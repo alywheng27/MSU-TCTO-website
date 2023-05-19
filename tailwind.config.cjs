@@ -33,10 +33,6 @@ module.exports = {
 				'charcoal': '#222222',
 				'graphite': '#444444',
 			},
-			linearGradients: {
-				'blue-purple': ['to right', '#4F3A72', '#8A3097'],
-				'green-yellow': ['45deg', '#00BFA6', '#F9A826'],
-			},
 		},
 	},
 	plugins: [],
