@@ -143,16 +143,22 @@
     width: 100%;
 }
 
-
+.hero-fold-06-img {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('../../../public/images/fold-06.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 980px;
+    width: 100%;
+}
 
 .footer{
     margin: 0 auto;
-    margin-top: 50%;
 
     font-family: 'Merchant';
     font-style: normal;
     font-weight: 700;
-    height: 1080px;
+    height: 1120px;
+    width: 100%;
 
     hanging-punctuation: first last;
     /* For hanging lists, 0 padding should be applied to the <ul> element. */
@@ -164,6 +170,18 @@
 
     color: #FFFFFF;
     font-stretch: 90;
+}
+
+.footer-nav{
+    margin: 0 auto;
+    width: 100%;
+    height: 720;
+
+    /* Primary/MSU Deep Ocean */
+
+    color: #0A1C37;
+    font-stretch: 90;
+
 }
 
 .cards {
