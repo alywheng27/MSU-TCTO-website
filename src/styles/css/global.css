@@ -80,6 +80,7 @@
 
 /* Paragraph styles */
 .paragraph {
+    margin: auto;
     font-family: 'Atkinson Hyperlegible';
     font-style: normal;
     font-weight: 400;
@@ -91,6 +92,7 @@
 }
 
 .p2 {
+    margin: 0 auto;
     font-size: 16px;
     line-height: 20px;
 }
@@ -139,4 +141,38 @@
     background-size: cover;
     height: 980px;
     width: 100%;
+}
+
+
+
+.footer{
+    font-family: 'Merchant';
+    font-style: normal;
+    font-weight: 700;
+    height: 1080px;
+
+    hanging-punctuation: first last;
+    /* For hanging lists, 0 padding should be applied to the <ul> element. */
+
+    list-style-position: outside;
+    padding: 0;
+
+    /* Mono/Light/White Pure */
+
+    color: #FFFFFF;
+    font-stretch: 90;
+}
+
+.cards {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 75px;
+    font-family: 'Merchant';
+    
+}
+.cards .p2{
+    line-height: 1.5;
+    margin-top: 0 auto;
+    justify-items: center;
 }
