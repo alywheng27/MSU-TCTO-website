@@ -143,13 +143,15 @@
     width: 100%;
 }
 
-.hero-fold-06-img {
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('../../../public/images/fold-06.png');
+
+.campuslife-bg-img {
+    background: linear-gradient(0deg, rgba(16, 31, 54, 0.4), rgba(16, 31, 54, 0.4)), url('../../../public/images/campus-life.png');
     background-repeat: no-repeat;
     background-size: cover;
-    height: 980px;
+    height: 1080px;
     width: 100%;
 }
+
 
 .footer{
     margin: 0 auto;
@@ -186,8 +188,8 @@
 
 .cards {
     margin: auto;
-    margin-left: 12.5%;
-    margin-right: 12.5%;
+    margin-left: 13%;
+    margin-right: 13%;
     display: grid;
     grid-template-columns: repeat(4, 0.5fr);
     gap: 85px;
