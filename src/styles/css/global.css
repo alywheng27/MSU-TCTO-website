@@ -146,6 +146,9 @@
 
 
 .footer{
+    margin: 0 auto;
+    margin-top: 50%;
+
     font-family: 'Merchant';
     font-style: normal;
     font-weight: 700;
@@ -164,7 +167,9 @@
 }
 
 .cards {
-    margin: 0 auto;
+    margin: auto;
+    margin-left: 13%;
+    margin-right: 13%;
     display: grid;
     grid-template-columns: repeat(4, 0.5fr);
     gap: 85px;
