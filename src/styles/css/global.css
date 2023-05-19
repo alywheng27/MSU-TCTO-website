@@ -166,8 +166,8 @@
 .cards {
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 75px;
+    grid-template-columns: repeat(4, 0.5fr);
+    gap: 85px;
     font-family: 'Merchant';
     
 }
