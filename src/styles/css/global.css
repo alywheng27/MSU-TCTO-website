@@ -128,7 +128,7 @@
 }
 
 /* Drop Shadow */
-.drop-shadow {
+.msu-drop-shadow {
     background: #D9D9D9;
     box-shadow: 0px 0px 20px 10px #101F36;
 }
