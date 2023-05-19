@@ -3,19 +3,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
   
 @font-face {
     font-family: 'Merchant';
-    src: url('../fonts/Merchant-Regular.woff2') format('woff2');
+    src: url('../fonts/Merchant-Black.woff2') format('woff2');
 }
 
 @layer base {
     body {
-        background-color: black;
+        @apply bg-msu-deep-ocean;
         font-family: 'Atkinson Hyperlegible', sans-serif;
     }
-
-    
 }
 
 /* Headings */
@@ -39,7 +45,7 @@
 .h1 {
     font-size: 178px;
     line-height: 181px;
-    /* hanging-punctuation is currently only supported in Safari. */    
+    /* hanging-punctuation is currently only supported in Safari. */  
 }
 
 .h2 {
@@ -129,5 +135,8 @@
 
 .hero-main-img {
     background: linear-gradient(0deg, rgba(16, 31, 54, 0.4), rgba(16, 31, 54, 0.4)), url('../../../public/images/Sitangkai.png');
+    background-repeat: no-repeat;
+    background-size: cover;
     height: 980px;
+    width: 100%;
 }
