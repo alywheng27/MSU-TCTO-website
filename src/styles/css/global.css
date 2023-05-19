@@ -80,7 +80,6 @@
 
 /* Paragraph styles */
 .paragraph {
-    margin: auto;
     font-family: 'Atkinson Hyperlegible';
     font-style: normal;
     font-weight: 400;
@@ -92,7 +91,6 @@
 }
 
 .p2 {
-    margin: 0 auto;
     font-size: 16px;
     line-height: 20px;
 }
@@ -146,6 +144,14 @@
 
 .campuslife-bg-img {
     background: linear-gradient(0deg, rgba(16, 31, 54, 0.4), rgba(16, 31, 54, 0.4)), url('../../../public/images/campus-life.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 1080px;
+    width: 100%;
+}
+
+.fold-06-gb-img {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('../../../public/images/fold-06.png');
     background-repeat: no-repeat;
     background-size: cover;
     height: 1080px;
