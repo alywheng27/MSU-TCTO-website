@@ -151,11 +151,35 @@
 }
 
 .fold-06-gb-img {
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('../../../public/images/fold-06.png');
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5) ), url('../../../public/images/fold-06.png');
     background-repeat: no-repeat;
     background-size: cover;
     height: 1080px;
     width: 100%;
+}
+
+.video-wrapper{
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0px;
+}
+.video-container{
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;;
+}
+.video-container iframe,
+.video-container object,
+.video-container embed{
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 
