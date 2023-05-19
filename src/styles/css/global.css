@@ -143,6 +143,14 @@
     width: 100%;
 }
 
+.campuslife-bg-img {
+    background: linear-gradient(0deg, rgba(16, 31, 54, 0.4), rgba(16, 31, 54, 0.4)), url('../../../public/images/campus-life.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 1080px;
+    width: 100%;
+}
+
 
 
 .footer{
@@ -168,8 +176,8 @@
 
 .cards {
     margin: auto;
-    margin-left: 13%;
-    margin-right: 13%;
+    margin-left: 12.5%;
+    margin-right: 12.5%;
     display: grid;
     grid-template-columns: repeat(4, 0.5fr);
     gap: 85px;
