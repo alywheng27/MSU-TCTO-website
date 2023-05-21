@@ -187,12 +187,10 @@
 
 
 .footer{
-    margin: 0 auto;
-
     font-family: 'Merchant';
     font-style: normal;
     font-weight: 700;
-    height: 1120px;
+    height: 1080px;
     width: 100%;
 
     hanging-punctuation: first last;
@@ -208,7 +206,6 @@
 }
 
 .footer-nav{
-    margin: 0 auto;
     width: 100%;
     height: 720;
 
@@ -220,7 +217,6 @@
 }
 
 .cards {
-    margin: auto;
     margin-left: 13%;
     margin-right: 13%;
     display: grid;
