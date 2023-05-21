@@ -140,7 +140,7 @@
     background: linear-gradient(0deg, rgba(16, 31, 54, 0.4), rgba(16, 31, 54, 0.4)), url('../../../public/images/Sitangkai.png');
     background-repeat: no-repeat;
     background-size: cover;
-    height: 980px;
+    background-position: center;
     width: 100%;
 }
 
@@ -232,14 +232,14 @@
 }
 
 .nav {
-    @apply xsm:h-0 xl:h-fit xl:py-0 overflow-hidden;
+    @apply xs:h-0 xl:h-fit xl:py-0 overflow-hidden;
     transition: .3s ease-in-out;
 }
 
 .nav.active {
-    @apply xsm:py-5 xsm:h-[360px] xl:h-0;
+    @apply xs:py-5 xs:h-[360px] xl:h-0;
     transition: .3s ease-in-out;
 }
 
-/* xsm:py-5 xl:py-0 h-0 overflow-hidden, */
+/* xs:py-5 xl:py-0 h-0 overflow-hidden, */
 }

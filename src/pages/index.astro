@@ -7,7 +7,44 @@ import '../styles/css/global.css';
 <Layout title="Welcome to Astro.">
 	<main>
 		<Navbar client:visible />
-		<div class="bg-msu-dark-ocean h-[440px] w-full mt-[695px] px-[12.5%]">
+		<div class="flex xl:flex-row xs:flex-col justify-center xl:bottom-[70px] xl:h-[650px] xl:mx-[12.5%] xs:mx-0 relative">
+			<div class="bg-msu-deep-ocean flex xl:flex-row xs:flex-col justify-center xl:pr-5">
+				<div>
+					<img src="/images/main-article.png" alt="" class="xl:h-[720px] xs:w-full object-cover object-center" />
+					<div class="grid justify-center xl:absolute xl:top-[519px] xs:relative xl:px-10 xs:px-5 xl:pt-0 xs:pt-10">
+						<h4 class="headings xl:h4 xs:h5 max-w-[680px]">
+							Four decades of steadfast
+							Excellence in Marine Sciences
+						</h4>
+						<p class="paragraph p2 mt-5 text-titanium max-w-[680px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+					</div>
+				</div>
+				<div class="grid justify-center xl:mt-5 xs:mt-20 mx-5 xl:pb-0 xs:pb-20">
+					<div class="flex">
+						<img src="/images/article-img-1.png" alt="" class="xl:h-[200px] xs:h-[179px] object-cover object-center" />
+						<div class="ml-5">
+							<h5 class="headings xl:h5 xs:h6 xl:max-w-[220px] xs:max-w-[165px]">Article Long Title </h5>
+							<p class="paragraph p2 xl:max-w-[220px] xs:max-w-[165px] text-titanium xl:mt-[15px] xs:mt-[10px] max-h-[156px] overflow-clip">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+						</div>
+					</div>
+					<div class="flex mt-10">
+						<img src="/images/article-img-1.png" alt="" class="xl:h-[200px] xs:h-[179px] object-cover object-center" />
+						<div class="ml-5">
+							<h5 class="headings xl:h5 xs:h6 xl:max-w-[220px] xs:max-w-[165px]">Article Long Title </h5>
+							<p class="paragraph p2 xl:max-w-[220px] xs:max-w-[165px] text-titanium xl:mt-[15px] xs:mt-[10px] max-h-[156px] overflow-clip">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+						</div>
+					</div>
+					<div class="flex mt-10">
+						<img src="/images/article-img-1.png" alt="" class="xl:h-[200px] xs:h-[179px] object-cover object-center" />
+						<div class="ml-5">
+							<h5 class="headings xl:h5 xs:h6 xl:max-w-[220px] xs:max-w-[165px]">Article Long Title </h5>
+							<p class="paragraph p2 xl:max-w-[220px] xs:max-w-[165px] text-titanium xl:mt-[15px] xs:mt-[10px] max-h-[156px] overflow-clip">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="bg-msu-dark-ocean h-[440px] w-full px-[12.5%]">
 			<h5 class="headings h5 text-center pt-[27px]">Upcoming Events</h5>
 			<div class="grid grid-cols-4 justify-items-center mt-[27px]">
 				<div class="p-10 max-w-[360px]">
@@ -138,7 +175,7 @@ import '../styles/css/global.css';
 		<!-- fold 06 -->
 		<div class="fold-06-gb-img">
 			<div class="flex">
-				<img src="/images/fold-06 chancy.png" alt="" class="ml-[260px] mt-[100px] h-[980.5px]">
+				<img src="/images/fold-06 chancy.png" alt="" class="ml-[260px] mt-[122px] h-[958px]">
 				<div class="ml-5">
 					<h3 class="headings h3 text-msu-deep-ocean ml-[76px] mt-[120px] pr-[12.5%]">We help you take your first step towards </h3>
 					<h3 class="headings h3 bg-msu-deep-ocean text-msu-gold ml-[76px] px-3 py-3 pb-1 max-w-[350px]"> SUCCESS! </h3>
@@ -157,9 +194,9 @@ import '../styles/css/global.css';
 		
 		<!-- selection/footer-nav -->
 		<div class="footer-nav">
-			<div class=" bg-msu-deep-ocean text-white-pure headings mb-[20px] mt-[100px]">
+			<div class=" bg-msu-deep-ocean text-white-pure headings justify-center mb-[20px] mt-[50px]">
 				<div class="mt-5">
-					<div class="flex px-[12.5%] justify-center  mb-[8.5%]">
+					<div class="flex px-[12.5%]  mb-[8.5%]">
 						<img src="/images/article-img-1.png" alt="" class="ml-10 h-[200px]">
 						<div class="ml-5">
 							<h5 class="headings h5 max-w-[220px]">Article Long Title </h5>
@@ -179,7 +216,7 @@ import '../styles/css/global.css';
 					</div>
 					
 					<img src="/images/rectangle.png" alt="" class="max-w-[360px] h-[20px] absolute">
-					<div class="flex pl-[20.5%] justify-center pr-[20.5%]">
+					<div class="flex pl-[20.5%] pr-[20.5%]">
 						
 						<div>
 							<ul>
@@ -256,7 +293,7 @@ import '../styles/css/global.css';
 			<div class="bg-msu-dark-ocean text-white-pure footer justify-center">
 				
 				<div class="flex mb-10 justify-center">
-					<div class="items-center mb-10  mt-[100px]">
+					<div class="items-center mb-10  mt-[70px]">
 						<img src="/images/MSU Seal New (Official).png" alt="" class="ml-[28%] h-[152.99px] mr-5 mb-5">
 						<div>
 							<h4 class="headings h5 text-center">Mindanao State University</h4>
