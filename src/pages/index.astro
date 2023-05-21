@@ -1,85 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Navbar from "../components/Navbar";
 import '../styles/css/global.css';
 ---
 
 <Layout title="Welcome to Astro.">
 	<main>
-		<div class="h-[100px] w-full bg-msu-deep-ocean text-white-pure headings h1 flex justify-between items-center px-[12.5%]">
-			<div class="flex items-center">
-				<img src="/images/MSU Seal New (Official).png" alt="" class="h-[72.99px] mr-5">
-				<div>
-					<h4 class="headings h5">Mindanao State University</h4>
-					<p class="paragraph p2">Tawi-Tawi College of Technology and Oceanography</p>
-				</div>
-			</div>
-			<div>
-				<p class="paragraph p2 pb-1">+63 910 291 0605</p>
-				<p class="paragraph p2">admissions@msutawi-tawi.edu.ph</p>
-			</div>
-		</div>
-		<div class="hero-main-img relative">
-			<div class="bg-gradient-ocean flex justify-between items-center h-[80px] text-white-pure px-[12.5%]">
-				<div class="flex gap-20 paragraph p2">
-					<a href="#">Admissions</a>
-					<a href="#">Programs</a>
-					<a href="#">Offices</a>
-					<a href="#">Publication</a>
-					<a href="#">The Campus</a>
-				</div>
-				<div class="relative">
-					<input type="search" name="" id="" class="bg-transparent border rounded-[20px] w-[360px] h-10 pl-12 pr-4 text-center">
-					<img src="/images/search.png" alt="" class="absolute top-[6px] left-3">
-				</div>
-			</div>
-			<div class="mt-[478px] px-[12.5%]">
-				<h3 class="headings h3">
-					Four decades<br>
-					of steadfast Excellence<br>
-					in Marine Sciences
-				</h3>
-				<div class="mt-5">
-					<a href="#" class="bg-msu-maroon text-white-pure py-[14.5px] px-[115.5px] rounded-[40px] paragraph p1">Enroll Now</a>
-					<a href="#" class="text-white-pure py-[14.5px] px-[115.5px] rounded-[40px] ml-10 paragraph p1 border">Our Course Offerings</a>
-				</div>
-			</div>
-			<div class="flex justify-center mt-[135px] px-[12.5%] relative">
-				<div>
-					<img src="/images/main-article.png" alt="" class="h-[720px]">
-					<div class="absolute top-[519px] pl-10">
-						<h4 class="headings h4 max-w-[680px]">
-							Four decades of steadfast
-							Excellence in Marine Sciences
-						</h4>
-						<p class="paragraph p2 mt-5 text-titanium max-w-[680px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-					</div>
-				</div>
-				<div class="mt-5 ml-5">
-					<div class="flex">
-						<img src="/images/article-img-1.png" alt="" class="h-[200px]">
-						<div class="ml-5">
-							<h5 class="headings h5 max-w-[220px]">Article Long Title </h5>
-							<p class="paragraph p2 max-w-[220px] text-white-pure mt-[15px] max-h-[152px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-						</div>
-					</div>
-					<div class="flex mt-10">
-						<img src="/images/article-img-1.png" alt="" class="h-[200px]">
-						<div class="ml-5">
-							<h5 class="headings h5 max-w-[220px]">Article Long Title </h5>
-							<p class="paragraph p2 max-w-[220px] text-white-pure mt-[15px] max-h-[152px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-						</div>
-					</div>
-					<div class="flex mt-10">
-						<img src="/images/article-img-1.png" alt="" class="h-[200px]">
-						<div class="ml-5">
-							<h5 class="headings h5 max-w-[220px]">Article Long Title </h5>
-							<p class="paragraph p2 max-w-[220px] text-white-pure mt-[15px] max-h-[152px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
+		<Navbar client:visible />
 		<div class="bg-msu-dark-ocean h-[440px] w-full mt-[695px] px-[12.5%]">
 			<h5 class="headings h5 text-center pt-[27px]">Upcoming Events</h5>
 			<div class="grid grid-cols-4 justify-items-center mt-[27px]">

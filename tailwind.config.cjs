@@ -33,6 +33,11 @@ module.exports = {
 				'charcoal': '#222222',
 				'graphite': '#444444',
 			},
+			screens: {
+				'xsm': '390px',
+				'3xl': '1920px',
+				// => @media (min-width: 1536px) { ... }
+			  }
 		},
 	},
 	plugins: [],

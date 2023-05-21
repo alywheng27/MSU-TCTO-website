@@ -24,7 +24,8 @@
     }
 }
 
-/* Headings */
+@layer components {
+    /* Headings */
 .headings {
     font-family: 'Merchant';
     font-style: normal;
@@ -126,6 +127,8 @@
 .bg-gradient-black {
     background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
 }
+
+
 
 /* Drop Shadow */
 .msu-drop-shadow {
@@ -230,4 +233,17 @@
     line-height: 1.5;
     margin-top: 0 auto;
     justify-items: center;
+}
+
+.nav {
+    @apply xsm:h-0 xl:h-fit xl:py-0 overflow-hidden;
+    transition: .3s ease-in-out;
+}
+
+.nav.active {
+    @apply xsm:py-5 xsm:h-[360px] xl:h-0;
+    transition: .3s ease-in-out;
+}
+
+/* xsm:py-5 xl:py-0 h-0 overflow-hidden, */
 }
