@@ -37,6 +37,7 @@ const Navbar = () => {
 					<img src="/images/search.png" alt="" className="absolute top-[6px] left-3" />
 				</div>
 			</div>
+            <div className='bg-gradient-ocean h-[60px] xsm:block xl:hidden'></div>
 			<div className="mt-[478px] px-[12.5%]">
 				<h3 className="headings h3">
 					Four decades<br/>
