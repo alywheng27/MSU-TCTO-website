@@ -164,7 +164,7 @@
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5) ), url('../../../public/images/fold-06.png');
     background-repeat: no-repeat;
     background-size: cover;
-    height: 1080px;
+    background-position: center;
     width: 100%;
 }
 
