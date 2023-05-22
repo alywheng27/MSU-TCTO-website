@@ -23,7 +23,7 @@ const Navbar = () => {
 				<button className="headings h6 xl:hidden xs:block" onClick={toggleNavbar}>MENU</button>
 			</div>
 		</div>
-        <div className="hero-main-img xl:h-[980px] xs:h-[764px] relative">
+        <div className="hero-main-img relative xl:pb-[215px] xs:pb-[99px]">
 			<div className={`xs:bg-msu-deep-ocean xl:bg-transparent xl:bg-gradient-ocean flex xl:flex-row xs:flex-col justify-between items-center 3xl:h-[80px] xl-[60px] text-white-pure xl:px-[12.5%] xs:px-[3.85%] nav ${isOpen && 'active'}`}>
 				<div className="flex 3xl:flex-row xl:flex-row sm:flex-col xs:flex-col xl:gap-20 xl:text-left xs:text-center paragraph p2 w-full">
 					<a href="/admissions" className='py-[15px]'>Admissions</a>
@@ -49,41 +49,6 @@ const Navbar = () => {
 					<a href="#" className="text-white-pure xl:py-[14.5px] xs:py-5 xl:w-[360px] text-center rounded-[40px] xl:ml-10 xl:mt-0 xs:mt-[10px] paragraph xl:p1 xs:p2 border">Our Course Offerings</a>
 				</div>
 			</div>
-			{/* <div className="flex xl:flex-row xs:flex-col justify-center mt-[135px] px-[12.5%] relative">
-				<div>
-					<img src="/images/main-article.png" alt="" className="h-[720px] object-cover object-center" />
-					<div className="xl:absolute xl:top-[519px] xs:relative pl-10">
-						<h4 className="headings h4 max-w-[680px]">
-							Four decades of steadfast
-							Excellence in Marine Sciences
-						</h4>
-						<p className="paragraph p2 mt-5 text-titanium max-w-[680px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-					</div>
-				</div>
-				<div className="mt-5 ml-5">
-					<div className="flex">
-						<img src="/images/article-img-1.png" alt="" className="h-[200px]" />
-						<div className="ml-5">
-							<h5 className="headings h5 max-w-[220px]">Article Long Title </h5>
-							<p className="paragraph p2 max-w-[220px] text-white-pure mt-[15px] max-h-[152px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-						</div>
-					</div>
-					<div className="flex mt-10">
-						<img src="/images/article-img-1.png" alt="" className="h-[200px]" />
-						<div className="ml-5">
-							<h5 className="headings h5 max-w-[220px]">Article Long Title </h5>
-							<p className="paragraph p2 max-w-[220px] text-white-pure mt-[15px] max-h-[152px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-						</div>
-					</div>
-					<div className="flex mt-10">
-						<img src="/images/article-img-1.png" alt="" className="h-[200px]" />
-						<div className="ml-5">
-							<h5 className="headings h5 max-w-[220px]">Article Long Title </h5>
-							<p className="paragraph p2 max-w-[220px] text-white-pure mt-[15px] max-h-[152px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-						</div>
-					</div>
-				</div>
-			</div> */}
 		</div>
     </>
   );

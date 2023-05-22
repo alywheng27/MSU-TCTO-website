@@ -156,7 +156,7 @@
     background: linear-gradient(0deg, rgba(16, 31, 54, 0.4), rgba(16, 31, 54, 0.4)), url('../../../public/images/campus-life.png');
     background-repeat: no-repeat;
     background-size: cover;
-    height: 1080px;
+    background-position: center;
     width: 100%;
 }
 
