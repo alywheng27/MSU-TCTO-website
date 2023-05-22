@@ -26,7 +26,7 @@ const Navbar = () => {
         <div className="hero-main-img relative xl:pb-[215px] xs:pb-[99px]">
 			<div className={`xs:bg-msu-deep-ocean xl:bg-transparent xl:bg-gradient-ocean flex xl:flex-row xs:flex-col justify-between items-center 3xl:h-[80px] xl-[60px] text-white-pure xl:px-[12.5%] xs:px-[3.85%] nav ${isOpen && 'active'}`}>
 				<div className="flex 3xl:flex-row xl:flex-row sm:flex-col xs:flex-col xl:gap-20 xl:text-left xs:text-center paragraph p2 w-full">
-					<a href="#" className='py-[15px]' >Admissions</a>
+					<a href="/admissions" className='py-[15px]'>Admissions</a>
 					<a href="#" className='py-[15px]'>Programs</a>
 					<a href="#" className='py-[15px]'>Offices</a>
 					<a href="#" className='py-[15px]'>Publication</a>
