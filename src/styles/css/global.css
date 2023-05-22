@@ -143,6 +143,13 @@
     background-position: center;
     width: 100%;
 }
+.hero-admission-img {
+    background: linear-gradient(0deg, rgba(16, 31, 54, 0.4), rgba(16, 31, 54, 0.4)), url('../../../public/images/admissions.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+}
 
 
 .campuslife-bg-img {
@@ -153,8 +160,17 @@
     width: 100%;
 }
 
-.fold-06-gb-img {
+.home-fold-06-gb-img {
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5) ), url('../../../public/images/fold-06.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 1080px;
+    width: 100%;
+}
+
+
+.admissions-fold-05-gb-img {
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5) ), url('../../../public/images/fold-05 Academic Scholarship.png');
     background-repeat: no-repeat;
     background-size: cover;
     height: 1080px;
@@ -185,51 +201,6 @@
     height: 100%;
 }
 
-
-.footer{
-    font-family: 'Merchant';
-    font-style: normal;
-    font-weight: 700;
-    height: 1080px;
-    width: 100%;
-
-    hanging-punctuation: first last;
-    /* For hanging lists, 0 padding should be applied to the <ul> element. */
-
-    list-style-position: outside;
-    padding: 0;
-
-    /* Mono/Light/White Pure */
-
-    color: #FFFFFF;
-    font-stretch: 90;
-}
-
-.footer-nav{
-    width: 100%;
-    height: 720;
-
-    /* Primary/MSU Deep Ocean */
-
-    color: #0A1C37;
-    font-stretch: 90;
-
-}
-
-.cards {
-    margin-left: 13%;
-    margin-right: 13%;
-    display: grid;
-    grid-template-columns: repeat(4, 0.5fr);
-    gap: 85px;
-    font-family: 'Merchant';
-    
-}
-.cards .p2{
-    line-height: 1.5;
-    margin-top: 0 auto;
-    justify-items: center;
-}
 
 .nav {
     @apply xs:h-0 xl:h-fit xl:py-0 overflow-hidden;
