@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import HeroMainHeading from './HeroMainHeading';
 import HeroAdmissionHeading from './HeroAdmissionHeading';
 import HeroProgramHeading from './HeroProgramHeading';
+import HeroPublicationHeading from './HeroPublicationHeading';
 
 const Navbar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,6 +15,8 @@ const Navbar = (props) => {
 
   const bg = (path == '/admissions') ? 'hero-admission-img'
   				: (path == '/programs') ? 'hero-program-img'
+				: (path == '/offices') ? 'hero-office-img'
+				: (path == '/publications') ? 'hero-publication-img'
 				: 'hero-main-img'
 
   return (
@@ -38,7 +41,7 @@ const Navbar = (props) => {
 					<a href="/admissions" className='py-[15px]'>Admissions</a>
 					<a href="/programs" className='py-[15px]'>Programs</a>
 					<a href="#" className='py-[15px]'>Offices</a>
-					<a href="#" className='py-[15px]'>Publication</a>
+					<a href="/publications" className='py-[15px]'>Publication</a>
 					<a href="#" className='py-[15px]'>The Campus</a>
 				</div>
 				<div className="relative xl:mt-0 xs:mt-[15px] xl:w-fit xs:w-full">
@@ -50,6 +53,7 @@ const Navbar = (props) => {
 			{
 				(path == '/admissions') ? <HeroAdmissionHeading />
 				: (path == '/programs') ? <HeroProgramHeading />
+				: (path == '/publications') ? <HeroPublicationHeading />
 				: <HeroMainHeading />
 			}
 			

@@ -1,0 +1,174 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from "../components/Navbar";
+import '../styles/css/global.css';
+
+const currentPath = Astro.url.pathname;
+---
+
+<Layout title="Welcome to Astro.">
+	<main>
+		<Navbar path={currentPath} client:visible />
+        <div class='bg-msu-dark-ocean h-[40px] xl:px-[12.5%] xs:px-[3.85%]'>
+            <p class="paragraph p2 py-[10px] text-white-pure"><a href="/">Home</a> / Publications</p>
+        </div>
+        <div class="flex flex-col items-center mt-20 xl:px-[12.5%] xs:px-[3.85%]">
+            <h3 class="headings h3 text-msu-gold">Top News</h3>
+            <div class="flex mt-10">
+                <div class="flex flex-col w-[120px]">
+                    <h4 class="headings h4">Jan</h4>
+                    <h4 class="headings h4">24</h4>
+                </div>
+                <img src="/images/gray.png" alt="" class="h-[360px] object-cover object-center" />
+                <div class="ml-5">
+                    <h4 class="headings h4 max-w-[720px]">Update dates for next accreditation for the school</h4>
+                    <p class="paragraph p1 max-w-[720px] text-titanium mt-5">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+                </div>
+            </div>
+            <div class="flex mt-10">
+                <div class="flex flex-col w-[120px]">
+                    <h4 class="headings h4">Jan</h4>
+                    <h4 class="headings h4">24</h4>
+                </div>
+                <img src="/images/gray.png" alt="" class="h-[360px] object-cover object-center" />
+                <div class="ml-5">
+                    <h4 class="headings h4 max-w-[720px]">Update dates for next accreditation for the school</h4>
+                    <p class="paragraph p1 max-w-[720px] text-titanium mt-5">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+                </div>
+            </div>
+            <div class="flex mt-10">
+                <div class="flex flex-col w-[120px]">
+                    <h4 class="headings h4">Jan</h4>
+                    <h4 class="headings h4">24</h4>
+                </div>
+                <img src="/images/gray.png" alt="" class="h-[360px] object-cover object-center" />
+                <div class="ml-5">
+                    <h4 class="headings h4 max-w-[720px]">Update dates for next accreditation for the school</h4>
+                    <p class="paragraph p1 max-w-[720px] text-titanium mt-5">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-col items-center mt-40 xl:px-[12.5%] xs:px-[3.85%]">
+            <h3 class="headings h3">Article</h3>
+            <div class="flex mt-10">
+                <div class="flex flex-col">
+                    <img src="/images/article-blank-1.png" alt="" class="h-[320px] object-cover object-center" />
+                    <h4 class="headings h5 mt-10 max-w-[470px]">Update dates for next accreditation for the school</h4>
+                    <p class="paragraph p2 max-w-[470px] text-titanium mt-5">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+                </div>
+                <div class="flex flex-col">
+                    <img src="/images/article-blank-2.png" alt="" class="h-[320px] object-cover object-center" />
+                    <h4 class="headings h5 mt-10 max-w-[470px]">Update dates for next accreditation for the school</h4>
+                    <p class="paragraph p2 max-w-[470px] text-titanium mt-5">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+                </div>
+                <div class="flex flex-col">
+                    <img src="/images/article-blank-3.png" alt="" class="h-[320px] object-cover object-center" />
+                    <h4 class="headings h5 mt-10 max-w-[470px]">Update dates for next accreditation for the school</h4>
+                    <p class="paragraph p2 max-w-[470px] text-titanium mt-5">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+                </div>
+            </div>
+            <div class="flex mt-20 mb-[150px]">
+                <div class="flex flex-col">
+                    <div class="flex">
+                        <img src="/images/article-blank-1.png" alt="" class="h-[160px] object-cover object-center" />
+                        <div class="ml-5">
+                            <h4 class="headings h5 max-w-[480px]">Update dates for next accreditation for the school</h4>
+                            <p class="paragraph p2 max-w-[480px] text-titanium mt-5">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+                        </div>
+                    </div>
+                    <div class="flex mt-10">
+                        <img src="/images/article-blank-1.png" alt="" class="h-[160px] object-cover object-center" />
+                        <div class="ml-5">
+                            <h4 class="headings h5 max-w-[480px]">Update dates for next accreditation for the school</h4>
+                            <p class="paragraph p2 max-w-[480px] text-titanium mt-5">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+                        </div>
+                    </div>
+                    <div class="flex mt-10">
+                        <img src="/images/article-blank-1.png" alt="" class="h-[160px] object-cover object-center" />
+                        <div class="ml-5">
+                            <h4 class="headings h5 max-w-[480px]">Update dates for next accreditation for the school</h4>
+                            <p class="paragraph p2 max-w-[480px] text-titanium mt-5">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <div class="flex">
+                        <img src="/images/article-blank-1.png" alt="" class="h-[160px] object-cover object-center" />
+                        <div class="ml-5">
+                            <h4 class="headings h5 max-w-[480px]">Update dates for next accreditation for the school</h4>
+                            <p class="paragraph p2 max-w-[480px] text-titanium mt-5">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+                        </div>
+                    </div>
+                    <div class="flex mt-10">
+                        <img src="/images/article-blank-1.png" alt="" class="h-[160px] object-cover object-center" />
+                        <div class="ml-5">
+                            <h4 class="headings h5 max-w-[480px]">Update dates for next accreditation for the school</h4>
+                            <p class="paragraph p2 max-w-[480px] text-titanium mt-5">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+                        </div>
+                    </div>
+                    <div class="flex mt-10">
+                        <img src="/images/article-blank-1.png" alt="" class="h-[160px] object-cover object-center" />
+                        <div class="ml-5">
+                            <h4 class="headings h5 max-w-[480px]">Update dates for next accreditation for the school</h4>
+                            <p class="paragraph p2 max-w-[480px] text-titanium mt-5">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-msu-dark-ocean flex flex-col items-center xl:px-[12.5%] xs:px-[3.85%]">
+            <h3 class="headings h3 text-white-pure mt-20">Upcoming Events</h3>
+            <div class="grid grid-cols-4 mt-[131px] mb-20">
+                <div class="bg-gradient-ocean flex flex-col px-10 pt-10 pb-[93px]">
+                    <p class="paragraph p1 text-white-pure">June</p>
+                    <h2 class="headings h2 text-white-pure">18</h2>
+                    <p class="paragraph p1 text-titanium">Event Title 2023</p>
+                    <p class="paragraph p3 text-titanium max-w-[280px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+                </div>
+                <div class="bg-gradient-maroon flex flex-col px-10 pt-10 pb-[93px]">
+                    <p class="paragraph p1 text-white-pure">June</p>
+                    <h2 class="headings h2 text-white-pure">18</h2>
+                    <p class="paragraph p1 text-titanium">Event Title 2023</p>
+                    <p class="paragraph p3 text-titanium max-w-[280px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+                </div>
+                <div class="bg-gradient-ocean flex flex-col px-10 pt-10 pb-[93px]">
+                    <p class="paragraph p1 text-white-pure">June</p>
+                    <h2 class="headings h2 text-white-pure">18</h2>
+                    <p class="paragraph p1 text-titanium">Event Title 2023</p>
+                    <p class="paragraph p3 text-titanium max-w-[280px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+                </div>
+                <div class="bg-gradient-ocean flex flex-col px-10 pt-10 pb-[93px]">
+                    <p class="paragraph p1 text-white-pure">June</p>
+                    <h2 class="headings h2 text-white-pure">18</h2>
+                    <p class="paragraph p1 text-titanium">Event Title 2023</p>
+                    <p class="paragraph p3 text-titanium max-w-[280px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+                </div>
+                <div class="bg-gradient-ocean flex flex-col px-10 pt-10 pb-[93px]">
+                    <p class="paragraph p1 text-white-pure">June</p>
+                    <h2 class="headings h2 text-white-pure">18</h2>
+                    <p class="paragraph p1 text-titanium">Event Title 2023</p>
+                    <p class="paragraph p3 text-titanium max-w-[280px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+                </div>
+                <div class="bg-gradient-ocean flex flex-col px-10 pt-10 pb-[93px]">
+                    <p class="paragraph p1 text-white-pure">June</p>
+                    <h2 class="headings h2 text-white-pure">18</h2>
+                    <p class="paragraph p1 text-titanium">Event Title 2023</p>
+                    <p class="paragraph p3 text-titanium max-w-[280px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+                </div>
+                <div class="bg-gradient-maroon flex flex-col px-10 pt-10 pb-[93px]">
+                    <p class="paragraph p1 text-white-pure">June</p>
+                    <h2 class="headings h2 text-white-pure">18</h2>
+                    <p class="paragraph p1 text-titanium">Event Title 2023</p>
+                    <p class="paragraph p3 text-titanium max-w-[280px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+                </div>
+                <div class="bg-gradient-ocean flex flex-col px-10 pt-10 pb-[93px]">
+                    <p class="paragraph p1 text-white-pure">June</p>
+                    <h2 class="headings h2 text-white-pure">18</h2>
+                    <p class="paragraph p1 text-titanium">Event Title 2023</p>
+                    <p class="paragraph p3 text-titanium max-w-[280px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+	
+</Layout>
