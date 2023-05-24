@@ -28,7 +28,7 @@ const Navbar = () => {
 				<div className="flex 3xl:flex-row xl:flex-row sm:flex-col xs:flex-col xl:gap-20 xl:text-left xs:text-center paragraph p2 w-full">
 					<a href="/admissions" className='py-[15px]'>Admissions</a>
 					<a href="/programs" className='py-[15px]'>Programs</a>
-					<a href="#" className='py-[15px]'>Offices</a>
+					<a href="/offices" className='py-[15px]'>Offices</a>
 					<a href="#" className='py-[15px]'>Publication</a>
 					<a href="#" className='py-[15px]'>The Campus</a>
 				</div>
