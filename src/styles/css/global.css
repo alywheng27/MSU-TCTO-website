@@ -143,11 +143,22 @@
     background-position: center;
     width: 100%;
 }
+
 .hero-admission-img {
-    background: linear-gradient(0deg, rgba(16, 31, 54, 0.4), rgba(16, 31, 54, 0.4)), url('../../../public/images/admissions.png');
+    background: url('../../../public/images/admissions.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    height: 440px;
+    width: 100%;
+}
+
+.hero-program-img {
+    background: url('../../../public/images/programs.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 440px;
     width: 100%;
 }
 
