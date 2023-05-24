@@ -162,6 +162,15 @@
     width: 100%;
 }
 
+.hero-publication-img {
+    background: url('../../../public/images/programs.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 440px;
+    width: 100%;
+}
+
 .admissions-fold-05-gb-img {
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5) ), url('../../../public/images/fold-05 Academic Scholarship.png');
     background-repeat: no-repeat;
