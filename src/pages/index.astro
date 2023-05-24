@@ -2,11 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from "../components/Navbar";
 import '../styles/css/global.css';
+
+const currentPath = Astro.url.pathname;
 ---
 
 <Layout title="Welcome to Astro.">
 	<main>
-		<Navbar client:visible />
+		<Navbar path={currentPath} client:visible />
 		<div class="flex xl:flex-row xs:flex-col justify-center xl:bottom-[70px] xl:h-[650px] xl:mx-[12.5%] xs:mx-0 relative">
 			<div class="bg-msu-deep-ocean flex xl:flex-row xs:flex-col justify-center xl:pr-5">
 				<div>

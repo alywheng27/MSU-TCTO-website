@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
+import HeroMainHeading from './HeroMainHeading';
+import HeroAdmissionHeading from './HeroAdmissionHeading';
+import HeroProgramHeading from './HeroProgramHeading';
 
-const Navbar = () => {
+const Navbar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   }
 
+  const { path } = props
+
+  const bg = (path == '/admissions') ? 'hero-admission-img'
+  				: (path == '/programs') ? 'hero-program-img'
+				: 'hero-main-img'
+
   return (
     <>
-        <div className="3xl:h-[100px] xl:h-[80px] xs:h-[60px] w-full bg-msu-deep-ocean text-white-pure flex justify-between items-center xl:px-[12.5%] xs:px-[3.85%]">
+        <div className="3xl:h-[100px] xl:h-[80px] xs:h-[60px] w-full bg-msu-deep-ocean text-white-pure flex justify-between items-center xl:px-[12.5%] xs:px-[3.85%] relative">
 			<div className="flex items-center xl:py-0 xs:py-2">
 				<img src="/images/MSU Seal New (Official).png" alt="" className="3xl:h-[72.99px] xs:h-[43.79px] mr-5 3xl:block xl:hidden sm:block" />
 				<div>
@@ -23,7 +32,7 @@ const Navbar = () => {
 				<button className="headings h6 xl:hidden xs:block" onClick={toggleNavbar}>MENU</button>
 			</div>
 		</div>
-        <div className="hero-main-img relative xl:pb-[215px] xs:pb-[99px]">
+        <div className={bg + ` relative xl:pb-[215px] xs:pb-[99px]`}>
 			<div className={`xs:bg-msu-deep-ocean xl:bg-transparent xl:bg-gradient-ocean flex xl:flex-row xs:flex-col justify-between items-center 3xl:h-[80px] xl-[60px] text-white-pure xl:px-[12.5%] xs:px-[3.85%] nav ${isOpen && 'active'}`}>
 				<div className="flex 3xl:flex-row xl:flex-row sm:flex-col xs:flex-col xl:gap-20 xl:text-left xs:text-center paragraph p2 w-full">
 					<a href="/admissions" className='py-[15px]'>Admissions</a>
@@ -38,17 +47,12 @@ const Navbar = () => {
 				</div>
 			</div>
             <div className='bg-gradient-ocean h-[60px] xs:block xl:hidden'></div>
-			<div className="xl:mt-[398px] xs:mt-[300px] xl:w-[769px] xl:mx-[12.5%] xs:mx-[3.85%]">
-				<h3 className="headings xl:h3 xs:h4">
-					Four decades <br />
-					of steadfast Excellence <br />
-					in Marine Sciences
-				</h3>
-				<div className="mt-5 flex xl:flex-row xs:flex-col">
-					<a href="#" className="bg-msu-maroon text-white-pure xl:py-[14.5px] xs:py-5 xl:w-[360px] text-center rounded-[40px] paragraph xl:p1 xs:p2">Enroll Now</a>
-					<a href="#" className="text-white-pure xl:py-[14.5px] xs:py-5 xl:w-[360px] text-center rounded-[40px] xl:ml-10 xl:mt-0 xs:mt-[10px] paragraph xl:p1 xs:p2 border">Our Course Offerings</a>
-				</div>
-			</div>
+			{
+				(path == '/admissions') ? <HeroAdmissionHeading />
+				: (path == '/programs') ? <HeroProgramHeading />
+				: <HeroMainHeading />
+			}
+			
 		</div>
     </>
   );

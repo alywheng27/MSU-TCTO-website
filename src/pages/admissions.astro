@@ -2,16 +2,21 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from "../components/Navbar";
 import '../styles/css/global.css';
+
+const currentPath = Astro.url.pathname;
 ---
 
 <Layout title="Welcome to Astro.">
 	<main>
 <!-- fold 01 - Header -->
-		<Navbar client:visible />
+		<Navbar path={currentPath} client:visible />
 <!-- end fold 01 -->
 
 <!-- fold 02 -->
-		<div class="bg-msu-dark-ocean h-[1080px] text-center w-full px-[12.5%] pt-20">
+		<div class='bg-msu-dark-ocean h-[40px] xl:px-[12.5%] xs:px-[3.85%]'>
+			<p class="paragraph p2 py-[10px] text-white-pure"><a href="/">Home</a> / Addmissions</p>
+		</div>
+		<div class="bg-msu-deep-ocean h-[1080px] text-center w-full xl:px-[12.5%] xs:px-[3.85%] pt-20">
 			<div class="item-center">
 				<h4 class="headings h4 pt-[27px] pl-[28.5%] pr-[28.5%]">We give you an easy way to enroll for you chosen future</h4>
 				<p class="paragraph text-silver p1 pt-[27px] pl-[28.5%] pr-[28.5%]">Lorem ipsum dolor sit amet consectetur. Sit justo semper sollicitudin nisl. Adipiscing amet gravida justo venenatis viverra morbi in. Eros tellus integer sit non amet amet.</p>
@@ -144,7 +149,7 @@ import '../styles/css/global.css';
 <!-- end fold 03 -->
 
 <!-- fold 04 -->
-		<div class="bg-msu-dark-ocean  w-full px-[12.5%] pt-20">
+		<div class="bg-msu-deep-ocean  w-full px-[12.5%] pt-20">
 			<div class="text-center">
 				<h3 class="headings h3 pt-[27px] pl-[28.5%] pr-[28.5%]">Scholarships and Grants</h3>
 			</div>
