@@ -2,11 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from "../components/Navbar";
 import '../styles/css/global.css';
+
+const currentPath = Astro.url.pathname;
 ---
 
 <Layout title="Welcome to Astro.">
 	<main>
-		<Navbar client:visible />
+		<Navbar path={currentPath} client:visible />
 
 <!-- fold 02 -->
         <div class="xl:campuslife-bg-img xs:bg-transparent">

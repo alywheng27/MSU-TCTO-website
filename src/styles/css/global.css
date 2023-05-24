@@ -162,8 +162,26 @@
     width: 100%;
 }
 
+.hero-office-img {
+    background: url('../../../public/images/office.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 440px;
+    width: 100%;
+}
+
 .hero-publication-img {
     background: url('../../../public/images/programs.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 440px;
+    width: 100%;
+}
+
+.hero-campus-img {
+    background: url('../../../public/images/the-campus.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

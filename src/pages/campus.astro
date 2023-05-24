@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from "../components/Navbar";
+import '../styles/css/global.css';
+
+const currentPath = Astro.url.pathname;
+---
+
+<Layout title="Welcome to Astro.">
+	<main>
+		<Navbar path={currentPath} client:visible />
+        <div class='bg-msu-dark-ocean h-[40px] xl:px-[12.5%] xs:px-[3.85%]'>
+            <p class="paragraph p2 py-[10px] text-white-pure"><a href="/">Home</a> / The Campus</p>
+        </div>
+        <div>
+            <h3 class="headings h3 max-w-[720px] mr-[120px]">A Brief History</h3>
+        </div>
+    </main>
+	
+</Layout>

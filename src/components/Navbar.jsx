@@ -3,6 +3,8 @@ import HeroMainHeading from './HeroMainHeading';
 import HeroAdmissionHeading from './HeroAdmissionHeading';
 import HeroProgramHeading from './HeroProgramHeading';
 import HeroPublicationHeading from './HeroPublicationHeading';
+import HeroOfficeHeading from './HeroOfficeHeading';
+import HeroCampusHeading from './HeroCampusHeading';
 
 const Navbar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,6 +19,7 @@ const Navbar = (props) => {
   				: (path == '/programs') ? 'hero-program-img'
 				: (path == '/offices') ? 'hero-office-img'
 				: (path == '/publications') ? 'hero-publication-img'
+				: (path == '/campus') ? 'hero-campus-img'
 				: 'hero-main-img'
 
   return (
@@ -53,7 +56,9 @@ const Navbar = (props) => {
 			{
 				(path == '/admissions') ? <HeroAdmissionHeading />
 				: (path == '/programs') ? <HeroProgramHeading />
+				: (path == '/offices') ? <HeroOfficeHeading />
 				: (path == '/publications') ? <HeroPublicationHeading />
+				: (path == '/campus') ? <HeroCampusHeading />
 				: <HeroMainHeading />
 			}
 			
