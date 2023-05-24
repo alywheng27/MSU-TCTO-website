@@ -238,6 +238,46 @@
     height: 100%;
 }
 
+.audio-player .controls .toggle-play.play {
+    cursor: pointer;
+    position: relative;
+    left: 0;
+    height: 0;
+    width: 0;
+    border: 7px solid #75140C;
+    border-left: 13px solid white;
+  }
+  .audio-player .controls .toggle-play.play:hover {
+    transform: scale(1.1);
+  }
+  .audio-player .controls .toggle-play.pause {
+    height: 15px;
+    width: 20px;
+    cursor: pointer;
+    position: relative;
+  }
+  .audio-player .controls .toggle-play.pause:before {
+    position: absolute;
+    top: 0;
+    left: 0px;
+    background: white;
+    content: "";
+    height: 15px;
+    width: 3px;
+  }
+  .audio-player .controls .toggle-play.pause:after {
+    position: absolute;
+    top: 0;
+    right: 8px;
+    background: white;
+    content: "";
+    height: 15px;
+    width: 3px;
+  }
+  .audio-player .controls .toggle-play.pause:hover {
+    transform: scale(1.1);
+  }
+
 
 .nav {
     @apply xs:h-0 xl:h-fit xl:py-0 overflow-hidden;
