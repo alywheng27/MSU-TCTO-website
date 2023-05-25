@@ -22,6 +22,8 @@ const Navbar = (props) => {
 				: (path == '/campus') ? 'hero-campus-img'
 				: (path == '/academic-calendar') ? ''
 				: (path == '/articles') ? 'hero-main-img pb-[980px]'
+				: (path == '/annual-reports') ? 'hero-main-img pb-[980px]'
+				: (path == '/gazette') ? 'hero-main-img pb-[980px]'
 				: 'hero-main-img xl:pb-[215px] xs:pb-[99px]'
 
   return (
@@ -64,7 +66,7 @@ const Navbar = (props) => {
 				: (path == '/offices') ? <HeroOfficeHeading />
 				: (path == '/publications') ? <HeroPublicationHeading />
 				: (path == '/campus') ? <HeroCampusHeading />
-				: (path == '/academic-calendar' || path == '/articles') ? ''
+				: (path == '/academic-calendar' || path == '/articles' || path == '/annual-reports' || path == '/gazette') ? ''
 				: <HeroMainHeading />
 			}
 			
