@@ -24,7 +24,7 @@ const Navbar = (props) => {
 				: (path == '/articles') ? 'hero-main-img pb-[980px]'
 				: (path == '/annual-reports') ? 'hero-main-img pb-[980px]'
 				: (path == '/gazette') ? 'hero-main-img pb-[980px]'
-				: 'hero-admission-img xl:pb-[215px] xs:pb-[99px]'
+				: 'hero-main-img xl:pb-[215px] xs:pb-[99px]'
 
   return (
     <>
