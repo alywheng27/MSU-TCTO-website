@@ -1,0 +1,67 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from "../components/Navbar";
+import '../styles/css/global.css';
+
+const currentPath = Astro.url.pathname;
+---
+
+<Layout title="Welcome to Astro.">
+	<main>
+		<Navbar path={currentPath} client:visible />
+        <div class='bg-gradient-ocean h-[100px] relative bottom-[100px] rotate-180'></div>
+        <div class="absolute top-[180px] w-full">
+            <div class='bg-msu-shallow-ocean h-[40px] xl:px-[12.5%] xs:px-[3.85%]'>
+                <p class="paragraph p2 py-[10px] text-white-pure"><a href="/home">Home</a> / <a href="/publications">Publications</a>  / Articles </p>
+            </div>
+            <div class="flex flex-col items-center mt-20">
+                <h3 class="headings h3">Articles</h3>
+                <div class="flex mt-20">
+                    <div class="w-[120px] ">
+                        <h4 class="headings h4">Jan</h4>
+                        <h4 class="headings h4">24</h4>
+                        <p class="paragraph p2 text-white-pure">03:00</p>
+                        <p class="paragraph p2 text-white-pure">GMT +8:00</p>
+                    </div>
+                    <img src="/images/article-blank-1.png" alt="" class="h-[360px] object-cover object-center" />
+                    <div class="w-[720px] ml-5">
+                        <h4 class="headings h4">Update dates for next accreditation for the school</h4>
+                        <p class="paragraph p1 mt-5 text-silver">Lorem ipsum dolor sit amet consectetur. Sit justo semper sollicitudin nisl. Adipiscing amet gravida justo venenatis viverra morbi in. Eros tellus integer sit non amet amet.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-center mt-[120px]">
+                <div class="grid grid-cols-2 gap-y-10">
+                    <div class="flex">
+                        <img src="/images/article-blank-1.png" alt="" class="h-[160px] object-cover object-center" />
+                        <div class="flex flex-col w-[480px] ml-5">
+                            <h5 class="headings h5">School get highest accreditation from CHED | Plans hit for 2023</h5>
+                            <p class="paragraph p2 text-silver mt-[10px]">Lorem ipsum dolor sit amet consectetur. Sit justo semper sollicitudin nisl. Adipiscing amet gravida justo venenatis viverra morbi in. Eros tellus integer sit non amet amet.</p>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <img src="/images/article-blank-1.png" alt="" class="h-[160px] object-cover object-center" />
+                        <div class="flex flex-col w-[480px] ml-5">
+                            <h5 class="headings h5">School get highest accreditation from CHED | Plans hit for 2023</h5>
+                            <p class="paragraph p2 text-silver mt-[10px]">Lorem ipsum dolor sit amet consectetur. Sit justo semper sollicitudin nisl. Adipiscing amet gravida justo venenatis viverra morbi in. Eros tellus integer sit non amet amet.</p>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <img src="/images/article-blank-1.png" alt="" class="h-[160px] object-cover object-center" />
+                        <div class="flex flex-col w-[480px] ml-5">
+                            <h5 class="headings h5">School get highest accreditation from CHED | Plans hit for 2023</h5>
+                            <p class="paragraph p2 text-silver mt-[10px]">Lorem ipsum dolor sit amet consectetur. Sit justo semper sollicitudin nisl. Adipiscing amet gravida justo venenatis viverra morbi in. Eros tellus integer sit non amet amet.</p>
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <img src="/images/article-blank-1.png" alt="" class="h-[160px] object-cover object-center" />
+                        <div class="flex flex-col w-[480px] ml-5">
+                            <h5 class="headings h5">School get highest accreditation from CHED | Plans hit for 2023</h5>
+                            <p class="paragraph p2 text-silver mt-[10px]">Lorem ipsum dolor sit amet consectetur. Sit justo semper sollicitudin nisl. Adipiscing amet gravida justo venenatis viverra morbi in. Eros tellus integer sit non amet amet.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</Layout>
