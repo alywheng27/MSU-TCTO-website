@@ -9,8 +9,6 @@ const currentPath = Astro.url.pathname;
 <Layout title="Welcome to Astro.">
 	<main>
 		<Navbar path={currentPath} client:visible />
-
-
         <div class='bg-msu-dark-ocean h-[40px] xl:px-[12.5%] xs:px-[3.85%]'>
             <p class="paragraph p2 py-[10px] text-white-pure"><a href="/home">Home</a> / <a href="/publications">Publications</a>  / Academic Calendar </p>
         </div>
