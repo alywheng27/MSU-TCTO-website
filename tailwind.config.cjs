@@ -34,7 +34,7 @@ module.exports = {
 				'graphite': '#444444',
 			},
 			screens: {
-				'xs': '390px',
+				'xs': '360px',
 				'3xl': '1920px',
 				// => @media (min-width: 1536px) { ... }
 			  }
