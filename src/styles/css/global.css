@@ -14,7 +14,7 @@
   
 @font-face {
     font-family: 'Merchant';
-    src: url('../fonts/Merchant-Black.woff2') format('woff2');
+    src: url('../fonts/Merchant-Bold.woff2') format('woff2');
 }
 
 @layer base {
@@ -109,7 +109,7 @@
 
 /* Gradient Background */
 .bg-gradient-maroon {
-    background: linear-gradient(180deg, #75140C 0%, rgba(117, 20, 12, 0) 100%);
+    background: linear-gradient(180deg, #820D13 0%, rgba(130, 13, 19, 0) 100%);
 }
 
 .bg-gradient-ocean {
@@ -117,15 +117,42 @@
 }
 
 .bg-gradient-gold {
-    background: linear-gradient(180deg, #F9D92B 0%, rgba(249, 217, 43, 0) 100%);
+    background: linear-gradient(180deg, #F7D93C 0%, rgba(247, 217, 60, 0) 100%);
 }
 
+/* Gradient Secondary Alpha */
+.bg-gradient-rusty-red {
+    background: linear-gradient(180deg, #A52930 0%, rgba(165, 41, 48, 0) 100%);
+}
+
+.bg-gradient-blue-horizon {
+    background: linear-gradient(180deg, #122B58 0%, rgba(18, 43, 88, 0) 100%);
+}
+
+.bg-gradient-hidden-gold {
+    background: linear-gradient(180deg, #D0B320 0%, rgba(208, 179, 32, 0) 100%);
+}
+
+/* Gradient Secondary Beta */
+.bg-gradient-crimson-blush {
+    background: linear-gradient(180deg, #C64D53 0%, rgba(198, 77, 83, 0) 100%);
+}
+
+.bg-gradient-sky-space {
+    background: linear-gradient(180deg, #1E4470 0%, rgba(30, 68, 112, 0) 100%);
+}
+
+.bg-gradient-golden-fog {
+    background: linear-gradient(180deg, #FFEB7B 0%, rgba(255, 235, 123, 0) 100%);
+}
+
+/* Gradient Mono */
 .bg-gradient-white {
     background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
 }
 
 .bg-gradient-black {
-    background: linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0) 100%);
+    background: linear-gradient(180deg, #111111 0%, rgba(17, 17, 17, 0) 100%);
 }
 
 
@@ -142,6 +169,17 @@
     background-size: cover;
     background-position: center;
     width: 100%;
+}
+
+.hero-img {
+    position:relative;
+    display:inline-block;
+}
+
+.hero-img::after {
+    content:'';
+    position:absolute;
+    background: linear-gradient(0deg, rgba(16, 31, 54, 0.4), rgba(16, 31, 54, 0.4))
 }
 
 .hero-admission-img {

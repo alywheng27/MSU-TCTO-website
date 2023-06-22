@@ -9,29 +9,29 @@ module.exports = {
 			},
 			colors: {
 				/* Primary */
-				'msu-maroon': '#75140C;',
+				'msu-maroon': '#820D13;',
 				'msu-deep-ocean': '#0A1C37',
-				'msu-gold': '#F9D92B',
+				'msu-gold': '#F7D93C',
 
 				/* Secondary/Light */
-				'msu-rusty-red': '#8C3F38',
-				'msu-shallow-ocean': '#365583',
-				'msu-golden-fog': '#FBE776',
+				'msu-rusty-red': '#A52930',
+				'msu-shallow-ocean': '#1E3070',
+				'msu-golden-fog': '#FFEB7B',
 
 				/* Secondary/Dark */
-				'msu-crimson-ground': '#420C07',
-				'msu-dark-ocean': '#061121',
-				'msu-hidden-gold': '#C7AE22',
+				'msu-crimson-ground': '#C64D53',
+				'msu-dark-ocean': '#0C1C59',
+				'msu-hidden-gold': '#E3C219',
 
 				/* Mono/Light */
 				'white-pure': '#FFFFFF',
-				'silver': '#DDDDDD',
-				'titanium': '#BBBBBB',
+				'silver': '#BBBBBB',
+				'titanium': '#999999',
 
 				/* Mono/Dark */
-				'black-pure': '#000000',
-				'charcoal': '#222222',
-				'graphite': '#444444',
+				'black-pure': '#111111',
+				'charcoal': '#444444',
+				'graphite': '#777777',
 			},
 			screens: {
 				'xs': '360px',
