@@ -6,6 +6,7 @@ const HeroOfficeHeading = () => {
       <h2 className="headings xl:h2 xs:h3 text-center text-black-pure">
         Offices
       </h2>
+            <p class="paragraph p2 py-[100px] text-silver"><a href="/">Home</a> / The Campus</p>
     </div>
   )
 }

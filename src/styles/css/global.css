@@ -200,6 +200,60 @@
     width: 100%;
 }
 
+.hero-cas-img {
+    background: url('../../../public/images/program_background/cas.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 440px;
+    width: 100%;
+}
+
+.hero-cias-img {
+    background: url('../../../public/images/program_background/cias.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 440px;
+    width: 100%;
+}
+
+.hero-coed-img {
+    background: url('../../../public/images/program_background/coed.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 440px;
+    width: 100%;
+}
+
+.hero-cof-img {
+    background: url('../../../public/images/program_background/cof.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 440px;
+    width: 100%;
+}
+
+.hero-iict-img {
+    background: url('../../../public/images/program_background/iict.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 440px;
+    width: 100%;
+}
+
+.hero-ioes-img {
+    background: url('../../../public/images/program_background/ioes.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 440px;
+    width: 100%;
+}
+
 .hero-office-img {
     background: url('../../../public/images/office.png');
     background-repeat: no-repeat;
@@ -257,13 +311,14 @@
     height: 100%;
     margin: 0 auto;
     padding: 0px;
+    /* background-attachment: scroll; */
 }
 .video-container{
     position: relative;
     padding-bottom: 56.25%;
     padding-top: 30px;
     height: 0;
-    overflow: hidden;;
+    overflow: hidden;
 }
 .video-container iframe,
 .video-container object,
@@ -275,6 +330,16 @@
     width: 100%;
     height: 100%;
 }
+/* .video-container::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: '';
+
+    background: linear-gradient(180deg, #820D13 0%, rgba(130, 13, 19, 0.00) 100%);
+  } */
 
 
 .nav {
@@ -287,5 +352,17 @@
     transition: .3s ease-in-out;
 }
 
+.arrow-left{
+    background: url('../../../public/images/Chevron Left.png'), lightgray 50% / contain ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+}
+.arrow-right{
+    background: url('../../../public/images/Chevron Right.png'), lightgray 50% / contain no-repeat;
+}
+
+  
 /* xs:py-5 xl:py-0 h-0 overflow-hidden, */
 }

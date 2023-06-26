@@ -1,0 +1,111 @@
+import React, { useState } from 'react';
+import HeroMainHeading from './HeroMainHeading';
+import HeroAdmissionHeading from './HeroAdmissionHeading';
+import HeroProgramHeading from './HeroProgramHeading';
+import HeroPublicationHeading from './HeroPublicationHeading';
+import HeroOfficeHeading from './HeroOfficeHeading';
+import HeroCampusHeading from './HeroCampusHeading';
+
+const Footer = (props) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleFooter = () => {
+    setIsOpen(!isOpen);
+  }
+
+  const { path } = props
+
+  return (
+    <>
+		<div class="bg-msu-deep-ocean text-white-pure justify-center xl:px-[12.5%] xs:px-[3.85%] xl:pt-20 xs:pt-10">
+			<div class="flex flex-col justify-center items-center text-center">
+				<img src="/images/MSU Seal New (Official).png" alt="" class="xl:h-[170px] xs:h-[127px] mb-10"></img>
+				<div>
+					<h4 class="headings xl:h4 xs:h5">Mindanao State University</h4>
+					<p class="paragraph xl:p1 xs:p2">Tawi-Tawi College of Technology and Oceanography</p>
+				</div>
+			</div>
+			<div class="flex gap-5 xl:mt-20 xs:mt-9 xl:mb-[70px] xs:mb-[80px] justify-center">
+				<img src="/images/Republika ng pilipinas.png" alt="" class="xl:h-[100px] xs:h-[75px]"></img>
+				<img src="/images/transparency_seal.png" alt="" class="xl:h-[100px] xs:h-[75px]"></img>
+				<img src="/images/FOI-logo.png" alt="" class="xl:h-[100px] xs:h-[75px]"></img>
+			</div>
+
+			<div class="flex xl:flex-row xs:flex-col justify-center xl:text-left xs:text-center xl:items-start xs:items-center">
+				<div class="flex flex-col max-w-[300px] xl:mr-[174px] xs:mr-0">
+					<div class="xl:mb-[50px] xs:mb-10">	
+						<div class="headings h5 mb-[10px]">
+							University Address
+						</div>
+						<div class="paragraph p2 text-titanium">Boheh Sallang, Sanga-Sanga
+							Bongao, Tawi-Tawi 7500</div>
+						</div>
+					<div class="mb-[50px]">	
+						<div class="headings h5 mb-[10px]">Main Office</div>
+						<div class="paragraph p2 text-titanium">MSU Manila Information and Liaison Office
+							Rm 203, Leticia Bldg.
+							1804 Taft Avenue Corner J. Nakpil St.
+							Malate, Manila
+						</div>
+					</div>
+				</div>
+
+				<div class="flex gap-[54px]">
+					<div class="flex flex-col max-w-[450px] xl:mr-10 xs:mr-0">
+						<div class="mb-[50px]">	
+							<div class="headings xl:h5 xs:h6 xl:mb-[10px] xs:mb-[5px]">Chancellor</div>
+							<div class="paragraph xl:p2 xs:p3 text-titanium">+63 917 3107843 <br></br> info@msutawi-tawi.edu.ph</div>
+						</div>
+						<div>	
+							<div class="headings xl:h5 xs:h6 xl:mb-[10px] xs:mb-[5px]">Admissions</div>
+							<div class="paragraph xl:p2 xs:p3 text-titanium">+63 917 3107843 <br></br> admission@msutawi-tawi.edu.ph</div>
+						</div>
+					</div>
+	
+					<div class="flex flex-col max-w-[450px] xl:mr-[175px] xs:mr-0">
+						<div class="mb-[50px]">	
+							<div class="headings xl:h5 xs:h6 xl:mb-[10px] xs:mb-[5px]">Registrar</div>
+							<div class="paragraph xl:p2 xs:p3 text-titanium">+63 917 3107843 <br></br> registrar@msutawi-tawi.edu.ph</div>
+						</div>
+						<div>	
+							<div class="headings xl:h5 xs:h6 xl:mb-[10px] xs:mb-[5px]">Guidance</div>
+							<div class="paragraph xl:p2 xs:p3 text-titanium">+63 917 3107843 <br></br> guidance@msutawi-tawi.edu.ph</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="flex flex-col xl:max-w-[360px] xs:max-w-[240px] xl:mt-0 xs:mt-10">
+					<div class="paragraph xl:p1 xs:p2 text-titanium mb-5">For other inquiries regarding biddings for projects and other business transactions please visit the link below</div>
+					<a href="#" class="bg-msu-maroon text-white-pure xl:py-[14.5px] xs:py-5 xl:px-[85.5px] xs:px-[61.5px] rounded-[40px] paragraph xl:p1 xs:p2">Project Biddings</a>
+				</div>
+
+			</div>
+			
+			<div class="flex gap-[33.33px] mt-8 justify-center">
+					<a href="#"><img src="/images/social media/linkin.png" alt=""></img></a>
+					<a href="#"><img src="/images/social media/instagram.png" alt=""></img></a>
+					<a href="#"><img src="/images/social media/facebook.png" alt=""></img></a>
+					<a href="#"><img src="/images/social media/tweeter.png" alt=""></img></a>
+					<a href="#"><img src="/images/social media/youtube.png" alt=""></img></a>
+			</div>
+			
+			<div class="flex flex-col justify-center items-center xl:mt-[55px] xs:mt-[45px] pb-10">
+				<div class="flex xl:flex-row xs:flex-col">
+					<p class="paragraph p2 text-center text-charcoal">© 2023 &nbsp;</p>
+					<p class="paragraph p2 text-center text-charcoal">Mindanao State University &nbsp;</p>
+					<p class="paragraph p2 text-center text-charcoal xl:block xs:hidden">- &nbsp;</p>
+					<p class="paragraph p2 text-center text-charcoal">Tawi-Tawi College of Technology and Oceanography</p>
+				</div>
+				<div>
+					<p class="paragraph p2 text-center text-charcoal mt-3">All rights reserved.</p>
+				</div>
+					
+					
+			</div>
+
+		</div>
+    </>
+  );
+}
+
+export default Footer;

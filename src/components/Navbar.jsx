@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import HeroMainHeading from './HeroMainHeading';
 import HeroAdmissionHeading from './HeroAdmissionHeading';
 import HeroProgramHeading from './HeroProgramHeading';
+import HeroCASHeading from './HeroCASHeading';
+import HeroCIASHeading from './HeroCIASHeading';
+import HeroCOEDHeading from './HeroCOEDHeading';
+import HeroCOFHeading from './HeroCOFHeading';
+import HeroIICTHeading from './HeroIICTHeading';
+import HeroIOESHeading from './HeroIOESHeading';
 import HeroPublicationHeading from './HeroPublicationHeading';
 import HeroOfficeHeading from './HeroOfficeHeading';
 import HeroCampusHeading from './HeroCampusHeading';
@@ -17,12 +23,19 @@ const Navbar = (props) => {
 
   const bg = (path == '/admissions') ? 'hero-admission-img'
   				: (path == '/programs') ? 'hero-program-img'
+  				: (path == '/cas') ? 'hero-cas-img'
+  				: (path == '/cias') ? 'hero-cias-img'
+  				: (path == '/coed') ? 'hero-coed-img'
+  				: (path == '/cof') ? 'hero-cof-img'
+  				: (path == '/iict') ? 'hero-iict-img'
+  				: (path == '/ioes') ? 'hero-ioes-img'
 				: (path == '/offices') ? 'hero-office-img'
 				: (path == '/publications') ? 'hero-publication-img'
 				: (path == '/campus') ? 'hero-campus-img'
 				: (path == '/academic-calendar') ? ''
 				: (path == '/search') ? ''
 				: (path == '/articles') ? 'hero-main-img pb-[980px]'
+				: (path == '/article-topic') ? ''
 				: (path == '/annual-reports') ? 'hero-main-img pb-[980px]'
 				: (path == '/gazette') ? 'hero-main-img pb-[980px]'
 				: 'hero-main-img xl:pb-[215px] xs:pb-[99px]'
@@ -64,10 +77,16 @@ const Navbar = (props) => {
 			{
 				(path == '/admissions') ? <HeroAdmissionHeading />
 				: (path == '/programs') ? <HeroProgramHeading />
+				: (path == '/cas') ? <HeroCASHeading />
+				: (path == '/cias') ? <HeroCIASHeading />
+				: (path == '/coed') ? <HeroCOEDHeading />
+				: (path == '/cof') ? <HeroCOFHeading />
+				: (path == '/iict') ? <HeroIICTHeading />
+				: (path == '/ioes') ? <HeroIOESHeading />
 				: (path == '/offices') ? <HeroOfficeHeading />
 				: (path == '/publications') ? <HeroPublicationHeading />
 				: (path == '/campus') ? <HeroCampusHeading />
-				: (path == '/academic-calendar' || path == '/articles' || path == '/annual-reports' || path == '/gazette' || path == '/search') ? ''
+				: (path == '/academic-calendar' || path == '/articles' || path == '/annual-reports' || path == '/gazette' || path == '/search' || path == '/article-topic') ? ''
 				: <HeroMainHeading />
 			}
 			

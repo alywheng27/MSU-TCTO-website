@@ -1,6 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navbar from "../components/Navbar";
+import AcademicCalendar from "../components/AcademicCalendar";
+import MainVideo from "../components/MainVideo";
+import FooterNav from "../components/FooterNav";
+import Footer from "../components/Footer";
 import '../styles/css/global.css';
 
 const currentPath = Astro.url.pathname;
@@ -13,79 +17,84 @@ const currentPath = Astro.url.pathname;
 <!-- end fold 01 -->
 
 <!-- fold 02 -->
-		<div class='bg-msu-dark-ocean h-[40px] xl:px-[12.5%] xs:px-[3.85%]'>
-			<p class="paragraph p2 py-[10px] text-white-pure"><a href="/">Home</a> / Addmissions</p>
-		</div>
-		<div class="bg-msu-deep-ocean h-[1080px] text-center w-full xl:px-[12.5%] xs:px-[3.85%] pt-20">
+<!--  -->
+		<div class="bg-msu-deep-ocean  text-center  xl:px-[12.5%] xs:px-[3.85%] pt-20 xl:pb-[68px] xs:pb-[48px]">
 			<div class="item-center">
-				<h4 class="headings h4 pt-[27px] pl-[28.5%] pr-[28.5%]">We give you an easy way to enroll for you chosen future</h4>
-				<p class="paragraph text-silver p1 pt-[27px] pl-[28.5%] pr-[28.5%]">Lorem ipsum dolor sit amet consectetur. Sit justo semper sollicitudin nisl. Adipiscing amet gravida justo venenatis viverra morbi in. Eros tellus integer sit non amet amet.</p>
+				<h4 class="headings xl:h4 xl:pt-[27px] xl:pl-[28.5%] xl:pr-[28.5%] xs:h5 xs:px-[60px]">We give you an easy way to enroll for you chosen future</h4>
+				<p class="paragraph text-silver xl:p1 xs:p2 xl:pt-[27px] xl:pl-[28.5%] xl:pr-[28.5%] xs:py-[38px] xs:px-[37px]">Lorem ipsum dolor sit amet consectetur. Sit justo semper sollicitudin nisl. Adipiscing amet gravida justo venenatis viverra morbi in. Eros tellus integer sit non amet amet.</p>
 			
 			</div>
 
 			<div class="flex justify-center mt-[86px]">
 				<div>
-					<img src="/images/campus-mini1.png" alt="" class=" h-[200px]">
+					<img src="/images/campus-mini1.png" alt="" class=" xl:h-[200px] xl:block xs:h-[200px]">
 					
 				</div>
 				<div>
-					<img src="/images/campus-mini2.png" alt="" class=" h-[200px]">
+					<img src="/images/campus-mini2.png" alt="" class=" xl:h-[200px] xl:block xs:h-[200px]">
 					
 				</div>
 				<div>
-					<img src="/images/campus-mini3.png" alt="" class=" h-[200px]">
+					<img src="/images/campus-mini3.png" alt="" class=" xl:h-[200px] xl:block xs:hidden">
 				</div>
 				<div>
-					<img src="/images/campus-mini1.png" alt="" class=" h-[200px]">
+					<img src="/images/campus-mini1.png" alt="" class=" xl:h-[200px] xl:block xs:hidden">
 					
 				</div>
 				<div>
-					<img src="/images/campus-mini2.png" alt="" class=" h-[200px]">
+					<img src="/images/campus-mini2.png" alt="" class=" xl:h-[200px] xl:block xs:hidden">
 					
 				</div>
 				<div>
-					<img src="/images/campus-mini3.png" alt="" class=" h-[200px]">
+					<img src="/images/campus-mini3.png" alt="" class=" xl:h-[200px] xl:block xs:hidden">
 				</div>
 			</div>
 
-			<div class="grid grid-cols-3 justify-items-center mt-[27px]">
+			<div class="grid xl:grid-cols-3 xs:grid-cols-2 justify-items-center mt-[27px]">
 				<div class="p-5 max-w-[360px]">
 					<h3 class="headings h3">200+</h3>
-					<p class="paragraph p1 text-titanium mt-[5px]">Certifications</p>
+					<p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px]">Certifications</p>
 				</div>
 				<div class="p-5 max-w-[360px]">
 					<h3 class="headings h3">20+</h3>
-					<p class="paragraph p1 text-titanium mt-[5px]">Courses for Arts and Sciences</p>
+					<p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px]">Courses for Arts and Sciences</p>
 				</div>
-				<div class="p-5 max-w-[360px]">
+				<div class="p-5 max-w-[360px] xl:block xs:hidden">
 					<h3 class="headings h3">18,000+</h3>
-					<p class="paragraph p1 text-titanium mt-[5px]">Total graduates and counting</p>
+					<p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px]">Total graduates and counting</p>
+				</div>
+			</div>
+
+			<div class="mt-[34px] mb-[34px] xl:hidden  xs:block ">
+				<div class="p-5 item-center">
+					<h3 class="headings h3">18,000+</h3>
+					<p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px]">Total graduates and counting</p>
 				</div>
 			</div>
 			<div class="grid grid-cols-2 justify-items-center mt-[27px]">
 				<div class="p-5 max-w-[360px]">
 					<h3 class="headings h3">100+</h3>
-					<p class="paragraph p1 text-titanium mt-[5px]">Acclaimed Researches</p>
+					<p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px]">Acclaimed Researches</p>
 				</div>
 				<div class="p-5 max-w-[360px]">
 					<h3 class="headings h3">20+</h3>
-					<p class="paragraph p1 text-titanium mt-[5px]">Of the best teachers in the field</p>
+					<p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px]">Of the best teachers in the field</p>
 				</div>
 			</div>
 		</div>
 <!-- end fold 02 -->
 
 <!-- fold 03 -->
-		<div class="bg-msu-crimson-ground w-full px-[12.5%] pt-20 ">
+		<div class=" bg-msu-maroon w-full px-[12.5%] xl:pt-[80px] xs:pt-[40px]">
 			<div class="item-center">
-				<h3 class="headings text-center text-msu-gold h3 pt-[27px] pl-[12.5%] pr-[12.5%]">Admission Procedures</h3>
+				<h3 class="headings text-center xl:text-white-pure xs:text-msu-golden-fog xl:h3 xs:h5">Admission Procedures</h3>
 			</div>
 			
 			<div class="flex mt-[27px]  justify-center">
-				<div class="flex">
-					<div class="flex flex-col  gap-[5px] m-5">
-						<p class="paragraph p1 text-msu-gold w-[180px]">MSU SASE</p>
-						<div class="flex flex-col gap-[5px] paragraph p2 text-white-pure mt-[10px]">
+				<div class="flex gap-[95px]">
+					<div class="flex flex-col  gap-[5px] m-5 xl:block xs:hidden">
+						<p class="paragraph p1 text-white-pure w-[180px]">MSU SASE</p>
+						<div class="flex flex-col gap-[5px] paragraph p1 text-msu-crimson-ground mt-[26px]">
 							<a href="#">Undergraduate Studies</a>
 							<a href="#">Transferee</a>
 							<a href="#">Returning or Shifting</a>
@@ -93,46 +102,85 @@ const currentPath = Astro.url.pathname;
 							<a href="#">Student Fees</a>
 						</div>
 					</div>
+
 					<div class="grid justify-center gap-[10px]">
 					
-						<div class="max-w-[1020px]">
-							<h4 class="headings h4 text-white-pure mt-5">MSU SASE Passers</h4>
-							<div class="flex flex-col gap-[5px] paragraph p2 text-white-pure mt-[10px]">
-								<p class="paragraph text-silver p1 pt-[27px]">
+						<div class="xs:mb-[50px]">
+							<h4 class="headings xl:h4 xs:h6 text-white-pure mt-5">MSU SASE Passers</h4>
+							<div class="flex flex-col gap-[5px] paragraph p2 text-white-pure xl:mt-[10px] xs:mt[18px]">
+								<p class="paragraph text-silver xl:p1 xs:p3 pt-[27px]">
 									Lorem ipsum dolor sit amet consectetur. Viverra feugiat sollicitudin sit lacus sagittis cursus at sodales nunc. Hendrerit lectus nibh cras faucibus maecenas. Aliquam viverra enim massa cras. Viverra turpis senectus viverra a eu turpis quis. Varius vestibulum urna in rhoncus laoreet.
 								</p>
 				
 							</div>
 						</div>
-						<div class="flex">
-							<div class="bg-gradient-maroon p-10 max-w-[360px]">
-								<p class="paragraph p1 text-white-pure mt-[5px]">Step 01</p>
-								<p class="paragraph p1 text-white-pure mt-[5px]">Step details, where to go and who to approach</p>
+						<div class="xl:block xs:hidden">
+							
+							<div class="flex">
+								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
+									<p class="paragraph p1 text-white-pure mt-[5px]">Step 01</p>
+									<p class="paragraph p1 text-white-pure mt-[5px]">Step details, where to go and who to approach</p>
+								</div>
+								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
+									<p class="paragraph p1 text-white-pure mt-[5px]">Step 02</p>
+									<p class="paragraph p1 text-white-pure mt-[5px]">Step details, where to go and who to approach</p>
+								</div>
+								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
+									<p class="paragraph p1 text-white-pure mt-[5px]">Step 03</p>
+									<p class="paragraph p1 text-white-pure mt-[5px]">Step details, where to go and who to approach</p>
+								</div>
 							</div>
-							<div class="bg-gradient-maroon p-10 max-w-[360px]">
-								<p class="paragraph p1 text-white-pure mt-[5px]">Step 02</p>
-								<p class="paragraph p1 text-white-pure mt-[5px]">Step details, where to go and who to approach</p>
-							</div>
-							<div class="bg-gradient-maroon p-10 max-w-[360px]">
-								<p class="paragraph p1 text-white-pure mt-[5px]">Step 03</p>
-								<p class="paragraph p1 text-white-pure mt-[5px]">Step details, where to go and who to approach</p>
+
+							<div class="flex">
+								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
+									<p class="paragraph p1 text-white-pure mt-[5px]">Step 04</p>
+									<p class="paragraph p1 text-white-pure mt-[5px]">Step details, where to go and who to approach</p>
+								</div>
+								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
+									<p class="paragraph p1 text-white-pure mt-[5px]">Step 05</p>
+									<p class="paragraph p1 text-white-pure mt-[5px]">Step details, where to go and who to approach</p>
+								</div>
+								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
+									<p class="paragraph p1 text-white-pure mt-[5px]">Step 06</p>
+									<p class="paragraph p1 text-white-pure mt-[5px]">Step details, where to go and who to approach</p>
+								</div>
 							</div>
 						</div>
-
-						<div class="flex">
-							<div class="bg-gradient-maroon p-10 max-w-[360px]">
-								<p class="paragraph p1 text-white-pure mt-[5px]">Step 04</p>
-								<p class="paragraph p1 text-white-pure mt-[5px]">Step details, where to go and who to approach</p>
+						<div class="xl:hidden xs:block">
+							<div class="grid grid-cols-2 gap-[6px]">
+								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
+									<p class="paragraph p2 text-white-pure mt-[5px]">Step 01</p>
+									<p class="paragraph p3 text-white-pure mt-[5px]">Step details, where to go and who to approach</p>
+								</div>
+								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
+									<p class="paragraph p2 text-white-pure mt-[5px]">Step 02</p>
+									<p class="paragraph p3 text-white-pure mt-[5px]">Step details, where to go and who to approach</p>
+								</div>
 							</div>
-							<div class="bg-gradient-maroon p-10 max-w-[360px]">
-								<p class="paragraph p1 text-white-pure mt-[5px]">Step 05</p>
-								<p class="paragraph p1 text-white-pure mt-[5px]">Step details, where to go and who to approach</p>
+	
+							<div class="grid grid-cols-2 gap-[6px]">
+								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
+									<p class="paragraph p2 text-white-pure mt-[5px]">Step 03</p>
+									<p class="paragraph p3 text-white-pure mt-[5px]">Step details, where to go and who to approach</p>
+								</div>
+								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
+									<p class="paragraph p2 text-white-pure mt-[5px]">Step 04</p>
+									<p class="paragraph p3 text-white-pure mt-[5px]">Step details, where to go and who to approach</p>
+								</div>
 							</div>
-							<div class="bg-gradient-maroon p-10 max-w-[360px]">
-								<p class="paragraph p1 text-white-pure mt-[5px]">Step 06</p>
-								<p class="paragraph p1 text-white-pure mt-[5px]">Step details, where to go and who to approach</p>
+							
+							<div class="grid grid-cols-2 gap-[6px]">
+								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
+									<p class="paragraph p2 text-white-pure mt-[5px]">Step 05</p>
+									<p class="paragraph p3 text-white-pure mt-[5px]">Step details, where to go and who to approach</p>
+								</div>
+								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
+									<p class="paragraph p2 text-white-pure mt-[5px]">Step 06</p>
+									<p class="paragraph p3 text-white-pure mt-[5px]">Step details, where to go and who to approach</p>
+								</div>
 							</div>
-					</div>
+						</div>
+						
 
 					</div>
 
@@ -141,8 +189,8 @@ const currentPath = Astro.url.pathname;
 				</div>
 			</div>
 			<div class="text-center pb-[60px]">
-				<p class="paragraph text-white-pure p1 pt-20 mb-5">Need clarifications or help?</p>
-				<a href="" class="bg-transparent border paragraph p1 gap-10 text-white-pure py-[10.5px] px-[60px] rounded-[40px]">Contact us now!</a>
+				<p class="paragraph text-white-pure xl:p1 xs:p2 pt-20 mb-5">Need clarifications or help?</p>
+				<a href="" class="bg-transparent border paragraph  xl:p1 xs:p2  gap-10 text-white-pure py-[10.5px] px-[60px] rounded-[40px]">Contact us now!</a>
 			
 			</div>
 		</div>
@@ -151,36 +199,54 @@ const currentPath = Astro.url.pathname;
 <!-- fold 04 -->
 		<div class="bg-msu-deep-ocean  w-full px-[12.5%] pt-20">
 			<div class="text-center">
-				<h3 class="headings h3 pt-[27px] pl-[28.5%] pr-[28.5%]">Scholarships and Grants</h3>
+				
+				<h3 class="headings xl:h3 xs:h4 text-white-pure">Scholarships and Grants</h3>
+				<!-- <h3 class="headings xl:h3 xs:h4 pt-[27px] pl-[28.5%] pr-[28.5%]">Scholarships and Grants</h3> -->
 			</div>
 
 			<div class="flex gap-20 mt-[27px] ">
-				<div class="p-1">
-					<p class="paragraph p1 text-white-pure text-center">EXTERNAL</p>
-					<p class="paragraph p1 text-silver mt-[40px]">
+				<div class="p-1 text-center">
+					<p class="paragraph  xl:p1 xs:p2 text-white-pure">EXTERNAL</p>
+					<p class="paragraph  xl:p1 xs:p2 text-silver mt-[40px]">
 						Lorem ipsum dolor sit amet consectetur. Viverra feugiat sollicitudin sit lacus sagittis cursus at sodales nunc. Hendrerit lectus nibh cras faucibus maecenas. Aliquam viverra enim massa cras. Viverra turpis senectus viverra a eu turpis quis. Varius vestibulum urna in rhoncus laoreet.
 						<br><br>
 						Lorem ipsum dolor sit amet consectetur. Viverra feugiat sollicitudin sit lacus sagittis cursus at sodales nunc. Hendrerit lectus nibh cras faucibus maecenas. Aliquam viverra enim massa cras. Viverra turpis senectus viverra a eu turpis quis. Varius vestibulum urna in rhoncus laoreet.
 					</p>
+					<p class="paragraph  xl:p1 xs:p2 text-msu-crimson-ground text-center mt-[40px]">Click here to know more!</p>
 				</div>
-				<div class="p-1">
-					<p class="paragraph p1 text-white-pure text-center">INTERNAL</p>
-					<p class="paragraph p1 text-silver mt-[40px]">
+				<div class="p-1 text-center xl:block xs:hidden">
+					<p class="paragraph  xl:p1 xs:p2 text-white-pure">INTERNAL</p>
+					<p class="paragraph  xl:p1 xs:p2 text-silver mt-[40px]">
 						Lorem ipsum dolor sit amet consectetur. Viverra feugiat sollicitudin sit lacus sagittis cursus at sodales nunc. Hendrerit lectus nibh cras faucibus maecenas. Aliquam viverra enim massa cras. Viverra turpis senectus viverra a eu turpis quis. Varius vestibulum urna in rhoncus laoreet.
 						<br><br>
 						Lorem ipsum dolor sit amet consectetur. Viverra feugiat sollicitudin sit lacus sagittis cursus at sodales nunc. Hendrerit lectus nibh cras faucibus maecenas. Aliquam viverra enim massa cras. Viverra turpis senectus viverra a eu turpis quis. Varius vestibulum urna in rhoncus laoreet.
 					</p>
+					<p class="paragraph  xl:p1 xs:p2 text-msu-crimson-ground text-center mt-[40px]">Click here to know more!</p>
 				</div>
 			</div>
 
-			<div class="mt-[86px] pl-[28.5%] pr-[28.5%]">
-				<div class="p-1">
-					<h3 class="headings h3 text-white-pure text-center">Policies</h3>
-					<p class="paragraph p1 text-silver mt-[40px] mb-[60px]">
+			<div class="mt-[86px] xl:px-[28.5px] xs:px-[12px] mb-[60px] xl:hidden xs:block">
+				<div class="p-1 text-center">
+					<p class="paragraph  xl:p1 xs:p2 text-white-pure">INTERNAL</p>
+					<p class="paragraph xl:p1 xs:p2 text-silver mt-[40px] ">
 						Lorem ipsum dolor sit amet consectetur. Viverra feugiat sollicitudin sit lacus sagittis cursus at sodales nunc. Hendrerit lectus nibh cras faucibus maecenas. Aliquam viverra enim massa cras. Viverra turpis senectus viverra a eu turpis quis. Varius vestibulum urna in rhoncus laoreet.
 						<br><br>
 						Lorem ipsum dolor sit amet consectetur. Viverra feugiat sollicitudin sit lacus sagittis cursus at sodales nunc. Hendrerit lectus nibh cras faucibus maecenas. Aliquam viverra enim massa cras. Viverra turpis senectus viverra a eu turpis quis. Varius vestibulum urna in rhoncus laoreet.
 					</p>
+					<p class="paragraph  xl:p1 xs:p2 text-msu-crimson-ground text-center mt-[40px]">Click here to know more!</p>
+
+				</div>
+			</div>
+
+			<div class="mt-[86px] xl:px-[28.5px] xs:px-[12px] mb-[60px]">
+				<div class="p-1 text-center">
+					<h3 class="headings xl:h3 xs:h4 text-white-pure">Policies</h3>
+					<p class="paragraph xl:p1 xs:p2 text-silver mt-[40px] ">
+						Lorem ipsum dolor sit amet consectetur. Viverra feugiat sollicitudin sit lacus sagittis cursus at sodales nunc. Hendrerit lectus nibh cras faucibus maecenas. Aliquam viverra enim massa cras. Viverra turpis senectus viverra a eu turpis quis. Varius vestibulum urna in rhoncus laoreet.
+						<br><br>
+						Lorem ipsum dolor sit amet consectetur. Viverra feugiat sollicitudin sit lacus sagittis cursus at sodales nunc. Hendrerit lectus nibh cras faucibus maecenas. Aliquam viverra enim massa cras. Viverra turpis senectus viverra a eu turpis quis. Varius vestibulum urna in rhoncus laoreet.
+					</p>
+					<p class="paragraph  xl:p1 xs:p2 text-msu-crimson-ground text-center mt-[40px]">Click here to know more!</p>
 
 				</div>
 			</div>
@@ -188,14 +254,34 @@ const currentPath = Astro.url.pathname;
 <!-- end fold 04 -->
 
 <!-- fold 05 -->
-		<div class="admissions-fold-05-gb-img w-full px-[12.5%] pt-20">
+		<div class="admissions-fold-05-gb-img w-full  pt-20">
 			<div class="item-center">
-				<h3 class="headings text-center text-msu-maroon h3 pt-[27px] pl-[12.5%] pr-[12.5%]">You can have any of these</h3>
+				<h3 class="headings text-center text-msu-maroon xl:h3 xs:h4 xl:pt-[80px] xs:pt-[62px] pl-[12.5%] pr-[12.5%]">You can have any of these</h3>
 			</div>
 			
-			<div class="flex justify-center mt-10">
-				<div class="m-5">
-					<p class="paragraph p1 text-msu-maroon w-[255px] mt-10">Academic Scholarship</p>
+			<div class="flex justify-center mt-10 xl:hidden xs:block">
+				<div class="m-5 text-center">
+					<p class="paragraph xl:p1 xs:p2 text-msu-maroon mt-10">Academic Scholarship</p>
+					<div class="flex flex-col gap-[5px] paragraph text-graphite mt-[20px]">
+						<a href="#" class=" mt-[20px]">MSU Tawi-Tawi Scholarship
+							for Science and Mathematics
+							(SSM)</a>
+						<a href="#" class=" mt-[20px]">Special Privileges for
+							Academic Excellence</a>
+						<a href="#" class=" mt-[20px]">Cultural Community Grant
+							(CCG)</a>
+						<a href="#" class=" mt-[20px]">The Badjao Grant</a>
+						<a href="#" class=" mt-[20px]">Skill/Talent Study Grant</a>
+						<a href="#" class=" mt-[20px]">Fisheries Technology Study
+							Grant (Fish Tech Grant)</a>
+					</div>
+
+				</div>
+					
+			</div>
+			<div class="xl:flex justify-center mt-10 xl:px-[12.5%]">
+				<div class="m-5 xl:block xs:hidden">
+					<p class="paragraph xl:p1 xs:p2 text-msu-maroon w-[255px] mt-10">Academic Scholarship</p>
 					<div class="flex flex-col gap-[5px] paragraph text-graphite mt-[20px]">
 						<a href="#" class=" mt-[20px]">MSU Tawi-Tawi Scholarship
 							for Science and Mathematics
@@ -212,15 +298,15 @@ const currentPath = Astro.url.pathname;
 
 				</div>
 				
-				<div class="m-5 pl-[12.5%] pr-[12.5%]">
-					<h4 class="headings h4 text-msu-maroon mt-10">Academic Scholarship</h4>
-					<div class="paragraph p2  mt-[10px] text-graphite">
-						<p class=" text-graphite paragraph p1 pt-[27px]">
+				<div class="m-5 xl:px-[12.5%] xs:px-[0%] ">
+					<h4 class="headings h4 text-msu-maroon mt-10 xl:block xs:hidden">Academic Scholarship</h4>
+					<div class="paragraph p2  mt-[10px] text-black-pure">
+						<p class=" paragraph xl:p1 xs:p2 pt-[27px]">
 								Lorem ipsum dolor sit amet consectetur. Sit justo semper 
 								sollicitudin nisl. Adipiscing amet gravida justo venenatis viverra morbi in. Eros tellus integer sit non amet amet.
 						</p>
-						<p class="paragraph p1 pt-[27px]">Requirements: </p>
-						<ul class="gap-8 paragraph p1 text-graphite pt-[27px] p-10 mb-[20px]">
+						<p class="paragraph  xl:p1 xs:p2 pt-[27px]">Requirements: </p>
+						<ul class="gap-8 paragraph  xl:p1 xs:p2 pt-[27px] p-10 mb-[20px]">
 							<li class="mb-[12px]">Report Card (Form 137)</li>
 							<li class="mb-[12px]">PSA Birth Certificate</li>
 							<li class="mb-[12px]">SASE Report Rating</li>
@@ -232,450 +318,31 @@ const currentPath = Astro.url.pathname;
 				</div>
 					
 			</div>
-			<div class="text-center pb-[60px]">
-				<p class="paragraph text-black-pure p1 mb-5">Need more help of information?</p>
-				<a href="" class="bg-transparent border border-black paragraph p1 gap-10 text-black-pure py-[10.5px] px-[60px] rounded-[40px]">Contact us now!</a>
+			<div class="text-center pb-[79px]">
+				<p class="paragraph text-msu-crimson-ground xl:p1 xs:p2 mb-5">Need more help of information?</p>
+				<a href="" class="bg-transparent border border-msu-crimson-ground paragraph xl:p1 xs:p2 gap-10 text-msu-crimson-ground py-[10.5px] px-[60px] rounded-[40px]">Contact us now!</a>
 			
 			</div>
 		</div>
 <!-- end fold 05 -->
 		
 
-<!-- fold 06 -->
-		<div class="bg-msu-shallow-ocean w-full px-[12.5%] flex justify-center flex-col pt-20">
-			<div class="item-center">
-				<h3 class="headings text-center text-white-pure h3 pt-[27px] pl-[12.5%] pr-[12.5%]">Academic Calendar</h3>
-				
-				<p class="paragraph flex justify-center text-silver p1 pt-[27px]">
-					Lorem ipsum dolor sit amet consectetur. Viverra feugiat sollicitudin sit lacus sagittis cursus at sodales nunc. Hendrerit lectus nibh cras faucibus maecenas. Aliquam viverra enim massa cras. Viverra turpis senectus viverra a eu turpis quis. Varius vestibulum urna in rhoncus laoreet.
-				</p>
+<!--  Academic Calendar -->
+		<AcademicCalendar path={currentPath} client:visible />
+<!-- end  Academic Calendar -->
+
+
+<!-- Main video -->
+		<MainVideo path={currentPath} client:visible />
+<!-- end Main video -->
 		
-				
-			</div>
-			
-			<div class="item-center mt-[27px] pb-[60px]">
-				<div class="item-center">
+<!-- FooterNaV -->
+		<FooterNav path={currentPath} client:visible />
+<!-- end FooterNaV -->
 
-					<div class="grid grid-col-4 justify-center">
-						<div class="flex">
-							<div class="bg-gradient-ocean p-5">
-								
-								<div class="gap-2 flex">
-									<div>
-										<p class="paragraph p1 text-white-pure">Jan</p>
-										<h3 class="headings h3">14</h3>
-									</div>
-									<div>
-										<p class="paragraph p1 text-titanium mt-[5px]">Event Title</p>
-										<p class="paragraph p2 text-titanium mt-[5px]">Lorem ipsum dolor sit amet consectetur. Faucibus enim nunc integer libero</p>
-									</div>
-								</div>
-							</div>
-							<div class="bg-gradient-ocean p-5">
-								
-								<div class="gap-2 flex">
-									<div>
-										<p class="paragraph p1 text-white-pure">Jan</p>
-										<h3 class="headings h3">14</h3>
-									</div>
-									<div>
-										<p class="paragraph p1 text-titanium mt-[5px]">Event Title</p>
-										<p class="paragraph p2 text-titanium mt-[5px]">Lorem ipsum dolor sit amet consectetur. Faucibus enim nunc integer libero</p>
-									</div>
-								</div>
-							</div>
-							<div class="bg-gradient-ocean p-5">
-								
-								<div class="gap-2 flex">
-									<div>
-										<p class="paragraph p1 text-white-pure">Jan</p>
-										<h3 class="headings h3">14</h3>
-									</div>
-									<div>
-										<p class="paragraph p1 text-titanium mt-[5px]">Event Title</p>
-										<p class="paragraph p2 text-titanium mt-[5px]">Lorem ipsum dolor sit amet consectetur. Faucibus enim nunc integer libero</p>
-									</div>
-								</div>
-							</div>
-							<div class="bg-gradient-ocean p-5">
-								
-								<div class="gap-2 flex">
-									<div>
-										<p class="paragraph p1 text-white-pure">Jan</p>
-										<h3 class="headings h3">14</h3>
-									</div>
-									<div>
-										<p class="paragraph p1 text-titanium mt-[5px]">Event Title</p>
-										<p class="paragraph p2 text-titanium mt-[5px]">Lorem ipsum dolor sit amet consectetur. Faucibus enim nunc integer libero</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="flex">
-							<div class="bg-gradient-ocean p-5">
-								
-								<div class="gap-2 flex">
-									<div>
-										<p class="paragraph p1 text-white-pure">Jan</p>
-										<h3 class="headings h3">14</h3>
-									</div>
-									<div>
-										<p class="paragraph p1 text-titanium mt-[5px]">Event Title</p>
-										<p class="paragraph p2 text-titanium mt-[5px]">Lorem ipsum dolor sit amet consectetur. Faucibus enim nunc integer libero</p>
-									</div>
-								</div>
-							</div>
-							<div class="bg-gradient-maroon p-5">
-								
-								<div class="gap-2 flex">
-									<div>
-										<p class="paragraph p1 text-white-pure">Apr</p>
-										<h3 class="headings h3">01</h3>
-									</div>
-									<div>
-										<p class="paragraph p1 text-titanium mt-[5px]">Event Title</p>
-										<p class="paragraph p2 text-titanium mt-[5px]">Lorem ipsum dolor sit amet consectetur. Faucibus enim nunc integer libero</p>
-									</div>
-								</div>
-							</div>
-							<div class="bg-gradient-ocean p-5">
-								
-								<div class="gap-2 flex">
-									<div>
-										<p class="paragraph p1 text-white-pure">Jan</p>
-										<h3 class="headings h3">14</h3>
-									</div>
-									<div>
-										<p class="paragraph p1 text-titanium mt-[5px]">Event Title</p>
-										<p class="paragraph p2 text-titanium mt-[5px]">Lorem ipsum dolor sit amet consectetur. Faucibus enim nunc integer libero</p>
-									</div>
-								</div>
-							</div>
-							<div class="bg-gradient-ocean p-5">
-								
-								<div class="gap-2 flex">
-									<div>
-										<p class="paragraph p1 text-white-pure">Jan</p>
-										<h3 class="headings h3">14</h3>
-									</div>
-									<div>
-										<p class="paragraph p1 text-titanium mt-[5px]">Event Title</p>
-										<p class="paragraph p2 text-titanium mt-[5px]">Lorem ipsum dolor sit amet consectetur. Faucibus enim nunc integer libero</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="flex">
-							
-							<div class="bg-gradient-ocean p-5">
-								
-								<div class="gap-2 flex">
-									<div>
-										<p class="paragraph p1 text-white-pure">Jan</p>
-										<h3 class="headings h3">14</h3>
-									</div>
-									<div>
-										<p class="paragraph p1 text-titanium mt-[5px]">Event Title</p>
-										<p class="paragraph p2 text-titanium mt-[5px]">Lorem ipsum dolor sit amet consectetur. Faucibus enim nunc integer libero</p>
-									</div>
-								</div>
-							</div>
-							<div class="bg-gradient-ocean p-5">
-								
-								<div class="gap-2 flex">
-									<div>
-										<p class="paragraph p1 text-white-pure">Jan</p>
-										<h3 class="headings h3">14</h3>
-									</div>
-									<div>
-										<p class="paragraph p1 text-titanium mt-[5px]">Event Title</p>
-										<p class="paragraph p2 text-titanium mt-[5px]">Lorem ipsum dolor sit amet consectetur. Faucibus enim nunc integer libero</p>
-									</div>
-								</div>
-							</div>
-							<div class="bg-gradient-ocean p-5">
-								
-								<div class="gap-2 flex">
-									<div>
-										<p class="paragraph p1 text-white-pure">Jan</p>
-										<h3 class="headings h3">14</h3>
-									</div>
-									<div>
-										<p class="paragraph p1 text-titanium mt-[5px]">Event Title</p>
-										<p class="paragraph p2 text-titanium mt-[5px]">Lorem ipsum dolor sit amet consectetur. Faucibus enim nunc integer libero</p>
-									</div>
-								</div>
-							</div>
-							<div class="bg-gradient-ocean p-5">
-								
-								<div class="gap-2 flex">
-									<div>
-										<p class="paragraph p1 text-white-pure">Jan</p>
-										<h3 class="headings h3">14</h3>
-									</div>
-									<div>
-										<p class="paragraph p1 text-titanium mt-[5px]">Event Title</p>
-										<p class="paragraph p2 text-titanium mt-[5px]">Lorem ipsum dolor sit amet consectetur. Faucibus enim nunc integer libero</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="flex">
-
-							<div class="bg-gradient-ocean p-5">
-								
-								<div class="gap-2 flex">
-									<div>
-										<p class="paragraph p1 text-white-pure">Jan</p>
-										<h3 class="headings h3">14</h3>
-									</div>
-									<div>
-										<p class="paragraph p1 text-titanium mt-[5px]">Event Title</p>
-										<p class="paragraph p2 text-titanium mt-[5px]">Lorem ipsum dolor sit amet consectetur. Faucibus enim nunc integer libero</p>
-									</div>
-								</div>
-							</div>
-							<div class="bg-gradient-ocean p-5">
-								
-								<div class="gap-2 flex">
-									<div>
-										<p class="paragraph p1 text-white-pure">Jan</p>
-										<h3 class="headings h3">14</h3>
-									</div>
-									<div>
-										<p class="paragraph p1 text-titanium mt-[5px]">Event Title</p>
-										<p class="paragraph p2 text-titanium mt-[5px]">Lorem ipsum dolor sit amet consectetur. Faucibus enim nunc integer libero</p>
-									</div>
-								</div>
-							</div>
-							<div class="bg-gradient-ocean p-5">
-								
-								<div class="gap-2 flex">
-									<div>
-										<p class="paragraph p1 text-white-pure">Jan</p>
-										<h3 class="headings h3">14</h3>
-									</div>
-									<div>
-										<p class="paragraph p1 text-titanium mt-[5px]">Event Title</p>
-										<p class="paragraph p2 text-titanium mt-[5px]">Lorem ipsum dolor sit amet consectetur. Faucibus enim nunc integer libero</p>
-									</div>
-								</div>
-							</div>
-							<div class="bg-gradient-maroon p-5">
-								
-								<div class="gap-2 flex">
-									<div>
-										<p class="paragraph p1 text-white-pure">Dec</p>
-										<h3 class="headings h3">25</h3>
-									</div>
-									<div>
-										<p class="paragraph p1 text-titanium mt-[5px]">Event Title</p>
-										<p class="paragraph p2 text-titanium mt-[5px]">Lorem ipsum dolor sit amet consectetur. Faucibus enim nunc integer libero</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-					</div>
-					
-				</div>
-			</div>
-
-		</div>
-<!-- end fold 06 -->
-
-<!-- fold 07 -->
-		<div class="video-wrapper">
-			<div class="video-container">
-				<iframe width="100%" height="980"
-					src="https://www.youtube.com/embed/0C7f8iq6f_w?autoplay=0&mute=0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-				</iframe>
-			</div>
-		</div>
-<!-- end fold 07 -->
-		
-<!-- footer-nav -->
-		<div class="bg-msu-deep-ocean text-white-pure">
-			<div class="mb-[60px] xl:mt-[80px] xs:mt-[40px]">
-				<div class="flex xl:flex-row xs:flex-col xl:px-[12.5%] xs:px-[3.85%] xl:mb-[140px] xs:[58px] justify-center items-center">
-					<div class="flex mb-[40px]">
-						<img src="/images/article-img-1.png" alt="" class="ml-10 xl:h-[200px] xs:h-[120px]">
-						<div class="ml-5">
-							<h5 class="headings xl:h5 xs:h6 max-w-[220px]">Article Long Title </h5>
-							<p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[15px] max-h-[142px] overflow-hidden">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-						</div>
-					</div>
-					<div class="flex mb-[40px]">
-						<img src="/images/article-img-1.png" alt="" class="ml-10 xl:h-[200px] xs:h-[120px]">
-						<div class="ml-5">
-							<h5 class="headings xl:h5 xs:h6 max-w-[220px]">Article Long Title </h5>
-							<p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[15px] max-h-[142px] overflow-hidden">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-						</div>
-					</div>
-					<div class="flex mb-[40px]">
-						<img src="/images/article-img-1.png" alt="" class="ml-10 xl:h-[200px] xs:h-[120px]">
-						<div class="ml-5">
-							<h5 class="headings xl:h5 xs:h6 max-w-[220px]">Article Long Title </h5>
-							<p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[15px] max-h-[142px] overflow-hidden">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-						</div>
-					</div>
-				</div>
-				
-				<img src="/images/rectangle.png" alt="" class="max-w-full h-[20px] absolute xs:hidden 3xl:block">
-				<div class="flex xl:flex-row xs:flex-col justify-center xl:items-stretch xs:items-center xl:mx-[12.5%] xs:mx-[3.85%] px-[240px]">
-					<div class="flex xl:mt-0 xs:mt-10">
-						<ul class="min-w-[170px]">
-							<li><h5 class="headings h5 max-w-[220px] mb-2">University </h5></li>
-							<li><a href="#" class="paragraph p2 text-titanium mb-1">History </a></li>
-							<li><a href="#" class="paragraph p2 text-titanium mb-1">Mission / Vission </a></li>
-							<li><a href="#" class="paragraph p2 text-titanium mb-1">University Hymn </a></li>
-							<li><a href="#" class="paragraph p2 text-titanium mb-1">Articles </a></li>
-							<li><a href="#" class="paragraph p2 text-titanium mb-1">Events </a></li>
-							<li><a href="#" class="paragraph p2 text-titanium mb-1">Gazette </a></li>
-							<li><a href="#" class="paragraph p2 text-titanium mb-1">Annual Report </a></li>
-						</ul>
-						<ul class="xl:ml-[100px] xs:ml-[52px] min-w-[170px]">
-							<li><h5 class="headings h5 mb-2">Admissions </h5></li>	
-							<li><a href="#" class="paragraph p2 text-titanium mb-1">MSU SASE </a></li>	
-							<li><a href="#" class="paragraph p2 text-titanium mb-1">Undergraduate </a></li>	
-							<li><a href="#" class="paragraph p2 text-titanium mb-1">Transferee </a></li>	
-							<li><a href="#" class="paragraph p2 text-titanium mb-1">Returning / Shifting </a></li>	
-							<li><a href="#" class="paragraph p2 text-titanium mb-1">Remedial Program </a></li>	
-							<li><a href="#" class="paragraph p2 text-titanium mb-1">Student Fees </a></li>	
-							<li><a href="#" class="paragraph p2 text-titanium mb-1">Scholarships & Grants </a></li>	
-						</ul>
-					</div>
-					<div class="flex xl:mt-0 xs:mt-10 xl:ml-[100px] xs:ml-0">
-						<ul class="min-w-[170px]">
-							<li><h5 class="headings h5  w-200 mb-2">Programs </h5></li>
-							<li><a href="#" class="paragraph p2 text-titanium mb-1 max-w-[520px] mt-[15px] max-h-[152px]">Intormation Technology </a></li>
-							<li><a href="#" class="paragraph p2 text-titanium mb-1 max-w-[220px] mt-[15px] max-h-[152px]">Science & Arts </a></li>
-							<li><a href="#" class="paragraph p2 text-titanium mb-1 max-w-[220px] mt-[15px] max-h-[152px]">Fisheries </a></li>
-							<li><a href="#" class="paragraph p2 text-titanium mb-1 max-w-[220px] mt-[15px] max-h-[152px]">Education </a></li>
-							<li><a href="#" class="paragraph p2 text-titanium mb-1 max-w-[220px] mt-[15px] max-h-[152px]">Oceanography </a></li>
-							<li><a href="#" class="paragraph p2 text-titanium mb-1 max-w-[220px] mt-[15px] max-h-[152px]">Islami & Arabic Studies </a></li>
-						</ul>
-						<ul class="xl:ml-[100px] xs:ml-[52px] min-w-[170px]">
-							<li><h5 class="headings h5 max-w-[220px] mb-2">Admissions</h5></li>
-							<li><a href="#" class="paragraph p2 text-titanium mb-1">Chancellor </a></li>
-							<li><a href="#" class="paragraph p2 text-titanium mb-1">VC Admin & Finance </a></li>
-							<li><a href="#" class="paragraph p2 text-titanium mb-1">Planning & Development </a></li>
-							<li><a href="#" class="paragraph p2 text-titanium mb-1">IICT </a></li>
-							<li><a href="#" class="paragraph p2 text-titanium mb-1">CAS </a></li>
-							<li><a href="#" class="paragraph p2 text-titanium mb-1">COF </a></li>
-							<li><a href="#" class="paragraph p2 text-titanium mb-1">COED </a></li>
-							<li><a href="#" class="paragraph p2 text-titanium mb-1">IOES </a></li>
-							<li><a href="#" class="paragraph p2 text-titanium mb-1">CIAS </a></li>
-						</ul>
-					</div>
-					<div class="xl:mt-0 xs:mt-10 xl:ml-[100px] xs:ml-0">
-						<h5 class="headings h5 mb-2 text-center">Legal </h5>
-						<div class="flex xl:flex-col xs:flex-row items-center xl:gap-0 xs:gap-[137px]">
-							<div class="flex flex-col min-w-[70px]">
-								<a href="#" class="paragraph p2 text-titanium mb-1">Terms </a>
-								<a href="#" class="paragraph p2 text-titanium mb-1">Pricacy </a>
-							</div>
-							<div class="flex flex-col min-w-[70px]">
-								<a href="#" class="paragraph p2 text-titanium mb-1">RA 6060 </a>
-								<a href="#" class="paragraph p2 text-titanium mb-1">KRA2 </a>
-							</div>
-						</div>
-						
-					</div>
-				</div>
-			</div>
-		</div>
-<!-- end footer-nav -->
-
-<!-- footer -->
-		<div class="bg-msu-dark-ocean text-white-pure justify-center xl:px-[12.5%] xs:px-[3.85%] xl:pt-20 xs:pt-10">
-			<div class="flex flex-col justify-center items-center text-center">
-				<img src="/images/MSU Seal New (Official).png" alt="" class="xl:h-[170px] xs:h-[127px] mb-10">
-				<div>
-					<h4 class="headings xl:h4 xs:h5">Mindanao State University</h4>
-					<p class="paragraph xl:p1 xs:p2">Tawi-Tawi College of Technology and Oceanography</p>
-				</div>
-			</div>
-			<div class="flex gap-5 xl:mt-20 xs:mt-9 xl:mb-[70px] xs:mb-[80px] justify-center">
-				<img src="/images/Republika ng pilipinas.png" alt="" class="xl:h-[100px] xs:h-[75px]">
-				<img src="/images/transparency_seal.png" alt="" class="xl:h-[100px] xs:h-[75px]">
-				<img src="/images/FOI-logo.png" alt="" class="xl:h-[100px] xs:h-[75px]">
-			</div>
-
-			<div class="flex xl:flex-row xs:flex-col justify-center xl:text-left xs:text-center xl:items-start xs:items-center">
-				<div class="flex flex-col max-w-[300px] xl:mr-[174px] xs:mr-0">
-					<div class="xl:mb-[50px] xs:mb-10">	
-						<div class="headings h5 mb-[10px]">
-							University Address
-						</div>
-						<div class="paragraph p2 text-titanium">Boheh Sallang, Sanga-Sanga
-							Bongao, Tawi-Tawi 7500</div>
-						</div>
-					<div class="mb-[50px]">	
-						<div class="headings h5 mb-[10px]">Main Office</div>
-						<div class="paragraph p2 text-titanium">MSU Manila Information and Liaison Office
-							Rm 203, Leticia Bldg.
-							1804 Taft Avenue Corner J. Nakpil St.
-							Malate, Manila
-						</div>
-					</div>
-				</div>
-
-				<div class="flex gap-[54px]">
-					<div class="flex flex-col max-w-[450px] xl:mr-10 xs:mr-0">
-						<div class="mb-[50px]">	
-							<div class="headings xl:h5 xs:h6 xl:mb-[10px] xs:mb-[5px]">Chancellor</div>
-							<div class="paragraph xl:p2 xs:p3 text-titanium">+63 917 3107843 <br> info@msutawi-tawi.edu.ph</div>
-						</div>
-						<div>	
-							<div class="headings xl:h5 xs:h6 xl:mb-[10px] xs:mb-[5px]">Admissions</div>
-							<div class="paragraph xl:p2 xs:p3 text-titanium">+63 917 3107843 <br> admission@msutawi-tawi.edu.ph</div>
-						</div>
-					</div>
-	
-					<div class="flex flex-col max-w-[450px] xl:mr-[175px] xs:mr-0">
-						<div class="mb-[50px]">	
-							<div class="headings xl:h5 xs:h6 xl:mb-[10px] xs:mb-[5px]">Registrar</div>
-							<div class="paragraph xl:p2 xs:p3 text-titanium">+63 917 3107843 <br> registrar@msutawi-tawi.edu.ph</div>
-						</div>
-						<div>	
-							<div class="headings xl:h5 xs:h6 xl:mb-[10px] xs:mb-[5px]">Guidance</div>
-							<div class="paragraph xl:p2 xs:p3 text-titanium">+63 917 3107843 <br> guidance@msutawi-tawi.edu.ph</div>
-						</div>
-					</div>
-				</div>
-				
-				<div class="flex flex-col xl:max-w-[360px] xs:max-w-[240px] xl:mt-0 xs:mt-10">
-					<div class="paragraph xl:p1 xs:p2 text-titanium mb-5">For other inquiries regarding biddings for projects and other business transactions please visit the link below</div>
-					<a href="#" class="bg-msu-maroon text-white-pure xl:py-[14.5px] xs:py-5 xl:px-[85.5px] xs:px-[61.5px] rounded-[40px] paragraph xl:p1 xs:p2">Project Biddings</a>
-				</div>
-
-			</div>
-			
-			<div class="flex gap-[33.33px] mt-8 justify-center">
-					<a href="#"><img src="/images/social media/linkin.png" alt=""></a>
-					<a href="#"></a><img src="/images/social media/instagram.png" alt=""></a>
-					<a href="#"></a><img src="/images/social media/facebook.png" alt=""></a>
-					<a href="#"></a><img src="/images/social media/tweeter.png" alt=""></a>
-					<a href="#"></a><img src="/images/social media/youtube.png" alt=""></a>
-			</div>
-			
-			<div class="flex flex-col justify-center items-center xl:mt-[55px] xs:mt-[45px] pb-10">
-				<div class="flex xl:flex-row xs:flex-col">
-					<p class="paragraph p2 text-center text-msu-shallow-ocean">© 2023 &nbsp;</p>
-					<p class="paragraph p2 text-center text-msu-shallow-ocean">Mindanao State University &nbsp;</p>
-					<p class="paragraph p2 text-center text-msu-shallow-ocean xl:block xs:hidden">- &nbsp;</p>
-					<p class="paragraph p2 text-center text-msu-shallow-ocean">Tawi-Tawi College of Technology and Oceanography</p>
-				</div>
-				<div>
-					<p class="paragraph p2 text-center text-msu-shallow-ocean mt-3">All rights reserved.</p>
-				</div>
-					
-					
-			</div>
-
-		</div>
-<!-- end footer -->
+<!-- Footer -->
+		<Footer path={currentPath} client:visible />
+<!-- end Footer -->
 
 	</main>
 	

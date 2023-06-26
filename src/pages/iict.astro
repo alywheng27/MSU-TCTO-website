@@ -1,0 +1,173 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from "../components/Navbar";
+import FooterNav from "../components/FooterNav";
+import Footer from "../components/Footer";
+import '../styles/css/global.css';
+
+const currentPath = Astro.url.pathname;
+---
+
+<Layout title="Welcome to Astro.">
+	<main>
+		<Navbar path={currentPath} client:visible />
+
+<!-- fold 02 -->
+		<div class=" bg-msu-deep-ocean">
+			<div class="text-center xl:px-[12.5%] xs:px-[3.85%] pt-[80px] xl:bg-none xs:campuslife-bg-img">
+                <h4 class="headings xl:h4 xs:h4 text-white-pure">Institute of Information and Communications Technology</h4>
+				<div class="bg-gradient-ocean h-20 rotate-180 xs:block xl:hidden"></div>
+			</div>
+            <div class="flex gap-[120px] pl-[240px] pr-[240px] pt-[74px] pb-[82px] ">
+                <div class="flex place-items-center w-[1280px]">
+                    <img src="/images/College Logo/LOGO IICT.png" >
+                </div>
+                <div class="p-1 max-w[480px]">
+                    <p class="paragraph p1 text-silver mt-[40px]">
+                        Lorem ipsum dolor sit amet consectetur. Viverra feugiat sollicitudin sit lacus sagittis cursus at sodales nunc. Hendrerit lectus nibh cras faucibus maecenas. Aliquam viverra enim massa cras. Viverra turpis senectus viverra a eu turpis quis. Varius vestibulum urna in rhoncus laoreet.
+                    </p>
+                </div>
+                <div class="p-1 max-w[480px]">
+                    <p class="paragraph p1 text-silver mt-[40px]">
+                        Lorem ipsum dolor sit amet consectetur. Viverra feugiat sollicitudin sit lacus sagittis cursus at sodales nunc. Hendrerit lectus nibh cras faucibus maecenas. Aliquam viverra enim massa cras. Viverra turpis senectus viverra a eu turpis quis. Varius vestibulum urna in rhoncus laoreet.
+                    </p>
+                </div>
+            </div>
+		</div>
+
+		<div class=" bg-msu-gold">
+            <div class="flex gap-[240px] pl-[240px] pr-[240px] pt-[74px] pb-[82px] justify-center">
+                <div class="flex flex-col gap-[20px] max-w[480px] text-center">
+					<h4 class="headings h4 text-black">Center of Development</h4>
+                    <p class="paragraph p1 text-black mt-[40px]">
+                        Center of Development
+                    </p>
+                    <p class="paragraph p1 text-black">
+                        Center of Development
+                    </p>
+                    <p class="paragraph p1 text-black">
+                        Center of Development
+                    </p>
+                    <p class="paragraph p1 text-black">
+                        Center of Development
+                    </p>
+                    <p class="paragraph p1 text-black">
+                        Center of Development
+                    </p>
+                </div>
+                <div class="flex flex-col gap-[20px] max-w[480px] text-center">
+					<h4 class="headings h4 text-black">Certifications</h4>
+                    <p class="paragraph p1 text-black mt-[40px]">
+                        Certifications
+                    </p>
+                    <p class="paragraph p1 text-black">
+                        Certifications
+                    </p>
+                    <p class="paragraph p1 text-black">
+                        Certifications
+                    </p>
+                    <p class="paragraph p1 text-black">
+                        Certifications
+                    </p>
+                    <p class="paragraph p1 text-black">
+                        Certifications
+                    </p>
+                </div>
+            </div>
+		</div>
+        
+        <div class="flex justify-center mt-20 xl:px-[12.5%] xs:px-[3.85%]">
+            <img src="/images/the-campus-2.png" alt="" class="h-[360px] object-cover object-center" />
+            <img src="/images/the-campus-2.png" alt="" class="h-[360px] object-cover object-center" />
+            <img src="/images/the-campus-2.png" alt="" class="h-[360px] object-cover object-center" />
+            
+
+        </div>
+        <div class="flex-col text-center pb-[60px]">
+            <p class="paragraph text-white-pure p1 pt-20 mb-5"> </p>
+            <a href="" class="bg-transparent border paragraph xl:p1 xs:p2 gap-10 text-white-pure xl:py-[10.5px] xs:py-5 xl:px-[60px] xs:px-[61.5px] rounded-[40px]">Check our Campus Galery</a>
+        
+        </div>
+<!-- end fold 02 -->
+
+        
+<!-- fold 03 -->
+        <div class="flex flex-col align-cneter bg-gradient-maroon px-[12.5%] pt-20 pb-20 ">
+            <div class="item-center">
+                <h3 class="headings text-center text-white-pure h3 pl-[12.5%] pr-[12.5%]">Our Programs</h3>
+            </div>
+            
+            <div class="flex place-items-center gap-[20px] p-5 ">
+                <img src="/images/College Logo/LOGO IICT.png" class="w-[100px]" alt="">
+                <h4 class="headings h4 text-white-pure mt-5">Institute of Information and Communications Technology</h4>
+            </div>
+            
+            <div class="flex place-items-top gap-[175px] p-5 ml-[120px]">
+                <div class="flex flex-col paragraph p1 text-titanium">
+                    <p class=""> Bachelor of Science in Computer Application </p>
+                    <p class=""> Bachelor of Science in Information Technology </p>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <p class="paragraph text-titanium p1 pt-[150px] mb-5">Need clarifications or help?</p>
+                <a href="" class="bg-transparent border paragraph p1  text-titanium py-[10.5px] px-[60px] rounded-[40px]">Contact us now!</a>
+            
+            </div>
+        </div>
+
+        
+        <div class="flex flex-col gap-[80px] bg-msu-deep-ocean xl:px-[12.5%] xs:px-[3.85%] xl:pt-[80px] xs:pt-20 xl:pb-[80px] xs:pb-[80px]">
+            <h3 class="headings xl:h3 xs:h4 text-white-pure text-center">Our Facilities & Equipments</h3>
+            <div class="flex xl:flex-row xs:flex-col justify-center gap-[120px] ">
+                <div class="xl:mt-10 xs:mt-20 ">
+                    <img src="/images/the-campus-2.png" alt="" class="h-[360px] object-cover object-center" />
+                </div>
+                <div class="xl:mt-10 xs:mt-20">
+                    
+                    <p class="paragraph p1 text-titanium w-[720px]">
+                        Lorem ipsum dolor sit amet consectetur. Dui eros integer varius bibendum eu. Venenatis nulla amet tincidunt at orci enim. Sit nunc massa tempus placerat risus maecenas. Faucibus duis feugiat parturient enim ullamcorper nunc. Consequat vulputate turpis ullamcorper felis dignissim. Pharetra et duis duis ultrices id velit ut. Vulputate platea porta consectetur risus turpis amet. Luctus massa eu urna maecenas eros pretium. Pellentesque senectus dolor id quam nec. Nulla nunc integer facilisi arcu porttitor. Maecenas quam lectus quis convallis erat. Vitae enim vulputate dolor quisque ipsum. Et vel maecenas justo quis nulla nibh duis.
+                    </p>
+                </div>
+            </div>
+            <div class="flex xl:flex-row xs:flex-col justify-center  gap-[120px] ">
+                <div class="xl:mt-10 xs:mt-20 ">
+                    <img src="/images/the-campus-2.png" alt="" class="h-[360px] object-cover object-center" />
+                </div>
+                <div class="xl:mt-10 xs:mt-20">
+                    
+                    <p class="paragraph p1 text-titanium w-[720px]">
+                        Lorem ipsum dolor sit amet consectetur. Dui eros integer varius bibendum eu. Venenatis nulla amet tincidunt at orci enim. Sit nunc massa tempus placerat risus maecenas. Faucibus duis feugiat parturient enim ullamcorper nunc. Consequat vulputate turpis ullamcorper felis dignissim. Pharetra et duis duis ultrices id velit ut. Vulputate platea porta consectetur risus turpis amet. Luctus massa eu urna maecenas eros pretium. Pellentesque senectus dolor id quam nec. Nulla nunc integer facilisi arcu porttitor. Maecenas quam lectus quis convallis erat. Vitae enim vulputate dolor quisque ipsum. Et vel maecenas justo quis nulla nibh duis.
+                    </p>
+                </div>
+            </div>
+            <div class="flex xl:flex-row xs:flex-col justify-center  gap-[120px] ">
+                <div class="xl:mt-10 xs:mt-20 ">
+                    <img src="/images/the-campus-2.png" alt="" class="h-[360px] object-cover object-center" />
+                </div>
+                <div class="xl:mt-10 xs:mt-20">
+                    
+                    <p class="paragraph p1 text-titanium w-[720px]">
+                        Lorem ipsum dolor sit amet consectetur. Dui eros integer varius bibendum eu. Venenatis nulla amet tincidunt at orci enim. Sit nunc massa tempus placerat risus maecenas. Faucibus duis feugiat parturient enim ullamcorper nunc. Consequat vulputate turpis ullamcorper felis dignissim. Pharetra et duis duis ultrices id velit ut. Vulputate platea porta consectetur risus turpis amet. Luctus massa eu urna maecenas eros pretium. Pellentesque senectus dolor id quam nec. Nulla nunc integer facilisi arcu porttitor. Maecenas quam lectus quis convallis erat. Vitae enim vulputate dolor quisque ipsum. Et vel maecenas justo quis nulla nibh duis.
+                    </p>
+                </div>
+            </div>
+            <div class="text-center pt-[91px]">
+                <a href="" class="bg-transparent border paragraph p1 gap-10 text-titanium py-[10.5px] px-[60px] rounded-[40px]">See more of our facilities</a>
+            
+            </div>
+
+        </div>
+<!-- end fold 03 -->
+
+<!-- FooterNaV -->
+        <FooterNav path={currentPath} client:visible />
+<!-- end FooterNaV -->
+
+<!-- Footer -->
+		<Footer path={currentPath} client:visible />
+<!-- end Footer -->
+
+	</main>
+	
+</Layout>

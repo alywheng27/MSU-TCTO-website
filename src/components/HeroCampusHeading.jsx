@@ -8,6 +8,8 @@ const HeroCampusHeading = () => {
         Mindanao State University<br />
         Tawi-Tawi College of Technology & Oceanography
       </h4>
+      
+      <p class="paragraph p2 py-[100px] text-silver"><a href="/">Home</a> / The Campus</p>
     </div>
   )
 }
