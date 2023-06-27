@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from "../components/Navbar";
 import ChancellorMessage from "../components/ChancellorMessage";
-import MainVideo from "../components/MainVideo";
+import MainVideo from "../components/MainVideo.astro";
 import FooterNav from "../components/FooterNav";
 import Footer from "../components/Footer";
 import '../styles/css/global.css';
@@ -199,7 +199,7 @@ const hero = await getHero();
 		
 	
 <!-- fold 06 -->
-		<FooterNav path={currentPath} client:visible />
+		<MainVideo path={currentPath} client:visible />
 		
 <!-- FooterNaV -->
 		<FooterNav path={currentPath} client:visible />

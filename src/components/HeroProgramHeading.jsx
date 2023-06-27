@@ -7,7 +7,7 @@ const HeroProgramHeading = () => {
         Programs
       </h2>
       
-      <p class="paragraph p2 py-[100px] text-titanium"><a href="/">Home</a> / Programs</p>
+      <p class="paragraph p2 py-[100px] text-titanium xs:hidden xl:block"><a href="/">Home</a> / Programs</p>
     </div>
   )
 }

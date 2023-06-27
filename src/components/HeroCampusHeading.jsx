@@ -9,7 +9,7 @@ const HeroCampusHeading = () => {
         Tawi-Tawi College of Technology & Oceanography
       </h4>
       
-      <p class="paragraph p2 py-[100px] text-silver"><a href="/">Home</a> / The Campus</p>
+      <p class="paragraph p2 py-[100px] text-silver xl:block xs:hidden"><a href="/">Home</a> / The Campus</p>
     </div>
   )
 }

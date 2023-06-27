@@ -1,8 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navbar from "../components/Navbar";
-import ChancellorMessage from "../components/ChancellorMessage";
-import MainVideo from "../components/MainVideo";
+import ChancellorMessage from "../components/ChancellorMessage.astro";
+import MainVideo from "../components/MainVideo.astro";
 import FooterNav from "../components/FooterNav";
 import Footer from "../components/Footer";
 import '../styles/css/global.css';
@@ -14,51 +14,48 @@ const currentPath = Astro.url.pathname;
 	<main>
 		<Navbar path={currentPath} client:visible />
 <!-- fold 02 -->
-        <div class="xl:campuslife-bg-img xs:bg-transparent">
-            
-            <div class="text-center xl:px-[12.5%] xs:px-[3.85%] pt-20 xl:bg-none xs:campuslife-bg-img">
-                <h4 class="headings xl:h4 xs:h4 text-white-pure">We  offer a variety  of the best programs in Mindanao</h4>
-                <div class="flex justify-center xl:ml-0 xs:ml-0 xl:mt-0 xs:mt-10 pt-10">
-                    <p class="paragraph xl:p1 xs:p2 xl:w-[840px] text-titanium xl:mb-[41px] xs:mb-[58px] text-center">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+        <div class="bg-msu-deep-ocean w-full   ">
+            <div class="text-center xl:px-[12.5%] xs:px-[3.85%] xl:pt-[110px] xs:pt-[61px] ">
+                <h4 class="headings xl:h4 xs:h4 text-white-pure xl:px-[20.5%] ">We  offer a variety  of the best programs in Mindanao</h4>
+                <div class="flex justify-center xl:ml-0 xs:ml-0 xl:mt-[20px] xs:mt-10 ">
+                    <p class="paragraph xl:p1 xs:p2 xl:w-[840px] text-titanium  text-center ">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
                     
                 </div>
-                <div class="bg-gradient-ocean h-20 rotate-180 xs:block xl:hidden"></div>
+                <!-- <div class="bg-gradient-ocean h-20 rotate-180 xs:block xl:hidden"></div> -->
             </div>
-            <div class="flex xl:flex-row xs:flex-col justify-center xl:mt-[86px] xl:pb-[141px] xs:pb-[85px] xl:px-[12.5%] xs:px-[3.85%]">
+            <div class="flex xl:flex-row justify-center xl:mt-[63px] xs:mt-[48px] xs:px-[3.85%]">
                 <div class="xs:mb-[61px] xl:mb-0">
                     <img src="/images/campus-mini1.png" class="w-full" alt="">
-                    <div class="m-5 grid justify-center">
-                        <h2 class="flex-col text-center headings h2 text-white-pure">100+</h2>
-                            <div class="flex flex-col gap-[5px] paragraph p2 text-white-pure mt-[10px]">
-                            <p class="paragraph xl:p1 xs:p2 xl:w-[480px] text-titanium xl:mb-[41px] xs:mb-[58px] text-center">
-                                Internationally presented paperes
-                            </p>
-                        </div>
-                    </div>
                 </div>
                 <div class="xs:mb-[61px] xl:mb-0">
                     <img src="/images/campus-mini2.png" class="w-full" alt="">
-                    <div class="m-5 grid justify-center">
-                        <h2 class="flex-col text-center headings h2 text-white-pure">20+</h2>
-                            <div class="flex flex-col gap-[5px] paragraph p2 text-white-pure mt-[10px]">
-                            <p class="paragraph xl:p1 xs:p2 xl:w-[480px] text-titanium xl:mb-[41px] xs:mb-[58px] text-center">
-                                On going local research for biodiversity
-                            </p>
-                        </div>
-                    </div>
                 </div>
-                <div class="xs:mb-[61px] xl:mb-0">
+                <div class="xs:mb-[61px] xl:mb-0 xl:block xs:hidden">
                     <img src="/images/campus-mini3.png" class="w-full" alt="">
-                    <div class="m-5 grid justify-center">
-                        <h2 class="flex-col text-center headings h2 text-white-pure">50+</h2>
-                            <div class="flex flex-col gap-[5px] paragraph p2 text-white-pure mt-[10px]">
-                            <p class="paragraph xl:p1 xs:p2 xl:w-[480px] text-titanium xl:mb-[41px] xs:mb-[58px] text-center">
-                                Multiple programs for the ocean
-                            </p>
-                        </div>
-                    </div>
                 </div>
             </div>
+            <div class="grid xl:grid-cols-3 xs:grid-cols-2 justify-items-center xl:px-[12.5%] pb-[80px] xl:pt-[27px] xs:pt[66px]">
+                <div class="p-5 max-w-[360px]">
+                    <h2 class="flex-col text-center headings xl:h2 xs:h4 text-white-pure">100+</h2>
+                    <p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px] text-center">Internationally presented paperes</p>
+                </div>
+                <div class="p-5 max-w-[360px]">
+                    <h2 class="flex-col text-center headings  xl:h2 xs:h4 text-white-pure">20+</h2>
+                    <p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px] text-center">On going local research for biodiversity</p>
+                </div>
+                <div class="p-5 max-w-[360px] xl:block xs:hidden">
+                    <h2 class="flex-col text-center headings  xl:h2 xs:h4 text-white-pure">50+</h2>
+                    <p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px] text-center">Multiple programs for the ocean</p>
+                </div>
+            </div>
+
+            <div class="mb-[34px] xl:hidden  xs:block ">
+                <div class="p-5 item-center">
+                    <h2 class="flex-col text-center headings  xl:h2 xs:h4 text-white-pure">50+</h2>
+                    <p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px] text-center">Multiple programs for the ocean</p>
+                </div>
+            </div>'
+        
         </div>
 <!-- end fold 02 -->
 		
@@ -72,10 +69,10 @@ const currentPath = Astro.url.pathname;
         <div class=" bg-white-pure xl:pt-[80px] xs:pt-[80px] xl:pb-[60px] xs:pb-[80px] ">
             
             <div class="text-center xs:px-[66px]">
-                <h3 class="headings xl:h3 xs:h4 text-msu-maroon mb-[80px]">Administrative Offices</h3>
-                <div class="flex gap-[240px] justify-center">
-                    <div class="flex flex-col gap-[20px] justify-top xl:ml-0 xs:ml-0 xl:mt-0 xs:mt-10 pt-10 ">
-                        <h3 class="headings xl:h4 xs:h5 text-msu-maroon mb-[40px]">Chancellor</h3>
+                <h3 class="headings xl:h3 xs:h4 text-msu-maroon xl:mb-[80px] xs:mb-[64px]">Administrative Offices</h3>
+                <div class="flex xs:flex-col xl:flex-row xl:gap-[240px] xs:gap-[85px] justify-center">
+                    <div class="flex flex-col gap-[20px] justify-top xl:ml-0 xs:ml-0 xl:mt-0">
+                        <h3 class="headings xl:h4 xs:h5 text-msu-maroon xl:mb-[40px] xs:mb-[42px]">Chancellor</h3>
                         <p class="paragraph xl:p2 xs:p2 text-black-pure text-center">BUDGET MANGEMENT OFFICE</p>
                         <p class="paragraph xl:p2 xs:p2 text-black-pure text-center">OFFICE OF THE CAMPUS SECRETARY</p>
                         <p class="paragraph xl:p2 xs:p2 text-black-pure text-center">INTERNAL CONTROL & AUDIT UNIT</p>
@@ -90,8 +87,8 @@ const currentPath = Astro.url.pathname;
                         <p class="paragraph xl:p2 xs:p2 text-black-pure text-center">SPECIAL PROJECTS</p>
                         
                     </div>
-                    <div class="flex flex-col gap-[20px] justify-top xl:ml-0 xs:ml-0 xl:mt-0 xs:mt-10 pt-10 ">
-                        <h3 class="headings xl:h4 xs:h5 text-msu-maroon mb-[40px]">Vice Chancellor</h3>
+                    <div class="flex flex-col gap-[20px] justify-top xl:ml-0 xs:ml-0 xl:mt-0 ">
+                        <h3 class="headings xl:h4 xs:h5 text-msu-maroon xl:mb-[40px] xs:mb-[42px]">Vice Chancellor</h3>
                         <p class="paragraph xl:p2 xs:p2 text-black-pure text-center">VICE-CHANCELLOR RESEARCH INNOVATION DEVELOPMENT & EXTENSION</p>
                         <p class="paragraph xl:p2 xs:p2 text-black-pure text-center">VICE-CHANCELLOR FOR ACADEMIC AFFAIRS</p>
                         <p class="paragraph xl:p2 xs:p2 text-black-pure text-center">ASSISTANT VICE-CHANCELLOR FOR SECONDARY EDUCATION</p>
@@ -107,7 +104,7 @@ const currentPath = Astro.url.pathname;
 <!-- end Academic Offices -->
 
 <!-- Academic Offices -->
-        <div class=" bg-msu-deep-ocean xl:pt-[80px] xs:pt-[80px] xl:pb-[60px] xs:pb-[80px]  ">
+        <div class=" bg-msu-deep-ocean xl:pt-[80px] xs:pt-[80px] xl:pb-[60px] xs:pb-[80px] ">
             
             <div class="text-center xs:px-[66px]">
                 <h3 class="headings xl:h3 xs:h4 text-white-pure ">Academic Offices</h3>
@@ -127,252 +124,106 @@ const currentPath = Astro.url.pathname;
 <!-- end Academic Offices -->
 
 <!-- Faculty -->
-        <div class=" bg-msu-shallow-ocean xl:pt-[80px] xs:pt-[80px] xl:pb-[60px] xs:pb-[600px] ">
+        <div class=" bg-msu-dark-ocean xl:pt-[80px] xs:pt-[80px]  xs:pb-[57px]">
             
-            <div class="text-center xl:px-[12.5%] xl:mb-[40px] xs:mb-[40px] xs:px-[3.85%] pt-20 xl:bg-none">
+            <div class="text-center xl:px-[12.5%] xl:mb-[40px] xs:mb-[75px] xs:px-[3.85%]  xl:bg-none">
                 <h4 class="headings xl:h4 xs:h4 text-white-pure xl:mb-[80px] xs:mb-[80px]">Our Teachers</h4>
                 <div class="flex gap-[124px] justify-center xl:mb-[80px] xs:mb-[80px] xl:ml-0 xs:ml-0 xl:mt-0 xs:mt-10">
-                    <p class="paragraph xl:p1 xs:p2 text-white-pure text-center">IICT</p>
-                    <p class="paragraph xl:p1 xs:p2 text-msu-gold text-center">CAS</p>
-                    <p class="paragraph xl:p1 xs:p2 text-white-pure text-center">COF</p>
-                    <p class="paragraph xl:p1 xs:p2 text-white-pure text-center">COED</p>
-                    <p class="paragraph xl:p1 xs:p2 text-white-pure text-center">IOES</p>
-                    <p class="paragraph xl:p1 xs:p2 text-white-pure text-center">CIAS</p>
+                    <p class="paragraph xl:p1 xs:h4 text-white-pure text-center">IICT</p>
+                    <p class="paragraph xl:p1 xs:p2 text-msu-gold text-center xl:block xs:hidden">CAS</p>
+                    <p class="paragraph xl:p1 xs:p2 text-white-pure text-center xl:block xs:hidden">COF</p>
+                    <p class="paragraph xl:p1 xs:p2 text-white-pure text-center xl:block xs:hidden">COED</p>
+                    <p class="paragraph xl:p1 xs:p2 text-white-pure text-center xl:block xs:hidden">IOES</p>
+                    <p class="paragraph xl:p1 xs:p2 text-white-pure text-center xl:block xs:hidden">CIAS</p>
                     
                 </div>
                 <h4 class="headings xl:h4 xs:h4 text-white-pure xl:mb-[40px]">Institute of Information and Communication Technology</h4>
             </div>
-            <div class="grid grid-col-4 xl:flex-row xs:flex-col xl:px-[12.5%] xs:px-[3.85%] xl:mb-[117px] xs:[58px] justify-center items-center">
-                <div class="flex">
-                    <div class="flex">
-                        <img src="/images/article-img-1.png" alt="" class="ml-10 xl:h-[160px] xs:h-[160px]">
+            <div class="grid grid-col-4 xl:flex-row xs:flex-col xl:gap-[24px] xl:mx-[240px] xs:mx-[10px] xl:mb-[117px]  items-center">
+                <div class="flex xl:flex-row xs:flex-col ">
+                    <div class="flex ">
+                        <img src="/images/article-img-1.png" alt="" class="xl:ml-10 xl:h-[160px] xs:h-[170px]">
                         <div class="ml-5">
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px]  text-titanium mt-[15px] max-h-[142px] overflow-hidden">
+                            <p class="paragraph xl:p2 xs:p2 max-w-[220px]  text-white-pure mt-[15px] max-h-[142px] overflow-hidden">
                                 Full Name
                             </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
+                            <p class="paragraph xl:p2 xs:p2 max-w-[220px] text-white-pure mt-[5px] max-h-[142px] overflow-hidden">
                                 Teaching Level
                             </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
+                            <p class="paragraph xl:p2 xs:p2 max-w-[220px] text-white-pure mt-[5px] max-h-[142px] overflow-hidden">
                                 Advisory
                                 Year Started
                             </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
+                            <p class="paragraph xl:p2 xs:p2 max-w-[220px] text-white-pure mt-[5px] max-h-[142px] overflow-hidden">
                                 Year Started
                             </p>
                         </div>
                     </div>
-                    <div class="flex">
-                        <img src="/images/article-img-1.png" alt="" class="ml-10 xl:h-[160px] xs:h-[160px]">
+                    <div class="flex ">
+                        <img src="/images/article-img-1.png" alt="" class="xl:ml-10 xl:h-[160px] xs:h-[170px]">
                         <div class="ml-5">
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px]  text-titanium mt-[15px] max-h-[142px] overflow-hidden">
+                            <p class="paragraph xl:p2 xs:p2 max-w-[220px]  text-white-pure mt-[15px] max-h-[142px] overflow-hidden">
                                 Full Name
                             </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
+                            <p class="paragraph xl:p2 xs:p2 max-w-[220px] text-white-pure mt-[5px] max-h-[142px] overflow-hidden">
                                 Teaching Level
                             </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
+                            <p class="paragraph xl:p2 xs:p2 max-w-[220px] text-white-pure mt-[5px] max-h-[142px] overflow-hidden">
                                 Advisory
                                 Year Started
                             </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
+                            <p class="paragraph xl:p2 xs:p2 max-w-[220px] text-white-pure mt-[5px] max-h-[142px] overflow-hidden">
                                 Year Started
                             </p>
                         </div>
                     </div>
-                    <div class="flex">
-                        <img src="/images/article-img-1.png" alt="" class="ml-10 xl:h-[160px] xs:h-[160px]">
+                    <div class="flex ">
+                        <img src="/images/article-img-1.png" alt="" class="xl:ml-10 xl:h-[160px] xs:h-[170px]">
                         <div class="ml-5">
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px]  text-titanium mt-[15px] max-h-[142px] overflow-hidden">
+                            <p class="paragraph xl:p2 xs:p2 max-w-[220px]  text-white-pure mt-[15px] max-h-[142px] overflow-hidden">
                                 Full Name
                             </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
+                            <p class="paragraph xl:p2 xs:p2 max-w-[220px] text-white-pure mt-[5px] max-h-[142px] overflow-hidden">
                                 Teaching Level
                             </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
+                            <p class="paragraph xl:p2 xs:p2 max-w-[220px] text-white-pure mt-[5px] max-h-[142px] overflow-hidden">
                                 Advisory
                                 Year Started
                             </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
+                            <p class="paragraph xl:p2 xs:p2 max-w-[220px] text-white-pure mt-[5px] max-h-[142px] overflow-hidden">
                                 Year Started
                             </p>
                         </div>
                     </div>
-                    <div class="flex">
-                        <img src="/images/article-img-1.png" alt="" class="ml-10 xl:h-[160px] xs:h-[160px]">
+                    <div class="flex ">
+                        <img src="/images/article-img-1.png" alt="" class="xl:ml-10 xl:h-[160px] xs:h-[170px]">
                         <div class="ml-5">
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px]  text-titanium mt-[15px] max-h-[142px] overflow-hidden">
+                            <p class="paragraph xl:p2 xs:p2 max-w-[220px]  text-white-pure mt-[15px] max-h-[142px] overflow-hidden">
                                 Full Name
                             </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
+                            <p class="paragraph xl:p2 xs:p2 max-w-[220px] text-white-pure mt-[5px] max-h-[142px] overflow-hidden">
                                 Teaching Level
                             </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
+                            <p class="paragraph xl:p2 xs:p2 max-w-[220px] text-white-pure mt-[5px] max-h-[142px] overflow-hidden">
                                 Advisory
                                 Year Started
                             </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
-                                Year Started
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex">
-                    <div class="flex">
-                        <img src="/images/article-img-1.png" alt="" class="ml-10 xl:h-[160px] xs:h-[160px]">
-                        <div class="ml-5">
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px]  text-titanium mt-[15px] max-h-[142px] overflow-hidden">
-                                Full Name
-                            </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
-                                Teaching Level
-                            </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
-                                Advisory
-                                Year Started
-                            </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
-                                Year Started
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex">
-                        <img src="/images/article-img-1.png" alt="" class="ml-10 xl:h-[160px] xs:h-[160px]">
-                        <div class="ml-5">
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px]  text-titanium mt-[15px] max-h-[142px] overflow-hidden">
-                                Full Name
-                            </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
-                                Teaching Level
-                            </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
-                                Advisory
-                                Year Started
-                            </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
-                                Year Started
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex">
-                        <img src="/images/article-img-1.png" alt="" class="ml-10 xl:h-[160px] xs:h-[160px]">
-                        <div class="ml-5">
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px]  text-titanium mt-[15px] max-h-[142px] overflow-hidden">
-                                Full Name
-                            </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
-                                Teaching Level
-                            </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
-                                Advisory
-                                Year Started
-                            </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
-                                Year Started
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex">
-                        <img src="/images/article-img-1.png" alt="" class="ml-10 xl:h-[160px] xs:h-[160px]">
-                        <div class="ml-5">
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px]  text-titanium mt-[15px] max-h-[142px] overflow-hidden">
-                                Full Name
-                            </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
-                                Teaching Level
-                            </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
-                                Advisory
-                                Year Started
-                            </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
+                            <p class="paragraph xl:p2 xs:p2 max-w-[220px] text-white-pure mt-[5px] max-h-[142px] overflow-hidden">
                                 Year Started
                             </p>
                         </div>
                     </div>
                 </div>
-                <div class="flex">
-                    <div class="flex">
-                        <img src="/images/article-img-1.png" alt="" class="ml-10 xl:h-[160px] xs:h-[160px]">
-                        <div class="ml-5">
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px]  text-titanium mt-[15px] max-h-[142px] overflow-hidden">
-                                Full Name
-                            </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
-                                Teaching Level
-                            </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
-                                Advisory
-                                Year Started
-                            </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
-                                Year Started
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex">
-                        <img src="/images/article-img-1.png" alt="" class="ml-10 xl:h-[160px] xs:h-[160px]">
-                        <div class="ml-5">
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px]  text-titanium mt-[15px] max-h-[142px] overflow-hidden">
-                                Full Name
-                            </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
-                                Teaching Level
-                            </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
-                                Advisory
-                                Year Started
-                            </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
-                                Year Started
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex">
-                        <img src="/images/article-img-1.png" alt="" class="ml-10 xl:h-[160px] xs:h-[160px]">
-                        <div class="ml-5">
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px]  text-titanium mt-[15px] max-h-[142px] overflow-hidden">
-                                Full Name
-                            </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
-                                Teaching Level
-                            </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
-                                Advisory
-                                Year Started
-                            </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
-                                Year Started
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex">
-                        <img src="/images/article-img-1.png" alt="" class="ml-10 xl:h-[160px] xs:h-[160px]">
-                        <div class="ml-5">
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px]  text-titanium mt-[15px] max-h-[142px] overflow-hidden">
-                                Full Name
-                            </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
-                                Teaching Level
-                            </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
-                                Advisory
-                                Year Started
-                            </p>
-                            <p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[5px] max-h-[142px] overflow-hidden">
-                                Year Started
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex gap-[30px] justify-center mt-[40px]">
-                    <a href="#" class="border-transparent text-white-pure xl:py-[10px] xl:px-[10px] xs:py-5 xs:px-[61.5px] rounded-[40px] border-white border-2"></a>
-                    <a href="#" class=" bg-white text-white-pure xl:py-[10px] xl:px-[10px] xs:py-5 xs:px-[61.5px] rounded-[40px] border-white border-2"></a>
-                    <a href="#" class="border-transparent text-white-pure xl:py-[10px] xl:px-[10px] xs:py-5 xs:px-[61.5px] rounded-[40px] border-white border-2"></a>
-                    <a href="#" class="border-transparent text-white-pure xl:py-[10px] xl:px-[10px] xs:py-5 xs:px-[61.5px] rounded-[40px] border-white border-2"></a>
-                </div>
+               
+               
 				
                 
+            </div>
+            <div class="flex gap-[30px] justify-center mt-[40px] mb-[57px] ">
+                <a href="#" class="border-transparent xl:py-[10px] xl:px-[10px] xs:py-[8px] xs:px-[8px]  xl:rounded-[40px] xs:rounded-[40px] border-white border-2"></a>
+                <a href="#" class=" bg-white xl:py-[10px] xl:px-[10px] xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
+                <a href="#" class="border-transparent xl:py-[10px] xl:px-[10px] xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
+                <a href="#" class="border-transparent xl:py-[10px] xl:px-[10px] xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
             </div>
         </div>
 <!-- end Faculty -->

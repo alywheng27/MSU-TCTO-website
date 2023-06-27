@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from "../components/Navbar";
 import AcademicCalendar from '../components/AcademicCalendar';
-import MainVideo from "../components/MainVideo";
+import MainVideo from "../components/MainVideo.astro";
 import FooterNav from "../components/FooterNav";
 import Footer from "../components/Footer";
 import '../styles/css/global.css';
@@ -15,167 +15,192 @@ const currentPath = Astro.url.pathname;
 		<Navbar path={currentPath} client:visible />
 
 <!-- fold 02 -->
-		<div class="xl:campuslife-bg-img xs:bg-transparent">
-			<div class="text-center xl:px-[12.5%] xs:px-[3.85%] pt-20 xl:bg-none xs:campuslife-bg-img">
-                <h4 class="headings xl:h4 xs:h4 text-white-pure">We  offer a variety  of the best programs in Mindanao</h4>
-				<div class="flex justify-center xl:ml-0 xs:ml-0 xl:mt-0 xs:mt-10 pt-10">
-					<p class="paragraph xl:p1 xs:p2 xl:w-[840px] text-titanium xl:mb-[41px] xs:mb-[58px] text-center">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+        <div class="bg-msu-deep-ocean w-full   ">
+			<div class="text-center xl:px-[12.5%] xs:px-[3.85%] xl:pt-[110px] xs:pt-[61px] ">
+                <h4 class="headings xl:h4 xs:h4 text-white-pure xl:px-[20.5%] ">We  offer a variety  of the best programs in Mindanao</h4>
+				<div class="flex justify-center xl:ml-0 xs:ml-0 xl:mt-[20px] xs:mt-10 ">
+					<p class="paragraph xl:p1 xs:p2 xl:w-[840px] text-titanium  text-center ">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
 					
 				</div>
-				<div class="bg-gradient-ocean h-20 rotate-180 xs:block xl:hidden"></div>
+				<!-- <div class="bg-gradient-ocean h-20 rotate-180 xs:block xl:hidden"></div> -->
 			</div>
-			<div class="flex xl:flex-row xs:flex-col justify-center xl:mt-[86px] xl:pb-[141px] xs:pb-[85px] xl:px-[12.5%] xs:px-[3.85%]">
+			<div class="flex xl:flex-row justify-center xl:mt-[63px] xs:mt-[48px] xs:px-[3.85%]">
 				<div class="xs:mb-[61px] xl:mb-0">
 					<img src="/images/campus-mini1.png" class="w-full" alt="">
-					<div class="m-5 grid justify-center">
-						<h2 class="flex-col text-center headings h2 text-white-pure">100+</h2>
-						    <div class="flex flex-col gap-[5px] paragraph p2 text-white-pure mt-[10px]">
-                            <p class="paragraph xl:p1 xs:p2 xl:w-[480px] text-titanium xl:mb-[41px] xs:mb-[58px] text-center">
-                                Internationally presented paperes
-                            </p>
-						</div>
-					</div>
 				</div>
 				<div class="xs:mb-[61px] xl:mb-0">
 					<img src="/images/campus-mini2.png" class="w-full" alt="">
-					<div class="m-5 grid justify-center">
-						<h2 class="flex-col text-center headings h2 text-white-pure">20+</h2>
-						    <div class="flex flex-col gap-[5px] paragraph p2 text-white-pure mt-[10px]">
-                            <p class="paragraph xl:p1 xs:p2 xl:w-[480px] text-titanium xl:mb-[41px] xs:mb-[58px] text-center">
-                                On going local research for biodiversity
-                            </p>
-						</div>
-					</div>
 				</div>
-				<div class="xs:mb-[61px] xl:mb-0">
+				<div class="xs:mb-[61px] xl:mb-0 xl:block xs:hidden">
 					<img src="/images/campus-mini3.png" class="w-full" alt="">
-					<div class="m-5 grid justify-center">
-						<h2 class="flex-col text-center headings h2 text-white-pure">50+</h2>
-						    <div class="flex flex-col gap-[5px] paragraph p2 text-white-pure mt-[10px]">
-                            <p class="paragraph xl:p1 xs:p2 xl:w-[480px] text-titanium xl:mb-[41px] xs:mb-[58px] text-center">
-                                Multiple programs for the ocean
-                            </p>
-						</div>
-					</div>
 				</div>
 			</div>
+            <div class="grid xl:grid-cols-3 xs:grid-cols-2 justify-items-center xl:px-[12.5%] pb-[80px] xl:pt-[27px] xs:pt[66px]">
+				<div class="p-5 max-w-[360px]">
+                    <h2 class="flex-col text-center headings xl:h2 xs:h4 text-white-pure">100+</h2>
+					<p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px] text-center">Internationally presented paperes</p>
+				</div>
+				<div class="p-5 max-w-[360px]">
+                    <h2 class="flex-col text-center headings  xl:h2 xs:h4 text-white-pure">20+</h2>
+					<p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px] text-center">On going local research for biodiversity</p>
+				</div>
+				<div class="p-5 max-w-[360px] xl:block xs:hidden">
+                    <h2 class="flex-col text-center headings  xl:h2 xs:h4 text-white-pure">50+</h2>
+					<p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px] text-center">Multiple programs for the ocean</p>
+				</div>
+			</div>
+
+			<div class="mb-[34px] xl:hidden  xs:block ">
+				<div class="p-5 item-center">
+                    <h2 class="flex-col text-center headings  xl:h2 xs:h4 text-white-pure">50+</h2>
+					<p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px] text-center">Multiple programs for the ocean</p>
+				</div>
+			</div>'
+         
 		</div>
 <!-- end fold 02 -->
 
         
 <!-- fold 03 -->
-        <div class="flex flex-col align-cneter bg-gradient-maroon w-full px-[12.5%] pt-20 ">
+        <div class="flex flex-col align-cneter bg-gradient-maroon w-full xl:px-[12.5%] xs:px-[5.5%] ">
             <div class="item-center">
-                <h3 class="headings text-center text-white-pure h3 pl-[12.5%] pr-[12.5%]">Our Programs</h3>
+                <h3 class="headings text-center text-white-pure xl:h3 xs:h5 px-[12.5%]  xl:pt-[80px] xs:pt-[40px]">Our Programs</h3>
             </div>
             
-            <div class="flex place-items-center gap-[10%] p-5 ">
-                <img src="/images/College Logo/LOGO CAS.png" class="w-[200px]" alt="">
-                <h4 class="headings h4 text-white-pure mt-5"><a href="/cas">College of Arts and Sciences</a></a></h4>
+            <div class="place-items-center xs:pt-[48px] xs:pb-[48px] text-center xs:block xl:hidden">
+                <select id="programs">
+                    <option id="cas" class="paragraph p2 text-white-pure">College of Arts and Science</option>
+                    <option id="cias" class="paragraph p2 text-white-pure">College of Islamic & Arabic Studies</option>
+                    <option id="coed" class="paragraph p2 text-white-pure">College of Education</option>
+                    <option id="cof" class="paragraph p2 text-white-pure">College of Fisheries</option>
+                    <option id="iict" class="paragraph p2 text-white-pure">Institute of Information and Communication Technology</option>
+                    <option id="ioes" class="paragraph p2 text-white-pure">Institute of Oceanography and Environmental Science</option>
+                </select>
             </div>
             
-            <div class="flex place-items-top gap-[10%] p-5 ">
-                <div class="w-[200px]"> </div>
-                <div class="flex flex-col paragraph p1 text-titanium">
-                    <p class=""> Bachelor of Science in Business Management </p>
-                    <p class=""> Bachelor of Arts in Literary and Cultural Studies </p>
+            <div id="cas" class="xl:pb-[120px]">
+            
+                <div class="flex place-items-center xl:gap-[90px] xs:gap-[23px] xl:p-5 xs:pt-[48px] text-center">
+                    <img src="/images/College Logo/LOGO CAS.png" class="xl:w-[200px] xs:w-[150px]" alt="">
+                    <h4 class="headings xl:h4 xs:h5 text-white-pure mt-5"><a href="/cas">College of Arts and Sciences</a></h4>
+                </div>
+                <div class="xl:flex place-items-top gap-[175px] xl:p-5 xs:pt-[32px] xs:pl-[97px]">
+                    <div class="xl:w-[200px] xs:w-0"> </div>
+                    <div class="flex flex-col paragraph xl:p1 xs:p2 text-silver">
+                        <p class=""> Bachelor of Science in Business Management </p>
+                        <p class=""> Bachelor of Arts in Literary and Cultural Studies </p>
+                        
+                        <p class=""> Bachelor of Arts in Language Studies</p>
+                        <p class=""> Bachelor of Arts in English</p>
+                        <p class=""> Social Science Department</p>
+                        <p class=""> Bachelor of Arts in History</p>
+                        <p class=""> Bachelor of Arts in Political Science</p>
+                        <p class=""> Math and Science Department</p>
+                        <p class=""> Bachelor of Science in Mathematics</p>
+                    </div>
+                    <div class="flex flex-col paragraph xl:p1 xs:p2 text-silver">
+                        <p class=""> Bachelor of Science in in Statistics </p>
+                        <p class=""> Sports Physical Education and Sports Department</p>
+                        <p class=""> Professional Diploma Physical Education</p>
+                        <p class=""> GESECOM Department</p>
+                        <p class=""> General Education</p>
+                        <p class=""> Secretarial Science</p>
+                        <p class=""> Office Management</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cias" class="xl:pb-[120px] ">
+            
+                <div class="flex place-items-center xl:gap-[90px] xs:gap-[23px] xl:p-5 xs:pt-[48px] text-center ">
+                    <img src="/images/College Logo/LOGO CIAS.png" class="xl:w-[200px] xs:w-[150px]" alt="">
+                    <h4 class="headings xl:h4 xs:h5 text-white-pure mt-5"><a href="/cias">College of Islamic & Arabic Studies</a></h4>
+                </div>
+                <div class="xl:flex place-items-top gap-[10%] xl:p-5 xs:pt-[32px] xs:pl-[97px] ">
+                    <div class="xl:w-[200px]"> </div>
+                    <div class="flex flex-col paragraph xl:p1 xs:p2 text-silver">
+                        <p class=""> MA in Islamic Education</p>
+                        <p class=""> Bachelor of Science in Teaching Arabic </p>
+                        <p class=""> Bachelor of Arts in Islamic Studies Major in Sharia</p>
+                    </div>
+                </div>
+
+            </div>
+            <div id="coed" class="xl:pb-[120px]">
+            
+                <div class="flex place-items-center xl:gap-[90px] xs:gap-[23px] xl:p-5 xs:pt-[48px] text-center ">
+                    <img src="/images/College Logo/LOGO COED.png" class="xl:w-[200px] xs:w-[150px]" alt="">
+                    <h4 class="headings xl:h4 xs:h5 text-white-pure mt-5"><a href="/coed">College of Education</a></h4>
+                </div>
+                <div class="xl:flex place-items-top gap-[10%] xl:p-5 xs:pt-[32px] xs:pl-[97px] ">
+                    <div class="xl:w-[200px]"> </div>
+                    <div class="flex flex-col paragraph xl:p1 xs:p2 text-silver">
+    
+                        <p class=""> PhD in Education Management</p>
+                        <p class=""> MA in Education major in Educational Management</p>
+                        <p class=""> MA in Education major in Reading</p>
                     
-                    <p class=""> Bachelor of Arts in Language Studies</p>
-                    <p class=""> Bachelor of Arts in English</p>
-                    <p class=""> Social Science Department</p>
-                    <p class=""> Bachelor of Arts in History</p>
-                    <p class=""> Bachelor of Arts in Political Science</p>
-                    <p class=""> Math and Science Department</p>
-                    <p class=""> Bachelor of Science in Mathematics</p>
+                        <p class=""> Bachelor Elementary Education with area of concentration in General Education </p>
+                        <p class=""> Bachelor of Early Childhood Education</p>
+                        <p class=""> Bachelor of Secondary Education Major in English</p>
+                        <p class=""> Bachelor of Secondary Education Major in Mathematics</p>
+                        <p class=""> Bachelor of Secondary Education Major in Filipino</p>
+                        <p class=""> Bachelor of Secondary Education Major in Sciences</p>
+                    </div>
                 </div>
-                <div class="flex flex-col paragraph p1 text-titanium">
-                    <p class=""> Bachelor of Science in in Statistics </p>
-                    <p class=""> Sports Physical Education and Sports Department</p>
-                    <p class=""> Professional Diploma Physical Education</p>
-                    <p class=""> GESECOM Department</p>
-                    <p class=""> General Education</p>
-                    <p class=""> Secretarial Science</p>
-                    <p class=""> Office Management</p>
-                </div>
-            </div>
-            
-            <div class="flex place-items-center gap-[10%] p-5 ">
-                <img src="/images/College Logo/LOGO CIAS.png" class="w-[200px]" alt="">
-                <h4 class="headings h4 text-white-pure mt-5"><a href="/cias">College of Islamic & Arabic Studies</a></h4>
-            </div>
-            
-            <div class="flex place-items-top gap-[10%] p-5 ">
-                <div class="w-[200px]"> </div>
-                <div class="flex flex-col paragraph p1 text-titanium">
-                    <p class=""> MA in Islamic Education</p>
-                
-                    <p class=""> Bachelor of Science in Teaching Arabic </p>
-                    <p class=""> Bachelor of Arts in Islamic Studies Major in Sharia</p>
-                </div>
-            </div>
-            
-            <div class="flex place-items-center gap-[10%] p-5 ">
-                <img src="/images/College Logo/LOGO COED.png" class="w-[200px]" alt="">
-                <h4 class="headings h4 text-white-pure mt-5"><a href="/coed">College of Education</a></h4>
-            </div>
-            <div class="flex place-items-top gap-[10%] p-5 ">
-                <div class="w-[200px]"> </div>
-                <div class="flex flex-col paragraph p1 text-titanium">
 
-                    <p class=""> PhD in Education Management</p>
-                    <p class=""> MA in Education major in Educational Management</p>
-                    <p class=""> MA in Education major in Reading</p>
-                
-                    <p class=""> Bachelor Elementary Education with area of concentration in General Education </p>
-                    <p class=""> Bachelor of Early Childhood Education</p>
-                    <p class=""> Bachelor of Secondary Education Major in English</p>
-                    <p class=""> Bachelor of Secondary Education Major in Mathematics</p>
-                    <p class=""> Bachelor of Secondary Education Major in Filipino</p>
-                    <p class=""> Bachelor of Secondary Education Major in Sciences</p>
-                </div>
             </div>
+            <div id="cof" class="xl:pb-[120px]">
             
-            <div class="flex place-items-center gap-[10%] p-5 ">
-                <img src="/images/College Logo/LOGO COF.png" class="w-[200px]" alt="">
-                <h4 class="headings h4 text-white-pure mt-5"><a href="/cof">College of Fisheries</a></h4>
-            </div>
-            <div class="flex place-items-top gap-[10%] p-5 ">
-                <div class="w-[200px]"> </div>
-                <div class="flex flex-col paragraph p1 text-titanium">
-                    <p class=""> Bachelor of Science in Food Technology</p>
-                    <p class=""> Bachelor of Science in Fisheries</p>
-                    <p class=""> Diploma in Fisheries Technology Major in Aquaculture</p>
-                    <p class=""> Diploma in Fisheries Technology Major in Fish Processing</p>
+                <div class="flex place-items-center xl:gap-[90px] xs:gap-[23px] xl:p-5 xs:pt-[48px] text-center ">
+                    <img src="/images/College Logo/LOGO COF.png" class="xl:w-[200px] xs:w-[150px]" alt="">
+                    <h4 class="headings xl:h4 xs:h5 text-white-pure mt-5"><a href="/cof">College of Fisheries</a></h4>
                 </div>
+                <div class="xl:flex place-items-top gap-[10%] xl:p-5 xs:pt-[32px] xs:pl-[97px] ">
+                    <div class="xl:w-[200px]"> </div>
+                    <div class="flex flex-col paragraph xl:p1 xs:p2 text-silver">
+                        <p class=""> Bachelor of Science in Food Technology</p>
+                        <p class=""> Bachelor of Science in Fisheries</p>
+                        <p class=""> Diploma in Fisheries Technology Major in Aquaculture</p>
+                        <p class=""> Diploma in Fisheries Technology Major in Fish Processing</p>
+                    </div>
+                </div>
+
             </div>
+            <div id="iict" class="xl:pb-[120px]">
             
-            <div class="flex place-items-center gap-[10%] p-5 ">
-                <img src="/images/College Logo/LOGO IICT.png" class="w-[200px]" alt="">
-                <h4 class="headings h4 text-white-pure mt-5"><a href="/iict">Institute of Information and Communication Technology</a></h4>
-            </div>
-            <div class="flex place-items-top gap-[10%] p-5 ">
-                <div class="w-[200px]"> </div>
-                <div class="flex flex-col paragraph p1 text-titanium">
-                    <p class=""> Bachelor of Science in Computer Application </p>
-                    <p class=""> Bachelor of Science in Information Technology </p>
+                <div class="flex place-items-center xl:gap-[90px] xs:gap-[23px] xl:p-5 xs:pt-[48px] text-center ">
+                    <img src="/images/College Logo/LOGO IICT.png" class="xl:w-[200px] xs:w-[150px]" alt="">
+                    <h4 class="headings xl:h4 xs:h5 text-white-pure mt-5"><a href="/iict">Institute of Information and Communication Technology</a></h4>
                 </div>
+                <div class="xl:flex place-items-top gap-[10%] xl:p-5 xs:pt-[32px] xs:pl-[97px] ">
+                    <div class="xl:w-[200px]"> </div>
+                    <div class="flex flex-col paragraph xl:p1 xs:p2 text-silver">
+                        <p class=""> Bachelor of Science in Computer Application </p>
+                        <p class=""> Bachelor of Science in Information Technology </p>
+                    </div>
+                </div>
+
             </div>
+            <div id="ioes" class="xl:pb-[52px]">
             
-            <div class="flex place-items-center gap-[10%] p-5 ">
-                <img src="/images/College Logo/LOGO IOES.png" class="w-[200px]" alt="">
-                <h4 class="headings h4 text-white-pure mt-5"><a href="/ioes">Institute of Oceanography and Environmental Science</a></h4>
-            </div>
-            <div class="flex place-items-top gap-[10%] p-5 ">
-                <div class="w-[200px]"> </div>
-                <div class="flex flex-col paragraph p1 text-titanium">
-                    <p class=""> Bachelor of Science in Environmental Science</p>
-                    <p class=""> Bachelor of Science in Marine Biology</p>
+                <div class="flex place-items-center xl:gap-[90px] xs:gap-[23px] xl:p-5 xs:pt-[48px] text-center ">
+                    <img src="/images/College Logo/LOGO IOES.png" class="xl:w-[200px] xs:w-[150px]" alt="">
+                    <h4 class="headings xl:h4 xs:h5 text-white-pure mt-5"><a href="/ioes">Institute of Oceanography and Environmental Science</a></h4>
                 </div>
+                <div class="xl:flex place-items-top gap-[10%] xl:p-5 xs:pt-[32px] xs:pl-[97px] ">
+                    <div class="xl:w-[200px]"> </div>
+                    <div class="flex flex-col paragraph xl:p1 xs:p2 text-silver">
+                        <p class=""> Bachelor of Science in Environmental Science</p>
+                        <p class=""> Bachelor of Science in Marine Biology</p>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="text-center pb-[60px]">
-                <p class="paragraph text-titanium p1 pt-20 mb-5">Need clarifications or help?</p>
-                <a href="" class="bg-transparent border paragraph p1 gap-10 text-titanium py-[10.5px] px-[60px] rounded-[40px]">Contact us now!</a>
+            <div class="text-center xl:pb-[80px] xs:pb-[48px]">
+                <p class="paragraph text-silver  xl:p1 xs:p2 pt-20 mb-5">Need clarifications or help?</p>
+                <a href="" class="bg-transparent border paragraph xl:p1 xs:p2 gap-10 text-silver py-[10.5px] px-[60px] rounded-[40px]">Contact us now!</a>
             
             </div>
         </div>
@@ -184,38 +209,38 @@ const currentPath = Astro.url.pathname;
 
 <!-- fold 04 -->
         <div class="bg-msu-deep-ocean xl:px-[12.5%] xs:px-[3.85%] xl:pt-10 xs:pt-20 xl:pb-[101px] xs:pb-[95px]">
-            <h3 class="headings xl:h3 xs:h4 text-white-pure text-center">Research at TCTO</h3>
-            <div class="flex xl:flex-row xs:flex-col justify-center   ">
-                <div class="xl:mt-10 xs:mt-20 ">
-                    <div class="flex flex-col">
-                        <p class="paragraph xl:p1 xs:p2 text-white-pure text-center">Latest from our labs and research </p>
-                        <div class="relative xl:w-[480px] xs:w-[300px]">
+            <h3 class="headings xl:h3 xs:h4 text-white-pure text-center xl:mb-[53px]">Research at TCTO</h3>
+            <div class="flex xl:flex-row xs:flex-col   ">
+                <div class="xl:mt-[20px] xs:mt-[50px] xs:ml-[26px] ">
+                    <div class="flex flex-col  place-items-center">
+                        <p class="paragraph xl:p1 xs:p2 text-white-pure">Latest from our labs and research </p>
+                        <div class="relative xl:w-[480px] xs:w-[480px] xs:mb-[150px] xl:mb-[10px]">
                             <!-- Add msu-drop-shadow on other image other than this gazette -->
                             <img src="/images/gazette1.png" class="absolute w-[412px] z-20" alt="">
                             <img src="/images/gazette2.png" class="absolute w-[412px] top-[37px] left-[37px] z-10" alt="">
                             <img src="/images/gazette3.png" class="absolute w-[412px] top-[68px] left-[68px] z-0" alt="">
                         </div>
-                        <div class=" ml-5 xl:max-w-[480px] xs:max-w-[350px]">
+                        <div class=" ml-5 xl:max-w-[480px] xs:max-w-[480px]">
                             <p class=" paragraph p2 text-titanium xl:mt-[650px] xs:mt-[470px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
                         </div>
                     </div> 
                 </div>
-                <div class="xl:mt-10 xs:mt-20">
-                    <p class="flex place-items-center paragraph ml-[26%] xl:p1 xs:p2 text-white-pure">Previous Researches </p>
+                <div class="xl:mt-[20px] xs:mt-[70px] xs:ml-[26px] ">
+                    <p class="flex paragraph xl:ml-[26%] xs:ml-3 xl:p1 xs:p2 text-white-pure">Previous Researches </p>
                     <div class="flex  xl:mt-10 xs:mt-20 xl:ml-[200px] ">
-                        <div class="flex-col w-[203px] ">
+                        <div class="flex-col xl:w-[203px] xs:w-[300px] ">
                             <p class="paragraph ml-3 xl:p2 xs:p3 text-white-pure">2022, 4th Quarter </p>
                             <img src="/images/gazette1.png" class="" alt="">
                             <p class=" paragraph p2 text-titanium  ml-3  mr-3">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
                             
                         </div>
-                        <div class="flex-col w-[203px]">
+                        <div class="flex-col w-[203px] xl:block xs:hidden">
                             <p class="paragraph ml-3 xl:p2 xs:p3 text-white-pure">2022, 3rd Quarter </p>
                             <img src="/images/gazette2.png" alt="">
                             <p class=" paragraph p2 text-titanium  ml-3  mr-3">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
                             
                         </div>
-                        <div class="flex-col w-[203px]">
+                        <div class="flex-col w-[203px] xl:block xs:hidden">
                             <p class="paragraph ml-3 xl:p2 xs:p3 text-white-pure">2022, 2nd Quarter </p>
                             <img src="/images/gazette3.png" alt="">
                             <p class=" paragraph p2 text-titanium  ml-3  mr-3">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
@@ -236,10 +261,9 @@ const currentPath = Astro.url.pathname;
 		
 		
 
-<!-- Academic Calendar -->
+<!--  Academic Calendar -->
     <AcademicCalendar path={currentPath} client:visible />
-<!-- end Academic Calendar 05 -->
-
+<!-- end  Academic Calendar -->
 
 <!-- Main video -->
     <MainVideo path={currentPath} client:visible />

@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from "../components/Navbar";
 import AcademicCalendar from "../components/AcademicCalendar";
-import MainVideo from "../components/MainVideo";
+import MainVideo from "../components/MainVideo.astro";
 import FooterNav from "../components/FooterNav";
 import Footer from "../components/Footer";
 import '../styles/css/global.css';
@@ -256,29 +256,24 @@ const currentPath = Astro.url.pathname;
 <!-- fold 05 -->
 		<div class="admissions-fold-05-gb-img w-full  pt-20">
 			<div class="item-center">
-				<h3 class="headings text-center text-msu-maroon xl:h3 xs:h4 xl:pt-[80px] xs:pt-[62px] pl-[12.5%] pr-[12.5%]">You can have any of these</h3>
+				<h3 class="headings text-center text-msu-rusty-red xl:h3 xs:h4 xl:pt-[80px] xs:pt-[62px] pl-[12.5%] pr-[12.5%]">You can have any of these</h3>
 			</div>
-			
-			<div class="flex justify-center mt-10 xl:hidden xs:block">
-				<div class="m-5 text-center">
-					<p class="paragraph xl:p1 xs:p2 text-msu-maroon mt-10">Academic Scholarship</p>
-					<div class="flex flex-col gap-[5px] paragraph text-graphite mt-[20px]">
-						<a href="#" class=" mt-[20px]">MSU Tawi-Tawi Scholarship
-							for Science and Mathematics
-							(SSM)</a>
-						<a href="#" class=" mt-[20px]">Special Privileges for
-							Academic Excellence</a>
-						<a href="#" class=" mt-[20px]">Cultural Community Grant
-							(CCG)</a>
-						<a href="#" class=" mt-[20px]">The Badjao Grant</a>
-						<a href="#" class=" mt-[20px]">Skill/Talent Study Grant</a>
-						<a href="#" class=" mt-[20px]">Fisheries Technology Study
-							Grant (Fish Tech Grant)</a>
-					</div>
 
-				</div>
-					
-			</div>
+			<div class="place-items-center xs:pt-[48px] text-center paragraph p2 text-msu-rusty-red xs:block xl:hidden">
+                <select id="programs">
+                    <option id=" " class="">Academic Scholarship</option>
+                    <option id=" " class=" ">MSU Tawi-Tawi Scholarship
+						for Science and Mathematics
+						(SSM)</option>
+                    <option id=" " class=" ">Special Privileges for
+						Academic Excellence</option>
+                    <option id=" " class=" ">The Badjao Grant</option>
+                    <option id=" " class=" ">Skill/Talent Study Grant</option>
+                    <option id=" " class=" ">Fisheries Technology Study
+						Grant (Fish Tech Grant)</option>
+                </select>
+            </div>
+			
 			<div class="xl:flex justify-center mt-10 xl:px-[12.5%]">
 				<div class="m-5 xl:block xs:hidden">
 					<p class="paragraph xl:p1 xs:p2 text-msu-maroon w-[255px] mt-10">Academic Scholarship</p>
