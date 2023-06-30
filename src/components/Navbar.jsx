@@ -21,35 +21,35 @@ const Navbar = (props) => {
 
   const { path } = props
 
-  const bg = (path == '/admissions') ? 'hero-admission-img'
-  				: (path == '/programs') ? 'hero-program-img'
+  const bg = (path == '/admissions') ? 'hero-admission-img xl:h-[440px] xs:h-[164px]'
+  				: (path == '/programs') ? 'hero-program-img xl:h-[440px] xs:h-[164px]'
   				: (path == '/cas') ? 'hero-cas-img'
   				: (path == '/cias') ? 'hero-cias-img'
   				: (path == '/coed') ? 'hero-coed-img'
   				: (path == '/cof') ? 'hero-cof-img'
   				: (path == '/iict') ? 'hero-iict-img'
   				: (path == '/ioes') ? 'hero-ioes-img'
-				: (path == '/offices') ? 'hero-office-img'
-				: (path == '/publications') ? 'hero-publication-img'
-				: (path == '/campus') ? 'hero-campus-img'
+				: (path == '/offices') ? 'hero-office-img xl:h-[440px] xs:h-[164px]'
+				: (path == '/publications') ? 'hero-publication-img xl:h-[440px] xs:h-[220px]'
+				: (path == '/campus') ? 'hero-campus-img xl:h-[440px] xs:h-[164px]'
 				: (path == '/academic-calendar') ? ''
 				: (path == '/search') ? ''
 				: (path == '/articles') ? 'hero-main-img pb-[980px]'
 				: (path == '/article-topic') ? ''
 				: (path == '/annual-reports') ? 'hero-main-img pb-[980px]'
 				: (path == '/gazette') ? 'hero-main-img pb-[980px]'
-				: 'hero-main-img xl:pb-[215px] xs:pb-[99px]'
+				: 'hero-main-img xl:h-[980px] xs:h-[770px]'
 
   return (
     <>
         <div className="3xl:h-[100px] xl:h-[80px] xs:h-[60px] w-full bg-msu-deep-ocean text-white-pure flex justify-between items-center xl:px-[12.5%] xs:px-[3.85%] relative">
-			<div className="flex items-center xl:py-0 xs:py-2">
+			<a href='/' className="flex items-center xl:py-0 xs:py-2">
 				<img src="/images/MSU Seal New (Official).png" alt="" className="3xl:h-[72.99px] xs:h-[43.79px] mr-5 3xl:block xl:hidden sm:block" />
 				<div>
 					<h4 className="headings xl:h5 block xl:block xs:hidden">Mindanao State University</h4>
 					<p className="paragraph xl:p2 block xl:block xs:hidden">Tawi-Tawi College of Technology and Oceanography</p>
 				</div>
-			</div>
+			</a>
 			<div>
 				<p className="paragraph xl:p2 xl:block xs:hidden pb-1">+63 910 291 0605</p>
 				<p className="paragraph xl:p2 xl:block xs:hidden">admissions@msutawi-tawi.edu.ph</p>
@@ -57,7 +57,7 @@ const Navbar = (props) => {
 			</div>
 		</div>
         <div className={bg + ` relative`}>
-			<div className='relative'>
+			<div className='relative z-20'>
 				<div className={`xs:bg-msu-deep-ocean xl:bg-transparent xl:bg-gradient-ocean flex xl:flex-row xs:flex-col justify-between items-center 3xl:h-[80px] xl-[60px] text-white-pure xl:px-[12.5%] xs:px-[3.85%] nav ${isOpen && 'active'}`}>
 					<div className="flex 3xl:flex-row xl:flex-row sm:flex-col xs:flex-col xl:gap-20 xl:text-left xs:text-center paragraph p2 w-full">
 						<a href="/admissions" className='py-[15px]'>Admissions</a>
@@ -74,23 +74,24 @@ const Navbar = (props) => {
 			</div>
 			
             <div className='bg-gradient-ocean h-[60px] xl:hidden xs:block'></div>
-			{
-				(path == '/admissions') ? <HeroAdmissionHeading />
-				: (path == '/programs') ? <HeroProgramHeading />
-				: (path == '/cas') ? <HeroCASHeading />
-				: (path == '/cias') ? <HeroCIASHeading />
-				: (path == '/coed') ? <HeroCOEDHeading />
-				: (path == '/cof') ? <HeroCOFHeading />
-				: (path == '/iict') ? <HeroIICTHeading />
-				: (path == '/ioes') ? <HeroIOESHeading />
-				: (path == '/offices') ? <HeroOfficeHeading />
-				: (path == '/publications') ? <HeroPublicationHeading />
-				: (path == '/campus') ? <HeroCampusHeading />
-				: (path == '/academic-calendar' || path == '/articles' || path == '/annual-reports' || path == '/gazette' || path == '/search' || path == '/article-topic') ? ''
-				: <HeroMainHeading />
-			}
+			
 			
 		</div>
+		{
+			(path == '/admissions') ? <HeroAdmissionHeading />
+			: (path == '/programs') ? <HeroProgramHeading />
+			: (path == '/cas') ? <HeroCASHeading />
+			: (path == '/cias') ? <HeroCIASHeading />
+			: (path == '/coed') ? <HeroCOEDHeading />
+			: (path == '/cof') ? <HeroCOFHeading />
+			: (path == '/iict') ? <HeroIICTHeading />
+			: (path == '/ioes') ? <HeroIOESHeading />
+			: (path == '/offices') ? <HeroOfficeHeading />
+			: (path == '/publications') ? <HeroPublicationHeading />
+			: (path == '/campus') ? <HeroCampusHeading />
+			: (path == '/academic-calendar' || path == '/articles' || path == '/annual-reports' || path == '/gazette' || path == '/search' || path == '/article-topic') ? ''
+			: <HeroMainHeading />
+		}
     </>
   );
 }
