@@ -2,7 +2,7 @@ import React from 'react'
 
 const HeroMainHeading = () => {
   return (
-    <div className="xl:mt-[398px] xs:mt-[300px] xl:w-[769px] xl:mx-[12.5%] xs:mx-[3.85%]">
+    <div className="absolute z-10 xl:top-[578px] xs:top-[490px] xl:w-[769px] xl:mx-[12.5%] xs:mx-[3.85%]">
       <h3 className="headings xl:h3 xs:h4">
           Four decades of steadfast
           Excellence in Marine Sciences

@@ -172,7 +172,8 @@
 }
 
 .hero-main-img {
-    background: linear-gradient(0deg, rgba(16, 31, 54, 0.4), rgba(16, 31, 54, 0.4)), url('../../../public/images/Sitangkai.png');
+    /* background: linear-gradient(0deg, rgba(16, 31, 54, 0.4), rgba(16, 31, 54, 0.4)), url('../../../public/images/Sitangkai.png'); */
+    background: url('../../../public/images/Sitangkai.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -195,7 +196,6 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 440px;
     width: 100%;
 }
 
@@ -204,7 +204,6 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 440px;
     width: 100%;
 }
 
@@ -267,7 +266,6 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 440px;
     width: 100%;
 }
 
@@ -276,7 +274,6 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 440px;
     width: 100%;
 }
 
@@ -285,7 +282,6 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 440px;
     width: 100%;
 }
 
