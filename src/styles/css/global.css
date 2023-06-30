@@ -166,6 +166,10 @@
     border-radius: 11px;
     background: rgba(217, 217, 217, 0.20);
 }
+.msu-drop-none{
+    border-radius: 11px;
+    background: rgba(0, 0, 0, 0);
+}
 
 .hero-main-img {
     background: linear-gradient(0deg, rgba(16, 31, 54, 0.4), rgba(16, 31, 54, 0.4)), url('../../../public/images/Sitangkai.png');

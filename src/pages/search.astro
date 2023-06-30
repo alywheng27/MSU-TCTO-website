@@ -1,8 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navbar from "../components/Navbar";
-import FooterNav from "../components/FooterNav";
-import Footer from "../components/Footer";
+import FooterNav from "../components/FooterNav.astro";
+import Footer from "../components/Footer.astro";
 import '../styles/css/global.css';
 
 const currentPath = Astro.url.pathname;
@@ -15,48 +15,55 @@ const currentPath = Astro.url.pathname;
 
 
         <div class='bg-black-pure h-[40px] xl:px-[12.5%] xs:px-[3.85%]'>
-            <p class="paragraph p2 py-[10px] text-titanium"><a href="/index">Home</a>   / Search </p>
+            <p class="paragraph p2 py-[10px] text-titanium xl:block xs:hidden"><a href="/index">Home</a>   / Search </p>
         </div>
 <!-- search -->
-        <div class="bg-black-pure w-full px-[12.5%]  flex-col pt-[80px] pb-[123px]">
-            <div class="flex gap-[239px]">
+        <div class="bg-black-pure w-full xl:px-[12.5%]  xs:px-[3.5%] xl:flex-col xl:pt-[80px] xs:pt-[0px] xl:pb-[123px] xs:pb-[40px] ">
+            <div class="flex gap-[239px] ">
 
-                <div class="flex  w-[960px]">
+                <div class="flex  w-[960px] ">
 
-                        <div class="flex flex-col gap-[60px]">
+                        <div class="flex flex-col gap-[60px] ">
                             <div class="flex flex-col ">   
-                                <div class="flex mb-[30px]">   
+                                    <!-- <div class="flex flex-col mb-[30px]">   
                                     <a href="/academic-calendar" class="flex  w-[960px] h-[100px] items-center bg-transparent border paragraph p1  py-[14px] px-[139px] text-white-pure rounded-[40px]">
                                         Sample title search of a document, article, or event...</a>
 
 
+                                    </div> -->
+                                    
+                                    <div class="flex relative xl:mt-0 xs:mt-[15px] xl:w-fit xs:w-full xl:mb-[30px]">
+                                        <input type="search" name="" value="Sample title search of a document, article, or event..." id="" class="bg-transparent border xs:rounded-[20px] xl:rounded-[40px] xs:w-full xl:w-[960px]  xl:py-[25px] xs:py-[12px] pl-12 pr-4 text-center text-white-pure" />
+                                        <img src="/images/search.png" alt="" class="absolute xl:top-[25px] xs:top-[12px] left-3 xl:hidden xs:block" />
                                     </div>
+
+                                    
                                     <div class="flex gap-[30px] mb-[10px]">  
-                                        <p class="paragraph text-msu-crimson-ground p2 text-left">
+                                        <p class="paragraph text-msu-crimson-ground p2 text-left xl:block xs:hidden">
                                             All
                                         </p> 
-                                        <p class="paragraph text-titanium p2 text-left">
+                                        <p class="paragraph text-titanium p2 text-left xl:block xs:hidden">
                                             Articles
                                         </p> 
-                                        <p class="paragraph text-titanium p2 text-left">
+                                        <p class="paragraph text-titanium p2 text-left xl:block xs:hidden">
                                             Events
                                         </p> 
-                                        <p class="paragraph text-titanium p2 text-left">
+                                        <p class="paragraph text-titanium p2 text-left xl:block xs:hidden">
                                             Gazette
                                         </p> 
-                                        <p class="paragraph text-titanium p2 text-left">
+                                        <p class="paragraph text-titanium p2 text-left xl:block xs:hidden">
                                             Reports
                                         </p> 
-                                        <p class="paragraph text-titanium p2 text-left">
+                                        <p class="paragraph text-titanium p2 text-left xl:block xs:hidden">
                                             Others
                                         </p> 
 
                                     </div>
-                                    <div class="flex gap-[50px] ">  
-                                        <p class="paragraph text-titanium p2 mb-[20px] text-left">
+                                    <div class="flex gap-[50px]">  
+                                        <p class="paragraph text-titanium p2 mb-[20px] text-left xl:block xs:hidden">
                                             3,691 results
                                         </p> 
-                                        <p class="paragraph text-titanium p2 mb-[20px] text-left">
+                                        <p class="paragraph text-titanium p2 mb-[20px] text-left xl:block xs:hidden">
                                             Sort by date
                                         </p> 
 
@@ -182,7 +189,7 @@ const currentPath = Astro.url.pathname;
 
                 </div>
 
-                <div class="flex flex-col">
+                <div class="flex flex-col xl:block xs:hidden">
                     <p class="paragraph text-titanium p1  mb-[30px] text-left">
                         Related searches
                     </p>

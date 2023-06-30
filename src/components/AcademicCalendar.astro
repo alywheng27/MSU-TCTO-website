@@ -1,35 +1,4 @@
-import React, { useState } from 'react';
-import HeroMainHeading from './HeroMainHeading';
-import HeroAdmissionHeading from './HeroAdmissionHeading';
-import HeroProgramHeading from './HeroProgramHeading';
-import HeroPublicationHeading from './HeroPublicationHeading';
-import HeroOfficeHeading from './HeroOfficeHeading';
-import HeroCampusHeading from './HeroCampusHeading';
-
-const AcademicCalendar = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleAcademicCalendar = () => {
-    setIsOpen(!isOpen);
-  }
-
-  const { path } = props
-
-  const bg = (path == '/admissions') ? 'hero-admission-img'
-  				: (path == '/programs') ? 'hero-program-img'
-				: (path == '/offices') ? 'hero-office-img'
-				: (path == '/publications') ? 'hero-publication-img'
-				: (path == '/campus') ? 'hero-campus-img'
-				: (path == '/academic-calendar') ? ''
-				: (path == '/search') ? ''
-				: (path == '/articles') ? 'hero-main-img pb-[980px]'
-				: (path == '/annual-reports') ? 'hero-main-img pb-[980px]'
-				: (path == '/gazette') ? 'hero-main-img pb-[980px]'
-				: 'hero-main-img xl:pb-[215px] xs:pb-[99px]'
-
-  return (
-    <>
-		<div class=" bg-msu-deep-ocean w-full px-[12.5%] flex  flex-col pt-20">
+		<div class="xl:bg-msu-deep-ocean xs:bg-black-pure w-full px-[12.5%] flex  flex-col pt-20">
             <div class="flex flex-col items-center">
                 <h3 class="headings text-white-pure xl:h3 xs:h5 pl-[12.5%] pr-[12.5%] pb-[20px]">Academic Calendar</h3>
                 <p class="paragraph text-silver xl:p1 xs:p2 pb-[80px]  xl:w-[960px]">
@@ -267,7 +236,6 @@ const AcademicCalendar = (props) => {
 						</div>
 						
 					</div>
-
 					{/* mobile view */}
 					<div class="flex xs:flex-col xl:hidden xs:block">
 								
@@ -316,8 +284,3 @@ const AcademicCalendar = (props) => {
 			</div>
 
 		</div>
-    </>
-  );
-}
-
-export default AcademicCalendar;

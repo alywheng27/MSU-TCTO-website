@@ -1,22 +1,3 @@
-import React, { useState } from 'react';
-import HeroMainHeading from './HeroMainHeading';
-import HeroAdmissionHeading from './HeroAdmissionHeading';
-import HeroProgramHeading from './HeroProgramHeading';
-import HeroPublicationHeading from './HeroPublicationHeading';
-import HeroOfficeHeading from './HeroOfficeHeading';
-import HeroCampusHeading from './HeroCampusHeading';
-
-const Footer = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleFooter = () => {
-    setIsOpen(!isOpen);
-  }
-
-  const { path } = props
-
-  return (
-    <>
 		<div class="bg-msu-deep-ocean text-white-pure justify-center xl:px-[12.5%] xs:px-[3.85%] xl:pt-20 xs:pt-10">
 			<div class="flex flex-col justify-center items-center text-center">
 				<img src="/images/MSU Seal New (Official).png" alt="" class="xl:h-[170px] xs:h-[127px] mb-10"></img>
@@ -104,8 +85,3 @@ const Footer = (props) => {
 			</div>
 
 		</div>
-    </>
-  );
-}
-
-export default Footer;

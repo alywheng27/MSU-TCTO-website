@@ -1,8 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navbar from "../components/Navbar";
-import FooterNav from "../components/FooterNav";
-import Footer from "../components/Footer";
+import FooterNav from "../components/FooterNav.astro";
+import Footer from "../components/Footer.astro";
 import '../styles/css/global.css';
 import MainVideo from '../components/MainVideo.astro';
 
@@ -59,14 +59,14 @@ const currentPath = Astro.url.pathname;
                     This is us now!
                 </h3>
             </div>
-            <div class="flex xl:flex-row xs:flex-col">
+            <div class="flex xl:flex-row justify-center xs:flex-col">
                 <div>
                     
                     <img src="/images/campus-now-1.png" alt="" class="xl:h-[980px] object-cover object-center" />
                 </div>
-                <div class="flex xl:flex-col  xs:flex-row">
-                    <img src="/images/campus-now-2.png" alt="" class="xl:h-[490px] xs:h-[104px]   object-cover object-center" />
-                    <img src="/images/campus-now-3.png" alt="" class="xl:h-[490px] xs:h-[104px]   object-cover object-center" />
+                <div class="flex xl:flex-col justify-center xs:flex-row ">
+                    <img src="/images/campus-now-2.png" alt="" class="xl:h-[490px] xs:h-[164px]   object-cover object-center" />
+                    <img src="/images/campus-now-3.png" alt="" class="xl:h-[490px] xs:h-[164px]    object-cover object-center" />
                 </div>
             </div>
             <div class="flex flex-col items-center xl:mt-[40px] xs:mt-[66px] xl:pb-[57px] xs:pb-[42px] xs:mx-[25px] xs:text-left">
@@ -173,9 +173,9 @@ const currentPath = Astro.url.pathname;
             </div>
             
             <!-- mobile view -->
-            <div class="flex flex-col gap-[20px] mb-[120px] justify-center">
-                <div  class="flex xl:flex-row xs:flex-col gap-[20px] justify-center">
-                    <div id="cas" class="msu-drop-white-shadow xs:w-[460px] xs:h-[658px] xs:mx-[15px] ">
+            <div class="flex flex-col gap-[20px] mb-[120px] items-center ">
+                <div  class="flex xl:flex-row xs:flex-col xs:gap-[20px] justify-center xl:hidden xs:block">
+                    <div id="cas" class="msu-drop-white-shadow xs:w-[460px] xs:h-[658px] xs:mx-[15px] xs:mb-[20px]">
                         <div class="flex xs:mx-[75px] xs:pt-[61px] justify-center">
                             <img src="/images/College Logo/LOGO CAS.png" alt="" class="xs:w-[242px] xs:h-[242px]">
                         </div>
@@ -192,7 +192,7 @@ const currentPath = Astro.url.pathname;
                         </div>
                     </div>
     
-                    <div id="cias" class="msu-drop-white-shadow xs:w-[460px] xs:h-[658px] xs:mx-[15px] ">
+                    <div id="cias" class="msu-drop-white-shadow xs:w-[460px] xs:h-[658px] xs:mx-[15px] xs:mb-[20px]">
                         <div class="flex xs:mx-[75px] xs:pt-[61px] justify-center">
                             <img src="/images/College Logo/LOGO CIAS.png" alt="" class="xs:w-[242px] xs:h-[242px]">
                         </div>
@@ -209,7 +209,7 @@ const currentPath = Astro.url.pathname;
                         </div>
                     </div>
     
-                    <div id="coed" class="msu-drop-white-shadow xs:w-[460px] xs:h-[658px] xs:mx-[15px] ">
+                    <div id="coed" class="msu-drop-white-shadow xs:w-[460px] xs:h-[658px] xs:mx-[15px] xs:mb-[20px]">
                         <div class="flex xs:mx-[75px] xs:pt-[61px] justify-center">
                             <img src="/images/College Logo/LOGO COED.png" alt="" class="xs:w-[242px] xs:h-[242px]">
                         </div>
@@ -228,9 +228,9 @@ const currentPath = Astro.url.pathname;
 
                 
                 </div>
-                <div  class="flex xl:flex-row xs:flex-col gap-[20px] justify-center">
+                <div  class="flex xl:flex-row xs:flex-col xs:gap-[20px] justify-center xl:hidden xs:block">
 
-                    <div id="cof" class="msu-drop-white-shadow xs:w-[460px] xs:h-[658px] xs:mx-[15px] ">
+                    <div id="cof" class="msu-drop-white-shadow xs:w-[460px] xs:h-[658px] xs:mx-[15px]  xs:mb-[20px]">
                         <div class="flex xs:mx-[75px] xs:pt-[61px] justify-center">
                             <img src="/images/College Logo/LOGO COF.png" alt="" class="xs:w-[242px] xs:h-[242px]">
                         </div>
@@ -247,7 +247,7 @@ const currentPath = Astro.url.pathname;
                         </div>
                     </div>
     
-                    <div id="iict" class="msu-drop-white-shadow xs:w-[460px] xs:h-[658px] xs:mx-[15px] ">
+                    <div id="iict" class="msu-drop-white-shadow xs:w-[460px] xs:h-[658px] xs:mx-[15px]  xs:mb-[20px]">
                         <div class="flex xs:mx-[75px] xs:pt-[61px] justify-center">
                             <img src="/images/College Logo/LOGO IICT.png" alt="" class="xs:w-[242px] xs:h-[242px]">
                         </div>
@@ -264,7 +264,7 @@ const currentPath = Astro.url.pathname;
                         </div>
                     </div>
     
-                    <div id="ioes" class="msu-drop-white-shadow xs:w-[460px] xs:h-[658px] xs:mx-[15px] ">
+                    <div id="ioes" class="msu-drop-white-shadow xs:w-[460px] xs:h-[658px] xs:mx-[15px]  xs:mb-[20px]">
                         <div class="flex xs:mx-[75px] xs:pt-[61px] justify-center">
                             <img src="/images/College Logo/LOGO IOES.png" alt="" class="xs:w-[242px] xs:h-[242px]">
                         </div>

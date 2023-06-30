@@ -7,7 +7,7 @@ const HeroCASHeading = () => {
         
       </h2>
       
-      <p class="paragraph p2 py-[220px] text-silver"><a href="/">Home</a> / Programs / College of Arts and Sciences</p>
+      <p class="paragraph p2 xl:py-[220px] xs:py-[250px]  text-silver"><a href="/">Home</a> / Programs / College of Arts and Sciences</p>
     </div>
   )
 }

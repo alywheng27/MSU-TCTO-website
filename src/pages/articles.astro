@@ -14,20 +14,23 @@ const currentPath = Astro.url.pathname;
         <div class='bg-gradient-ocean h-[100px] relative bottom-[100px] rotate-180'></div>
         <div class="absolute top-[180px] w-full">
             <div class='h-[40px] xl:px-[12.5%] xs:px-[3.85%]'>
-                <p class="paragraph p2 py-[10px] text-titanium"><a href="/home">Home</a> / <a href="/publications">Publications</a>  / Articles </p>
+                <p class="paragraph p2 py-[10px] text-titanium xl:block xs:hidden"><a href="/home">Home</a> / <a href="/publications">Publications</a>  / Articles </p>
             </div>
-            <div class="flex flex-col mx-[240px] mt-20">
-                <h3 class="headings h3">Articles</h3>
-                <div class="flex mt-[80px]">
-                    <img src="/images/article-blank-1.png" alt="" class="h-[360px] object-cover object-center" />
-                    <div class="w-[720px] ml-5">
-                        <h4 class="headings h4">Update dates for next accreditation for the school</h4>
-                        <p class="paragraph p1 mt-5 text-silver">Lorem ipsum dolor sit amet consectetur. Sit justo semper sollicitudin nisl. Adipiscing amet gravida justo venenatis viverra morbi in. Eros tellus integer sit non amet amet.</p>
+            <div class="flex flex-col xl:mx-[240px] xs:mx-[20px] xl:mt-20 xs:mt-[50px] ">
+                <h3 class="headings xl:h3 xs:h5 text-center">Articles</h3>
+                <div class="flex xl:flex-row xs:flex-col xl:mt-[80px] xs:mt-[50px]">
+                    <img src="/images/article-blank-1.png" alt="" class="xl:h-[360px] object-cover object-center" />
+                    <div class="xl:w-[720px] xl:ml-5">
+                        <h4 class="headings xl:h4 xs:h6 xs:mt-[13px]">Update dates for next accreditation for the school</h4>
+                        <p class="paragraph xl:p1 xs:p3 xl:mt-5 xs:mt-[22px] xs:ml-[100px] text-silver">Lorem ipsum dolor sit amet consectetur. Sit justo semper sollicitudin nisl. Adipiscing amet gravida justo venenatis viverra morbi in. Eros tellus integer sit non amet amet.</p>
                     </div>
                 </div>
             </div>
-            <div class="flex mx-[240px] mt-[120px]">
-                <div class="grid grid-cols-2 gap-y-10">
+            
+
+
+            <div class="flex mx-[240px] mt-[120px]  xl:block xs:hidden">
+                <div class="grid grid-cols-2 gap-y-10 xs:gap-[20px]">
                     <div class="flex">
                         <img src="/images/article-blank-1.png" alt="" class="h-[160px] object-cover object-center" />
                         <div class="flex flex-col w-[480px] ml-5">
@@ -58,41 +61,82 @@ const currentPath = Astro.url.pathname;
                     </div>
                 </div>
             </div>
+            <div class="flex gap-[30px] justify-center mt-[40px] ">
+                <a href="#" class=" bg-white xl:py-[10px] xl:px-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
+                <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xl:px-[10px] xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
+                <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xl:px-[10px] xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
+            </div>
+
             <div class="flex justify-center mt-20">
-                <div class="flex w-[1440px]">
-                    <div class="flex flex-col gap-[30px] relative">
-                        <p class="paragraph p1 text-white-pure">Categories</p>
-                        <div class="flex flex-col gap-5">
-                            <p class="paragraph p2 text-titanium">Events</p>
-                            <p class="paragraph p2 text-titanium">News</p>
-                            <p class="paragraph p2 text-titanium">Academic</p>
-                            <p class="paragraph p2 text-titanium">Ceremonies</p>
-                            <p class="paragraph p2 text-titanium">Administrative</p>
-                        </div>
-                        <p class="paragraph p1 text-white-pure">Date</p>
-                        <div class="flex flex-col gap-5">
-                            <p class="paragraph p2 text-titanium">2023</p>
-                            <p class="paragraph p2 text-titanium">2022</p>
-                            <p class="paragraph p2 text-titanium">2021</p>
-                            <p class="paragraph p2 text-titanium">2020</p>
-                            <div class="flex flex-col gap-5 ml-[10px]">
-                                <p class="paragraph p2 text-titanium">December</p>
-                                <p class="paragraph p2 text-titanium">November</p>
-                                <p class="paragraph p2 text-titanium">October</p>
-                                <p class="paragraph p2 text-titanium">September</p>
-                                <p class="paragraph p2 text-titanium">August</p>
-                                <p class="paragraph p2 text-titanium">July</p>
-                                <p class="paragraph p2 text-titanium">June</p>
+                <div class="flex xl:flex-row xs:flex-col w-[1440px]">
+                    <div class="flex xl:flex-col  xl:gap-[30px] justify-center xs:flex-row xs:gap-[60px] ">
+                        <div class="flex xl:flex-col xs:flex-col xl:gap-[30px]  relative">
+                            
+                            <p class="paragraph p1 text-white-pure xl:text-left xs:text-center xs:mb-[7px]">Categories</p>
+
+
+                            <div class="flex xl:flex-col xl:gap-5">
+                                
+                                <p class="paragraph p2 text-titanium xl:block xs:hidden">Events</p>
+                                <p class="paragraph p2 text-titanium xl:block xs:hidden">News</p>
+                                <p class="paragraph p2 text-titanium xl:block xs:hidden">Academic</p>
+                                <p class="paragraph p2 text-titanium xl:block xs:hidden">Ceremonies</p>
+                                <p class="paragraph p2 text-titanium xl:block xs:hidden">Administrative</p>
+
+                                
+                                <select class="rounded-[40px] flex xs:flex-col xs:msu-drop-white-shadow xs:ml-[14px] xs:w-[181px]  text-white-pure xs:px-[9px] xs:py-[9px]  gap-5 xl:hidden xs:block">
+                                    
+                                    <option class="paragraph p2 text-black-pure">Events</option>
+                                    <option class="paragraph p2 text-black-pure">News</option>
+                                    <option class="paragraph p2 text-black-pure">Academic</option>
+                                    <option class="paragraph p2 text-black-pure">Ceremonies</option>
+                                    <option class="paragraph p2 text-black-pure">Administrative</option>
+                                </select>
+
                             </div>
                         </div>
-                        <div class="flex flex-col min-w-max absolute bottom-0">
+                        
+                        <div class="flex xl:flex-col xs:flex-col xl:gap-[30px] relative  xs:ml-[50px]">
+                            <p class="paragraph p1 text-white-pure xl:text-left xs:text-center xs:mb-[7px] ">Date</p>
+                            <div class="flex flex-col gap-5">
+                                <p class="paragraph p2 text-titanium xl:block xs:hidden">2024</p>
+                                <p class="paragraph p2 text-titanium xl:block xs:hidden">2023</p>
+                                <p class="paragraph p2 text-titanium xl:block xs:hidden">2022</p>
+                                <p class="paragraph p2 text-titanium xl:block xs:hidden">2021</p>
+                                <p class="paragraph p2 text-titanium xl:block xs:hidden">2020</p>
+
+
+                                <select class="rounded-[40px] flex xs:flex-col xs:msu-drop-white-shadow xs:ml-[14px] xs:w-[120px]  text-white-pure xs:px-[9px] xs:py-[9px]  gap-5 xl:hidden xs:block">
+                                    
+                                    <option class="paragraph p2 text-black-pure">10/11/24</option>
+                                    <option class="paragraph p2 text-black-pure">10/11/2023</option>
+                                    <option class="paragraph p2 text-black-pure">10/11/2022</option>
+                                    <option class="paragraph p2 text-black-pure">10/11/2021</option>
+                                    <option class="paragraph p2 text-black-pure">10/11/2020</option>
+                                </select>
+
+                                <div class="flex flex-col xl:gap-5 xl:ml-[10px]">
+                                    <p class="paragraph p2 text-titanium xl:block xs:hidden">December</p>
+                                    <p class="paragraph p2 text-titanium xl:block xs:hidden">November</p>
+                                    <p class="paragraph p2 text-titanium xl:block xs:hidden">October</p>
+                                    <p class="paragraph p2 text-titanium xl:block xs:hidden">September</p>
+                                    <p class="paragraph p2 text-titanium xl:block xs:hidden">August</p>
+                                    <p class="paragraph p2 text-titanium xl:block xs:hidden">July</p>
+                                    <p class="paragraph p2 text-titanium xl:block xs:hidden">June</p>
+                                </div>
+
+                                
+                                
+                            </div>
+                        </div>
+                        <div class="flex flex-col min-w-max  bottom-0 xl:block xs:hidden">
                             <p class="paragraph p2 text-titanium">Can’t see what you’re looking for?</p>
                             <button class="paragraph p2 text-white-pure w-full border py-[10px] mt-[10px] rounded-[40px]">Search</button>
                         </div>
                     </div>
-                    <div class="flex flex-col ml-[235px]">
+                    <div class="flex xl:flex-col xl:ml-[235px]  xs:flex-col xs:mx-[20px] xl:gap-[32px] xs:gap-[31px] xs:mt-[49px]">
                         <div class="flex">
-                            <img src="/images/article-blank-1.png" alt="" class="h-[120px] object-cover object-center" />
+                            <img src="/images/article-blank-1.png" alt="" class="xl:h-[120px] xs:h-[136px] object-cover object-center" />
                             <div class="flex flex-col ml-[22px]">
                                 <h5 class="headings h5 max-w-[599px]">Sample title search of a document, article</h5>
                                 <p class="paragraph p2 text-silver max-w-[599px] mt-[10px]">Lorem ipsum dolor sit amet consectetur. Ac sem cursus facilisis facilisis orci erat ut. Pulvinar consectetur quisque sollicitudin morbi feugiat. Elementum nisl quis rhoncus cras neque et pulvinar id.</p>
@@ -102,8 +146,8 @@ const currentPath = Astro.url.pathname;
                                 </div>
                             </div>
                         </div>
-                        <div class="flex mt-[32px]">
-                            <img src="/images/article-blank-1.png" alt="" class="h-[120px] object-cover object-center" />
+                        <div class="flex">
+                            <img src="/images/article-blank-1.png" alt="" class="xl:h-[120px] xs:h-[136px] object-cover object-center" />
                             <div class="flex flex-col ml-[22px]">
                                 <h5 class="headings h5 max-w-[599px]">Sample title search of a document, article</h5>
                                 <p class="paragraph p2 text-silver max-w-[599px] mt-[10px]">Lorem ipsum dolor sit amet consectetur. Ac sem cursus facilisis facilisis orci erat ut. Pulvinar consectetur quisque sollicitudin morbi feugiat. Elementum nisl quis rhoncus cras neque et pulvinar id.</p>
@@ -113,8 +157,8 @@ const currentPath = Astro.url.pathname;
                                 </div>
                             </div>
                         </div>
-                        <div class="flex mt-[32px]">
-                            <img src="/images/article-blank-1.png" alt="" class="h-[120px] object-cover object-center" />
+                        <div class="flex">
+                            <img src="/images/article-blank-1.png" alt="" class="xl:h-[120px] xs:h-[136px] object-cover object-center" />
                             <div class="flex flex-col ml-[22px]">
                                 <h5 class="headings h5 max-w-[599px]">Sample title search of a document, article</h5>
                                 <p class="paragraph p2 text-silver max-w-[599px] mt-[10px]">Lorem ipsum dolor sit amet consectetur. Ac sem cursus facilisis facilisis orci erat ut. Pulvinar consectetur quisque sollicitudin morbi feugiat. Elementum nisl quis rhoncus cras neque et pulvinar id.</p>
@@ -124,8 +168,8 @@ const currentPath = Astro.url.pathname;
                                 </div>
                             </div>
                         </div>
-                        <div class="flex mt-[32px]">
-                            <img src="/images/article-blank-1.png" alt="" class="h-[120px] object-cover object-center" />
+                        <div class="flex">
+                            <img src="/images/article-blank-1.png" alt="" class="xl:h-[120px] xs:h-[136px] object-cover object-center" />
                             <div class="flex flex-col ml-[22px]">
                                 <h5 class="headings h5 max-w-[599px]">Sample title search of a document, article</h5>
                                 <p class="paragraph p2 text-silver max-w-[599px] mt-[10px]">Lorem ipsum dolor sit amet consectetur. Ac sem cursus facilisis facilisis orci erat ut. Pulvinar consectetur quisque sollicitudin morbi feugiat. Elementum nisl quis rhoncus cras neque et pulvinar id.</p>
@@ -135,8 +179,8 @@ const currentPath = Astro.url.pathname;
                                 </div>
                             </div>
                         </div>
-                        <div class="flex mt-[32px]">
-                            <img src="/images/article-blank-1.png" alt="" class="h-[120px] object-cover object-center" />
+                        <div class="flex">
+                            <img src="/images/article-blank-1.png" alt="" class="xl:h-[120px] xs:h-[136px] object-cover object-center" />
                             <div class="flex flex-col ml-[22px]">
                                 <h5 class="headings h5 max-w-[599px]">Sample title search of a document, article</h5>
                                 <p class="paragraph p2 text-silver max-w-[599px] mt-[10px]">Lorem ipsum dolor sit amet consectetur. Ac sem cursus facilisis facilisis orci erat ut. Pulvinar consectetur quisque sollicitudin morbi feugiat. Elementum nisl quis rhoncus cras neque et pulvinar id.</p>
@@ -146,8 +190,8 @@ const currentPath = Astro.url.pathname;
                                 </div>
                             </div>
                         </div>
-                        <div class="flex mt-[32px]">
-                            <img src="/images/article-blank-1.png" alt="" class="h-[120px] object-cover object-center" />
+                        <div class="flex">
+                            <img src="/images/article-blank-1.png" alt="" class="xl:h-[120px] xs:h-[136px] object-cover object-center" />
                             <div class="flex flex-col ml-[22px]">
                                 <h5 class="headings h5 max-w-[599px]">Sample title search of a document, article</h5>
                                 <p class="paragraph p2 text-silver max-w-[599px] mt-[10px]">Lorem ipsum dolor sit amet consectetur. Ac sem cursus facilisis facilisis orci erat ut. Pulvinar consectetur quisque sollicitudin morbi feugiat. Elementum nisl quis rhoncus cras neque et pulvinar id.</p>
@@ -157,8 +201,8 @@ const currentPath = Astro.url.pathname;
                                 </div>
                             </div>
                         </div>
-                        <div class="flex mt-[32px]">
-                            <img src="/images/article-blank-1.png" alt="" class="h-[120px] object-cover object-center" />
+                        <div class="flex">
+                            <img src="/images/article-blank-1.png" alt="" class="xl:h-[120px] xs:h-[136px] object-cover object-center" />
                             <div class="flex flex-col ml-[22px]">
                                 <h5 class="headings h5 max-w-[599px]">Sample title search of a document, article</h5>
                                 <p class="paragraph p2 text-silver max-w-[599px] mt-[10px]">Lorem ipsum dolor sit amet consectetur. Ac sem cursus facilisis facilisis orci erat ut. Pulvinar consectetur quisque sollicitudin morbi feugiat. Elementum nisl quis rhoncus cras neque et pulvinar id.</p>
