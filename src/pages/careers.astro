@@ -1,0 +1,318 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from "../components/Navbar";
+import AcademicCalendar from "../components/AcademicCalendar.astro";
+import MainVideo from "../components/MainVideo.astro";
+import FooterNav from "../components/FooterNav.astro";
+import Footer from "../components/Footer.astro";
+import '../styles/css/global.css';
+
+const currentPath = Astro.url.pathname;
+---
+
+<Layout title="Welcome to Astro.">
+	<main>
+<!-- fold 01 - Header -->
+		<Navbar path={currentPath} client:visible />
+<!-- end fold 01 -->
+
+<!-- fold 02 -->
+		<div class="bg-msu-ocean text-center xl:px-[12.5%] xl:pt-[80px] xs:pt-[0px] xs:px-[3.85%] xl:pb-[68px] xs:pb-[48px]">
+            <div class="flex gap-[239px] ">
+
+                <div class="flex  w-[960px] ">
+
+                        <div class="flex flex-col gap-[60px] ">
+                            <div class="flex flex-col ">   
+                                    
+                                    <div class="flex relative xl:mt-0 xs:mt-[15px] xl:w-fit xs:w-full xl:mb-[30px] xs:mb-[20px]">
+                                        <input type="search" name="" value="Search for open positions" id=""
+                                             class="bg-transparent border xs:rounded-[20px] xl:rounded-[40px] xs:w-full xl:w-[960px]  xl:py-[25px] xs:py-[12px] pl-12 pr-4  text-white-pure" />
+                                        <img src="/images/search.png" alt="" class="absolute xl:top-[25px] xs:top-[12px] left-3 xl:hidden xs:block" />
+                                    </div>
+
+                            </div>
+
+                            
+                            <div class="flex flex-col xl:gap-[40px] xs:gap-[40px]">  
+                                <div class="flex flex-col gap-[10px]">
+                                    <h4 class="headings text-white-pure h4 mb-[10px] text-left">
+                                        Open positions
+                                    </h4> 
+                                    <div class="flex xl:gap-[30px] xs:gap-[20px] mb-[10px]">  
+                                        <p class="paragraph text-msu-crimson-ground p2 text-left ">
+                                            All
+                                        </p> 
+                                        <p class="paragraph text-titanium p2 text-left ">
+                                            Administrative
+                                        </p> 
+                                        <p class="paragraph text-titanium p2 text-left">
+                                            Academic
+                                        </p> 
+    
+                                    </div>
+                                    <div class="flex">
+                                        <p class="paragraph text-titanium p2 text-left">
+                                            3,691 results
+                                        </p> 
+                                    </div>
+                                </div>
+                                <!-- JOB 1 -->
+                                <div class="flex xl:flex-row xs:flex-col  xl:gap-[120px] xs:gap-[28px] ">   
+                                    
+                                    <div class="flex xl:flex-col xs:flex-col xl:gap-[20px] xs:gap-[20px] xl:w-full ">
+                                        <div class="flex gap-[20px] place-items-enter">
+                                            <div class="flex place-items-center xl:w-[475px]">
+                                                <h5 class="headings text-white-pure h5 text-left">
+                                                    <a href="/application">Professor III</a>
+                                                </h5> 
+                                            </div>
+                                        </div>
+                                        <div class="flex place-items-enter">
+                                            <div class="flex place-items-center xl:w-[475px]">
+                                                <p class="paragraph text-white-pure p2 text-left">
+                                                    Lorem ipsum dolor sit amet consectetur. Fermentum feugiat consectetur sit ultrices vitae suscipit aliquet tellus nulla. Consequat sed eu auctor feugiat mus. Sed rutrum et ultricies ac euismod ullamcorper.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="flex  gap-[20px]  xl:mt-[20px]">
+                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border rounded-[40px]">
+                                                Academic
+                                            </p> 
+                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border rounded-[40px]">
+                                                Urgent
+                                            </p> 
+                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border rounded-[40px]">
+                                                Full time
+                                            </p> 
+                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border rounded-[40px]">
+                                                CIAS
+                                            </p> 
+                                        </div>
+
+                        
+                                    </div>
+                                    
+                                    <div class="flex xl:flex-col place-items-center gap-[20px] ">
+                                        <div class="flex ">
+                                            <a href="/application" class="paragraph xl:p1 xs:p2 msu-blue-horizon text-white-pure xl:py-[14px] xs:py-[14px] xl:px-[109px] xs:px-[109px] rounded-[40px]">Apply</a>
+                                            
+                                        </div>
+                                        <div class="flex justify-center  xl:w-[475px]  xl:mt-[40px]">
+                                            <p class="paragraph text-titanium p2 text-left ">
+                                                Share job link
+                                            </p>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- JOB 2 -->
+                                <div class="flex xl:flex-row xs:flex-col  xl:gap-[120px] xs:gap-[28px] ">   
+                                    
+                                    <div class="flex xl:flex-col xs:flex-col xl:gap-[20px] xs:gap-[20px] xl:w-full ">
+                                        <div class="flex gap-[20px] place-items-enter">
+                                            <div class="flex place-items-center xl:w-[475px]">
+                                                <h5 class="headings text-white-pure h5 text-left">
+                                                    <a href="/application">Professor III</a>
+                                                </h5> 
+                                            </div>
+                                        </div>
+                                        <div class="flex place-items-enter">
+                                            <div class="flex place-items-center xl:w-[475px]">
+                                                <p class="paragraph text-white-pure p2 text-left">
+                                                    Lorem ipsum dolor sit amet consectetur. Fermentum feugiat consectetur sit ultrices vitae suscipit aliquet tellus nulla. Consequat sed eu auctor feugiat mus. Sed rutrum et ultricies ac euismod ullamcorper.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="flex  gap-[20px]  xl:mt-[20px]">
+                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border rounded-[40px]">
+                                                Academic
+                                            </p> 
+                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border rounded-[40px]">
+                                                Urgent
+                                            </p> 
+                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border rounded-[40px]">
+                                                Full time
+                                            </p> 
+                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border rounded-[40px]">
+                                                CIAS
+                                            </p> 
+                                        </div>
+
+                        
+                                    </div>
+                                    
+                                    <div class="flex xl:flex-col place-items-center gap-[20px] ">
+                                        <div class="flex ">
+                                            <a href="/application" class="paragraph xl:p1 xs:p2 msu-blue-horizon text-white-pure xl:py-[14px] xs:py-[14px] xl:px-[109px] xs:px-[109px] rounded-[40px]">Apply</a>
+                                            
+                                        </div>
+                                        <div class="flex justify-center  xl:w-[475px]  xl:mt-[40px]">
+                                            <p class="paragraph text-titanium p2 text-left ">
+                                                Share job link
+                                            </p>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- JOB 3 -->
+                                <div class="flex xl:flex-row xs:flex-col  xl:gap-[120px] xs:gap-[28px] ">   
+                                    
+                                    <div class="flex xl:flex-col xs:flex-col xl:gap-[20px] xs:gap-[20px] xl:w-full ">
+                                        <div class="flex gap-[20px] place-items-enter">
+                                            <div class="flex place-items-center xl:w-[475px]">
+                                                <h5 class="headings text-white-pure h5 text-left">
+                                                    <a href="/application">Professor III</a>
+                                                </h5> 
+                                            </div>
+                                        </div>
+                                        <div class="flex place-items-enter">
+                                            <div class="flex place-items-center xl:w-[475px]">
+                                                <p class="paragraph text-white-pure p2 text-left">
+                                                    Lorem ipsum dolor sit amet consectetur. Fermentum feugiat consectetur sit ultrices vitae suscipit aliquet tellus nulla. Consequat sed eu auctor feugiat mus. Sed rutrum et ultricies ac euismod ullamcorper.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="flex  gap-[20px]  xl:mt-[20px]">
+                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border rounded-[40px]">
+                                                Academic
+                                            </p> 
+                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border rounded-[40px]">
+                                                Urgent
+                                            </p> 
+                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border rounded-[40px]">
+                                                Full time
+                                            </p> 
+                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border rounded-[40px]">
+                                                CIAS
+                                            </p> 
+                                        </div>
+
+                        
+                                    </div>
+                                    
+                                    <div class="flex xl:flex-col place-items-center gap-[20px] ">
+                                        <div class="flex ">
+                                            <a href="/application" class="paragraph xl:p1 xs:p2 msu-blue-horizon text-white-pure xl:py-[14px] xs:py-[14px] xl:px-[109px] xs:px-[109px] rounded-[40px]">Apply</a>
+                                            
+                                        </div>
+                                        <div class="flex justify-center  xl:w-[475px]  xl:mt-[40px]">
+                                            <p class="paragraph text-titanium p2 text-left ">
+                                                Share job link
+                                            </p>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="flex">
+                                <p class="paragraph text-titanium p2 mr-[30px] text-left">
+                                    Page
+                                </p> 
+                                <p class="paragraph text-msu-crimson-ground p2 mr-[20px] text-left">
+                                    1
+                                </p> 
+                                <p class="paragraph text-titanium p2 mr-[20px] text-left">
+                                    2
+                                </p> 
+                                <p class="paragraph text-titanium p2 mr-[20px] text-left">
+                                    3
+                                </p> 
+                                <p class="paragraph text-titanium p2 mr-[20px] text-left">
+                                    4
+                                </p> 
+                                <p class="paragraph text-titanium p2 mr-[20px] text-left">
+                                    5
+                                </p> 
+                                <p class="paragraph text-titanium p2 mr-[20px] text-left">
+                                    6
+                                </p> 
+                                <p class="paragraph text-titanium p2 mr-[20px] text-left">
+                                    7
+                                </p> 
+                                <p class="paragraph text-titanium p2 mr-[20px] text-left">
+                                    8
+                                </p>
+                            </div>
+                            
+                        </div>
+
+                </div>
+
+                <div class="flex flex-col xl:block xs:hidden xl:pt-[260px]">
+                    <!-- Classification -->
+                    <p class="paragraph text-white-pure p1  mb-[30px] text-left">
+                        Classification
+                    </p>
+                    <p class="paragraph text-white-pure p2 mb-[20px] text-left">
+                        Academic
+                    </p>
+                    <p class="paragraph text-white-pure p2 text-left">
+                        Administrative
+                    </p>
+
+                    <!-- Position -->
+                    <p class="paragraph text-white-pure p1 mt-[80px] mb-[30px] text-left">
+                        Position
+                    </p>
+                    <p class="paragraph text-white-pure p2 mb-[20px] text-left">
+                        Full time
+                    </p>
+                    <p class="paragraph text-white-pure p2 text-left">
+                        Part time
+                    </p>
+
+                    <!-- Office -->
+                    <p class="paragraph text-white-pure p1 mt-[80px] mb-[30px] text-left">
+                        Office
+                    </p>
+                    <p class="paragraph text-white-pure p2 mb-[20px] text-left">
+                        Chancellorship
+                    </p>
+                    <p class="paragraph text-white-pure p2 mb-[20px] text-left">
+                        Vice-Chancellorship
+                    </p>
+                    <p class="paragraph text-white-pure p2 text-left">
+                        College
+                    </p>
+
+                    <!-- College -->
+                    <p class="paragraph text-white-pure p1 mt-[80px] mb-[30px] text-left">
+                        College
+                    </p>
+                    <p class="paragraph text-white-pure p2 mb-[20px] text-left">
+                        CAS
+                    </p>
+                    <p class="paragraph text-white-pure p2 mb-[20px] text-left">
+                        CIAS
+                    </p>
+                    <p class="paragraph text-white-pure p2 mb-[20px] text-left">
+                        COED
+                    </p>
+                    <p class="paragraph text-white-pure p2 mb-[20px] text-left">
+                        COF
+                    </p>
+                    <p class="paragraph text-white-pure p2 mb-[20px] text-left">
+                        IICT
+                    </p>
+                    <p class="paragraph text-white-pure p2 text-left">
+                        IOES
+                    </p>
+                </div>
+            </div>
+		</div>
+<!-- end fold 02 -->
+
+<!-- FooterNaV -->
+		<FooterNav path={currentPath} client:visible />
+<!-- end FooterNaV -->
+
+<!-- Footer -->
+		<Footer path={currentPath} client:visible />
+<!-- end Footer -->
+
+	</main>
+	
+</Layout>
+ 
