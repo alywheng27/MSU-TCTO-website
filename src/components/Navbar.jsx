@@ -34,11 +34,11 @@ const Navbar = (props) => {
 				: (path == '/campus') ? 'hero-campus-img xl:h-[440px] xs:h-[164px]'
 				: (path == '/academic-calendar') ? ''
 				: (path == '/search') ? ''
-				: (path == '/articles') ? 'hero-main-img pb-[980px]'
-				: (path == '/article-topic') ? ''
-				: (path == '/annual-reports') ? 'hero-main-img pb-[980px]'
-				: (path == '/gazette') ? 'hero-main-img pb-[980px]'
-				: 'hero-main-img xl:h-[980px] xs:h-[770px]'
+				: (path == '/articles') ? 'hero-main-img xl:h-[980px] xs:h-[770px]'
+				: (path == '/annual-reports') ? 'hero-main-img xl:h-[980px] xs:h-[770px]'
+				: (path == '/gazette') ? 'hero-main-img xl:h-[980px] xs:h-[770px]'
+				: (path == '/') ? 'hero-main-img xl:h-[980px] xs:h-[770px]'
+				: ''
 
   return (
     <>
@@ -53,7 +53,7 @@ const Navbar = (props) => {
 			<div>
 				<p className="paragraph xl:p2 xl:block xs:hidden pb-1">+63 910 291 0605</p>
 				<p className="paragraph xl:p2 xl:block xs:hidden">admissions@msutawi-tawi.edu.ph</p>
-				<button className="headings h6 xl:hidden xs:block" onClick={toggleNavbar}>MENU</button>
+				<button className="headings h5 xl:hidden xs:block" onClick={toggleNavbar}>MENU</button>
 			</div>
 		</div>
         <div className={bg + ` relative`}>
@@ -90,7 +90,8 @@ const Navbar = (props) => {
 			: (path == '/publications') ? <HeroPublicationHeading />
 			: (path == '/campus') ? <HeroCampusHeading />
 			: (path == '/academic-calendar' || path == '/articles' || path == '/annual-reports' || path == '/gazette' || path == '/search' || path == '/article-topic') ? ''
-			: <HeroMainHeading />
+			: (path == '/') ? <HeroMainHeading />
+			: ''
 		}
     </>
   );

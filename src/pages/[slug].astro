@@ -7,35 +7,57 @@ import Footer from "../components/Footer.astro";
 import '../styles/css/global.css';
 
 const currentPath = Astro.url.pathname;
+
+import { urlForImage } from '../api/api';
+import { getWordMonth } from '../js/date';
+
+import { getArticle } from '../api/api';
+const articles = await getArticle();
+
+export async function getStaticPaths() {
+
+    const articles = await getArticle();
+
+    return articles.map((article: { 
+        slug: {
+            current: unknown;
+        }; 
+    }) => ({
+        params: {
+            slug: article.slug.current,
+        },
+        props: {
+            article
+        }
+    }));
+}
 ---
 
 <Layout title="Welcome to Astro.">
 	<main>
 		<Navbar path={currentPath} client:visible />
         <div class='bg-msu-deep-ocean h-[40px] xl:px-[12.5%] xs:px-[3.85%] xl:block xs:hidden'>
-            <p class="paragraph p2 py-[10px] text-titanium xl:block xs:hidden"><a href="/home">Home</a> / <a href="/publications">Publications</a>  / Articles / Article Title </p>
+            <p class="paragraph p2 py-[10px] text-titanium xl:block xs:hidden"><a href="/home">Home</a> / <a href="/publications">Publications</a>  / Articles / { Astro.props.article.title } </p>
         </div>
 
         <div class="flex bg-msu-deep-ocean w-full  flex-col xl:pt-[40px]">
             <div class="flex flex-col item-center">
-                <h3 class="headings text-white-pure xl:h3 xs:h5 xl:px-[482px] xs:px-[34px] pb-[20px]  text-center">CSM Produces New Scientist of the ERA (Article Title)</h3>
+                <h3 class="headings text-white-pure xl:h3 xs:h5 xl:px-[482px] xs:px-[34px] pb-[20px]  text-center">{ Astro.props.article.title }</h3>
                 <div class="xs:px-[44px] xl:hidden xs:block"><hr></div>
                 <div class="flex xl:gap-[80px] justify-center  ">
                     <p class="paragraph text-white-pure p2 pb-[40px] xl:block xs:hidden">
-                        By: Rey Christian M. Villarin
+                        By: { Astro.props.article.author.name }
                     </p>
                     <p class="paragraph text-white-pure p2 pb-[40px] xl:block xs:hidden">
-                        Published: September 30, 2023
+                        Published: { getWordMonth(Astro.props.article.publishedAt) }
                     </p>
                 </div>
-
-                
             </div>
             <div class="flex xl:justify-start xs:justify-center bg-msu-deep-ocean  xl:px-[12.5%]">
-                <p class="paragraph xl:p2 xs:p3 xl:py-[10px] xs:mt-[9px] xs:mb-[9px]  text-titanium"><a href="/publications">Sciences</a>  / CMS / Academics </p>
+                <p class="paragraph xl:p2 xs:p3 xl:py-[10px] xs:mt-[9px] xs:mb-[9px]  text-titanium"><a href="/publications">{ Astro.props.article.articleSubject.subject }</a>  / { Astro.props.article.college.college } / { Astro.props.article.topic.topic } </p>
             </div>
             <div class="flex flex-col xl:px-[240px] xs:px-[15px] ">
-                <img src="/images/budbongao.png" alt="" class="xl:h-full" />
+                <img src={ urlForImage(Astro.props.article.mainImage.asset.url).fit('crop').url() } alt="" class="xl:h-full" />
 
                 <div class="flex xs:gap-[120px] xs:mt-[11px] xl:mt-[0px] xs:mb-[22px] xl:mb-[0px] justify-center  xl:hidden">
                     <p class="paragraph text-titanium xs:p3   xl:hidden xs:block">
@@ -48,63 +70,18 @@ const currentPath = Astro.url.pathname;
 
                 <div class="flex xl:flex-row xs:flex-col xl:gap-[120px] xl:mt-[42px] mb-[95px]">
                     <div class="xl:w-[840px] xs:mb-[30px]">
-                        <p class="paragraph xl:p2 xs:p3 text-silver">
-                            
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore 
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        
-                            
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore 
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                        
-                        <br>
-                        <br>
-                        
-                            
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore 
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                        
-                        <br>
-                        <img src="/images/budbongao.png" alt="" class="xl:h-full xs:px-[40px] xs:py-[15px] xl:hidden" />
-                        <br>
-                        
-                            
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore 
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                        
-                        <br>
-                        <br>
-                        
-                            
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore 
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo 
-                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                    </p>
+                        {
+                            // Astro.props.article.body.map((con) => (
+                            //     <>{ con.children.text }</>
+                            // ))
+                            Astro.props.article.body.map((con) => (
+                                <>{ con.children.map((child: {
+                                    text: unknown;
+                                }) => (
+                                    <p class="paragraph xl:p2 xs:p3 mb-5 text-silver">{child.text}</p>
+                                )) }</>
+                            ))
+                        }
                     </div>
                     <div class="border xl:block xs:hidden">
                     

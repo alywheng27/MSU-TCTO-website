@@ -9,9 +9,9 @@ import '../styles/css/global.css';
 
 const currentPath = Astro.url.pathname;
 
-import { getHero } from '../api';
-import type { createImageBuilder } from 'astro-sanity';
-const hero = await getHero();
+import { getArticle } from '../api/api';
+import { urlForImage } from '../api/api';
+const articles = await getArticle();
 ---
 
 <Layout title="Welcome to Astro.">
