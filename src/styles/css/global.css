@@ -171,6 +171,12 @@
     background: rgba(0, 0, 0, 0);
 }
 
+/* Color Alpha */
+.msu-blue-horizon{
+    border-radius: 40px;
+    background: var(--colors-alpha-msu-blue-horizon, #122B58);
+}
+
 .hero-main-img {
     /* background: linear-gradient(0deg, rgba(16, 31, 54, 0.4), rgba(16, 31, 54, 0.4)), url('../../../public/images/Sitangkai.png'); */
     background: url('../../../public/images/Sitangkai.png');
