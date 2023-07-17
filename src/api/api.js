@@ -17,7 +17,8 @@ export async function getArticle() {
     body[]{
       children[]{
         text
-      }
+      },
+      asset->{url},
     },
     mainImage{
       asset->,
@@ -28,6 +29,7 @@ export async function getArticle() {
     articleSubject->{subject},
     topic->{topic},
     publishedAt,
+    featured,
     _createdAt,
   }`;
 
@@ -46,7 +48,8 @@ export async function getSingleLatestArticle() {
     body[]{
       children[]{
         text
-      }
+      },
+      asset->{url},
     },
     mainImage{
       asset->,
@@ -57,6 +60,7 @@ export async function getSingleLatestArticle() {
     articleSubject->{subject},
     topic->{topic},
     publishedAt,
+    featured,
     _createdAt,
   }`;
 
@@ -75,7 +79,8 @@ export async function getSingleOldestArticle() {
     body[]{
       children[]{
         text
-      }
+      },
+      asset->{url},
     },
     mainImage{
       asset->,
@@ -86,6 +91,7 @@ export async function getSingleOldestArticle() {
     articleSubject->{subject},
     topic->{topic},
     publishedAt,
+    featured,
     _createdAt,
   }`;
 
@@ -104,7 +110,8 @@ export async function get4LatestArticles() {
     body[]{
       children[]{
         text
-      }
+      },
+      asset->{url},
     },
     mainImage{
       asset->,
@@ -115,9 +122,86 @@ export async function get4LatestArticles() {
     articleSubject->{subject},
     topic->{topic},
     publishedAt,
+    featured,
     _createdAt,
   }`;
 
   const fourLatestArticles= await useSanityClient().fetch(query);
   return fourLatestArticles;
+}
+
+export async function get3LatestArticle() {
+  const query = groq`*[_type == "article"] | order(_createdAt desc)[0..2]{
+    title,
+    slug{
+      current
+    },
+    author->{name},
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url},
+    },
+    mainImage{
+      asset->,
+      crop,
+      hotspot,
+    },
+    college->{college},
+    articleSubject->{subject},
+    topic->{topic},
+    publishedAt,
+    featured,
+    _createdAt,
+  }`;
+
+  const threeLatestArticles = await useSanityClient().fetch(query);
+  return threeLatestArticles;
+}
+
+export async function getLatestFeaturedArticle() {
+  const query = groq`*[_type == "article" && featured == true] | order(_createdAt asc)[0] {
+    title,
+    slug{
+      current
+    },
+    author->{name},
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url},
+    },
+    mainImage{
+      asset->,
+      crop,
+      hotspot,
+    },
+    college->{college},
+    articleSubject->{subject},
+    topic->{topic},
+    publishedAt,
+    featured,
+    _createdAt,
+  }`;
+
+  const latestFeaturedArticle = await useSanityClient().fetch(query);
+  return latestFeaturedArticle;
+}
+
+export async function get4UpcomingEvents() {
+  const query = groq`*[_type == "calendar" && date >= now()] | order(date asc)[0..3] {
+    title,
+    date,
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url},
+    },
+  }`;
+
+  const fourUpcomingEvents = await useSanityClient().fetch(query);
+  return fourUpcomingEvents;
 }

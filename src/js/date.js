@@ -1,3 +1,8 @@
+export function getYear(date) {
+    var year = date.substr(0, 4);
+    
+    return year;
+}
 
 export function getWordMonth(date) { 
     // 0000-00-00
@@ -31,6 +36,15 @@ export function getWordMonth(date) {
         month = 'December';
     }
 
+    return month;
+}
+
+export function getDay(date) {
+    // 0000-00-00
+    var year = date.substr(0, 4);
+    var month = date.substr(5, 2);
+    var day = date.substr(8, 2);
+
     if (day == '01'){
         day = '1';
     }else if (day == '02'){
@@ -51,5 +65,5 @@ export function getWordMonth(date) {
         day = '9'
     }
 
-    return month + ' ' + day + ', ' + year;
+    return day;
 }

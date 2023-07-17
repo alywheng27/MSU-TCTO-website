@@ -9,9 +9,18 @@ import '../styles/css/global.css';
 
 const currentPath = Astro.url.pathname;
 
-import { getArticle } from '../api/api';
 import { urlForImage } from '../api/api';
-const articles = await getArticle();
+import { getYear } from '../js/date';
+import { getWordMonth } from '../js/date';
+import { getDay } from '../js/date';
+
+import { get3LatestArticle } from '../api/api';
+import { getLatestFeaturedArticle } from '../api/api';
+import { get4UpcomingEvents } from '../api/api';
+
+const threeLatestArticles = await get3LatestArticle();
+const latestFeaturedArticle = await getLatestFeaturedArticle();
+const fourUpcomingEvents = await get4UpcomingEvents();
 ---
 
 <Layout title="Welcome to Astro.">
@@ -19,84 +28,91 @@ const articles = await getArticle();
 		<Navbar path={currentPath} client:visible />
 		<div class="flex xl:flex-row xs:flex-col justify-center xl:bottom-[80px] xl:h-[640px] xl:mx-[12.5%] xs:mx-0 relative">
 			<div class="bg-msu-deep-ocean flex xl:flex-row xs:flex-col justify-center xl:pr-5">
-				<div>
-					<img src="/images/main-article.png" alt="" class="xl:h-[720px] xs:h-[480px] xs:w-full object-cover object-center" />
-					<div class="grid justify-center xl:absolute xl:top-[519px] xs:relative xl:px-10 xs:px-5 xl:pt-0 xs:pt-10">
-						<h4 class="headings xl:h4 xs:h5 max-w-[680px]">
-							Four decades of steadfast
-							Excellence in Marine Sciences
-						</h4>
-						<p class="paragraph p2 mt-5 text-titanium max-w-[680px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-					</div>
-				</div>
-				<div class="grid justify-center xl:mt-5 xs:mt-20 mx-5 xl:pb-0 xs:pb-20">
-					<div class="flex">
-						<img src="/images/article-img-1.png" alt="" class="xl:h-[200px] xs:h-[179px] object-cover object-center" />
-						<div class="ml-5">
-							<h5 class="headings xl:h5 xs:h6 xl:max-w-[220px] xs:max-w-[165px]">Article Long Title </h5>
-							<p class="paragraph p2 xl:max-w-[220px] xs:max-w-[165px] text-titanium xl:mt-[15px] xs:mt-[10px] max-h-[156px] overflow-clip">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+				{
+					<div>
+						<img src={ urlForImage(latestFeaturedArticle.mainImage.asset.url).url() } alt="" class="xl:w-[960px] xl:h-[720px] xs:h-[480px] xs:w-full object-cover object-center" />
+						<div class="grid justify-center xl:absolute xl:top-[519px] xs:relative xl:px-10 xs:px-5 xl:pt-0 xs:pt-10">
+							<a href="">
+								<h4 class="headings xl:h4 xs:h5 max-w-[680px]">
+									{ latestFeaturedArticle.title }
+								</h4>
+							</a>
+							<p class="paragraph p2 mt-5 text-titanium xl:max-w-[680px] xl:max-h-[60px] xs:max-h-[95px] overflow-hidden">
+								{ latestFeaturedArticle.body[0].children[0].text }
+							</p>
 						</div>
 					</div>
-					<div class="flex mt-10">
-						<img src="/images/article-img-1.png" alt="" class="xl:h-[200px] xs:h-[179px] object-cover object-center" />
-						<div class="ml-5">
-							<h5 class="headings xl:h5 xs:h6 xl:max-w-[220px] xs:max-w-[165px]">Article Long Title </h5>
-							<p class="paragraph p2 xl:max-w-[220px] xs:max-w-[165px] text-titanium xl:mt-[15px] xs:mt-[10px] max-h-[156px] overflow-clip">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-						</div>
-					</div>
-					<div class="flex mt-10">
-						<img src="/images/article-img-1.png" alt="" class="xl:h-[200px] xs:h-[179px] object-cover object-center" />
-						<div class="ml-5">
-							<h5 class="headings xl:h5 xs:h6 xl:max-w-[220px] xs:max-w-[165px]">Article Long Title </h5>
-							<p class="paragraph p2 xl:max-w-[220px] xs:max-w-[165px] text-titanium xl:mt-[15px] xs:mt-[10px] max-h-[156px] overflow-clip">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-						</div>
-					</div>
+				}
+				
+				<div class="grid justify-center xl:mt-[-20px] xs:mt-[40px] mx-5 xl:pb-0 xs:pb-20">
+					{
+						threeLatestArticles.map((article: {
+							title: unknown; 
+                            body: [
+                                {
+                                    children: [
+                                        {
+                                            text: unknown;
+                                        }
+                                    ]
+                                }
+                            ];
+                            mainImage: {
+                                asset: {
+                                    url: string
+                                };
+                            };
+                            slug: {
+                                current: unknown;
+                            };
+						}) => (
+							<div class="flex mt-10">
+								<img src={ urlForImage(article.mainImage.asset.url).url() } alt="" class="xl:h-[200px] xl:w-[200px] xs:h-[175px] xs:w-[175px] object-cover object-center" />
+								<div class="ml-5">
+									<a href={`/${article.slug.current}`}><h5 class="headings xl:h5 xs:h6 xl:max-w-[220px] xl:max-h-[48px] xs:max-w-[165px] xs:max-h-[29px] overflow-hidden">{ article.title }</h5></a>
+									<p class="paragraph p2 xl:max-w-[220px] xl:max-h-[141px] xs:max-w-[165px] xs:max-h-[122px] text-titanium xl:mt-[15px] xs:mt-[10px] max-h-[156px] overflow-hidden">
+										{ article.body[0].children[0].text }
+									</p>
+								</div>
+							</div>
+						))
+					}
 				</div>
 			</div>
 		</div>
 		<div class="bg-black-pure w-full xl:px-[12.5%] xs:px-[3.85%]">
 			<h5 class="headings h5 text-center xl:pt-[27px] xs:pt-[30px]">Upcoming Events</h5>
 			<div class="grid xl:grid-cols-4 md:grid-cols-2 xs:grid-cols-1 mt-[27px]">
-				<div class="bg-gradient-ocean flex xl:flex-col xs:flex-row xl:gap-0 xs:gap-[50px] p-10">
-					<div>
-						<p class="paragraph xl:p1 xs:p2 text-white-pure xl:mb-0 xs:mb-[10px]">June</p>
-						<h2 class="headings xl:h2 xs:h3">18</h2>
-					</div>
-					<div>
-						<p class="paragraph xl:p1 xs:p2 text-titanium xl:mt-[5px] xl:mb-0 xs:mb-[10px]">Event Title 2023</p>
-						<p class="paragraph p3 text-titanium xs:max-w-[233px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-					</div>
-				</div>
-				<div class="bg-gradient-ocean flex xl:flex-col xs:flex-row xl:gap-0 xs:gap-[50px] p-10">
-					<div>
-						<p class="paragraph xl:p1 xs:p2 text-white-pure xl:mb-0 xs:mb-[10px]">July</p>
-						<h2 class="headings xl:h2 xs:h3">03</h2>
-					</div>
-					<div>
-						<p class="paragraph xl:p1 xs:p2 text-titanium xl:mt-[5px] xl:mb-0 xs:mb-[10px]">Event Title 2023</p>
-						<p class="paragraph p3 text-titanium xs:max-w-[233px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-					</div>
-				</div>
-				<div class="bg-gradient-ocean flex xl:flex-col xs:flex-row xl:gap-0 xs:gap-[50px] p-10">
-					<div>
-						<p class="paragraph xl:p1 xs:p2 text-white-pure xl:mb-0 xs:mb-[10px]">August</p>
-						<h2 class="headings xl:h2 xs:h3">12</h2>
-					</div>
-					<div>
-						<p class="paragraph xl:p1 xs:p2 text-titanium xl:mt-[5px] xl:mb-0 xs:mb-[10px]">Event Title 2023</p>
-						<p class="paragraph p3 text-titanium xs:max-w-[233px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-					</div>
-				</div>
-				<div class="bg-gradient-ocean flex xl:flex-col xs:flex-row xl:gap-0 xs:gap-[50px] p-10">
-					<div>
-						<p class="paragraph xl:p1 xs:p2 text-white-pure xl:mb-0 xs:mb-[10px]">September</p>
-						<h2 class="headings xl:h2 xs:h3">16</h2>
-					</div>
-					<div>
-						<p class="paragraph xl:p1 xs:p2 text-titanium xl:mt-[5px] xl:mb-0 xs:mb-[10px]">Event Title 2023</p>
-						<p class="paragraph p3 text-titanium xs:max-w-[233px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-					</div>
-				</div>
+				{
+					fourUpcomingEvents.map((calendar: {
+						title: unknown;
+						date: unknown;
+						body: [
+							{
+								children: [
+									{
+										text: unknown;
+									}
+								]
+							}
+						];
+					}) => (
+						<div class="bg-gradient-ocean flex xl:flex-col xs:flex-row xl:gap-0 xs:gap-[50px] p-10">
+							<div>
+								<p class="paragraph xl:p1 xs:p2 text-white-pure xl:mb-0 xs:mb-[10px]">{ getWordMonth(calendar.date) }</p>
+								<h2 class="headings xl:h2 xs:h3">{ getDay(calendar.date) }</h2>
+							</div>
+							<div>
+								<p class="paragraph xl:p1 xs:p2 text-titanium xl:mt-[5px] xl:mb-0 xs:mb-[10px]">{ calendar.title }</p>
+								<p class="paragraph p3 text-titanium xl:max-h-[48px] xs:max-h-[60px] overflow-hidden">
+									{
+										calendar.body[0].children[0].text
+									}
+								</p>
+							</div>
+						</div>
+					))
+				}
 			</div>
 		</div>
 		<div class="xl:campuslife-bg-img xs:bg-transparent">

@@ -9,7 +9,9 @@ import '../styles/css/global.css';
 const currentPath = Astro.url.pathname;
 
 import { urlForImage } from '../api/api';
+import { getYear } from '../js/date';
 import { getWordMonth } from '../js/date';
+import { getDay } from '../js/date';
 
 import { getArticle } from '../api/api';
 const articles = await getArticle();
@@ -49,7 +51,7 @@ export async function getStaticPaths() {
                         By: { Astro.props.article.author.name }
                     </p>
                     <p class="paragraph text-white-pure p2 pb-[40px] xl:block xs:hidden">
-                        Published: { getWordMonth(Astro.props.article.publishedAt) }
+                        Published: { getWordMonth(Astro.props.article.publishedAt) } { getDay(Astro.props.article.publishedAt) }, { getYear(Astro.props.article.publishedAt) }
                     </p>
                 </div>
             </div>
@@ -61,20 +63,24 @@ export async function getStaticPaths() {
 
                 <div class="flex xs:gap-[120px] xs:mt-[11px] xl:mt-[0px] xs:mb-[22px] xl:mb-[0px] justify-center  xl:hidden">
                     <p class="paragraph text-titanium xs:p3   xl:hidden xs:block">
-                        By: Rey Christian M. Villarin
+                        By: { Astro.props.article.author.name }
                     </p>
                     <p class="paragraph text-titanium xs:p3 xl:hidden xs:block">
-                        Published: September 30, 2023
+                        Published: { getWordMonth(Astro.props.article.publishedAt) } { getDay(Astro.props.article.publishedAt) }, { getYear(Astro.props.article.publishedAt) }
                     </p>
                 </div>
 
                 <div class="flex xl:flex-row xs:flex-col xl:gap-[120px] xl:mt-[42px] mb-[95px]">
                     <div class="xl:w-[840px] xs:mb-[30px]">
                         {
-                            // Astro.props.article.body.map((con) => (
-                            //     <>{ con.children.text }</>
-                            // ))
-                            Astro.props.article.body.map((con) => (
+                            Astro.props.article.body.filter((con) => {
+                                if (con.children == null || con.children == undefined) {
+                                    return false;
+                                }else {
+                                    return true;
+                                }
+                            })
+                            .map((con) => (
                                 <>{ con.children.map((child: {
                                     text: unknown;
                                 }) => (
@@ -82,10 +88,24 @@ export async function getStaticPaths() {
                                 )) }</>
                             ))
                         }
+                        <!-- {
+                            Astro.props.article.body.filter((con) => {
+                                if (con.asset == null || con.asset == undefined) {
+                                    return false;
+                                }else {
+                                    return true;
+                                }
+                            })
+                            .map((con: {
+                                asset: {
+                                    url: string
+                                };
+                            }) => {
+                                <p class="paragraph xl:p2 xs:p3 mb-5 text-silver">{ con.asset.url }</p>
+                            })
+                        } -->
                     </div>
-                    <div class="border xl:block xs:hidden">
-                    
-                    </div>
+                    <div class="border xl:block xs:hidden"></div>
                     <div class="flex xl:flex-col xs:flex-col xl:gap-[20px] xs:gap-[20px] xl:w-[363px] xs:justify-middle ">
                         
                         <div class="flex xl:gap-[53px] xs:gap-[53px] justify-center ">
