@@ -7,6 +7,18 @@ import '../styles/css/global.css';
 import AcademicCalendar from "../components/AcademicCalendar.astro";
 
 const currentPath = Astro.url.pathname;
+
+import { urlForImage } from '../api/api';
+
+import { getYear } from '../js/date';
+import { get3LettersMonth } from '../js/date';
+import { getDay } from '../js/date';
+
+import { get3LatestNews } from '../api/api';
+import { get3LatestArticle } from '../api/api';
+
+const threeLatestNews = await get3LatestNews();
+const threeLatestArticles = await get3LatestArticle();
 ---
 
 <Layout title="Welcome to Astro.">
@@ -16,53 +28,47 @@ const currentPath = Astro.url.pathname;
             <h3 class="headings xl:h3 xs:h5 text-msu-gold">Top News</h3>
 
             <div class="flex flex-col items-center xl:mt-[40px] xl:px-[12.5%] xs:px-[15px] xs:gap-[30px]">
-                
-                <div class="flex xl:flex-row xs:flex-col xs:gap-[10px] ">
-                    <div class="flex xl:flex-col xs:flex-row  xs:gap-[10px] w-[120px]">
-                        <h4 class="headings xl:h4 xs:h6">Jan</h4>
-                        <h4 class="headings xl:h4 xs:h6">24</h4>
-                    </div>
-                    <div class="flex">
-                        <div class="xl:h-[360px] xs:h-[136px]">
-                            <img src="/images/gray.png" alt="" class=" object-cover object-center" />
+                {
+                    threeLatestNews.map((article: {
+                        title: unknown; 
+                        body: [
+                            {
+                                children: [
+                                    {
+                                        text: unknown;
+                                    }
+                                ]
+                            }
+                        ];
+                        mainImage: {
+                            asset: {
+                                url: string
+                            };
+                        };
+                        slug: {
+                            current: unknown;
+                        };
+                        publishedAt: unknown;
+                    }) => (
+                        <div class="flex xl:flex-row xs:flex-col xs:gap-[10px] ">
+                            <div class="flex xl:flex-col xs:flex-row  xs:gap-[10px] w-[120px]">
+                                <h4 class="headings xl:h4 xs:h6">{ get3LettersMonth(article.publishedAt) }</h4>
+                                <h4 class="headings xl:h4 xs:h6">{ getDay(article.publishedAt) }</h4>
+                            </div>
+                            <div class="flex">
+                                <div class="xl:h-[360px] xs:h-[136px]">
+                                    <img src={ urlForImage(article.mainImage.asset.url).width(580).height(360).fit('crop').crop('center').url() } alt="" class="xl:max-h-[360px] object-cover object-center" />
+                                </div>
+                                <div class="ml-5">
+                                    <a href={`/${article.slug.current}`}><h4 class="headings xl:h4 xs:h6 xl:max-w-[720px] xl:max-h-[86px] overflow-hidden">{ article.title }</h4></a>
+                                    <p class="paragraph xl:p1 xs:p3 max-w-[720px] xl:max-h-[162px] xs:max-h-[50px] overflow-hidden text-titanium mt-[10px]">
+                                        { article.body[0].children[0].text }
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="ml-5">
-                            <h4 class="headings xl:h4 xs:h6 max-w-[720px]">Update dates for next accreditation for the school</h4>
-                            <p class="paragraph xl:p1 xs:p3 max-w-[720px] text-titanium mt-5">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex xl:flex-row xs:flex-col xs:gap-[10px]">
-                    <div class="flex xl:flex-col xs:flex-row  xs:gap-[10px] w-[120px]">
-                        <h4 class="headings xl:h4 xs:h6">Jan</h4>
-                        <h4 class="headings xl:h4 xs:h6">24</h4>
-                    </div>
-                    <div class="flex">
-                        <div class="xl:h-[360px] xs:h-[136px]">
-                            <img src="/images/gray.png" alt="" class=" object-cover object-center" />
-                        </div>
-                        <div class="ml-5">
-                            <h4 class="headings xl:h4 xs:h6 max-w-[720px]">Update dates for next accreditation for the school</h4>
-                            <p class="paragraph xl:p1 xs:p3 max-w-[720px] text-titanium mt-5">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex xl:flex-row xs:flex-col xs:gap-[10px]">
-                    <div class="flex xl:flex-col xs:flex-row  xs:gap-[10px] w-[120px]">
-                        <h4 class="headings xl:h4 xs:h6">Jan</h4>
-                        <h4 class="headings xl:h4 xs:h6">24</h4>
-                    </div>
-                    <div class="flex">
-                        <div class="xl:h-[360px] xs:h-[136px]">
-                            <img src="/images/gray.png" alt="" class=" object-cover object-center" />
-                        </div>
-                        <div class="ml-5">
-                            <h4 class="headings xl:h4 xs:h6 max-w-[720px]">Update dates for next accreditation for the school</h4>
-                            <p class="paragraph xl:p1 xs:p3 max-w-[720px] text-titanium mt-5">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                        </div>
-                    </div>
-                </div>
-
+                    ))
+                }
             </div>
         </div>
 
@@ -70,25 +76,49 @@ const currentPath = Astro.url.pathname;
             <h3 class="headings xl:h3 xs:h5 text-msu-gold ">Article</h3>
 
             <div class="flex flex-col items-center xl:mt-[40px] xl:px-[12.5%] xs:px-[15px] xs:gap-[30px]">
-
                 <div class="flex mt-10">
-                    <div id="" class="flex flex-col xl:block xs:hidden">
-                        <img src="/images/article-blank-1.png" alt="" class="h-[320px] object-cover object-center" />
-                        <h4 class="headings xl:h5 xs:h6 mt-10 max-w-[470px]">Update dates for next accreditation for the school</h4>
-                        <p class="paragraph xl:p2 xs:p3 max-w-[470px] text-titanium mt-5">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                    </div>
-                    <div id="" class="flex flex-col xl:block xs:hidden">
-                        <img src="/images/article-blank-2.png" alt="" class="h-[320px] object-cover object-center" />
-                        <h4 class="headings xl:h5 xs:h6 mt-10 max-w-[470px]">Update dates for next accreditation for the school</h4>
-                        <p class="paragraph xl:p2 xs:p3 max-w-[470px] text-titanium mt-5">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                    </div>
-                    <div id="active" class="flex flex-col">
-                        <img src="/images/article-blank-3.png" alt="" class="h-[320px] object-cover object-center" />
-                        <h4 class="headings xl:h5 xs:h6 xl:mt-10 xs:mt-[15px] xl:max-w-[470px] xs:px-[15px]">Update dates for next accreditation for the school</h4>
-                        <p class="paragraph xl:p2 xs:p3 max-w-[470px] text-titanium mt-5 xs:mx-[70px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                    </div>
+                    {
+						threeLatestArticles.map((article: {
+							title: unknown; 
+                            body: [
+                                {
+                                    children: [
+                                        {
+                                            text: unknown;
+                                        }
+                                    ]
+                                }
+                            ];
+                            mainImage: {
+                                asset: {
+                                    url: string
+                                };
+                            };
+                            slug: {
+                                current: unknown;
+                            };
+						}, index) => {
+                            if(index != 2) {
+                                return <div id="" class="flex flex-col xl:block xs:hidden">
+                                    <img src={ urlForImage(article.mainImage.asset.url).width(480).height(320).fit('crop').crop('center').url() } alt="" class="object-cover object-center" />
+                                    <h4 class="headings xl:h5 xs:h6 mt-10 xl:max-w-[470px] xl:max-h-[52px]">{ article.title }</h4>
+                                    <p class="paragraph xl:p2 xs:p3 xl:max-w-[470px] xl:max-h-[60px] overflow-hidden text-titanium mt-[10px]">
+                                        { article.body[0].children[0].text }
+                                    </p>
+                                </div>
+                            }else {
+                                return <div id="active" class="flex flex-col">
+                                    <img src={ urlForImage(article.mainImage.asset.url).width(480).height(320).fit('crop').crop('center').url() } alt="" class="object-cover object-center" />
+                                    <h4 class="headings xl:h5 xs:h6 mt-10 xl:max-w-[470px] xl:max-h-[52px]">{ article.title }</h4>
+                                    <p class="paragraph xl:p2 xs:p3 xl:max-w-[470px] xl:max-h-[60px] xs:max-h-[36px] overflow-hidden text-titanium mt-[10px]">
+                                        { article.body[0].children[0].text }
+                                    </p>
+                                </div>
+                            }
+                            
+						})
+					}
                     
-            
                 </div>
                 <div class="flex gap-[30px] justify-center mt-[40px] ">
                     <a href="#" class=" bg-white xl:py-[10px] xl:px-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>

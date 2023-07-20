@@ -17,10 +17,14 @@ import { getDay } from '../js/date';
 import { get3LatestArticle } from '../api/api';
 import { getLatestFeaturedArticle } from '../api/api';
 import { get4UpcomingEvents } from '../api/api';
+import { get3LatestGazette } from '../api/api';
+import { get3LatestAnnualReport } from '../api/api';
 
 const threeLatestArticles = await get3LatestArticle();
 const latestFeaturedArticle = await getLatestFeaturedArticle();
 const fourUpcomingEvents = await get4UpcomingEvents();
+const threeLatestGazette = await get3LatestGazette();
+const threeLatestAnnualReport = await get3LatestAnnualReport();
 ---
 
 <Layout title="Welcome to Astro.">
@@ -189,24 +193,24 @@ const fourUpcomingEvents = await get4UpcomingEvents();
 					<h4 class="headings xl:h4 xs:h5 text-white-pure">Gazette</h4>
 					<div class="relative xl:w-[480px] xs:w-[300px]">
 						<!-- Add msu-drop-shadow on other image other than this gazette -->
-						<img src="/images/gazette1.png" class="absolute xl:w-[412px] xs:w-[392px] z-20" alt="">
-						<img src="/images/gazette2.png" class="absolute xl:w-[412px] xs:w-[392px] top-[15px] left-[15px] z-10" alt="">
-						<img src="/images/gazette3.png" class="absolute xl:w-[412px] xs:w-[392px] top-[45px] left-[45px] z-0" alt="">
+						<img src={ urlForImage(threeLatestGazette[0].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] z-20" alt="" />
+						<img src={ urlForImage(threeLatestGazette[1].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] top-[15px] left-[15px] z-10" alt="" />
+						<img src={ urlForImage(threeLatestGazette[2].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] top-[30px] left-[30px] z-0" alt="" />
 					</div>
 					<div class="xl:max-w-[480px] xs:max-w-[350px] text-left">
-						<p class="paragraph p2 text-titanium xl:mt-[650px] xs:mt-[470px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+						<p class="paragraph p2 text-titanium xl:mt-[650px] xs:mt-[470px] xl:h-[80px] xs:h-[95px] overflow-hidden">{ threeLatestGazette[0].body[0].children[0].text }</p>
 					</div>
 				</div>
 				<div class="xl:mt-10 xs:mt-20 xl:ml-[240px]">
 					<h4 class="headings h4 text-white-pure">Annual Report</h4>
 					<div class="relative xl:w-[480px] xs:w-[300px]">
 						<!-- Add msu-drop-shadow on other image other than this gazette -->
-						<img src="/images/gazette1.png" class="absolute xl:w-[412px] xs:w-[392px] z-20" alt="">
-						<img src="/images/gazette2.png" class="absolute xl:w-[412px] xs:w-[392px] top-[15px] left-[15px] z-10" alt="">
-						<img src="/images/gazette3.png" class="absolute xl:w-[412px] xs:w-[392px] top-[45px] left-[45px] z-0" alt="">
+						<img src={ urlForImage(threeLatestAnnualReport[0].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] z-20" alt="">
+						<img src={ urlForImage(threeLatestAnnualReport[1].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] top-[15px] left-[15px] z-10" alt="">
+						<img src={ urlForImage(threeLatestAnnualReport[2].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] top-[30px] left-[30px] z-0" alt="">
 					</div>
 					<div class="xl:max-w-[480px] xs:max-w-[350px] text-left">
-						<p class="paragraph p2 text-titanium xl:mt-[650px] xs:mt-[470px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+						<p class="paragraph p2 text-titanium xl:mt-[650px] xs:mt-[470px] xl:h-[80px] xs:h-[95px] overflow-hidden">{ threeLatestAnnualReport[0].body[0].children[0].text }</p>
 					</div>
 				</div>
 			</div>

@@ -23,7 +23,7 @@ const Navbar = (props) => {
 
   const bg = (path == '/admissions') ? 'hero-admission-img xl:h-[440px] xs:h-[164px]'
   				: (path == '/programs') ? 'hero-program-img xl:h-[440px] xs:h-[164px]'
-  				: (path == '/cas') ? 'hero-cas-img'
+  				: (path == '/cas') ? 'hero-cas-img xl:h-[440px] xs:h-[164px]'
   				: (path == '/cias') ? 'hero-cias-img'
   				: (path == '/coed') ? 'hero-coed-img'
   				: (path == '/cof') ? 'hero-cof-img'
