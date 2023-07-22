@@ -11,14 +11,29 @@ const currentPath = Astro.url.pathname;
 import { urlForImage } from '../api/api';
 
 import { getYear } from '../js/date';
+import { getWordMonth } from '../js/date';
 import { get3LettersMonth } from '../js/date';
 import { getDay } from '../js/date';
 
 import { get3LatestNews } from '../api/api';
+import { get3LatestFeaturedArticle } from '../api/api';
 import { get3LatestArticle } from '../api/api';
+import { get3_5LatestArticle } from '../api/api';
+import { get8UpcomingEvents } from '../api/api';
+import { get3LatestGazette } from '../api/api';
+import { get3LatestAnnualReport } from '../api/api';
+import { get1_3LatestGazette } from '../api/api';
+import { get1_3LatestAnnualReport } from '../api/api';
 
 const threeLatestNews = await get3LatestNews();
+const threeLatestFeaturedArticle = await get3LatestFeaturedArticle();
 const threeLatestArticles = await get3LatestArticle();
+const three_5LatestArticles = await get3_5LatestArticle();
+const eightUpcomingEvents = await get8UpcomingEvents();
+const threeLatestGazette = await get3LatestGazette();
+const threeLatestAnnualReport = await get3LatestAnnualReport();
+const one_threeLatestGazette = await get1_3LatestGazette();
+const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
 ---
 
 <Layout title="Welcome to Astro.">
@@ -78,7 +93,7 @@ const threeLatestArticles = await get3LatestArticle();
             <div class="flex flex-col items-center xl:mt-[40px] xl:px-[12.5%] xs:px-[15px] xs:gap-[30px]">
                 <div class="flex mt-10">
                     {
-						threeLatestArticles.map((article: {
+						threeLatestFeaturedArticle.map((article: {
 							title: unknown; 
                             body: [
                                 {
@@ -128,51 +143,73 @@ const threeLatestArticles = await get3LatestArticle();
 
 
                 <div class="flex xl:mt-20 xs:mt-[20px] mb-[150px]">
-                    <div class="flex flex-col">
-                        <div class="flex">
-                            <img src="/images/article-blank-1.png" alt="" class="h-[160px] object-cover object-center" />
-                            <div class="ml-5">
-                                <h4 class="headings h5 max-w-[480px]">Update dates for next accreditation for the school</h4>
-                                <p class="paragraph p2 max-w-[480px] text-titanium mt-5">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                            </div>
-                        </div>
-                        <div class="flex mt-10">
-                            <img src="/images/article-blank-1.png" alt="" class="h-[160px] object-cover object-center" />
-                            <div class="ml-5">
-                                <h4 class="headings h5 max-w-[480px]">Update dates for next accreditation for the school</h4>
-                                <p class="paragraph p2 max-w-[480px] text-titanium mt-5">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                            </div>
-                        </div>
-                        <div class="flex mt-10">
-                            <img src="/images/article-blank-1.png" alt="" class="h-[160px] object-cover object-center" />
-                            <div class="ml-5">
-                                <h4 class="headings h5 max-w-[480px]">Update dates for next accreditation for the school</h4>
-                                <p class="paragraph p2 max-w-[480px] text-titanium mt-5">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                            </div>
-                        </div>
+                    <div class="flex flex-col mt-[-40px]">
+                        {
+                            threeLatestArticles.map((article: {
+                                title: unknown; 
+                                body: [
+                                    {
+                                        children: [
+                                            {
+                                                text: unknown;
+                                            }
+                                        ]
+                                    }
+                                ];
+                                mainImage: {
+                                    asset: {
+                                        url: string
+                                    };
+                                };
+                                slug: {
+                                    current: unknown;
+                                };
+                            }, index) => (
+                                <div class="flex mt-10">
+                                    <img src={ urlForImage(article.mainImage.asset.url).width(220).height(160).fit('crop').crop('center').url() } alt="" class="object-cover object-center" />
+                                    <div class="ml-5">
+                                        <h4 class="headings h5 max-w-[480px] xl:max-h-[52px] xs:max-h-[58px] overflow-hidden">{ article.title }</h4>
+                                        <p class="paragraph xl:p2 xs:p3 max-w-[480px] xl:max-h-[80px] xs:max-h-[72px] overflow-hidden text-titanium mt-5">
+                                            { article.body[0].children[0].text }
+                                        </p>
+                                    </div>
+                                </div>
+                            ))
+                        }
                     </div>
-                    <div class="flex flex-col xs:hidden xl:block">
-                        <div class="flex">
-                            <img src="/images/article-blank-1.png" alt="" class="h-[160px] object-cover object-center" />
-                            <div class="ml-5">
-                                <h4 class="headings h5 max-w-[480px]">Update dates for next accreditation for the school</h4>
-                                <p class="paragraph p2 max-w-[480px] text-titanium mt-5">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                            </div>
-                        </div>
-                        <div class="flex mt-10">
-                            <img src="/images/article-blank-1.png" alt="" class="h-[160px] object-cover object-center" />
-                            <div class="ml-5">
-                                <h4 class="headings h5 max-w-[480px]">Update dates for next accreditation for the school</h4>
-                                <p class="paragraph p2 max-w-[480px] text-titanium mt-5">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                            </div>
-                        </div>
-                        <div class="flex mt-10">
-                            <img src="/images/article-blank-1.png" alt="" class="h-[160px] object-cover object-center" />
-                            <div class="ml-5">
-                                <h4 class="headings h5 max-w-[480px]">Update dates for next accreditation for the school</h4>
-                                <p class="paragraph p2 max-w-[480px] text-titanium mt-5">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                            </div>
-                        </div>
+                    <div class="xl:flex xs:hidden xl:flex-col mt-[-40px]">
+                        {
+                            three_5LatestArticles.map((article: {
+                                title: unknown; 
+                                body: [
+                                    {
+                                        children: [
+                                            {
+                                                text: unknown;
+                                            }
+                                        ]
+                                    }
+                                ];
+                                mainImage: {
+                                    asset: {
+                                        url: string
+                                    };
+                                };
+                                slug: {
+                                    current: unknown;
+                                };
+                            }, index) => (
+                                <div class="flex mt-10">
+                                    <img src={ urlForImage(article.mainImage.asset.url).width(220).height(160).fit('crop').crop('center').url() } alt="" class="object-cover object-center" />
+                                    <div class="ml-5">
+                                        <h4 class="headings h5 max-w-[480px] xl:max-h-[52px] overflow-hidden">{ article.title }</h4>
+                                        <p class="paragraph xl:p2 xs:p3 max-w-[480px] xl:max-h-[80px] overflow-hidden text-titanium mt-5">
+                                            { article.body[0].children[0].text }
+                                        </p>
+                                    </div>
+                                </div>
+                            ))
+                        }
                     </div>
                 </div>
             </div>
@@ -182,54 +219,51 @@ const threeLatestArticles = await get3LatestArticle();
             <div class=" bg-black-pure flex flex-col items-center xl:px-[12.5%] xs:px-[3.85%]">
                 <h3 class="headings h3 text-white-pure mt-20">Upcoming Events</h3>
                 <div class="grid grid-cols-4 mt-[131px] mb-[40px]">
-                    <div class="bg-gradient-ocean flex flex-col px-10 pt-10 pb-[93px]">
-                        <p class="paragraph p1 text-white-pure">June</p>
-                        <h2 class="headings h2 text-white-pure">18</h2>
-                        <p class="paragraph p1 text-titanium">Event Title 2023</p>
-                        <p class="paragraph p3 text-titanium max-w-[280px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                    </div>
-                    <div class="bg-gradient-maroon flex flex-col px-10 pt-10 pb-[93px]">
-                        <p class="paragraph p1 text-white-pure">June</p>
-                        <h2 class="headings h2 text-white-pure">18</h2>
-                        <p class="paragraph p1 text-titanium">Event Title 2023</p>
-                        <p class="paragraph p3 text-titanium max-w-[280px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                    </div>
-                    <div class="bg-gradient-ocean flex flex-col px-10 pt-10 pb-[93px]">
-                        <p class="paragraph p1 text-white-pure">June</p>
-                        <h2 class="headings h2 text-white-pure">18</h2>
-                        <p class="paragraph p1 text-titanium">Event Title 2023</p>
-                        <p class="paragraph p3 text-titanium max-w-[280px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                    </div>
-                    <div class="bg-gradient-ocean flex flex-col px-10 pt-10 pb-[93px]">
-                        <p class="paragraph p1 text-white-pure">June</p>
-                        <h2 class="headings h2 text-white-pure">18</h2>
-                        <p class="paragraph p1 text-titanium">Event Title 2023</p>
-                        <p class="paragraph p3 text-titanium max-w-[280px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                    </div>
-                    <div class="bg-gradient-ocean flex flex-col px-10 pt-10 pb-[93px]">
-                        <p class="paragraph p1 text-white-pure">June</p>
-                        <h2 class="headings h2 text-white-pure">18</h2>
-                        <p class="paragraph p1 text-titanium">Event Title 2023</p>
-                        <p class="paragraph p3 text-titanium max-w-[280px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                    </div>
-                    <div class="bg-gradient-ocean flex flex-col px-10 pt-10 pb-[93px]">
-                        <p class="paragraph p1 text-white-pure">June</p>
-                        <h2 class="headings h2 text-white-pure">18</h2>
-                        <p class="paragraph p1 text-titanium">Event Title 2023</p>
-                        <p class="paragraph p3 text-titanium max-w-[280px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                    </div>
-                    <div class="bg-gradient-maroon flex flex-col px-10 pt-10 pb-[93px]">
-                        <p class="paragraph p1 text-white-pure">June</p>
-                        <h2 class="headings h2 text-white-pure">18</h2>
-                        <p class="paragraph p1 text-titanium">Event Title 2023</p>
-                        <p class="paragraph p3 text-titanium max-w-[280px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                    </div>
-                    <div class="bg-gradient-ocean flex flex-col px-10 pt-10 pb-[93px]">
-                        <p class="paragraph p1 text-white-pure">June</p>
-                        <h2 class="headings h2 text-white-pure">18</h2>
-                        <p class="paragraph p1 text-titanium">Event Title 2023</p>
-                        <p class="paragraph p3 text-titanium max-w-[280px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                    </div>
+                    {
+                        eightUpcomingEvents.map((calendar: {
+                            title: unknown;
+                            date: unknown;
+                            body: [
+                                {
+                                    children: [
+                                        {
+                                            text: unknown;
+                                        }
+                                    ]
+                                }
+                            ];
+                            semester: {
+								semester: unknown;
+							};
+							holiday: {
+								holiday: unknown;
+							};
+                        }) => {
+                            if (calendar.holiday.holiday === 'Academic Holiday') {
+                                return <div class="bg-gradient-ocean flex flex-col px-10 pt-10 pb-[93px]">
+                                    <p class="paragraph p1 text-white-pure">{ getWordMonth(calendar.date) }</p>
+                                    <h2 class="headings h2 text-white-pure">{ getDay(calendar.date) }</h2>
+                                    <p class="paragraph p1 text-titanium">{ calendar.title }</p>
+                                    <p class="paragraph p3 text-titanium max-w-[280px] max-h-[48px] overflow-hidden">
+                                        {
+                                            calendar.body[0].children[0].text
+                                        }
+                                    </p>
+                                </div>
+                            }else if (calendar.holiday.holiday === 'National Holiday') {
+                                return <div class="bg-gradient-maroon flex flex-col px-10 pt-10 pb-[93px]">
+                                    <p class="paragraph p1 text-white-pure">{ getWordMonth(calendar.date) }</p>
+                                    <h2 class="headings h2 text-white-pure">{ getDay(calendar.date) }</h2>
+                                    <p class="paragraph p1 text-titanium">{ calendar.title }</p>
+                                    <p class="paragraph p3 text-titanium max-w-[280px] max-h-[48px] overflow-hidden">
+                                        {
+                                            calendar.body[0].children[0].text
+                                        }
+                                    </p>
+                                </div>
+                            }
+                        })
+                    }
                 </div>
                 <div class="mt-[50px] text-center ml-[110px] mb-[80px]">
                     <a href="/academic-calendar" class="bg-transparent border paragraph p1 py-[14px] px-[139px] text-white-pure rounded-[40px]">Check out our academic calendar</a>
@@ -251,33 +285,55 @@ const threeLatestArticles = await get3LatestArticle();
                         <p class="paragraph xl:p1 xs:p2 text-white-pure text-center">2023, 1st Quarter (January to March)</p>
                         <div class="relative xl:w-[480px] xs:w-[300px]">
                             <!-- Add msu-drop-shadow on other image other than this gazette -->
-                            <img src="/images/gazette1.png" class="absolute w-[412px] z-20" alt="">
-                            <img src="/images/gazette2.png" class="absolute w-[412px] top-[37px] left-[37px] z-10" alt="">
-                            <img src="/images/gazette3.png" class="absolute w-[412px] top-[68px] left-[68px] z-0" alt="">
+                            <img src={ urlForImage(threeLatestGazette[0].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] z-20" alt="" />
+                            <img src={ urlForImage(threeLatestGazette[1].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] top-[37px] left-[37px] z-10" alt="" />
+                            <img src={ urlForImage(threeLatestGazette[2].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] top-[68px] left-[68px] z-0" alt="" />
                         </div>
                         <div class=" ml-5 xl:max-w-[480px] xs:max-w-[350px]">
-                            <p class=" paragraph p2 text-titanium xl:mt-[650px] xs:mt-[470px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+                            <p class="paragraph p2 text-titanium xl:mt-[650px] xs:mt-[470px] xl:h-[80px] xs:h-[95px] overflow-hidden">{ threeLatestGazette[0].body[0].children[0].text }</p>
                         </div>
                     </div> 
                 </div>
                 <div class="flex xs:flex-col xs:items-left xs:px-[20px] xl:px-[10px]">
-                    <p class="flex xl:place-items-center  paragraph xl:ml-[120px] xl:p1 xs:p2 xs:mt-[35px] text-white-pure">Previous Researches</p>
+                    <p class="flex xl:place-items-center  paragraph xl:ml-[120px] xl:p1 xs:p2 xs:mt-[35px] text-white-pure">Previous Releases</p>
                     <div class="flex xl:mt-10 xs:mt-10 xl:ml-[110px]">
-                        <div class="w-[203px] ">
-                            <p class="paragraph ml-3 xl:p2 xs:p3 text-white-pure">2022, 4th Quarter </p>
-                            <img src="/images/gazette1.png" class="" alt="">
-                            <p class=" paragraph p2 text-titanium  ml-3  mr-3">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                        </div>
-                        <div class="flex xl:block xs:hidden w-[203px]">
-                            <p class="paragraph ml-3 xl:p2 xs:p3 text-white-pure">2022, 3rd Quarter </p>
-                            <img src="/images/gazette2.png" alt="">
-                            <p class=" paragraph p2 text-titanium  ml-3  mr-3">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                        </div>
-                        <div class="flex xl:block xs:hidden w-[203px]">
-                            <p class="paragraph ml-3 xl:p2 xs:p3 text-white-pure">2022, 2nd Quarter </p>
-                            <img src="/images/gazette3.png" alt="">
-                            <p class=" paragraph p2 text-titanium  ml-3  mr-3">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                        </div>
+                        {
+                            one_threeLatestGazette.map((gazette: {
+                                publishedAt: unknown;
+                                gazetteQuarter: {
+                                    gazetteQuarter: unknown;
+                                };
+                                mainImage: {
+                                    asset: {
+                                        url: string
+                                    };
+                                };
+                                body: [
+                                    {
+                                        children: [
+                                            {
+                                                text: unknown;
+                                            }
+                                        ]
+                                    }
+                                ];
+                            }, index) => {
+                                if (index == 0) {
+                                    return <div class="w-[203px] ">
+                                        <p class="paragraph ml-3 xl:p2 xs:p3 text-white-pure">{ getYear(gazette.publishedAt) }, { gazette.gazetteQuarter.gazetteQuarter }</p>
+                                        <img src={ urlForImage(gazette.mainImage.asset.url).url() } class="h-[286px] w-[203px]" alt="" />
+                                        <p class=" paragraph p2 text-titanium  ml-3 mr-3 max-h-[160px] overflow-hidden">{ gazette.body[0].children[0].text }</p>
+                                    </div>
+                                } else {
+                                    return <div class="flex xl:block xs:hidden w-[203px]">
+                                        <p class="paragraph ml-3 xl:p2 xs:p3 text-white-pure">{ getYear(gazette.publishedAt) }, { gazette.gazetteQuarter.gazetteQuarter }</p>
+                                        <img src={ urlForImage(gazette.mainImage.asset.url).url() } class="h-[286px] w-[203px]" alt="" />
+                                        <p class=" paragraph p2 text-titanium  ml-3 mr-3 max-h-[160px] overflow-hidden">{ gazette.body[0].children[0].text }</p>
+                                    </div>
+                                }
+                                
+                            })
+                        }
                     </div>
                     <div class="flex xl:mt-[50px] xs:mt-[50px] xl:justify-center xs:justify-center xl:ml-[110px]  ">
                         <a href="/gazette" class="bg-transparent border paragraph p1 py-[4.5px] px-[105px] text-white-pure rounded-[40px] xs:hidden xl:block">More Gazette Reports</a>
@@ -294,33 +350,52 @@ const threeLatestArticles = await get3LatestArticle();
                         <p class="paragraph xl:p1 xs:p2 text-white-pure text-center">2023, 1st Quarter (January to March)</p>
                         <div class="relative xl:w-[480px] xs:w-[300px]">
                             <!-- Add msu-drop-shadow on other image other than this gazette -->
-                            <img src="/images/gazette1.png" class="absolute w-[412px] z-20" alt="">
-                            <img src="/images/gazette2.png" class="absolute w-[412px] top-[37px] left-[37px] z-10" alt="">
-                            <img src="/images/gazette3.png" class="absolute w-[412px] top-[68px] left-[68px] z-0" alt="">
+                            <img src={ urlForImage(threeLatestAnnualReport[0].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] z-20" alt="">
+                            <img src={ urlForImage(threeLatestAnnualReport[1].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] top-[37px] left-[37px] z-10" alt="">
+                            <img src={ urlForImage(threeLatestAnnualReport[2].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] top-[68px] left-[68px] z-0" alt="">
                         </div>
                         <div class=" ml-5 xl:max-w-[480px] xs:max-w-[350px]">
-                            <p class=" paragraph p2 text-titanium xl:mt-[650px] xs:mt-[470px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+                            <p class="paragraph p2 text-titanium xl:mt-[650px] xs:mt-[470px] xl:h-[80px] xs:h-[95px] overflow-hidden">{ threeLatestAnnualReport[0].body[0].children[0].text }</p>
                         </div>
                     </div> 
                 </div>
                 <div class="flex xs:flex-col xs:items-left xs:px-[20px] xl:px-[10px]">
-                    <p class="flex xl:place-items-center  paragraph xl:ml-[120px] xl:p1 xs:p2 xs:mt-[35px] text-white-pure">Previous Researches</p>
+                    <p class="flex xl:place-items-center  paragraph xl:ml-[120px] xl:p1 xs:p2 xs:mt-[35px] text-white-pure">Previous Releases</p>
                     <div class="flex xl:mt-10 xs:mt-10 xl:ml-[110px]">
-                        <div class="w-[203px] ">
-                            <p class="paragraph ml-3 xl:p2 xs:p3 text-white-pure">2022, 4th Quarter </p>
-                            <img src="/images/gazette1.png" class="" alt="">
-                            <p class=" paragraph p2 text-titanium  ml-3  mr-3">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                        </div>
-                        <div class="flex xl:block xs:hidden w-[203px]">
-                            <p class="paragraph ml-3 xl:p2 xs:p3 text-white-pure">2022, 3rd Quarter </p>
-                            <img src="/images/gazette2.png" alt="">
-                            <p class=" paragraph p2 text-titanium  ml-3  mr-3">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                        </div>
-                        <div class="flex xl:block xs:hidden w-[203px]">
-                            <p class="paragraph ml-3 xl:p2 xs:p3 text-white-pure">2022, 2nd Quarter </p>
-                            <img src="/images/gazette3.png" alt="">
-                            <p class=" paragraph p2 text-titanium  ml-3  mr-3">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                        </div>
+                        {
+                            one_threeLatestAnnualReport.map((annualReport: {
+                                publishedAt: unknown;
+                                mainImage: {
+                                    asset: {
+                                        url: string
+                                    };
+                                };
+                                body: [
+                                    {
+                                        children: [
+                                            {
+                                                text: unknown;
+                                            }
+                                        ]
+                                    }
+                                ];
+                            }, index) => {
+                                if (index == 0) {
+                                    return <div class="w-[203px] ">
+                                        <p class="paragraph ml-3 xl:p2 xs:p3 text-white-pure">{ getYear(annualReport.publishedAt) }</p>
+                                        <img src={ urlForImage(annualReport.mainImage.asset.url).url() } class="h-[286px] w-[203px]" alt="" />
+                                        <p class=" paragraph p2 text-titanium  ml-3 mr-3 max-h-[160px] overflow-hidden">{ annualReport.body[0].children[0].text }</p>
+                                    </div>
+                                } else {
+                                    return <div class="flex xl:block xs:hidden w-[203px]">
+                                        <p class="paragraph ml-3 xl:p2 xs:p3 text-white-pure">{ getYear(annualReport.publishedAt) }</p>
+                                        <img src={ urlForImage(annualReport.mainImage.asset.url).url() } class="h-[286px] w-[203px]" alt="" />
+                                        <p class=" paragraph p2 text-titanium  ml-3 mr-3 max-h-[160px] overflow-hidden">{ annualReport.body[0].children[0].text }</p>
+                                    </div>
+                                }
+                                
+                            })
+                        }
                     </div>
                     <div class="flex xl:mt-[50px] xs:mt-[50px] xl:justify-center xs:justify-center xl:ml-[110px]  ">
                         <a href="/annual-reports" class="bg-transparent border paragraph p1 py-[4.5px] px-[105px] text-white-pure rounded-[40px] xs:hidden xl:block">More Annual Reports</a>

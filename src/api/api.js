@@ -165,6 +165,37 @@ export async function get3LatestArticle() {
   return threeLatestArticles;
 }
 
+export async function get3_5LatestArticle() {
+  const query = groq`*[_type == "article"] | order(_createdAt desc)[3..5]{
+    title,
+    slug{
+      current
+    },
+    author->{name},
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url},
+    },
+    mainImage{
+      asset->,
+      crop,
+      hotspot,
+    },
+    college->{college},
+    articleSubject->{subject},
+    topic->{topic},
+    category->{category},
+    publishedAt,
+    featured,
+    _createdAt,
+  }`;
+
+  const three_5LatestArticles = await useSanityClient().fetch(query);
+  return three_5LatestArticles;
+}
+
 export async function get3LatestNews() {
   const query = groq`*[_type == "article" && category._ref in *[_type=="articleCategory" && category=="News"]._id] | order(_createdAt desc)[0..2]{
     title,
@@ -227,6 +258,55 @@ export async function getLatestFeaturedArticle() {
   return latestFeaturedArticle;
 }
 
+export async function get3LatestFeaturedArticle() {
+  const query = groq`*[_type == "article" && featured == true] | order(_createdAt desc)[0..2] {
+    title,
+    slug{
+      current
+    },
+    author->{name},
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url},
+    },
+    mainImage{
+      asset->,
+      crop,
+      hotspot,
+    },
+    college->{college},
+    articleSubject->{subject},
+    topic->{topic},
+    category->{category},
+    publishedAt,
+    featured,
+    _createdAt,
+  }`;
+
+  const threeLatestFeaturedArticle = await useSanityClient().fetch(query);
+  return threeLatestFeaturedArticle;
+}
+
+export async function get3UpcomingEvents() {
+  const query = groq`*[_type == "calendar" && date >= now()] | order(date asc)[0..2] {
+    title,
+    date,
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url},
+    },
+    semester->{semester},
+    holiday->{holiday},
+  }`;
+
+  const threeUpcomingEvents = await useSanityClient().fetch(query);
+  return threeUpcomingEvents;
+}
+
 export async function get4UpcomingEvents() {
   const query = groq`*[_type == "calendar" && date >= now()] | order(date asc)[0..3] {
     title,
@@ -245,40 +325,22 @@ export async function get4UpcomingEvents() {
   return fourUpcomingEvents;
 }
 
-export async function get3LatestGazette() {
-  const query = groq`*[_type == "gazette"] | order(_createdAt desc)[0..2] {
+export async function get8UpcomingEvents() {
+  const query = groq`*[_type == "calendar" && date >= now()] | order(date asc)[0..7] {
     title,
+    date,
     body[]{
       children[]{
         text
       },
       asset->{url},
     },
-    mainImage{
-      asset->,
-    },
+    semester->{semester},
+    holiday->{holiday},
   }`;
 
-  const threeLatestGazette = await useSanityClient().fetch(query);
-  return threeLatestGazette;
-}
-
-export async function get3LatestAnnualReport() {
-  const query = groq`*[_type == "annualReport"] | order(_createdAt desc)[0..2] {
-    title,
-    body[]{
-      children[]{
-        text
-      },
-      asset->{url},
-    },
-    mainImage{
-      asset->,
-    },
-  }`;
-
-  const threeLatestAnnualReport = await useSanityClient().fetch(query);
-  return threeLatestAnnualReport;
+  const eightUpcomingEvents = await useSanityClient().fetch(query);
+  return eightUpcomingEvents;
 }
 
 export async function get16UpcomingEvents() {
@@ -297,4 +359,226 @@ export async function get16UpcomingEvents() {
 
   const sixteenUpcomingEvents = await useSanityClient().fetch(query);
   return sixteenUpcomingEvents;
+}
+
+export async function get16FirstSemesterUpcomingEvents() {
+  const query = groq`*[_type == "calendar" && semester._ref in *[_type=="semester" && semester=="1st Semester"]._id && date >= now()] | order(date asc)[0..15] {
+    title,
+    date,
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url},
+    },
+    semester->{semester},
+    holiday->{holiday},
+  }`;
+
+  const sixteenFirstSemesterUpcomingEvents = await useSanityClient().fetch(query);
+  return sixteenFirstSemesterUpcomingEvents;
+}
+
+export async function get16SecondSemesterUpcomingEvents() {
+  const query = groq`*[_type == "calendar" && semester._ref in *[_type=="semester" && semester=="2nd Semester"]._id && date >= now()] | order(date asc)[0..15] {
+    title,
+    date,
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url},
+    },
+    semester->{semester},
+    holiday->{holiday},
+  }`;
+
+  const sixteenSecondSemesterUpcomingEvents = await useSanityClient().fetch(query);
+  return sixteenSecondSemesterUpcomingEvents;
+}
+
+export async function get16SummerUpcomingEvents() {
+  const query = groq`*[_type == "calendar" && semester._ref in *[_type=="semester" && semester=="Summer"]._id && date >= now()] | order(date asc)[0..15] {
+    title,
+    date,
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url},
+    },
+    semester->{semester},
+    holiday->{holiday},
+  }`;
+
+  const sixteenSummerUpcomingEvents = await useSanityClient().fetch(query);
+  return sixteenSummerUpcomingEvents;
+}
+
+export async function get16SecondSummerUpcomingEvents() {
+  const query = groq`*[_type == "calendar" && semester._ref in *[_type=="semester" && semester=="Second Summer"]._id && date >= now()] | order(date asc)[0..15] {
+    title,
+    date,
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url},
+    },
+    semester->{semester},
+    holiday->{holiday},
+  }`;
+
+  const sixteenSecondSummerUpcomingEvents = await useSanityClient().fetch(query);
+  return sixteenSecondSummerUpcomingEvents;
+}
+
+export async function get6FirstSemesterUpcomingEvents() {
+  const query = groq`*[_type == "calendar" && semester._ref in *[_type=="semester" && semester=="1st Semester"]._id && date >= now()] | order(date asc)[0..15] {
+    title,
+    date,
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url},
+    },
+    semester->{semester},
+    holiday->{holiday},
+  }`;
+
+  const sixFirstSemesterUpcomingEvents = await useSanityClient().fetch(query);
+  return sixFirstSemesterUpcomingEvents;
+}
+
+export async function get6SecondSemesterUpcomingEvents() {
+  const query = groq`*[_type == "calendar" && semester._ref in *[_type=="semester" && semester=="2nd Semester"]._id && date >= now()] | order(date asc)[0..15] {
+    title,
+    date,
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url},
+    },
+    semester->{semester},
+    holiday->{holiday},
+  }`;
+
+  const sixSecondSemesterUpcomingEvents = await useSanityClient().fetch(query);
+  return sixSecondSemesterUpcomingEvents;
+}
+
+export async function get6SummerUpcomingEvents() {
+  const query = groq`*[_type == "calendar" && semester._ref in *[_type=="semester" && semester=="Summer"]._id && date >= now()] | order(date asc)[0..15] {
+    title,
+    date,
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url},
+    },
+    semester->{semester},
+    holiday->{holiday},
+  }`;
+
+  const sixSummerUpcomingEvents = await useSanityClient().fetch(query);
+  return sixSummerUpcomingEvents;
+}
+
+export async function get6SecondSummerUpcomingEvents() {
+  const query = groq`*[_type == "calendar" && semester._ref in *[_type=="semester" && semester=="Second Summer"]._id && date >= now()] | order(date asc)[0..15] {
+    title,
+    date,
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url},
+    },
+    semester->{semester},
+    holiday->{holiday},
+  }`;
+
+  const sixSecondSummerUpcomingEvents = await useSanityClient().fetch(query);
+  return sixSecondSummerUpcomingEvents;
+}
+
+export async function get3LatestGazette() {
+  const query = groq`*[_type == "gazette"] | order(_createdAt desc)[0..2] {
+    title,
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url},
+    },
+    mainImage{
+      asset->,
+    },
+    publishedAt,
+    gazetteQuarter->{gazetteQuarter},
+  }`;
+
+  const threeLatestGazette = await useSanityClient().fetch(query);
+  return threeLatestGazette;
+}
+
+export async function get1_3LatestGazette() {
+  const query = groq`*[_type == "gazette"] | order(_createdAt desc)[1..3] {
+    title,
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url}, 
+    },
+    mainImage{
+      asset->,
+    },
+    publishedAt,
+    gazetteQuarter->{gazetteQuarter},
+  }`;
+
+  const one_threeLatestGazette = await useSanityClient().fetch(query);
+  return one_threeLatestGazette;
+} 
+
+export async function get3LatestAnnualReport() {
+  const query = groq`*[_type == "annualReport"] | order(_createdAt desc)[0..2] {
+    title,
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url},
+    },
+    mainImage{
+      asset->,
+    },
+    publishedAt,
+  }`;
+
+  const threeLatestAnnualReport = await useSanityClient().fetch(query);
+  return threeLatestAnnualReport;
+}
+
+export async function get1_3LatestAnnualReport() {
+  const query = groq`*[_type == "annualReport"] | order(_createdAt desc)[1..3] {
+    title,
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url},
+    },
+    mainImage{
+      asset->,
+    },
+    publishedAt,
+  }`;
+
+  const one_threeLatestAnnualReport = await useSanityClient().fetch(query);
+  return one_threeLatestAnnualReport;
 }
