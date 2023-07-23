@@ -171,21 +171,21 @@ export async function getStaticPaths() {
 
         <div class="flex xl:hidden xs:block">
             <!-- other stories in mobile view -->
-                    <Stories path={currentPath} client:visible />
+                    <Stories />
             <!-- end other stories in mobile view -->
             
         </div>
 
         <div class="flex xl:block xs:hidden">
             <!-- FooterNaV -->
-                    <FooterNav path={currentPath} client:visible />
+                    <FooterNav />
             <!-- end FooterNaV -->
         </div>
 
 
 
 <!-- Footer -->
-		<Footer path={currentPath} client:visible />
+		<Footer />
 <!-- end Footer -->
         
 

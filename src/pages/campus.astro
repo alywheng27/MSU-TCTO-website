@@ -181,7 +181,7 @@ const currentPath = Astro.url.pathname;
             
             <!-- <MySwiper client:load /> -->
             <div class="xl:hidden xs:block">
-                <MySwiper path={currentPath} client:visible />
+                <MySwiper client:visible />
             </div>
 
             <!-- desktop view -->
@@ -227,15 +227,15 @@ const currentPath = Astro.url.pathname;
         </div>
 
 <!-- FooterNaV -->
-        <MainVideo path={currentPath} client:visible />
+        <MainVideo />
 <!-- end FooterNaV -->
 
 <!-- FooterNaV -->
-        <FooterNav path={currentPath} client:visible />
+        <FooterNav />
 <!-- end FooterNaV -->
 
 <!-- Footer -->
-		<Footer path={currentPath} client:visible />
+		<Footer />
 <!-- end Footer -->
 
 
