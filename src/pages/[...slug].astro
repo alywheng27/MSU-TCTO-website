@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navbar from "../components/Navbar";
-import Stories from "../pages/Stories.astro";
+import Stories from "./Stories.astro";
 import FooterNav from "../components/FooterNav.astro";
 import Footer from "../components/Footer.astro";
 import '../styles/css/global.css';
@@ -16,64 +16,69 @@ import { getDay } from '../js/date';
 import { getArticle } from '../api/api';
 const articles = await getArticle();
 
-export async function getStaticPaths() {
+// export async function getStaticPaths() {
 
-    const articles = await getArticle();
+//     const articles = await getArticle();
 
-    return articles.map((article: { 
-        slug: {
-            current: unknown;
-        }; 
-    }) => ({
-        params: {
-            slug: article.slug.current,
-        },
-        props: {
-            article
-        }
-    }));
-}
+//     return articles.map((article: { 
+//         slug: {
+//             current: unknown;
+//         }; 
+//     }) => ({
+//         params: {
+//             slug: article.slug.current,
+//         },
+//         props: {
+//             article
+//         }
+//     }));
+// }
+
+const { slug } = Astro.params;
+const article = articles.find((article) => article.slug.current === slug);
+if (!article) return Astro.redirect("/404");
+const { title, author, publishedAt, articleSubject, college, topic, mainImage, body } = article;
 ---
 
 <Layout title="Welcome to Astro.">
 	<main>
 		<Navbar path={currentPath} client:visible />
         <div class='bg-msu-deep-ocean h-[40px] xl:px-[12.5%] xs:px-[3.85%] xl:block xs:hidden'>
-            <p class="paragraph p2 py-[10px] text-titanium xl:block xs:hidden"><a href="/home">Home</a> / <a href="/publications">Publications</a>  / Articles / { Astro.props.article.title } </p>
+            <p class="paragraph p2 py-[10px] text-titanium xl:block xs:hidden"><a href="/home">Home</a> / <a href="/publications">Publications</a>  / Articles / { title } </p>
         </div>
 
         <div class="flex bg-msu-deep-ocean w-full  flex-col xl:pt-[40px]">
             <div class="flex flex-col item-center">
-                <h3 class="headings text-white-pure xl:h3 xs:h5 xl:px-[482px] xs:px-[34px] pb-[20px]  text-center">{ Astro.props.article.title }</h3>
+                <h3 class="headings text-white-pure xl:h3 xs:h5 xl:px-[482px] xs:px-[34px] pb-[20px]  text-center">{ title }</h3>
                 <div class="xs:px-[44px] xl:hidden xs:block"><hr></div>
                 <div class="flex xl:gap-[80px] justify-center  ">
                     <p class="paragraph text-white-pure p2 pb-[40px] xl:block xs:hidden">
-                        By: { Astro.props.article.author.name }
+                        By: { author.name }
                     </p>
                     <p class="paragraph text-white-pure p2 pb-[40px] xl:block xs:hidden">
-                        Published: { getWordMonth(Astro.props.article.publishedAt) } { getDay(Astro.props.article.publishedAt) }, { getYear(Astro.props.article.publishedAt) }
+                        Published: { getWordMonth(publishedAt) } { getDay(publishedAt) }, { getYear(publishedAt) }
                     </p>
                 </div>
             </div>
             <div class="flex xl:justify-start xs:justify-center bg-msu-deep-ocean  xl:px-[12.5%]">
-                <p class="paragraph xl:p2 xs:p3 xl:py-[10px] xs:mt-[9px] xs:mb-[9px]  text-titanium"><a href="/publications">{ Astro.props.article.articleSubject.subject }</a>  / { Astro.props.article.college.college } / { Astro.props.article.topic.topic } </p>
+                <p class="paragraph xl:p2 xs:p3 xl:py-[10px] xs:mt-[9px] xs:mb-[9px]  text-titanium"><a href="/publications">{ articleSubject.subject }</a>  / { college.college } / { topic.topic } </p>
             </div>
             <div class="flex flex-col xl:px-[240px] xs:px-[15px] ">
-                <img src={ urlForImage(Astro.props.article.mainImage.asset.url).fit('crop').url() } alt="" class="xl:h-full" />
+                <img src={ urlForImage(mainImage.asset.url).fit('crop').url() } alt="" class="xl:h-full" />
 
                 <div class="flex xs:gap-[120px] xs:mt-[11px] xl:mt-[0px] xs:mb-[22px] xl:mb-[0px] justify-center  xl:hidden">
                     <p class="paragraph text-titanium xs:p3   xl:hidden xs:block">
-                        By: { Astro.props.article.author.name }
+                        By: { author.name }
                     </p>
                     <p class="paragraph text-titanium xs:p3 xl:hidden xs:block">
-                        Published: { getWordMonth(Astro.props.article.publishedAt) } { getDay(Astro.props.article.publishedAt) }, { getYear(Astro.props.article.publishedAt) }
+                        Published: { getWordMonth(publishedAt) } { getDay(publishedAt) }, { getYear(publishedAt) }
                     </p>
                 </div>
 
                 <div class="flex xl:flex-row xs:flex-col xl:gap-[120px] xl:mt-[42px] mb-[95px]">
                     <div class="xl:w-[840px] xs:mb-[30px]">
                         {
-                            Astro.props.article.body.filter((con) => {
+                            body.filter((con) => {
                                 if (con.children == null || con.children == undefined) {
                                     return false;
                                 }else {
@@ -88,6 +93,7 @@ export async function getStaticPaths() {
                                 )) }</>
                             ))
                         }
+
                         <!-- {
                             Astro.props.article.body.filter((con) => {
                                 if (con.asset == null || con.asset == undefined) {

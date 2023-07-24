@@ -116,7 +116,7 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
                             if(index != 2) {
                                 return <div id="" class="flex flex-col xl:block xs:hidden">
                                     <img src={ urlForImage(article.mainImage.asset.url).width(480).height(320).fit('crop').crop('center').url() } alt="" class="object-cover object-center" />
-                                    <h4 class="headings xl:h5 xs:h6 mt-10 xl:max-w-[470px] xl:max-h-[52px]">{ article.title }</h4>
+                                    <a href={`/${article.slug.current}`}><h4 class="headings xl:h5 xs:h6 mt-10 xl:max-w-[470px] xl:max-h-[52px]">{ article.title }</h4></a>
                                     <p class="paragraph xl:p2 xs:p3 xl:max-w-[470px] xl:max-h-[60px] overflow-hidden text-titanium mt-[10px]">
                                         { article.body[0].children[0].text }
                                     </p>
@@ -124,7 +124,7 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
                             }else {
                                 return <div id="active" class="flex flex-col">
                                     <img src={ urlForImage(article.mainImage.asset.url).width(480).height(320).fit('crop').crop('center').url() } alt="" class="object-cover object-center" />
-                                    <h4 class="headings xl:h5 xs:h6 mt-10 xl:max-w-[470px] xl:max-h-[52px]">{ article.title }</h4>
+                                    <a href={`/${article.slug.current}`}><h4 class="headings xl:h5 xs:h6 mt-10 xl:max-w-[470px] xl:max-h-[52px]">{ article.title }</h4></a>
                                     <p class="paragraph xl:p2 xs:p3 xl:max-w-[470px] xl:max-h-[60px] xs:max-h-[36px] overflow-hidden text-titanium mt-[10px]">
                                         { article.body[0].children[0].text }
                                     </p>
@@ -168,7 +168,7 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
                                 <div class="flex mt-10">
                                     <img src={ urlForImage(article.mainImage.asset.url).width(220).height(160).fit('crop').crop('center').url() } alt="" class="object-cover object-center" />
                                     <div class="ml-5">
-                                        <h4 class="headings h5 max-w-[480px] xl:max-h-[52px] xs:max-h-[58px] overflow-hidden">{ article.title }</h4>
+                                        <a href={`/${article.slug.current}`}><h4 class="headings h5 max-w-[480px] xl:max-h-[52px] xs:max-h-[58px] overflow-hidden">{ article.title }</h4></a>
                                         <p class="paragraph xl:p2 xs:p3 max-w-[480px] xl:max-h-[80px] xs:max-h-[72px] overflow-hidden text-titanium mt-5">
                                             { article.body[0].children[0].text }
                                         </p>
@@ -202,7 +202,7 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
                                 <div class="flex mt-10">
                                     <img src={ urlForImage(article.mainImage.asset.url).width(220).height(160).fit('crop').crop('center').url() } alt="" class="object-cover object-center" />
                                     <div class="ml-5">
-                                        <h4 class="headings h5 max-w-[480px] xl:max-h-[52px] overflow-hidden">{ article.title }</h4>
+                                        <a href={`/${article.slug.current}`}><h4 class="headings h5 max-w-[480px] xl:max-h-[52px] overflow-hidden">{ article.title }</h4></a>
                                         <p class="paragraph xl:p2 xs:p3 max-w-[480px] xl:max-h-[80px] overflow-hidden text-titanium mt-5">
                                             { article.body[0].children[0].text }
                                         </p>
@@ -285,7 +285,7 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
                         <p class="paragraph xl:p1 xs:p2 text-white-pure text-center">2023, 1st Quarter (January to March)</p>
                         <div class="relative xl:w-[480px] xs:w-[300px]">
                             <!-- Add msu-drop-shadow on other image other than this gazette -->
-                            <img src={ urlForImage(threeLatestGazette[0].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] z-20" alt="" />
+                            <a href={`${threeLatestGazette[0].file.asset.url}`} target="_blank"><img src={ urlForImage(threeLatestGazette[0].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] z-20" alt="" /></a>
                             <img src={ urlForImage(threeLatestGazette[1].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] top-[37px] left-[37px] z-10" alt="" />
                             <img src={ urlForImage(threeLatestGazette[2].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] top-[68px] left-[68px] z-0" alt="" />
                         </div>
@@ -305,8 +305,13 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
                                 };
                                 mainImage: {
                                     asset: {
-                                        url: string
+                                        url: string;
                                     };
+                                };
+                                file: {
+                                    asset: {
+                                        url: unknown;
+                                    }
                                 };
                                 body: [
                                     {
@@ -321,13 +326,13 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
                                 if (index == 0) {
                                     return <div class="w-[203px] ">
                                         <p class="paragraph ml-3 xl:p2 xs:p3 text-white-pure">{ getYear(gazette.publishedAt) }, { gazette.gazetteQuarter.gazetteQuarter }</p>
-                                        <img src={ urlForImage(gazette.mainImage.asset.url).url() } class="h-[286px] w-[203px]" alt="" />
+                                        <a href={`${gazette.file.asset.url}`} target="_blank"><img src={ urlForImage(gazette.mainImage.asset.url).url() } class="h-[286px] w-[203px]" alt="" /></a>
                                         <p class=" paragraph p2 text-titanium  ml-3 mr-3 max-h-[160px] overflow-hidden">{ gazette.body[0].children[0].text }</p>
                                     </div>
                                 } else {
                                     return <div class="flex xl:block xs:hidden w-[203px]">
                                         <p class="paragraph ml-3 xl:p2 xs:p3 text-white-pure">{ getYear(gazette.publishedAt) }, { gazette.gazetteQuarter.gazetteQuarter }</p>
-                                        <img src={ urlForImage(gazette.mainImage.asset.url).url() } class="h-[286px] w-[203px]" alt="" />
+                                        <a href={`${gazette.file.asset.url}`} target="_blank"><img src={ urlForImage(gazette.mainImage.asset.url).url() } class="h-[286px] w-[203px]" alt="" /></a>
                                         <p class=" paragraph p2 text-titanium  ml-3 mr-3 max-h-[160px] overflow-hidden">{ gazette.body[0].children[0].text }</p>
                                     </div>
                                 }
@@ -350,7 +355,7 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
                         <p class="paragraph xl:p1 xs:p2 text-white-pure text-center">2023, 1st Quarter (January to March)</p>
                         <div class="relative xl:w-[480px] xs:w-[300px]">
                             <!-- Add msu-drop-shadow on other image other than this gazette -->
-                            <img src={ urlForImage(threeLatestAnnualReport[0].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] z-20" alt="">
+                            <a href={`${threeLatestAnnualReport[0].file.asset.url}`} target="_blank"><img src={ urlForImage(threeLatestAnnualReport[0].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] z-20" alt=""></a>
                             <img src={ urlForImage(threeLatestAnnualReport[1].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] top-[37px] left-[37px] z-10" alt="">
                             <img src={ urlForImage(threeLatestAnnualReport[2].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] top-[68px] left-[68px] z-0" alt="">
                         </div>
@@ -370,6 +375,11 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
                                         url: string
                                     };
                                 };
+                                file: {
+                                    asset: {
+                                        url: unknown;
+                                    }
+                                };
                                 body: [
                                     {
                                         children: [
@@ -383,13 +393,13 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
                                 if (index == 0) {
                                     return <div class="w-[203px] ">
                                         <p class="paragraph ml-3 xl:p2 xs:p3 text-white-pure">{ getYear(annualReport.publishedAt) }</p>
-                                        <img src={ urlForImage(annualReport.mainImage.asset.url).url() } class="h-[286px] w-[203px]" alt="" />
+                                        <a href={`${annualReport.file.asset.url}`} target="_blank"><img src={ urlForImage(annualReport.mainImage.asset.url).url() } class="h-[286px] w-[203px]" alt="" /></a>
                                         <p class=" paragraph p2 text-titanium  ml-3 mr-3 max-h-[160px] overflow-hidden">{ annualReport.body[0].children[0].text }</p>
                                     </div>
                                 } else {
                                     return <div class="flex xl:block xs:hidden w-[203px]">
                                         <p class="paragraph ml-3 xl:p2 xs:p3 text-white-pure">{ getYear(annualReport.publishedAt) }</p>
-                                        <img src={ urlForImage(annualReport.mainImage.asset.url).url() } class="h-[286px] w-[203px]" alt="" />
+                                        <a href={`${annualReport.file.asset.url}`} target="_blank"><img src={ urlForImage(annualReport.mainImage.asset.url).url() } class="h-[286px] w-[203px]" alt="" /></a>
                                         <p class=" paragraph p2 text-titanium  ml-3 mr-3 max-h-[160px] overflow-hidden">{ annualReport.body[0].children[0].text }</p>
                                     </div>
                                 }

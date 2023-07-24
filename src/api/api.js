@@ -517,6 +517,7 @@ export async function get3LatestGazette() {
     mainImage{
       asset->,
     },
+    file{asset->{url}},
     publishedAt,
     gazetteQuarter->{gazetteQuarter},
   }`;
@@ -537,6 +538,7 @@ export async function get1_3LatestGazette() {
     mainImage{
       asset->,
     },
+    file{asset->{url}},
     publishedAt,
     gazetteQuarter->{gazetteQuarter},
   }`;
@@ -557,6 +559,7 @@ export async function get3LatestAnnualReport() {
     mainImage{
       asset->,
     },
+    file{asset->{url}},
     publishedAt,
   }`;
 
@@ -576,6 +579,7 @@ export async function get1_3LatestAnnualReport() {
     mainImage{
       asset->,
     },
+    file{asset->{url}},
     publishedAt,
   }`;
 
