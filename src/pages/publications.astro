@@ -327,17 +327,18 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
                                     return <div class="w-[203px] ">
                                         <p class="paragraph ml-3 xl:p2 xs:p3 text-white-pure">{ getYear(gazette.publishedAt) }, { gazette.gazetteQuarter.gazetteQuarter }</p>
                                         <a href={`${gazette.file.asset.url}`} target="_blank"><img src={ urlForImage(gazette.mainImage.asset.url).url() } class="h-[286px] w-[203px]" alt="" /></a>
-                                        <p class=" paragraph p2 text-titanium  ml-3 mr-3 max-h-[160px] overflow-hidden">{ gazette.body[0].children[0].text }</p>
+                                       
                                     </div>
                                 } else {
                                     return <div class="flex xl:block xs:hidden w-[203px]">
                                         <p class="paragraph ml-3 xl:p2 xs:p3 text-white-pure">{ getYear(gazette.publishedAt) }, { gazette.gazetteQuarter.gazetteQuarter }</p>
                                         <a href={`${gazette.file.asset.url}`} target="_blank"><img src={ urlForImage(gazette.mainImage.asset.url).url() } class="h-[286px] w-[203px]" alt="" /></a>
-                                        <p class=" paragraph p2 text-titanium  ml-3 mr-3 max-h-[160px] overflow-hidden">{ gazette.body[0].children[0].text }</p>
+                                        
                                     </div>
                                 }
                                 
                             })
+                            // <p class=" paragraph p2 text-titanium  ml-3 mr-3 max-h-[160px] overflow-hidden">{ gazette.body[0].children[0].text }</p>
                         }
                     </div>
                     <div class="flex xl:mt-[50px] xs:mt-[50px] xl:justify-center xs:justify-center xl:ml-[110px]  ">
@@ -394,16 +395,16 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
                                     return <div class="w-[203px] ">
                                         <p class="paragraph ml-3 xl:p2 xs:p3 text-white-pure">{ getYear(annualReport.publishedAt) }</p>
                                         <a href={`${annualReport.file.asset.url}`} target="_blank"><img src={ urlForImage(annualReport.mainImage.asset.url).url() } class="h-[286px] w-[203px]" alt="" /></a>
-                                        <p class=" paragraph p2 text-titanium  ml-3 mr-3 max-h-[160px] overflow-hidden">{ annualReport.body[0].children[0].text }</p>
+                                        
                                     </div>
                                 } else {
                                     return <div class="flex xl:block xs:hidden w-[203px]">
                                         <p class="paragraph ml-3 xl:p2 xs:p3 text-white-pure">{ getYear(annualReport.publishedAt) }</p>
                                         <a href={`${annualReport.file.asset.url}`} target="_blank"><img src={ urlForImage(annualReport.mainImage.asset.url).url() } class="h-[286px] w-[203px]" alt="" /></a>
-                                        <p class=" paragraph p2 text-titanium  ml-3 mr-3 max-h-[160px] overflow-hidden">{ annualReport.body[0].children[0].text }</p>
+                                        
                                     </div>
                                 }
-                                
+                                // <p class=" paragraph p2 text-titanium  ml-3 mr-3 max-h-[160px] overflow-hidden">{ annualReport.body[0].children[0].text }</p>
                             })
                         }
                     </div>
