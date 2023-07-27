@@ -8,7 +8,7 @@ export function urlForImage(source) {
 }
 
 export async function getArticle() {
-  const query = groq`*[_type == "article"]{
+  const query = groq`*[_type == "article"] | order(publishedAt desc){
     title,
     slug{
       current
@@ -40,7 +40,7 @@ export async function getArticle() {
 
 // the single, latest document
 export async function getSingleLatestArticle() {
-  const query = groq`*[_type == "article"] | order(_createdAt desc)[0]{
+  const query = groq`*[_type == "article"] | order(publishedAt desc)[0]{
     title,
     slug{
       current
@@ -72,7 +72,7 @@ export async function getSingleLatestArticle() {
 
 // the single, oldest document
 export async function getSingleOldestArticle() {
-  const query = groq`*[_type == "article"] | order(_createdAt asc)[0]{
+  const query = groq`*[_type == "article"] | order(publishedAt asc)[0]{
     title,
     slug{
       current
@@ -104,7 +104,7 @@ export async function getSingleOldestArticle() {
 
 // latest 4 documents
 export async function get4LatestArticles() {
-  const query = groq`*[_type == "article"] | order(_createdAt desc)[1..4]{
+  const query = groq`*[_type == "article"] | order(publishedAt desc)[1..4]{
     title,
     slug{
       current
@@ -135,7 +135,7 @@ export async function get4LatestArticles() {
 }
 
 export async function get3LatestArticle() {
-  const query = groq`*[_type == "article"] | order(_createdAt desc)[0..2]{
+  const query = groq`*[_type == "article"] | order(publishedAt desc)[0..2]{
     title,
     slug{
       current
@@ -166,7 +166,7 @@ export async function get3LatestArticle() {
 }
 
 export async function get3_5LatestArticle() {
-  const query = groq`*[_type == "article"] | order(_createdAt desc)[3..5]{
+  const query = groq`*[_type == "article"] | order(publishedAt desc)[3..5]{
     title,
     slug{
       current
@@ -197,7 +197,7 @@ export async function get3_5LatestArticle() {
 }
 
 export async function get3LatestNews() {
-  const query = groq`*[_type == "article" && category._ref in *[_type=="articleCategory" && category=="News"]._id] | order(_createdAt desc)[0..2]{
+  const query = groq`*[_type == "article" && category._ref in *[_type=="articleCategory" && category=="News"]._id] | order(publishedAt desc)[0..2]{
     title,
     slug{
       current
@@ -228,7 +228,7 @@ export async function get3LatestNews() {
 }
 
 export async function getLatestFeaturedArticle() {
-  const query = groq`*[_type == "article" && featured == true] | order(_createdAt asc)[0] {
+  const query = groq`*[_type == "article" && featured == true] | order(publishedAt asc)[0] {
     title,
     slug{
       current
@@ -259,7 +259,7 @@ export async function getLatestFeaturedArticle() {
 }
 
 export async function get3LatestFeaturedArticle() {
-  const query = groq`*[_type == "article" && featured == true] | order(_createdAt desc)[0..2] {
+  const query = groq`*[_type == "article" && featured == true] | order(publishedAt desc)[0..2] {
     title,
     slug{
       current
@@ -505,8 +505,29 @@ export async function get6SecondSummerUpcomingEvents() {
   return sixSecondSummerUpcomingEvents;
 }
 
+export async function getLatestGazette() {
+  const query = groq`*[_type == "gazette"] | order(publishedAt desc)[0] {
+    title,
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url},
+    },
+    mainImage{
+      asset->,
+    },
+    file{asset->{url}},
+    publishedAt,
+    gazetteQuarter->{gazetteQuarter},
+  }`;
+
+  const latestGazette = await useSanityClient().fetch(query);
+  return latestGazette;
+}
+
 export async function get3LatestGazette() {
-  const query = groq`*[_type == "gazette"] | order(_createdAt desc)[0..2] {
+  const query = groq`*[_type == "gazette"] | order(publishedAt desc)[0..2] {
     title,
     body[]{
       children[]{
@@ -527,7 +548,7 @@ export async function get3LatestGazette() {
 }
 
 export async function get1_3LatestGazette() {
-  const query = groq`*[_type == "gazette"] | order(_createdAt desc)[1..3] {
+  const query = groq`*[_type == "gazette"] | order(publishedAt desc)[1..3] {
     title,
     body[]{
       children[]{
@@ -545,10 +566,39 @@ export async function get1_3LatestGazette() {
 
   const one_threeLatestGazette = await useSanityClient().fetch(query);
   return one_threeLatestGazette;
-} 
+}
+
+export async function getYearGazette() {
+  const query = groq`*[_type == "gazette"] | order(publishedAt desc) {
+    publishedAt,
+  }`;
+
+  const yearGazette = await useSanityClient().fetch(query);
+  return yearGazette;
+}
+
+export async function getLatestAnnualReport() {
+  const query = groq`*[_type == "annualReport"] | order(publishedAt desc)[0] {
+    title,
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url},
+    },
+    mainImage{
+      asset->,
+    },
+    file{asset->{url}},
+    publishedAt,
+  }`;
+
+  const latestAnnualReport = await useSanityClient().fetch(query);
+  return latestAnnualReport;
+}
 
 export async function get3LatestAnnualReport() {
-  const query = groq`*[_type == "annualReport"] | order(_createdAt desc)[0..2] {
+  const query = groq`*[_type == "annualReport"] | order(publishedAt desc)[0..2] {
     title,
     body[]{
       children[]{
@@ -568,7 +618,7 @@ export async function get3LatestAnnualReport() {
 }
 
 export async function get1_3LatestAnnualReport() {
-  const query = groq`*[_type == "annualReport"] | order(_createdAt desc)[1..3] {
+  const query = groq`*[_type == "annualReport"] | order(publishedAt desc)[1..3] {
     title,
     body[]{
       children[]{
@@ -585,4 +635,44 @@ export async function get1_3LatestAnnualReport() {
 
   const one_threeLatestAnnualReport = await useSanityClient().fetch(query);
   return one_threeLatestAnnualReport;
+}
+
+export async function get1_4LatestAnnualReport() {
+  const query = groq`*[_type == "annualReport"] | order(publishedAt desc)[1..4] {
+    title,
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url},
+    },
+    mainImage{
+      asset->,
+    },
+    file{asset->{url}},
+    publishedAt,
+  }`;
+
+  const one_fourLatestAnnualReport = await useSanityClient().fetch(query);
+  return one_fourLatestAnnualReport;
+}
+
+export async function get1_6LatestAnnualReport() {
+  const query = groq`*[_type == "annualReport"] | order(publishedAt desc)[1..6] {
+    title,
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url},
+    },
+    mainImage{
+      asset->,
+    },
+    file{asset->{url}},
+    publishedAt,
+  }`;
+
+  const one_sixLatestAnnualReport = await useSanityClient().fetch(query);
+  return one_sixLatestAnnualReport;
 }

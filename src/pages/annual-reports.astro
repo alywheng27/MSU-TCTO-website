@@ -8,6 +8,21 @@ import '../styles/css/global.css';
 
 
 const currentPath = Astro.url.pathname;
+
+import { urlForImage } from '../api/api';
+
+import { getYear } from '../js/date';
+import { getWordMonth } from '../js/date';
+import { get3LettersMonth } from '../js/date';
+import { getDay } from '../js/date';
+
+import { getLatestAnnualReport } from '../api/api';
+import { get1_4LatestAnnualReport } from '../api/api';
+import { get1_6LatestAnnualReport } from '../api/api';
+
+const latestAnnualReport = await getLatestAnnualReport();
+const one_fourLatestAnnualReport = await get1_4LatestAnnualReport();
+const one_sixLatestAnnualReport = await get1_6LatestAnnualReport();
 ---
 
 <Layout title="Welcome to Astro.">
@@ -25,63 +40,47 @@ const currentPath = Astro.url.pathname;
                 <div class="flex xl:flex-row xs:flex-col xs:justify-center xl:mt-[80px] ">
                     
                     <div class="flex ">
-                        <img src="/images/gazette1.png" class="xl:w-[424px] xl:px-[0%] xs:px-[101px] xl:mr-[68px] xs:mb-[45px] " alt="">
+                        <a href={ latestAnnualReport.file.asset.url } target="_blank"><img src={ urlForImage(latestAnnualReport.mainImage.asset.url).url() } class="xl:w-[424px] xl:px-[0%] xs:px-[101px] xl:mr-[68px] xs:mb-[45px] " alt=""></a>
                     </div>
-                    <div class="flex flex-col mt-[18px] xl:block xs:hidden ">
-                        <div class="flex gap-[37px]">
-                            <div class="mb-[10px]">
-                                <img src="/images/gazette1.png" class="w-[200px] " alt="">
-                            </div>
-                            <div class="w-[200px]">
-                                <img src="/images/gazette2.png" alt="">
-                            </div>
-                        </div>
-                        <div class="flex gap-[37px]">
-                            <div class="">
-                                <img src="/images/gazette1.png" class="w-[200px]" alt="">
-                            </div>
-                            <div class="w-[200px]">
-                                <img src="/images/gazette2.png" alt="">
-                            </div>
-                        </div>
+                    <div class="xl:grid xs:hidden xl:grid-cols-2">
+                        {
+                            one_fourLatestAnnualReport.map((annualReport: {
+                                publishedAt: unknown;
+                                mainImage: {
+                                    asset: {
+                                        url: string;
+                                    };
+                                };
+                                file: {
+                                    asset: {
+                                        url: string;
+                                    }
+                                };
+                                body: [
+                                    {
+                                        children: [
+                                            {
+                                                text: unknown;
+                                            }
+                                        ]
+                                    }
+                                ];
+                            }) => (
+                                <a href={ annualReport.file.asset.url } target="_blank"><img src={ annualReport.mainImage.asset.url } class="w-[200px] " alt="" /></a>
+                            ))
+                        }
                     </div>
                     <div class="flex flex-col xl:mt-[20px] xl:text-start xs:text-start ">
                         <div class="flex  xl:max-w-[480px] xl:px-[47px] xs:px-[124px] xs:justify-center  ">
-                            <h4 class="headings xl:h4 xs:h5 text-write-pure">2023, 1st Quarter (January to March)</h4>
+                            <h4 class="headings xl:h4 xs:h5 text-write-pure">{ getYear(latestAnnualReport.publishedAt) }</h4>
                         
                         </div>
-                        <div class="flex xl:flex-col xs:flex-col xl:max-w-[480px]  xs:px-[47px]  xs:justify-center  ">
-                            <p class="paragraph p2 text-titanium mt-[40px]">
-                                Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien.
-                                Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.
-                                Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien.
-                                Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.
-                            </p><br><br>
-                            <p class="paragraph p2 text-titanium">
-                                Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien.
-                                Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.
-                                Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien.
-                                Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.
+                        <div class="flex xl:flex-col xs:flex-col xl:max-w-[480px] xs:px-[47px]">
+                            <p class="paragraph p2 text-white-pure mt-[40px] xl:max-h-[400px] xs:max-h-[62px] overflow-hidden">
+                                { latestAnnualReport.body[0].children[0].text }
                             </p>
                         </div>
                     </div>
-                    <!-- <div class="mt-[20px]">
-                        <div class=" ml-[38px] xl:max-w-[480px] xs:max-w-[350px]">
-                            <h4 class="headings h4 text-write-pure">2023, 1st Quarter (January to March)</h4>
-                            <p class="paragraph p2 text-white-pure mt-[40px]">
-                                Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien.
-                                Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.
-                                Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien.
-                                Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.
-                            </p><br><br>
-                            <p class="paragraph p2 text-white-pure">
-                                Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien.
-                                Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.
-                                Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien.
-                                Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.
-                            </p>
-                        </div>
-                    </div> -->
                 </div>
                 
                     
@@ -92,20 +91,16 @@ const currentPath = Astro.url.pathname;
                     <a href="#" class=" bg-white xl:py-[10px] xl:px-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
                     <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xl:px-[10px] xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
                     <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xl:px-[10px] xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
-                
-                    
                 </div>
-    
             </div>
             <div class="flex flex-col justify-center bg-msu-maroon xl:px-[12.5%] xs:px-[31px] ">
     
-                <div class="flex xs:flex-col xs:items-center xs:mt-[48px]  xl:mt-[0px] ">
+                <!-- <div class="flex xs:flex-col xs:items-center xs:mt-[48px]  xl:mt-[0px] ">
                     <div class="flex">
-                        <p class="paragraph xs:p2 text-white-pure   xl:hidden xs:block">YEAR RELEASED</p>
-                    </div> 
+                        <p class="paragraph xs:p2 text-white-pure xl:hidden xs:block">Previous Releases</p>
+                    </div>
                     <div class="flex">
-                        <select class=" flex  xs:flex-col xs:msu-drop-white-shadow  xs:w-[181px]  text-white-pure xs:px-[19px] xs:py-3 rounded-[40px] xl:hidden xs:block">
-                                        
+                        <select class="flex xs:flex-col xs:msu-drop-white-shadow  xs:w-[181px] text-white-pure xs:px-[19px] xs:py-3 rounded-[40px] xl:hidden xs:block">
                             <option class="paragraph p2 text-black-pure">2023</option>
                             <option class="paragraph p2 text-black-pure">2022</option>
                             <option class="paragraph p2 text-black-pure">2021</option>
@@ -113,16 +108,86 @@ const currentPath = Astro.url.pathname;
                             <option class="paragraph p2 text-black-pure">2019</option>
                             <option class="paragraph p2 text-black-pure">2018</option>
                         </select>
-                    </div> 
-                    
-                </div>
+                    </div>
+                </div> -->
                 <div class="flex justify-center xl:py-[71px] xs:pt-[48px] ">
                     <div class="flex xl:flex-col">
-                        <p class="paragraph p1 text-white-pure  xl:ml-[12px] xl:block xs:hidden ">YEAR RELEASED</p>
+                        <p class="paragraph p1 text-white-pure  xl:ml-[12px] xl:block xs:hidden mb-10">Previous Releases</p>
                         
                         <div class="flex xl:flex-row xs:flex-col ">
-                            
-                            <div id="2022" class="flex xl:flex-col xl:gap-[2px] xs:gap-[30px] ">
+                            {
+                                one_sixLatestAnnualReport.map((annualReport: {
+                                    title: unknown;
+                                    publishedAt: unknown;
+                                    mainImage: {
+                                        asset: {
+                                            url: string;
+                                        };
+                                    };
+                                    file: {
+                                        asset: {
+                                            url: string;
+                                        }
+                                    };
+                                    body: [
+                                        {
+                                            children: [
+                                                {
+                                                    text: unknown;
+                                                }
+                                            ]
+                                        }
+                                    ];
+                                }, index) => {
+                                    if (index < 4) {
+                                        return <div id="2022" class="flex xl:flex-col xl:gap-[2px] xs:gap-[30px] ">
+                                            <div class="flex flex-col">
+                                                <p id="gazetteDate" class="paragraph p2 text-white-pure xl:ml-[12px] xl:block xs:hidden">{ getYear(annualReport.publishedAt) }</p>
+                                                <a href={ annualReport.file.asset.url } target="_blank"><img src={ annualReport.mainImage.asset.url } class="xl:max-w-[203px] xl:max-h-[286px] xs:max-w-[110px] xs:max-h-[155px]" alt="" /></a>
+                                            </div> 
+                                            <div class="flex xl:flex-col xs:flex-col xl:py-[0px] xs:py-[10px] xs:gap-[10px]  xl:gap-[0px] ">
+                                                
+                                                <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
+                                                    <h6 id="gazetteTitle" class="headings h6 text-white-pure xl:ml-[12px] xl:hidden xs:block">{ annualReport.title }</h6>
+                                                </div>  
+                                                <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
+                                            
+                                                    <p id="gazetteBody" class="paragraph p2 text-silver xl:ml-[12px] xl:w-[205px] xl:max-h-[160px] xs:max-h-[80px] overflow-hidden ">
+                                                        { annualReport.body[0].children[0].text }
+                                                    </p>
+                                                </div>
+                                                <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
+                                                    <p id="gazetteDate" class="paragraph p2 text-silver  xl:hidden xs:block">{ getYear(annualReport.publishedAt) }</p>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    }else {
+                                        return <div id="2022" class="xl:flex xs:hidden xl:flex-col xl:gap-[2px] xs:gap-[30px] ">
+                                            <div class="flex flex-col">
+                                                <p id="gazetteDate" class="paragraph p2 text-white-pure xl:ml-[12px] xl:block xs:hidden">{ getYear(annualReport.publishedAt) }</p>
+                                                <a href={ annualReport.file.asset.url } target="_blank"><img src={ annualReport.mainImage.asset.url } class="xl:max-w-[203px] xl:max-h-[286px] xs:max-w-[110px] xs:max-h-[155px]" alt="" /></a>
+                                            </div> 
+                                            <div class="flex xl:flex-col xs:flex-col xl:py-[0px] xs:py-[10px] xs:gap-[10px]  xl:gap-[0px] ">
+                                                
+                                                <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
+                                                    <h6 id="gazetteTitle" class="headings h6 text-white-pure xl:ml-[12px] xl:hidden xs:block">{ annualReport.title }</h6>
+                                                </div>  
+                                                <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
+                                            
+                                                    <p id="gazetteBody" class="paragraph p2 text-silver xl:ml-[12px] xl:w-[205px] xl:max-h-[160px] xs:max-h-[80px] overflow-hidden ">
+                                                        { annualReport.body[0].children[0].text }
+                                                    </p>
+                                                </div>
+                                                <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
+                                                    <p id="gazetteDate" class="paragraph p2 text-silver  xl:hidden xs:block">{ getYear(annualReport.publishedAt) }</p>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    }
+                                })
+                            }
+
+                            <!-- <div id="2022" class="flex xl:flex-col xl:gap-[2px] xs:gap-[30px] ">
                                 <div class="flex flex-col">
                                     <p id="gazetteDate" class="paragraph p2 text-white-pure xl:ml-[12px] xl:block xs:hidden">2022</p>
                                     <img src="/images/gazette1.png" class="xl:w-[220px] xs:w-[1000px]" alt="">
@@ -143,140 +208,9 @@ const currentPath = Astro.url.pathname;
                                     <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
                                         <p id="gazetteDate" class="paragraph p2 text-silver  xl:hidden xs:block">Article</p>
                                         <p id="gazetteDate" class="paragraph p2 text-silver  xl:hidden xs:block">2021 Feb 01</p>
-                                    </div> 
+                                    </div>
                                 </div> 
-                         
-                            </div>
-                            
-                            <div id="2022" class="flex xl:flex-col xl:gap-[2px] xs:gap-[30px] ">
-                                <div class="flex flex-col">
-                                    <p id="gazetteDate" class="paragraph p2 text-white-pure xl:ml-[12px] xl:block xs:hidden">2022</p>
-                                    <img src="/images/gazette1.png" class="xl:w-[220px] xs:w-[1000px]" alt="">
-                                </div> 
-                                <div class="flex xl:flex-col xs:flex-col xl:py-[0px] xs:py-[10px] xs:gap-[10px]  xl:gap-[0px] ">
-                                    
-                                    <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                        <h6 id="gazetteTitle" class="headings h6 text-white-pure xl:ml-[12px] xl:hidden xs:block">Sample title search of a document, article</h6>
-                                    </div>  
-                                    <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                   
-                                        <p id="gazetteBody" class="paragraph p2 text-silver xl:ml-[12px] xl:w-[205px] ">
-                                            Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien.
-                                            Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.
-                                        </p>
-                                     </div> 
-                                  
-                                    <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                        <p id="gazetteDate" class="paragraph p2 text-silver  xl:hidden xs:block">Article</p>
-                                        <p id="gazetteDate" class="paragraph p2 text-silver  xl:hidden xs:block">2021 Feb 01</p>
-                                    </div> 
-                                </div> 
-                         
-                            </div>
-                            
-                            <div id="2022" class="flex xl:flex-col xl:gap-[2px] xs:gap-[30px] ">
-                                <div class="flex flex-col">
-                                    <p id="gazetteDate" class="paragraph p2 text-white-pure xl:ml-[12px] xl:block xs:hidden">2022</p>
-                                    <img src="/images/gazette1.png" class="xl:w-[220px] xs:w-[1000px]" alt="">
-                                </div> 
-                                <div class="flex xl:flex-col xs:flex-col xl:py-[0px] xs:py-[10px] xs:gap-[10px]  xl:gap-[0px] ">
-                                    
-                                    <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                        <h6 id="gazetteTitle" class="headings h6 text-white-pure xl:ml-[12px] xl:hidden xs:block">Sample title search of a document, article</h6>
-                                    </div>  
-                                    <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                   
-                                        <p id="gazetteBody" class="paragraph p2 text-silver xl:ml-[12px] xl:w-[205px] ">
-                                            Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien.
-                                            Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.
-                                        </p>
-                                     </div> 
-                                  
-                                    <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                        <p id="gazetteDate" class="paragraph p2 text-silver  xl:hidden xs:block">Article</p>
-                                        <p id="gazetteDate" class="paragraph p2 text-silver  xl:hidden xs:block">2021 Feb 01</p>
-                                    </div> 
-                                </div> 
-                         
-                            </div>
-                            
-                            <div id="2022" class="flex xl:flex-col xl:gap-[2px] xs:gap-[30px] ">
-                                <div class="flex flex-col">
-                                    <p id="gazetteDate" class="paragraph p2 text-white-pure xl:ml-[12px] xl:block xs:hidden">2022</p>
-                                    <img src="/images/gazette1.png" class="xl:w-[220px] xs:w-[1000px]" alt="">
-                                </div> 
-                                <div class="flex xl:flex-col xs:flex-col xl:py-[0px] xs:py-[10px] xs:gap-[10px]  xl:gap-[0px] ">
-                                    
-                                    <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                        <h6 id="gazetteTitle" class="headings h6 text-white-pure xl:ml-[12px] xl:hidden xs:block">Sample title search of a document, article</h6>
-                                    </div>  
-                                    <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                   
-                                        <p id="gazetteBody" class="paragraph p2 text-silver xl:ml-[12px] xl:w-[205px] ">
-                                            Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien.
-                                            Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.
-                                        </p>
-                                     </div> 
-                                  
-                                    <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                        <p id="gazetteDate" class="paragraph p2 text-silver  xl:hidden xs:block">Article</p>
-                                        <p id="gazetteDate" class="paragraph p2 text-silver  xl:hidden xs:block">2021 Feb 01</p>
-                                    </div> 
-                                </div> 
-                         
-                            </div>
-                            
-                            <div id="2022" class="flex xl:flex-col xl:gap-[2px] xs:gap-[30px] ">
-                                <div class="flex flex-col">
-                                    <p id="gazetteDate" class="paragraph p2 text-white-pure xl:ml-[12px] xl:block xs:hidden">2022</p>
-                                    <img src="/images/gazette1.png" class="xl:w-[220px] xs:w-[1000px]" alt="">
-                                </div> 
-                                <div class="flex xl:flex-col xs:flex-col xl:py-[0px] xs:py-[10px] xs:gap-[10px]  xl:gap-[0px] ">
-                                    
-                                    <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                        <h6 id="gazetteTitle" class="headings h6 text-white-pure xl:ml-[12px] xl:hidden xs:block">Sample title search of a document, article</h6>
-                                    </div>  
-                                    <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                   
-                                        <p id="gazetteBody" class="paragraph p2 text-silver xl:ml-[12px] xl:w-[205px] ">
-                                            Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien.
-                                            Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.
-                                        </p>
-                                     </div> 
-                                  
-                                    <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                        <p id="gazetteDate" class="paragraph p2 text-silver  xl:hidden xs:block">Article</p>
-                                        <p id="gazetteDate" class="paragraph p2 text-silver  xl:hidden xs:block">2021 Feb 01</p>
-                                    </div> 
-                                </div> 
-                         
-                            </div>
-                            
-                            <div id="2022" class="flex xl:flex-col xl:gap-[2px] xs:gap-[30px] ">
-                                <div class="flex flex-col">
-                                    <p id="gazetteDate" class="paragraph p2 text-white-pure xl:ml-[12px] xl:block xs:hidden">2022</p>
-                                    <img src="/images/gazette1.png" class="xl:w-[220px] xs:w-[1000px]" alt="">
-                                </div> 
-                                <div class="flex xl:flex-col xs:flex-col xl:py-[0px] xs:py-[10px] xs:gap-[10px]  xl:gap-[0px] ">
-                                    
-                                    <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                        <h6 id="gazetteTitle" class="headings h6 text-white-pure xl:ml-[12px] xl:hidden xs:block">Sample title search of a document, article</h6>
-                                    </div>  
-                                    <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                   
-                                        <p id="gazetteBody" class="paragraph p2 text-silver xl:ml-[12px] xl:w-[205px] ">
-                                            Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien.
-                                            Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.
-                                        </p>
-                                     </div> 
-                                  
-                                    <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                        <p id="gazetteDate" class="paragraph p2 text-silver  xl:hidden xs:block">Article</p>
-                                        <p id="gazetteDate" class="paragraph p2 text-silver  xl:hidden xs:block">2021 Feb 01</p>
-                                    </div> 
-                                </div> 
-                         
-                            </div>
+                            </div> -->
                         </div>
                         
 
