@@ -282,7 +282,7 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
             <div class="flex xl:flex-row xs:flex-col justify-center mt-[53px]">
                 <div class="">
                     <div class="flex flex-col">
-                        <p class="paragraph xl:p1 xs:p2 text-white-pure text-center">2023, 1st Quarter (January to March)</p>
+                        <p class="paragraph xl:p1 xs:p2 text-white-pure text-center">{ getYear(threeLatestGazette[0].publishedAt) }, { threeLatestGazette[0].gazetteQuarter.gazetteQuarter }</p>
                         <div class="relative xl:w-[480px] xs:w-[300px]">
                             <!-- Add msu-drop-shadow on other image other than this gazette -->
                             <a href={`${threeLatestGazette[0].file.asset.url}`} target="_blank"><img src={ urlForImage(threeLatestGazette[0].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] z-20" alt="" /></a>
@@ -353,7 +353,7 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
             <div class="flex xl:flex-row xs:flex-col justify-center mt-[53px]">
                 <div class="">
                     <div class="flex flex-col">
-                        <p class="paragraph xl:p1 xs:p2 text-white-pure text-center">2023, 1st Quarter (January to March)</p>
+                        <p class="paragraph xl:p1 xs:p2 text-white-pure text-center">{ getYear(threeLatestAnnualReport[0].publishedAt) }</p>
                         <div class="relative xl:w-[480px] xs:w-[300px]">
                             <!-- Add msu-drop-shadow on other image other than this gazette -->
                             <a href={`${threeLatestAnnualReport[0].file.asset.url}`} target="_blank"><img src={ urlForImage(threeLatestAnnualReport[0].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] z-20" alt=""></a>

@@ -7,6 +7,19 @@ import Footer from "../components/Footer.astro";
 import '../styles/css/global.css';
 
 const currentPath = Astro.url.pathname;
+
+import { urlForImage } from '../api/api';
+
+import { getYear } from '../js/date';
+import { getWordMonth } from '../js/date';
+import { get3LettersMonth } from '../js/date';
+import { getDay } from '../js/date';
+
+import { getLatestGazette } from '../api/api';
+import { getYearGazette } from '../api/api';
+
+const latestGazette = await getLatestGazette();
+const yearGazette = await getYearGazette();
 ---
 
 <Layout title="Welcome to Astro.">
@@ -22,26 +35,17 @@ const currentPath = Astro.url.pathname;
     
                 <div class="flex xl:flex-row xs:flex-col xl:ml-[480px] xl:mt-[80px] ">
                     <div class="flex ">
-                        <img src="/images/gazette1.png" class="xl:w-[412px] xl:px-[0%] xs:px-[100px] xl:mr-[68px] xs:mb-[45px] " alt="">
+                        <img src={ urlForImage(latestGazette.mainImage.asset.url).url() } class="xl:w-[412px] xl:px-[0%] xs:px-[100px] xl:mr-[68px] xs:mb-[45px] " alt="">
                     </div>
                     
                     <div class="flex flex-col mt-[20px] xl:text-start xs:text-start">
                         <div class="flex  xl:max-w-[480px] xl:px-[47px] xs:px-[124px] xs:justify-center  ">
-                            <h4 class="headings xl:h4 xs:h5 text-write-pure">2023, 1st Quarter (January to March)</h4>
+                            <h4 class="headings xl:h4 xs:h5 text-write-pure">{ getYear(latestGazette.publishedAt) }, { latestGazette.gazetteQuarter.gazetteQuarter }</h4>
                         
                         </div>
-                        <div class="flex xl:flex-col xs:flex-col xl:max-w-[480px]  xs:px-[47px]  xs:justify-center  ">
-                            <p class="paragraph p2 text-titanium mt-[40px]">
-                                Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien.
-                                Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.
-                                Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien.
-                                Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.
-                            </p><br><br>
-                            <p class="paragraph p2 text-titanium">
-                                Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien.
-                                Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.
-                                Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien.
-                                Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.
+                        <div class="flex xl:flex-col xs:flex-col xl:max-w-[480px] xs:px-[47px]">
+                            <p class="paragraph p2 text-white-pure mt-[40px] xl:max-h-[400px] xs:max-h-[62px] overflow-hidden">
+                                { latestGazette.body[0].children[0].text }
                             </p>
                         </div>
                     </div>
@@ -63,7 +67,6 @@ const currentPath = Astro.url.pathname;
                     </div> 
                     <div class="flex">
                         <select class=" flex  xs:flex-col xs:msu-drop-white-shadow  xs:w-[181px]  text-white-pure xs:px-[19px] xs:py-3 rounded-[40px] xl:hidden xs:block">
-                                        
                             <option class="paragraph p2 text-black-pure">2023</option>
                             <option class="paragraph p2 text-black-pure">2022</option>
                             <option class="paragraph p2 text-black-pure">2021</option>
@@ -78,7 +81,6 @@ const currentPath = Astro.url.pathname;
             </div>
             <div class=" xl:flex-row xs:flex-col bg-msu-ocean mt-[49px] flex xl:pl-[242px] mb-[120px]">
                 <div class="flex xl:flex-col xs:flex-col xl:mr-[10px] xs:mr-[0px] ">
-                
                     <p id="gazette" class="paragraph p1 text-white-pure  pt-[71px] xl:block xs:hidden">Previous Releases</p>
                     <p id="2022" class="paragraph p2 text-white-pure  pt-[40px] xl:block xs:hidden">2022</p>
                     <p id="2021" class="paragraph p2 text-white-pure  pt-[20px] xl:block xs:hidden">2021</p>
