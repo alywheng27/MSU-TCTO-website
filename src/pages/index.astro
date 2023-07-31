@@ -37,7 +37,7 @@ const threeLatestAnnualReport = await get3LatestAnnualReport();
 						<img src={ urlForImage(latestFeaturedArticle.mainImage.asset.url).url() } alt="" class="xl:w-[960px] xl:h-[720px] xs:h-[480px] xs:w-full object-cover object-center" />
 						<div class="grid justify-center xl:absolute xl:top-[519px] xs:relative xl:px-10 xs:px-5 xl:pt-0 xs:pt-10">
 							<a href="">
-								<h4 class="headings xl:h4 xs:h5 max-w-[680px]">
+								<h4 class="headings xl:h4 xs:h5 xl:max-w-[680px] xl:max-h-[86px] overflow-hidden">
 									{ latestFeaturedArticle.title }
 								</h4>
 							</a>
@@ -100,22 +100,46 @@ const threeLatestAnnualReport = await get3LatestAnnualReport();
 								]
 							}
 						];
-					}) => (
-						<div class="bg-gradient-ocean flex xl:flex-col xs:flex-row xl:gap-0 xs:gap-[50px] p-10">
-							<div>
-								<p class="paragraph xl:p1 xs:p2 text-white-pure xl:mb-0 xs:mb-[10px]">{ getWordMonth(calendar.date) }</p>
-								<h2 class="headings xl:h2 xs:h3">{ getDay(calendar.date) }</h2>
+						semester: {
+							semester: unknown;
+						};
+						holiday: {
+							holiday: unknown;
+						};
+					}) => {
+						if (calendar.holiday.holiday === 'Academic Holiday') {
+							return <div class="bg-gradient-ocean flex xl:flex-col xs:flex-row xl:gap-0 xs:gap-[50px] p-10">
+								<div>
+									<p class="paragraph xl:p1 xs:p2 text-white-pure xl:mb-0 xs:mb-[10px]">{ getWordMonth(calendar.date) }</p>
+									<h2 class="headings xl:h2 xs:h3">{ getDay(calendar.date) }</h2>
+								</div>
+								<div>
+									<p class="paragraph xl:p1 xs:p2 text-titanium xl:mt-[5px] xl:mb-0 xs:mb-[10px]">{ calendar.title }</p>
+									<p class="paragraph p3 text-titanium xl:max-h-[48px] xs:max-h-[60px] overflow-hidden">
+										{
+											calendar.body[0].children[0].text
+										}
+									</p>
+								</div>
 							</div>
-							<div>
-								<p class="paragraph xl:p1 xs:p2 text-titanium xl:mt-[5px] xl:mb-0 xs:mb-[10px]">{ calendar.title }</p>
-								<p class="paragraph p3 text-titanium xl:max-h-[48px] xs:max-h-[60px] overflow-hidden">
-									{
-										calendar.body[0].children[0].text
-									}
-								</p>
+						} else if (calendar.holiday.holiday === 'National Holiday') {
+							return <div class="bg-gradient-maroon flex xl:flex-col xs:flex-row xl:gap-0 xs:gap-[50px] p-10">
+								<div>
+									<p class="paragraph xl:p1 xs:p2 text-white-pure xl:mb-0 xs:mb-[10px]">{ getWordMonth(calendar.date) }</p>
+									<h2 class="headings xl:h2 xs:h3">{ getDay(calendar.date) }</h2>
+								</div>
+								<div>
+									<p class="paragraph xl:p1 xs:p2 text-titanium xl:mt-[5px] xl:mb-0 xs:mb-[10px]">{ calendar.title }</p>
+									<p class="paragraph p3 text-titanium xl:max-h-[48px] xs:max-h-[60px] overflow-hidden">
+										{
+											calendar.body[0].children[0].text
+										}
+									</p>
+								</div>
 							</div>
-						</div>
-					))
+						}
+						
+					})
 				}
 			</div>
 		</div>
