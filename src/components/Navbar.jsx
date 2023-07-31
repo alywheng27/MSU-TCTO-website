@@ -68,6 +68,7 @@ const Navbar = (props) => {
 						<a href="/publications" className='py-[15px]'>Publication</a>
 						<a href="/campus" className='py-[15px]'>The Campus</a>
 						<a href="/careers#" className='py-[15px]'>Careers</a>
+						<a href="#" className='py-[15px]'>Global</a>
 						{/* <a href="#" className='py-[15px]'>Campus Officials</a> */}
 					</div>
 					<div className="relative xl:mt-0 xs:mt-[15px] xl:w-fit xs:w-full">
