@@ -1,7 +1,14 @@
 import { useSanityClient, groq } from 'astro-sanity';
 import { createImageBuilder } from 'astro-sanity';
+import sanityClient from "@sanity/client"
+const client = sanityClient ({
+  projectId: "w8lfrsa6",
+  dataset: "production",
+  useCdn: true
+});
 
 export const imageBuilder = createImageBuilder(useSanityClient());
+
 
 export function urlForImage(source) {
   return imageBuilder.image(source);
@@ -573,8 +580,29 @@ export async function getYearGazette() {
     publishedAt,
   }`;
 
-  const yearGazette = await useSanityClient().fetch(query);
+  const yearGazette = await client.fetch(query);
   return yearGazette;
+}
+
+export async function getGazette(year) {
+  const query = groq`*[_type == "gazette" && publishedAt match "${year}"] | order(publishedAt desc) {
+    title,
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url}, 
+    },
+    mainImage{
+      asset->,
+    },
+    file{asset->{url}},
+    publishedAt,
+    gazetteQuarter->{gazetteQuarter},
+  }`;
+
+  const gazette = await client.fetch(query);
+  return gazette;
 }
 
 export async function getLatestAnnualReport() {
