@@ -60,7 +60,7 @@ const Navbar = (props) => {
 		</div>
         <div className={bg + ` relative`}>
 			<div className='relative z-20'>
-				<div className={`xs:bg-msu-deep-ocean xl:bg-transparent xl:bg-gradient-ocean flex xl:flex-row xs:flex-col justify-between items-center 3xl:h-[80px] xl-[60px] text-white-pure xl:px-[12.5%] xs:px-[3.85%] nav ${isOpen && 'active'}`}>
+				<div className={`xs:bg-msu-deep-ocean xl:bg-transparent xl:bg-gradient-ocean flex xl:flex-row xs:flex-col justify-between items-center 3xl:h-[80px] xl:h-[60px] text-white-pure xl:px-[12.5%] xs:px-[3.85%] nav ${isOpen && 'active'}`}>
 					<div className="flex 3xl:flex-row xl:flex-row sm:flex-col xs:flex-col xl:gap-20 xl:text-left xs:text-center paragraph p2 w-full">
 						<a href="/admissions" className='py-[15px]'>Admissions</a>
 						<a href="/programs" className='py-[15px]'>Programs</a>
@@ -68,7 +68,7 @@ const Navbar = (props) => {
 						<a href="/publications" className='py-[15px]'>Publication</a>
 						<a href="/campus" className='py-[15px]'>The Campus</a>
 						<a href="/careers#" className='py-[15px]'>Careers</a>
-						<a href="#" className='py-[15px]'>Global</a>
+						{/* <a href="#" className='py-[15px]'>Global</a> */}
 						{/* <a href="#" className='py-[15px]'>Campus Officials</a> */}
 					</div>
 					<div className="relative xl:mt-0 xs:mt-[15px] xl:w-fit xs:w-full">
