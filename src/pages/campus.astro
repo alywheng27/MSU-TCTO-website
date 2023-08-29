@@ -8,7 +8,8 @@ import MainVideo from '../components/MainVideo.astro';
 
 
 
-import MySwiper from "../components/MySwiper.jsx";
+import Old_Campus_Swiper from "../components/old_campus_swiper.jsx";
+import College_Logo_Swiper from "../components/college_logo_swiper.jsx";
 
 const currentPath = Astro.url.pathname;
 
@@ -26,12 +27,12 @@ const currentPath = Astro.url.pathname;
                 <p class="paragraph xl:p1 xs:p2 text-white-pure max-w-[720px] xl:mt-10 xs:mt-10">Republic Act 6060 gave birth to MSU-Sulu College of Technology and Oceanography on August 4, 1969, initially offering degree programs and diploma in Fisheries Technology.</p>
             </div>
             <div>
-                <img src="/images/the-campus-2.png" alt="" class="xl:h-[640px] object-cover object-center" />
+                <img src="/images/a breif history 1.png" alt="" class="xl:h-[640px] object-cover object-center" />
             </div>
         </div>
         <div class="flex xl:flex-row xs:flex-col-reverse items-center justify-start xl:mt-[120px] xs:mt-[60px] xs:gap-[66px]">
             <div class="xl:block xs:hidden">
-                <img src="/images/the-campus-2.png" alt="" class="xl:h-[640px] object-cover object-center" />
+                <img src="/images/a breif history 2.png" alt="" class="xl:h-[640px] object-cover object-center" />
             </div>
             <div class="xl:mr-[120px] xs:mx-[25px] xs:text-left">
                 <p class="paragraph xl:p1 xs:p2 text-white-pure max-w-[720px]">In 1973, Tawi-Tawi became a separate province from Sulu, and MSU-SCTO became MSU-Tawi-Tawi College of Technology and Oceanography per BP Blg. 197. In 1990 it became an autonomous university campus.</p>
@@ -40,15 +41,19 @@ const currentPath = Astro.url.pathname;
             </div>
         </div>
         <div class="flex justify-center mt-20 xl:px-[12.5%] xs:px-[0px]">
-            <img src="/images/the-campus-2.png" alt="" class="xl:h-[360px] object-cover object-center" />
-            <img src="/images/the-campus-2.png" alt="" class="xl:h-[360px] object-cover object-center xl:block xs:hidden" />
-            <img src="/images/the-campus-2.png" alt="" class="xl:h-[360px] object-cover object-center xl:block xs:hidden" />
+            <img src="/images/image 3.png" alt="" class="xl:h-[360px] object-cover object-center xl:block xs:hidden" />
+            <img src="/images/image 4.png" alt="" class="xl:h-[360px] object-cover object-center xl:block xs:hidden" />
+            <img src="/images/image 5.png" alt="" class="xl:h-[360px] object-cover object-center xl:block xs:hidden" />
         </div>
-            
+        
+        <div class="flex justify-center mt-20 xl:px-[12.5%] xs:px-[0px] xl:hidden xs:block">
+            <Old_Campus_Swiper client:visible />
+        </div>
+
+
         <div class="flex gap-[30px] justify-center mt-[40px] mb-[57px] ">
             <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px]  xl:rounded-[40px] xs:rounded-[40px] border-white border-2"></a>
             <a href="#" class=" bg-white xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
-            <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
             <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
         </div>
 
@@ -65,8 +70,8 @@ const currentPath = Astro.url.pathname;
                 </h3>
             </div>
             <div class="flex xl:flex-row justify-center xs:flex-col">
+                
                 <div>
-                    
                     <img src="/images/campus-now-1.png" alt="" class="xl:h-[980px] object-cover object-center" />
                 </div>
                 <div class="flex xl:flex-col justify-center xs:flex-row ">
@@ -74,6 +79,10 @@ const currentPath = Astro.url.pathname;
                     <img src="/images/campus-now-3.png" alt="" class="xl:h-[490px] xs:h-[164px]    object-cover object-center" />
                 </div>
             </div>
+
+            
+
+
             <div class="flex flex-col items-center xl:mt-[40px] xs:mt-[66px] xl:pb-[57px] xs:pb-[42px] xs:mx-[25px] xs:text-left">
                 <h3 class="headings xl:h3 xs:h4 max-w-[720px] text-center">A lot has changed through the years!</h3>
                 <p class="paragraph  xl:p1 xs:p2 text-white-pure max-w-[720px] mt-20">Lorem ipsum dolor sit amet consectetur. At sapien diam cras pellentesque aliquam adipiscing. Morbi consectetur et rhoncus id turpis tortor. Sed aliquam potenti porta tellus. Ut consequat ut tempor senectus. Accumsan accumsan orci vel lacus diam sed ut elit.<br /><br />
@@ -109,6 +118,9 @@ const currentPath = Astro.url.pathname;
                         <iframe class="flex xs:mx-[44px] xl:mb-[90px] xs:mb-[74px] rounded-[40px] xl:w-[721px] xs:w-[323px] xl:h-[490px] xs:h-[225px]" 
                             src="https://www.youtube.com/embed/0C7f8iq6f_w?autoplay=0&mute=0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                         </iframe>
+                        <!-- <video class="flex xs:mx-[44px] xl:mb-[90px] xs:mb-[74px] rounded-[40px] xl:w-[721px] xs:w-[323px] xl:h-[490px] xs:h-[225px]"
+                             src="/video/HIMNO (TCTO).mp4" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen controls >
+                        </video> -->
                         <figure>
                             <audio controls class="xs:mx-[44px] xl:h-[60px] xs:h-[50px] xl:w-[720px] xs:w-[318px]">
                                 <source src="/audio/magsayaulit.mp3" type="audio/mpeg">
@@ -181,7 +193,7 @@ const currentPath = Astro.url.pathname;
             
             <!-- <MySwiper client:load /> -->
             <div class="xl:hidden xs:block">
-                <MySwiper client:visible />
+                <College_Logo_Swiper client:visible />
             </div>
 
             <!-- desktop view -->
