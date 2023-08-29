@@ -31,7 +31,7 @@ const Navbar = (props) => {
   				: (path == '/ioes') ? 'hero-ioes-img'
 				: (path == '/offices') ? 'hero-office-img xl:h-[440px] xs:h-[164px]'
 				: (path == '/publications') ? 'hero-publication-img xl:h-[440px] xs:h-[220px]'
-				: (path == '/campus') ? 'hero-campus-img xl:h-[440px] xs:h-[164px]'
+				: (path == '/campus') ? 'hero-campus-img xl:h-[440px] xs:h-[220px]'
 				: (path == '/academic-calendar') ? ''
 				: (path == '/search') ? ''
 				: (path == '/articles') ? 'hero-main-img xl:h-[980px] xs:h-[770px]'

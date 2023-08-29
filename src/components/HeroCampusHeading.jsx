@@ -2,7 +2,7 @@ import React from 'react'
 
 const HeroCampusHeading = () => {
   return (
-    <div className="relative z-10 xl:bottom-[250px] xs:bottom-[79px] h-[164px] xl:mx-[12.5%] xs:mx-[3.85%]">
+    <div className="relative z-10 xl:bottom-[250px] xs:bottom-[150px] h-[80px] xl:mx-[12.5%] xs:mx-[3.85%]">
       <h5 className="headings xl:h4 xs:h5 text-center">
         Welcome to the<br />
         Mindanao State University<br />
