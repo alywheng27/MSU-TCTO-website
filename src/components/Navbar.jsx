@@ -31,7 +31,7 @@ const Navbar = (props) => {
   				: (path == '/ioes') ? 'hero-ioes-img'
 				: (path == '/offices') ? 'hero-office-img xl:h-[440px] xs:h-[164px]'
 				: (path == '/publications') ? 'hero-publication-img xl:h-[440px] xs:h-[220px]'
-				: (path == '/campus') ? 'hero-campus-img xl:h-[440px] xs:h-[164px]'
+				: (path == '/campus') ? 'hero-campus-img xl:h-[440px] xs:h-[220px]'
 				: (path == '/academic-calendar') ? ''
 				: (path == '/search') ? ''
 				: (path == '/articles') ? 'hero-main-img xl:h-[980px] xs:h-[770px]'
@@ -60,7 +60,7 @@ const Navbar = (props) => {
 		</div>
         <div className={bg + ` relative`}>
 			<div className='relative z-20'>
-				<div className={`xs:bg-msu-deep-ocean xl:bg-transparent xl:bg-gradient-ocean flex xl:flex-row xs:flex-col justify-between items-center 3xl:h-[80px] xl-[60px] text-white-pure xl:px-[12.5%] xs:px-[3.85%] nav ${isOpen && 'active'}`}>
+				<div className={`xs:bg-msu-deep-ocean xl:bg-transparent xl:bg-gradient-ocean flex xl:flex-row xs:flex-col justify-between items-center 3xl:h-[80px] xl:h-[60px] text-white-pure xl:px-[12.5%] xs:px-[3.85%] nav ${isOpen && 'active'}`}>
 					<div className="flex 3xl:flex-row xl:flex-row sm:flex-col xs:flex-col xl:gap-20 xl:text-left xs:text-center paragraph p2 w-full">
 						<a href="/admissions" className='py-[15px]'>Admissions</a>
 						<a href="/programs" className='py-[15px]'>Programs</a>

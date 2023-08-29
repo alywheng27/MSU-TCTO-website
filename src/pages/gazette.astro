@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import MainVideo from "../components/MainVideo.astro";
 import FooterNav from "../components/FooterNav.astro";
 import Footer from "../components/Footer.astro";
+import GazetteTab from "../components/GazetteTab";
 import '../styles/css/global.css';
 
 const currentPath = Astro.url.pathname;
@@ -20,6 +21,8 @@ import { getYearGazette } from '../api/api';
 
 const latestGazette = await getLatestGazette();
 const yearGazette = await getYearGazette();
+
+var x = null;
 ---
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
@@ -67,12 +70,14 @@ const yearGazette = await getYearGazette();
                     </div> 
                     <div class="flex">
                         <select class=" flex  xs:flex-col xs:msu-drop-white-shadow  xs:w-[181px]  text-white-pure xs:px-[19px] xs:py-3 rounded-[40px] xl:hidden xs:block">
-                            <option class="paragraph p2 text-black-pure">2023</option>
-                            <option class="paragraph p2 text-black-pure">2022</option>
-                            <option class="paragraph p2 text-black-pure">2021</option>
-                            <option class="paragraph p2 text-black-pure">2020</option>
-                            <option class="paragraph p2 text-black-pure">2019</option>
-                            <option class="paragraph p2 text-black-pure">2018</option>
+                            {
+                                yearGazette.map((gazette) => {
+                                    if (x !== getYear(gazette.publishedAt)) {
+                                        x = getYear(gazette.publishedAt);
+                                        return <option class="paragraph p2 text-black-pure">{ getYear(gazette.publishedAt) }</option>
+                                    }
+                                })
+                            }
                         </select>
                     </div> 
                     
@@ -81,18 +86,16 @@ const yearGazette = await getYearGazette();
             </div>
             <div class=" xl:flex-row xs:flex-col bg-msu-ocean mt-[49px] flex xl:pl-[242px] mb-[120px]">
                 <div class="flex xl:flex-col xs:flex-col xl:mr-[10px] xs:mr-[0px] ">
-                    <p id="gazette" class="paragraph p1 text-white-pure  pt-[71px] xl:block xs:hidden">Previous Releases</p>
-                    <p id="2022" class="paragraph p2 text-white-pure  pt-[40px] xl:block xs:hidden">2022</p>
-                    <p id="2021" class="paragraph p2 text-white-pure  pt-[20px] xl:block xs:hidden">2021</p>
-                    <p id="2020" class="paragraph p2 text-white-pure  pt-[20px] xl:block xs:hidden">2020</p>
-                    <p id="2019" class="paragraph p2 text-white-pure  pt-[20px] xl:block xs:hidden">2019</p>
-                    <p id="2018" class="paragraph p2 text-white-pure  pt-[20px] xl:block xs:hidden">2018</p>
-                    <p id="2017" class="paragraph p2 text-white-pure  pt-[20px] xl:block xs:hidden">2017</p>
-                    <p id="2016" class="paragraph p2 text-white-pure  pt-[20px] xl:block xs:hidden">2016</p>
+                    <p id="gazette" class="paragraph p1 text-white-pure pt-[71px] pb-5 xl:block xs:hidden">Previous Releases</p>
+                    {
+                        yearGazette.map((gazette) => {
+                            if (x !== getYear(gazette.publishedAt)) {
+                                x = getYear(gazette.publishedAt);
+                                return <p id="2022" class="paragraph p2 text-white-pure pt-5 xl:block xs:hidden">{ getYear(gazette.publishedAt) }</p>
+                            }
+                        })
+                    }
                 </div>
-
-                
-
                 <div id="gazette" class="flex xl:justify-center xl:mt-[140px] xs:mt-[40px]  ">
                     <div class="flex xl:flex-col ">
                         <!-- gazette year -->
@@ -212,6 +215,7 @@ const yearGazette = await getYearGazette();
                 </div>
     
             </div>
+            <GazetteTab client:visible />
                     
 
 
