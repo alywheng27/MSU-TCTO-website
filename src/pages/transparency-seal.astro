@@ -1,0 +1,96 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from "../components/Navbar";
+import FooterNav from "../components/FooterNav.astro";
+import Footer from "../components/Footer.astro";
+import '../styles/css/global.css';
+
+const currentPath = Astro.url.pathname;
+---
+
+<Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
+	<main>
+		<Navbar path={currentPath} client:visible />
+
+        <div class="bg-white-pure w-full xl:px-[12.5%] xs:px-[3.85%] py-[80px]">
+            <h4 class="xl:h4 xs:h5 text-msu-maroon text-center">MSU-TCTO(Tawi-tawi) Compliance with Sec. 93 (Transparency Seal) R.A. No. 10155 (General Appropriations Act, FY 2013)</h4>
+            <div class="mt-10">
+                <p class="paragraph p2">The agency's mandates and functions, names of its officials with their positions and designations, and contact information</p>
+                <p class="paragraph p2">Annual Financial Reports</p>
+                <ul class="ml-10 list-disc">
+                    <li>
+                        2016
+                        <ul class="ml-10 list-decimal">
+                            <a href="transparency/2016_FAR1-B_Q1-Q4.pdf"><li class="text-msu-rusty-red">FAR No. 1-B: Statement of Approved Budget, Utilizations, Disbursement and Balances</li></a>
+                            <a href="transparency/2016_FAR4_Q1-Q4.pdf"><li class="text-msu-rusty-red">Summary Report of Disbursements</li></a>
+                            <a href="transparency/2016_BAR1_Q1-Q4.pdf"><li class="text-msu-rusty-red">BAR No. 1: Quarterly Physical Report of Operations/Physical Plan</li></a>
+                            <a href="2016_FAR5_Q1-Q4.pdf"><li class="text-msu-rusty-red">FAR No. 5: Quarterly Report on Revenue and Other Receipts</li></a>
+                            <a href="transparency/2016_BED1.pdf"><li class="text-msu-rusty-red">Financial Plan (Detailed Statement of Current Year's Obligations, Disbursements and Unpaid Obligations)</li></a>
+                            <a href="transparency/2016_FAR1-A_Q1-Q4.pdf"><li class="text-msu-rusty-red">Summary of Appropriations, Allotments, Obligations, Disbursement and Balance</li></a>
+                            <a href="transparency/2016_FAR2_Q4.pdf"><li class="text-msu-rusty-red">List of Allotment and Sub-allotments</li></a>
+                        </ul>
+                    </li>
+                        
+                    <li>
+                        2015
+                        <ul class="ml-10 list-decimal">
+                            <a href="transparency/2015_FARS_No1Q3.pdf"><li class="text-msu-rusty-red">FAR No. 1: SAAOBDB (Statement of Appropriations, Allotments, Obligations, Disbursements and Balances)</li></a>
+                            <a href="transparency/2015_FARS_No4Q3.pdf"><li class="text-msu-rusty-red">Summary Report of Disbursements</li></a>
+                            <a href="transparency/2015_BAR_No1Q3.pdf"><li class="text-msu-rusty-red">BAR No. 1: Quarterly Physical Report of Operations/Physical Plan</li></a>
+                            <a href="transparency/2015_FARS_No5Q3.pdf"><li class="text-msu-rusty-red">FAR No. 5: Quarterly Report on Revenue and Other Receipts</li></a>
+                            <a href="transparency/2015_FARS_No1AQ3.pdf"><li class="text-msu-rusty-red">Financial Plan (Detailed Statement of Current Year's Obligations, Disbursements and Unpaid Obligations)</li></a>
+                        </ul>
+                    </li>
+                    <li>
+                        2014
+                        <ul class="ml-10 list-decimal">
+                            <a href="transparency/2014_FARS_No1Q3.pdf"><li class="text-msu-rusty-red">FAR No. 1 - Statement of Appropriations, Allotments,Obligations,Disbursements and Balances</li></a>
+                            <a href="transparency/2014_FARS_No1AQ3.pdf"><li class="text-msu-rusty-red">FAR No. 1A - Summary of Prior Year's Obligations and Unpaid Prior Year's Obligations</li></a>
+                            <a href="transparency/2014_FARS_No1BQ3.pdf"><li class="text-msu-rusty-red">FAR No. 1B - List of ABM/SAROs/Sub-Allotment Release Orders</li></a>
+                            <a href=""><li class="text-msu-rusty-red">FAR No. 2 - Statement of Approved Budget, Utilization, Disbursements and Balances</li></a>
+                            <a href="transparency/2014_FARS_No2AQ3.pdf"><li class="text-msu-rusty-red">FAR No. 2A - Summary of Approved Budget, Utilizations, Disbursements and Balances by Object of Expenditures</li></a>
+                            <a href="transparency/2014_FARS_No4Q3.pdf"><li class="text-msu-rusty-red">FAR No. 4 - Monthly Report of Disbursements</li></a>
+                        </ul>
+                    </li>
+                    <li>
+                        2013
+                        <ul class="ml-10 list-decimal">
+                            <a href="transparency/2013_FARS_AnnexAQ3.pdf"><li class="text-msu-rusty-red">Annex A Statement of Appropriations, Allotments, Obligations, Disbursements and Balances</li></a>
+                            <a href="transparency/2013_FARS_AnnexA1Q2.pdf"><li class="text-msu-rusty-red">Annex A-1 List of Agency Budget Matrix Special Allotment Release Orders, Sub-Allotment Release Orders</li></a>
+                            <a href="transparency/2013_FARS_AnnexBQ3.pdf"><li class="text-msu-rusty-red">Annex B Detailed Statement of Current Year's Obligations Disbursement and Unpaid Obligations</li></a>
+                            <a href="transparency/2013_FARS_AnnexDQ3.pdf"><li class="text-msu-rusty-red">Annex C Summary of Prior Year's Obligations, Disbursements and Unpaid Prior Year Obligations</li></a>
+                            <a href="transparency/2013_FARS_AnnexDQ3.pdf"><li class="text-msu-rusty-red">Annex D Summary Report of Disbursements</li></a>
+                        </ul>
+                    </li>
+                </ul>
+                <p class="paragraph p2">DBM Approved Budget and Targets</p>
+                <ul class="ml-10 list-decimal">
+                    <a href="transparency/2016_GAA_MSU-TCTO_BUDGET.pdf"><li class="text-msu-rusty-red">Budget 2016</li></a>
+                    <a href="transparency/2016_MSU-TCTO_PERFORMANCE_TARGETS_2.pdf"><li class="text-msu-rusty-red">MFO Targets 2016</li></a>
+                </ul>
+                <p class="paragraph p2">Projects, Programs and Activities, Beneficiaries, and Status of Implementation</p>
+                <p class="paragraph p2">Annual Procurement Plans 2015</p>
+                <p class="paragraph p2">QMS Certification</p>
+                <a href="transparency/SystemOfRanking.pdf"><p class="paragraph p2 text-msu-rusty-red">System of Ranking Delivery Units and Individuals</p></a>
+                <p class="paragraph p2">Agency Operations Manual</p>
+                <ul class="ml-10 list-decimal">
+                    <!-- <a href="transparency/"><li class="text-msu-rusty-red">Manual on Faculty Recruitment</li></a> -->
+                </ul>
+                <p class="paragraph p2">Freedom of Information</p>
+                <ul class="ml-10 list-decimal">
+                    <a href="transparency/FOI.pdf"><li class="text-msu-rusty-red">Freedom of Information (FOI) Manual</li></a>
+                </ul>
+            </div>
+        </div>
+		
+<!-- FooterNaV -->
+        <FooterNav />
+<!-- end FooterNaV -->
+
+<!-- Footer -->
+		<Footer />
+<!-- end Footer -->
+
+	</main>
+	
+</Layout>
