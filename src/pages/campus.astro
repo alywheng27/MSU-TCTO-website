@@ -10,6 +10,7 @@ import MainVideo from '../components/MainVideo.astro';
 
 import Old_Campus_Swiper from "../components/old_campus_swiper.jsx";
 import College_Logo_Swiper from "../components/college_logo_swiper.jsx";
+import MySwiper from "../components/MySwiper.jsx";
 
 const currentPath = Astro.url.pathname;
 
@@ -51,11 +52,11 @@ const currentPath = Astro.url.pathname;
         </div>
 
 
-        <div class="flex gap-[30px] justify-center mt-[40px] mb-[57px] ">
+        <!-- <div class="flex gap-[30px] justify-center mt-[40px] mb-[57px] ">
             <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px]  xl:rounded-[40px] xs:rounded-[40px] border-white border-2"></a>
             <a href="#" class=" bg-white xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
             <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
-        </div>
+        </div> -->
 
 
         <div class="flex flex-col items-center xl:mt-[40px] xs:mt-[66px] xl:mb-[57px] xs:mb-[50px] xs:mx-[25px] xs:text-left">
@@ -72,11 +73,11 @@ const currentPath = Astro.url.pathname;
             <div class="flex xl:flex-row justify-center xs:flex-col">
                 
                 <div>
-                    <img src="/images/campus-now-1.png" alt="" class="xl:h-[980px] object-cover object-center" />
+                    <img src="/images/campus-now-1.png" alt="" class="xl:h-[980px] xs:w-full object-cover object-center" />
                 </div>
                 <div class="flex xl:flex-col justify-center xs:flex-row ">
-                    <img src="/images/campus-now-2.png" alt="" class="xl:h-[490px] xs:h-[164px]   object-cover object-center" />
-                    <img src="/images/campus-now-3.png" alt="" class="xl:h-[490px] xs:h-[164px]    object-cover object-center" />
+                    <img src="/images/campus-now-2.png" alt="" class="xl:h-[490px] xs:h-[164px] xs:w-full object-cover object-center" />
+                    <img src="/images/campus-now-3.png" alt="" class="xl:h-[490px] xs:h-[164px] xs:w-full object-cover object-center" />
                 </div>
             </div>
 
@@ -190,10 +191,10 @@ const currentPath = Astro.url.pathname;
             </div>
             
            
-            
+            <!-- <College_Logo_Swiper client:visible /> -->
             <!-- <MySwiper client:load /> -->
             <div class="xl:hidden xs:block">
-                <College_Logo_Swiper client:visible />
+                <MySwiper client:load />
             </div>
 
             <!-- desktop view -->

@@ -372,6 +372,18 @@
     background: url('../../../public/images/Chevron Right.png'), lightgray 50% / contain no-repeat;
 }
 
+.swiper-pagination-bullet {
+    width: 11px !important;
+    height: 11px !important;
+    opacity: 1 !important;
+    background: rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid #fff !important;
+}
+
+.swiper-pagination-bullet-active {
+    background: #fff !important;
+  }
+
   
 /* xs:py-5 xl:py-0 h-0 overflow-hidden, */
 
