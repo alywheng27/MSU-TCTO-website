@@ -10,6 +10,7 @@ import MainVideo from '../components/MainVideo.astro';
 
 import Old_Campus_Swiper from "../components/old_campus_swiper.jsx";
 import College_Logo_Swiper from "../components/college_logo_swiper.jsx";
+import MySwiper from "../components/MySwiper.jsx";
 
 const currentPath = Astro.url.pathname;
 
@@ -51,11 +52,11 @@ const currentPath = Astro.url.pathname;
         </div>
 
 
-        <div class="flex gap-[30px] justify-center mt-[40px] mb-[57px] ">
+        <!-- <div class="flex gap-[30px] justify-center mt-[40px] mb-[57px] ">
             <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px]  xl:rounded-[40px] xs:rounded-[40px] border-white border-2"></a>
             <a href="#" class=" bg-white xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
             <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
-        </div>
+        </div> -->
 
 
         <div class="flex flex-col items-center xl:mt-[40px] xs:mt-[66px] xl:mb-[57px] xs:mb-[50px] xs:mx-[25px] xs:text-left">
@@ -72,11 +73,11 @@ const currentPath = Astro.url.pathname;
             <div class="flex xl:flex-row justify-center xs:flex-col">
                 
                 <div>
-                    <img src="/images/campus-now-1.png" alt="" class="xl:h-[980px] object-cover object-center" />
+                    <img src="/images/campus-now-1.png" alt="" class="xl:h-[980px] xs:w-full object-cover object-center" />
                 </div>
                 <div class="flex xl:flex-col justify-center xs:flex-row ">
-                    <img src="/images/campus-now-2.png" alt="" class="xl:h-[490px] xs:h-[164px]   object-cover object-center" />
-                    <img src="/images/campus-now-3.png" alt="" class="xl:h-[490px] xs:h-[164px]    object-cover object-center" />
+                    <img src="/images/campus-now-2.png" alt="" class="xl:h-[490px] xs:h-[164px] xs:w-full object-cover object-center" />
+                    <img src="/images/campus-now-3.png" alt="" class="xl:h-[490px] xs:h-[164px] xs:w-full object-cover object-center" />
                 </div>
             </div>
 
@@ -91,7 +92,7 @@ const currentPath = Astro.url.pathname;
                 <a href="" class="paragraph xl:p1 xs:p2 text-white-pure py-[10.5px] px-[90px] mt-[50px] border rounded-[40px]">Check our Campus Gallery</a>
             </div>
         </div>
-        <div class="bg-white-pure flex flex-col items-center text-center pb-[71px]">
+        <div id="mv" class="bg-white-pure flex flex-col items-center text-center pb-[71px]">
             <h3 class="headings xl:h3 xs:h4 xs:max-w-[353px] text-msu-maroon xl:max-w-[720px] mt-20">The same vision with a better mission</h3>
             <h4 class="headings h4 text-msu-rusty-red max-w-[720px] mt-20">VISION</h4>
             <p class="paragraph p1 text-black-pure xl:max-w-[720px] xs:max-w-[325px] mt-10">A university in the Sulu Archipelago renowned for Fisheries, Marine and Environmental Science and other disciplines.</p>
@@ -108,7 +109,7 @@ const currentPath = Astro.url.pathname;
             </p>
         </div>
 
-        <div class="bg-black-pure flex flex-col  items-center xl:px-[358px] xs:px-[44px] gap-[80px] " >
+        <div id="hymn" class="bg-black-pure flex flex-col  items-center xl:px-[358px] xs:px-[44px] gap-[80px] " >
             <div class="">
                 <h4 class="headings text-msu-maroon h3 mt-[80px] xl:w-[718px] xs:w-[412px] text-center">The MSU Hymn</h4>
             </div>
@@ -190,10 +191,10 @@ const currentPath = Astro.url.pathname;
             </div>
             
            
-            
+            <!-- <College_Logo_Swiper client:visible /> -->
             <!-- <MySwiper client:load /> -->
             <div class="xl:hidden xs:block">
-                <College_Logo_Swiper client:visible />
+                <MySwiper client:load />
             </div>
 
             <!-- desktop view -->

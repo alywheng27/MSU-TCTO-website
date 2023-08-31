@@ -1,5 +1,5 @@
 // import Swiper core and required modules
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import { Navigation, Pagination, Autoplay, Scrollbar, A11y } from 'swiper/modules';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -13,7 +13,7 @@ export default function MySwiper() {
   return (
     <Swiper
     // install Swiper modules
-    modules={[Navigation]}
+    modules={[Navigation, Autoplay]}
     spaceBetween={50}
     slidesPerView={1}
     navigation
@@ -22,6 +22,10 @@ export default function MySwiper() {
     onSwiper={(swiper) => console.log(swiper)}
     onSlideChange={() => console.log('slide change')}
     loop={true}
+    autoplay={{
+        delay: 5000,
+        disableOnInteraction: false,
+    }}
     fade = {true}
     >
 
