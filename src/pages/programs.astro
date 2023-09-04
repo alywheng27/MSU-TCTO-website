@@ -5,6 +5,7 @@ import AcademicCalendar from '../components/AcademicCalendar.astro';
 import MainVideo from "../components/MainVideo.astro";
 import FooterNav from "../components/FooterNav.astro";
 import Footer from "../components/Footer.astro";
+import ProgramsDropDown from "../components/programsDropDown";
 import '../styles/css/global.css';
 
 const currentPath = Astro.url.pathname;
@@ -211,6 +212,7 @@ const currentPath = Astro.url.pathname;
                 <a href="" class="bg-transparent border paragraph xl:p1 xs:p2 gap-10 text-silver py-[10.5px] px-[60px] rounded-[40px]">Contact us now!</a>
             
             </div>
+            <!-- <ProgramsDropDown client:visible /> -->
         </div>
 <!-- end fold 03 -->
 

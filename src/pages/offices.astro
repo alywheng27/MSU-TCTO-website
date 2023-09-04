@@ -5,6 +5,7 @@ import ChancellorMessage from "../components/ChancellorMessage.astro";
 import MainVideo from "../components/MainVideo.astro";
 import FooterNav from "../components/FooterNav.astro";
 import Footer from "../components/Footer.astro";
+import FacultyAndStaff from "../components/FacultyAndStaff";
 import '../styles/css/global.css';
 
 const currentPath = Astro.url.pathname;
@@ -129,104 +130,11 @@ const currentPath = Astro.url.pathname;
             
             <div class="text-center xl:px-[12.5%] xl:mb-[40px] xs:mb-[75px] xs:px-[3.85%]  xl:bg-none">
                 <h4 class="headings xl:h4 xs:h4 text-white-pure xl:mb-[80px] xs:mb-[80px]">Faculty & Staff</h4>
-                <div class="flex gap-[124px] justify-center xl:mb-[80px] xs:mb-[80px] xl:ml-0 xs:ml-0 xl:mt-0 xs:mt-10">
-                    <p class="paragraph xl:p1 xs:h4 text-white-pure text-center">IICT</p>
-                    <p class="paragraph xl:p1 xs:p2 text-msu-gold text-center xl:block xs:hidden">CAS</p>
-                    <p class="paragraph xl:p1 xs:p2 text-white-pure text-center xl:block xs:hidden">COF</p>
-                    <p class="paragraph xl:p1 xs:p2 text-white-pure text-center xl:block xs:hidden">COED</p>
-                    <p class="paragraph xl:p1 xs:p2 text-white-pure text-center xl:block xs:hidden">IOES</p>
-                    <p class="paragraph xl:p1 xs:p2 text-white-pure text-center xl:block xs:hidden">CIAS</p>
-                    
-                </div>
-                <h4 class="headings xl:h4 xs:h4 text-white-pure xl:mb-[40px]">Institute of Information and Communication Technology</h4>
+                <FacultyAndStaff client:visible />
             </div>
-            <div class="grid grid-col-4 xl:flex-row xs:flex-col xl:gap-[24px] xl:mx-[240px] xs:mx-[10px] xl:mb-[117px]  items-center">
-                <div class="flex xl:flex-row xs:flex-col ">
-                    <div class="flex ">
-                        <img src="/images/article-img-1.png" alt="" class="xl:ml-10 xl:h-[160px] xs:h-[170px]">
-                        <div class="ml-5">
-                            <p class="paragraph xl:p2 xs:p2 max-w-[220px]  text-white-pure mt-[15px] max-h-[142px] overflow-hidden">
-                                Full Name
-                            </p>
-                            <p class="paragraph xl:p2 xs:p2 max-w-[220px] text-white-pure mt-[5px] max-h-[142px] overflow-hidden">
-                                Teaching Level
-                            </p>
-                            <p class="paragraph xl:p2 xs:p2 max-w-[220px] text-white-pure mt-[5px] max-h-[142px] overflow-hidden">
-                                Advisory
-                                Year Started
-                            </p>
-                            <p class="paragraph xl:p2 xs:p2 max-w-[220px] text-white-pure mt-[5px] max-h-[142px] overflow-hidden">
-                                Year Started
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex ">
-                        <img src="/images/article-img-1.png" alt="" class="xl:ml-10 xl:h-[160px] xs:h-[170px]">
-                        <div class="ml-5">
-                            <p class="paragraph xl:p2 xs:p2 max-w-[220px]  text-white-pure mt-[15px] max-h-[142px] overflow-hidden">
-                                Full Name
-                            </p>
-                            <p class="paragraph xl:p2 xs:p2 max-w-[220px] text-white-pure mt-[5px] max-h-[142px] overflow-hidden">
-                                Teaching Level
-                            </p>
-                            <p class="paragraph xl:p2 xs:p2 max-w-[220px] text-white-pure mt-[5px] max-h-[142px] overflow-hidden">
-                                Advisory
-                                Year Started
-                            </p>
-                            <p class="paragraph xl:p2 xs:p2 max-w-[220px] text-white-pure mt-[5px] max-h-[142px] overflow-hidden">
-                                Year Started
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex ">
-                        <img src="/images/article-img-1.png" alt="" class="xl:ml-10 xl:h-[160px] xs:h-[170px]">
-                        <div class="ml-5">
-                            <p class="paragraph xl:p2 xs:p2 max-w-[220px]  text-white-pure mt-[15px] max-h-[142px] overflow-hidden">
-                                Full Name
-                            </p>
-                            <p class="paragraph xl:p2 xs:p2 max-w-[220px] text-white-pure mt-[5px] max-h-[142px] overflow-hidden">
-                                Teaching Level
-                            </p>
-                            <p class="paragraph xl:p2 xs:p2 max-w-[220px] text-white-pure mt-[5px] max-h-[142px] overflow-hidden">
-                                Advisory
-                                Year Started
-                            </p>
-                            <p class="paragraph xl:p2 xs:p2 max-w-[220px] text-white-pure mt-[5px] max-h-[142px] overflow-hidden">
-                                Year Started
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex ">
-                        <img src="/images/article-img-1.png" alt="" class="xl:ml-10 xl:h-[160px] xs:h-[170px]">
-                        <div class="ml-5">
-                            <p class="paragraph xl:p2 xs:p2 max-w-[220px]  text-white-pure mt-[15px] max-h-[142px] overflow-hidden">
-                                Full Name
-                            </p>
-                            <p class="paragraph xl:p2 xs:p2 max-w-[220px] text-white-pure mt-[5px] max-h-[142px] overflow-hidden">
-                                Teaching Level
-                            </p>
-                            <p class="paragraph xl:p2 xs:p2 max-w-[220px] text-white-pure mt-[5px] max-h-[142px] overflow-hidden">
-                                Advisory
-                                Year Started
-                            </p>
-                            <p class="paragraph xl:p2 xs:p2 max-w-[220px] text-white-pure mt-[5px] max-h-[142px] overflow-hidden">
-                                Year Started
-                            </p>
-                        </div>
-                    </div>
-                </div>
-               
-               
-				
-                
-            </div>
-            <div class="flex gap-[30px] justify-center mt-[40px] mb-[57px] ">
-                <a href="#" class="border-transparent xl:py-[10px] xl:px-[10px] xs:py-[8px] xs:px-[8px]  xl:rounded-[40px] xs:rounded-[40px] border-white border-2"></a>
-                <a href="#" class=" bg-white xl:py-[10px] xl:px-[10px] xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
-                <a href="#" class="border-transparent xl:py-[10px] xl:px-[10px] xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
-                <a href="#" class="border-transparent xl:py-[10px] xl:px-[10px] xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
-            </div>
+
         </div>
+        
 <!-- end Faculty -->
 	
 
