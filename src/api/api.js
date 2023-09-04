@@ -706,7 +706,7 @@ export async function get1_6LatestAnnualReport() {
 }
 
 export async function getFacultyAndStaff(college) {
-  const query = groq`*[_type == "facultyAndStaff" && college._ref in *[_type=="college" && college=="${college}"]._id] | order(name desc) {
+  const query = groq`*[_type == "facultyAndStaff" && college._ref in *[_type=="college" && college=="${college}"]._id] | order(name asc) {
     name,
     teachingLevel,
     advisory,
