@@ -40,7 +40,7 @@ export default function MySwiper() {
                 </div>
                 <div class="flex flex-col gap-[20px] justify-center">
                     <div class="flex justify-center  mx-[41px]">
-                        <a href="#" class="paragraph p1 bg-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px]">Check our Enrollment Procedures</a>
+                        <a href="/cas#college_contact_details_cas#" class="paragraph p1 bg-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px]">Contact Us</a>
                         </div>
                     <div class="flex justify-center mx-[41px]">
                         <a href="#" class="paragraph p1 bg-transparent text-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px] border border-msu-white-pure">Administrative Offices</a>
@@ -59,7 +59,7 @@ export default function MySwiper() {
                 </div>
                 <div class="flex flex-col gap-[20px] justify-center">
                     <div class="flex justify-center  mx-[41px]">
-                        <a href="#" class="paragraph p1 bg-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px]">Check our Enrollment Procedures</a>
+                        <a href="/cias#college_contact_details_cias#" class="paragraph p1 bg-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px]">Contact Us</a>
                         </div>
                     <div class="flex justify-center mx-[41px]">
                         <a href="#" class="paragraph p1 bg-transparent text-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px] border border-msu-white-pure">Administrative Offices</a>
@@ -78,7 +78,7 @@ export default function MySwiper() {
                 </div>
                 <div class="flex flex-col gap-[20px] justify-center">
                     <div class="flex justify-center  mx-[41px]">
-                        <a href="#" class="paragraph p1 bg-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px]">Check our Enrollment Procedures</a>
+                        <a href="/coed#college_contact_details_coed#" class="paragraph p1 bg-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px]">Contact Us</a>
                         </div>
                     <div class="flex justify-center mx-[41px]">
                         <a href="#" class="paragraph p1 bg-transparent text-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px] border border-msu-white-pure">Administrative Offices</a>
@@ -97,7 +97,7 @@ export default function MySwiper() {
                 </div>
                 <div class="flex flex-col gap-[20px] justify-center">
                     <div class="flex justify-center  mx-[41px]">
-                        <a href="#" class="paragraph p1 bg-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px]">Check our Enrollment Procedures</a>
+                        <a href="/cof#college_contact_details_cof#" class="paragraph p1 bg-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px]">Contact Us</a>
                         </div>
                     <div class="flex justify-center mx-[41px]">
                         <a href="#" class="paragraph p1 bg-transparent text-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px] border border-msu-white-pure">Administrative Offices</a>
@@ -117,7 +117,7 @@ export default function MySwiper() {
                 </div>
                 <div class="flex flex-col gap-[20px] justify-center">
                     <div class="flex justify-center  mx-[41px]">
-                        <a href="#" class="paragraph p1 bg-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px]">Check our Enrollment Procedures</a>
+                        <a href="/iict#college_contact_details_iict#" class="paragraph p1 bg-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px]">Contact Us</a>
                         </div>
                     <div class="flex justify-center mx-[41px]">
                         <a href="#" class="paragraph p1 bg-transparent text-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px] border border-msu-white-pure">Administrative Offices</a>
@@ -137,7 +137,7 @@ export default function MySwiper() {
                 </div>
                 <div class="flex flex-col gap-[20px] justify-center">
                     <div class="flex justify-center  mx-[41px]">
-                        <a href="#" class="paragraph p1 bg-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px]">Check our Enrollment Procedures</a>
+                        <a href="/ioes#college_contact_details_ioes#" class="paragraph p1 bg-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px]">Contact Us</a>
                         </div>
                     <div class="flex justify-center mx-[41px]">
                         <a href="#" class="paragraph p1 bg-transparent text-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px] border border-msu-white-pure">Administrative Offices</a>
