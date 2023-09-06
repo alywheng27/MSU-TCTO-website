@@ -235,7 +235,7 @@ export async function get3LatestNews() {
 }
 
 export async function getLatestFeaturedArticle() {
-  const query = groq`*[_type == "article" && featured == true] | order(publishedAt asc)[0] {
+  const query = groq`*[_type == "article" && featured == true] | order(publishedAt desc)[0] {
     title,
     slug{
       current
