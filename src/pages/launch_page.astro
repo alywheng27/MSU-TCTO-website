@@ -1,0 +1,72 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from "../components/Navbar";
+import ChancellorMessage from "../components/ChancellorMessage.astro";
+import MainVideo from "../components/MainVideo.astro";
+import FooterNav from "../components/FooterNav.astro";
+import Footer from "../components/Footer.astro";
+import '../styles/css/global.css';
+
+const currentPath = Astro.url.pathname;
+
+import { urlForImage } from '../api/api';
+import { getYear } from '../js/date';
+import { getWordMonth } from '../js/date';
+import { getDay } from '../js/date';
+
+import { get3LatestArticle } from '../api/api';
+import { getLatestFeaturedArticle } from '../api/api';
+import { get4UpcomingEvents } from '../api/api';
+import { get3LatestGazette } from '../api/api';
+import { get3LatestAnnualReport } from '../api/api';
+
+const threeLatestArticles = await get3LatestArticle();
+const latestFeaturedArticle = await getLatestFeaturedArticle();
+const fourUpcomingEvents = await get4UpcomingEvents();
+const threeLatestGazette = await get3LatestGazette();
+const threeLatestAnnualReport = await get3LatestAnnualReport();
+---
+
+<Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
+	<main>
+        <div class="flex flex-col justify-center items-center text-center mt-[50px]">
+            <img src="/images/MSU Seal New (Official).png" alt="" class="xl:h-[170px] xs:h-[127px] mb-10"></img>
+        </div>
+		<div class=" ">
+			<div class="flex flex-col xl:px-[12.5%] pt-10   ">
+
+
+                
+                
+                <div class="flex  justify-center xl:block mb-10  ">
+                
+                    <h4 class="headings text-msu-golden-fog h4 xl:text-jusity xs:text-center mb-[20px]">LAUNCHING OF THE NEW WEBSITE</h4>
+                    <h3 class="headings text-msu-gold h3 xl:text-jusity xs:text-center">MINDANAO STATE UNIVERSITY</h3>
+                    <h4 class="headings text-msu-golden-fog  h4 xl:text-jusity xs:text-center">TAWI-TAWI COLLEGE OF TECHNOLOGY AND OCEANOGRAPHY</h4>
+                    <!-- <h3 class="headings text-msu-gold h3 xl:text-jusity xs:text-center mt-[25px]">WEBSITE</h3> -->
+
+                    <div class="flex justify-center">
+
+                        <div class="relative xl:mt-0 xs:mt-[15px]">
+                            <input type="text" placeholder="www.msutawi-tawi.edu.ph" class=" xl:py-[14.5px] xs:py-5 xl:w-[720px] text-center rounded-[40px] xl:ml-10 xl:mt-[50px] xs:mt-[10px] paragraph xl:p1 xs:p2 border "  /> 
+                          
+                        </div>
+                    </div> 
+
+                    <div class="flex justify-center mt-[20px] mb-[20px]  ">
+                        
+						<a href="https://msutawi-tawi.netlify.app/" class="bg-msu-maroon text-white-pure xl:py-[14.5px] xs:py-5 xl:w-[360px] text-center rounded-[40px] paragraph h4 ">LAUNCH ME</a>
+
+                    </div> 
+                </div>
+			</div>
+		</div>
+
+		
+<!-- Footer -->
+<!-- <Footer /> -->
+<!-- end Footer -->
+
+	</main>
+	
+</Layout>

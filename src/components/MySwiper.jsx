@@ -107,8 +107,9 @@ export default function MySwiper() {
 
         </SwiperSlide>
         <SwiperSlide className='flex justify-center'>
-
-            <div id="iict" class="msu-drop-white-shadow xs:w-[460px] xs:h-[658px]  xs:mb-[20px]">
+            
+            <div id="iict" class="msu-drop-white-shadow xs:w-[460px] xs:h-[658px] xs:mb-[20px] swiper-slide">
+            {/* <div id="iict" class="msu-drop-white-shadow xs:w-[460px] xs:h-[658px]  xs:mb-[20px]"> */}
                 <div class="flex xs:mx-[75px] xs:pt-[61px] justify-center">
                     <img src="/images/College Logo/LOGO IICT.png" alt="" class="xs:w-[242px] xs:h-[242px]"></img>
                 </div>
@@ -128,7 +129,8 @@ export default function MySwiper() {
         </SwiperSlide>
         <SwiperSlide className='flex justify-center'>
 
-            <div id="ioes" class="msu-drop-white-shadow xs:w-[460px] xs:h-[658px] xs:mb-[20px]">
+            <div id="ioes" class="msu-drop-white-shadow xs:w-[460px] xs:h-[658px] xs:mb-[20px] swiper-slide">
+            {/* <div id="ioes" class="msu-drop-white-shadow xs:w-[460px] xs:h-[658px] xs:mb-[20px]"> */}
                 <div class="flex xs:mx-[75px] xs:pt-[61px] justify-center">
                     <img src="/images/College Logo/LOGO IOES.png" alt="" class="xs:w-[242px] xs:h-[242px]"></img>
                 </div>
