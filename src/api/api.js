@@ -204,7 +204,7 @@ export async function get5LatestArticle() {
 }
 
 export async function get3_5LatestArticle() {
-  const query = groq`*[_type == "article"] | order(publishedAt desc)[3..5]{
+  const query = groq`*[_type == "article"] | order(publishedAt desc)[4..6]{
     title,
     slug{
       current
