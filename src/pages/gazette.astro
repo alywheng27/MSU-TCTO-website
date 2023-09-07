@@ -58,21 +58,19 @@ var x = null;
                     </div>
                 </div>
                     
-                <div class="flex xs:justify-center xs:my-[32px] xs:mx-[74px] xl:hidden xs:block  ">
+                <!-- <div class="flex xs:justify-center xs:my-[32px] xs:mx-[74px] xl:hidden xs:block  ">
 					<a href="#" class="bg-gradient-sky-space text-white-pure  xs:py-5  xs:px-[61.5px] rounded-[40px] paragraph xl:p1 xs:p2 xl:hidden xs:block">Read Now</a>
-				</div>
-                <div class="flex gap-[30px] justify-center mt-[40px] ">
+				</div> -->
+                <!-- <div class="flex gap-[30px] justify-center mt-[40px] ">
                     <a href="#" class=" bg-white xl:py-[10px] xl:px-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
                     <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xl:px-[10px] xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
                     <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xl:px-[10px] xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
-                
-                    
-                </div>
+                </div> -->
                 <div class="flex xs:flex-col xs:items-center xs:mt-[48px]  xl:mt-[0px] ">
                     <div class="flex">
                         <p class="paragraph xs:p2 text-white-pure   xl:hidden xs:block">PREVIOUS RELEASES</p>
                     </div> 
-                    <div class="flex">
+                    <!-- <div class="flex">
                         <select class=" flex  xs:flex-col xs:msu-drop-white-shadow  xs:w-[181px]  text-white-pure xs:px-[19px] xs:py-3 rounded-[40px] xl:hidden xs:block">
                             {
                                 yearGazette.map((gazette) => {
@@ -83,7 +81,7 @@ var x = null;
                                 })
                             }
                         </select>
-                    </div> 
+                    </div>  -->
                     
                 </div>
     
@@ -220,7 +218,7 @@ var x = null;
     
             </div> -->
             <!-- <GazetteTab client:visible /> -->
-            <div class="flex justify-center xl:py-[71px] xs:pt-[48px] ">
+            <div class="flex justify-center xl:py-[71px] xs:pt-[48px] my-5">
                 <div class="flex xl:flex-col">
                     <p class="paragraph p1 text-white-pure  xl:ml-[12px] xl:block xs:hidden mb-10">Previous Releases</p>
                     
@@ -250,7 +248,7 @@ var x = null;
                                 ];
                             }, index) => {
                                 if (index < 4) {
-                                    return <div id="2022" class="flex xl:flex-col xl:gap-[2px] xs:gap-[30px] ">
+                                    return <div id="2022" class="flex xl:flex-col xl:gap-[2px] xs:gap-[30px] mx-5">
                                         <div class="flex flex-col">
                                             <p id="gazetteDate" class="paragraph p2 text-white-pure xl:ml-[12px] xl:block xs:hidden">{ getYear(gaz.publishedAt) }</p>
                                             <a href={ gaz.file.asset.url } target="_blank"><img src={ gaz.mainImage.asset.url } class="xl:max-w-[203px] xl:max-h-[286px] xs:max-w-[110px] xs:max-h-[155px]" alt="" /></a>
@@ -272,7 +270,7 @@ var x = null;
                                         </div> 
                                     </div>
                                 }else {
-                                    return <div id="2022" class="xl:flex xs:hidden xl:flex-col xl:gap-[2px] xs:gap-[30px] ">
+                                    return <div id="2022" class="flex xl:flex-col xl:gap-[2px] xs:gap-[30px] mx-5">
                                         <div class="flex flex-col">
                                             <p id="gazetteDate" class="paragraph p2 text-white-pure xl:ml-[12px] xl:block xs:hidden">{ getYear(gaz.publishedAt) }</p>
                                             <a href={ gaz.file.asset.url } target="_blank"><img src={ gaz.mainImage.asset.url } class="xl:max-w-[203px] xl:max-h-[286px] xs:max-w-[110px] xs:max-h-[155px]" alt="" /></a>
