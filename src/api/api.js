@@ -111,7 +111,7 @@ export async function getSingleOldestArticle() {
 
 // latest 4 documents
 export async function get4LatestArticles() {
-  const query = groq`*[_type == "article"] | order(publishedAt desc)[1..4]{
+  const query = groq`*[_type == "article"] | order(publishedAt desc){
     title,
     slug{
       current
