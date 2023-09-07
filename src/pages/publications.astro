@@ -88,7 +88,7 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
         </div>
 
         <div class="flex  flex-col items-center  mt-10">
-            <h3 class="headings xl:h3 xs:h5 text-msu-gold ">Article</h3>
+            <h3 class="headings xl:h3 xs:h5 text-msu-gold xl:block xs:hidden">Article</h3>
 
             <div class="flex flex-col items-center xl:mt-[40px] xl:px-[12.5%] xs:px-[15px] xs:gap-[30px]">
                 <div class="flex mt-10">
@@ -122,24 +122,24 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
                                     </p>
                                 </div>
                             }else {
-                                return <div id="active" class="flex flex-col">
-                                    <img src={ urlForImage(article.mainImage.asset.url).width(480).height(320).fit('crop').crop('center').url() } alt="" class="object-cover object-center" />
-                                    <a href={`/${article.slug.current}`}><h4 class="headings xl:h5 xs:h6 mt-10 xl:max-w-[470px] xl:max-h-[52px] overflow-hidden">{ article.title }</h4></a>
-                                    <p class="paragraph xl:p2 xs:p3 xl:max-w-[470px] xl:max-h-[60px] xs:max-h-[36px] overflow-hidden text-titanium mt-[10px]">
-                                        { article.body[0].children[0].text }
-                                    </p>
-                                </div>
+                                // return <div id="active" class="flex flex-col">
+                                //     <img src={ urlForImage(article.mainImage.asset.url).width(480).height(320).fit('crop').crop('center').url() } alt="" class="object-cover object-center" />
+                                //     <a href={`/${article.slug.current}`}><h4 class="headings xl:h5 xs:h6 mt-10 xl:max-w-[470px] xl:max-h-[52px] overflow-hidden">{ article.title }</h4></a>
+                                //     <p class="paragraph xl:p2 xs:p3 xl:max-w-[470px] xl:max-h-[60px] xs:max-h-[36px] overflow-hidden text-titanium mt-[10px]">
+                                //         { article.body[0].children[0].text }
+                                //     </p>
+                                // </div>
                             }
                             
 						})
 					}
                     
                 </div>
-                <div class="flex gap-[30px] justify-center mt-[40px] ">
+                <!-- <div class="flex gap-[30px] justify-center mt-[40px] ">
                     <a href="#" class=" bg-white xl:py-[10px] xl:px-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
                     <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xl:px-[10px] xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
                     <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xl:px-[10px] xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
-                </div>
+                </div> -->
 
 
                 <div class="flex xl:mt-20 xs:mt-[20px] ">
@@ -212,8 +212,8 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
                         }
                     </div>
                 </div>
-                <div class="mt-[50px] text-center ml-[110px] mb-[80px]">
-                    <a href="/articles" class="bg-transparent border paragraph p1 py-[14px] px-[139px] text-white-pure rounded-[40px]">More Articles</a>
+                <div class="mt-[50px] text-center mb-[80px]">
+                    <a href="/articles" class="bg-transparent border paragraph xl:p1 xs:p2 py-[14px] xl:px-[139px] xs:px-[30px] text-white-pure rounded-[40px]">More Articles</a>
                 </div>
             </div>
         </div>
