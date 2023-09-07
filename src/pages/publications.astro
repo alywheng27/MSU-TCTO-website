@@ -122,13 +122,13 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
                                     </p>
                                 </div>
                             }else {
-                                // return <div id="active" class="flex flex-col">
-                                //     <img src={ urlForImage(article.mainImage.asset.url).width(480).height(320).fit('crop').crop('center').url() } alt="" class="object-cover object-center" />
-                                //     <a href={`/${article.slug.current}`}><h4 class="headings xl:h5 xs:h6 mt-10 xl:max-w-[470px] xl:max-h-[52px] overflow-hidden">{ article.title }</h4></a>
-                                //     <p class="paragraph xl:p2 xs:p3 xl:max-w-[470px] xl:max-h-[60px] xs:max-h-[36px] overflow-hidden text-titanium mt-[10px]">
-                                //         { article.body[0].children[0].text }
-                                //     </p>
-                                // </div>
+                                return <div id="active" class="flex flex-col">
+                                    <img src={ urlForImage(article.mainImage.asset.url).width(480).height(320).fit('crop').crop('center').url() } alt="" class="object-cover object-center" />
+                                    <a href={`/${article.slug.current}`}><h4 class="headings xl:h5 xs:h6 mt-10 xl:max-w-[470px] xl:max-h-[52px] overflow-hidden">{ article.title }</h4></a>
+                                    <p class="paragraph xl:p2 xs:p3 xl:max-w-[470px] xl:max-h-[60px] xs:max-h-[36px] overflow-hidden text-titanium mt-[10px]">
+                                        { article.body[0].children[0].text }
+                                    </p>
+                                </div>
                             }
                             
 						})

@@ -38,8 +38,8 @@ const fourLatestArticles = await get4LatestArticles();
                     
                 </div>
             </div>
-            <div class="flex mx-[240px] mt-[120px]  xl:block xs:hidden">
-                <div class="grid grid-cols-2 gap-y-10 xs:gap-[20px]">
+            <div class="flex xl:mx-[240px] xs:mx-5 mt-[120px]">
+                <div class="grid xl:grid-cols-2 xs:grid-cols-1 gap-y-10 xs:gap-[20px]">
                     {
                         fourLatestArticles.map((article: { 
                             title: unknown; 
@@ -72,11 +72,11 @@ const fourLatestArticles = await get4LatestArticles();
                     }
                 </div>
             </div>
-            <div class="flex gap-[30px] justify-center mt-[40px] ">
+            <!-- <div class="flex gap-[30px] justify-center mt-[40px] ">
                 <a href="#" class=" bg-white xl:py-[10px] xl:px-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
                 <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xl:px-[10px] xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
                 <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xl:px-[10px] xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
-            </div>
+            </div> -->
 
             <!-- <div class="flex justify-center mt-20">
                 <div class="flex xl:flex-row xs:flex-col w-[1440px]">
