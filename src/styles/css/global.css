@@ -358,7 +358,7 @@
 }
 
 .nav.active {
-    @apply xs:py-5 xs:h-[404px] xl:h-0;
+    @apply xs:py-5 xs:h-[300px] xl:h-0;
     transition: .3s ease-in-out;
 }
 
