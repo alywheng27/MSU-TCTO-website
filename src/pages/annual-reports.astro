@@ -114,7 +114,7 @@ const one_sixLatestAnnualReport = await get1_6LatestAnnualReport();
                     <div class="flex xl:flex-col">
                         <p class="paragraph p1 text-white-pure  xl:ml-[12px] xl:block xs:hidden mb-10">Previous Releases</p>
                         
-                        <div class="flex xl:flex-row xs:flex-col ">
+                        <div class="grid xl:grid-cols-4 xs:grid-cols-1">
                             {
                                 one_sixLatestAnnualReport.map((annualReport: {
                                     title: unknown;

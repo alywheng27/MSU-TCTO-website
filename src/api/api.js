@@ -564,6 +564,27 @@ export async function getLatestGazette() {
   return latestGazette;
 }
 
+export async function getAllGazette() {
+  const query = groq`*[_type == "gazette"] | order(publishedAt desc) {
+    title,
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url},
+    },
+    mainImage{
+      asset->,
+    },
+    file{asset->{url}},
+    publishedAt,
+    gazetteQuarter->{gazetteQuarter},
+  }`;
+
+  const allGazette = await useSanityClient().fetch(query);
+  return allGazette;
+}
+
 export async function get3LatestGazette() {
   const query = groq`*[_type == "gazette"] | order(publishedAt desc)[0..2] {
     title,
