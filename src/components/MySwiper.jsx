@@ -42,9 +42,9 @@ export default function MySwiper() {
                     <div class="flex justify-center  mx-[41px]">
                         <a href="/cas#college_contact_details_cas#" class="paragraph p1 bg-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px]">Contact Us</a>
                         </div>
-                    <div class="flex justify-center mx-[41px]">
+                    {/* <div class="flex justify-center mx-[41px]">
                         <a href="#" class="paragraph p1 bg-transparent text-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px] border border-msu-white-pure">Administrative Offices</a>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 
@@ -61,9 +61,9 @@ export default function MySwiper() {
                     <div class="flex justify-center  mx-[41px]">
                         <a href="/cias#college_contact_details_cias#" class="paragraph p1 bg-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px]">Contact Us</a>
                         </div>
-                    <div class="flex justify-center mx-[41px]">
+                    {/* <div class="flex justify-center mx-[41px]">
                         <a href="#" class="paragraph p1 bg-transparent text-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px] border border-msu-white-pure">Administrative Offices</a>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </SwiperSlide>
@@ -80,9 +80,9 @@ export default function MySwiper() {
                     <div class="flex justify-center  mx-[41px]">
                         <a href="/coed#college_contact_details_coed#" class="paragraph p1 bg-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px]">Contact Us</a>
                         </div>
-                    <div class="flex justify-center mx-[41px]">
+                    {/* <div class="flex justify-center mx-[41px]">
                         <a href="#" class="paragraph p1 bg-transparent text-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px] border border-msu-white-pure">Administrative Offices</a>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </SwiperSlide>
@@ -99,9 +99,9 @@ export default function MySwiper() {
                     <div class="flex justify-center  mx-[41px]">
                         <a href="/cof#college_contact_details_cof#" class="paragraph p1 bg-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px]">Contact Us</a>
                         </div>
-                    <div class="flex justify-center mx-[41px]">
+                    {/* <div class="flex justify-center mx-[41px]">
                         <a href="#" class="paragraph p1 bg-transparent text-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px] border border-msu-white-pure">Administrative Offices</a>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 
@@ -120,9 +120,9 @@ export default function MySwiper() {
                     <div class="flex justify-center  mx-[41px]">
                         <a href="/iict#college_contact_details_iict#" class="paragraph p1 bg-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px]">Contact Us</a>
                         </div>
-                    <div class="flex justify-center mx-[41px]">
+                    {/* <div class="flex justify-center mx-[41px]">
                         <a href="#" class="paragraph p1 bg-transparent text-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px] border border-msu-white-pure">Administrative Offices</a>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 
@@ -141,9 +141,9 @@ export default function MySwiper() {
                     <div class="flex justify-center  mx-[41px]">
                         <a href="/ioes#college_contact_details_ioes#" class="paragraph p1 bg-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px]">Contact Us</a>
                         </div>
-                    <div class="flex justify-center mx-[41px]">
+                    {/* <div class="flex justify-center mx-[41px]">
                         <a href="#" class="paragraph p1 bg-transparent text-white-pure w-[351px] py-[12.5px] px-[30.5px] rounded-[40px] border border-msu-white-pure">Administrative Offices</a>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 
