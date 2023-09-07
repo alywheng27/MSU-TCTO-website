@@ -65,7 +65,7 @@ const Navbar = (props) => {
 						<a href="/admissions" className='py-[15px]'>Admissions</a>
 						<a href="/programs" className='py-[15px]'>Programs</a>
 						<a href="/offices" className='py-[15px]'>Offices</a>
-						<a href="/publications" className='py-[15px]'>Publication</a>
+						<a href="/publications" className='py-[15px]'>Publications</a>
 						<a href="/campus" className='py-[15px]'>The Campus</a>
 						{/* <a href="/careers#" className='py-[15px]'>Careers</a> */}
 					</div>

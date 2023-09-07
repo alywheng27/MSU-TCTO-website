@@ -1,3 +1,9 @@
+---
+import { urlForImage } from '../api/api';
+
+import { get5LatestArticle } from '../api/api';
+const fiveLatestArticles = await get5LatestArticle();
+---
 <div class="bg-msu-deep-ocean text-white-pure">
 
 	<div class="flex flex-col xl:mx-[240px] xs:mx-[20px] xs:mt-[58px] xl:hidden xs:block ">
@@ -5,45 +11,83 @@
 	</div>
 
 	<div class="mb-[60px] xl:mt-[80px] xs:mt-[40px]">
-		<div class="flex xl:flex-row xs:flex-col xl:px-[240px] xs:px-[15px] xl:mb-[140px] xs:mb-[58px] xl:gap-[40px] xs:gap-[10px] ">
-			<div class="flex mb-[40px]">
-				
-				<img src="/images/article-img-1.png" alt="" class="xl:h-[200px] xs:h-[160px]"></img>
-				<div class="ml-5">
-					<h5 class="headings xl:h5 xs:h6 max-w-[220px]">Article Long Title </h5>
-					<p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[15px] max-h-[142px] overflow-hidden">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-				</div>
-			</div>
-			<div class="flex mb-[40px]">
-				
-				<img src="/images/article-img-1.png" alt="" class="xl:h-[200px] xs:h-[160px]"></img>
-				<div class="ml-5">
-					<h5 class="headings xl:h5 xs:h6 max-w-[220px]">Article Long Title </h5>
-					<p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[15px] max-h-[142px] overflow-hidden">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-				</div>
-			</div>
-			<div class="flex mb-[40px]">
-				
-				<img src="/images/article-img-1.png" alt="" class="xl:h-[200px] xs:h-[160px]"></img>
-				<div class="ml-5">
-					<h5 class="headings xl:h5 xs:h6 max-w-[220px]">Article Long Title </h5>
-					<p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[15px] max-h-[142px] overflow-hidden">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-				</div>
-			</div>
-			<div class="flex mb-[40px]">
-				<img src="/images/article-img-1.png" alt="" class="xl:h-[200px] xs:h-[160px]"></img>
-				<div class="ml-5">
-					<h5 class="headings xl:h5 xs:h6 max-w-[220px]">Article Long Title </h5>
-					<p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[15px] max-h-[142px] overflow-hidden">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-				</div>
-			</div>
-			<div class="flex mb-[40px]">
-				<img src="/images/article-img-1.png" alt="" class="xl:h-[200px] xs:h-[160px]"></img>
-				<div class="ml-5">
-					<h5 class="headings xl:h5 xs:h6 max-w-[220px]">Article Long Title </h5>
-					<p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[15px] max-h-[142px] overflow-hidden">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-				</div>
-			</div>
+
+		
+		<div class="flex xl:flex-row xs:flex-col items-center xl:px-[240px] xs:px-[15px] xl:mb-[140px] xs:mb-[58px] xl:gap-[40px] xs:gap-[10px] ">
+			{
+				fiveLatestArticles.map((article: {
+					title: unknown; 
+					body: [
+						{
+							children: [
+								{
+									text: unknown;
+								}
+							]
+						}
+					];
+					mainImage: {
+						asset: {
+							url: string
+						};
+					};
+					slug: {
+						current: unknown;
+					};
+				}) => (
+					<div class="flex mb-[40px]">
+						<img src={ urlForImage(article.mainImage.asset.url).url() } alt="" class="xl:h-[200px] xl:w-[200px] xs:h-[180px] xs:w-[180px] object-cover object-center"></img>
+						<div class="ml-5">
+							<a href={`/${article.slug.current}`}><h5 class="headings xl:h5 xs:h6 max-w-[220px] xl:max-h-[48px] xs:max-h-[29px] overflow-hidden">{ article.title }</h5></a>
+							<p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[15px] max-h-[142px] overflow-hidden">
+								{
+									article.body[0].children[0].text
+								}
+							</p>
+						</div>
+					</div>
+				))
+			}
 		</div>
+		<!-- <div class="flex xl:flex-row xs:flex-col xl:px-[240px] xs:px-[15px] xl:mb-[140px] xs:mb-[58px] xl:gap-[40px] xs:gap-[10px] ">
+			<div class="flex mb-[40px]">
+				
+				<img src="/images/article-img-1.png" alt="" class="xl:h-[200px] xs:h-[160px]"></img>
+				<div class="ml-5">
+					<h5 class="headings xl:h5 xs:h6 max-w-[220px]">Article Long Title </h5>
+					<p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[15px] max-h-[142px] overflow-hidden">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+				</div>
+			</div>
+			<div class="flex mb-[40px]">
+				
+				<img src="/images/article-img-1.png" alt="" class="xl:h-[200px] xs:h-[160px]"></img>
+				<div class="ml-5">
+					<h5 class="headings xl:h5 xs:h6 max-w-[220px]">Article Long Title </h5>
+					<p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[15px] max-h-[142px] overflow-hidden">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+				</div>
+			</div>
+			<div class="flex mb-[40px]">
+				
+				<img src="/images/article-img-1.png" alt="" class="xl:h-[200px] xs:h-[160px]"></img>
+				<div class="ml-5">
+					<h5 class="headings xl:h5 xs:h6 max-w-[220px]">Article Long Title </h5>
+					<p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[15px] max-h-[142px] overflow-hidden">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+				</div>
+			</div>
+			<div class="flex mb-[40px]">
+				<img src="/images/article-img-1.png" alt="" class="xl:h-[200px] xs:h-[160px]"></img>
+				<div class="ml-5">
+					<h5 class="headings xl:h5 xs:h6 max-w-[220px]">Article Long Title </h5>
+					<p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[15px] max-h-[142px] overflow-hidden">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+				</div>
+			</div>
+			<div class="flex mb-[40px]">
+				<img src="/images/article-img-1.png" alt="" class="xl:h-[200px] xs:h-[160px]"></img>
+				<div class="ml-5">
+					<h5 class="headings xl:h5 xs:h6 max-w-[220px]">Article Long Title </h5>
+					<p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[15px] max-h-[142px] overflow-hidden">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
+				</div>
+			</div>
+		</div> -->
 	</div>
 </div>

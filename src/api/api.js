@@ -172,6 +172,37 @@ export async function get3LatestArticle() {
   return threeLatestArticles;
 }
 
+export async function get5LatestArticle() {
+  const query = groq`*[_type == "article"] | order(publishedAt desc)[0..4]{
+    title,
+    slug{
+      current
+    },
+    author->{name},
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url},
+    },
+    mainImage{
+      asset->,
+      crop,
+      hotspot,
+    },
+    college->{college},
+    articleSubject->{subject},
+    topic->{topic},
+    category->{category},
+    publishedAt,
+    featured,
+    _createdAt,
+  }`;
+
+  const get5LatestArticle = await useSanityClient().fetch(query);
+  return get5LatestArticle;
+}
+
 export async function get3_5LatestArticle() {
   const query = groq`*[_type == "article"] | order(publishedAt desc)[3..5]{
     title,
