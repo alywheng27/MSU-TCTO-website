@@ -7,10 +7,10 @@ const HeroMainHeading = () => {
           Four decades of steadfast
           Excellence in Marine Sciences
       </h3>
-      <div className="mt-5 flex xl:flex-row xs:flex-col">
+      {/* <div className="mt-5 flex xl:flex-row xs:flex-col">
         <a href="#" className="bg-msu-maroon text-white-pure xl:py-[14.5px] xs:py-5 xl:w-[360px] text-center rounded-[40px] paragraph xl:p1 xs:p2">Enroll Now</a>
         <a href="#" className="text-white-pure xl:py-[14.5px] xs:py-5 xl:w-[360px] text-center rounded-[40px] xl:ml-10 xl:mt-0 xs:mt-[10px] paragraph xl:p1 xs:p2 border">Our Course Offerings</a>
-      </div>
+      </div> */}
     </div>
   )
 }

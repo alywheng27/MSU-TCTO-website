@@ -147,12 +147,12 @@ const threeLatestAnnualReport = await get3LatestAnnualReport();
 			<div class="flex xl:flex-row xs:flex-col xl:px-[12.5%] xs:px-[3.85%] pt-20 xl:bg-none xs:campuslife-bg-img">
 				<h3 class="headings xl:h3 xs:h4 xl:w-[414px] xl:text-jusity xs:text-center">Experience MSU-TCTO’s Campus Life</h3>
 				<div class=" xs:ml-0 xl:mt-0 xs:mt-10">
-					<p class="paragraph xl:p1 xs:p2 xl:w-[840px] text-titanium xl:mb-[41px] xs:mb-[58px]">
+					<p class="paragraph xl:p1 xs:p2 xl:w-[840px] text-titanium xl:mb-[41px] xs:mb-[58px] xl:ml-10">
 						As an innovative research university, MSU-TCTO offers a vibrant campus life at the heart of the Sulu Archipelago. Experience diverse cultures, engage in the rich heritage of Tawi-Tawians, and participate in community engagements. Your campus experiences will change your mind and enrich your heart forever.
 					</p>
-					<div class="flex xl:flex-row xs:flex-col">
+					<div class="flex xl:flex-row xs:flex-col justify-center">
 						<a href="/campus" class="bg-msu-maroon text-white-pure xl:py-[14.5px] xs:py-5 xl:w-[360px] text-center rounded-[40px] paragraph xl:p1 xs:p2">Explore The Campus</a>
-						<a href="/campus" class="text-white-pure xl:py-[14.5px] xs:py-5 xl:w-[360px] text-center rounded-[40px] xl:ml-10 xl:mt-0 xs:mt-[10px] paragraph xl:p1 xs:p2 border">Campus History</a>
+						<!-- <a href="/campus" class="text-white-pure xl:py-[14.5px] xs:py-5 xl:w-[360px] text-center rounded-[40px] xl:ml-10 xl:mt-0 xs:mt-[10px] paragraph xl:p1 xs:p2 border">Campus History</a> -->
 					</div>
 				</div>
 				<div class="bg-gradient-ocean h-20 rotate-180 xs:block xl:hidden"></div>
@@ -218,7 +218,7 @@ const threeLatestAnnualReport = await get3LatestAnnualReport();
 					<h4 class="headings xl:h4 xs:h5 text-white-pure xl:mb-[20px]"><a href="/gazette">Gazette</a></h4>
 					<div class="relative xl:w-[480px] xs:w-[300px]">
 						<!-- Add msu-drop-shadow on other image other than this gazette -->
-						<img src={ urlForImage(threeLatestGazette[0].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] z-20" alt="" />
+						<a href={threeLatestGazette[0].file.asset.url}><img src={ urlForImage(threeLatestGazette[0].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] z-20" alt="" /></a>
 						<img src={ urlForImage(threeLatestGazette[1].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] top-[15px] left-[15px] z-10" alt="" />
 						<img src={ urlForImage(threeLatestGazette[2].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] top-[30px] left-[30px] z-0" alt="" />
 					</div>
@@ -230,7 +230,7 @@ const threeLatestAnnualReport = await get3LatestAnnualReport();
 					<h4 class="headings xl:h4 xs:h5 text-white-pure xl:mb-[20px]"><a href="/annual-reports">Annual Report</a></h4>
 					<div class="relative xl:w-[480px] xs:w-[300px]">
 						<!-- Add msu-drop-shadow on other image other than this gazette -->
-						<img src={ urlForImage(threeLatestAnnualReport[0].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] z-20" alt="">
+						<a href={threeLatestAnnualReport[0].file.asset.url}><img src={ urlForImage(threeLatestAnnualReport[0].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] z-20" alt=""></a>
 						<img src={ urlForImage(threeLatestAnnualReport[1].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] top-[15px] left-[15px] z-10" alt="">
 						<img src={ urlForImage(threeLatestAnnualReport[2].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] top-[30px] left-[30px] z-0" alt="">
 					</div>
