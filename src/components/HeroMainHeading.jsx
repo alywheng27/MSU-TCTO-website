@@ -4,7 +4,7 @@ const HeroMainHeading = () => {
   return (
     <div className="absolute z-10 xl:top-[578px] xs:top-[490px] xl:w-[769px] xl:mx-[12.5%] xs:mx-[3.85%]">
       <h3 className="headings xl:h3 xs:h4">
-          Four decades of steadfast
+          Five decades of steadfast
           Excellence in Marine Sciences
       </h3>
       {/* <div className="mt-5 flex xl:flex-row xs:flex-col">
