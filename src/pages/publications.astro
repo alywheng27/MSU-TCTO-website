@@ -71,12 +71,10 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
                                 <h4 class="headings xl:h4 xs:h6">{ getDay(article.publishedAt) }</h4>
                             </div>
                             <div class="flex">
-                                <div class="xl:h-[360px] xs:h-[136px]">
-                                    <img src={ urlForImage(article.mainImage.asset.url).width(580).height(360).fit('crop').crop('center').url() } alt="" class="xl:max-h-[360px] object-cover object-center" />
-                                </div>
-                                <div class="ml-5">
-                                    <a href={`/${article.slug.current}`}><h4 class="headings xl:h4 xs:h6 xl:max-w-[720px] xl:max-h-[86px] overflow-hidden">{ article.title }</h4></a>
-                                    <p class="paragraph xl:p1 xs:p3 max-w-[720px] xl:max-h-[162px] xs:max-h-[50px] overflow-hidden text-titanium mt-[10px]">
+                                <img src={ urlForImage(article.mainImage.asset.url).url() } alt="" class="xl:max-w-[580px] xs:max-w-[163px] object-cover object-center"></img>
+                                <div class="ml-5 xl:max-w-[720px] xs:max-w-[180px]">
+                                    <a href={`/${article.slug.current}`}><h4 class="headings xl:h4 xs:h6 xl:max-h-[86px] overflow-hidden">{ article.title }</h4></a>
+                                    <p class="paragraph xl:p1 xs:p3 xl:max-h-[162px] xs:max-h-[50px] overflow-hidden text-titanium mt-[10px]">
                                         { article.body[0].children[0].text }
                                     </p>
                                 </div>
