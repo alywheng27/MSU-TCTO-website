@@ -42,7 +42,7 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
         <div class="flex flex-col items-center xl:px-[12.5%] xs:px-[3.85%]">
             <h3 class="headings xl:h3 xs:h5 text-msu-gold">Top News</h3>
 
-            <div class="flex flex-col items-center xl:mt-[40px] xl:px-[12.5%] xs:px-[15px] xs:gap-[30px]">
+            <div class="flex flex-col xl:items-center xs:items-start xl:mt-[40px] xl:px-[12.5%] xs:px-[15px] xs:gap-[30px]">
                 {
                     threeLatestNews.map((article: {
                         title: unknown; 
@@ -71,8 +71,8 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
                                 <h4 class="headings xl:h4 xs:h6">{ getDay(article.publishedAt) }</h4>
                             </div>
                             <div class="flex">
-                                <img src={ urlForImage(article.mainImage.asset.url).url() } alt="" class="xl:max-w-[580px] xs:max-w-[163px] object-cover object-center"></img>
-                                <div class="ml-5 xl:max-w-[720px] xs:max-w-[180px]">
+                                <img src={ urlForImage(article.mainImage.asset.url).url() } alt="" class="xl:max-w-[580px] xs:max-w-[220px] object-cover object-center"></img>
+                                <div class="ml-5 xl:max-w-[720px] xs:max-w-[480px]">
                                     <a href={`/${article.slug.current}`}><h4 class="headings xl:h4 xs:h6 xl:max-h-[86px] overflow-hidden">{ article.title }</h4></a>
                                     <p class="paragraph xl:p1 xs:p3 xl:max-h-[162px] xs:max-h-[50px] overflow-hidden text-titanium mt-[10px]">
                                         { article.body[0].children[0].text }
@@ -140,7 +140,7 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
                 </div> -->
 
 
-                <div class="flex xl:mt-20 xs:mt-[20px] ">
+                <div class="flex xl:mt-20 xs:mt-[20px] gap-x-5">
                     <div class="flex flex-col mt-[-40px]">
                         {
                             threeLatestArticles.map((article: {
