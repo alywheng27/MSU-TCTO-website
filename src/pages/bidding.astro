@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from "../components/Navbar";
+import FooterNav from "../components/FooterNav.astro";
+import Footer from "../components/Footer.astro";
+import '../styles/css/global.css';
+
+const currentPath = Astro.url.pathname;
+
+import { getBidding } from '../api/api';
+
+const bidding = await getBidding();
+---
+
+<Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
+	<main>
+		<Navbar path={currentPath} client:visible />
+
+        <div class="bg-white-pure w-full xl:px-[12.5%] xs:px-[3.85%] py-[80px]">
+            <h4 class="xl:h4 xs:h5 text-msu-maroon text-center">Approval for Posting</h4>
+			<div class="mt-16">
+				<div class="grid grid-cols-6 gap-x-5 gap-y-10">
+					{
+						bidding.map((bid: {
+							title: unknown; 
+                            file: {
+								asset: {
+									url: string;
+								}
+							};
+						}) => (
+							<a href={`${bid.file.asset.url}`} class="text-msu-rusty-red">{ bid.title }</a>
+						))
+					}
+				</div>
+			</div>
+        </div>
+
+
+
+<!-- FooterNaV -->
+        <FooterNav />
+<!-- end FooterNaV -->
+
+<!-- Footer -->
+		<Footer />
+<!-- end Footer -->
+
+	</main>
+	
+</Layout>

@@ -1,0 +1,75 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from "../components/Navbar";
+import FooterNav from "../components/FooterNav.astro";
+import Footer from "../components/Footer.astro";
+import '../styles/css/global.css';
+
+const currentPath = Astro.url.pathname;
+
+import { getBidding } from '../api/api';
+
+const bidding = await getBidding();
+---
+
+<Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
+	<main>
+		<Navbar path={currentPath} client:visible />
+
+        <div class="bg-msu-deep-ocean w-full xl:px-[12.5%] xs:px-[3.85%] xl:pt-20 xl:pb-20 xs:pt-0 xs:pb-20">
+            <h4 class="headings xl:h3 xs:h5 text-white-pure text-center">MIKROTIK</h4>
+			<div class="flex justify-center mt-10">
+                <img src="/images/mikrotik/mikrotik1.jpg" alt="" class="xl:max-w-[480px] xs:max-w-[480px] object-cover object-center" />
+                <img src="/images/mikrotik/mikrotik2.jpg" alt="" class="xl:max-w-[480px] xs:max-w-[480px] object-cover object-center xl:block xs:hidden" />
+                <img src="/images/mikrotik/mikrotik3.jpg" alt="" class="xl:max-w-[480px] xs:max-w-[480px] object-cover object-center xl:block xs:hidden" />
+            </div>
+            <div class="mt-10">
+                <p class="paragraph xl:p2 xs:p3 text-white-pure">
+                    𝗜𝗜𝗖𝗧 𝗳𝗮𝗰𝘂𝗹𝘁𝘆 𝗺𝗲𝗺𝗯𝗲𝗿𝘀 𝗮𝘁𝘁𝗲𝗻𝗱 𝗜𝗻𝘁𝗲𝗻𝘀𝗶𝘃𝗲 𝗠𝗶𝗸𝗿𝗼𝘁𝗶𝗸 𝗧𝗿𝗮𝗶𝗻𝗶𝗻𝗴, 𝗲𝗮𝗿𝗻 𝗰𝗲𝗿𝘁𝗶𝗳𝗶𝗰𝗮𝘁𝗶𝗼𝗻𝘀 𝗮𝘀 𝗠𝗶𝗸𝗿𝗼𝘁𝗶𝗸 𝗔𝗰𝗮𝗱𝗲𝗺𝘆 𝗧𝗿𝗮𝗶𝗻𝗲𝗿𝘀
+                    <br />
+                    <br />
+                    MSU-TCTO recently sent four (4) faculty members from the Institute of Information and Communications Technology to attend an Intensive Six-day Mikrotik Training and Certification Program from March 7 to 12.
+                    <br />
+                    <br />
+                    Held in Zamboanga City, the following faculty members attended the said training: Assoc. Prof. Charisa Llema-Abalie, Assoc. Prof. Nerico Mingoc, Mr. Al-kadra Antao and Ms. Irene Bakili 
+                    <br />
+                    <br />
+                    The training was hosted by the Department of Information and Communications Technology - Region 9 and BASULTA, in partnership with Handlink Inc, and was led by Engr. Roy Lopez Pamitalan, a Mikrotik Certified Trainer and Mikrotik Certified Academy Trainer. Engr. Pamitalan is renowned for his extensive knowledge and expertise in MikroTik RouterOS.
+                    <br />
+                    <br />
+                    The topic covered included: Mikrotik Certified Network Associate (MTCNA), Mikrotik Certified User Management Engineer (MTCUME), and Mikrotik Certified Routing Engineer (MTCRE). 
+                    <br />
+                    <br />
+                    IICT officials also participated in the workshops on planning, implementing, adjusting, and debugging user management configurations in the Mikrotik RouterOS. They were also exposed to how to configure, manage, and troubleshoot a Mikrotik device for routing, bridging tunneling, and Virtual Private Network (VPN).
+                    <br />
+                    <br />
+                    Following the hands-on training, the IICT faculty took and passed the examination and earned certifications as Mikrotik Academy Trainers. They also received certifications as a Mikrotik Certified Network Associate (MTCNA), Mikrotik Certified Routing Engineer (MTCRE), and Mikrotik Certified User Management Engineer (MTCUME).
+                    <br />
+                    <br />
+                    The University expects the faculty to apply and share their insights on Mikrotik as certified Mikrotik Academy Trainers that will help develop routers and wireless ISP systems.
+                    <br />
+                    <br />
+                    Contributor: Al-kadra Antao (faculty, IICT)
+                    <br />
+                    <br />
+                    <br />
+                    #𝗶𝗟𝗼𝘃𝗲𝗠𝗦𝗨𝗧𝗖𝗧𝗢
+                    <br />
+                    #𝗦𝗺𝗮𝗿𝘁𝗚𝗿𝗲𝗲𝗻𝗥𝗲𝘀𝗶𝗹𝗶𝗲𝗻𝘁
+                </p>
+            </div>
+        </div>
+
+
+
+<!-- FooterNaV -->
+        <FooterNav />
+<!-- end FooterNaV -->
+
+<!-- Footer -->
+		<Footer />
+<!-- end Footer -->
+
+	</main>
+	
+</Layout>

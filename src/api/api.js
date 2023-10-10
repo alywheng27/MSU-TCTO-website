@@ -772,3 +772,14 @@ export async function getFacultyAndStaff(college) {
   const gazette = await client.fetch(query);
   return gazette;
 }
+
+export async function getBidding() {
+  const query = groq`*[_type == "bidding"] | order(dateOfPublication desc, title desc){
+    title,
+    file{asset->{url}},
+    dateOfPublication,
+  }`;
+
+  const articles = await useSanityClient().fetch(query);
+  return articles;
+}
