@@ -29,7 +29,10 @@ const bidding = await getBidding();
 								}
 							};
 						}) => (
-							<a href={`${bid.file.asset.url}`} class="text-msu-rusty-red">{ bid.title }</a>
+							<div class="card-bidding">
+								<a href={`${bid.file.asset.url}`} class="text-white-pure">{ bid.title }</a>
+							</div>
+							
 						))
 					}
 				</div>

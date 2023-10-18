@@ -35,13 +35,13 @@ const threeLatestAnnualReport = await get3LatestAnnualReport();
 				{
 					<div>
 						<img src={ urlForImage(latestFeaturedArticle.mainImage.asset.url).url() } alt="" class="xl:w-[960px] xl:h-[720px] xs:h-[480px] xs:w-full object-cover object-center" />
-						<div class="grid justify-center xl:absolute xl:top-[519px] xs:relative xl:px-10 xs:px-5 xl:pt-0 xs:pt-10">
+						<div class="grid justify-center xl:absolute xl:top-[554px] xs:relative xl:px-10 xs:px-5 xl:py-5 xs:pt-10  xl:bg-[rgba(0,0,0,0.3)] xs:bg-none rounded-tr-lg">
 							<a href={`/${latestFeaturedArticle.slug.current}`}>
 								<h4 class="headings xl:h4 xs:h5 xl:max-w-[680px] xl:max-h-[86px] overflow-hidden">
 									{ latestFeaturedArticle.title }
 								</h4>
 							</a>
-							<p class="paragraph p2 mt-5 text-titanium xl:max-w-[680px] xl:max-h-[60px] xs:max-h-[95px] overflow-hidden">
+							<p class="paragraph p2 mt-5 text-white-pure xl:max-w-[680px] xl:max-h-[60px] xs:max-h-[95px] overflow-hidden">
 								{ latestFeaturedArticle.body[0].children[0].text }
 							</p>
 						</div>

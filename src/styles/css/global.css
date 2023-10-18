@@ -437,5 +437,15 @@
   
 /* xs:py-5 xl:py-0 h-0 overflow-hidden, */
 
+.card-bidding {
+    @apply 
+    bg-msu-deep-ocean 
+      shadow-lg
+      rounded-md 
+      py-4 px-5
+      relative 
+      overflow-hidden;
+  }
+
 
 }
