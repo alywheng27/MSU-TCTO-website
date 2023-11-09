@@ -67,7 +67,7 @@ const Navbar = (props) => {
 						<a href="/offices" className='py-[15px]'>Offices</a>
 						<a href="/publications" className='py-[15px]'>Publications</a>
 						<a href="/campus" className='py-[15px]'>The Campus</a>
-						{/* <a href="/careers#" className='py-[15px]'>Careers</a> */}
+						<a href="/careers" className='py-[15px]'>Careers</a>
 					</div>
 					{/* <div className="relative xl:mt-0 xs:mt-[15px] xl:w-fit xs:w-full">
 						<input type="search" name="" id="" className="bg-transparent border rounded-[20px] 3xl:w-[360px] xl:w-[240px] xs:w-full h-10 pl-12 pr-4 text-center" />
