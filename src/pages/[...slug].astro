@@ -13,6 +13,8 @@ import { getYear } from '../js/date';
 import { getWordMonth } from '../js/date';
 import { getDay } from '../js/date';
 
+import { isURL } from '../js/regEx';
+
 import { getArticle } from '../api/api';
 const articles = await getArticle();
 
@@ -90,7 +92,12 @@ const { title, author, publishedAt, articleSubject, college, topic, mainImage, b
                                 <>{ con.children.map((child: {
                                     text: unknown;
                                 }) => (
-                                    <p class="paragraph xl:p2 xs:p3 mb-5 text-silver">{child.text}</p>
+                                    <>
+                                        {
+                                            (isURL(child.text)) ? <a href={`${child.text}`} class="paragraph xl:p2 xs:p3 mb-5 text-msu-crimson-ground">{child.text}</a> : <p class="paragraph xl:p2 xs:p3 mb-5 text-silver">{child.text}</p>
+                                        }
+                                    </>
+                                    
                                 )) }</>
                             ))
                         }
