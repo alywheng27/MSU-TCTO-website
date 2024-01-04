@@ -94,7 +94,7 @@ const { title, author, publishedAt, articleSubject, college, topic, mainImage, b
                                 }) => (
                                     <>
                                         {
-                                            (isURL(child.text)) ? <a href={`${child.text}`} class="paragraph xl:p2 xs:p3 mb-5 text-msu-crimson-ground">{child.text}</a> : <p class="paragraph xl:p2 xs:p3 mb-5 text-silver">{child.text}</p>
+                                            (isURL(child.text)) ? <a href={`${child.text}`} target="_blank" class="paragraph xl:p2 xs:p3 mb-5 text-msu-crimson-ground">{child.text}</a> : <p class="paragraph xl:p2 xs:p3 mb-5 text-silver">{child.text}</p>
                                         }
                                     </>
                                     
