@@ -71,7 +71,8 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
                                 <h4 class="headings xl:h4 xs:h6">{ getDay(article.publishedAt) }</h4>
                             </div>
                             <div class="flex">
-                                <img src={ urlForImage(article.mainImage.asset.url).url() } alt="" class="xl:max-w-[580px] xs:max-w-[220px] object-cover object-center"></img>
+                                <img src={ urlForImage(article.mainImage.asset.url).width(480).height(320).fit('crop').crop('center').url() } alt="" class="object-cover object-center xl:block xs:hidden" />
+                                <img src={ urlForImage(article.mainImage.asset.url).width(220).height(160).fit('crop').crop('center').url() } alt="" class="object-cover object-center xl:hidden xs:block" />
                                 <div class="ml-5 xl:max-w-[720px] xs:max-w-[480px]">
                                     <a href={`/${article.slug.current}`}><h4 class="headings xl:h4 xs:h6 xl:max-h-[86px] overflow-hidden">{ article.title }</h4></a>
                                     <p class="paragraph xl:p1 xs:p3 xl:max-h-[162px] xs:max-h-[50px] overflow-hidden text-titanium mt-[10px]">
