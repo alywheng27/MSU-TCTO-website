@@ -13,6 +13,9 @@ const { title } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/images/MSU Seal New (Official).png" />
 		<meta name="generator" content={Astro.generator} />
+		<meta property="og:title" content="The title of the sharing preview" />
+		<meta property="og:description" content="The first few lines of content below the title" />
+		<meta property="og:image" content="http://example.com/your-image-1200x630px.jpg" />
 		<title>{title}</title>
 	</head>
 	<body>
