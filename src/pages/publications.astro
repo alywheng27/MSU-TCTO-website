@@ -86,8 +86,8 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
             </div>
         </div>
 
-        <div class="flex  flex-col items-center  mt-10">
-            <h3 class="headings xl:h3 xs:h5 text-msu-gold xl:block xs:hidden">Article</h3>
+        <div class="bg-white-pure flex flex-col items-center pt-20 mt-20">
+            <h3 class="headings xl:h3 xs:h5 text-msu-hidden-gold xl:block xs:hidden">Article</h3>
 
             <div class="flex flex-col items-center xl:mt-[40px] xl:px-[12.5%] xs:px-[15px] xs:gap-[30px]">
                 <div class="flex mt-10">
@@ -115,7 +115,7 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
                             if(index != 2) {
                                 return <div id="" class="flex flex-col xl:block xs:hidden">
                                     <img src={ urlForImage(article.mainImage.asset.url).width(480).height(320).fit('crop').crop('center').url() } alt="" class="object-cover object-center" />
-                                    <a href={`/${article.slug.current}`}><h4 class="headings xl:h5 xs:h6 mt-10 xl:max-w-[470px] xl:max-h-[52px] overflow-hidden">{ article.title }</h4></a>
+                                    <a href={`/${article.slug.current}`}><h4 class="headings xl:h5 xs:h6 text-msu-deep-ocean mt-10 xl:max-w-[470px] xl:max-h-[52px] overflow-hidden">{ article.title }</h4></a>
                                     <p class="paragraph xl:p2 xs:p3 xl:max-w-[470px] xl:max-h-[60px] overflow-hidden text-titanium mt-[10px]">
                                         { article.body[0].children[0].text }
                                     </p>
@@ -123,7 +123,7 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
                             }else {
                                 return <div id="active" class="flex flex-col">
                                     <img src={ urlForImage(article.mainImage.asset.url).width(480).height(320).fit('crop').crop('center').url() } alt="" class="object-cover object-center" />
-                                    <a href={`/${article.slug.current}`}><h4 class="headings xl:h5 xs:h6 mt-10 xl:max-w-[470px] xl:max-h-[52px] overflow-hidden">{ article.title }</h4></a>
+                                    <a href={`/${article.slug.current}`}><h4 class="headings xl:h5 xs:h6 text-msu-deep-ocean mt-10 xl:max-w-[470px] xl:max-h-[52px] overflow-hidden">{ article.title }</h4></a>
                                     <p class="paragraph xl:p2 xs:p3 xl:max-w-[470px] xl:max-h-[60px] xs:max-h-[36px] overflow-hidden text-titanium mt-[10px]">
                                         { article.body[0].children[0].text }
                                     </p>
@@ -167,7 +167,7 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
                                 <div class="flex mt-10">
                                     <img src={ urlForImage(article.mainImage.asset.url).width(220).height(160).fit('crop').crop('center').url() } alt="" class="object-cover object-center" />
                                     <div class="ml-5">
-                                        <a href={`/${article.slug.current}`}><h4 class="headings h5 max-w-[480px] xl:max-h-[52px] xs:max-h-[50px] overflow-hidden">{ article.title }</h4></a>
+                                        <a href={`/${article.slug.current}`}><h4 class="headings h5 text-msu-deep-ocean max-w-[480px] xl:max-h-[52px] xs:max-h-[50px] overflow-hidden">{ article.title }</h4></a>
                                         <p class="paragraph xl:p2 xs:p3 max-w-[480px] xl:max-h-[80px] xs:max-h-[72px] overflow-hidden text-titanium mt-5">
                                             { article.body[0].children[0].text }
                                         </p>
@@ -201,7 +201,7 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
                                 <div class="flex mt-10">
                                     <img src={ urlForImage(article.mainImage.asset.url).width(220).height(160).fit('crop').crop('center').url() } alt="" class="object-cover object-center" />
                                     <div class="ml-5">
-                                        <a href={`/${article.slug.current}`}><h4 class="headings h5 max-w-[480px] xl:max-h-[52px] overflow-hidden">{ article.title }</h4></a>
+                                        <a href={`/${article.slug.current}`}><h4 class="headings h5 text-msu-deep-ocean max-w-[480px] xl:max-h-[52px] overflow-hidden">{ article.title }</h4></a>
                                         <p class="paragraph xl:p2 xs:p3 max-w-[480px] xl:max-h-[80px] overflow-hidden text-titanium mt-5">
                                             { article.body[0].children[0].text }
                                         </p>
@@ -214,7 +214,7 @@ const one_threeLatestAnnualReport = await get1_3LatestAnnualReport();
                 <div class="mt-[50px] text-center  mb-[80px]">
                     
                     <!-- <a href="/gazette-reports" class="bg-transparent border paragraph xl:p1 xs:p2 py-[4.5px] px-[105px] text-white-pure rounded-[40px] xs:block xl:hidden">See More</a> -->
-                    <a href="/articles" class="bg-transparent border paragraph xl:p1 xs:p2 py-[4.5px] xl:px-[139px] xs:px-[85px] text-white-pure rounded-[40px]">More Articles</a>
+                    <a href="/articles" class="bg-transparent border paragraph xl:p1 xs:p2 py-[4.5px] xl:px-[139px] xs:px-[85px] text-msu-deep-ocean rounded-[40px]">More Articles</a>
                 </div>
             </div>
         </div>
