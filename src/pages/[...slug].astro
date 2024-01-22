@@ -1,5 +1,5 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout2 from '../layouts/Layout2.astro';
 import Navbar from "../components/Navbar";
 import Stories from "./Stories.astro";
 import FooterNav from "../components/FooterNav.astro";
@@ -42,7 +42,7 @@ if (!article) return Astro.redirect("/404");
 const { title, author, publishedAt, articleSubject, college, topic, mainImage, body } = article;
 ---
 
-<Layout title={ title }>
+<Layout2 title={title} image={mainImage.asset.url}>
 	<main>
 		<Navbar path={currentPath} client:visible />
         <div class='bg-msu-deep-ocean h-[40px] xl:px-[12.5%] xs:px-[3.85%] xl:block xs:hidden'>
@@ -51,7 +51,7 @@ const { title, author, publishedAt, articleSubject, college, topic, mainImage, b
 
         <div class="flex bg-msu-deep-ocean w-full  flex-col xl:pt-[40px]">
             <div class="flex flex-col item-center">
-                <h3 class="headings text-white-pure xl:h3 xs:h5 xl:px-[482px] xs:px-[34px] pb-[20px]  text-center"></h3>
+                <h3 class="headings text-white-pure xl:h3 xs:h5 xl:px-[482px] xs:px-[34px] pb-[20px]  text-center">{title}</h3>
                 <div class="xs:px-[44px] xl:hidden xs:block"><hr></div>
                 <div class="flex xl:gap-[80px] justify-center  ">
                     <p class="paragraph text-white-pure p2 pb-[40px] xl:block xs:hidden">
@@ -206,4 +206,4 @@ const { title, author, publishedAt, articleSubject, college, topic, mainImage, b
 
     </main>
 	
-</Layout>
+</Layout2>
