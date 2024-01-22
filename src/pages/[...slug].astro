@@ -42,7 +42,7 @@ if (!article) return Astro.redirect("/404");
 const { title, author, publishedAt, articleSubject, college, topic, mainImage, body } = article;
 ---
 
-<Layout2 title={title} image={mainImage.asset.url}>
+<Layout2 title="MSU | Tawi-Tawi College of Technology and Oceanography" header={title} image={mainImage.asset.url}>
 	<main>
 		<Navbar path={currentPath} client:visible />
         <div class='bg-msu-deep-ocean h-[40px] xl:px-[12.5%] xs:px-[3.85%] xl:block xs:hidden'>
