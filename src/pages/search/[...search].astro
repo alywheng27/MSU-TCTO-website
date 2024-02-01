@@ -1,11 +1,20 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from "../components/Navbar";
-import FooterNav from "../components/FooterNav.astro";
-import Footer from "../components/Footer.astro";
-import '../styles/css/global.css';
+import Layout from '../../layouts/Layout.astro';
+import Navbar from "../../components/Navbar";
+import FooterNav from "../../components/FooterNav.astro";
+import Footer from "../../components/Footer.astro";
+import '../../styles/css/global.css';
+
+import { getYear } from '../../js/date';
+import { get3LettersMonth } from '../../js/date';
+import { getDay } from '../../js/date';
 
 const currentPath = Astro.url.pathname;
+
+const { search } = Astro.params;
+
+import { getSearchArticle } from '../../api/api';
+const articles = await getSearchArticle(search);
 ---
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
@@ -72,89 +81,54 @@ const currentPath = Astro.url.pathname;
                             </div>
 
                             
-                            <div class="flex flex-col gap-[40px]">  
-                                <div class="flex flex-col gap-[10px]">
-                                    <h5 class="headings text-white-pure h5 mb-[10px] text-left">
-                                        Sample title search of a document, article, or event...
-                                    </h5> 
-                                    <p class="paragraph text-titanium p2 text-left">
-                                        A very short snippet of the articles first few lines making it a little visible to the audi...
-                                    </p>
-                                    <div class="flex gap-[20px]">
-                                        <p class="paragraph text-titanium p2 mb-[20px] text-left">
-                                            3,691 results
-                                        </p> 
-                                        <p class="paragraph text-titanium p2 mb-[20px] text-left">
-                                            Sort by date
-                                        </p> 
-                                    </div>
-                                </div>
-                                <div class="flex flex-col gap-[10px]">
-                                    <h5 class="headings text-msu-maroon h5 mb-[10px] text-left">
-                                        <u>Sample title search of a document, article, or event...</u>
-                                    </h5> 
-                                    <p class="paragraph text-msu-maroon p2 text-left">
-                                        A very short snippet of the articles first few lines making it a little visible to the audi...
-                                    </p>
-                                    <div class="flex gap-[20px]">
-                                        <p class="paragraph text-msu-maroon p2 mb-[20px] text-left">
-                                            3,691 results
-                                        </p> 
-                                        <p class="paragraph text-msu-maroon p2 mb-[20px] text-left">
-                                            Sort by date
-                                        </p> 
-                                    </div>
-                                </div>
-                                <div class="flex flex-col gap-[10px]">
-                                    <h5 class="headings text-white-pure h5 mb-[10px] text-left">
-                                        Sample title search of a document, article, or event...
-                                    </h5> 
-                                    <p class="paragraph text-titanium p2 text-left">
-                                        A very short snippet of the articles first few lines making it a little visible to the audi...
-                                    </p>
-                                    <div class="flex gap-[20px]">
-                                        <p class="paragraph text-titanium p2 mb-[20px] text-left">
-                                            3,691 results
-                                        </p> 
-                                        <p class="paragraph text-titanium p2 mb-[20px] text-left">
-                                            Sort by date
-                                        </p> 
-                                    </div>
-                                </div>
-                                <div class="flex flex-col gap-[10px]">
-                                    <h5 class="headings text-white-pure h5 mb-[10px] text-left">
-                                        Sample title search of a document, article, or event...
-                                    </h5> 
-                                    <p class="paragraph text-titanium p2 text-left">
-                                        A very short snippet of the articles first few lines making it a little visible to the audi...
-                                    </p>
-                                    <div class="flex gap-[20px]">
-                                        <p class="paragraph text-titanium p2 mb-[20px] text-left">
-                                            3,691 results
-                                        </p> 
-                                        <p class="paragraph text-titanium p2 mb-[20px] text-left">
-                                            Sort by date
-                                        </p> 
-                                    </div>
-                                </div>
-                                <div class="flex flex-col gap-[10px]">
-                                    <h5 class="headings text-white-pure h5 mb-[10px] text-left">
-                                        Sample title search of a document, article, or event...
-                                    </h5> 
-                                    <p class="paragraph text-titanium p2 text-left">
-                                        A very short snippet of the articles first few lines making it a little visible to the audi...
-                                    </p>
-                                    <div class="flex gap-[20px]">
-                                        <p class="paragraph text-titanium p2 mb-[20px] text-left">
-                                            3,691 results
-                                        </p> 
-                                        <p class="paragraph text-titanium p2 mb-[20px] text-left">
-                                            Sort by date
-                                        </p> 
-                                    </div>
-                                </div>
-
+                            <div class="flex flex-col gap-[40px]">
+                                {
+                                    articles.map((article: {
+                                        title: unknown; 
+                                        body: [
+                                            {
+                                                children: [
+                                                    {
+                                                        text: unknown;
+                                                    }
+                                                ]
+                                            }
+                                        ];
+                                        mainImage: {
+                                                asset: {
+                                                        url: string
+                                                };
+                                        };
+                                        slug: {
+                                                current: unknown;
+                                        };
+                                        category: {
+                                                category: unknown;
+                                        };
+                                        publishedAt: unknown;
+                                    }) => (
+                                        <div class="flex flex-col gap-[10px]">
+                                            <a href={`/${article.slug.current}`}>
+                                                <h5 class="headings text-white-pure hover:text-msu-maroon hover:underline h5 mb-[10px] text-left">
+                                                    { article.title }
+                                                </h5>     
+                                            </a>
+                                            <p class="paragraph text-titanium p2 text-left">
+                                                { article.body[0].children[0].text }
+                                            </p>
+                                            <div class="flex gap-[20px]">
+                                                <p class="paragraph text-titanium p2 mb-[20px] text-left">
+                                                    { article.category.category }
+                                                </p> 
+                                                <p class="paragraph text-titanium p2 mb-[20px] text-left">
+                                                    { getYear(article.publishedAt) } { get3LettersMonth(article.publishedAt) } { getDay(article.publishedAt) }
+                                                </p> 
+                                            </div>
+                                        </div>
+                                    ))
+                                }
                             </div>
+
                             <div class="flex">
                                 <p class="paragraph text-titanium p2 mr-[30px] text-left">
                                     Page

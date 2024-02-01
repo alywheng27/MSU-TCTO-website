@@ -52,23 +52,23 @@ const threeLatestAnnualReport = await get3LatestAnnualReport();
 					{
 						threeLatestArticles.map((article: {
 							title: unknown; 
-                            body: [
-                                {
-                                    children: [
-                                        {
-                                            text: unknown;
-                                        }
-                                    ]
-                                }
-                            ];
-                            mainImage: {
-                                asset: {
-                                    url: string
-                                };
-                            };
-                            slug: {
-                                current: unknown;
-                            };
+								body: [
+										{
+												children: [
+														{
+																text: unknown;
+														}
+												]
+										}
+								];
+								mainImage: {
+										asset: {
+												url: string
+										};
+								};
+								slug: {
+										current: unknown;
+								};
 						}) => (
 							<div class="flex mt-10">
 								<img src={ urlForImage(article.mainImage.asset.url).url() } alt="" class="xl:h-[200px] xl:w-[200px] xs:h-[175px] xs:w-[175px] object-cover object-center" />

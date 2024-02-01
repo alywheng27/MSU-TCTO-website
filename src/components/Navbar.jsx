@@ -14,6 +14,7 @@ import HeroCampusHeading from './HeroCampusHeading';
 
 const Navbar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
+	const [url, setUrl] = useState("");
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
@@ -67,12 +68,15 @@ const Navbar = (props) => {
 						<a href="/offices" className='py-[15px]'>Offices</a>
 						<a href="/publications" className='py-[15px]'>Publications</a>
 						<a href="/campus" className='py-[15px]'>The Campus</a>
-						{/* <a href="/careers" className='py-[15px]'>Careers</a> */}
+						<a href="/careers" className='py-[15px]'>Careers</a>
 					</div>
-					{/* <div className="relative xl:mt-0 xs:mt-[15px] xl:w-fit xs:w-full">
-						<input type="search" name="" id="" className="bg-transparent border rounded-[20px] 3xl:w-[360px] xl:w-[240px] xs:w-full h-10 pl-12 pr-4 text-center" />
-						<img src="/images/search.png" alt="" className="absolute top-[6px] left-3" />
-					</div> */}
+					<div className="relative xl:mt-0 xs:mt-[15px] xl:w-fit xs:w-full">
+						{/* <form action={`/search/${url}`} method="post">
+							<input type="search" autoComplete='off' onChange={(e) => {setUrl(e.target.value)}} name="" id="search" className="bg-transparent border rounded-[20px] 3xl:w-[360px] xl:w-[240px] xs:w-full h-10 pl-12 pr-4 text-center" />
+							<img src="/images/search.png" alt="" className="absolute top-[6px] left-3" label="search" />
+						</form> */}
+						
+					</div>
 				</div>				
 			</div>
 			
