@@ -4,10 +4,7 @@ import Navbar from "../../components/Navbar";
 import FooterNav from "../../components/FooterNav.astro";
 import Footer from "../../components/Footer.astro";
 import '../../styles/css/global.css';
-
-import { getYear } from '../../js/date';
-import { get3LettersMonth } from '../../js/date';
-import { getDay } from '../../js/date';
+import SearchedArticles from "../../components/search/SearchedArticles"
 
 const currentPath = Astro.url.pathname;
 
@@ -31,136 +28,7 @@ const articles = await getSearchArticle(search);
             <div class="flex gap-[239px] ">
 
                 <div class="flex  w-[960px] ">
-
-                        <div class="flex flex-col gap-[60px] ">
-                            <div class="flex flex-col ">   
-                                    <!-- <div class="flex flex-col mb-[30px]">   
-                                    <a href="/academic-calendar" class="flex  w-[960px] h-[100px] items-center bg-transparent border paragraph p1  py-[14px] px-[139px] text-white-pure rounded-[40px]">
-                                        Sample title search of a document, article, or event...</a>
-
-
-                                    </div> -->
-                                    
-                                    <div class="flex relative xl:mt-0 xs:mt-[15px] xl:w-fit xs:w-full xl:mb-[30px]">
-                                        <input type="search" name="" value="Sample title search of a document, article, or event..." id="" class="bg-transparent border xs:rounded-[20px] xl:rounded-[40px] xs:w-full xl:w-[960px]  xl:py-[25px] xs:py-[12px] pl-12 pr-4 text-center text-white-pure" />
-                                        <img src="/images/search.png" alt="" class="absolute xl:top-[25px] xs:top-[12px] left-3 xl:hidden xs:block" />
-                                    </div>
-
-                                    
-                                    <div class="flex gap-[30px] mb-[10px]">  
-                                        <p class="paragraph text-msu-crimson-ground p2 text-left xl:block xs:hidden">
-                                            All
-                                        </p> 
-                                        <p class="paragraph text-titanium p2 text-left xl:block xs:hidden">
-                                            Articles
-                                        </p> 
-                                        <p class="paragraph text-titanium p2 text-left xl:block xs:hidden">
-                                            Events
-                                        </p> 
-                                        <p class="paragraph text-titanium p2 text-left xl:block xs:hidden">
-                                            Gazette
-                                        </p> 
-                                        <p class="paragraph text-titanium p2 text-left xl:block xs:hidden">
-                                            Reports
-                                        </p> 
-                                        <p class="paragraph text-titanium p2 text-left xl:block xs:hidden">
-                                            Others
-                                        </p> 
-
-                                    </div>
-                                    <div class="flex gap-[50px]">  
-                                        <p class="paragraph text-titanium p2 mb-[20px] text-left xl:block xs:hidden">
-                                            3,691 results
-                                        </p> 
-                                        <p class="paragraph text-titanium p2 mb-[20px] text-left xl:block xs:hidden">
-                                            Sort by date
-                                        </p> 
-
-                                    </div>
-
-                            </div>
-
-                            
-                            <div class="flex flex-col gap-[40px]">
-                                {
-                                    articles.map((article: {
-                                        title: unknown; 
-                                        body: [
-                                            {
-                                                children: [
-                                                    {
-                                                        text: unknown;
-                                                    }
-                                                ]
-                                            }
-                                        ];
-                                        mainImage: {
-                                                asset: {
-                                                        url: string
-                                                };
-                                        };
-                                        slug: {
-                                                current: unknown;
-                                        };
-                                        category: {
-                                                category: unknown;
-                                        };
-                                        publishedAt: unknown;
-                                    }) => (
-                                        <div class="flex flex-col gap-[10px]">
-                                            <a href={`/${article.slug.current}`}>
-                                                <h5 class="headings text-white-pure hover:text-msu-maroon hover:underline h5 mb-[10px] text-left">
-                                                    { article.title }
-                                                </h5>     
-                                            </a>
-                                            <p class="paragraph text-titanium p2 text-left">
-                                                { article.body[0].children[0].text }
-                                            </p>
-                                            <div class="flex gap-[20px]">
-                                                <p class="paragraph text-titanium p2 mb-[20px] text-left">
-                                                    { article.category.category }
-                                                </p> 
-                                                <p class="paragraph text-titanium p2 mb-[20px] text-left">
-                                                    { getYear(article.publishedAt) } { get3LettersMonth(article.publishedAt) } { getDay(article.publishedAt) }
-                                                </p> 
-                                            </div>
-                                        </div>
-                                    ))
-                                }
-                            </div>
-
-                            <div class="flex">
-                                <p class="paragraph text-titanium p2 mr-[30px] text-left">
-                                    Page
-                                </p> 
-                                <p class="paragraph text-msu-crimson-ground p2 mr-[20px] text-left">
-                                    1
-                                </p> 
-                                <p class="paragraph text-titanium p2 mr-[20px] text-left">
-                                    2
-                                </p> 
-                                <p class="paragraph text-titanium p2 mr-[20px] text-left">
-                                    3
-                                </p> 
-                                <p class="paragraph text-titanium p2 mr-[20px] text-left">
-                                    4
-                                </p> 
-                                <p class="paragraph text-titanium p2 mr-[20px] text-left">
-                                    5
-                                </p> 
-                                <p class="paragraph text-titanium p2 mr-[20px] text-left">
-                                    6
-                                </p> 
-                                <p class="paragraph text-titanium p2 mr-[20px] text-left">
-                                    7
-                                </p> 
-                                <p class="paragraph text-titanium p2 mr-[20px] text-left">
-                                    8
-                                </p>
-                            </div>
-                            
-                        </div>
-
+                  <SearchedArticles articles={articles} client:visible />
                 </div>
 
                 <div class="flex flex-col xl:block xs:hidden">
@@ -202,4 +70,4 @@ const articles = await getSearchArticle(search);
 
     </main>
 	
-</Layout>
+</Layout>../../components/search/SearchedArticles
