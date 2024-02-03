@@ -45,8 +45,12 @@ export async function getArticle() {
   return articles;
 }
 
-export async function getSearchArticle(search) {
-  const query = groq`*[_type == "article" && title match "*${search}*"] | order(publishedAt desc){
+export async function getSearchArticle(search, category) {
+  let hold = "";
+  if(category != null) {
+    hold = ` && category._ref in *[_type=="articleCategory" && category=="${category}"]._id`;
+  }
+  const query = groq`*[_type == "article" && title match "*${search}*"${hold}] | order(publishedAt desc)[0..10]{
     title,
     slug{
       current

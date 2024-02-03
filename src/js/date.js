@@ -62,7 +62,7 @@ export function get3LettersMonth(date) {
     }else if (month == '08'){
         month = 'Aug';
     }else if (month == '09'){
-        month = 'Sep';
+        month = 'Sept';
     }else if (month == '10'){
         month = 'Oct';
     }else if(month == '11'){

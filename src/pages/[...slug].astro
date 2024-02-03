@@ -18,24 +18,6 @@ import { isURL } from '../js/regEx';
 import { getArticle } from '../api/api';
 const articles = await getArticle();
 
-// export async function getStaticPaths() {
-
-//     const articles = await getArticle();
-
-//     return articles.map((article: { 
-//         slug: {
-//             current: unknown;
-//         }; 
-//     }) => ({
-//         params: {
-//             slug: article.slug.current,
-//         },
-//         props: {
-//             article
-//         }
-//     }));
-// }
-
 const { slug } = Astro.params;
 const article = articles.find((article) => article.slug.current === slug);
 if (!article) return Astro.redirect("/404");
@@ -65,10 +47,10 @@ const { title, author, publishedAt, articleSubject, college, topic, mainImage, b
             <div class="flex xl:justify-start xs:justify-center bg-msu-deep-ocean  xl:px-[12.5%]">
                 <p class="paragraph xl:p2 xs:p3 xl:py-[10px] xs:mt-[9px] xs:mb-[9px]  text-titanium"><a href="/publications">{ articleSubject.subject }</a>  / { college.college } / { topic.topic } </p>
             </div>
-            <div class="flex flex-col xl:px-[240px] xs:px-[15px] ">
+            <div class="flex flex-col xl:px-[240px] xs:px-[15px] bg-white-pure ">
                 <img src={ urlForImage(mainImage.asset.url).fit('crop').url() } alt="" class="xl:h-full" />
 
-                <div class="flex xs:gap-[120px] xs:mt-[11px] xl:mt-[0px] xs:mb-[22px] xl:mb-[0px] justify-center  xl:hidden">
+                <div class="flex xs:gap-[120px] xs:mt-[11px] xl:mt-[0px] xs:mb-[22px] xl:mb-[0px] justify-center xl:hidden">
                     <p class="paragraph text-titanium xs:p3   xl:hidden xs:block">
                         By: { author.name }
                     </p>
@@ -94,7 +76,7 @@ const { title, author, publishedAt, articleSubject, college, topic, mainImage, b
                                 }) => (
                                     <>
                                         {
-                                            (isURL(child.text)) ? <a href={`${child.text}`} target="_blank" class="paragraph xl:p2 xs:p3 mb-5 text-msu-crimson-ground">{child.text}</a> : <p class="paragraph xl:p2 xs:p3 mb-5 text-silver">{child.text}</p>
+                                            (isURL(child.text)) ? <a href={`${child.text}`} target="_blank" class="paragraph xl:p2 xs:p3 mb-5 text-msu-crimson-ground">{child.text}</a> : <p class="paragraph xl:p2 xs:p3 mb-5 text-charcoal">{child.text}</p>
                                         }
                                     </>
                                     
