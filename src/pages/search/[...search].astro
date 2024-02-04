@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar";
 import FooterNav from "../../components/FooterNav.astro";
 import Footer from "../../components/Footer.astro";
 import '../../styles/css/global.css';
+import PageSearch from "../../components/search/PageSearch"
 
 import { getYear } from '../../js/date';
 import { get3LettersMonth } from '../../js/date';
@@ -13,170 +14,108 @@ const currentPath = Astro.url.pathname;
 
 const { search } = Astro.params;
 const splitSearch = search.split('/')
+import { getSearchArticleCount } from '../../api/api';
 import { getSearchArticle } from '../../api/api';
+import SearchForm from '../../components/search/SearchForm';
 
-const articles = await getSearchArticle(splitSearch[0], splitSearch[1]);
+const maxCount = await getSearchArticleCount(splitSearch[0], splitSearch[1]);
+const articles = await getSearchArticle(splitSearch[0], splitSearch[1], splitSearch[2]);
 ---
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
 	<div>
 		<Navbar path={currentPath} client:visible />
 
-
-
         <div class='bg-black-pure h-[40px] xl:px-[12.5%] xs:px-[3.85%]'>
             <p class="paragraph p2 py-[10px] text-titanium xl:block xs:hidden"><a href="/index">Home</a>   / Search </p>
         </div>
 <!-- search -->
         <div class="bg-black-pure w-full xl:px-[12.5%]  xs:px-[3.5%] xl:flex-col xl:pt-[80px] xs:pt-[0px] xl:pb-[123px] xs:pb-[40px] ">
-            <div class="flex gap-[239px] ">
+            <div class="flex gap-[239px] justify-center">
 
-                <div class="flex  w-[960px] ">
+                <div class="flex w-[960px]">
+                  <div class="flex flex-col gap-[60px] ">
+                    <div class="flex flex-col ">   
+                      <div class="flex relative xl:mt-0 xs:mt-[15px] xl:w-fit xs:w-full xl:mb-[30px]">
+                          <SearchForm search={splitSearch[0]} />
+                      </div>
+              
+                      <div class="flex gap-[30px] mb-4">  
+                        <a href=`/search/${splitSearch[0]}/All` class=`paragraph p2 text-left xl:block xs:hidden ${ splitSearch[1] === undefined ? "text-msu-crimson-ground" : "text-titanium" }`>
+                            All
+                        </a> 
+                        <a href=`/search/${splitSearch[0]}/Events` class=`paragraph p2 text-left xl:block xs:hidden ${ splitSearch[1] === "Events" ? "text-msu-crimson-ground" : "text-titanium" }`>
+                            Events
+                        </a> 
+                        <a href=`/search/${splitSearch[0]}/News` class=`paragraph p2 text-left xl:block xs:hidden ${ splitSearch[1] === "News" ? "text-msu-crimson-ground" : "text-titanium" }`>
+                            News
+                        </a> 
+                        <a href=`/search/${splitSearch[0]}/Academics` class=`paragraph p2 text-left xl:block xs:hidden ${ splitSearch[1] === "Academics" ? "text-msu-crimson-ground" : "text-titanium" }`>
+                            Academics
+                        </a> 
+                        <a href=`/search/${splitSearch[0]}/Administrative` class=`paragraph p2 text-left xl:block xs:hidden ${ splitSearch[1] === "Administrative" ? "text-msu-crimson-ground" : "text-titanium" }`>
+                            Administrative
+                        </a> 
+                      </div>
+            
+                      <div class="flex gap-[50px]">  
+                          <p class="paragraph text-titanium p2 mb-[20px] text-left xl:block xs:hidden">
+                              { maxCount.length } results
+                          </p> 
+                          <!-- <p class="paragraph text-titanium p2 mb-[20px] text-left xl:block xs:hidden">
+                              Sort by date
+                          </p>  -->
+                      </div>
+                    </div>
+                    <div class="flex flex-col gap-[40px]">
+                      {
+                        articles.map((article) => (
+                          <div class="flex flex-col gap-[10px]">
+                              <a href={`/${article.slug.current}`}>
+                                  <h5 class="headings text-white-pure hover:text-msu-crimson-ground hover:underline h5 mb-[10px] text-left h-13 overflow-hidden">
+                                      { article.title }
+                                  </h5>     
+                              </a>
+                              <p class="paragraph text-titanium p2 text-left h-5 overflow-hidden">
+                                  { article.body[0].children[0].text }
+                              </p>
+                              <div class="flex gap-[20px]">
+                                  <p class="paragraph text-titanium p2 mb-[20px] text-left">
+                                      { article.category.category }
+                                  </p> 
+                                  <p class="paragraph text-titanium p2 mb-[20px] text-left">
+                                      { getYear(article.publishedAt) } { get3LettersMonth(article.publishedAt) } { getDay(article.publishedAt) }
+                                  </p> 
+                              </div>
+                          </div>
+                        ))
+                      }
+                    </div>
 
-                        <div class="flex flex-col gap-[60px] ">
-                            <div class="flex flex-col ">   
-                                    <div class="flex relative xl:mt-0 xs:mt-[15px] xl:w-fit xs:w-full xl:mb-[30px]">
-                                        <input type="search" name="" value="Sample title search of a document, article, or event..." id="" class="bg-transparent border xs:rounded-[20px] xl:rounded-[40px] xs:w-full xl:w-[960px]  xl:py-[25px] xs:py-[12px] pl-12 pr-4 text-center text-white-pure" />
-                                        <img src="/images/search.png" alt="" class="absolute xl:top-[25px] xs:top-[12px] left-3 xl:hidden xs:block" />
-                                    </div>
-
-                                    
-                                    <div class="flex gap-[30px] mb-[10px]">  
-                                        <p class="paragraph text-msu-crimson-ground p2 text-left xl:block xs:hidden">
-                                            All
-                                        </p> 
-                                        <p class="paragraph text-titanium p2 text-left xl:block xs:hidden">
-                                            Articles
-                                        </p> 
-                                        <p class="paragraph text-titanium p2 text-left xl:block xs:hidden">
-                                            Events
-                                        </p> 
-                                        <p class="paragraph text-titanium p2 text-left xl:block xs:hidden">
-                                            Gazette
-                                        </p> 
-                                        <p class="paragraph text-titanium p2 text-left xl:block xs:hidden">
-                                            Reports
-                                        </p> 
-                                        <p class="paragraph text-titanium p2 text-left xl:block xs:hidden">
-                                            Others
-                                        </p> 
-
-                                    </div>
-                                    <div class="flex gap-[50px]">  
-                                        <p class="paragraph text-titanium p2 mb-[20px] text-left xl:block xs:hidden">
-                                            3,691 results
-                                        </p> 
-                                        <p class="paragraph text-titanium p2 mb-[20px] text-left xl:block xs:hidden">
-                                            Sort by date
-                                        </p> 
-
-                                    </div>
-
-                            </div>
-
-                            
-                            <div class="flex flex-col gap-[40px]">
-                                {
-                                    articles.map((article: {
-                                        title: unknown; 
-                                        body: [
-                                            {
-                                                children: [
-                                                    {
-                                                        text: unknown;
-                                                    }
-                                                ]
-                                            }
-                                        ];
-                                        mainImage: {
-                                                asset: {
-                                                        url: string
-                                                };
-                                        };
-                                        slug: {
-                                                current: unknown;
-                                        };
-                                        category: {
-                                                category: unknown;
-                                        };
-                                        publishedAt: unknown;
-                                    }) => (
-                                        <div class="flex flex-col gap-[10px]">
-                                            <a href={`/${article.slug.current}`}>
-                                                <h5 class="headings text-white-pure hover:text-msu-maroon hover:underline h5 mb-[10px] text-left">
-                                                    { article.title }
-                                                </h5>     
-                                            </a>
-                                            <p class="paragraph text-titanium p2 text-left">
-                                                { article.body[0].children[0].text }
-                                            </p>
-                                            <div class="flex gap-[20px]">
-                                                <p class="paragraph text-titanium p2 mb-[20px] text-left">
-                                                    { article.category.category }
-                                                </p> 
-                                                <p class="paragraph text-titanium p2 mb-[20px] text-left">
-                                                    { getYear(article.publishedAt) } { get3LettersMonth(article.publishedAt) } { getDay(article.publishedAt) }
-                                                </p> 
-                                            </div>
-                                        </div>
-                                    ))
-                                }
-                            </div>
-
-                            <div class="flex">
-                                <p class="paragraph text-titanium p2 mr-[30px] text-left">
-                                    Page
-                                </p> 
-                                <p class="paragraph text-msu-crimson-ground p2 mr-[20px] text-left">
-                                    1
-                                </p> 
-                                <p class="paragraph text-titanium p2 mr-[20px] text-left">
-                                    2
-                                </p> 
-                                <p class="paragraph text-titanium p2 mr-[20px] text-left">
-                                    3
-                                </p> 
-                                <p class="paragraph text-titanium p2 mr-[20px] text-left">
-                                    4
-                                </p> 
-                                <p class="paragraph text-titanium p2 mr-[20px] text-left">
-                                    5
-                                </p> 
-                                <p class="paragraph text-titanium p2 mr-[20px] text-left">
-                                    6
-                                </p> 
-                                <p class="paragraph text-titanium p2 mr-[20px] text-left">
-                                    7
-                                </p> 
-                                <p class="paragraph text-titanium p2 mr-[20px] text-left">
-                                    8
-                                </p>
-                            </div>
-                            
-                        </div>
-
+                    <PageSearch articles={articles} search={search} maxCount={maxCount.length} />
+                  </div>
                 </div>
 
-                <div class="flex flex-col xl:block xs:hidden">
+                <!-- <div class="flex flex-col xl:block xs:hidden">
                     <p class="paragraph text-titanium p1  mb-[30px] text-left">
                         Related searches
                     </p>
-                    <p class="paragraph text-titanium p1 mb-[20px] text-left">
+                    <p class="paragraph text-titanium p2 mb-[20px] text-left">
                         An article title
                     </p>
-                    <p class="paragraph text-titanium p1 mb-[20px] text-left">
+                    <p class="paragraph text-titanium p2 mb-[20px] text-left">
                         Year 2020 gazette
                     </p>
-                    <p class="paragraph text-titanium p1 mb-[20px] text-left">
+                    <p class="paragraph text-titanium p2 mb-[20px] text-left">
                         Photo gallery of the new build...
                     </p>
-                    <p class="paragraph text-titanium p1 mb-[20px] text-left">
+                    <p class="paragraph text-titanium p2 mb-[20px] text-left">
                         History of the school
                     </p>
-                    <p class="paragraph text-titanium p1 mb-[20px] text-left">
+                    <p class="paragraph text-titanium p2 mb-[20px] text-left">
                         Other related searches
                     </p>
-                </div>
+                </div> -->
             </div>
         </div>
 <!-- end search --> 
@@ -196,4 +135,4 @@ const articles = await getSearchArticle(splitSearch[0], splitSearch[1]);
 
     </main>
 	
-</Layout>../../components/search/SearchedArticles
+</Layout>../../components/search/SearchedArticles../../components/search/PageSearch

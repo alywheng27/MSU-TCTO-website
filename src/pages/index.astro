@@ -218,7 +218,7 @@ const threeLatestAnnualReport = await get3LatestAnnualReport();
 					<h4 class="headings xl:h4 xs:h5 text-white-pure xl:mb-[20px]"><a href="/gazette">Gazette</a></h4>
 					<div class="relative xl:w-[480px] xs:w-[300px]">
 						<!-- Add msu-drop-shadow on other image other than this gazette -->
-						<a href={threeLatestGazette[0].file.asset.url}><img src={ urlForImage(threeLatestGazette[0].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] z-20" alt="" /></a>
+						<a href={threeLatestGazette[0].file.asset.url} target="_blank" ><img src={ urlForImage(threeLatestGazette[0].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] z-20" alt="" /></a>
 						<img src={ urlForImage(threeLatestGazette[1].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] top-[15px] left-[15px] z-10" alt="" />
 						<img src={ urlForImage(threeLatestGazette[2].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] top-[30px] left-[30px] z-0" alt="" />
 					</div>
@@ -230,7 +230,7 @@ const threeLatestAnnualReport = await get3LatestAnnualReport();
 					<h4 class="headings xl:h4 xs:h5 text-white-pure xl:mb-[20px]"><a href="/annual-reports">Annual Report</a></h4>
 					<div class="relative xl:w-[480px] xs:w-[300px]">
 						<!-- Add msu-drop-shadow on other image other than this gazette -->
-						<a href={threeLatestAnnualReport[0].file.asset.url}><img src={ urlForImage(threeLatestAnnualReport[0].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] z-20" alt=""></a>
+						<a href={threeLatestAnnualReport[0].file.asset.url} target="_blank" ><img src={ urlForImage(threeLatestAnnualReport[0].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] z-20" alt=""></a>
 						<img src={ urlForImage(threeLatestAnnualReport[1].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] top-[15px] left-[15px] z-10" alt="">
 						<img src={ urlForImage(threeLatestAnnualReport[2].mainImage.asset.url).url() } class="absolute xl:w-[412px] xs:w-[392px] top-[30px] left-[30px] z-0" alt="">
 					</div>

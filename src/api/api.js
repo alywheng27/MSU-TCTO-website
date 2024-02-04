@@ -45,12 +45,29 @@ export async function getArticle() {
   return articles;
 }
 
-export async function getSearchArticle(search, category) {
+export async function getSearchArticleCount(search, category) {
   let hold = "";
-  if(category != null) {
+  if(category != undefined && category != "All") {
     hold = ` && category._ref in *[_type=="articleCategory" && category=="${category}"]._id`;
   }
-  const query = groq`*[_type == "article" && title match "*${search}*"${hold}] | order(publishedAt desc)[0..10]{
+  const query = groq`*[_type == "article" && title match "*${search}*"${hold}] | order(publishedAt desc){}`;
+
+  const articles = await useSanityClient().fetch(query);
+  return articles;
+}
+
+export async function getSearchArticle(search, category, page) {
+  if(page === undefined) {
+    page = 1;
+  }
+  const end = (page * 10) - 1 ;
+  const start = (end - 10) + 1;
+
+  let hold = "";
+  if(category != undefined && category != "All") {
+    hold = ` && category._ref in *[_type=="articleCategory" && category=="${category}"]._id`;
+  }
+  const query = groq`*[_type == "article" && title match "*${search}*"${hold}] | order(publishedAt desc)[${start}..${end}]{
     title,
     slug{
       current
