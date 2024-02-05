@@ -32,14 +32,14 @@ const threeLatestArticles = await get3LatestArticle();
 					<div class="flex mb-[40px]">
 						<img src={ urlForImage(article.mainImage.asset.url).url() } alt="" class="xl:h-[200px] xl:w-[200px] xs:h-[180px] xs:w-[180px] object-cover object-center"></img>
 						<div class="ml-5">
-							<a href={`/${article.slug.current}`}><h5 class="headings xl:h5 xs:h6 max-w-[220px] xl:max-h-[48px] xs:max-h-[29px] overflow-hidden">{ article.title }</h5></a>
-							<p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[15px] max-h-[142px] overflow-hidden">
+							<a href={`/${article.slug.current}`}><h5 class="headings xl:h5 xs:h6 max-w-[220px] xl:max-h-[48px] xs:max-h-[29px] overflow-hidden whitespace-normal text-ellipsis" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{ article.title }</h5></a>
+							<p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[15px] max-h-[142px] overflow-hidden whitespace-normal text-ellipsis" style="display: -webkit-box; -webkit-line-clamp: 7; -webkit-box-orient: vertical;">
 								{
 									article.body[0].children[0].text
 								}
 							</p>
 						</div>
-					</div>
+          </div>
 				))
 			}
 		</div>
