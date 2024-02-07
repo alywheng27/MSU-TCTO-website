@@ -2,10 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from "../components/Navbar";
 import AcademicCalendar from "../components/AcademicCalendar.astro";
+import AdmissionProcedure from "../components/admissionProcedure/AdmissionProcedure";
 import MainVideo from "../components/MainVideo.astro";
 import FooterNav from "../components/FooterNav.astro";
 import Footer from "../components/Footer.astro";
 import '../styles/css/global.css';
+
 
 const currentPath = Astro.url.pathname;
 ---
@@ -84,336 +86,7 @@ const currentPath = Astro.url.pathname;
 <!-- end fold 02 -->
 
 <!-- fold 03 -->
-		<div class="bg-msu-maroon px-[12.5%] xl:pt-[80px] xs:pt-[40px]">
-			<div class="item-center">
-				<h3 class="headings text-center xl:text-white-pure xs:text-msu-golden-fog xl:h3 xs:h5">Admission Procedures</h3>
-			</div>
-			
-			<div class="mt-[27px]">
-				<div class="">
-					<!-- <div class="flex flex-col  gap-[5px] m-5 xl:block xs:hidden">
-						
-						<div class="flex flex-col gap-[20px] paragraph p1 text-msu-crimson-ground mt-[26px]">
-							<a href="#" class="paragraph p1 text-white-pure w-[300px]">The Admission process</a>
-							
-							<a href="#">Freshmen</a>
-							<a href="#">Transferee</a>
-							<a href="#">Returning or Shifting</a>
-							<a href="#">Remedial Programs</a>
-							<a href="#">Student Fees</a>
-						</div>
-					</div> -->
-
-					<div class="justify-center gap-[10px]">
-					
-						<div class="xs:mb-[50px]">
-							<!-- <h4 class="headings xl:h4 xs:h6 text-white-pure mt-5">THE ADMISSION PROCESS </h4> -->
-							<div class="flex flex-col gap-[5px] paragraph p2 text-white-pure xl:mt-[10px] xs:mt[18px]">
-								<p class="paragraph xl:p1 xs:p3 text-white-pure pt-[27px]">
-									For admission, prospective students should bring a short brown envelope, 3 copies of 2X2 ID pictures (recently taken close-up shot) and the following documents (with 2 photocopies of each):  
-								</p>
-								<a href="#" id="freshmen" class="paragraph p1 text-white-pure w-[300px] ml-[50px] mt-[25px]">A.	FOR FRESHMEN:   </a>
-									<p class="paragraph xl:p1 xs:p2 text-white-pure mt-[5px] ml-[100px]">
-									1.	Senior High School Report Card (Form 138-A)<br>  
-									2.	MSU SASE Report of Rating (with passing score) <br>
-									3.	PSA/NSO-Authenticated Birth Certificate (original) <br>
-									4.	Certificate of Good Moral Character   <br>
-									</p>
-								<a href="#" id="transferee" class="paragraph p1 text-white-pure w-[300px] ml-[50px] mt-[25px]">B.	FOR TRANSFEREE:   </a>
-									<p class="paragraph xl:p1 xs:p2 text-white-pure mt-[5px] ml-[100px]">
-										1.	Honorable Dismissal  <br>
-										2.	Transcript of Records (TOR)  <br>
-										3.	PSA/ NSO-Authenticated Birth Certificate (original); and  <br>
-										4. MSU SASE Report of Rating (with passing score)     <br>
-										
-									</p>
-				
-							</div>
-						</div>
-						<div class="xl:block xs:hidden">
-							
-							<div class="flex">
-								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
-									<p class="paragraph p1 text-white-pure mt-[5px]">Step 01</p>
-									<p class="paragraph p1 text-white-pure mt-[5px]">Present the documents above to the attending admission personnel. Secure an Application for Admission form. There is an express lane for persons with disabilities in all the steps enumerated for the admission process. </p>
-								</div>
-								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
-									<p class="paragraph p1 text-white-pure mt-[5px]">Step 02</p>
-									<p class="paragraph p1 text-white-pure mt-[5px]">See the college physician at the College Infirmary for medical examination and from whom you secure a medical clearance to be presented to the admissions personnel.</p>
-								</div>
-								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
-									<p class="paragraph p1 text-white-pure mt-[5px]">Step 03</p>
-									<p class="paragraph p1 text-white-pure mt-[5px]">Proceed to the Guidance Counselor for career guidance and psychometric test.</p>
-								</div>
-							</div>
-
-							<div class="flex">
-								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
-									<p class="paragraph p1 text-white-pure mt-[5px]">Step 04</p>
-									<p class="paragraph p1 text-white-pure mt-[5px]">Accomplish Application for Admission, making sure all solicited information is filled up as completely and accurately as possible. Incompletely filled up or unsigned forms will be returned.  </p>
-								</div>
-								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
-									<p class="paragraph p1 text-white-pure mt-[5px]">Step 05</p>
-									<p class="paragraph p1 text-white-pure mt-[5px]">Secure Notice of Admission. You may now proceed and present your Notice of Admission to the registration adviser for the course you intend to enroll in.  </p>
-								</div>
-								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
-									<p class="paragraph p1 text-white-pure mt-[5px]">Step 06</p>
-									<p class="paragraph p1 text-white-pure mt-[5px]">Step details, where to go and who to approach</p>
-								</div>
-							</div>
-						</div>
-
-						
-						<!-- Mobile view -->
-						<div class="xl:hidden xs:block">
-							<div class="grid grid-cols-2 gap-[6px]">
-								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
-									<p class="paragraph p2 text-white-pure mt-[5px]">Step 01</p>
-									<p class="paragraph p3 text-white-pure mt-[5px]">Present the documents above to the attending admission personnel. Secure an Application for Admission form. There is an express lane for persons with disabilities in all the steps enumerated for the admission process. </p>
-								</div>
-								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
-									<p class="paragraph p2 text-white-pure mt-[5px]">Step 02</p>
-									<p class="paragraph p3 text-white-pure mt-[5px]">See the college physician at the College Infirmary for medical examination and from whom you secure a medical clearance to be presented to the admissions personnel.</p>
-								</div>
-							</div>
-	
-							<div class="grid grid-cols-2 gap-[6px]">
-								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
-									<p class="paragraph p2 text-white-pure mt-[5px]">Step 03</p>
-									<p class="paragraph p3 text-white-pure mt-[5px]">Proceed to the Guidance Counselor for career guidance and psychometric test.</p>
-								</div>
-								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
-									<p class="paragraph p2 text-white-pure mt-[5px]">Step 04</p>
-									<p class="paragraph p3 text-white-pure mt-[5px]">Accomplish Application for Admission, making sure all solicited information is filled up as completely and accurately as possible. Incompletely filled up or unsigned forms will be returned.  </p>
-								</div>
-							</div>
-							
-							<div class="grid grid-cols-2 gap-[6px]">
-								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
-									<p class="paragraph p2 text-white-pure mt-[5px]">Step 05</p>
-									<p class="paragraph p3 text-white-pure mt-[5px]">Secure Notice of Admission. You may now proceed and present your Notice of Admission to the registration adviser for the course you intend to enroll in.  </p>
-								</div>
-								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
-									<p class="paragraph p2 text-white-pure mt-[5px]">Step 06</p>
-									<p class="paragraph p3 text-white-pure mt-[5px]">Step details, where to go and who to approach</p>
-								</div>
-							</div>
-						</div>
-
-						<div class="xs:mb-[50px]" id="shifting">
-							<!-- <h4 class="headings xl:h4 xs:h6 text-white-pure mt-5">THE ADMISSION PROCESS </h4> -->
-							<div class="paragraph p2 text-white-pure xl:mt-[10px] xs:mt[18px]">
-								<a href="#" class="paragraph p1 text-white-pure w-[900px] ml-[50px] mt-[25px]">C.	FOR RETURNING AND SHIFTING STUDENTS </a>
-				
-							</div>
-						</div>
-						<div class="xl:block xs:hidden">
-							
-							<div class="flex">
-								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
-									<p class="paragraph p1 text-white-pure mt-[5px]">Step 01</p>
-									<p class="paragraph p1 text-white-pure mt-[5px]">Present your official copy of grades (with photocopy) for the latest semester to the admission personnel.  </p>
-								</div>
-								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
-									<p class="paragraph p1 text-white-pure mt-[5px]">Step 02</p>
-									<p class="paragraph p1 text-white-pure mt-[5px]"> Secure and fill-up an Application for Shifting/Re-admission form.  </p>
-								</div>
-								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
-									<p class="paragraph p1 text-white-pure mt-[5px]">Step 03</p>
-									<p class="paragraph p1 text-white-pure mt-[5px]">Proceed to the Guidance Counselor for career guidance and psychometric test. </p>
-								</div>
-							</div>
-
-							<div class="flex">
-								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
-									<p class="paragraph p1 text-white-pure mt-[5px]">Step 04</p>
-									<p class="paragraph p1 text-white-pure mt-[5px]">Bring the endorsed Application for Shifting/Re-admission to the appropriate registration adviser for action. (Your application will either be approved or disapproved depending on whether you are able to meet the required CGPA for the concerned program)  </p>
-								</div>
-								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
-									<p class="paragraph p1 text-white-pure mt-[5px]">Step 05</p>
-									<p class="paragraph p1 text-white-pure mt-[5px]">Bring back the approved Application for Shifting/Re-admission to the Admissions Office. </p>
-								</div>
-								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
-									<p class="paragraph p1 text-white-pure mt-[5px]">Step 06</p>
-									<p class="paragraph p1 text-white-pure mt-[5px]">Proceed to the respective department. </p>
-								</div>
-							</div>
-						</div>
-
-						<!-- Mobile view -->
-						<div class="xl:hidden xs:block">
-							<div class="grid grid-cols-2 gap-[6px]">
-								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
-									<p class="paragraph p2 text-white-pure mt-[5px]">Step 01</p>
-									<p class="paragraph p3 text-white-pure mt-[5px]">Present your official copy of grades (with photocopy) for the latest semester to the admission personnel.  </p>
-								</div>
-								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
-									<p class="paragraph p2 text-white-pure mt-[5px]">Step 02</p>
-									<p class="paragraph p3 text-white-pure mt-[5px]"> Secure and fill-up an Application for Shifting/Re-admission form.  </p>
-								</div>
-							</div>
-	
-							<div class="grid grid-cols-2 gap-[6px]">
-								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
-									<p class="paragraph p2 text-white-pure mt-[5px]">Step 03</p>
-									<p class="paragraph p3 text-white-pure mt-[5px]">Proceed to the Guidance Counselor for career guidance and psychometric test. </p>
-								</div>
-								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
-									<p class="paragraph p2 text-white-pure mt-[5px]">Step 04</p>
-									<p class="paragraph p3 text-white-pure mt-[5px]">Bring the endorsed Application for Shifting/Re-admission to the appropriate registration adviser for action. (Your application will either be approved or disapproved depending on whether you are able to meet the required CGPA for the concerned program)  </p>
-								</div>
-							</div>
-							
-							<div class="grid grid-cols-2 gap-[6px]">
-								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
-									<p class="paragraph p2 text-white-pure mt-[5px]">Step 05</p>
-									<p class="paragraph p3 text-white-pure mt-[5px]">Bring back the approved Application for Shifting/Re-admission to the Admissions Office. </p>
-								</div>
-								<div class=" bg-gradient-rusty-red p-10 max-w-[360px]">
-									<p class="paragraph p2 text-white-pure mt-[5px]">Step 06</p>
-									<p class="paragraph p3 text-white-pure mt-[5px]">Proceed to the respective department. </p>
-								</div>
-							</div>
-						</div>
-
-						<div class="xs:mb-[50px]" id="remedial">
-							<!-- <h4 class="headings xl:h4 xs:h6 text-white-pure mt-5">THE ADMISSION PROCESS </h4> -->
-							<div class="paragraph p2 text-white-pure xl:mt-[10px] xs:mt[18px]">
-								<a href="#" class="paragraph p1 text-white-pure w-[900px] ml-[50px] mt-[25px]">D.	FOR REMEDIAL PROGRAM </a>
-				
-								<p class="paragraph text-white-pure xl:p1 xs:p3 pt-[27px]">
-									The MSU-Tawi-Tawi , in order to accommodate those whose scores are a little lower than the median, has been implementing the so-called Remedial Program wherein for the first semester of the student’s stay in the campus he is enrolled in a 9-hour per week remedial Math and another 9-hour per week remedial English. (Only upon passing both subjects is the student deemed qualified to be treated as a regular student)
-								</p>
-							</div>
-						</div>
-						<div class="xs:mb-[50px]" id="fees">
-							<!-- <h4 class="headings xl:h4 xs:h6 text-white-pure mt-5">THE ADMISSION PROCESS </h4> -->
-							<div class="paragraph p2 text-white-pure xl:mt-[10px] xs:mt[18px]">
-								<a href="#" class="paragraph p1 text-white-pure w-[900px] ml-[50px] mt-[25px]">E.	FOR STUDENT FEES (BOR RES #50, Series 2005) </a>
-							</div>
-						</div>
-						<div class="xl:block xs:hidden">
-							
-							<div class="flex">
-								<div class=" bg-maroon py-[20px] w-[650px] border border-msu-rusty-red">
-									<p class="paragraph p1 text-white-pure ml-[50px] mr-[50px]">Tuition Fees</p>
-								</div>
-								<div class=" bg-maroon py-[20px] w-[440px] border bg-msu-rusty-red">
-									<p class="paragraph p1 text-white-pure ml-[50px] mr-[50px]">Php 50.00 / unit</p>
-								</div>
-							</div>
-							
-							<div class="flex">
-								<div class=" bg-maroon py-[20px] w-[650px] border border-msu-rusty-red">
-									<p class="paragraph p1 text-white-pure ml-[50px] mr-[50px]">Athletic Fees</p>
-								</div>
-								<div class=" bg-maroon py-[20px] w-[440px] border bg-msu-rusty-red">
-									<p class="paragraph p1 text-white-pure ml-[50px] mr-[50px]">Php 50.00</p>
-								</div>
-							</div>
-							
-							<div class="flex">
-								<div class=" bg-maroon py-[20px] w-[650px] border border-msu-rusty-red">
-									<p class="paragraph p1 text-white-pure ml-[50px] mr-[50px]">CDF</p>
-								</div>
-								<div class=" bg-maroon py-[20px] w-[440px] border bg-msu-rusty-red">
-									<p class="paragraph p1 text-white-pure ml-[50px] mr-[50px]">Php 20.00</p>
-								</div>
-							</div>
-							
-							<div class="flex">
-								<div class=" bg-maroon py-[20px] w-[650px] border border-msu-rusty-red">
-									<p class="paragraph p1 text-white-pure ml-[50px] mr-[50px]">SPEAR</p>
-								</div>
-								<div class=" bg-maroon py-[20px] w-[440px] border bg-msu-rusty-red">
-									<p class="paragraph p1 text-white-pure ml-[50px] mr-[50px]">Php 50.00</p>
-								</div>
-							</div>
-							
-							<div class="flex">
-								<div class=" bg-maroon py-[20px] w-[650px] border border-msu-rusty-red">
-									<p class="paragraph p1 text-white-pure ml-[50px] mr-[50px]">ROTC / CWTS</p>
-								</div>
-								<div class=" bg-maroon py-[20px] w-[440px] border bg-msu-rusty-red">
-									<p class="paragraph p1 text-white-pure ml-[50px] mr-[50px]">Php 100.00</p>
-								</div>
-							</div>
-							
-							<div class="flex">
-								<div class=" bg-maroon py-[20px] w-[650px] border border-msu-rusty-red">
-									<p class="paragraph p1 text-white-pure ml-[50px] mr-[50px]">Speech Laboratory</p>
-								</div>
-								<div class=" bg-maroon py-[20px] w-[440px] border bg-msu-rusty-red">
-									<p class="paragraph p1 text-white-pure ml-[50px] mr-[50px]">Php 150.00</p>
-								</div>
-							</div>
-						</div>
-
-						<!-- Mobile view -->
-						<div class="xl:hidden xs:block">
-							<div class="grid xs:grid-cols-2 xs:gap-[0px] ">
-								
-								<div class=" bg-maroon  xs:w-[175px] border border-msu-rusty-red">
-									<p class="paragraph xs:p3 text-white-pure xs:ml-[10px] my-[3px]">Tuition Fees</p>
-								</div>
-								<div class=" bg-maroon xs:w-[120px] border bg-msu-rusty-red">
-									<p class="paragraph xs:p3 text-white-pure xs:ml-[10px] my-[3px]">Php 50.00 / unit</p>
-								</div>
-							</div>
-							<div class="grid xs:grid-cols-2 xs:gap-[0px]">
-								
-								<div class=" bg-maroon  xs:w-[175px] border border-msu-rusty-red">
-									<p class="paragraph xs:p3 text-white-pure xs:ml-[10px] my-[3px]">Athletic Fees</p>
-								</div>
-								<div class=" bg-maroon xs:w-[120px] border bg-msu-rusty-red">
-									<p class="paragraph xs:p3 text-white-pure xs:ml-[10px] my-[3px]">Php 50.00</p>
-								</div>
-							</div>
-							<div class="grid xs:grid-cols-2 xs:gap-[0px]">
-								
-								<div class=" bg-maroon  xs:w-[175px] border border-msu-rusty-red">
-									<p class="paragraph xs:p3 text-white-pure xs:ml-[10px] my-[3px]">CDF</p>
-								</div>
-								<div class=" bg-maroon xs:w-[120px] border bg-msu-rusty-red">
-									<p class="paragraph xs:p3 text-white-pure xs:ml-[10px] my-[3px]">Php 20.00</p>
-								</div>
-							</div>
-							<div class="grid xs:grid-cols-2 xs:gap-[0px]">
-								
-								<div class=" bg-maroon  xs:w-[175px] border border-msu-rusty-red">
-									<p class="paragraph xs:p3 text-white-pure xs:ml-[10px] my-[3px]">SPEAR</p>
-								</div>
-								<div class=" bg-maroon xs:w-[120px] border bg-msu-rusty-red">
-									<p class="paragraph xs:p3 text-white-pure xs:ml-[10px] my-[3px]">Php 30.00</p>
-								</div>
-							</div>
-							<div class="grid xs:grid-cols-2 xs:gap-[0px]">
-								
-								<div class=" bg-maroon  xs:w-[175px] border border-msu-rusty-red">
-									<p class="paragraph xs:p3 text-white-pure xs:ml-[10px] my-[3px]">ROTC / CWTS</p>
-								</div>
-								<div class=" bg-maroon xs:w-[120px] border bg-msu-rusty-red">
-									<p class="paragraph xs:p3 text-white-pure xs:ml-[10px] my-[3px]">Php 100.00</p>
-								</div>
-							</div>
-							<div class="grid xs:grid-cols-2 xs:gap-[0px]">
-								
-								<div class=" bg-maroon  xs:w-[175px] border border-msu-rusty-red">
-									<p class="paragraph xs:p3 text-white-pure xs:ml-[10px] my-[3px]">Speech Laboratory</p>
-								</div>
-								<div class=" bg-maroon xs:w-[120px] border bg-msu-rusty-red">
-									<p class="paragraph xs:p3 text-white-pure xs:ml-[10px] my-[3px]">Php 150.00</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="text-center pb-[60px]">
-				<!-- <p class="paragraph text-white-pure xl:p1 xs:p2 pt-20 mb-5">Need clarifications or help?</p>
-				<a href="" class="bg-transparent border paragraph  xl:p1 xs:p2  gap-10 text-white-pure py-[10.5px] px-[60px] rounded-[40px]">Contact us now!</a> -->
-			</div>
-		</div>
+		<AdmissionProcedure client:visible />
 <!-- end fold 03 -->
 
 <!-- fold 04 -->
@@ -424,10 +97,10 @@ const currentPath = Astro.url.pathname;
 				<!-- <h3 class="headings xl:h3 xs:h4 pt-[27px] pl-[28.5%] pr-[28.5%]">Scholarships and Grants</h3> -->
 			</div>
 
-			<div class="flex gap-20 mt-[27px] ">
+			<div class="grid xl:grid-cols-2 xs:grid-cols-1 gap-20 mt-[27px] ">
 				<div class="p-1 text-center">
 					<p class="paragraph xl:p1 xs:p2 text-white-pure">EXTERNALLY-FUNDED</p>
-					<p class="paragraph  xl:w-[700px] xl:p1 xs:p2 text-silver mt-[40px]">
+					<p class="paragraph  xl:p1 xs:p2 text-silver mt-[40px]">
 						This is a special scholarship for Fisheries, Marine Biology, Environmental Science and for Badjao students whose objectives are to attract more enrollees to the mandated programs, to increase the number of academically better students taking these programs, to help enhance efforts at gainfully strengthening such programs, and to augment the campus support for the Badjaos who comprise the main indigenous group in this province.
 						<br><br>
 						This special scholarship was first funded from the P5,000,000 allocated by the national government for this campus beginning AY 2014-15. Such was reflected in FY 2014 GAA (R.A. 10633).
@@ -437,7 +110,7 @@ const currentPath = Astro.url.pathname;
 				</div>
 				<div class="p-1 text-center xl:block xs:hidden">
 					<p class="paragraph  xl:p1 xs:p2 text-white-pure">INTERNALLY-FUNDED</p>
-					<p class="paragraph  xl:w-[700px] xl:p1 xs:p2 text-silver mt-[40px]">
+					<p class="paragraph  xl:p1 xs:p2 text-silver mt-[40px]">
 						
 						1. Academic Scholarship
 						<br>
