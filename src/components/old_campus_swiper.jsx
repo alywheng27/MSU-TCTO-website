@@ -24,8 +24,8 @@ export default function MySwiper() {
     }, }}
     // navigation={{nextEl: '.swiper-button-next', prevEl:'.swiper-button-prev'}}
     // scrollbar={{ draggable: true }}
-    onSwiper={(swiper) => console.log(swiper)}
-    onSlideChange={() => console.log('slide change')}
+    onSwiper={(swiper) => {}}
+    onSlideChange={() => {}}
     loop={true}
     autoplay={{
         delay: 5000,

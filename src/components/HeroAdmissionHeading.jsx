@@ -7,7 +7,7 @@ const HeroAdmissionHeading = () => {
         Admissions
       </h2>
       
-        <p class="paragraph p2 pt-[100px] text-silver xl:block xs:hidden"><a href="/">Home</a> / Addmissions</p>
+        <p className="paragraph p2 pt-[100px] text-silver xl:block xs:hidden"><a href="/">Home</a> / Addmissions</p>
     </div>
   )
 }
