@@ -4,10 +4,10 @@ import Navbar from "../components/Navbar";
 import FooterNav from "../components/FooterNav.astro";
 import Footer from "../components/Footer.astro";
 import '../styles/css/global.css';
-
+import '../styles/css/table.css';
+import { Fade } from "react-awesome-reveal";
 const currentPath = Astro.url.pathname;
 ---
-
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
 	<main>
 <!-- fold 01 - Header -->
@@ -34,9 +34,9 @@ const currentPath = Astro.url.pathname;
                             
                             <div class="flex flex-col xl:gap-[40px] xs:gap-[40px]">  
                                 <div class="flex flex-col gap-[10px]">
-                                    <h4 class="headings text-white-pure h4 mb-[10px] text-left">
-                                        Open positions
-                                    </h4> 
+                                        <!-- <h4 class="headings text-white-pure h4 mb-[10px] text-center">
+                                            Open positions
+                                        </h4>  -->
                                     <!-- <div class="flex xl:gap-[30px] xs:gap-[20px] mb-[10px]">  
                                         <p class="paragraph text-msu-crimson-ground p2 text-left ">
                                             All
@@ -51,628 +51,128 @@ const currentPath = Astro.url.pathname;
                                     </div> -->
                                     <div class="flex">
                                         <p class="paragraph text-titanium p2 text-left">
-                                            26 positions
+                                            <!-- 26 positions -->
                                             <!-- 0 results -->
                                         </p> 
                                     </div>
                                 </div>
 
-                                <!-- JOB 1 -->
-                                <div class="flex xl:flex-row xs:flex-col xl:gap-[0px] xs:gap-[28px]">   
-                                    <div class="flex xl:flex-col xs:flex-col xl:gap-[20px] xs:gap-[20px] xl:w-full ">
-                                        <div class="flex gap-[20px] place-items-enter">
-                                            <div class="flex place-items-center xl:w-[475px]">
-                                                <h5 class="headings text-white-pure h5 text-left">
-                                                    Planning Officer V
-                                                </h5> 
-                                            </div>
-                                        </div>
-                                        <div class="xl:flex xs:grid xs:grid-cols-4 gap-4">
-                                          <!-- <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                            MSU-TCTOB-PLO5-1-1998
-                                          </p>  -->
-                                          <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                            Salary Grade 24
-                                          </p> 
-                                          <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                              Monthly Salary: 90,078
-                                          </p>
-                                          <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                            Master's Degree
-                                          </p>
-                                          <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                            24 hours of training in management and supervision
-                                          </p>
-                                          <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                            4 years in position/s involving management and supervision
-                                          </p>
-                                          <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border xl:rounded-[40px] xs:rounded-[20px]">
-                                            Career Service (Professional) Second Level Eligibility or its equivalent
-                                          </p>
-                                          <!-- <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border xl:rounded-[40px] xs:rounded-[20px]">
-                                            Manila Information and Liaison Office
-                                          </p> -->
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- JOB 2 -->
-                                <div class="flex xl:flex-row xs:flex-col xl:gap-[0px] xs:gap-[28px]">   
-                                  <div class="flex xl:flex-col xs:flex-col xl:gap-[20px] xs:gap-[20px] xl:w-full ">
-                                      <div class="flex gap-[20px] place-items-enter">
-                                          <div class="flex place-items-center xl:w-[475px]">
-                                              <h5 class="headings text-white-pure h5 text-left">
-                                                  Supervising Administrative Officer
-                                              </h5> 
-                                          </div>
-                                      </div>
-                                      <div class="xl:flex xs:grid xs:grid-cols-4 gap-4">
-                                          <!-- <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                            MSU-TCTOB-SADOF-7-2004
-                                          </p>  -->
-                                          <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                              Salary Grade 22
-                                          </p> 
-                                          <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                              Monthly Salary: 71,511
-                                          </p>
-                                          <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                              Bachelor's Degree
-                                          </p>
-                                          <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                              16 hours of relevant training
-                                          </p>
-                                          <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                              3 years of relevant experience
-                                          </p>
-                                          <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border xl:rounded-[40px] xs:rounded-[20px]">
-                                              Career Service (Professional) Second Level Eligibility or its equivalent
-                                          </p>
-                                          <!-- <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border xl:rounded-[40px] xs:rounded-[20px]">
-                                            Cashiering Section
-                                          </p> -->
-                                      </div>
+                
+                                         
+                                <div class="table-container" >
+                                    <h4 class="headings text-black h4 mb-[10px] text-center bg-white">
+                                        Open positions
+                                    </h4> 
+                                    <table id="example" class="table table-striped" style="width:100%">
+                                      <thead>
+                                        <tr>
+                                          <th>No.</th>
+                                          <th>Positions</th>
+                                          <th>Salary Grade</th>
+                                          <th>Monthly Salary</th>
+                                          <th>Degree</th>
+                                          <th>Managements</th>
+                                          <th>Experience</th>
+                                          <th>Eligibility</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <!-- Job 1 -->
+                                        <tr>
+                                          <td>1</td>
+                                          <td>Administrative Aide VI</td>
+                                          <td>Salary Grade 6</td>
+                                          <td>₱17,553</td>
+                                          <td>Completion of two year studies in college</td>
+                                          <td>None Required </td>
+                                          <td>None Required</td>
+                                          <td>Career Service (Subprofessional) First Level Eligibility or its equivalent </td>
+                                        </tr>
+                                        <!--JOB 2  -->
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Administrative Aide III </td>
+                                            <td>Salary Grade 3</td>
+                                            <td>₱14,678</td>
+                                            <td>Elementary School Graduate</td>
+                                            <td>None Required </td>
+                                            <td>None Required</td>
+                                            <td>Pipefitter or Plumber (MC 11, s.96 - Cat. I)</td>
+                                          </tr>    
+                                          
+                                          
+                                                    <!--JOB 3  -->
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Administrative Aide III </td>
+                                            <td>Salary Grade 3</td>
+                                            <td>₱14,678</td>
+                                            <td>Able to read and write</td>
+                                            <td>None Required </td>
+                                            <td>None Required</td>
+                                            <td>None Required (MC 11, s. 96 - Cat. III)</td>
+                                          </tr> 
+                                          
+                                          
+                                                          
+                                                    <!--JOB 4  -->
+                                        <tr>
+                                            <td>4</td>
+                                            <td>Administrative Aide III </td>
+                                            <td>Salary Grade 3</td>
+                                            <td>₱14,678</td>
+                                            <td>Able to read and write</td>
+                                            <td>None Required </td>
+                                            <td>None Required</td>
+                                            <td>None Required (MC 11, s. 96 - Cat. III)</td>
+                                          </tr>           
+                                                
+                                          <!--JOB 5  -->
+                                        <tr>
+                                            <td>5</td>
+                                            <td>Security Guard I</td>
+                                            <td>Salary Grade 3</td>
+                                            <td>₱14,678</td>
+                                            <td>High School Graduate</td>
+                                            <td>None Required </td>
+                                            <td>None Required</td>
+                                            <td>Security Guard License </td>
+                                          </tr>           
+                                                
+                                                 <!--JOB 6  -->
+                                        <tr>
+                                            <td>6</td>
+                                            <td>Security Guard I</td>
+                                            <td>Salary Grade 3</td>
+                                            <td>₱14,678</td>
+                                            <td>High School Graduate</td>
+                                            <td>None Required </td>
+                                            <td>None Required</td>
+                                            <td>Security Guard License </td>
+                                          </tr>  
+                                          
+                                          
+                                                           
+                                                 <!--JOB 7  -->
+                                        <tr>
+                                            <td>7</td>
+                                            <td>Security Guard I</td>
+                                            <td>Salary Grade 3</td>
+                                            <td>₱14,678</td>
+                                            <td>High School Graduate</td>
+                                            <td>None Required </td>
+                                            <td>None Required</td>
+                                            <td>Security Guard License </td>
+                                          </tr>    
+                                                
+                                                
+                                                          
+                            
+                                        <!-- Add more rows as needed -->
+                                      </tbody>
+                                    </table>
                                   </div>
-                                </div>
-
-                                <!-- JOB 3 -->
-                                <div class="flex xl:flex-row xs:flex-col xl:gap-[0px] xs:gap-[28px]">   
-                                    
-                                    <div class="flex xl:flex-col xs:flex-col xl:gap-[20px] xs:gap-[20px] xl:w-full ">
-                                        <div class="flex gap-[20px] place-items-enter">
-                                            <div class="flex place-items-center xl:w-[475px]">
-                                                <h5 class="headings text-white-pure h5 text-left">
-                                                    Administrative Officer IV
-                                                </h5> 
-                                            </div>
-                                        </div>
-                                        <!-- <div class="flex place-items-enter">
-                                            <div class="flex place-items-center xl:w-[475px]">
-                                                <p class="paragraph text-white-pure p2 text-left">
-                                                    Lorem ipsum dolor sit amet consectetur. Fermentum feugiat consectetur sit ultrices vitae suscipit aliquet tellus nulla. Consequat sed eu auctor feugiat mus. Sed rutrum et ultricies ac euismod ullamcorper.
-                                                </p>
-                                            </div>
-                                        </div> -->
-                                        <div class="xl:flex xs:grid xs:grid-cols-4 gap-4">
-                                            <!-- <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                              MSU-TCTOB-ADOF4-15-2004
-                                            </p>  -->
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                Salary Grade 15
-                                            </p> 
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                Monthly Salary: 36,619
-                                            </p>
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                Bachelor's Degree
-                                            </p>
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                4 hours of relevant training
-                                            </p>
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                1 years of relevant experience
-                                            </p>
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border xl:rounded-[40px] xs:rounded-[20px]">
-                                                Career Service (Professional) Second Level Eligibility or its equivalent
-                                            </p>
-                                            <!-- <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border xl:rounded-[40px] xs:rounded-[20px]">
-                                                Office of the Vice Chancellor for Research and Development
-                                            </p> -->
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- <div class="">
-                                        <div class="flex ">
-                                            <a href="​mailto:aly070296@gmail.com" target="_blank" class="paragraph xl:p1 xs:p2 msu-blue-horizon text-white-pure xl:py-[14px] xs:py-[14px] xl:px-[109px] xs:px-[109px] rounded-[40px]">Apply</a>
-                                            
-                                        </div>
-                                        <div class="flex justify-center xl:mt-[40px]">
-                                            <p class="paragraph text-titanium p2 text-left ">
-                                                Share job link
-                                            </p>
-                                            
-                                        </div>
-                                    </div> -->
-                                </div>
-
-                                <!-- JOB 4 -->
-                                <div class="flex xl:flex-row xs:flex-col xl:gap-[0px] xs:gap-[28px]">   
-                                    
-                                    <div class="flex xl:flex-col xs:flex-col xl:gap-[20px] xs:gap-[20px] xl:w-full ">
-                                        <div class="flex gap-[20px] place-items-enter">
-                                            <div class="flex place-items-center xl:w-[475px]">
-                                                <h5 class="headings text-white-pure h5 text-left">
-                                                    3 - School Librarian I
-                                                </h5> 
-                                            </div>
-                                        </div>
-                                        <!-- <div class="flex place-items-enter">
-                                            <div class="flex place-items-center xl:w-[475px]">
-                                                <p class="paragraph text-white-pure p2 text-left">
-                                                    Lorem ipsum dolor sit amet consectetur. Fermentum feugiat consectetur sit ultrices vitae suscipit aliquet tellus nulla. Consequat sed eu auctor feugiat mus. Sed rutrum et ultricies ac euismod ullamcorper.
-                                                </p>
-                                            </div>
-                                        </div> -->
-                                        <div class="xl:flex xs:grid xs:grid-cols-4 gap-4">
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                Salary Grade 11
-                                            </p> 
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                Monthly Salary: 27,000
-                                            </p>
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                              Bachelor's Degree in Library Science or Information Science or Bachelor of Science in Education/ Arts major in Library Science
-                                            </p>
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border xl:rounded-[40px] xs:rounded-[20px]">
-                                              RA 1080 ( Registered Librarian)
-                                            </p>
-                                            <!-- <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border xl:rounded-[40px] xs:rounded-[20px]">
-                                              Tubig-Indangan Community High School
-                                            </p> -->
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- <div class="">
-                                        <div class="flex ">
-                                            <a href="​mailto:aly070296@gmail.com" target="_blank" class="paragraph xl:p1 xs:p2 msu-blue-horizon text-white-pure xl:py-[14px] xs:py-[14px] xl:px-[109px] xs:px-[109px] rounded-[40px]">Apply</a>
-                                            
-                                        </div>
-                                        <div class="flex justify-center xl:mt-[40px]">
-                                            <p class="paragraph text-titanium p2 text-left ">
-                                                Share job link
-                                            </p>
-                                            
-                                        </div>
-                                    </div> -->
-                                </div>
-
-                                <!-- JOB 5 -->
-                                <div class="flex xl:flex-row xs:flex-col xl:gap-[0px] xs:gap-[28px]">   
-                                    
-                                    <div class="flex xl:flex-col xs:flex-col xl:gap-[20px] xs:gap-[20px] xl:w-full ">
-                                        <div class="flex gap-[20px] place-items-enter">
-                                            <div class="flex place-items-center xl:w-[475px]">
-                                                <h5 class="headings text-white-pure h5 text-left">
-                                                    Librarian
-                                                </h5> 
-                                            </div>
-                                        </div>
-                                        <!-- <div class="flex place-items-enter">
-                                            <div class="flex place-items-center xl:w-[475px]">
-                                                <p class="paragraph text-white-pure p2 text-left">
-                                                    Lorem ipsum dolor sit amet consectetur. Fermentum feugiat consectetur sit ultrices vitae suscipit aliquet tellus nulla. Consequat sed eu auctor feugiat mus. Sed rutrum et ultricies ac euismod ullamcorper.
-                                                </p>
-                                            </div>
-                                        </div> -->
-                                        <div class="xl:flex xs:grid xs:grid-cols-4 gap-4">
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                Salary Grade 11
-                                            </p> 
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                Monthly Salary: 27,000
-                                            </p>
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                              Bachelor's Degree in Library Science or Information Science or Bachelor of Science in Education/ Arts major in Library Science
-                                            </p>
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border xl:rounded-[40px] xs:rounded-[20px]">
-                                              RA 1080 ( Registered Librarian)
-                                            </p>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- <div class="">
-                                        <div class="flex ">
-                                            <a href="​mailto:aly070296@gmail.com" target="_blank" class="paragraph xl:p1 xs:p2 msu-blue-horizon text-white-pure xl:py-[14px] xs:py-[14px] xl:px-[109px] xs:px-[109px] rounded-[40px]">Apply</a>
-                                            
-                                        </div>
-                                        <div class="flex justify-center xl:mt-[40px]">
-                                            <p class="paragraph text-titanium p2 text-left ">
-                                                Share job link
-                                            </p>
-                                            
-                                        </div>
-                                    </div> -->
-                                </div>
-
-                                <!-- JOB 6 -->
-                                <div class="flex xl:flex-row xs:flex-col xl:gap-[0px] xs:gap-[28px]">   
-                                    
-                                    <div class="flex xl:flex-col xs:flex-col xl:gap-[20px] xs:gap-[20px] xl:w-full ">
-                                        <div class="flex gap-[20px] place-items-enter">
-                                            <div class="flex place-items-center xl:w-[475px]">
-                                                <h5 class="headings text-white-pure h5 text-left">
-                                                  Dormitory Manager II
-                                                </h5> 
-                                            </div>
-                                        </div>
-                                        <!-- <div class="flex place-items-enter">
-                                            <div class="flex place-items-center xl:w-[475px]">
-                                                <p class="paragraph text-white-pure p2 text-left">
-                                                    Lorem ipsum dolor sit amet consectetur. Fermentum feugiat consectetur sit ultrices vitae suscipit aliquet tellus nulla. Consequat sed eu auctor feugiat mus. Sed rutrum et ultricies ac euismod ullamcorper.
-                                                </p>
-                                            </div>
-                                        </div> -->
-                                        <div class="xl:flex xs:grid xs:grid-cols-4 gap-4">
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                Salary Grade 11
-                                            </p> 
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                Monthly Salary: 27,000
-                                            </p>
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                              Bachelor's Degree
-                                            </p>
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border xl:rounded-[40px] xs:rounded-[20px]">
-                                                Career Service (Professional) Second Level Eligibility or its equivalent
-                                            </p>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- <div class="">
-                                        <div class="flex ">
-                                            <a href="​mailto:aly070296@gmail.com" target="_blank" class="paragraph xl:p1 xs:p2 msu-blue-horizon text-white-pure xl:py-[14px] xs:py-[14px] xl:px-[109px] xs:px-[109px] rounded-[40px]">Apply</a>
-                                            
-                                        </div>
-                                        <div class="flex justify-center xl:mt-[40px]">
-                                            <p class="paragraph text-titanium p2 text-left ">
-                                                Share job link
-                                            </p>
-                                            
-                                        </div>
-                                    </div> -->
-                                </div>
-
-                                <!-- JOB 7 -->
-                                <div class="flex xl:flex-row xs:flex-col xl:gap-[0px] xs:gap-[28px]">   
-                                    
-                                    <div class="flex xl:flex-col xs:flex-col xl:gap-[20px] xs:gap-[20px] xl:w-full ">
-                                        <div class="flex gap-[20px] place-items-enter">
-                                            <div class="flex place-items-center xl:w-[475px]">
-                                                <h5 class="headings text-white-pure h5 text-left">
-                                                  Administrative Assistant II
-                                                </h5> 
-                                            </div>
-                                        </div>
-                                        <!-- <div class="flex place-items-enter">
-                                            <div class="flex place-items-center xl:w-[475px]">
-                                                <p class="paragraph text-white-pure p2 text-left">
-                                                    Lorem ipsum dolor sit amet consectetur. Fermentum feugiat consectetur sit ultrices vitae suscipit aliquet tellus nulla. Consequat sed eu auctor feugiat mus. Sed rutrum et ultricies ac euismod ullamcorper.
-                                                </p>
-                                            </div>
-                                        </div> -->
-                                        <div class="xl:flex xs:grid xs:grid-cols-4 gap-4">
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                Salary Grade 8
-                                            </p> 
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                Monthly Salary: 19,744
-                                            </p>
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                Completion of two year studies in college
-                                            </p>
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                4 hours of relevant training
-                                            </p>
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                1 year of relevant experience
-                                            </p>
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border xl:rounded-[40px] xs:rounded-[20px]">
-                                                Career Service (Subprofessional) First Level Eligibility or its equivalent
-                                            </p>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- <div class="">
-                                        <div class="flex ">
-                                            <a href="​mailto:aly070296@gmail.com" target="_blank" class="paragraph xl:p1 xs:p2 msu-blue-horizon text-white-pure xl:py-[14px] xs:py-[14px] xl:px-[109px] xs:px-[109px] rounded-[40px]">Apply</a>
-                                            
-                                        </div>
-                                        <div class="flex justify-center xl:mt-[40px]">
-                                            <p class="paragraph text-titanium p2 text-left ">
-                                                Share job link
-                                            </p>
-                                            
-                                        </div>
-                                    </div> -->
-                                </div>
-
-                                <!-- JOB 8 -->
-                                <div class="flex xl:flex-row xs:flex-col xl:gap-[0px] xs:gap-[28px]">   
-                                    
-                                    <div class="flex xl:flex-col xs:flex-col xl:gap-[20px] xs:gap-[20px] xl:w-full ">
-                                        <div class="flex gap-[20px] place-items-enter">
-                                            <div class="flex place-items-center xl:w-[475px]">
-                                                <h5 class="headings text-white-pure h5 text-left">
-                                                    2 - Aquacultural Technician I
-                                                </h5> 
-                                            </div>
-                                        </div>
-                                        <!-- <div class="flex place-items-enter">
-                                            <div class="flex place-items-center xl:w-[475px]">
-                                                <p class="paragraph text-white-pure p2 text-left">
-                                                    Lorem ipsum dolor sit amet consectetur. Fermentum feugiat consectetur sit ultrices vitae suscipit aliquet tellus nulla. Consequat sed eu auctor feugiat mus. Sed rutrum et ultricies ac euismod ullamcorper.
-                                                </p>
-                                            </div>
-                                        </div> -->
-                                        <div class="xl:flex xs:grid xs:grid-cols-4 gap-4">
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                Salary Grade 6
-                                            </p> 
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                Monthly Salary: 17,553
-                                            </p>
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                Completion of two year studies in college
-                                            </p>
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border xl:rounded-[40px] xs:rounded-[20px]">
-                                                Career Service (Subprofessional) First Level Eligibility or its equivalent
-                                            </p>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- <div class="">
-                                        <div class="flex ">
-                                            <a href="​mailto:aly070296@gmail.com" target="_blank" class="paragraph xl:p1 xs:p2 msu-blue-horizon text-white-pure xl:py-[14px] xs:py-[14px] xl:px-[109px] xs:px-[109px] rounded-[40px]">Apply</a>
-                                            
-                                        </div>
-                                        <div class="flex justify-center xl:mt-[40px]">
-                                            <p class="paragraph text-titanium p2 text-left ">
-                                                Share job link
-                                            </p>
-                                            
-                                        </div>
-                                    </div> -->
-                                </div>
-
-                                <!-- JOB 9 -->
-                                <div class="flex xl:flex-row xs:flex-col xl:gap-[0px] xs:gap-[28px]">   
-                                    
-                                    <div class="flex xl:flex-col xs:flex-col xl:gap-[20px] xs:gap-[20px] xl:w-full ">
-                                        <div class="flex gap-[20px] place-items-enter">
-                                            <div class="flex place-items-center xl:w-[475px]">
-                                                <h5 class="headings text-white-pure h5 text-left">
-                                                    Laboratory Technician I
-                                                </h5> 
-                                            </div>
-                                        </div>
-                                        <!-- <div class="flex place-items-enter">
-                                            <div class="flex place-items-center xl:w-[475px]">
-                                                <p class="paragraph text-white-pure p2 text-left">
-                                                    Lorem ipsum dolor sit amet consectetur. Fermentum feugiat consectetur sit ultrices vitae suscipit aliquet tellus nulla. Consequat sed eu auctor feugiat mus. Sed rutrum et ultricies ac euismod ullamcorper.
-                                                </p>
-                                            </div>
-                                        </div> -->
-                                        <div class="xl:flex xs:grid xs:grid-cols-4 gap-4">
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                Salary Grade 6
-                                            </p> 
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                Monthly Salary: 17,553
-                                            </p>
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                Completion of two-year studies in College
-                                            </p>
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border xl:rounded-[40px] xs:rounded-[20px]">
-                                                CSC MC 10, S.2013 - Cat II, Laboratory Technician
-                                            </p>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- <div class="">
-                                        <div class="flex ">
-                                            <a href="​mailto:aly070296@gmail.com" target="_blank" class="paragraph xl:p1 xs:p2 msu-blue-horizon text-white-pure xl:py-[14px] xs:py-[14px] xl:px-[109px] xs:px-[109px] rounded-[40px]">Apply</a>
-                                            
-                                        </div>
-                                        <div class="flex justify-center xl:mt-[40px]">
-                                            <p class="paragraph text-titanium p2 text-left ">
-                                                Share job link
-                                            </p>
-                                            
-                                        </div>
-                                    </div> -->
-                                </div>
-
-                                <!-- JOB 10 -->
-                                <div class="flex xl:flex-row xs:flex-col xl:gap-[0px] xs:gap-[28px]">   
-                                    
-                                    <div class="flex xl:flex-col xs:flex-col xl:gap-[20px] xs:gap-[20px] xl:w-full ">
-                                        <div class="flex gap-[20px] place-items-enter">
-                                            <div class="flex place-items-center xl:w-[475px]">
-                                                <h5 class="headings text-white-pure h5 text-left">
-                                                    5 - Administrative Aide VI
-                                                </h5> 
-                                            </div>
-                                        </div>
-                                        <!-- <div class="flex place-items-enter">
-                                            <div class="flex place-items-center xl:w-[475px]">
-                                                <p class="paragraph text-white-pure p2 text-left">
-                                                    Lorem ipsum dolor sit amet consectetur. Fermentum feugiat consectetur sit ultrices vitae suscipit aliquet tellus nulla. Consequat sed eu auctor feugiat mus. Sed rutrum et ultricies ac euismod ullamcorper.
-                                                </p>
-                                            </div>
-                                        </div> -->
-                                        <div class="xl:flex xs:grid xs:grid-cols-4 gap-4">
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                Salary Grade 6
-                                            </p> 
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                Monthly Salary: 17,553
-                                            </p>
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                Completion of two-year studies in College
-                                            </p>
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border xl:rounded-[40px] xs:rounded-[20px]">
-                                                Career Service (Subprofessional) First Level Eligibility or its equivalent
-                                            </p>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- <div class="">
-                                        <div class="flex ">
-                                            <a href="​mailto:aly070296@gmail.com" target="_blank" class="paragraph xl:p1 xs:p2 msu-blue-horizon text-white-pure xl:py-[14px] xs:py-[14px] xl:px-[109px] xs:px-[109px] rounded-[40px]">Apply</a>
-                                            
-                                        </div>
-                                        <div class="flex justify-center xl:mt-[40px]">
-                                            <p class="paragraph text-titanium p2 text-left ">
-                                                Share job link
-                                            </p>
-                                            
-                                        </div>
-                                    </div> -->
-                                </div>
-
-                                <!-- JOB 11 -->
-                                <div class="flex xl:flex-row xs:flex-col xl:gap-[0px] xs:gap-[28px]">   
-                                    
-                                    <div class="flex xl:flex-col xs:flex-col xl:gap-[20px] xs:gap-[20px] xl:w-full ">
-                                        <div class="flex gap-[20px] place-items-enter">
-                                            <div class="flex place-items-center xl:w-[475px]">
-                                                <h5 class="headings text-white-pure h5 text-left">
-                                                    4 - Administrative Aide IV
-                                                </h5> 
-                                            </div>
-                                        </div>
-                                        <!-- <div class="flex place-items-enter">
-                                            <div class="flex place-items-center xl:w-[475px]">
-                                                <p class="paragraph text-white-pure p2 text-left">
-                                                    Lorem ipsum dolor sit amet consectetur. Fermentum feugiat consectetur sit ultrices vitae suscipit aliquet tellus nulla. Consequat sed eu auctor feugiat mus. Sed rutrum et ultricies ac euismod ullamcorper.
-                                                </p>
-                                            </div>
-                                        </div> -->
-                                        <div class="xl:flex xs:grid xs:grid-cols-4 gap-4">
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                Salary Grade 4
-                                            </p> 
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                Monthly Salary: 15,586
-                                            </p>
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                Completion of two year studies in college
-                                            </p>
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border xl:rounded-[40px] xs:rounded-[20px]">
-                                                Career Service (Subprofessional) First Level Eligibility or its equivalent
-                                            </p>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- <div class="">
-                                        <div class="flex ">
-                                            <a href="​mailto:aly070296@gmail.com" target="_blank" class="paragraph xl:p1 xs:p2 msu-blue-horizon text-white-pure xl:py-[14px] xs:py-[14px] xl:px-[109px] xs:px-[109px] rounded-[40px]">Apply</a>
-                                            
-                                        </div>
-                                        <div class="flex justify-center xl:mt-[40px]">
-                                            <p class="paragraph text-titanium p2 text-left ">
-                                                Share job link
-                                            </p>
-                                            
-                                        </div>
-                                    </div> -->
-                                </div>
-
-                                <!-- JOB 12 -->
-                                <div class="flex xl:flex-row xs:flex-col xl:gap-[0px] xs:gap-[28px]">   
-                                    
-                                    <div class="flex xl:flex-col xs:flex-col xl:gap-[20px] xs:gap-[20px] xl:w-full ">
-                                        <div class="flex gap-[20px] place-items-enter">
-                                            <div class="flex place-items-center xl:w-[475px]">
-                                                <h5 class="headings text-white-pure h5 text-left">
-                                                    2 - Security Guard I
-                                                </h5> 
-                                            </div>
-                                        </div>
-                                        <!-- <div class="flex place-items-enter">
-                                            <div class="flex place-items-center xl:w-[475px]">
-                                                <p class="paragraph text-white-pure p2 text-left">
-                                                    Lorem ipsum dolor sit amet consectetur. Fermentum feugiat consectetur sit ultrices vitae suscipit aliquet tellus nulla. Consequat sed eu auctor feugiat mus. Sed rutrum et ultricies ac euismod ullamcorper.
-                                                </p>
-                                            </div>
-                                        </div> -->
-                                        <div class="xl:flex xs:grid xs:grid-cols-4 gap-4">
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                Salary Grade 3
-                                            </p> 
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                Monthly Salary: 14,678
-                                            </p>
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                High School Graduate
-                                            </p>
-                                            <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                                Security Guard License
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                        
-
-                                
-                                    
-                                    <!-- <div class="">
-                                        <div class="flex ">
-                                            <a href="​mailto:aly070296@gmail.com" target="_blank" class="paragraph xl:p1 xs:p2 msu-blue-horizon text-white-pure xl:py-[14px] xs:py-[14px] xl:px-[109px] xs:px-[109px] rounded-[40px]">Apply</a>
-                                            
-                                        </div>
-                                        <div class="flex justify-center xl:mt-[40px]">
-                                            <p class="paragraph text-titanium p2 text-left ">
-                                                Share job link
-                                            </p>
-                                            
-                                        </div>
-                                    </div> -->
-                                </div>
-
-                                <!-- JOB 13 -->
-                                <div class="flex xl:flex-row xs:flex-col xl:gap-[0px] xs:gap-[28px]">   
-                                    
-                                  <div class="flex xl:flex-col xs:flex-col xl:gap-[20px] xs:gap-[20px] xl:w-full ">
-                                      <div class="flex gap-[20px] place-items-enter">
-                                          <div class="flex place-items-center xl:w-[475px]">
-                                              <h5 class="headings text-white-pure h5 text-left">
-                                                  3 - Administrative Aide I
-                                              </h5> 
-                                          </div>
-                                      </div>
-                                      <!-- <div class="flex place-items-enter">
-                                          <div class="flex place-items-center xl:w-[475px]">
-                                              <p class="paragraph text-white-pure p2 text-left">
-                                                  Lorem ipsum dolor sit amet consectetur. Fermentum feugiat consectetur sit ultrices vitae suscipit aliquet tellus nulla. Consequat sed eu auctor feugiat mus. Sed rutrum et ultricies ac euismod ullamcorper.
-                                              </p>
-                                          </div>
-                                      </div> -->
-                                      <div class="xl:flex xs:grid xs:grid-cols-4 gap-4">
-                                          <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                              Salary Grade 1
-                                          </p> 
-                                          <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                              Monthly Salary: 13,000
-                                          </p>
-                                          <p class="paragraph text-titanium p4 text-left xl:py-[8px]  xs:py-[8px]  xl:px-[10px]  xs:px-[10px] border  xl:rounded-[40px] xs:rounded-[20px]">
-                                              Must be able to read and write
-                                          </p>
-                                      </div>
-                                  </div>
-                                </div>
-
-                                
+                          
 
                                 <div class="mt-10 text-left">
                                     <p class="paragraph p2 text-white-pure mb-5">Interested and qualified applicants should signify their interest in writing. Attach the following documents to the application letter and send to the address below not later than February 12, 2024.</p>
@@ -693,7 +193,6 @@ const currentPath = Astro.url.pathname;
                                 </div>
 
                             </div>
-                            
                             <!-- <div class="flex">
                                 <p class="paragraph text-titanium p2 mr-[30px] text-left">
                                     Page

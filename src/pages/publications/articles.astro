@@ -1,0 +1,256 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from "../../components/Navbar";
+import FooterNav from "../../components/FooterNav.astro";
+import Footer from "../../components/Footer.astro";
+import '../../styles/css/global.css';
+
+const currentPath = Astro.url.pathname;
+
+import { urlForImage } from '../../api/api';
+
+import { getArticle } from '../../api/api';
+const articles = await getArticle();
+
+import { getSingleLatestArticle } from '../../api/api';
+const singleLatestArticle = await getSingleLatestArticle();
+
+import { get4LatestArticles } from '../../api/api';
+const fourLatestArticles = await get4LatestArticles();
+---
+
+<Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
+	<main>
+		<Navbar path={currentPath} client:visible />
+        <div class='bg-gradient-ocean h-[100px] relative bottom-[100px] rotate-180'></div>
+        <div class="absolute top-[180px] w-full">
+            <div class='h-[40px] xl:px-[12.5%] xs:px-[3.85%]'>
+                <p class="paragraph p2 py-[10px] text-titanium xl:block xs:hidden"><a href="/home">Home</a> / <a href="/publications">Publications</a>  / Articles </p>
+            </div>
+            <div class="flex flex-col xl:mx-[240px] xs:mx-[20px] xl:mt-20">
+                <h3 class="headings xl:h3 xs:h5 text-center">Articles</h3>
+                <div class="flex xl:flex-row xs:flex-col xl:mt-[80px] xs:mt-[50px]">
+                    <img src={ urlForImage(singleLatestArticle.mainImage.asset.url).height(360).fit('crop').crop('center').url() } alt="" class="object-cover object-center" />
+                    <div class="xl:w-[720px] xl:ml-5">
+                        <a href={`/${singleLatestArticle.slug.current}`}><h4 class="headings xl:h4 xs:h6 xs:mt-[13px]">{singleLatestArticle.title}</h4></a>
+                        <p class="paragraph xl:p1 xs:p3 xl:mt-5 xs:mt-[22px] xl:h-[226px] xs:h-[46px] overflow-hidden text-silver">{ singleLatestArticle.body[0].children[0].text }</p>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="flex xl:mx-[240px] xs:mx-5 mt-[120px]">
+                <div class="grid xl:grid-cols-2 xs:grid-cols-1 gap-y-10 xs:gap-[20px]">
+                    {
+                        fourLatestArticles.map((article: { 
+                            title: unknown; 
+                            body: [
+                                {
+                                    children: [
+                                        {
+                                            text: unknown;
+                                        }
+                                    ]
+                                }
+                            ];
+                            mainImage: {
+                                asset: {
+                                    url: string
+                                };
+                            };
+                            slug: {
+                                current: unknown;
+                            };
+                        }) => (
+                            <div class="flex">
+                                <img src={ urlForImage(article.mainImage.asset.url).height(160).width(220).fit('crop').url() } alt="" class="" />
+                                <div class="flex flex-col w-[480px] ml-5">
+                                    <a href={`/${article.slug.current}`}><h5 class="headings h5">{ article.title }</h5></a>
+                                    <p class="paragraph p2 text-silver mt-[10px] h-[60px] overflow-hidden">{article.body[0].children[0].text}</p>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+            <!-- <div class="flex gap-[30px] justify-center mt-[40px] ">
+                <a href="#" class=" bg-white xl:py-[10px] xl:px-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
+                <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xl:px-[10px] xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
+                <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xl:px-[10px] xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
+            </div> -->
+
+            <!-- <div class="flex justify-center mt-20">
+                <div class="flex xl:flex-row xs:flex-col w-[1440px]">
+                    <div class="flex xl:flex-col  xl:gap-[30px] justify-center xs:flex-row xs:gap-[60px] ">
+                        <div class="flex xl:flex-col xs:flex-col xl:gap-[30px]  relative">
+                            
+                            <p class="paragraph p1 text-white-pure xl:text-left xs:text-center xs:mb-[7px]">Categories</p>
+
+
+                            <div class="flex xl:flex-col xl:gap-5">
+                                
+                                <p class="paragraph p2 text-titanium xl:block xs:hidden">Events</p>
+                                <p class="paragraph p2 text-titanium xl:block xs:hidden">News</p>
+                                <p class="paragraph p2 text-titanium xl:block xs:hidden">Academic</p>
+                                <p class="paragraph p2 text-titanium xl:block xs:hidden">Ceremonies</p>
+                                <p class="paragraph p2 text-titanium xl:block xs:hidden">Administrative</p>
+
+                                
+                                <select class="rounded-[40px] flex xs:flex-col xs:msu-drop-white-shadow xs:ml-[14px] xs:w-[181px]  text-white-pure xs:px-[9px] xs:py-[9px]  gap-5 xl:hidden xs:block">
+                                    
+                                    <option class="paragraph p2 text-black-pure">Events</option>
+                                    <option class="paragraph p2 text-black-pure">News</option>
+                                    <option class="paragraph p2 text-black-pure">Academic</option>
+                                    <option class="paragraph p2 text-black-pure">Ceremonies</option>
+                                    <option class="paragraph p2 text-black-pure">Administrative</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        
+                        <div class="flex xl:flex-col xs:flex-col xl:gap-[30px] relative  xs:ml-[50px]">
+                            <p class="paragraph p1 text-white-pure xl:text-left xs:text-center xs:mb-[7px] ">Date</p>
+                            <div class="flex flex-col gap-5">
+                                <p class="paragraph p2 text-titanium xl:block xs:hidden">2024</p>
+                                <p class="paragraph p2 text-titanium xl:block xs:hidden">2023</p>
+                                <p class="paragraph p2 text-titanium xl:block xs:hidden">2022</p>
+                                <p class="paragraph p2 text-titanium xl:block xs:hidden">2021</p>
+                                <p class="paragraph p2 text-titanium xl:block xs:hidden">2020</p>
+
+
+                                <select class="rounded-[40px] flex xs:flex-col xs:msu-drop-white-shadow xs:ml-[14px] xs:w-[120px]  text-white-pure xs:px-[9px] xs:py-[9px]  gap-5 xl:hidden xs:block">
+                                    
+                                    <option class="paragraph p2 text-black-pure">10/11/24</option>
+                                    <option class="paragraph p2 text-black-pure">10/11/2023</option>
+                                    <option class="paragraph p2 text-black-pure">10/11/2022</option>
+                                    <option class="paragraph p2 text-black-pure">10/11/2021</option>
+                                    <option class="paragraph p2 text-black-pure">10/11/2020</option>
+                                </select>
+
+                                <div class="flex flex-col xl:gap-5 xl:ml-[10px]">
+                                    <p class="paragraph p2 text-titanium xl:block xs:hidden">December</p>
+                                    <p class="paragraph p2 text-titanium xl:block xs:hidden">November</p>
+                                    <p class="paragraph p2 text-titanium xl:block xs:hidden">October</p>
+                                    <p class="paragraph p2 text-titanium xl:block xs:hidden">September</p>
+                                    <p class="paragraph p2 text-titanium xl:block xs:hidden">August</p>
+                                    <p class="paragraph p2 text-titanium xl:block xs:hidden">July</p>
+                                    <p class="paragraph p2 text-titanium xl:block xs:hidden">June</p>
+                                </div>
+
+                                
+                                
+                            </div>
+                        </div>
+                        <div class="flex flex-col min-w-max  bottom-0 xl:block xs:hidden">
+                            <p class="paragraph p2 text-titanium">Can’t see what you’re looking for?</p>
+                            <button class="paragraph p2 text-white-pure w-full border py-[10px] mt-[10px] rounded-[40px]">Search</button>
+                        </div>
+                    </div>
+                    <div class="flex xl:flex-col xl:ml-[235px]  xs:flex-col xs:mx-[20px] xl:gap-[32px] xs:gap-[31px] xs:mt-[49px]">
+                        <div class="flex">
+                            <img src="/images/article-blank-1.png" alt="" class="xl:h-[120px] xs:h-[136px] object-cover object-center" />
+                            <div class="flex flex-col ml-[22px]">
+                                <h5 class="headings h5 max-w-[599px]">Sample title search of a document, article</h5>
+                                <p class="paragraph p2 text-silver max-w-[599px] mt-[10px]">Lorem ipsum dolor sit amet consectetur. Ac sem cursus facilisis facilisis orci erat ut. Pulvinar consectetur quisque sollicitudin morbi feugiat. Elementum nisl quis rhoncus cras neque et pulvinar id.</p>
+                                <div class="flex max-w-[599px] mt-[10px]">
+                                    <p class="paragraph p2 text-titanium">Article</p>
+                                    <p class="paragraph p2 text-titanium ml-5">2021 Feb 01</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <img src="/images/article-blank-1.png" alt="" class="xl:h-[120px] xs:h-[136px] object-cover object-center" />
+                            <div class="flex flex-col ml-[22px]">
+                                <h5 class="headings h5 max-w-[599px]">Sample title search of a document, article</h5>
+                                <p class="paragraph p2 text-silver max-w-[599px] mt-[10px]">Lorem ipsum dolor sit amet consectetur. Ac sem cursus facilisis facilisis orci erat ut. Pulvinar consectetur quisque sollicitudin morbi feugiat. Elementum nisl quis rhoncus cras neque et pulvinar id.</p>
+                                <div class="flex max-w-[599px] mt-[10px]">
+                                    <p class="paragraph p2 text-titanium">Article</p>
+                                    <p class="paragraph p2 text-titanium ml-5">2021 Feb 01</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <img src="/images/article-blank-1.png" alt="" class="xl:h-[120px] xs:h-[136px] object-cover object-center" />
+                            <div class="flex flex-col ml-[22px]">
+                                <h5 class="headings h5 max-w-[599px]">Sample title search of a document, article</h5>
+                                <p class="paragraph p2 text-silver max-w-[599px] mt-[10px]">Lorem ipsum dolor sit amet consectetur. Ac sem cursus facilisis facilisis orci erat ut. Pulvinar consectetur quisque sollicitudin morbi feugiat. Elementum nisl quis rhoncus cras neque et pulvinar id.</p>
+                                <div class="flex max-w-[599px] mt-[10px]">
+                                    <p class="paragraph p2 text-titanium">Article</p>
+                                    <p class="paragraph p2 text-titanium ml-5">2021 Feb 01</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <img src="/images/article-blank-1.png" alt="" class="xl:h-[120px] xs:h-[136px] object-cover object-center" />
+                            <div class="flex flex-col ml-[22px]">
+                                <h5 class="headings h5 max-w-[599px]">Sample title search of a document, article</h5>
+                                <p class="paragraph p2 text-silver max-w-[599px] mt-[10px]">Lorem ipsum dolor sit amet consectetur. Ac sem cursus facilisis facilisis orci erat ut. Pulvinar consectetur quisque sollicitudin morbi feugiat. Elementum nisl quis rhoncus cras neque et pulvinar id.</p>
+                                <div class="flex max-w-[599px] mt-[10px]">
+                                    <p class="paragraph p2 text-titanium">Article</p>
+                                    <p class="paragraph p2 text-titanium ml-5">2021 Feb 01</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <img src="/images/article-blank-1.png" alt="" class="xl:h-[120px] xs:h-[136px] object-cover object-center" />
+                            <div class="flex flex-col ml-[22px]">
+                                <h5 class="headings h5 max-w-[599px]">Sample title search of a document, article</h5>
+                                <p class="paragraph p2 text-silver max-w-[599px] mt-[10px]">Lorem ipsum dolor sit amet consectetur. Ac sem cursus facilisis facilisis orci erat ut. Pulvinar consectetur quisque sollicitudin morbi feugiat. Elementum nisl quis rhoncus cras neque et pulvinar id.</p>
+                                <div class="flex max-w-[599px] mt-[10px]">
+                                    <p class="paragraph p2 text-titanium">Article</p>
+                                    <p class="paragraph p2 text-titanium ml-5">2021 Feb 01</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <img src="/images/article-blank-1.png" alt="" class="xl:h-[120px] xs:h-[136px] object-cover object-center" />
+                            <div class="flex flex-col ml-[22px]">
+                                <h5 class="headings h5 max-w-[599px]">Sample title search of a document, article</h5>
+                                <p class="paragraph p2 text-silver max-w-[599px] mt-[10px]">Lorem ipsum dolor sit amet consectetur. Ac sem cursus facilisis facilisis orci erat ut. Pulvinar consectetur quisque sollicitudin morbi feugiat. Elementum nisl quis rhoncus cras neque et pulvinar id.</p>
+                                <div class="flex max-w-[599px] mt-[10px]">
+                                    <p class="paragraph p2 text-titanium">Article</p>
+                                    <p class="paragraph p2 text-titanium ml-5">2021 Feb 01</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <img src="/images/article-blank-1.png" alt="" class="xl:h-[120px] xs:h-[136px] object-cover object-center" />
+                            <div class="flex flex-col ml-[22px]">
+                                <h5 class="headings h5 max-w-[599px]">Sample title search of a document, article</h5>
+                                <p class="paragraph p2 text-silver max-w-[599px] mt-[10px]">Lorem ipsum dolor sit amet consectetur. Ac sem cursus facilisis facilisis orci erat ut. Pulvinar consectetur quisque sollicitudin morbi feugiat. Elementum nisl quis rhoncus cras neque et pulvinar id.</p>
+                                <div class="flex max-w-[599px] mt-[10px]">
+                                    <p class="paragraph p2 text-titanium">Article</p>
+                                    <p class="paragraph p2 text-titanium ml-5">2021 Feb 01</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-center mt-20">
+                <p class="paragraph p2 text-titanium mr-[30px]">Pages</p>
+                <a href="" class="paragraph p2 text-titanium mr-5">1</a>
+                <a href="" class="paragraph p2 text-titanium mr-5">2</a>
+                <a href="" class="paragraph p2 text-titanium mr-5">3</a>
+                <a href="" class="paragraph p2 text-titanium mr-5">4</a>
+                <a href="" class="paragraph p2 text-titanium mr-5">5</a>
+                <a href="" class="paragraph p2 text-titanium mr-5">6</a>
+                <a href="" class="paragraph p2 text-titanium mr-5">7</a>
+                <a href="" class="paragraph p2 text-titanium mr-5">8</a>
+            </div> -->
+            <div class="video-wrapper mt-[120px]">
+                <div class="video-container">
+                    <iframe width="100%" height="980"
+                        src="https://www.youtube.com/embed/0C7f8iq6f_w?autoplay=0&mute=0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+<!-- FooterNaV -->
+        <FooterNav />
+<!-- end FooterNaV -->
+
+<!-- Footer -->
+		<Footer />
+<!-- end Footer -->
+        </div>
+    </main>
+</Layout>

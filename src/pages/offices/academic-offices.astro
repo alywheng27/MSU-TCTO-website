@@ -1,0 +1,47 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from "../../components/Navbar";
+import ChancellorMessage from "../../components/ChancellorMessage.astro";
+import MainVideo from "../../components/MainVideo.astro";
+import FooterNav from "../../components/FooterNav.astro";
+import Footer from "../../components/Footer.astro";
+import FacultyAndStaff from "../../components/FacultyAndStaff";
+import '../../styles/css/global.css';
+
+const currentPath = Astro.url.pathname;
+---
+
+<Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
+	<main>
+		<Navbar path={currentPath} client:visible />        
+
+<!-- Academic Offices -->
+        <div id="academic" class=" bg-white-pure xl:pt-[80px] xs:pt-[80px] xl:pb-[60px] xs:pb-[80px] ">
+            
+            <div class="text-center xs:px-[66px]">
+                <h3 class="headings xl:h3 xs:h4 text-msu-rusty-red ">Academic Offices</h3>
+                <div class="flex flex-col gap-[20px] justify-center xl:ml-0 xs:ml-0 xl:mt-0 xs:mt-10 pt-10 ">
+                    <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">COLLEGE OF ARTS AND SCIENCES</p>
+                    <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">COLLEGE OF ISLAMIC & ARABIC STUDIES</p>
+                    <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">COLLEGE OF EDUCATION</p>
+                    <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">COLLEGE OF FISHERIES</p>
+                    <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">INSTITUTE OF INFORMATION & COMMUNICATIONS TECHNOLOGY</p>
+                    <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">INSTITUTE OF OCEANOGRAPHY & ENVIRONMENTAL SCIENCE</p>
+                    
+                </div>
+            </div>
+           
+        </div>
+<!-- end Academic Offices -->
+
+<!-- FooterNaV -->
+        <FooterNav />
+<!-- end FooterNaV -->
+
+<!-- Footer -->
+		<Footer />
+<!-- end Footer -->
+
+	</main>
+	
+</Layout>
