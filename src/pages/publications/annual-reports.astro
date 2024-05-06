@@ -1,24 +1,24 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from "../components/Navbar";
-import MainVideo from "../components/MainVideo.astro";
-import FooterNav from "../components/FooterNav.astro";
-import Footer from "../components/Footer.astro";
-import '../styles/css/global.css';
+import Layout from '../../layouts/Layout.astro';
+import Navbar from "../../components/Navbar";
+import MainVideo from "../../components/MainVideo.astro";
+import FooterNav from "../../components/FooterNav.astro";
+import Footer from "../../components/Footer.astro";
+import '../../styles/css/global.css';
 
 
 const currentPath = Astro.url.pathname;
 
-import { urlForImage } from '../api/api';
+import { urlForImage } from '../../api/api';
 
-import { getYear } from '../js/date';
-import { getWordMonth } from '../js/date';
-import { get3LettersMonth } from '../js/date';
-import { getDay } from '../js/date';
+import { getYear } from '../../js/date';
+import { getWordMonth } from '../../js/date';
+import { get3LettersMonth } from '../../js/date';
+import { getDay } from '../../js/date';
 
-import { getLatestAnnualReport } from '../api/api';
-import { get1_4LatestAnnualReport } from '../api/api';
-import { get1_6LatestAnnualReport } from '../api/api';
+import { getLatestAnnualReport } from '../../api/api';
+import { get1_4LatestAnnualReport } from '../../api/api';
+import { get1_6LatestAnnualReport } from '../../api/api';
 
 const latestAnnualReport = await getLatestAnnualReport();
 const one_fourLatestAnnualReport = await get1_4LatestAnnualReport();

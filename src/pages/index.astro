@@ -5,6 +5,8 @@ import ChancellorMessage from "../components/ChancellorMessage.astro";
 import MainVideo from "../components/MainVideo.astro";
 import FooterNav from "../components/FooterNav.astro";
 import Footer from "../components/Footer.astro";
+import CarouselMain from "../components/CarouselMain";
+
 import '../styles/css/global.css';
 
 const currentPath = Astro.url.pathname;
@@ -30,7 +32,10 @@ const threeLatestAnnualReport = await get3LatestAnnualReport();
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
 	<main>
 		<Navbar path={currentPath} client:visible />
-		<div class="flex xl:flex-row xs:flex-col justify-center xl:bottom-[80px] xl:h-[640px] xl:mx-[12.5%] xs:mx-0 relative">
+    <div class="bg-black-pure w-full xl:px-[12.5%] xs:px-[3.85%] py-10">
+      <CarouselMain client:visible />
+    </div>
+		<!-- <div class="flex xl:flex-row xs:flex-col justify-center xl:bottom-[80px] xl:h-[640px] xl:mx-[12.5%] xs:mx-0 relative">
 			<div class="bg-msu-deep-ocean flex xl:flex-row xs:flex-col justify-center xl:pr-5">
 				{
 					<div>
@@ -83,7 +88,7 @@ const threeLatestAnnualReport = await get3LatestAnnualReport();
 					}
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<div class="bg-black-pure w-full xl:px-[12.5%] xs:px-[3.85%]">
 			<h5 class="headings h5 text-center xl:pt-[27px] xs:pt-[30px]">Upcoming Events</h5>
 			<div class="grid xl:grid-cols-4 md:grid-cols-2 xs:grid-cols-1 mt-[27px]">

@@ -1,9 +1,9 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from "../components/Navbar";
-import FooterNav from "../components/FooterNav.astro";
-import Footer from "../components/Footer.astro";
-import '../styles/css/global.css';
+import Layout from '../../layouts/Layout.astro';
+import Navbar from "../../components/Navbar";
+import FooterNav from "../../components/FooterNav.astro";
+import Footer from "../../components/Footer.astro";
+import '../../styles/css/global.css';
 
 const currentPath = Astro.url.pathname;
 ---
@@ -15,30 +15,29 @@ const currentPath = Astro.url.pathname;
 <!-- fold 02 -->
 		<div class=" bg-msu-deep-ocean">
 			<div class="text-center xl:px-[12.5%] xs:px-[3.85%] pt-[80px] xl:bg-none xs:bg-none">
-                <h3 class="headings xl:h3 xs:h5 text-white-pure">Institute of Oceanography and Environmental Science</h3>
+                <h3 class="headings xl:h3 xs:h5 text-white-pure">College of Education</h3>
 				<!-- <div class="bg-gradient-ocean h-20 rotate-180 xs:block xl:hidden"></div> -->
 			</div>
-            <div class="flex gap-x-[120px] gap-y-[35px] text-justify xl:flex-row xs:flex-col xl:items-start xs:items-center xl:mb-20 xs:mb-10 xl:mt-20 xs:mt-10 xl:mx-[12.5%] xs:mx-[3.85%]">
-                <div class="flex xl:gap-[120px] xs:gap-[35px] justify-center">
+            <div class="flex justify-center gap-x-[80px] gap-y-[35px] text-left xl:flex-row xs:flex-col xl:items-start xs:items-center xl:mb-20 xs:mb-10 xl:mt-20 xs:mt-10 xl:mx-[12.5%] xs:mx-[3.85%]">
+                <div class="flex xl:gap-[80px] xs:gap-[35px] justify-center">
                     <div class="xl:w-[240px] xs:w-[115px] object-cover object-center">
-                        <img src="/images/College Logo/IOES Logo.png" >
+                        <img src="/images/College Logo/LOGO COED.png" >
                     </div>
-                    <div class="xl:max-w-[480px] xs:max-w-[212px]">
+                    <div class="xl:max-w-[380px] xs:max-w-[212px]">
                         <p class="paragraph xl:p1 xs:p2 text-white-pure">
-                            The objective of the college is to:
+                            To produce highly motivated and competent teachers who will:
                             <br />
                             <br />
-                            To generate science-based
-                            knowledge and develop technology for sustainable utilization and conservation of natural resources in the region
-                            <br />
-                            <br />
-                            To produce competent graduates that will contribute to nation building particularly as stewards of natural resources
+	                        a. provide leadership in their respective disciplines through quality instruction, research, extension and innovation; 
                         </p>
                     </div>
                 </div>
-                <div class="flex xl:max-w-[480px] xs:max-w-[360px]">
+                <div class="flex xl:max-w-[380px] xs:max-w-[360px]">
                     <p class="paragraph xl:p1 xs:p2 text-white-pure">
-                        To render extension services to support local stakeholders in improving their socio-economic condition 
+                        b. responds to the demands of their social environment and its diverse cultures; and
+                        <br />
+                        <br />
+                        c. be effective agents of peace and development in the Sulu Archipelago.                     
                     </p>
                 </div>
             </div>
@@ -54,7 +53,7 @@ const currentPath = Astro.url.pathname;
             </div>
             <div class="grid grid-cols-2 text-center xl:pt-[40px] xs:pt-[20px] justify-center">
                 <p class="paragraph xl:p1 xs:p2 text-black">
-                    BS in Marine Biology
+                    Bachelor of Secondary Education (Major in English, Filipino, Sciences, Mathematics)
                 </p>
                 <div class="text-start xl:pl-20">
                     <p class="paragraph xl:p1 xs:p2 text-black">
@@ -65,9 +64,22 @@ const currentPath = Astro.url.pathname;
                     </p>
                 </div>
             </div>
-            <div class="grid grid-cols-2 text-center xl:pt-[40px] xs:pt-[20px] justify-center">
+            <div class="grid grid-cols-2 text-center xl:pt-[20px] xs:pt-[18px] justify-center">
                 <p class="paragraph xl:p1 xs:p2 text-black">
-                    BA in Environmental Sciences
+                    Bachelor of Elementary Education (Major in General Education)
+                </p>
+                <div class="text-start xl:pl-20">
+                    <p class="paragraph xl:p1 xs:p2 text-black">
+                        AACCUP Level 1 Accredited
+                    </p>
+                    <p class="paragraph xl:p1 xs:p2 text-black">
+                        CHED Certificate of Program Compliance
+                    </p>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 text-center xl:pt-[20px] xs:pt-[18px] justify-center">
+                <p class="paragraph xl:p1 xs:p2 text-black">
+                    Bachelor of Early Childhood Education
                 </p>
                 <div class="text-start xl:pl-20">
                     <p class="paragraph xl:p1 xs:p2 text-black">
@@ -78,9 +90,9 @@ const currentPath = Astro.url.pathname;
 		</div>
         
         <div class="flex xl:flex-row xs:flex-col justify-center mt-20 xl:px-[12.5%] xs:px-[0px]">
-            <img src="/images/ioes/image1.png" alt="" class="xl:h-[360px] object-cover object-center" />
-            <img src="/images/ioes/image2.png" alt="" class="xl:h-[360px] object-cover object-center" />
-            <img src="/images/ioes/image3.png" alt="" class="xl:h-[360px] object-cover object-center xl:block xs:hidden" />
+            <img src="/images/coed/image1.png" alt="" class="xl:h-[360px] object-cover object-center" />
+            <img src="/images/coed/image8.png" alt="" class="xl:h-[360px] object-cover object-center" />
+            <img src="/images/coed/image3.png" alt="" class="xl:h-[360px] object-cover object-center xl:block xs:hidden" />
         </div>
             
         <div class="flex gap-[30px] justify-center mt-[40px] mb-[57px] ">
@@ -99,6 +111,8 @@ const currentPath = Astro.url.pathname;
                 <h3 class="headings text-center text-white-pure xl:h3 xs:h5 px-[12.5%]  xl:pt-[80px] xs:pt-[40px]">Our Programs</h3>
             </div>
             
+
+            
             <!-- <div class="place-items-center xs:pt-[48px] xs:pb-[48px] text-center xs:block xl:hidden">
                 <select id="programs" class=" flex xs:flex-col xs:msu-drop-white-shadow text-white-pure xs:px-[9px] xs:py-[9px]  xl:hidden xs:block">
                     <option id="cas" class="paragraph p2 text-black-pure">College of Arts and Science</option>
@@ -109,30 +123,39 @@ const currentPath = Astro.url.pathname;
                     <option id="ioes" class="paragraph p2 text-black-pure">Institute of Oceanography and Environmental Science</option>
                 </select>
             </div> -->
-
-            <div id="ioes" class="xl:pb-[52px]">
+            
+            <div id="coed" class="xl:pb-[120px]">
             
                 <div class="flex place-items-center xl:gap-[90px] xs:gap-[23px] xl:p-5 xs:pt-[48px] text-center ">
-                    <img src="/images/College Logo/IOES Logo.png" class="xl:w-[200px] xs:w-[150px]" alt="">
-                    <h4 class="headings xl:h4 xs:h5 text-white-pure mt-5"><a href="/ioes">Institute of Oceanography and Environmental Science</a></h4>
+                    <img src="/images/College Logo/LOGO COED.png" class="xl:w-[200px] xs:w-[150px]" alt="">
+                    <h4 class="headings xl:h4 xs:h5 text-white-pure mt-5"><a href="/coed">College of Education</a></h4>
                 </div>
                 <div class="xl:flex place-items-top gap-[10%] xl:p-5 xs:pt-[32px] xs:pl-[97px] ">
                     <div class="xl:w-[200px]"> </div>
                     <div class="flex flex-col paragraph xl:p1 xs:p2 text-silver">
-                        <a href="https://drive.google.com/file/d/1n2txgNFydhR8j_hKAPjjQdLknbIqvHiF/view?usp=drive_link" class=""> Bachelor of Science in Environmental Science</a>
-                        <a href="https://drive.google.com/file/d/1mwEKaO9epZEvW2A_ZQ-joUTpkZ4TWVwF/view?usp=drive_link" class=""> Bachelor of Science in Marine Science</a>
+    
+                        <p class=""> PhD in Education Management</p>
+                        <p class=""> MA in Education major in Educational Management</p>
+                        <p class=""> MA in Education major in Reading</p>
+                    
+                        <p class=""> Bachelor Elementary Education with area of concentration in General Education </p>
+                        <p class=""> Bachelor of Early Childhood Education</p>
+                        <p class=""> Bachelor of Secondary Education Major in English</p>
+                        <p class=""> Bachelor of Secondary Education Major in Mathematics</p>
+                        <p class=""> Bachelor of Secondary Education Major in Filipino</p>
+                        <p class=""> Bachelor of Secondary Education Major in Sciences</p>
                     </div>
                 </div>
 
             </div>
 
-            <div class="text-center xl:pb-[80px] xs:pb-[48px]" id="college_contact_details_ioes">
+            <div class="text-center xl:pb-[80px] xs:pb-[48px]" id="college_contact_details_coed">
                 <p class="paragraph text-silver  xl:p1 xs:p2 pt-20 mb-5">Need clarifications or help?</p>
                 <!-- <a href="" class="bg-transparent border paragraph xl:p1 xs:p2 gap-10 text-silver py-[10.5px] px-[60px] rounded-[40px]">Contact us now!</a> -->
                 <div class="paragraph xl:p1 xs:p2 text-silver">
-                    Email Address: sheriffaandas@msutawi-tawi.edu.ph
-                        <br />
-                    Contact #: 09979757616
+                    Contact #: 09555415841
+                    <br />
+                    Contact #: 09361564807
                 </div>
             </div>
         
@@ -146,7 +169,7 @@ const currentPath = Astro.url.pathname;
             <div class="flex flex-row xl:gap-[50px] xl:px-[240px] xs:pt-20  xs:px-[0px]">
                 <div class="flex xl:flex-row  justify-center  xl:gap-[120px] xs:gap-[41px] ">
                     <div class="flex justify-center  xs:px-[0px] xl:block xs:hidden ">
-                        <img src="/images/ioes/image3.png" alt="" class="xl:h-[360px] object-cover object-center" />
+                        <img src="/images/coed/image7.png" alt="" class="xl:h-[360px] object-cover object-center" />
                     </div>
                     <!-- <div class="xl:block xs:hidden">
                         
@@ -157,7 +180,7 @@ const currentPath = Astro.url.pathname;
                 </div>
                 <div class="flex xl:flex-row xs:flex-col justify-center  xl:gap-[120px] xs:gap-[41px]  ">
                     <div class="flex justify-center  xs:px-[0px] xl:block xs:hidden">
-                        <img src="/images/ioes/image4.png" alt="" class="xl:h-[360px] object-cover object-center" />
+                        <img src="/images/coed/image1.png" alt="" class="xl:h-[360px] object-cover object-center" />
                     </div>
                     <!-- <div class="xl:block xs:hidden">
                         
@@ -172,10 +195,9 @@ const currentPath = Astro.url.pathname;
                     <div class="xl:mt-0 xs:mt-0  xs:px-[0px]">
                         <!-- <img src="/images/the-campus-2.png" alt="" class="h-[360px] object-cover object-center" /> -->
                         <div class="flex justify-center xs:px-[0px] xl:block xs:hidden">
-                            <img src="/images/ioes/image5.JPG" alt="" class="xl:h-[360px] object-cover object-center" />
+                            <img src="/images/coed/image2.png" alt="" class="xl:h-[360px] object-cover object-center" />
                         </div>
                         <div class="flex gap-[30px] justify-center mt-[40px]  ">
-                            <!-- <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px]  xl:rounded-[40px] xs:rounded-[40px] border-white border-2"></a> -->
                             <!-- <a href="#" class=" bg-white xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
                             <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
                             <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a> -->

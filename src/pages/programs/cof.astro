@@ -1,9 +1,9 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from "../components/Navbar";
-import FooterNav from "../components/FooterNav.astro";
-import Footer from "../components/Footer.astro";
-import '../styles/css/global.css';
+import Layout from '../../layouts/Layout.astro';
+import Navbar from "../../components/Navbar";
+import FooterNav from "../../components/FooterNav.astro";
+import Footer from "../../components/Footer.astro";
+import '../../styles/css/global.css';
 
 const currentPath = Astro.url.pathname;
 ---
@@ -15,29 +15,33 @@ const currentPath = Astro.url.pathname;
 <!-- fold 02 -->
 		<div class=" bg-msu-deep-ocean">
 			<div class="text-center xl:px-[12.5%] xs:px-[3.85%] pt-[80px] xl:bg-none xs:bg-none">
-                <h3 class="headings xl:h3 xs:h5 text-white-pure">College of Islamic and Arabic Studies</h3>
+                <h3 class="headings xl:h3 xs:h5 text-white-pure">College of Fisheries</h3>
 				<!-- <div class="bg-gradient-ocean h-20 rotate-180 xs:block xl:hidden"></div> -->
 			</div>
-            <div class="flex gap-x-[120px] gap-y-[35px] text-justify xl:flex-row xs:flex-col xl:items-start xs:items-center xl:mb-20 xs:mb-10 xl:mt-20 xs:mt-10 xl:mx-[12.5%] xs:mx-[3.85%]">
-                <div class="flex xl:gap-[120px] xs:gap-[35px] justify-center">
+            <div class="flex justify-center gap-x-[80px] gap-y-[35px] text-left xl:flex-row xs:flex-col xl:items-start xs:items-center xl:mb-20 xs:mb-10 xl:mt-20 xs:mt-10 xl:mx-[12.5%] xs:mx-[3.85%]">
+                <div class="flex xl:gap-[80px] xs:gap-[35px] justify-center">
                     <div class="xl:w-[240px] xs:w-[115px] object-cover object-center">
-                        <img src="/images/College Logo/LOGO CIAS.png" >
+                        <img src="/images/College Logo/LOGO COF.png" >
                     </div>
-                    <div class="xl:max-w-[480px] xs:max-w-[212px]">
+                    <div class="xl:max-w-[380px] xs:max-w-[212px]">
                         <p class="paragraph xl:p1 xs:p2 text-white-pure">
-                            To produce highly motivated and competent teachers who will:
-                            <br />
-                            <br />
-                            provide leadership in their respective disciplines through quality instruction, research, extension and innovation;
+                            To achieve the objectives set by R.A. 6060, the college developed academic programs that are focused on the “effective exploitation and conservation of fisheries resources 
+                            in the Sulu sea and nearby waters.” Researches on fish processing, aquaculture and capture fisheries were proposed and implemented with the goal of helping promote the social 
+                            and economic development of the people and their communities.
+                            <br/>
+                            <br/>
+                            From the year of its creation, MSU-TCTO has been producing graduates of Bachelor of Science in Fisheries along three fields of specialization such as fish culture, fish 
+                            capture and fish processing. The college has also been producing graduates of three-year diploma in fisheries technology along the above mentioned fields of specialization.
                         </p>
                     </div>
                 </div>
-                <div class="flex xl:max-w-[480px] xs:max-w-[360px]">
+                <div class="flex xl:max-w-[380px] xs:max-w-[360px]">
                     <p class="paragraph xl:p1 xs:p2 text-white-pure">
-                        respond to the demands of their social environment and its diverse cultures;
-                        <br />
-                        <br />
-                        Be effective agents of peace and development in the Sulu Archipelago.
+                        Some of the College’s graduates are now holding key positions in both government and non-government institutions
+                        Others have ventured into self-employment (business). These are 
+                        some of its accomplishments, but true to its mandate, the college would like to do more. With support from the administration under the stewardship of Chancellor Mary Joyce Z. 
+                        Guinto-Sali, Ph.D, the college is gearing up to link with national and international Colleges and Universities via joint programs (academic and research). The collaborative effort is 
+                        expected to strengthen the partner institutions through sharing of resources and Faculty and student exchange programs.
                     </p>
                 </div>
             </div>
@@ -53,20 +57,7 @@ const currentPath = Astro.url.pathname;
             </div>
             <div class="grid grid-cols-2 text-center xl:pt-[40px] xs:pt-[20px] justify-center">
                 <p class="paragraph xl:p1 xs:p2 text-black">
-                    BS in Teaching Arabic
-                </p>
-                <div class="text-start xl:pl-20">
-                    <p class="paragraph xl:p1 xs:p2 text-black">
-                        AACCUP Level 1 Accredited
-                    </p>
-                    <p class="paragraph xl:p1 xs:p2 text-black">
-                        CHED Certificate of Program Compliance
-                    </p>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 text-center xl:pt-[20px] xs:pt-[18px] justify-center">
-                <p class="paragraph xl:p1 xs:p2 text-black">
-                    BA in Islamic Studies (Major in Shariah)
+                    BS in Fisheries
                 </p>
                 <div class="text-start xl:pl-20">
                     <p class="paragraph xl:p1 xs:p2 text-black">
@@ -80,9 +71,9 @@ const currentPath = Astro.url.pathname;
 		</div>
         
         <div class="flex xl:flex-row xs:flex-col justify-center mt-20 xl:px-[12.5%] xs:px-[0px]">
-            <img src="/images/cias/image3.png" alt="" class="xl:h-[360px] object-cover object-center" />
-            <img src="/images/cias/image2.png" alt="" class="xl:h-[360px] object-cover object-center" />
-            <img src="/images/cias/image1.png" alt="" class="xl:h-[360px] object-cover object-center xl:block xs:hidden" />
+            <img src="/images/cof/image1.png" alt="" class="xl:h-[360px] object-cover object-center" />
+            <img src="/images/cof/image2.png" alt="" class="xl:h-[360px] object-cover object-center" />
+            <img src="/images/cof/image5.png" alt="" class="xl:h-[360px] object-cover object-center xl:block xs:hidden" />
         </div>
             
         <div class="flex gap-[30px] justify-center mt-[40px] mb-[57px] ">
@@ -113,30 +104,29 @@ const currentPath = Astro.url.pathname;
                 </select>
             </div> -->
 
-            <div id="cias" class="xl:pb-[120px] ">
+            <div id="cof" class="xl:pb-[120px]">
             
                 <div class="flex place-items-center xl:gap-[90px] xs:gap-[23px] xl:p-5 xs:pt-[48px] text-center ">
-                    <img src="/images/College Logo/LOGO CIAS.png" class="xl:w-[200px] xs:w-[150px]" alt="">
-                    <h4 class="headings xl:h4 xs:h5 text-white-pure mt-5"><a href="/cias">College of Islamic & Arabic Studies</a></h4>
+                    <img src="/images/College Logo/LOGO COF.png" class="xl:w-[200px] xs:w-[150px]" alt="">
+                    <h4 class="headings xl:h4 xs:h5 text-white-pure mt-5"><a href="/cof">College of Fisheries</a></h4>
                 </div>
                 <div class="xl:flex place-items-top gap-[10%] xl:p-5 xs:pt-[32px] xs:pl-[97px] ">
                     <div class="xl:w-[200px]"> </div>
                     <div class="flex flex-col paragraph xl:p1 xs:p2 text-silver">
-                        <a href="https://drive.google.com/file/d/1o6V4gWfdf--bOOI0G8fyhg41hAJJvRLc/view?usp=drive_link" class=""> Master of Arts in Islamic Education</a>
-                        <a href="https://docs.google.com/document/d/1rRuFXcbhHzkQ6pkt9-kTvK05XwrZHMK3/edit?usp=drive_link" class=""> Bachelor of Arts in Islamic Studies Major in Sharia</a>
-                        <a href="https://drive.google.com/file/d/13p2k38zFJObS_8c3PHjSdTSDudITklZ8/view?usp=drive_link" class=""> Bachelor of Science in Teaching Arabic </a>
+                        <p class=""> Bachelor of Science in Food Technology</p>
+                        <p class=""> Bachelor of Science in Fisheries</p>
+                        <p class=""> Diploma in Fisheries Technology Major in Aquaculture</p>
+                        <p class=""> Diploma in Fisheries Technology Major in Fish Processing</p>
                     </div>
                 </div>
 
             </div>
 
-            <div class="text-center xl:pb-[80px] xs:pb-[48px]" id="college_contact_details_cias">
+            <div class="text-center xl:pb-[80px] xs:pb-[48px]" id="college_contact_details_cof">
                 <p class="paragraph text-silver  xl:p1 xs:p2 pt-20 mb-5">Need clarifications or help?</p>
                 <!-- <a href="" class="bg-transparent border paragraph xl:p1 xs:p2 gap-10 text-silver py-[10.5px] px-[60px] rounded-[40px]">Contact us now!</a> -->
                 <div class="paragraph xl:p1 xs:p2 text-silver">
-                    Email Address: almirahadji@msutawi-tawi.edu.ph
-                    <br />
-                    Contact #: 09273592473
+                    Email Address: msutctocof@msutawi-tawi.edu.ph
                 </div>
             </div>
         
@@ -150,7 +140,7 @@ const currentPath = Astro.url.pathname;
             <div class="flex flex-row xl:gap-[50px] xl:px-[240px] xs:pt-20  xs:px-[0px]">
                 <div class="flex xl:flex-row  justify-center  xl:gap-[120px] xs:gap-[41px] ">
                     <div class="flex justify-center  xs:px-[0px] xl:block xs:hidden ">
-                        <img src="/images/cias/image4.png" alt="" class="xl:h-[360px] object-cover object-center" />
+                        <img src="/images/cof/image3.png" alt="" class="xl:h-[360px] object-cover object-center" />
                     </div>
                     <!-- <div class="xl:block xs:hidden">
                         
@@ -161,7 +151,7 @@ const currentPath = Astro.url.pathname;
                 </div>
                 <div class="flex xl:flex-row xs:flex-col justify-center  xl:gap-[120px] xs:gap-[41px]  ">
                     <div class="flex justify-center  xs:px-[0px] xl:block xs:hidden">
-                        <img src="/images/cias/image3.png" alt="" class="xl:h-[360px] object-cover object-center" />
+                        <img src="/images/cof/image4.png" alt="" class="xl:h-[360px] object-cover object-center" />
                     </div>
                     <!-- <div class="xl:block xs:hidden">
                         
@@ -176,7 +166,7 @@ const currentPath = Astro.url.pathname;
                     <div class="xl:mt-0 xs:mt-0  xs:px-[0px]">
                         <!-- <img src="/images/the-campus-2.png" alt="" class="h-[360px] object-cover object-center" /> -->
                         <div class="flex justify-center xs:px-[0px] xl:block xs:hidden">
-                            <img src="/images/cias/image6.png" alt="" class="xl:h-[360px] object-cover object-center" />
+                            <img src="/images/cof/image6.png" alt="" class="xl:h-[360px] object-cover object-center" />
                         </div>
                         <div class="flex gap-[30px] justify-center mt-[40px]  ">
                             <!-- <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px]  xl:rounded-[40px] xs:rounded-[40px] border-white border-2"></a> -->
@@ -189,8 +179,8 @@ const currentPath = Astro.url.pathname;
                         
                         <p class="flex paragraph p1 text-titanium xl:w-[720px] xs:px-[27px]">
                             Lorem ipsum dolor sit amet consectetur. Dui eros integer varius bibendum eu. Venenatis nulla amet tincidunt at orci enim. Sit nunc massa tempus placerat risus maecenas. Faucibus duis feugiat parturient enim ullamcorper nunc. Consequat vulputate turpis ullamcorper felis dignissim. Pharetra et duis duis ultrices id velit ut. Vulputate platea porta consectetur risus turpis amet. Luctus massa eu urna maecenas eros pretium. Pellentesque senectus dolor id quam nec. Nulla nunc integer facilisi arcu porttitor. Maecenas quam lectus quis convallis erat. Vitae enim vulputate dolor quisque ipsum. Et vel maecenas justo quis nulla nibh duis.
-                        </p>
-                    </div> -->
+                        </p> -->
+                    </div>
                 </div>
                 <!-- <div class="text-center xl:py-[80px] xs:py-[50px]">
                     <a href="" class="bg-transparent border paragraph p1 text-titanium py-[10.5px] px-[60px] rounded-[40px]">See more of our facilities</a>

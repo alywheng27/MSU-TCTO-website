@@ -353,14 +353,48 @@
 
 
 .nav {
-    @apply xs:h-0 xl:h-fit xl:py-0 overflow-hidden;
-    transition: .3s ease-in-out;
+    @apply xs:h-0 xl:h-fit xl:py-0 xl:overflow-visible xs:overflow-hidden;
 }
 
 .nav.active {
-    @apply xs:py-5 xs:h-[300px] xl:h-0;
-    transition: .3s ease-in-out;
+    @apply xs:py-5 xs:h-auto xl:h-0;
 }
+
+.nav li a:hover {
+  @apply text-msu-crimson-ground;
+}
+
+.dropdown {
+  position: relative;
+  display: block;
+}
+
+
+.dropdown-menu {
+  @apply xs:h-0 hidden bg-msu-deep-ocean xs:p-0 xl:pb-5 xl:absolute xs:relative xs:top-0 xl:top-[35px] xl:shadow xl:shadow-md xl:shadow-white-pure;
+  transition: .3s ease-in-out;
+
+  display: none;
+  /* position: absolute; */
+  min-width: 240px;
+  /* box-shadow: 0px 8px 16px 0px rgba(255, 255, 255, 0.2); */
+  z-index: 1;
+}
+
+.dropdown-1:hover .lvl-one {
+  @apply xs:h-auto block;
+  transition: .3s ease-in-out;
+}
+
+.lvl-two {
+  @apply xl:left-[201px] xs:left-0;
+  top: 0px;
+}
+
+.dropdown-2:hover .lvl-two {
+  @apply xs:h-auto block;
+  transition: .3s ease-in-out;
+} 
 
 .arrow-left{
     background: url('../../../public/images/Chevron Left.png'), lightgray 50% / contain ;
@@ -374,15 +408,15 @@
 }
 
 .swiper-pagination-bullet {
-    width: 11px !important;
-    height: 11px !important;
+    @apply xl:w-6 xl:h-6 xs:w-4 xs:h-4;
+
     opacity: 1 !important;
-    background: rgba(0, 0, 0, 0.2) !important;
-    border: 1px solid #fff !important;
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid #820D13 !important;
 }
 
 .swiper-pagination-bullet-active {
-    background: #fff !important;
+    background: #820D13 !important;
   }
 
   .app-container {

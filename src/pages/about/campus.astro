@@ -1,16 +1,16 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from "../components/Navbar";
-import FooterNav from "../components/FooterNav.astro";
-import Footer from "../components/Footer.astro";
-import '../styles/css/global.css';
-import MainVideo from '../components/MainVideo.astro';
+import Layout from '../../layouts/Layout.astro';
+import Navbar from "../../components/Navbar";
+import FooterNav from "../../components/FooterNav.astro";
+import Footer from "../../components/Footer.astro";
+import '../../styles/css/global.css';
+import MainVideo from '../../components/MainVideo.astro';
 
 
 
-import Old_Campus_Swiper from "../components/old_campus_swiper.jsx";
-import College_Logo_Swiper from "../components/college_logo_swiper.jsx";
-import MySwiper from "../components/MySwiper.jsx";
+import Old_Campus_Swiper from "../../components/old_campus_swiper.jsx";
+import College_Logo_Swiper from "../../components/college_logo_swiper.jsx";
+import MySwiper from "../../components/MySwiper.jsx";
 
 const currentPath = Astro.url.pathname;
 
@@ -28,23 +28,23 @@ const currentPath = Astro.url.pathname;
                 <p class="paragraph xl:p1 xs:p2 text-white-pure max-w-[720px] xl:mt-10 xs:mt-10">Republic Act 6060 gave birth to MSU-Sulu College of Technology and Oceanography on August 4, 1969, initially offering degree programs and diploma in Fisheries Technology.</p>
             </div>
             <div>
-                <img src="/images/a breif history 1.png" alt="" class="xl:h-[640px] object-cover object-center" />
+                <img src="/images/a breif history 1.png" loading="lazy" alt="" class="xl:h-[640px] object-cover object-center" />
             </div>
         </div>
         <div class="flex xl:flex-row xs:flex-col-reverse items-center justify-start xl:mt-[120px] xs:mt-[60px] xs:gap-[66px]">
-            <div class="xl:block xs:hidden">
-                <img src="/images/a breif history 2.png" alt="" class="xl:h-[640px] object-cover object-center" />
-            </div>
-            <div class="xl:mr-[120px] xs:mx-[25px] xs:text-left">
-                <p class="paragraph xl:p1 xs:p2 text-white-pure max-w-[720px]">In 1973, Tawi-Tawi became a separate province from Sulu, and MSU-SCTO became MSU-Tawi-Tawi College of Technology and Oceanography per BP Blg. 197. In 1990 it became an autonomous university campus.</p>
-                <p class="paragraph xl:p1 xs:p2 text-white-pure max-w-[720px] xl:mt-10 xs:mt-10">In its more than four decades of existence, it has steadfastly pursued its vision to be the center of excellence in Fisheries, Marine and Maritime Sciences and Engineering, and Oceanography, in its mission to give Muslims and other cultural minorities access to quality education and develop such other programs as will promote Muslim welfare and hasten socio-economic development of the southernmost region of the country.</p>
-                <p class="paragraph xl:p1 xs:p2 text-white-pure max-w-[720px] xl:mt-10 xs:mt-10">MSU-TCTO is comprised of the following academic units: the College of Fisheries, College of Arts and Sciences, College of Education, Institute of Environmental and Oceanography Studies, College of Islamic and Arabic Studies, and the Institute of Information and Communications Technology.</p>
-            </div>
+          <div class="xl:block xs:hidden">
+              <img src="/images/a breif history 2.png" loading="lazy" alt="" class="xl:h-[640px] object-cover object-center" />
+          </div>
+          <div class="xl:mr-[120px] xs:mx-[25px] xs:text-left">
+              <p class="paragraph xl:p1 xs:p2 text-white-pure max-w-[720px]">In 1973, Tawi-Tawi became a separate province from Sulu, and MSU-SCTO became MSU-Tawi-Tawi College of Technology and Oceanography per BP Blg. 197. In 1990 it became an autonomous university campus.</p>
+              <p class="paragraph xl:p1 xs:p2 text-white-pure max-w-[720px] xl:mt-10 xs:mt-10">In its more than four decades of existence, it has steadfastly pursued its vision to be the center of excellence in Fisheries, Marine and Maritime Sciences and Engineering, and Oceanography, in its mission to give Muslims and other cultural minorities access to quality education and develop such other programs as will promote Muslim welfare and hasten socio-economic development of the southernmost region of the country.</p>
+              <p class="paragraph xl:p1 xs:p2 text-white-pure max-w-[720px] xl:mt-10 xs:mt-10">MSU-TCTO is comprised of the following academic units: the College of Fisheries, College of Arts and Sciences, College of Education, Institute of Environmental and Oceanography Studies, College of Islamic and Arabic Studies, and the Institute of Information and Communications Technology.</p>
+          </div>
         </div>
         <div class="flex justify-center mt-20 xl:px-[12.5%] xs:px-[0px]">
-            <img src="/images/image 3.png" alt="" class="xl:h-[360px] object-cover object-center xl:block xs:hidden" />
-            <img src="/images/image 4.png" alt="" class="xl:h-[360px] object-cover object-center xl:block xs:hidden" />
-            <img src="/images/image 5.png" alt="" class="xl:h-[360px] object-cover object-center xl:block xs:hidden" />
+            <img src="/images/image 3.png" loading="lazy" alt="" class="xl:h-[360px] object-cover object-center xl:block xs:hidden" />
+            <img src="/images/image 4.png" loading="lazy" alt="" class="xl:h-[360px] object-cover object-center xl:block xs:hidden" />
+            <img src="/images/image 5.png" loading="lazy" alt="" class="xl:h-[360px] object-cover object-center xl:block xs:hidden" />
         </div>
         
         <div class="flex justify-center mt-20 xl:px-[12.5%] xs:px-[0px] xl:hidden xs:block">
@@ -73,11 +73,11 @@ const currentPath = Astro.url.pathname;
             <div class="flex xl:flex-row justify-center xs:flex-col">
                 
                 <div>
-                    <img src="/images/campus-now-2.png" alt="" class="xl:h-[980px] xs:w-full object-cover object-center" />
+                    <img src="/images/campus-now-2.png" loading="lazy" alt="" class="xl:h-[980px] xs:w-full object-cover object-center" />
                 </div>
                 <div class="flex xl:flex-col justify-center xs:flex-row ">
-                    <img src="/images/campus-now-1.png" alt="" class="xl:h-[490px] xs:h-[164px] xs:w-full object-cover object-center" />
-                    <img src="/images/Masjid Nuruul Iman.png" alt="" class="xl:h-[490px] xs:h-[164px] xs:w-full object-cover object-center" />
+                    <img src="/images/campus-now-1.png" loading="lazy" alt="" class="xl:h-[490px] xs:h-[164px] xs:w-full object-cover object-center" />
+                    <img src="/images/Masjid Nuruul Iman.png" loading="lazy" alt="" class="xl:h-[490px] xs:h-[164px] xs:w-full object-cover object-center" />
                 </div>
             </div>
 
@@ -97,10 +97,10 @@ const currentPath = Astro.url.pathname;
         </div>
         
         <div class="flex justify-center xl:mt-0 xl:px-[0%] xs:px-[0%]">
-            <img src="/images/development.png" alt="" class="xl:h-full object-cover object-center" />
+            <img src="/images/development.png" loading="lazy" alt="" class="xl:h-full object-cover object-center" />
         </div>
         
-        <div id="mv" class="bg-white-pure flex flex-col items-center text-center pb-[71px]">
+        <!-- <div id="mv" class="bg-white-pure flex flex-col items-center text-center pb-[71px]">
             <h3 class="headings xl:h3 xs:h4 xs:max-w-[353px] text-msu-maroon xl:max-w-[720px] mt-20">The same vision with a better mission</h3>
             <h4 class="headings h4 text-msu-rusty-red max-w-[720px] mt-20">VISION</h4>
             <p class="paragraph p1 text-black-pure xl:max-w-[720px] xs:max-w-[325px] mt-10">A university in the Sulu Archipelago renowned for Fisheries, Marine and Environmental Science and other disciplines.</p>
@@ -115,9 +115,9 @@ const currentPath = Astro.url.pathname;
                 
                 d) Engage stakeholders in peace and socio-economic development endeavors.
             </p>
-        </div>
+        </div> -->
 
-        <div id="hymn" class="bg-black-pure flex flex-col  items-center xl:px-[358px] xs:px-[44px] gap-[80px] " >
+        <!-- <div id="hymn" class="bg-black-pure flex flex-col  items-center xl:px-[358px] xs:px-[44px] gap-[80px] " >
             <div class="">
                 <h4 class="headings text-msu-maroon h3 mt-[80px] xl:w-[718px] xs:w-[412px] text-center">The MSU Hymn</h4>
                 <figure>
@@ -126,23 +126,23 @@ const currentPath = Astro.url.pathname;
                     </audio>
                 </figure>
             </div>
-            <div class="flex xs:flex-col xl:flex-row gap-[120px] mb-[130px]"> 
-                <div class="">
+            <div class="flex xs:flex-col xl:flex-row gap-[120px] mb-[130px]">  -->
+                <!-- <div class="">
                     <div class="video-wrapper">
-                        <!-- <iframe class="flex xs:mx-[44px] xl:mb-[90px] xs:mb-[74px] rounded-[40px] xl:w-[721px] xs:w-[323px] xl:h-[490px] xs:h-[225px]" 
+                        <iframe class="flex xs:mx-[44px] xl:mb-[90px] xs:mb-[74px] rounded-[40px] xl:w-[721px] xs:w-[323px] xl:h-[490px] xs:h-[225px]" 
                             src="https://www.youtube.com/embed/p4VyE0-Vnrs?autoplay=0&mute=0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                        </iframe> -->
+                        </iframe>
                        
 
-                        <!-- <figure>
+                        <figure>
                             <audio controls class="xs:mx-[44px] xl:h-[60px] xs:h-[50px] xl:w-[720px] xs:w-[318px]">
                                 <source src="/audio/himno_tcto.mp3" type="audio/mpeg">
                             </audio>
-                        </figure> -->
+                        </figure>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="xl:block xs:hidden">
+                <!-- <div class="xl:block xs:hidden">
                     <p class="paragraph p1 w-[400px] text-white-pure">
                         Silahis ang katulad mong
                         nagsabog ng liwanag
@@ -177,7 +177,7 @@ const currentPath = Astro.url.pathname;
                 </div>
             </div>  
             
-        </div>
+        </div> -->
         
 
         <!-- <div class="bg-msu-maroon">
@@ -196,21 +196,21 @@ const currentPath = Astro.url.pathname;
             
             </div>
         </div> -->
-        <div class="text-center mb-[84px] ">
+        <!-- <div class="text-center mb-[84px] ">
             <div class="flex flex-col items-center gap-[120px]">
                 <h3 class="headings xl:h3 xs:h5 mt-[80px] mb-[120px] xl:w-[960px] xs:mx-[50px]">More courses offered in more areas of knowledge</h3>
             
             </div>
             
-           
+            -->
             <!-- <College_Logo_Swiper client:visible /> -->
             <!-- <MySwiper client:load /> -->
-            <div class="xl:hidden xs:block">
+            <!-- <div class="xl:hidden xs:block">
                 <MySwiper client:load />
-            </div>
+            </div> -->
 
             <!-- desktop view -->
-            <div class="flex flex-col gap-[120px] mb-[120px] xl:block xs:hidden">
+            <!-- <div class="flex flex-col gap-[120px] mb-[120px] xl:block xs:hidden">
                 <div class="flex flex-col gap-[40px]  xl:mb-[40px]">
                     <div class="gap-[330px] flex xl:flex-row xs:flex-col xl:px-[12.5%] xs:px-[3.85%] xl:mb-[10px] justify-center ">
                         <img src="/images/College Logo/LOGO CAS.png" alt="" class="xl:w-[150px] xl:h-[150px] ">
@@ -240,23 +240,23 @@ const currentPath = Astro.url.pathname;
     
                 </div>
 
-            </div>
-            <div class="flex flex-col justify-center xl:block xs:hidden">
+            </div> -->
+            <!-- <div class="flex flex-col justify-center xl:block xs:hidden">
 
-                <!-- <div class="flex justify-center">
+                <div class="flex justify-center">
                     <a href="#" class="paragraph p1 bg-transparent text-white-pure w-[480px] py-[12.5px] px-[30.5px] rounded-[40px] border border-msu-white-pure">Contact us</a>
-                </div>  -->
-                <!-- <div class="flex justify-center mb-[20px]">
+                </div> 
+                <div class="flex justify-center mb-[20px]">
                     <a href="#" class="paragraph p1 bg-white-pure w-[480px] py-[12.5px] px-[30.5px] rounded-[40px]">Check our Enrollment Procedures</a>
                 </div>
                 <div class="flex justify-center">
                     <a href="#" class="paragraph p1 bg-transparent text-white-pure w-[480px] py-[12.5px] px-[30.5px] rounded-[40px] border border-msu-white-pure">Administrative Offices</a>
-                </div> -->
-            </div>
-        </div>
+                </div>
+            </div> -->
+        <!-- </div> -->
 
 <!-- FooterNaV -->
-        <MainVideo />
+        <!-- <MainVideo /> -->
 <!-- end FooterNaV -->
 
 <!-- FooterNaV -->

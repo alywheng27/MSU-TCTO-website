@@ -1,21 +1,21 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from "../components/Navbar";
-import FooterNav from "../components/FooterNav.astro";
-import Footer from "../components/Footer.astro";
-import '../styles/css/global.css';
+import Layout from '../../layouts/Layout.astro';
+import Navbar from "../../components/Navbar";
+import FooterNav from "../../components/FooterNav.astro";
+import Footer from "../../components/Footer.astro";
+import '../../styles/css/global.css';
 
 const currentPath = Astro.url.pathname;
 
-import { urlForImage } from '../api/api';
+import { urlForImage } from '../../api/api';
 
-import { getArticle } from '../api/api';
+import { getArticle } from '../../api/api';
 const articles = await getArticle();
 
-import { getSingleLatestArticle } from '../api/api';
+import { getSingleLatestArticle } from '../../api/api';
 const singleLatestArticle = await getSingleLatestArticle();
 
-import { get4LatestArticles } from '../api/api';
+import { get4LatestArticles } from '../../api/api';
 const fourLatestArticles = await get4LatestArticles();
 ---
 

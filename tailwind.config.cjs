@@ -36,6 +36,9 @@ module.exports = {
 			screens: {
 				'xs': '360px',
 				'3xl': '1920px',
+        // 'xs': '360px',
+        // 'xl': '1024px',
+				// '3xl': '1280px',
 				// => @media (min-width: 1536px) { ... }
 			  }
 		},
