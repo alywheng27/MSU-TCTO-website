@@ -1,0 +1,275 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from "../../components/Navbar";
+import FooterNav from "../../components/FooterNav.astro";
+import Footer from "../../components/Footer.astro";
+import '../../styles/css/global.css';
+import MainVideo from '../../components/MainVideo.astro';
+import { Fade } from "react-awesome-reveal";
+
+
+import Old_Campus_Swiper from "../../components/old_campus_swiper.jsx";
+import College_Logo_Swiper from "../../components/college_logo_swiper.jsx";
+import MySwiper from "../../components/MySwiper.jsx";
+
+const currentPath = Astro.url.pathname;
+
+---
+
+<Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
+	<main>
+		<Navbar path={currentPath} client:visible />
+
+
+        <div class="flex xl:flex-row xs:flex-col items-center justify-end xs:gap-[66px]">
+            <div class="xl:mr-[120px] xs:mx-[25px] xs:text-left">
+                <h3 class="headings xl:h3 xs:h5 xl:max-w-[720px]">A Brief History</h3>
+                <p class="paragraph xl:p1 xs:p2 text-white-pure max-w-[720px] xl:mt-20 xs:mt-10">Starting in 1964 as Mindanao State University Preparatory High School in Bongao, Tawi-Tawi, a mere adjunct to MSU Marawi Preparatory High School, MSU Tawi-Tawi College of Technology and Oceanography has grown into an institution of academic excellence. More secondary schools were established from 1967 to 1977 in the outlying island municipalities of Tawi-Tawi. By 1990, 20 high schools were put up throughout the province. In 1984, MSU-TCTO Science High School and MSU-TCTO Child Development Center – Laboratory Elementary School were established.</p>
+                <p class="paragraph xl:p1 xs:p2 text-white-pure max-w-[720px] xl:mt-10 xs:mt-10">Republic Act 6060 gave birth to MSU-Sulu College of Technology and Oceanography on August 4, 1969, initially offering degree programs and diploma in Fisheries Technology.</p>
+            </div>
+       
+            <div>
+                <img src="/images/a breif history 1.png" alt="" class="xl:h-[640px] object-cover object-center" />
+            </div>
+   
+        </div>
+        <div class="flex xl:flex-row xs:flex-col-reverse items-center justify-start xl:mt-[120px] xs:mt-[60px] xs:gap-[66px]">
+          <div class="xl:block xs:hidden">
+              <img src="/images/a breif history 2.png" alt="" class="xl:h-[640px] object-cover object-center" />
+          </div>
+          <div class="xl:mr-[120px] xs:mx-[25px] xs:text-left">
+              <p class="paragraph xl:p1 xs:p2 text-white-pure max-w-[720px]">In 1973, Tawi-Tawi became a separate province from Sulu, and MSU-SCTO became MSU-Tawi-Tawi College of Technology and Oceanography per BP Blg. 197. In 1990 it became an autonomous university campus.</p>
+              <p class="paragraph xl:p1 xs:p2 text-white-pure max-w-[720px] xl:mt-10 xs:mt-10">In its more than four decades of existence, it has steadfastly pursued its vision to be the center of excellence in Fisheries, Marine and Maritime Sciences and Engineering, and Oceanography, in its mission to give Muslims and other cultural minorities access to quality education and develop such other programs as will promote Muslim welfare and hasten socio-economic development of the southernmost region of the country.</p>
+              <p class="paragraph xl:p1 xs:p2 text-white-pure max-w-[720px] xl:mt-10 xs:mt-10">MSU-TCTO is comprised of the following academic units: the College of Fisheries, College of Arts and Sciences, College of Education, Institute of Environmental and Oceanography Studies, College of Islamic and Arabic Studies, and the Institute of Information and Communications Technology.</p>
+          </div>
+        </div>
+        <div class="flex justify-center mt-20 xl:px-[12.5%] xs:px-[0px]">
+            <img src="/images/image 3.png" loading="lazy" alt="" class="xl:h-[360px] object-cover object-center xl:block xs:hidden" />
+            <img src="/images/image 4.png" loading="lazy" alt="" class="xl:h-[360px] object-cover object-center xl:block xs:hidden" />
+            <img src="/images/image 5.png" loading="lazy" alt="" class="xl:h-[360px] object-cover object-center xl:block xs:hidden" />
+        </div>
+        
+        <div class="flex justify-center mt-20 xl:px-[12.5%] xs:px-[0px] xl:hidden xs:block">
+            <Old_Campus_Swiper client:visible />
+        </div>
+
+
+        <!-- <div class="flex gap-[30px] justify-center mt-[40px] mb-[57px] ">
+            <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px]  xl:rounded-[40px] xs:rounded-[40px] border-white border-2"></a>
+            <a href="#" class=" bg-white xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
+            <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
+        </div> -->
+
+
+        <div class="flex flex-col items-center xl:mt-[40px] xs:mt-[66px] xl:mb-[57px] xs:mb-[50px] xs:mx-[25px] xs:text-left">
+            <p class="paragraph  xl:p1 xs:p2 text-white-pure max-w-[720px]">The extension services of the college include providing capability building trainings and functional literacy programs to the Tawi-Tawians. The local folks are empowered through education and entrepreneurial development.</p>
+            <p class="paragraph  xl:p1 xs:p2 text-white-pure max-w-[720px] mt-10">The college has continued to undertake researches in fisheries aquaculture, and marine related sciences, as well as in the social sciences. These initiatives are designed to promote sustainable utilization and rational management of the marine and fisheries resources of the area, with the aim of improving the standard of living of the people of Southern Philippines.</p>
+        </div>
+        <div class="bg-msu-maroon ">
+            <div class="flex justify-center bg-gradient-ocean py-[111px]">
+                <h3 class="headings xl:h3 xs:h4 xl:max-w-[720px] xs:max-w-[357px] text-center">
+                    That was us before.
+                    This is us now!
+                </h3>
+            </div>
+            <div class="flex xl:flex-row justify-center xs:flex-col">
+                
+                <div>
+                    <img src="/images/campus-now-2.png" loading="lazy" alt="" class="xl:h-[980px] xs:w-full object-cover object-center" />
+                </div>
+                <div class="flex xl:flex-col justify-center xs:flex-row ">
+                    <img src="/images/campus-now-1.png" loading="lazy" alt="" class="xl:h-[490px] xs:h-[164px] xs:w-full object-cover object-center" />
+                    <img src="/images/Masjid Nuruul Iman.png" loading="lazy" alt="" class="xl:h-[490px] xs:h-[164px] xs:w-full object-cover object-center" />
+                </div>
+            </div>
+
+            
+
+
+            <div class="flex flex-col items-center xl:mt-[40px] xs:mt-[66px] xl:pb-[57px] xs:pb-[42px] xs:mx-[25px] xs:text-left">
+                <h3 class="headings xl:h3 xs:h4 max-w-[720px] text-center">A lot has changed through the years!</h3>
+                <!-- <p class="paragraph  xl:p1 xs:p2 text-white-pure max-w-[720px] mt-20">
+                    Lorem ipsum dolor sit amet consectetur. At sapien diam cras pellentesque aliquam adipiscing. Morbi consectetur et rhoncus id turpis tortor.
+                    Sed aliquam potenti porta tellus. Ut consequat ut tempor senectus. Accumsan accumsan orci vel lacus diam sed ut elit.<br /><br />
+                    Pretium viverra et amet egestas dolor vitae magna venenatis sit. Orci morbi pharetra pulvinar purus pretium enim sagittis sit nullam.
+                    Quam blandit mi mi ut rhoncus aenean. Ut lectus metus dictum fames sed. Aliquam nam amet luctus duis euismod et.
+                </p> -->
+                <!-- <a href="" class="paragraph xl:p1 xs:p2 text-white-pure py-[10.5px] px-[90px] mt-[50px] border rounded-[40px]">Check our Campus Gallery</a> -->
+            </div>
+        </div>
+        
+        <div class="flex justify-center xl:mt-0 xl:px-[0%] xs:px-[0%]">
+            <img src="/images/development.png" loading="lazy" alt="" class="xl:h-full object-cover object-center" />
+        </div>
+        
+        <!-- <div id="mv" class="bg-white-pure flex flex-col items-center text-center pb-[71px]">
+            <h3 class="headings xl:h3 xs:h4 xs:max-w-[353px] text-msu-maroon xl:max-w-[720px] mt-20">The same vision with a better mission</h3>
+            <h4 class="headings h4 text-msu-rusty-red max-w-[720px] mt-20">VISION</h4>
+            <p class="paragraph p1 text-black-pure xl:max-w-[720px] xs:max-w-[325px] mt-10">A university in the Sulu Archipelago renowned for Fisheries, Marine and Environmental Science and other disciplines.</p>
+            <h4 class="headings h4 text-msu-rusty-red max-w-[720px] mt-20">MISSION</h4>
+            <p class="paragraph p1 text-black-pure xl:max-w-[720px] xs:max-w-[325px] mt-10">
+                To fulfill its mandate, MSU-TCTO shall:<br /><br />
+                a) Provide relevant quality education especially to Muslims and other indigenous groups;<br /><br />
+                
+                b) Promote environmental conservation and sustainable utilization of fisheries and marine resources;<br /><br />
+                
+                c) Develop and transfer new knowledge and innovative technology to the community; and<br /><br />
+                
+                d) Engage stakeholders in peace and socio-economic development endeavors.
+            </p>
+        </div> -->
+
+        <!-- <div id="hymn" class="bg-black-pure flex flex-col  items-center xl:px-[358px] xs:px-[44px] gap-[80px] " >
+            <div class="">
+                <h4 class="headings text-msu-maroon h3 mt-[80px] xl:w-[718px] xs:w-[412px] text-center">The MSU Hymn</h4>
+                <figure>
+                    <audio controls class="xs:mx-[44px] xl:h-[60px] xs:h-[50px] xl:w-[720px] xs:w-[318px] xs:mt-[50px]">
+                        <source src="/audio/himno_tcto.mp3" type="audio/mpeg">
+                    </audio>
+                </figure>
+            </div>
+            <div class="flex xs:flex-col xl:flex-row gap-[120px] mb-[130px]">  -->
+                <!-- <div class="">
+                    <div class="video-wrapper">
+                        <iframe class="flex xs:mx-[44px] xl:mb-[90px] xs:mb-[74px] rounded-[40px] xl:w-[721px] xs:w-[323px] xl:h-[490px] xs:h-[225px]" 
+                            src="https://www.youtube.com/embed/p4VyE0-Vnrs?autoplay=0&mute=0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                        </iframe>
+                       
+
+                        <figure>
+                            <audio controls class="xs:mx-[44px] xl:h-[60px] xs:h-[50px] xl:w-[720px] xs:w-[318px]">
+                                <source src="/audio/himno_tcto.mp3" type="audio/mpeg">
+                            </audio>
+                        </figure>
+                    </div>
+                </div> -->
+
+                <!-- <div class="xl:block xs:hidden">
+                    <p class="paragraph p1 w-[400px] text-white-pure">
+                        Silahis ang katulad mong
+                        nagsabog ng liwanag
+                        <br> <br>
+                        Ng pag-asa't hangarin
+                        ng pag-unlad.
+                        <br> <br>
+    
+                        Ang pook ng Mindanao
+                        tinanglaw at pinalad,
+                        <br> <br>
+    
+                        Nang ika'y isilang
+                        na dakila ang hangad.
+                        <br> <br>
+    
+                        Ating ipagkapuri
+                        Itong Pamantasan,
+                        <br> <br>
+    
+                        Ang buhay at pag-ibig
+                        sa kanya'y iaalay;
+                        <br> <br>
+    
+                        Saan man naroroon
+                        ay bigyang karangalan,
+                        <br> <br>
+    
+                        Dakilang paaralan
+                        Pamantasang Mindanao.
+                    </p>
+                </div>
+            </div>  
+            
+        </div> -->
+        
+
+        <!-- <div class="bg-msu-maroon">
+            <div class="flex flex-col items-center xl:gap-[80px]">
+                <div class=" xl:mb-[90px]">
+                    <h4 class="headings text-white-pure xl:h3 xs:h4 mt-[80px] xl:w-[1438px]  xs:mx-[50px] text-center">A Center of Excellence & Development</h4>
+                </div>
+                <div class="flex flex-col xl:gap-[5px] xs:gap-[12px] xs:mb-[78px] xs:mt-[31px]">
+                    <p class="paragraph p1 text-center text-msu-golden-fog xs:mx-[31px]">Center of Excellence in Field</p>
+                    <p class="paragraph p1 text-center text-msu-golden-fog xs:mx-[31px]">Center of Excellence in Field</p>
+                    <p class="paragraph p1 text-center text-msu-golden-fog xs:mx-[31px]">Center of Excellence in Field</p>
+                    <p class="paragraph p1 text-center text-msu-golden-fog xs:mx-[31px]">Center of Excellence in Field</p>
+                    <p class="paragraph p1 text-center text-msu-golden-fog xs:mx-[31px]">Center of Excellence in Field</p>
+                    <p class="paragraph p1 text-center text-msu-golden-fog xs:mx-[31px]">Center of Excellence in Field</p>
+                </div>
+            
+            </div>
+        </div> -->
+        <!-- <div class="text-center mb-[84px] ">
+            <div class="flex flex-col items-center gap-[120px]">
+                <h3 class="headings xl:h3 xs:h5 mt-[80px] mb-[120px] xl:w-[960px] xs:mx-[50px]">More courses offered in more areas of knowledge</h3>
+            
+            </div>
+            
+            -->
+            <!-- <College_Logo_Swiper client:visible /> -->
+            <!-- <MySwiper client:load /> -->
+            <!-- <div class="xl:hidden xs:block">
+                <MySwiper client:load />
+            </div> -->
+
+            <!-- desktop view -->
+            <!-- <div class="flex flex-col gap-[120px] mb-[120px] xl:block xs:hidden">
+                <div class="flex flex-col gap-[40px]  xl:mb-[40px]">
+                    <div class="gap-[330px] flex xl:flex-row xs:flex-col xl:px-[12.5%] xs:px-[3.85%] xl:mb-[10px] justify-center ">
+                        <img src="/images/College Logo/LOGO CAS.png" alt="" class="xl:w-[150px] xl:h-[150px] ">
+                        <img src="/images/College Logo/LOGO CIAS.png" alt="" class="xl:w-[150px] xl:h-[150px] ">
+                        <img src="/images/College Logo/LOGO COED.png" alt="" class="xl:w-[150px] xl:h-[150px] ">
+                    </div>
+                    <div class="flex xl:flex-row xs:flex-col xl:px-[12.5%] xs:px-[3.85%] justify-center ">
+                        <p class="paragraph xl:p1 text-white-pure w-[480px] flex justify-center">College of Arts and Sciences</p>
+                        <p class="paragraph xl:p1 text-white-pure w-[480px] flex justify-center ">College of Islamic & Arabic Studies</p>
+                        <p class="paragraph xl:p1 text-white-pure w-[480px] flex justify-center">College of Education</p>
+                    </div>
+    
+                </div>
+                
+    
+                <div class="flex flex-col  gap-[40px] xl:mb-[40px]">
+                    <div class="gap-[330px] flex xl:flex-row xs:flex-col xl:px-[12.5%] xs:px-[3.85%] xl:mb-[10px] justify-center ">
+                        <img src="/images/College Logo/LOGO COF.png" alt="" class="xl:w-[150px] xl:h-[150px] ">
+                        <img src="/images/College Logo/LOGO IICT.png" alt="" class="xl:w-[150px] xl:h-[150px] ">
+                        <img src="/images/College Logo/LOGO IOES.png" alt="" class="xl:w-[150px] xl:h-[150px] ">
+                    </div>
+                    <div class="flex xl:flex-row xs:flex-col xl:px-[12.5%] xs:px-[3.85%] justify-center ">
+                        <p class="paragraph xl:p1 text-white-pure w-[480px] flex justify-center ">College of Fisheries</p>
+                        <p class="paragraph xl:p1 text-white-pure w-[480px] flex justify-center">Institute of Information and Communication Technology</p>
+                        <p class="paragraph xl:p1 text-white-pure w-[480px] flex justify-center">Institute of Oceanography and Environmental Science</p>
+                    </div>
+    
+                </div>
+
+            </div> -->
+            <!-- <div class="flex flex-col justify-center xl:block xs:hidden">
+
+                <div class="flex justify-center">
+                    <a href="#" class="paragraph p1 bg-transparent text-white-pure w-[480px] py-[12.5px] px-[30.5px] rounded-[40px] border border-msu-white-pure">Contact us</a>
+                </div> 
+                <div class="flex justify-center mb-[20px]">
+                    <a href="#" class="paragraph p1 bg-white-pure w-[480px] py-[12.5px] px-[30.5px] rounded-[40px]">Check our Enrollment Procedures</a>
+                </div>
+                <div class="flex justify-center">
+                    <a href="#" class="paragraph p1 bg-transparent text-white-pure w-[480px] py-[12.5px] px-[30.5px] rounded-[40px] border border-msu-white-pure">Administrative Offices</a>
+                </div>
+            </div> -->
+        <!-- </div> -->
+
+<!-- FooterNaV -->
+        <!-- <MainVideo /> -->
+<!-- end FooterNaV -->
+
+<!-- FooterNaV -->
+        <FooterNav />
+<!-- end FooterNaV -->
+
+<!-- Footer -->
+		<Footer />
+<!-- end Footer -->
+
+
+    </main>
+	
+</Layout>
