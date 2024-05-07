@@ -52,13 +52,18 @@ export default function MySwiper() {
     // grabCursor={true}
     
     >
-      <SwiperSlide className='flex justify-center'>
-        <img src="/images/banner/banner1.jpg" alt="" className="xl:h-[70dvh] xs:w-full object-cover object-center" ></img>
+      <SwiperSlide >
+      <div className='z-0'>
+        <img src="/images/banner/banner1.jpg"></img>
+        </div>
       </SwiperSlide>
       {
         banner.map((ban, index) => (
-          <SwiperSlide key={index} className='flex justify-center'>
-            <img src={ ban.mainImage.asset.url } alt="" className="xl:h-[70dvh] xs:w-full object-cover object-center" ></img>
+          <SwiperSlide key={index} className='z-0' >
+           
+           <div className='z-0'>
+            <img src={ ban.mainImage.asset.url }></img>
+            </div>
           </SwiperSlide>
         ))
       }
