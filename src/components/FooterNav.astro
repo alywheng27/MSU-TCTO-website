@@ -7,7 +7,7 @@ const threeLatestArticles = await get3LatestArticle();
 
 <div class="bg-msu-deep-ocean text-white-pure">
 	<div class="mb-[60px] xl:mt-[80px] xs:mt-[40px]">
-		<div class="flex xl:flex-row xs:flex-col items-center xl:px-[240px] xs:px-[15px] xl:mb-[140px] xs:mb-[58px] xl:gap-[40px] xs:gap-[10px] ">
+		<div class="flex xl:flex-row xs:flex-col justify-center xl:px-[240px] xs:px-[15px] xl:mb-[140px] xs:mb-[58px] xl:gap-[40px] xs:gap-[10px] ">
 			{
 				threeLatestArticles.map((article: {
 					title: unknown; 
@@ -30,10 +30,10 @@ const threeLatestArticles = await get3LatestArticle();
 					};
 				}) => (
 					<div class="flex mb-[40px]">
-						<img src={ urlForImage(article.mainImage.asset.url).url() } alt="" class="xl:h-[200px] xl:w-[200px] xs:h-[180px] xs:w-[180px] object-cover object-center"></img>
+						<img src={ urlForImage(article.mainImage.asset.url).url() } alt="" class="xl:h-[200px] xl:w-[200px] xs:h-[180px] xs:w-[180px] object-cover object-center" />
 						<div class="ml-5">
-							<a href={`/${article.slug.current}`}><h5 class="headings xl:h5 xs:h6 max-w-[220px] xl:max-h-[48px] xs:max-h-[29px] overflow-hidden whitespace-normal text-ellipsis" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{ article.title }</h5></a>
-							<p class="paragraph xl:p2 xs:p3 max-w-[220px] text-titanium mt-[15px] max-h-[142px] overflow-hidden whitespace-normal text-ellipsis" style="display: -webkit-box; -webkit-line-clamp: 7; -webkit-box-orient: vertical;">
+							<a href={`/${article.slug.current}`}><h5 class=" xl:h5 xs:h6 max-w-[155px] xl:max-h-[48px] xs:max-h-[29px] overflow-hidden whitespace-normal text-ellipsis" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{ article.title }</h5></a>
+							<p class="paragraph xl:p2 xs:p3 max-w-[155px] text-titanium mt-[15px] max-h-[142px] overflow-hidden whitespace-normal text-ellipsis" style="display: -webkit-box; -webkit-line-clamp: 7; -webkit-box-orient: vertical;">
 								{
 									article.body[0].children[0].text
 								}
