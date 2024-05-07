@@ -11,8 +11,8 @@ import HeroIOESHeading from './HeroIOESHeading';
 import HeroPublicationHeading from './HeroPublicationHeading';
 import HeroOfficeHeading from './HeroOfficeHeading';
 import HeroCampusHeading from './HeroCampusHeading';
-// import Headroom from 'react-headroom';
-import '../styles/css/navbar.css';
+import Headroom from 'react-headroom';
+
 
 /***
  * Faculty and Staff data
@@ -59,7 +59,7 @@ const Navbar = (props) => {
   return (
     <>
 
-{/* <Headroom> */}
+<Headroom>
 
 
 
@@ -157,7 +157,7 @@ const Navbar = (props) => {
 				
 			</div>
 
-			{/* </Headroom> */}
+			</Headroom>
 		
 		<div class="downsize">
 		{
