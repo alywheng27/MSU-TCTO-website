@@ -835,3 +835,15 @@ export async function getBidding() {
   const articles = await useSanityClient().fetch(query);
   return articles;
 }
+
+export async function getBanner() {
+  const query = groq`*[_type == "banner"] | order(title desc){
+    title,
+    mainImage{
+      asset->,
+    },
+  }`;
+
+  const banner = await client.fetch(query);
+  return banner;
+}
