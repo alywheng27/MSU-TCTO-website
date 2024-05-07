@@ -13,16 +13,6 @@ import HeroOfficeHeading from './HeroOfficeHeading';
 import HeroCampusHeading from './HeroCampusHeading';
 // import Headroom from 'react-headroom';
 
-/***
- * Faculty and Staff data
- * List of Departments of Colleges data
- * List of Courses of Departments data
- * Head of Departments data
- * Short Description of the departments data
- * Photos of facilities and activities of dapartments
- * Programs and certifications of departments
- * Email and Contacts of departments
- */
 
 /***
  * Faculty and Staff data
@@ -70,6 +60,7 @@ const Navbar = (props) => {
     <>
 
 {/* <Headroom> */}
+
 			<div className="3xl:h-[100px] xl:h-[80px] xs:h-[60px] w-full bg-msu-deep-ocean text-white-pure flex justify-between items-center xl:px-[12.5%] xs:px-[3.85%] relative">
 				<a href='/' className="flex items-center xl:py-0 xs:py-2">
 					<img src="/images/MSU Seal New (Official).png" alt="" className="3xl:h-[72.99px] xs:h-[43.79px] mr-5 3xl:block xl:hidden sm:block" />
@@ -141,7 +132,7 @@ const Navbar = (props) => {
 				</li>
 
 				<li className='py-[15px] dropdown dropdown-1'>
-				<a href="/publications" className='flex xs:justify-center xl:justify-start'>Job Offering <img src="../../public/down-arrow2-svgrepo-com.svg" className='ml-2 float-right' width={16} alt="" /></a>
+				<a href="/publications" className='flex xs:justify-center xl:justify-start'>Job Opening <img src="../../public/down-arrow2-svgrepo-com.svg" className='ml-2 float-right' width={16} alt="" /></a>
 				<ul className={`mt-[15px] dropdown-menu lvl-one`}>
 					<li className='py-[15px] px-5'><a href="/careers">Open Positions</a></li>
 		
