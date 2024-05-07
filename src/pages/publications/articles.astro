@@ -22,11 +22,7 @@ const fourLatestArticles = await get4LatestArticles();
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
 	<main>
 		<Navbar path={currentPath} client:visible />
-        <div class='bg-gradient-ocean h-[100px] relative bottom-[100px] rotate-180'></div>
-        <div class="absolute top-[180px] w-full">
-            <div class='h-[40px] xl:px-[12.5%] xs:px-[3.85%]'>
-                <p class="paragraph p2 py-[10px] text-titanium xl:block xs:hidden"><a href="/home">Home</a> / <a href="/publications">Publications</a>  / Articles </p>
-            </div>
+
             <div class="flex flex-col xl:mx-[240px] xs:mx-[20px] xl:mt-20">
                 <h3 class="headings xl:h3 xs:h5 text-center">Articles</h3>
                 <div class="flex xl:flex-row xs:flex-col xl:mt-[80px] xs:mt-[50px]">
