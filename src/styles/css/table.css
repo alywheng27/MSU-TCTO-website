@@ -1,0 +1,179 @@
+
+
+.wrapper {
+    margin-top: 6vh;
+  }
+  
+  .dataTables_filter {
+    float: right;
+  }
+  
+  .table-hover > tbody > tr:hover {
+    background-color: #65b4ff;
+  }
+  
+  @media only screen and (min-width: 768px) {
+    .table {
+      table-layout: fixed;
+      max-width: 100% !important;
+      font-size: 26px;
+    }
+  }
+  
+  thead {
+    background: #13437a;
+    font-size: 25px;
+    color: #fff;
+    border: 0.1px solid;
+  }
+  
+
+  .table td:nth-child(1) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: #fbfdff;
+    border: 0.1px solid;
+  }
+
+  .table td:nth-child(2) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: #fffbfb;
+    border: 0.1px solid;
+  }
+
+  .table td:nth-child(3) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: #fffbfb;
+    border: 0.1px solid;
+  }
+
+  .table td:nth-child(4) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: #fffbfb;
+    border: 0.1px solid;
+  }
+
+  .table td:nth-child(5) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: #fffbfb;
+    border: 0.1px solid;
+  }
+  .table td:nth-child(6) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: #fffbfb;
+    border: 0.1px solid;
+  }
+  .table td:nth-child(7) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: #fffbfb;
+    border: 0.1px solid;
+  }
+  .table td:nth-child(8) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: #fffbfb;
+    border: 0.1px solid;
+  }
+  
+  
+  .highlight {
+    background: #ffff99;
+  }
+  
+  @media only screen and (max-width: 767px) {
+    /* Force table to not be like tables anymore */
+    table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+      display: block;
+    
+    }
+  
+    /* Hide table headers (but not display: none;, for accessibility) */
+    thead tr,
+  tfoot tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+  
+    td {
+      /* Behave  like a "row" */
+      border: none;
+      border-bottom: 0.px solid #000000;
+      position: relative;
+      padding-left: 50% !important;
+      
+    }
+  
+    td:before {
+      /* Now like a table header */
+      position: absolute;
+      /* Top/left values mimic padding */
+      top: 6px;
+      left: 6px;
+      width: 45%;
+      padding-right: 10px;
+      white-space: nowrap;
+    }
+  
+    .table td:nth-child(1) {
+      background: #17409d;
+      height: 100%;
+      top: 0;
+      left: 0;
+      font-weight: bold;
+      color: #fff;
+    }
+  
+    /*
+    Label the data
+    */
+    td:nth-of-type(1):before {
+      content: "No.";
+    }
+  
+    td:nth-of-type(2):before {
+      content: "Positions";
+    }
+  
+    td:nth-of-type(3):before {
+      content: "Salary Grade";
+
+    }
+  
+    td:nth-of-type(4):before {
+      content: "Monthly Salary";
+    }
+  
+    td:nth-of-type(5):before {
+      content: "Degree";
+    }
+  
+    td:nth-of-type(6):before {
+      content: "Managements";
+    }
+    td:nth-of-type(7):before {
+        content: "Experience";
+      }
+      td:nth-of-type(8):before {
+        content: "Eligibility";
+
+      }
+      
+  
+    .dataTables_length {
+      display: none;
+    }
+  }
+  
+  
