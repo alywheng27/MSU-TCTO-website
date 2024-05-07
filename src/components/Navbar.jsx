@@ -13,6 +13,17 @@ import HeroOfficeHeading from './HeroOfficeHeading';
 import HeroCampusHeading from './HeroCampusHeading';
 import Headroom from 'react-headroom';
 
+/***
+ * Faculty and Staff data
+ * List of Departments of Colleges data
+ * List of Courses of Departments data
+ * Head of Departments data
+ * Short Description of the departments data
+ * Photos of facilities and activities of dapartments
+ * Programs and certifications of departments
+ * Email and Contacts of departments
+ */
+
 
 /***
  * Faculty and Staff data
@@ -58,10 +69,6 @@ const Navbar = (props) => {
 
   return (
     <>
-
-<Headroom>
-
-
 
 
 			<div className="3xl:h-[100px] xl:h-[80px] xs:h-[60px] w-full bg-msu-deep-ocean text-white-pure flex justify-between items-center xl:px-[12.5%] xs:px-[3.85%] relative">
@@ -157,7 +164,7 @@ const Navbar = (props) => {
 				
 			</div>
 
-			</Headroom>
+			{/* </Headroom> */}
 		
 		<div class="downsize">
 		{
