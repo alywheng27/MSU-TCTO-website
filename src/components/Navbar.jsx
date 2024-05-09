@@ -129,7 +129,7 @@ const Navbar = (props) => {
 				<ul className={`mt-[15px] dropdown-menu lvl-one`}>
 					<li className='py-[15px] px-5'><a href="/offices/offices">Administrative Offices</a></li>
 					<li className='pt-[15px] px-5'><a href="/offices/academic-offices">Academic Offices</a></li>
-					<li className='pt-[15px] px-5'><a href="/offices/academic-offices">Our Teachers</a></li>
+					{/* <li className='pt-[15px] px-5'><a href="/offices/academic-offices">Our Teachers</a></li> */}
 				</ul>
 				</li>
 							<li className='py-[15px] dropdown dropdown-1'>
