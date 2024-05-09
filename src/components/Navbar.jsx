@@ -11,7 +11,7 @@ import HeroIOESHeading from './HeroIOESHeading';
 import HeroPublicationHeading from './HeroPublicationHeading';
 import HeroOfficeHeading from './HeroOfficeHeading';
 import HeroCampusHeading from './HeroCampusHeading';
-import Headroom from 'react-headroom';
+// import Headroom from 'react-headroom';
 
 /***
  * Faculty and Staff data
@@ -73,7 +73,7 @@ const Navbar = (props) => {
 
 			<div className="3xl:h-[100px] xl:h-[80px] xs:h-[60px] w-full bg-msu-deep-ocean text-white-pure flex justify-between items-center xl:px-[12.5%] xs:px-[3.85%] relative">
 				<a href='/' className="flex items-center xl:py-0 xs:py-2">
-					<img src="/images/MSU Seal New (Official).png" alt="" className="3xl:h-[72.99px] xs:h-[43.79px] mr-5 3xl:block xl:hidden sm:block" />
+					<img src="../../public/images/MSU Seal New (Official).png" alt="" className="3xl:h-[72.99px] xs:h-[43.79px] mr-5 3xl:block xl:hidden sm:block" />
 					<div>
 						<h4 className="headings xl:h5 block xl:block xs:hidden">Mindanao State University</h4>
 						<p className="paragraph xl:p2 block xl:block xs:hidden">Tawi-Tawi College of Technology and Oceanography</p>
@@ -82,7 +82,7 @@ const Navbar = (props) => {
 				<div>
 					<p className="paragraph xl:p2 xl:block xs:hidden pb-1">+63 909 9826063</p>
 					<p className="paragraph xl:p2 xl:block xs:hidden">admissions@msutawi-tawi.edu.ph</p>
-					<button className="headings h5 xl:hidden xs:block" onClick={toggleNavbar}><img src="../public/images/menuicon.png"></img></button>
+					<button className="headings h5 xl:hidden xs:block" onClick={toggleNavbar}><img src="../../public/images/menuicon.png"></img></button>
 				</div>
 			</div>
 			<div className={` relative z-99`}>
