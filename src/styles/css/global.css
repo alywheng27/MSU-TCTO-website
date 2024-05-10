@@ -10,6 +10,9 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    
+    
+
 }
   
 @font-face {
@@ -30,17 +33,12 @@
     font-family: 'Merchant';
     font-style: normal;
     font-weight: 700;
-
     hanging-punctuation: first last;
-    /* For hanging lists, 0 padding should be applied to the <ul> element. */
-
     list-style-position: outside;
     padding: 0;
-
-    /* Mono/Light/White Pure */
-
     color: #FFFFFF;
     font-stretch: 90;
+ 
 }
 
 .h1 {
@@ -83,7 +81,9 @@
 .paragraph {
     font-family: 'Atkinson Hyperlegible';
     font-style: normal;
-    font-weight: 400;
+    font-weight: 25px;
+    font-size: 24px;
+    position: relative;
 }
 
 .p1 {
@@ -532,21 +532,3 @@
 
   /* animate text message */
   
-/* Base styles for all devices */
-/* You can define base styles that apply to all devices here */
-
-/* Media query for Android tablets */
-@media only screen and (min-device-width: 600px) and (max-device-width: 1024px) and (orientation: landscape),
-       only screen and (min-device-width: 600px) and (max-device-width: 962px) and (orientation: portrait) {
-    /* Styles specific to Android tablets */
-}
-
-/* Media query for iPhones */
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
-    /* Styles specific to iPhones */
-}
-
-/* Media query for desktops */
-@media only screen and (min-width: 1025px) {
-    /* Styles specific to desktops */
-}
