@@ -11,8 +11,8 @@ import HeroIOESHeading from './HeroIOESHeading';
 import HeroPublicationHeading from './HeroPublicationHeading';
 import HeroOfficeHeading from './HeroOfficeHeading';
 import HeroCampusHeading from './HeroCampusHeading';
-// import Headroom from 'react-headroom';
 
+import Headroom from '../api/index';
 /***
  * Faculty and Staff data
  * List of Departments of Colleges data
@@ -23,6 +23,7 @@ import HeroCampusHeading from './HeroCampusHeading';
  * Programs and certifications of departments
  * Email and Contacts of departments
  */
+
 
 /***
  * Faculty and Staff data
@@ -69,10 +70,12 @@ const Navbar = (props) => {
   return (
     <>
 
-{/* <Headroom> */}
+<Headroom>
+
+	
 			<div className="3xl:h-[100px] xl:h-[80px] xs:h-[60px] w-full bg-msu-deep-ocean text-white-pure flex justify-between items-center xl:px-[12.5%] xs:px-[3.85%] relative">
 				<a href='/' className="flex items-center xl:py-0 xs:py-2">
-					<img src="/images/MSU Seal New (Official).png" alt="" className="3xl:h-[72.99px] xs:h-[43.79px] mr-5 3xl:block xl:hidden sm:block" />
+					<img src="/images/MSU Seal New (Official).png" alt="" className="3xl:h-[72.99px] xs:h-[43.79px] mr-5" />
 					<div>
 						<h4 className="headings xl:h5 block xl:block xs:hidden">Mindanao State University</h4>
 						<p className="paragraph xl:p2 block xl:block xs:hidden">Tawi-Tawi College of Technology and Oceanography</p>
@@ -81,7 +84,7 @@ const Navbar = (props) => {
 				<div>
 					<p className="paragraph xl:p2 xl:block xs:hidden pb-1">+63 909 9826063</p>
 					<p className="paragraph xl:p2 xl:block xs:hidden">admissions@msutawi-tawi.edu.ph</p>
-					<button className="headings h5 xl:hidden xs:block" onClick={toggleNavbar}><img src="../public/images/menuicon.png"></img></button>
+					<button className="headings h5 xl:hidden xs:block" onClick={toggleNavbar}><img src="/images/menuicon.png"></img></button>
 				</div>
 			</div>
 			<div className={` relative z-99`}>
@@ -128,7 +131,7 @@ const Navbar = (props) => {
 				<ul className={`mt-[15px] dropdown-menu lvl-one`}>
 					<li className='py-[15px] px-5'><a href="/offices/offices">Administrative Offices</a></li>
 					<li className='pt-[15px] px-5'><a href="/offices/academic-offices">Academic Offices</a></li>
-					<li className='pt-[15px] px-5'><a href="/offices/academic-offices">Our Teachers</a></li>
+					{/* <li className='pt-[15px] px-5'><a href="/offices/academic-offices">Our Teachers</a></li> */}
 				</ul>
 				</li>
 							<li className='py-[15px] dropdown dropdown-1'>
@@ -141,7 +144,7 @@ const Navbar = (props) => {
 				</li>
 
 				<li className='py-[15px] dropdown dropdown-1'>
-				<a href="/publications" className='flex xs:justify-center xl:justify-start'>Job Offering <img src="../../public/down-arrow2-svgrepo-com.svg" className='ml-2 float-right' width={16} alt="" /></a>
+				<a href="/publications" className='flex xs:justify-center xl:justify-start'>Job Opening <img src="../../public/down-arrow2-svgrepo-com.svg" className='ml-2 float-right' width={16} alt="" /></a>
 				<ul className={`mt-[15px] dropdown-menu lvl-one`}>
 					<li className='py-[15px] px-5'><a href="/careers">Open Positions</a></li>
 		
@@ -163,7 +166,7 @@ const Navbar = (props) => {
 				
 			</div>
 
-			{/* </Headroom> */}
+			</Headroom>
 		
 		<div class="downsize">
 		{
