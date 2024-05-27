@@ -829,6 +829,9 @@ export async function getBidding() {
   const query = groq`*[_type == "bidding"] | order(dateOfPublication desc, title desc){
     title,
     file{asset->{url}},
+    price,
+    email,
+    number,
     dateOfPublication,
   }`;
 
