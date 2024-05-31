@@ -809,6 +809,26 @@ export async function get1_6LatestAnnualReport() {
   return one_sixLatestAnnualReport;
 }
 
+export async function getLatestSulimbang() {
+  const query = groq`*[_type == "sulimbang"] | order(publishedAt desc) {
+    title,
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url},
+    },
+    mainImage{
+      asset->,
+    },
+    file{asset->{url}},
+    publishedAt,
+  }`;
+
+  const latestSulimbang = await useSanityClient().fetch(query);
+  return latestSulimbang;
+}
+
 export async function getFacultyAndStaff(college) {
   const query = groq`*[_type == "facultyAndStaff" && college._ref in *[_type=="college" && college=="${college}"]._id] | order(name asc) {
     name,
