@@ -26,15 +26,15 @@ const fourLatestArticles = await get4LatestArticles();
             <div class="flex flex-col xl:mx-[240px] xs:mx-[20px] xl:mt-20">
                 <h3 class="headings xl:h3 xs:h5 text-center">Articles</h3>
                 <div class="flex xl:flex-row xs:flex-col xl:mt-[80px] xs:mt-[50px]">
-                    <img src={ urlForImage(singleLatestArticle.mainImage.asset.url).height(360).fit('crop').crop('center').url() } alt="" class="object-cover object-center" />
+                    <img src={ urlForImage(singleLatestArticle.mainImage.asset.url).url() } alt="" class="xl:w-[400px] object-cover object-center" />
                     <div class="xl:w-[720px] xl:ml-5">
-                        <a href={`/${singleLatestArticle.slug.current}`}><h4 class="headings xl:h4 xs:h6 xs:mt-[13px]">{singleLatestArticle.title}</h4></a>
+                        <a href={`/${singleLatestArticle.slug.current}`}><h4 class="headings xl:h4 xs:h6 xs:mt-[13px] overflow-hidden whitespace-normal text-ellipsis" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{singleLatestArticle.title}</h4></a>
                         <p class="paragraph xl:p1 xs:p3 xl:mt-5 xs:mt-[22px] xl:h-[226px] xs:h-[46px] overflow-hidden text-silver">{ singleLatestArticle.body[0].children[0].text }</p>
                     </div>
                     
                 </div>
             </div>
-            <div class="flex xl:mx-[240px] xs:mx-5 mt-[120px]">
+            <div class="flex justify-center xl:mx-[240px] xs:mx-5 mt-[120px]">
                 <div class="grid xl:grid-cols-2 xs:grid-cols-1 gap-y-10 xs:gap-[20px]">
                     {
                         fourLatestArticles.map((article: { 
@@ -58,10 +58,11 @@ const fourLatestArticles = await get4LatestArticles();
                             };
                         }) => (
                             <div class="flex">
-                                <img src={ urlForImage(article.mainImage.asset.url).height(160).width(220).fit('crop').url() } alt="" class="" />
+                                {/* <img src={ urlForImage(article.mainImage.asset.url).height(160).width(220).fit('crop').url() } alt="" class="xl:w-[320px] xl:h-[260px] object-cover object-center" /> */}
+                                <img src={ urlForImage(article.mainImage.asset.url).url() } alt="" class="xs:min-w-[200px] xs:h-[120px] xl:min-w-[260px] xl:h-[160px] object-cover object-center" />
                                 <div class="flex flex-col w-[480px] ml-5">
-                                    <a href={`/${article.slug.current}`}><h5 class="headings h5">{ article.title }</h5></a>
-                                    <p class="paragraph p2 text-silver mt-[10px] h-[60px] overflow-hidden">{article.body[0].children[0].text}</p>
+                                    <a href={`/${article.slug.current}`}><h5 class="headings h5 overflow-hidden whitespace-normal text-ellipsis" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">{ article.title }</h5></a>
+                                    <p class="paragraph p2 text-silver mt-[10px] h-[60px] overflow-hidden whitespace-normal text-ellipsis" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">{article.body[0].children[0].text}</p>
                                 </div>
                             </div>
                         ))
