@@ -82,7 +82,7 @@ const Navbar = (props) => {
 					</div>
 				</a>
 				<div>
-					<p className="paragraph xl:p2 xl:block xs:hidden pb-1">+63 909 9826063</p>
+					<p className="paragraph xl:p2 xl:block xs:hidden pb-1">+63 909 982 6063</p>
 					<p className="paragraph xl:p2 xl:block xs:hidden">admissions@msutawi-tawi.edu.ph</p>
 					<button className="headings h5 xl:hidden xs:block" onClick={toggleNavbar}><img src="/images/menuicon.png"></img></button>
 				</div>
