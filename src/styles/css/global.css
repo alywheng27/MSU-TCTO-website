@@ -532,3 +532,267 @@
 
   /* animate text message */
   
+/* Search Input */
+input[type="text"] {
+    font-size: 1rem;
+  }
+  
+  /* Table Styling */
+  table {
+    border-spacing: 0;
+    width: 100%;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 12px;
+  }
+  
+  th {
+    background-color: #800000; /* MSU Maroon */
+    color: #fff;
+  }
+  
+  td {
+    background-color: #fff;
+  }
+  
+  tr:hover td {
+    background-color: #f3f3f3;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #ffffff;
+    transition: color 0.3s ease;
+  }
+  
+  a:hover {
+    color: #d4af37; /* MSU Gold */
+  }
+
+  
+  input[type="text"] {
+    font-size: 1rem;
+    transition: box-shadow 0.3s;
+  }
+  
+  input[type="text"]:focus {
+    box-shadow: 0 0 10px rgba(128, 0, 0, 0.5); /* Focus effect with MSU Maroon */
+  }
+  
+
+
+  /* gaZETTE */
+
+  
+a {
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  a:hover {
+    color: #007bff;
+  }
+  
+  /* Breadcrumb */
+  .breadcrumb-container {
+    background-color: #fafafa;
+    padding: 20px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .breadcrumb {
+    font-size: 15px;
+    color: #7d7d7d;
+    display: flex;
+    gap: 5px;
+  }
+  
+  .breadcrumb a {
+    color: #007bff;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+  
+  .breadcrumb a:hover {
+    color: #0056b3;
+  }
+  
+  /* Featured Gazette Section */
+  .gazette-intro {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #0056b3, #007bff);
+    color: #fff;
+    text-align: center;
+    border-bottom: 3px solid #f1f1f1;
+  }
+  
+  .gazette-intro .title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+  
+  .featured-gazette {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-top: 40px;
+  }
+  
+  .featured-gazette-image {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .featured-gazette-image:hover {
+    transform: scale(1.05);
+  }
+  
+  .featured-gazette-info {
+    max-width: 650px;
+    text-align: left;
+  }
+  
+  .featured-gazette-info .gazette-year {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #f8f8f8;
+  }
+  
+  .featured-gazette-info .gazette-description {
+    font-size: 1rem;
+    color: #d1d1d1;
+    line-height: 1.6;
+    margin-top: 30px;
+  }
+  
+  /* Previous Gazette Section */
+  .previous-gazettes {
+    padding: 60px 20px;
+    background-color: #ffffff;
+  }
+  
+  .previous-gazettes .section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 50px;
+    color: #333;
+    text-transform: uppercase;
+  }
+  
+  .gazette-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding: 0 20px;
+  }
+  
+  .gazette-list .gazette-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .gazette-list .gazette-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  .gazette-list .gazette-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-bottom: 2px solid #f1f1f1;
+  }
+  
+  .gazette-list .gazette-card .content {
+    padding: 20px;
+  }
+  
+  .gazette-list .gazette-card .content h5 {
+    font-size: 1.2rem;
+    color: #007bff;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  
+  .gazette-list .gazette-card .content p {
+    font-size: 0.9rem;
+    color: #6c757d;
+    line-height: 1.4;
+    margin-bottom: 15px;
+  }
+  
+  /* Footer Section */
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 30px 20px;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+  
+  footer a {
+    color: #007bff;
+    transition: color 0.3s ease;
+  }
+  
+  footer a:hover {
+    color: #0056b3;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .gazette-intro {
+      padding: 60px 20px;
+    }
+  
+    .gazette-intro .title {
+      font-size: 2rem;
+    }
+  
+    .featured-gazette {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .gazette-list {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+  
+    .gazette-list .gazette-card .content {
+      padding: 15px;
+    }
+  }
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .gazette-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 1025px) {
+    .gazette-list {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+
+  /* pREVIOUS RELEASE  */
+  
