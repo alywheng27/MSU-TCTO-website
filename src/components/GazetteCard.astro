@@ -1,0 +1,24 @@
+---
+// Props for individual gazette
+const { title, publishedAt, mainImage, file, body } = Astro.props;
+---
+
+<div class="gazette-card mx-5 flex xl:flex-col xl:gap-[2px] xs:gap-[30px]">
+  <div class="flex flex-col">
+    <p class="gazette-year text-white-pure xl:ml-[12px] xl:block xs:hidden">{new Date(publishedAt).getFullYear()}</p>
+    <a href={file.asset.url} target="_blank">
+      <img
+        src={mainImage.asset.url}
+        class="gazette-image xl:max-w-[203px] xl:max-h-[286px] xs:max-w-[110px] xs:max-h-[155px]"
+        alt={`Cover for ${title}`}
+      />
+    </a>
+  </div>
+  <div class="gazette-info flex xl:flex-col xs:flex-col xl:py-[0px] xs:py-[10px] xs:gap-[10px] xl:gap-[0px]">
+    <h6 class="gazette-title headings h6 text-white-pure xl:ml-[12px] xl:hidden xs:block">{title}</h6>
+    <p class="gazette-body paragraph p2 text-silver xl:ml-[12px] xl:w-[205px] xl:max-h-[160px] xs:max-h-[80px] overflow-hidden">
+      {body[0]?.children[0]?.text || "No description available."}
+    </p>
+    <p class="gazette-date paragraph p2 text-silver xl:hidden xs:block">{new Date(publishedAt).toLocaleDateString()}</p>
+  </div>
+</div>

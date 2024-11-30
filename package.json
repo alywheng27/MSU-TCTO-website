@@ -20,6 +20,7 @@
     "astro": "^2.9.1",
     "astro-sanity": "^1.1.7",
     "bootstrap": "^5.3.3",
+    "framer-motion": "^11.11.17",
     "react": "^18.2.0",
     "react-animate-on-scroll": "^2.1.9",
     "react-awesome-reveal": "^4.2.8",

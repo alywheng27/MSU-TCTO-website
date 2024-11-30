@@ -709,6 +709,30 @@ export async function getGazette(year) {
   return gazette;
 }
 
+
+
+export async function getallSulimbang(year) {
+  const query = groq`*[_type == "gazette" && publishedAt match "${year}"] | order(publishedAt desc) {
+    title,
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url}, 
+    },
+    mainImage{
+      asset->,
+    },
+    file{asset->{url}},
+    publishedAt,
+    gazetteQuarter->{gazetteQuarter},
+  }`;
+
+  const gazette = await client.fetch(query);
+  return gazette;
+}
+
+
 export async function getLatestAnnualReport() {
   const query = groq`*[_type == "annualReport"] | order(publishedAt desc)[0] {
     title,
@@ -851,6 +875,7 @@ export async function getBidding() {
     file{asset->{url}},
     price,
     email,
+    contactPerson,
     number,
     dateOfPublication,
   }`;
