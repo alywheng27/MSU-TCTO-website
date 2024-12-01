@@ -139,6 +139,8 @@ const Navbar = (props) => {
 				<ul className={`mt-[15px] dropdown-menu lvl-one`}>
 					<li className='py-[15px] px-5'><a href="/publications/articles">Articles</a></li>
 					<li className='py-[15px] px-5'><a href="/publications/gazette">Gazettes</a></li>
+					{/* <li className='pt-[15px] px-5'><a href="/publications/sulimbang">Sulimbang</a></li> */}
+						<li className='py-[15px] px-5'><a href="/bidding">Bidding</a></li>
 					<li className='pt-[15px] px-5'><a href="/publications/annual-reports">Annual Reports</a></li>
 				</ul>
 				</li>
@@ -147,7 +149,7 @@ const Navbar = (props) => {
 				<a href="/publications" className='flex xs:justify-center xl:justify-start'>Job Opening <img src="../../public/down-arrow2-svgrepo-com.svg" className='ml-2 float-right' width={16} alt="" /></a>
 				<ul className={`mt-[15px] dropdown-menu lvl-one`}>
 					<li className='py-[15px] px-5'><a href="/careers">Open Positions</a></li>
-		
+				
 				</ul>
 				</li>
 							{/* <li className='py-[15px]'><a href="/careers">Careers</a></li> */}
