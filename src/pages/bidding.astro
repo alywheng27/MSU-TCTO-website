@@ -13,42 +13,126 @@ const bidding = await getBidding();
 ---
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
-	<main>
-		<Navbar path={currentPath} client:visible />
+  <main>
+    <Navbar path={currentPath} client:visible />
 
-        <div class="bg-white-pure w-full xl:px-[12.5%] xs:px-[3.85%] py-[80px]">
-            <h4 class="xl:h4 xs:h5 text-msu-maroon text-center">Approval for Posting</h4>
-			<div class="mt-16">
-				<div class="grid grid-cols-6 gap-x-5 gap-y-10">
-					{
-						bidding.map((bid: {
-							title: unknown; 
-                            file: {
-								asset: {
-									url: string;
-								}
-							};
-						}) => (
-							<div class="card-bidding">
-								<a href={`${bid.file.asset.url}`} class="text-white-pure">{ bid.title }</a>
-							</div>
-							
-						))
-					}
-				</div>
-			</div>
+    <!-- Approval Section -->
+    <section class="bg-white-pure w-full xl:px-[12.5%] xs:px-[5%] py-[60px]">
+      <h4 class="xl:h4 xs:h5 text-msu-maroon text-center font-semibold mb-6">
+        Approval for Posting
+      </h4>
+
+      <!-- Search Bar -->
+      <div class="flex justify-center mb-6">
+        <input
+          type="text"
+          placeholder="Search for titles..."
+          class="w-full md:w-1/2 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-msu-maroon focus:border-transparent"
+          id="searchInput"
+        />
+      </div>
+
+      <!-- Responsive Table -->
+      <div class="overflow-x-auto">
+        <table class="min-w-full border-collapse border border-gray-200">
+          <thead class="bg-msu-maroon text-white hidden md:table-header-group">
+            <tr>
+              <th class="text-left py-3 px-4">#</th>
+              <th class="text-left py-3 px-4">Title</th>
+              <th class="text-left py-3 px-4">Contact Person</th>
+              <th class="text-left py-3 px-4">Approved Budget for the Contract</th>
+              <th class="text-left py-3 px-4">Contact Number</th>
+              <th class="text-left py-3 px-4">Email</th>
+              <th class="text-left py-3 px-4">Action</th>
+            </tr>
+          </thead>
+          <tbody id="biddingTable">
+            {bidding.map(
+              (bid: { title: string; file: { asset: { url: string } } }, index: number) => (
+                <tr class="hover:bg-gray-100 transition-colors hidden md:table-row">
+                  <td class="border-t px-4 py-3">{index + 1}</td>
+                  <td class="border-t px-4 py-3">{bid.title}</td>
+                  <td class="border-t px-4 py-3">{bid.contactPerson}</td>
+                  <td class="border-t px-4 py-3">{bid.price}</td>
+                  <td class="border-t px-4 py-3">{bid.number}</td>
+                  <td class="border-t px-4 py-3">{bid.email}</td>
+                  <td class="border-t px-4 py-3">
+                    <a
+                      href={`${bid.file.asset.url}`}
+                      class="text-msu-maroon underline hover:text-msu-gold"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View
+                    </a>
+                  </td>
+                </tr>
+              )
+            )}
+          </tbody>
+        </table>
+
+        <!-- Mobile View -->
+        <div id="biddingTableMobile" class="block md:hidden">
+          {bidding.map(
+            (bid: { title: string; file: { asset: { url: string } } }, index: number) => (
+              <div class="border border-gray-200 rounded-lg p-4 mb-4 shadow-sm">
+                <div class="font-semibold text-msu-maroon">{index + 1}. {bid.title}</div>
+                <div class="text-sm text-gray-600">
+                  <p><strong>Contact Person:</strong> {bid.contactPerson}</p>
+                  <p><strong>Budget:</strong> {bid.price}</p>
+                  <p><strong>Contact:</strong> {bid.number}</p>
+                  <p><strong>Email:</strong> {bid.email}</p>
+                </div>
+                <a
+                  href={`${bid.file.asset.url}`}
+                  class="text-msu-maroon underline hover:text-msu-gold mt-2 block"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View
+                </a>
+              </div>
+            )
+          )}
         </div>
+      </div>
+    </section>
 
+    <!-- FooterNav -->
+    <FooterNav />
 
+    <!-- Footer -->
+    <Footer />
+  </main>
 
-<!-- FooterNaV -->
-        <FooterNav />
-<!-- end FooterNaV -->
+  <script>
+    // Access the input and table body
+    const searchInput = document.getElementById('searchInput');
+    const biddingTable = document.getElementById('biddingTable');
+    const biddingTableMobile = document.getElementById('biddingTableMobile');
 
-<!-- Footer -->
-		<Footer />
-<!-- end Footer -->
+    // Function to filter bidding titles based on search input
+    const handleSearch = () => {
+      const searchQuery = searchInput.value.toLowerCase();
+      const rows = biddingTable.querySelectorAll('tr');
+      const cards = biddingTableMobile.querySelectorAll('div');
 
-	</main>
-	
+      rows.forEach((row) => {
+        const titleCell = row.querySelector('td:nth-child(2)');
+        if (titleCell) {
+          const titleText = titleCell.textContent.toLowerCase();
+          row.style.display = titleText.includes(searchQuery) ? '' : 'none';
+        }
+      });
+
+      cards.forEach((card) => {
+        const titleText = card.querySelector('.font-semibold').textContent.toLowerCase();
+        card.style.display = titleText.includes(searchQuery) ? '' : 'none';
+      });
+    };
+
+    // Attach event listener to search input
+    searchInput.addEventListener('input', handleSearch);
+  </script>
 </Layout>
