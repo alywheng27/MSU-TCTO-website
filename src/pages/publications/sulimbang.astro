@@ -17,308 +17,124 @@ import { get3LettersMonth } from '../../js/date';
 import { getDay } from '../../js/date';
 
 import { getLatestSulimbang } from '../../api/api';
-import { getYearGazette } from '../../api/api';
-
+import { getYearSulimbang } from '../../api/api';
 import { getallSulimbang } from '../../api/api';
 
 const latestsulimbang = await getLatestSulimbang();
-const yearGazette = await getYearGazette();
-
+const yearSulimbang = await getYearSulimbang();
 const allsulimbang = await getallSulimbang();
 
-var x = null;
+// Ensure data is available
+if (!latestsulimbang || !allsulimbang) {
+    throw new Error("Failed to fetch Sulimbang data.");
+}
 ---
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
-	<main>
-		<Navbar path={currentPath} client:visible />
+    <main>
+        <Navbar path={currentPath} client:visible />
 
-        <div class="absolute top-[180px] w-full">
-            <div class='h-[40px] xl:px-[12.5%] xs:px-[3.85%]'>
-                <p class="paragraph p2 py-[10px] text-titanium xl:block xs:hidden"><a href="/home">Home</a> / <a href="/publications">Publications</a>  / Sulimbang </p>
-            </div> 
-            <div class="xl:pt-[80px]">
-                <h3 class="headings xl:h3 xs:h4 text-white-pure text-center xs:mb-[45px]">Sulimbang</h3>
-    
-                <div class="flex xl:flex-row xs:flex-col xl:ml-[480px] xl:mt-[80px] ">
-                    <div class="flex flex-col justify center">
-                        <img src={ urlForImage(latestsulimbang.mainImage.asset.url).url() } class="xl:w-[412px] xl:px-[0%] xs:px-[100px] xl:mr-[68px] xs:mb-[45px] " alt="">
-                        <h4 class="headings xl:h4 xs:h5 text-write-pure">{ latestsulimbang.title }</h4>
-                    </div>
-                    
-                    <div class="flex flex-col mt-[20px] xl:text-start xs:text-start">
-                        <!-- <div class="flex  xl:max-w-[480px] xl:px-[47px] xs:px-[124px] xs:justify-center  ">
-                            <h4 class="headings xl:h4 xs:h5 text-write-pure">{ getYear(latestsulimbang.publishedAt) }</h4>
-                        
-                        </div> -->
-                        <!-- <div class="flex xl:flex-col xs:flex-col xl:max-w-[480px] xs:px-[47px]">
-                            <p class="paragraph p2 text-white-pure mt-[40px] xl:max-h-[400px] xs:max-h-[62px] overflow-hidden">
-                                { latestsulimbang.body[0].children[0].text }
-                            </p>
-                        </div> -->
-                    </div>
-                </div>
-                    
-                <!-- <div class="flex xs:justify-center xs:my-[32px] xs:mx-[74px] xl:hidden xs:block  ">
-					<a href="#" class="bg-gradient-sky-space text-white-pure  xs:py-5  xs:px-[61.5px] rounded-[40px] paragraph xl:p1 xs:p2 xl:hidden xs:block">Read Now</a>
-				</div> -->
-                <!-- <div class="flex gap-[30px] justify-center mt-[40px] ">
-                    <a href="#" class=" bg-white xl:py-[10px] xl:px-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
-                    <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xl:px-[10px] xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
-                    <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xl:px-[10px] xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
-                </div> -->
-                <div class="flex xs:flex-col xs:items-center xs:mt-[48px]  xl:mt-[0px] ">
-                    <div class="flex">
-                        <p class="paragraph xs:p2 text-white-pure   xl:hidden xs:block">PREVIOUS RELEASES</p>
-                    </div> 
-                    <!-- <div class="flex">
-                        <select class=" flex  xs:flex-col xs:msu-drop-white-shadow  xs:w-[181px]  text-white-pure xs:px-[19px] xs:py-3 rounded-[40px] xl:hidden xs:block">
-                            {
-                                yearGazette.map((gazette) => {
-                                    if (x !== getYear(gazette.publishedAt)) {
-                                        x = getYear(gazette.publishedAt);
-                                        return <option class="paragraph p2 text-black-pure">{ getYear(gazette.publishedAt) }</option>
-                                    }
-                                })
-                            }
-                        </select>
-                    </div>  -->
-                    
-                </div>
-    
+        <div class="pt-[100px] w-full">
+
+            <!-- Breadcrumb -->
+            <div class='h-[10px] xl:px-[12.5%] xs:px-[3.85%]'>
+                <p class="paragraph p2 py-[10px] text-titanium xl:block xs:hidden">
+                    <a href="/home">Home</a> / <a href="/publications">Publications</a> / Sulimbang
+                </p>
             </div>
-            <!-- <div class=" xl:flex-row xs:flex-col bg-msu-ocean mt-[49px] flex xl:pl-[242px] mb-[120px]">
-                <div class="flex xl:flex-col xs:flex-col xl:mr-[10px] xs:mr-[0px] ">
-                    <p id="gazette" class="paragraph p1 text-white-pure pt-[71px] pb-5 xl:block xs:hidden">Previous Releases</p>
-                    {
-                        yearGazette.map((gazette) => {
-                            if (x !== getYear(gazette.publishedAt)) {
-                                x = getYear(gazette.publishedAt);
-                                return <p id="2022" class="paragraph p2 text-white-pure pt-5 xl:block xs:hidden">{ getYear(gazette.publishedAt) }</p>
-                            }
-                        })
-                    }
-                </div>
-                <div id="gazette" class="flex xl:justify-center xl:mt-[140px] xs:mt-[40px]  ">
-                    <div class="flex xl:flex-col ">
-                        
-                        <div id="2022" class="flex xl:flex-row  xs:flex-col xl:gap-[20px]">
-                            <div id="4thQuarther" class="flex xl:flex-col xl:gap-[2px] xs:gap-[30px] xs:mx-[30px] ">
-                                <div class="flex flex-col">
-                                    <p id="gazetteDate" class="paragraph p2 text-white-pure xl:ml-[12px] xl:block xs:hidden">2022, 4th Quarter</p>
-                                    <img src="/images/gazette1.png" class="xl:w-[220px] xs:w-[1000px]" alt="">
-                                </div> 
-                                <div class="flex xl:flex-col xs:flex-col xl:py-[0px] xs:py-[10px] xs:gap-[10px]  xl:gap-[0px] ">
-                                    
-                                    <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                        <h6 id="gazetteTitle" class="headings h6 text-white-pure xl:ml-[12px] xl:hidden xs:block">Sample title search of a document, article</h6>
-                                    </div>  
-                                    <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                   
-                                        <p id="gazetteBody" class="paragraph p2 text-silver xl:ml-[12px] xl:w-[205px] ">
-                                            Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien.
-                                            Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.
-                                        </p>
-                                     </div> 
-                                  
-                                    <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                        <p id="gazetteDate" class="paragraph p2 text-silver  xl:hidden xs:block">Article</p>
-                                        <p id="gazetteDate" class="paragraph p2 text-silver  xl:hidden xs:block">2021 Feb 01</p>
-                                    </div> 
-                                </div> 
-                         
-                            </div>
-                            <div id="3rdQuarther" class="flex xl:flex-col xl:gap-[2px] xs:gap-[30px] xs:mx-[30px] ">
-                                <div class="flex flex-col">
-                                    <p id="gazetteDate" class="paragraph p2 text-white-pure xl:ml-[12px] xl:block xs:hidden">2022, 3rd Quarter</p>
-                                    <img src="/images/gazette1.png" class="xl:w-[220px] xs:w-[1000px]" alt="">
-                                </div> 
-                                <div class="flex xl:flex-col xs:flex-col xl:py-[0px] xs:py-[10px] xs:gap-[10px]  xl:gap-[0px] ">
-                                    
-                                    <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                        <h6 id="gazetteTitle" class="headings h6 text-white-pure xl:ml-[12px] xl:hidden xs:block">Sample title search of a document, article</h6>
-                                    </div>  
-                                    <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                   
-                                        <p id="gazetteBody" class="paragraph p2 text-silver xl:ml-[12px] xl:w-[205px] ">
-                                            Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien.
-                                            Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.
-                                        </p>
-                                     </div> 
-                                  
-                                    <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                        <p id="gazetteDate" class="paragraph p2 text-silver  xl:hidden xs:block">Article</p>
-                                        <p id="gazetteDate" class="paragraph p2 text-silver  xl:hidden xs:block">2021 Feb 01</p>
-                                    </div> 
-                                </div> 
-                         
-                            </div>
-                            <div id="2ndQuarther" class="flex xl:flex-col xl:gap-[2px] xs:gap-[30px] xs:mx-[30px] ">
-                                <div class="flex flex-col">
-                                    <p id="gazetteDate" class="paragraph p2 text-white-pure xl:ml-[12px] xl:block xs:hidden">2022, 2nd Quarter</p>
-                                    <img src="/images/gazette1.png" class="xl:w-[220px] xs:w-[1000px]" alt="">
-                                </div> 
-                                <div class="flex xl:flex-col xs:flex-col xl:py-[0px] xs:py-[10px] xs:gap-[10px]  xl:gap-[0px] ">
-                                    
-                                    <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                        <h6 id="gazetteTitle" class="headings h6 text-white-pure xl:ml-[12px] xl:hidden xs:block">Sample title search of a document, article</h6>
-                                    </div>  
-                                    <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                   
-                                        <p id="gazetteBody" class="paragraph p2 text-silver xl:ml-[12px] xl:w-[205px] ">
-                                            Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien.
-                                            Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.
-                                        </p>
-                                     </div> 
-                                  
-                                    <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                        <p id="gazetteDate" class="paragraph p2 text-silver  xl:hidden xs:block">Article</p>
-                                        <p id="gazetteDate" class="paragraph p2 text-silver  xl:hidden xs:block">2021 Feb 01</p>
-                                    </div> 
-                                </div> 
-                         
-                            </div>
-                            <div id="1stQuarther" class="flex xl:flex-col xl:gap-[2px] xs:gap-[30px] xs:mx-[30px] ">
-                                <div class="flex flex-col">
-                                    <p id="gazetteDate" class="paragraph p2 text-white-pure xl:ml-[12px] xl:block xs:hidden">2022, 1st Quarter</p>
-                                    <img src="/images/gazette1.png" class="xl:w-[220px] xs:w-[1000px]" alt="">
-                                </div> 
-                                <div class="flex xl:flex-col xs:flex-col xl:py-[0px] xs:py-[10px] xs:gap-[10px]  xl:gap-[0px] ">
-                                    
-                                    <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                        <h6 id="gazetteTitle" class="headings h6 text-white-pure xl:ml-[12px] xl:hidden xs:block">Sample title search of a document, article</h6>
-                                    </div>  
-                                    <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                   
-                                        <p id="gazetteBody" class="paragraph p2 text-silver xl:ml-[12px] xl:w-[205px] ">
-                                            Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien.
-                                            Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.
-                                        </p>
-                                     </div> 
-                                  
-                                    <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                        <p id="gazetteDate" class="paragraph p2 text-silver  xl:hidden xs:block">Article</p>
-                                        <p id="gazetteDate" class="paragraph p2 text-silver  xl:hidden xs:block">2021 Feb 01</p>
-                                    </div> 
-                                </div> 
-                         
-                            </div>
+
+            <!-- Main Content -->
+            <div class="xl:pt-[90px] px-4 xl:px-0">
+                <h3 class="headings xl:h3 xs:h4 text-white-pure text-center xs:mb-[45px]">Sulimbang</h3>
+
+                <!-- Latest Sulimbang Section -->
+                <div class="flex flex-col xl:flex-row items-center xl:items-start xl:ml-[480px] xl:mt-[80px] gap-8">
+                    <!-- Image Section -->
+                    <div class="flex flex-col items-center xl:items-start">
+                        <img
+                            src={urlForImage(latestsulimbang.mainImage.asset.url).url()}
+                            class="xl:w-[600px] xs:px-[100px] xl:mr-[80px] xs:mb-[45px] hover:scale-105 transition-transform duration-300 shadow-lg rounded-lg"
+                            alt={latestsulimbang.title}
+                        />
+                        <h4 class="headings xl:h4 xs:h5 text-white-pure xs:text-center xl:text- mt-1 ml-13">
+
+                            {latestsulimbang.title}
+                        </h4>
+                    </div>
+
+                    <!-- Text Content -->
+                    <div class="flex flex-col text-center xl:text-left w-full xl:max-w-[480px]">
+                        <h4 class="headings xl:h4 xs:h5 text-white-pure">{getYear(latestsulimbang.publishedAt)}</h4>
+                        <p class="paragraph p2 text-white-pure mt-4 xl:max-h-[400px] xs:max-h-[62px] overflow-hidden">
+                            {latestsulimbang.body[0].children[0].text}
+                        </p>
+
+                        <!-- Download Button -->
+                        <div class="mt-8 flex justify-center xl:justify-start">
+                            <a
+                                href={latestsulimbang.file.asset.url} target="_blank" rel="noopener noreferrer"
+                                download
+                                class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition-all duration-300 flex items-center gap-2"
+                            >
+                                📥 Download Latest Sulimbang
+                            </a>
                         </div>
                     </div>
                 </div>
-                
-                <div class="flex xs:flex-col xs:items-center xs:mt-[48px] xs:gap-[9px] xl:mt-[0px] ">
-                    <div class="flex">
-                        <p class="paragraph xs:p2 text-white-pure   xl:hidden xs:block">Can’t see what you’re looking for?</p>
-                    </div> 
-                    <div class="flex">
-                        <a href="#" class="bg-gradient-sky-space text-white-pure  xs:py-5  xs:px-[74px] rounded-[40px] paragraph xl:p1 xs:p2 xl:hidden xs:block">Search Article</a>
-                    </div> 
-                    
-                </div>
-    
-            </div> -->
-            <!-- <GazetteTab client:visible /> -->
-            <div class="flex justify-center xl:py-[71px] xs:pt-[48px] my-5">
-                <div class="flex xl:flex-col">
-                    <p class="paragraph p1 text-white-pure  xl:ml-[12px] xl:block xs:hidden mb-10">Previous Releases</p>
-                    
-                    <div class="grid xl:grid-cols-6 xs:grid-cols-1">
-                        {
-                            allsulimbang.map((sulimbang: {
-                                title: unknown;
-                                publishedAt: unknown;
-                                mainImage: {
-                                    asset: {
-                                        url: string;
-                                    };
-                                };
-                                file: {
-                                    asset: {
-                                        url: string;
-                                    }
-                                };
-                                body: [
-                                    {
-                                        children: [
-                                            {
-                                                text: unknown;
-                                            }
-                                        ]
-                                    }
-                                ];
-                            }, index) => {
-                                if (index < 4) {
-                                    return <div id="2022" class="flex xl:flex-col xl:gap-[2px] xs:gap-[30px] mx-5">
-                                        <div class="flex flex-col">
-                                            <p id="gazetteDate" class="paragraph p2 text-white-pure xl:ml-[12px] xl:block xs:hidden">{ sulimbang.title }</p>
-                                            <a href={ sulimbang.file.asset.url } target="_blank"><img src={ sulimbang.mainImage.asset.url } class="xl:max-w-[203px] xl:max-h-[286px] xs:max-w-[110px] xs:max-h-[155px]" alt="" /></a>
-                                        </div> 
-                                        <div class="flex xl:flex-col xs:flex-col xl:py-[0px] xs:py-[10px] xs:gap-[10px]  xl:gap-[0px] ">
-                                            
-                                            <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                                <h6 id="gazetteTitle" class="headings h6 text-white-pure xl:ml-[12px] xl:hidden xs:block">{ sulimbang.title }</h6>
-                                            </div>  
-                                            <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                        
-                                                {/* <p id="gazetteBody" class="paragraph p2 text-silver xl:ml-[12px] xl:w-[205px] xl:max-h-[160px] xs:max-h-[80px] overflow-hidden ">
-                                                    { sulimbang.body[0].children[0].text }
-                                                </p> */}
-                                            </div>
-                                            <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                                <p id="gazetteDate" class="paragraph p2 text-silver  xl:hidden xs:block">{ getYear(sulimbang.publishedAt) }</p>
-                                            </div>
-                                        </div> 
-                                    </div>
-                                }else {
-                                    return <div id="2022" class="flex xl:flex-col xl:gap-[2px] xs:gap-[30px] mx-5">
-                                        <div class="flex flex-col">
-                                            <p id="gazetteDate" class="paragraph p2 text-white-pure xl:ml-[12px] xl:block xs:hidden">{ getYear(sulimbang.publishedAt) }</p>
-                                            <a href={ sulimbang.file.asset.url } target="_blank"><img src={ sulimbang.mainImage.asset.url } class="xl:max-w-[203px] xl:max-h-[286px] xs:max-w-[110px] xs:max-h-[155px]" alt="" /></a>
-                                        </div> 
-                                        <div class="flex xl:flex-col xs:flex-col xl:py-[0px] xs:py-[10px] xs:gap-[10px]  xl:gap-[0px] ">
-                                            
-                                            <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                                <h6 id="gazetteTitle" class="headings h6 text-white-pure xl:ml-[12px] xl:hidden xs:block">{ sulimbang.title }</h6>
-                                            </div>  
-                                            <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                        
-                                                <p id="gazetteBody" class="paragraph p2 text-silver xl:ml-[12px] xl:w-[205px] xl:max-h-[160px] xs:max-h-[80px] overflow-hidden ">
-                                                    { sulimbang.body[0].children[0].text }
-                                                </p>
-                                            </div>
-                                            <div class="flex xl:flex-col xs:flex-row xs:gap-[37px]">
-                                                <p id="gazetteDate" class="paragraph p2 text-silver  xl:hidden xs:block">{ getYear(sulimbang.publishedAt) }</p>
-                                            </div>
-                                        </div> 
-                                    </div>
-                                }
-                            })
-                        }
-                    </div>
-                </div>
             </div>
 
+            <!-- Search Bar -->
+            <div class="flex justify-center mt-8">
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search by title or year..."
+                    class="p-3 border border-gray-300 rounded-lg w-1/2 shadow-md focus:ring-2 focus:ring-blue-500 outline-none"
+                />
+            </div>
 
-<!-- fold Main video -->
-
-    <MainVideo />
-<!-- end Main video -->
-
-
-<!-- FooterNaV -->
-        <FooterNav />
-<!-- end FooterNaV -->
-
-<!-- Footer -->
-		<Footer />
-<!-- end Footer -->
-                    
+            <!-- Sulimbang Grid -->
+            <div class="flex justify-center xl:py-[71px] xs:pt-[48px] my-7">
+                <div id="sulimbangContainer" class="grid xl:grid-cols-6 xs:grid-cols-2 gap-6 w-full px-10">
+                    {allsulimbang.map((sulimbang) => (
+                        <div class="bg-white rounded-lg shadow-lg p-11 transition-transform transform hover:scale-105" style="max-width: 320px;">
+                            <a href={sulimbang.file.asset.url} target="_blank" rel="noopener noreferrer">
+                                <img src={sulimbang.mainImage.asset.url} class="w-full h-64 object-cover rounded-lg" alt={sulimbang.title} />
+                            </a>
+                            <div class="p-4 text-center">
+                                <h6 id="gazetteTitle" class="headings h6 text-black font-semibold mb-2">{sulimbang.title}</h6>
+                                <p id="gazetteBody" class="paragraph p2 text-gray-600 mb-3 overflow-hidden" style="max-height: 60px;">{sulimbang.body[0].children[0].text}</p>
+                                <p id="gazetteDate" class="paragraph p2 text-gray-500 text-sm">{getYear(sulimbang.publishedAt)}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
-        
+    </div>
+    
 
+        <!-- Footer Components -->
+        <MainVideo />
+        <FooterNav />
+        <Footer />
 
+        <!-- Search Functionality -->
+        <script>
+            const searchInput = document.getElementById('searchInput');
+            const allSulimbangItems = document.querySelectorAll('.bg-white.rounded-lg');
 
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+
+                allSulimbangItems.forEach(item => {
+                    const title = item.querySelector('#gazetteTitle').textContent.toLowerCase();
+                    const year = item.querySelector('#gazetteDate').textContent.toLowerCase();
+
+                    item.style.display = (title.includes(query) || year.includes(query)) ? 'block' : 'none';
+                });
+            });
+        </script>
     </main>
-	
-</Layout>
+    
+</Layout>     
