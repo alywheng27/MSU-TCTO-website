@@ -1,4 +1,3 @@
-// BiddingPage.jsx
 import React, { useState, useEffect } from 'react';
 
 const BiddingPage = ({ bidding }) => {
@@ -26,6 +25,26 @@ const BiddingPage = ({ bidding }) => {
 
   const totalPages = Math.ceil(filteredBidding.length / itemsPerPage);
 
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  const renderPageNumbers = () => {
+    const pageNumbers = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(
+        <button
+          key={i}
+          className={`px-4 py-2 ${currentPage === i ? 'bg-msu-gold text-white' : 'bg-msu-maroon text-white'} rounded-lg hover:bg-msu-gold`}
+          onClick={() => handlePageChange(i)}
+        >
+          {i}
+        </button>
+      );
+    }
+    return pageNumbers;
+  };
+
   return (
     <div>
       <div className="flex justify-center mb-6">
@@ -49,7 +68,7 @@ const BiddingPage = ({ bidding }) => {
           <tbody>
             {displayBidding().map((bid, index) => (
               <tr key={index} className="hover:bg-gray-100 transition-colors">
-                <td className="border-t px-4 py-3">{index + 1}</td>
+                <td className="border-t px-4 py-3">{(currentPage - 1) * itemsPerPage + index + 1}</td>
                 <td className="border-t px-4 py-3">{bid.title}</td>
                 <td className="border-t px-4 py-3">
                   <a
@@ -67,14 +86,14 @@ const BiddingPage = ({ bidding }) => {
         </table>
       </div>
 
-      <div className="flex justify-center mt-6">
+      <div className="flex justify-center mt-6 space-x-2">
         <button
           className="px-4 py-2 bg-msu-maroon text-white rounded-lg hover:bg-msu-gold"
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
         >
           Previous
         </button>
-        <span className="px-4 py-2">Page {currentPage}</span>
+        {renderPageNumbers()}
         <button
           className="px-4 py-2 bg-msu-maroon text-white rounded-lg hover:bg-msu-gold"
           onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
