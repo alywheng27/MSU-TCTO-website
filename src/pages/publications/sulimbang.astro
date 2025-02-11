@@ -36,32 +36,32 @@ if (!latestsulimbang || !allsulimbang) {
 
         <div class="pt-[100px] w-full">
             <!-- Breadcrumb -->
-            <div class='h-[10px] xl:px-[12.5%] xs:px-[3.85%]'>
+            <div class='h-[10px] xl:px-[12.5%] xs:px-[5%]'>
                 <p class="paragraph p2 py-[10px] text-titanium xl:block xs:hidden">
                     <a href="/home">Home</a> / <a href="/publications">Publications</a> / Sulimbang
                 </p>
             </div>
 
             <!-- Main Content -->
-            <div class="xl:pt-[90px] px-4 xl:px-0">
+            <div class="xl:pt-[90px] xs:pt-[45px] px-4 xl:px-0">
                 <h3 class="headings xl:h3 xs:h4 text-white-pure text-center xs:mb-[45px]">Sulimbang</h3>
 
                 <!-- Latest Sulimbang Section -->
-                <div class="flex flex-col xl:flex-row items-center xl:items-start xl:ml-[480px] xl:mt-[80px] gap-8">
+                <div class="flex flex-col xl:flex-row items-center xl:items-start xl:ml-[480px] xl:mt-[80px] xs:mt-[40px] gap-8">
                     <!-- Image Section -->
                     <div class="flex flex-col items-center xl:items-start">
                         <img
                             src={urlForImage(latestsulimbang.mainImage.asset.url).url()}
-                            class="xl:w-[600px] xs:px-[100px] xl:mr-[80px] xs:mb-[45px] hover:scale-105 transition-transform duration-300 shadow-lg rounded-lg"
+                            class="xl:w-[600px] xs:w-full xs:max-w-[300px] xl:mr-[80px] xs:mb-[45px] hover:scale-105 transition-transform duration-300 shadow-lg rounded-lg"
                             alt={latestsulimbang.title}
                         />
-                        <h4 class="headings xl:h4 xs:h5 text-white-pure xs:text-center xl:text- mt-1 ml-13">
+                        <h4 class="headings xl:h4 xs:h5 text-white-pure xs:text-center xl:text-left mt-4">
                             {latestsulimbang.title}
                         </h4>
                     </div>
 
                     <!-- Text Content -->
-                    <div class="flex flex-col text-center xl:text-left w-full xl:max-w-[480px]">
+                    <div class="flex flex-col text-center xl:text-left w-full xl:max-w-[480px] xs:px-4">
                         <h4 class="headings xl:h4 xs:h5 text-white-pure">{getYear(latestsulimbang.publishedAt)}</h4>
                         <p class="paragraph p2 text-white-pure mt-4 xl:max-h-[400px] xs:max-h-[62px] overflow-hidden">
                             {latestsulimbang.body[0].children[0].text}
@@ -82,22 +82,22 @@ if (!latestsulimbang || !allsulimbang) {
             </div>
 
             <!-- Search Bar -->
-            <div class="flex justify-center mt-8">
+            <div class="flex justify-center mt-8 px-4">
                 <input
                     type="text"
                     id="searchInput"
                     placeholder="Search by title or year..."
-                    class="p-3 border border-gray-300 rounded-lg w-1/2 shadow-md focus:ring-2 focus:ring-blue-500 outline-none"
+                    class="p-3 border border-gray-300 rounded-lg xl:w-1/2 xs:w-full shadow-md focus:ring-2 focus:ring-blue-500 outline-none"
                 />
             </div>
 
             <!-- Sulimbang Grid -->
-            <div class="flex justify-center xl:py-[71px] xs:pt-[48px] my-7">
-                <div id="sulimbangContainer" class="grid xl:grid-cols-6 xs:grid-cols-2 gap-6 w-full px-10">
+            <div class="flex justify-center xl:py-[71px] xs:py-[48px] my-7">
+                <div id="sulimbangContainer" class="grid xl:grid-cols-6 xs:grid-cols-1 sm:grid-cols-2 gap-6 w-full px-4">
                     {allsulimbang.map((sulimbang) => (
-                        <div class="bg-white rounded-lg shadow-lg p-11 transition-transform transform hover:scale-105" style="max-width: 320px;">
+                        <div class="bg-white rounded-lg shadow-lg p-4 transition-transform transform hover:scale-105" style="max-width: 320px;">
                             <a href={sulimbang.file.asset.url} target="_blank" rel="noopener noreferrer">
-                                <img src={sulimbang.mainImage.asset.url} class="w-full h-64 object-cover rounded-lg" alt={sulimbang.title} />
+                                <img src={sulimbang.mainImage.asset.url} class="w-full h-70 object-cover rounded-lg" alt={sulimbang.title} />
                             </a>
                             <div class="p-4 text-center">
                                 <h6 id="gazetteTitle" class="headings h6 text-black font-semibold mb-2">{sulimbang.title}</h6>
@@ -142,4 +142,4 @@ if (!latestsulimbang || !allsulimbang) {
             });
         </script>
     </main>
-</Layout> 
+</Layout>
