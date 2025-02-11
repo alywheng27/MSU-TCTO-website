@@ -35,7 +35,6 @@ if (!latestsulimbang || !allsulimbang) {
         <Navbar path={currentPath} client:visible />
 
         <div class="pt-[100px] w-full">
-
             <!-- Breadcrumb -->
             <div class='h-[10px] xl:px-[12.5%] xs:px-[3.85%]'>
                 <p class="paragraph p2 py-[10px] text-titanium xl:block xs:hidden">
@@ -57,7 +56,6 @@ if (!latestsulimbang || !allsulimbang) {
                             alt={latestsulimbang.title}
                         />
                         <h4 class="headings xl:h4 xs:h5 text-white-pure xs:text-center xl:text- mt-1 ml-13">
-
                             {latestsulimbang.title}
                         </h4>
                     </div>
@@ -105,36 +103,43 @@ if (!latestsulimbang || !allsulimbang) {
                                 <h6 id="gazetteTitle" class="headings h6 text-black font-semibold mb-2">{sulimbang.title}</h6>
                                 <p id="gazetteBody" class="paragraph p2 text-gray-600 mb-3 overflow-hidden" style="max-height: 60px;">{sulimbang.body[0].children[0].text}</p>
                                 <p id="gazetteDate" class="paragraph p2 text-gray-500 text-sm">{getYear(sulimbang.publishedAt)}</p>
+                                <!-- Download Button -->
+                                <a href={sulimbang.file.asset.url} download class="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors">
+                                    Download
+                                </a>
                             </div>
                         </div>
                     ))}
                 </div>
             </div>
-        </div>
-    </div>
-    
 
-        <!-- Footer Components -->
-        <MainVideo />
-        <FooterNav />
-        <Footer />
+            <!-- Footer Components -->
+            <MainVideo />
+            <FooterNav />
+            <Footer />
+        </div>
 
         <!-- Search Functionality -->
-        <script>
-            const searchInput = document.getElementById('searchInput');
-            const allSulimbangItems = document.querySelectorAll('.bg-white.rounded-lg');
+        <script client:load>
+            document.addEventListener('DOMContentLoaded', () => {
+                const searchInput = document.getElementById('searchInput');
+                const allSulimbangItems = document.querySelectorAll('.bg-white.rounded-lg');
 
-            searchInput.addEventListener('input', (e) => {
-                const query = e.target.value.toLowerCase();
+                if (searchInput && allSulimbangItems.length > 0) {
+                    searchInput.addEventListener('input', (e) => {
+                        const query = e.target.value.toLowerCase();
 
-                allSulimbangItems.forEach(item => {
-                    const title = item.querySelector('#gazetteTitle').textContent.toLowerCase();
-                    const year = item.querySelector('#gazetteDate').textContent.toLowerCase();
+                        allSulimbangItems.forEach(item => {
+                            const title = item.querySelector('#gazetteTitle').textContent.toLowerCase();
+                            const year = item.querySelector('#gazetteDate').textContent.toLowerCase();
 
-                    item.style.display = (title.includes(query) || year.includes(query)) ? 'block' : 'none';
-                });
+                            item.style.display = (title.includes(query) || year.includes(query)) ? 'block' : 'none';
+                        });
+                    });
+                } else {
+                    console.error('Search input or Sulimbang items not found!');
+                }
             });
         </script>
     </main>
-    
-</Layout>     
+</Layout> 
