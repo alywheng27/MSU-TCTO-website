@@ -595,6 +595,7 @@ export async function get6SecondSummerUpcomingEvents() {
   return sixSecondSummerUpcomingEvents;
 }
 
+//Gazette
 export async function getLatestGazette() {
   const query = groq`*[_type == "gazette"] | order(publishedAt desc)[0] {
     title,
@@ -636,6 +637,61 @@ export async function getAllGazette() {
   const allGazette = await useSanityClient().fetch(query);
   return allGazette;
 }
+
+//Sulimbang
+export async function getallSulimbang() {
+  const query = groq`*[_type == "sulimbang"] | order(publishedAt desc) {
+    title,
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url}, 
+    },
+    mainImage{
+      asset->,
+    },
+    file{asset->{url}},
+    publishedAt,
+    sulimbangQuarter->{sulimbangQuarter},
+  }`;
+
+  const allsulimbang = await client.fetch(query);
+  return allsulimbang;
+}
+
+
+export async function getLatestSulimbang() {
+ const query = groq`*[_type == "sulimbang"] | order(publishedAt desc)[0] {
+    title,
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url},
+    },
+    mainImage{
+      asset->,
+    },
+    file{asset->{url}},
+    publishedAt,
+  }`;
+
+  const latestsulimbang = await useSanityClient().fetch(query);
+  return latestsulimbang;
+}
+
+
+export async function getYearSulimbang() {
+  const query = groq`*[_type == "sulimbang"] | order(publishedAt desc) {
+    publishedAt,
+  }`;
+
+}
+
+
+
+
 
 export async function get3LatestGazette() {
   const query = groq`*[_type == "gazette"] | order(publishedAt desc)[0..2] {
@@ -689,29 +745,6 @@ export async function getYearGazette() {
 }
 
 export async function getGazette(year) {
-  const query = groq`*[_type == "gazette" && publishedAt match "${year}"] | order(publishedAt desc) {
-    title,
-    body[]{
-      children[]{
-        text
-      },
-      asset->{url}, 
-    },
-    mainImage{
-      asset->,
-    },
-    file{asset->{url}},
-    publishedAt,
-    gazetteQuarter->{gazetteQuarter},
-  }`;
-
-  const gazette = await client.fetch(query);
-  return gazette;
-}
-
-
-
-export async function getallSulimbang(year) {
   const query = groq`*[_type == "gazette" && publishedAt match "${year}"] | order(publishedAt desc) {
     title,
     body[]{
@@ -833,25 +866,6 @@ export async function get1_6LatestAnnualReport() {
   return one_sixLatestAnnualReport;
 }
 
-export async function getLatestSulimbang() {
-  const query = groq`*[_type == "sulimbang"] | order(publishedAt desc) {
-    title,
-    body[]{
-      children[]{
-        text
-      },
-      asset->{url},
-    },
-    mainImage{
-      asset->,
-    },
-    file{asset->{url}},
-    publishedAt,
-  }`;
-
-  const latestSulimbang = await useSanityClient().fetch(query);
-  return latestSulimbang;
-}
 
 export async function getFacultyAndStaff(college) {
   const query = groq`*[_type == "facultyAndStaff" && college._ref in *[_type=="college" && college=="${college}"]._id] | order(name asc) {
