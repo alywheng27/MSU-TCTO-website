@@ -58,21 +58,29 @@ const currentPath = Astro.url.pathname;
 	<main>
 		<Navbar path={currentPath} client:visible />       
     
-
-         
-
-
-    <div class="text-center xs:px-[66px]">
-      <h3 class="headings xl:h3 xs:h4 text-msu-rusty-red ">Academic Offices</h3>
-      <div class="flex flex-col gap-[20px] justify-center xl:ml-0 xs:ml-0 xl:mt-0 xs:mt-10 pt-10 ">
-          <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">COLLEGE OF ARTS AND SCIENCES</p>
-          <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">COLLEGE OF ISLAMIC & ARABIC STUDIES</p>
-          <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">COLLEGE OF EDUCATION</p>
-          <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">COLLEGE OF FISHERIES</p>
-          <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">INSTITUTE OF INFORMATION & COMMUNICATIONS TECHNOLOGY</p>
-          <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">INSTITUTE OF OCEANOGRAPHY & ENVIRONMENTAL SCIENCE</p>
-          
+    
+    <div id="facultyStaff" class=" bg-msu-dark-ocean xl:pt-[80px] xs:pt-[80px]  xs:pb-[57px]">
+            
+      <div class="text-center xl:px-[12.5%] xl:mb-[40px] xs:mb-[75px] xs:px-[3.85%]  xl:bg-none">
+          <h4 class="headings xl:h4 xs:h4 text-white-pure xl:mb-[80px] xs:mb-[80px]">Faculty & Staff</h4>
+          <FacultyAndStaff client:only />
       </div>
+
+  </div>
+<!--             
+
+
+            <div class="text-center xs:px-[66px]">
+                <h3 class="headings xl:h3 xs:h4 text-msu-rusty-red ">Academic Offices</h3>
+                <div class="flex flex-col gap-[20px] justify-center xl:ml-0 xs:ml-0 xl:mt-0 xs:mt-10 pt-10 ">
+                    <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">COLLEGE OF ARTS AND SCIENCES</p>
+                    <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">COLLEGE OF ISLAMIC & ARABIC STUDIES</p>
+                    <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">COLLEGE OF EDUCATION</p>
+                    <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">COLLEGE OF FISHERIES</p>
+                    <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">INSTITUTE OF INFORMATION & COMMUNICATIONS TECHNOLOGY</p>
+                    <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">INSTITUTE OF OCEANOGRAPHY & ENVIRONMENTAL SCIENCE</p>
+                    
+                </div> -->
      
                 <!-- <ReactTable /> -->
                 <!-- <div  class="App">
