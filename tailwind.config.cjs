@@ -4,12 +4,45 @@ module.exports = {
 	theme: {
 		extend: {
 			fontFamily: {
-				merchant: ['Merchant', 'sans-serif'],
-				// Add your custom font families here
+			  atkinson: ['Atkinson Hyperlegible', 'sans-serif'],
+			  merchant: ['Merchant', 'serif'],
 			},
+			fontSize: {
+			  '178px': '178px',
+			  '110px': '110px',
+			  '68px': '68px',
+			  '42px': '42px',
+			  '26px': '26px',
+			  '24px': '24px',
+			  '16px': '16px',
+			  '10px': '10px', // Adding this custom font size
+			},
+			lineHeight: {
+			  '181px': '181px',
+			  '112px': '112px',
+			  '69px': '69px',
+			  '43px': '43px',
+			  '32px': '32px',
+			  '26px': '26px',
+			  '20px': '20px',
+			  '16px': '16px',
+			  '12px': '12px',
+			},
+			 
 			colors: {
 				/* Primary */
-				'msu-maroon': '#820D13;',
+				'msu-maroon': {
+					DEFAULT: '#800000', // Default maroon
+					100: '#FFE5E5', // Lightest shade
+					200: '#FFB2B2',
+					300: '#FF8080',
+					400: '#FF4D4D',
+					500: '#800000', // Default
+					600: '#660000',
+					700: '#4D0000',
+					800: '#330000',
+					900: '#1A0000', // Darkest shade
+				  },
 				'msu-deep-ocean': '#0A1C37',
 				'msu-gold': '#F7D93C',
 
@@ -40,8 +73,13 @@ module.exports = {
         // 'xl': '1024px',
 				// '3xl': '1280px',
 				// => @media (min-width: 1536px) { ... }
-			  }
-		},
-	},
-	plugins: [],
-}
+			  },
+			},
+		  },
+		  variants: {
+			extend: {},
+		  },
+		  plugins: [],
+		};
+
+
