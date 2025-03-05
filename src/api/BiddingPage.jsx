@@ -14,7 +14,7 @@ const BiddingPage = ({ bidding }) => {
     setFilteredBidding(
       bidding.filter((bid) => bid.title.toLowerCase().includes(searchQuery))
     );
-    setCurrentPage(1);
+    setCurrentPage(1); // Reset to the first page after search
   };
 
   const displayBidding = () => {
@@ -31,17 +31,56 @@ const BiddingPage = ({ bidding }) => {
 
   const renderPageNumbers = () => {
     const pageNumbers = [];
-    for (let i = 1; i <= totalPages; i++) {
+    const maxPagesToShow = 5; // Maximum page numbers to display at once
+    let startPage = Math.max(1, currentPage - Math.floor(maxPagesToShow / 2));
+    let endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
+
+    // Adjust startPage if we're at the end
+    if (endPage - startPage + 1 < maxPagesToShow) {
+      startPage = Math.max(1, endPage - maxPagesToShow + 1);
+    }
+
+    // Add "..." for pages before the startPage
+    if (startPage > 1) {
+      pageNumbers.push(
+        <button
+          key="ellipsis-start"
+          className="px-4 py-2 bg-msu-maroon text-white rounded-lg cursor-default"
+          disabled
+        >
+          ...
+        </button>
+      );
+    }
+
+    // Add page numbers
+    for (let i = startPage; i <= endPage; i++) {
       pageNumbers.push(
         <button
           key={i}
-          className={`px-4 py-2 ${currentPage === i ? 'bg-msu-gold text-white' : 'bg-msu-maroon text-white'} rounded-lg hover:bg-msu-gold`}
+          className={`px-4 py-2 ${
+            currentPage === i ? 'bg-msu-gold text-white' : 'bg-msu-maroon text-white'
+          } rounded-lg hover:bg-msu-gold`}
           onClick={() => handlePageChange(i)}
         >
           {i}
         </button>
       );
     }
+
+    // Add "..." for pages after the endPage
+    if (endPage < totalPages) {
+      pageNumbers.push(
+        <button
+          key="ellipsis-end"
+          className="px-4 py-2 bg-msu-maroon text-white rounded-lg cursor-default"
+          disabled
+        >
+          ...
+        </button>
+      );
+    }
+
     return pageNumbers;
   };
 
@@ -88,15 +127,21 @@ const BiddingPage = ({ bidding }) => {
 
       <div className="flex justify-center mt-6 space-x-2">
         <button
-          className="px-4 py-2 bg-msu-maroon text-white rounded-lg hover:bg-msu-gold"
+          className={`px-4 py-2 ${
+            currentPage === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-msu-maroon hover:bg-msu-gold'
+          } text-white rounded-lg`}
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
         >
           Previous
         </button>
         {renderPageNumbers()}
         <button
-          className="px-4 py-2 bg-msu-maroon text-white rounded-lg hover:bg-msu-gold"
+          className={`px-4 py-2 ${
+            currentPage === totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-msu-maroon hover:bg-msu-gold'
+          } text-white rounded-lg`}
           onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+          disabled={currentPage === totalPages}
         >
           Next
         </button>

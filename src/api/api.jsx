@@ -872,11 +872,14 @@ export async function getFacultyAndStaff(college) {
     name,
     teachingLevel,
     advisory,
+    educations[]->{title}, // Fetch nested fields if educations is an array of objects
     yearStarted,
     image{
       asset->,
     },
     college->{college},
+    researchLink,
+
   }`;
 
   const gazette = await client.fetch(query);

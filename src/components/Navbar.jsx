@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import { FaHome, FaInfoCircle, FaGraduationCap, FaBook, FaBriefcase, FaSearch } from 'react-icons/fa';
 import HeroMainHeading from './HeroMainHeading';
 import HeroAdmissionHeading from './HeroAdmissionHeading';
 import HeroProgramHeading from './HeroProgramHeading';
@@ -12,10 +13,12 @@ import HeroPublicationHeading from './HeroPublicationHeading';
 import HeroOfficeHeading from './HeroOfficeHeading';
 import HeroCampusHeading from './HeroCampusHeading';
 
-const Dropdown = ({ title, items }) => {
+
+const Dropdown = ({ title, items, icon }) => {
   return (
     <li className='py-[15px] dropdown dropdown-1'>
-      <a href="#" className='flex xs:justify-center xl:justify-start'>
+      <a href="#" className='flex xs:justify-center xl:justify-start items-center'>
+        {icon && <span className="mr-2">{icon}</span>}
         {title} <img src="../../public/down-arrow2-svgrepo-com.svg" className='ml-2 float-right' width={16} alt="" />
       </a>
       <ul className={`mt-[15px] dropdown-menu lvl-one`}>
@@ -83,11 +86,11 @@ const Navbar = ({ path }) => {
     <>
       <div className="sticky top-0 z-50">
         <div className="3xl:h-[100px] xl:h-[80px] xs:h-[60px] w-full bg-msu-deep-ocean text-white-pure flex justify-between items-center xl:px-[12.5%] xs:px-[3.85%] relative">
-          <a href="#" className="flex items-center xl:py-0 xs:py-2">
+          <a href="/" className="flex items-center xl:py-0 xs:py-2">
             <img src="/images/MSU Seal New (Official).png" alt="" className="3xl:h-[72.99px] xs:h-[43.79px] mr-5" />
             <div>
               <h4 className="headings xl:h5 block xl:block xs:hidden">Mindanao State University</h4>
-              <p className="paragraph xl:p2 block xl:block xs:hidden">Tawi-Tawi College of Technology and Oceanography</p>
+              <p className="paragraph xl:p2 block xl:block xs:hidden" >Tawi-Tawi College of Technology and Oceanography</p>
             </div>
           </a>
           <div>
@@ -98,12 +101,22 @@ const Navbar = ({ path }) => {
             </button>
           </div>
         </div>
+
+        
         <div className={`relative z-99 ${isOpen ? 'block' : 'hidden'} xl:block`}>
           <div className='relative z-99'>
             <div className={`xs:bg-msu-deep-ocean xl:bg-transparent xl:bg-gradient-ocean flex xl:flex-row xs:flex-col justify-between items-center text-white-pure xl:px-[12.5%] xs:px-[3.85%] nav ${isOpen && 'active'}`}>
               <ul className="flex 3xl:flex-row xl:flex-row sm:flex-col xs:flex-col xl:gap-14 xl:text-left xs:text-center paragraph p2 w-full">
                 <Dropdown
+                  title="Home"
+                  icon={<FaHome />}
+                  items={[
+                    { link: "/", label: "Home" },
+                  ]}
+                />
+                <Dropdown
                   title="About"
+                  icon={<FaInfoCircle />}
                   items={[
                     { link: "/about/campus", label: "Brief History" },
                     { link: "/about/mission-vision", label: "Mission/Vision" },
@@ -112,6 +125,7 @@ const Navbar = ({ path }) => {
                 />
                 <Dropdown
                   title="Admissions"
+                  icon={<FaGraduationCap />}
                   items={[
                     { link: "/admissions/admissions", label: "Admission Procedures" },
                     { link: "/admissions/scholarship-and-grants", label: "Scholarship and Grants" },
@@ -119,6 +133,7 @@ const Navbar = ({ path }) => {
                 />
                 <Dropdown
                   title="Programs"
+                  icon={<FaBook />}
                   items={[
                     { link: "/programs/cas", label: "College of Arts and Sciences" },
                     { link: "/programs/cias", label: "College of Islamic & Arabic Studies" },
@@ -130,6 +145,7 @@ const Navbar = ({ path }) => {
                 />
                 <Dropdown
                   title="Offices"
+                  icon={<FaBriefcase />}
                   items={[
                     { link: "/offices/offices", label: "Administrative Offices" },
                     { link: "/offices/academic-offices", label: "Academic Offices" },
@@ -138,6 +154,7 @@ const Navbar = ({ path }) => {
                 />
                 <Dropdown
                   title="Publications"
+                  icon={<FaBook />}
                   items={[
                     { link: "/publications/articles", label: "Articles" },
                     { link: "/publications/sulimbang", label: "Sulimbang" },
@@ -148,6 +165,7 @@ const Navbar = ({ path }) => {
                 />
                 <Dropdown
                   title="Job Opening"
+                  icon={<FaBriefcase />}
                   items={[
                     { link: "/careers", label: "Open Positions" },
                   ]}
@@ -156,7 +174,7 @@ const Navbar = ({ path }) => {
               <div className="relative xl:mt-0 xs:mt-[15px] xl:w-fit xs:w-full">
                 <form action={`/search/${url}`} method="post">
                   <input type="search" autoComplete='off' onChange={(e) => { setUrl(e.target.value) }} name="" id="search" className="bg-transparent border rounded-[20px] 3xl:w-[360px] xl:w-[240px] xs:w-full h-10 pl-12 pr-4 text-center" />
-                  <img src="/images/search.png" alt="" className="absolute top-[6px] left-3" label="search" />
+                  <FaSearch className="absolute top-[10px] left-3 text-white-pure" />
                 </form>
               </div>
             </div>

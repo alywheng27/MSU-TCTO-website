@@ -50,35 +50,35 @@ const currentPath = Astro.url.pathname;
 					<img src="/images/graduation/image2.png" alt="" class=" xl:h-[200px] xl:block xs:hidden">
 				</div>
 			</div>
-
 			<div class="grid xl:grid-cols-3 xs:grid-cols-2 justify-items-center mt-[27px]">
 				<div class="p-5 max-w-[360px]">
-					<h3 class="headings xl:h3 xs:h4">12+</h3>
+					<h3 class="headings xl:h3 xs:h4"><span class="counter" data-target="12">0</span>+</h3>
 					<p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px]">AACCUP Program Certified</p>
 				</div>
 				<div class="p-5 max-w-[360px]">
-					<h3 class="headings xl:h3 xs:h4">39+</h3>
+					<h3 class="headings xl:h3 xs:h4"><span class="counter" data-target="39">0</span>+</h3>
 					<p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px]">Programs offered</p>
 				</div>
 				<div class="p-5 max-w-[360px] xl:block xs:hidden">
-					<h3 class="headings xl:h3 xs:h4">3,772+</h3>
+					<h3 class="headings xl:h3 xs:h4"><span class="counter" data-target="3772">0</span>+</h3>
 					<p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px]">Total graduates and counting</p>
 				</div>
 			</div>
-
-			<div class="mt-[34px] mb-[34px] xl:hidden  xs:block ">
+			
+			<div class="mt-[34px] mb-[34px] xl:hidden xs:block">
 				<div class="p-5 item-center">
-					<h3 class="headings xl:h3 xs:h4">3,772+</h3>
+					<h3 class="headings xl:h3 xs:h4"><span class="counter" data-target="3772">0</span>+</h3>
 					<p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px]">Total graduates and counting</p>
 				</div>
 			</div>
+			
 			<div class="grid grid-cols-2 justify-items-center mt-[27px]">
 				<div class="p-5 max-w-[360px]">
-					<h3 class="headings xl:h3 xs:h4">98+</h3>
+					<h3 class="headings xl:h3 xs:h4"><span class="counter" data-target="98">0</span>+</h3>
 					<p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px]">Acclaimed Researches</p>
 				</div>
 				<div class="p-5 max-w-[360px]">
-					<h3 class="headings xl:h3 xs:h4">3,008+</h3>
+					<h3 class="headings xl:h3 xs:h4"><span class="counter" data-target="3008">0</span>+</h3>
 					<p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px]">Student Scholars</p>
 				</div>
 			</div>
@@ -252,5 +252,29 @@ const currentPath = Astro.url.pathname;
 
 	</main>
 	
+
+	<script>
+		document.addEventListener("DOMContentLoaded", () => {
+    const counters = document.querySelectorAll('.counter');
+    const speed = 200; // Adjust speed (lower = faster)
+
+    counters.forEach(counter => {
+        const updateCount = () => {
+            const target = +counter.getAttribute('data-target');
+            const count = +counter.innerText.replace(/,/g, ''); // Remove commas for calculation
+            const increment = target / speed;
+
+            if (count < target) {
+                counter.innerText = Math.ceil(count + increment).toLocaleString(); // Add commas back
+                setTimeout(updateCount, 1);
+            } else {
+                counter.innerText = target.toLocaleString(); // Ensure final value has commas
+            }
+        };
+
+        updateCount();
+    });
+});
+	</script>
 </Layout>
  
