@@ -34,7 +34,7 @@ if (!latestsulimbang || !allsulimbang) {
     <main>
         <Navbar path={currentPath} client:visible />
 
-        <div class="pt-[100px] w-full">
+        <div class="pt-[100px] w-full ocean-background">
             <!-- Breadcrumb -->
             <div class='h-[10px] xl:px-[12.5%] xs:px-[5%]'>
                 <p class="paragraph p2 py-[10px] text-titanium xl:block xs:hidden">
@@ -52,7 +52,7 @@ if (!latestsulimbang || !allsulimbang) {
                     <div class="flex flex-col items-center xl:items-start">
                         <img
                             src={urlForImage(latestsulimbang.mainImage.asset.url).url()}
-                            class="xl:w-[600px] xs:w-full xs:max-w-[300px] xl:mr-[80px] xs:mb-[45px] hover:scale-105 transition-transform duration-300 shadow-lg rounded-lg"
+                            class="xl:w-[600px] xs:w-full xs:max-w-[360px] xl:mr-[80px] xs:mb-[45px] hover:scale-105 transition-transform duration-300 shadow-lg rounded-lg"
                             alt={latestsulimbang.title}
                         />
                         <h4 class="headings xl:h4 xs:h5 text-white-pure xs:text-center xl:text-left mt-4">
@@ -78,11 +78,8 @@ if (!latestsulimbang || !allsulimbang) {
                             </a>
                         </div>
                     </div>
-                    
                 </div>
             </div>
-
-            
 
             <!-- Search Bar -->
             <div class="flex justify-center mt-8 px-4">
@@ -94,13 +91,9 @@ if (!latestsulimbang || !allsulimbang) {
                 />
             </div>
 
-
-
-            
-
             <!-- Sulimbang Grid -->
-            <div class="flex justify-center xl:py-[71px] xs:py-[48px] my-7">
-                <div id="sulimbangContainer" class="grid xl:grid-cols-6 xs:grid-cols-1 sm:grid-cols-2 gap-6 w-full px-4">
+            <div class="flex flex-col justify-center xl:py-[71px] xs:py-[20px] my-7">
+                <div id="sulimbangContainer" class="grid xl:grid-cols-5 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full px-4">
                     {allsulimbang.map((sulimbang) => (
                         <div class="bg-white rounded-lg shadow-lg p-4 transition-transform transform hover:scale-105" style="max-width: 320px;">
                             <a href={sulimbang.file.asset.url} target="_blank" rel="noopener noreferrer">
@@ -120,40 +113,120 @@ if (!latestsulimbang || !allsulimbang) {
                 </div>
             </div>
 
-          <!-- Global Filter Section -->
-          <div class="flex flex-col items-center xl:py-[71px] xs:pt-[48px] my-5 w-full">
-            <div class="w-full max-w-7xl px-4">
-                <p class="paragraph p1 text-white-pure xl:ml-[12px] xl:block xs:hidden mb-6 text-center">
-                    Filter Previous Releases
-                </p>
-        
-            
+            <!-- Pagination -->
+            <div class="flex justify-center mt-10">
+                <div id="pagination" class="flex items-center space-x-2">
+                    <!-- Previous Button -->
+                    <button id="prevPage" class="px-4 py-2 bg-gray-200 rounded-full hover:bg-blue-500 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        &larr; Prev
+                    </button>
+
+                    <!-- Page Numbers -->
+                    <div id="pageNumbers" class="flex items-center space-x-2">
+                        <!-- Page numbers will be dynamically inserted here -->
+                    </div>
+
+                    <!-- Next Button -->
+                    <button id="nextPage" class="px-4 py-2 bg-gray-200 rounded-full hover:bg-blue-500 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+                        Next &rarr;
+                    </button>
+                </div>
+            </div>
+
+            <!-- Global Filter Section -->
+            <div class="flex flex-col items-center xl:py-[71px] xs:pt-[48px] my-5 w-full">
+                <div class="w-full max-w-7xl px-4">
+                    <p class="paragraph p1 text-white-pure xl:ml-[12px] xl:block xs:hidden mb-6 text-center">
+                        Filter Previous Releases
+                    </p>
+                </div>
+            </div>
+
             <!-- Footer Components -->
             <MainVideo />
             <FooterNav />
             <Footer />
         </div>
 
-        <!-- Search Functionality -->
+        <!-- Search and Pagination Functionality -->
         <script client:load>
             document.addEventListener('DOMContentLoaded', () => {
+                const itemsPerPage = 5; // Number of items per page
+                const sulimbangContainer = document.getElementById('sulimbangContainer');
+                const allSulimbangItems = Array.from(sulimbangContainer.querySelectorAll('.bg-white.rounded-lg'));
                 const searchInput = document.getElementById('searchInput');
-                const allSulimbangItems = document.querySelectorAll('.bg-white.rounded-lg');
+                const prevPageButton = document.getElementById('prevPage');
+                const nextPageButton = document.getElementById('nextPage');
+                const pageNumbersContainer = document.getElementById('pageNumbers');
 
-                if (searchInput && allSulimbangItems.length > 0) {
-                    searchInput.addEventListener('input', (e) => {
-                        const query = e.target.value.toLowerCase();
+                let currentPage = 1;
+                let filteredItems = allSulimbangItems;
 
-                        allSulimbangItems.forEach(item => {
-                            const title = item.querySelector('#gazetteTitle').textContent.toLowerCase();
-                            const year = item.querySelector('#gazetteDate').textContent.toLowerCase();
-
-                            item.style.display = (title.includes(query) || year.includes(query)) ? 'block' : 'none';
-                        });
+                // Function to filter items based on search query
+                function filterItems(query) {
+                    filteredItems = allSulimbangItems.filter(item => {
+                        const title = item.querySelector('#gazetteTitle').textContent.toLowerCase();
+                        const year = item.querySelector('#gazetteDate').textContent.toLowerCase();
+                        return title.includes(query) || year.includes(query);
                     });
-                } else {
-                    console.error('Search input or Sulimbang items not found!');
+                    currentPage = 1;
+                    renderPagination();
+                    changePage(currentPage);
                 }
+
+                // Function to render page numbers
+                function renderPagination() {
+                    const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+                    pageNumbersContainer.innerHTML = '';
+
+                    for (let i = 1; i <= totalPages; i++) {
+                        const pageButton = document.createElement('button');
+                        pageButton.className = `px-4 py-2 rounded-full transition-all ${
+                            currentPage === i ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-blue-500 hover:text-white'
+                        }`;
+                        pageButton.textContent = i;
+                        pageButton.addEventListener('click', () => changePage(i));
+                        pageNumbersContainer.appendChild(pageButton);
+                    }
+
+                    prevPageButton.disabled = currentPage === 1;
+                    nextPageButton.disabled = currentPage === totalPages;
+                }
+
+                // Function to change page
+                function changePage(page) {
+                    currentPage = page;
+                    const startIndex = (currentPage - 1) * itemsPerPage;
+                    const endIndex = startIndex + itemsPerPage;
+
+                    allSulimbangItems.forEach((item) => {
+                        item.style.display = 'none'; // Hide all items initially
+                    });
+
+                    filteredItems.slice(startIndex, endIndex).forEach((item) => {
+                        item.style.display = 'block'; // Show items for the current page
+                    });
+
+                    renderPagination();
+                }
+
+                // Event listeners for search input
+                searchInput.addEventListener('input', (e) => {
+                    const query = e.target.value.toLowerCase();
+                    filterItems(query);
+                });
+
+                // Event listeners for previous and next buttons
+                prevPageButton.addEventListener('click', () => {
+                    if (currentPage > 1) changePage(currentPage - 1);
+                });
+
+                nextPageButton.addEventListener('click', () => {
+                    if (currentPage < Math.ceil(filteredItems.length / itemsPerPage)) changePage(currentPage + 1);
+                });
+
+                // Initial render
+                filterItems('');
             });
         </script>
     </main>

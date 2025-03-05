@@ -4,13 +4,14 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 *,
 *::before,
 *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    
     
 
 }
@@ -847,6 +848,13 @@ a {
   }
 }
 
+@media (max-width: 640px) {
+  .table-cell {
+    padding: 8px;
+    font-size: 14px;
+  }
+}
+
 .download-img:hover {
   animation: bounceDownload 0.5s ease-in-out;
 }
@@ -863,7 +871,7 @@ a {
 }
 .filter-dropdown {
   appearance: none;
-  background-color: #1a1a1a;
+  background-color: #ffffff;
   color: white;
   border: 1px solid #555;
   padding: 10px 15px;
@@ -872,10 +880,11 @@ a {
   font-size: 16px;
   transition: all 0.3s;
   width: 100%;
+  color: #111111;
 }
 
 .filter-dropdown:hover {
-  border-color: #888;
+  border-color: #3db2f6;
 }
 
 .filter-dropdown:focus {

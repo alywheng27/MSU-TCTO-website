@@ -189,6 +189,26 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                             })
                         }
                     </div>
+
+                    <!-- Pagination -->
+                    <div class="flex justify-center mt-10">
+                        <div id="pagination" class="flex items-center space-x-2">
+                            <!-- Previous Button -->
+                            <button id="prevPage" class="px-4 py-2 bg-gray-200 rounded-full hover:bg-blue-500 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                                &larr; Prev
+                            </button>
+
+                            <!-- Page Numbers -->
+                            <div id="pageNumbers" class="flex items-center space-x-2">
+                                <!-- Page numbers will be dynamically inserted here -->
+                            </div>
+
+                            <!-- Next Button -->
+                            <button id="nextPage" class="px-4 py-2 bg-gray-200 rounded-full hover:bg-blue-500 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+                                Next &rarr;
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -209,19 +229,28 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
 </Layout>
 
 <script >
-// Client-side filtering logic
+// Client-side filtering and pagination logic
 document.addEventListener('DOMContentLoaded', () => {
+    const itemsPerPage = 6; // Number of items per page
+    const gazetteGrid = document.getElementById('gazetteGrid');
+    const allGazetteItems = Array.from(gazetteGrid.querySelectorAll('.gazette-item'));
     const yearFilter = document.getElementById('yearFilter');
     const quarterFilter = document.getElementById('quarterFilter');
     const searchFilter = document.getElementById('searchFilter');
-    const gazetteItems = document.querySelectorAll('.gazette-item');
+    const prevPageButton = document.getElementById('prevPage');
+    const nextPageButton = document.getElementById('nextPage');
+    const pageNumbersContainer = document.getElementById('pageNumbers');
 
-    const filterGazettes = () => {
+    let currentPage = 1;
+    let filteredItems = allGazetteItems;
+
+    // Function to filter items based on search query and filters
+    function filterItems() {
         const selectedYear = yearFilter.value.toLowerCase();
         const selectedQuarter = quarterFilter.value.toLowerCase();
         const searchQuery = searchFilter.value.toLowerCase();
 
-        gazetteItems.forEach(item => {
+        filteredItems = allGazetteItems.filter(item => {
             const year = item.getAttribute('data-year').toLowerCase();
             const quarter = item.getAttribute('data-quarter').toLowerCase();
             const title = item.getAttribute('data-title').toLowerCase();
@@ -232,19 +261,65 @@ document.addEventListener('DOMContentLoaded', () => {
             const quarterMatch = selectedQuarter === 'all' || quarter === selectedQuarter;
             const searchMatch = title.includes(searchQuery) || content.includes(searchQuery);
 
-            // Show only items that match all filters
-            item.style.display = (yearMatch && quarterMatch && searchMatch) ? 'block' : 'none';
+            return yearMatch && quarterMatch && searchMatch;
         });
-    };
 
-    // Attach event listeners for real-time filtering
-    yearFilter.addEventListener('change', filterGazettes);
-    quarterFilter.addEventListener('change', filterGazettes);
-    searchFilter.addEventListener('input', filterGazettes);
+        currentPage = 1;
+        renderPagination();
+        changePage(currentPage);
+    }
 
-    // Initial filtering to apply default state
-    filterGazettes();
+    // Function to render page numbers
+    function renderPagination() {
+        const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+        pageNumbersContainer.innerHTML = '';
+
+        for (let i = 1; i <= totalPages; i++) {
+            const pageButton = document.createElement('button');
+            pageButton.className = `px-4 py-2 rounded-full transition-all ${
+                currentPage === i ? 'bg-blue-500 text-white' : 'bg-gray-200 hover:bg-blue-500 hover:text-white'
+            }`;
+            pageButton.textContent = i;
+            pageButton.addEventListener('click', () => changePage(i));
+            pageNumbersContainer.appendChild(pageButton);
+        }
+
+        prevPageButton.disabled = currentPage === 1;
+        nextPageButton.disabled = currentPage === totalPages;
+    }
+
+    // Function to change page
+    function changePage(page) {
+        currentPage = page;
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+
+        allGazetteItems.forEach((item) => {
+            item.style.display = 'none'; // Hide all items initially
+        });
+
+        filteredItems.slice(startIndex, endIndex).forEach((item) => {
+            item.style.display = 'block'; // Show items for the current page
+        });
+
+        renderPagination();
+    }
+
+    // Event listeners for filters and search
+    yearFilter.addEventListener('change', filterItems);
+    quarterFilter.addEventListener('change', filterItems);
+    searchFilter.addEventListener('input', filterItems);
+
+    // Event listeners for previous and next buttons
+    prevPageButton.addEventListener('click', () => {
+        if (currentPage > 1) changePage(currentPage - 1);
+    });
+
+    nextPageButton.addEventListener('click', () => {
+        if (currentPage < Math.ceil(filteredItems.length / itemsPerPage)) changePage(currentPage + 1);
+    });
+
+    // Initial render
+    filterItems();
 });
-
 </script>
-

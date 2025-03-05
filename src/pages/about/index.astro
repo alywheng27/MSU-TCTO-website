@@ -1,28 +1,26 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from "../components/Navbar";
-import ChancellorMessage from "../components/ChancellorMessage.astro";
-import MainVideo from "../components/MainVideo.astro";
-import FooterNav from "../components/FooterNav.astro";
-import Footer from "../components/Footer.astro";
-import CarouselMain from "../components/CarouselMain";
-import heromain from "../components/HeroMainHeading";
-
+import Layout from '../../layouts/Layout.astro';
+import Navbar from "../../components/Navbar";
+import ChancellorMessage from "../../components/ChancellorMessage.astro";
+import MainVideo from "../../components/MainVideo.astro";
+import FooterNav from "../../components/FooterNav.astro";
+import Footer from "../../components/Footer.astro";
+import CarouselMain from "../../components/CarouselMain";
 
 import '../styles/css/global.css';
 
 const currentPath = Astro.url.pathname;
 
-import { urlForImage } from '../api/api';
-import { getYear } from '../js/date';
-import { getWordMonth } from '../js/date';
-import { getDay } from '../js/date';
+import { urlForImage } from '../../api/api';
+import { getYear } from '../../js/date';
+import { getWordMonth } from '../../js/date';
+import { getDay } from '../../js/date';
 
-import { get3LatestArticle } from '../api/api';
-import { getLatestFeaturedArticle } from '../api/api';
-import { get4UpcomingEvents } from '../api/api';
-import { get3LatestGazette } from '../api/api';
-import { get3LatestAnnualReport } from '../api/api';
+import { get3LatestArticle } from '../../api/api';
+import { getLatestFeaturedArticle } from '../../api/api';
+import { get4UpcomingEvents } from '../../api/api';
+import { get3LatestGazette } from '../../api/api';
+import { get3LatestAnnualReport } from '../../api/api';
 
 const threeLatestArticles = await get3LatestArticle();
 const latestFeaturedArticle = await getLatestFeaturedArticle();
@@ -32,8 +30,6 @@ const threeLatestAnnualReport = await get3LatestAnnualReport();
 ---
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
-
-	
 	<main>
 		<Navbar path={currentPath} client:visible />
     <div class="relative bg-black-pure w-full xl:px-[12.5%] xs:px-[3.85%] py-10 z-0">

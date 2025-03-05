@@ -17,7 +17,7 @@ const FacultyAndStaff = () => {
     COED: [],
     IOES: [],
     CIAS: [],
-    Staff: [], // Added Staff Section
+    ADMIN: [], // Added Staff Section
   });
   const [selectedPerson, setSelectedPerson] = useState(null);
 
@@ -28,7 +28,7 @@ const FacultyAndStaff = () => {
     { tabId: '3', label: 'COED', title: 'College of Education', key: 'COED' },
     { tabId: '4', label: 'IOES', title: 'Institute of Environmental Science', key: 'IOES' },
     { tabId: '5', label: 'CIAS', title: 'College of Islamic and Arabic Studies', key: 'CIAS' },
-    { tabId: '6', label: 'Staff', title: 'Administrative and Support Staff', key: 'Staff' }, // Added Staff Tab
+    { tabId: '6', label: 'ADMIN', title: 'Administrative and Support Staff', key: 'ADMIN' }, // Added Staff Tab
   ];
 
   function getInitialPerPage() {
@@ -121,35 +121,35 @@ const FacultyAndStaff = () => {
         </div>
       </div>
 
-      {/* Updated Navigation Section */}
-      <nav className="tab-container text-white-pure flex justify-center">
-        <div className="tab-navigation inline-flex bg-gray-200 p-2 rounded-lg shadow-md" role="group">
-          {tabs.map((tab, index) => (
-            <a
-              key={index}
-              href="#" // Replace with actual link or use `to` for React Router
-              className={`px-6 py-4 text-lg font-semibold transition-all duration-300 ease-in-out transform focus:outline-none border border-gray-300
-                ${index === 0
-                  ? 'rounded-l-lg' // Rounded left for the first button
-                  : index === tabs.length - 1
-                  ? 'rounded-r-lg' // Rounded right for the last button
-                  : 'rounded-none' // No rounding for middle buttons
-                }
-                ${index === activeTab
-                  ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg' // Active tab style
-                  : 'bg-white text-gray-700 hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:text-white hover:shadow-xl hover:scale-105' // Inactive tab style
-                }`}
-              onClick={(e) => {
-                e.preventDefault(); // Prevent default link behavior
-                handleTabClick(index);
-              }}
-              aria-current={index === activeTab ? "page" : undefined} // Accessibility enhancement
-            >
-              {tab.label}
-            </a>
-          ))}
-        </div>
-      </nav>
+      {/* Updated Responsive Navigation Section */}
+      <nav className={`container text-white-pure flex justify-center transition-all duration-300 `}>
+  <div className={`tab-navigation inline-flex bg-gray-200 p-4 rounded-lg shadow-md overflow-x-auto `} role="group">
+    {tabs.map((tab, index) => (
+      <a
+        key={index}
+        href="#" // Replace with actual link or use `to` for React Router
+        className={`px-4 py-2 md:px-6 md:py-4 text-sm md:text-lg font-semibold transition-all duration-300 ease-in-out transform focus:outline-none border border-gray-300 whitespace-nowrap
+          ${index === 0
+            ? 'rounded-l-lg' // Rounded left for the first button
+            : index === tabs.length - 1
+            ? 'rounded-r-lg' // Rounded right for the last button
+            : 'rounded-none' // No rounding for middle buttons
+          }
+          ${index === activeTab
+            ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg' // Active tab style
+            : 'bg-white text-gray-700 hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 hover:text-white hover:shadow-xl hover:scale-105' // Inactive tab style
+          }`}
+        onClick={(e) => {
+          e.preventDefault(); // Prevent default link behavior
+          handleTabClick(index);
+        }}
+        aria-current={index === activeTab ? "page" : undefined} // Accessibility enhancement
+      >
+        {tab.label}
+      </a>
+    ))}
+  </div>
+</nav>
 
       <div className="tab-content text-white-pure">
         <h2 className="text-center font-semibold text-3xl mt-10 mb-6 animate-fade-in">
@@ -242,15 +242,15 @@ const FacultyAndStaff = () => {
                 className="h-40 w-40 rounded-full border-4 border-blue-500 shadow-lg"
               />
               <p className="font-medium text-lg mt-4 text-gray-700">
-                {selectedPerson.teachingLevel || 'Teaching Level Unavailable'}
+                {selectedPerson.advisory || 'Teaching Level Unavailable'}
               </p>
             </div>
 
             <div className="space-y-6">
-              {selectedPerson.academicRank && (
-                <div className="flex items-start space-x-4">
+              {selectedPerson.teachingLevel && (
+                <div className="flex items-start space-x-4 justify-center items-center z-50">
                   <span className="text-blue-500">
-                    <svg
+                    {/* <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-6 w-6"
                       fill="none"
@@ -263,43 +263,46 @@ const FacultyAndStaff = () => {
                         strokeLinejoin="round"
                         d="M8 7v10m8-10v10m-12 4h16"
                       />
-                    </svg>
+                    </svg> */}
                   </span>
                   <div>
                     <h4 className="font-semibold text-lg text-gray-800">
-                      Academic Rank and Unit
+                      Academic Rank and Department
                     </h4>
-                    <p className="text-gray-700">{selectedPerson.academicRank}</p>
+                    <p className="text-gray-700">{selectedPerson.teachingLevel}</p>
                   </div>
                 </div>
               )}
 
-              {selectedPerson.education && (
-                <div className="flex items-start space-x-4">
-                  <span className="text-green-500">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M12 8v8m0 4v.01M4 12h16"
-                      />
-                    </svg>
-                  </span>
-                  <div>
-                    <h4 className="font-semibold text-lg text-gray-800">
-                      Education
-                    </h4>
-                    <p className="text-gray-700">{selectedPerson.education}</p>
-                  </div>
+            {selectedPerson.educations && (
+              <div className="flex items-start space-x-4">
+                <span className="text-green-500">
+                  {/* <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 8v8m0 4v.01M4 12h16"
+                    />
+                  </svg> */}
+                </span>
+                <div>
+                  <h4 className="font-semibold text-lg text-gray-800">Educations</h4>
+                  {/* Map over the educations array */}
+                  {selectedPerson.educations.map((educations, index) => (
+                    <p key={index} className="text-gray-700">
+                      {educations.title} 
+                    </p>
+                  ))}
                 </div>
-              )}
+              </div>
+            )}
 
               {selectedPerson.email && (
                 <div className="flex items-start space-x-4">
@@ -321,7 +324,7 @@ const FacultyAndStaff = () => {
                   </span>
                   <div>
                     <h4 className="font-semibold text-lg text-gray-800">
-                      Email Inquiry
+                      Email   
                     </h4>
                     <a
                       href={`mailto:${selectedPerson.email}`}
@@ -333,32 +336,39 @@ const FacultyAndStaff = () => {
                 </div>
               )}
 
-              {selectedPerson.research && (
-                <div className="flex items-start space-x-4">
-                  <span className="text-red-500">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M9.5 14L7 16.5m-2-2.5h2m12 0h-2M7 9.5l2.5 2m7-2l-2.5 2"
-                      />
-                    </svg>
-                  </span>
-                  <div>
-                    <h4 className="font-semibold text-lg text-gray-800">
-                      Research Areas
-                    </h4>
-                    <p className="text-gray-700">{selectedPerson.research}</p>
+                {selectedPerson.researchLink && (
+                  <div className="flex items-start space-x-4 flex justify-center items-center z-50">
+                    <span className="text-red-500">
+                      {/* <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M9.5 14L7 16.5m-2-2.5h2m12 0h-2M7 9.5l2.5 2m7-2l-2.5 2"
+                        />
+                      </svg> */}
+                    </span>
+                    <div>
+                      <h4 className="font-semibold text-lg text-gray-800">
+                      
+                      </h4>
+                      <a
+                        href={selectedPerson.researchLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block mt-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg shadow-md hover:from-blue-700 hover:to-purple-700 hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+                      >
+                        View More Info
+                      </a>
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
             </div>
           </div>
         </div>
