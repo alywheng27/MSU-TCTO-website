@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getLatestSulimbang } from '../pages/publications/sulimbang.astro';
+import { getLatestSulimbang } from '../../pages/publications/sulimbang.astro';
 import { urlForImage } from '../../utils/imageHelper';
 
 const LatestSulimbang = () => {
