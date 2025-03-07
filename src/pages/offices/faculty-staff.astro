@@ -15,7 +15,7 @@ import '../../styles/css/global.css';
 
 // import DataTableComponent from '../../components/DataTableComponent';
 
-import ReactTable from '../../components/ReactTable';
+
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
@@ -63,7 +63,7 @@ const currentPath = Astro.url.pathname;
             
       <div class="text-center xl:px-[12.5%] xl:mb-[40px] xs:mb-[75px] xs:px-[3.85%]  xl:bg-none">
           <h4 class="headings xl:h4 xs:h4 text-white-pure xl:mb-[80px] xs:mb-[80px]">Faculty & Staff</h4>
-          <FacultyAndStaff client:only />
+          <FacultyAndStaff client:only="react" />
       </div>
 
   </div>

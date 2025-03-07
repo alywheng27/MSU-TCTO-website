@@ -285,7 +285,7 @@
 }
 
 .hero-campus-img {
-    background: url('../../../public/images/the-campus.png');
+    background: url('/images/campus-life.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -302,7 +302,7 @@
 
 
 .campuslife-bg-img {
-    background: linear-gradient(0deg, rgba(16, 31, 54, 0.4), rgba(16, 31, 54, 0.4)), url('../../../public/images/campus-life.png');
+    background: linear-gradient(0deg, rgba(16, 31, 54, 0.4), rgba(16, 31, 54, 0.4)), url('/images/campus-life.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -310,7 +310,7 @@
 }
 
 .home-fold-06-gb-img {
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5) ), url('../../../public/images/fold-06.png');
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5) ), url('/images/fold-06.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

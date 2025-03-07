@@ -19,7 +19,7 @@ const Dropdown = ({ title, items, icon }) => {
     <li className='py-[15px] dropdown dropdown-1'>
       <a href="#" className='flex xs:justify-center xl:justify-start items-center'>
         {icon && <span className="mr-2">{icon}</span>}
-        {title} <img src="../../public/down-arrow2-svgrepo-com.svg" className='ml-2 float-right' width={16} alt="" />
+        {title} <img src="/down-arrow2-svgrepo-com.svg" className='ml-2 float-right' width={16} alt="" />
       </a>
       <ul className={`mt-[15px] dropdown-menu lvl-one`}>
         {items.map((item, index) => (
