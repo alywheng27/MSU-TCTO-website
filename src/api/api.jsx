@@ -1,7 +1,8 @@
 import { useSanityClient, groq } from 'astro-sanity';
 import { createImageBuilder } from 'astro-sanity';
-import sanityClient from '@sanity/client'
-const client = sanityClient ({
+// import sanityClient from '@sanity/client'
+import { createClient } from "@sanity/client";
+const client = createClient ({
   projectId: "w8lfrsa6",
   dataset: "production",
   apiVersion: '2021-03-25',
