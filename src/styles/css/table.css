@@ -175,5 +175,41 @@
       display: none;
     }
   }
+
+  table {
+    border-spacing: 0;
+    width: 100%;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 12px;
+  }
+  
+  th {
+    background-color: #800000; /* MSU Maroon */
+    color: #fff;
+  }
+  
+  td {
+    background-color: #fff;
+  }
+  
+  tr:hover td {
+    background-color: #f3f3f3;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #ffffff;
+    transition: color 0.3s ease;
+  }
+  
+  a:hover {
+    color: #d4af37; /* MSU Gold */
+  }
+
   
   
