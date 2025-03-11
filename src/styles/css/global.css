@@ -4,13 +4,14 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 *,
 *::before,
 *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    
     
 
 }
@@ -284,7 +285,7 @@
 }
 
 .hero-campus-img {
-    background: url('../../../public/images/the-campus.png');
+    background: url('/images/campus-life.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -301,7 +302,7 @@
 
 
 .campuslife-bg-img {
-    background: linear-gradient(0deg, rgba(16, 31, 54, 0.4), rgba(16, 31, 54, 0.4)), url('../../../public/images/campus-life.png');
+    background: linear-gradient(0deg, rgba(16, 31, 54, 0.4), rgba(16, 31, 54, 0.4)), url('/images/campus-life.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -309,7 +310,7 @@
 }
 
 .home-fold-06-gb-img {
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5) ), url('../../../public/images/fold-06.png');
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5) ), url('/images/fold-06.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -443,7 +444,7 @@
     font-size: 16px;
     cursor: pointer;
     padding-right: 25px; /* Add padding to the right for the arrow icon */
-    background: url('arrow-down.png') no-repeat right center;
+
 }
 
 .dropdown-program option {
@@ -538,41 +539,7 @@ input[type="text"] {
   }
   
   /* Table Styling */
-  table {
-    border-spacing: 0;
-    width: 100%;
-    font-size: 1rem;
-    color: #333;
-  }
-  
-  th, td {
-    text-align: left;
-    padding: 12px;
-  }
-  
-  th {
-    background-color: #800000; /* MSU Maroon */
-    color: #fff;
-  }
-  
-  td {
-    background-color: #fff;
-  }
-  
-  tr:hover td {
-    background-color: #f3f3f3;
-  }
-  
-  a {
-    text-decoration: none;
-    color: #ffffff;
-    transition: color 0.3s ease;
-  }
-  
-  a:hover {
-    color: #d4af37; /* MSU Gold */
-  }
-
+ 
   
   input[type="text"] {
     font-size: 1rem;
@@ -847,6 +814,13 @@ a {
   }
 }
 
+@media (max-width: 640px) {
+  .table-cell {
+    padding: 8px;
+    font-size: 14px;
+  }
+}
+
 .download-img:hover {
   animation: bounceDownload 0.5s ease-in-out;
 }
@@ -861,3 +835,33 @@ a {
 .shadow-lg {
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
+.filter-dropdown {
+  appearance: none;
+  background-color: #ffffff;
+  color: white;
+  border: 1px solid #555;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s;
+  width: 100%;
+  color: #111111;
+}
+
+.filter-dropdown:hover {
+  border-color: #3db2f6;
+}
+
+.filter-dropdown:focus {
+  outline: none;
+  border-color: #00bfff;
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+}
+
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+}
+

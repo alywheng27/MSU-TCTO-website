@@ -1,0 +1,25 @@
+/* Add this to your CSS file or style tag */
+.transition-all {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .hover-scale {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
