@@ -1,26 +1,24 @@
 import React, { useEffect, useState } from 'react';
-
-// import Swiper core and required modules
-import { Navigation, Pagination, Autoplay, Scrollbar, A11y } from 'swiper/modules';
-
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-
-import { urlForImage } from '../api/api';
 import { getBanner } from '../api/api';
 
 export default function MySwiper() {
-  const [banner, setbanner] = useState([]);
-  
+  const [banner, setBanner] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
-        const hold = await getBanner();
-        setbanner(hold);
+      try {
+        const data = await getBanner();
+        console.log('Banner Data:', data); // Debugging: Log fetched data
+        setBanner(data);
+      } catch (error) {
+        console.error('Error fetching banner data:', error); // Debugging: Log errors
+      }
     };
 
     fetchData();
@@ -28,46 +26,39 @@ export default function MySwiper() {
 
   return (
     <Swiper
-    // install Swiper modules
-    modules={[Navigation, Pagination, Autoplay]}
-    spaceBetween={25}
-    slidesPerView={1}
-    slidesPerGroup={1}
-    pagination={{ 
-      clickable: true,
-      renderBullet: function () {
-      return '<span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span>';
-    }, }}
-    // navigation={{nextEl: '.swiper-button-next', prevEl:'.swiper-button-prev'}}
-    // scrollbar={{ draggable: true }}
-    onSwiper={(swiper) => {}}
-    onSlideChange={() => {}}
-    loop={true}
-    autoplay={{
+      modules={[Navigation, Pagination, Autoplay]}
+      spaceBetween={25}
+      slidesPerView={1}
+      slidesPerGroup={1}
+      pagination={{
+        clickable: true,
+        renderBullet: function (index, className) {
+          return `<span class="${className}"></span>`;
+        },
+      }}
+      loop={banner.length >= 3} // Enable loop only if there are 3 or more slides
+      autoplay={{
         delay: 5000,
         disableOnInteraction: false,
-    }}
-    // fade = {true}
-    // centeredSlides={true}
-    // grabCursor={true}
-    
+      }}
+      onSwiper={(swiper) => console.log('Swiper instance:', swiper)} // Debugging: Log Swiper instance
+      onSlideChange={() => console.log('Slide changed')} // Debugging: Log slide change
     >
-      <SwiperSlide >
-      <div className='z-0'>
-        <img src="/images/banner/banner1.jpg"></img>
+      {/* Static Slide */}
+      <SwiperSlide>
+        <div className="z-0">
+          <img src="/images/banner/banner1.jpg" alt="Banner 1" />
         </div>
       </SwiperSlide>
-      {
-        banner.map((ban, index) => (
-          <SwiperSlide key={index} className='z-0' >
-           
-           <div className='z-0'>
-            <img src={ ban.mainImage.asset.url }></img>
-            </div>
-          </SwiperSlide>
-        ))
-      }
-    </Swiper>
 
+      {/* Dynamic Slides from API */}
+      {banner.map((ban, index) => (
+        <SwiperSlide key={index} className="z-0">
+          <div className="z-0">
+            <img src={ban.mainImage.asset.url} alt={`Banner ${index + 2}`} />
+          </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
   );
-};
+}

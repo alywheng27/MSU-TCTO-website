@@ -1,9 +1,9 @@
 import { defineConfig } from 'astro/config';
-import react from "@astrojs/react";
-import tailwind from "@astrojs/tailwind";
+import react from '@astrojs/react';
+import tailwind from '@astrojs/tailwind';
 import sanity from "astro-sanity";
+import netlify from "@astrojs/netlify";  // ✅ Correct import
 
-import netlify from "@astrojs/netlify/functions";
 
 // https://astro.build/config
 export default defineConfig({

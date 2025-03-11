@@ -1,3 +1,4 @@
+
 <div class="bg-msu-deep-ocean text-white-pure justify-center xl:px-[12.5%] xs:px-[3.85%] xl:pt-20 xs:pt-10">
 	<div class="flex flex-col justify-center items-center text-center">
 		<img src="/images/MSU Seal New (Official).png" alt="" class="xl:h-[170px] xs:h-[127px] mb-10"></img>
@@ -73,14 +74,27 @@
 	
 	<div class="flex flex-col justify-center items-center xl:mt-[55px] xs:mt-[45px] pb-10">
 		<div class="flex xl:flex-row xs:flex-col">
-			<p class="paragraph p2 text-center text-white"><a  href="https://www.facebook.com/msutcto">© 2023  Mindanao State University Tawi-Tawi College of Technology and Oceanography All rights reserved.</a></p>
+			<p class="paragraph p2 text-center text-white">
+				<a href="https://www.facebook.com/msutcto">
+				  © <span id="currentYear"></span> Mindanao State University Tawi-Tawi College of Technology and Oceanography.
+				</a>
+			  </p>
 
 		</div>
 		<div>
-			<!-- <p class="paragraph p2 text-center text-charcoal mt-3">All rights reserved.</p> -->
+			<p class="paragraph p2 text-center text-charcoal mt-3 text-white">All rights reserved.</p>
 		</div>
 			
 			
 	</div>
 
 </div>
+
+
+
+<script>
+	// Get the current year
+	const currentYear = new Date().getFullYear();
+	// Insert the current year into the span with id "currentYear"
+	document.getElementById('currentYear').textContent = currentYear;
+  </script>

@@ -1,9 +1,11 @@
 import { useSanityClient, groq } from 'astro-sanity';
 import { createImageBuilder } from 'astro-sanity';
-import sanityClient from "@sanity/client"
-const client = sanityClient ({
+// import sanityClient from '@sanity/client'
+import { createClient } from "@sanity/client";
+const client = createClient({
   projectId: "w8lfrsa6",
   dataset: "production",
+  apiVersion: '2021-03-25',
   useCdn: true
 });
 
@@ -872,11 +874,14 @@ export async function getFacultyAndStaff(college) {
     name,
     teachingLevel,
     advisory,
+    educations[]->{title}, // Fetch nested fields if educations is an array of objects
     yearStarted,
     image{
       asset->,
     },
     college->{college},
+    researchLink,
+
   }`;
 
   const gazette = await client.fetch(query);
@@ -898,14 +903,14 @@ export async function getBidding() {
   return articles;
 }
 
-export async function getBanner() {
-  const query = groq`*[_type == "banner"] | order(title desc){
-    title,
-    mainImage{
-      asset->,
-    },
-  }`;
 
-  const banner = await client.fetch(query);
-  return banner;
-}
+export const getBanner = async () => {
+  const query = `*[_type == "banner"] | order(title desc) {
+    title,
+    mainImage {
+      asset->
+    }
+  }`;
+  const data = await client.fetch(query);
+  return data;
+};
