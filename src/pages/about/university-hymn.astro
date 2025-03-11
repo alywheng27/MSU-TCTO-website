@@ -12,33 +12,24 @@ const currentPath = Astro.url.pathname;
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
 	<main>
 		<Navbar path={currentPath} client:visible />
-    <div id="hymn" class="bg-white-pure flex flex-col items-center xl:px-[358px] xs:px-[44px] gap-[80px] " >
-      <div class="">
-          <h4 class="headings text-msu-maroon h3 mt-[80px] text-center">The MSU Hymn</h4>
-          <figure>
-              <audio controls class="xs:mx-[44px] xl:h-[60px] xs:h-[50px] xl:w-[720px] xs:w-[318px] xs:mt-[50px]">
+    <div id="hymn" class="bg-white-pure flex flex-col items-center px-4 sm:px-6 md:px-12 lg:px-24 xl:px-[358px] gap-10 md:gap-20">
+      <div class="w-full text-center">
+          <h4 class="headings text-msu-maroon h3 mt-10 md:mt-20">The MSU Hymn</h4>
+          <figure class="mt-5">
+              <audio controls class="w-full max-w-lg md:max-w-xl lg:max-w-2xl h-12">
                   <source src="/audio/himno_tcto.mp3" type="audio/mpeg">
               </audio>
           </figure>
       </div>
-      <div class="flex xs:flex-col xl:flex-row xl:gap-[100px] xs:gap-[40px] mb-[130px]"> 
-          <div class="">
-              <div class="video-wrapper">
-                  <!-- <iframe class="flex xs:mx-[44px] xl:mb-[90px] xs:mb-[74px] rounded-[40px] xl:w-[721px] xs:w-[323px] xl:h-[490px] xs:h-[225px]" 
-                      src="https://www.youtube.com/embed/p4VyE0-Vnrs?autoplay=0&mute=0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                  </iframe> -->
-                 
-
-                  <!-- <figure>
-                      <audio controls class="xs:mx-[44px] xl:h-[60px] xs:h-[50px] xl:w-[720px] xs:w-[318px]">
-                          <source src="/audio/himno_tcto.mp3" type="audio/mpeg">
-                      </audio>
-                  </figure> -->
+      <div class="flex flex-col md:flex-row md:gap-12 lg:gap-24 w-full items-center">
+          <div class="w-full md:w-1/2 flex justify-center">
+              <div class="video-wrapper w-full max-w-md md:max-w-lg lg:max-w-xl">
+                  <!-- Responsive iframe or video player can be added here -->
               </div>
           </div>
 
-          <div class="">
-              <p class="paragraph xl:p1 xs:p2 w-[400px] text-black-pure">
+          <div class="w-full md:w-1/2">
+              <p class="paragraph p-4 md:p-6 text-black-pure text-center md:text-left">
                 Silahis ang katulad mong
                 nagsabog ng liwanag
                 <br> <br>
@@ -68,10 +59,9 @@ const currentPath = Astro.url.pathname;
 
                 Dakilang paaralan
                 Pamantasang Mindanao.
-            </p>
+              </p>
           </div>
       </div>  
-      
     </div>
 
 <!-- FooterNaV -->
@@ -82,7 +72,5 @@ const currentPath = Astro.url.pathname;
 		<Footer />
 <!-- end Footer -->
 
-
     </main>
-	
 </Layout>
