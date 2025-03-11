@@ -111,7 +111,7 @@ const Navbar = ({ path }) => {
                   title="Home"
                   icon={<FaHome />}
                   items={[
-                    { link: "/", label: "Home" },
+                    { link: "/", label: "Overview" },
                   ]}
                 />
                 <Dropdown
