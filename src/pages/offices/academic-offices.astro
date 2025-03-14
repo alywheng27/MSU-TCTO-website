@@ -17,32 +17,32 @@ const currentPath = Astro.url.pathname;
 const academicOffices = [
   {
     name: "COLLEGE OF ARTS AND SCIENCES",
-    logo: "../../public/images/College Logo/LOGO CAS.png", // Replace with actual path
+    logo: "/images/College Logo/LOGO CAS.png", // Replace with actual path
     link: "/programs/cas", // Replace with actual link
   },
   {
     name: "COLLEGE OF ISLAMIC & ARABIC STUDIES",
-    logo: "../../public/images/College Logo/LOGO CIAS.png", // Replace with actual path
+    logo: "/images/College Logo/LOGO CIAS.png", // Replace with actual path
     link: "/programs/cias", // Replace with actual link
   },
   {
     name: "COLLEGE OF EDUCATION",
-    logo: "../../public/images/College Logo/LOGO COED.png", // Replace with actual path
+    logo: "/images/College Logo/LOGO COED.png", // Replace with actual path
     link: "/programs/coed", // Replace with actual link
   },
   {
     name: "COLLEGE OF FISHERIES",
-    logo: "../../public/images/College Logo/LOGO COF.png", // Replace with actual path
+    logo: "/images/College Logo/LOGO COF.png", // Replace with actual path
     link: "/programs/cof", // Replace with actual link
   },
   {
     name: "INSTITUTE OF INFORMATION & COMMUNICATIONS TECHNOLOGY",
-    logo: "../../public/images/College Logo/LOGO IICT.png", // Replace with actual path
+    logo: "/images/College Logo/LOGO IICT.png", // Replace with actual path
     link: "/programs/iict", // Replace with actual link
   },
   {
     name: "INSTITUTE OF OCEANOGRAPHY & ENVIRONMENTAL SCIENCE",
-    logo: "../../public/images/College Logo/LOGO IOES.png", // Replace with actual path
+    logo: "/images/College Logo/LOGO IOES.png", // Replace with actual path
     link: "/programs/ioes", // Replace with actual link
   },
 ];
@@ -53,7 +53,7 @@ const academicOffices = [
 		<Navbar path={currentPath} client:visible />
 
 		<!-- Parallax Background Section -->
-		<div class="parallax-section bg-fixed bg-cover bg-center py-20" style="background-image: url('/images/parallax-bg.jpg');">
+		<div class="parallax-section bg-fixed bg-cover bg-center py-20" style="background-image: url('/images/landing_page4.png');">
 			<div class="text-center px-4 sm:px-6 lg:px-8">
 				<h3 class="headings text-4xl md:text-5xl font-bold text-white mb-10">Academic Offices</h3>
 				<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
