@@ -8,94 +8,124 @@ import FooterNav from "../../components/FooterNav.astro";
 import Footer from "../../components/Footer.astro";
 import FacultyAndStaff from "../../components/FacultyAndStaff";
 
-
-
 import '../../styles/css/global.css';
-// import '../../styles/css/facultycard.css';
-
-// import DataTableComponent from '../../components/DataTableComponent';
-
 import ReactTable from '../../components/ReactTable';
-
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
-// import FacultySearch from '../../components/FacultySearch';
-
 
 const currentPath = Astro.url.pathname;
 
-// Sample data for the table
-// const data = [
-//   { name: 'John Doe', age: 28, occupation: 'Engineer', profilePicture: 'https://randomuser.me/api/portraits/men/1.jpg' },
-//   { name: 'Jane Smith', age: 34, occupation: 'Designer', profilePicture: 'https://randomuser.me/api/portraits/women/1.jpg' },
-//   { name: 'Bob Brown', age: 45, occupation: 'Manager', profilePicture: 'https://randomuser.me/api/portraits/men/2.jpg' },
-//   { name: 'Alice Johnson', age: 22, occupation: 'Developer', profilePicture: 'https://randomuser.me/api/portraits/women/2.jpg' },
-//   { name: 'Michael White', age: 29, occupation: 'Chef', profilePicture: 'https://randomuser.me/api/portraits/men/3.jpg' },
-//   { name: 'Sarah Lee', age: 31, occupation: 'Teacher', profilePicture: 'https://randomuser.me/api/portraits/women/3.jpg' },
-//   { name: 'David Kim', age: 38, occupation: 'Doctor', profilePicture: 'https://randomuser.me/api/portraits/men/4.jpg' },
-//   { name: 'Emily Davis', age: 26, occupation: 'Nurse', profilePicture: 'https://randomuser.me/api/portraits/women/4.jpg' },
-//   { name: 'Chris Green', age: 41, occupation: 'Pilot', profilePicture: 'https://randomuser.me/api/portraits/men/5.jpg' },
-//   { name: 'Anna Black', age: 24, occupation: 'Writer', profilePicture: 'https://randomuser.me/api/portraits/women/5.jpg' },
-//   { name: 'James Young', age: 33, occupation: 'Photographer', profilePicture: 'https://randomuser.me/api/portraits/men/6.jpg' },
-//   { name: 'Olivia Brown', age: 27, occupation: 'Architect', profilePicture: 'https://randomuser.me/api/portraits/women/6.jpg' },
-//   { name: 'Henry White', age: 42, occupation: 'Lawyer', profilePicture: 'https://randomuser.me/api/portraits/men/7.jpg' },
-//   { name: 'Chloe Martin', age: 35, occupation: 'Therapist', profilePicture: 'https://randomuser.me/api/portraits/women/7.jpg' },
-//   { name: 'Jake Wilson', age: 37, occupation: 'Firefighter', profilePicture: 'https://randomuser.me/api/portraits/men/8.jpg' },
-//   { name: 'Lily Scott', age: 30, occupation: 'Social Worker', profilePicture: 'https://randomuser.me/api/portraits/women/8.jpg' },
-//   { name: 'Samuel Clark', age: 28, occupation: 'Scientist', profilePicture: 'https://randomuser.me/api/portraits/men/9.jpg' },
-//   { name: 'Sophia Miller', age: 33, occupation: 'Librarian', profilePicture: 'https://randomuser.me/api/portraits/women/9.jpg' },
-//   { name: 'Ryan Moore', age: 39, occupation: 'Consultant', profilePicture: 'https://randomuser.me/api/portraits/men/10.jpg' },
-//   { name: 'Isabella Perez', age: 25, occupation: 'Musician', profilePicture: 'https://randomuser.me/api/portraits/women/10.jpg' },
-// ];
-
+// Academic Offices Data
+const academicOffices = [
+  {
+    name: "COLLEGE OF ARTS AND SCIENCES",
+    logo: "../../public/images/College Logo/LOGO CAS.png", // Replace with actual path
+    link: "/programs/cas", // Replace with actual link
+  },
+  {
+    name: "COLLEGE OF ISLAMIC & ARABIC STUDIES",
+    logo: "../../public/images/College Logo/LOGO CIAS.png", // Replace with actual path
+    link: "/programs/cias", // Replace with actual link
+  },
+  {
+    name: "COLLEGE OF EDUCATION",
+    logo: "../../public/images/College Logo/LOGO COED.png", // Replace with actual path
+    link: "/programs/coed", // Replace with actual link
+  },
+  {
+    name: "COLLEGE OF FISHERIES",
+    logo: "../../public/images/College Logo/LOGO COF.png", // Replace with actual path
+    link: "/programs/cof", // Replace with actual link
+  },
+  {
+    name: "INSTITUTE OF INFORMATION & COMMUNICATIONS TECHNOLOGY",
+    logo: "../../public/images/College Logo/LOGO IICT.png", // Replace with actual path
+    link: "/programs/iict", // Replace with actual link
+  },
+  {
+    name: "INSTITUTE OF OCEANOGRAPHY & ENVIRONMENTAL SCIENCE",
+    logo: "../../public/images/College Logo/LOGO IOES.png", // Replace with actual path
+    link: "/programs/ioes", // Replace with actual link
+  },
+];
 ---
-
-
-
-
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
 	<main>
-		<Navbar path={currentPath} client:visible />       
-    
+		<Navbar path={currentPath} client:visible />
 
-         
+		<!-- Parallax Background Section -->
+		<div class="parallax-section bg-fixed bg-cover bg-center py-20" style="background-image: url('/images/parallax-bg.jpg');">
+			<div class="text-center px-4 sm:px-6 lg:px-8">
+				<h3 class="headings text-4xl md:text-5xl font-bold text-white mb-10">Academic Offices</h3>
+				<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+					{academicOffices.map((office) => (
+						<div class="office-card bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2">
+							<a href={office.link} class="block">
+								<img
+									src={office.logo}
+									alt={`${office.name} Logo`}
+									class="w-24 h-24 mx-auto mb-4 object-contain transition-transform duration-300 hover:scale-110"
+								/>
+							</a>
+							<p class="paragraph text-lg font-semibold text-charcoal">{office.name}</p>
+						</div>
+					))}
+				</div>
+			</div>
+		</div>
 
+		<!-- FooterNav -->
+		<FooterNav />
 
-    <div class="text-center xs:px-[66px]">
-      <h3 class="headings xl:h3 xs:h4 text-msu-rusty-red ">Academic Offices</h3>
-      <div class="flex flex-col gap-[20px] justify-center xl:ml-0 xs:ml-0 xl:mt-0 xs:mt-10 pt-10 ">
-          <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">COLLEGE OF ARTS AND SCIENCES</p>
-          <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">COLLEGE OF ISLAMIC & ARABIC STUDIES</p>
-          <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">COLLEGE OF EDUCATION</p>
-          <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">COLLEGE OF FISHERIES</p>
-          <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">INSTITUTE OF INFORMATION & COMMUNICATIONS TECHNOLOGY</p>
-          <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">INSTITUTE OF OCEANOGRAPHY & ENVIRONMENTAL SCIENCE</p>
-          
-      </div>
-     
-                <!-- <ReactTable /> -->
-                <!-- <div  class="App">
-                  <ReactTable data={data} /> -->
-                    <!-- <DataTableComponent columns={columns} data={data} /> -->
-                    <!-- <FacultySearch facultyList={facultyList} /> -->
-                  </div>
-
-          
-
-            
-           
-        </div>
-<!-- end Academic Offices -->
-
-<!-- FooterNaV -->
-        <FooterNav />
-<!-- end FooterNaV -->
-
-<!-- Footer -->
+		<!-- Footer -->
 		<Footer />
-<!-- end Footer -->
-
 	</main>
-	
 </Layout>
+
+<style>
+	/* Parallax Effect */
+	.parallax-section {
+		background-attachment: fixed;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		position: relative;
+	}
+
+	/* Overlay for Better Readability */
+	.parallax-section::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(0, 0, 0, 0.4); /* Dark overlay for better contrast */
+		z-index: 1;
+	}
+
+	.parallax-section > * {
+		position: relative;
+		z-index: 2;
+	}
+
+	/* Office Card Enhancements */
+	.office-card {
+		transition: all 0.3s ease;
+	}
+
+	.office-card:hover {
+		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+	}
+
+	/* Responsive Adjustments */
+	@media (max-width: 768px) {
+		.office-card {
+			padding: 1.5rem;
+		}
+
+		.office-card img {
+			width: 20%;
+			height: 20%;
+		}
+	}
+</style>
