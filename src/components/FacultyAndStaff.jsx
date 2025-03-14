@@ -275,7 +275,7 @@ const FacultyAndStaff = () => {
               )}
 
             {selectedPerson.educations && (
-              <div className="flex items-start space-x-4">
+              <div className="flex items-start space-x-4 justify-center items-center z-50">
                 <span className="text-green-500">
                   {/* <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -305,7 +305,7 @@ const FacultyAndStaff = () => {
             )}
 
               {selectedPerson.email && (
-                <div className="flex items-start space-x-4">
+                <div className="flex items-start space-x-4 justify-center items-center z-50">
                   <span className="text-yellow-500">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

@@ -36,7 +36,11 @@ const threeLatestAnnualReport = await get3LatestAnnualReport();
 	
 	<main>
 		<Navbar path={currentPath} client:visible />
-    <div class="relative bg-black-pure w-full xl:px-[12.5%] xs:px-[3.85%] py-10 z-0">
+    <div class="relative bg-black-pure w-full xl:px-[12.5%] xs:px-[3.85%] py-10 z-0
+	"  style="background-image: url('/images/bgpage.jpg');   
+	background-size: cover;
+	background-position: center 100%;
+	background-repeat: no-repeat;">
       <CarouselMain client:visible />
     </div>
 		<!-- <div class="flex xl:flex-row xs:flex-col justify-center xl:bottom-[80px] xl:h-[640px] xl:mx-[12.5%] xs:mx-0 relative">
