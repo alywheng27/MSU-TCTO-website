@@ -112,6 +112,7 @@ const Navbar = ({ path }) => {
                   icon={<FaHome />}
                   items={[
                     { link: "/", label: "Overview" },
+                    { link: "#office-feedback", label: "Office Feedback" }
                   ]}
                 />
                 <Dropdown

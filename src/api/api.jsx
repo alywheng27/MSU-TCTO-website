@@ -401,17 +401,21 @@ export async function get3UpcomingEvents() {
 
 export async function get4UpcomingEvents() {
   const query = groq`*[_type == "calendar" && date >= now()] | order(date asc)[0..3] {
-    title,
-    date,
-    body[]{
-      children[]{
-        text
-      },
-      asset->{url},
-    },
-    semester->{semester},
-    holiday->{holiday},
-  }`;
+  title,
+  date,
+  body[]{
+    ...,
+    children[]{ text }
+  },
+  "image": asset->url,
+  semester->{
+    title
+  },
+  holiday->{
+    name
+  }
+}
+`;
 
   const fourUpcomingEvents = await useSanityClient().fetch(query);
   return fourUpcomingEvents;
