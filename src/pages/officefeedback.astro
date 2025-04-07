@@ -1,0 +1,105 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from "../components/Navbar";
+import ChancellorMessage from "../components/ChancellorMessage.astro";
+import MainVideo from "../components/MainVideo.astro";
+import FooterNav from "../components/FooterNav.astro";
+import Footer from "../components/Footer.astro";
+import CarouselMain from "../components/CarouselMain";
+import heromain from "../components/HeroMainHeading";
+
+
+import '../styles/css/global.css';
+
+const currentPath = Astro.url.pathname;
+
+import { urlForImage } from '../api/api';
+import { getYear } from '../js/date';
+import { getWordMonth } from '../js/date';
+import { getDay } from '../js/date';
+
+import { get3LatestArticle } from '../api/api';
+import { getLatestFeaturedArticle } from '../api/api';
+import { get4UpcomingEvents } from '../api/api';
+import { get3LatestGazette } from '../api/api';
+import { get3LatestAnnualReport } from '../api/api';
+
+const threeLatestArticles = await get3LatestArticle();
+const latestFeaturedArticle = await getLatestFeaturedArticle();
+const fourUpcomingEvents = await get4UpcomingEvents();
+const threeLatestGazette = await get3LatestGazette();
+const threeLatestAnnualReport = await get3LatestAnnualReport();
+---
+
+<Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
+
+	
+	<main>
+		<Navbar path={currentPath} client:visible />
+
+		
+
+		
+	
+
+
+
+
+<!-- Add this section before the Chancellor Message -->
+<div id="office-feedback" class="bg-msu-deep-ocean xl:px-[12.5%] xs:px-[3.85%] py-20">
+    <div class="max-w-3xl mx-auto px-5 text-center">
+        <!-- Professional heading with subtle decoration -->
+        <div class="mb-6">
+            <h1 class="headings h2 text-white-pure mb-3">Office Feedback</h1>
+            <div class="w-16 h-1 bg-msu-maroon mx-auto"></div>
+        </div>
+        
+        <!-- Concise, professional description -->
+        <p class="paragraph p1 text-titanium mb-10 leading-relaxed">
+            Your feedback is essential in helping us improve our office services and environment. 
+            We appreciate you taking a few minutes to share your experience.
+        </p>
+        
+        <!-- Professional button with subtle hover effect -->
+        <a href="https://forms.gle/PsjMhe56ree4uZoD7" 
+           target="_blank"
+           class="inline-block bg-msu-maroon text-white-pure headings h5 px-10 py-3 rounded 
+                  hover:bg-msu-maroon-dark transition-colors duration-200
+                  focus:outline-none focus:ring-2 focus:ring-white-pure focus:ring-opacity-50">
+            Complete Feedback Form
+        </a>
+        
+        <!-- Professional footnote -->
+        <p class="paragraph p3 text-titanium mt-8 opacity-80">
+            All responses will remain confidential.
+        </p>
+    </div>
+</div>
+
+
+<!-- fold 06 -->
+		<MainVideo />
+
+	
+		<!-- <div class="google-form-container">
+			<iframe 
+			  src="https://docs.google.com/forms/d/e/1FAIpQLSfXYmBoB1ZQ9VLVOWq11YODOTFQQfiZGanv7Fvv2EcpO8qq9g/viewform?embedded=true" 
+			  frameborder="0" 
+			  marginheight="0" 
+			  marginwidth="0" 
+			  allowfullscreen>
+			  Loading…
+			</iframe>
+		  </div> -->
+		<!-- <div id="ff-compose"></div>
+		<script async defer src="https://formfacade.com/include/115061745318006024813/form/1FAIpQLSfXYmBoB1ZQ9VLVOWq11YODOTFQQfiZGanv7Fvv2EcpO8qq9g/classic.js?div=ff-compose"></script> -->
+<!-- FooterNaV -->
+		<FooterNav />
+<!-- end FooterNaV -->
+<!-- Footer -->
+		<Footer />
+<!-- end Footer -->
+
+	</main>
+	
+</Layout>
