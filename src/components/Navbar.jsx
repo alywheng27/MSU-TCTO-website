@@ -275,7 +275,7 @@ const Navbar = ({ path }) => {
                 alt="MSU Seal" 
                 className={`transition-all duration-300 ${scrolled ? 'h-12' : 'h-16'} mr-4`} 
               />
-              <div>
+              <div className='xs:hidden xl:block'>
                 <img
                   src="/images/TAWI-TAWI COLLEGE OF TECHNOLOGY AND OCEANOGRAPHY.png"
                   alt="MSU Logo"
