@@ -1,138 +1,190 @@
 ---
+// Imports
 import Layout from '../../layouts/Layout.astro';
 import Navbar from "../../components/Navbar";
 import FooterNav from "../../components/FooterNav.astro";
 import Footer from "../../components/Footer.astro";
 import '../../styles/css/global.css';
 import PageSearch from "../../components/search/PageSearch"
-
-import { getYear } from '../../js/date';
-import { get3LettersMonth } from '../../js/date';
-import { getDay } from '../../js/date';
-
-const currentPath = Astro.url.pathname;
-
-const { search } = Astro.params;
-const splitSearch = search.split('/')
-import { getSearchArticleCount } from '../../api/api';
-import { getSearchArticle } from '../../api/api';
 import SearchForm from '../../components/search/SearchForm';
+import { getYear, get3LettersMonth, getDay } from '../../js/date';
+import { getSearchArticleCount, getSearchArticle } from '../../api/api';
 
+// Data Fetching
+const currentPath = Astro.url.pathname;
+const { search } = Astro.params;
+const splitSearch = search.split('/');
 const maxCount = await getSearchArticleCount(splitSearch[0], splitSearch[1]);
 const articles = await getSearchArticle(splitSearch[0], splitSearch[1], splitSearch[2]);
+
+// Metadata
+const pageTitle = `"${splitSearch[0]}" Search Results | MSU TCTO`;
+const pageDescription = `Find ${maxCount.length} results for ${splitSearch[0]} at MSU Tawi-Tawi College`;
 ---
 
-<Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
-	<div>
-		<Navbar path={currentPath} client:visible />
+<Layout title={pageTitle} description={pageDescription}>
+  <!-- Modern White Theme -->
+  <div class="min-h-screen flex flex-col bg-white">
+    <Navbar path={currentPath} client:visible />
 
-        <div class='bg-black-pure h-[40px] xl:px-[12.5%] xs:px-[3.85%]'>
-            <p class="paragraph p2 py-[10px] text-titanium xl:block xs:hidden"><a href="/index">Home</a>   / Search </p>
+    <!-- Elegant Header -->
+    <header class="bg-msu-deep-ocean from-msu-crimson-ground to-msu-deep-ocean py-16">
+      <div class="container mx-auto px-6 text-center">
+        <h1 class="text-4xl font-bold text-white mb-4">Search Results</h1>
+        <div class="max-w-1xl mx-auto">
+          <SearchForm search={splitSearch[0]} />
         </div>
-<!-- search -->
-        <div class="bg-black-pure w-full xl:px-[12.5%]  xs:px-[3.5%] xl:flex-col xl:pt-[80px] xs:pt-[0px] xl:pb-[123px] xs:pb-[40px] ">
-            <div class="flex gap-[239px] justify-center">
+      </div>
+    </header>
 
-                <div class="flex w-[960px]">
-                  <div class="flex flex-col gap-[60px] ">
-                    <div class="flex flex-col ">   
-                      <div class="flex relative xl:mt-0 xs:mt-[15px] xl:w-fit xs:w-full xl:mb-[30px]">
-                          <SearchForm search={splitSearch[0]} />
-                      </div>
-              
-                      <div class="flex gap-[30px] mb-4">  
-                        <a href=`/search/${splitSearch[0]}/All` class=`paragraph p2 text-left xl:block xs:hidden ${ splitSearch[1] === undefined ? "text-msu-crimson-ground" : "text-titanium" }`>
-                            All
-                        </a> 
-                        <a href=`/search/${splitSearch[0]}/Events` class=`paragraph p2 text-left xl:block xs:hidden ${ splitSearch[1] === "Events" ? "text-msu-crimson-ground" : "text-titanium" }`>
-                            Events
-                        </a> 
-                        <a href=`/search/${splitSearch[0]}/News` class=`paragraph p2 text-left xl:block xs:hidden ${ splitSearch[1] === "News" ? "text-msu-crimson-ground" : "text-titanium" }`>
-                            News
-                        </a> 
-                        <a href=`/search/${splitSearch[0]}/Academics` class=`paragraph p2 text-left xl:block xs:hidden ${ splitSearch[1] === "Academics" ? "text-msu-crimson-ground" : "text-titanium" }`>
-                            Academics
-                        </a> 
-                        <a href=`/search/${splitSearch[0]}/Administrative` class=`paragraph p2 text-left xl:block xs:hidden ${ splitSearch[1] === "Administrative" ? "text-msu-crimson-ground" : "text-titanium" }`>
-                            Administrative
-                        </a> 
-                      </div>
-            
-                      <div class="flex gap-[50px]">  
-                          <p class="paragraph text-titanium p2 mb-[20px] text-left xl:block xs:hidden">
-                              { maxCount.length } results
-                          </p> 
-                          <!-- <p class="paragraph text-titanium p2 mb-[20px] text-left xl:block xs:hidden">
-                              Sort by date
-                          </p>  -->
-                      </div>
-                    </div>
-                    <div class="flex flex-col gap-[40px]">
-                      {
-                        articles.map((article) => (
-                          <div class="flex flex-col gap-[10px]">
-                              <a href={`/${article.slug.current}`}>
-                                  <h5 class="headings text-white-pure hover:text-msu-crimson-ground hover:underline h5 mb-[10px] text-left h-13 overflow-hidden">
-                                      { article.title }
-                                  </h5>     
-                              </a>
-                              <p class="paragraph text-titanium p2 text-left h-5 overflow-hidden">
-                                  { article.body[0].children[0].text }
-                              </p>
-                              <div class="flex gap-[20px]">
-                                  <p class="paragraph text-titanium p2 mb-[20px] text-left">
-                                      { article.category.category }
-                                  </p> 
-                                  <p class="paragraph text-titanium p2 mb-[20px] text-left">
-                                      { getYear(article.publishedAt) } { get3LettersMonth(article.publishedAt) } { getDay(article.publishedAt) }
-                                  </p> 
-                              </div>
-                          </div>
-                        ))
-                      }
-                    </div>
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-6 py-12">
+      <!-- Results Summary -->
+      <div class="flex justify-between items-center mb-8 border-b pb-6">
+        <p class="text-gray-600">
+          Showing <span class="font-semibold text-msu-crimson-ground">{maxCount.length}</span> results for 
+          <span class="font-semibold">"{splitSearch[0]}"</span>
+        </p>
+        
+        <!-- Category Filters -->
+        <div class="flex space-x-2">
+          <a 
+            href={`/search/${splitSearch[0]}/All`} 
+            class={`px-4 py-2 rounded-full text-sm font-medium ${!splitSearch[1] ? 'bg-msu-crimson-ground text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-700'}`}
+          >
+            All
+          </a>
+          <a 
+            href={`/search/${splitSearch[0]}/Events`} 
+            class={`px-4 py-2 rounded-full text-sm font-medium ${splitSearch[1] === "Events" ? 'bg-msu-crimson-ground text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-700'}`}
+          >
+            Events
+          </a>
+          <a 
+            href={`/search/${splitSearch[0]}/News`} 
+            class={`px-4 py-2 rounded-full text-sm font-medium ${splitSearch[1] === "News" ? 'bg-msu-crimson-ground text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-700'}`}
+          >
+            News
+          </a>
+          <a 
+            href={`/search/${splitSearch[0]}/Academics`} 
+            class={`px-4 py-2 rounded-full text-sm font-medium ${splitSearch[1] === "Academics" ? 'bg-msu-crimson-ground text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-700'}`}
+          >
+            Academics
+          </a>
+        </div>
+      </div>
 
-                    <PageSearch articles={articles} search={search} maxCount={maxCount.length} />
+      <!-- Search Results -->
+      {articles.length > 0 ? (
+        <div class="space-y-8">
+          {articles.map((article) => (
+            <article key={article._id} class="p-6 rounded-lg border border-gray-100 hover:shadow-md transition-shadow">
+              <div class="flex flex-col md:flex-row gap-6">
+                {article.image && (
+                  <div class="md:w-1/4">
+                    <img 
+                      src={article.image} 
+                      alt={article.title} 
+                      class="w-full h-48 object-cover rounded-lg"
+                      loading="lazy"
+                    />
+                  </div>
+                )}
+                <div class={`${article.image ? 'md:w-3/4' : 'w-full'}`}>
+                  <a href={`/${article.slug.current}`}>
+                    <h2 class="text-2xl font-bold text-gray-800 hover:text-msu-crimson-ground mb-2">
+                      {article.title}
+                    </h2>
+                  </a>
+                  <p class="text-gray-600 mb-4 line-clamp-2">
+                    {article.body[0].children[0].text}
+                  </p>
+                  <div class="flex flex-wrap items-center gap-4 text-sm">
+                    <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full">
+                      {article.category.category}
+                    </span>
+                    <span class="text-gray-500">
+                      {getYear(article.publishedAt)} {get3LettersMonth(article.publishedAt)} {getDay(article.publishedAt)}
+                    </span>
+                    <a 
+                      href={`/${article.slug.current}`} 
+                      class="ml-auto text-msu-crimson-ground font-medium hover:underline flex items-center"
+                    >
+                      Read more
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </a>
                   </div>
                 </div>
-
-                <!-- <div class="flex flex-col xl:block xs:hidden">
-                    <p class="paragraph text-titanium p1  mb-[30px] text-left">
-                        Related searches
-                    </p>
-                    <p class="paragraph text-titanium p2 mb-[20px] text-left">
-                        An article title
-                    </p>
-                    <p class="paragraph text-titanium p2 mb-[20px] text-left">
-                        Year 2020 gazette
-                    </p>
-                    <p class="paragraph text-titanium p2 mb-[20px] text-left">
-                        Photo gallery of the new build...
-                    </p>
-                    <p class="paragraph text-titanium p2 mb-[20px] text-left">
-                        History of the school
-                    </p>
-                    <p class="paragraph text-titanium p2 mb-[20px] text-left">
-                        Other related searches
-                    </p>
-                </div> -->
-            </div>
+              </div>
+            </article>
+          ))}
         </div>
-<!-- end search --> 
-
-
-<!-- FooterNaV -->
-        <FooterNav />
-<!-- end FooterNaV -->
-<!-- Footer -->
-		<Footer />
-<!-- end Footer -->
-                    
-    
+      ) : (
+        <!-- No Results State -->
+        <div class="text-center py-16">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 mx-auto text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <h2 class="text-2xl font-bold text-gray-700 mt-6 mb-2">No results found</h2>
+          <p class="text-gray-500 max-w-md mx-auto mb-8">
+            We couldn't find any matches for "{splitSearch[0]}". Try different keywords or check the suggestions below.
+          </p>
+          <div class="flex flex-wrap justify-center gap-3">
+            <a href="/news" class="px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full font-medium transition-colors">
+              Latest News
+            </a>
+            <a href="/events" class="px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full font-medium transition-colors">
+              Upcoming Events
+            </a>
+            <a href="/academics" class="px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full font-medium transition-colors">
+              Academic Programs
+            </a>
+          </div>
         </div>
+      )}
 
-
-
+      <!-- Pagination -->
+      {articles.length > 0 && (
+        <div class="mt-12">
+          <PageSearch articles={articles} search={search} maxCount={maxCount.length} />
+        </div>
+      )}
     </main>
-	
-</Layout>../../components/search/SearchedArticles../../components/search/PageSearch
+
+    <!-- Footer -->
+    <FooterNav />
+    <Footer />
+  </div>
+</Layout>
+
+<style is:global>
+    /* Custom scrollbar for modern browsers */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #61063b ; /* MSU crimson */
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #61063b ;
+  }
+
+  /* Smooth transitions */
+  a, button {
+    transition: all 0.2s ease;
+  }
+
+  /* Focus styles for accessibility */
+  a:focus, button:focus {
+    outline: 2px solid #8b0000;
+    outline-offset: 2px;
+  }
+</style>

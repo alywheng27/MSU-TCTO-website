@@ -4,67 +4,290 @@ import Navbar from "../../components/Navbar";
 import FooterNav from "../../components/FooterNav.astro";
 import Footer from "../../components/Footer.astro";
 import '../../styles/css/global.css';
+import '../../styles/css/globalanimate.css';
 
 const currentPath = Astro.url.pathname;
 ---
 
-<Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
-	<main>
-		<Navbar path={currentPath} client:visible />
-    <div id="hymn" class="bg-white-pure flex flex-col items-center px-4 sm:px-6 md:px-12 lg:px-24 xl:px-[358px] gap-10 md:gap-20 py-10">
-      <div class="w-full text-center">
-          <h4 class="headings text-msu-maroon text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mt-10 md:mt-20">The MSU Hymn</h4>
-          <figure class="mt-5 flex justify-center">
-              <audio controls class="w-full max-w-lg md:max-w-xl lg:max-w-2xl h-12">
-                  <source src="/audio/himno_tcto.mp3" type="audio/mpeg">
-              </audio>
-          </figure>
-      </div>
-    
+<Layout title="MSU Hymn | Tawi-Tawi College of Technology and Oceanography">
+    <main class="bg-white text-gray-900 font-sans antialiased">
+      <Navbar path={currentPath} client:visible />
 
-            <p class="paragraph p1 text-black-pure xl:max-w-[720px] xs:max-w-[325px] mt-10">
 
-                Silahis ang katulad mong
-                nagsabog ng liwanag
-                <br> <br>
-                Ng pag-asa't hangarin
-                ng pag-unlad.
-                <br> <br>
-
-                Ang pook ng Mindanao
-                tinanglaw at pinalad,
-                <br> <br>
-
-                Nang ika'y isilang
-                na dakila ang hangad.
-                <br> <br>
-
-                Ating ipagkapuri
-                Itong Pamantasan,
-                <br> <br>
-
-                Ang buhay at pag-ibig
-                sa kanya'y iaalay;
-                <br> <br>
-
-                Saan man naroroon
-                ay bigyang karangalan,
-                <br> <br>
-
-                Dakilang paaralan
-                Pamantasang Mindanao.
-              </p>
+          <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-msu-main-color to-msu-rusty-red/90 text-white py-40 overflow-hidden pt-[200px]">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1567359781514-3c964c02b32a?q=80&w=1932&auto=format&fit=crop')] bg-cover bg-center opacity-30"></div>
+        <div class="container mx-auto px-6 relative z-10 text-center">
+          <h1 class="headings text-5xl md:text-5xl font-bold mb-6 animate-fade-in-up">
+            The MSU Hymn
+          </h1>
+          <p class="text-xl max-w-2xl mx-auto animate-fade-in-up delay-100">
+            Official Hymn of Mindanao State University
+          </p>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-16 bg-white/10 backdrop-blur-sm"></div>
+      </section>
+  
+      
+      
+  
+      <!-- Hymn Player Section -->
+      <section class="py-16 md:py-24">
+        <div class="container mx-auto px-6 max-w-4xl">
+          <!-- Enhanced Audio Player with Progress Bar -->
+          <div class="bg-white rounded-2xl shadow-xl p-6 mb-12">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-lg font-semibold text-msu-main-color flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                </svg>
+                Now Playing
+              </h3>
+              <div class="text-sm text-gray-500">
+                <span id="current-time">0:00</span> / <span id="duration">0:45</span>
+              </div>
+            </div>
+            <audio id="hymn-audio" controls class="w-full audio-player">
+              <source src="/audio/himno_tcto.mp3" type="audio/mpeg">
+            </audio>
+            <div id="progress-bar" class="h-1 bg-gray-200 mt-2 rounded-full overflow-hidden">
+              <div id="progress" class="h-full bg-msu-main-color" style="width: 0%"></div>
+            </div>
           </div>
-      </div>  
-    </div>
+  
+          <!-- Lyrics Container with Perfect Sync -->
+          <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <div class="bg-gradient-to-r from-msu-main-color to-msu-dark-maroon text-white py-5 px-8">
+              <h2 class="text-2xl font-bold flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                </svg>
+                Lyrics Synchronized with Music
+              </h2>
+            </div>
+            
+            <div class="p-6 md:p-8">
+              <div id="lyrics-container" class="space-y-6 text-center">
+                <!-- Verse 1 (Timing adjusted for actual singing) -->
+                <div data-start="8" data-end="23" class="lyric-verse transition-all duration-300">
+                  <p class="text-xl md:text-2xl text-gray-700 mb-2">Silahis ang katulad mong</p>
+                  <p class="text-xl md:text-2xl text-gray-700">nagsabog ng liwanag</p>
+                </div>
+                
+                <!-- Verse 2 -->
+                <div data-start="24" data-end="36" class="lyric-verse transition-all duration-300">
+                  <p class="text-xl md:text-2xl text-gray-700 mb-2">Ng pag-asa't hangarin</p>
+                  <p class="text-xl md:text-2xl text-gray-700">ng pag-unlad.</p>
+                </div>
+                
+                <!-- Verse 3 -->
+                <div data-start="36" data-end="47" class="lyric-verse transition-all duration-300">
+                  <p class="text-xl md:text-2xl text-gray-700 mb-2">Ang pook ng Mindanao</p>
+                  <p class="text-xl md:text-2xl text-gray-700">tinanglaw at pinalad,</p>
+                </div>
+                
+                <!-- Verse 4 -->
+                <div data-start="48" data-end="59" class="lyric-verse transition-all duration-300">
+                  <p class="text-xl md:text-2xl text-gray-700 mb-2">Nang ika'y isilang</p>
+                  <p class="text-xl md:text-2xl text-gray-700">na dakila ang hangad.</p>
+                </div>
+                
+                <!-- Verse 5 -->
+                <div data-start="59" data-end="72" class="lyric-verse transition-all duration-300">
+                  <p class="text-xl md:text-2xl text-gray-700 mb-2">Ating ipagkapuri</p>
+                  <p class="text-xl md:text-2xl text-gray-700">Itong Pamantasan,</p>
+                </div>
+                
+                <!-- Verse 6 -->
+                <div data-start="72" data-end="82" class="lyric-verse transition-all duration-300">
+                  <p class="text-xl md:text-2xl text-gray-700 mb-2">Ang buhay at pag-ibig</p>
+                  <p class="text-xl md:text-2xl text-gray-700">sa kanya'y iaalay;</p>
+                </div>
+                
+                <!-- Verse 7 -->
+                <div data-start="82" data-end="96" class="lyric-verse transition-all duration-300">
+                  <p class="text-xl md:text-2xl text-gray-700 mb-2">Saan man naroroon</p>
+                  <p class="text-xl md:text-2xl text-gray-700">ay bigyang karangalan,</p>
+                </div>
+                
+                <!-- Final Verse (Highlighted throughout) -->
+                <div data-start="96" data-end="109" class="lyric-verse transition-all duration-300">
+                  <p class="text-xl md:text-2xl text-gray-700 mb-2">Dakilang paaralan</p>
+                  <p class="text-xl md:text-2xl text-msu-maroon font-bold">Pamantasang Mindanao.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <!-- University Seal -->
+          <div class="mt-16 text-center">
+            <div class="inline-flex items-center justify-center p-4 bg-white rounded-full shadow-lg border-4 border-msu-maroon/20">
+              <img src="/images/MSU Seal New (Official).png" alt="MSU Seal" class="h-20 w-20" loading="lazy">
+            </div>
+            <h3 class="mt-6 text-2xl font-bold text-msu-maroon">Mindanao State University</h3>
+            <p class="text-lg text-gray-600 mt-2">Tawi-Tawi College of Technology and Oceanography</p>
+          </div>
+        </div>
+      </section>
 
-<!-- FooterNaV -->
-        <FooterNav />
-<!-- end FooterNaV -->
+      
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" aria-label="Scroll to top">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+      </svg>
+    </button>
 
-<!-- Footer -->
-		<Footer />
-<!-- end Footer -->
+  
+      <FooterNav />
+      <Footer />
 
+      <script src="../../js/animate.js" ></script>
+      <script src="../../js/loadinganim.js" ></script>
+      <script src="../../js/smoothscroll.js" ></script>
+
+      
+      <style is:global>
+        html, body {
+         
+         width: 100%;
+       }
+
+       </style>
+  
+      <!-- Precision Audio Synchronization Script -->
+      <script is:inline>
+        document.addEventListener('DOMContentLoaded', () => {
+          const audio = document.getElementById('hymn-audio');
+          const verses = document.querySelectorAll('.lyric-verse');
+          const currentTimeDisplay = document.getElementById('current-time');
+          const durationDisplay = document.getElementById('duration');
+          const progressBar = document.getElementById('progress');
+          
+          // Set total duration
+          audio.addEventListener('loadedmetadata', () => {
+            durationDisplay.textContent = formatTime(audio.duration);
+          });
+          
+          // Update time display and progress bar
+          audio.addEventListener('timeupdate', () => {
+            const currentTime = audio.currentTime;
+            currentTimeDisplay.textContent = formatTime(currentTime);
+            progressBar.style.width = (currentTime / audio.duration) * 100 + '%';
+            highlightCurrentVerse(currentTime);
+          });
+          
+          // Click progress bar to seek
+          document.getElementById('progress-bar').addEventListener('click', (e) => {
+            const percent = e.offsetX / e.target.offsetWidth;
+            audio.currentTime = percent * audio.duration;
+          });
+          
+          // Format time as MM:SS
+          function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+          }
+          
+          // Precision highlighting with vocal synchronization
+          function highlightCurrentVerse(currentTime) {
+            verses.forEach(verse => {
+              const start = parseFloat(verse.dataset.start);
+              const end = parseFloat(verse.dataset.end);
+              
+              if (currentTime >= start && currentTime <= end) {
+                // Highlight current verse
+                verse.classList.add('active-verse', 'bg-msu-maroon/5', 'border-l-4', 'border-msu-maroon', 'pl-4');
+                verse.querySelectorAll('p').forEach(p => {
+                  p.classList.add('text-msu-maroon', 'font-medium');
+                  p.classList.remove('text-gray-700');
+                });
+                
+                // Auto-scroll to verse (only if not already in view)
+                if (!verse.scrollIntoViewOnActive) {
+                  verse.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  verse.scrollIntoViewOnActive = true;
+                }
+              } else {
+                // Reset other verses
+                verse.classList.remove('active-verse', 'bg-msu-maroon/5', 'border-l-4', 'border-msu-maroon', 'pl-4');
+                verse.querySelectorAll('p').forEach(p => {
+                  p.classList.remove('text-msu-maroon', 'font-medium');
+                  p.classList.add('text-gray-700');
+                });
+                verse.scrollIntoViewOnActive = false;
+              }
+            });
+          }
+          
+          // Click verse to seek
+          verses.forEach(verse => {
+            verse.addEventListener('click', () => {
+              const startTime = parseFloat(verse.dataset.start);
+              audio.currentTime = startTime;
+              audio.play();
+            });
+          });
+        });
+      </script>
     </main>
-</Layout>
+  </Layout>
+  
+  <style>
+    /* Audio Player Styling */
+    .audio-player {
+      border-radius: 12px;
+      height: 50px;
+      background: white;
+    }
+    
+    .audio-player::-webkit-media-controls-panel {
+      background: white;
+      border-radius: 12px;
+    }
+    
+    /* Progress Bar */
+    #progress-bar {
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    
+    #progress-bar:hover {
+      background-color: #e5e7eb;
+    }
+    
+    /* Lyrics Styling */
+    .lyric-verse {
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      cursor: pointer;
+      border-radius: 6px;
+      padding: 8px 12px;
+      margin: 4px 0;
+    }
+    
+    .lyric-verse p {
+      transition: all 0.3s ease;
+      line-height: 1.6;
+    }
+    
+    .lyric-verse:hover {
+      background-color: rgba(115, 38, 67, 0.05) !important;
+    }
+    
+    /* Active Verse Styling */
+    .lyric-verse.active-verse {
+      transform: scale(1.01);
+    }
+    
+    /* Animations */
+    @keyframes pan {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 100% 100%; }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>

@@ -9,6 +9,7 @@ import Footer from "../../components/Footer.astro";
 import FacultyAndStaff from "../../components/FacultyAndStaff";
 
 import '../../styles/css/global.css';
+import '../../styles/css/globalanimate.css';
 import ReactTable from '../../components/ReactTable';
 
 const currentPath = Astro.url.pathname;
@@ -18,38 +19,44 @@ const academicOffices = [
   {
     name: "COLLEGE OF ARTS AND SCIENCES",
     logo: "/images/College Logo/LOGO CAS.png", // Replace with actual path
-    link: "/programs/cas", // Replace with actual link
+	link: "/404.astro",
+    // link: "/programs/cas", // Replace with actual link
   },
   {
     name: "COLLEGE OF ISLAMIC & ARABIC STUDIES",
     logo: "/images/College Logo/LOGO CIAS.png", // Replace with actual path
-    link: "/programs/cias", // Replace with actual link
+	link: "/404.astro",
+    // link: "/programs/cias", // Replace with actual link
   },
   {
     name: "COLLEGE OF EDUCATION",
     logo: "/images/College Logo/LOGO COED.png", // Replace with actual path
-    link: "/programs/coed", // Replace with actual link
+	link: "/404.astro",
+    // link: "/programs/coed", // Replace with actual link
   },
   {
     name: "COLLEGE OF FISHERIES",
     logo: "/images/College Logo/LOGO COF.png", // Replace with actual path
-    link: "/programs/cof", // Replace with actual link
+	link: "/404.astro",
+    // link: "/programs/cof", // Replace with actual link
   },
   {
     name: "INSTITUTE OF INFORMATION & COMMUNICATIONS TECHNOLOGY",
     logo: "/images/College Logo/LOGO IICT.png", // Replace with actual path
-    link: "/programs/iict", // Replace with actual link
+	link: "/404.astro",
+    // link: "/programs/iict", // Replace with actual link
   },
   {
     name: "INSTITUTE OF OCEANOGRAPHY & ENVIRONMENTAL SCIENCE",
     logo: "/images/College Logo/LOGO IOES.png", // Replace with actual path
-    link: "/programs/ioes", // Replace with actual link
+	link: "/404.astro",
+    // link: "/programs/ioes", // Replace with actual link
   },
 ];
 ---
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
-	<main>
+ <main class="font-sans antialiased text-gray-800">
 		<Navbar path={currentPath} client:visible />
 
 		<!-- Parallax Background Section -->
@@ -73,6 +80,13 @@ const academicOffices = [
 			</div>
 		</div>
 
+		    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" aria-label="Scroll to top">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+      </svg>
+    </button>
+
 		<!-- FooterNav -->
 		<FooterNav />
 
@@ -80,6 +94,11 @@ const academicOffices = [
 		<Footer />
 	</main>
 </Layout>
+
+<script src="../../js/animate.js" ></script>
+<script src="../../js/loadinganim.js" ></script>
+<script src="../../js/smoothscroll.js" ></script>
+
 
 <style>
 	/* Parallax Effect */

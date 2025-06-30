@@ -27,5 +27,17 @@
   .animate-fade-in {
     animation: fade-in 1s ease-out;
   }
+  @keyframes loadingBar {
+    0% { width: 0%; left: 0; }
+    50% { width: 100%; left: 0; }
+    100% { width: 0%; left: 100%; }
+  }
+  .animate-loadingBar {
+    animation: loadingBar 1.5s ease-in-out infinite;
+  }
+
+
+
+  
   
   
