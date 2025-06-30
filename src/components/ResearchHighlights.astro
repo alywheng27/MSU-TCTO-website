@@ -1,0 +1,219 @@
+---
+// src/components/ResearchHighlights.astro
+
+interface ResearchProject {
+  title: string;
+  description: string;
+  researchers: string[];
+  year: number;
+  image: string;
+  link?: string;
+  tags: string[];
+}
+
+// Sample data - replace with your actual data source
+const researchProjects: ResearchProject[] = [
+  {
+    title: "Sustainable Coral Reef Conservation",
+    description: "Developing innovative approaches to protect and regenerate coral ecosystems in the Sulu Sea",
+    researchers: ["Dr. Amina Hassan", "Prof. Rajiv Mendoza", "Dr. Fatima Abdullah"],
+    year: 2023,
+    image: "/images/research/coral-reef.jpg",
+    link: "/research/coral-conservation",
+    tags: ["Marine Biology", "Conservation", "Ecology"]
+  },
+  {
+    title: "Renewable Ocean Energy Systems",
+    description: "Pioneering wave energy conversion technologies for coastal communities",
+    researchers: ["Dr. Carlos Ruiz", "Prof. Leila Zhang"],
+    year: 2022,
+    image: "/images/research/ocean-energy.jpg",
+    link: "/research/ocean-energy",
+    tags: ["Engineering", "Renewable Energy", "Sustainability"]
+  },
+  {
+    title: "Indigenous Maritime Navigation",
+    description: "Documenting and preserving traditional navigation techniques of Sama-Bajau communities",
+    researchers: ["Dr. Sofia Amin", "Prof. Jamaluddin Omar"],
+    year: 2023,
+    image: "/images/research/navigation.jpg",
+    tags: ["Anthropology", "Cultural Heritage", "Ethnography"]
+  }
+];
+
+// Group projects by year for the timeline view
+const projectsByYear = researchProjects.reduce((acc, project) => {
+  if (!acc[project.year]) {
+    acc[project.year] = [];
+  }
+  acc[project.year].push(project);
+  return acc;
+}, {} as Record<number, ResearchProject[]>);
+
+const sortedYears = Object.keys(projectsByYear)
+  .map(Number)
+  .sort((a, b) => b - a); // Most recent first
+---
+
+<div class="bg-msu-bgc-color py-20">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-msu-main-color mb-4">
+        Research Excellence
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Groundbreaking discoveries and innovations from our academic community
+      </p>
+    </div>
+
+    <!-- Desktop Timeline View -->
+    <div class="hidden md:block">
+      <div class="relative">
+        <!-- Timeline line -->
+        <div class="absolute left-1/2 h-full w-1 bg-msu-maroon/20 transform -translate-x-1/2"></div>
+        
+        {sortedYears.map((year, yearIndex) => (
+          <div class={`mb-16 ${yearIndex % 2 === 0 ? 'timeline-left' : 'timeline-right'}`}>
+            <div class="relative">
+              <!-- Year marker -->
+              <div class={`absolute top-0 w-24 h-24 rounded-full bg-msu-maroon text-white flex items-center justify-center text-2xl font-bold z-10 ${
+                yearIndex % 2 === 0 ? 'right-0 mr-4' : 'left-0 ml-4'
+              }`}>
+                {year}
+              </div>
+              
+              <!-- Projects container -->
+              <div class={`w-1/2 py-4 ${
+                yearIndex % 2 === 0 ? 'pr-24 text-right' : 'pl-24'
+              }`}>
+                {projectsByYear[year].map((project) => (
+                  <div class="mb-8 last:mb-0">
+                    <div class={`bg-white rounded-xl shadow-lg overflow-hidden ${
+                      yearIndex % 2 === 0 ? 'ml-auto' : 'mr-auto'
+                    }`} style="max-width: 500px;">
+                      <img 
+                        src={project.image} 
+                        alt={project.title}
+                        class="w-full h-48 object-cover"
+                        loading="lazy"
+                      />
+                      <div class="p-6">
+                        <h3 class="text-xl font-bold text-msu-main-color mb-2">
+                          {project.link ? (
+                            <a href={project.link} class="hover:underline">{project.title}</a>
+                          ) : (
+                            project.title
+                          )}
+                        </h3>
+                        <p class="text-gray-600 mb-4">{project.description}</p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-4">
+                          {project.tags.map(tag => (
+                            <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                        
+                        <div class="text-sm text-gray-500">
+                          <p>Researchers: {project.researchers.join(", ")}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Mobile List View -->
+    <div class="md:hidden space-y-8">
+      {sortedYears.map((year) => (
+        <div>
+          <h3 class="text-2xl font-bold text-msu-main-color mb-6 text-center">
+            {year}
+          </h3>
+          
+          <div class="space-y-6">
+            {projectsByYear[year].map((project) => (
+              <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <img 
+                  src={project.image} 
+                  alt={project.title}
+                  class="w-full h-48 object-cover"
+                  loading="lazy"
+                />
+                <div class="p-6">
+                  <h3 class="text-xl font-bold text-msu-main-color mb-2">
+                    {project.link ? (
+                      <a href={project.link} class="hover:underline">{project.title}</a>
+                    ) : (
+                      project.title
+                    )}
+                  </h3>
+                  <p class="text-gray-600 mb-4">{project.description}</p>
+                  
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    {project.tags.map(tag => (
+                      <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  <div class="text-sm text-gray-500">
+                    <p>Researchers: {project.researchers.join(", ")}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="text-center mt-16">
+      <a 
+        href="/research" 
+        class="inline-block bg-msu-maroon text-white px-8 py-3 rounded-full font-bold hover:bg-msu-maroon-dark transition"
+      >
+        View All Research Projects
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Timeline animations */
+  .timeline-left {
+    animation: slideInLeft 0.6s ease-out;
+  }
+  .timeline-right {
+    animation: slideInRight 0.6s ease-out;
+  }
+  
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInRight {
+    from {
+      transform: translateX(50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+</style>

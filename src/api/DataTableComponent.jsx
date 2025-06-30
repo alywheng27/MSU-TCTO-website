@@ -38,7 +38,7 @@ const DataTableComponent = ({ data }) => {
       {/* Table for Desktop */}
       <div className="hidden sm:block">
         <table className="min-w-full border-collapse border border-gray-200">
-          <thead className="bg-msu-maroon text-white">
+          <thead className="bg-msu-deep-ocean text-white">
             <tr>
               <th className="text-left py-3 px-4">#</th>
               <th className="text-left py-3 px-4">Title</th>
@@ -115,7 +115,7 @@ const DataTableComponent = ({ data }) => {
         <button
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
           disabled={currentPage === 1}
-          className={`px-4 py-2 mx-1 rounded-full ${currentPage === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500 text-white hover:bg-blue-700'}`}
+          className={`px-4 py-2 mx-1 rounded-full ${currentPage === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-msu-main-color text-white hover:bg-msu-deep-ocean'}`}
         >
           Prev
         </button>
@@ -123,7 +123,7 @@ const DataTableComponent = ({ data }) => {
           <button
             key={i}
             onClick={() => setCurrentPage(i + 1)}
-            className={`px-4 py-2 mx-1 rounded-full ${currentPage === i + 1 ? 'bg-blue-500 text-white' : 'bg-gray-300 hover:bg-blue-500 hover:text-white'}`}
+            className={`px-4 py-2 mx-1 rounded-full ${currentPage === i + 1 ? 'bg-msu-deep-ocean text-white' : 'bg-gray-300 hover:bg-msu-main-color hover:text-white'}`}
           >
             {i + 1}
           </button>
@@ -131,7 +131,7 @@ const DataTableComponent = ({ data }) => {
         <button
           onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
           disabled={currentPage === totalPages}
-          className={`px-4 py-2 mx-1 rounded-full ${currentPage === totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500 text-white hover:bg-blue-700'}`}
+          className={`px-4 py-2 mx-1 rounded-full ${currentPage === totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-msu-main-color text-white hover:bg-msu-main-color'}`}
         >
           Next
         </button>

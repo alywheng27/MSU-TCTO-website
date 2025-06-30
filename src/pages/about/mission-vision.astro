@@ -4,40 +4,189 @@ import Navbar from "../../components/Navbar";
 import FooterNav from "../../components/FooterNav.astro";
 import Footer from "../../components/Footer.astro";
 import '../../styles/css/global.css';
+import '../../styles/css/globalanimate.css';
+
 
 const currentPath = Astro.url.pathname;
-
 ---
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
-	<main>
-		<Navbar path={currentPath} client:visible />
-      <div id="mv" class="bg-white-pure flex flex-col items-center text-center pb-[71px]">
-        <h3 class="headings xl:h3 xs:h4 xs:max-w-[353px] text-msu-maroon xl:max-w-[720px] mt-20">The same vision with a better mission</h3>
-        <h4 class="headings h4 text-msu-rusty-red max-w-[720px] mt-20">VISION</h4>
-        <p class="paragraph p1 text-black-pure xl:max-w-[720px] xs:max-w-[325px] mt-10">A university in the Sulu Archipelago renowned for Fisheries, Marine and Environmental Science and other disciplines.</p>
-        <h4 class="headings h4 text-msu-rusty-red max-w-[720px] mt-20">MISSION</h4>
-        <p class="paragraph p1 text-black-pure xl:max-w-[720px] xs:max-w-[325px] mt-10">
-            To fulfill its mandate, MSU-TCTO shall:<br /><br />
-            a) Provide relevant quality education especially to Muslims and other indigenous groups;<br /><br />
-            
-            b) Promote environmental conservation and sustainable utilization of fisheries and marine resources;<br /><br />
-            
-            c) Develop and transfer new knowledge and innovative technology to the community; and<br /><br />
-            
-            d) Engage stakeholders in peace and socio-economic development endeavors.
+  <main class="bg-gray-50">
+    <Navbar path={currentPath} client:visible />
+    
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-msu-main-color to-msu-rusty-red/90 text-white py-40 overflow-hidden">
+      <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1567359781514-3c964c02b32a?q=80&w=1932&auto=format&fit=crop')] bg-cover bg-center opacity-30"></div>
+      <div class="container mx-auto px-6 relative z-10 text-center">
+        <h1 class="headings text-5xl md:text-6xl font-bold mb-6 animate-fade-in-up pt-[100px]">
+          Our Vision & Mission
+        </h1>
+        <p class="text-xl max-w-3xl mx-auto animate-fade-in-up delay-100">
+          Guiding principles that shape our university's future
         </p>
       </div>
+      <div class="absolute bottom-0 left-0 right-0 h-16 bg-white/10 backdrop-blur-sm"></div>
+    </section>
 
-<!-- FooterNaV -->
-        <FooterNav />
-<!-- end FooterNaV -->
+    <!-- Vision Section -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto text-center">
+          <span class="inline-block bg-msu-rusty-red/10 text-msu-rusty-red px-4 py-2 rounded-full text-sm font-semibold mb-6 animate-fade-in">
+            OUR VISION
+          </span>
+          <h2 class="headings text-3xl md:text-4xl font-bold text-msu-maroon mb-8 animate-fade-in-up">
+            A university in the Sulu Archipelago renowned for Fisheries, Marine and Environmental Science
+          </h2>
+          <div class="relative">
+            <div class="absolute -inset-4 bg-msu-rusty-red/10 rounded-xl blur-sm opacity-75 animate-pulse-slow"></div>
+            <p class="paragraph text-lg md:text-xl text-gray-700 relative z-10 leading-relaxed animate-fade-in-up delay-100">
+              We envision MSU-TCTO as a beacon of excellence in marine sciences, environmental studies, and related disciplines, serving as a catalyst for sustainable development in the Sulu Archipelago region.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<!-- Footer -->
-		<Footer />
-<!-- end Footer -->
+    <!-- Mission Section -->
+    <section class="py-20 bg-gray-50">
+      <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-16">
+            <span class="inline-block bg-msu-rusty-red/10 text-msu-rusty-red px-4 py-2 rounded-full text-sm font-semibold animate-fade-in">
+              OUR MISSION
+            </span>
+            <h2 class="headings text-3xl md:text-4xl font-bold text-msu-maroon mt-4 mb-6 animate-fade-in-up">
+              Commitment to Excellence and Service
+            </h2>
+          </div>
+
+          <!-- Mission Items Grid -->
+          <div class="grid md:grid-cols-2 gap-8">
+            <!-- Item 1 -->
+            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-msu-maroon animate-fade-in-up delay-100">
+              <div class="text-msu-maroon text-4xl mb-4">01</div>
+              <h3 class="text-xl font-bold text-gray-800 mb-3">Quality Education</h3>
+              <p class="text-gray-600">
+                Provide relevant quality education especially to Muslims and other indigenous groups
+              </p>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-msu-maroon animate-fade-in-up delay-200">
+              <div class="text-msu-maroon text-4xl mb-4">02</div>
+              <h3 class="text-xl font-bold text-gray-800 mb-3">Environmental Stewardship</h3>
+              <p class="text-gray-600">
+                Promote environmental conservation and sustainable utilization of fisheries and marine resources
+              </p>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-msu-maroon animate-fade-in-up delay-300">
+              <div class="text-msu-maroon text-4xl mb-4">03</div>
+              <h3 class="text-xl font-bold text-gray-800 mb-3">Knowledge Transfer</h3>
+              <p class="text-gray-600">
+                Develop and transfer new knowledge and innovative technology to the community
+              </p>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-msu-maroon animate-fade-in-up delay-400">
+              <div class="text-msu-maroon text-4xl mb-4">04</div>
+              <h3 class="text-xl font-bold text-gray-800 mb-3">Community Engagement</h3>
+              <p class="text-gray-600">
+                Engage stakeholders in peace and socio-economic development endeavors
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action
+    <section class="py-16 bg-msu-maroon text-white">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="headings text-3xl font-bold mb-6 animate-fade-in-up">
+          Join Us in Our Mission
+        </h2>
+        <p class="max-w-2xl mx-auto text-lg mb-8 animate-fade-in-up delay-100">
+          Become part of a university dedicated to marine science excellence and community development.
+        </p>
+        <div class="animate-fade-in-up delay-200">
+          <a href="#" class="inline-block bg-white text-msu-maroon px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-300 shadow-lg hover:shadow-xl">
+            Learn More About Our Programs
+          </a>
+        </div>
+      </div>
+    </section> -->
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" aria-label="Scroll to top">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+      </svg>
+    </button>
+
+    <!-- Footer Navigation -->
+    <FooterNav />
+    
+    <!-- Footer -->
+    <Footer />
+  </main>
+
+  <script src="../../js/animate.js" ></script>
+<script src="../../js/loadinganim.js" ></script>
+<script src="../../js/smoothscroll.js" ></script>
 
 
-    </main>
-	
+  <!-- Add these styles to your global CSS -->
+  <style>
+    .animate-fade-in {
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+    
+    .animate-fade-in-up {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    
+    .animate-fade-in-up.delay-100 {
+      animation-delay: 0.1s;
+    }
+    
+    .animate-fade-in-up.delay-200 {
+      animation-delay: 0.2s;
+    }
+    
+    .animate-fade-in-up.delay-300 {
+      animation-delay: 0.3s;
+    }
+    
+    .animate-fade-in-up.delay-400 {
+      animation-delay: 0.4s;
+    }
+    
+    .animate-pulse-slow {
+      animation: pulse 6s infinite;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes fadeInUp {
+      from { 
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 0.75; }
+      50% { opacity: 0.5; }
+    }
+  </style>
 </Layout>

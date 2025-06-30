@@ -1,4 +1,5 @@
 ---
+// src/pages/ra-6060.astro
 import Layout from '../layouts/Layout.astro';
 import Navbar from "../components/Navbar";
 import FooterNav from "../components/FooterNav.astro";
@@ -6,36 +7,113 @@ import Footer from "../components/Footer.astro";
 import '../styles/css/global.css';
 
 const currentPath = Astro.url.pathname;
+const pageTitle = "Republic Act 6060 | MSU-TCTO";
+const pageDescription = "Learn about Republic Act 6060 which established the Sulu College of Technology and Oceanography as a unit of Mindanao State University.";
 ---
 
-<Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
-	<main>
-		<Navbar path={currentPath} client:visible />
+<Layout title={pageTitle} description={pageDescription}>
+    <main class="min-h-screen flex flex-col">
+        <Navbar path={currentPath} client:visible />
 
-        <div class="bg-white-pure w-full xl:px-[12.5%] xs:px-[3.85%] py-[80px]">
-            <h4 class="headings xl:h4 xs:h5 text-msu-maroon">RA 6060</h4>
-            <h5 class="headings xl:h5 xs:h6 text-msu-maroon mt-10">SIXTH CONGRESS OF THE REPUBLIC OF THE PHILIPPINES</h5>
-            <h5 class="headings xl:h5 xs:h6 text-msu-maroon mt-5">NINTH SPECIAL SESSION NO. 18987</h5>
-            <h5 class="headings xl:h5 xs:h6 text-msu-maroon mt-5">REPUBLIC ACT NO. 6060</h5>
-            <p class="paragraph xl:p2 xs:p3 mt-5">AN ACT TO ESTABLISH THE SULU COLLEGE OF TECHNOLOGY AND OCEANOGRAPHY AS A UNIT OF THE MINDANAO STATE UNEVERSITY, DEFINING ITS OBJECTIVES, APPROPRIATING FUNDS THEREFOR, AND FOR OTHER PURPOSES.</p>
-            <p class="paragraph xl:p2 xs:p3 mt-5">Be it enacted by the Senate and House of Representatives of the Philippines in Congress assembled:</p>
-            <p class="paragraph xl:p2 xs:p3 mt-5">SECTION 1. There is hereby established in Southern Sulu a college to be known as the Sulu College of Technology and Oceanography which shall extend to the Muslims and other cultural minority groups the opportunities of college education and develop such other programs as will promote Muslim welfare and hasten the economic development of the southernmost religion of the Philippines.</p>
-            <p class="paragraph xl:p2 xs:p3 mt-5">SECTION 2. To achieve the foregoing objectives, the college shall develop academic programs for effective exploitation and conservation of the fisheries resources in the Sulu seas and nearby waters, undertake researches in fish processing and culture, and in oceanography for increase understanding of the country’s territorial waters, and adopt other programs and projects as way be necessary to promote the social and economic development of the people.</p>
-            <p class="paragraph xl:p2 xs:p3 mt-5">SECTION 3. The said college shall operate as the integral unit of the Mindanao State University and its administration shall be vested in the Board of Regents of the said University in accordance with Republic Act Numbered Thirteen hundred and eighty-seven, as amended, otherwise known as the Charter of the Mindanao State University. In addition, three members of the Boards, preferably from the province of Sulu, shall be appointed, the President of the Philippines, with the consent of the commission on Appointments. Of the three to be initially appointed, the President shall designate one to serve for three years. Thereafter, person appointed to succeed such members are appointed. The additional three members shall attend meeting along with the other members of the Board of Regents and participate in its deliberations on matters affecting the college and in other items of the agenda that may affect, directly or indirectly the academic, administrative and finical operation of the College.</p>
-            <p class="paragraph xl:p2 xs:p3 mt-5">SECTION 4. To carry out the program of research in oceanography, in fish processing and production, and in other related activities, including construction of laboratory buildings and other physical facilities, an ad valorem duty of five per centum, in addition to the existing duties, is hereby imposed and collected on prepared or preserved first imported under Section 16.04, Paragraph A, B and C, and on crustaceans and mullusks Tariff and Custom Code, as amended beginning fiscal year nineteen hundred and seventy. The amount so collected is hereby automatically appropriated in favor of the Mindanao State University for the purpose provided in this section and the Institution every quarter following the quarter in which the collection is made.</p>
-            <p class="paragraph xl:p2 xs:p3 mt-5">SECTION 5. Upon request of the President of the University, the heads of appropriate offices and other instrumentalities of the Government may authorize the transfer of equipment and personnel to the College, by the heads of these agencies.</p>
-            <p class="paragraph xl:p2 xs:p3 mt-5">SECTION 6. the sum of the million pesos for operating expenses and five hundred thousand pesos for capital outlays is hereby authorized to be appropriated out of any funds in the National Treasury not otherwise appropriated, beginning fiscal year nineteen hundred and seventy and every fiscal year thereafter for the continuing support of the said College.</p>
-            <p class="paragraph xl:p2 xs:p3 mt-5">SECTION 7. this act shall take effect upon its approval. Approved, August 4, 1969.</p>
-        </div>
-		
-<!-- FooterNaV -->
+        <!-- Document Content Section -->
+        <section class="bg-white w-full xl:px-[12.5%] xs:px-[3.85%] py-16 md:py-20">
+            <div class="max-w-4xl mx-auto">
+                <!-- Document Header -->
+                <header class="mb-12 border-b border-msu-maroon/20 pb-6">
+                    <h1 class="headings xl:h3 xs:h4 text-msu-maroon font-bold tracking-tight">Republic Act No. 6060</h1>
+                    <p class="paragraph xl:p1 xs:p2 text-gray-700 mt-2">AN ACT TO ESTABLISH THE SULU COLLEGE OF TECHNOLOGY AND OCEANOGRAPHY AS A UNIT OF THE MINDANAO STATE UNEVERSITY, DEFINING ITS OBJECTIVES, APPROPRIATING FUNDS THEREFOR, AND FOR OTHER PURPOSES.</p>
+                </header>
+
+                <!-- Document Metadata -->
+                <div class="mb-12 bg-msu-maroon/5 p-6 rounded-lg">
+                    <p class="paragraph xl:p2 xs:p3 text-msu-maroon font-medium">Sixth Congress of the Republic of the Philippines</p>
+                    <p class="paragraph xl:p2 xs:p3 text-msu-maroon mt-2">Ninth Special Session No. 18987</p>
+                    <p class="paragraph xl:p2 xs:p3 text-msu-maroon mt-2">Approved: August 4, 1969</p>
+               
+                </div>
+
+                <!-- Document Content -->
+                <article class="prose prose-lg max-w-none">
+                    <p class="paragraph xl:p2 xs:p3 text-gray-800 leading-relaxed">
+                         <strong>Be it enacted by the Senate and House of Representatives of the Philippines in Congress assembled:</strong>
+                    </p>
+
+                    <!-- Sections -->
+                    <div class="space-y-8 mt-8">
+                        <section>
+                            <h2 class="headings xl:h5 xs:h6 text-msu-maroon font-semibold">SECTION 1.</h2>
+                            <p class="paragraph xl:p2 xs:p3 text-gray-800 mt-2 leading-relaxed">
+                              There is hereby established in Southern Sulu a college to be known as the Sulu College of Technology and Oceanography which shall extend to the Muslims and other cultural minority groups the opportunities of college education and develop such other programs as will promote Muslim welfare and hasten the economic development of the southernmost religion of the Philippines.
+                            </p>
+                        </section>
+
+                        <section>
+                            <h2 class="headings xl:h5 xs:h6 text-msu-maroon font-semibold">SECTION 2.</h2>
+                            <p class="paragraph xl:p2 xs:p3 text-gray-800 mt-2 leading-relaxed">
+                                 To achieve the foregoing objectives, the college shall develop academic programs for effective exploitation and conservation of the fisheries resources in the Sulu seas and nearby waters, undertake researches in fish processing and culture, and in oceanography for increase understanding of the country’s territorial waters, and adopt other programs and projects as way be necessary to promote the social and economic development of the people.
+                            </p>
+                        </section>
+
+                        <!-- Additional sections continue with the same pattern -->
+                        <section>
+                            <h2 class="headings xl:h5 xs:h6 text-msu-maroon font-semibold">SECTION 3.</h2>
+                            <p class="paragraph xl:p2 xs:p3 text-gray-800 mt-2 leading-relaxed">
+                                The said college shall operate as the integral unit of the Mindanao State University and its administration shall be vested in the Board of Regents of the said University in accordance with Republic Act Numbered Thirteen hundred and eighty-seven, as amended, otherwise known as the Charter of the Mindanao State University. In addition, three members of the Boards, preferably from the province of Sulu, shall be appointed, the President of the Philippines, with the consent of the commission on Appointments. Of the three to be initially appointed, the President shall designate one to serve for three years. Thereafter, person appointed to succeed such members are appointed. The additional three members shall attend meeting along with the other members of the Board of Regents and participate in its deliberations on matters affecting the college and in other items of the agenda that may affect, directly or indirectly the academic, administrative and finical operation of the College.
+                            </p>
+                        </section>
+
+                         <section>
+                            <h2 class="headings xl:h5 xs:h6 text-msu-maroon font-semibold">SECTION 4.</h2>
+                            <p class="paragraph xl:p2 xs:p3 text-gray-800 mt-2 leading-relaxed">
+                               To carry out the program of research in oceanography, in fish processing and production, and in other related activities, including construction of laboratory buildings and other physical facilities, an ad valorem duty of five per centum, in addition to the existing duties, is hereby imposed and collected on prepared or preserved first imported under Section 16.04, Paragraph A, B and C, and on crustaceans and mullusks Tariff and Custom Code, as amended beginning fiscal year nineteen hundred and seventy. The amount so collected is hereby automatically appropriated in favor of the Mindanao State University for the purpose provided in this section and the Institution every quarter following the quarter in which the collection is made.
+                            </p>
+                        </section>
+
+                         <section>
+                            <h2 class="headings xl:h5 xs:h6 text-msu-maroon font-semibold">SECTION 5.</h2>
+                            <p class="paragraph xl:p2 xs:p3 text-gray-800 mt-2 leading-relaxed">
+                                 Upon request of the President of the University, the heads of appropriate offices and other instrumentalities of the Government may authorize the transfer of equipment and personnel to the College, by the heads of these agencies.
+                            </p>
+                        </section>
+
+                        
+                         <section>
+                            <h2 class="headings xl:h5 xs:h6 text-msu-maroon font-semibold">SECTION 6.</h2>
+                            <p class="paragraph xl:p2 xs:p3 text-gray-800 mt-2 leading-relaxed">
+                               the sum of the million pesos for operating expenses and five hundred thousand pesos for capital outlays is hereby authorized to be appropriated out of any funds in the National Treasury not otherwise appropriated, beginning fiscal year nineteen hundred and seventy and every fiscal year thereafter for the continuing support of the said College.
+                            </p>
+                        </section>
+
+
+                         <section>
+                            <h2 class="headings xl:h5 xs:h6 text-msu-maroon font-semibold">SECTION 7.</h2>
+                            <p class="paragraph xl:p2 xs:p3 text-gray-800 mt-2 leading-relaxed">
+                                this act shall take effect upon its approval. Approved, August 4, 1969.
+                            </p>
+                        </section>
+
+                        <!-- Continue with remaining sections following the same structure -->
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Footer Navigation -->
         <FooterNav />
-<!-- end FooterNaV -->
 
-<!-- Footer -->
-		<Footer />
-<!-- end Footer -->
-
-	</main>
-	
+        <!-- Main Footer -->
+        <Footer />
+    </main>
 </Layout>
+
+<style>
+    .prose {
+        line-height: 1.75;
+    }
+    .prose p {
+        margin-bottom: 1.25em;
+    }
+    .headings {
+        letter-spacing: -0.025em;
+    }
+</style>

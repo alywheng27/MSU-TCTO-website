@@ -6,7 +6,7 @@ module.exports = {
 		extend: {
 			fontFamily: {
 			  atkinson: ['Atkinson Hyperlegible', 'sans-serif'],
-			  merchant: ['Merchant', 'serif'],
+			  merchant: ['Merchant', 'serif'], philosopher: ['Philosopher', 'sans-serif'],
 			},
 			fontSize: {
 			  '178px': '178px',
@@ -44,8 +44,12 @@ module.exports = {
 					800: '#330000',
 					900: '#1A0000', // Darkest shade
 				  },
-				'msu-deep-ocean': '#0A1C37',
+				'msu-deep-ocean': '#61063B',
+				'msu-main-color': '#03045e',
+				'msu-text-color': '#000749',
+				'msu-bgc-color': '#ffffff',
 				'msu-gold': '#F7D93C',
+				'msu-pink': '#ac228a',
 
 				/* Secondary/Light */
 				'msu-rusty-red': '#A52930',

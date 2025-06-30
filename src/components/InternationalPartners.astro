@@ -1,0 +1,270 @@
+---
+// src/components/InternationalPartners.astro
+
+interface Partner {
+  name: string;
+  country: string;
+  logo: string;
+  website: string;
+  collaborationType: string;
+  since: number;
+}
+
+// Sample data - replace with your actual partners
+const partners: Partner[] = [
+  {
+    name: "University of Tokyo Marine Science",
+    country: "Japan",
+    logo: "/images/partners/tokyo-univ.png",
+    website: "https://www.u-tokyo.ac.jp",
+    collaborationType: "Student Exchange, Joint Research",
+    since: 2018
+  },
+  {
+    name: "Australian Institute of Marine Science",
+    country: "Australia",
+    logo: "/images/partners/australian-marine.png",
+    website: "https://www.aims.gov.au",
+    collaborationType: "Research Collaboration",
+    since: 2015
+  },
+  {
+    name: "National University of Singapore",
+    country: "Singapore",
+    logo: "/images/partners/nus.png",
+    website: "https://www.nus.edu.sg",
+    collaborationType: "Faculty Exchange, Dual Degree",
+    since: 2020
+  },
+  {
+    name: "Hawaii Pacific University",
+    country: "USA",
+    logo: "/images/partners/hawaii-pacific.png",
+    website: "https://www.hpu.edu",
+    collaborationType: "Student Exchange",
+    since: 2019
+  },
+  {
+    name: "University of Brunei Darussalam",
+    country: "Brunei",
+    logo: "/images/partners/ubd.png",
+    website: "https://www.ubd.edu.bn",
+    collaborationType: "Cultural Exchange",
+    since: 2017
+  },
+  {
+    name: "University of Malaysia Terengganu",
+    country: "Malaysia",
+    logo: "/images/partners/umt.png",
+    website: "https://www.umt.edu.my",
+    collaborationType: "Marine Research",
+    since: 2016
+  }
+];
+
+// Group partners by region for the map view
+const partnersByRegion = {
+  "Asia-Pacific": partners.filter(p => 
+    ["Japan", "Singapore", "Brunei", "Malaysia"].includes(p.country)
+  ),
+  "Oceania": partners.filter(p => 
+    ["Australia"].includes(p.country)
+  ),
+  "Americas": partners.filter(p => 
+    ["USA"].includes(p.country)
+  )
+};
+---
+
+<div class="bg-white py-20">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-msu-main-color mb-4">
+        Global Partnerships
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Collaborating with leading institutions worldwide to advance oceanographic and technological education
+      </p>
+    </div>
+
+    <!-- Interactive Map Visualization -->
+    <div class="hidden lg:block mb-20">
+      <div class="relative h-96 w-full bg-gray-100 rounded-xl overflow-hidden">
+        <!-- World Map Background -->
+        <img 
+          src="/images/world-map.svg" 
+          alt="World Map" 
+          class="absolute inset-0 w-full h-full object-cover opacity-20"
+        />
+        
+        <!-- Partner Location Dots -->
+        <div class="relative h-full w-full">
+          {partners.map(partner => {
+            // Simplified coordinates for demonstration
+            const coordinates = {
+              "Japan": { top: "28%", left: "82%" },
+              "Australia": { top: "62%", left: "85%" },
+              "Singapore": { top: "48%", left: "78%" },
+              "USA": { top: "35%", left: "15%" },
+              "Brunei": { top: "48%", left: "76%" },
+              "Malaysia": { top: "48%", left: "74%" }
+            };
+            
+            return (
+              <div 
+                class={`absolute w-8 h-8 rounded-full bg-msu-maroon border-4 border-white transform -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all hover:scale-125 hover:z-10 ${
+                  partner.country in coordinates ? '' : 'hidden'
+                }`}
+                style={{
+                  top: coordinates[partner.country]?.top || "50%",
+                  left: coordinates[partner.country]?.left || "50%"
+                }}
+                x-data="{ showTooltip: false }"
+                x-on:mouseover="showTooltip = true"
+                x-on:mouseleave="showTooltip = false"
+              >
+                <div 
+                  class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 bg-white shadow-lg rounded-lg p-4 text-left z-20 transition-opacity duration-300"
+                  x-show="showTooltip"
+                  x-transition
+                  style="display: none;"
+                >
+                  <div class="flex items-center mb-2">
+                    <img 
+                      src={partner.logo} 
+                      alt={partner.name}
+                      class="w-12 h-12 object-contain mr-3"
+                    />
+                    <div>
+                      <h4 class="font-bold text-msu-main-color">{partner.name}</h4>
+                      <p class="text-sm text-gray-600">{partner.country}</p>
+                    </div>
+                  </div>
+                  <p class="text-sm mb-1"><span class="font-semibold">Collaboration:</span> {partner.collaborationType}</p>
+                  <p class="text-sm"><span class="font-semibold">Since:</span> {partner.since}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+
+    <!-- Partner Logos Carousel -->
+    <div class="relative">
+      <div class="glide-partners">
+        <div class="glide__track" data-glide-el="track">
+          <ul class="glide__slides flex items-center">
+            {partners.map(partner => (
+              <li class="glide__slide h-full flex items-center justify-center px-4">
+                <a 
+                  href={partner.website} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="block p-6 hover:bg-gray-50 rounded-lg transition"
+                >
+                  <div class="flex flex-col items-center">
+                    <div class="h-24 w-48 flex items-center justify-center mb-4">
+                      <img 
+                        src={partner.logo} 
+                        alt={partner.name}
+                        class="max-h-full max-w-full object-contain"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="text-center">
+                      <p class="text-sm font-medium text-gray-600">{partner.country}</p>
+                      <p class="text-xs text-gray-500 mt-1">Since {partner.since}</p>
+                    </div>
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        
+        <div class="glide__arrows mt-8" data-glide-el="controls">
+          <button class="glide__arrow glide__arrow--left absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-md hover:bg-gray-100 transition" data-glide-dir="<">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-msu-maroon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button class="glide__arrow glide__arrow--right absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-md hover:bg-gray-100 transition" data-glide-dir=">">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-msu-maroon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Partnership Types -->
+    <div class="mt-20 grid md:grid-cols-3 gap-8">
+      <div class="bg-gray-50 p-8 rounded-xl">
+        <div class="text-msu-maroon mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-msu-main-color mb-3">Student Exchange</h3>
+        <p class="text-gray-600">Global learning opportunities through semester abroad programs and short-term exchanges.</p>
+      </div>
+      
+      <div class="bg-gray-50 p-8 rounded-xl">
+        <div class="text-msu-maroon mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-msu-main-color mb-3">Joint Research</h3>
+        <p class="text-gray-600">Collaborative projects addressing global challenges in marine science and technology.</p>
+      </div>
+      
+      <div class="bg-gray-50 p-8 rounded-xl">
+        <div class="text-msu-maroon mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-msu-main-color mb-3">Faculty Development</h3>
+        <p class="text-gray-600">International seminars, visiting professorships, and joint curriculum development.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Glide.js Carousel Implementation -->
+<script is:inline src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function() {
+    new Glide('.glide-partners', {
+      type: 'carousel',
+      perView: 4,
+      gap: 20,
+      autoplay: 4000,
+      hoverpause: true,
+      animationDuration: 600,
+      breakpoints: {
+        1024: {
+          perView: 3
+        },
+        768: {
+          perView: 2
+        },
+        640: {
+          perView: 1
+        }
+      }
+    }).mount();
+  });
+</script>
+
+<style>
+  .glide__slide {
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
+  .glide__slide--active {
+    opacity: 1;
+  }
+</style>

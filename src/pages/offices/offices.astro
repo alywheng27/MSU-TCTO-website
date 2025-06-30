@@ -2,158 +2,286 @@
 import Layout from '../../layouts/Layout.astro';
 import Navbar from "../../components/Navbar";
 import ChancellorMessage from "../../components/ChancellorMessage.astro";
-import MainVideo from "../../components/MainVideo.astro";
 import FooterNav from "../../components/FooterNav.astro";
 import Footer from "../../components/Footer.astro";
 import FacultyAndStaff from "../../components/FacultyAndStaff";
 import '../../styles/css/global.css';
+import '../../styles/css/globalanimate.css';
+
 
 const currentPath = Astro.url.pathname;
 ---
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
-	<main>
+	<main class="overflow-x-hidden bg-white">
 		<Navbar path={currentPath} client:visible />
-<!-- fold 02 -->
-        <div class="bg-msu-deep-ocean w-full   ">
-            <div class="text-center xl:px-[12.5%] xs:px-[3.85%]">
-                <h4 class="headings xl:h4 xs:h5 text-white-pure xl:px-[20.5%] ">A warm welcome awaits you</h4>
-                <div class="flex justify-center xl:ml-0 xs:ml-0 xl:mt-[20px] xs:mt-10 ">
-                    <p class="paragraph xl:p1 xs:p2 xl:w-[840px] text-titanium  text-center ">
-                        Wherever you go, our student-centered approach is manifested in all our offices. We believe that comfort is critical to our students' success.
-                    </p>
-                    
-                </div>
-                <!-- <div class="bg-gradient-ocean h-20 rotate-180 xs:block xl:hidden"></div> -->
-            </div>
-            <div class="flex xl:flex-row justify-center xl:mt-[63px] xs:mt-[48px] xs:px-[3.85%]">
-                <div class="xs:mb-[61px] xl:mb-0">
-                    <img src="/images/ilab.png" class="w-full" alt="">
-                </div>
-                <div class="xs:mb-[61px] xl:mb-0">
-                    <img src="/images/seaweed_cultivars.png" class="w-full" alt="">
-                </div>
-                <div class="xs:mb-[61px] xl:mb-0 xl:block xs:hidden">
-                    <img src="/images/administrative_office/image2.png" class="w-full" alt="">
-                </div>
-            </div>
-            <div class="grid xl:grid-cols-3 xs:grid-cols-2 justify-items-center xl:px-[12.5%] pb-[80px] xl:pt-[27px] xs:pt[66px]">
-                <div class="p-5 max-w-[360px]">
-                    <h2 class="flex-col text-center headings xl:h2 xs:h4 text-white-pure">500+</h2>
-                    <p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px] text-center">Smart facilities</p>
-                </div>
-                <div class="p-5 max-w-[360px]">
-                    <h2 class="flex-col text-center headings  xl:h2 xs:h4 text-white-pure">120+</h2>
-                    <p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px] text-center">On going local research for biodiversity</p>
-                </div>
-                <div class="p-5 max-w-[360px] xl:block xs:hidden">
-                    <h2 class="flex-col text-center headings  xl:h2 xs:h4 text-white-pure">50+</h2>
-                    <p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px] text-center">Multiple programs for the ocean</p>
-                </div>
-            </div>
-
-            <div class="mb-[34px] xl:hidden  xs:block ">
-                <div class="p-5 item-center">
-                    <h2 class="flex-col text-center headings  xl:h2 xs:h4 text-white-pure">50+</h2>
-                    <p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px] text-center">Multiple programs for the ocean</p>
-                </div>
-            </div>'
-        
-        </div>
-<!-- end fold 02 -->
 		
-	
-
-<!-- Chancellor Message -->
-    <ChancellorMessage />
-<!-- end Chancellor Message -->
-
-<!-- Administrative Offices -->
-        <div id="administrative" class=" bg-white-pure xl:pt-[80px] xs:pt-[80px] xl:pb-[60px] xs:pb-[80px] ">
-            
-            <div class="text-center xs:px-[66px]">
-                <h3 class="headings xl:h3 xs:h4 text-msu-maroon xl:mb-[80px] xs:mb-[64px] justify-center">Administrative Offices</h3>
-                <div class="flex xs:flex-col xl:flex-row xl:gap-[240px] xs:gap-[85px] justify-center">
-                    <div class="flex flex-col gap-[20px] justify-top xl:ml-0 xs:ml-0 xl:mt-0">
-                        <h3 class="headings xl:h4 xs:h5 text-msu-maroon xl:mb-[40px] xs:mb-[42px]">Chancellor</h3>
-                        <p class="paragraph xl:p2 xs:p2 text-black-pure text-center">OFFICE OF THE CAMPUS SECRETARY</p>
-                        <p class="paragraph xl:p2 xs:p2 text-black-pure text-center">BUDGET MANAGEMENT OFFICE</p>
-                        <p class="paragraph xl:p2 xs:p2 text-black-pure text-center">INTERNAL CONTROL & AUDIT UNIT</p>
-                        <p class="paragraph xl:p2 xs:p2 text-black-pure text-center">OFFICE OF LEGAL SERVICES</p>
-                        <p class="paragraph xl:p2 xs:p2 text-black-pure text-center">OFFICE OF INFORMATION, PRESS, & PUBLICATIONS</p>
-                        <p class="paragraph xl:p2 xs:p2 text-black-pure text-center">MANILA INFORMATION & LIASON OFFICE</p>
-                        <p class="paragraph xl:p2 xs:p2 text-black-pure text-center">INFORMATION & COMMUNICATIONS TECHNOLOGY OFFICE</p>
-                        <p class="paragraph xl:p2 xs:p2 text-black-pure text-center">SPORTS DEVELOPMENT OFFICE</p>
-                        <p class="paragraph xl:p2 xs:p2 text-black-pure text-center">CULTURAL AFFAIRS & COMMUNITY RELATIONS OFFICE</p>
-                        <p class="paragraph xl:p2 xs:p2 text-black-pure text-center">INSTITUTE FOR PEACE & DEVELOPMENT IN MINDANAO</p>
-                        <p class="paragraph xl:p2 xs:p2 text-black-pure text-center">OFFICE OF INTERNATIONAL LINKAGES</p>
-                        <p class="paragraph xl:p2 xs:p2 text-black-pure text-center">SPECIAL PROJECTS</p>
-                        
-                    </div>
-                    <div class="flex flex-col gap-[20px] justify-top xl:ml-0 xs:ml-0 xl:mt-0 ">
-                        <h3 class="headings xl:h4 xs:h5 text-msu-maroon xl:mb-[40px] xs:mb-[42px]">Vice Chancellor</h3>
-                        <p class="paragraph xl:p2 xs:p2 text-black-pure text-center">VICE-CHANCELLOR FOR RESEARCH, INNOVATION, DEVELOPMENT & EXTENSION</p>
-                        <p class="paragraph xl:p2 xs:p2 text-black-pure text-center">VICE-CHANCELLOR FOR ACADEMIC AFFAIRS</p>
-                        <p class="paragraph xl:p2 xs:p2 text-black-pure text-center">ASSISTANT VICE-CHANCELLOR FOR SECONDARY EDUCATION</p>
-                        <p class="paragraph xl:p2 xs:p2 text-black-pure text-center">VICE-CHANCELLOR FOR ADMINISTRATION & FINANCE</p>
-                        <p class="paragraph xl:p2 xs:p2 text-black-pure text-center">VICE-CHANCELLOR FOR PLANNING & DEVELOPMENT</p>
-                        
-                    </div>
-
-                </div>
-            </div>
-			<div class="text-center pb-[20px] pt-20">
-				<a href="https://drive.google.com/file/d/10AHPJVf1ePe2KGkAn9ynYndbc9Rx2yes/view?usp=drive_link" class="bg-transparent border border-msu-maroon paragraph  xl:p1 xs:p2  gap-10 text-msu-maroon py-[10.5px] px-[60px] rounded-[40px]">View More</a>
-			
+		
+		<!-- Hero Section -->
+		<section class="relative bg-white pt-[200px]">
+			<div class="absolute inset-0 bg-gradient-to-r from-msu-maroon/5 to-msu-dark-ocean/5 z-0"></div>
+			<div class="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 py-24">
+				<div class="text-center">
+					<h1 class="text-5xl font-bold tracking-tight text-msu-deep-ocean sm:text-6xl">
+						<span class="block">MSU Tawi-Tawi College of</span>
+						<span class="block text-msu-main-color">Technology and Oceanography</span>
+					</h1>
+					<p class="mt-6 text-xl leading-8 text-gray-600 max-w-3xl mx-auto">
+						Where innovation meets ocean conservation in the heart of the Sulu Archipelago
+					</p>
+					<div class="mt-10 flex items-center justify-center gap-x-6">
+						<a href="/about/campus" class="rounded-md bg-msu-main-color px-6 py-3 text-lg font-semibold text-white shadow-sm hover:bg-msu-dark-ocean focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-msu-maroon transition-all">
+							Explore Our Campus
+						</a>
+						<a href="/404.astro" class="text-lg font-semibold leading-6 text-msu-dark-ocean hover:text-msu-maroon transition-colors">
+							Academic Programs <span aria-hidden="true">→</span>
+						</a>
+					</div>
+				</div>
 			</div>
-           
-        </div>
-<!-- end Academic Offices -->
+			<div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent z-20"></div>
+		</section>
 
-<!-- Academic Offices -->
-        <!-- <div id="academic" class=" bg-msu-deep-ocean xl:pt-[80px] xs:pt-[80px] xl:pb-[60px] xs:pb-[80px] ">
-            
-            <div class="text-center xs:px-[66px]">
-                <h3 class="headings xl:h3 xs:h4 text-white-pure ">Academic Offices</h3>
-                <div class="flex flex-col gap-[20px] justify-center xl:ml-0 xs:ml-0 xl:mt-0 xs:mt-10 pt-10 ">
-                    <p class="paragraph xl:p2 xs:p2 text-white-pure text-center">COLLEGE OF ARTS AND SCIENCES</p>
-                    <p class="paragraph xl:p2 xs:p2 text-white-pure text-center">COLLEGE OF ISLAMIC & ARABIC STUDIES</p>
-                    <p class="paragraph xl:p2 xs:p2 text-white-pure text-center">COLLEGE OF EDUCATION</p>
-                    <p class="paragraph xl:p2 xs:p2 text-white-pure text-center">COLLEGE OF FISHERIES</p>
-                    <p class="paragraph xl:p2 xs:p2 text-white-pure text-center">INSTITUTE OF INFORMATION & COMMUNICATIONS TECHNOLOGY</p>
-                    <p class="paragraph xl:p2 xs:p2 text-white-pure text-center">INSTITUTE OF OCEANOGRAPHY & ENVIRONMENTAL SCIENCE</p>
-                    
-                </div>
-            </div>
-           
-        </div> -->
-<!-- end Academic Offices -->
+		<!-- Stats Section -->
+		<section id="explore" class="bg-gray-50 py-24 sm:py-32">
+			<div class="mx-auto max-w-7xl px-6 lg:px-8">
+				<div class="mx-auto max-w-2xl text-center">
+					<h2 class="text-3xl font-bold tracking-tight text-msu-dark-ocean sm:text-4xl">
+                        A warm welcome awaits you</h2>
+					<p class="mt-6 text-lg leading-8 text-gray-600">
+						Wherever you go, our student-centered approach is manifested in all our offices. We believe that comfort is critical to our students' success.
+					</p>
+				</div>
+				<div class="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+					<div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 transform transition-all hover:scale-105">
+						<div class="text-msu-maroon mb-6">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
+							</svg>
+						</div>
+						<h3 class="text-2xl font-bold text-msu-dark-ocean">500+</h3>
+						<p class="mt-2 text-base text-gray-600">Smart Facilities</p>
+					</div>
 
-<!-- Faculty -->
-       <div id="facultyStaff" class=" bg-msu-dark-ocean xl:pt-[80px] xs:pt-[80px]  xs:pb-[57px]">
-            
-            <div class="text-center xl:px-[12.5%] xl:mb-[40px] xs:mb-[75px] xs:px-[3.85%]  xl:bg-none">
-                <h4 class="headings xl:h4 xs:h4 text-white-pure xl:mb-[80px] xs:mb-[80px]">Faculty & Staff</h4>
-                <FacultyAndStaff client:only />
-            </div>
+					<div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 transform transition-all hover:scale-105">
+						<div class="text-msu-maroon mb-6">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75m-16.5 0v3.75m16.5 0v3.75" />
+							</svg>
+						</div>
+						<h3 class="text-2xl font-bold text-msu-dark-ocean">120+</h3>
+						<p class="mt-2 text-base text-gray-600">Ongoing research projects in marine biodiversity</p>
+					</div>
 
-        </div>
-        
-<!-- end Faculty -->
-	
+					<div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 transform transition-all hover:scale-105">
+						<div class="text-msu-maroon mb-6">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+							</svg>
+						</div>
+						<h3 class="text-2xl font-bold text-msu-dark-ocean">50+</h3>
+						<p class="mt-2 text-base text-gray-600">Multiple programs for the ocean</p>
+					</div>
+				</div>
+			</div>
+		</section>
 
-<!-- MainVideo -->
-        <!-- <MainVideo /> -->
-<!-- end MainVideo -->
+		<!-- Image Gallery -->
+		<section class="py-12">
+			<div class="mx-auto max-w-7xl px-6 lg:px-8">
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+					<div class="overflow-hidden rounded-2xl shadow-xl transition-all hover:shadow-2xl">
+						<img src="/images/ilab.png" alt="Marine research laboratory" class="h-full w-full object-cover transition-transform duration-500 hover:scale-110">
+					</div>
+					<div class="overflow-hidden rounded-2xl shadow-xl transition-all hover:shadow-2xl">
+						<img src="/images/seaweed_cultivars.png" alt="Seaweed cultivation research" class="h-full w-full object-cover transition-transform duration-500 hover:scale-110">
+					</div>
+					<div class="overflow-hidden rounded-2xl shadow-xl transition-all hover:shadow-2xl md:block hidden">
+						<img src="/images/administrative_office/image2.png" alt="Campus facilities" class="h-full w-full object-cover transition-transform duration-500 hover:scale-110">
+					</div>
+				</div>
+			</div>
+		</section>
 
-<!-- FooterNaV -->
-        <FooterNav />
-<!-- end FooterNaV -->
+		<!-- Chancellor Message -->
+		<!-- <ChancellorMessage /> -->
 
-<!-- Footer -->
+		<!-- Administrative Offices -->
+		<section id="administrative" class="py-24 bg-gray-50">
+			<div class="mx-auto max-w-7xl px-6 lg:px-8">
+				<div class="text-center">
+					<h2 class="text-4xl font-bold text-msu-dark-ocean">Administrative Offices</h2>
+					<p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+						Our dedicated administration supports the academic mission of the college
+					</p>
+				</div>
+
+				<div class="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-12">
+					<div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+						<h3 class="text-2xl font-bold text-msu-maroon pb-4 mb-8 border-b border-gray-200">Chancellor's Office</h3>
+						<ul class="space-y-4">
+							<li class="flex items-start">
+								<svg class="h-6 w-6 flex-shrink-0 text-msu-maroon mt-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+								</svg>
+								<span class="ml-3 text-lg text-gray-700 hover:text-msu-maroon transition-colors cursor-pointer">Office of the Campus Secretary</span>
+							</li>
+							<li class="flex items-start">
+								<svg class="h-6 w-6 flex-shrink-0 text-msu-maroon mt-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+								</svg>
+								<span class="ml-3 text-lg text-gray-700 hover:text-msu-maroon transition-colors cursor-pointer">Budget Management Office</span>
+							</li>
+							<li class="flex items-start">
+								<svg class="h-6 w-6 flex-shrink-0 text-msu-maroon mt-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+								</svg>
+								<span class="ml-3 text-lg text-gray-700 hover:text-msu-maroon transition-colors cursor-pointer">Internal Control & Audit Unit</span>
+							</li>
+							<li class="flex items-start">
+								<svg class="h-6 w-6 flex-shrink-0 text-msu-maroon mt-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+								</svg>
+								<span class="ml-3 text-lg text-gray-700 hover:text-msu-maroon transition-colors cursor-pointer">Office of Legal Services</span>
+							</li>
+							<li class="flex items-start">
+								<svg class="h-6 w-6 flex-shrink-0 text-msu-maroon mt-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+								</svg>
+								<span class="ml-3 text-lg text-gray-700 hover:text-msu-maroon transition-colors cursor-pointer">Office of Information, Press, & Publications</span>
+							</li>
+						</ul>
+					</div>
+
+					<div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+						<h3 class="text-2xl font-bold text-msu-maroon pb-4 mb-8 border-b border-gray-200">Vice Chancellor Offices</h3>
+						<ul class="space-y-4">
+							<li class="flex items-start">
+								<svg class="h-6 w-6 flex-shrink-0 text-msu-maroon mt-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+								</svg>
+								<span class="ml-3 text-lg text-gray-700 hover:text-msu-maroon transition-colors cursor-pointer">Vice-Chancellor for Research, Innovation, Development & Extension</span>
+							</li>
+							<li class="flex items-start">
+								<svg class="h-6 w-6 flex-shrink-0 text-msu-maroon mt-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+								</svg>
+								<span class="ml-3 text-lg text-gray-700 hover:text-msu-maroon transition-colors cursor-pointer">Vice-Chancellor for Academic Affairs</span>
+							</li>
+							<li class="flex items-start">
+								<svg class="h-6 w-6 flex-shrink-0 text-msu-maroon mt-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+								</svg>
+								<span class="ml-3 text-lg text-gray-700 hover:text-msu-maroon transition-colors cursor-pointer">Vice-Chancellor for Administration & Finance</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="mt-16 text-center">
+					<a href="https://drive.google.com/file/d/10AHPJVf1ePe2KGkAn9ynYndbc9Rx2yes/view?usp=drive_link" 
+					   class="inline-flex items-center rounded-full border border-msu-maroon px-8 py-3 text-lg font-medium text-msu-maroon hover:bg-msu-maroon hover:text-white transition-colors duration-300">
+						View Complete Directory
+						<svg class="ml-2 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+							<path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+						</svg>
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- Faculty & Staff -->
+		<section id="facultyStaff" class="py-24 bg-white">
+			<div class="mx-auto max-w-7xl px-6 lg:px-8">
+				<div class="text-center">
+					<!-- <h2 class="text-4xl font-bold text-msu-dark-ocean">Our Distinguished Faculty</h2>
+					<p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+						Meet the experts guiding the next generation of marine scientists and technologists
+					</p> -->
+				</div>
+				<div class="mt-8">
+					<FacultyAndStaff client:only />
+				</div>
+			</div>
+		</section>
+
+
+		    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" aria-label="Scroll to top">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+      </svg>
+    </button>
+
+
+		<!-- Call to Action -->
+		<!-- <section class="bg-msu-maroon py-24">
+			<div class="mx-auto max-w-7xl px-6 lg:px-8 text-center">
+				<h2 class="text-4xl font-bold text-white">Ready to Dive Into Marine Science?</h2>
+				<p class="mt-6 text-xl leading-8 text-white/90 max-w-3xl mx-auto">
+					Join the leading institution for ocean technology and research in the Sulu Archipelago
+				</p>
+				<div class="mt-10 flex items-center justify-center gap-x-6">
+					<a href="#" class="rounded-md bg-white px-8 py-4 text-lg font-semibold text-msu-maroon shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white transition-all">
+						Apply Now
+					</a>
+					<a href="#" class="text-lg font-semibold leading-6 text-white hover:text-gray-200 transition-colors">
+						Learn more <span aria-hidden="true">→</span>
+					</a>
+				</div>
+			</div>
+		</section> -->
+
+		<!-- Footer Navigation -->
+		<FooterNav />
+
+		<!-- Footer -->
 		<Footer />
-<!-- end Footer -->
-
 	</main>
-	
 </Layout>
+
+<script src="../../js/animate.js" ></script>
+<script src="../../js/loadinganim.js" ></script>
+<script src="../../js/smoothscroll.js" ></script>
+
+
+<style is:global>
+	/* Smooth scrolling */
+	html {
+		scroll-behavior: smooth;
+	}
+
+	/* Custom transitions */
+	.transition-slow {
+		transition: all 0.5s ease;
+	}
+
+	/* Custom shadow for depth */
+	.shadow-deep {
+		box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+	}
+
+	/* Underline animation */
+	.hover-underline-animation {
+		display: inline-block;
+		position: relative;
+	}
+
+	.hover-underline-animation:after {
+		content: '';
+		position: absolute;
+		width: 100%;
+		transform: scaleX(0);
+		height: 2px;
+		bottom: -4px;
+		left: 0;
+		background-color: #8B1E3F;
+		transform-origin: bottom right;
+		transition: transform 0.25s ease-out;
+	}
+
+	.hover-underline-animation:hover:after {
+		transform: scaleX(1);
+		transform-origin: bottom left;
+	}
+</style>

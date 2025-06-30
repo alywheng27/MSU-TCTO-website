@@ -5,17 +5,464 @@ export interface Props {
 
 const { title } = Astro.props;
 ---
-
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/images/MSU Seal New (Official).png" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/images/MSU Seal New (Official).png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <style>
+    /* Modern Animation Keyframes */
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.05); }
+      50% { transform: scale(1); }
+      75% { transform: scale(1.03); }
+      100% { transform: scale(1); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes shimmer {
+      0% { background-position: -1000px 0; }
+      100% { background-position: 1000px 0; }
+    }
+    @keyframes scaleIn {
+      0% { transform: scale(0.9); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    /* Modern Utility Classes */
+    .animate-heartbeat { animation: heartbeat 1.5s ease-in-out infinite; }
+    .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+    .animate-gradient-flow { 
+      animation: gradientFlow 8s ease infinite;
+      background-size: 200% 200%;
+    }
+    .animate-shimmer {
+      animation: shimmer 2s linear infinite;
+      background: linear-gradient(to right, #f3f4f6 4%, #e5e7eb 25%, #f3f4f6 36%);
+      background-size: 1000px 100%;
+    }
+    .animate-scale-in { animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+    
+    /* Modern Glass Morphism */
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    }
+    
+    /* Modern Text Gradients */
+    .text-gradient-primary {
+      background: linear-gradient(135deg, #61063B 0%, #9A1750 50%, #EE4C7C 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .text-gradient-secondary {
+      background: linear-gradient(135deg, #3B82F6 0%, #6366F1 50%, #8B5CF6 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    /* Modern Progress Elements */
+    .progress-ring__circle {
+      transition: stroke-dashoffset 0.65s cubic-bezier(0.83, 0, 0.17, 1);
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+    }
+    
+    /* Modern Badges */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.35em 0.65em;
+      font-size: 0.75em;
+      font-weight: 700;
+      line-height: 1;
+      color: white;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: baseline;
+      border-radius: 50rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .badge-success {
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+      box-shadow: 0 4px 6px -1px rgba(5, 150, 105, 0.1), 0 2px 4px -1px rgba(5, 150, 105, 0.06);
+    }
+    .badge-danger {
+      background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+      box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.1), 0 2px 4px -1px rgba(220, 38, 38, 0.06);
+    }
+    
+    /* Modern Loading Container */
+    .loading-container {
+      background: linear-gradient(135deg, rgba(249, 250, 251, 0.98) 0%, rgba(255, 255, 255, 0.98) 100%);
+    }
+    
+    /* Modern Check Items */
+    .check-item {
+      position: relative;
+      padding-left: 1.75rem;
+    }
+    .check-item:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.25rem;
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      background-color: #E5E7EB;
+      transition: all 0.3s ease;
+    }
+    .check-item.completed:before {
+      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+      content: "✓";
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      font-weight: bold;
+    }
+    .check-item.failed:before {
+      background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+      content: "✗";
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      font-weight: bold;
+    }
+    
+    /* Modern Glow Effects */
+    .glow-primary {
+      filter: drop-shadow(0 0 8px rgba(238, 76, 124, 0.6));
+    }
+    .glow-secondary {
+      filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.6));
+    }
+    
+    /* Modern Hover Effects */
+    .hover-scale {
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .hover-scale:hover {
+      transform: scale(1.05);
+    }
+    
+    /* Modern Progress Bar */
+    .progress-bar-container {
+      height: 0.5rem;
+      background-color: #F3F4F6;
+      border-radius: 0.25rem;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      border-radius: 0.25rem;
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      background: linear-gradient(90deg, #61063B 0%, #9A1750 50%, #EE4C7C 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .progress-bar:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      animation: shimmer 2s linear infinite;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- Ultra Premium Loading Container -->
+  <div id="loading-container" class="fixed inset-0 z-50 flex flex-col items-center justify-center loading-container transition-all duration-500">
+    <div class="max-w-md w-full px-6">
+      <!-- Main Loading Card -->
+      <div class="glass-panel rounded-2xl p-8 mb-8 animate-scale-in">
+        <!-- Animated Logo Container -->
+        <div class="relative w-48 h-48 mx-auto mb-8">
+          <!-- Heartbeat Logo -->
+          <div class="absolute inset-0 flex items-center justify-center animate-heartbeat">
+            <img src="/images/MSU Seal New (Official).png" alt="University Logo" 
+                 class="w-32 h-32 rounded-full border-4 border-white/20 glow-primary hover-scale" />
+          </div>
+          
+          <!-- Security Badge -->
+          <div id="security-badge" class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 opacity-0 translate-y-4">
+            <span class="badge badge-success flex items-center">
+              <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+              </svg>
+              Secured Connection
+            </span>
+          </div>
+        </div>
+        
+        <!-- Loading Header -->
+        <div class="text-center mb-6">
+          <h1 class="text-gradient-primary text-4xl font-extrabold mb-2">MSUTCTO</h1>
+          <p class="text-gray-600 font-medium">Secure System Initialization</p>
+        </div>
+        
+        <!-- Percentage Display -->
+        <div id="loading-percentage" class="text-gradient-primary text-6xl font-black text-center mb-6">0%</div>
+        
+        <!-- Status Message -->
+        <p id="loading-status" class="text-center text-gray-700 font-medium mb-6">Starting verification process...</p>
+        
+        <!-- Modern Progress Bar -->
+        <div class="progress-bar-container mb-8">
+          <div id="progress-bar" class="progress-bar" style="width: 0%"></div>
+        </div>
+        
+        <!-- Verification Steps -->
+        <div id="verification-steps" class="space-y-3">
+          <div class="check-item" id="auth-check">
+            <span class="text-gray-800">Authentication Protocol</span>
+            <span class="float-right text-sm text-gray-500" id="auth-time">0.2s</span>
+          </div>
+          <div class="check-item" id="security-check">
+            <span class="text-gray-800">Security Verification</span>
+            <span class="float-right text-sm text-gray-500" id="security-time">0.4s</span>
+          </div>
+          <div class="check-item" id="data-check">
+            <span class="text-gray-800">Data Integrity Check</span>
+            <span class="float-right text-sm text-gray-500" id="data-time">0.6s</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- System Info Footer -->
+      <div class="text-center text-sm text-gray-500">
+        <p>MSU-TCTO Secure Access Portal v3.5.1</p>
+        <p class="mt-1">© 2025 Mindanao State University Tawi-Tawi College of Technology and Oceanography. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content (hidden during loading) -->
+
+    <slot />
+
+
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const loadingContainer = document.getElementById('loading-container');
+      const percentageDisplay = document.getElementById('loading-percentage');
+      const loadingStatus = document.getElementById('loading-status');
+      const content = document.getElementById('content');
+      const progressBar = document.getElementById('progress-bar');
+      const securityBadge = document.getElementById('security-badge');
+      
+      // Verification elements
+      const authCheck = document.getElementById('auth-check');
+      const securityCheck = document.getElementById('security-check');
+      const dataCheck = document.getElementById('data-check');
+      
+      // Time indicators
+      const authTime = document.getElementById('auth-time');
+      const securityTime = document.getElementById('security-time');
+      const dataTime = document.getElementById('data-time');
+      
+      const statusMessages = [
+        { msg: "Initializing MSUTCTO Dolphin...", progress: 0 },
+        { msg: "Loading cryptographic modules...", progress: 10 },
+        { msg: "Establishing secure connection...", progress: 20 },
+        { msg: "Verifying user credentials...", progress: 30 },
+        { msg: "Authenticating with MSU servers...", progress: 40 },
+        { msg: "Validating security certificates...", progress: 50 },
+        { msg: "Scanning system integrity...", progress: 60 },
+        { msg: "Verifying data sources...", progress: 70 },
+        { msg: "Loading secure modules...", progress: 80 },
+        { msg: "Finalizing security checks...", progress: 90 },
+        { msg: "System ready for access", progress: 95 }
+      ];
+      
+      let progress = 0;
+      let verificationState = {
+        authenticated: false,
+        securityVerified: false,
+        dataValidated: false
+      };
+      
+      // Generate random completion times between 1.5s and 3.5s
+      const authCompleteTime = (1.5 + Math.random() * 2).toFixed(1);
+      const securityCompleteTime = (parseFloat(authCompleteTime) + 1 + Math.random() * 2).toFixed(1);
+      const dataCompleteTime = (parseFloat(securityCompleteTime) + 0.5 + Math.random() * 1.5).toFixed(1);
+      
+      const loadingInterval = setInterval(() => {
+        // Simulate verification steps with realistic timing
+        if (progress >= 25 && !verificationState.authenticated) {
+          verificationState.authenticated = true;
+          authCheck.classList.add('completed');
+          authTime.textContent = `${authCompleteTime}s`;
+          authTime.classList.add('text-green-600', 'font-semibold');
+        }
+        
+        if (progress >= 55 && !verificationState.securityVerified) {
+          verificationState.securityVerified = true;
+          securityCheck.classList.add('completed');
+          securityTime.textContent = `${securityCompleteTime}s`;
+          securityTime.classList.add('text-green-600', 'font-semibold');
+          
+          // Show security badge with animation
+          securityBadge.style.opacity = '1';
+          securityBadge.style.transform = 'translateY(0)';
+        }
+        
+        if (progress >= 85 && !verificationState.dataValidated) {
+          verificationState.dataValidated = true;
+          dataCheck.classList.add('completed');
+          dataTime.textContent = `${dataCompleteTime}s`;
+          dataTime.classList.add('text-green-600', 'font-semibold');
+        }
+        
+        // Calculate progress with acceleration based on completed steps
+        let progressIncrement = 0.4 + Math.random() * 0.6;
+        
+        if (verificationState.authenticated) progressIncrement *= 1.3;
+        if (verificationState.securityVerified) progressIncrement *= 1.4;
+        if (verificationState.dataValidated) progressIncrement *= 1.5;
+        
+        progress = Math.min(progress + progressIncrement, 100);
+        
+        // Update displays with smooth transitions
+        const displayProgress = Math.floor(progress);
+        percentageDisplay.textContent = `${displayProgress}%`;
+        progressBar.style.width = `${progress}%`;
+        
+        // Update status message based on progress
+        const currentStatus = statusMessages.reduce((prev, curr) => 
+          progress >= curr.progress ? curr : prev
+        );
+        loadingStatus.textContent = currentStatus.msg;
+        
+        // Complete loading when all verifications pass and progress reaches 100%
+        if (progress >= 100 && verificationState.authenticated && 
+            verificationState.securityVerified && verificationState.dataValidated) {
+          clearInterval(loadingInterval);
+          
+          // Final animations before revealing content
+          setTimeout(() => {
+            loadingStatus.textContent = "All systems verified ✓ Ready for access";
+            percentageDisplay.textContent = "100%";
+            
+            // Add celebration particles
+            for (let i = 0; i < 30; i++) {
+              createParticle();
+            }
+            
+            setTimeout(() => {
+              loadingContainer.style.opacity = '0';
+              loadingContainer.style.pointerEvents = 'none';
+              setTimeout(() => {
+                loadingContainer.style.display = 'none';
+                content.style.display = 'block';
+                content.classList.add('animate-fadeIn');
+                
+                // Dispatch custom event when fully loaded
+                document.dispatchEvent(new CustomEvent('systemLoaded', {
+                  detail: {
+                    authenticated: true,
+                    securityVerified: true,
+                    loadTime: `${dataCompleteTime} seconds`,
+                    timestamp: new Date().toISOString()
+                  }
+                }));
+              }, 600);
+            }, 1000);
+          }, 500);
+        }
+      }, 40);
+      
+      // Simulate potential security issues (for demonstration)
+      setTimeout(() => {
+        if (progress < 30 && Math.random() > 0.7) {
+          // Simulate failed authentication
+          authCheck.classList.remove('completed');
+          authCheck.classList.add('failed');
+          authTime.textContent = "Failed";
+          authTime.classList.remove('text-green-600');
+          authTime.classList.add('text-red-600', 'font-semibold');
+          loadingStatus.textContent = "Authentication failed - Retrying...";
+          progress = Math.max(0, progress - 10);
+          
+          // Show error badge temporarily
+          const errorBadge = document.createElement('div');
+          errorBadge.className = 'badge badge-danger absolute top-4 right-4 flex items-center animate-scale-in';
+          errorBadge.innerHTML = `
+            <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+            </svg>
+            Security Alert
+          `;
+          loadingContainer.querySelector('.glass-panel').appendChild(errorBadge);
+          
+          setTimeout(() => {
+            errorBadge.remove();
+            authCheck.classList.remove('failed');
+            authCheck.classList.add('completed');
+            authTime.textContent = `${authCompleteTime}s`;
+            authTime.classList.remove('text-red-600');
+            authTime.classList.add('text-green-600', 'font-semibold');
+            loadingStatus.textContent = "Authentication recovered - Proceeding...";
+            verificationState.authenticated = true;
+          }, 2000);
+        }
+      }, 3000);
+      
+      // Create celebration particles
+      function createParticle() {
+        const particle = document.createElement('div');
+        particle.className = 'absolute w-2 h-2 rounded-full';
+        const colors = ['#61063B', '#9A1750', '#EE4C7C', '#3B82F6', '#8B5CF6'];
+        particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.left = `${50 + (Math.random() - 0.5) * 20}%`;
+        particle.style.top = `${50 + (Math.random() - 0.5) * 20}%`;
+        particle.style.transform = 'scale(0)';
+        particle.style.transition = 'all 1s ease-out';
+        
+        loadingContainer.querySelector('.glass-panel').appendChild(particle);
+        
+        setTimeout(() => {
+          particle.style.transform = `scale(1) translate(${(Math.random() - 0.5) * 200}px, ${(Math.random() - 0.5) * 200}px)`;
+          particle.style.opacity = '0';
+        }, 10);
+        
+        setTimeout(() => {
+          particle.remove();
+        }, 1000);
+      }
+    });
+  </script>
+</body>
 </html>

@@ -6,6 +6,7 @@ import FooterNav from "../../components/FooterNav.astro";
 import Footer from "../../components/Footer.astro";
 import GazetteTab from "../../components/GazetteTab";
 import '../../styles/css/global.css';
+import '../../styles/css/globalanimate.css';
 
 const currentPath = Astro.url.pathname;
 
@@ -24,114 +25,146 @@ const fourLatestArticles = await get4LatestArticles();
 
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
-    <main>
+    <main class="bg-white min-h-screen">
         <Navbar path={currentPath} client:visible />
 
-<!-- Animated Magazine-Style Article Card -->
-<div class="flex justify-center xl:mx-[240px] xs:mx-[20px] xl:mt-20">
-    <div class="group relative bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 w-full max-w-3xl p-6">
-        <!-- Image -->
-        <div class="relative w-full overflow-hidden rounded-lg">
-            <img src={urlForImage(singleLatestArticle.mainImage.asset.url).url()} 
-                 alt="" 
-                 class="w-full h-[250px] sm:h-[350px] xl:h-[400px] object-cover rounded-lg transition-transform duration-500 group-hover:scale-105" />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
-        </div>
+        <!-- Hero Section with Featured Article -->
+        <section class="relative bg-gradient-to-b from-white to-gray-50 py-16">
+            <div class="container mx-auto px-4 max-w-7xl">
+                <!-- Featured Article Card -->
+                <div class="group relative bg-white rounded-xl shadow-md overflow-hidden transition-all duration-500 hover:shadow-xl hover:-translate-y-1 w-full max-w-5xl mx-auto">
+                    <!-- Image with Gradient Overlay -->
+                    <div class="relative w-full overflow-hidden h-100">
+                        <img src={urlForImage(singleLatestArticle.mainImage.asset.url).url()} 
+                             alt={singleLatestArticle.title} 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-msu-main-color/80 to-transparent"></div>
+                    </div>
 
-        <!-- Article Content -->
-        <div class="text-center mt-6">
-            <a href={`/${singleLatestArticle.slug.current}`} class="hover:no-underline">
-                <h4 class="text-2xl sm:text-3xl font-bold leading-snug tracking-wide text-gray-900 group-hover:text-blue-500 transition-colors duration-300 font-serif line-clamp-2">
-                    {singleLatestArticle.title}
-                </h4>
-            </a>
-
-            <p class="text-lg text-gray-700 mt-4 leading-relaxed font-light italic line-clamp-3 max-w-[700px]">
-                {singleLatestArticle.body[0].children[0].text}
-            </p>
-
-            <a href={`/${singleLatestArticle.slug.current}`} 
-            class="mt-4 inline-flex items-center text-blue-600 font-semibold tracking-wide hover:text-blue-800 transition-all duration-300 font-serif uppercase text-lg sm:text-xl">
-             Read More
-             <svg class="w-5 h-5 ml-1 transition-transform duration-300 group-hover:translate-x-1" 
-                  fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"></path>
-             </svg>
-         </a>
-         
-        </div>
-    </div>
-</div>
-
-
-<!-- Main Content -->
-<div class="text-center mt-10 px-4">
-    <h3 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white">Search filtered Articles</h3>
-</div>
-
-
-        <!-- Global Search Bar -->
-        <div class="flex justify-center mt-10 px-5">
-            <div class="w-full max-w-4xl">
-                <input type="text" id="searchInput" placeholder="Search articles..." class="w-full px-6 py-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md" />
-            </div>
-        </div>
-        <div class="flex justify-center xl:mx-[240px] xs:mx-5 mt-[80px]">
-            <div class="grid xl:grid-cols-2 xs:grid-cols-1 gap-10 xs:gap-[20px] w-full" id="articlesContainer">
-                {articles.map((article, index) => (
-                    <div class="relative overflow-hidden rounded-lg shadow-lg bg-white group transition-all duration-300 hover:shadow-xl hover:-translate-y-1 article-item"
-                         data-index={index}>
-                        <div class="relative w-full overflow-hidden rounded-t-lg">
-                            <img src={ urlForImage(article.mainImage.asset.url).url() } 
-                                 alt="" 
-                                 class="w-full md:h-[700px] object-cover object-center transition-transform duration-500 group-hover:scale-105 group-hover:shadow-lg" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <!-- Article Content -->
+                    <div class="p-8 text-center">
+                        <div class="mb-4">
+                            <span class="inline-block px-3 py-1 text-xs font-semibold tracking-wider text-white uppercase bg-[#61063B] rounded-full">
+                                Featured Article
+                            </span>
                         </div>
-                        <div class="flex flex-col flex-1 p-5">
-                            <a href={`/${article.slug.current}`} class="hover:no-underline">
-                                <h5 class="text-[22px] font-extrabold leading-snug tracking-wide text-gray-900 group-hover:text-blue-500 transition-colors duration-300 font-serif line-clamp-3">
-                                    { article.title }
-                                </h5>
-                            </a>
-                            <p class="text-[16px] text-gray-700 mt-3 leading-relaxed font-light italic line-clamp-2">
-                                {article.body[0].children[0].text}
-                            </p>
-                            <a href={`/${article.slug.current}`} class="mt-4 text-blue-600 font-semibold tracking-wide hover:text-blue-800 transition-all duration-300 flex items-center gap-1">
-                                Read More 
-                                <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"></path>
+                        
+                        <a href={`/${singleLatestArticle.slug.current}`} class="hover:no-underline">
+                            <h2 class="text-3xl md:text-4xl font-bold leading-tight text-gray-900 group-hover:text-msu-main-color transition-colors duration-300 font-serif">
+                                {singleLatestArticle.title}
+                            </h2>
+                        </a>
+
+                        <p class="mt-4 text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto line-clamp-2">
+                            {singleLatestArticle.body[0].children[0].text}
+                        </p>
+
+                        <div class="mt-8">
+                            <a href={`/${singleLatestArticle.slug.current}`} 
+                               class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-[#61063B] hover:bg-msu-dark-color transition-all duration-300 shadow-sm hover:shadow-md">
+                                Read Full Story
+                                <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                                 </svg>
                             </a>
                         </div>
                     </div>
-                ))}
+                </div>
             </div>
-        </div>
+        </section>
 
+        <!-- Search and Articles Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4 max-w-7xl">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                        Explore Our Articles
+                    </h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                        Discover the latest news, research, and stories from MSU Tawi-Tawi
+                    </p>
+                </div>
 
-<!-- Pagination Controls -->
-<div class="flex justify-center mt-8 space-x-2">
-    <!-- Previous Button -->
-    <button id="prevPage" class="flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full shadow-md hover:from-blue-600 hover:to-purple-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
-        <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
-        </svg>
-        <span class="text-white font-semibold">Previous</span>
+                <!-- Search Bar -->
+                <div class="max-w-2xl mx-auto mb-16">
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <input type="text" id="searchInput" placeholder="Search articles..." 
+                               class="block w-full pl-10 pr-3 py-4 border border-gray-300 rounded-full bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-msu-main-color focus:border-transparent transition-all duration-300" />
+                    </div>
+                </div>
+
+                <!-- Articles Grid -->
+                <div class="grid md:grid-cols-2 gap-8" id="articlesContainer">
+                    {articles.map((article, index) => (
+                        <div class="group relative bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1 article-item"
+                             data-index={index}>
+                            <div class="relative h-64 overflow-hidden">
+                                <img src={urlForImage(article.mainImage.asset.url).url()} 
+                                     alt={article.title}
+                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex items-center text-sm text-gray-500 mb-2">
+                                    <span class="inline-block px-2 py-1 text-xs font-medium tracking-wider text-msu-main-color uppercase bg-msu-main-color/10 rounded">
+                                        News
+                                    </span>
+                                    <span class="mx-2">•</span>
+                                    <span>{new Date(article._createdAt).toLocaleDateString()}</span>
+                                </div>
+                                <a href={`/${article.slug.current}`} class="hover:no-underline">
+                                    <h3 class="text-xl font-bold leading-snug text-gray-900 group-hover:text-msu-main-color transition-colors duration-300 mb-3 line-clamp-2">
+                                        {article.title}
+                                    </h3>
+                                </a>
+                                <p class="text-gray-600 mb-4 line-clamp-2">
+                                    {article.body[0].children[0].text}
+                                </p>
+                                <a href={`/${article.slug.current}`} class="inline-flex items-center text-msu-main-color font-medium hover:text-msu-dark-color transition-colors duration-300">
+                                    Read more
+                                    <svg class="ml-1 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                <!-- Pagination -->
+                <div class="mt-16 flex items-center justify-center space-x-2">
+                    <button id="prevPage" class="flex items-center px-4 py-2 border border-gray-300 rounded-md bg-[#61063B] text-white hover:bg-[#61063B] disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300" disabled>
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                        Previous
+                    </button>
+
+                    <span id="pageInfo" class="px-4 py-2 text-sm font-medium text-gray-700">
+                        Page 1 of 5
+                    </span>
+
+                    <button id="nextPage" class="flex items-center px-4 py-2 border border-gray-300 rounded-md bg-[#61063B] text-white hover:bg-[#61063B] disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300">
+                        Next
+                        <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+            <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" aria-label="Scroll to top">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+      </svg>
     </button>
-
-    <!-- Page Numbers -->
-    <div class="flex items-center space-x-2">
-        <span id="pageInfo" class="px-4 py-2 text-lg font-semibold text-white">Page 1 of 5</span>
-    </div>
-
-    <!-- Next Button -->
-    <button id="nextPage" class="flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full shadow-md hover:from-blue-600 hover:to-purple-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
-        <span class="text-white font-semibold">Next</span>
-        <svg class="w-5 h-5 ml-2 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
-        </svg>
-    </button>
-</div>
 
 
         <FooterNav />
@@ -139,12 +172,19 @@ const fourLatestArticles = await get4LatestArticles();
     </main>
 </Layout>
 
+<script src="../../js/animate.js" ></script>
+<script src="../../js/loadinganim.js" ></script>
+<script src="../../js/smoothscroll.js" ></script>
+
+
+
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        const articlesPerPage = 4;
+        const articlesPerPage = 10;
         let currentPage = 1;
         const allArticles = Array.from(document.querySelectorAll(".article-item"));
-        let filteredArticles = [...allArticles]; // Initially, all articles are shown
+        let filteredArticles = [...allArticles];
         const searchInput = document.getElementById("searchInput");
         const articlesContainer = document.getElementById("articlesContainer");
         const pageInfo = document.getElementById("pageInfo");
@@ -154,25 +194,19 @@ const fourLatestArticles = await get4LatestArticles();
         function updatePagination() {
             const totalPages = Math.ceil(filteredArticles.length / articlesPerPage);
             
-            // Ensure the current page is within bounds
             if (currentPage > totalPages) currentPage = totalPages || 1;
             
-            // Hide all articles
             allArticles.forEach(article => article.style.display = "none");
 
-            // Calculate the range to show
             const start = (currentPage - 1) * articlesPerPage;
             const end = start + articlesPerPage;
 
-            // Show only articles for the current page
             filteredArticles.slice(start, end).forEach(article => article.style.display = "block");
 
-            // Update pagination controls
             pageInfo.textContent = `Page ${totalPages > 0 ? currentPage : 0} of ${totalPages}`;
             prevPageBtn.disabled = currentPage === 1;
             nextPageBtn.disabled = currentPage === totalPages || totalPages === 0;
 
-            // Show/hide pagination buttons based on search results
             if (filteredArticles.length === 0) {
                 pageInfo.style.display = "none";
                 prevPageBtn.style.display = "none";
@@ -184,7 +218,6 @@ const fourLatestArticles = await get4LatestArticles();
             }
         }
 
-        // Pagination event listeners
         prevPageBtn.addEventListener("click", function () {
             if (currentPage > 1) {
                 currentPage--;
@@ -200,7 +233,6 @@ const fourLatestArticles = await get4LatestArticles();
             }
         });
 
-        // Search function
         searchInput.addEventListener("input", function () {
             const searchQuery = this.value.toLowerCase().trim();
 
@@ -208,22 +240,64 @@ const fourLatestArticles = await get4LatestArticles();
                 filteredArticles = [...allArticles];
             } else {
                 filteredArticles = allArticles.filter(article => {
-                    const title = article.querySelector("h5").textContent.toLowerCase();
+                    const title = article.querySelector("h3").textContent.toLowerCase();
                     const body = article.querySelector("p").textContent.toLowerCase();
                     return title.includes(searchQuery) || body.includes(searchQuery);
                 });
             }
 
-            // Reset to first page when searching
             currentPage = 1;
             updatePagination();
         });
 
-        // Initial pagination setup
         updatePagination();
     });
 </script>
 
-
-
-
+<style>
+    :root {
+        --msu-main-color: #18453B; /* MSU Green */
+        --msu-dark-color: #0d2c26;
+        --msu-accent-color: #97a211;
+    }
+    
+    .bg-msu-main-color {
+        background-color: var(--msu-main-color);
+    }
+    
+    .bg-msu-dark-color {
+        background-color: var(--msu-dark-color);
+    }
+    
+    .bg-msu-accent-color {
+        background-color: var(--msu-accent-color);
+    }
+    
+    .text-msu-main-color {
+        color: var(--msu-main-color);
+    }
+    
+    .text-msu-dark-color {
+        color: var(--msu-dark-color);
+    }
+    
+    .text-msu-accent-color {
+        color: var(--msu-accent-color);
+    }
+    
+    .border-msu-main-color {
+        border-color: var(--msu-main-color);
+    }
+    
+    .hover\:bg-msu-dark-color:hover {
+        background-color: var(--msu-dark-color);
+    }
+    
+    .hover\:text-msu-dark-color:hover {
+        color: var(--msu-dark-color);
+    }
+    
+    .focus\:ring-msu-main-color:focus {
+        --tw-ring-color: var(--msu-main-color);
+    }
+</style>

@@ -5,6 +5,7 @@ import FooterNav from "../components/FooterNav.astro";
 import Footer from "../components/Footer.astro";
 import DataTableComponent from '../api/DataTableComponent.jsx';
 import '../styles/css/global.css';
+import '../styles/css/globalanimate.css';
 
 const currentPath = Astro.url.pathname;
 import { getBidding } from '../api/api';
@@ -19,12 +20,22 @@ const bidding = await getBidding();
     <!-- Approval Section -->
     <section class="bg-white-pure w-full xl:px-[12.5%] xs:px-[5%] py-[60px]">
       <h4 class="xl:h4 xs:h5 text-msu-maroon text-center font-semibold mb-6">
-        Approval for Posting
+        Bidding Opportunities
       </h4>
 
       <!-- Render React Component -->
       <DataTableComponent data={bidding} client:visible />
     </section>
+
+
+    
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" aria-label="Scroll to top">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+      </svg>
+    </button>
+
 
     <!-- FooterNav -->
     <FooterNav />
@@ -32,3 +43,9 @@ const bidding = await getBidding();
     <Footer />
   </main>
 </Layout>
+
+
+<script src="../js/animate.js" ></script>
+<script src="../js/loadinganim.js" ></script>
+<script src="../js/smoothscroll.js" ></script>
+
