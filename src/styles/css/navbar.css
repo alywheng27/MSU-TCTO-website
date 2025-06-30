@@ -1,18 +1,62 @@
 /* Base styles for all devices */
-/* You can define base styles that apply to all devices here */
-
-/* Media query for Android tablets */
-@media only screen and (min-device-width: 600px) and (max-device-width: 1024px) and (orientation: landscape),
-       only screen and (min-device-width: 600px) and (max-device-width: 962px) and (orientation: portrait) {
-    /* Styles specific to Android tablets */
-}
-
-/* Media query for iPhones */
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
-    /* Styles specific to iPhones */
-}
-
-/* Media query for desktops */
-@media only screen and (min-width: 1025px) {
-    /* Styles specific to desktops */
-}
+html, body {
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: #fff;
+    color: #000;
+  }
+  
+  /* Styles for your navbar (example) */
+  .navbar {
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+    position: relative; /* or fixed, sticky as needed */
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Media query for Android tablets */
+  @media only screen and (min-device-width: 600px) and (max-device-width: 1024px) and (orientation: landscape),
+         only screen and (min-device-width: 600px) and (max-device-width: 962px) and (orientation: portrait) {
+    html, body {
+      font-size: 16px;
+    }
+  
+    .navbar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  
+  /* Media query for iPhones */
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    html, body {
+      font-size: 14px;
+    }
+  
+    .navbar {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
+  
+  /* Media query for desktops */
+  @media only screen and (min-width: 1025px) {
+    html, body {
+      font-size: 18px;
+    }
+  
+    .navbar {
+      flex-direction: row;
+    }
+  }
+  

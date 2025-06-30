@@ -5,270 +5,689 @@ import Navbar from "../../components/Navbar";
 import FooterNav from "../../components/FooterNav.astro";
 import Footer from "../../components/Footer.astro";
 import '../../styles/css/global.css';
+import '../../styles/css/globalanimate.css';
 import MainVideo from '../../components/MainVideo.astro';
-// import { Fade } from "react-awesome-reveal";
-
 
 import Old_Campus_Swiper from "../../components/old_campus_swiper.jsx";
 import College_Logo_Swiper from "../../components/college_logo_swiper.jsx";
 import MySwiper from "../../components/MySwiper.jsx";
 
+
 const currentPath = Astro.url.pathname;
-
 ---
+<Layout title="MSU | Tawi-Tawi - Legacy of Excellence">
+    <Navbar path={currentPath} client:visible />
 
-<Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
-	<main>
-		<Navbar path={currentPath} client:visible />
-        <div class="flex xl:flex-row xs:flex-col items-center justify-end xs:gap-[66px] " data-aos="fade-up" data-aos-duration="1000">
-            <div class="xl:mr-[120px] xs:mx-[25px] xs:text-left">
-                <h3 class="headings xl:h3 xs:h5 xl:max-w-[720px]">A Brief History</h3>
-                <p class="paragraph xl:p1 xs:p2 text-white-pure max-w-[720px] xl:mt-20 xs:mt-10">Starting in 1964 as Mindanao State University Preparatory High School in Bongao, Tawi-Tawi, a mere adjunct to MSU Marawi Preparatory High School, MSU Tawi-Tawi College of Technology and Oceanography has grown into an institution of academic excellence. More secondary schools were established from 1967 to 1977 in the outlying island municipalities of Tawi-Tawi. By 1990, 20 high schools were put up throughout the province. In 1984, MSU-TCTO Science High School and MSU-TCTO Child Development Center – Laboratory Elementary School were established.</p>
-                <p class="paragraph xl:p1 xs:p2 text-white-pure max-w-[720px] xl:mt-10 xs:mt-10">Republic Act 6060 gave birth to MSU-Sulu College of Technology and Oceanography on August 4, 1969, initially offering degree programs and diploma in Fisheries Technology.</p>
-            </div>
-       
-            <div>
-                <img src="/images/a breif history 1.png" alt="" class="xl:h-[640px] object-cover object-center" />
-            </div>
+
+  <main class="bg-white text-gray-900 font-sans antialiased">
+
+
+<!-- Video Hero Section -->
+<section class="relative h-screen min-h-[800px] overflow-hidden">
+    <!-- Video Background -->
+    <div class="absolute inset-0 z-0">
+        <video 
+            autoplay 
+            loop 
+            muted 
+            playsinline 
+            class="w-full h-full object-cover"
+            poster="/images/video-poster.jpg"
+        >
+            <source src="/video/msucamp.mp4" type="video/mp4">
+            <!-- Fallback image if video doesn't load -->
+            <img src="/images/msucampus.jpg" alt="MSU Tawi-Tawi Campus" class="w-full h-full object-cover">
+        </video>
+        <!-- Enhanced Video overlay with gradient -->
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-msu-main-color/70 to-msu-deep-ocean/90"></div>
+    </div>
+    
+    <!-- Update the hero content section -->
+    <div class="relative z-20 h-full flex flex-col justify-center items-center text-center px-4 sm:px-6 max-w-6xl mx-auto">
+        <div class="mb-8 px-4" data-aos="fade-up" data-aos-duration="1000">
+            <span class="text-white font-medium tracking-widest text-sm sm:text-base">EST. 1964</span>
+              <!-- Responsive Typography with Perfect Scaling -->
+        <h1 class="font-philosopher text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight tracking-tight animate-fadeInUp">
+            <span class="block text-shadow-md">Mindanao State University</span>
+            <span class="block font-bold mt-2 sm:mt-3 text-shadow">Tawi-Tawi College of Technology and Oceanography</span>
+        </h1>
+
    
-        </div>
-        <div class="flex xl:flex-row xs:flex-col-reverse items-center justify-start xl:mt-[120px] xs:mt-[60px] xs:gap-[66px]">
-          <div class="xl:block xs:hidden">
-              <img src="/images/a breif history 2.png" alt="" class="xl:h-[640px] object-cover object-center" />
-          </div>
-          <div class="xl:mr-[120px] xs:mx-[25px] xs:text-left">
-              <p class="paragraph xl:p1 xs:p2 text-white-pure max-w-[720px]">In 1973, Tawi-Tawi became a separate province from Sulu, and MSU-SCTO became MSU-Tawi-Tawi College of Technology and Oceanography per BP Blg. 197. In 1990 it became an autonomous university campus.</p>
-              <p class="paragraph xl:p1 xs:p2 text-white-pure max-w-[720px] xl:mt-10 xs:mt-10">In its more than four decades of existence, it has steadfastly pursued its vision to be the center of excellence in Fisheries, Marine and Maritime Sciences and Engineering, and Oceanography, in its mission to give Muslims and other cultural minorities access to quality education and develop such other programs as will promote Muslim welfare and hasten socio-economic development of the southernmost region of the country.</p>
-              <p class="paragraph xl:p1 xs:p2 text-white-pure max-w-[720px] xl:mt-10 xs:mt-10">MSU-TCTO is comprised of the following academic units: the College of Fisheries, College of Arts and Sciences, College of Education, Institute of Environmental and Oceanography Studies, College of Islamic and Arabic Studies, and the Institute of Information and Communications Technology.</p>
-          </div>
-        </div>
-        <div class="flex justify-center mt-20 xl:px-[12.5%] xs:px-[0px]">
-            <img src="/images/image 3.png" loading="lazy" alt="" class="xl:h-[360px] object-cover object-center xl:block xs:hidden" />
-            <img src="/images/image 4.png" loading="lazy" alt="" class="xl:h-[360px] object-cover object-center xl:block xs:hidden" />
-            <img src="/images/image 5.png" loading="lazy" alt="" class="xl:h-[360px] object-cover object-center xl:block xs:hidden" />
-        </div>
         
-        <div class="flex justify-center mt-20 xl:px-[12.5%] xs:px-[0px] xl:hidden xs:block">
-            <Old_Campus_Swiper client:visible />
-        </div>
-
-
-        <!-- <div class="flex gap-[30px] justify-center mt-[40px] mb-[57px] ">
-            <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px]  xl:rounded-[40px] xs:rounded-[40px] border-white border-2"></a>
-            <a href="#" class=" bg-white xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
-            <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
-        </div> -->
-
-
-        <div class="flex flex-col items-center xl:mt-[40px] xs:mt-[66px] xl:mb-[57px] xs:mb-[50px] xs:mx-[25px] xs:text-left">
-            <p class="paragraph  xl:p1 xs:p2 text-white-pure max-w-[720px]">The extension services of the college include providing capability building trainings and functional literacy programs to the Tawi-Tawians. The local folks are empowered through education and entrepreneurial development.</p>
-            <p class="paragraph  xl:p1 xs:p2 text-white-pure max-w-[720px] mt-10">The college has continued to undertake researches in fisheries aquaculture, and marine related sciences, as well as in the social sciences. These initiatives are designed to promote sustainable utilization and rational management of the marine and fisheries resources of the area, with the aim of improving the standard of living of the people of Southern Philippines.</p>
-        </div>
-        <div class="bg-msu-maroon ">
-            <div class="flex justify-center bg-gradient-ocean py-[111px]">
-                <h3 class="headings xl:h3 xs:h4 xl:max-w-[720px] xs:max-w-[357px] text-center">
-                    That was us before.
-                    This is us now!
-                </h3>
-            </div>
-            <div class="flex xl:flex-row justify-center xs:flex-col">
+            <!-- Enhanced gradient divider with animation -->
+            <!-- <div class="w-24 sm:w-32 h-1 bg-gradient-to-r from-white via-msu-main-color to-white mx-auto my-4 sm:my-6 transform transition-all duration-1000 hover:scale-x-110 hover:via-[#D4AF37]"></div> -->
                 
-                <div>
-                    <img src="/images/campus-now-2.png" loading="lazy" alt="" class="xl:h-[980px] xs:w-full object-cover object-center" />
-                </div>
-                <div class="flex xl:flex-col justify-center xs:flex-row ">
-                    <img src="/images/campus-now-1.png" loading="lazy" alt="" class="xl:h-[490px] xs:h-[164px] xs:w-full object-cover object-center" />
-                    <img src="/images/Masjid Nuruul Iman.png" loading="lazy" alt="" class="xl:h-[490px] xs:h-[164px] xs:w-full object-cover object-center" />
-                </div>
-            </div>
-
-            
-
-
-            <div class="flex flex-col items-center xl:mt-[40px] xs:mt-[66px] xl:pb-[57px] xs:pb-[42px] xs:mx-[25px] xs:text-left">
-                <h3 class="headings xl:h3 xs:h4 max-w-[720px] text-center">A lot has changed through the years!</h3>
-                <!-- <p class="paragraph  xl:p1 xs:p2 text-white-pure max-w-[720px] mt-20">
-                    Lorem ipsum dolor sit amet consectetur. At sapien diam cras pellentesque aliquam adipiscing. Morbi consectetur et rhoncus id turpis tortor.
-                    Sed aliquam potenti porta tellus. Ut consequat ut tempor senectus. Accumsan accumsan orci vel lacus diam sed ut elit.<br /><br />
-                    Pretium viverra et amet egestas dolor vitae magna venenatis sit. Orci morbi pharetra pulvinar purus pretium enim sagittis sit nullam.
-                    Quam blandit mi mi ut rhoncus aenean. Ut lectus metus dictum fames sed. Aliquam nam amet luctus duis euismod et.
-                </p> -->
-                <!-- <a href="" class="paragraph xl:p1 xs:p2 text-white-pure py-[10.5px] px-[90px] mt-[50px] border rounded-[40px]">Check our Campus Gallery</a> -->
-            </div>
-        </div>
-        
-        <div class="flex justify-center xl:mt-0 xl:px-[0%] xs:px-[0%]">
-            <img src="/images/development.png" loading="lazy" alt="" class="xl:h-full object-cover object-center" />
-        </div>
-        
-        <!-- <div id="mv" class="bg-white-pure flex flex-col items-center text-center pb-[71px]">
-            <h3 class="headings xl:h3 xs:h4 xs:max-w-[353px] text-msu-maroon xl:max-w-[720px] mt-20">The same vision with a better mission</h3>
-            <h4 class="headings h4 text-msu-rusty-red max-w-[720px] mt-20">VISION</h4>
-            <p class="paragraph p1 text-black-pure xl:max-w-[720px] xs:max-w-[325px] mt-10">A university in the Sulu Archipelago renowned for Fisheries, Marine and Environmental Science and other disciplines.</p>
-            <h4 class="headings h4 text-msu-rusty-red max-w-[720px] mt-20">MISSION</h4>
-            <p class="paragraph p1 text-black-pure xl:max-w-[720px] xs:max-w-[325px] mt-10">
-                To fulfill its mandate, MSU-TCTO shall:<br /><br />
-                a) Provide relevant quality education especially to Muslims and other indigenous groups;<br /><br />
-                
-                b) Promote environmental conservation and sustainable utilization of fisheries and marine resources;<br /><br />
-                
-                c) Develop and transfer new knowledge and innovative technology to the community; and<br /><br />
-                
-                d) Engage stakeholders in peace and socio-economic development endeavors.
+            <!-- Responsive Subheading -->
+            <p class="font-philosopher text-lg sm:text-xl md:text-2xl text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto animate-fadeInUp delay-100 leading-relaxed">
+                Creating Opportunities • Transforming Lives
             </p>
-        </div> -->
+        </div>
+        
+        <div class="mt-8 sm:mt-12" data-aos="fade-up" data-aos-delay="300">
+            <div class="flex flex-col sm:flex-row gap-4">
+                <div class="mt-8 sm:mt-12" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <!-- History Button with enhanced gradient hover -->
+                        <a href="#history-section" class="explore-btn relative overflow-hidden group hover:bg-gradient-to-r from-msu-main-color to-msu-deep-ocean transition-all duration-500">
+                            <span class="relative z-10 px-6 py-3 sm:px-8 sm:py-4 flex items-center text-white group-hover:text-white">
+                                Explore Our History
+                                <svg class="ml-2 w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1 sm:group-hover:translate-x-2 duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                </svg>
+                            </span>
+                            <span class="absolute inset-0 bg-gradient-to-r from-msu-main-color to-msu-deep-ocean opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+                        </a>
+                
+                        <!-- Mission Button with enhanced gradient hover -->
+                        <a href="#mission-section" class="explore-btn relative overflow-hidden group hover:bg-gradient-to-r from-msu-main-color to-msu-deep-ocean transition-all duration-500">
+                            <span class="relative z-10 px-6 py-3 sm:px-8 sm:py-4 flex items-center text-white group-hover:text-white">
+                                Our Vision & Mission
+                                <svg class="ml-2 w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1 sm:group-hover:translate-x-2 duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                </svg>
+                            </span>
+                            <span class="absolute inset-0 bg-gradient-to-r from-msu-main-color to-msu-deep-ocean opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+                        </a>
 
-        <!-- <div id="hymn" class="bg-black-pure flex flex-col  items-center xl:px-[358px] xs:px-[44px] gap-[80px] " >
-            <div class="">
-                <h4 class="headings text-msu-maroon h3 mt-[80px] xl:w-[718px] xs:w-[412px] text-center">The MSU Hymn</h4>
-                <figure>
-                    <audio controls class="xs:mx-[44px] xl:h-[60px] xs:h-[50px] xl:w-[720px] xs:w-[318px] xs:mt-[50px]">
-                        <source src="/audio/himno_tcto.mp3" type="audio/mpeg">
-                    </audio>
-                </figure>
-            </div>
-            <div class="flex xs:flex-col xl:flex-row gap-[120px] mb-[130px]">  -->
-                <!-- <div class="">
-                    <div class="video-wrapper">
-                        <iframe class="flex xs:mx-[44px] xl:mb-[90px] xs:mb-[74px] rounded-[40px] xl:w-[721px] xs:w-[323px] xl:h-[490px] xs:h-[225px]" 
-                            src="https://www.youtube.com/embed/p4VyE0-Vnrs?autoplay=0&mute=0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-                        </iframe>
-                       
-
-                        <figure>
-                            <audio controls class="xs:mx-[44px] xl:h-[60px] xs:h-[50px] xl:w-[720px] xs:w-[318px]">
-                                <source src="/audio/himno_tcto.mp3" type="audio/mpeg">
-                            </audio>
-                        </figure>
+                        <!-- Academic Button with enhanced gradient hover -->
+                        <a href="#academic-section" class="explore-btn relative overflow-hidden group hover:bg-gradient-to-r from-msu-main-color to-msu-deep-ocean transition-all duration-500">
+                            <span class="relative z-10 px-6 py-3 sm:px-8 sm:py-4 flex items-center text-white group-hover:text-white">
+                                Our Academic
+                                <svg class="ml-2 w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1 sm:group-hover:translate-x-2 duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                </svg>
+                            </span>
+                            <span class="absolute inset-0 bg-gradient-to-r from-msu-main-color to-msu-deep-ocean opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+                        </a>
                     </div>
-                </div> -->
+                </div>
+                    
+                    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                <!-- <div class="xl:block xs:hidden">
-                    <p class="paragraph p1 w-[400px] text-white-pure">
-                        Silahis ang katulad mong
-                        nagsabog ng liwanag
-                        <br> <br>
-                        Ng pag-asa't hangarin
-                        ng pag-unlad.
-                        <br> <br>
-    
-                        Ang pook ng Mindanao
-                        tinanglaw at pinalad,
-                        <br> <br>
-    
-                        Nang ika'y isilang
-                        na dakila ang hangad.
-                        <br> <br>
-    
-                        Ating ipagkapuri
-                        Itong Pamantasan,
-                        <br> <br>
-    
-                        Ang buhay at pag-ibig
-                        sa kanya'y iaalay;
-                        <br> <br>
-    
-                        Saan man naroroon
-                        ay bigyang karangalan,
-                        <br> <br>
-    
-                        Dakilang paaralan
-                        Pamantasang Mindanao.
+       
+        <!-- History Timeline with Interactive Elements -->
+        <section class="relative z-10 py-28 px-6 max-w-8xl mx-auto bg-white">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <span class="text-[#61063B] uppercase tracking-widest text-sm">Our Legacy</span>
+                <h2 class="text-4xl md:text-5xl font-bold mt-4 mb-6 text-gray-900">Chronicles of Excellence</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-[#61063B] to-[#61063B] mx-auto"></div>
+            </div>
+
+            <!-- Interactive Timeline -->
+            <div class="timeline-container relative">
+                <!-- Timeline Line -->
+                <div class="timeline-line absolute left-1/2 h-full w-1 bg-gradient-to-b from-[#61063B] via-msu-deep-ocean to-[#61063B] transform -translate-x-1/2"></div>
+<!-- Timeline Item 1 -->
+<div class="timeline-item mb-32 group" data-year="1964">
+    <div class="timeline-content transform transition-all duration-500 group-hover:scale-105" data-aos="fade-up">
+        <div class="timeline-dot absolute left-1/2 -ml-3 w-6 h-6 rounded-full bg-[#D4AF37] border-4 border-[#61063B] transform -translate-x-1/2 group-hover:scale-150 group-hover:bg-[#61063B] transition-all duration-300"></div>
+        <div class="timeline-card bg-white p-8 rounded-xl shadow-lg border-l-4 border-[#61063B]">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 md:pr-12 mb-8 md:mb-0">
+                    <span class="text-[#61063B] font-medium">1964</span>
+                    <h3 class="text-2xl font-bold mb-4 mt-2 text-gray-900">Humble Beginnings</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        Starting in 1964 as Mindanao State University Preparatory High School in Bongao, Tawi-Tawi, a mere adjunct to MSU Marawi
+                         Preparatory High School, MSU Tawi-Tawi College of Technology and Oceanography has grown into an institution of academic
+                          excellence. More secondary schools were established from 1967 to 1977 in the outlying island municipalities of Tawi-Tawi.
+                           By 1990, 20 high schools were put up throughout the province. In 1984, MSU-TCTO Science High School and MSU-TCTO Child
+                            Development Center – Laboratory Elementary School were established.
+
+                            Republic Act 6060 gave birth to MSU-Sulu College of Technology and Oceanography on August 4, 
+                            1969, initially offering degree programs and diploma in Fisheries Technology.
                     </p>
                 </div>
-            </div>  
-            
-        </div> -->
-        
-
-        <!-- <div class="bg-msu-maroon">
-            <div class="flex flex-col items-center xl:gap-[80px]">
-                <div class=" xl:mb-[90px]">
-                    <h4 class="headings text-white-pure xl:h3 xs:h4 mt-[80px] xl:w-[1438px]  xs:mx-[50px] text-center">A Center of Excellence & Development</h4>
+                <div class="md:w-1/2 overflow-hidden rounded-lg">
+                    <img 
+                        src="/images/a breif history 1.png" 
+                        alt="MSU TCTO Early Years" 
+                        class="w-full h-auto rounded-lg shadow-md transform transition-all duration-500 group-hover:scale-110"
+                    />
                 </div>
-                <div class="flex flex-col xl:gap-[5px] xs:gap-[12px] xs:mb-[78px] xs:mt-[31px]">
-                    <p class="paragraph p1 text-center text-msu-golden-fog xs:mx-[31px]">Center of Excellence in Field</p>
-                    <p class="paragraph p1 text-center text-msu-golden-fog xs:mx-[31px]">Center of Excellence in Field</p>
-                    <p class="paragraph p1 text-center text-msu-golden-fog xs:mx-[31px]">Center of Excellence in Field</p>
-                    <p class="paragraph p1 text-center text-msu-golden-fog xs:mx-[31px]">Center of Excellence in Field</p>
-                    <p class="paragraph p1 text-center text-msu-golden-fog xs:mx-[31px]">Center of Excellence in Field</p>
-                    <p class="paragraph p1 text-center text-msu-golden-fog xs:mx-[31px]">Center of Excellence in Field</p>
-                </div>
-            
             </div>
-        </div> -->
-        <!-- <div class="text-center mb-[84px] ">
-            <div class="flex flex-col items-center gap-[120px]">
-                <h3 class="headings xl:h3 xs:h5 mt-[80px] mb-[120px] xl:w-[960px] xs:mx-[50px]">More courses offered in more areas of knowledge</h3>
-            
-            </div>
-            
-            -->
-            <!-- <College_Logo_Swiper client:visible /> -->
-            <!-- <MySwiper client:load /> -->
-            <!-- <div class="xl:hidden xs:block">
-                <MySwiper client:load />
-            </div> -->
+        </div>
+    </div>
+</div>
 
-            <!-- desktop view -->
-            <!-- <div class="flex flex-col gap-[120px] mb-[120px] xl:block xs:hidden">
-                <div class="flex flex-col gap-[40px]  xl:mb-[40px]">
-                    <div class="gap-[330px] flex xl:flex-row xs:flex-col xl:px-[12.5%] xs:px-[3.85%] xl:mb-[10px] justify-center ">
-                        <img src="/images/College Logo/LOGO CAS.png" alt="" class="xl:w-[150px] xl:h-[150px] ">
-                        <img src="/images/College Logo/LOGO CIAS.png" alt="" class="xl:w-[150px] xl:h-[150px] ">
-                        <img src="/images/College Logo/LOGO COED.png" alt="" class="xl:w-[150px] xl:h-[150px] ">
+<!-- Timeline Item 2 -->
+<div class="timeline-item mb-32 group" data-year="1969">
+    <div class="timeline-content transform transition-all duration-500 group-hover:scale-105" data-aos="fade-up">
+        <div class="timeline-dot absolute left-1/2 -ml-3 w-6 h-6 rounded-full bg-[#D4AF37] border-4 border-[#61063B] transform -translate-x-1/2 group-hover:scale-150 group-hover:bg-[#61063B] transition-all duration-300"></div>
+        <div class="timeline-card bg-white p-8 rounded-xl shadow-lg border-l-4 border-[#61063B]">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 order-2 md:order-1 overflow-hidden rounded-lg">
+                    <img 
+                        src="/images/a breif history 2.png" 
+                        alt="MSU TCTO Growth" 
+                        class="w-full h-auto rounded-lg shadow-md transform transition-all duration-500 group-hover:scale-110"
+                    />
+                </div>
+                <div class="md:w-1/2 md:pl-12 mb-8 md:mb-0 order-1 md:order-2">
+                    <span class="text-[#61063B] font-medium">1969-1990</span>
+                    <h3 class="text-2xl font-bold mb-4 mt-2 text-gray-900">Establishment & Growth</h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        In 1973, Tawi-Tawi became a separate province from Sulu, and MSU-SCTO became MSU-Tawi-Tawi College of Technology and Oceanography per BP Blg. 197. In 1990 it became an autonomous university campus.
+
+                        In its more than four decades of existence, it has steadfastly pursued its vision to be the center of excellence in Fisheries, Marine and Maritime Sciences and Engineering, and Oceanography, in its mission to
+                         give Muslims and other cultural minorities access to quality education and develop such other programs as will promote Muslim welfare and hasten 
+                         socio-economic development of the southernmost region of the country.
+                        
+                        MSU-TCTO is comprised of the following academic units: the College of Fisheries, College of Arts and Sciences, College of Education, 
+                        Institute of Environmental and Oceanography Studies, College of Islamic and Arabic Studies, and the Institute of Information and
+                         Communications Technology.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Timeline Item 3 (LAST ITEM) -->
+    <div class="timeline-item mb-32 group" data-year="1990">
+        <div class="timeline-content transform transition-all duration-500 group-hover:scale-105" data-aos="fade-up">
+            <div class="timeline-dot absolute left-1/2 -ml-3 w-6 h-6 rounded-full bg-[#D4AF37] border-4 border-[#61063B] transform -translate-x-1/2 group-hover:scale-150 group-hover:bg-[#61063B] transition-all duration-300"></div>
+            <div class="timeline-card bg-white p-8 rounded-xl shadow-lg border-l-4 border-[#61063B]">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 md:pr-12 mb-8 md:mb-0">
+                        <span class="text-[#61063B] font-medium">1990-Present</span>
+                        <h3 class="text-2xl font-bold mb-4 mt-2 text-gray-900">Modern Development</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            The extension services of the college include providing capability building trainings and functional 
+                            literacy programs to the Tawi-Tawians. The local folks are empowered through education and entrepreneurial development.
+
+                            The college has continued to undertake researches in fisheries aquaculture,
+                            and marine related sciences, as well as in the social sciences. These initiatives
+                            are designed to promote sustainable utilization and rational management of the marine 
+                            and fisheries resources of the area, with the aim of improving the standard of living of the people of Southern Philippines.
+                        </p>
                     </div>
-                    <div class="flex xl:flex-row xs:flex-col xl:px-[12.5%] xs:px-[3.85%] justify-center ">
-                        <p class="paragraph xl:p1 text-white-pure w-[480px] flex justify-center">College of Arts and Sciences</p>
-                        <p class="paragraph xl:p1 text-white-pure w-[480px] flex justify-center ">College of Islamic & Arabic Studies</p>
-                        <p class="paragraph xl:p1 text-white-pure w-[480px] flex justify-center">College of Education</p>
+                    <div class="md:w-1/2 overflow-hidden rounded-lg">
+                        <img 
+                            src="/images/development.png" 
+                            alt="MSU TCTO Modern Era" 
+                            class="w-full h-auto rounded-lg shadow-md transform transition-all duration-500 group-hover:scale-110"
+                        />
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- Close timeline-container -->
+<!-- Transformation Section with Comparison Slider -->
+<div class="mb-28" data-aos="fade-up">
+    <div class="text-center mb-16">
+        <span class="text-[#61063B] uppercase tracking-widest text-sm">Transformation</span>
+        <h2 class="text-4xl md:text-5xl font-bold mt-4 mb-6 text-gray-900">From Then To Now</h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-[#61063B] to-[#61063B] mx-auto"></div>
+    </div>
     
+    <div class="comparison-slider bg-white p-8 rounded-xl shadow-md">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2 overflow-hidden rounded-xl">
+                <img 
+                    src="/images/campus-now-2.png" 
+                    alt="Current Campus" 
+                    class="w-full h-full object-cover rounded-xl transform transition-all duration-700 hover:scale-105"
+                />
+            </div>
+            <div class="grid grid-rows-2 gap-6">
+                <div class="overflow-hidden rounded-xl">
+                    <img 
+                        src="/images/campus-now-1.png" 
+                        alt="Campus Building" 
+                        class="w-full h-full object-cover rounded-xl transform transition-all duration-700 hover:scale-105"
+                    />
+                </div>
+                <div class="overflow-hidden rounded-xl">
+                    <img 
+                        src="/images/Masjid Nuruul Iman.png" 
+                        alt="Masjid Nuruul Iman" 
+                        class="w-full h-full object-cover rounded-xl transform transition-all duration-700 hover:scale-105"
+                    />
+                </div>
+                <div class="overflow-hidden rounded-xl">
+                    <img 
+                        src="/images/development.png" 
+                        alt="MSUTCTO" 
+                        class="w-full h-full object-cover rounded-xl transform transition-all duration-700 hover:scale-105"
+                    />
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-12">
+            <h3 class="text-3xl font-bold mb-6 text-gray-900">A Legacy of Growth & Innovation</h3>
+            <p class="text-xl text-gray-600 max-w-4xl mx-auto">
+                From modest beginnings to a thriving academic community, our campus transformation mirrors our educational evolution.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Close the timeline container div -->
+</div>
+            
+       
+    <!-- Vision Section -->
+    <section id="mission-section" class="py-20 bg-white"><!-- Mission Section -->
+        <div class="container mx-auto px-6">
+          <div class="max-w-4xl mx-auto text-center">
+            <span class="inline-block bg-msu-rusty-red/10 text-msu-rusty-red px-4 py-2 rounded-full text-sm font-semibold mb-6 animate-fade-in">
+              OUR VISION
+            </span>
+            <h2 class="headings text-3xl md:text-4xl font-bold text-msu-maroon mb-8 animate-fade-in-up">
+              A university in the Sulu Archipelago renowned for Fisheries, Marine and Environmental Science
+            </h2>
+            <div class="relative">
+              <div class="absolute -inset-4 bg-msu-rusty-red/10 rounded-xl blur-sm opacity-75 animate-pulse-slow"></div>
+              <p class="paragraph text-lg md:text-xl text-gray-700 relative z-10 leading-relaxed animate-fade-in-up delay-100">
+                We envision MSU-TCTO as a beacon of excellence in marine sciences, environmental studies, and related disciplines, serving as a catalyst for sustainable development in the Sulu Archipelago region.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+  
+      <!-- Mission Section -->
+      <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+          <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+              <span class="inline-block bg-msu-rusty-red/10 text-msu-rusty-red px-4 py-2 rounded-full text-sm font-semibold animate-fade-in">
+                OUR MISSION
+              </span>
+              <h2 class="headings text-3xl md:text-4xl font-bold text-msu-maroon mt-4 mb-6 animate-fade-in-up">
+                Commitment to Excellence and Service
+              </h2>
+            </div>
+  
+            <!-- Mission Items Grid -->
+            <div class="grid md:grid-cols-2 gap-8">
+              <!-- Item 1 -->
+              <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-msu-maroon animate-fade-in-up delay-100">
+                <div class="text-msu-maroon text-4xl mb-4">01</div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Quality Education</h3>
+                <p class="text-gray-600">
+                  Provide relevant quality education especially to Muslims and other indigenous groups
+                </p>
+              </div>
+  
+              <!-- Item 2 -->
+              <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-msu-maroon animate-fade-in-up delay-200">
+                <div class="text-msu-maroon text-4xl mb-4">02</div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Environmental Stewardship</h3>
+                <p class="text-gray-600">
+                  Promote environmental conservation and sustainable utilization of fisheries and marine resources
+                </p>
+              </div>
+  
+              <!-- Item 3 -->
+              <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-msu-maroon animate-fade-in-up delay-300">
+                <div class="text-msu-maroon text-4xl mb-4">03</div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Knowledge Transfer</h3>
+                <p class="text-gray-600">
+                  Develop and transfer new knowledge and innovative technology to the community
+                </p>
+              </div>
+  
+              <!-- Item 4 -->
+              <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-msu-maroon animate-fade-in-up delay-400">
+                <div class="text-msu-maroon text-4xl mb-4">04</div>
+                <h3 class="text-xl font-bold text-gray-800 mb-3">Community Engagement</h3>
+                <p class="text-gray-600">
+                  Engage stakeholders in peace and socio-economic development endeavors
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+<!-- Academic Units Section - Enhanced with Custom Icons -->
+<section class="relative z-10 py-20 px-6 max-w-7xl mx-auto" id="academic-section">
+    <div class="text-center mb-16" data-aos="fade-up">
+        <span class="text-[#61063B] uppercase tracking-widest text-sm">Academics</span>
+        <h2 class="text-4xl md:text-5xl font-bold mt-4 mb-6 text-gray-900">Our Academic Units</h2>
+        <div class="w-24 h-1 bg-gradient-to-r from-[#61063B] to-[#D4AF37] mx-auto"></div>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto mt-6">
+            Offering diverse programs that foster innovation, research, and community development
+        </p>
+    </div>
+
+    <!-- Academic Units Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- College of Fisheries -->
+        <div class="academic-card group" data-aos="fade-up" data-aos-delay="100">
+            <div class="icon-box bg-[#61063B] group-hover:bg-msu-deep-ocean">
+                <!-- Dolphin Icon -->
+                <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M20 10c0 4.4-3.6 8-8 8s-8-3.6-8-8 3.6-8 8-8 8 3.6 8 8z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16 10c0 2.2-1.8 4-4 4s-4-1.8-4-4 1.8-4 4-4 4 1.8 4 4z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 16v-2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 text-[#61063B]">College of Fisheries</h3>
+            <p class="text-gray-600 mb-4">
+                Premier institution for marine sciences and fisheries technology in Southern Philippines.
+            </p>
+            <ul class="space-y-2 text-gray-600">
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    MS in Aquaculture
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    BS in Food Technology
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                   Diploma in Fisheries Technology (Aquaculture)
+                </li>
+            </ul>
+        </div>
+
+        <!-- College of Islamic and Arabic Studies -->
+        <div class="academic-card group" data-aos="fade-up" data-aos-delay="150">
+            <div class="icon-box bg-[#61063B] group-hover:bg-msu-deep-ocean">
+                <!-- Mosque Icon -->
+                <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M12 2L2 7v10l10 5 10-5V7L12 2z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 22V12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M17 7v10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M7 7v10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 7h20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 text-[#61063B]">College of Islamic and Arabic Studies</h3>
+            <p class="text-gray-600 mb-4">
+                Preserving and advancing Islamic knowledge and Arabic language studies.
+            </p>
+            <ul class="space-y-2 text-gray-600">
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Master of Arts in Islamic Education
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    BA in Islamic Studies (Sharia)
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    BS in Teaching Arabic
+                </li>
+            </ul>
+        </div>
+
+        <!-- College of Education -->
+        <div class="academic-card group" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon-box bg-[#61063B] group-hover:bg-msu-deep-ocean">
+                <!-- Graduation Cap Icon -->
+                <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M4 13v8a2 2 0 002 2h12a2 2 0 002-2v-8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 3L2 7l10 4 10-4-10-4z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.53 9C4.6 8.8 3 7.1 3 5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.53 9c.3.6.8 1 1.47 1h10c.67 0 1.17-.4 1.47-1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 text-[#61063B]">College of Education</h3>
+            <p class="text-gray-600 mb-4">
+                Developing exceptional educators and education professionals.
+            </p>
+            <ul class="space-y-2 text-gray-600">
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    PhD in Education Management
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Bachelor of Elementary Education
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    MA in Education (Educational Management)
+                </li>
+            </ul>
+        </div>
+
+        <!-- College of Arts and Science -->
+        <div class="academic-card group" data-aos="fade-up" data-aos-delay="100">
+            <div class="icon-box bg-[#61063B] group-hover:bg-msu-deep-ocean">
+                <!-- Atom Icon -->
+                <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <circle cx="12" cy="12" r="1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 2v2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 20v2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M4.93 4.93l1.41 1.41" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M17.66 17.66l1.41 1.41" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 12h2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M20 12h2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.34 17.66l-1.41 1.41" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M19.07 4.93l-1.41 1.41" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 text-[#61063B]">College of Arts and Science</h3>
+            <p class="text-gray-600 mb-4">
+                Comprehensive liberal arts and sciences education with diverse disciplines.
+            </p>
+            <ul class="space-y-2 text-gray-600">
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Master in Public Administration
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Bachelor of Public Administration
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Master of Science in Teaching Mathematics
+                </li>
+            </ul>
+        </div>
+
+        <!-- Institute of Information and Communication Technology -->
+        <div class="academic-card group" data-aos="fade-up" data-aos-delay="150">
+            <div class="icon-box bg-[#61063B] group-hover:bg-msu-deep-ocean">
+                <!-- Computer Chip Icon -->
+                <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <rect x="4" y="4" width="16" height="16" rx="2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <rect x="9" y="9" width="6" height="6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 1v3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M15 1v3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 20v3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M15 20v3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M20 9h3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M20 14h3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M1 9h3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M1 14h3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 text-[#61063B]">Institute of ICT</h3>
+            <p class="text-gray-600 mb-4">
+                Cutting-edge technology education for the digital age.
+            </p>
+            <ul class="space-y-2 text-gray-600">
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                  BS in Information Technology
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                  BS in Computer Applications
+                </li>
+                <!-- <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Cybersecurity
+                </li> -->
+            </ul>
+        </div>
+
+        <!-- Institute of Oceanography and Environmental Science -->
+        <div class="academic-card group" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon-box bg-[#61063B] group-hover:bg-msu-deep-ocean">
+                <!-- Wave Icon -->
+                <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M2 15c4 3 8 3 12 0s8-3 12 0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 9c4-3 8-3 12 0s8 3 12 0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 3c4 3 8 3 12 0s8-3 12 0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 text-[#61063B]">Institute of Oceanography & Environmental Science</h3>
+            <p class="text-gray-600 mb-4">
+                Pioneering research in marine conservation and environmental sustainability.
+            </p>
+            <ul class="space-y-2 text-gray-600">
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    BS in Environmental Science
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                   BS in Marine Science
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Climate Change Studies
+                </li>
+            </ul>
+        </div>
+
+        <!-- College of Law -->
+        <div class="academic-card group" data-aos="fade-up" data-aos-delay="250">
+            <div class="icon-box bg-[#61063B] group-hover:bg-msu-deep-ocean">
+                <!-- Scale of Justice Icon -->
+                <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M12 3v18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8 7l4-4 4 4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8 17l4 4 4-4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M20 11h-4a4 4 0 01-4-4V3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M4 11h4a4 4 0 004-4V3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 text-[#61063B]">College of Law</h3>
+            <p class="text-gray-600 mb-4">
+                Developing ethical legal professionals with a commitment to justice.
+            </p>
+            <ul class="space-y-2 text-gray-600">
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Juris Doctor
+                </li>
+                <!-- <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    International Law
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Maritime Law
+                </li> -->
+            </ul>
+        </div>
+    </div>
+
+    <!-- View All Programs Button -->
+    <div class="text-center mt-16" data-aos="fade-up">
+        <a href="/404.astro" class="inline-flex items-center px-8 py-3 border border-[#61063B] text-[#61063B] rounded-full hover:bg-[#61063B] hover:text-white transition-all duration-300">
+            View All Academic Programs
+            <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+        </a>
+    </div>
+</section>
+            <!-- Interactive Map Section -->
+            <div class="mb-28 bg-white p-8 rounded-xl shadow-md" data-aos="fade-up">
+                <div class="text-center mb-12">
+                    <span class="text-[#61063B] uppercase tracking-widest text-sm">Location</span>
+                    <h2 class="text-4xl md:text-5xl font-bold mt-4 mb-6 text-gray-900">Our Island Home</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-[#61063B] to-[#D4AF37] mx-auto"></div>
                 </div>
                 
-    
-                <div class="flex flex-col  gap-[40px] xl:mb-[40px]">
-                    <div class="gap-[330px] flex xl:flex-row xs:flex-col xl:px-[12.5%] xs:px-[3.85%] xl:mb-[10px] justify-center ">
-                        <img src="/images/College Logo/LOGO COF.png" alt="" class="xl:w-[150px] xl:h-[150px] ">
-                        <img src="/images/College Logo/LOGO IICT.png" alt="" class="xl:w-[150px] xl:h-[150px] ">
-                        <img src="/images/College Logo/LOGO IOES.png" alt="" class="xl:w-[150px] xl:h-[150px] ">
+                <div class="interactive-map-container relative overflow-hidden rounded-xl h-96 bg-gray-100 border border-gray-200">
+                    <!-- Map placeholder with university colors -->
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="text-center p-8 bg-white/90 rounded-lg shadow-sm max-w-md mx-4">
+                            <h3 class="text-2xl font-bold mb-4 text-[#61063B]">Bongao-Tawi-Tawi, Philippines</h3>
+                            <p class="text-gray-600 mb-6">
+                                Located in the southernmost part of the country, our campus thrives in this unique marine biodiversity hotspot.
+                            </p>
+                            <a href="https://maps.app.goo.gl/1NP5FqQ2J9eSzg6y7" target="_blank" rel="noopener noreferrer"
+                            class="inline-block border border-[#61063B] text-[#61063B] px-6 py-2 rounded-full hover:bg-[#61063B] hover:text-white transition-all duration-300">
+                             View Campus Map
+                         </a>
+                         
+                        </div>
                     </div>
-                    <div class="flex xl:flex-row xs:flex-col xl:px-[12.5%] xs:px-[3.85%] justify-center ">
-                        <p class="paragraph xl:p1 text-white-pure w-[480px] flex justify-center ">College of Fisheries</p>
-                        <p class="paragraph xl:p1 text-white-pure w-[480px] flex justify-center">Institute of Information and Communication Technology</p>
-                        <p class="paragraph xl:p1 text-white-pure w-[480px] flex justify-center">Institute of Oceanography and Environmental Science</p>
-                    </div>
-    
                 </div>
+            </div>
+        </section>
 
-            </div> -->
-            <!-- <div class="flex flex-col justify-center xl:block xs:hidden">
-
-                <div class="flex justify-center">
-                    <a href="#" class="paragraph p1 bg-transparent text-white-pure w-[480px] py-[12.5px] px-[30.5px] rounded-[40px] border border-msu-white-pure">Contact us</a>
-                </div> 
-                <div class="flex justify-center mb-[20px]">
-                    <a href="#" class="paragraph p1 bg-white-pure w-[480px] py-[12.5px] px-[30.5px] rounded-[40px]">Check our Enrollment Procedures</a>
-                </div>
-                <div class="flex justify-center">
-                    <a href="#" class="paragraph p1 bg-transparent text-white-pure w-[480px] py-[12.5px] px-[30.5px] rounded-[40px] border border-msu-white-pure">Administrative Offices</a>
-                </div>
-            </div> -->
-        <!-- </div> -->
-
-<!-- FooterNaV -->
-        <!-- <MainVideo /> -->
-<!-- end FooterNaV -->
-
-<!-- FooterNaV -->
-        <FooterNav />
-<!-- end FooterNaV -->
-
-<!-- Footer -->
-		<Footer />
-<!-- end Footer -->
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" aria-label="Scroll to top">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+      </svg>
+    </button>
 
 
+        <!-- Footer Navigation -->
+        <FooterNav class="relative z-50" />
+        
+        <!-- Footer -->
+        <Footer class="relative z-50" />
     </main>
-	
 </Layout>
+
+<!-- HTML file -->
+<script src="../../js/animate.js" ></script>
+<script src="../../js/loadinganim.js" ></script>
+<script src="../../js/smoothscroll.js" ></script>
+

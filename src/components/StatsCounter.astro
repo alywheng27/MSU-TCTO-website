@@ -1,0 +1,100 @@
+---
+// src/components/StatsCounter.astro
+import type { UniversityStats } from '../api/api';
+
+interface Props {
+  students: number;
+  faculty: number;
+  programs: number;
+  research: number;
+}
+
+const { students, faculty, programs, research } = Astro.props;
+
+// Format numbers with commas
+const formatNumber = (num: number) => {
+  return new Intl.NumberFormat('en-US').format(num);
+};
+---
+
+<div class="bg-white py-16">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <!-- Students Counter -->
+      <div class="p-6">
+        <div class="text-5xl font-bold text-msu-maroon mb-3" data-count={students}>
+          0
+        </div>
+        <h3 class="text-xl font-semibold text-gray-700">Students</h3>
+      </div>
+      
+      <!-- Faculty Counter -->
+      <div class="p-6">
+        <div class="text-5xl font-bold text-msu-maroon mb-3" data-count={faculty}>
+          0
+        </div>
+        <h3 class="text-xl font-semibold text-gray-700">Faculty</h3>
+      </div>
+      
+      <!-- Programs Counter -->
+      <div class="p-6">
+        <div class="text-5xl font-bold text-msu-maroon mb-3" data-count={programs}>
+          0
+        </div>
+        <h3 class="text-xl font-semibold text-gray-700">Programs</h3>
+      </div>
+      
+      <!-- Research Projects Counter -->
+      <div class="p-6">
+        <div class="text-5xl font-bold text-msu-maroon mb-3" data-count={research}>
+          0
+        </div>
+        <h3 class="text-xl font-semibold text-gray-700">Research Projects</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Animation script -->
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const counters = document.querySelectorAll('[data-count]');
+    const speed = 200; // Animation duration in ms
+    
+    counters.forEach(counter => {
+      const target = +counter.getAttribute('data-count');
+      const count = +counter.innerText;
+      const increment = target / speed;
+      
+      if (count < target) {
+        const updateCount = () => {
+          const currentCount = +counter.innerText;
+          const newCount = Math.ceil(currentCount + increment);
+          
+          if (newCount < target) {
+            counter.innerText = formatNumber(newCount);
+            setTimeout(updateCount, 1);
+          } else {
+            counter.innerText = formatNumber(target);
+          }
+        };
+        
+        updateCount();
+      } else {
+        counter.innerText = formatNumber(target);
+      }
+    });
+    
+    // Helper function to format numbers with commas
+    function formatNumber(num) {
+      return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+    }
+  });
+</script>
+
+<style>
+  /* Add some subtle animation */
+  [data-count] {
+    transition: all 0.3s ease-out;
+  }
+</style>

@@ -7,102 +7,206 @@ import MainVideo from "../../components/MainVideo.astro";
 import FooterNav from "../../components/FooterNav.astro";
 import Footer from "../../components/Footer.astro";
 import FacultyAndStaff from "../../components/FacultyAndStaff";
-
-
 import '../../styles/css/global.css';
-// import '../../styles/css/facultycard.css';
-
-// import DataTableComponent from '../../components/DataTableComponent';
-
-
-
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
-// import FacultySearch from '../../components/FacultySearch';
+import '../../styles/css/globalanimate.css';
 
 
 const currentPath = Astro.url.pathname;
-
-// Sample data for the table
-// const data = [
-//   { name: 'John Doe', age: 28, occupation: 'Engineer', profilePicture: 'https://randomuser.me/api/portraits/men/1.jpg' },
-//   { name: 'Jane Smith', age: 34, occupation: 'Designer', profilePicture: 'https://randomuser.me/api/portraits/women/1.jpg' },
-//   { name: 'Bob Brown', age: 45, occupation: 'Manager', profilePicture: 'https://randomuser.me/api/portraits/men/2.jpg' },
-//   { name: 'Alice Johnson', age: 22, occupation: 'Developer', profilePicture: 'https://randomuser.me/api/portraits/women/2.jpg' },
-//   { name: 'Michael White', age: 29, occupation: 'Chef', profilePicture: 'https://randomuser.me/api/portraits/men/3.jpg' },
-//   { name: 'Sarah Lee', age: 31, occupation: 'Teacher', profilePicture: 'https://randomuser.me/api/portraits/women/3.jpg' },
-//   { name: 'David Kim', age: 38, occupation: 'Doctor', profilePicture: 'https://randomuser.me/api/portraits/men/4.jpg' },
-//   { name: 'Emily Davis', age: 26, occupation: 'Nurse', profilePicture: 'https://randomuser.me/api/portraits/women/4.jpg' },
-//   { name: 'Chris Green', age: 41, occupation: 'Pilot', profilePicture: 'https://randomuser.me/api/portraits/men/5.jpg' },
-//   { name: 'Anna Black', age: 24, occupation: 'Writer', profilePicture: 'https://randomuser.me/api/portraits/women/5.jpg' },
-//   { name: 'James Young', age: 33, occupation: 'Photographer', profilePicture: 'https://randomuser.me/api/portraits/men/6.jpg' },
-//   { name: 'Olivia Brown', age: 27, occupation: 'Architect', profilePicture: 'https://randomuser.me/api/portraits/women/6.jpg' },
-//   { name: 'Henry White', age: 42, occupation: 'Lawyer', profilePicture: 'https://randomuser.me/api/portraits/men/7.jpg' },
-//   { name: 'Chloe Martin', age: 35, occupation: 'Therapist', profilePicture: 'https://randomuser.me/api/portraits/women/7.jpg' },
-//   { name: 'Jake Wilson', age: 37, occupation: 'Firefighter', profilePicture: 'https://randomuser.me/api/portraits/men/8.jpg' },
-//   { name: 'Lily Scott', age: 30, occupation: 'Social Worker', profilePicture: 'https://randomuser.me/api/portraits/women/8.jpg' },
-//   { name: 'Samuel Clark', age: 28, occupation: 'Scientist', profilePicture: 'https://randomuser.me/api/portraits/men/9.jpg' },
-//   { name: 'Sophia Miller', age: 33, occupation: 'Librarian', profilePicture: 'https://randomuser.me/api/portraits/women/9.jpg' },
-//   { name: 'Ryan Moore', age: 39, occupation: 'Consultant', profilePicture: 'https://randomuser.me/api/portraits/men/10.jpg' },
-//   { name: 'Isabella Perez', age: 25, occupation: 'Musician', profilePicture: 'https://randomuser.me/api/portraits/women/10.jpg' },
-// ];
-
 ---
 
-
-
-
-
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
-	<main>
-		<Navbar path={currentPath} client:visible />       
-    
-    
-    <div id="facultyStaff" class=" bg-msu-dark-ocean xl:pt-[80px] xs:pt-[80px]  xs:pb-[57px]">
-            
-      <div class="text-center xl:px-[12.5%] xl:mb-[40px] xs:mb-[75px] xs:px-[3.85%]  xl:bg-none">
-          <h4 class="headings xl:h4 xs:h4 text-white-pure xl:mb-[80px] xs:mb-[80px]">Faculty & Staff</h4>
-          <FacultyAndStaff client:only="react" />
+
+
+  <Navbar path={currentPath} client:visible />       
+  <!-- Loading Animation -->
+  <!-- <div id="loading-animation" class="fixed inset-0 z-50 flex items-center justify-center bg-white transition-opacity duration-500">
+    <div class="relative w-24 h-24">
+      <div class="absolute inset-0 border-4 border-t-[#61063B] border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin"></div>
+      <div class="absolute inset-4 border-4 border-t-[#61063B] border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin animation-delay-200"></div>
+      <div class="absolute inset-8 border-4 border-t-[#61063B] border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin animation-delay-400"></div>
+      <div class="absolute inset-0 flex items-center justify-center">
+        <img src="/images/MSU Seal New (Official).png" alt="University Logo" class="w-12 h-12" />
       </div>
+    </div>
+  </div> -->
 
-  </div>
-<!--             
+  <main class="font-sans antialiased text-gray-800">
 
+<!-- Video Hero Section -->
+<section class="relative h-screen min-h-[800px] overflow-hidden">
+    <!-- Video Background -->
+    <div class="absolute inset-0 z-0">
+        <video 
+            autoplay 
+            loop 
+            muted 
+            playsinline 
+            class="w-full h-full object-cover"
+            poster="/images/video-poster.jpg"
+        >
+            <source src="/video/msucamp.mp4" type="video/mp4">
+            <!-- Fallback image if video doesn't load -->
+            <img src="/images/msucampus.jpg" alt="MSU Tawi-Tawi Campus" class="w-full h-full object-cover">
+        </video>
+        <!-- Enhanced Video overlay with gradient -->
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-msu-main-color/70 to-msu-deep-ocean/90"></div>
+    </div>
+    
+    <!-- Update the hero content section -->
+    <div class="relative z-20 h-full flex flex-col justify-center items-center text-center px-4 sm:px-6 max-w-6xl mx-auto">
+        <div class="mb-8 px-4" data-aos="fade-up" data-aos-duration="1000">
+            <span class="text-white font-medium tracking-widest text-sm sm:text-base">EST. 1964</span>
+              <!-- Responsive Typography with Perfect Scaling -->
+        <h1 class="font-philosopher text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight tracking-tight animate-fadeInUp">
+            <span class="block text-shadow-md">Mindanao State University</span>
+            <span class="block font-bold mt-2 sm:mt-3 text-shadow">Tawi-Tawi College of Technology and Oceanography</span>
+        </h1>
 
-            <div class="text-center xs:px-[66px]">
-                <h3 class="headings xl:h3 xs:h4 text-msu-rusty-red ">Academic Offices</h3>
-                <div class="flex flex-col gap-[20px] justify-center xl:ml-0 xs:ml-0 xl:mt-0 xs:mt-10 pt-10 ">
-                    <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">COLLEGE OF ARTS AND SCIENCES</p>
-                    <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">COLLEGE OF ISLAMIC & ARABIC STUDIES</p>
-                    <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">COLLEGE OF EDUCATION</p>
-                    <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">COLLEGE OF FISHERIES</p>
-                    <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">INSTITUTE OF INFORMATION & COMMUNICATIONS TECHNOLOGY</p>
-                    <p class="paragraph xl:p2 xs:p2 text-charcoal text-center">INSTITUTE OF OCEANOGRAPHY & ENVIRONMENTAL SCIENCE</p>
-                    
-                </div> -->
-     
-                <!-- <ReactTable /> -->
-                <!-- <div  class="App">
-                  <ReactTable data={data} /> -->
-                    <!-- <DataTableComponent columns={columns} data={data} /> -->
-                    <!-- <FacultySearch facultyList={facultyList} /> -->
-                  </div>
-
-          
-
-            
-           
+   
+        
+            <!-- Enhanced gradient divider with animation -->
+            <!-- <div class="w-24 sm:w-32 h-1 bg-gradient-to-r from-white via-msu-main-color to-white mx-auto my-4 sm:my-6 transform transition-all duration-1000 hover:scale-x-110 hover:via-[#D4AF37]"></div> -->
+                
+            <!-- Responsive Subheading -->
+            <p class="font-philosopher text-lg sm:text-xl md:text-2xl text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto animate-fadeInUp delay-100 leading-relaxed">
+                Excellence in Technology and Oceanographic Studies
+            </p>
         </div>
-<!-- end Academic Offices -->
+        
+        <div class="mt-8 sm:mt-12" data-aos="fade-up" data-aos-delay="300">
+            <div class="flex flex-col sm:flex-row gap-4">
+                <div class="mt-8 sm:mt-12" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex flex-col sm:flex-row gap-4">
+                     
+                
+                        <!--     Our Faculty & Staf  Button with enhanced gradient hover -->
+                        <a href="#faculty" class="explore-btn relative overflow-hidden group hover:bg-gradient-to-r from-msu-main-color to-msu-deep-ocean transition-all duration-500">
+                            <span class="relative z-10 px-6 py-3 sm:px-8 sm:py-4 flex items-center text-white group-hover:text-white">
+                                Our Faculty & Staf
+                                <svg class="ml-2 w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1 sm:group-hover:translate-x-2 duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                </svg>
+                            </span>
+                            <span class="absolute inset-0 bg-gradient-to-r from-msu-main-color to-msu-deep-ocean opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+                        </a>
 
-<!-- FooterNaV -->
-        <FooterNav />
-<!-- end FooterNaV -->
+                    </div>
+                </div>
+                    
+                    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<!-- Footer -->
-		<Footer />
-<!-- end Footer -->
 
-	</main>
-	
+              <!-- <p class="font-philosopher text-lg sm:text-xl md:text-2xl text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto animate-fadeInUp delay-100 leading-relaxed">
+                 Excellence in Technology and Oceanographic Studies Since 1971
+            </p>
+       -->
+    <!-- Faculty & Staff Section -->
+    <!-- <section id="facultyStaff" class="bg-[#f8f9fa] py-20">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-[#61063B] mb-4">Faculty & Staff</h2>
+          <div class="w-24 h-1 bg-[#FFC107] mx-auto"></div>
+          <p class="text-gray-600 mt-6 max-w-2xl mx-auto">
+            Meet our distinguished faculty members and dedicated staff who are committed to academic excellence and student success.
+          </p>
+        </div> -->
+        
+        <div id="faculty" class="bg-white rounded-xl shadow-xl overflow-hidden">
+          <FacultyAndStaff client:only="react" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Global Recognition -->
+    <!-- <section class="py-20 bg-[#03045e] text-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold mb-4">Internationally Recognized Excellence</h2>
+          <div class="w-24 h-1 bg-[#FFC107] mx-auto"></div>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div class="text-center p-6 bg-msu-deep-ocean bg-opacity-10 rounded-lg hover:bg-opacity-20 transition-all">
+            <div class="text-5xl font-bold mb-2">150+</div>
+            <div class="text-lg">International Partnerships</div>
+          </div>
+          <div class="text-center p-6 bg-msu-deep-ocean bg-opacity-10 rounded-lg hover:bg-opacity-20 transition-all">
+            <div class="text-5xl font-bold mb-2">TOP 5%</div>
+            <div class="text-lg">World University Rankings</div>
+          </div>
+          <div class="text-center p-6 bg-msu-deep-ocean bg-opacity-10 rounded-lg hover:bg-opacity-20 transition-all">
+            <div class="text-5xl font-bold mb-2">95%</div>
+            <div class="text-lg">Graduate Employment Rate</div>
+          </div>
+          <div class="text-center p-6 bg-msu-deep-ocean bg-opacity-10 rounded-lg hover:bg-opacity-20 transition-all">
+            <div class="text-5xl font-bold mb-2">50+</div>
+            <div class="text-lg">Research Centers</div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+
+        <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" aria-label="Scroll to top">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+      </svg>
+    </button>
+
+
+    <!-- Footer Navigation -->
+    <FooterNav />
+    
+    <!-- Footer -->
+    <Footer />
+  </main>
 </Layout>
+
+<script src="../../js/animate.js" ></script>
+<script src="../../js/loadinganim.js" ></script>
+<script src="../../js/smoothscroll.js" ></script>
+
+
+<style is:global>
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .animate-spin {
+    animation: spin 1.5s linear infinite;
+  }
+  
+  .animation-delay-200 {
+    animation-delay: 0.2s;
+  }
+  
+  .animation-delay-400 {
+    animation-delay: 0.4s;
+  }
+  
+  /* Hide loading animation when page loads */
+  html.wf-active #loading-animation,
+  html.loaded #loading-animation {
+    opacity: 0;
+    pointer-events: none;
+  }
+</style>
+
+<script is:inline>
+  // Hide loading animation when page is loaded
+  window.addEventListener('load', function() {
+    document.documentElement.classList.add('loaded');
+    setTimeout(function() {
+      document.getElementById('loading-animation').style.display = 'none';
+    }, 500);
+  });
+</script>

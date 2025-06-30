@@ -7,274 +7,257 @@ import MainVideo from "../../components/MainVideo.astro";
 import FooterNav from "../../components/FooterNav.astro";
 import Footer from "../../components/Footer.astro";
 import '../../styles/css/global.css';
-
+import '../../styles/css/globalanimate.css';
 
 const currentPath = Astro.url.pathname;
 ---
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
-	<main>
-<!-- fold 01 - Header -->
-		<Navbar path={currentPath} client:visible />
-<!-- end fold 01 -->
+  <main class="font-sans antialiased">
 
-<!-- fold 02 -->
-<!--  -->
-		<div class="bg-msu-deep-ocean text-center xl:px-[12.5%] xs:px-[3.85%] xl:pb-[68px] xs:pb-[48px]">
-			<div class="item-center">
-				<h4 class="headings xl:h4 xl:pl-[28.5%] xl:pr-[28.5%] xs:h5 xs:px-[60px]">Creating Opportunities, Transforming Lives</h4>
-				<p class="paragraph text-silver xl:p1 xs:p2 xl:pt-[27px] xl:pl-[28.5%] xl:pr-[28.5%] xs:py-[38px] xs:px-[37px]">MSU-TCTO welcomes adept and curious students who wish to excel in academics, arts, research, and community extension. Inclusion and diversity are the core of our operations.</p>
-			</div>
+          <Navbar path={currentPath} client:visible />
+    <!-- Hero Section -->
+    <section class="relative bg-msu-main-color text-white overflow-hidden  pt-[120px]">
+      <div class="absolute inset-0 z-0 opacity-20">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-msu-deep-ocean"></div>
+      </div>
+      
 
-			<div class="flex justify-center mt-[86px]">
-				<div>
-					<img src="/images/aaccup.png" alt="" class=" xl:h-[200px] xl:block xs:h-[200px]">
-					
-				</div>
-				<div>
-					<img src="/images/graduation/image1.png" alt="" class=" xl:h-[200px] xl:block xs:h-[200px]">
-					
-				</div>
-				<div>
-					<img src="/images/ched.png" alt="" class=" xl:h-[200px] xl:block xs:hidden">
-				</div>
-				<div>
-					<img src="/images/welcome_freshies.png" alt="" class=" xl:h-[200px] xl:block xs:hidden">
-					
-				</div>
-				<div>
-					<img src="/images/admission_page/image1.png" alt="" class=" xl:h-[200px] xl:block xs:hidden">
-					
-				</div>
-				<div>
-					<img src="/images/graduation/image2.png" alt="" class=" xl:h-[200px] xl:block xs:hidden">
-				</div>
-			</div>
-			<div class="grid xl:grid-cols-3 xs:grid-cols-2 justify-items-center mt-[27px]">
-				<div class="p-5 max-w-[360px]">
-					<h3 class="headings xl:h3 xs:h4"><span class="counter" data-target="12">0</span>+</h3>
-					<p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px]">AACCUP Program Certified</p>
-				</div>
-				<div class="p-5 max-w-[360px]">
-					<h3 class="headings xl:h3 xs:h4"><span class="counter" data-target="39">0</span>+</h3>
-					<p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px]">Programs offered</p>
-				</div>
-				<div class="p-5 max-w-[360px] xl:block xs:hidden">
-					<h3 class="headings xl:h3 xs:h4"><span class="counter" data-target="3772">0</span>+</h3>
-					<p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px]">Total graduates and counting</p>
-				</div>
-			</div>
-			
-			<div class="mt-[34px] mb-[34px] xl:hidden xs:block">
-				<div class="p-5 item-center">
-					<h3 class="headings xl:h3 xs:h4"><span class="counter" data-target="3772">0</span>+</h3>
-					<p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px]">Total graduates and counting</p>
-				</div>
-			</div>
-			
-			<div class="grid grid-cols-2 justify-items-center mt-[27px]">
-				<div class="p-5 max-w-[360px]">
-					<h3 class="headings xl:h3 xs:h4"><span class="counter" data-target="98">0</span>+</h3>
-					<p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px]">Acclaimed Researches</p>
-				</div>
-				<div class="p-5 max-w-[360px]">
-					<h3 class="headings xl:h3 xs:h4"><span class="counter" data-target="3008">0</span>+</h3>
-					<p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px]">Student Scholars</p>
-				</div>
-			</div>
-		</div>
-<!-- end fold 02 -->
+      
+      <div class="container mx-auto px-6 py-24 md:py-32 lg:py-40 text-center relative z-10">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+          Creating Opportunities,<br class="hidden md:block"> Transforming Lives
+        </h1>
+        <p class="text-xl md:text-2xl text-silver max-w-3xl mx-auto mb-12">
+          MSU-TCTO welcomes adept and curious students who wish to excel in academics, arts, research, technology, and community extension. Inclusion and diversity are the core of our operations.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a href="#admission" class="bg-msu-maroon hover:bg-msu-rusty-red text-white px-8 py-4 rounded-lg font-medium transition duration-300 transform hover:scale-105">
+            Apply Now
+          </a>
+          <a href="/404.astro" class="bg-transparent border-2 border-white hover:bg-white hover:text-msu-deep-ocean text-white px-8 py-4 rounded-lg font-medium transition duration-300">
+            Explore Programs
+          </a>
+        </div>
+      </div>
+    </section>
 
-<!-- fold 03 -->
-		<AdmissionProcedure client:visible />
-<!-- end fold 03 -->
-{/* 
-<!-- fold 04 -->
-		<!-- <div class="bg-msu-deep-ocean  w-full px-[12.5%] pt-20" id="scholarship">
-			<div class="text-center">
-				
-				<h3 class="headings xl:h3 xs:h4 text-white-pure">Scholarship and Grants offered in the Campus</h3> -->
-				<!-- <h3 class="headings xl:h3 xs:h4 pt-[27px] pl-[28.5%] pr-[28.5%]">Scholarships and Grants</h3> -->
-			</div>
+    <!-- Stats Section -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div class="p-6 rounded-xl hover:shadow-lg transition duration-300">
+            <div class="text-4xl md:text-5xl font-bold text-msu-main-color mb-2 counter" data-target="12">0</div>
+            <div class="text-gray-600">AACCUP Program Certified</div>
+          </div>
+          <div class="p-6 rounded-xl hover:shadow-lg transition duration-300">
+            <div class="text-4xl md:text-5xl font-bold text-msu-main-color mb-2 counter" data-target="39">0</div>
+            <div class="text-gray-600">Programs Offered</div>
+          </div>
+          <div class="p-6 rounded-xl hover:shadow-lg transition duration-300">
+            <div class="text-4xl md:text-5xl font-bold text-msu-main-color mb-2 counter" data-target="3772">0</div>
+            <div class="text-gray-600">Total Graduates</div>
+          </div>
+          <div class="p-6 rounded-xl hover:shadow-lg transition duration-300">
+            <div class="text-4xl md:text-5xl font-bold text-msu-main-color mb-2 counter" data-target="3008">0</div>
+            <div class="text-gray-600">Student Scholars</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-			<div class="grid xl:grid-cols-2 xs:grid-cols-1 gap-20 mt-[27px] ">
-				<div class="p-1 text-center">
-					<p class="paragraph xl:p1 xs:p2 text-white-pure">EXTERNALLY-FUNDED</p>
-					<p class="paragraph  xl:p1 xs:p2 text-silver mt-[40px]">
-						This is a special scholarship for Fisheries, Marine Biology, Environmental Science and for Badjao students whose objectives are to attract more enrollees to the mandated programs, to increase the number of academically better students taking these programs, to help enhance efforts at gainfully strengthening such programs, and to augment the campus support for the Badjaos who comprise the main indigenous group in this province.
-						<br><br>
-						This special scholarship was first funded from the P5,000,000 allocated by the national government for this campus beginning AY 2014-15. Such was reflected in FY 2014 GAA (R.A. 10633).
-						
-					</p>
-					<!-- <p class="paragraph  xl:p1 xs:p2 text-msu-crimson-ground text-center mt-[40px]">Click here to know more!</p> -->
-				</div>
-				<div class="p-1 text-center xl:block xs:hidden">
-					<p class="paragraph  xl:p1 xs:p2 text-white-pure">INTERNALLY-FUNDED</p>
-					<p class="paragraph  xl:p1 xs:p2 text-silver mt-[40px]">
-						
-						1. Academic Scholarship
-						<br>
-						2. MSU Tawi-Tawi Scholarship for Science and Mathematics (SSM)<br>
-						3. Cultural Community Grant (CCG)<br>
-						4. Skill/Talent Study Grant (Tambuli Cultural Troupe, Band memebers and Athletes)<br>
-						(Internally-funded)SCHOLARSHIP POLICIES (BOR RES #66, 2013)<br>
-						<br><br>
-					</p>
-					<!-- <p class="paragraph  xl:p1 xs:p2 text-msu-crimson-ground text-center mt-[40px]">Click here to know more!</p> -->
-				</div>
-			</div>
-			<!-- <p class="paragraph  xl:p1 xs:p2 text-msu-crimson-ground text-center mt-[40px] xl:block xs:hidden">Click here to know more!</p> -->
+ <style>
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            animation: marquee 30s linear infinite;
+            display: inline-flex;
+        }
+        .logo-item {
+            display: inline-flex;
+            align-items: center;
+            margin: 0 3rem;
+            min-width: 180px;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+    </style>
 
-			<div class="mt-[86px] xl:px-[28.5px] xs:px-[12px] mb-[60px] xl:hidden xs:block">
-				<div class="p-1 text-center">
-					<p class="paragraph  xl:p1 xs:p2 text-white-pure">INTERNALLY-FUNDED
-					</p>
-					<p class="paragraph xl:p1 xs:p2 text-silver mt-[40px] ">
-						Lorem ipsum dolor sit amet consectetur. Viverra feugiat sollicitudin sit lacus sagittis cursus at sodales nunc. Hendrerit lectus nibh cras faucibus maecenas. Aliquam viverra enim massa cras. Viverra turpis senectus viverra a eu turpis quis. Varius vestibulum urna in rhoncus laoreet.
-						<br><br>
-						Lorem ipsum dolor sit amet consectetur. Viverra feugiat sollicitudin sit lacus sagittis cursus at sodales nunc. Hendrerit lectus nibh cras faucibus maecenas. Aliquam viverra enim massa cras. Viverra turpis senectus viverra a eu turpis quis. Varius vestibulum urna in rhoncus laoreet.
-					</p>
-					<!-- <p class="paragraph  xl:p1 xs:p2 text-msu-crimson-ground text-center mt-[40px]">Click here to know more!</p> -->
+     <section class="py-20 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header -->
+            <div class="text-center mb-16">
+                <span class="inline-block mb-4 px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full">
+                    OUR PARTNERS
+                </span>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    <span class="gradient-text">Trusted Worldwide</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Collaborating with leading institutions across the globe
+                </p>
+            </div>
 
-				</div>
-			</div>
-
-			<div class="mt-[86px] xl:px-[28.5px] xs:px-[12px] mb-[60px]">
-				<div class="p-1 text-center">
-					<h3 class="headings xl:h3 xs:h4 text-white-pure">General Policies On Scholarships And Grants For
-						The MSU Tawi-Tawi Campus</h3>
-					<p class="paragraph  xl:p1 xs:p2 text-white-pure mt-[20px]">(TERTIARY LEVEL)</p>
-					<p class="paragraph xl:p1 xs:p2 text-silver mt-[40px] ">
-						Privileges granted to a select group of students in the campus are generally classified as scholarships or grants. A scholarship refers to privileges obtained on the basis of one’s high score in the MSU System Admission and Scholarship Examination (SASE) (administered annually throughout Mindanao) or very good scholastic performance. A grant, while not disregarding such factors, is based more on other attributes such as special skills or one’s ethnic origin.
-					</p>
-					<!-- <p class="paragraph  xl:p1 xs:p2 text-msu-crimson-ground text-center mt-[40px]">Click here to know more!</p> -->
-
-				</div>
-			</div>
-		</div>
-<!-- end fold 04 -->
-
-<!-- fold 05 -->
-		<div class="admissions-fold-05-gb-img w-full  pt-20">
-			<div class="item-center">
-				<h3 class="headings text-center text-msu-rusty-red xl:h3 xs:h4 xl:pt-[80px] xs:pt-[62px] pl-[12.5%] pr-[12.5%]">You can have any of these</h3>
-			</div>
-
-			<!-- <div class="place-items-center xs:pt-[48px] text-center paragraph xs:p2 text-msu-rusty-red xs:block xl:hidden ">
-                <select id="programs" class=" border-b-msu-crimson-ground border-b-2 xs:w-[210px] xs:px-[10px]">
-                    <option id=" " class="paragraph p2 text-black-pure ">Academic Scholarship</option>
-                    <option id=" " class="paragraph p2 text-black-pure">MSU Tawi-Tawi Scholarship
-						for Science and Mathematics
-						(SSM)</option>
-                    <option id=" " class="paragraph p2 text-black-pure">Special Privileges for
-						Academic Excellence</option>
-                    <option id=" " class="paragraph p2 text-black-pure">The Badjao Grant</option>
-                    <option id=" " class="paragraph p2 text-black-pure">Skill/Talent Study Grant</option>
-                    <option id=" " class="paragraph p2 text-black-pure">Fisheries Technology Study
-						Grant (Fish Tech Grant)</option>
-                </select>
-            </div> -->
-			
-			<div class="xl:flex justify-center mt-10 xl:px-[12.5%]">
-				<!-- <div class="m-5 xl:block xs:hidden">
-					<div class="flex flex-col gap-[20px] paragraph text-graphite mt-[20px]">
-						<a href="#" class="paragraph xl:p1 xs:p2 text-msu-maroon w-[255px] mt-10">Scholarships and Grants</a>
-						<a href="#">MSU Tawi-Tawi Scholarship for Science and Mathematics (SSM)</a>
-						<a href="#">Academic Scholarship for Non- Science / Mathematics Courses (NSM)</a>
-						<a href="#">Academic Scholarship for Science and Mathematics Courses (SSM)</a>
-						<a href="#">Special Muslim Grant (SMG)</a>
-						<a href="#">Cultural Community Grant (CCG)</a>
-						<a href="#">The Badjao Student Grant (Badjao Grant)</a>
-						<a href="#">Talent/Skill Study Grant (TSG)</a>
-						<a href="#">“On-the-Job Training” (OJT) Grant</a>
-						<a href="#">SCUBA Training Grant (Scuba Grant)</a>
-						<a href="#">Review for Licensure Examinations Grant (Review Grant)</a>
-					</div>
-
-				</div> -->
-				
-				<div class="m-5 xl:px-[12.5%] xs:px-[0%] ">
-					<h4 class="headings h4 text-msu-maroon mt-10 xl:block xs:hidden">Scholarships and Grants</h4>
-					<div class="paragraph p2 mt-[10px] text-black-pure">
-						<p class="paragraph xl:p1 xs:p2 pt-[27px] text-justify">
-							Privileges granted to a select group of students in the MSU-Tawi-Tawi campus are generally classified as scholarships or grants.
-							A scholarship refers to privileges obtained on the basis of one’s a sufficiently high score in the Mindanao State University System Admission and Scholarship Examination (MSU-SASE) or an academic performance deemed at least “very good”. A grant, requiring only a minimum level of scholastic proficiency, is based more on other attributes such as special skills or talents, indigent family background, or even one’s ethnic origin.    
-						</p>
-						
-						<p class="paragraph  xl:p1 xs:p2 pt-[27px]">A. TYPES OF SCHOLARSHIPS AND REGULAR GRANTS; QUALIFICATIONS FOR 
-							AWARDING; PRIVILEGES AND CONDITIONS FOR MAINTENANCE
-						</p>
-						<div class="flex flex-col gap-[20px] paragraph text-graphite mt-[20px] ml-[50px]">
-							<a href="#">A1. MSU Tawi-Tawi Scholarship for Science and Mathematics (SSM)</a>
-							<a href="#">A2. Academic Scholarship for Non- Science / Mathematics Courses (NSM)</a>
-							<a href="#">A3. Academic Scholarship for Science and Mathematics Courses (SSM)</a>
-							<a href="#">A4. Special Muslim Grant (SMG)</a>
-							<a href="#">A5. Cultural Community Grant (CCG)</a>
-							<a href="#">A6. The Badjao Student Grant (Badjao Grant)</a>
-							<a href="#">A7. Talent/Skill Study Grant (TSG)</a>
-						</div>
-
-						<p class="paragraph  xl:p1 xs:p2 pt-[27px]">B. OTHER STUDENT GRANTS </p>
-						<div class="flex flex-col gap-[20px] paragraph text-graphite mt-[20px] ml-[50px]">
-							<a href="#">B1. “On-the-Job Training” (OJT) Grant</a>
-							<a href="#">B2. SCUBA Training Grant (Scuba Grant)</a>
-							<a href="#">B3. Review for Licensure Examinations Grant (Review Grant)</a>
-						</div>
-
-					</div>
-				</div>
-					
-			</div>
-			<div class="text-center pb-[79px] mt-[50px]">
-				<!-- <p class="paragraph text-msu-crimson-ground xl:p1 xs:p2 mb-5">Need more help of information?</p>
-				<a href="" class="bg-transparent border border-msu-crimson-ground paragraph xl:p1 xs:p2 gap-10 text-msu-crimson-ground py-[10.5px] px-[60px] rounded-[40px]">Contact us now!</a> -->
-			</div>
-		</div>
-<!-- end fold 05 -->
-		
-
-<!--  Academic Calendar -->
-		<AcademicCalendar />
-<!-- end  Academic Calendar -->
+            <!-- Logo Marquee -->
+            <div class="relative h-40 w-full overflow-hidden">
+                <!-- Gradient fade -->
+                <div class="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-gray-50 to-transparent z-10"></div>
+                <div class="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-gray-50 to-transparent z-10"></div>
+                
+                <!-- Marquee Container -->
+                <div class="absolute inset-0 flex items-center">
+                    <div class="animate-marquee whitespace-nowrap">
+                        <!-- Logo Set 1 -->
+                        <div class="logo-item">
+                             <img src="/InternationalPartnership/UNIVERSITAS JENDERAL SOEDIRMAN, INDONESIA.png" alt="UNIVERSITAS JENDERAL SOEDIRMAN" class="h-26 object-contain opacity-90 hover:opacity-100 transition-all duration-300">
+                        </div>
+                        <div class="logo-item">
+                             <img src="/InternationalPartnership/UNIVERSITAS MUHAMMADIYAH YOGYAKARTA, INDONESIA.png"  alt=" UNIVERSITAS MUHAMMADIYAH YOGYAKARTA" class="h-26 object-contain opacity-90 hover:opacity-100 transition-all duration-300">
+                        </div>
+                        <div class="logo-item">
+                             <img src="/InternationalPartnership/INSTITUTE OF PERTANIAN BOGOR (IPB).png"  alt="INSTITUTE OF PERTANIAN BOGOR" class="h-26 object-contain opacity-90 hover:opacity-100 transition-all duration-300">
+                        </div>
+                        <div class="logo-item">
+                           <img src="/InternationalPartnership/UNIVERSITI ISLAM SULTAN SHARIF ALI (UNISSA).png"  alt="UNIVERSITI ISLAM SULTAN SHARIF ALI" class="h-26 object-contain opacity-90 hover:opacity-100 transition-all duration-300">
+                        </div>
+                        <div class="logo-item">
+                             <img src="/InternationalPartnership/THE UNIVERSITY OF HONG KONG.png"  alt="THE UNIVERSITY OF HONG KONG" class="h-26 object-contain opacity-90 hover:opacity-100 transition-all duration-300">
+                        </div>
+                        <div class="logo-item">
+                            <img src="/InternationalPartnership/NATIONAL KAOHSIUNG UNIVERSITY OF SCIENCE AND TECHNOLOGY (NKUST-CHS).png"  alt="NATIONAL KAOHSIUNG UNIVERSITY" class="h-26 bject-contain opacity-90 hover:opacity-100 transition-all duration-300">
+                        </div>
+                        <div class="logo-item">
+                             <img src="/InternationalPartnership/KOLEJ UNIVERSITI PERGURUAN UGAMA SERI BEGAWAN BRUNEI DARUSSALAM.png" alt="KOLEJ UNIVERSITI PERGURUAN UGAMA SERI BEGAWAN BRUNEI DARUSSALAM" class="h-26 object-contain opacity-90 hover:opacity-100 transition-all duration-300">
+                        </div>
+                        <div class="logo-item">
+                            <img src="/InternationalPartnership/UNIVERSITY OF MALAYA.png"  alt="UNIVERSITY OF MALAYA" class="h-26 object-contain opacity-90 hover:opacity-100 transition-all duration-300">
+                        </div>
+                        
+                        <!-- Logo Set 2 (Duplicate for seamless looping) -->
+                        <div class="logo-item">
+                            <img src="/InternationalPartnership/UNIVERSITAS TEKNOLOGI SUMBAWA.png"  alt="UNIVERSITAS TEKNOLOGI SUMBAWA" class="h-26 object-contain opacity-90 hover:opacity-100 transition-all duration-300">
+                        </div>
+                        <div class="logo-item">
+                           <img src="/InternationalPartnership/UNIVERSAITAS LAMPUNG, INDONESIA.png" alt="UNIVERSAITAS LAMPUNG, INDONESIA" class="h-26 object-contain opacity-90 hover:opacity-100 transition-all duration-300">
+                        </div>
+                        <div class="logo-item">
+                           <img src="/InternationalPartnership/UNIVERSITI TEKNOLOGY BRUNEI.png"  alt="UNIVERSITI TEKNOLOGY BRUNEI" class="h-26 object-contain opacity-90 hover:opacity-100 transition-all duration-300">
+                        </div>
+                        <div class="logo-item">
+                            <img src="/InternationalPartnership/UNIVERSITI TEKNOLOGI MARA.png"  alt="UNIVERSITI TEKNOLOGI MARA" class="h-26 object-contain opacity-90 hover:opacity-100 transition-all duration-300">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
 
 
-<!-- Main video -->
-		<MainVideo />
-<!-- end Main video -->
-*/}
-<!-- FooterNaV -->
-		<FooterNav />
-<!-- end FooterNaV -->
 
-<!-- Footer -->
-		<Footer />
-<!-- end Footer -->
+    <!-- Admission Procedure -->
+    <section id="admission" class="py-16 bg-gray-100">
+      <AdmissionProcedure client:visible />
+    </section>
 
-	</main>
-	
+    <!-- Video Highlight -->
+    <section class="py-16 bg-msu-deep-ocean">
+      <MainVideo />
+    </section>
 
-	<script>
-		document.addEventListener("DOMContentLoaded", () => {
-    const counters = document.querySelectorAll('.counter');
-    const speed = 200; // Adjust speed (lower = faster)
+    <!-- Academic Calendar -->
+    <!-- <section class="py-16 bg-gray-50">
+      <AcademicCalendar />
+    </section> -->
 
-    counters.forEach(counter => {
+    <!-- Call to Action -->
+    <!-- <section class="py-20 bg-msu-deep-ocean text-white">
+      <div class="container mx-auto px-6 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Start Your Journey?</h2>
+        <p class="text-xl text-silver max-w-2xl mx-auto mb-8">
+          Join our diverse community of scholars and innovators shaping the future of Tawi-Tawi and beyond.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a href="#admission" class="bg-white text-msu-deep-ocean hover:bg-gray-100 px-8 py-4 rounded-lg font-medium transition duration-300 transform hover:scale-105">
+            Apply for Admission
+          </a>
+          <a href="#" class="bg-transparent border-2 border-white hover:bg-white hover:text-msu-deep-ocean px-8 py-4 rounded-lg font-medium transition duration-300">
+            Schedule a Campus Tour
+          </a>
+        </div>
+      </div>
+    </section> -->
+
+
+
+  </main>
+  
+
+  <script>
+    // Enhanced counter animation
+    document.addEventListener("DOMContentLoaded", () => {
+      const counters = document.querySelectorAll('.counter');
+      const animationDuration = 2000; // 2 seconds
+      const frameDuration = 1000 / 60; // 60fps
+      const totalFrames = Math.round(animationDuration / frameDuration);
+      
+      const easeOutQuad = t => t * (2 - t);
+
+      counters.forEach(counter => {
+        const target = +counter.getAttribute('data-target');
+        let frame = 0;
+        
         const updateCount = () => {
-            const target = +counter.getAttribute('data-target');
-            const count = +counter.innerText.replace(/,/g, ''); // Remove commas for calculation
-            const increment = target / speed;
-
-            if (count < target) {
-                counter.innerText = Math.ceil(count + increment).toLocaleString(); // Add commas back
-                setTimeout(updateCount, 1);
-            } else {
-                counter.innerText = target.toLocaleString(); // Ensure final value has commas
-            }
+          frame++;
+          const progress = easeOutQuad(frame / totalFrames);
+          const currentCount = Math.round(target * progress);
+          
+          counter.textContent = currentCount.toLocaleString();
+          
+          if (frame < totalFrames) {
+            requestAnimationFrame(updateCount);
+          } else {
+            counter.textContent = target.toLocaleString();
+          }
         };
-
-        updateCount();
+        
+        // Start animation when counter is in viewport
+        const observer = new IntersectionObserver((entries) => {
+          if (entries[0].isIntersecting) {
+            updateCount();
+            observer.unobserve(counter);
+          }
+        });
+        
+        observer.observe(counter);
+      });
     });
-});
-	</script>
+  </script>
 </Layout>
- 
+
+    
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" aria-label="Scroll to top">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+      </svg>
+    </button>
+
+
+
+    <!-- Footer Navigation -->
+    <FooterNav />
+
+    <!-- Footer -->
+    <Footer />
+
+
+        <script src="../../js/animate.js" ></script>
+        <script src="../../js/loadinganim.js" ></script>
+        <script src="../../js/smoothscroll.js" ></script>
