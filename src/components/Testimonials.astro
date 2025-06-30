@@ -1,0 +1,139 @@
+---
+// src/components/Testimonials.astro
+
+interface Testimonial {
+  name: string;
+  role: string;
+  graduationYear: number;
+  quote: string;
+  image: string;
+  program: string;
+}
+
+// Sample data - replace with your actual data source
+const testimonials: Testimonial[] = [
+  {
+    name: "Dr. Aisha Mohammad",
+    role: "Marine Biologist",
+    graduationYear: 2015,
+    quote: "MSU-TCTO provided me with the research opportunities that launched my international career in marine conservation.",
+    image: "/images/testimonials/alumni-1.jpg",
+    program: "BS in Marine Biology"
+  },
+  {
+    name: "Rafiq Hassan",
+    role: "Software Engineer",
+    graduationYear: 2018,
+    quote: "The cutting-edge IT program at MSU-TCTO gave me the skills to compete globally in the tech industry.",
+    image: "/images/testimonials/alumni-2.jpg",
+    program: "BS in Information Technology"
+  },
+  {
+    name: "Sarah Jamal",
+    role: "Education Specialist",
+    graduationYear: 2020,
+    quote: "The holistic approach to teacher education prepared me to make an impact in diverse learning environments.",
+    image: "/images/testimonials/alumni-3.jpg",
+    program: "BS in Elementary Education"
+  }
+];
+---
+
+<div class="bg-gray-50 py-20">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-bold text-msu-main-color mb-4">
+        Voices of Our Community
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Hear from our alumni and students about their MSU-TCTO experiences
+      </p>
+    </div>
+
+    <div class="relative max-w-5xl mx-auto">
+      <!-- Testimonial Carousel -->
+      <div class="glide">
+        <div class="glide__track" data-glide-el="track">
+          <ul class="glide__slides">
+            {
+              testimonials.map((testimonial) => (
+                <li class="glide__slide">
+                  <div class="bg-white rounded-xl shadow-lg p-8 md:p-12 flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/3 mb-8 md:mb-0 md:mr-8">
+                      <img 
+                        src={testimonial.image} 
+                        alt={testimonial.name}
+                        class="w-48 h-48 object-cover rounded-full border-4 border-msu-maroon/20 mx-auto"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="md:w-2/3">
+                      <blockquote class="text-lg italic text-gray-700 mb-6">
+                        "{testimonial.quote}"
+                      </blockquote>
+                      <div class="border-t border-gray-200 pt-6">
+                        <h4 class="text-xl font-bold text-msu-main-color">{testimonial.name}</h4>
+                        <p class="text-gray-600">{testimonial.role} • {testimonial.program} '{testimonial.graduationYear}</p>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        
+        <!-- Carousel Controls -->
+        <div class="glide__arrows mt-8 flex justify-center gap-4" data-glide-el="controls">
+          <button class="glide__arrow glide__arrow--left bg-msu-maroon text-white p-3 rounded-full hover:bg-msu-maroon-dark transition" data-glide-dir="<">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button class="glide__arrow glide__arrow--right bg-msu-maroon text-white p-3 rounded-full hover:bg-msu-maroon-dark transition" data-glide-dir=">">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+        
+        <!-- Carousel Bullets -->
+        <div class="glide__bullets mt-6 flex justify-center gap-2" data-glide-el="controls[nav]">
+          {
+            testimonials.map((_, index) => (
+              <button class="glide__bullet w-3 h-3 rounded-full bg-gray-300 hover:bg-msu-maroon transition" data-glide-dir={`=${index}`}></button>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Glide.js Carousel Implementation -->
+<script is:inline src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function() {
+    new Glide('.glide', {
+      type: 'carousel',
+      perView: 1,
+      gap: 40,
+      autoplay: 5000,
+      hoverpause: true,
+      animationDuration: 800
+    }).mount();
+  });
+</script>
+
+<style>
+  .glide__slide {
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+  }
+  .glide__slide--active {
+    opacity: 1;
+  }
+  .glide__bullet--active {
+    background-color: #861F41 !important;
+  }
+</style>

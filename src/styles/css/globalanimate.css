@@ -1,0 +1,280 @@
+
+ html, body {
+  
+  width: 100%;
+}
+  
+    /* Mobile Navbar Fixes */
+    @media (max-width: 768px) {
+      /* Navbar container */
+      .navbar-container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 15px;
+      }
+  
+      /* Mobile menu styles */
+      .mobile-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: white;
+        z-index: 1000;
+        padding: 20px;
+        box-sizing: border-box;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+      }
+  
+      .mobile-menu.open {
+        transform: translateX(0);
+      }
+  
+      .mobile-menu-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 1001;
+      }
+  
+      /* Prevent body scrolling when menu is open */
+      body.menu-open {
+        overflow: hidden;
+        height: 100vh;
+      }
+    }
+  
+    /* Scroll to Top Button - Responsive */
+    .scroll-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #61063B;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 9999;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      border: 2px solid white;
+    }
+    
+    .scroll-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+  
+    @media (max-width: 768px) {
+      .scroll-to-top {
+        width: 40px;
+        height: 40px;
+        bottom: 15px;
+        right: 15px;
+      }
+      
+      .scroll-to-top svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  
+    /* Hero Section Responsiveness */
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2rem !important;
+        line-height: 1.2;
+        padding: 0 15px;
+      }
+  
+      .hero-content h2 {
+        font-size: 1.2rem !important;
+      }
+  
+      .explore-btn {
+        padding: 8px 16px !important;
+        font-size: 0.9rem;
+      }
+    }
+  
+    /* Timeline Responsiveness */
+    @media (max-width: 768px) {
+      .timeline-container {
+        padding: 0 15px;
+      }
+  
+      .timeline-card {
+        padding: 1rem !important;
+      }
+  
+      .timeline-content {
+        margin-left: 0 !important;
+      }
+  
+      .timeline-item {
+        margin-bottom: 2rem !important;
+      }
+    }
+  
+    /* General Section Padding */
+    @media (max-width: 768px) {
+      section {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+      }
+    }
+
+
+    /* Subtle Animated Background Elements */
+    .circles-animation {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    
+    .circles-animation:before {
+        content: '';
+        position: absolute;
+        bottom: -150px;
+        left: -150px;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: rgba(97, 6, 59, 0.05);
+        animation: float 15s infinite linear;
+    }
+    
+    .circles-animation:after {
+        content: '';
+        position: absolute;
+        top: 100px;
+        right: -100px;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: rgba(212, 175, 55, 0.03);
+        animation: float 12s infinite linear reverse;
+    }
+    
+    @keyframes float {
+        0% {
+            transform: translateY(0) rotate(0deg);
+        }
+        100% {
+            transform: translateY(-1000px) rotate(720deg);
+        }
+    }
+    
+    /* Explore Button */
+    .explore-btn {
+        border: 2px solid #61063B;
+        font-weight: 600;
+        letter-spacing: 1px;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+    }
+    
+    .explore-btn:hover {
+        box-shadow: 0 0 20px rgba(97, 6, 59, 0.1);
+    }
+    
+    /* Timeline Styles */
+    .timeline-container {
+        padding: 0 2rem;
+    }
+    
+    .timeline-line {
+        z-index: 1;
+    }
+    
+    .timeline-dot {
+        z-index: 2;
+        box-shadow: 0 0 0 6px rgba(97, 6, 59, 0.1);
+    }
+    
+    /* Mission Cards Hover Effect */
+    .mission-card:hover {
+        box-shadow: 0 10px 30px rgba(97, 6, 59, 0.1) !important;
+        border-color: #61063B !important;
+    }
+    
+    /* Academic Card Icons */
+    .icon-box {
+        box-shadow: 0 5px 15px rgba(97, 6, 59, 0.1);
+    }
+    
+    /* Responsive Timeline */
+    @media (max-width: 768px) {
+        .timeline-line {
+            left: 2rem;
+        }
+        
+        .timeline-content {
+            margin-left: 4rem;
+        }
+    }
+
+    
+    /* Ensure all sections are properly sized */
+    section {
+        width: 100%;
+        position: relative;
+    }
+    
+    /* Fix for timeline items */
+    .timeline-item {
+        width: 100%;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .timeline-content {
+            width: 100%;
+            margin-left: 0;
+            padding: 0 1rem;
+        }
+        
+        .timeline-card {
+            padding: 1.5rem;
+        }
+        
+        .hero-content h1 {
+            font-size: 2rem;
+            line-height: 1.2;
+        }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .animate-spin {
+      animation: spin 1.5s linear infinite;
+    }
+    
+    .animation-delay-200 {
+      animation-delay: 0.2s;
+    }
+    
+    .animation-delay-400 {
+      animation-delay: 0.4s;
+    }
+    
+    /* Hide loading animation when page loads */
+    html.wf-active #loading-animation,
+    html.loaded #loading-animation {
+      opacity: 0;
+      pointer-events: none;
+    }

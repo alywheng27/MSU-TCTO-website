@@ -131,6 +131,8 @@ export async function getSingleLatestArticle() {
   return singleLatestArticle;
 }
 
+
+
 // the single, oldest document
 export async function getSingleOldestArticle() {
   const query = groq`*[_type == "article"] | order(publishedAt asc)[0]{
@@ -320,7 +322,9 @@ export async function get3LatestNews() {
 }
 
 export async function getLatestFeaturedArticle() {
-  const query = groq`*[_type == "article" && featured == true] | order(publishedAt desc)[0] {
+  const query = groq`
+    *[_type == "article"] 
+    | order(publishedAt desc)[0] {
     title,
     slug{
       current
@@ -918,3 +922,36 @@ export const getBanner = async () => {
   const data = await client.fetch(query);
   return data;
 };
+
+
+// api/api.js
+export async function getRelatedArticles(currentArticleId, subjectId, limit = 3) {
+  // Ensure required parameters are provided
+  if (!currentArticleId || !subjectId) {
+    console.error('Missing required parameters for getRelatedArticles');
+    return [];
+  }
+
+  const query = `
+    *[_type == "article" && 
+     _id != $currentArticleId && 
+     references($subjectId)] | 
+    order(publishedAt desc)[0...$limit] {
+      _id,
+      title,
+      slug,
+      publishedAt,
+      mainImage,
+      body,
+      "articleSubject": articleSubject->subject
+    }
+  `;
+  
+  const params = { 
+    currentArticleId, 
+    subjectId, 
+    limit 
+  };
+  
+  return await client.fetch(query, params);
+}

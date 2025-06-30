@@ -12,306 +12,304 @@ const currentPath = Astro.url.pathname;
 ---
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
-	<main>
-		<Navbar path={currentPath} client:visible />
+    <main class="bg-white">
+        <Navbar path={currentPath} client:visible />
 
-<!-- fold 02 -->
-        <div class="bg-msu-deep-ocean w-full   ">
-			<div class="text-center xl:px-[12.5%] xs:px-[3.85%]">
-                <h4 class="headings xl:h4 xs:h5 text-white-pure xl:px-[20.5%] ">
-                    Deploying Pivotal Knowldege to Address the Most Critical Gaps in the Bangsamoro Region
-                </h4>
-				<div class="flex justify-center xl:ml-0 xs:ml-0 xl:mt-[20px] xs:mt-10 ">
-					<p class="paragraph xl:p1 xs:p2 xl:w-[840px] text-titanium  text-center ">
-                        Pursuing academic excellence, intellectual freedom, creative autonomy, specialized learning, and impactful research is our way of life. Gain new insights and expand your worldview with us.
+        <!-- Hero Section -->
+        <div class="relative pt-24 pb-12 bg-msu-main-color">
+            <div class="container mx-auto px-4 xl:px-0 relative">
+                <!-- Breadcrumb -->
+                <div class="mb-8">
+                    <p class="paragraph p2 text-gray-300">
+                        <a href="/home" class="hover:text-msu-gold transition-colors">Home</a> / 
+                        <span class="text-white">Academic Programs</span>
                     </p>
-					
-				</div>
-				<!-- <div class="bg-gradient-ocean h-20 rotate-180 xs:block xl:hidden"></div> -->
-			</div>
-			<div class="flex xl:flex-row justify-center xl:mt-[63px] xs:mt-[48px] xs:px-[3.85%]">
-				<div class="xs:mb-[61px] xl:mb-0">
-					<img src="/images/maas_kamlon.png" class="w-full" alt="">
-				</div>
-				<div class="xs:mb-[61px] xl:mb-0">
-					<img src="/images/image_hatchery.png" class="w-full" alt="">
-				</div>
-				<div class="xs:mb-[61px] xl:mb-0 xl:block xs:hidden">
-					<img src="/images/curriculum_program.png" class="w-full" alt="">
-				</div>
-			</div>
-            <div class="grid xl:grid-cols-3 xs:grid-cols-2 justify-items-center xl:px-[12.5%] pb-[80px] xl:pt-[27px] xs:pt[66px]">
-				<div class="p-5 max-w-[360px]">
-                    <h2 class="flex-col text-center headings xl:h2 xs:h4 text-white-pure">102+</h2>
-					<p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px] text-center">National and International Partners</p>
-				</div>
-				<div class="p-5 max-w-[360px]">
-                    <h2 class="flex-col text-center headings  xl:h2 xs:h4 text-white-pure">55+</h2>
-					<p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px] text-center">On going local research for biodiversity</p>
-				</div>
-				<div class="p-5 max-w-[360px] xl:block xs:hidden">
-                    <h2 class="flex-col text-center headings  xl:h2 xs:h4 text-white-pure">30+</h2>
-					<p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px] text-center">Curriculum programs of TCTO</p>
-				</div>
-			</div>
+                </div>
 
-			<div class="mb-[34px] xl:hidden  xs:block ">
-				<div class="p-5 item-center">
-                    <h2 class="flex-col text-center headings  xl:h2 xs:h4 text-white-pure">30+</h2>
-					<p class="paragraph xl:p1 xs:p2 text-titanium mt-[5px] text-center">Curriculum program of TCTO</p>
-				</div>
-			</div>'
-         
-		</div>
-<!-- end fold 02 -->
-
-        
-<!-- fold 03 -->
-        <div class="flex flex-col align-cneter bg-gradient-maroon w-full xl:px-[12.5%] xs:px-[5.5%] ">
-            <div class="item-center">
-                <h3 class="headings text-center text-white-pure xl:h3 xs:h5 px-[12.5%]  xl:pt-[80px] xs:pt-[40px]">Our Programs</h3>
+                <!-- Hero Content -->
+                <div class="text-center mb-12">
+                    <h1 class="headings text-5xl font-bold text-white mb-6">Our Academic Programs</h1>
+                    <div class="w-24 h-1.5 bg-msu-deep-ocean mx-auto mb-6"></div>
+                    <p class="paragraph p2 text-gray-300 max-w-3xl mx-auto text-lg">
+                        Pursuing academic excellence, intellectual freedom, creative autonomy, specialized learning, and impactful research is our way of life.
+                    </p>
+                </div>
             </div>
-            
-            <!-- <div class="place-items-center xs:pt-[48px] xs:pb-[48px] text-center xs:block xl:hidden">
-                <select id="programs">
-                    <option id="cas" class="paragraph p2 text-white-pure">College of Arts and Science</option>
-                    <option id="cias" class="paragraph p2 text-white-pure">College of Islamic & Arabic Studies</option>
-                    <option id="coed" class="paragraph p2 text-white-pure">College of Education</option>
-                    <option id="cof" class="paragraph p2 text-white-pure">College of Fisheries</option>
-                    <option id="iict" class="paragraph p2 text-white-pure">Institute of Information and Communication Technology</option>
-                    <option id="ioes" class="paragraph p2 text-white-pure">Institute of Oceanography and Environmental Science</option>
-                </select>
-            </div> -->
-            
-            
-            <div id="cas" class="xl:pb-[120px]">
-            
-                <div class="flex place-items-center xl:gap-[90px] xs:gap-[23px] xl:p-5 xs:pt-[48px] ">
-                    <img src="/images/College Logo/LOGO CAS.png" class="xl:w-[200px] xs:w-[150px]" alt="">
-                    <h4 class="headings xl:h4 xs:h5 text-white-pure mt-5"><a href="/cas">College of Arts and Sciences</a></h4>
-                </div>
-                <div class="xl:flex place-items-top gap-[10%] xl:p-5 xs:pt-[32px] xs:pl-[97px] ">
-                    <div class="xl:w-[200px]"> </div>
-                    <div class="flex flex-col paragraph xl:p1 xs:p2 text-silver">
-                        <a href="#" class=""> Master in Public Administration </a>
-                        <a href="#" class=""> Master of Science in Teaching Mathematics </a>
-                        <a href="https://drive.google.com/file/d/1-nR4D-JxwCTGbQnqUWM1zACgGk-QF4ME/view?usp=drive_link" class=""> Master of Arts in English Language Teaching </a>
-                        <a href="https://drive.google.com/file/d/1nnhyYyiE3kl3SUm-LC5218bhlJUwHk3_/view?usp=drive_link" class=""> Bachelor of Public Administration </a>
-                        <a href="https://drive.google.com/file/d/1opvINEN2o8nhu30Kq6PAZhUwHdBIEOYm/view?usp=drive_link" class=""> Bachelor of Science in Business Administration major in Marketing Management </a>
-                        <a href="https://drive.google.com/file/d/1nVHOCbhiUkXvxmpzWnoXZxjMhoYwipG7/view?usp=drive_link" class=""> Bachelor of Arts in Literary and Cultural Studies </a>
-                        <a href="https://drive.google.com/file/d/1-q3se6aH5VEn8mHv2PNM6vrKO_wAcuEg/view?usp=drive_link" class=""> Bachelor of Arts in English Language Studies</a>
-                        <a href="#" class=""> Bachelor of Arts in History</a>
-                        <a href="#" class=""> Bachelor of Arts in Political Science</a>
-                        <a href="#" class=""> Bachelor of Science in Mathematics</a>
-                        <a href="#" class=""> Bachelor of Science in Statistics </a>
-                        <a href="#" class=""> Professional Diploma Physical Education</a>
-                        <a href="https://drive.google.com/file/d/1p04fYLXUYcL7LUQIN6-9tjKrqgbOyNRu/view?usp=drive_link" class=""> Diploma in Office Management</a>
-
-                    </div>
-                </div>
-                <!-- <div class="xl:flex place-items-top gap-[50px] xl:p-5 xs:pt-[32px] xs:pl-[97px] ">
-                    <div class="xl:w-[350px] xs:w-0 " > </div>
-                    <div class="xl:w-[650px] flex flex-col paragraph xl:p1 xs:p2 text-silver ">
-                        <p class=""> Master in Public Administration </p>
-                        <p class=""> Master of Science in Teaching Mathematics </p>
-                        <p class=""> Master of Arts in English Language Teaching </p>
-                        <p class=""> Bachelor of Public Management </p>
-                        <p class=""> Bachelor of Science in Business Management </p>
-                        <p class=""> Bachelor of Arts in Literary and Cultural Studies </p>
-                        <p class=""> Bachelor of Arts in Language Studies</p>
-                    </div>
-                    <div class="xl:w-[650px] flex flex-col paragraph xl:p1 xs:p2 text-silver ">
-                        <p class=""> Bachelor of Arts in English</p>
-                        <p class=""> Bachelor of Arts in History</p>
-                        <p class=""> Bachelor of Arts in Political Science</p>
-                        <p class=""> Bachelor of Science in Mathematics</p>
-                        <p class=""> Bachelor of Science in Statistics </p>
-                        <p class=""> Professional Diploma Physical Education</p>
-                        <p class=""> Diploma in Office Management</p>
-                    </div>
-                </div> -->
-            </div>
-
-            <div id="cias" class="xl:pb-[120px] ">
-            
-                <div class="flex place-items-center xl:gap-[90px] xs:gap-[23px] xl:p-5 xs:pt-[48px] ">
-                    <img src="/images/College Logo/LOGO CIAS.png" class="xl:w-[200px] xs:w-[150px]" alt="">
-                    <h4 class="headings xl:h4 xs:h5 text-white-pure mt-5"><a href="/cias">College of Islamic & Arabic Studies</a></h4>
-                </div>
-                <div class="xl:flex place-items-top gap-[10%] xl:p-5 xs:pt-[32px] xs:pl-[97px] ">
-                    <div class="xl:w-[200px]"> </div>
-                    <div class="flex flex-col paragraph xl:p1 xs:p2 text-silver">
-                        
-                        <a href="https://drive.google.com/file/d/1o6V4gWfdf--bOOI0G8fyhg41hAJJvRLc/view?usp=drive_link" class=""> Master of Arts in Islamic Education</a>
-                        <a href="https://drive.google.com/file/d/13dpldTbgKueOYMFFm-_M0XrFforNN-FZ/view?usp=drive_link" class=""> Bachelor of Arts in Islamic Studies Major in Sharia</a>
-                        <a href="https://drive.google.com/file/d/13p2k38zFJObS_8c3PHjSdTSDudITklZ8/view?usp=drive_link" class=""> Bachelor of Science in Teaching Arabic </a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div id="coed" class="xl:pb-[120px]">
-            
-                <div class="flex place-items-center xl:gap-[90px] xs:gap-[23px] xl:p-5 xs:pt-[48px] ">
-                    <img src="/images/College Logo/LOGO COED.png" class="xl:w-[200px] xs:w-[150px]" alt="">
-                    <h4 class="headings xl:h4 xs:h5 text-white-pure mt-5"><a href="/coed">College of Education</a></h4>
-                </div>
-                <div class="xl:flex place-items-top gap-[10%] xl:p-5 xs:pt-[32px] xs:pl-[97px] ">
-                    <div class="xl:w-[200px]"> </div>
-                    <div class="flex flex-col paragraph xl:p1 xs:p2 text-silver">
-    
-                        <a href="#" class=""> Doctor of Philosophy major in Education Management</a>
-                        <a href="#" class=""> Master of Arts in Education major in Administration and Supervision</a>
-                        <a href="https://drive.google.com/file/d/1o7b4bg-jaAyHAoCaI0LdHCs79Uyl3FkD/view?usp=drive_link" class=""> Master of Arts in Education major in Educational Management</a>
-                        <a href="https://drive.google.com/file/d/1oNF_W5aVov3iEP0DY5HXLJ6oiqpzVrl7/view?usp=drive_link" class=""> Master of Arts in Education major in Reading</a>
-                    
-                        <a href="https://drive.google.com/file/d/1o1wzRuhuiwsjLySKBJcHNXSAzm-xoo8W/view?usp=drive_link" class=""> Bachelor of Elementary Education in General Education </a>
-                        <a href="#https://drive.google.com/file/d/1gKDhP-1EHh48eD9QocIYKS1LhCArki5d/view?usp=drive_link" class=""> Bachelor of Early Childhood Education</a>
-                        <a href="https://drive.google.com/file/d/1PV7w6fnHwsmYfqTU0NuYVvBuWUVLN1ON/view?usp=drive_link" class=""> Bachelor of Secondary Education Major in English</a>
-                        <a href="https://drive.google.com/file/d/1p3uHxYRK1NkZpxMITW9P3mY1moJ_Dola/view?usp=drive_link" class=""> Bachelor of Secondary Education Major in Mathematics</a>
-                        <a href="https://drive.google.com/file/d/1KTE3bRxGLLCNkQE4rhmDfBro_rfBVdRM/view?usp=drive_link" class=""> Bachelor of Secondary Education Major in Filipino</a>
-                        <a href="https://drive.google.com/file/d/1_DsudLGInUfmXa39bzCijo1HVgEKsOKp/view?usp=drive_link" class=""> Bachelor of Secondary Education Major in Sciences</a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div id="cof" class="xl:pb-[120px]">
-            
-                <div class="flex place-items-center xl:gap-[90px] xs:gap-[23px] xl:p-5 xs:pt-[48px] ">
-                    <img src="/images/College Logo/LOGO COF.png" class="xl:w-[200px] xs:w-[150px]" alt="">
-                    <h4 class="headings xl:h4 xs:h5 text-white-pure mt-5"><a href="/cof">College of Fisheries</a></h4>
-                </div>
-                <div class="xl:flex place-items-top gap-[10%] xl:p-5 xs:pt-[32px] xs:pl-[97px] ">
-                    <div class="xl:w-[200px]"> </div>
-                    <div class="flex flex-col paragraph xl:p1 xs:p2 text-silver">
-                        <a href="#" class=""> Master of Science in Aquaculture</a>
-                        <a href="https://drive.google.com/file/d/1o2t1Ivt_DADBLip6f3i0-2W_tjtWSF-f/view?usp=drive_link" class=""> Bachelor of Science in Food Technology</a>
-                        <a href="https://drive.google.com/file/d/13-b6dZBtnkp_PbnsbbKi4iJ7eSPwXuwB/view?usp=drive_link" class=""> Bachelor of Science in Fisheries - Aquaculture</a>
-                        <a href="https://drive.google.com/file/d/13ESpvaR8ADOXYNUY85zY03iIZnA8Ts_L/view?usp=drive_link" class=""> Bachelor of Science in Fisheries - Fish Processing</a>
-                        <a href="https://drive.google.com/file/d/13dC8HTpLo70s7o-v34Je5Ho4irQaGOz5/view?usp=drive_link" class=""> Bachelor of Science in Fisheries - Marine FISHERIES</a>
-                        <a href="#" class=""> Bachelor of Science in Fisheries</a>
-                        <a href="#" class=""> Diploma in Fisheries Technology Major in Aquaculture</a>
-                        <a href="https://drive.google.com/file/d/1lU3plT3f17NQHTvliauxrEUi-NZfd30r/view?usp=drive_link" class=""> Diploma in Fisheries Technology Major in Fish Processing</a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div id="iict" class="xl:pb-[120px]">
-            
-                <div class="flex place-items-center xl:gap-[90px] xs:gap-[23px] xl:p-5 xs:pt-[48px] ">
-                    <img src="/images/College Logo/LOGO IICT.png" class="xl:w-[200px] xs:w-[150px]" alt="">
-                    <h4 class="headings xl:h4 xs:h5 text-white-pure mt-5"><a href="/iict">Institute of Information and Communication Technology</a></h4>
-                </div>
-                <div class="xl:flex place-items-top gap-[10%] xl:p-5 xs:pt-[32px] xs:pl-[97px] ">
-                    <div class="xl:w-[200px]"> </div>
-                    <div class="flex flex-col paragraph xl:p1 xs:p2 text-silver">
-                        <a href="https://drive.google.com/file/d/10EgGXSFoGTfT_qe7HYqknlNeT_KSqwT0/view?usp=drive_link" class=""> Bachelor of Science in Computer Applications </a>
-                        <a href="https://drive.google.com/file/d/1pDlJDSRqbIAKcmx5FAHVZg8gICEde5O4/view?usp=drive_link" class=""> Bachelor of Science in Information Technology </a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div id="ioes" class="xl:pb-[52px]">
-            
-                <div class="flex place-items-center xl:gap-[90px] xs:gap-[23px] xl:p-5 xs:pt-[48px] ">
-                    <img src="/images/College Logo/IOES Logo.png" class="xl:w-[200px] xs:w-[150px]" alt="">
-                    <h4 class="headings xl:h4 xs:h5 text-white-pure mt-5"><a href="/ioes">Institute of Oceanography and Environmental Science</a></h4>
-                </div>
-                <div class="xl:flex place-items-top gap-[10%] xl:p-5 xs:pt-[32px] xs:pl-[97px] ">
-                    <div class="xl:w-[200px]"> </div>
-                    <div class="flex flex-col paragraph xl:p1 xs:p2 text-silver">
-                        <a href="https://drive.google.com/file/d/1n2txgNFydhR8j_hKAPjjQdLknbIqvHiF/view?usp=drive_link" class=""> Bachelor of Science in Environmental Science</a>
-                        <a href="https://drive.google.com/file/d/1mwEKaO9epZEvW2A_ZQ-joUTpkZ4TWVwF/view?usp=drive_link" class=""> Bachelor of Science in Marine Science</a>
-                        
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="text-center xl:pb-[80px] xs:pb-[48px]">
-                <!-- <p class="paragraph text-silver  xl:p1 xs:p2 pt-20 mb-5">Need clarifications or help?</p>
-                <a href="" class="bg-transparent border paragraph xl:p1 xs:p2 gap-10 text-silver py-[10.5px] px-[60px] rounded-[40px]">Contact us now!</a> -->
-            
-            </div>
-            <!-- <ProgramsDropDown client:visible /> -->
         </div>
-<!-- end fold 03 -->
 
-
-<!-- fold 04 -->
-        <!-- <div class="bg-msu-deep-ocean xl:px-[12.5%] xs:px-[3.85%] xl:pt-10 xs:pt-20 xl:pb-[101px] xs:pb-[95px]">
-            <h3 class="headings xl:h3 xs:h4 text-white-pure text-center xl:mb-[53px]">Research at TCTO</h3>
-            <div class="flex xl:flex-row xs:flex-col   ">
-                <div class="xl:mt-[20px] xs:mt-[50px] xs:ml-[26px] ">
-                    <div class="flex flex-col  place-items-center">
-                        <p class="paragraph xl:p1 xs:p2 text-white-pure">Latest from our labs and research </p>
-                        <div class="relative xl:w-[480px] xs:w-[480px] xs:mb-[150px] xl:mb-[10px]">
-                            Add msu-drop-shadow on other image other than this gazette
-                            <img src="/images/gazette1.png" class="absolute w-[412px] z-20" alt="">
-                            <img src="/images/gazette2.png" class="absolute w-[412px] top-[37px] left-[37px] z-10" alt="">
-                            <img src="/images/gazette3.png" class="absolute w-[412px] top-[68px] left-[68px] z-0" alt="">
-                        </div>
-                        <div class=" ml-5 xl:max-w-[480px] xs:max-w-[480px]">
-                            <p class=" paragraph p2 text-titanium xl:mt-[650px] xs:mt-[470px]">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                        </div>
-                    </div> 
-                </div>
-                <div class="xl:mt-[20px] xs:mt-[70px] xs:ml-[26px] ">
-                    <p class="flex paragraph xl:ml-[26%] xs:ml-3 xl:p1 xs:p2 text-white-pure">Previous Researches </p>
-                    <div class="flex  xl:mt-10 xs:mt-20 xl:ml-[200px] ">
-                        <div class="flex-col xl:w-[203px] xs:w-[300px] ">
-                            <p class="paragraph ml-3 xl:p2 xs:p3 text-white-pure">2022, 4th Quarter </p>
-                            <img src="/images/gazette1.png" class="" alt="">
-                            <p class=" paragraph p2 text-titanium  ml-3  mr-3">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                            
-                        </div>
-                        <div class="flex-col w-[203px] xl:block xs:hidden">
-                            <p class="paragraph ml-3 xl:p2 xs:p3 text-white-pure">2022, 3rd Quarter </p>
-                            <img src="/images/gazette2.png" alt="">
-                            <p class=" paragraph p2 text-titanium  ml-3  mr-3">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                            
-                        </div>
-                        <div class="flex-col w-[203px] xl:block xs:hidden">
-                            <p class="paragraph ml-3 xl:p2 xs:p3 text-white-pure">2022, 2nd Quarter </p>
-                            <img src="/images/gazette3.png" alt="">
-                            <p class=" paragraph p2 text-titanium  ml-3  mr-3">Lorem ipsum dolor sit amet consectetur. Consequat neque interdum ut tristique habitant sapien. Facilisis eros mauris imperdiet nibh adipiscing sit sed sed. Vestibulum mattis netus interdum vitae pellentesque.</p>
-                            
-                        </div>
-                        
+        <!-- Stats Section -->
+        <div class="py-16 bg-msu-blue/10">
+            <div class="container mx-auto px-4 xl:px-0">
+                <div class="grid xl:grid-cols-3 xs:grid-cols-2 justify-items-center gap-8">
+                    <div class="bg-white p-8 rounded-xl shadow-lg text-center max-w-[360px]">
+                        <h2 class="headings text-5xl font-bold text-msu-main-color mb-2">102+</h2>
+                        <p class="paragraph p2 text-gray-700">National and International Partners</p>
                     </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg text-center max-w-[360px]">
+                        <h2 class="headings text-5xl font-bold text-msu-main-color  mb-2">55+</h2>
+                        <p class="paragraph p2 text-gray-700">Ongoing local research for biodiversity</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-xl shadow-lg text-center max-w-[360px] xl:block xs:hidden">
+                        <h2 class="headings text-5xl font-bold text-msu-main-color  mb-2">30+</h2>
+                        <p class="paragraph p2 text-gray-700">Curriculum programs of TCTO</p>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg text-center max-w-[360px] mx-auto mt-8 xl:hidden xs:block">
+                    <h2 class="headings text-5xl font-bold text-msu-dark-blue mb-2">30+</h2>
+                    <p class="paragraph p2 text-gray-700">Curriculum programs of TCTO</p>
+                </div>
+            </div>
+        </div>
 
-                    <div class="flex-col text-center pb-[60px] xl:ml-[200px]">
-                        <p class="paragraph text-white-pure p1 pt-20 mb-5"> </p>
-                        <a href="" class="bg-transparent border paragraph xl:p1 xs:p2 gap-10 text-white-pure xl:py-[10.5px] xs:py-5 xl:px-[60px] xs:px-[61.5px] rounded-[40px]">More research and experiments</a>
-                    
+        <!-- Programs Section -->
+        <div class="py-16 bg-white">
+            <div class="container mx-auto px-4 xl:px-0">
+                <div class="text-center mb-16">
+                    <h2 class="headings text-4xl font-bold text-msu-main-color  mb-4">Our Colleges and Institutes</h2>
+                    <div class="w-24 h-1.5 bg-msu-deep-ocean mx-auto"></div>
+                </div>
+
+                <!-- College of Arts and Sciences -->
+                <div class="mb-16 bg-gray-50 rounded-xl p-8 shadow-md">
+                    <div class="flex flex-col md:flex-row items-center gap-8 mb-8">
+                        <img src="/images/College Logo/LOGO CAS.png" class="w-40 h-40 object-contain" alt="CAS Logo">
+                        <div>
+                            <h3 class="headings text-3xl font-bold text-msu-main-color mb-2">
+                                <a href="/cas" class="hover:text-msu-blue transition-colors">College of Arts and Sciences</a>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                            <h4 class="headings text-xl font-semibold text-msu-dark-blue mb-3">Graduate Programs</h4>
+                            <ul class="space-y-2 paragraph p2 text-gray-700">
+                                <li><a href="#" class="hover:text-msu-blue transition-colors">Master in Public Administration</a></li>
+                                <li><a href="#" class="hover:text-msu-blue transition-colors">Master of Science in Teaching Mathematics</a></li>
+                                <li><a href="https://drive.google.com/file/d/1-nR4D-JxwCTGbQnqUWM1zACgGk-QF4ME/view?usp=drive_link" class="hover:text-msu-blue transition-colors">Master of Arts in English Language Teaching</a></li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                            <h4 class="headings text-xl font-semibold text-msu-dark-blue mb-3">Undergraduate Programs</h4>
+                            <ul class="space-y-2 paragraph p2 text-gray-700">
+                                <li><a href="https://drive.google.com/file/d/1nnhyYyiE3kl3SUm-LC5218bhlJUwHk3_/view?usp=drive_link" class="hover:text-msu-blue transition-colors">Bachelor of Public Administration</a></li>
+                                <li><a href="https://drive.google.com/file/d/1opvINEN2o8nhu30Kq6PAZhUwHdBIEOYm/view?usp=drive_link" class="hover:text-msu-blue transition-colors">BS in Business Administration (Marketing)</a></li>
+                                <li><a href="https://drive.google.com/file/d/1nVHOCbhiUkXvxmpzWnoXZxjMhoYwipG7/view?usp=drive_link" class="hover:text-msu-blue transition-colors">BA in Literary and Cultural Studies</a></li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                            <h4 class="headings text-xl font-semibold text-msu-dark-blue mb-3">Other Programs</h4>
+                            <ul class="space-y-2 paragraph p2 text-gray-700">
+                                <li><a href="https://drive.google.com/file/d/1-q3se6aH5VEn8mHv2PNM6vrKO_wAcuEg/view?usp=drive_link" class="hover:text-msu-blue transition-colors">BA in English Language Studies</a></li>
+                                <li><a href="https://drive.google.com/file/d/1p04fYLXUYcL7LUQIN6-9tjKrqgbOyNRu/view?usp=drive_link" class="hover:text-msu-blue transition-colors">Diploma in Office Management</a></li>
+                                <li><a href="#" class="hover:text-msu-blue transition-colors">Professional Diploma Physical Education</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- College of Islamic & Arabic Studies -->
+                <div class="mb-16 bg-gray-50 rounded-xl p-8 shadow-md">
+                    <div class="flex flex-col md:flex-row items-center gap-8 mb-8">
+                        <img src="/images/College Logo/LOGO CIAS.png" class="w-40 h-40 object-contain" alt="CIAS Logo">
+                        <div>
+                            <h3 class="headings text-3xl font-bold text-msu-main-color mb-2">
+                                <a href="/cias" class="hover:text-msu-blue transition-colors">College of Islamic & Arabic Studies</a>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                            <h4 class="headings text-xl font-semibold text-msu-dark-blue mb-3">Graduate Programs</h4>
+                            <ul class="space-y-2 paragraph p2 text-gray-700">
+                                <li><a href="https://drive.google.com/file/d/1o6V4gWfdf--bOOI0G8fyhg41hAJJvRLc/view?usp=drive_link" class="hover:text-msu-blue transition-colors">Master of Arts in Islamic Education</a></li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                            <h4 class="headings text-xl font-semibold text-msu-dark-blue mb-3">Undergraduate Programs</h4>
+                            <ul class="space-y-2 paragraph p2 text-gray-700">
+                                <li><a href="https://drive.google.com/file/d/13dpldTbgKueOYMFFm-_M0XrFforNN-FZ/view?usp=drive_link" class="hover:text-msu-blue transition-colors">BA in Islamic Studies (Sharia)</a></li>
+                                <li><a href="https://drive.google.com/file/d/13p2k38zFJObS_8c3PHjSdTSDudITklZ8/view?usp=drive_link" class="hover:text-msu-blue transition-colors">BS in Teaching Arabic</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- College of Education -->
+                <div class="mb-16 bg-gray-50 rounded-xl p-8 shadow-md">
+                    <div class="flex flex-col md:flex-row items-center gap-8 mb-8">
+                        <img src="/images/College Logo/LOGO COED.png" class="w-40 h-40 object-contain" alt="COED Logo">
+                        <div>
+                            <h3 class="headings text-3xl font-bold text-msu-main-color mb-2">
+                                <a href="/coed" class="hover:text-msu-blue transition-colors">College of Education</a>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                            <h4 class="headings text-xl font-semibold text-msu-dark-blue mb-3">Doctoral Programs</h4>
+                            <ul class="space-y-2 paragraph p2 text-gray-700">
+                                <li><a href="#" class="hover:text-msu-blue transition-colors">PhD in Education Management</a></li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                            <h4 class="headings text-xl font-semibold text-msu-dark-blue mb-3">Graduate Programs</h4>
+                            <ul class="space-y-2 paragraph p2 text-gray-700">
+                                <li><a href="#" class="hover:text-msu-blue transition-colors">MA in Education (Admin & Supervision)</a></li>
+                                <li><a href="https://drive.google.com/file/d/1o7b4bg-jaAyHAoCaI0LdHCs79Uyl3FkD/view?usp=drive_link" class="hover:text-msu-blue transition-colors">MA in Education (Educational Management)</a></li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                            <h4 class="headings text-xl font-semibold text-msu-dark-blue mb-3">Undergraduate Programs</h4>
+                            <ul class="space-y-2 paragraph p2 text-gray-700">
+                                <li><a href="https://drive.google.com/file/d/1o1wzRuhuiwsjLySKBJcHNXSAzm-xoo8W/view?usp=drive_link" class="hover:text-msu-blue transition-colors">Bachelor of Elementary Education</a></li>
+                                <li><a href="#https://drive.google.com/file/d/1gKDhP-1EHh48eD9QocIYKS1LhCArki5d/view?usp=drive_link" class="hover:text-msu-blue transition-colors">Bachelor of Early Childhood Education</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- College of Fisheries -->
+                <div class="mb-16 bg-gray-50 rounded-xl p-8 shadow-md">
+                    <div class="flex flex-col md:flex-row items-center gap-8 mb-8">
+                        <img src="/images/College Logo/LOGO COF.png" class="w-40 h-40 object-contain" alt="COF Logo">
+                        <div>
+                            <h3 class="headings text-3xl font-bold text-msu-main-color mb-2">
+                                <a href="/cof" class="hover:text-msu-blue transition-colors">College of Fisheries</a>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                            <h4 class="headings text-xl font-semibold text-msu-dark-blue mb-3">Graduate Programs</h4>
+                            <ul class="space-y-2 paragraph p2 text-gray-700">
+                                <li><a href="#" class="hover:text-msu-blue transition-colors">MS in Aquaculture</a></li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                            <h4 class="headings text-xl font-semibold text-msu-dark-blue mb-3">Undergraduate Programs</h4>
+                            <ul class="space-y-2 paragraph p2 text-gray-700">
+                                <li><a href="https://drive.google.com/file/d/1o2t1Ivt_DADBLip6f3i0-2W_tjtWSF-f/view?usp=drive_link" class="hover:text-msu-blue transition-colors">BS in Food Technology</a></li>
+                                <li><a href="https://drive.google.com/file/d/13-b6dZBtnkp_PbnsbbKi4iJ7eSPwXuwB/view?usp=drive_link" class="hover:text-msu-blue transition-colors">BS in Fisheries (Aquaculture)</a></li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                            <h4 class="headings text-xl font-semibold text-msu-dark-blue mb-3">Diploma Programs</h4>
+                            <ul class="space-y-2 paragraph p2 text-gray-700">
+                                <li><a href="#" class="hover:text-msu-blue transition-colors">Diploma in Fisheries Technology (Aquaculture)</a></li>
+                                <li><a href="https://drive.google.com/file/d/1lU3plT3f17NQHTvliauxrEUi-NZfd30r/view?usp=drive_link" class="hover:text-msu-blue transition-colors">Diploma in Fisheries Technology (Fish Processing)</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Institute of Information and Communication Technology -->
+                <div class="mb-16 bg-gray-50 rounded-xl p-8 shadow-md">
+                    <div class="flex flex-col md:flex-row items-center gap-8 mb-8">
+                        <img src="/images/College Logo/LOGO IICT.png" class="w-40 h-40 object-contain" alt="IICT Logo">
+                        <div>
+                            <h3 class="headings text-3xl font-bold text-msu-main-color mb-2">
+                                <a href="/iict" class="hover:text-msu-blue transition-colors">Institute of Information and Communication Technology</a>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                            <h4 class="headings text-xl font-semibold text-msu-dark-blue mb-3">Undergraduate Programs</h4>
+                            <ul class="space-y-2 paragraph p2 text-gray-700">
+                                <li><a href="https://drive.google.com/file/d/10EgGXSFoGTfT_qe7HYqknlNeT_KSqwT0/view?usp=drive_link" class="hover:text-msu-blue transition-colors">BS in Computer Applications</a></li>
+                                <li><a href="https://drive.google.com/file/d/1pDlJDSRqbIAKcmx5FAHVZg8gICEde5O4/view?usp=drive_link" class="hover:text-msu-blue transition-colors">BS in Information Technology</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Institute of Oceanography and Environmental Science -->
+                <div class="mb-16 bg-gray-50 rounded-xl p-8 shadow-md">
+                    <div class="flex flex-col md:flex-row items-center gap-8 mb-8">
+                        <img src="/images/College Logo/IOES Logo.png" class="w-40 h-40 object-contain" alt="IOES Logo">
+                        <div>
+                            <h3 class="headings text-3xl font-bold text-msu-main-color mb-2">
+                                <a href="/ioes" class="hover:text-msu-blue transition-colors">Institute of Oceanography and Environmental Science</a>
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                            <h4 class="headings text-xl font-semibold text-msu-dark-blue mb-3">Undergraduate Programs</h4>
+                            <ul class="space-y-2 paragraph p2 text-gray-700">
+                                <li><a href="https://drive.google.com/file/d/1n2txgNFydhR8j_hKAPjjQdLknbIqvHiF/view?usp=drive_link" class="hover:text-msu-blue transition-colors">BS in Environmental Science</a></li>
+                                <li><a href="https://drive.google.com/file/d/1mwEKaO9epZEvW2A_ZQ-joUTpkZ4TWVwF/view?usp=drive_link" class="hover:text-msu-blue transition-colors">BS in Marine Science</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div> -->
-<!-- end fold 04 -->
-		
-		
+        </div>
 
-<!--  Academic Calendar -->
-    <AcademicCalendar />
-<!-- end  Academic Calendar -->
-
-<!-- Main video -->
-    <MainVideo />
-<!-- end Main video -->
-		
-
-<!-- FooterNaV -->
+        <!-- Academic Calendar to be fix -->
+        <!-- <AcademicCalendar /> -->
+        
+        <!-- Main Video -->
+        <!-- <MainVideo /> -->
+        
+        <!-- Footer Navigation -->
         <FooterNav />
-<!-- end FooterNaV -->
+        
+        <!-- Footer -->
+        <Footer />
 
-<!-- Footer -->
-		<Footer />
-<!-- end Footer -->
-
-	</main>
-	
+        <style global>
+            :root {
+                --msu-dark-blue: #003366;
+                --msu-blue: #0066CC;
+                --msu-light-blue: #E6F2FF;
+                --msu-gold: #FFCC00;
+                --msu-dark-gold: #E6B800;
+            }
+            
+            .bg-msu-dark-blue {
+                background-color: var(--msu-dark-blue);
+            }
+            
+            .bg-msu-blue {
+                background-color: var(--msu-blue);
+            }
+            
+            .bg-msu-light-blue {
+                background-color: var(--msu-light-blue);
+            }
+            
+            .bg-msu-gold {
+                background-color: var(--msu-gold);
+            }
+            
+            .bg-msu-dark-gold {
+                background-color: var(--msu-dark-gold);
+            }
+            
+            .text-msu-dark-blue {
+                color: var(--msu-dark-blue);
+            }
+            
+            .text-msu-blue {
+                color: var(--msu-blue);
+            }
+            
+            .text-msu-gold {
+                color: var(--msu-gold);
+            }
+            
+            .border-msu-blue {
+                border-color: var(--msu-blue);
+            }
+            
+            .hover\:bg-msu-dark-gold:hover {
+                background-color: var(--msu-dark-gold);
+            }
+            
+            .hover\:text-msu-dark-blue:hover {
+                color: var(--msu-dark-blue);
+            }
+        </style>
+    </main>
 </Layout>

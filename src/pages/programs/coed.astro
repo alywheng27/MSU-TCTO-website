@@ -4,228 +4,879 @@ import Navbar from "../../components/Navbar";
 import FooterNav from "../../components/FooterNav.astro";
 import Footer from "../../components/Footer.astro";
 import '../../styles/css/global.css';
+import '../../styles/css/globalanimate.css';
 
 const currentPath = Astro.url.pathname;
 ---
 
-<Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
-	<main>
+<Layout title="College of Education | MSU-TCTO">
+	<main class="font-sans">
 		<Navbar path={currentPath} client:visible />
 
-<!-- fold 02 -->
-		<div class=" bg-msu-deep-ocean">
-			<div class="text-center xl:px-[12.5%] xs:px-[3.85%] pt-[80px] xl:bg-none xs:bg-none">
-                <h3 class="headings xl:h3 xs:h5 text-white-pure">College of Education</h3>
-				<!-- <div class="bg-gradient-ocean h-20 rotate-180 xs:block xl:hidden"></div> -->
-			</div>
-            <div class="flex justify-center gap-x-[80px] gap-y-[35px] text-left xl:flex-row xs:flex-col xl:items-start xs:items-center xl:mb-20 xs:mb-10 xl:mt-20 xs:mt-10 xl:mx-[12.5%] xs:mx-[3.85%]">
-                <div class="flex xl:gap-[80px] xs:gap-[35px] justify-center">
-                    <div class="xl:w-[240px] xs:w-[115px] object-cover object-center">
-                        <img src="/images/College Logo/LOGO COED.png" >
-                    </div>
-                    <div class="xl:max-w-[380px] xs:max-w-[212px]">
-                        <p class="paragraph xl:p1 xs:p2 text-white-pure">
-                            To produce highly motivated and competent teachers who will:
-                            <br />
-                            <br />
-	                        a. provide leadership in their respective disciplines through quality instruction, research, extension and innovation; 
-                        </p>
-                    </div>
-                </div>
-                <div class="flex xl:max-w-[380px] xs:max-w-[360px]">
-                    <p class="paragraph xl:p1 xs:p2 text-white-pure">
-                        b. responds to the demands of their social environment and its diverse cultures; and
-                        <br />
-                        <br />
-                        c. be effective agents of peace and development in the Sulu Archipelago.                     
-                    </p>
-                </div>
-            </div>
-		</div>
 
-        <div class=" bg-msu-gold xl:px-[12.5%] xs:px-[3.85%] xl:py-[80px] xs:py-[70px]">
-            <div class="grid grid-cols-2 text-center">
-                <h4 class="headings xl:h4 xs:h5 text-black">Program</h4>
-                <div class="text-start xl:pl-20">
-                    <h4 class="headings xl:h4 xs:h5 text-black">Certifications</h4>
-                </div>
-                
-            </div>
-            <div class="grid grid-cols-2 text-center xl:pt-[40px] xs:pt-[20px] justify-center">
-                <p class="paragraph xl:p1 xs:p2 text-black">
-                    Bachelor of Secondary Education (Major in English, Filipino, Sciences, Mathematics)
-                </p>
-                <div class="text-start xl:pl-20">
-                    <p class="paragraph xl:p1 xs:p2 text-black">
-                        AACCUP Level 1 Accredited
-                    </p>
-                    <p class="paragraph xl:p1 xs:p2 text-black">
-                        CHED Certificate of Program Compliance
-                    </p>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 text-center xl:pt-[20px] xs:pt-[18px] justify-center">
-                <p class="paragraph xl:p1 xs:p2 text-black">
-                    Bachelor of Elementary Education (Major in General Education)
-                </p>
-                <div class="text-start xl:pl-20">
-                    <p class="paragraph xl:p1 xs:p2 text-black">
-                        AACCUP Level 1 Accredited
-                    </p>
-                    <p class="paragraph xl:p1 xs:p2 text-black">
-                        CHED Certificate of Program Compliance
-                    </p>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 text-center xl:pt-[20px] xs:pt-[18px] justify-center">
-                <p class="paragraph xl:p1 xs:p2 text-black">
-                    Bachelor of Early Childhood Education
-                </p>
-                <div class="text-start xl:pl-20">
-                    <p class="paragraph xl:p1 xs:p2 text-black">
-                        CHED Certificate of Program Compliance
-                    </p>
-                </div>
-            </div>
-		</div>
-        
-        <div class="flex xl:flex-row xs:flex-col justify-center mt-20 xl:px-[12.5%] xs:px-[0px]">
-            <img src="/images/coed/image1.png" alt="" class="xl:h-[360px] object-cover object-center" />
-            <img src="/images/coed/image8.png" alt="" class="xl:h-[360px] object-cover object-center" />
-            <img src="/images/coed/image3.png" alt="" class="xl:h-[360px] object-cover object-center xl:block xs:hidden" />
-        </div>
-            
-        <div class="flex gap-[30px] justify-center mt-[40px] mb-[57px] ">
-            <!-- <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px]  xl:rounded-[40px] xs:rounded-[40px] border-white border-2"></a> -->
-            <!-- <a href="#" class=" bg-white xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
-            <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
-            <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a> -->
-        </div>
-        <!-- <div class="flex-col text-center pb-[60px]">
-            <a href="" class="bg-transparent border paragraph xl:p1 xs:p2 gap-10 text-white-pure xl:py-[10.5px] xs:py-5 xl:px-[60px] xs:px-[61.5px] rounded-[40px]">Check our Campus Galery</a>
-        </div> -->
+		<!-- Hero Section -->
+<section class="relative bg-msu-deep-ocean h-[80vh] min-h-[600px] flex items-center overflow-hidden pt-[200px]">
+	  <div class="absolute inset-0 bg-gradient-to-t from-[#61063B]/90 via-[#61063B]/50 to-transparent z-10"></div>
+	<!-- Parallax Background Image -->
+	<div 
+	  class="absolute inset-0 bg-black/30 z-0"
+	  style="
+		background-image: url('/images/coed/coed.jpg');
+		background-size: cover;
+		background-position: center;
+		background-attachment: fixed;
+	  "
+	></div>
 
-        
-        <div class="flex flex-col align-cneter bg-gradient-maroon w-full xl:px-[12.5%] xs:px-[5.5%] ">
-            <div class="item-center">
-                <h3 class="headings text-center text-white-pure xl:h3 xs:h5 px-[12.5%]  xl:pt-[80px] xs:pt-[40px]">Our Programs</h3>
-            </div>
-            
-
-            
-            <!-- <div class="place-items-center xs:pt-[48px] xs:pb-[48px] text-center xs:block xl:hidden">
-                <select id="programs" class=" flex xs:flex-col xs:msu-drop-white-shadow text-white-pure xs:px-[9px] xs:py-[9px]  xl:hidden xs:block">
-                    <option id="cas" class="paragraph p2 text-black-pure">College of Arts and Science</option>
-                    <option id="cias" class="paragraph p2 text-black-pure">College of Islamic & Arabic Studies</option>
-                    <option id="coed" class="paragraph p2 text-black-pure">College of Education</option>
-                    <option id="cof" class="paragraph p2 text-black-pure">College of Fisheries</option>
-                    <option id="iict" class="paragraph p2 text-black-pure">Institute of Information and Communication Technology</option>
-                    <option id="ioes" class="paragraph p2 text-black-pure">Institute of Oceanography and Environmental Science</option>
-                </select>
-            </div> -->
-            
-            <div id="coed" class="xl:pb-[120px]">
-            
-                <div class="flex place-items-center xl:gap-[90px] xs:gap-[23px] xl:p-5 xs:pt-[48px] text-center ">
-                    <img src="/images/College Logo/LOGO COED.png" class="xl:w-[200px] xs:w-[150px]" alt="">
-                    <h4 class="headings xl:h4 xs:h5 text-white-pure mt-5"><a href="/coed">College of Education</a></h4>
-                </div>
-                <div class="xl:flex place-items-top gap-[10%] xl:p-5 xs:pt-[32px] xs:pl-[97px] ">
-                    <div class="xl:w-[200px]"> </div>
-                    <div class="flex flex-col paragraph xl:p1 xs:p2 text-silver">
-    
-                        <p class=""> PhD in Education Management</p>
-                        <p class=""> MA in Education major in Educational Management</p>
-                        <p class=""> MA in Education major in Reading</p>
-                    
-                        <p class=""> Bachelor Elementary Education with area of concentration in General Education </p>
-                        <p class=""> Bachelor of Early Childhood Education</p>
-                        <p class=""> Bachelor of Secondary Education Major in English</p>
-                        <p class=""> Bachelor of Secondary Education Major in Mathematics</p>
-                        <p class=""> Bachelor of Secondary Education Major in Filipino</p>
-                        <p class=""> Bachelor of Secondary Education Major in Sciences</p>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="text-center xl:pb-[80px] xs:pb-[48px]" id="college_contact_details_coed">
-                <p class="paragraph text-silver  xl:p1 xs:p2 pt-20 mb-5">Need clarifications or help?</p>
-                <!-- <a href="" class="bg-transparent border paragraph xl:p1 xs:p2 gap-10 text-silver py-[10.5px] px-[60px] rounded-[40px]">Contact us now!</a> -->
-                <div class="paragraph xl:p1 xs:p2 text-silver">
-                    Contact #: 09555415841
-                    <br />
-                    Contact #: 09361564807
-                </div>
-            </div>
-        
-        </div>
-<!-- end fold 02 -->
-
-        
-        
-        <div class=" bg-msu-deep-ocean  ">
-            <h3 class="headings xl:h3 xs:h4 text-white-pure text-center xl:my-[80px] xs:mt-[72px] xl:block xs:hidden">Our Facilities & Equipments</h3>
-            <div class="flex flex-row xl:gap-[50px] xl:px-[240px] xs:pt-20  xs:px-[0px]">
-                <div class="flex xl:flex-row  justify-center  xl:gap-[120px] xs:gap-[41px] ">
-                    <div class="flex justify-center  xs:px-[0px] xl:block xs:hidden ">
-                        <img src="/images/coed/image7.png" alt="" class="xl:h-[360px] object-cover object-center" />
-                    </div>
-                    <!-- <div class="xl:block xs:hidden">
-                        
-                        <p class="flex paragraph p1 text-titanium xl:w-[720px] xs:px-[27px] ">
-                            Lorem ipsum dolor sit amet consectetur. Dui eros integer varius bibendum eu. Venenatis nulla amet tincidunt at orci enim. Sit nunc massa tempus placerat risus maecenas. Faucibus duis feugiat parturient enim ullamcorper nunc. Consequat vulputate turpis ullamcorper felis dignissim. Pharetra et duis duis ultrices id velit ut. Vulputate platea porta consectetur risus turpis amet. Luctus massa eu urna maecenas eros pretium. Pellentesque senectus dolor id quam nec. Nulla nunc integer facilisi arcu porttitor. Maecenas quam lectus quis convallis erat. Vitae enim vulputate dolor quisque ipsum. Et vel maecenas justo quis nulla nibh duis.
-                        </p>
-                    </div> -->
-                </div>
-                <div class="flex xl:flex-row xs:flex-col justify-center  xl:gap-[120px] xs:gap-[41px]  ">
-                    <div class="flex justify-center  xs:px-[0px] xl:block xs:hidden">
-                        <img src="/images/coed/image1.png" alt="" class="xl:h-[360px] object-cover object-center" />
-                    </div>
-                    <!-- <div class="xl:block xs:hidden">
-                        
-                        <p class="flex paragraph p1 text-titanium xl:w-[720px] xs:px-[27px]">
-                            Lorem ipsum dolor sit amet consectetur. Dui eros integer varius bibendum eu. Venenatis nulla amet tincidunt at orci enim. Sit nunc massa tempus placerat risus maecenas. Faucibus duis feugiat parturient enim ullamcorper nunc. Consequat vulputate turpis ullamcorper felis dignissim. Pharetra et duis duis ultrices id velit ut. Vulputate platea porta consectetur risus turpis amet. Luctus massa eu urna maecenas eros pretium. Pellentesque senectus dolor id quam nec. Nulla nunc integer facilisi arcu porttitor. Maecenas quam lectus quis convallis erat. Vitae enim vulputate dolor quisque ipsum. Et vel maecenas justo quis nulla nibh duis.
-                        </p>
-                    </div> -->
-                </div>
-
-
-                <div class="flex xl:flex-row xs:flex-col justify-center  xl:gap-[120px] xs:gap-[41px]">
-                    <div class="xl:mt-0 xs:mt-0  xs:px-[0px]">
-                        <!-- <img src="/images/the-campus-2.png" alt="" class="h-[360px] object-cover object-center" /> -->
-                        <div class="flex justify-center xs:px-[0px] xl:block xs:hidden">
-                            <img src="/images/coed/image2.png" alt="" class="xl:h-[360px] object-cover object-center" />
-                        </div>
-                        <div class="flex gap-[30px] justify-center mt-[40px]  ">
-                            <!-- <a href="#" class=" bg-white xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
-                            <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a>
-                            <a href="#" class="border-transparent xl:py-[10px] xl:hidden xs:block xs:py-[8px] xs:px-[8px] rounded-[40px] border-white border-2"></a> -->
-                        </div>
-                    </div>
-                    <!-- <div class="">
-                        
-                        <p class="flex paragraph p1 text-titanium xl:w-[720px] xs:px-[27px]">
-                            Lorem ipsum dolor sit amet consectetur. Dui eros integer varius bibendum eu. Venenatis nulla amet tincidunt at orci enim. Sit nunc massa tempus placerat risus maecenas. Faucibus duis feugiat parturient enim ullamcorper nunc. Consequat vulputate turpis ullamcorper felis dignissim. Pharetra et duis duis ultrices id velit ut. Vulputate platea porta consectetur risus turpis amet. Luctus massa eu urna maecenas eros pretium. Pellentesque senectus dolor id quam nec. Nulla nunc integer facilisi arcu porttitor. Maecenas quam lectus quis convallis erat. Vitae enim vulputate dolor quisque ipsum. Et vel maecenas justo quis nulla nibh duis.
-                        </p>
-                    </div> -->
-                </div>
-                <!-- <div class="text-center xl:py-[80px] xs:py-[50px]">
-                    <a href="" class="bg-transparent border paragraph p1 text-titanium py-[10.5px] px-[60px] rounded-[40px]">See more of our facilities</a>
-                
-                </div> -->
-            </div>
-        </div>
-<!-- end fold 03 -->
-
-<!-- FooterNaV -->
-        <FooterNav />
-<!-- end FooterNaV -->
-
-<!-- Footer -->
-		<Footer />
-<!-- end Footer -->
-
-	</main>
 	
+	
+	<div class="container mx-auto px-6 z-10 relative">
+	  <div class="max-w-7xl mx-auto text-center">
+		<h1 class="text-2xl md:text-6xl font-bold text-white mb-2 leading-tight">
+		  College of <span class="relative text-msu-main-color font-bold" style="text-shadow: 
+				  -1px -1px 0 #fff, 
+				   1px -1px 0 #fff, 
+				  -1px  1px 0 #fff, 
+				   1px  1px 0 #fff;">
+				  Education
+				</span>
+		</h1>
+		<p class="text-xl text-white mb-8 max-w-2xl mx-auto">
+            Educating Hearts and Minds for a Brighter Community.
+		</p>
+    	<div class="flex flex-wrap justify-center gap-4">
+					<a 
+						href="#programs" 
+						class="bg-msu-rusty-red hover:bg-msu-maroon text-white font-bold py-3 px-8 rounded-full transition-all duration-300 inline-block hover-grow"
+					>
+						Explore Programs
+					</a>
+					<a 
+						href="#contact" 
+						class="bg-transparent border-2 border-white hover:bg-white/10 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 inline-block hover-grow"
+					>
+						Contact Us
+					</a>
+				</div>
+          
+	  </div>
+	</div>
+	<div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent"></div>
+  </section>
+
+
+  <!-- Trusted Organizations Section -->
+		<section class="py-12 bg-gray-50">
+			<div class="container mx-auto px-6">
+				<div class="text-center mb-10">
+					<h3 class="text-xl font-medium text-gray-500 mb-2">TRUSTED BY LEADING ORGANIZATIONS</h3>
+					<div class="w-24 h-1 bg-msu-gold mx-auto"></div>
+				</div>
+				
+				<div class="relative overflow-hidden">
+					<!-- Slider Container -->
+					<div class="logos-slider flex items-center justify-center gap-12 py-4">
+						<!-- Partner Logos - Duplicated for infinite loop effect -->
+						<div class="logos-slide flex items-center justify-center gap-12">
+							<img src="/images/social media/aaccup.png" alt="AACCUP" class="h-12 object-contain opacity-80 hover:opacity-100 transition-opacity">
+							<img src="/images/social media/chedlogo.png" alt="CHED" class="h-12 object-contain opacity-80 hover:opacity-100 transition-opacity">
+							<img src="/images/social media/dost.png" alt="DOST" class="h-12 object-contain opacity-80 hover:opacity-100 transition-opacity">
+							<img src="/images/social media/ched.png" alt="CHED" class="h-12 object-contain opacity-80 hover:opacity-100 transition-opacity">
+							<img src="/images/social media/msu.png" alt="MSU System" class="h-12 object-contain opacity-80 hover:opacity-100 transition-opacity">
+						</div>
+						<div class="logos-slide flex items-center justify-center gap-12">
+							<img src="/images/social media/aaccup.png" alt="AACCUP" class="h-12 object-contain opacity-80 hover:opacity-100 transition-opacity">
+							<img src="/images/social media/chedlogo.png" alt="CHED" class="h-12 object-contain opacity-80 hover:opacity-100 transition-opacity">
+							<img src="/images/social media/dost.png" alt="DOST" class="h-12 object-contain opacity-80 hover:opacity-100 transition-opacity">
+							<img src="/images/social media/ched.png" alt="CHED" class="h-12 object-contain opacity-80 hover:opacity-100 transition-opacity">
+							<img src="/images/social media/msu.png" alt="MSU System" class="h-12 object-contain opacity-80 hover:opacity-100 transition-opacity">
+						</div>
+					</div>
+					
+					<!-- Gradient overlays -->
+					<div class="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-gray-50 to-transparent z-10"></div>
+					<div class="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-gray-50 to-transparent z-10"></div>
+				</div>
+			</div>
+			
+			<style is:global>
+				@keyframes slide {
+					0% { transform: translateX(0); }
+					100% { transform: translateX(-100%); }
+				}
+				
+				.logos-slider {
+					width: 100%;
+					overflow: hidden;
+					position: relative;
+				}
+				
+				.logos-slide {
+					display: flex;
+					animation: slide 20s linear infinite;
+					width: calc(250px * 10); /* Adjust based on number of logos */
+				}
+				
+				.logos-slider:hover .logos-slide {
+					animation-play-state: paused;
+				}
+			</style>
+		</section>
+
+	<!-- About Section -->
+<section class="py-20 bg-white">
+	<div class="container mx-auto px-6">
+	  <div class="flex flex-col lg:flex-row items-center gap-12">
+		<div class="lg:w-1/2">
+		  <div class="relative rounded-xl overflow-hidden shadow-2xl group cursor-pointer">
+			<!-- Logo Container with enhanced hover effects -->
+			<div class="relative overflow-hidden transition-all duration-500">
+			  <!-- Main Logo -->
+			  <img src="/images/College Logo/LOGO COED.png" alt="CAS Logo" 
+				   class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105 group-hover:rotate-1" />
+			  
+			  <!-- Animated Overlay Elements -->
+			  <div class="absolute inset-0 bg-msu-deep-ocean/20 transition-opacity duration-500 group-hover:opacity-30"></div>
+			  
+			  <!-- Particle Effects (hidden until hover) -->
+			  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+				<!-- Multiple floating elements that appear on hover -->
+				<div class="absolute particle  w-3 h-3 bg-msu-gold rounded-full opacity-0 group-hover:opacity-80 transition-all duration-1000"></div>
+				<div class="absolute particle  w-4 h-4 bg-msu-gold rounded-full opacity-0 group-hover:opacity-80 transition-all duration-1200"></div>
+				<div class="absolute particle w-2 h-2 bg-msu-gold rounded-full opacity-0 group-hover:opacity-80 transition-all duration-900"></div>
+				<div class="absolute particle  w-3 h-3 bg-msu-gold rounded-full opacity-0 group-hover:opacity-80 transition-all duration-1100"></div>
+			  </div>
+			  
+			  <!-- Glow Effect -->
+			  <div class="absolute inset-0  opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+			</div>
+			
+			<!-- Floating Label (appears on hover) -->
+			<div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-msu-deep-ocean/90 text-white px-4 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+			  College of Arts & Sciences
+			</div>
+		  </div>
+		</div>
+		
+		<div class="lg:w-1/2">
+		  <h2 class="text-3xl font-bold text-msu-deep-ocean mb-6">About Our College</h2>
+		  <div class="space-y-4 text-gray-700">
+			<p>
+                    A. provide leadership in their respective disciplines through quality instruction, research, extension and innovation;			</p>
+			<p>
+                B. responds to the demands of their social environment and its diverse cultures; and		</p>
+			<p>
+                C. be effective agents of peace and development in the Sulu Archipelago.			</p>
+		
+		  </div>
+		</div>
+	  </div>
+	</div>
+  </section>
+  
+  <style>
+	/* Particle animation */
+
+	
+	@keyframes float {
+	  0%, 100% {
+		transform: translateY(0) translateX(0);
+	  }
+	  50% {
+		transform: translateY(-20px) translateX(10px);
+	  }
+	}
+
+	/* Cursor tracking effect */
+	.logo-container {
+	  position: relative;
+	  overflow: hidden;
+	}
+  </style>
+  
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+	const logoContainer = document.querySelector('.group');
+	
+	// Enhanced cursor position tracking for more interactive effects
+	logoContainer.addEventListener('mousemove', (e) => {
+	  const rect = logoContainer.getBoundingClientRect();
+	  const x = e.clientX - rect.left;
+	  const y = e.clientY - rect.top;
+	  const centerX = rect.width / 2;
+	  const centerY = rect.height / 2;
+	  
+	  // Calculate distance from center
+	  const distanceX = x - centerX;
+	  const distanceY = y - centerY;
+	  
+	  // Adjust particles based on cursor position
+	  const particles = document.querySelectorAll('.particle');
+	  particles.forEach((particle, index) => {
+		const speed = index * 0.5 + 1;
+		particle.style.transform = `translate(${distanceX * 0.01 * speed}px, ${distanceY * 0.01 * speed}px)`;
+	  });
+	  
+	  // Create a subtle parallax effect
+	  const logo = logoContainer.querySelector('img');
+	  logo.style.transform = `scale(1.05) rotate(${distanceX * 0.01}deg)`;
+	  
+	  // Dynamic glow effect
+	  const glow = logoContainer.querySelector('.glow-effect');
+	  glow.style.left = `${x}px`;
+	  glow.style.top = `${y}px`;
+	});
+	
+	// Reset on mouse leave
+	logoContainer.addEventListener('mouseleave', () => {
+	  const particles = document.querySelectorAll('.particle');
+	  particles.forEach(particle => {
+		particle.style.transform = '';
+	  });
+	  
+	  const logo = logoContainer.querySelector('img');
+	  logo.style.transform = '';
+	});
+  });
+  </script>
+		<!-- Stats Section -->
+		<section class="py-16 bg-msu-main-color text-white">
+			<div class="container mx-auto px-6">
+				<div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+					<div class="p-6">
+						<div class="text-5xl font-bold mb-2">6</div>
+						<div class="text-xl">Undergraduate Programs</div>
+					</div>
+					<div class="p-6">
+						<div class="text-5xl font-bold mb-2">2</div>
+						<div class="text-xl">Graduate Programs</div>
+					</div>
+                    <div class="p-6">
+						<div class="text-5xl font-bold mb-2">1</div>
+						<div class="text-xl">Doctoral Programs</div>
+					</div>
+					<div class="p-6">
+						<div class="text-5xl font-bold mb-2">5</div>
+						<div class="text-xl">Academic Departments</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+                    <!-- Programs Section -->
+                <section id="programs" class="py-20 bg-gray-50">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-msu-deep-ocean mb-4">Our Academic Programs</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">
+                        Explore our comprehensive range of accredited programs designed to develop exceptional educators and leaders
+                    </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Undergraduate Programs -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
+                        <div class="bg-msu-gold py-4 px-6">
+                        <h3 class="text-xl font-bold text-white">Undergraduate Programs</h3>
+                        </div>
+                        <div class="p-6">
+                        <ul class="space-y-4">
+                            <!-- BSEd Programs -->
+                            <li class="group">
+                            <div class="flex items-start">
+                                <svg class="h-5 w-5 text-msu-gold mt-1 mr-2 flex-shrink-0 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span class="font-medium group-hover:text-msu-gold transition-colors">Bachelor of Secondary Education</span>
+                            </div>
+                            <div class="ml-7 mt-2 pl-2 border-l-2 border-msu-gold/30 space-y-3">
+                                <div class="flex items-start">
+                                <svg class="h-4 w-4 text-msu-deep-ocean mt-1 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Major in English</span>
+                                </div>
+                                <div class="flex items-start">
+                                <svg class="h-4 w-4 text-msu-deep-ocean mt-1 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Major in Filipino</span>
+                                </div>
+                                <div class="flex items-start">
+                                <svg class="h-4 w-4 text-msu-deep-ocean mt-1 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Major in Sciences</span>
+                                </div>
+                                <div class="flex items-start">
+                                <svg class="h-4 w-4 text-msu-deep-ocean mt-1 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Major in Mathematics</span>
+                                </div>
+                            </div>
+                            </li>
+
+                            <!-- BEED -->
+                            <li class="group">
+                            <div class="flex items-start">
+                                <svg class="h-5 w-5 text-msu-gold mt-1 mr-2 flex-shrink-0 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span class="font-medium group-hover:text-msu-gold transition-colors">Bachelor of Elementary Education</span>
+                            </div>
+                            <div class="ml-7 mt-2 pl-2 border-l-2 border-msu-gold/30">
+                                <div class="flex items-start">
+                                <svg class="h-4 w-4 text-msu-deep-ocean mt-1 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>Major in General Education</span>
+                                </div>
+                            </div>
+                            </li>
+
+                            <!-- Early Childhood Education -->
+                            <li class="group">
+                            <div class="flex items-start">
+                                <svg class="h-5 w-5 text-msu-gold mt-1 mr-2 flex-shrink-0 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <a href="https://docs.google.com/document/d/1rRuFXcbhHzkQ6pkt9-kTvK05XwrZHMK3/edit?usp=drive_link" class="font-medium hover:text-msu-gold transition-colors flex items-center">
+                                Bachelor of Early Childhood Education
+                                <svg class="h-4 w-4 ml-1 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                </svg>
+                                </a>
+                            </div>
+                            </li>
+                        </ul>
+                        </div>
+                    </div>
+
+                    <!-- Graduate & Doctoral Programs -->
+                    <div class="space-y-8">
+                        <!-- Graduate Programs -->
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
+                        <div class="bg-msu-deep-ocean py-4 px-6">
+                            <h3 class="text-xl font-bold text-white">Graduate Programs</h3>
+                        </div>
+                        <div class="p-6">
+                            <ul class="space-y-4">
+                            <li class="group">
+                                <a href="https://drive.google.com/file/d/1o6V4gWfdf--bOOI0G8fyhg41hAJJvRLc/view?usp=drive_link" class="flex items-start hover:text-msu-deep-ocean transition-colors">
+                                <svg class="h-5 w-5 text-msu-deep-ocean mt-1 mr-2 flex-shrink-0 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span class="font-medium">MA in Education major in Educational Management</span>
+                                <svg class="h-4 w-4 ml-1 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                </svg>
+                                </a>
+                            </li>
+                            
+                            <li class="group">
+                                <a href="https://drive.google.com/file/d/1o6V4gWfdf--bOOI0G8fyhg41hAJJvRLc/view?usp=drive_link" class="flex items-start hover:text-msu-deep-ocean transition-colors">
+                                <svg class="h-5 w-5 text-msu-deep-ocean mt-1 mr-2 flex-shrink-0 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span class="font-medium">MA in Education major in Reading</span>
+                                <svg class="h-4 w-4 ml-1 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                </svg>
+                                </a>
+                            </li>
+                            </ul>
+                        </div>
+                        </div>
+
+                        <!-- Doctoral Programs -->
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
+                        <div class="bg-msu-main-color py-4 px-6">
+                            <h3 class="text-xl font-bold text-white">Doctoral Programs</h3>
+                        </div>
+                        <div class="p-6">
+                            <ul class="space-y-4">
+                            <li class="group">
+                                <a href="https://drive.google.com/file/d/1o6V4gWfdf--bOOI0G8fyhg41hAJJvRLc/view?usp=drive_link" class="flex items-start hover:text-msu-main-color transition-colors">
+                                <svg class="h-5 w-5 text-msu-main-color mt-1 mr-2 flex-shrink-0 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span class="font-medium">PhD in Education Management</span>
+                                <svg class="h-4 w-4 ml-1 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                </svg>
+                                </a>
+                            </li>
+                            </ul>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+
+                    <!-- Accreditation Badges -->
+                     <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                        		</div>
+                    <div class="mt-16 bg-white rounded-xl shadow-lg p-8">
+                    <div class="text-center mb-8">
+                        <h3 class="text-xl font-bold text-msu-deep-ocean">Program Accreditations</h3>
+                        <p class="text-gray-600 mt-2">Our programs meet the highest standards of quality education</p>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-8">
+                        <div class="flex flex-col items-center">
+                        <div class="bg-gray-50 p-4 rounded-lg shadow-md mb-2">
+                            <img src="/images/social media/aaccup.png" alt="AACCUP Logo" class="h-16 w-auto object-contain">
+                        </div>
+                        <span class="text-sm font-medium text-gray-700">AACCUP Accredited Programs</span>
+                        </div>
+                        <div class="flex flex-col items-center">
+                        <div class="bg-gray-50 p-4 rounded-lg shadow-md mb-2">
+                            <img src="/images/social media/chedlogo.png" alt="CHED Logo" class="h-16 w-auto object-contain">
+                        </div>
+                        <span class="text-sm font-medium text-gray-700">CHED Certificate of Program Compliance</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </section>
+
+		<!-- Gallery Section -->
+		<section class="py-20 bg-white">
+			<div class="container mx-auto px-6">
+				<div class="text-center mb-16">
+					<h2 class="text-3xl font-bold text-msu-deep-ocean mb-4">Campus Life</h2>
+					<p class="text-gray-600 max-w-2xl mx-auto">
+						Experience the vibrant academic community at the College of Arts and Sciences
+					</p>
+				</div>
+
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+					<div class="relative group overflow-hidden rounded-xl shadow-lg h-64">
+						<img src="/images/coed/image1.png" alt="CAS Campus" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+						<div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+							<span class="text-white font-bold text-lg">Classroom Discussions</span>
+						</div>
+					</div>
+					<div class="relative group overflow-hidden rounded-xl shadow-lg h-64">
+						<img src="/images/coed/image2.png" alt="CAS Students" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+						<div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+							<span class="text-white font-bold text-lg">Student Activities</span>
+						</div>
+					</div>
+					<div class="relative group overflow-hidden rounded-xl shadow-lg h-64">
+						<img src="/images/coed/image3.png" alt="CAS Facilities" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+						<div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+							<span class="text-white font-bold text-lg">Academic Events</span>
+						</div>
+					</div>
+					<div class="relative group overflow-hidden rounded-xl shadow-lg h-64 md:col-span-2">
+						<img src="/images/coed/image4.png" alt="CAS Laboratory" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+						<div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+							<span class="text-white font-bold text-lg">Research Facilities</span>
+						</div>
+					</div>
+					<div class="relative group overflow-hidden rounded-xl shadow-lg h-64">
+						<img src="/images/coed/image5.png" alt="CAS Library" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+						<div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+							<span class="text-white font-bold text-lg">Learning Spaces</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Contact Section -->
+		<section id="contact" class="py-20 bg-msu-deep-ocean text-white">
+			<div class="container mx-auto px-6">
+				<div class="max-w-4xl mx-auto">
+					<div class="text-center mb-12">
+						<h2 class="text-3xl font-bold mb-4">Contact the College of Islamic and Arabic Studies</h2>
+						<p class="text-gray-300">
+							Have questions about our programs or admission process? Reach out to us.
+						</p>
+					</div>
+
+					<div class="grid md:grid-cols-2 gap-8">
+						<div>
+							<h3 class="text-xl font-bold mb-4">Contact Information</h3>
+							<ul class="space-y-4">
+								<li class="flex items-start">
+									<svg class="h-6 w-6 text-msu-main-color mr-4 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+									</svg>
+									<span>almirahadji@msutawi-tawi.edu.ph</span>
+								</li>
+								<li class="flex items-start">
+									<svg class="h-6 w-6 text-msu-main-color mr-4 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+									</svg>
+									<div>
+										<p>0927-359-2473</p>
+								
+									</div>
+								</li>
+								<li class="flex items-start">
+									<svg class="h-6 w-6 text-msu-main-color mr-4 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+									</svg>
+									<span>MSU-TCTO Campus, Sanga-Sanga, Bongao, Tawi-Tawi, Philippines</span>
+								</li>
+							</ul>
+						</div>
+
+						<div>
+							<section class="py-12 px-4">
+								<div class="max-w-4xl mx-auto">
+								  <div class="bg-msu-deep-ocean rounded-lg shadow-lg overflow-hidden">
+									<div class="p-8">
+									  <h3 class="text-2xl font-bold mb-6 text-white">Send Us a Message</h3>
+									  
+									  <!-- Form Container -->
+									  <div id="form-container">
+										<form id="contact-form" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSderS6A0qtRPw6zVVeTY-tTTjszHFz1cO-aSDaru4aXyUH6QA/formResponse" method="POST" class="space-y-6">
+										  <div>
+											<label for="name" class="block mb-2 text-gray-300">Name <span class="text-msu-gold">*</span></label>
+											<input type="text" id="name" name="entry.757250837" required
+											  class="w-full px-4 py-3 rounded bg-msu-deep-ocean-light border border-gray-600 focus:outline-none focus:ring-2 focus:ring-msu-gold text-white placeholder-gray-400"
+											  placeholder="Your name">
+											<div id="name-error" class="text-red-400 text-sm mt-1 hidden">Please enter your name</div>
+										  </div>
+										  
+										  <div>
+											<label for="email" class="block mb-2 text-gray-300">Email <span class="text-msu-gold">*</span></label>
+											<input type="email" id="email" name="entry.1493463705" required
+											  class="w-full px-4 py-3 rounded bg-msu-deep-ocean-light border border-gray-600 focus:outline-none focus:ring-2 focus:ring-msu-gold text-white placeholder-gray-400"
+											  placeholder="your.email@example.com">
+											<div id="email-error" class="text-red-400 text-sm mt-1 hidden">Please enter a valid email address</div>
+										  </div>
+										  
+										  <div>
+											<label for="message" class="block mb-2 text-gray-300">Message <span class="text-msu-gold">*</span></label>
+											<textarea id="message" name="entry.1174451292" rows="5" required
+											  class="w-full px-4 py-3 rounded bg-msu-deep-ocean-light border border-gray-600 focus:outline-none focus:ring-2 focus:ring-msu-gold text-white placeholder-gray-400"
+											  placeholder="Your message here..."></textarea>
+											<div id="message-error" class="text-red-400 text-sm mt-1 hidden">Please enter your message</div>
+										  </div>
+
+										  <div>
+						
+											<input type="text" id="name" name="entry.757250837" value="COED" required
+											  class="w-full px-4 py-3 rounded bg-msu-deep-ocean-light border border-gray-600 focus:outline-none focus:ring-2 focus:ring-msu-gold text-white placeholder-gray-400"
+											  placeholder="Your name" hidden>
+											<div id="name-error" class="text-red-400 text-sm mt-1 hidden">Please enter Department</div>
+										  </div>
+										  
+										<div class="pt-2">
+                                            <button 
+                                                type="submit" 
+                                                id="submit-btn" 
+                                                class="w-full py-3 px-6 rounded-lg font-medium transition-all duration-300 flex items-center justify-center
+                                                    bg-gradient-to-r from-msu-main-color to-msu-deep-ocean hover:bg-gradient-to-br
+                                                    text-white shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                                            >
+                                                <span id="btn-text">Send Message</span>
+                                                <svg id="spinner" class="hidden w-5 h-5 ml-2 text-white animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                </svg>
+                                            </button>
+                                            </div>
+										</form>
+									  </div>
+									  
+									  <!-- Success Message -->
+									  <div id="thank-you" class="hidden p-6 bg-green-900/30 rounded-lg border border-green-500 text-center">
+										<div class="text-green-400 text-5xl mb-4">✓</div>
+										<h4 class="text-xl font-bold text-green-100 mb-2">Message Sent Successfully!</h4>
+										<p class="text-gray-300">Thank you for contacting us. We'll get back to you soon.</p>
+										<button id="new-message-btn" class="mt-6 text-msu-gold hover:text-msu-gold-light underline">Send another message</button>
+									  </div>
+									</div>
+								  </div>
+								</div>
+							  </section>
+							  
+							  <script>
+							  document.addEventListener('DOMContentLoaded', function() {
+								const form = document.getElementById('contact-form');
+								const formContainer = document.getElementById('form-container');
+								const thankYou = document.getElementById('thank-you');
+								const submitBtn = document.getElementById('submit-btn');
+								const btnText = document.getElementById('btn-text');
+								const spinner = document.getElementById('spinner');
+								const newMessageBtn = document.getElementById('new-message-btn');
+								
+								// Error elements
+								const nameError = document.getElementById('name-error');
+								const emailError = document.getElementById('email-error');
+								const messageError = document.getElementById('message-error');
+								
+								// Validate form on submit
+								form.addEventListener('submit', function(e) {
+								  e.preventDefault();
+								  
+								  // Reset errors
+								  nameError.classList.add('hidden');
+								  emailError.classList.add('hidden');
+								  messageError.classList.add('hidden');
+								  
+								  // Validate fields
+								  let isValid = true;
+								  const name = document.getElementById('name').value.trim();
+								  const email = document.getElementById('email').value.trim();
+								  const message = document.getElementById('message').value.trim();
+								  
+								  if (!name) {
+									nameError.classList.remove('hidden');
+									isValid = false;
+								  }
+								  
+								  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+									emailError.classList.remove('hidden');
+									isValid = false;
+								  }
+								  
+								  if (!message) {
+									messageError.classList.remove('hidden');
+									isValid = false;
+								  }
+								  
+								  if (!isValid) return;
+								  
+								  // Show loading state
+								  submitBtn.disabled = true;
+								  btnText.textContent = 'Sending...';
+								  spinner.classList.remove('hidden');
+								  
+								  // Submit form data
+								  const formData = new FormData(form);
+								  
+								  fetch(form.action, {
+									method: 'POST',
+									mode: 'no-cors',
+									body: formData
+								  })
+								  .then(() => {
+									// Show success message
+									formContainer.style.display = 'none';
+									thankYou.classList.remove('hidden');
+									
+									// Reset form
+									form.reset();
+								  })
+								  .catch((error) => {
+									console.error('Error:', error);
+									alert('There was an error sending your message. Please try again later.');
+								  })
+								  .finally(() => {
+									// Reset button state
+									submitBtn.disabled = false;
+									btnText.textContent = 'Send Message';
+									spinner.classList.add('hidden');
+								  });
+								});
+								
+								// New message button
+								newMessageBtn.addEventListener('click', function() {
+								  formContainer.style.display = 'block';
+								  thankYou.classList.add('hidden');
+								});
+								
+								// Real-time validation
+								document.getElementById('name').addEventListener('input', function() {
+								  if (this.value.trim()) nameError.classList.add('hidden');
+								});
+								
+								document.getElementById('email').addEventListener('input', function() {
+								  if (this.value.trim() && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.value)) {
+									emailError.classList.add('hidden');
+								  }
+								});
+								
+								document.getElementById('message').addEventListener('input', function() {
+								  if (this.value.trim()) messageError.classList.add('hidden');
+								});
+							  });
+							  </script>
+							  
+							  <style>
+							  .btn-gold {
+								background-color: #FFD700; /* MSU gold */
+								color: #002855; /* MSU deep ocean */
+								font-weight: 600;
+							  }
+							  
+							  .btn-gold:hover {
+								background-color: #E6C200;
+							  }
+							  
+							  .bg-msu-deep-ocean-light {
+								background-color: #003366;
+							  }
+							  
+							  /* Add any additional custom styles here */
+							  </style>
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+		    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" aria-label="Scroll to top">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+      </svg>
+    </button>
+
+		<!-- FooterNav -->
+		<FooterNav />
+		
+		<!-- Footer -->
+		<Footer />
+	</main>
+
+
+				<script src="../../js/animate.js" ></script>
+				<script src="../../js/loadinganim.js" ></script>
+				<script src="../../js/smoothscroll.js" ></script>
+
+
+
+    <script>
+        module.exports = {
+  theme: {
+    extend: {
+      keyframes: {
+        'fade-in-up': {
+          '0%': { opacity: 0, transform: 'translateY(20px)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        'fade-in-up': 'fade-in-up 0.8s ease-out forwards',
+      },
+    },
+  },
+}
+
+    </script>
+	<style>
+		.btn-gold {
+			display: inline-block;
+			background-color: #D4AF37;
+			color: #002855;
+			font-weight: 600;
+			padding: 12px 24px;
+			border-radius: 50px;
+			transition: all 0.3s ease;
+			text-align: center;
+		}
+		
+		.btn-gold:hover {
+			background-color: #c2a030;
+			transform: translateY(-2px);
+			box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+		}
+		
+		.btn-outline-white {
+			display: inline-block;
+			border: 2px solid white;
+			color: white;
+			font-weight: 600;
+			padding: 12px 24px;
+			border-radius: 50px;
+			transition: all 0.3s ease;
+			text-align: center;
+		}
+		
+		.btn-outline-white:hover {
+			background-color: rgba(255,255,255,0.1);
+			transform: translateY(-2px);
+		}
+		
+		.shadow-2xl {
+			box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+		}
+
+		  /* ... your existing styles ... */
+
+  /* Wave animation effect */
+  .btn-gold, .btn-outline-white {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-gold:after, .btn-outline-white:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+  }
+
+  .btn-gold:focus:not(:active)::after,
+  .btn-outline-white:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+  }
+
+  @keyframes ripple {
+    0% {
+      transform: scale(0, 0);
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(20, 20);
+      opacity: 0;
+    }
+  }
+	</style>
 </Layout>
+
+
+
+
+
+
+
+<style is:global>
+	@keyframes spin {
+	  0% { transform: rotate(0deg); }
+	  100% { transform: rotate(360deg); }
+	}
+	
+	.animate-spin {
+	  animation: spin 1.5s linear infinite;
+	}
+	
+	.animation-delay-200 {
+	  animation-delay: 0.2s;
+	}
+	
+	.animation-delay-400 {
+	  animation-delay: 0.4s;
+	}
+	
+	/* Hide loading animation when page loads */
+	html.wf-active #loading-animation,
+	html.loaded #loading-animation {
+	  opacity: 0;
+	  pointer-events: none;
+	}
+  </style>
+  
+  <script is:inline>
+	// Hide loading animation when page is loaded
+	window.addEventListener('load', function() {
+	  document.documentElement.classList.add('loaded');
+	  setTimeout(function() {
+		document.getElementById('loading-animation').style.display = 'none';
+	  }, 500);
+	});
+  </script>
