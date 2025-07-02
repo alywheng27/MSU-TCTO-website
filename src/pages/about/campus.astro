@@ -16,11 +16,11 @@ import MySwiper from "../../components/MySwiper.jsx";
 const currentPath = Astro.url.pathname;
 ---
 <Layout title="MSU | Tawi-Tawi - Legacy of Excellence">
-    <Navbar path={currentPath} client:visible />
 
 
-  <main class="bg-white text-gray-900 font-sans antialiased">
-
+    <main class="font-sans antialiased text-gray-800 leading-normal">
+        <!-- Enhanced Navbar -->
+        <Navbar path={currentPath} client:visible class="bg-white shadow-md" />
 
 <!-- Video Hero Section -->
 <section class="relative h-screen min-h-[800px] overflow-hidden">
