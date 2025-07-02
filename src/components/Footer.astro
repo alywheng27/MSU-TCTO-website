@@ -4,6 +4,14 @@ import { urlForImage } from '../api/api';
 import { get3LatestArticle } from '../api/api';
 const threeLatestArticles = await get3LatestArticle();
 ---
+
+
+<div style="position: fixed; left: 0; bottom: 0; z-index: 1000;">
+    <script src="https://insights.elishatelecom.com/aichat/public/snippet_assets/js/include-chatbot.min.js"></script>
+    <div include-html="https://insights.elishatelecom.com/aichat/embedded-chatbot?key=guXJzVN2UnYvtbBf70C3GKEpDF5wZ9ad" id="chatbot"></div>
+</div>
+
+
 <div class="bg-msu-deep-ocean text-white-pure">
     <!-- Latest Articles Section -->
     <div class="bg-gradient-to-r from-msu-deep-ocean to-msu-deep-ocean py-16">
@@ -44,12 +52,832 @@ const threeLatestArticles = await get3LatestArticle();
                 ))}
             </div>
             <div class="text-center mt-10">
-                <a href="/publications/articles" class="inline-block bg-gradient-to-r from-msu-pink to-msu-pink hover:from-msu-dark-gold hover:to-msu-ocean-deep text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-msu-main-color/30">
+                <a href="/publications/articles" class="inline-block bg-gradient-to-r from-msu-bgc-color to-msu-bgc-color hover:from-msu-main-color hover:to-msu-deep-ocean text-msu-deep-ocean font-semibold py-3 px-8 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-msu-main-color/30">
                     View All News Articles
                 </a>
             </div>
         </div>
     </div>
+
+
+    <!-- Partners Sections (Keep your existing partners code) -->
+    <!-- International Partners -->
+    <div class="bg-white py-16 bg-gradient-to-r from-msu-dark-blue to-msu-deep-ocean">
+        <div class="container mx-auto px-4 max-w-7xl">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-msu-deep-ocean to-msu-deep-ocean">INTERNATIONAL PARTNERSHIPS</span>
+                </h2>
+                <p class="max-w-3xl mx-auto text-xl text-msu-maroon-900 opacity-90 leading-relaxed">
+                    Collaborating with prestigious institutions worldwide to advance education and research
+                </p>
+                <div class="w-40 h-1.5 bg-gradient-to-r from-msu-dark-ocean to-msu-dark-ocean  mx-auto mt-8 rounded-full"></div>
+            </div>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6" id="intl-partners-container">
+                <!-- Your existing partner cards (6 visible by default) -->
+                <div class="partner-card">
+                    <a href="#" class="group block h-full">
+                        <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">
+                                <img src="/InternationalPartnership/UNIVERSITAS JENDERAL SOEDIRMAN, INDONESIA.png" 
+                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                            </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                UNIVERSITAS JENDERAL SOEDIRMAN
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+
+                <div class="partner-card">
+                    <a href="#" class="group block h-full">
+                          <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                                         <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1 rounded-xl backdrop-blur-sm">
+                                <img src="/InternationalPartnership/UNIVERSITAS MUHAMMADIYAH YOGYAKARTA, INDONESIA.png" 
+                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                            </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                UNIVERSITAS MUHAMMADIYAH YOGYAKARTA
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="partner-card">
+                    <a href="#" class="group block h-full">
+                         <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                           <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1 rounded-xl backdrop-blur-sm">                                <img src="/InternationalPartnership/INSTITUTE OF PERTANIAN BOGOR (IPB).png" 
+                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                            </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                INSTITUTE OF PERTANIAN BOGOR
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="partner-card">
+                    <a href="#" class="group block h-full">
+                           <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1 rounded-xl backdrop-blur-sm">
+                                <img src="/InternationalPartnership/UNIVERSITI ISLAM SULTAN SHARIF ALI (UNISSA).png" 
+                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                            </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                UNIVERSITI ISLAM SULTAN SHARIF ALI
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="partner-card">
+                    <a href="#" class="group block h-full">
+                          <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1 rounded-xl backdrop-blur-sm">
+                                <img src="/InternationalPartnership/THE UNIVERSITY OF HONG KONG.png" 
+                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                            </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                THE UNIVERSITY OF HONG KONG
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="partner-card">
+                    <a href="#" class="group block h-full">
+                          <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1 rounded-xl backdrop-blur-sm">
+                                <img src="/InternationalPartnership/NATIONAL KAOHSIUNG UNIVERSITY OF SCIENCE AND TECHNOLOGY (NKUST-CHS).png" 
+                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                            </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                NATIONAL KAOHSIUNG UNIVERSITY
+                            </span>
+                        </div>
+                    </a>
+                </div>
+                <!-- More partners... -->
+            </div>
+            
+            <!-- Hidden partners -->
+            <div id="intl-hidden-partners" class="hidden col-span-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 mt-6">
+                <!-- Your hidden international partners (7-16) -->
+                  <!-- Example for partner 7 -->
+                  <div class="partner-card">
+                    <a href="#" class="group block h-full">
+                          <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1 rounded-xl backdrop-blur-sm">
+                                <img src="/InternationalPartnership/KOLEJ UNIVERSITI PERGURUAN UGAMA SERI BEGAWAN BRUNEI DARUSSALAM.png" 
+                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                            </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                KOLEJ UNIVERSITI PERGURUAN UGAMA SERI BEGAWAN BRUNEI DARUSSALAM
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+
+                <div class="partner-card">
+                    <a href="#" class="group block h-full">
+                          <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1 rounded-xl backdrop-blur-sm">
+                                <img src="/InternationalPartnership/UNIVERSITY OF MALAYA.png" 
+                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                            </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                UNIVERSITY OF MALAYA
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+
+                <div class="partner-card">
+                    <a href="#" class="group block h-full">
+                          <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1 rounded-xl backdrop-blur-sm">
+                                <img src="/InternationalPartnership/UNIVERSITAS TEKNOLOGI SUMBAWA.png" 
+                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                            </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                UNIVERSITAS TEKNOLOGI SUMBAWA
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+
+                <div class="partner-card">
+                    <a href="#" class="group block h-full">
+                          <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1 rounded-xl backdrop-blur-sm">
+                                <img src="/InternationalPartnership/UNIVERSAITAS LAMPUNG, INDONESIA.png" 
+                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                            </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                UNIVERSAITAS LAMPUNG, INDONESIA
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+
+                <div class="partner-card">
+                    <a href="#" class="group block h-full">
+                          <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1 rounded-xl backdrop-blur-sm">
+                                <img src="/InternationalPartnership/UNIVERSITI TEKNOLOGY BRUNEI.png" 
+                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                            </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                UNIVERSITI TEKNOLOGY BRUNEI
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+
+                <div class="partner-card">
+                    <a href="#" class="group block h-full">
+                          <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1 rounded-xl backdrop-blur-sm">
+                                <img src="/InternationalPartnership/UNIVERSITI TEKNOLOGI MARA.png" 
+                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                            </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                UNIVERSITI TEKNOLOGI MARA
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+
+                <div class="partner-card">
+                    <a href="#" class="group block h-full">
+                          <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1 rounded-xl backdrop-blur-sm">
+                                <img src="/InternationalPartnership/KEUKA COLLEGE, UNITED STATES.png" 
+                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                            </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                KEUKA COLLEGE, UNITED STATES
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+
+                <div class="partner-card">
+                    <a href="#" class="group block h-full">
+                          <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1 rounded-xl backdrop-blur-sm">
+                                <img src="/InternationalPartnership/UNIVERSITI TUN HUSSEIN ONN MALAYSIA.png" 
+                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                            </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                UNIVERSITI TUN HUSSEIN ONN MALAYSIA
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+
+                <div class="partner-card">
+                    <a href="#" class="group block h-full">
+                          <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1 rounded-xl backdrop-blur-sm">
+                                <img src="/InternationalPartnership/KASTAMONU UNIVERSITY.png" 
+                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                            </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                KASTAMONU UNIVERSITY
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+
+                <div class="partner-card">
+                    <a href="#" class="group block h-full">
+                          <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1 rounded-xl backdrop-blur-sm">
+                                <img src="/InternationalPartnership/INSTITUTE PERTANIAN BOGOR (IPB).png" 
+                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                            </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                INSTITUTE PERTANIAN BOGOR (IPB)
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="partner-card">
+                    <a href="#" class="group block h-full">
+                          <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1 rounded-xl backdrop-blur-sm">
+                                <img src="/InternationalPartnership/KOLEJ UNIVERSITI PERGURUAN UGAMA SERI BEGAWAN BRUNEI DARUSSALAM.png" 
+                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                            </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                KOLEJ UNIVERSITI PERGURUAN UGAMA
+                            </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button id="intl-show-more" class="bg-transparent border-2 border-msu-deep-ocean text-msu-deep-ocean hover:bg-msu-main-color hover:text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-msu-main-color/30">
+                    Show All International Partners
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block ml-2 transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Local Partners -->
+    <div class=" py-16 bg-gradient-to-br from-msu-bgc-color to-msu-bgc-color">
+        <div class="container mx-auto px-4 max-w-7xl">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-msu-deep-ocean to-msu-deep-ocean">LOCAL PARTNERSHIPS</span>
+                </h2>
+                <p class="max-w-3xl mx-auto text-xl text-msu-maroon-900 opacity-90 leading-relaxed">
+                    Strengthening ties with Philippine institutions for community development
+                </p>
+                <div class="w-40 h-1.5 bg-gradient-to-r from-msu-main-color to-msu-main-color mx-auto mt-8 rounded-full"></div>
+            </div>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6" id="local-partners-container">
+                <!-- Your existing local partner cards (6 visible by default) -->
+                <div class="partner-card">
+                    <a href="#" class="group block h-full">
+                    <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">
+                                <img src="/LocalPartnership/UNIVERSITY OF THE PHILIPPINES- LOS BAÑOS.png" 
+                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                            </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                UNIVERSITY OF THE PHILIPPINES
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+                      <!-- First 6 partners shown by default -->
+                      <div class="partner-card">
+                        <a href="#" class="group block h-full">
+  <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">
+                                    <img src="/LocalPartnership/MINDANAO STATE UNIVERSIY-NAAWAN.png" 
+                                         class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                                </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                    MINDANAO STATE UNIVERSIY-NAAWAN
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+
+                          <!-- First 6 partners shown by default -->
+                <div class="partner-card">
+                    <a href="#" class="group block h-full">
+ <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">                                <img src="/LocalPartnership/ATENEO DE ZAMBOANGA UNIVERSITY.png" 
+                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                            </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                ATENEO DE ZAMBOANGA UNIVERSITY
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+                      <!-- First 6 partners shown by default -->
+                      <div class="partner-card">
+                        <a href="#" class="group block h-full">
+ <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">                                    <img src="/LocalPartnership/UNIVERSITY OF THE PHILIPPINES- VISAYAS.png" 
+                                         class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                                </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                    UNIVERSITY OF THE PHILIPPINES- VISAYAS
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="partner-card">
+                        <a href="#" class="group block h-full">
+                   <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">                                    <img src="/LocalPartnership/POLYTECHNIC UNIVERSITY OF THE PHILIPPINES.png" 
+                                         class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                                </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                    POLYTECHNIC UNIVERSITY OF THE PHILIPPINES
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+
+                          <!-- First 6 partners shown by default -->
+                          <div class="partner-card">
+                            <a href="#" class="group block h-full">
+                    <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">                                        <img src="/LocalPartnership/UNIVERSITY OF THE PHILIPPINES- MINDANAO.png" 
+                                             class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                                    </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                        UNIVERSITY OF THE PHILIPPINES- MINDANAO
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+    
+
+                <!-- More partners... -->
+            </div>
+            
+            <!-- Hidden local partners -->
+            <div id="local-hidden-partners" class="hidden col-span-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 mt-6">
+                <!-- Your hidden local partners -->
+
+                 <div class="partner-card">
+                                            <a href="#" class="group block h-full">
+ <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">                                                   
+                                  <img src="/LocalPartnership/CAGAYAN STATE UNIVERSITY.png" 
+                                                             class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                                                    </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                                        CAGAYAN STATE UNIVERSITY
+                                                    </span>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <div class="partner-card">
+                                            <a href="#" class="group block h-full">
+ <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">                                                 
+                                       <img src="/LocalPartnership/DAVAO DEL NORTE STATE COLLEGE.png" 
+                                                             class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                                                    </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                                        DAVAO DEL NORTE STATE COLLEGE
+                                                    </span>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
+                                        
+                                       <div class="partner-card">
+                                            <a href="#" class="group block h-full">
+ <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">                                                        <img src="/LocalPartnership/MINDANAO STATE UNIVERSITY- SULU.png" 
+                                                             class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                                                    </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                                        MINDANAO STATE UNIVERSITY- SULU
+                                                    </span>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
+                                   
+                                        
+                                        <div class="partner-card">
+                                            <a href="#" class="group block h-full">
+                                     <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">                                                        <img src="/LocalPartnership/WESTERN MINDANAO STATE UNIVERSITY (WMSU).png" 
+                                                             class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                                                    </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                                        WESTERN MINDANAO STATE UNIVERSITY (WMSU)
+                                                    </span>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
+                                       
+                                        <div class="partner-card">
+                                            <a href="#" class="group block h-full">
+                                                 <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">                                                        <img src="/LocalPartnership/ATENEO DE DAVAO UNIVERSITY.png" 
+                                                             class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                                                    </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                                        ATENEO DE DAVAO UNIVERSITY
+                                                    </span>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
+                                        <div class="partner-card">
+                                            <a href="#" class="group block h-full">
+                <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">                                                        <img src="/LocalPartnership/UNIVERSITY OF EASTERN PHILIPPINES.png" 
+                                                             class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                                                    </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                                        UNIVERSITY OF EASTERN PHILIPPINES
+                                                    </span>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
+                                        
+                                        <div class="partner-card">
+                                            <a href="#" class="group block h-full">
+                                          <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">                                                     
+                                   <img src="/LocalPartnership/MINDANAO STATE UNIVERSITY- MAGUINDANAO.png" 
+                                                             class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                                                    </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                                        MINDANAO STATE UNIVERSITY- MAGUINDANAO
+                                                    </span>
+                                                </div>
+                                            </a>
+                                        </div>
+          
+                                        
+                                         <div class="partner-card">
+                                        <a href="#" class="group block h-full">
+                                          <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">                                                    <img src="/LocalPartnership/MINDANAO STATE UNIVERSITY- GENERAL SANTOS.png" 
+                                                         class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                                                </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                                    MINDANAO STATE UNIVERSITY- GENERAL SANTOS
+                                                </span>
+                                            </div>
+                                        </a>
+                                    </div>
+
+
+                                     <div class="partner-card">
+                                    <a href="#" class="group block h-full">
+                                       <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">                                                <img src="/LocalPartnership/MINDANAO STATE UNIVERSITY- ILIGAN CITY.png" 
+                                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                                            </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                                MINDANAO STATE UNIVERSITY- ILIGAN CITY
+                                            </span>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                  <div class="partner-card">            
+                                <a href="#" class="group block h-full">
+                                  <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">                                            <img src="/LocalPartnership/MINDANAO STATE UNIVERSITY- MARAWI.png" 
+                                                 class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                                        </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                            MINDANAO STATE UNIVERSITY- MARAWI
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+
+
+                              <div class="partner-card">                     
+                            <a href="#" class="group block h-full">
+                      <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">                                        <img src="/LocalPartnership/BASILAN STATE COLLEGE (BaSC).png" 
+                                             class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                                    </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                        BASILAN STATE COLLEGE (BaSC)
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+
+                          <div class="partner-card">               
+                        <a href="#" class="group block h-full">
+                         <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">                                    <img src="/LocalPartnership/J.H. CERILLES STATE COLLEGE.png"  
+                                         class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                                </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                    J.H. CERILLES STATE COLLEGE
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+
+
+                     <div class="partner-card">
+                    <a href="#" class="group block h-full">
+                     <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">                                    <img src="/LocalPartnership/JOSE MEMORIAL STATE UNIVERSTIY- DAPITAN.png"
+                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                            </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                JOSE MEMORIAL STATE UNIVERSTIY- DAPITAN
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+
+                 <div class="partner-card">            
+                <a href="#" class="group block h-full">
+                   <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">                                <img src="/LocalPartnership/JOSE MEMORIAL STATE UNIVERSITY- TAMPILISAN.png"
+                                 class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                        </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                            JOSE MEMORIAL STATE UNIVERSITY- TAMPILISAN
+                        </span>
+                    </div>
+                </a>
+            </div>
+
+              <div class="partner-card">           
+            <a href="#" class="group block h-full">
+                 <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">                           <img src="/LocalPartnership/JOSE MEMORIAL STATE UNIVERSTIY- KATIPUNAN.png"
+                             class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                    </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                        JOSE MEMORIAL STATE UNIVERSTIY- KATIPUNAN
+                    </span>
+                </div>
+            </a>
+        </div>
+
+
+
+          <div class="partner-card">                   
+        <a href="#" class="group block h-full">
+            <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">                      <img src="/LocalPartnership/ZAMBOANGA STATE COLLEGE OF MARINE SCIENCES AND TECHNOLOGY.png"
+                         class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                    ZAMBOANGA STATE COLLEGE OF MARINE SCIENCES AND TECHNOLOGY
+                </span>
+            </div>
+        </a>
+    </div>
+
+       <div class="partner-card">                                  
+    <a href="#" class="group block h-full">
+ <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">                  <img src="/LocalPartnership/MINDANAO STATE UNIVERSITY- BUUG.png"
+                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+            </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                MINDANAO STATE UNIVERSITY- BUUG
+            </span>
+        </div>
+    </a>
+</div>
+
+ <div class="partner-card">
+<a href="#" class="group block h-full">
+   <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">            <img src="/LocalPartnership/TAWI-TAWI REGIONAL AGRICULTURAL COLLEGE.png"
+                 class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+        </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+            TAWI-TAWI REGIONAL AGRICULTURAL COLLEGE
+        </span>
+    </div>
+</a>
+</div> 
+            </div>
+            
+            <div class="text-center mt-12">
+           <button id="local-show-more" class="bg-transparent border-2 border-msu-deep-ocean text-msu-deep-ocean hover:bg-msu-main-color hover:text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-msu-main-color/30">
+    Show All Local Partners
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block ml-2 transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+    </svg>
+</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- International Agencies Section -->
+    <div class="py-16 bg-gradient-to-r from-msu-bgc-color to-msu-bgc-color">
+        <div class="container mx-auto px-4 max-w-7xl">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-msu-deep-ocean to-msu-deep-ocean">
+                        INTERNATIONAL AGENCIES / ORGANIZATIONS PARTNERS
+                    </span>
+                </h2>
+                <p class="max-w-3xl mx-auto text-xl text-msu-maroon-900 opacity-90 leading-relaxed">
+                    Global collaborations for academic excellence and research innovation
+                </p>
+                <div class="w-40 h-1.5 bg-gradient-to-r from-msu-main-color to-msu-main-color mx-auto mt-8 rounded-full"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center">
+                <!-- Agency 1 -->
+                <div class="partner-card w-full max-w-xs">
+                    <a href="#" class="group block h-full">
+ <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">                                <img src="/InterAgencies/FOOD AND AGRICULTURE ORGANIZATION OF THE UNITED NATION.png" 
+                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                            </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                FOOD AND AGRICULTURE ORGANIZATION (UN)
+                            </span>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Agency 2 -->
+                <div class="partner-card w-full max-w-xs">
+                    <a href="#" class="group block h-full">
+ <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">                                <img src="/InterAgencies/UNITED STATES AGENCY FOR THE INTERNATIONAL DEVELOPMENT (USAID).png" 
+                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                            </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                USAID
+                            </span>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Agency 3 -->
+                <div class="partner-card w-full max-w-xs">
+                    <a href="#" class="group block h-full">
+ <div class="bg-msu-deep-ocean bg-opacity-90 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-msu-deep-ocean border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
+                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-msu-bgc-color bg-opacity-1  rounded-xl backdrop-blur-sm">                                <img src="/InterAgencies/SOUTHEAST ASIAN REGIONAL CENTRE FOR TROPICAL BIOLOGY.png" 
+                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
+                            </div>
+                            <span class="text-center font-medium text-msu-light-blue group-hover:text-msu-deep-ocean transition-colors duration-300 text-sm md:text-base">
+                                SEARCA
+                            </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- SDG Full Width Section - Responsive -->
+<div class="w-full bg-msu-bgc-color py-8 md:py-12 lg:py-16">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Optional Heading (you can remove if not needed) -->
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-msu-deep-ocean text-center mb-4 md:mb-6 lg:mb-8">
+            Sustainable Development Goals
+        </h2>
+        
+        <!-- Image Container -->
+        <div class="w-full overflow-hidden rounded-lg md:rounded-xl shadow-md md:shadow-xl transition-all duration-300 hover:shadow-2xl">
+            <picture>
+                <!-- WebP versions for better performance -->
+                <source 
+                    srcset="/../images/sdg.jpg" 
+                    type="image/webp"
+                    media="(min-width: 768px)"
+                >
+                <source 
+                    srcset="/../images/sdg.jpg" 
+                    type="image/webp"
+                >
+                <!-- Fallback JPEG -->
+                <img 
+                    src="/../images/sdg.jpg" 
+                    srcset="/../images/sdg.jpg 768w, /../images/sdg.jpg 1600w"
+                    alt="Sustainable Development Goals illustration showing global initiatives"
+                    class="w-full h-auto object-cover"
+                    loading="lazy"
+                    width="1600"
+                    height="600"
+                    sizes="(max-width: 767px) 100vw, (min-width: 768px) 100vw"
+                    decoding="async"
+                >
+            </picture>
+        </div>
+        
+        <!-- Caption -->
+        <div class="text-center mt-3 md:mt-4 lg:mt-6 text-msu-deep-ocean text-base md:text-lg lg:text-xl font-medium">
+            Global Initiatives for a Better Future
+        </div>
+    </div>
+</div>
+
+<style>
+/* SDG Responsive Styles */
+.sdg-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+/* Aspect ratio box for better CLS (Cumulative Layout Shift) */
+.aspect-ratio-box {
+    position: relative;
+    width: 100%;
+    padding-top: 37.5%; /* 600/1600 = 0.375 (3:8 ratio) */
+    overflow: hidden;
+}
+
+.aspect-ratio-box img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* Hover effects for non-touch devices */
+@media (hover: hover) {
+    .sdg-container:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    
+    .aspect-ratio-box:hover img {
+        transform: scale(1.03);
+    }
+}
+
+/* Mobile optimizations */
+@media (max-width: 767px) {
+    .sdg-container {
+        border-radius: 0.25rem;
+    }
+    
+    /* Optional: Adjust padding for mobile */
+    .sdg-section {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+}
+
+/* Tablet optimizations */
+@media (min-width: 768px) and (max-width: 1023px) {
+    /* Optional: Adjust caption size */
+    .sdg-caption {
+        font-size: 1.1rem;
+    }
+}
+</style>
+
 
     <!-- Quick Links Section -->
     <div class="bg-msu-deep-ocean py-16">
@@ -307,743 +1135,7 @@ const threeLatestArticles = await get3LatestArticle();
         </div>
     </div>
 
-    <!-- Partners Sections (Keep your existing partners code) -->
-    <!-- International Partners -->
-    <div class="py-16 bg-gradient-to-r from-msu-dark-blue to-msu-deep-ocean">
-        <div class="container mx-auto px-4 max-w-7xl">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-msu-bgc-color to-msu-bgc-color">INTERNATIONAL PARTNERSHIPS</span>
-                </h2>
-                <p class="max-w-3xl mx-auto text-xl text-msu-light-blue opacity-90 leading-relaxed">
-                    Collaborating with prestigious institutions worldwide to advance education and research
-                </p>
-                <div class="w-40 h-1.5 bg-gradient-to-r from-msu-pink to-msu-pink  mx-auto mt-8 rounded-full"></div>
-            </div>
-            
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6" id="intl-partners-container">
-                <!-- Your existing partner cards (6 visible by default) -->
-                <div class="partner-card">
-                    <a href="#" class="group block h-full">
-                        <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
-                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                <img src="/InternationalPartnership/UNIVERSITAS JENDERAL SOEDIRMAN, INDONESIA.png" 
-                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                            </div>
-                            <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                UNIVERSITAS JENDERAL SOEDIRMAN
-                            </span>
-                        </div>
-                    </a>
-                </div>
 
-
-                <div class="partner-card">
-                    <a href="#" class="group block h-full">
-                        <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
-                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                <img src="/InternationalPartnership/UNIVERSITAS MUHAMMADIYAH YOGYAKARTA, INDONESIA.png" 
-                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                            </div>
-                            <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                UNIVERSITAS MUHAMMADIYAH YOGYAKARTA
-                            </span>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="partner-card">
-                    <a href="#" class="group block h-full">
-                        <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
-                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                <img src="/InternationalPartnership/INSTITUTE OF PERTANIAN BOGOR (IPB).png" 
-                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                            </div>
-                            <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                INSTITUTE OF PERTANIAN BOGOR
-                            </span>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="partner-card">
-                    <a href="#" class="group block h-full">
-                        <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
-                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                <img src="/InternationalPartnership/UNIVERSITI ISLAM SULTAN SHARIF ALI (UNISSA).png" 
-                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                            </div>
-                            <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                UNIVERSITI ISLAM SULTAN SHARIF ALI
-                            </span>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="partner-card">
-                    <a href="#" class="group block h-full">
-                        <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
-                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                <img src="/InternationalPartnership/THE UNIVERSITY OF HONG KONG.png" 
-                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                            </div>
-                            <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                THE UNIVERSITY OF HONG KONG
-                            </span>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="partner-card">
-                    <a href="#" class="group block h-full">
-                        <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
-                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                <img src="/InternationalPartnership/NATIONAL KAOHSIUNG UNIVERSITY OF SCIENCE AND TECHNOLOGY (NKUST-CHS).png" 
-                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                            </div>
-                            <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                NATIONAL KAOHSIUNG UNIVERSITY
-                            </span>
-                        </div>
-                    </a>
-                </div>
-                <!-- More partners... -->
-            </div>
-            
-            <!-- Hidden partners -->
-            <div id="intl-hidden-partners" class="hidden col-span-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 mt-6">
-                <!-- Your hidden international partners (7-16) -->
-                  <!-- Example for partner 7 -->
-                  <div class="partner-card">
-                    <a href="#" class="group block h-full">
-                        <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
-                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                <img src="/InternationalPartnership/KOLEJ UNIVERSITI PERGURUAN UGAMA SERI BEGAWAN BRUNEI DARUSSALAM.png" 
-                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                            </div>
-                            <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                KOLEJ UNIVERSITI PERGURUAN UGAMA SERI BEGAWAN BRUNEI DARUSSALAM
-                            </span>
-                        </div>
-                    </a>
-                </div>
-
-
-                <div class="partner-card">
-                    <a href="#" class="group block h-full">
-                        <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
-                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                <img src="/InternationalPartnership/UNIVERSITY OF MALAYA.png" 
-                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                            </div>
-                            <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                UNIVERSITY OF MALAYA
-                            </span>
-                        </div>
-                    </a>
-                </div>
-
-
-                <div class="partner-card">
-                    <a href="#" class="group block h-full">
-                        <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
-                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                <img src="/InternationalPartnership/UNIVERSITAS TEKNOLOGI SUMBAWA.png" 
-                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                            </div>
-                            <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                UNIVERSITAS TEKNOLOGI SUMBAWA
-                            </span>
-                        </div>
-                    </a>
-                </div>
-
-
-                <div class="partner-card">
-                    <a href="#" class="group block h-full">
-                        <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
-                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                <img src="/InternationalPartnership/UNIVERSAITAS LAMPUNG, INDONESIA.png" 
-                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                            </div>
-                            <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                UNIVERSAITAS LAMPUNG, INDONESIA
-                            </span>
-                        </div>
-                    </a>
-                </div>
-
-
-                <div class="partner-card">
-                    <a href="#" class="group block h-full">
-                        <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
-                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                <img src="/InternationalPartnership/UNIVERSITI TEKNOLOGY BRUNEI.png" 
-                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                            </div>
-                            <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                UNIVERSITI TEKNOLOGY BRUNEI
-                            </span>
-                        </div>
-                    </a>
-                </div>
-
-
-                <div class="partner-card">
-                    <a href="#" class="group block h-full">
-                        <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
-                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                <img src="/InternationalPartnership/UNIVERSITI TEKNOLOGI MARA.png" 
-                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                            </div>
-                            <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                UNIVERSITI TEKNOLOGI MARA
-                            </span>
-                        </div>
-                    </a>
-                </div>
-
-
-                <div class="partner-card">
-                    <a href="#" class="group block h-full">
-                        <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
-                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                <img src="/InternationalPartnership/KEUKA COLLEGE, UNITED STATES.png" 
-                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                            </div>
-                            <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                KEUKA COLLEGE, UNITED STATES
-                            </span>
-                        </div>
-                    </a>
-                </div>
-
-
-                <div class="partner-card">
-                    <a href="#" class="group block h-full">
-                        <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
-                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                <img src="/InternationalPartnership/UNIVERSITI TUN HUSSEIN ONN MALAYSIA.png" 
-                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                            </div>
-                            <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                UNIVERSITI TUN HUSSEIN ONN MALAYSIA
-                            </span>
-                        </div>
-                    </a>
-                </div>
-
-
-                <div class="partner-card">
-                    <a href="#" class="group block h-full">
-                        <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
-                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                <img src="/InternationalPartnership/KASTAMONU UNIVERSITY.png" 
-                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                            </div>
-                            <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                KASTAMONU UNIVERSITY
-                            </span>
-                        </div>
-                    </a>
-                </div>
-
-
-                <div class="partner-card">
-                    <a href="#" class="group block h-full">
-                        <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
-                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                <img src="/InternationalPartnership/INSTITUTE PERTANIAN BOGOR (IPB).png" 
-                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                            </div>
-                            <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                INSTITUTE PERTANIAN BOGOR (IPB)
-                            </span>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="partner-card">
-                    <a href="#" class="group block h-full">
-                        <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
-                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                <img src="/InternationalPartnership/KOLEJ UNIVERSITI PERGURUAN UGAMA SERI BEGAWAN BRUNEI DARUSSALAM.png" 
-                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                            </div>
-                            <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                KOLEJ UNIVERSITI PERGURUAN UGAMA
-                            </span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            
-            <div class="text-center mt-12">
-                <button id="intl-show-more" class="bg-transparent border-2 border-msu-pink text-white hover:bg-msu-main-color hover:text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-msu-main-color/30">
-                    Show All International Partners
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block ml-2 transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Local Partners -->
-    <div class="py-16 bg-gradient-to-br from-msu-deep-ocean to-msu-dark-blue">
-        <div class="container mx-auto px-4 max-w-7xl">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-msu-bgc-color to-msu-bgc-color">LOCAL PARTNERSHIPS</span>
-                </h2>
-                <p class="max-w-3xl mx-auto text-xl text-msu-light-blue opacity-90 leading-relaxed">
-                    Strengthening ties with Philippine institutions for community development
-                </p>
-                <div class="w-40 h-1.5 bg-gradient-to-r from-msu-pink to-msu-pink mx-auto mt-8 rounded-full"></div>
-            </div>
-            
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6" id="local-partners-container">
-                <!-- Your existing local partner cards (6 visible by default) -->
-                <div class="partner-card">
-                    <a href="#" class="group block h-full">
-                        <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-gold hover:border-opacity-30">
-                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                <img src="/LocalPartnership/UNIVERSITY OF THE PHILIPPINES- LOS BAÑOS.png" 
-                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                            </div>
-                            <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                UNIVERSITY OF THE PHILIPPINES
-                            </span>
-                        </div>
-                    </a>
-                </div>
-
-                      <!-- First 6 partners shown by default -->
-                      <div class="partner-card">
-                        <a href="#" class="group block h-full">
-                            <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-gold hover:border-opacity-30">
-                                <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                    <img src="/LocalPartnership/MINDANAO STATE UNIVERSIY-NAAWAN.png" 
-                                         class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                                </div>
-                                <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                    MINDANAO STATE UNIVERSIY-NAAWAN
-                                </span>
-                            </div>
-                        </a>
-                    </div>
-
-                          <!-- First 6 partners shown by default -->
-                <div class="partner-card">
-                    <a href="#" class="group block h-full">
-                        <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-gold hover:border-opacity-30">
-                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                <img src="/LocalPartnership/ATENEO DE ZAMBOANGA UNIVERSITY.png" 
-                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                            </div>
-                            <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                ATENEO DE ZAMBOANGA UNIVERSITY
-                            </span>
-                        </div>
-                    </a>
-                </div>
-
-                      <!-- First 6 partners shown by default -->
-                      <div class="partner-card">
-                        <a href="#" class="group block h-full">
-                            <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-gold hover:border-opacity-30">
-                                <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                    <img src="/LocalPartnership/UNIVERSITY OF THE PHILIPPINES- VISAYAS.png" 
-                                         class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                                </div>
-                                <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                    UNIVERSITY OF THE PHILIPPINES- VISAYAS
-                                </span>
-                            </div>
-                        </a>
-                    </div>
-                    
-                    <div class="partner-card">
-                        <a href="#" class="group block h-full">
-                            <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-gold hover:border-opacity-30">
-                                <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                    <img src="/LocalPartnership/POLYTECHNIC UNIVERSITY OF THE PHILIPPINES.png" 
-                                         class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                                </div>
-                                <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                    POLYTECHNIC UNIVERSITY OF THE PHILIPPINES
-                                </span>
-                            </div>
-                        </a>
-                    </div>
-
-                          <!-- First 6 partners shown by default -->
-                          <div class="partner-card">
-                            <a href="#" class="group block h-full">
-                                <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-gold hover:border-opacity-30">
-                                    <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                        <img src="/LocalPartnership/UNIVERSITY OF THE PHILIPPINES- MINDANAO.png" 
-                                             class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                                    </div>
-                                    <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                        UNIVERSITY OF THE PHILIPPINES- MINDANAO
-                                    </span>
-                                </div>
-                            </a>
-                        </div>
-    
-
-                <!-- More partners... -->
-            </div>
-            
-            <!-- Hidden local partners -->
-            <div id="local-hidden-partners" class="hidden col-span-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 mt-6">
-                <!-- Your hidden local partners -->
-
-                 <div class="partner-card">
-                                            <a href="#" class="group block h-full">
-                                                <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-gold hover:border-opacity-30">
-                                                    <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                                        <img src="/LocalPartnership/CAGAYAN STATE UNIVERSITY.png" 
-                                                             class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                                                    </div>
-                                                    <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                                        CAGAYAN STATE UNIVERSITY
-                                                    </span>
-                                                </div>
-                                            </a>
-                                        </div>
-
-                                        <div class="partner-card">
-                                            <a href="#" class="group block h-full">
-                                                <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-gold hover:border-opacity-30">
-                                                    <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                                        <img src="/LocalPartnership/DAVAO DEL NORTE STATE COLLEGE.png" 
-                                                             class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                                                    </div>
-                                                    <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                                        DAVAO DEL NORTE STATE COLLEGE
-                                                    </span>
-                                                </div>
-                                            </a>
-                                        </div>
-
-
-                                        
-                                       <div class="partner-card">
-                                            <a href="#" class="group block h-full">
-                                                <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-gold hover:border-opacity-30">
-                                                    <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                                        <img src="/LocalPartnership/MINDANAO STATE UNIVERSITY- SULU.png" 
-                                                             class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                                                    </div>
-                                                    <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                                        MINDANAO STATE UNIVERSITY- SULU
-                                                    </span>
-                                                </div>
-                                            </a>
-                                        </div>
-
-
-                                   
-                                        
-                                        <div class="partner-card">
-                                            <a href="#" class="group block h-full">
-                                                <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-gold hover:border-opacity-30">
-                                                    <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                                        <img src="/LocalPartnership/WESTERN MINDANAO STATE UNIVERSITY (WMSU).png" 
-                                                             class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                                                    </div>
-                                                    <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                                        WESTERN MINDANAO STATE UNIVERSITY (WMSU)
-                                                    </span>
-                                                </div>
-                                            </a>
-                                        </div>
-
-
-                                       
-                                        <div class="partner-card">
-                                            <a href="#" class="group block h-full">
-                                                <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-gold hover:border-opacity-30">
-                                                    <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                                        <img src="/LocalPartnership/ATENEO DE DAVAO UNIVERSITY.png" 
-                                                             class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                                                    </div>
-                                                    <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                                        ATENEO DE DAVAO UNIVERSITY
-                                                    </span>
-                                                </div>
-                                            </a>
-                                        </div>
-
-
-                                        <div class="partner-card">
-                                            <a href="#" class="group block h-full">
-                                                <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-gold hover:border-opacity-30">
-                                                    <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                                        <img src="/LocalPartnership/UNIVERSITY OF EASTERN PHILIPPINES.png" 
-                                                             class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                                                    </div>
-                                                    <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                                        UNIVERSITY OF EASTERN PHILIPPINES
-                                                    </span>
-                                                </div>
-                                            </a>
-                                        </div>
-
-
-                                        
-                                        <div class="partner-card">
-                                            <a href="#" class="group block h-full">
-                                                <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-gold hover:border-opacity-30">
-                                                    <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                                        <img src="/LocalPartnership/MINDANAO STATE UNIVERSITY- MAGUINDANAO.png" 
-                                                             class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                                                    </div>
-                                                    <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                                        MINDANAO STATE UNIVERSITY- MAGUINDANAO
-                                                    </span>
-                                                </div>
-                                            </a>
-                                        </div>
-          
-                                        
-                                         <div class="partner-card">
-                                        <a href="#" class="group block h-full">
-                                            <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-gold hover:border-opacity-30">
-                                                <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                                    <img src="/LocalPartnership/MINDANAO STATE UNIVERSITY- GENERAL SANTOS.png" 
-                                                         class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                                                </div>
-                                                <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                                    MINDANAO STATE UNIVERSITY- GENERAL SANTOS
-                                                </span>
-                                            </div>
-                                        </a>
-                                    </div>
-
-
-                                     <div class="partner-card">
-                                    <a href="#" class="group block h-full">
-                                        <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-gold hover:border-opacity-30">
-                                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                                <img src="/LocalPartnership/MINDANAO STATE UNIVERSITY- ILIGAN CITY.png" 
-                                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                                            </div>
-                                            <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                                MINDANAO STATE UNIVERSITY- ILIGAN CITY
-                                            </span>
-                                        </div>
-                                    </a>
-                                </div>
-
-                                  <div class="partner-card">            
-                                <a href="#" class="group block h-full">
-                                    <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-gold hover:border-opacity-30">
-                                        <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                            <img src="/LocalPartnership/MINDANAO STATE UNIVERSITY- MARAWI.png" 
-                                                 class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                                        </div>
-                                        <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                            MINDANAO STATE UNIVERSITY- MARAWI
-                                        </span>
-                                    </div>
-                                </a>
-                            </div>
-
-
-                              <div class="partner-card">                     
-                            <a href="#" class="group block h-full">
-                                <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-gold hover:border-opacity-30">
-                                    <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                        <img src="/LocalPartnership/BASILAN STATE COLLEGE (BaSC).png" 
-                                             class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                                    </div>
-                                    <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                        BASILAN STATE COLLEGE (BaSC)
-                                    </span>
-                                </div>
-                            </a>
-                        </div>
-
-                          <div class="partner-card">               
-                        <a href="#" class="group block h-full">
-                            <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-gold hover:border-opacity-30">
-                                <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                    <img src="/LocalPartnership/J.H. CERILLES STATE COLLEGE.png"  
-                                         class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                                </div>
-                                <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                    J.H. CERILLES STATE COLLEGE
-                                </span>
-                            </div>
-                        </a>
-                    </div>
-
-
-                     <div class="partner-card">
-                    <a href="#" class="group block h-full">
-                        <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-gold hover:border-opacity-30">
-                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                    <img src="/LocalPartnership/JOSE MEMORIAL STATE UNIVERSTIY- DAPITAN.png"
-                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                            </div>
-                            <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                JOSE MEMORIAL STATE UNIVERSTIY- DAPITAN
-                            </span>
-                        </div>
-                    </a>
-                </div>
-
-
-                 <div class="partner-card">            
-                <a href="#" class="group block h-full">
-                    <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-gold hover:border-opacity-30">
-                        <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                <img src="/LocalPartnership/JOSE MEMORIAL STATE UNIVERSITY- TAMPILISAN.png"
-                                 class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                        </div>
-                        <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                            JOSE MEMORIAL STATE UNIVERSITY- TAMPILISAN
-                        </span>
-                    </div>
-                </a>
-            </div>
-
-              <div class="partner-card">           
-            <a href="#" class="group block h-full">
-                <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-gold hover:border-opacity-30">
-                    <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                           <img src="/LocalPartnership/JOSE MEMORIAL STATE UNIVERSTIY- KATIPUNAN.png"
-                             class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                    </div>
-                    <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                        JOSE MEMORIAL STATE UNIVERSTIY- KATIPUNAN
-                    </span>
-                </div>
-            </a>
-        </div>
-
-
-
-          <div class="partner-card">                   
-        <a href="#" class="group block h-full">
-            <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-gold hover:border-opacity-30">
-                <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                      <img src="/LocalPartnership/ZAMBOANGA STATE COLLEGE OF MARINE SCIENCES AND TECHNOLOGY.png"
-                         class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                </div>
-                <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                    ZAMBOANGA STATE COLLEGE OF MARINE SCIENCES AND TECHNOLOGY
-                </span>
-            </div>
-        </a>
-    </div>
-
-       <div class="partner-card">                                  
-    <a href="#" class="group block h-full">
-        <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-gold hover:border-opacity-30">
-            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                  <img src="/LocalPartnership/MINDANAO STATE UNIVERSITY- BUUG.png"
-                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-            </div>
-            <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                MINDANAO STATE UNIVERSITY- BUUG
-            </span>
-        </div>
-    </a>
-</div>
-
- <div class="partner-card">
-<a href="#" class="group block h-full">
-    <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-gold hover:border-opacity-30">
-        <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-            <img src="/LocalPartnership/TAWI-TAWI REGIONAL AGRICULTURAL COLLEGE.png"
-                 class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-        </div>
-        <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-            TAWI-TAWI REGIONAL AGRICULTURAL COLLEGE
-        </span>
-    </div>
-</a>
-</div> 
-            </div>
-            
-            <div class="text-center mt-12">
-                <button id="local-show-more" class="bg-transparent border-2 border-msu-pink text-white hover:bg-msu-main-color hover:text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-msu-gold/30">
-                    Show All Local Partners
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block ml-2 transition-transform duration-300" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- International Agencies Section -->
-    <div class="py-16 bg-gradient-to-r from-msu-dark-blue to-msu-deep-ocean">
-        <div class="container mx-auto px-4 max-w-7xl">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-msu-bgc-color to-msu-bgc-color">
-                        INTERNATIONAL AGENCIES / ORGANIZATIONS PARTNERS
-                    </span>
-                </h2>
-                <p class="max-w-3xl mx-auto text-xl text-msu-light-blue opacity-90 leading-relaxed">
-                    Global collaborations for academic excellence and research innovation
-                </p>
-                <div class="w-40 h-1.5 bg-gradient-to-r from-msu-pink to-msu-pink mx-auto mt-8 rounded-full"></div>
-            </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center">
-                <!-- Agency 1 -->
-                <div class="partner-card w-full max-w-xs">
-                    <a href="#" class="group block h-full">
-                        <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
-                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                <img src="/InterAgencies/FOOD AND AGRICULTURE ORGANIZATION OF THE UNITED NATION.png" 
-                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                            </div>
-                            <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                FOOD AND AGRICULTURE ORGANIZATION (UN)
-                            </span>
-                        </div>
-                    </a>
-                </div>
-                
-                <!-- Agency 2 -->
-                <div class="partner-card w-full max-w-xs">
-                    <a href="#" class="group block h-full">
-                        <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
-                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                <img src="/InterAgencies/UNITED STATES AGENCY FOR THE INTERNATIONAL DEVELOPMENT (USAID).png" 
-                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                            </div>
-                            <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                USAID
-                            </span>
-                        </div>
-                    </a>
-                </div>
-                
-                <!-- Agency 3 -->
-                <div class="partner-card w-full max-w-xs">
-                    <a href="#" class="group block h-full">
-                        <div class="bg-white bg-opacity-5 rounded-xl p-6 h-full flex flex-col items-center justify-center transition-all duration-500 hover:bg-opacity-10 border border-white border-opacity-10 hover:border-msu-main-color hover:border-opacity-30">
-                            <div class="h-28 w-28 flex items-center justify-center mb-5 p-3 bg-white bg-opacity-1 rounded-xl backdrop-blur-sm">
-                                <img src="/InterAgencies/SOUTHEAST ASIAN REGIONAL CENTRE FOR TROPICAL BIOLOGY.png" 
-                                     class="max-h-full max-w-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105">
-                            </div>
-                            <span class="text-center font-medium text-msu-light-blue group-hover:text-white transition-colors duration-300 text-sm md:text-base">
-                                SEARCA
-                            </span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
 <!-- University Footer Section -->
 <div class="bg-gradient-to-b from-msu-deep-ocean to-msu-dark-blue text-white-pure">
     <!-- University Identity & Contact Section -->
@@ -1082,7 +1174,7 @@ const threeLatestArticles = await get3LatestArticle();
                 <div class="mt-10 w-full">
                     <h4 class="text-lg font-medium mb-3 text-left">Project Biddings</h4>
                     <p class="text-titanium mb-4 text-left">For inquiries regarding biddings for projects and other business transactions</p>
-                    <a href="/bidding" class="inline-block bg-gradient-to-r from-msu-pink to-msu-pink hover:from-msu-deep-ocean hover:to-msu-main-color text-white font-medium py-3 px-8 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-msu-main-color/30 w-full text-center">
+                    <a href="/bidding" class="inline-block bg-gradient-to-r from-msu-bgc-color to-msu-bgc-color hover:from-msu-deep-ocean hover:to-msu-main-color text-msu-deep-ocean font-medium py-3 px-8 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-msu-main-color/30 w-full text-center">
                         View Bidding Opportunities
                     </a>
                 </div>
@@ -1101,8 +1193,8 @@ const threeLatestArticles = await get3LatestArticle();
                 <div class="space-y-6">
                     <!-- Main Campus -->
                     <div class="flex items-start group">
-                        <div class="bg-msu-pink p-2 rounded-full mr-4 flex-shrink-0 group-hover:bg-msu-main-color transition-colors duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+<div class="bg-msu-bgc-color p-2 rounded-full mr-4 flex-shrink-0 group-hover:bg-msu-deep-ocean transition-colors duration-300">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-msu-main-color group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
@@ -1115,8 +1207,8 @@ const threeLatestArticles = await get3LatestArticle();
                     
                     <!-- Manila Campus -->
                     <div class="flex items-start group">
-                        <div class="bg-msu-pink p-2 rounded-full mr-4 flex-shrink-0 group-hover:bg-msu-main-color transition-colors duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <div class="bg-msu-bgc-color p-2 rounded-full mr-4 flex-shrink-0 group-hover:bg-msu-deep-ocean transition-colors duration-300">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-msu-main-color group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
@@ -1129,8 +1221,8 @@ const threeLatestArticles = await get3LatestArticle();
                     
                     <!-- Chancellor's Office -->
                     <div class="flex items-start group">
-                        <div class="bg-msu-pink p-2 rounded-full mr-4 flex-shrink-0 group-hover:bg-msu-main-color transition-colors duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+<div class="bg-msu-bgc-color p-2 rounded-full mr-4 flex-shrink-0 group-hover:bg-msu-deep-ocean transition-colors duration-300">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-msu-main-color group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                             </svg>
                         </div>
@@ -1142,8 +1234,8 @@ const threeLatestArticles = await get3LatestArticle();
                     
                     <!-- Registrar's Office -->
                     <div class="flex items-start group">
-                        <div class="bg-msu-pink p-2 rounded-full mr-4 flex-shrink-0 group-hover:bg-msu-main-color transition-colors duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+<div class="bg-msu-bgc-color p-2 rounded-full mr-4 flex-shrink-0 group-hover:bg-msu-deep-ocean transition-colors duration-300">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-msu-main-color group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                             </svg>
                         </div>
@@ -1155,8 +1247,8 @@ const threeLatestArticles = await get3LatestArticle();
                     
                     <!-- Admissions -->
                     <div class="flex items-start group">
-                        <div class="bg-msu-pink p-2 rounded-full mr-4 flex-shrink-0 group-hover:bg-msu-main-color transition-colors duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                 <div class="bg-msu-bgc-color p-2 rounded-full mr-4 flex-shrink-0 group-hover:bg-msu-deep-ocean transition-colors duration-300">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-msu-main-color group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                             </svg>
                         </div>
@@ -1168,8 +1260,8 @@ const threeLatestArticles = await get3LatestArticle();
                     
                     <!-- Guidance -->
                     <div class="flex items-start group">
-                        <div class="bg-msu-pink p-2 rounded-full mr-4 flex-shrink-0 group-hover:bg-msu-main-color transition-colors duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+<div class="bg-msu-bgc-color p-2 rounded-full mr-4 flex-shrink-0 group-hover:bg-msu-deep-ocean transition-colors duration-300">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-msu-main-color group-hover:text-white transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                             </svg>
                         </div>
@@ -1178,6 +1270,8 @@ const threeLatestArticles = await get3LatestArticle();
                             <p class="text-titanium group-hover:text-white">+63 905 792 5924<br>guidanceoffice@msutawi-tawi.edu.ph</p>
                         </div>
                     </div>
+
+                    
                     
                     <!-- General Inquiries -->
                     <!-- <div class="flex items-start group">
@@ -1193,6 +1287,8 @@ const threeLatestArticles = await get3LatestArticle();
                     </div> -->
                 </div>
             </div>
+
+            
 
             <!-- Column 3: Government Seals -->
             <div>

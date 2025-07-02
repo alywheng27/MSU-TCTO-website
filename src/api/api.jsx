@@ -692,12 +692,36 @@ export async function getLatestSulimbang() {
 }
 
 
+
+export async function sulimbanglatestshown() {
+ const query = groq`*[_type == "sulimbang"] | order(publishedAt desc)[0..2] {
+    title,
+    body[]{
+      children[]{
+        text
+      },
+      asset->{url},
+    },
+    mainImage{
+      asset->,
+    },
+    file{asset->{url}},
+    publishedAt,
+  }`;
+
+  const newsulimbang = await useSanityClient().fetch(query);
+  return newsulimbang;
+}
+
+
 export async function getYearSulimbang() {
   const query = groq`*[_type == "sulimbang"] | order(publishedAt desc) {
     publishedAt,
   }`;
 
 }
+
+
 
 
 
@@ -915,6 +939,7 @@ export async function getBidding() {
 export const getBanner = async () => {
   const query = `*[_type == "banner"] | order(title desc) {
     title,
+    link, // Add this line to include the link field
     mainImage {
       asset->
     }

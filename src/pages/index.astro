@@ -23,11 +23,13 @@ import { getLatestFeaturedArticle } from '../api/api';
 import { get4UpcomingEvents } from '../api/api';
 import { get3LatestGazette } from '../api/api';
 import { get3LatestAnnualReport } from '../api/api';
+import { sulimbanglatestshown } from '../api/api';
 
 const threeLatestArticles = await get3LatestArticle();
 const latestFeaturedArticle = await getLatestFeaturedArticle();
 const fourUpcomingEvents = await get4UpcomingEvents();
 const threeLatestGazette = await get3LatestGazette();
+const latestsulimbang = await sulimbanglatestshown();
 const threeLatestAnnualReport = await get3LatestAnnualReport();
 ---
 
@@ -202,12 +204,27 @@ const threeLatestAnnualReport = await get3LatestAnnualReport();
    <!-- Centered Pop-out Advertisement Carousel -->
 <div id="adOverlay" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 hidden">
   <div class="relative w-full max-w-7xl mx-4 bg-white rounded-xl shadow-2xl overflow-hidden transition-all duration-300 transform">
-    <button 
-      class="absolute top-4 right-4 z-10 bg-black/50 text-white rounded-full w-8 h-8 flex items-center justify-center hover:bg-black/80 transition-colors"
-      onclick="document.getElementById('adOverlay').classList.add('hidden')"
-    >
-      ×
-    </button>
+    <!-- Professional close button with tooltip -->
+    <div class="absolute top-4 right-4 z-10 group">
+      <button 
+        aria-label="Close advertisement"
+        class="bg-msu-deep-ocean text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-black/80 transition-all duration-200 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/50"
+        onclick="document.getElementById('adOverlay').classList.add('hidden')"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <div class="absolute right-12 top-1/2 -translate-y-1/2 bg-gray-900 text-white text-sm px-3 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+        Click to close this ad
+      </div>
+    </div>
+    
+    <!-- Instruction text -->
+    <div class="absolute bottom-4 right-4 z-10 bg-black/70 text-white text-xs px-3 py-1 rounded-full">
+     To close this advertisement, just click the 'X' icon. Tap or click the photo to learn more.
+    </div>
+    
     <CarouselMain client:visible class="w-full h-auto aspect-[16/9]" />
   </div>
 </div>
@@ -412,7 +429,7 @@ window.addEventListener('load', function() {
 			  <div class="text-center mb-16">
 				<h2 class="text-4xl font-extrabold text-msu-main-color mb-4 tracking-tight">University Publications</h2>
 				<p class="text-lg text-gray-600 max-w-2xl mx-auto">
-				  Discover our official Gazette and Annual Reports in visual format.
+				  Discover our Sulimbang and Annual Reports in visual format.
 				</p>
 				<div class="w-20 h-1 bg-msu-gold mx-auto mt-6 rounded-full"></div>
 			  </div>
@@ -421,24 +438,24 @@ window.addEventListener('load', function() {
 				<!-- Gazette Section -->
 				<div class="flex flex-col items-center text-center">
 				  <h3 class="text-2xl font-semibold text-msu-main-color mb-4">
-					<a href="/gazette" class="hover:underline">University Gazette</a>
+					<a href="/gazette" class="hover:underline">Sulimbang</a>
 				  </h3>
 		  
 				  <!-- Image Thumbnails (Responsive, Equal Size) -->
 				  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full max-w-3xl">
-					{threeLatestGazette.map((gazette) => (
-					  <a href={gazette.file?.asset?.url || '#'} target="_blank" class="block w-full aspect-[3/4] overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+					{latestsulimbang.map((sulimbang) => (
+					  <a href={sulimbang.file?.asset?.url || '#'} target="_blank" class="block w-full aspect-[3/4] overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
 						<img
-						  src={gazette.mainImage?.asset?.url ? urlForImage(gazette.mainImage.asset.url).url() : '/images/default-thumbnail.jpg'}
-						  alt={gazette.title || 'University Gazette'}
+						  src={sulimbang.mainImage?.asset?.url ? urlForImage(sulimbang.mainImage.asset.url).url() : '/images/default-thumbnail.jpg'}
+						  alt={sulimbang.title || 'University Gazette'}
 						  class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
 						/>
 					  </a>
 					))}
 				  </div>
 		  
-				  <a href="/gazette" class="mt-6 inline-flex items-center px-6 py-3 border border-msu-main-color text-msu-main-color rounded-full font-medium hover:bg-msu-main-color hover:text-white transition duration-300">
-					Browse All Gazettes
+				  <a href="/publications/sulimbang" class="mt-6 inline-flex items-center px-6 py-3 border border-msu-main-color text-msu-main-color rounded-full font-medium hover:bg-msu-main-color hover:text-white transition duration-300">
+					View All Sulimbang
 				  </a>
 				</div>
 		  
@@ -460,7 +477,7 @@ window.addEventListener('load', function() {
 					))}
 				  </div>
 		  
-				  <a href="/annual-reports" class="mt-6 inline-flex items-center px-6 py-3 border border-msu-main-color text-msu-main-color rounded-full font-medium hover:bg-msu-main-color hover:text-white transition duration-300">
+				  <a href="/publications/annual-reports" class="mt-6 inline-flex items-center px-6 py-3 border border-msu-main-color text-msu-main-color rounded-full font-medium hover:bg-msu-main-color hover:text-white transition duration-300">
 					View All Reports
 				  </a>
 				</div>
@@ -804,13 +821,13 @@ window.addEventListener('load', function() {
 
                
 
-  <script src="https://insights.elishatelecom.com/aichat/public/snippet_assets/js/include-chatbot.min.js"></script>
-  <div include-html="https://insights.elishatelecom.com/aichat/embedded-chatbot?key=guXJzVN2UnYvtbBf70C3GKEpDF5wZ9ad" id="chatbot"></div>
-   
         </section>
 
 
         
+            <script src="https://insights.elishatelecom.com/aichat/public/snippet_assets/js/include-chatbot.min.js"></script>
+            <div include-html="https://insights.elishatelecom.com/aichat/embedded-chatbot?key=guXJzVN2UnYvtbBf70C3GKEpDF5wZ9ad" id="chatbot"></div>
+   
         <!-- Scroll to Top Button -->
         <button class="scroll-to-top" aria-label="Scroll to top">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -821,7 +838,7 @@ window.addEventListener('load', function() {
 
       
 
-           <MainVideo />
+           <!-- <MainVideo /> -->
         <!-- Footer Navigation -->
         <FooterNav />
 
