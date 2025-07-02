@@ -50,6 +50,7 @@ module.exports = {
 				'msu-bgc-color': '#ffffff',
 				'msu-gold': '#F7D93C',
 				'msu-pink': '#ac228a',
+				'msu-dark-pink': '#49052c',
 
 				/* Secondary/Light */
 				'msu-rusty-red': '#A52930',

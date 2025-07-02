@@ -1,6 +1,6 @@
 ---
 export interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
@@ -11,457 +11,628 @@ const { title } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/images/MSU Seal New (Official).png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <style>
-    /* Modern Animation Keyframes */
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    @keyframes heartbeat {
-      0% { transform: scale(1); }
-      25% { transform: scale(1.05); }
-      50% { transform: scale(1); }
-      75% { transform: scale(1.03); }
-      100% { transform: scale(1); }
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.6; }
-    }
-    @keyframes gradientFlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    @keyframes shimmer {
-      0% { background-position: -1000px 0; }
-      100% { background-position: 1000px 0; }
-    }
-    @keyframes scaleIn {
-      0% { transform: scale(0.9); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
+    /* Professional Maroon Theme with Realistic Dolphin */
+    :root {
+      --maroon-primary: #61063B;
+      --maroon-secondary: #9A1750;
+      --maroon-accent: #EE4C7C;
+      --blue-primary: #1a6fc9;
+      --blue-secondary: #4facfe;
     }
     
-    /* Modern Utility Classes */
-    .animate-heartbeat { animation: heartbeat 1.5s ease-in-out infinite; }
-    .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
-    .animate-gradient-flow { 
-      animation: gradientFlow 8s ease infinite;
-      background-size: 200% 200%;
-    }
-    .animate-shimmer {
-      animation: shimmer 2s linear infinite;
-      background: linear-gradient(to right, #f3f4f6 4%, #e5e7eb 25%, #f3f4f6 36%);
-      background-size: 1000px 100%;
-    }
-    .animate-scale-in { animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
-    
-    /* Modern Glass Morphism */
-    .glass-panel {
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(16px) saturate(180%);
-      -webkit-backdrop-filter: blur(16px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-    }
-    
-    /* Modern Text Gradients */
-    .text-gradient-primary {
-      background: linear-gradient(135deg, #61063B 0%, #9A1750 50%, #EE4C7C 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .text-gradient-secondary {
-      background: linear-gradient(135deg, #3B82F6 0%, #6366F1 50%, #8B5CF6 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    
-    /* Modern Progress Elements */
-    .progress-ring__circle {
-      transition: stroke-dashoffset 0.65s cubic-bezier(0.83, 0, 0.17, 1);
-      transform: rotate(-90deg);
-      transform-origin: 50% 50%;
+    /* Ultra-Realistic Dolphin Animations */
+    @keyframes dolphinSwim {
+      0% { 
+        transform: translateX(-120%) rotateY(180deg) translateY(0) rotateZ(0deg);
+        opacity: 0;
+      }
+      15% {
+        transform: translateX(-80%) rotateY(180deg) translateY(-5px) rotateZ(-3deg);
+        opacity: 1;
+      }
+      25% {
+        transform: translateX(-60%) rotateY(180deg) translateY(5px) rotateZ(2deg);
+      }
+      35% {
+        transform: translateX(-40%) rotateY(180deg) translateY(-8px) rotateZ(-4deg);
+      }
+      50% { 
+        transform: translateX(0%) rotateY(180deg) translateY(0) rotateZ(0deg);
+      }
+      51% { 
+        transform: translateX(0%) rotateY(0deg) translateY(0) rotateZ(0deg);
+      }
+      65% {
+        transform: translateX(-40%) rotateY(0deg) translateY(-5px) rotateZ(-3deg);
+      }
+      75% {
+        transform: translateX(-60%) rotateY(0deg) translateY(5px) rotateZ(2deg);
+      }
+      85% {
+        transform: translateX(-80%) rotateY(0deg) translateY(-8px) rotateZ(-4deg);
+      }
+      100% { 
+        transform: translateX(-120%) rotateY(0deg) translateY(0) rotateZ(0deg);
+        opacity: 1;
+      }
     }
     
-    /* Modern Badges */
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.35em 0.65em;
-      font-size: 0.75em;
-      font-weight: 700;
-      line-height: 1;
-      color: white;
+    @keyframes bodyUndulation {
+      0%, 15%, 35%, 50%, 65%, 85%, 100% { transform: translateY(0) rotateZ(0deg); }
+      25%, 75% { transform: translateY(-8px) rotateZ(5deg); }
+    }
+    
+    @keyframes tailMove {
+      0% { transform: rotate(-15deg); }
+      25% { transform: rotate(20deg); }
+      50% { transform: rotate(-15deg); }
+      75% { transform: rotate(20deg); }
+      100% { transform: rotate(-15deg); }
+    }
+    
+    @keyframes pectoralFinMove {
+      0%, 100% { transform: rotate(-10deg); }
+      50% { transform: rotate(10deg); }
+    }
+    
+    @keyframes waterRipple {
+      0% { transform: scale(0.8); opacity: 0.8; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+    
+    @keyframes bubbleFloat {
+      0% { transform: translateY(0) scale(0.3); opacity: 0; }
+      20% { opacity: 0.8; }
+      100% { transform: translateY(-200px) scale(1); opacity: 0; }
+    }
+    
+    /* Dolphin Speech Bubble - Only shows when swimming right */
+    @keyframes bubbleRightSwim {
+      0%, 50% { opacity: 0; transform: scale(0.8); }
+      60% { opacity: 1; transform: scale(1.1); }
+      70% { opacity: 1; transform: scale(0.95); }
+      80% { opacity: 1; transform: scale(1); }
+      90%, 100% { opacity: 0; transform: scale(0.8); }
+    }
+    
+    /* Realistic Seaweed Animations */
+    @keyframes seaweedGrow {
+      0% { height: 0; opacity: 0; transform: scaleY(0); }
+      100% { height: var(--target-height); opacity: 1; transform: scaleY(1); }
+    }
+    
+    @keyframes seaweedSway {
+      0%, 100% { transform: rotate(-8deg); }
+      50% { transform: rotate(8deg); }
+    }
+    
+    @keyframes seaweedLeafMove {
+      0%, 100% { transform: rotate(-5deg); }
+      50% { transform: rotate(5deg); }
+    }
+    
+    .dolphin-speech {
+      position: absolute;
+      left: -120px;
+      top: -50px;
+      width: 160px;
+      background: white;
+      padding: 10px;
+      border-radius: 12px;
+      font-size: 14px;
+      color: #333;
       text-align: center;
-      white-space: nowrap;
-      vertical-align: baseline;
-      border-radius: 50rem;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .badge-success {
-      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
-      box-shadow: 0 4px 6px -1px rgba(5, 150, 105, 0.1), 0 2px 4px -1px rgba(5, 150, 105, 0.06);
-    }
-    .badge-danger {
-      background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
-      box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.1), 0 2px 4px -1px rgba(220, 38, 38, 0.06);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transform: scale(0.8);
+      z-index: 10;
     }
     
-    /* Modern Loading Container */
+    .dolphin-speech:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      margin-left: -10px;
+      border-width: 10px 10px 0;
+      border-style: solid;
+      border-color: white transparent;
+    }
+    
+    .ocean-loader {
+      position: relative;
+      width: 100%;
+      max-width: 600px;
+      height: 250px;
+      margin: 0 auto;
+      overflow: hidden;
+      background: linear-gradient(to bottom, 
+        #0a4da3 0%, 
+        #1a6fc9 30%, 
+        #4facfe 100%);
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      perspective: 1000px;
+    }
+    
     .loading-container {
-      background: linear-gradient(135deg, rgba(249, 250, 251, 0.98) 0%, rgba(255, 255, 255, 0.98) 100%);
+      background-color: #61063B;
+      background: linear-gradient(135deg, #61063B 0%, #9A1750 100%);
     }
     
-    /* Modern Check Items */
-    .check-item {
-      position: relative;
-      padding-left: 1.75rem;
+    .loading-content {
+      background-color: #61063B;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      max-width: 800px;
+      margin: 0 auto;
     }
-    .check-item:before {
-      content: "";
+    
+    .dolphin-container {
       position: absolute;
-      left: 0;
-      top: 0.25rem;
-      width: 1rem;
-      height: 1rem;
-      border-radius: 50%;
-      background-color: #E5E7EB;
-      transition: all 0.3s ease;
-    }
-    .check-item.completed:before {
-      background: linear-gradient(135deg, #10B981 0%, #059669 100%);
-      content: "✓";
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.6rem;
-      font-weight: bold;
-    }
-    .check-item.failed:before {
-      background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
-      content: "✗";
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.6rem;
-      font-weight: bold;
+      width: 150px;
+      height: 60px;
+      left: 50%;
+      top: 50%;
+      transform-style: preserve-3d;
+      animation: dolphinSwim 8s linear infinite;
+      z-index: 3;
     }
     
-    /* Modern Glow Effects */
-    .glow-primary {
-      filter: drop-shadow(0 0 8px rgba(238, 76, 124, 0.6));
-    }
-    .glow-secondary {
-      filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.6));
+    .dolphin-container .dolphin-speech {
+      animation: bubbleRightSwim 8s linear infinite;
     }
     
-    /* Modern Hover Effects */
-    .hover-scale {
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .hover-scale:hover {
-      transform: scale(1.05);
-    }
-    
-    /* Modern Progress Bar */
-    .progress-bar-container {
-      height: 0.5rem;
-      background-color: #F3F4F6;
-      border-radius: 0.25rem;
-      overflow: hidden;
-    }
-    .progress-bar {
+    .dolphin-body {
+      position: relative;
+      width: 100%;
       height: 100%;
-      border-radius: 0.25rem;
-      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      background: linear-gradient(90deg, #61063B 0%, #9A1750 50%, #EE4C7C 100%);
-      position: relative;
-      overflow: hidden;
+      background: linear-gradient(135deg, 
+        #a8d8ff 0%, 
+        #7cc2ff 30%, 
+        #5d9ce0 60%, 
+        #3a7bd5 100%);
+      border-radius: 70% 70% 60% 60% / 80% 80% 50% 50%;
+      animation: bodyUndulation 3s ease-in-out infinite;
     }
-    .progress-bar:after {
-      content: "";
+    
+    .dolphin-body:before {
+      content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      top: 18px;
+      right: -10px;
+      width: 25px;
+      height: 25px;
+      background: linear-gradient(to bottom right, #7cc2ff 0%, #3a7bd5 100%);
+      border-radius: 50% 50% 0 50%;
+      transform: rotate(-45deg);
+    }
+    
+    .dolphin-eye {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: #111;
+      border-radius: 50%;
+      top: 22px;
+      left: 30px;
+    }
+    
+    .dolphin-eye:after {
+      content: '';
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: white;
+      border-radius: 50%;
+      top: 2px;
+      left: 2px;
+    }
+    
+    .dolphin-fin {
+      position: absolute;
+      width: 25px;
+      height: 35px;
+      background: linear-gradient(to bottom, #5d9ce0 0%, #3a7bd5 100%);
+      border-radius: 50% 50% 0 0;
+      top: 8px;
+      left: 50px;
+      transform-origin: bottom center;
+      animation: pectoralFinMove 2s ease-in-out infinite;
+    }
+    
+    .dolphin-tail {
+      position: absolute;
+      width: 35px;
+      height: 20px;
+      background: linear-gradient(to right, #3a7bd5 0%, #1a5bb5 100%);
+      border-radius: 50% 0 0 50%;
+      right: -30px;
+      top: 20px;
+      transform-origin: left center;
+      animation: tailMove 1s ease-in-out infinite;
+    }
+    
+    .water-ripple {
+      position: absolute;
+      width: 120%;
+      height: 40px;
+      bottom: -10px;
+      left: -10%;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 100% 100% 0 0;
+      animation: waterRipple 4s infinite ease-out;
+    }
+    
+    .bubble {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      filter: blur(1px);
+      animation: bubbleFloat 5s infinite ease-in;
+    }
+    
+    .sunlight {
+      position: absolute;
+      width: 200%;
+      height: 150px;
       background: linear-gradient(
-        90deg,
+        to bottom,
         rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0.15) 50%,
         rgba(255, 255, 255, 0) 100%
       );
-      animation: shimmer 2s linear infinite;
+      transform: rotate(-15deg);
+      animation: sunlight 20s linear infinite;
+    }
+    
+    .loading-text {
+      color: white;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    .title-text {
+      color: white;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+    
+    .logo-container img {
+      width: 120px;
+      height: 120px;
+      border: 4px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .logo-container img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+    
+    .progress-container {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 3px;
+      margin: 1.5rem 0;
+      overflow: hidden;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #EE4C7C 0%, #FF8E9E 100%);
+      border-radius: 3px;
+      transition: width 0.4s ease;
+    }
+    
+    /* Realistic Seaweed Styles */
+    .seaweed-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      z-index: 2;
+    }
+    
+    .seaweed {
+      position: absolute;
+      bottom: 0;
+      width: 8px;
+      background: linear-gradient(to top, 
+        #0a5a32 0%, 
+        #1a8449 30%, 
+        #2dce7d 70%);
+      border-radius: 4px;
+      transform-origin: bottom center;
+      animation: seaweedSway 3s ease-in-out infinite;
+      opacity: 0;
+      height: 0;
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+    
+    .seaweed::before {
+      content: '';
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 25px;
+      height: 15px;
+      background: #1a8449;
+      border-radius: 50% 50% 0 0;
+      clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
+      animation: seaweedLeafMove 3.5s ease-in-out infinite;
+      z-index: -1;
+    }
+    
+    .seaweed::after {
+      content: '';
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 12px;
+      background: #2dce7d;
+      border-radius: 50% 50% 0 0;
+      clip-path: polygon(0 0, 100% 0, 70% 100%, 30% 100%);
+      animation: seaweedLeafMove 4s ease-in-out infinite 0.5s;
+      z-index: -2;
+    }
+    
+    .seaweed .leaf {
+      position: absolute;
+      width: 18px;
+      height: 10px;
+      background: #1a8449;
+      border-radius: 50% 50% 0 0;
+      clip-path: polygon(0 0, 100% 0, 70% 100%, 30% 100%);
+      animation: seaweedLeafMove 4s ease-in-out infinite;
+    }
+    
+    .content-bubble {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 160px;
+      background: white;
+      padding: 10px;
+      border-radius: 12px;
+      font-size: 14px;
+      color: #333;
+      text-align: center;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      z-index: 5;
+      top: 20px;
+      transition: all 0.5s ease;
+    }
+    
+    .content-bubble:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      margin-left: -10px;
+      border-width: 10px 10px 0;
+      border-style: solid;
+      border-color: white transparent;
     }
   </style>
 </head>
-<body class="bg-gray-50">
-  <!-- Ultra Premium Loading Container -->
+<body>
+  <!-- Professional Maroon Loading Container -->
   <div id="loading-container" class="fixed inset-0 z-50 flex flex-col items-center justify-center loading-container transition-all duration-500">
-    <div class="max-w-md w-full px-6">
-      <!-- Main Loading Card -->
-      <div class="glass-panel rounded-2xl p-8 mb-8 animate-scale-in">
-        <!-- Animated Logo Container -->
-        <div class="relative w-48 h-48 mx-auto mb-8">
-          <!-- Heartbeat Logo -->
-          <div class="absolute inset-0 flex items-center justify-center animate-heartbeat">
-            <img src="/images/MSU Seal New (Official).png" alt="University Logo" 
-                 class="w-32 h-32 rounded-full border-4 border-white/20 glow-primary hover-scale" />
-          </div>
-          
-          <!-- Security Badge -->
-          <div id="security-badge" class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 opacity-0 translate-y-4">
-            <span class="badge badge-success flex items-center">
-              <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-              </svg>
-              Secured Connection
-            </span>
-          </div>
+    <div class="w-full max-w-3xl px-6 text-center fade-in">
+      <div class="loading-content p-8">
+        <!-- University Logo -->
+        <div class="logo-container mb-6">
+          <img src="/images/MSU Seal New (Official).png" alt="University Logo" 
+               class="mx-auto rounded-full" />
         </div>
         
-        <!-- Loading Header -->
-        <div class="text-center mb-6">
-          <h1 class="text-gradient-primary text-4xl font-extrabold mb-2">MSUTCTO</h1>
-          <p class="text-gray-600 font-medium">Secure System Initialization</p>
+        <!-- Title -->
+        <h1 class="title-text text-3xl mb-4">{title}</h1>
+        
+        <!-- Dolphin Loader -->
+        <div class="ocean-loader mb-6 overflow-visible" id="ocean-loader">
+          <div class="sunlight"></div>
+          <div class="seaweed-container" id="seaweed-container"></div>
+          <div class="dolphin-container">
+            <!-- <div class="dolphin-speech">Please wait while we process<br>the CMS Baby Dolphin!</div> -->
+            <div class="dolphin-body">
+              <div class="dolphin-eye"></div>
+              <div class="dolphin-fin"></div>
+              <div class="dolphin-tail"></div>
+            </div>
+          </div>
+          <div class="water-ripple" style="animation-delay: 0s"></div>
+          <div class="water-ripple" style="animation-delay: 2s"></div>
+          <div class="content-bubble" id="content-bubble"></div>
         </div>
         
-        <!-- Percentage Display -->
-        <div id="loading-percentage" class="text-gradient-primary text-6xl font-black text-center mb-6">0%</div>
+        <!-- Loading Text -->
+        <p class="loading-text text-lg mb-4" id="status-text">Initializing systems...</p>
         
-        <!-- Status Message -->
-        <p id="loading-status" class="text-center text-gray-700 font-medium mb-6">Starting verification process...</p>
-        
-        <!-- Modern Progress Bar -->
-        <div class="progress-bar-container mb-8">
+        <!-- Progress Bar -->
+        <div class="progress-container">
           <div id="progress-bar" class="progress-bar" style="width: 0%"></div>
         </div>
-        
-        <!-- Verification Steps -->
-        <div id="verification-steps" class="space-y-3">
-          <div class="check-item" id="auth-check">
-            <span class="text-gray-800">Authentication Protocol</span>
-            <span class="float-right text-sm text-gray-500" id="auth-time">0.2s</span>
-          </div>
-          <div class="check-item" id="security-check">
-            <span class="text-gray-800">Security Verification</span>
-            <span class="float-right text-sm text-gray-500" id="security-time">0.4s</span>
-          </div>
-          <div class="check-item" id="data-check">
-            <span class="text-gray-800">Data Integrity Check</span>
-            <span class="float-right text-sm text-gray-500" id="data-time">0.6s</span>
-          </div>
-        </div>
-      </div>
-      
-      <!-- System Info Footer -->
-      <div class="text-center text-sm text-gray-500">
-        <p>MSU-TCTO Secure Access Portal v3.5.1</p>
-        <p class="mt-1">© 2025 Mindanao State University Tawi-Tawi College of Technology and Oceanography. All rights reserved.</p>
       </div>
     </div>
   </div>
 
-  <!-- Main Content (hidden during loading) -->
-
+  <!-- Main Content -->
+  <div id="content" style="display: none;">
     <slot />
-
+  </div>
 
   <script is:inline>
     document.addEventListener('DOMContentLoaded', () => {
       const loadingContainer = document.getElementById('loading-container');
-      const percentageDisplay = document.getElementById('loading-percentage');
-      const loadingStatus = document.getElementById('loading-status');
       const content = document.getElementById('content');
+      const oceanLoader = document.getElementById('ocean-loader');
       const progressBar = document.getElementById('progress-bar');
-      const securityBadge = document.getElementById('security-badge');
+      const statusText = document.getElementById('status-text');
+      const seaweedContainer = document.getElementById('seaweed-container');
+      const contentBubble = document.getElementById('content-bubble');
       
-      // Verification elements
-      const authCheck = document.getElementById('auth-check');
-      const securityCheck = document.getElementById('security-check');
-      const dataCheck = document.getElementById('data-check');
-      
-      // Time indicators
-      const authTime = document.getElementById('auth-time');
-      const securityTime = document.getElementById('security-time');
-      const dataTime = document.getElementById('data-time');
-      
+      // Status messages
       const statusMessages = [
-        { msg: "Initializing MSUTCTO Dolphin...", progress: 0 },
-        { msg: "Loading cryptographic modules...", progress: 10 },
-        { msg: "Establishing secure connection...", progress: 20 },
-        { msg: "Verifying user credentials...", progress: 30 },
-        { msg: "Authenticating with MSU servers...", progress: 40 },
-        { msg: "Validating security certificates...", progress: 50 },
-        { msg: "Scanning system integrity...", progress: 60 },
-        { msg: "Verifying data sources...", progress: 70 },
-        { msg: "Loading secure modules...", progress: 80 },
-        { msg: "Finalizing security checks...", progress: 90 },
-        { msg: "System ready for access", progress: 95 }
+        { text: "Booting oceanographic systems...", progress: 10 },
+        { text: "Calibrating sensors...", progress: 25 },
+        { text: "Establishing secure connection...", progress: 40 },
+        { text: "Authenticating credentials...", progress: 55 },
+        { text: "Loading marine data...", progress: 70 },
+        { text: "Finalizing initialization...", progress: 85 },
+        { text: "Ready for exploration", progress: 100 }
       ];
       
-      let progress = 0;
-      let verificationState = {
-        authenticated: false,
-        securityVerified: false,
-        dataValidated: false
-      };
-      
-      // Generate random completion times between 1.5s and 3.5s
-      const authCompleteTime = (1.5 + Math.random() * 2).toFixed(1);
-      const securityCompleteTime = (parseFloat(authCompleteTime) + 1 + Math.random() * 2).toFixed(1);
-      const dataCompleteTime = (parseFloat(securityCompleteTime) + 0.5 + Math.random() * 1.5).toFixed(1);
-      
-      const loadingInterval = setInterval(() => {
-        // Simulate verification steps with realistic timing
-        if (progress >= 25 && !verificationState.authenticated) {
-          verificationState.authenticated = true;
-          authCheck.classList.add('completed');
-          authTime.textContent = `${authCompleteTime}s`;
-          authTime.classList.add('text-green-600', 'font-semibold');
-        }
+      // Create realistic seaweeds
+      function createSeaweeds() {
+        const seaweedCount = 7 + Math.floor(Math.random() * 4);
         
-        if (progress >= 55 && !verificationState.securityVerified) {
-          verificationState.securityVerified = true;
-          securityCheck.classList.add('completed');
-          securityTime.textContent = `${securityCompleteTime}s`;
-          securityTime.classList.add('text-green-600', 'font-semibold');
+        for (let i = 0; i < seaweedCount; i++) {
+          const seaweed = document.createElement('div');
+          seaweed.className = 'seaweed';
           
-          // Show security badge with animation
-          securityBadge.style.opacity = '1';
-          securityBadge.style.transform = 'translateY(0)';
+          // Random position and height
+          const left = 5 + Math.random() * 90;
+          const height = 50 + Math.random() * 100;
+          
+          seaweed.style.left = `${left}%`;
+          seaweed.style.setProperty('--target-height', `${height}px`);
+          
+          // Random sway timing
+          const swayDuration = 2.5 + Math.random() * 2;
+          seaweed.style.animationDuration = `${swayDuration}s`;
+          seaweed.style.animationDelay = `${Math.random() * 2}s`;
+          
+          // Add leaves at random positions
+          for (let j = 0; j < 3 + Math.floor(Math.random() * 3); j++) {
+            const leaf = document.createElement('div');
+            leaf.className = 'leaf';
+            leaf.style.top = `${20 + Math.random() * 60}%`;
+            leaf.style.left = `${Math.random() > 0.5 ? -10 : 90}%`;
+            leaf.style.transform = `rotate(${Math.random() > 0.5 ? '' : '-'}${10 + Math.random() * 20}deg)`;
+            leaf.style.animationDelay = `${Math.random() * 2}s`;
+            seaweed.appendChild(leaf);
+          }
+          
+          seaweedContainer.appendChild(seaweed);
+          
+          // Animate growth
+          setTimeout(() => {
+            seaweed.style.animation = `seaweedGrow ${1 + Math.random()}s ease-out forwards, seaweedSway ${swayDuration}s ease-in-out infinite`;
+            seaweed.style.height = `${height}px`;
+            seaweed.style.opacity = '0.9';
+          }, i * 200);
         }
+      }
+      
+      // Create bubbles
+      function createBubbles() {
+        const bubbleCount = 5 + Math.floor(Math.random() * 4);
         
-        if (progress >= 85 && !verificationState.dataValidated) {
-          verificationState.dataValidated = true;
-          dataCheck.classList.add('completed');
-          dataTime.textContent = `${dataCompleteTime}s`;
-          dataTime.classList.add('text-green-600', 'font-semibold');
+        for (let i = 0; i < bubbleCount; i++) {
+          setTimeout(() => {
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            const size = 4 + Math.random() * 10;
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
+            bubble.style.left = `${10 + Math.random() * 80}%`;
+            bubble.style.bottom = '0';
+            bubble.style.animationDuration = `${3 + Math.random() * 3}s`;
+            bubble.style.animationDelay = `${Math.random() * 2}s`;
+            oceanLoader.appendChild(bubble);
+            
+            setTimeout(() => bubble.remove(), 6000);
+          }, i * 300);
         }
+      }
+      
+      // Update content bubble with loading messages
+      function updateContentBubble(message) {
+        contentBubble.textContent = message;
+        contentBubble.style.opacity = '1';
+        contentBubble.style.top = '20px';
         
-        // Calculate progress with acceleration based on completed steps
-        let progressIncrement = 0.4 + Math.random() * 0.6;
-        
-        if (verificationState.authenticated) progressIncrement *= 1.3;
-        if (verificationState.securityVerified) progressIncrement *= 1.4;
-        if (verificationState.dataValidated) progressIncrement *= 1.5;
-        
-        progress = Math.min(progress + progressIncrement, 100);
-        
-        // Update displays with smooth transitions
-        const displayProgress = Math.floor(progress);
-        percentageDisplay.textContent = `${displayProgress}%`;
+        setTimeout(() => {
+          contentBubble.style.opacity = '0';
+          contentBubble.style.top = '0px';
+        }, 2000);
+      }
+      
+      // Loading simulation
+      let progress = 0;
+      const bubbleInterval = setInterval(createBubbles, 1500);
+      createBubbles();
+      
+      // Create initial seaweeds
+      createSeaweeds();
+      
+      // Add more seaweeds as loading progresses
+      const seaweedInterval = setInterval(() => {
+        if (progress < 100) {
+          createSeaweeds();
+        }
+      }, 2500);
+      
+      const loadInterval = setInterval(() => {
+        progress = Math.min(progress + 0.5 + Math.random(), 100);
         progressBar.style.width = `${progress}%`;
         
-        // Update status message based on progress
+        // Update status text
         const currentStatus = statusMessages.reduce((prev, curr) => 
           progress >= curr.progress ? curr : prev
         );
-        loadingStatus.textContent = currentStatus.msg;
+        statusText.textContent = currentStatus.text;
         
-        // Complete loading when all verifications pass and progress reaches 100%
-        if (progress >= 100 && verificationState.authenticated && 
-            verificationState.securityVerified && verificationState.dataValidated) {
-          clearInterval(loadingInterval);
+        // Update content bubble at certain progress points
+        if (progress >= 20 && progress < 25) {
+          updateContentBubble("Hi MSUanz...");
+        } else if (progress >= 45 && progress < 50) {
+          updateContentBubble("Please wait for a while...");
+        } else if (progress >= 70 && progress < 75) {
+          updateContentBubble("let's go dive my Baby Dolphin...");
+        }
+        
+        if (progress >= 100) {
+          clearInterval(loadInterval);
+          clearInterval(bubbleInterval);
+          clearInterval(seaweedInterval);
           
-          // Final animations before revealing content
+          // Show final message in bubble
+          updateContentBubble("Ocean System ready for exploration!");
+          
+          // Final animation
           setTimeout(() => {
-            loadingStatus.textContent = "All systems verified ✓ Ready for access";
-            percentageDisplay.textContent = "100%";
-            
-            // Add celebration particles
-            for (let i = 0; i < 30; i++) {
-              createParticle();
-            }
-            
+            loadingContainer.style.opacity = '0';
             setTimeout(() => {
-              loadingContainer.style.opacity = '0';
-              loadingContainer.style.pointerEvents = 'none';
-              setTimeout(() => {
-                loadingContainer.style.display = 'none';
-                content.style.display = 'block';
-                content.classList.add('animate-fadeIn');
-                
-                // Dispatch custom event when fully loaded
-                document.dispatchEvent(new CustomEvent('systemLoaded', {
-                  detail: {
-                    authenticated: true,
-                    securityVerified: true,
-                    loadTime: `${dataCompleteTime} seconds`,
-                    timestamp: new Date().toISOString()
-                  }
-                }));
-              }, 600);
-            }, 1000);
-          }, 500);
+              loadingContainer.style.display = 'none';
+              content.style.display = 'block';
+            }, 800);
+          }, 1500);
         }
-      }, 40);
-      
-      // Simulate potential security issues (for demonstration)
-      setTimeout(() => {
-        if (progress < 30 && Math.random() > 0.7) {
-          // Simulate failed authentication
-          authCheck.classList.remove('completed');
-          authCheck.classList.add('failed');
-          authTime.textContent = "Failed";
-          authTime.classList.remove('text-green-600');
-          authTime.classList.add('text-red-600', 'font-semibold');
-          loadingStatus.textContent = "Authentication failed - Retrying...";
-          progress = Math.max(0, progress - 10);
-          
-          // Show error badge temporarily
-          const errorBadge = document.createElement('div');
-          errorBadge.className = 'badge badge-danger absolute top-4 right-4 flex items-center animate-scale-in';
-          errorBadge.innerHTML = `
-            <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
-            </svg>
-            Security Alert
-          `;
-          loadingContainer.querySelector('.glass-panel').appendChild(errorBadge);
-          
-          setTimeout(() => {
-            errorBadge.remove();
-            authCheck.classList.remove('failed');
-            authCheck.classList.add('completed');
-            authTime.textContent = `${authCompleteTime}s`;
-            authTime.classList.remove('text-red-600');
-            authTime.classList.add('text-green-600', 'font-semibold');
-            loadingStatus.textContent = "Authentication recovered - Proceeding...";
-            verificationState.authenticated = true;
-          }, 2000);
-        }
-      }, 3000);
-      
-      // Create celebration particles
-      function createParticle() {
-        const particle = document.createElement('div');
-        particle.className = 'absolute w-2 h-2 rounded-full';
-        const colors = ['#61063B', '#9A1750', '#EE4C7C', '#3B82F6', '#8B5CF6'];
-        particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        particle.style.left = `${50 + (Math.random() - 0.5) * 20}%`;
-        particle.style.top = `${50 + (Math.random() - 0.5) * 20}%`;
-        particle.style.transform = 'scale(0)';
-        particle.style.transition = 'all 1s ease-out';
-        
-        loadingContainer.querySelector('.glass-panel').appendChild(particle);
-        
-        setTimeout(() => {
-          particle.style.transform = `scale(1) translate(${(Math.random() - 0.5) * 200}px, ${(Math.random() - 0.5) * 200}px)`;
-          particle.style.opacity = '0';
-        }, 10);
-        
-        setTimeout(() => {
-          particle.remove();
-        }, 1000);
-      }
+      }, 50);
     });
   </script>
 </body>
