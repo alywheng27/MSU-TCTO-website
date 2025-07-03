@@ -835,6 +835,83 @@ window.addEventListener('load', function() {
         </button>
 
 
+        <!-- Add this button somewhere in your page -->
+<button 
+  id="showAdButton"
+  class="fixed bottom-20 left-5 z-40 bg-msu-deep-ocean text-white rounded-full w-12 h-12 flex items-center justify-center hover:bg-black/80 transition-all duration-200 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-white/50 group"
+  title="Show advertisement"
+>
+  <!-- Eye icon -->
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+  </svg>
+  
+  <!-- Tooltip message that appears for 5 seconds -->
+  <div id="adButtonTooltip" class="absolute left-full ml-2 bg-gray-900 text-white text-sm px-3 py-1 rounded whitespace-nowrap opacity-0 transition-opacity duration-300 pointer-events-none">
+    Click me to show advertisement again
+  </div>
+</button>
+
+<script>
+window.addEventListener('load', function() {
+  const adOverlay = document.getElementById('adOverlay');
+  const showAdButton = document.getElementById('showAdButton');
+  const tooltip = document.getElementById('adButtonTooltip');
+  
+  // Initially hide both elements
+  showAdButton.classList.add('hidden');
+  tooltip.classList.add('hidden');
+  
+  // Show ad after 2 seconds
+  setTimeout(function() {
+    adOverlay.classList.remove('hidden');
+  }, 2000);
+  
+  // When closing the ad
+  adOverlay.querySelector('button[aria-label="Close advertisement"]').addEventListener('click', function() {
+    adOverlay.classList.add('hidden');
+    showAdButton.classList.remove('hidden');
+    
+    // Show tooltip for 5 seconds
+    tooltip.classList.remove('hidden');
+    setTimeout(() => {
+      tooltip.classList.remove('opacity-0');
+    }, 100); // Small delay for transition
+    
+    setTimeout(() => {
+      tooltip.classList.add('opacity-0');
+      setTimeout(() => {
+        tooltip.classList.add('hidden');
+      }, 300); // Wait for transition to complete
+    }, 5000); // Hide after 5 seconds
+  });
+  
+  // When reopening the ad
+  showAdButton.addEventListener('click', function() {
+    adOverlay.classList.remove('hidden');
+    showAdButton.classList.add('hidden');
+    tooltip.classList.add('hidden', 'opacity-0');
+  });
+  
+  // Optional: Show tooltip on hover after the initial 5 seconds
+  showAdButton.addEventListener('mouseenter', function() {
+    if (tooltip.classList.contains('hidden')) {
+      tooltip.classList.remove('hidden');
+      setTimeout(() => tooltip.classList.remove('opacity-0'), 10);
+    }
+  });
+  
+  showAdButton.addEventListener('mouseleave', function() {
+    if (!tooltip.classList.contains('hidden')) {
+      tooltip.classList.add('opacity-0');
+      setTimeout(() => tooltip.classList.add('hidden'), 300);
+    }
+  });
+});
+</script>
+
+
       
 
          <!-- Footer Navigation -->
