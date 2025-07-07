@@ -98,7 +98,7 @@ const currentPath = Astro.url.pathname;
                             <input
                               type="text"
                               id="globalSearch"
-                              class="block w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-msu-main-color/50 focus:border-msu-main-color transition-all"
+                              class="block w-full pl-10 pr-12 py-3 border text-gray-700 border-gray-300 rounded-lg focus:ring-2 focus:ring-msu-main-color/50 focus:border-msu-main-color transition-all"
                               placeholder="Search all offices and services..."
                               autocomplete="off"
                             />
@@ -119,7 +119,7 @@ const currentPath = Astro.url.pathname;
                                 id="office" 
                                 name="entry.1924231474" 
                                 required
-                                class="office-select block w-full pl-4 pr-10 py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-msu-main-color/50 focus:border-msu-main-color transition-all hover:border-gray-400"
+                                class="office-select block w-full pl-4 pr-10 py-3 text-gray-700 border border-gray-300 rounded-lg focus:ring-2 focus:ring-msu-main-color/50 focus:border-msu-main-color transition-all hover:border-gray-400"
                               >
                                 <option value="" disabled selected>Select an office</option>
                                 <optgroup label="Administrative Offices" class="text-gray-900">
@@ -140,7 +140,7 @@ const currentPath = Astro.url.pathname;
                                   <option value="SUPPLY AND PROPERTY OFFICE">Supply and Property Office</option>
                                 </optgroup>
                                 
-                                <optgroup label="Academic Offices">
+                                <optgroup label="Academic Offices" class="text-gray-900">
                                   <option value="ADMISSION OFFICE">Admission Office</option>
                                   <option value="ALUMNI AND CAREER CENTER OFFICE">Alumni and Career Center Office</option>
                                   <option value="COLLEGE LIBRARY">College Library</option>
@@ -152,7 +152,7 @@ const currentPath = Astro.url.pathname;
                                   <option value="OFFICE OF THE REGISTRAR">Office of the Registrar</option>
                                 </optgroup>
                                 
-                                <optgroup label="Extension & Research">
+                                <optgroup label="Extension & Research" class="text-gray-900">
                                   <option value="EXTENSION SERVICES">Extension Services</option>
                                   <option value="RESEARCH SERVICES">Research Services</option>
                                   <option value="CENTER FOR OCEAN STUDIES">Center for Ocean Studies</option>
@@ -160,7 +160,7 @@ const currentPath = Astro.url.pathname;
                                   <option value="OFFICE OF THE VICE CHANCELLOR FOR RESEARCH INNOVATION DEVELOPMENT AND EXTENSION">Vice Chancellor for Research, Innovation, Development and Extension</option>
                                 </optgroup>
                                 
-                                <optgroup label="Other Units">
+                                <optgroup label="Other Units" class="text-gray-900" >
                                   <option value="CAFETERIA">Cafeteria</option>
                                   <option value="GUIDANCE AND COUNSELING OFFICE">Guidance and Counseling Office</option>
                                   <option value="QUALITY ASSURANCE & ACCREDITATION OFFICE">Quality Assurance & Accreditation Office</option>
@@ -185,7 +185,7 @@ const currentPath = Astro.url.pathname;
                                 id="status" 
                                 name="entry.724584061" 
                                 required
-                                class="block w-full pl-4 pr-10 py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-msu-main-color/50 focus:border-msu-main-color transition-all hover:border-gray-400"
+                                class="block w-full pl-4 pr-10 py-3 text-gray-700  border border-gray-300 rounded-lg focus:ring-2 focus:ring-msu-main-color/50 focus:border-msu-main-color transition-all hover:border-gray-400"
                               >
                                 <option value="" disabled selected>Select your status</option>
                                 <option value="Permanent">Permanent</option>
@@ -315,7 +315,7 @@ const currentPath = Astro.url.pathname;
                             name="entry.1589457788" 
                             rows="4"
                             placeholder="Please share any specific experiences or suggestions that could help us improve..."
-                            class="block w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-msu-main-color/50 focus:border-msu-main-color transition-all hover:border-gray-400"
+                            class="block w-full px-4 py-3 text-gray-700 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-msu-main-color/50 focus:border-msu-main-color transition-all hover:border-gray-400"
                           ></textarea>
                         </div>
                       </div>
@@ -382,6 +382,7 @@ const currentPath = Astro.url.pathname;
   </div>
 
   <style is:global>
+
     /* Tab Navigation Styles */
     .tab-content {
       display: none;
@@ -685,7 +686,7 @@ const currentPath = Astro.url.pathname;
     }
 
     /* Progress tracker */
-    .progress-tracker {
+    .studentprogress-tracker {
       position: fixed;
       bottom: 2rem;
       right: 2rem;
@@ -702,7 +703,7 @@ const currentPath = Astro.url.pathname;
       transition: all 0.3s ease;
     }
     
-    .progress-tracker:hover {
+    .studentprogress-tracker:hover {
       transform: scale(1.1);
     }
     
