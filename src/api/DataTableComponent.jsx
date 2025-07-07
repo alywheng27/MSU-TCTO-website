@@ -51,7 +51,7 @@ const DataTableComponent = ({ data }) => {
           </thead>
           <tbody>
             {paginatedData.map((bid, index) => (
-              <tr key={index} className="hover:bg-gray-100 transition-all text-center">
+              <tr key={index} className="hover:bg-gray-100 transition-all text-center text-msu-deep-ocean">
                 <td className="border-t px-4 py-3">{startIndex + index + 1}</td>
                 <td className="border-t px-4 py-3">{bid.title || 'N/A'}</td>
                 <td className="border-t px-4 py-3">{bid.contactPerson || 'N/A'}</td>
