@@ -534,8 +534,7 @@ export default function AdmissionProcedure() {
                           key={index}
                           className={`bg-white p-6 rounded-xl shadow-sm cursor-pointer border border-gray-200 hover:border-msu-maroon transition-all ${hoveredStep === index ? 'ring-2 ring-msu-maroon' : ''}`}
                           variants={itemVariants}
-                          whileHover="hover"
-                          variants={scaleUp}
+                          whileHover={{ scale: 1.03, boxShadow: "0 10px 25px rgba(0,0,0,0.1)", borderColor: "#8B1D1D" }}
                           onMouseEnter={() => setHoveredStep(index)}
                           onMouseLeave={() => setHoveredStep(null)}
                         >
@@ -672,8 +671,7 @@ export default function AdmissionProcedure() {
                           key={index}
                           className={`bg-white p-6 rounded-xl shadow-sm cursor-pointer border border-gray-200 hover:border-msu-maroon transition-all ${hoveredStep === index+6 ? 'ring-2 ring-msu-maroon' : ''}`}
                           variants={itemVariants}
-                          whileHover="hover"
-                          variants={scaleUp}
+                          whileHover={{ scale: 1.03, boxShadow: "0 10px 25px rgba(0,0,0,0.1)", borderColor: "#8B1D1D" }}
                           onMouseEnter={() => setHoveredStep(index+6)}
                           onMouseLeave={() => setHoveredStep(null)}
                         >
