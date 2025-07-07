@@ -632,7 +632,6 @@
       </div>
     </div>
 
-
 <script is:inline>
 document.addEventListener('DOMContentLoaded', function() {
   // Tab functionality
@@ -653,7 +652,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (tabId === 'student-survey') {
         initializeStudentSurvey();
       } else {
-        const existingTracker = document.querySelector('.progress-tracker');
+        const existingTracker = document.querySelector('.studentprogress-tracker');
         if (existingTracker) existingTracker.remove();
       }
     });
@@ -666,7 +665,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (storedTab === 'student-survey') {
       initializeStudentSurvey();
     } else {
-      const existingTracker = document.querySelector('.progress-tracker');
+      const existingTracker = document.querySelector('.studentprogress-tracker');
       if (existingTracker) existingTracker.remove();
     }
   } else if (tabButtons.length > 0) {
@@ -682,14 +681,20 @@ document.addEventListener('DOMContentLoaded', function() {
   // Student survey specific functionality
   function initializeStudentSurvey() {
     // Initialize services tracking
-    const services = {
-      'Admission Services': { completed: false, verified: false },
-      'Guidance Services': { completed: false, verified: false },
-      'Health Services': { completed: false, verified: false },
-      'Facilities Services': { completed: false, verified: false },
-      'Registrar Services': { completed: false, verified: false },
-      'Campus Orientation Services': { completed: false, verified: false }
-    };
+    const services = {};
+    const serviceTitles = [
+      'Admission Services',
+      'Guidance Services',
+      'Health Services',
+      'Facilities Services',
+      'Registrar Services',
+      'Campus Orientation Services'
+    ];
+    
+    // Initialize services object
+    serviceTitles.forEach(title => {
+      services[title] = { completed: false, verified: false };
+    });
 
     // Check internet connectivity
     function checkInternetConnection() {
@@ -700,6 +705,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function initializeVerificationStatus() {
       document.querySelectorAll('.service-card').forEach(card => {
         const title = card.querySelector('.service-card-title').textContent.trim();
+        // Ensure the service exists in our object
+        if (!services[title]) {
+          services[title] = { completed: false, verified: false };
+        }
         updateVerificationStatus(card, services[title]);
         
         const checkbox = card.querySelector('.service-card-checkbox');
@@ -716,11 +725,14 @@ document.addEventListener('DOMContentLoaded', function() {
       const statusIndicator = document.createElement('div');
       statusIndicator.className = 'verification-status';
       
-      if (status.verified) {
+      // Check if status exists, otherwise use default
+      const actualStatus = status || { verified: false, completed: false };
+      
+      if (actualStatus.verified) {
         statusIndicator.classList.add('verified');
         statusIndicator.innerHTML = '✓';
         statusIndicator.title = 'Verified and submitted';
-      } else if (status.completed) {
+      } else if (actualStatus.completed) {
         statusIndicator.classList.add('completed');
         statusIndicator.innerHTML = '✓';
         statusIndicator.title = 'Completed (not submitted)';
@@ -784,19 +796,21 @@ document.addEventListener('DOMContentLoaded', function() {
         const serviceCard = this.closest('.service-card');
         const title = serviceCard.querySelector('.service-card-title').textContent.trim();
         
-        services[title].completed = validateServiceQuestions(serviceCard);
-        updateVerificationStatus(serviceCard, services[title]);
-        updateProgressTracker();
+        if (services[title]) {
+          services[title].completed = validateServiceQuestions(serviceCard);
+          updateVerificationStatus(serviceCard, services[title]);
+          updateProgressTracker();
+        }
       });
     });
 
-    // Create progress tracker
+   // Create progress tracker
     function createProgressTracker() {
-      const existingTracker = document.querySelector('.progress-tracker');
+      const existingTracker = document.querySelector('.studentprogress-tracker');
       if (existingTracker) existingTracker.remove();
       
       const tracker = document.createElement('div');
-      tracker.className = 'progress-tracker';
+      tracker.className = 'studentprogress-tracker';
       tracker.title = 'Survey completion progress';
       tracker.innerHTML = `
         <div class="progress-circle">
@@ -977,171 +991,171 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Show submission success with details
-  function showSubmissionSuccess(data) {
-  const modal = document.getElementById('feedbackModal');
-  const modalMessage = document.getElementById('modalMessage');
-  const modalIcon = modal.querySelector('.modal-icon');
-  const modalTitle = modal.querySelector('.modal-title');
-  
-  modalTitle.textContent = 'Submission Successful';
-  modalIcon.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-    </svg>
-  `;
-  
-  modalMessage.innerHTML = `
-    <div class="space-y-4">
-      <div id="receiptContent" class="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
-        <div class="flex justify-between items-center mb-4">
-          <h3 class="font-bold text-lg text-msu-main-color">Survey Submission Receipt</h3>
-          <div class="flex items-center space-x-2">
-            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Verified</span>
-            <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">${new Date().toLocaleDateString()}</span>
-          </div>
-        </div>
-        <div class="grid grid-cols-1 gap-3">
-          <div>
-            <p class="text-sm text-gray-500">Reference Code</p>
-            <p class="font-mono font-bold text-lg">${data.referenceCode}</p>
-          </div>
-          <div>
-            <p class="text-sm text-gray-500">Student ID</p>
-            <p class="font-medium">${data.studentId}</p>
-          </div>
-          <div>
-            <p class="text-sm text-gray-500">Course</p>
-            <p class="font-medium">${data.course}</p>
-          </div>
-          <div>
-            <p class="text-sm text-gray-500">Year Level</p>
-            <p class="font-medium">${data.yearLevel}</p>
-          </div>
-          <div>
-            <p class="text-sm text-gray-500">Submission Date</p>
-            <p class="font-medium">${new Date().toLocaleString()}</p>
-          </div>
-        </div>
-        <div class="mt-4 pt-4 border-t border-gray-200">
-          <div class="flex items-center justify-center space-x-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-msu-main-color" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-            </svg>
-            <span class="text-sm text-gray-600">Thank you for your feedback submission</span>
-          </div>
-        </div>
-      </div>
+    function showSubmissionSuccess(data) {
+      const modal = document.getElementById('feedbackModal');
+      const modalMessage = document.getElementById('modalMessage');
+      const modalIcon = modal.querySelector('.modal-icon');
+      const modalTitle = modal.querySelector('.modal-title');
       
-      <div class="bg-blue-50 rounded-lg p-4 border border-blue-100">
-        <p class="text-sm text-blue-700 mb-3">Please note your reference code for future inquiries.</p>
-        <button id="downloadReceiptBtn" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-msu-main-color to-msu-maroon hover:from-msu-main-color-dark hover:to-msu-maroon-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-msu-main-color">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-          </svg>
-          Download Receipt as Image
-        </button>
-      </div>
-    </div>
-  `;
-  
-  modal.classList.add('active');
-  
-  document.getElementById('modalCloseButton').onclick = function() {
-    modal.classList.remove('active');
-  };
-  
-  modal.onclick = function(e) {
-    if (e.target === modal) {
-      modal.classList.remove('active');
-    }
-  };
-
-  // Add event listener for download button
-  document.getElementById('downloadReceiptBtn')?.addEventListener('click', function() {
-    downloadReceiptAsImage();
-  });
-
-  // Function to download the receipt as image
-  async function downloadReceiptAsImage() {
-    const downloadBtn = document.getElementById('downloadReceiptBtn');
-    const originalBtnContent = downloadBtn.innerHTML;
-    
-    // Show loading state on button
-    downloadBtn.innerHTML = `
-      <svg class="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-      </svg>
-      Generating Image...
-    `;
-    downloadBtn.disabled = true;
-
-    try {
-      // Use html2canvas library to convert the div to an image
-      const html2canvas = await loadHtml2Canvas();
-      const receiptElement = document.getElementById('receiptContent');
-      
-      // Add some temporary styles for better screenshot
-      receiptElement.style.boxShadow = 'none';
-      receiptElement.style.border = '1px solid #e5e7eb';
-      receiptElement.style.borderRadius = '0.5rem';
-      receiptElement.style.padding = '1.5rem';
-      
-      const canvas = await html2canvas(receiptElement, {
-        scale: 2, // Higher quality
-        logging: false,
-        useCORS: true,
-        allowTaint: true,
-        backgroundColor: '#ffffff'
-      });
-      
-      // Create download link
-      const link = document.createElement('a');
-      link.download = `MSU-Survey-Receipt-${data.referenceCode}.jpg`;
-      link.href = canvas.toDataURL('image/jpeg', 0.9);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      
-      // Show success feedback
-      const modalIcon = document.querySelector('#feedbackModal .modal-icon');
+      modalTitle.textContent = 'Submission Successful';
       modalIcon.innerHTML = `
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
         </svg>
       `;
-    } catch (error) {
-      console.error('Error generating image:', error);
-      // Show error feedback
-      const modalIcon = document.querySelector('#feedbackModal .modal-icon');
-      modalIcon.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-        </svg>
-      `;
-    } finally {
-      // Restore button state
-      downloadBtn.innerHTML = originalBtnContent;
-      downloadBtn.disabled = false;
-    }
-  }
-
-  // Function to dynamically load html2canvas
-  function loadHtml2Canvas() {
-    return new Promise((resolve, reject) => {
-      if (window.html2canvas) {
-        resolve(window.html2canvas);
-        return;
-      }
       
-      const script = document.createElement('script');
-      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
-      script.onload = () => resolve(window.html2canvas);
-      script.onerror = reject;
-      document.head.appendChild(script);
-    });
-  }
-}
+      modalMessage.innerHTML = `
+        <div class="space-y-4">
+          <div id="receiptContent" class="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="font-bold text-lg text-msu-main-color">Survey Submission Receipt</h3>
+              <div class="flex items-center space-x-2">
+                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Verified</span>
+                <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">${new Date().toLocaleDateString()}</span>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 gap-3">
+              <div>
+                <p class="text-sm text-gray-500">Reference Code</p>
+                <p class="font-mono font-bold text-lg">${data.referenceCode}</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Student ID</p>
+                <p class="font-medium">${data.studentId}</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Course</p>
+                <p class="font-medium">${data.course}</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Year Level</p>
+                <p class="font-medium">${data.yearLevel}</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Submission Date</p>
+                <p class="font-medium">${new Date().toLocaleString()}</p>
+              </div>
+            </div>
+            <div class="mt-4 pt-4 border-t border-gray-200">
+              <div class="flex items-center justify-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-msu-main-color" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-sm text-gray-600">Thank you for your feedback submission</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-blue-50 rounded-lg p-4 border border-blue-100">
+            <p class="text-sm text-blue-700 mb-3">Please note your reference code for future inquiries.</p>
+            <button id="downloadReceiptBtn" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-msu-main-color to-msu-maroon hover:from-msu-main-color-dark hover:to-msu-maroon-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-msu-main-color">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              Download Receipt as Image
+            </button>
+          </div>
+        </div>
+      `;
+      
+      modal.classList.add('active');
+      
+      document.getElementById('modalCloseButton').onclick = function() {
+        modal.classList.remove('active');
+      };
+      
+      modal.onclick = function(e) {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+        }
+      };
+
+      // Add event listener for download button
+      document.getElementById('downloadReceiptBtn')?.addEventListener('click', function() {
+        downloadReceiptAsImage();
+      });
+
+      // Function to download the receipt as image
+      async function downloadReceiptAsImage() {
+        const downloadBtn = document.getElementById('downloadReceiptBtn');
+        const originalBtnContent = downloadBtn.innerHTML;
+        
+        // Show loading state on button
+        downloadBtn.innerHTML = `
+          <svg class="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Generating Image...
+        `;
+        downloadBtn.disabled = true;
+
+        try {
+          // Use html2canvas library to convert the div to an image
+          const html2canvas = await loadHtml2Canvas();
+          const receiptElement = document.getElementById('receiptContent');
+          
+          // Add some temporary styles for better screenshot
+          receiptElement.style.boxShadow = 'none';
+          receiptElement.style.border = '1px solid #e5e7eb';
+          receiptElement.style.borderRadius = '0.5rem';
+          receiptElement.style.padding = '1.5rem';
+          
+          const canvas = await html2canvas(receiptElement, {
+            scale: 2, // Higher quality
+            logging: false,
+            useCORS: true,
+            allowTaint: true,
+            backgroundColor: '#ffffff'
+          });
+          
+          // Create download link
+          const link = document.createElement('a');
+          link.download = `MSU-Survey-Receipt-${data.referenceCode}.jpg`;
+          link.href = canvas.toDataURL('image/jpeg', 0.9);
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          
+          // Show success feedback
+          const modalIcon = document.querySelector('#feedbackModal .modal-icon');
+          modalIcon.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          `;
+        } catch (error) {
+          console.error('Error generating image:', error);
+          // Show error feedback
+          const modalIcon = document.querySelector('#feedbackModal .modal-icon');
+          modalIcon.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+          `;
+        } finally {
+          // Restore button state
+          downloadBtn.innerHTML = originalBtnContent;
+          downloadBtn.disabled = false;
+        }
+      }
+
+      // Function to dynamically load html2canvas
+      function loadHtml2Canvas() {
+        return new Promise((resolve, reject) => {
+          if (window.html2canvas) {
+            resolve(window.html2canvas);
+            return;
+          }
+          
+          const script = document.createElement('script');
+          script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+          script.onload = () => resolve(window.html2canvas);
+          script.onerror = reject;
+          document.head.appendChild(script);
+        });
+      }
+    }
 
     // Form submission handler with hidden iframe
     const surveyForm = document.querySelector('#studentSurveyForm');

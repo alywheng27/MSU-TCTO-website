@@ -87,7 +87,7 @@ const OpenPositionsTable = () => {
   return (
     <div>
       {/* Table */}
-      <table className="table table-striped" style={{ width: '100%' }}>
+      <table className="table table-striped bg-msu-deep-ocean" style={{ width: '100%' }}>
         <thead>
           <tr>
             <th>No.</th>
@@ -118,7 +118,7 @@ const OpenPositionsTable = () => {
 
       {/* Additional Content */}
      {/* Additional Content */}
-<div className="mt-10 text-left px-5 md:px-10">
+<div className="mt-10 text-left px-5 md:px-10 text-msu-deep-ocean">
   <p className="paragraph p2 text-blue mb-5">
     Interested and qualified applicants should signify their interest in writing. Attach the following documents to the application letter and send to the address below not later than <strong>May 14, 2024</strong>.
   </p>
