@@ -239,22 +239,20 @@ const Navbar = ({ path }) => {
             </div>
             
             <div className="flex items-center">
-              <a 
-                href="https://msutawitawiedu.sharepoint.com/sites/Tawitawi" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center text-xs sm:text-sm hover:text-msu-gold transition-colors duration-200"
-              >
-                <span className="hidden lg:inline-block mr-1">SharePoint Portal</span>
-                <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  viewBox="0 0 24 24" 
-                  fill="currentColor" 
-                  className="w-4 h-4"
-                >
-                  <path d="M3.75 3h16.5a.75.75 0 0 1 .75.75v16.5a.75.75 0 0 1-.75.75H3.75a.75.75 0 0 1-.75-.75V3.75a.75.75 0 0 1 .75-.75zm4.94 4.28a.75.75 0 0 0-1.06-1.06L6 7.94 4.97 6.97a.75.75 0 0 0-1.06 1.06L4.94 9l-1.03 1.03a.75.75 0 1 0 1.06 1.06L6 10.06l1.03 1.03a.75.75 0 1 0 1.06-1.06L7.06 9l1.03-1.03a.75.75 0 0 0 0-1.06zm4.78 5.72a.75.75 0 1 1 1.5 0v5.25a.75.75 0 0 1-1.5 0v-5.25zm5.25-4.5a.75.75 0 1 0 0-1.5h-5.25a.75.75 0 0 0 0 1.5h5.25z" />
-                </svg>
-              </a>
+                          
+                    <a 
+              href="https://msutawitawiedu.sharepoint.com/sites/Tawitawi" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center text-xs sm:text-sm hover:text-msu-gold transition-colors duration-200"
+            >
+              <img 
+                src="https://dev-tcto.etpbx.com/Picture1-removebg-preview.png" 
+                alt="Logo" 
+                className="w-[90px] mr-2"
+              />
+            
+            </a>
             </div>
           </div>
         </div>
@@ -392,7 +390,7 @@ const Navbar = ({ path }) => {
                 href="https://msutawitawiedu.sharepoint.com/sites/Tawitawi" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="block bg-msu-main-color hover:bg-msu-gold-dark text-white px-4 py-3 rounded text-center font-medium transition-colors duration-300 flex items-center justify-center text-sm"
+                className=" bg-msu-main-color hover:bg-msu-gold-dark text-white px-4 py-3 rounded text-center font-medium transition-colors duration-300 flex items-center justify-center text-sm"
               >
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
