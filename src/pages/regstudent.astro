@@ -1,640 +1,296 @@
-      <!-- Student Survey Tab Content -->
-      <div id="studentreg-survey" class="tab-content">
-        <section id="studentreg-survey" class="bg-gradient-to-b from-gray-50 to-white py-16 md:py-24">
-          <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-            <div class="text-center mb-12">
-              <span class="inline-block px-4 py-2 bg-msu-main-color/10 text-msu-main-color text-sm font-semibold rounded-full mb-4">
-                Student Feedback Survey
-              </span>
-              <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                Student Satisfaction Survey <span class="text-msu-main-color">For Regular </span>
-              </h2>
-              <div class="w-24 h-1.5 bg-gradient-to-r from-msu-gold to-msu-maroon mx-auto rounded-full"></div>
-              <p class="text-lg text-gray-600 mt-6 max-w-2xl mx-auto">
-                Your feedback helps us improve campus services and facilities
-              </p>
-            </div>
+<!-- Student Survey Tab Content -->
+<div id="studentreg-survey" class="tab-content">
+  <section id="studentreg-survey" class="bg-gradient-to-b from-gray-50 to-white py-16 md:py-24">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+      <div class="text-center mb-12">
+        <span class="inline-block px-4 py-2 bg-msu-main-color/10 text-msu-main-color text-sm font-semibold rounded-full mb-4">
+          Student Feedback Survey
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+          Student Satisfaction Survey <span class="text-msu-main-color">For Regular </span>
+        </h2>
+        <div class="w-24 h-1.5 bg-gradient-to-r from-msu-gold to-msu-maroon mx-auto rounded-full"></div>
+        <p class="text-lg text-gray-600 mt-6 max-w-2xl mx-auto">
+          Your feedback helps us improve campus services and facilities
+        </p>
+      </div>
 
-            <!-- Progress Legend -->
-            <div class="verification-legend">
-              <div class="verification-legend-item">
-                <div class="verification-legend-badge verified">✓</div>
-                <span>Verified & Submitted</span>
-              </div>
-              <div class="verification-legend-item">
-                <div class="verification-legend-badge completed">✓</div>
-                <span>Completed (Not Submitted)</span>
-              </div>
-              <div class="verification-legend-item">
-                <div class="verification-legend-badge not-completed">✕</div>
-                <span>Not Completed</span>
-              </div>
-            </div>
+      <!-- Progress Legend -->
+      <div class="verification-legend">
+        <div class="verification-legend-item">
+          <div class="verification-legend-badge verified">✓</div>
+          <span>Verified & Submitted</span>
+        </div>
+        <div class="verification-legend-item">
+          <div class="verification-legend-badge completed">✓</div>
+          <span>Completed (Not Submitted)</span>
+        </div>
+        <div class="verification-legend-item">
+          <div class="verification-legend-badge not-completed">✕</div>
+          <span>Not Completed</span>
+        </div>
+      </div>
 
-            <!-- Survey Card -->
-            <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
-              <div class="bg-gradient-to-r from-msu-main-color to-msu-maroon px-8 py-6">
-                <div class="flex items-center">
-                  <div class="bg-white/20 p-2 rounded-lg mr-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 class="text-xl font-semibold text-white">Academic Year 2023-2024</h3>
-                    <p class="text-white/90">Please provide honest feedback about our services</p>
-                  </div>
+      <!-- Survey Card -->
+      <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+        <div class="bg-gradient-to-r from-msu-main-color to-msu-maroon px-8 py-6">
+          <div class="flex items-center">
+            <div class="bg-white/20 p-2 rounded-lg mr-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold text-white">Academic Year 2023-2024</h3>
+              <p class="text-white/90">Please provide honest feedback about our services</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 sm:p-8">
+          <form id="studentSurveyForm" class="space-y-8">
+            <!-- Student Information -->
+            <div class="grid md:grid-cols-2 gap-6">
+              <div class="form-group">
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  Year Level <span class="text-msu-maroon">*</span>
+                </label>
+                <div class="grid grid-cols-4 gap-2">
+                  <label class="flex items-center">
+                    <input type="radio" name="regyearlevels" value="1st" class="h-4 w-4 text-msu-main-color focus:ring-msu-main-color">
+                    <span class="ml-2 text-sm text-gray-700">1st</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input type="radio" name="regyearlevels" value="2nd" class="h-4 w-4 text-msu-main-color focus:ring-msu-main-color">
+                    <span class="ml-2 text-sm text-gray-700">2nd</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input type="radio" name="regyearlevels" value="3rd" class="h-4 w-4 text-msu-main-color focus:ring-msu-main-color">
+                    <span class="ml-2 text-sm text-gray-700">3rd</span>
+                  </label>
+                  <label class="flex items-center">
+                    <input type="radio" name="regyearlevels" value="4th" class="h-4 w-4 text-msu-main-color focus:ring-msu-main-color">
+                    <span class="ml-2 text-sm text-gray-700">4th</span>
+                  </label>
                 </div>
               </div>
 
-              <div class="p-6 sm:p-8">
-                <form id="studentSurveyForm"  class="space-y-8">
-                  <!-- Student Information -->
-                  <div class="grid md:grid-cols-2 gap-6">
-                    <div class="form-group">
-                      <label class="block text-sm font-medium text-gray-700 mb-2">
-                        Year Level <span class="text-msu-maroon">*</span>
-                      </label>
-                      <div class="grid grid-cols-4 gap-2">
-                        <label class="flex items-center">
-                          <input type="radio" name="yearlevel" value="1st" class="h-4 w-4 text-msu-main-color focus:ring-msu-main-color">
-                          <span class="ml-2 text-sm text-gray-700">1st</span>
-                        </label>
-                        <label class="flex items-center">
-                          <input type="radio" name="yearlevel" value="2nd" class="h-4 w-4 text-msu-main-color focus:ring-msu-main-color">
-                          <span class="ml-2 text-sm text-gray-700">2nd</span>
-                        </label>
-                        <label class="flex items-center">
-                          <input type="radio" name="yearlevel" value="3rd" class="h-4 w-4 text-msu-main-color focus:ring-msu-main-color">
-                          <span class="ml-2 text-sm text-gray-700">3rd</span>
-                        </label>
-                        <label class="flex items-center">
-                          <input type="radio" name="yearlevel" value="4th" class="h-4 w-4 text-msu-main-color focus:ring-msu-main-color">
-                          <span class="ml-2 text-sm text-gray-700">4th</span>
-                        </label>
+              <div class="form-group">
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  Course <span class="text-msu-maroon">*</span>
+                </label>
+                <input type="text" name="regcourses" class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-msu-main-color focus:border-msu-main-color" placeholder="Enter your course" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="block text-sm font-medium text-gray-700 mb-2">
+                Student Number <span class="text-msu-maroon">*</span>
+              </label>
+              <input type="text" name="regstudids" class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-msu-main-color focus:border-msu-main-color" placeholder="e.g. 2023-12345" required>
+            </div>
+
+            <!-- Reference Code Field -->
+            <div class="form-group">
+              <label class="block text-sm font-medium text-gray-700 mb-2">
+                Reference Code <span class="text-msu-maroon">*</span>
+              </label>
+              <div class="flex items-center">
+                <input 
+                  type="text" 
+                  name="references" 
+                  id="regreferenceCodeInputs"
+                  class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-msu-main-color focus:border-msu-main-color bg-gray-100 font-mono" 
+                  placeholder="Will be generated automatically" 
+                  readonly
+                  required
+                />
+                <button 
+                  type="button" 
+                  id="regcopyReferenceCodeBtns"
+                  class="ml-2 p-2 text-gray-500 hover:text-msu-main-color focus:outline-none"
+                  title="Copy to clipboard"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+                  </svg>
+                </button>
+              </div>
+              <p class="mt-1 text-xs text-gray-500">This unique code identifies your submission</p>
+            </div>
+
+            <!-- Introductory Message -->
+            <div class="bg-gray-50 p-4 rounded-lg">
+              <p class="text-sm text-gray-600">
+                Dear Student,<br><br>
+                As a valuable member of the university, we would like to ask your opinion about the 
+                frontline services you have received and experienced here on campus during the School Year 
+                2023-2024.<br><br>
+                Your answer will provide us valuable inputs to serve you better and to make sure we meet 
+                your expectations. Please check the number that corresponds to your level of assessment.
+              </p>
+            </div>
+
+            <!-- Service Sections -->
+            {[
+              {
+                title: "Library Services",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h8m-8 4h5M17 14a2 2 0 100-4 2 2 0 000 4z" />
+                        <circle cx="17" cy="17" r="2" stroke="currentColor" stroke-width="2" fill="none"/>
+                      </svg>`,
+                questions: [
+                  { 
+                    text: "1. The admission staff responds to questions and concerns in a timely manner.", 
+                    entry: "entry.1132405313"
+                  },
+                  { 
+                    text: "2. The admissions policies and procedures are posted in a clear and systematic manner in bulletin boards.", 
+                    entry: "entry.470748009"
+                  },
+                  // Add more questions as needed
+                ],
+                commentsEntry: "entry.1263059269",
+                suggestionsEntry: "entry.415098962"
+              },
+              {
+                title: "Guidance Services",
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                      </svg>`,
+                questions: [
+                  { 
+                    text: "1. The guidance staff are approachable and accommodating.", 
+                    entry: "entry.987654321"
+                  },
+                  // Add more questions as needed
+                ],
+                commentsEntry: "entry.987654322",
+                suggestionsEntry: "entry.987654323"
+              }
+              // Add more services as needed
+            ].map((servicereg, serviceIndex) => (
+              <div class="service-section">
+                <div class="service-card">
+                  <label class="service-card-header">
+                    <input type="radio" name="selected-service" class="service-card-checkbox" value={servicereg.title.toLowerCase().replace(' ', '-')}>
+                    <div class="service-card-icon" set:html={servicereg.icon}></div>
+                    <div class="service-card-title">{servicereg.title}</div>
+                  </label>
+                  
+                  <div class="service-questions">
+                    <div class="bg-gray-50 p-3 rounded-lg mb-4">
+                      <div class="flex items-center justify-between text-xs font-medium text-gray-500">
+                        <span>1 (Poor)</span>
+                        <span>2 (Fair)</span>
+                        <span>3 (Satisfactory)</span>
+                        <span>4 (Very Satisfactory)</span>
+                        <span>5 (Excellent)</span>
                       </div>
                     </div>
-
-                    <div class="form-group">
-                      <label class="block text-sm font-medium text-gray-700 mb-2">
-                        Course <span class="text-msu-maroon">*</span>
-                      </label>
-                      <input type="text" name="course" class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-msu-main-color focus:border-msu-main-color" placeholder="Enter your course" required>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                      Student Number <span class="text-msu-maroon">*</span>
-                    </label>
-                    <input type="text" name="studid" class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-msu-main-color focus:border-msu-main-color" placeholder="e.g. 2023-12345" required>
-                  </div>
-
-                <!-- Add this right after the Student Number field in your form -->
-                  <div class="form-group">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                      Reference Code <span class="text-msu-maroon">*</span>
-                    </label>
-                    <div class="flex items-center">
-                      <input 
-                        type="text" 
-                        name="reference" 
-                        id="referenceCodeInputs"
-                        class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-msu-main-color focus:border-msu-main-color bg-gray-100 font-mono" 
-                        placeholder="Will be generated automatically" 
-                        readonly
-                        required
-                      />
-                      <button 
-                        type="button" 
-                        id="copyReferenceCodeBtnregs"
-                        class="ml-2 p-2 text-gray-500 hover:text-msu-main-color focus:outline-none"
-                        title="Copy to clipboard"
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                        </svg>
-                      </button>
-                    </div>
-                    <p class="mt-1 text-xs text-gray-500">This unique code identifies your submission</p>
-                  </div>
-
-                  <!-- Introductory Message -->
-                  <div class="bg-gray-50 p-4 rounded-lg">
-                    <p class="text-sm text-gray-600">
-                      Dear Student,<br><br>
-                      As a valuable member of the university, we would like to ask your opinion about the 
-                      frontline services you have received and experienced here on campus during the School Year 
-                      2023-2024.<br><br>
-                      Your answer will provide us valuable inputs to serve you better and to make sure we meet 
-                      your expectations. Please check the number that corresponds to your level of assessment.
-                    </p>
-                  </div>
-
-                     <!-- Service Sections -->
-                          {[
-                    {
-                      title: "Admission Services",
-                      icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h8m-8 4h5M17 14a2 2 0 100-4 2 2 0 000 4z" />
-                              <circle cx="17" cy="17" r="2" stroke="currentColor" stroke-width="2" fill="none"/>
-                            </svg>`,
-                      questions: [
-                        { 
-                          text: "1. The admission staff responds to questions and concerns in a timely manner. ", 
-                          entry: "entry.1132405313"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "2. The admissions policies and procedures are posted in a clear and systematic manner in bulletin boards.   ", 
-                          entry: "entry.470748009"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "3. The website used for registration is efficient and user-friendly.    ", 
-                          entry: "entry.1461034551"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "4. Efficiency and Orderliness of the procedures are strictly observed.    ", 
-                          entry: "entry.409425690"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "5. The application process was student friendly.     ", 
-                          entry: "entry.190100243"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "6. My interaction with the Admissions office played a positive part in my decision to attend MSU-TCTO.      ", 
-                          entry: "entry.1065385484"  // Use the exact Google Form field name
-                        },
-                         { 
-                          text: "7. I received my notice of acceptance in a timely manner.      ", 
-                          entry: "entry.1053564623"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "8. The selection of programs is well-communicated with the applicants before the final registration.       ", 
-                          entry: "entry.1858192816"  // Use the exact Google Form field name
-                        },
-                       { 
-                          text: "9. The Admissions office is accessible.        ", 
-                          entry: "entry.1930952706"  // Use the exact Google Form field name
-                        },
-                                               { 
-                          text: "10. Updates from the social media page of the office are timely and relevant.        ", 
-                          entry: "entry.461394408"  // Use the exact Google Form field name
-                        },
-                        
-                        
-                        
-                        // More questions with their specific entry names
-                      ],
-                      commentsEntry: "entry.1263059269",
-                      suggestionsEntry: "entry.415098962"
-                    },
-
-                      {
-                      title: "Guidance Services",
-                      icon: ` <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
-                              </svg>`,
-                      questions: [
-                        { 
-                          text: "1. The counselor seemed well-trained and skilled.  ", 
-                          entry: "entry.1908417319"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "2. The waiting area is comfortable and well-ventilated.   ", 
-                          entry: "entry.182997037"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "3. The guidance and counseling procedures are well communicated.     ", 
-                          entry: "entry.877735723"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "4. The counselor and the staff are courteous and prompt.    ", 
-                          entry: "entry.1747292146"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "5. The counseling area is well-lit, comfortable and provides privacy.      ", 
-                          entry: "entry.139211950"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "6. My concerns have been improved because of the services provided.       ", 
-                          entry: "entry.739530064"  // Use the exact Google Form field name
-                        },
-                         { 
-                          text: "7. My counselor understood my problems and concerns.      ", 
-                          entry: "entry.1625956601"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "8. I was treated considerately and respectfully by the Counseling staff.        ", 
-                          entry: "entry.1825320977"  // Use the exact Google Form field name
-                        },
-                       { 
-                          text: "9. I would recommend the service to my friends.        ", 
-                          entry: "entry.139972847"  // Use the exact Google Form field name
-                        },
-                                               { 
-                          text: "10. Referral services are available and communicated well.        ", 
-                          entry: "entry.1440470180"  // Use the exact Google Form field name
-                        },
-                        
-                        
-                        
-                        // More questions with their specific entry names
-                      ],
-                      commentsEntry: "entry.953509473",
-                      suggestionsEntry: "entry.1036661815"
-                    },
-
-                         {
-                      title: "Health Services",
-                      icon: `<svg 
-                            xmlns="http://www.w3.org/2000/svg" 
-                            viewBox="0 0 24 24" 
-                            fill="none" 
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          >
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                            <path d="M12 8v4M8 10h8"/>
-                          </svg>`,
-                      questions: [
-                        { 
-                          text: "1. The infirmary personnel are available and efficient.   ", 
-                          entry: "entry.1230310625"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "2. The medical and dental programs offered are clearly posted.    ", 
-                          entry: "entry.557952169"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "3. The physician’s schedule is posted.      ", 
-                          entry: "entry.1574762898"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "4. The infirmary personnel assists in the orientation of the procedures and reminders before each session.     ", 
-                          entry: "entry.952340677"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "5. Medicines and medical kits are readily available.      ", 
-                          entry: "entry.219828953"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "6. The patient rooms are clean and well-maintained.       ", 
-                          entry: "entry.1665306060"  // Use the exact Google Form field name
-                        },
-                         { 
-                          text: "7. The physician’s diagnosis is precise and reliable.       ", 
-                          entry: "entry.1700661155"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "8. The issuance of medical certificates is systematic and hassle-free.       ", 
-                          entry: "entry.1590571010"  // Use the exact Google Form field name
-                        },
-                       { 
-                          text: "9. Client profiling is done in a courteous and prompt manner.          ", 
-                          entry: "entry.45416038"  // Use the exact Google Form field name
-                        },
-                                               { 
-                          text: "10. The infirmary offers referral services to distinguished health clinics around the area.          ", 
-                          entry: "entry.883745635"  // Use the exact Google Form field name
-                        },
-                        
-                        
-                        
-                        // More questions with their specific entry names
-                      ],
-                      commentsEntry: "entry.528669148",
-                      suggestionsEntry: "entry.1872232086"
-                    },
-
-
-                            {
-                      title: "Facilities Services",
-                      icon: `<svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="1.5"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          >
-                            <path d="M3 21h18M5 21V10h14v11M9 21v-6h6v6"/>
-                            <path d="M19 21V7l-7-5-7 5v14"/>
-                            <path d="M9 10h1m5 0h1m-7 4h1m5 0h1m-7 4h1m5 0h1"/>
-                          </svg>`,
-                      questions: [
-                        { 
-                          text: "1. The buildings in the campus are logically organized and easy to find.     ", 
-                          entry: "entry.219780789"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "2. The buildings are equipped with fire extinguishers and emergency exits.    ", 
-                          entry: "entry.1409199805"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "3. The comfort rooms are neat and clean.      ", 
-                          entry: "entry.594250787"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "4. The free wi-fi connection is easily accessed and provides an active internet connection.      ", 
-                          entry: "entry.1062600403"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "5. The cafeteria is spacious and well-ventilated.      ", 
-                          entry: "entry.1633357096"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "6. The offices present in the campus are well-labeled and manned.        ", 
-                          entry: "entry.1291044789"  // Use the exact Google Form field name
-                        },
-                         { 
-                          text: "7. The campus premises are free from clutters and other debris that may cause hazards.        ", 
-                          entry: "entry.1402911528"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "8. Student Lounges are available and comfortable.        ", 
-                          entry: "entry.207769118"  // Use the exact Google Form field name
-                        },
-                       { 
-                          text: "9. The gymnasium is well-maintained and can accommodate large groups of people without causing too much crowding.          ", 
-                          entry: "entry.1269709801"  // Use the exact Google Form field name
-                        },
-                                               { 
-                          text: "10. The covered pathways provide shade from the sun and shield from the rain.          ", 
-                          entry: "entry.424815213"  // Use the exact Google Form field name
-                        },
-                        
-                        
-                        
-                        // More questions with their specific entry names
-                      ],
-                      commentsEntry: "entry.1125677920",
-                      suggestionsEntry: "entry.1974052259"
-                    },
-
-
                     
-                            {
-                      title: "Registrar Services",
-                      icon: `<svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="1.5"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                            >
-                              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                              <polyline points="14 2 14 8 20 8"/>
-                              <line x1="9" y1="15" x2="15" y2="15"/>
-                              <line x1="12" y1="12" x2="12" y2="18"/>
-                            </svg>`,
-                      questions: [
-                        { 
-                          text: "1. The Registrar’s office staff members are respectful and polite.   ", 
-                          entry: "entry.873793740"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "2. The Registrar’s Office staff members displayed professionalism during interactions.     ", 
-                          entry: "entry.790874569"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "3. The service was done in a reasonable amount of time.       ", 
-                          entry: "entry.417482068"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "4. The issues raised to the office were addressed and they provided the necessary steps needed for the resolution and/or update until the request was fulfilled.       ", 
-                          entry: "entry.615257091"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "5. Step-by-Step procedures are visible at the most conspicuous places.      ", 
-                          entry: "entry.171005161"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "6. The physical facilities offered are adequate and appealing.        ", 
-                          entry: "entry.1033057264"  // Use the exact Google Form field name
-                        },
-                         { 
-                          text: "7. There is quality completeness and accuracy of document/s, service/s, information requested..        ", 
-                          entry: "entry.1069805834"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "8. The office has operating hours convenient to customers.         ", 
-                          entry: "entry.1887940505"  // Use the exact Google Form field name
-                        },
-                       { 
-                          text: "9. The staff members answered inquiries correctly the first time.           ", 
-                          entry: "entry.1064475469"  // Use the exact Google Form field name
-                        },
-                                               { 
-                          text: "10. The waiting lounge is comfortable for the customers.           ", 
-                          entry: "entry.2080739566"  // Use the exact Google Form field name
-                        },
-                        
-                        
-                        
-                        // More questions with their specific entry names
-                      ],
-                      commentsEntry: "entry.1305715067",
-                      suggestionsEntry: "entry.181941643"
-                    },
-
-
-
-                             {
-                      title: "Campus Orientation Services",
-                      icon: `<svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="1.5"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                            >
-                              <path d="M2 22h20"/>
-                              <path d="M3 10h18v12H3z"/>
-                              <path d="M7 10V6a5 5 0 0 1 10 0v4"/>
-                              <path d="M12 16v2"/>
-                              <circle cx="12" cy="12" r="1"/>
-                              <path d="M12 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                            </svg>`,
-                      questions: [
-                        { 
-                          text: "1. The orientation program is well-organized and interactive.    ", 
-                          entry: "entry.1124864109"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "2. The program facilitators are knowledgeable and respectful.      ", 
-                          entry: "entry.1788790174"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "3. The topics covered helped to better understand the goals of the university.        ", 
-                          entry: "entry.1155650238"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "4. The orientation materials provided helpful information about the campus resources.        ", 
-                          entry: "entry.1127478906"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "5. The campus tour follows the designated routes in accordance with the provided schedule.      ", 
-                          entry: "entry.1368534626"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "6. The orientation program is timely and relevant.          ", 
-                          entry: "entry.1788732301"  // Use the exact Google Form field name
-                        },
-                         { 
-                          text: "7. The program facilitators responded to questions kindly.       ", 
-                          entry: "entry.1679863227"  // Use the exact Google Form field name
-                        },
-                        { 
-                          text: "8. The safety and comfort of the students are ensured during the entire duration of the program.          ", 
-                          entry: "entry.1075065667"  // Use the exact Google Form field name
-                        },
-                       { 
-                          text: "9. The refreshments provided during the program are satisfying.           ", 
-                          entry: "entry.2100687734"  // Use the exact Google Form field name
-                        },
-                                               { 
-                          text: "10. The orientation increases the confidence that MSU-TCTO is the right choice for a university.           ", 
-                          entry: "entry.1382450669"  // Use the exact Google Form field name
-                        },
-                        
-                        
-                        
-                        // More questions with their specific entry names
-                      ],
-                      commentsEntry: "entry.1744293880",
-                      suggestionsEntry: "entry.796382935"
-                    },
-
-
-
-
-
-
-
-                    
-
-
-                    
-                    // More services
-                  ].map((service, serviceIndex) => (
-                    <div class="service-section">
-                      <div class="service-card">
-                        <label class="service-card-header">
-                          <input type="radio" name="selected-service" class="service-card-checkbox" value={service.title.toLowerCase().replace(' ', '-')}>
-                          <div class="service-card-icon" set:html={service.icon}></div>
-                          <div class="service-card-title">{service.title}</div>
+                    {servicereg.questions.map((question, index) => (
+                      <div class="form-group mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                          {index + 1}. {question.text}
                         </label>
-                        
-                        <div class="service-questions">
-                          <div class="bg-gray-50 p-3 rounded-lg mb-4">
-                            <div class="flex items-center justify-between text-xs font-medium text-gray-500">
-                              <span>1 (Poor)</span>
-                              <span>2 (Fair)</span>
-                              <span>3 (Satisfactory)</span>
-                              <span>4 (Very Satisfactory)</span>
-                              <span>5 (Excellent)</span>
-                            </div>
-                          </div>
-                          
-                          {service.questions.map((question, index) => (
-                            <div class="form-group mb-6">
-                              <label class="block text-sm font-medium text-gray-700 mb-2">
-                                {index + 1}. {question.text}
-                              </label>
-                              <div class="flex items-center justify-between">
-                                {[1, 2, 3, 4, 5].map((rating) => (
-                                  <label class="flex flex-col items-center">
-                                    <input 
-                                      type="radio" 
-                                      name={question.entry}  // Use the specific entry name here
-                                      value={rating}
-                                      required
-                                      class="h-5 w-5 text-msu-main-color focus:ring-msu-main-color border-gray-300"
-                                    >
-                                    <span class="mt-1 text-xs text-gray-500">
-                                      {rating === 1 ? 'Poor' : 
-                                      rating === 2 ? 'Fair' : 
-                                      rating === 3 ? 'Good' : 
-                                      rating === 4 ? 'Very Good' : 'Excellent'}
-                                    </span>
-                                  </label>
-                                ))}
-                              </div>
-                            </div>
+                        <div class="flex items-center justify-between">
+                          {[1, 2, 3, 4, 5].map((rating) => (
+                            <label class="flex flex-col items-center">
+                              <input 
+                                type="radio" 
+                                name={question.entry}
+                                value={rating}
+                                required
+                                class="h-5 w-5 text-msu-main-color focus:ring-msu-main-color border-gray-300"
+                              >
+                              <span class="mt-1 text-xs text-gray-500">
+                                {rating === 1 ? 'Poor' : 
+                                rating === 2 ? 'Fair' : 
+                                rating === 3 ? 'Good' : 
+                                rating === 4 ? 'Very Good' : 'Excellent'}
+                              </span>
+                            </label>
                           ))}
-                          
- <!-- Comments Section -->
-        <div class="pt-6 border-t border-gray-200">
-          <h4 class="text-lg font-semibold text-gray-900 mb-4">Additional Feedback</h4>
-          
-          <div class="form-group">
-            <label class="block text-sm font-medium text-gray-700 mb-2">
-              Comments
-            </label>
-            <textarea 
-              name={service.commentsEntry}
-              rows="3" 
-              class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-msu-main-color focus:border-msu-main-color" 
-              placeholder="Share your experience or suggestions..."
-            ></textarea>
-          </div>
+                        </div>
+                      </div>
+                    ))}
+                    
+                    <!-- Comments Section -->
+                    <div class="pt-6 border-t border-gray-200">
+                      <h4 class="text-lg font-semibold text-gray-900 mb-4">Additional Feedback</h4>
+                      
+                      <div class="form-group">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                          Comments
+                        </label>
+                        <textarea 
+                          name={servicereg.commentsEntry}
+                          rows="3" 
+                          class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-msu-main-color focus:border-msu-main-color" 
+                          placeholder="Share your experience or suggestions..."
+                        ></textarea>
+                      </div>
 
-          <div class="form-group">
-            <label class="block text-sm font-medium text-gray-700 mb-2">
-              Suggestions/Recommendations
-            </label>
-            <textarea 
-              name={service.suggestionsEntry}
-              rows="3" 
-              class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-msu-main-color focus:border-msu-main-color" 
-              placeholder="How can we serve you better?"
-            ></textarea>
-          </div>
+                      <div class="form-group">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                          Suggestions/Recommendations
+                        </label>
+                        <textarea 
+                          name={servicereg.suggestionsEntry}
+                          rows="3" 
+                          class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-msu-main-color focus:border-msu-main-color" 
+                          placeholder="How can we serve you better?"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+
+            <!-- Form Footer -->
+            <div class="pt-6">
+              <div class="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
+                <p class="text-sm text-gray-500">
+                  All responses are confidential and will be used for service improvement.
+                </p>
+                <button
+                  type="submit"
+                  class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-msu-main-color to-msu-maroon hover:from-msu-main-color-dark hover:to-msu-maroon-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-msu-main-color transition-all"
+                >
+                  Submit Survey
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-  </div>
-))}
-           
-                  <!-- Closing Message -->
-                  {/* <div class="bg-gray-50 p-4 rounded-lg">
-                    <p class="text-sm text-gray-600 text-center">
-                      Thank you and have a nice day!
-                    </p>
-                  </div> */}
+  </section>
+</div>
 
-                  <!-- Form Footer -->
-                  <div class="pt-6">
-                    <div class="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
-                      <p class="text-sm text-gray-500">
-                        All responses are confidential and will be used for service improvement.
-                      </p>
-                      <button
-                        type="submit"
-                        class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-msu-main-color to-msu-maroon hover:from-msu-main-color-dark hover:to-msu-maroon-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-msu-main-color transition-all"
-                      >
-                        Submit Survey
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
+<!-- Feedback Modal -->
+<div id="feedbackModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="modal-icon"></div>
+      <h3 class="modal-title"></h3>
+      <button id="modalCloseButton" class="modal-close">&times;</button>
     </div>
+    <div id="modalMessage" class="modal-body"></div>
+  </div>
+</div>
 
-
-<script is:inline>
+<script>
 document.addEventListener('DOMContentLoaded', function() {
+  // Initialize services tracking
+  const services = {
+    'Library Services': { completed: false, verified: false },
+    'Guidance Services': { completed: false, verified: false }
+    // Add more services as needed
+  };
+
   // Tab functionality
   const tabButtons = document.querySelectorAll('.tab-btn');
   const tabContents = document.querySelectorAll('.tab-content');
@@ -651,10 +307,7 @@ document.addEventListener('DOMContentLoaded', function() {
       sessionStorage.setItem('activeTab', tabId);
       
       if (tabId === 'studentreg-survey') {
-        initializeStudentSurvey();
-      } else {
-        const existingTracker = document.querySelector('.progress-tracker');
-        if (existingTracker) existingTracker.remove();
+        initializeStudentSurveyreg();
       }
     });
   });
@@ -663,48 +316,26 @@ document.addEventListener('DOMContentLoaded', function() {
   const storedTab = sessionStorage.getItem('activeTab');
   if (storedTab && document.getElementById(storedTab)) {
     document.querySelector(`.tab-btn[data-tab="${storedTab}"]`).click();
-    if (storedTab === 'studentreg-survey') {
-      initializeStudentSurvey();
-    } else {
-      const existingTracker = document.querySelector('.progress-tracker');
-      if (existingTracker) existingTracker.remove();
-    }
   } else if (tabButtons.length > 0) {
     tabButtons[0].click();
   }
 
-  // Create hidden iframe for form submission
-  const hiddenIframe = document.createElement('iframe');
-  hiddenIframe.name = 'hidden_iframe';
-  hiddenIframe.style.display = 'none';
-  document.body.appendChild(hiddenIframe);
-
-  // Student survey specific functionality
-  function initializeStudentSurvey() {
-    // Initialize services tracking
-    const services = {
-      'Admission Services': { completed: false, verified: false },
-      'Guidance Services': { completed: false, verified: false },
-      'Health Services': { completed: false, verified: false },
-      'Facilities Services': { completed: false, verified: false },
-      'Registrar Services': { completed: false, verified: false },
-      'Campus Orientation Services': { completed: false, verified: false }
-    };
-
+  // Initialize student survey
+  function initializeStudentSurveyreg() {
     // Check internet connectivity
-    function checkInternetConnections() {
+    function checkInternetConnectionreg() {
       return navigator.onLine;
     }
 
     // Initialize verification status
-    function initializesVerificationStatus() {
+    function initializeVerificationStatusreg() {
       document.querySelectorAll('.service-card').forEach(card => {
         const title = card.querySelector('.service-card-title').textContent.trim();
+        // Initialize service if not already in services object
+        if (!services[title]) {
+          services[title] = { completed: false, verified: false };
+        }
         updateVerificationStatus(card, services[title]);
-        
-        const checkbox = card.querySelector('.service-card-checkbox');
-        if (checkbox) checkbox.checked = false;
-        card.classList.remove('selected');
       });
     }
 
@@ -749,6 +380,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Service card selection and validation
     document.querySelectorAll('.service-card').forEach(card => {
       const checkbox = card.querySelector('.service-card-checkbox');
+      const title = card.querySelector('.service-card-title').textContent.trim();
+      
+      // Initialize service if not already in services object
+      if (!services[title]) {
+        services[title] = { completed: false, verified: false };
+      }
       
       card.addEventListener('click', function(e) {
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.closest('.form-group')) {
@@ -791,7 +428,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Create progress tracker
-    function createsProgressTracker() {
+    function createProgressTracker() {
       const existingTracker = document.querySelector('.progress-tracker');
       if (existingTracker) existingTracker.remove();
       
@@ -910,7 +547,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Generate reference code
-    function generateReferenceCodes() {
+    function generateReferenceCode() {
       const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
       let result = '';
       for (let i = 0; i < 8; i++) {
@@ -920,241 +557,78 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Setup reference code generation
-    function setupsReferenceCodeGenerations() {
-      const studentNumberInput = document.querySelector('input[name="studid"]');
-      const courseInput = document.querySelector('input[name="course"]');
-      const yearLevelInputs = document.querySelectorAll('input[name="yearlevel"]');
-      const referenceCodeInputs = document.getElementById('referenceCodeInputs');
-      const copyBtns = document.getElementById('copyReferenceCodeBtnregs');
+    function setupReferenceCodeGenerationreg() {
+      const regstudentNumberInput = document.querySelector('input[name="regstudids"]');
+      const regcourseInput = document.querySelector('input[name="regcourses"]');
+      const regyearLevelInputs = document.querySelectorAll('input[name="regyearlevels"]');
+      const regreferenceCodeInput = document.getElementById('regreferenceCodeInputs');
+      const regcopyBtn = document.getElementById('regcopyReferenceCodeBtns');
       
-      function updateReferenceCodes() {
-        const studentNumbers = studentNumberInput?.value.trim();
-        const courses = courseInput?.value.trim();
-        const yearLevels = document.querySelector('input[name="yearlevel"]:checked')?.value;
+      function regupdateReferenceCode() {
+        const regstudentNumber = regstudentNumberInput?.value.trim();
+        const regcourse = regcourseInput?.value.trim();
+        let regyearLevel = '';
         
-        if (studentNumbers && courses && yearLevels) {
-          const code = generateReferenceCodes();
-          referenceCodeInputs.value = code;
-          referenceCodeInputs.classList.remove('bg-gray-100');
-          referenceCodeInputs.classList.add('bg-yellow-100', 'border-yellow-300');
+        // Find the checked year level radio button
+        regyearLevelInputs.forEach(input => {
+          if (input.checked) {
+            regyearLevel = input.value;
+          }
+        });
+        
+        if (regstudentNumber && regcourse && regyearLevel) {
+          const code = generateReferenceCode();
+          regreferenceCodeInput.value = code;
+          regreferenceCodeInput.classList.remove('bg-gray-100');
+          regreferenceCodeInput.classList.add('bg-yellow-100', 'border-yellow-300');
         } else {
-          referenceCodeInputs.value = '';
-          referenceCodeInputs.classList.add('bg-gray-100');
-          referenceCodeInputs.classList.remove('bg-yellow-100', 'border-yellow-300');
+          regreferenceCodeInput.value = '';
+          regreferenceCodeInput.classList.add('bg-gray-100');
+          regreferenceCodeInput.classList.remove('bg-yellow-100', 'border-yellow-300');
         }
       }
       
-      if (studentNumberInput) studentNumberInput.addEventListener('input', updateReferenceCodes);
-      if (courseInput) courseInput.addEventListener('input', updateReferenceCodes);
-      if (yearLevelInputs) {
-        yearLevelInputs.forEach(input => {
-          input.addEventListener('change', updateReferenceCodes);
+      if (regstudentNumberInput) regstudentNumberInput.addEventListener('input', regupdateReferenceCode);
+      if (regcourseInput) regcourseInput.addEventListener('input', regupdateReferenceCode);
+      if (regyearLevelInputs) {
+        regyearLevelInputs.forEach(input => {
+          input.addEventListener('change', regupdateReferenceCode);
         });
       }
       
-      if (copyBtns) {
-        copyBtns.addEventListener('click', () => {
-          if (referenceCodeInputs.value) {
-            referenceCodeInputs.select();
+      if (regcopyBtn) {
+        regcopyBtn.addEventListener('click', () => {
+          if (regreferenceCodeInput.value) {
+            regreferenceCodeInput.select();
             document.execCommand('copy');
             
-            const originalHtml = copyBtns.innerHTML;
-            copyBtns.innerHTML = `
+            const originalHtml = regcopyBtn.innerHTML;
+            regcopyBtn.innerHTML = `
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
             `;
             
             setTimeout(() => {
-              copyBtns.innerHTML = originalHtml;
+              regcopyBtn.innerHTML = originalHtml;
             }, 2000);
           }
         });
       }
       
       // Initial update
-      updateReferenceCodes();
+      regupdateReferenceCode();
     }
 
-    // Show submission success with details
-  function showSubmissionSuccess(data) {
-  const modal = document.getElementById('feedbackModal');
-  const modalMessage = document.getElementById('modalMessage');
-  const modalIcon = modal.querySelector('.modal-icon');
-  const modalTitle = modal.querySelector('.modal-title');
-  
-  modalTitle.textContent = 'Submission Successful';
-  modalIcon.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-    </svg>
-  `;
-  
-  modalMessage.innerHTML = `
-    <div class="space-y-4">
-      <div id="receiptContent" class="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
-        <div class="flex justify-between items-center mb-4">
-          <h3 class="font-bold text-lg text-msu-main-color">Survey Submission Receipt</h3>
-          <div class="flex items-center space-x-2">
-            <span class="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Verified</span>
-            <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">${new Date().toLocaleDateString()}</span>
-          </div>
-        </div>
-        <div class="grid grid-cols-1 gap-3">
-          <div>
-            <p class="text-sm text-gray-500">Reference Code</p>
-            <p class="font-mono font-bold text-lg">${data.referenceCode}</p>
-          </div>
-          <div>
-            <p class="text-sm text-gray-500">Student ID</p>
-            <p class="font-medium">${data.studentId}</p>
-          </div>
-          <div>
-            <p class="text-sm text-gray-500">Course</p>
-            <p class="font-medium">${data.courses}</p>
-          </div>
-          <div>
-            <p class="text-sm text-gray-500">Year Level</p>
-            <p class="font-medium">${data.yearLevels}</p>
-          </div>
-          <div>
-            <p class="text-sm text-gray-500">Submission Date</p>
-            <p class="font-medium">${new Date().toLocaleString()}</p>
-          </div>
-        </div>
-        <div class="mt-4 pt-4 border-t border-gray-200">
-          <div class="flex items-center justify-center space-x-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-msu-main-color" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-            </svg>
-            <span class="text-sm text-gray-600">Thank you for your feedback submission</span>
-          </div>
-        </div>
-      </div>
-      
-      <div class="bg-blue-50 rounded-lg p-4 border border-blue-100">
-        <p class="text-sm text-blue-700 mb-3">Please note your reference code for future inquiries.</p>
-        <button id="downloadReceiptBtn" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-msu-main-color to-msu-maroon hover:from-msu-main-color-dark hover:to-msu-maroon-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-msu-main-color">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-          </svg>
-          Download Receipt as Image
-        </button>
-      </div>
-    </div>
-  `;
-  
-  modal.classList.add('active');
-  
-  document.getElementById('modalCloseButton').onclick = function() {
-    modal.classList.remove('active');
-  };
-  
-  modal.onclick = function(e) {
-    if (e.target === modal) {
-      modal.classList.remove('active');
-    }
-  };
-
-  // Add event listener for download button
-  document.getElementById('downloadReceiptBtn')?.addEventListener('click', function() {
-    downloadReceiptAsImage();
-  });
-
-  // Function to download the receipt as image
-  async function downloadReceiptAsImage() {
-    const downloadBtn = document.getElementById('downloadReceiptBtn');
-    const originalBtnContent = downloadBtn.innerHTML;
-    
-    // Show loading state on button
-    downloadBtn.innerHTML = `
-      <svg class="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-      </svg>
-      Generating Image...
-    `;
-    downloadBtn.disabled = true;
-
-    try {
-      // Use html2canvas library to convert the div to an image
-      const html2canvas = await loadHtml2Canvas();
-      const receiptElement = document.getElementById('receiptContent');
-      
-      // Add some temporary styles for better screenshot
-      receiptElement.style.boxShadow = 'none';
-      receiptElement.style.border = '1px solid #e5e7eb';
-      receiptElement.style.borderRadius = '0.5rem';
-      receiptElement.style.padding = '1.5rem';
-      
-      const canvas = await html2canvas(receiptElement, {
-        scale: 2, // Higher quality
-        logging: false,
-        useCORS: true,
-        allowTaint: true,
-        backgroundColor: '#ffffff'
-      });
-      
-      // Create download link
-      const link = document.createElement('a');
-      link.download = `MSU-Survey-Receipt-${data.referenceCode}.jpg`;
-      link.href = canvas.toDataURL('image/jpeg', 0.9);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      
-      // Show success feedback
-      const modalIcon = document.querySelector('#feedbackModal .modal-icon');
-      modalIcon.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-        </svg>
-      `;
-    } catch (error) {
-      console.error('Error generating image:', error);
-      // Show error feedback
-      const modalIcon = document.querySelector('#feedbackModal .modal-icon');
-      modalIcon.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-        </svg>
-      `;
-    } finally {
-      // Restore button state
-      downloadBtn.innerHTML = originalBtnContent;
-      downloadBtn.disabled = false;
-    }
-  }
-
-  // Function to dynamically load html2canvas
-  function loadHtml2Canvas() {
-    return new Promise((resolve, reject) => {
-      if (window.html2canvas) {
-        resolve(window.html2canvas);
-        return;
-      }
-      
-      const script = document.createElement('script');
-      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
-      script.onload = () => resolve(window.html2canvas);
-      script.onerror = reject;
-      document.head.appendChild(script);
-    });
-  }
-}
-
-    // Form submission handler with hidden iframe
-    const surveyForm = document.querySelector('#studentSurveyForm');
+    // Form submission handler
+    const surveyForm = document.getElementById('studentSurveyForm');
     if (surveyForm) {
       let isSubmitting = false;
       
       surveyForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        // Prevent multiple submissions
-        if (isSubmitting) {
-          return;
-        }
+        if (isSubmitting) return;
         isSubmitting = true;
         
         // Create and show loader
@@ -1176,7 +650,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Check internet connection
-        if (!checkInternetConnections()) {
+        if (!checkInternetConnectionreg()) {
           loader.remove();
           isSubmitting = false;
           if (submitButton) {
@@ -1188,11 +662,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Validate student info
-        const yearLevels = document.querySelector('input[name="yearlevel"]:checked');
-        const courses = document.querySelector('input[name="course"]');
-        const studentNumbers = document.querySelector('input[name="studid"]');
+        const regyearLevel = document.querySelector('input[name="regyearlevels"]:checked');
+        const regcourse = document.querySelector('input[name="regcourses"]');
+        const regstudentNumber = document.querySelector('input[name="regstudids"]');
         
-        if (!yearLevels) {
+        if (!regyearLevel) {
           loader.remove();
           isSubmitting = false;
           if (submitButton) {
@@ -1203,8 +677,8 @@ document.addEventListener('DOMContentLoaded', function() {
           return;
         }
         
-        if (!courses || !courses.value.trim()) {
-          courses.classList.add('border-red-500');
+        if (!regcourse || !regcourse.value.trim()) {
+          regcourse.classList.add('border-red-500');
           loader.remove();
           isSubmitting = false;
           if (submitButton) {
@@ -1215,8 +689,8 @@ document.addEventListener('DOMContentLoaded', function() {
           return;
         }
         
-        if (!studentNumbers || !studentNumbers.value.trim()) {
-          studentNumbers.classList.add('border-red-500');
+        if (!regstudentNumber || !regstudentNumber.value.trim()) {
+          regstudentNumber.classList.add('border-red-500');
           loader.remove();
           isSubmitting = false;
           if (submitButton) {
@@ -1257,6 +731,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Prepare form data
         const formData = new FormData(surveyForm);
         
+        // Create hidden iframe for form submission
+        const hiddenIframe = document.createElement('iframe');
+        hiddenIframe.name = 'hidden_iframe';
+        hiddenIframe.style.display = 'none';
+        document.body.appendChild(hiddenIframe);
+        
         // Create hidden form for submission
         const hiddenForm = document.createElement('form');
         hiddenForm.style.display = 'none';
@@ -1284,10 +764,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Show success message with details
         const studentData = {
-          referenceCode: document.getElementById('referenceCodeInputs').value,
-          studentId: studentNumbers.value,
-          courses: courses.value,
-          yearLevels: yearLevels.value
+          regreferenceCode: document.getElementById('regreferenceCodeInputs').value,
+          regstudentId: regstudentNumber.value,
+          regcourse: regcourse.value,
+          regyearLevel: regyearLevel.value
         };
         
         // Remove loader before showing success message
@@ -1300,12 +780,13 @@ document.addEventListener('DOMContentLoaded', function() {
         // Remove the hidden form after submission
         setTimeout(() => {
           hiddenForm.remove();
+          hiddenIframe.remove();
         }, 1000);
         
         // Reset form after successful submission
         setTimeout(() => {
           surveyForm.reset();
-          initializesVerificationStatus();
+          initializeVerificationStatusreg();
           updateProgressTracker();
           isSubmitting = false;
           if (submitButton) {
@@ -1316,52 +797,220 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
 
-    // Initialize the student survey
-    initializesVerificationStatus();
-    createsProgressTracker();
-    setupsReferenceCodeGenerations();
-  }
-
-  // Modal control
-  function showModal(type, message) {
-    const modal = document.getElementById('feedbackModal');
-    const modalMessage = document.getElementById('modalMessage');
-    const modalIcon = modal.querySelector('.modal-icon');
-    const modalTitle = modal.querySelector('.modal-title');
-    
-    modalMessage.innerHTML = message;
-    
-    if (type === 'success') {
-      modal.classList.remove('modal-error');
-      modal.classList.add('modal-success');
-      modalTitle.textContent = 'Success!';
+    // Show submission success with details
+    function showSubmissionSuccess(data) {
+      const modal = document.getElementById('feedbackModal');
+      const modalMessage = document.getElementById('modalMessage');
+      const modalIcon = modal.querySelector('.modal-icon');
+      const modalTitle = modal.querySelector('.modal-title');
+      
+      modalTitle.textContent = 'Submission Successful';
       modalIcon.innerHTML = `
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
         </svg>
       `;
-    } else {
-      modal.classList.remove('modal-success');
-      modal.classList.add('modal-error');
-      modalTitle.textContent = 'Attention Required';
-      modalIcon.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-        </svg>
+      
+      modalMessage.innerHTML = `
+        <div class="space-y-4">
+          <div id="receiptContent" class="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="font-bold text-lg text-msu-main-color">Survey Submission Receipt</h3>
+              <div class="flex items-center space-x-2">
+                <span class="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">Verified</span>
+                <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">${new Date().toLocaleDateString()}</span>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 gap-3">
+              <div>
+                <p class="text-sm text-gray-500">Reference Code</p>
+                <p class="font-mono font-bold text-lg">${data.regreferenceCode}</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Student ID</p>
+                <p class="font-medium">${data.regstudentId}</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Course</p>
+                <p class="font-medium">${data.regcourse}</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Year Level</p>
+                <p class="font-medium">${data.regyearLevel}</p>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Submission Date</p>
+                <p class="font-medium">${new Date().toLocaleString()}</p>
+              </div>
+            </div>
+            <div class="mt-4 pt-4 border-t border-gray-200">
+              <div class="flex items-center justify-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-msu-main-color" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+                <span class="text-sm text-gray-600">Thank you for your feedback submission</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-blue-50 rounded-lg p-4 border border-blue-100">
+            <p class="text-sm text-blue-700 mb-3">Please note your reference code for future inquiries.</p>
+            <button id="downloadReceiptBtn" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-msu-main-color to-msu-maroon hover:from-msu-main-color-dark hover:to-msu-maroon-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-msu-main-color">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              Download Receipt as Image
+            </button>
+          </div>
+        </div>
       `;
-    }
-    
-    modal.classList.add('active');
-    
-    document.getElementById('modalCloseButton').onclick = function() {
-      modal.classList.remove('active');
-    };
-    
-    modal.onclick = function(e) {
-      if (e.target === modal) {
+      
+      modal.classList.add('active');
+      
+      document.getElementById('modalCloseButton').onclick = function() {
         modal.classList.remove('active');
+      };
+      
+      modal.onclick = function(e) {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+        }
+      };
+
+      // Add event listener for download button
+      document.getElementById('downloadReceiptBtn')?.addEventListener('click', function() {
+        downloadReceiptAsImage();
+      });
+
+      // Function to download the receipt as image
+      async function downloadReceiptAsImage() {
+        const downloadBtn = document.getElementById('downloadReceiptBtn');
+        const originalBtnContent = downloadBtn.innerHTML;
+        
+        // Show loading state on button
+        downloadBtn.innerHTML = `
+          <svg class="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Generating Image...
+        `;
+        downloadBtn.disabled = true;
+
+        try {
+          // Use html2canvas library to convert the div to an image
+          const html2canvas = await loadHtml2Canvas();
+          const receiptElement = document.getElementById('receiptContent');
+          
+          // Add some temporary styles for better screenshot
+          receiptElement.style.boxShadow = 'none';
+          receiptElement.style.border = '1px solid #e5e7eb';
+          receiptElement.style.borderRadius = '0.5rem';
+          receiptElement.style.padding = '1.5rem';
+          
+          const canvas = await html2canvas(receiptElement, {
+            scale: 2, // Higher quality
+            logging: false,
+            useCORS: true,
+            allowTaint: true,
+            backgroundColor: '#ffffff'
+          });
+          
+          // Create download link
+          const link = document.createElement('a');
+          link.download = `MSU-Survey-Receipt-${data.regreferenceCode}.jpg`;
+          link.href = canvas.toDataURL('image/jpeg', 0.9);
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          
+          // Show success feedback
+          const modalIcon = document.querySelector('#feedbackModal .modal-icon');
+          modalIcon.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          `;
+        } catch (error) {
+          console.error('Error generating image:', error);
+          // Show error feedback
+          const modalIcon = document.querySelector('#feedbackModal .modal-icon');
+          modalIcon.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+          `;
+        } finally {
+          // Restore button state
+          downloadBtn.innerHTML = originalBtnContent;
+          downloadBtn.disabled = false;
+        }
       }
-    };
+
+      // Function to dynamically load html2canvas
+      function loadHtml2Canvas() {
+        return new Promise((resolve, reject) => {
+          if (window.html2canvas) {
+            resolve(window.html2canvas);
+            return;
+          }
+          
+          const script = document.createElement('script');
+          script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+          script.onload = () => resolve(window.html2canvas);
+          script.onerror = reject;
+          document.head.appendChild(script);
+        });
+      }
+    }
+
+    // Modal control
+    function showModal(type, message) {
+      const modal = document.getElementById('feedbackModal');
+      const modalMessage = document.getElementById('modalMessage');
+      const modalIcon = modal.querySelector('.modal-icon');
+      const modalTitle = modal.querySelector('.modal-title');
+      
+      modalMessage.innerHTML = message;
+      
+      if (type === 'success') {
+        modal.classList.remove('modal-error');
+        modal.classList.add('modal-success');
+        modalTitle.textContent = 'Success!';
+        modalIcon.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+        `;
+      } else {
+        modal.classList.remove('modal-success');
+        modal.classList.add('modal-error');
+        modalTitle.textContent = 'Attention Required';
+        modalIcon.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+        `;
+      }
+      
+      modal.classList.add('active');
+      
+      document.getElementById('modalCloseButton').onclick = function() {
+        modal.classList.remove('active');
+      };
+      
+      modal.onclick = function(e) {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+        }
+      };
+    }
+
+    // Initialize the student survey
+    initializeVerificationStatusreg();
+    createProgressTracker();
+    setupReferenceCodeGenerationreg();
+    updateProgressTracker();
   }
 
   // Add connectivity status monitoring
@@ -1376,6 +1025,224 @@ document.addEventListener('DOMContentLoaded', function() {
   // Add styles
   const style = document.createElement('style');
   style.textContent = `
+    .service-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .service-card.selected {
+      border-color: #1a4b8c;
+      box-shadow: 0 0 0 3px rgba(26, 75, 140, 0.1);
+    }
+    .service-card-header {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      margin-bottom: 1rem;
+    }
+    .service-card-icon {
+      margin-right: 1rem;
+      color: #1a4b8c;
+    }
+    .service-card-title {
+      font-weight: 600;
+      font-size: 1.125rem;
+      color: #111827;
+    }
+    .service-card-checkbox {
+      margin-right: 0.75rem;
+    }
+    .verification-status {
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 0.75rem;
+      font-weight: bold;
+      font-size: 0.875rem;
+    }
+    .verification-status.verified {
+      background-color: #10B981;
+      color: white;
+    }
+    .verification-status.completed {
+      background-color: #3B82F6;
+      color: white;
+    }
+    .verification-status.not-completed {
+      background-color: #EF4444;
+      color: white;
+    }
+    .verification-legend {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .verification-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: #4B5563;
+    }
+    .verification-legend-badge {
+      width: 1.25rem;
+      height: 1.25rem;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+    .verification-legend-badge.verified {
+      background-color: #10B981;
+      color: white;
+    }
+    .verification-legend-badge.completed {
+      background-color: #3B82F6;
+      color: white;
+    }
+    .verification-legend-badge.not-completed {
+      background-color: #EF4444;
+      color: white;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 50;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+    }
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 1.5rem;
+      border: 1px solid #888;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .modal-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #111827;
+      margin: 0;
+    }
+    .modal-icon {
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 0.75rem;
+    }
+    .modal-close {
+      color: #9ca3af;
+      font-size: 1.5rem;
+      font-weight: bold;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .modal-close:hover {
+      color: #6b7280;
+    }
+    .modal-body {
+      color: #4b5563;
+      line-height: 1.5;
+    }
+    .modal-success {
+      border-left: 4px solid #10B981;
+    }
+    .modal-error {
+      border-left: 4px solid #EF4444;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .animate-spin {
+      animation: spin 1s linear infinite;
+    }
+    .loader {
+      border-top-color: #1a4b8c;
+      border-right-color: #1a4b8c;
+      border-bottom-color: #8b1a1a;
+      border-left-color: #d4af37;
+      animation-timing-function: cubic-bezier(0.53, 0.21, 0.29, 0.67);
+    }
+    .progress-tracker {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 4rem;
+      height: 4rem;
+      cursor: pointer;
+      z-index: 40;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .progress-circle {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .progress-bg, .progress-fill {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .progress-bg path {
+      stroke: #e5e7eb;
+      stroke-width: 3;
+    }
+    .progress-fill path {
+      stroke: #1a4b8c;
+      stroke-width: 3;
+      stroke-linecap: round;
+      transition: stroke-dasharray 0.6s ease;
+    }
+    .progress-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 0.875rem;
+      font-weight: bold;
+      color: #1a4b8c;
+    }
     .missing-question {
       animation: pulse 1.5s ease-in-out infinite;
       background-color: rgba(239, 68, 68, 0.1);

@@ -12,28 +12,58 @@ import '../../styles/css/globalanimate.css';
 const currentPath = Astro.url.pathname;
 ---
 
-<Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
-  <main class="font-sans antialiased">
 
-          <Navbar path={currentPath} client:visible />
+
+<Layout title="MSU | Tawi-Tawi College of Technology and Oceanography - Admissions">
+    <main class="font-sans antialiased text-gray-800 leading-normal">
+        <!-- Enhanced Navbar -->
+        <Navbar path={currentPath} client:visible class="bg-white shadow-md" />
+
+
+
+      
     <!-- Hero Section -->
-    <section class="relative bg-msu-main-color text-white overflow-hidden  pt-[120px]">
-      <div class="absolute inset-0 z-0 opacity-20">
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-msu-deep-ocean"></div>
-      </div>
-      
+  	<!-- Hero Section with Video Background -->
+		<section class="relative bg-msu-main-color h-screen min-h-[700px] flex items-center overflow-hidden pt-[80px]">
+			<!-- Video Background -->
+			<div class="absolute inset-0 z-0 overflow-hidden">
+				<video autoplay muted loop class="w-full h-full object-cover">
+					<source src="/video/msucamp.mp4" type="video/mp4">
+					<!-- Fallback image -->
+					<img src="/images/development.png" alt="MSUTCTO" class="w-full h-full object-cover">
+				</video>
+				<div class="absolute inset-0 bg-black/40"></div>
+			</div>
+			
+      			<!-- Gradient overlay -->
+			<div class="absolute inset-0 bg-gradient-to-t from-msu-deep-ocean/90 via-msu-main-color/50 to-transparent z-1"></div>
 
-      
-      <div class="container mx-auto px-6 py-24 md:py-32 lg:py-40 text-center relative z-10">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-          Creating Opportunities,<br class="hidden md:block"> Transforming Lives
+      			  <!-- Content Container with Responsive Adjustments -->
+    <div class="container mx-auto px-4 sm:px-6 z-10 relative">
+        <div class="max-w-4xl mx-auto text-center px-4">
+            <!-- University Seal with Responsive Sizing -->
+            <div class="mb-6 md:mb-8 animate-fadeIn">
+                <img 
+                    src="/images/MSU Seal New (Official).png" 
+                    alt="MSU Official Seal" 
+                    class="h-20 sm:h-24 md:h-32 mx-auto transition-all duration-500 hover:scale-105"
+                    loading="eager"
+                >
+            </div>
+            
+                        <!-- Responsive Typography with Perfect Scaling -->
+        <h1 class="font-philosopher text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight tracking-tight animate-fadeInUp">
+            <span class="block text-shadow-md">Creating Opportunities, Transforming Lives</span>
+
         </h1>
-        <p class="text-xl md:text-2xl text-silver max-w-3xl mx-auto mb-12">
-          MSU-TCTO welcomes adept and curious students who wish to excel in academics, arts, research, technology, and community extension. Inclusion and diversity are the core of our operations.
-        </p>
+   <!-- Responsive Subheading -->
+            <p class="font-philosopher text-lg sm:text-xl md:text-2xl text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto animate-fadeInUp delay-100 leading-relaxed">
+                 MSU-TCTO welcomes adept and curious students who wish to excel in academics, arts, research, technology, and community extension. Inclusion and diversity are the core of our operations.
+            </p>
+
         <div class="flex flex-col sm:flex-row justify-center gap-4">
           <a href="#admission" class="bg-msu-maroon hover:bg-msu-rusty-red text-white px-8 py-4 rounded-lg font-medium transition duration-300 transform hover:scale-105">
-            Apply Now
+           Admission Procedures
           </a>
           <a href="/404.astro" class="bg-transparent border-2 border-white hover:bg-white hover:text-msu-deep-ocean text-white px-8 py-4 rounded-lg font-medium transition duration-300">
             Explore Programs
@@ -196,7 +226,6 @@ const currentPath = Astro.url.pathname;
 
 
 
-  </main>
   
 
   <script>

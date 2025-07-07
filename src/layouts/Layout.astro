@@ -5,634 +5,675 @@ export interface Props {
 
 const { title } = Astro.props;
 ---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/images/MSU Seal New (Official).png" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-    <style>
-    /* Professional Maroon Theme with Realistic Dolphin */
-    :root {
-      --maroon-primary: #61063B;
-      --maroon-secondary: #9A1750;
-      --maroon-accent: #EE4C7C;
-      --blue-primary: #1a6fc9;
-      --blue-secondary: #4facfe;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <link rel="icon" type="image/svg+xml" href="/images/MSU Seal New (Official).png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="generator" content={Astro.generator} />
+  <title>{title}</title>
+  <style>
+    /* Modern animation keyframes */
+    @keyframes heartbeat {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      35% { transform: scale(0.95); }
+      45% { transform: scale(1.05); }
+      55% { transform: scale(0.98); }
+      65% { transform: scale(1.02); }
+      100% { transform: scale(1); }
     }
-    
-    /* Ultra-Realistic Dolphin Animations */
-    @keyframes dolphinSwim {
-      0% { 
-        transform: translateX(-120%) rotateY(180deg) translateY(0) rotateZ(0deg);
-        opacity: 0;
-      }
-      15% {
-        transform: translateX(-80%) rotateY(180deg) translateY(-5px) rotateZ(-3deg);
-        opacity: 1;
-      }
-      25% {
-        transform: translateX(-60%) rotateY(180deg) translateY(5px) rotateZ(2deg);
-      }
-      35% {
-        transform: translateX(-40%) rotateY(180deg) translateY(-8px) rotateZ(-4deg);
-      }
-      50% { 
-        transform: translateX(0%) rotateY(180deg) translateY(0) rotateZ(0deg);
-      }
-      51% { 
-        transform: translateX(0%) rotateY(0deg) translateY(0) rotateZ(0deg);
-      }
-      65% {
-        transform: translateX(-40%) rotateY(0deg) translateY(-5px) rotateZ(-3deg);
-      }
-      75% {
-        transform: translateX(-60%) rotateY(0deg) translateY(5px) rotateZ(2deg);
-      }
-      85% {
-        transform: translateX(-80%) rotateY(0deg) translateY(-8px) rotateZ(-4deg);
-      }
-      100% { 
-        transform: translateX(-120%) rotateY(0deg) translateY(0) rotateZ(0deg);
-        opacity: 1;
-      }
+    @keyframes pulse-glow {
+      0% { filter: drop-shadow(0 0 5px rgba(255,255,255,0.3)); }
+      50% { filter: drop-shadow(0 0 15px rgba(255,255,255,0.6)); }
+      100% { filter: drop-shadow(0 0 5px rgba(255,255,255,0.3)); }
     }
-    
-    @keyframes bodyUndulation {
-      0%, 15%, 35%, 50%, 65%, 85%, 100% { transform: translateY(0) rotateZ(0deg); }
-      25%, 75% { transform: translateY(-8px) rotateZ(5deg); }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
-    
-    @keyframes tailMove {
-      0% { transform: rotate(-15deg); }
-      25% { transform: rotate(20deg); }
-      50% { transform: rotate(-15deg); }
-      75% { transform: rotate(20deg); }
-      100% { transform: rotate(-15deg); }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
-    
-    @keyframes pectoralFinMove {
-      0%, 100% { transform: rotate(-10deg); }
-      50% { transform: rotate(10deg); }
-    }
-    
-    @keyframes waterRipple {
-      0% { transform: scale(0.8); opacity: 0.8; }
-      100% { transform: scale(1.5); opacity: 0; }
-    }
-    
-    @keyframes bubbleFloat {
-      0% { transform: translateY(0) scale(0.3); opacity: 0; }
-      20% { opacity: 0.8; }
-      100% { transform: translateY(-200px) scale(1); opacity: 0; }
-    }
-    
-    /* Dolphin Speech Bubble - Only shows when swimming right */
-    @keyframes bubbleRightSwim {
-      0%, 50% { opacity: 0; transform: scale(0.8); }
-      60% { opacity: 1; transform: scale(1.1); }
-      70% { opacity: 1; transform: scale(0.95); }
-      80% { opacity: 1; transform: scale(1); }
-      90%, 100% { opacity: 0; transform: scale(0.8); }
-    }
-    
-    /* Realistic Seaweed Animations */
-    @keyframes seaweedGrow {
-      0% { height: 0; opacity: 0; transform: scaleY(0); }
-      100% { height: var(--target-height); opacity: 1; transform: scaleY(1); }
-    }
-    
-    @keyframes seaweedSway {
-      0%, 100% { transform: rotate(-8deg); }
-      50% { transform: rotate(8deg); }
-    }
-    
-    @keyframes seaweedLeafMove {
-      0%, 100% { transform: rotate(-5deg); }
-      50% { transform: rotate(5deg); }
-    }
-    
-    .dolphin-speech {
-      position: absolute;
-      left: -120px;
-      top: -50px;
-      width: 160px;
-      background: white;
-      padding: 10px;
-      border-radius: 12px;
-      font-size: 14px;
-      color: #333;
-      text-align: center;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-      opacity: 0;
-      transform: scale(0.8);
-      z-index: 10;
-    }
-    
-    .dolphin-speech:after {
-      content: '';
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      margin-left: -10px;
-      border-width: 10px 10px 0;
-      border-style: solid;
-      border-color: white transparent;
-    }
-    
-    .ocean-loader {
-      position: relative;
-      width: 100%;
-      max-width: 600px;
-      height: 250px;
-      margin: 0 auto;
-      overflow: hidden;
-      background: linear-gradient(to bottom, 
-        #0a4da3 0%, 
-        #1a6fc9 30%, 
-        #4facfe 100%);
-      border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-      perspective: 1000px;
-    }
-    
-    .loading-container {
-      background-color: #61063B;
-      background: linear-gradient(135deg, #61063B 0%, #9A1750 100%);
-    }
-    
-    .loading-content {
-      background-color: #61063B;
-      border-radius: 16px;
-      padding: 2rem;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    
-    .dolphin-container {
-      position: absolute;
-      width: 150px;
-      height: 60px;
-      left: 50%;
-      top: 50%;
-      transform-style: preserve-3d;
-      animation: dolphinSwim 8s linear infinite;
-      z-index: 3;
-    }
-    
-    .dolphin-container .dolphin-speech {
-      animation: bubbleRightSwim 8s linear infinite;
-    }
-    
-    .dolphin-body {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, 
-        #a8d8ff 0%, 
-        #7cc2ff 30%, 
-        #5d9ce0 60%, 
-        #3a7bd5 100%);
-      border-radius: 70% 70% 60% 60% / 80% 80% 50% 50%;
-      animation: bodyUndulation 3s ease-in-out infinite;
-    }
-    
-    .dolphin-body:before {
-      content: '';
-      position: absolute;
-      top: 18px;
-      right: -10px;
-      width: 25px;
-      height: 25px;
-      background: linear-gradient(to bottom right, #7cc2ff 0%, #3a7bd5 100%);
-      border-radius: 50% 50% 0 50%;
-      transform: rotate(-45deg);
-    }
-    
-    .dolphin-eye {
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      background: #111;
-      border-radius: 50%;
-      top: 22px;
-      left: 30px;
-    }
-    
-    .dolphin-eye:after {
-      content: '';
-      position: absolute;
-      width: 3px;
-      height: 3px;
-      background: white;
-      border-radius: 50%;
-      top: 2px;
-      left: 2px;
-    }
-    
-    .dolphin-fin {
-      position: absolute;
-      width: 25px;
-      height: 35px;
-      background: linear-gradient(to bottom, #5d9ce0 0%, #3a7bd5 100%);
-      border-radius: 50% 50% 0 0;
-      top: 8px;
-      left: 50px;
-      transform-origin: bottom center;
-      animation: pectoralFinMove 2s ease-in-out infinite;
-    }
-    
-    .dolphin-tail {
-      position: absolute;
-      width: 35px;
-      height: 20px;
-      background: linear-gradient(to right, #3a7bd5 0%, #1a5bb5 100%);
-      border-radius: 50% 0 0 50%;
-      right: -30px;
-      top: 20px;
-      transform-origin: left center;
-      animation: tailMove 1s ease-in-out infinite;
-    }
-    
-    .water-ripple {
-      position: absolute;
-      width: 120%;
-      height: 40px;
-      bottom: -10px;
-      left: -10%;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 100% 100% 0 0;
-      animation: waterRipple 4s infinite ease-out;
-    }
-    
-    .bubble {
-      position: absolute;
-      background: rgba(255, 255, 255, 0.7);
-      border-radius: 50%;
-      filter: blur(1px);
-      animation: bubbleFloat 5s infinite ease-in;
-    }
-    
-    .sunlight {
-      position: absolute;
-      width: 200%;
-      height: 150px;
-      background: linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.15) 50%,
-        rgba(255, 255, 255, 0) 100%
-      );
-      transform: rotate(-15deg);
-      animation: sunlight 20s linear infinite;
-    }
-    
-    .loading-text {
-      color: white;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-    
-    .title-text {
-      color: white;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    }
-    
-    .logo-container img {
-      width: 120px;
-      height: 120px;
-      border: 4px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-      transition: all 0.3s ease;
-    }
-    
-    .logo-container img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    }
-    
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    
-    .fade-in {
-      animation: fadeIn 0.8s ease-out forwards;
+    @keyframes checkmark {
+      0% { stroke-dashoffset: 50; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes progress-pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.8; }
+      100% { opacity: 1; }
+    }
+    @keyframes shimmer {
+      0% { background-position: -1000px 0; }
+      100% { background-position: 1000px 0; }
     }
     
-    .progress-container {
+    /* Base styles */
+    body {
+      background-color: #61063B;
+      color: white;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* Loading container */
+    #loading-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+    }
+    
+    /* Logo container */
+    #logo-wrapper {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* Interactive elements */
+    #logo-container {
+      cursor: pointer;
+      transition: all 0.3s ease;
+      will-change: transform;
+      z-index: 10;
+    }
+    #logo-container:hover {
+      transform: scale(1.05);
+    }
+    #logo-container:active {
+      transform: scale(0.98);
+    }
+    
+    /* Heartbeat animation */
+    .heartbeat {
+      animation: heartbeat 1.8s ease infinite;
+    }
+    .heartbeat-fast {
+      animation: heartbeat 0.9s ease infinite;
+    }
+    .pulse-glow {
+      animation: pulse-glow 2s infinite;
+    }
+    
+    /* Progress elements */
+    .progress-ring__circle {
+      transition: stroke-dashoffset 0.65s cubic-bezier(0.33, 1, 0.68, 1);
+    }
+    .progress-thumb {
+      animation: progress-pulse 1.5s infinite;
+    }
+    
+    /* Verification checks */
+    .verification-check {
+      stroke-dasharray: 50;
+      stroke-dashoffset: 50;
+      animation: checkmark 0.5s ease-out forwards;
+      animation-delay: 0.3s;
+    }
+    
+    /* Status indicators */
+    .status-indicator {
+      width: 1.25rem;
+      height: 1.25rem;
+      border-radius: 50%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.1);
+    }
+    .status-indicator.pending::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      background: linear-gradient(135deg, #ffffff, #EE4C7C) border-box;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: spin 2s linear infinite;
+    }
+    .status-indicator.success {
+      background: linear-gradient(135deg, #10B981, #059669);
+    }
+    .status-indicator.failed {
+      background: linear-gradient(135deg, #EF4444, #DC2626);
+    }
+    
+    /* Progress bar */
+    .progress-track {
       height: 6px;
-      background: rgba(255, 255, 255, 0.2);
       border-radius: 3px;
-      margin: 1.5rem 0;
+      background: rgba(255,255,255,0.1);
       overflow: hidden;
     }
-    
-    .progress-bar {
+    .progress-thumb {
       height: 100%;
-      background: linear-gradient(90deg, #EE4C7C 0%, #FF8E9E 100%);
       border-radius: 3px;
-      transition: width 0.4s ease;
+      background: linear-gradient(90deg, #ffffff 0%, #EE4C7C 100%);
+      background-size: 200% 100%;
+      position: relative;
     }
-    
-    /* Realistic Seaweed Styles */
-    .seaweed-container {
+    .progress-thumb::after {
+      content: '';
       position: absolute;
-      bottom: 0;
+      top: 0;
       left: 0;
-      width: 100%;
-      height: 100px;
-      z-index: 2;
-    }
-    
-    .seaweed {
-      position: absolute;
+      right: 0;
       bottom: 0;
-      width: 8px;
-      background: linear-gradient(to top, 
-        #0a5a32 0%, 
-        #1a8449 30%, 
-        #2dce7d 70%);
-      border-radius: 4px;
-      transform-origin: bottom center;
-      animation: seaweedSway 3s ease-in-out infinite;
-      opacity: 0;
-      height: 0;
-      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+      background: linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.3) 100%);
+      background-size: 200% 100%;
+      animation: shimmer 2s infinite;
     }
     
-    .seaweed::before {
-      content: '';
+    /* Typography */
+    .text-gradient {
+      background: linear-gradient(90deg, #ffffff 0%, #EE4C7C 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    /* Tooltip */
+    .tooltip {
       position: absolute;
-      top: 10%;
+      bottom: -30px;
       left: 50%;
       transform: translateX(-50%);
-      width: 25px;
-      height: 15px;
-      background: #1a8449;
-      border-radius: 50% 50% 0 0;
-      clip-path: polygon(0 0, 100% 0, 80% 100%, 20% 100%);
-      animation: seaweedLeafMove 3.5s ease-in-out infinite;
-      z-index: -1;
-    }
-    
-    .seaweed::after {
-      content: '';
-      position: absolute;
-      top: 30%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 20px;
-      height: 12px;
-      background: #2dce7d;
-      border-radius: 50% 50% 0 0;
-      clip-path: polygon(0 0, 100% 0, 70% 100%, 30% 100%);
-      animation: seaweedLeafMove 4s ease-in-out infinite 0.5s;
-      z-index: -2;
-    }
-    
-    .seaweed .leaf {
-      position: absolute;
-      width: 18px;
-      height: 10px;
-      background: #1a8449;
-      border-radius: 50% 50% 0 0;
-      clip-path: polygon(0 0, 100% 0, 70% 100%, 30% 100%);
-      animation: seaweedLeafMove 4s ease-in-out infinite;
-    }
-    
-    .content-bubble {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 160px;
-      background: white;
-      padding: 10px;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      padding: 4px 10px;
       border-radius: 12px;
-      font-size: 14px;
-      color: #333;
-      text-align: center;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      font-size: 12px;
       opacity: 0;
-      z-index: 5;
-      top: 20px;
-      transition: all 0.5s ease;
+      transition: all 0.3s ease;
+      pointer-events: none;
+      white-space: nowrap;
+      backdrop-filter: blur(5px);
+    }
+    #logo-container:hover .tooltip {
+      opacity: 1;
+      bottom: -25px;
     }
     
-    .content-bubble:after {
+    /* Dot animation */
+    .dot-flashing {
+      position: relative;
+      width: 8px;
+      height: 8px;
+      border-radius: 4px;
+      background-color: white;
+      color: white;
+      animation: dotFlashing 1s infinite linear alternate;
+      animation-delay: 0.5s;
+    }
+    .dot-flashing::before, .dot-flashing::after {
       content: '';
+      display: inline-block;
       position: absolute;
-      bottom: -10px;
-      left: 50%;
-      margin-left: -10px;
-      border-width: 10px 10px 0;
+      top: 0;
+      width: 8px;
+      height: 8px;
+      border-radius: 4px;
+      background-color: white;
+      color: white;
+    }
+    .dot-flashing::before {
+      left: -12px;
+      animation: dotFlashing 1s infinite alternate;
+      animation-delay: 0s;
+    }
+    .dot-flashing::after {
+      left: 12px;
+      animation: dotFlashing 1s infinite alternate;
+      animation-delay: 1s;
+    }
+    @keyframes dotFlashing {
+      0% { opacity: 1; }
+      50%, 100% { opacity: 0.3; }
+    }
+    
+    /* Easter egg panel */
+    .easter-egg {
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-top: 1rem;
+      max-width: 400px;
+    }
+    
+    /* Animated rings */
+    .loading-ring {
+      position: absolute;
       border-style: solid;
-      border-color: white transparent;
+      border-color: transparent;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .ring-1 {
+      width: 180px;
+      height: 180px;
+      border-width: 3px;
+      border-top-color: rgba(255,255,255,0.3);
+      animation: spin 3s linear infinite;
+    }
+    .ring-2 {
+      width: 220px;
+      height: 220px;
+      border-width: 3px;
+      border-top-color: rgba(238, 76, 124, 0.4);
+      animation: spin 2.5s linear infinite reverse;
+      animation-delay: 0.2s;
+    }
+    .ring-3 {
+      width: 260px;
+      height: 260px;
+      border-width: 3px;
+      border-top-color: rgba(154, 23, 80, 0.5);
+      animation: spin 2s linear infinite;
+      animation-delay: 0.4s;
     }
   </style>
 </head>
-<body>
-  <!-- Professional Maroon Loading Container -->
-  <div id="loading-container" class="fixed inset-0 z-50 flex flex-col items-center justify-center loading-container transition-all duration-500">
-    <div class="w-full max-w-3xl px-6 text-center fade-in">
-      <div class="loading-content p-8">
-        <!-- University Logo -->
-        <div class="logo-container mb-6">
-          <img src="/images/MSU Seal New (Official).png" alt="University Logo" 
-               class="mx-auto rounded-full" />
+<body class="bg-msu-deep-ocean">
+  <!-- Loading Container -->
+  <div id="loading-container">
+    <!-- Logo with Loading Rings -->
+    <div id="logo-wrapper">
+      <!-- Animated Rings -->
+      <div class="loading-ring ring-1"></div>
+      <div class="loading-ring ring-2"></div>
+      <div class="loading-ring ring-3"></div>
+      
+      <!-- Progress Ring -->
+      <svg class="loading-ring" width="180" height="180" viewBox="0 0 100 100">
+        <circle class="progress-ring__circle" stroke="url(#gradient)" stroke-width="4" stroke-dasharray="283" stroke-dashoffset="283" fill="transparent" r="45" cx="50" cy="50" />
+        <defs>
+          <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff" />
+            <stop offset="100%" stop-color="#EE4C7C" />
+          </linearGradient>
+        </defs>
+      </svg>
+      
+      <!-- Interactive Logo -->
+      <div id="logo-container">
+        <img src="/images/MSU Seal New (Official).png" alt="University Logo" 
+             id="logo" class="w-32 h-32 heartbeat pulse-glow" />
+        <div class="tooltip">Click for surprise!</div>
+      </div>
+    </div>
+    
+    <!-- Loading Information -->
+    <div class="text-center max-w-md px-4">
+      <h2 class="text-gradient text-4xl font-bold mb-4 tracking-tight">{title}</h2>
+      <div id="loading-percentage" class="text-6xl font-black text-gradient mb-2">0%</div>
+      <p id="loading-status" class="mt-4 text-white/80 font-medium text-lg">
+        Starting verification process<span class="dot-flashing ml-1"></span>
+      </p>
+      
+      <!-- Verification Steps -->
+      <div id="verification-steps" class="mt-6 space-y-3 text-sm">
+        <!-- Dynamically populated -->
+      </div>
+      
+      <!-- System Info -->
+      <div id="system-info" class="mt-6 text-sm text-white/60 grid grid-cols-2 gap-y-1 gap-x-4 hidden">
+        <div class="text-left">System:</div>
+        <div id="system-name" class="text-right font-medium">Dolphin CMS</div>
+        <div class="text-left">Version:</div>
+        <div id="system-version" class="text-right font-medium">3.2.1</div>
+        <div class="text-left">Environment:</div>
+        <div id="system-env" class="text-right font-medium">Production</div>
+        <div class="text-left">Load Time:</div>
+        <div id="load-time" class="text-right font-medium">0.00s</div>
+      </div>
+    </div>
+    
+    <!-- Progress Bar -->
+    <div class="w-80 mt-8">
+      <div class="progress-track">
+        <div id="progress-bar" class="progress-thumb" style="width: 0%"></div>
+      </div>
+      <div class="flex justify-between mt-1 text-xs text-white/60">
+        <span>Booting</span>
+        <span id="progress-detail">Initializing</span>
+        <span>Ready</span>
+      </div>
+    </div>
+    
+    <!-- Easter Egg Panel (hidden by default) -->
+    <div id="easter-egg" class="easter-egg hidden">
+      <h3 class="font-bold text-white mb-2">System Diagnostics</h3>
+      <div class="text-sm space-y-2">
+        <div class="flex justify-between">
+          <span class="text-white/70">CPU Load:</span>
+          <span id="cpu-load" class="font-mono text-white">0.2%</span>
         </div>
-        
-        <!-- Title -->
-        <h1 class="title-text text-3xl mb-4">{title}</h1>
-        
-        <!-- Dolphin Loader -->
-        <div class="ocean-loader mb-6 overflow-visible" id="ocean-loader">
-          <div class="sunlight"></div>
-          <div class="seaweed-container" id="seaweed-container"></div>
-          <div class="dolphin-container">
-            <!-- <div class="dolphin-speech">Please wait while we process<br>the CMS Baby Dolphin!</div> -->
-            <div class="dolphin-body">
-              <div class="dolphin-eye"></div>
-              <div class="dolphin-fin"></div>
-              <div class="dolphin-tail"></div>
-            </div>
-          </div>
-          <div class="water-ripple" style="animation-delay: 0s"></div>
-          <div class="water-ripple" style="animation-delay: 2s"></div>
-          <div class="content-bubble" id="content-bubble"></div>
+        <div class="flex justify-between">
+          <span class="text-white/70">Memory Usage:</span>
+          <span id="memory-usage" class="font-mono text-white">124MB / 2GB</span>
         </div>
-        
-        <!-- Loading Text -->
-        <p class="loading-text text-lg mb-4" id="status-text">Initializing systems...</p>
-        
-        <!-- Progress Bar -->
-        <div class="progress-container">
-          <div id="progress-bar" class="progress-bar" style="width: 0%"></div>
+        <div class="flex justify-between">
+          <span class="text-white/70">DB Connections:</span>
+          <span id="db-connections" class="font-mono text-white">3 active</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-white/70">Cache Efficiency:</span>
+          <span id="cache-efficiency" class="font-mono text-white">92%</span>
         </div>
       </div>
+    </div>
+    
+    <!-- Security Badge -->
+    <div id="security-badge" class="absolute bottom-8 right-8 bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-lg opacity-0 transform translate-y-4 transition-all duration-300 flex items-center">
+      <svg id="badge-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="mr-1 hidden">
+        <path d="M20 6L9 17l-5-5" class="verification-check"/>
+      </svg>
+      <span id="badge-text">Verified Secure</span>
     </div>
   </div>
 
   <!-- Main Content -->
-  <div id="content" style="display: none;">
+  <div id="content" class="hidden min-h-screen">
     <slot />
   </div>
 
   <script is:inline>
     document.addEventListener('DOMContentLoaded', () => {
       const loadingContainer = document.getElementById('loading-container');
+      const percentageDisplay = document.getElementById('loading-percentage');
+      const loadingStatus = document.getElementById('loading-status');
       const content = document.getElementById('content');
-      const oceanLoader = document.getElementById('ocean-loader');
+      const progressCircle = document.querySelector('.progress-ring__circle');
       const progressBar = document.getElementById('progress-bar');
-      const statusText = document.getElementById('status-text');
-      const seaweedContainer = document.getElementById('seaweed-container');
-      const contentBubble = document.getElementById('content-bubble');
+      const progressDetail = document.getElementById('progress-detail');
+      const securityBadge = document.getElementById('security-badge');
+      const badgeIcon = document.getElementById('badge-icon');
+      const systemInfo = document.getElementById('system-info');
+      const loadTimeDisplay = document.getElementById('load-time');
+      const logo = document.getElementById('logo');
+      const logoContainer = document.getElementById('logo-container');
+      const easterEgg = document.getElementById('easter-egg');
+      const verificationSteps = document.getElementById('verification-steps');
+      const circumference = 283;
+      
+      // Create verification steps dynamically
+      const steps = [
+        { id: 'auth', label: 'Authentication', timeElement: 'auth-time' },
+        { id: 'security', label: 'Security Scan', timeElement: 'security-time' },
+        { id: 'data', label: 'Data Integrity', timeElement: 'data-time' },
+        { id: 'modules', label: 'Core Modules', timeElement: 'modules-time' },
+        { id: 'ui', label: 'UI Framework', timeElement: 'ui-time' }
+      ];
+      
+      steps.forEach(step => {
+        const stepElement = document.createElement('div');
+        stepElement.className = 'flex items-center justify-between';
+        stepElement.innerHTML = `
+          <div class="flex items-center space-x-3">
+            <div id="${step.id}-check" class="status-indicator pending">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="hidden">
+                <path d="M20 6L9 17l-5-5" class="verification-check"/>
+              </svg>
+            </div>
+            <span>${step.label}</span>
+          </div>
+          <span id="${step.timeElement}" class="text-white/50 text-xs">...</span>
+        `;
+        verificationSteps.appendChild(stepElement);
+      });
+      
+      // Set initial state
+      progressCircle.style.strokeDasharray = circumference;
+      progressCircle.style.strokeDashoffset = circumference;
       
       // Status messages
       const statusMessages = [
-        { text: "Booting oceanographic systems...", progress: 10 },
-        { text: "Calibrating sensors...", progress: 25 },
-        { text: "Establishing secure connection...", progress: 40 },
-        { text: "Authenticating credentials...", progress: 55 },
-        { text: "Loading marine data...", progress: 70 },
-        { text: "Finalizing initialization...", progress: 85 },
-        { text: "Ready for exploration", progress: 100 }
+        { msg: "Booting system kernel", progress: 0, detail: "Initializing core services" },
+        { msg: "Loading CMS modules", progress: 15, detail: "Loading authentication layer" },
+        { msg: "Verifying credentials", progress: 30, detail: "Checking admin permissions" },
+        { msg: "Establishing connection", progress: 45, detail: "Database handshake" },
+        { msg: "Scanning integrity", progress: 60, detail: "Validating core files" },
+        { msg: "Loading content cache", progress: 75, detail: "Warming up cache" },
+        { msg: "Finalizing checks", progress: 85, detail: "Security verification" },
+        { msg: "Optimizing performance", progress: 92, detail: "Compiling templates" },
+        { msg: "System ready", progress: 98, detail: "All checks passed" }
       ];
       
-      // Create realistic seaweeds
-      function createSeaweeds() {
-        const seaweedCount = 7 + Math.floor(Math.random() * 4);
-        
-        for (let i = 0; i < seaweedCount; i++) {
-          const seaweed = document.createElement('div');
-          seaweed.className = 'seaweed';
-          
-          // Random position and height
-          const left = 5 + Math.random() * 90;
-          const height = 50 + Math.random() * 100;
-          
-          seaweed.style.left = `${left}%`;
-          seaweed.style.setProperty('--target-height', `${height}px`);
-          
-          // Random sway timing
-          const swayDuration = 2.5 + Math.random() * 2;
-          seaweed.style.animationDuration = `${swayDuration}s`;
-          seaweed.style.animationDelay = `${Math.random() * 2}s`;
-          
-          // Add leaves at random positions
-          for (let j = 0; j < 3 + Math.floor(Math.random() * 3); j++) {
-            const leaf = document.createElement('div');
-            leaf.className = 'leaf';
-            leaf.style.top = `${20 + Math.random() * 60}%`;
-            leaf.style.left = `${Math.random() > 0.5 ? -10 : 90}%`;
-            leaf.style.transform = `rotate(${Math.random() > 0.5 ? '' : '-'}${10 + Math.random() * 20}deg)`;
-            leaf.style.animationDelay = `${Math.random() * 2}s`;
-            seaweed.appendChild(leaf);
-          }
-          
-          seaweedContainer.appendChild(seaweed);
-          
-          // Animate growth
-          setTimeout(() => {
-            seaweed.style.animation = `seaweedGrow ${1 + Math.random()}s ease-out forwards, seaweedSway ${swayDuration}s ease-in-out infinite`;
-            seaweed.style.height = `${height}px`;
-            seaweed.style.opacity = '0.9';
-          }, i * 200);
-        }
-      }
+      // System modules to load (simulated)
+      const systemModules = [
+        "AuthService", "DatabaseLayer", "ContentAPI", 
+        "AssetManager", "CacheEngine", "SecurityMonitor",
+        "TemplateRenderer", "PluginManager", "UIFramework"
+      ];
       
-      // Create bubbles
-      function createBubbles() {
-        const bubbleCount = 5 + Math.floor(Math.random() * 4);
-        
-        for (let i = 0; i < bubbleCount; i++) {
-          setTimeout(() => {
-            const bubble = document.createElement('div');
-            bubble.className = 'bubble';
-            const size = 4 + Math.random() * 10;
-            bubble.style.width = `${size}px`;
-            bubble.style.height = `${size}px`;
-            bubble.style.left = `${10 + Math.random() * 80}%`;
-            bubble.style.bottom = '0';
-            bubble.style.animationDuration = `${3 + Math.random() * 3}s`;
-            bubble.style.animationDelay = `${Math.random() * 2}s`;
-            oceanLoader.appendChild(bubble);
-            
-            setTimeout(() => bubble.remove(), 6000);
-          }, i * 300);
-        }
-      }
-      
-      // Update content bubble with loading messages
-      function updateContentBubble(message) {
-        contentBubble.textContent = message;
-        contentBubble.style.opacity = '1';
-        contentBubble.style.top = '20px';
-        
-        setTimeout(() => {
-          contentBubble.style.opacity = '0';
-          contentBubble.style.top = '0px';
-        }, 2000);
-      }
-      
-      // Loading simulation
       let progress = 0;
-      const bubbleInterval = setInterval(createBubbles, 1500);
-      createBubbles();
+      let verificationState = {
+        authenticated: false,
+        securityVerified: false,
+        dataValidated: false,
+        modulesLoaded: false,
+        uiLoaded: false,
+        startTime: performance.now(),
+        clickCount: 0
+      };
       
-      // Create initial seaweeds
-      createSeaweeds();
-      
-      // Add more seaweeds as loading progresses
-      const seaweedInterval = setInterval(() => {
-        if (progress < 100) {
-          createSeaweeds();
-        }
-      }, 2500);
-      
-      const loadInterval = setInterval(() => {
-        progress = Math.min(progress + 0.5 + Math.random(), 100);
-        progressBar.style.width = `${progress}%`;
+      // Logo interaction handler
+      logoContainer.addEventListener('click', () => {
+        verificationState.clickCount++;
         
-        // Update status text
+        // Accelerate heartbeat on click
+        logo.classList.remove('heartbeat');
+        void logo.offsetWidth; // Trigger reflow
+        logo.classList.add('heartbeat-fast');
+        
+        // Add pulse glow effect
+        logo.classList.add('pulse-glow');
+        setTimeout(() => logo.classList.remove('pulse-glow'), 1000);
+        
+        // Show easter egg after 3 clicks
+        if (verificationState.clickCount >= 3 && easterEgg.classList.contains('hidden')) {
+          easterEgg.classList.remove('hidden');
+          easterEgg.classList.add('animate-fadeIn');
+        }
+        
+        // Return to normal heartbeat after 1 second
+        setTimeout(() => {
+          logo.classList.remove('heartbeat-fast');
+          logo.classList.add('heartbeat');
+        }, 1000);
+      });
+      
+      // Simulate module loading
+      function simulateModuleLoading() {
+        const loadedModules = Math.min(systemModules.length, Math.floor(progress / (100 / systemModules.length)));
+        if (loadedModules > 0) {
+          return systemModules.slice(0, loadedModules).join(", ");
+        }
+        return "Initializing core services";
+      }
+      
+      // Update system diagnostics
+      function updateDiagnostics() {
+        const cpuLoad = (5 + Math.random() * 10 + progress / 4).toFixed(1);
+        const memoryUsage = Math.floor(100 + progress * 8 + Math.random() * 20);
+        const dbConnections = Math.floor(1 + progress / 25);
+        const cacheEfficiency = Math.floor(70 + progress / 3 + Math.random() * 10);
+        
+        document.getElementById('cpu-load').textContent = `${cpuLoad}%`;
+        document.getElementById('memory-usage').textContent = `${memoryUsage}MB / 2GB`;
+        document.getElementById('db-connections').textContent = `${dbConnections} active`;
+        document.getElementById('cache-efficiency').textContent = `${Math.min(100, cacheEfficiency)}%`;
+      }
+      
+      const loadingInterval = setInterval(() => {
+        // Update diagnostics if easter egg is visible
+        if (!easterEgg.classList.contains('hidden')) {
+          updateDiagnostics();
+        }
+        
+        // Simulate verification steps
+        if (progress >= 20 && !verificationState.authenticated) {
+          verificationState.authenticated = true;
+          const check = document.getElementById('auth-check');
+          check.classList.remove('pending');
+          check.classList.add('success');
+          check.querySelector('svg').classList.remove('hidden');
+          document.getElementById('auth-time').textContent = `${(Math.random() * 300 + 200).toFixed(0)}ms`;
+          
+          // Show system info
+          systemInfo.classList.remove('hidden');
+          systemInfo.classList.add('animate-fadeIn');
+        }
+        
+        if (progress >= 40 && !verificationState.securityVerified) {
+          verificationState.securityVerified = true;
+          const check = document.getElementById('security-check');
+          check.classList.remove('pending');
+          check.classList.add('success');
+          check.querySelector('svg').classList.remove('hidden');
+          document.getElementById('security-time').textContent = `${(Math.random() * 500 + 300).toFixed(0)}ms`;
+          
+          // Show security badge
+          securityBadge.style.opacity = '1';
+          securityBadge.style.transform = 'translateY(0)';
+          badgeIcon.classList.remove('hidden');
+        }
+        
+        if (progress >= 60 && !verificationState.dataValidated) {
+          verificationState.dataValidated = true;
+          const check = document.getElementById('data-check');
+          check.classList.remove('pending');
+          check.classList.add('success');
+          check.querySelector('svg').classList.remove('hidden');
+          document.getElementById('data-time').textContent = `${(Math.random() * 800 + 500).toFixed(0)}ms`;
+        }
+        
+        if (progress >= 75 && !verificationState.modulesLoaded) {
+          verificationState.modulesLoaded = true;
+          const check = document.getElementById('modules-check');
+          check.classList.remove('pending');
+          check.classList.add('success');
+          check.querySelector('svg').classList.remove('hidden');
+          document.getElementById('modules-time').textContent = `${(Math.random() * 400 + 200).toFixed(0)}ms`;
+        }
+        
+        if (progress >= 90 && !verificationState.uiLoaded) {
+          verificationState.uiLoaded = true;
+          const check = document.getElementById('ui-check');
+          check.classList.remove('pending');
+          check.classList.add('success');
+          check.querySelector('svg').classList.remove('hidden');
+          document.getElementById('ui-time').textContent = `${(Math.random() * 600 + 300).toFixed(0)}ms`;
+        }
+        
+        // Calculate progress
+        let progressIncrement = 0.3 + Math.random() * 0.7;
+        if (verificationState.authenticated) progressIncrement *= 1.3;
+        if (verificationState.securityVerified) progressIncrement *= 1.5;
+        if (verificationState.dataValidated) progressIncrement *= 1.8;
+        if (verificationState.modulesLoaded) progressIncrement *= 2;
+        
+        progress = Math.min(progress + progressIncrement, 100);
+        
+        // Update displays
+        const displayProgress = Math.floor(progress);
+        percentageDisplay.textContent = `${displayProgress}%`;
+        progressBar.style.width = `${progress}%`;
+        progressCircle.style.strokeDashoffset = circumference - (progress / 100) * circumference;
+        
+        // Update status message
         const currentStatus = statusMessages.reduce((prev, curr) => 
           progress >= curr.progress ? curr : prev
         );
-        statusText.textContent = currentStatus.text;
+        loadingStatus.innerHTML = currentStatus.msg + `<span class="dot-flashing ml-1"></span>`;
+        progressDetail.textContent = simulateModuleLoading();
         
-        // Update content bubble at certain progress points
-        if (progress >= 20 && progress < 25) {
-          updateContentBubble("Hi MSUanz...");
-        } else if (progress >= 45 && progress < 50) {
-          updateContentBubble("Please wait for a while...");
-        } else if (progress >= 70 && progress < 75) {
-          updateContentBubble("let's go dive my Baby Dolphin...");
-        }
+        // Update load time
+        const currentTime = performance.now();
+        const loadTime = (currentTime - verificationState.startTime) / 1000;
+        loadTimeDisplay.textContent = `${loadTime.toFixed(2)}s`;
         
-        if (progress >= 100) {
-          clearInterval(loadInterval);
-          clearInterval(bubbleInterval);
-          clearInterval(seaweedInterval);
+        // Complete loading when ready
+        if (progress >= 100 && verificationState.authenticated && 
+            verificationState.securityVerified && verificationState.dataValidated) {
+          clearInterval(loadingInterval);
           
-          // Show final message in bubble
-          updateContentBubble("Ocean System ready for exploration!");
-          
-          // Final animation
           setTimeout(() => {
-            loadingContainer.style.opacity = '0';
+            loadingStatus.innerHTML = "System ready <span class='text-green-300'>✓</span>";
+            percentageDisplay.textContent = "100%";
+            progressDetail.textContent = "All systems operational";
+            
             setTimeout(() => {
-              loadingContainer.style.display = 'none';
-              content.style.display = 'block';
+              loadingContainer.style.opacity = '0';
+              loadingContainer.style.pointerEvents = 'none';
+              
+              setTimeout(() => {
+                loadingContainer.style.display = 'none';
+                content.style.display = 'block';
+                content.classList.add('animate-fadeIn');
+                
+                // Dispatch loaded event
+                const finalLoadTime = (performance.now() - verificationState.startTime) / 1000;
+                document.dispatchEvent(new CustomEvent('systemLoaded', {
+                  detail: {
+                    loadTime: finalLoadTime.toFixed(2),
+                    modulesLoaded: systemModules.length,
+                    timestamp: new Date().toISOString()
+                  }
+                }));
+              }, 600);
             }, 800);
-          }, 1500);
+          }, 500);
         }
-      }, 50);
+      }, 40);
+      
+      // Simulate potential issues (20% chance)
+      if (Math.random() > 0.8) {
+        setTimeout(() => {
+          if (progress < 30) {
+            // Simulate failed authentication
+            const authCheck = document.getElementById('auth-check');
+            authCheck.classList.remove('pending');
+            authCheck.classList.add('failed');
+            authCheck.innerHTML = '✗';
+            loadingStatus.innerHTML = "Authentication failed <span class='text-red-300'>✗</span>";
+            progress = Math.max(0, progress - 10);
+            
+            // Retry after delay
+            setTimeout(() => {
+              authCheck.classList.remove('failed');
+              authCheck.classList.add('pending');
+              loadingStatus.innerHTML = "Retrying authentication<span class='dot-flashing ml-1'></span>";
+              progress += 5;
+            }, 1500);
+          }
+        }, 2000 + Math.random() * 2000);
+      }
     });
   </script>
 </body>
