@@ -37,7 +37,7 @@ const threeLatestAnnualReport = await get3LatestAnnualReport();
     
     <main class="font-sans antialiased text-gray-800 leading-normal">
         <!-- Enhanced Navbar -->
-        <Navbar path={currentPath} client:visible class="bg-white shadow-md" />
+        <Navbar path={currentPath} client:visible />
 
 
 
@@ -225,7 +225,7 @@ const threeLatestAnnualReport = await get3LatestAnnualReport();
      To close this advertisement, just click the 'X' icon. Tap or click the photo to learn more.
     </div>
     
-    <CarouselMain client:visible class="w-full h-auto aspect-[16/9]" />
+    <CarouselMain client:visible />
   </div>
 </div>
 
@@ -835,23 +835,32 @@ window.addEventListener('load', function() {
         </button>
 
 
-        <!-- Add this button somewhere in your page -->
-<button 
-  id="showAdButton"
-  class="fixed bottom-20 right-5 z-40 bg-msu-deep-ocean text-white rounded-full w-12 h-12 flex items-center justify-center hover:bg-black/80 transition-all duration-200 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-white/50 group"
-  title="Show advertisement"
->
-  <!-- Eye icon -->
-  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-  </svg>
-  
-  <!-- Tooltip message that appears for 5 seconds -->
-  <div id="adButtonTooltip" class="absolute right-full ml-2 bg-gray-900 text-white text-sm px-3 py-1 rounded whitespace-nowrap opacity-0 transition-opacity duration-300 pointer-events-none">
-    Click me to show advertisement again
-  </div>
-</button>
+        <!-- Chatbot and Show Ad Button Container -->
+        <div class="fixed bottom-5 right-5 z-40 flex flex-col items-end space-y-3">
+          <!-- Chatbot -->
+          <div id="chatbot" class="mb-2">
+            <script src="https://insights.elishatelecom.com/aichat/public/snippet_assets/js/include-chatbot.min.js"></script>
+            <div include-html="https://insights.elishatelecom.com/aichat/embedded-chatbot?key=guXJzVN2UnYvtbBf70C3GKEpDF5wZ9ad"></div>
+          </div>
+          
+          <!-- Show Ad Button -->
+          <button 
+            id="showAdButton"
+            class="bg-msu-deep-ocean text-white rounded-full w-12 h-12 flex items-center justify-center hover:bg-black/80 transition-all duration-200 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-white/50 group"
+            title="Show advertisement"
+          >
+            <!-- Eye icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+            
+            <!-- Tooltip message that appears for 5 seconds -->
+            <div id="adButtonTooltip" class="absolute right-full ml-2 bg-gray-900 text-white text-sm px-3 py-1 rounded whitespace-nowrap opacity-0 transition-opacity duration-300 pointer-events-none">
+              Click me to show advertisement again
+            </div>
+          </button>
+        </div>
 
 <script>
 window.addEventListener('load', function() {
@@ -915,7 +924,7 @@ window.addEventListener('load', function() {
       
 
          <!-- Footer Navigation -->
-        <FooterNav class="relative z-50" />
+        <!-- <FooterNav class="relative z-50" /> -->
         
         <!-- Footer -->
         <Footer class="relative z-50" />
@@ -933,8 +942,8 @@ window.addEventListener('load', function() {
 // Enhanced Global Search Functionality and Form Submission
 document.addEventListener('DOMContentLoaded', function() {
     // Global Search Functionality
-    const globalSearch = document.getElementById('globalSearch');
-    const officeSelect = document.getElementById('office');
+    const globalSearch = document.getElementById('globalSearch') as HTMLInputElement;
+    const officeSelect = document.getElementById('office') as HTMLSelectElement;
     const originalOptions = Array.from(officeSelect.options);
     
     // Create search results dropdown
@@ -966,9 +975,10 @@ document.addEventListener('DOMContentLoaded', function() {
         );
         
         // Group by optgroup
-        const grouped = {};
+        const grouped: { [key: string]: HTMLOptionElement[] } = {};
         matches.forEach(option => {
-            const group = option.parentNode.label || 'Other Offices';
+            const parent = option.parentNode as HTMLOptGroupElement;
+            const group = parent?.label || 'Other Offices';
             if (!grouped[group]) grouped[group] = [];
             grouped[group].push(option);
         });
@@ -981,7 +991,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 groupHeader.textContent = groupName;
                 searchResults.appendChild(groupHeader);
                 
-                options.forEach(option => {
+                (options as HTMLOptionElement[]).forEach(option => {
                     const resultItem = document.createElement('div');
                     resultItem.className = 'px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center';
                     resultItem.innerHTML = `
@@ -1013,17 +1023,18 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Hide results when clicking outside
     document.addEventListener('click', function(e) {
-        if (!globalSearch.contains(e.target) && !searchResults.contains(e.target)) {
+        const target = e.target as Node;
+        if (!globalSearch.contains(target) && !searchResults.contains(target)) {
             searchResults.classList.add('hidden');
         }
     });
     
     // Form Validation and Submission
-    const form = document.getElementById('evaluationForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const submitText = document.getElementById('submitText');
-    const submitSpinner = document.getElementById('submitSpinner');
-    const submitArrow = document.getElementById('submitArrow');
+    const form = document.getElementById('evaluationForm') as HTMLFormElement;
+    const submitBtn = document.getElementById('submitBtn') as HTMLButtonElement;
+    const submitText = document.getElementById('submitText') as HTMLElement;
+    const submitSpinner = document.getElementById('submitSpinner') as HTMLElement;
+    const submitArrow = document.getElementById('submitArrow') as HTMLElement;
     
     // Validate form on submit
     form.addEventListener('submit', async function(e) {
@@ -1034,15 +1045,15 @@ document.addEventListener('DOMContentLoaded', function() {
         let isValid = true;
         
         // Validate required fields
-        const office = document.getElementById('office');
+        const office = document.getElementById('office') as HTMLSelectElement;
         if (!office.value) {
-            document.getElementById('office-error').classList.remove('hidden');
+            document.getElementById('office-error')?.classList.remove('hidden');
             isValid = false;
         }
         
-        const status = document.getElementById('status');
+        const status = document.getElementById('status') as HTMLSelectElement;
         if (!status.value) {
-            document.getElementById('status-error').classList.remove('hidden');
+            document.getElementById('status-error')?.classList.remove('hidden');
             isValid = false;
         }
         
@@ -1093,13 +1104,15 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 5000);
             
             // Listen for iframe load (though Google Forms doesn't provide a proper response)
-            const iframe = document.querySelector('iframe[name="hiddenFrame"]');
-            iframe.onload = function() {
-                clearTimeout(submissionTimeout);
-                showResultModal('success', 'Evaluation submitted successfully!');
-                form.reset();
-                resetSubmitButton();
-            };
+            const iframe = document.querySelector('iframe[name="hiddenFrame"]') as HTMLIFrameElement;
+            if (iframe) {
+                iframe.onload = function() {
+                    clearTimeout(submissionTimeout);
+                    showResultModal('success', 'Evaluation submitted successfully!');
+                    form.reset();
+                    resetSubmitButton();
+                };
+            }
             
             // Submit the form
             form.submit();
@@ -1155,12 +1168,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Close pop-out advertisement
-    const popoutAd = document.querySelector('.fixed.bottom-4.right-4');
+    const popoutAd = document.querySelector('.fixed.bottom-4.right-4') as HTMLElement;
     if (popoutAd) {
         const closeBtn = popoutAd.querySelector('button');
-        closeBtn.addEventListener('click', () => {
-            popoutAd.style.display = 'none';
-        });
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                popoutAd.style.display = 'none';
+            });
+        }
     }
 });
 </script>
@@ -1261,6 +1276,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 .bg-gradient-maroon {
     background: linear-gradient(135deg, #7f1d1d 0%, #61063B 100%);
+}
+
+/* Chatbot and Show Ad Button Container Styles */
+#chatbot {
+    position: relative;
+    z-index: 40;
+}
+
+#chatbot iframe {
+    border-radius: 12px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 /* Pop-out advertisement styles */
