@@ -284,12 +284,8 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  // Initialize services tracking
-  const services = {
-    'Library Services': { completed: false, verified: false },
-    'Guidance Services': { completed: false, verified: false }
-    // Add more services as needed
-  };
+  // Initialize services tracking - will be populated from the actual services in the survey
+  const services: Record<string, { completed: boolean; verified: boolean }> = {};
 
   // Tab functionality
   const tabButtons = document.querySelectorAll('.tab-btn');
@@ -302,9 +298,16 @@ document.addEventListener('DOMContentLoaded', function() {
       
       button.classList.add('active');
       const tabId = button.getAttribute('data-tab');
-      document.getElementById(tabId).classList.add('active');
+      const targetTab = document.getElementById(tabId);
+      if (targetTab) targetTab.classList.add('active');
       
-      sessionStorage.setItem('activeTab', tabId);
+      sessionStorage.setItem('activeTab', tabId || '');
+      
+      // Remove progress tracker when switching away from regular student survey
+      if (tabId !== 'studentreg-survey') {
+        const existingTracker = document.querySelector('.reg-progress-tracker');
+        if (existingTracker) existingTracker.remove();
+      }
       
       if (tabId === 'studentreg-survey') {
         initializeStudentSurveyreg();
@@ -315,9 +318,10 @@ document.addEventListener('DOMContentLoaded', function() {
   // Set initial active tab
   const storedTab = sessionStorage.getItem('activeTab');
   if (storedTab && document.getElementById(storedTab)) {
-    document.querySelector(`.tab-btn[data-tab="${storedTab}"]`).click();
+    const tabButton = document.querySelector(`.tab-btn[data-tab="${storedTab}"]`) as HTMLElement;
+    if (tabButton) tabButton.click();
   } else if (tabButtons.length > 0) {
-    tabButtons[0].click();
+    (tabButtons[0] as HTMLElement).click();
   }
 
   // Initialize student survey
@@ -329,18 +333,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize verification status
     function initializeVerificationStatusreg() {
+      // Clear existing services
+      Object.keys(services).forEach(key => delete services[key]);
+      
+      // Define the exact services that should be in this survey
+      const expectedServices = ['Library Services', 'Guidance Services'];
+      
+      // Only add services that are in our expected list
       document.querySelectorAll('.service-card').forEach(card => {
-        const title = card.querySelector('.service-card-title').textContent.trim();
-        // Initialize service if not already in services object
-        if (!services[title]) {
+        const titleElement = card.querySelector('.service-card-title');
+        if (!titleElement) return;
+        
+        const title = titleElement.textContent?.trim();
+        if (!title) return;
+        
+        // Only add if it's in our expected services list
+        if (expectedServices.includes(title)) {
           services[title] = { completed: false, verified: false };
+          updateVerificationStatus(card as HTMLElement, services[title]);
+        } else {
+          console.log('Skipping service not in expected list:', title);
         }
-        updateVerificationStatus(card, services[title]);
       });
+      
+      // Debug log to verify services count
+      console.log('Services initialized:', Object.keys(services).length, 'services:', Object.keys(services));
+      console.log('Expected services:', expectedServices);
+      console.log('Services match expected:', Object.keys(services).length === expectedServices.length);
     }
 
     // Update verification status UI
-    function updateVerificationStatus(card, status) {
+    function updateVerificationStatus(card: HTMLElement, status: { completed: boolean; verified: boolean }) {
       const existingStatus = card.querySelector('.verification-status');
       if (existingStatus) existingStatus.remove();
 
@@ -361,17 +384,19 @@ document.addEventListener('DOMContentLoaded', function() {
         statusIndicator.title = 'Not completed';
       }
 
-      card.querySelector('.service-card-header').prepend(statusIndicator);
+      const header = card.querySelector('.service-card-header');
+      if (header) header.prepend(statusIndicator);
     }
 
     // Validate all questions in a service card
-    function validateServiceQuestions(serviceCard) {
-      const radioGroups = new Set();
-      const answeredGroups = new Set();
+    function validateServiceQuestions(serviceCard: HTMLElement) {
+      const radioGroups = new Set<string>();
+      const answeredGroups = new Set<string>();
       
       serviceCard.querySelectorAll('input[type="radio"]').forEach(radio => {
-        radioGroups.add(radio.name);
-        if (radio.checked) answeredGroups.add(radio.name);
+        const radioElement = radio as HTMLInputElement;
+        radioGroups.add(radioElement.name);
+        if (radioElement.checked) answeredGroups.add(radioElement.name);
       });
       
       return radioGroups.size === answeredGroups.size;
@@ -379,38 +404,46 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Service card selection and validation
     document.querySelectorAll('.service-card').forEach(card => {
-      const checkbox = card.querySelector('.service-card-checkbox');
-      const title = card.querySelector('.service-card-title').textContent.trim();
+      const cardElement = card as HTMLElement;
+      const checkbox = card.querySelector('.service-card-checkbox') as HTMLInputElement;
+      const titleElement = card.querySelector('.service-card-title');
+      if (!titleElement) return;
       
-      // Initialize service if not already in services object
-      if (!services[title]) {
-        services[title] = { completed: false, verified: false };
+      const title = titleElement.textContent?.trim();
+      if (!title) return;
+      
+      // Only work with services that are in our expected list
+      const expectedServices = ['Library Services', 'Guidance Services'];
+      if (!expectedServices.includes(title)) {
+        console.log('Skipping service not in expected list:', title);
+        return; // Skip this card if not in our expected services list
       }
       
-      card.addEventListener('click', function(e) {
-        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.closest('.form-group')) {
+      cardElement.addEventListener('click', function(e) {
+        const target = e.target as HTMLElement;
+        if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.closest('.form-group')) {
           return;
         }
         
         document.querySelectorAll('.service-card').forEach(c => {
           if (c !== card) {
             c.classList.remove('selected');
-            const otherCheckbox = c.querySelector('.service-card-checkbox');
+            const otherCheckbox = c.querySelector('.service-card-checkbox') as HTMLInputElement;
             if (otherCheckbox) otherCheckbox.checked = false;
           }
         });
         
-        card.classList.toggle('selected');
-        if (checkbox) checkbox.checked = card.classList.contains('selected');
+        cardElement.classList.toggle('selected');
+        if (checkbox) checkbox.checked = cardElement.classList.contains('selected');
         
-        if (card.classList.contains('selected')) {
-          card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        if (cardElement.classList.contains('selected')) {
+          cardElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
       });
       
       if (checkbox) {
         checkbox.addEventListener('change', function() {
-          card.classList.toggle('selected', this.checked);
+          cardElement.classList.toggle('selected', this.checked);
         });
       }
     });
@@ -418,26 +451,42 @@ document.addEventListener('DOMContentLoaded', function() {
     // Track radio button changes
     document.querySelectorAll('.service-questions input[type="radio"]').forEach(radio => {
       radio.addEventListener('change', function() {
-        const serviceCard = this.closest('.service-card');
-        const title = serviceCard.querySelector('.service-card-title').textContent.trim();
+        const serviceCard = this.closest('.service-card') as HTMLElement;
+        if (!serviceCard) return;
         
-        services[title].completed = validateServiceQuestions(serviceCard);
-        updateVerificationStatus(serviceCard, services[title]);
-        updateProgressTracker();
+        const titleElement = serviceCard.querySelector('.service-card-title');
+        if (!titleElement) return;
+        
+        const title = titleElement.textContent?.trim();
+        if (!title) return;
+        
+        // Only update if this service is in our expected list
+        const expectedServices = ['Library Services', 'Guidance Services'];
+        if (expectedServices.includes(title) && services[title]) {
+          services[title].completed = validateServiceQuestions(serviceCard);
+          updateVerificationStatus(serviceCard, services[title]);
+          updateRegProgressTracker();
+        }
       });
     });
 
-    // Create progress tracker
-    function createProgressTracker() {
-      const existingTracker = document.querySelector('.progress-tracker');
+    // Create progress tracker for regular students
+    function createRegProgressTracker() {
+      // Only create tracker if we're on the regular student survey tab
+      const activeTab = sessionStorage.getItem('activeTab');
+      if (activeTab !== 'studentreg-survey') {
+        return;
+      }
+      
+      const existingTracker = document.querySelector('.reg-progress-tracker');
       if (existingTracker) existingTracker.remove();
       
       const tracker = document.createElement('div');
-      tracker.className = 'progress-tracker';
+      tracker.className = 'reg-progress-tracker';
       tracker.title = 'Survey completion progress';
       tracker.innerHTML = `
-        <div class="progress-circle">
-          <svg viewBox="0 0 36 36" class="progress-bg">
+        <div class="reg-progress-circle">
+          <svg viewBox="0 0 36 36" class="reg-progress-bg">
             <path d="M18 2.0845
               a 15.9155 15.9155 0 0 1 0 31.831
               a 15.9155 15.9155 0 0 1 0 -31.831"
@@ -445,7 +494,7 @@ document.addEventListener('DOMContentLoaded', function() {
               stroke-dasharray="100, 100"
             />
           </svg>
-          <svg viewBox="0 0 36 36" class="progress-fill">
+          <svg viewBox="0 0 36 36" class="reg-progress-fill">
             <path d="M18 2.0845
               a 15.9155 15.9155 0 0 1 0 31.831
               a 15.9155 15.9155 0 0 1 0 -31.831"
@@ -453,22 +502,44 @@ document.addEventListener('DOMContentLoaded', function() {
               stroke-dasharray="0, 100"
             />
           </svg>
-          <div class="progress-text">0%</div>
+          <div class="reg-progress-text">0%</div>
         </div>
       `;
       
-      tracker.addEventListener('click', showProgressSummary);
+      tracker.addEventListener('click', showRegProgressSummary);
       document.body.appendChild(tracker);
     }
 
-    // Update progress tracker
-    function updateProgressTracker() {
-      const totalServices = Object.keys(services).length;
+    // Update progress tracker for regular students
+    function updateRegProgressTracker() {
+      // Only update tracker if we're on the regular student survey tab
+      const activeTab = sessionStorage.getItem('activeTab');
+      if (activeTab !== 'studentreg-survey') {
+        return;
+      }
+      
+      const expectedServices = ['Library Services', 'Guidance Services'];
+      const totalServices = expectedServices.length; // Always use expected count
       const completedServices = Object.values(services).filter(s => s.completed || s.verified).length;
       const percentage = Math.round((completedServices / totalServices) * 100);
       
-      const progressFill = document.querySelector('.progress-fill');
-      const progressText = document.querySelector('.progress-text');
+      // Debug logging
+      console.log('Reg Progress Tracker Update:');
+      console.log('Expected services:', expectedServices);
+      console.log('Total services (expected):', totalServices);
+      console.log('Completed services:', completedServices);
+      console.log('Percentage:', percentage);
+      console.log('Services status:', services);
+      
+      // Verify we have the right services
+      const actualServices = Object.keys(services);
+      if (actualServices.length !== totalServices) {
+        console.warn('Warning: Expected', totalServices, 'services, but found', actualServices.length);
+        console.log('Actual services found:', actualServices);
+      }
+      
+      const progressFill = document.querySelector('.reg-progress-fill') as HTMLElement;
+      const progressText = document.querySelector('.reg-progress-text') as HTMLElement;
       
       if (progressFill && progressText) {
         progressFill.style.strokeDasharray = `${percentage}, 100`;
@@ -487,17 +558,26 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
 
-    // Show progress summary
-    function showProgressSummary() {
-      const totalServices = Object.keys(services).length;
-      const completedServices = Object.values(services).filter(s => s.completed).length;
+    // Show progress summary for regular students
+    function showRegProgressSummary() {
+      const expectedServices = ['Library Services', 'Guidance Services'];
+      const totalServices = expectedServices.length; // Always use expected count
+      const completedServices = Object.values(services).filter(s => s.completed && !s.verified).length;
       const verifiedServices = Object.values(services).filter(s => s.verified).length;
       const remainingServices = totalServices - completedServices - verifiedServices;
       
-      const modal = document.getElementById('feedbackModal');
-      const modalMessage = document.getElementById('modalMessage');
-      const modalIcon = modal.querySelector('.modal-icon');
-      const modalTitle = modal.querySelector('.modal-title');
+      // Debug logging
+      console.log('Reg Progress Summary:');
+      console.log('Expected services:', expectedServices);
+      console.log('Total services (expected):', totalServices);
+      console.log('Completed (not submitted):', completedServices);
+      console.log('Verified (submitted):', verifiedServices);
+      console.log('Remaining:', remainingServices);
+      
+      const modal = document.getElementById('feedbackModal') as HTMLElement;
+      const modalMessage = document.getElementById('modalMessage') as HTMLElement;
+      const modalIcon = modal.querySelector('.modal-icon') as HTMLElement;
+      const modalTitle = modal.querySelector('.modal-title') as HTMLElement;
       
       modalTitle.textContent = 'Survey Progress';
       modal.classList.remove('modal-error', 'modal-success');
@@ -535,9 +615,12 @@ document.addEventListener('DOMContentLoaded', function() {
       `;
       
       modal.classList.add('active');
-      document.getElementById('modalCloseButton').onclick = function() {
-        modal.classList.remove('active');
-      };
+      const closeButton = document.getElementById('modalCloseButton') as HTMLElement;
+      if (closeButton) {
+        closeButton.onclick = function() {
+          modal.classList.remove('active');
+        };
+      }
       
       modal.onclick = function(e) {
         if (e.target === modal) {
@@ -558,11 +641,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Setup reference code generation
     function setupReferenceCodeGenerationreg() {
-      const regstudentNumberInput = document.querySelector('input[name="regstudids"]');
-      const regcourseInput = document.querySelector('input[name="regcourses"]');
-      const regyearLevelInputs = document.querySelectorAll('input[name="regyearlevels"]');
-      const regreferenceCodeInput = document.getElementById('regreferenceCodeInputs');
-      const regcopyBtn = document.getElementById('regcopyReferenceCodeBtns');
+      const regstudentNumberInput = document.querySelector('input[name="regstudids"]') as HTMLInputElement;
+      const regcourseInput = document.querySelector('input[name="regcourses"]') as HTMLInputElement;
+      const regyearLevelInputs = document.querySelectorAll('input[name="regyearlevels"]') as NodeListOf<HTMLInputElement>;
+      const regreferenceCodeInput = document.getElementById('regreferenceCodeInputs') as HTMLInputElement;
+      const regcopyBtn = document.getElementById('regcopyReferenceCodeBtns') as HTMLElement;
       
       function regupdateReferenceCode() {
         const regstudentNumber = regstudentNumberInput?.value.trim();
@@ -621,7 +704,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Form submission handler
-    const surveyForm = document.getElementById('studentSurveyForm');
+    const surveyForm = document.getElementById('studentSurveyForm') as HTMLFormElement;
     if (surveyForm) {
       let isSubmitting = false;
       
@@ -643,7 +726,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.appendChild(loader);
         
         // Disable submit button
-        const submitButton = surveyForm.querySelector('button[type="submit"]');
+        const submitButton = surveyForm.querySelector('button[type="submit"]') as HTMLButtonElement;
         if (submitButton) {
           submitButton.disabled = true;
           submitButton.innerHTML = 'Submitting...';
@@ -662,9 +745,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Validate student info
-        const regyearLevel = document.querySelector('input[name="regyearlevels"]:checked');
-        const regcourse = document.querySelector('input[name="regcourses"]');
-        const regstudentNumber = document.querySelector('input[name="regstudids"]');
+        const regyearLevel = document.querySelector('input[name="regyearlevels"]:checked') as HTMLInputElement;
+        const regcourse = document.querySelector('input[name="regcourses"]') as HTMLInputElement;
+        const regstudentNumber = document.querySelector('input[name="regstudids"]') as HTMLInputElement;
         
         if (!regyearLevel) {
           loader.remove();
@@ -704,16 +787,22 @@ document.addEventListener('DOMContentLoaded', function() {
         // Validate selected services
         const selectedServices = document.querySelectorAll('.service-card.selected');
         let allServicesValid = true;
-        let invalidServices = [];
+        let invalidServices: string[] = [];
         
         selectedServices.forEach(card => {
-          const title = card.querySelector('.service-card-title').textContent.trim();
-          const isValid = validateServiceQuestions(card);
+          const cardElement = card as HTMLElement;
+          const titleElement = cardElement.querySelector('.service-card-title');
+          if (!titleElement) return;
+          
+          const title = titleElement.textContent?.trim();
+          if (!title) return;
+          
+          const isValid = validateServiceQuestions(cardElement);
           
           if (!isValid) {
             allServicesValid = false;
             invalidServices.push(title);
-            card.classList.add('border-red-500');
+            cardElement.classList.add('border-red-500');
           }
         });
         
@@ -748,7 +837,7 @@ document.addEventListener('DOMContentLoaded', function() {
           const input = document.createElement('input');
           input.type = 'hidden';
           input.name = key;
-          input.value = value;
+          input.value = value.toString();
           hiddenForm.appendChild(input);
         });
         
@@ -760,14 +849,14 @@ document.addEventListener('DOMContentLoaded', function() {
           services[service].completed = true;
         });
         
-        updateProgressTracker();
+        updateRegProgressTracker();
         
         // Show success message with details
         const studentData = {
-          regreferenceCode: document.getElementById('regreferenceCodeInputs').value,
-          regstudentId: regstudentNumber.value,
-          regcourse: regcourse.value,
-          regyearLevel: regyearLevel.value
+          regreferenceCode: (document.getElementById('regreferenceCodeInputs') as HTMLInputElement).value,
+          regstudentId: regstudentNumber?.value || '',
+          regcourse: regcourse?.value || '',
+          regyearLevel: regyearLevel?.value || ''
         };
         
         // Remove loader before showing success message
@@ -787,7 +876,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
           surveyForm.reset();
           initializeVerificationStatusreg();
-          updateProgressTracker();
+          updateRegProgressTracker();
           isSubmitting = false;
           if (submitButton) {
             submitButton.disabled = false;
@@ -798,11 +887,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Show submission success with details
-    function showSubmissionSuccess(data) {
-      const modal = document.getElementById('feedbackModal');
-      const modalMessage = document.getElementById('modalMessage');
-      const modalIcon = modal.querySelector('.modal-icon');
-      const modalTitle = modal.querySelector('.modal-title');
+    function showSubmissionSuccess(data: { regreferenceCode: string; regstudentId: string; regcourse: string; regyearLevel: string }) {
+      const modal = document.getElementById('feedbackModal') as HTMLElement;
+      const modalMessage = document.getElementById('modalMessage') as HTMLElement;
+      const modalIcon = modal.querySelector('.modal-icon') as HTMLElement;
+      const modalTitle = modal.querySelector('.modal-title') as HTMLElement;
       
       modalTitle.textContent = 'Submission Successful';
       modalIcon.innerHTML = `
@@ -867,9 +956,12 @@ document.addEventListener('DOMContentLoaded', function() {
       
       modal.classList.add('active');
       
-      document.getElementById('modalCloseButton').onclick = function() {
-        modal.classList.remove('active');
-      };
+      const closeButton = document.getElementById('modalCloseButton') as HTMLElement;
+      if (closeButton) {
+        closeButton.onclick = function() {
+          modal.classList.remove('active');
+        };
+      }
       
       modal.onclick = function(e) {
         if (e.target === modal) {
@@ -878,13 +970,18 @@ document.addEventListener('DOMContentLoaded', function() {
       };
 
       // Add event listener for download button
-      document.getElementById('downloadReceiptBtn')?.addEventListener('click', function() {
-        downloadReceiptAsImage();
-      });
+      const downloadBtn = document.getElementById('downloadReceiptBtn') as HTMLButtonElement;
+      if (downloadBtn) {
+        downloadBtn.addEventListener('click', function() {
+          downloadReceiptAsImage();
+        });
+      }
 
       // Function to download the receipt as image
       async function downloadReceiptAsImage() {
-        const downloadBtn = document.getElementById('downloadReceiptBtn');
+        const downloadBtn = document.getElementById('downloadReceiptBtn') as HTMLButtonElement;
+        if (!downloadBtn) return;
+        
         const originalBtnContent = downloadBtn.innerHTML;
         
         // Show loading state on button
@@ -900,7 +997,8 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
           // Use html2canvas library to convert the div to an image
           const html2canvas = await loadHtml2Canvas();
-          const receiptElement = document.getElementById('receiptContent');
+          const receiptElement = document.getElementById('receiptContent') as HTMLElement;
+          if (!receiptElement) throw new Error('Receipt element not found');
           
           // Add some temporary styles for better screenshot
           receiptElement.style.boxShadow = 'none';
@@ -908,7 +1006,7 @@ document.addEventListener('DOMContentLoaded', function() {
           receiptElement.style.borderRadius = '0.5rem';
           receiptElement.style.padding = '1.5rem';
           
-          const canvas = await html2canvas(receiptElement, {
+          const canvas = await (html2canvas as any)(receiptElement, {
             scale: 2, // Higher quality
             logging: false,
             useCORS: true,
@@ -925,21 +1023,25 @@ document.addEventListener('DOMContentLoaded', function() {
           document.body.removeChild(link);
           
           // Show success feedback
-          const modalIcon = document.querySelector('#feedbackModal .modal-icon');
-          modalIcon.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-          `;
+          const modalIcon = document.querySelector('#feedbackModal .modal-icon') as HTMLElement;
+          if (modalIcon) {
+            modalIcon.innerHTML = `
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+            `;
+          }
         } catch (error) {
           console.error('Error generating image:', error);
           // Show error feedback
-          const modalIcon = document.querySelector('#feedbackModal .modal-icon');
-          modalIcon.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
-          `;
+          const modalIcon = document.querySelector('#feedbackModal .modal-icon') as HTMLElement;
+          if (modalIcon) {
+            modalIcon.innerHTML = `
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            `;
+          }
         } finally {
           // Restore button state
           downloadBtn.innerHTML = originalBtnContent;
@@ -950,14 +1052,14 @@ document.addEventListener('DOMContentLoaded', function() {
       // Function to dynamically load html2canvas
       function loadHtml2Canvas() {
         return new Promise((resolve, reject) => {
-          if (window.html2canvas) {
-            resolve(window.html2canvas);
+          if ((window as any).html2canvas) {
+            resolve((window as any).html2canvas);
             return;
           }
           
           const script = document.createElement('script');
           script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
-          script.onload = () => resolve(window.html2canvas);
+          script.onload = () => resolve((window as any).html2canvas);
           script.onerror = reject;
           document.head.appendChild(script);
         });
@@ -965,11 +1067,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Modal control
-    function showModal(type, message) {
-      const modal = document.getElementById('feedbackModal');
-      const modalMessage = document.getElementById('modalMessage');
-      const modalIcon = modal.querySelector('.modal-icon');
-      const modalTitle = modal.querySelector('.modal-title');
+    function showModal(type: 'success' | 'error', message: string) {
+      const modal = document.getElementById('feedbackModal') as HTMLElement;
+      const modalMessage = document.getElementById('modalMessage') as HTMLElement;
+      const modalIcon = modal.querySelector('.modal-icon') as HTMLElement;
+      const modalTitle = modal.querySelector('.modal-title') as HTMLElement;
       
       modalMessage.innerHTML = message;
       
@@ -995,9 +1097,12 @@ document.addEventListener('DOMContentLoaded', function() {
       
       modal.classList.add('active');
       
-      document.getElementById('modalCloseButton').onclick = function() {
-        modal.classList.remove('active');
-      };
+      const closeButton = document.getElementById('modalCloseButton') as HTMLElement;
+      if (closeButton) {
+        closeButton.onclick = function() {
+          modal.classList.remove('active');
+        };
+      }
       
       modal.onclick = function(e) {
         if (e.target === modal) {
@@ -1008,9 +1113,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize the student survey
     initializeVerificationStatusreg();
-    createProgressTracker();
+    createRegProgressTracker();
     setupReferenceCodeGenerationreg();
-    updateProgressTracker();
+    updateRegProgressTracker();
+    
+    // Verify services count matches survey
+    const expectedServices = ['Library Services', 'Guidance Services'];
+    const actualServices = Object.keys(services);
+    console.log('Expected services:', expectedServices);
+    console.log('Actual services found:', actualServices);
+    console.log('Services count match:', expectedServices.length === actualServices.length);
   }
 
   // Add connectivity status monitoring
@@ -1019,6 +1131,51 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   window.addEventListener('offline', () => {
+    // Define showModal function in global scope for offline event
+    function showModal(type: 'success' | 'error', message: string) {
+      const modal = document.getElementById('feedbackModal') as HTMLElement;
+      const modalMessage = document.getElementById('modalMessage') as HTMLElement;
+      const modalIcon = modal.querySelector('.modal-icon') as HTMLElement;
+      const modalTitle = modal.querySelector('.modal-title') as HTMLElement;
+      
+      modalMessage.innerHTML = message;
+      
+      if (type === 'success') {
+        modal.classList.remove('modal-error');
+        modal.classList.add('modal-success');
+        modalTitle.textContent = 'Success!';
+        modalIcon.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+        `;
+      } else {
+        modal.classList.remove('modal-success');
+        modal.classList.add('modal-error');
+        modalTitle.textContent = 'Attention Required';
+        modalIcon.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+        `;
+      }
+      
+      modal.classList.add('active');
+      
+      const closeButton = document.getElementById('modalCloseButton') as HTMLElement;
+      if (closeButton) {
+        closeButton.onclick = function() {
+          modal.classList.remove('active');
+        };
+      }
+      
+      modal.onclick = function(e) {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+        }
+      };
+    }
+    
     showModal('error', 'Internet connection lost. Please reconnect to submit your survey.');
   });
 
@@ -1197,7 +1354,7 @@ document.addEventListener('DOMContentLoaded', function() {
       border-left-color: #d4af37;
       animation-timing-function: cubic-bezier(0.53, 0.21, 0.29, 0.67);
     }
-    .progress-tracker {
+    .reg-progress-tracker {
       position: fixed;
       bottom: 2rem;
       right: 2rem;
@@ -1212,29 +1369,29 @@ document.addEventListener('DOMContentLoaded', function() {
       align-items: center;
       justify-content: center;
     }
-    .progress-circle {
+    .reg-progress-circle {
       position: relative;
       width: 100%;
       height: 100%;
     }
-    .progress-bg, .progress-fill {
+    .reg-progress-bg, .reg-progress-fill {
       width: 100%;
       height: 100%;
       position: absolute;
       top: 0;
       left: 0;
     }
-    .progress-bg path {
+    .reg-progress-bg path {
       stroke: #e5e7eb;
       stroke-width: 3;
     }
-    .progress-fill path {
+    .reg-progress-fill path {
       stroke: #1a4b8c;
       stroke-width: 3;
       stroke-linecap: round;
       transition: stroke-dasharray 0.6s ease;
     }
-    .progress-text {
+    .reg-progress-text {
       position: absolute;
       top: 50%;
       left: 50%;
