@@ -156,7 +156,7 @@ const Navbar = ({ path }) => {
       icon: <FaHome className="text-lg" />,
       items: [
         { link: "/", label: "Overview" },
-        { link: "/404.astro", label: "Office Feedback" },
+        { link: "/officefeedback", label: "Office Feedback" },
         { link: "/partners", label: "Local and International Partners" }
       ]
     },

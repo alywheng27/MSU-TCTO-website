@@ -79,7 +79,7 @@
                       <label class="block text-sm font-medium text-gray-700 mb-2">
                         Course <span class="text-msu-maroon">*</span>
                       </label>
-                      <input type="text" name="entry.1662743243" class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-msu-main-color focus:border-msu-main-color" placeholder="Enter your course" required>
+                      <input type="text" name="entry.1662743243" class="text-msu-maroon-900 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-msu-main-color focus:border-msu-main-color" placeholder="Enter your course" required>
                     </div>
                   </div>
 
@@ -87,7 +87,7 @@
                     <label class="block text-sm font-medium text-gray-700 mb-2">
                       Student Number <span class="text-msu-maroon">*</span>
                     </label>
-                    <input type="text" name="entry.413035083" class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-msu-main-color focus:border-msu-main-color" placeholder="e.g. 2023-12345" required>
+                    <input type="text" name="entry.413035083" class="text-msu-maroon-900 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-msu-main-color focus:border-msu-main-color" placeholder="e.g. 2023-12345" required>
                   </div>
 
                 <!-- Add this right after the Student Number field in your form -->
@@ -100,7 +100,7 @@
                         type="text" 
                         name="entry.1892298780" 
                         id="referenceCodeInput"
-                        class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-msu-main-color focus:border-msu-main-color bg-gray-100 font-mono" 
+                        class="text-msu-maroon-900 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-msu-main-color focus:border-msu-main-color bg-gray-100 font-mono" 
                         placeholder="Will be generated automatically" 
                         readonly
                         required
@@ -268,7 +268,7 @@
                           entry: "entry.557952169"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "3. The physician’s schedule is posted.      ", 
+                          text: "3. The physician's schedule is posted.      ", 
                           entry: "entry.1574762898"  // Use the exact Google Form field name
                         },
                         { 
@@ -284,7 +284,7 @@
                           entry: "entry.1665306060"  // Use the exact Google Form field name
                         },
                          { 
-                          text: "7. The physician’s diagnosis is precise and reliable.       ", 
+                          text: "7. The physician's diagnosis is precise and reliable.       ", 
                           entry: "entry.1700661155"  // Use the exact Google Form field name
                         },
                         { 
@@ -394,11 +394,11 @@
                             </svg>`,
                       questions: [
                         { 
-                          text: "1. The Registrar’s office staff members are respectful and polite.   ", 
+                          text: "1. The Registrar's office staff members are respectful and polite.   ", 
                           entry: "entry.873793740"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "2. The Registrar’s Office staff members displayed professionalism during interactions.     ", 
+                          text: "2. The Registrar's Office staff members displayed professionalism during interactions.     ", 
                           entry: "entry.790874569"  // Use the exact Google Form field name
                         },
                         { 
@@ -691,10 +691,12 @@ document.addEventListener('DOMContentLoaded', function() {
       'Campus Orientation Services'
     ];
     
-    // Initialize services object
+    // Initialize services object with only the 6 intended services
     serviceTitles.forEach(title => {
       services[title] = { completed: false, verified: false };
     });
+    
+    console.log('Initialized services:', Object.keys(services).length, 'services:', Object.keys(services));
 
     // Check internet connectivity
     function checkInternetConnection() {
@@ -705,11 +707,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function initializeVerificationStatus() {
       document.querySelectorAll('.service-card').forEach(card => {
         const title = card.querySelector('.service-card-title').textContent.trim();
-        // Ensure the service exists in our object
-        if (!services[title]) {
-          services[title] = { completed: false, verified: false };
+        // Only work with the 6 intended services
+        if (services[title]) {
+          updateVerificationStatus(card, services[title]);
         }
-        updateVerificationStatus(card, services[title]);
         
         const checkbox = card.querySelector('.service-card-checkbox');
         if (checkbox) checkbox.checked = false;
