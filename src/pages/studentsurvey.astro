@@ -240,7 +240,6 @@
                         
                         // More questions with their specific entry names
                       ],
-                      
                       commentsEntry: "entry.953509473", 
                       suggestionsEntry: "entry.1036661815"
                     },
@@ -1206,100 +1205,20 @@ document.addEventListener('DOMContentLoaded', function() {
               </div>
             </div>
             
-            <!-- Professional Grid Timeline -->
-            <div class="grid-timeline-container mb-6">
-              <div class="grid-timeline">
-                <div class="timeline-grid">
-                  <!-- Grid Background -->
-                  <div class="grid-background">
-                    <div class="grid-line horizontal"></div>
-                    <div class="grid-line horizontal"></div>
-                    <div class="grid-line horizontal"></div>
-                    <div class="grid-line vertical"></div>
-                    <div class="grid-line vertical"></div>
-                    <div class="grid-line vertical"></div>
-                  </div>
-                  
-                  <!-- Progress Line -->
-                  <div class="progress-line"></div>
-                  
-                  <!-- Timeline Steps -->
-                  <div class="timeline-step" data-step="1">
-                    <div class="step-node">
-                      <div class="step-circle">
-                        <span class="step-number">1</span>
-                        <svg class="step-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
-                        </svg>
-                      </div>
-                      <div class="step-label">
-                        <span class="step-title">Validating</span>
-                        <span class="step-subtitle">Checking data integrity</span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="timeline-step" data-step="2">
-                    <div class="step-node">
-                      <div class="step-circle">
-                        <span class="step-number">2</span>
-                        <svg class="step-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
-                        </svg>
-                      </div>
-                      <div class="step-label">
-                        <span class="step-title">Processing</span>
-                        <span class="step-subtitle">Analyzing responses</span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="timeline-step" data-step="3">
-                    <div class="step-node">
-                      <div class="step-circle">
-                        <span class="step-number">3</span>
-                        <svg class="step-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
-                        </svg>
-                      </div>
-                      <div class="step-label">
-                        <span class="step-title">Submitting</span>
-                        <span class="step-subtitle">Sending to server</span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="timeline-step" data-step="4">
-                    <div class="step-node">
-                      <div class="step-circle">
-                        <span class="step-number">4</span>
-                        <svg class="step-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
-                        </svg>
-                      </div>
-                      <div class="step-label">
-                        <span class="step-title">Complete</span>
-                        <span class="step-subtitle">Successfully finished</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+
             
-            <!-- Progress Bar -->
-            <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
-              <div class="progress-bar bg-gradient-to-r from-msu-main-color to-msu-maroon h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
-            </div>
+
             
             <!-- Status Message -->
-            <p class="text-gray-700 font-medium text-center mb-2">Processing your survey submission...</p>
-            <p class="text-sm text-gray-500 text-center">Please wait while we validate and submit your responses</p>
+            <p class="text-gray-700 font-medium text-center mb-2 transition-opacity duration-300">Processing your survey submission...</p>
+            <p class="text-sm text-gray-500 text-center transition-opacity duration-300">Please wait while we validate and submit your responses</p>
             
             <!-- Spinning Loader -->
             <div class="mt-4">
               <div class="loader animate-spin rounded-full h-8 w-8 border-2 border-msu-main-color border-t-transparent"></div>
             </div>
+            
+
           </div>
         `;
         document.body.appendChild(loader);
@@ -1485,123 +1404,47 @@ document.addEventListener('DOMContentLoaded', function() {
     showModal('error', 'Internet connection lost. Please reconnect to submit your survey.');
   });
 
-      // Professional Grid Timeline Progress Animation
+            // Simplified status animation function
     function startProgressAnimation() {
-      const progressLine = document.querySelector('.progress-line');
-      const timelineSteps = document.querySelectorAll('.timeline-step');
       const statusMessage = document.querySelector('.loader-container p:first-of-type');
       const statusSubtext = document.querySelector('.loader-container p:last-of-type');
       
-      let currentStep = 1;
-      const totalSteps = 4;
+      const statusMessages = [
+        { main: 'Validating your information...', sub: 'Checking student details and form completeness' },
+        { main: 'Processing survey responses...', sub: 'Analyzing your feedback and ratings' },
+        { main: 'Submitting to server...', sub: 'Sending your responses securely' },
+        { main: 'Finalizing submission...', sub: 'Preparing your receipt and confirmation' }
+      ];
       
-      const stepMessages = {
-        1: { main: 'Validating your information...', sub: 'Checking student details and form completeness' },
-        2: { main: 'Processing survey responses...', sub: 'Analyzing your feedback and ratings' },
-        3: { main: 'Submitting to server...', sub: 'Sending your responses securely' },
-        4: { main: 'Finalizing submission...', sub: 'Preparing your receipt and confirmation' }
-      };
+      let currentStep = 0;
       
-      // Initialize all steps as pending
-      timelineSteps.forEach((step, index) => {
-        step.classList.remove('active', 'completed', 'pending');
-        step.classList.add('pending');
-      });
-      
-      function updateStep(stepNumber) {
-        console.log('Updating to step:', stepNumber);
-        
-        // Update progress line
-        const progress = (stepNumber / totalSteps) * 100;
-        progressLine.style.width = `${progress}%`;
-        
-        // Update timeline steps with proper state management
-        timelineSteps.forEach((step, index) => {
-          const stepNum = index + 1;
-          
-          // Remove all classes first
-          step.classList.remove('active', 'completed', 'pending');
-          
-          if (stepNum < stepNumber) {
-            // Previous steps: completed with checkmark
-            step.classList.add('completed');
-            console.log(`Step ${stepNum} marked as completed`);
-          } else if (stepNum === stepNumber) {
-            // Current step: active
-            step.classList.add('active');
-            console.log(`Step ${stepNum} marked as active`);
-          } else {
-            // Future steps: pending
-            step.classList.add('pending');
-            console.log(`Step ${stepNum} marked as pending`);
-          }
-        });
+      function updateStatus() {
+        currentStep++;
         
         // Update status messages
-        if (stepMessages[stepNumber]) {
-          statusMessage.textContent = stepMessages[stepNumber].main;
-          statusSubtext.textContent = stepMessages[stepNumber].sub;
-        }
-        
-        // Ensure previous steps are marked as completed with checkmark animation
-        for (let i = 1; i < stepNumber; i++) {
-          const previousStep = document.querySelector(`.timeline-step[data-step="${i}"]`);
-          if (previousStep) {
-            previousStep.classList.remove('active');
-            previousStep.classList.add('completed');
-            
-            // Add checkmark animation for newly completed steps
-            const checkmark = previousStep.querySelector('.step-checkmark');
-            if (checkmark && !previousStep.classList.contains('checkmark-animated')) {
-              checkmark.style.animation = 'checkmarkAppear 0.5s ease-out';
-              previousStep.classList.add('checkmark-animated');
-              console.log(`Checkmark animation added to step ${i}`);
-            }
-          }
+        if (statusMessages[currentStep - 1]) {
+          statusMessage.style.transition = 'opacity 0.4s ease';
+          statusSubtext.style.transition = 'opacity 0.4s ease';
+          statusMessage.style.opacity = '0';
+          statusSubtext.style.opacity = '0';
+          
+          setTimeout(() => {
+            statusMessage.textContent = statusMessages[currentStep - 1].main;
+            statusSubtext.textContent = statusMessages[currentStep - 1].sub;
+            statusMessage.style.opacity = '1';
+            statusSubtext.style.opacity = '1';
+          }, 300);
         }
       }
       
-      // Simulate the process steps with checkmark animations
-      console.log('Starting progress animation...');
-      updateStep(1);
-      
-      setTimeout(() => {
-        console.log('Moving to step 2...');
-        updateStep(2);
-      }, 1500);
-      
-      setTimeout(() => {
-        console.log('Moving to step 3...');
-        updateStep(3);
-      }, 3000);
-      
-      setTimeout(() => {
-        console.log('Moving to step 4...');
-        updateStep(4);
-      }, 4500);
-      
-      // Complete the final step with checkmark
-      setTimeout(() => {
-        console.log('Completing final step...');
-        // Mark the final step as completed
-        const finalStep = document.querySelector('.timeline-step[data-step="4"]');
-        if (finalStep) {
-          finalStep.classList.remove('active');
-          finalStep.classList.add('completed');
-          
-          // Add completion animation
-          const checkmark = finalStep.querySelector('.step-checkmark');
-          if (checkmark) {
-            checkmark.style.animation = 'checkmarkAppear 0.5s ease-out';
-            console.log('Final checkmark animation added');
-          }
-          
-          // Add pulse animation to the entire step
-          finalStep.style.animation = 'finalStepComplete 0.8s ease-out';
-          console.log('Final step completion animation added');
-        }
-      }, 5000);
+      // Start status updates
+      setTimeout(() => updateStatus(), 1000);
+      setTimeout(() => updateStatus(), 3000);
+      setTimeout(() => updateStatus(), 5000);
+      setTimeout(() => updateStatus(), 7000);
     }
+      
+
     
     // Function to stop animation and show error
     function stopAnimationAndShowError(message) {
@@ -1902,265 +1745,7 @@ document.addEventListener('DOMContentLoaded', function() {
       100% { transform: scale(1); opacity: 1; }
     }
     
-    /* Professional Grid Timeline Styles */
-    .grid-timeline-container {
-      width: 100%;
-      padding: 2rem 0;
-    }
-    
-    .grid-timeline {
-      position: relative;
-      width: 100%;
-      height: 120px;
-      overflow: hidden;
-    }
-    
-    .timeline-grid {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-    }
-    
-    /* Grid Background */
-    .grid-background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-    }
-    
-    .grid-line {
-      position: absolute;
-      background: linear-gradient(90deg, transparent 0%, rgba(34, 197, 94, 0.1) 50%, transparent 100%);
-    }
-    
-    .grid-line.horizontal {
-      width: 100%;
-      height: 1px;
-      top: 33.33%;
-    }
-    
-    .grid-line.horizontal:nth-child(2) {
-      top: 66.66%;
-    }
-    
-    .grid-line.vertical {
-      width: 1px;
-      height: 100%;
-      left: 25%;
-    }
-    
-    .grid-line.vertical:nth-child(5) {
-      left: 50%;
-    }
-    
-    .grid-line.vertical:nth-child(6) {
-      left: 75%;
-    }
-    
-    /* Progress Line */
-    .progress-line {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      width: 0%;
-      height: 3px;
-      background: linear-gradient(90deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
-      border-radius: 2px;
-      z-index: 3;
-      transition: width 0.8s ease;
-      box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
-    }
-    
-    /* Timeline Steps */
-    .timeline-step {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 4;
-      transition: all 0.5s ease;
-    }
-    
-    .timeline-step:nth-child(3) { left: 12.5%; }
-    .timeline-step:nth-child(4) { left: 37.5%; }
-    .timeline-step:nth-child(5) { left: 62.5%; }
-    .timeline-step:nth-child(6) { left: 87.5%; }
-    
-    .step-node {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    
-    .step-circle {
-      width: 3rem;
-      height: 3rem;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 0.875rem;
-      color: #6b7280;
-      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-      border: 2px solid #cbd5e1;
-      position: relative;
-      transition: all 0.5s ease;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    
-    .step-number {
-      display: block;
-      transition: all 0.3s ease;
-      font-weight: 600;
-    }
-    
-    .step-checkmark {
-      position: absolute;
-      width: 1.5rem;
-      height: 1.5rem;
-      color: white;
-      opacity: 0;
-      transform: scale(0.5);
-      transition: all 0.4s ease;
-    }
-    
-    .step-label {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      max-width: 80px;
-    }
-    
-    .step-title {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: #374151;
-      margin-bottom: 0.125rem;
-      transition: color 0.3s ease;
-    }
-    
-    .step-subtitle {
-      font-size: 0.625rem;
-      color: #6b7280;
-      transition: color 0.3s ease;
-    }
-    
-    /* Active State */
-    .timeline-step.active .step-circle {
-      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-      color: white;
-      border-color: #22c55e;
-      transform: scale(1.1);
-      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2), 0 4px 8px rgba(34, 197, 94, 0.3);
-      animation: activePulse 1s ease-in-out;
-    }
-    
-    .timeline-step.active .step-title {
-      color: #22c55e;
-      font-weight: 700;
-    }
-    
-    .timeline-step.active .step-subtitle {
-      color: #16a34a;
-    }
-    
-    /* Completed State */
-    .timeline-step.completed .step-circle {
-      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-      color: white;
-      border-color: #22c55e;
-      box-shadow: 0 2px 8px rgba(34, 197, 94, 0.4);
-    }
-    
-    .timeline-step.completed .step-number {
-      opacity: 0;
-    }
-    
-    .timeline-step.completed .step-checkmark {
-      opacity: 1;
-      transform: scale(1);
-      animation: checkmarkAppear 0.5s ease-out;
-    }
-    
-    .timeline-step.completed .step-title {
-      color: #22c55e;
-      font-weight: 600;
-    }
-    
-    .timeline-step.completed .step-subtitle {
-      color: #16a34a;
-    }
-    
-    /* Pending State */
-    .timeline-step.pending .step-circle {
-      background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-      border-color: #cbd5e1;
-      color: #94a3b8;
-    }
-    
-    .timeline-step.pending .step-title {
-      color: #94a3b8;
-    }
-    
-    .timeline-step.pending .step-subtitle {
-      color: #cbd5e1;
-    }
-    
-    /* Animations */
-    @keyframes activePulse {
-      0% { transform: scale(1.1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1.1); }
-    }
-    
-    @keyframes checkmarkAppear {
-      0% { 
-        opacity: 0; 
-        transform: scale(0.5) rotate(-10deg);
-      }
-      50% { 
-        opacity: 0.8; 
-        transform: scale(1.1) rotate(5deg);
-      }
-      100% { 
-        opacity: 1; 
-        transform: scale(1) rotate(0deg);
-      }
-    }
-    
-    @keyframes finalStepComplete {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-    
-    @keyframes gridGlow {
-      0% { opacity: 0.1; }
-      50% { opacity: 0.3; }
-      100% { opacity: 0.1; }
-    }
-    
-    .grid-line {
-      animation: gridGlow 3s ease-in-out infinite;
-    }
-    
-    /* Progress line animation */
-    @keyframes progressGlow {
-      0% { box-shadow: 0 0 10px rgba(34, 197, 94, 0.3); }
-      50% { box-shadow: 0 0 20px rgba(34, 197, 94, 0.5); }
-      100% { box-shadow: 0 0 10px rgba(34, 197, 94, 0.3); }
-    }
-    
-    .progress-line {
-      animation: progressGlow 2s ease-in-out infinite;
-    }
+
     
     /* Enhanced Loader Styles */
     .loader-container {
