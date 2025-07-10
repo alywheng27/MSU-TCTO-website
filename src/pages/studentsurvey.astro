@@ -240,7 +240,8 @@
                         
                         // More questions with their specific entry names
                       ],
-                      commentsEntry: "entry.953509473",
+                      
+                      commentsEntry: "entry.953509473", 
                       suggestionsEntry: "entry.1036661815"
                     },
 
@@ -553,7 +554,7 @@
                                   <label class="flex flex-col items-center">
                                     <input 
                                       type="radio" 
-                                      name={question.entry}  // Use the specific entry name here
+                                      name={question.entry}
                                       value={rating}
                                       required
                                       class="h-5 w-5 text-msu-main-color focus:ring-msu-main-color border-gray-300"
@@ -807,6 +808,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
    // Create progress tracker
     function createProgressTracker() {
+      // Only create tracker if we're on the student survey tab
+      const activeTab = sessionStorage.getItem('activeTab');
+      if (activeTab !== 'student-survey') {
+        return;
+      }
+      
       const existingTracker = document.querySelector('.studentprogress-tracker');
       if (existingTracker) existingTracker.remove();
       
@@ -814,8 +821,8 @@ document.addEventListener('DOMContentLoaded', function() {
       tracker.className = 'studentprogress-tracker';
       tracker.title = 'Survey completion progress';
       tracker.innerHTML = `
-        <div class="progress-circle">
-          <svg viewBox="0 0 36 36" class="progress-bg">
+        <div class="student-progress-circle">
+          <svg viewBox="0 0 36 36" class="student-progress-bg">
             <path d="M18 2.0845
               a 15.9155 15.9155 0 0 1 0 31.831
               a 15.9155 15.9155 0 0 1 0 -31.831"
@@ -823,7 +830,7 @@ document.addEventListener('DOMContentLoaded', function() {
               stroke-dasharray="100, 100"
             />
           </svg>
-          <svg viewBox="0 0 36 36" class="progress-fill">
+          <svg viewBox="0 0 36 36" class="student-progress-fill">
             <path d="M18 2.0845
               a 15.9155 15.9155 0 0 1 0 31.831
               a 15.9155 15.9155 0 0 1 0 -31.831"
@@ -831,7 +838,7 @@ document.addEventListener('DOMContentLoaded', function() {
               stroke-dasharray="0, 100"
             />
           </svg>
-          <div class="progress-text">0%</div>
+          <div class="student-progress-text">0%</div>
         </div>
       `;
       
@@ -841,12 +848,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Update progress tracker
     function updateProgressTracker() {
+      // Only update tracker if we're on the student survey tab
+      const activeTab = sessionStorage.getItem('activeTab');
+      if (activeTab !== 'student-survey') {
+        return;
+      }
+      
       const totalServices = Object.keys(services).length;
       const completedServices = Object.values(services).filter(s => s.completed || s.verified).length;
       const percentage = Math.round((completedServices / totalServices) * 100);
       
-      const progressFill = document.querySelector('.progress-fill');
-      const progressText = document.querySelector('.progress-text');
+      // Debug logging
+      console.log('Student Progress Tracker Update:');
+      console.log('Total services:', totalServices);
+      console.log('Completed services:', completedServices);
+      console.log('Percentage:', percentage);
+      console.log('Services status:', services);
+      
+      const progressFill = document.querySelector('.student-progress-fill');
+      const progressText = document.querySelector('.student-progress-text');
       
       if (progressFill && progressText) {
         progressFill.style.strokeDasharray = `${percentage}, 100`;
@@ -1172,16 +1192,120 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         isSubmitting = true;
         
-        // Create and show loader
+        // Create and show enhanced process animation
         const loader = document.createElement('div');
         loader.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
         loader.innerHTML = `
-          <div class="loader-container bg-white p-6 rounded-lg shadow-xl flex flex-col items-center">
-            <div class="loader animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-msu-main-color mb-4"></div>
-            <p class="text-gray-700 font-medium">Submitting your survey...</p>
+          <div class="loader-container bg-white p-8 rounded-xl shadow-2xl flex flex-col items-center max-w-md mx-4">
+            <!-- MSU Logo Animation -->
+            <div class="loader-logo mb-6">
+              <div class="w-16 h-16 bg-gradient-to-br from-msu-main-color to-msu-maroon rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+            </div>
+            
+            <!-- Professional Grid Timeline -->
+            <div class="grid-timeline-container mb-6">
+              <div class="grid-timeline">
+                <div class="timeline-grid">
+                  <!-- Grid Background -->
+                  <div class="grid-background">
+                    <div class="grid-line horizontal"></div>
+                    <div class="grid-line horizontal"></div>
+                    <div class="grid-line horizontal"></div>
+                    <div class="grid-line vertical"></div>
+                    <div class="grid-line vertical"></div>
+                    <div class="grid-line vertical"></div>
+                  </div>
+                  
+                  <!-- Progress Line -->
+                  <div class="progress-line"></div>
+                  
+                  <!-- Timeline Steps -->
+                  <div class="timeline-step" data-step="1">
+                    <div class="step-node">
+                      <div class="step-circle">
+                        <span class="step-number">1</span>
+                        <svg class="step-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                        </svg>
+                      </div>
+                      <div class="step-label">
+                        <span class="step-title">Validating</span>
+                        <span class="step-subtitle">Checking data integrity</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="timeline-step" data-step="2">
+                    <div class="step-node">
+                      <div class="step-circle">
+                        <span class="step-number">2</span>
+                        <svg class="step-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                        </svg>
+                      </div>
+                      <div class="step-label">
+                        <span class="step-title">Processing</span>
+                        <span class="step-subtitle">Analyzing responses</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="timeline-step" data-step="3">
+                    <div class="step-node">
+                      <div class="step-circle">
+                        <span class="step-number">3</span>
+                        <svg class="step-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                        </svg>
+                      </div>
+                      <div class="step-label">
+                        <span class="step-title">Submitting</span>
+                        <span class="step-subtitle">Sending to server</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="timeline-step" data-step="4">
+                    <div class="step-node">
+                      <div class="step-circle">
+                        <span class="step-number">4</span>
+                        <svg class="step-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                        </svg>
+                      </div>
+                      <div class="step-label">
+                        <span class="step-title">Complete</span>
+                        <span class="step-subtitle">Successfully finished</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Progress Bar -->
+            <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
+              <div class="progress-bar bg-gradient-to-r from-msu-main-color to-msu-maroon h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+            
+            <!-- Status Message -->
+            <p class="text-gray-700 font-medium text-center mb-2">Processing your survey submission...</p>
+            <p class="text-sm text-gray-500 text-center">Please wait while we validate and submit your responses</p>
+            
+            <!-- Spinning Loader -->
+            <div class="mt-4">
+              <div class="loader animate-spin rounded-full h-8 w-8 border-2 border-msu-main-color border-t-transparent"></div>
+            </div>
           </div>
         `;
         document.body.appendChild(loader);
+        
+        // Start the progress animation
+        startProgressAnimation();
         
         // Disable submit button
         const submitButton = surveyForm.querySelector('button[type="submit"]');
@@ -1192,13 +1316,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Check internet connection
         if (!checkInternetConnection()) {
-          loader.remove();
-          isSubmitting = false;
-          if (submitButton) {
-            submitButton.disabled = false;
-            submitButton.innerHTML = 'Submit Survey';
-          }
-          showModal('error', 'No internet connection detected. Please connect to the internet to submit your survey.');
+          stopAnimationAndShowError('No internet connection detected. Please connect to the internet to submit your survey.');
           return;
         }
         
@@ -1208,37 +1326,19 @@ document.addEventListener('DOMContentLoaded', function() {
         const studentNumber = document.querySelector('input[name="entry.413035083"]');
         
         if (!yearLevel) {
-          loader.remove();
-          isSubmitting = false;
-          if (submitButton) {
-            submitButton.disabled = false;
-            submitButton.innerHTML = 'Submit Survey';
-          }
-          showModal('error', 'Please select your year level');
+          stopAnimationAndShowError('Please select your year level');
           return;
         }
         
         if (!course || !course.value.trim()) {
           course.classList.add('border-red-500');
-          loader.remove();
-          isSubmitting = false;
-          if (submitButton) {
-            submitButton.disabled = false;
-            submitButton.innerHTML = 'Submit Survey';
-          }
-          showModal('error', 'Please enter your course');
+          stopAnimationAndShowError('Please enter your course');
           return;
         }
         
         if (!studentNumber || !studentNumber.value.trim()) {
           studentNumber.classList.add('border-red-500');
-          loader.remove();
-          isSubmitting = false;
-          if (submitButton) {
-            submitButton.disabled = false;
-            submitButton.innerHTML = 'Submit Survey';
-          }
-          showModal('error', 'Please enter your student number');
+          stopAnimationAndShowError('Please enter your student number');
           return;
         }
         
@@ -1259,13 +1359,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         if (!allServicesValid) {
-          loader.remove();
-          isSubmitting = false;
-          if (submitButton) {
-            submitButton.disabled = false;
-            submitButton.innerHTML = 'Submit Survey';
-          }
-          showModal('error', `Please complete all questions in these services:<br><br>${invalidServices.join('<br>')}`);
+          stopAnimationAndShowError(`Please complete all questions in these services:<br><br>${invalidServices.join('<br>')}`);
           return;
         }
         
@@ -1305,29 +1399,32 @@ document.addEventListener('DOMContentLoaded', function() {
           yearLevel: yearLevel.value
         };
         
-        // Remove loader before showing success message
-        loader.remove();
-        showSubmissionSuccess(studentData);
-        
         // Submit the form
         hiddenForm.submit();
         
-        // Remove the hidden form after submission
+        // Allow animation to complete before showing success message
         setTimeout(() => {
-          hiddenForm.remove();
-        }, 1000);
-        
-        // Reset form after successful submission
-        setTimeout(() => {
-          surveyForm.reset();
-          initializeVerificationStatus();
-          updateProgressTracker();
-          isSubmitting = false;
-          if (submitButton) {
-            submitButton.disabled = false;
-            submitButton.innerHTML = 'Submit Survey';
-          }
-        }, 3000);
+          // Remove loader before showing success message
+          loader.remove();
+          showSubmissionSuccess(studentData);
+          
+          // Remove the hidden form after submission
+          setTimeout(() => {
+            hiddenForm.remove();
+          }, 1000);
+          
+          // Reset form after successful submission
+          setTimeout(() => {
+            surveyForm.reset();
+            initializeVerificationStatus();
+            updateProgressTracker();
+            isSubmitting = false;
+            if (submitButton) {
+              submitButton.disabled = false;
+              submitButton.innerHTML = 'Submit Survey';
+            }
+          }, 3000);
+        }, 6000); // Wait for animation to complete
       });
     }
 
@@ -1388,9 +1485,365 @@ document.addEventListener('DOMContentLoaded', function() {
     showModal('error', 'Internet connection lost. Please reconnect to submit your survey.');
   });
 
-  // Add styles
-  const style = document.createElement('style');
-  style.textContent = `
+      // Professional Grid Timeline Progress Animation
+    function startProgressAnimation() {
+      const progressLine = document.querySelector('.progress-line');
+      const timelineSteps = document.querySelectorAll('.timeline-step');
+      const statusMessage = document.querySelector('.loader-container p:first-of-type');
+      const statusSubtext = document.querySelector('.loader-container p:last-of-type');
+      
+      let currentStep = 1;
+      const totalSteps = 4;
+      
+      const stepMessages = {
+        1: { main: 'Validating your information...', sub: 'Checking student details and form completeness' },
+        2: { main: 'Processing survey responses...', sub: 'Analyzing your feedback and ratings' },
+        3: { main: 'Submitting to server...', sub: 'Sending your responses securely' },
+        4: { main: 'Finalizing submission...', sub: 'Preparing your receipt and confirmation' }
+      };
+      
+      // Initialize all steps as pending
+      timelineSteps.forEach((step, index) => {
+        step.classList.remove('active', 'completed', 'pending');
+        step.classList.add('pending');
+      });
+      
+      function updateStep(stepNumber) {
+        console.log('Updating to step:', stepNumber);
+        
+        // Update progress line
+        const progress = (stepNumber / totalSteps) * 100;
+        progressLine.style.width = `${progress}%`;
+        
+        // Update timeline steps with proper state management
+        timelineSteps.forEach((step, index) => {
+          const stepNum = index + 1;
+          
+          // Remove all classes first
+          step.classList.remove('active', 'completed', 'pending');
+          
+          if (stepNum < stepNumber) {
+            // Previous steps: completed with checkmark
+            step.classList.add('completed');
+            console.log(`Step ${stepNum} marked as completed`);
+          } else if (stepNum === stepNumber) {
+            // Current step: active
+            step.classList.add('active');
+            console.log(`Step ${stepNum} marked as active`);
+          } else {
+            // Future steps: pending
+            step.classList.add('pending');
+            console.log(`Step ${stepNum} marked as pending`);
+          }
+        });
+        
+        // Update status messages
+        if (stepMessages[stepNumber]) {
+          statusMessage.textContent = stepMessages[stepNumber].main;
+          statusSubtext.textContent = stepMessages[stepNumber].sub;
+        }
+        
+        // Ensure previous steps are marked as completed with checkmark animation
+        for (let i = 1; i < stepNumber; i++) {
+          const previousStep = document.querySelector(`.timeline-step[data-step="${i}"]`);
+          if (previousStep) {
+            previousStep.classList.remove('active');
+            previousStep.classList.add('completed');
+            
+            // Add checkmark animation for newly completed steps
+            const checkmark = previousStep.querySelector('.step-checkmark');
+            if (checkmark && !previousStep.classList.contains('checkmark-animated')) {
+              checkmark.style.animation = 'checkmarkAppear 0.5s ease-out';
+              previousStep.classList.add('checkmark-animated');
+              console.log(`Checkmark animation added to step ${i}`);
+            }
+          }
+        }
+      }
+      
+      // Simulate the process steps with checkmark animations
+      console.log('Starting progress animation...');
+      updateStep(1);
+      
+      setTimeout(() => {
+        console.log('Moving to step 2...');
+        updateStep(2);
+      }, 1500);
+      
+      setTimeout(() => {
+        console.log('Moving to step 3...');
+        updateStep(3);
+      }, 3000);
+      
+      setTimeout(() => {
+        console.log('Moving to step 4...');
+        updateStep(4);
+      }, 4500);
+      
+      // Complete the final step with checkmark
+      setTimeout(() => {
+        console.log('Completing final step...');
+        // Mark the final step as completed
+        const finalStep = document.querySelector('.timeline-step[data-step="4"]');
+        if (finalStep) {
+          finalStep.classList.remove('active');
+          finalStep.classList.add('completed');
+          
+          // Add completion animation
+          const checkmark = finalStep.querySelector('.step-checkmark');
+          if (checkmark) {
+            checkmark.style.animation = 'checkmarkAppear 0.5s ease-out';
+            console.log('Final checkmark animation added');
+          }
+          
+          // Add pulse animation to the entire step
+          finalStep.style.animation = 'finalStepComplete 0.8s ease-out';
+          console.log('Final step completion animation added');
+        }
+      }, 5000);
+    }
+    
+    // Function to stop animation and show error
+    function stopAnimationAndShowError(message) {
+      const loader = document.querySelector('.fixed.inset-0');
+      if (loader) {
+        loader.remove();
+      }
+      
+      const submitButton = document.querySelector('#studentSurveyForm button[type="submit"]');
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.innerHTML = 'Submit Survey';
+      }
+      
+      isSubmitting = false;
+      showModal('error', message);
+    }
+
+    // Add styles
+    const style = document.createElement('style');
+    style.textContent = `
+    .service-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .service-card.selected {
+      border-color: #1a4b8c;
+      box-shadow: 0 0 0 3px rgba(26, 75, 140, 0.1);
+    }
+    .service-card-header {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      margin-bottom: 1rem;
+    }
+    .service-card-icon {
+      margin-right: 1rem;
+      color: #1a4b8c;
+    }
+    .service-card-title {
+      font-weight: 600;
+      font-size: 1.125rem;
+      color: #111827;
+    }
+    .service-card-checkbox {
+      margin-right: 0.75rem;
+    }
+    .verification-status {
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 0.75rem;
+      font-weight: bold;
+      font-size: 0.875rem;
+    }
+    .verification-status.verified {
+      background-color: #10B981;
+      color: white;
+    }
+    .verification-status.completed {
+      background-color: #3B82F6;
+      color: white;
+    }
+    .verification-status.not-completed {
+      background-color: #EF4444;
+      color: white;
+    }
+    .verification-legend {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .verification-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: #4B5563;
+    }
+    .verification-legend-badge {
+      width: 1.25rem;
+      height: 1.25rem;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+    .verification-legend-badge.verified {
+      background-color: #10B981;
+      color: white;
+    }
+    .verification-legend-badge.completed {
+      background-color: #3B82F6;
+      color: white;
+    }
+    .verification-legend-badge.not-completed {
+      background-color: #EF4444;
+      color: white;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 50;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+    }
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 1.5rem;
+      border: 1px solid #888;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .modal-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #111827;
+      margin: 0;
+    }
+    .modal-icon {
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 0.75rem;
+    }
+    .modal-close {
+      color: #9ca3af;
+      font-size: 1.5rem;
+      font-weight: bold;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .modal-close:hover {
+      color: #6b7280;
+    }
+    .modal-body {
+      color: #4b5563;
+      line-height: 1.5;
+    }
+    .modal-success {
+      border-left: 4px solid #10B981;
+    }
+    .modal-error {
+      border-left: 4px solid #EF4444;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .animate-spin {
+      animation: spin 1s linear infinite;
+    }
+    .loader {
+      border-top-color: #1a4b8c;
+      border-right-color: #1a4b8c;
+      border-bottom-color: #8b1a1a;
+      border-left-color: #d4af37;
+      animation-timing-function: cubic-bezier(0.53, 0.21, 0.29, 0.67);
+    }
+   /* Progress tracker */
+    .studentprogress-tracker {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      background: white;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      z-index: 20;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .student-progress-circle {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .student-progress-bg, .student-progress-fill {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .student-progress-bg path {
+      stroke: #e5e7eb;
+      stroke-width: 3;
+    }
+    .student-progress-fill path {
+      stroke: #1a4b8c;
+      stroke-width: 3;
+      stroke-linecap: round;
+      transition: stroke-dasharray 0.6s ease;
+    }
+    .student-progress-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 0.875rem;
+      font-weight: bold;
+      color: #1a4b8c;
+    }
     .missing-question {
       animation: pulse 1.5s ease-in-out infinite;
       background-color: rgba(239, 68, 68, 0.1);
@@ -1448,11 +1901,305 @@ document.addEventListener('DOMContentLoaded', function() {
       50% { transform: scale(1.05); opacity: 0.9; }
       100% { transform: scale(1); opacity: 1; }
     }
+    
+    /* Professional Grid Timeline Styles */
+    .grid-timeline-container {
+      width: 100%;
+      padding: 2rem 0;
+    }
+    
+    .grid-timeline {
+      position: relative;
+      width: 100%;
+      height: 120px;
+      overflow: hidden;
+    }
+    
+    .timeline-grid {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+    
+    /* Grid Background */
+    .grid-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    
+    .grid-line {
+      position: absolute;
+      background: linear-gradient(90deg, transparent 0%, rgba(34, 197, 94, 0.1) 50%, transparent 100%);
+    }
+    
+    .grid-line.horizontal {
+      width: 100%;
+      height: 1px;
+      top: 33.33%;
+    }
+    
+    .grid-line.horizontal:nth-child(2) {
+      top: 66.66%;
+    }
+    
+    .grid-line.vertical {
+      width: 1px;
+      height: 100%;
+      left: 25%;
+    }
+    
+    .grid-line.vertical:nth-child(5) {
+      left: 50%;
+    }
+    
+    .grid-line.vertical:nth-child(6) {
+      left: 75%;
+    }
+    
+    /* Progress Line */
+    .progress-line {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+      border-radius: 2px;
+      z-index: 3;
+      transition: width 0.8s ease;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.3);
+    }
+    
+    /* Timeline Steps */
+    .timeline-step {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 4;
+      transition: all 0.5s ease;
+    }
+    
+    .timeline-step:nth-child(3) { left: 12.5%; }
+    .timeline-step:nth-child(4) { left: 37.5%; }
+    .timeline-step:nth-child(5) { left: 62.5%; }
+    .timeline-step:nth-child(6) { left: 87.5%; }
+    
+    .step-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .step-circle {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.875rem;
+      color: #6b7280;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      border: 2px solid #cbd5e1;
+      position: relative;
+      transition: all 0.5s ease;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .step-number {
+      display: block;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+    
+    .step-checkmark {
+      position: absolute;
+      width: 1.5rem;
+      height: 1.5rem;
+      color: white;
+      opacity: 0;
+      transform: scale(0.5);
+      transition: all 0.4s ease;
+    }
+    
+    .step-label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 80px;
+    }
+    
+    .step-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 0.125rem;
+      transition: color 0.3s ease;
+    }
+    
+    .step-subtitle {
+      font-size: 0.625rem;
+      color: #6b7280;
+      transition: color 0.3s ease;
+    }
+    
+    /* Active State */
+    .timeline-step.active .step-circle {
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+      color: white;
+      border-color: #22c55e;
+      transform: scale(1.1);
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2), 0 4px 8px rgba(34, 197, 94, 0.3);
+      animation: activePulse 1s ease-in-out;
+    }
+    
+    .timeline-step.active .step-title {
+      color: #22c55e;
+      font-weight: 700;
+    }
+    
+    .timeline-step.active .step-subtitle {
+      color: #16a34a;
+    }
+    
+    /* Completed State */
+    .timeline-step.completed .step-circle {
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+      color: white;
+      border-color: #22c55e;
+      box-shadow: 0 2px 8px rgba(34, 197, 94, 0.4);
+    }
+    
+    .timeline-step.completed .step-number {
+      opacity: 0;
+    }
+    
+    .timeline-step.completed .step-checkmark {
+      opacity: 1;
+      transform: scale(1);
+      animation: checkmarkAppear 0.5s ease-out;
+    }
+    
+    .timeline-step.completed .step-title {
+      color: #22c55e;
+      font-weight: 600;
+    }
+    
+    .timeline-step.completed .step-subtitle {
+      color: #16a34a;
+    }
+    
+    /* Pending State */
+    .timeline-step.pending .step-circle {
+      background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+      border-color: #cbd5e1;
+      color: #94a3b8;
+    }
+    
+    .timeline-step.pending .step-title {
+      color: #94a3b8;
+    }
+    
+    .timeline-step.pending .step-subtitle {
+      color: #cbd5e1;
+    }
+    
+    /* Animations */
+    @keyframes activePulse {
+      0% { transform: scale(1.1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1.1); }
+    }
+    
+    @keyframes checkmarkAppear {
+      0% { 
+        opacity: 0; 
+        transform: scale(0.5) rotate(-10deg);
+      }
+      50% { 
+        opacity: 0.8; 
+        transform: scale(1.1) rotate(5deg);
+      }
+      100% { 
+        opacity: 1; 
+        transform: scale(1) rotate(0deg);
+      }
+    }
+    
+    @keyframes finalStepComplete {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    @keyframes gridGlow {
+      0% { opacity: 0.1; }
+      50% { opacity: 0.3; }
+      100% { opacity: 0.1; }
+    }
+    
+    .grid-line {
+      animation: gridGlow 3s ease-in-out infinite;
+    }
+    
+    /* Progress line animation */
+    @keyframes progressGlow {
+      0% { box-shadow: 0 0 10px rgba(34, 197, 94, 0.3); }
+      50% { box-shadow: 0 0 20px rgba(34, 197, 94, 0.5); }
+      100% { box-shadow: 0 0 10px rgba(34, 197, 94, 0.3); }
+    }
+    
+    .progress-line {
+      animation: progressGlow 2s ease-in-out infinite;
+    }
+    
+    /* Enhanced Loader Styles */
+    .loader-container {
+      min-width: 320px;
+      max-width: 90%;
+      transition: all 0.3s ease;
+      animation: slideIn 0.5s ease-out;
+    }
+    
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    
+    .progress-bar {
+      transition: width 0.8s ease;
+      background: linear-gradient(90deg, #1a4b8c 0%, #8b1a1a 50%, #d4af37 100%);
+    }
+    
     button[disabled] {
       opacity: 0.7;
       cursor: not-allowed;
     }
   `;
   document.head.appendChild(style);
+
+  // Add this for debugging
+  function forceUpdateProgress() {
+    console.log('Forcing progress update...');
+    updateProgressTracker();
+  }
+
+  // You can call this in the browser console to test
+  window.forceUpdateProgress = forceUpdateProgress;
 });
 </script>
