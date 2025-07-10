@@ -18,64 +18,147 @@ const currentPath = Astro.url.pathname;
 const academicOffices = [
   {
     name: "COLLEGE OF ARTS AND SCIENCES",
-    logo: "/images/College Logo/LOGO CAS.png", // Replace with actual path
-	link: "/404.astro",
-    // link: "/programs/cas", // Replace with actual link
+    shortName: "CAS",
+    description: "Fostering excellence in liberal arts, sciences, and humanities education",
+    icon: "🎓",
+    link: "/404.astro",
+    color: "from-blue-100 to-blue-200"
   },
   {
     name: "COLLEGE OF ISLAMIC & ARABIC STUDIES",
-    logo: "/images/College Logo/LOGO CIAS.png", // Replace with actual path
-	link: "/404.astro",
-    // link: "/programs/cias", // Replace with actual link
+    shortName: "CIAS",
+    description: "Advancing Islamic education and Arabic language studies",
+    icon: "🕌",
+    link: "/404.astro",
+    color: "from-green-100 to-green-200"
   },
   {
     name: "COLLEGE OF EDUCATION",
-    logo: "/images/College Logo/LOGO COED.png", // Replace with actual path
-	link: "/404.astro",
-    // link: "/programs/coed", // Replace with actual link
+    shortName: "COED",
+    description: "Shaping future educators and educational leaders",
+    icon: "📚",
+    link: "/404.astro",
+    color: "from-purple-100 to-purple-200"
   },
   {
     name: "COLLEGE OF FISHERIES",
-    logo: "/images/College Logo/LOGO COF.png", // Replace with actual path
-	link: "/404.astro",
-    // link: "/programs/cof", // Replace with actual link
+    shortName: "COF",
+    description: "Leading marine science and fisheries technology education",
+    icon: "🐟",
+    link: "/404.astro",
+    color: "from-cyan-100 to-cyan-200"
   },
   {
     name: "INSTITUTE OF INFORMATION & COMMUNICATIONS TECHNOLOGY",
-    logo: "/images/College Logo/LOGO IICT.png", // Replace with actual path
-	link: "/404.astro",
-    // link: "/programs/iict", // Replace with actual link
+    shortName: "IICT",
+    description: "Driving innovation in technology and digital transformation",
+    icon: "💻",
+    link: "/404.astro",
+    color: "from-indigo-100 to-indigo-200"
   },
   {
     name: "INSTITUTE OF OCEANOGRAPHY & ENVIRONMENTAL SCIENCE",
-    logo: "/images/College Logo/LOGO IOES.png", // Replace with actual path
-	link: "/404.astro",
-    // link: "/programs/ioes", // Replace with actual link
+    shortName: "IOES",
+    description: "Exploring ocean sciences and environmental sustainability",
+    icon: "🌊",
+    link: "/404.astro",
+    color: "from-teal-100 to-teal-200"
+  },
+  {
+    name: "COLLEGE OF LAW",
+    shortName: "COL",
+    description: "Advancing legal education and fostering justice and advocacy",
+    icon: "⚖️",
+    link: "/404.astro",
+    color: "from-amber-100 to-amber-200"
   },
 ];
 ---
 
-<Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
+<Layout title="MSUTCTO | Academic Offices">
  <main class="font-sans antialiased text-gray-800">
 		<Navbar path={currentPath} client:visible />
 
-		<!-- Parallax Background Section -->
-		<div class="parallax-section bg-fixed bg-cover bg-center py-20" style="background-image: url('/images/landing_page4.png');">
-			<div class="text-center px-4 sm:px-6 lg:px-8">
-				<h3 class="headings text-4xl md:text-5xl font-bold text-white mb-10">Academic Offices</h3>
-				<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+		<!-- Hero Section -->
+		<div class="relative bg-msu-deep-ocean from-msu-main-color via-indigo-50 to-purple-50 py-20 overflow-hidden">
+			<!-- Background Pattern -->
+			<div class="absolute inset-0 opacity-20">
+				<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiM2NjY2NjYiIGZpbGwtb3BhY2l0eT0iMC4xIj48Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIyIi8+PC9nPjwvZz48L3N2Zz4=')] bg-repeat"></div>
+			</div>
+			
+			<div class="relative z-10 text-center px-4 sm:px-6 lg:px-8">
+				<div class="max-w-4xl mx-auto">
+					<h1 class="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+						Academic Offices
+					</h1>
+					<p class="text-xl md:text-2xl text-white mb-8 max-w-3xl mx-auto">
+						Discover our diverse academic units dedicated to excellence in education, research, and community service
+					</p>
+					<div class="w-24 h-1 bg-white from-blue-300 to-indigo-300 mx-auto rounded-full"></div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Academic Offices Grid -->
+		<div class="py-16 bg-gray-50">
+			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 					{academicOffices.map((office) => (
-						<div class="office-card bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-2">
+						<div class="group">
 							<a href={office.link} class="block">
-								<img
-									src={office.logo}
-									alt={`${office.name} Logo`}
-									class="w-24 h-24 mx-auto mb-4 object-contain transition-transform duration-300 hover:scale-110"
-								/>
+								<div class="office-card bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 overflow-hidden">
+									<!-- Header with gradient -->
+									<div class={`bg-gradient-to-r ${office.color} p-6 text-gray-800 relative overflow-hidden`}>
+										<div class="absolute top-0 right-0 opacity-10">
+											<span class="text-6xl">{office.icon}</span>
+										</div>
+										<div class="relative z-10">
+											<div class="text-3xl mb-2">{office.icon}</div>
+											<h3 class="text-lg font-bold mb-1">{office.shortName}</h3>
+											<p class="text-sm text-gray-700">{office.name}</p>
+										</div>
+									</div>
+									
+									<!-- Content -->
+									<div class="p-6">
+										<p class="text-gray-600 text-sm leading-relaxed mb-4">
+											{office.description}
+										</p>
+										
+										<!-- Learn More Button -->
+										<div class="flex items-center justify-between">
+											<span class="text-sm font-medium text-gray-500">Learn More</span>
+											<div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center group-hover:bg-blue-100 transition-colors duration-300">
+												<svg class="w-4 h-4 text-gray-400 group-hover:text-blue-600 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+												</svg>
+											</div>
+										</div>
+									</div>
+								</div>
 							</a>
-							<p class="paragraph text-lg font-semibold text-charcoal">{office.name}</p>
 						</div>
 					))}
+				</div>
+			</div>
+		</div>
+
+		<!-- Call to Action Section -->
+		<div class="bg-gradient-to-r from-blue-50 to-indigo-50 py-16">
+			<div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+				<h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+					Ready to Start Your Academic Journey?
+				</h2>
+				<p class="text-xl text-gray-600 mb-8">
+					Explore our programs and discover the perfect path for your future
+				</p>
+				<div class="flex flex-col sm:flex-row gap-4 justify-center">
+					<a href="/admissions/admissions" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300">
+						Apply Now
+					</a>
+					<a href="/programs" class="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-600 hover:text-white transition-colors duration-300">
+						View Programs
+					</a>
 				</div>
 			</div>
 		</div>
@@ -99,52 +182,34 @@ const academicOffices = [
 <script src="../../js/loadinganim.js" ></script>
 <script src="../../js/smoothscroll.js" ></script>
 
-
 <style>
-	/* Parallax Effect */
-	.parallax-section {
-		background-attachment: fixed;
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: cover;
-		position: relative;
-	}
-
-	/* Overlay for Better Readability */
-	.parallax-section::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background: rgba(0, 0, 0, 0.4); /* Dark overlay for better contrast */
-		z-index: 1;
-	}
-
-	.parallax-section > * {
-		position: relative;
-		z-index: 2;
-	}
-
-	/* Office Card Enhancements */
+	/* Office Card Animations */
 	.office-card {
-		transition: all 0.3s ease;
+		transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
 	.office-card:hover {
-		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+		transform: translateY(-8px);
+		box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+	}
+
+	/* Gradient Text Animation */
+	@keyframes gradient-shift {
+		0%, 100% { background-position: 0% 50%; }
+		50% { background-position: 100% 50%; }
 	}
 
 	/* Responsive Adjustments */
 	@media (max-width: 768px) {
 		.office-card {
-			padding: 1.5rem;
+			margin-bottom: 1rem;
 		}
+	}
 
-		.office-card img {
-			width: 20%;
-			height: 20%;
-		}
+	/* Smooth transitions for all interactive elements */
+	* {
+		transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+		transition-duration: 300ms;
 	}
 </style>
