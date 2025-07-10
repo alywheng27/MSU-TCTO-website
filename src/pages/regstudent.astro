@@ -478,36 +478,73 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
       
+      // Remove any existing tracker first
       const existingTracker = document.querySelector('.reg-progress-tracker');
       if (existingTracker) existingTracker.remove();
       
-      const tracker = document.createElement('div');
-      tracker.className = 'reg-progress-tracker';
-      tracker.title = 'Survey completion progress';
-      tracker.innerHTML = `
-        <div class="reg-progress-circle">
-          <svg viewBox="0 0 36 36" class="reg-progress-bg">
-            <path d="M18 2.0845
-              a 15.9155 15.9155 0 0 1 0 31.831
-              a 15.9155 15.9155 0 0 1 0 -31.831"
-              fill="none"
-              stroke-dasharray="100, 100"
-            />
-          </svg>
-          <svg viewBox="0 0 36 36" class="reg-progress-fill">
-            <path d="M18 2.0845
-              a 15.9155 15.9155 0 0 1 0 31.831
-              a 15.9155 15.9155 0 0 1 0 -31.831"
-              fill="none"
-              stroke-dasharray="0, 100"
-            />
-          </svg>
-          <div class="reg-progress-text">0%</div>
-        </div>
-      `;
+      // Wait for layout to be fully loaded
+      const waitForLayout = () => {
+        // Check if main content and survey content are loaded
+        const mainContent = document.querySelector('main');
+        const surveyContent = document.querySelector('#studentreg-survey');
+        
+        if (!mainContent || !surveyContent) {
+          // If not ready, wait a bit more
+          setTimeout(waitForLayout, 100);
+          return;
+        }
+        
+        // Check if page is fully rendered
+        if (document.readyState !== 'complete') {
+          setTimeout(waitForLayout, 100);
+          return;
+        }
+        
+        // Create tracker after layout is ready
+        setTimeout(() => {
+          const tracker = document.createElement('div');
+          tracker.className = 'reg-progress-tracker';
+          tracker.title = 'Survey completion progress';
+          tracker.innerHTML = `
+            <div class="reg-progress-circle">
+              <svg viewBox="0 0 36 36" class="reg-progress-bg">
+                <path d="M18 2.0845
+                  a 15.9155 15.9155 0 0 1 0 31.831
+                  a 15.9155 15.9155 0 0 1 0 -31.831"
+                  fill="none"
+                  stroke-dasharray="100, 100"
+                />
+              </svg>
+              <svg viewBox="0 0 36 36" class="reg-progress-fill">
+                <path d="M18 2.0845
+                  a 15.9155 15.9155 0 0 1 0 31.831
+                  a 15.9155 15.9155 0 0 1 0 -31.831"
+                  fill="none"
+                  stroke-dasharray="0, 100"
+                />
+              </svg>
+              <div class="reg-progress-text">0%</div>
+            </div>
+          `;
+          
+          tracker.addEventListener('click', showRegProgressSummary);
+          document.body.appendChild(tracker);
+          
+          // Add fade-in animation
+          tracker.style.opacity = '0';
+          tracker.style.transform = 'scale(0.8)';
+          tracker.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+          
+          // Force a reflow and animate in
+          setTimeout(() => {
+            tracker.style.opacity = '1';
+            tracker.style.transform = 'scale(1)';
+          }, 50);
+        }, 300);
+      };
       
-      tracker.addEventListener('click', showRegProgressSummary);
-      document.body.appendChild(tracker);
+      // Start the layout check process
+      setTimeout(waitForLayout, 200);
     }
 
     // Update progress tracker for regular students
@@ -1357,17 +1394,23 @@ document.addEventListener('DOMContentLoaded', function() {
     .reg-progress-tracker {
       position: fixed;
       bottom: 2rem;
-      right: 2rem;
+      left: 2rem;
       width: 4rem;
       height: 4rem;
       cursor: pointer;
-      z-index: 40;
+      z-index: 9999;
       background: white;
       border-radius: 50%;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1);
       display: flex;
       align-items: center;
       justify-content: center;
+      /* Ensure it shows in front */
+      pointer-events: auto;
+      /* Create new stacking context */
+      isolation: isolate;
+      /* Add glow effect to make it more visible */
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
     }
     .reg-progress-circle {
       position: relative;
