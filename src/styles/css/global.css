@@ -41,6 +41,13 @@
     font-stretch: 90;
  
 }
+/* Input and textarea styles */
+input,
+textarea,
+select {
+    color: #000000 !important;
+    background-color: #ffffff;
+}
 
 .h1 {
     font-size: 178px;

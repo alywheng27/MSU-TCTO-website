@@ -2,6 +2,9 @@
     window.addEventListener('load', function() {
       document.documentElement.classList.add('loaded');
       setTimeout(function() {
-        document.getElementById('loading-animation').style.display = 'none';
+        const loadingAnimation = document.getElementById('loading-animation');
+        if (loadingAnimation) {
+          loadingAnimation.style.display = 'none';
+        }
       }, 500);
     });

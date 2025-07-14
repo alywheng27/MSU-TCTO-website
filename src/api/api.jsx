@@ -980,3 +980,72 @@ export async function getRelatedArticles(currentArticleId, subjectId, limit = 3)
   
   return await client.fetch(query, params);
 }
+
+export async function getCommencementPhotos(name, birthDate) {
+  const query = groq`*[_type == "commencement"] {
+    _id,
+    graduate->,
+    mainImage{
+      asset->{
+        url
+      }
+    },
+    birthDate
+  }`;
+
+  try {
+    console.log('Fetching all commencement photos from Sanity...');
+    // Try using the direct client first
+    const photos = await client.fetch(query);
+    console.log('All photos from Sanity:', photos);
+    console.log('Number of photos found:', photos ? photos.length : 0);
+    
+    if (!photos || photos.length === 0) {
+      console.log('No photos found in Sanity');
+      return [];
+    }
+    
+    // Filter photos by name and birthDate on the client side
+    const filteredPhotos = photos.filter(photo => {
+      const graduateName = photo.graduate?.name || '';
+      const photoBirthDate = photo.birthDate;
+      
+      console.log('Comparing photo:', {
+        photoId: photo._id,
+        searchName: name,
+        graduateName: graduateName,
+        searchBirthDate: birthDate,
+        photoBirthDate: photoBirthDate,
+        nameMatch: graduateName.toLowerCase().includes(name.toLowerCase()),
+        dateMatch: photoBirthDate === birthDate
+      });
+      
+      return graduateName.toLowerCase().includes(name.toLowerCase()) && 
+             photoBirthDate === birthDate;
+    });
+    
+    console.log('Filtered photos:', filteredPhotos);
+    console.log('Number of filtered photos:', filteredPhotos.length);
+    return filteredPhotos || [];
+  } catch (error) {
+    console.error('Error fetching commencement photos:', error);
+    return [];
+  }
+}
+
+// Test function to check Sanity connection
+export async function testSanityConnection() {
+  try {
+    const query = groq`*[_type == "commencement"] | order(_createdAt desc)[0]{
+      _id,
+      _type
+    }`;
+    
+    const result = await client.fetch(query);
+    console.log('Sanity connection test result:', result);
+    return result;
+  } catch (error) {
+    console.error('Sanity connection test failed:', error);
+    return null;
+  }
+}
