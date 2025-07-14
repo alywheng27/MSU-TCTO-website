@@ -11,7 +11,7 @@ import '../styles/css/global.css';
 const currentPath = Astro.url.pathname;
 ---
 
-<Layout title="MSU | Tawi-Tawi College of Technology and Oceanography - Feedback System">
+<Layout title="MSUTCTO - Office Evaluation and Students Survey">
   <main>
     <Navbar path={currentPath} client:visible />
 
@@ -123,11 +123,12 @@ const currentPath = Astro.url.pathname;
                               >
                                 <option value="" disabled selected>Select an office</option>
                                 <optgroup label="Administrative Offices" class="text-gray-900">
-                                  <option value="BUDGET OFFICE" class="py-2">Budget Office</option>
+                                  <option value="BUDGET OFFICE">Budget Office</option>
                                   <option value="INTERNAL CONTROL AND AUDIT UNIT">Internal Control and Audit Unit</option>
                                   <option value="ACCOUNTING OFFICE">Accounting Office</option>
                                   <option value="CASHIERING OFFICE">Cashiering Office</option>
                                   <option value="OFFICE OF THE CHANCELLOR">Office of the Chancellor</option>
+                                  <option value="EXTENSION SERVICES">Extension Services</option>
                                   <option value="GENERAL SERVICES OFFICE">General Services Office</option>
                                   <option value="OFFICE OF MEDICAL AND WELLNESS SERVICES">Office of Medical and Wellness Services</option>
                                   <option value="MANILA INFORMATION AND LIAISON OFFICE">Manila Information and Liaison Office</option>
@@ -136,34 +137,109 @@ const currentPath = Astro.url.pathname;
                                   <option value="HUMAN RESOURCE DEVELOPMENT OFFICE">Human Resource Development Office</option>
                                   <option value="PHYSICAL PLANT OFFICE">Physical Plant Office</option>
                                   <option value="PROCUREMENT OFFICE">Procurement Office</option>
+                                  <option value="RESEARCH SERVICES">Research Services</option>
                                   <option value="SECURITY FORCE">Security Force</option>
                                   <option value="SUPPLY AND PROPERTY OFFICE">Supply and Property Office</option>
-                                </optgroup>
-                                
-                                <optgroup label="Academic Offices" class="text-gray-900">
                                   <option value="ADMISSION OFFICE">Admission Office</option>
                                   <option value="ALUMNI AND CAREER CENTER OFFICE">Alumni and Career Center Office</option>
+                                  <option value="CAGAYAN DE TAWI-TAWI COLLEGE OF ARTS AND SCIENCES EXTENSION">Cagayan de Tawi-Tawi College of Arts and Sciences Extension</option>
+                                  <option value="CENTER FOR OCEAN STUDIES">Center for Ocean Studies</option>
+                                  <option value="CHILD DEVELOPMENT CENTER">Child Development Center</option>
                                   <option value="COLLEGE LIBRARY">College Library</option>
                                   <option value="COLLEGE OF EDUCATION">College of Education</option>
-                                  <option value="INSTITUTE OF INFORMATION AND COMMUNICATIONS TECHNOLOGY">Institute of ICT</option>
+                                  <option value="INSTITUTE OF INFORMATION AND COMMUNICATIONS TECHNOLOGY">Institute of Information and Communications Technology</option>
+                                  <option value="COLLEGE OF ARTS AND SCIENCES - LANGUAGE DEPARTMENT">College of Arts and Sciences - Language Department</option>
                                   <option value="GRADUATE SCHOOL">Graduate School</option>
                                   <option value="COLLEGE OF FISHERIES">College of Fisheries</option>
                                   <option value="COLLEGE OF ISLAMIC AND ARABIC STUDIES">College of Islamic and Arabic Studies</option>
-                                  <option value="OFFICE OF THE REGISTRAR">Office of the Registrar</option>
-                                </optgroup>
-                                
-                                <optgroup label="Extension & Research" class="text-gray-900">
-                                  <option value="EXTENSION SERVICES">Extension Services</option>
-                                  <option value="RESEARCH SERVICES">Research Services</option>
-                                  <option value="CENTER FOR OCEAN STUDIES">Center for Ocean Studies</option>
+                                  <option value="COLLEGE OF FISHERIES - MARINE FISHERIES DEPARTMENT">College of Fisheries - Marine Fisheries Department</option>
+                                  <option value="COLLEGE OF ARTS AND SCIENCES - MATHEMATICS AND SCIENCES DEPARTMENT">College of Arts and Sciences - Mathematics and Sciences Department</option>
                                   <option value="OCEANOGRAPHY AND FISH TECHNOLOGY CENTER">Oceanography and Fish Technology Center</option>
-                                  <option value="OFFICE OF THE VICE CHANCELLOR FOR RESEARCH INNOVATION DEVELOPMENT AND EXTENSION">Vice Chancellor for Research, Innovation, Development and Extension</option>
-                                </optgroup>
-                                
-                                <optgroup label="Other Units" class="text-gray-900" >
+                                  <option value="OFFICE OF THE DIRECTOR FOR ACADEMIC SUPPORT SERVICES">Office of the Director for Academic Support Services</option>
+                                  <option value="OFFICE OF THE VICE CHANCELLOR FOR ACADEMIC AFFAIRS">Office of the Vice Chancellor for Academic Affairs</option>
+                                  <option value="COLLEGE OF ARTS AND SCIENCES - SPEAR DEPARTMENT">College of Arts and Sciences - SPEAR Department</option>
+                                  <option value="OFFICE OF THE REGISTRAR">Office of the Registrar</option>
+                                  <option value="SCIENCE HIGH SCHOOL">Science High School</option>
+                                  <option value="SIBUTU COLLEGE OF ARTS AND SCIENCES EXTENSION">Sibutu College of Arts and Sciences Extension</option>
+                                  <option value="COLLEGE OF ARTS AND SCIENCES - SOCIAL SCIENCES DEPARTMENT">College of Arts and Sciences - Social Sciences Department</option>
+                                  <option value="UNGUS MATATA COLLEGE OF ARTS AND SCIENCES EXTENSION">Ungus Matata College of Arts and Sciences Extension</option>
+                                  <option value="BAKONG COMMUNITY HIGH SCHOOL">Bakong Community High School</option>
+                                  <option value="BANARAN COMMUNITY HIGH SCHOOL">Banaran Community High School</option>
+                                  <option value="BUAN COMMUNITY HIGH SCHOOL">Buan Community High School</option>
+                                  <option value="MAPUN COMMUNITY HIGH SCHOOL">Mapun Community High School</option>
+                                  <option value="EASTERN TAWI-TAWI SECONDARY SCHOOLS">Eastern Tawi-Tawi Secondary Schools</option>
+                                  <option value="LANGUYAN COMMUNITY HIGH SCHOOL">Languyan Community High School</option>
+                                  <option value="LARAP COMMUNITY HIGH SCHOOL">Larap Community High School</option>
+                                  <option value="MANTABUAN COMMUNITY HIGH SCHOOL">Mantabuan Community High School</option>
+                                  <option value="MANUK-MANGKAW COMMUNITY HIGH SCHOOL">Manuk-Mangkaw Community High School</option>
+                                  <option value="SAPA-SAPA COMMUNITY HIGH SCHOOL">Sapa-Sapa Community High School</option>
+                                  <option value="SIBUTU COMMUNITY HIGH SCHOOL">Sibutu Community High School</option>
+                                  <option value="SITANGKAI SITANGKAI HIGH SCHOOL">Sitangkai Sitangkai High School</option>
+                                  <option value="SOUTH UBIAN COMMUNITY HIGH SCHOOL">South Ubian Community High School</option>
+                                  <option value="TABAWAN COMMUNITY HIGH SCHOOL">Tabawan Community High School</option>
+                                  <option value="TAMPAKAN COMMUNITY HIGH SCHOOL">Tampakan Community High School</option>
+                                  <option value="TANDUBANAK COMMUNITY HIGH SCHOOL">Tandubanak Community High School</option>
+                                  <option value="TUBIG INDANGAN COMMUNITY HIGH SCHOOL">Tubig Indangan Community High School</option>
+                                  <option value="UNGUS MATATA COMMUNITY HIGH SCHOOL">Ungus Matata Community High School</option>
+                                  <option value="WESTERN TAWI-TAWI COMMUNITY SCHOOL">Western Tawi-Tawi Community School</option>
+                                  <option value="INTEGRATED LABORATORY SCHOOL">Integrated Laboratory School</option>
+                                  <option value="INFORMATION AND COMMUNICATIONS TECHNOLOGY OFFICE">Information and Communications Technology Office</option>
+                                  <option value="REMITTING OFFICE">Remitting Office</option>
+                                  <option value="INTEGRATED LABORATORY SCHOOL - JUNIOR HIGH SCHOOL DEPARTMENT">Integrated Laboratory School - Junior High School Department</option>
+                                  <option value="GRADUATE SCHOOL_SCHOLAR">Graduate School Scholar</option>
+                                  <option value="COLLEGE OF EDUCATION_SCHOLAR">College of Education Scholar</option>
+                                  <option value="UNGUS MATATA EXTENSION_SCHOLAR">Ungus Matata Extension Scholar</option>
+                                  <option value="INTEGRATED LABORATORY SCHOOL - STANDARD BASIC EDUCATION CURRICULUM">Integrated Laboratory School - Standard Basic Education Curriculum</option>
+                                  <option value="MSU-TCTO LANGUYAN SECONDARY">MSU-TCTO Languyan Secondary</option>
+                                  <option value="COLLEGE OF FISHERIES - INLAND FISHERIES DEPARTMENT">College of Fisheries - Inland Fisheries Department</option>
+                                  <option value="MAPUN CAS EXTENSION">Mapun CAS Extension</option>
+                                  <option value="OFFICE OF THE CAMPUS SECRETARY">Office of the Campus Secretary</option>
                                   <option value="CAFETERIA">Cafeteria</option>
-                                  <option value="GUIDANCE AND COUNSELING OFFICE">Guidance and Counseling Office</option>
+                                  <option value="SAPA COMMUNITY HIGH SCHOOL">Sapa Community High School</option>
+                                  <option value="OFFICE OF THE VICE CHANCELLOR FOR RESEARCH INNOVATION DEVELOPMENT AND EXTENSION">Office of the Vice Chancellor for Research Innovation Development and Extension</option>
+                                  <option value="SECONDARY EDUCATION DEPARTMENT">Secondary Education Department</option>
+                                  <option value="BAC SECRETARIAT OFFICE">BAC Secretariat Office</option>
+                                  <option value="OFFICE OF THE SUPERVISORS FOR SECONDARY SCHOOLS">Office of the Supervisors for Secondary Schools</option>
+                                  <option value="SPORT DEVELOPMENT OFFICE">Sport Development Office</option>
+                                  <option value="OFFICE OF THE DIRECTOR FOR ADMINISTRATION">Office of the Director for Administration</option>
+                                  <option value="OFFICE OF THE INFORMATION AND PRESS PUBLICATIONS">Office of the Information and Press Publications</option>
+                                  <option value="OFFICE OF THE VICE CHANCELLOR FOR STUDENT AFFAIRS">Office of the Vice Chancellor for Student Affairs</option>
+                                  <option value="OFFICE OF CULTURAL AFFAIRS AND DEVELOPMENT">Office of Cultural Affairs and Development</option>
+                                  <option value="INTEGRATED FISHERIES RESEARCH AND TRAINING CENTER (IFRTC)">Integrated Fisheries Research and Training Center (IFRTC)</option>
+                                  <option value="MSU-TCTO MAPUN SECONDARY">MSU-TCTO Mapun Secondary</option>
+                                  <option value="OFFICE OF INTERNATIONAL LINKAGES">Office of International Linkages</option>
+                                  <option value="INTEGRATED SCIENCE LABORATORY">Integrated Science Laboratory</option>
+                                  <option value="COLLEGE OF FISHERIES - MULTI-SPECIES HATCHERY">College of Fisheries - Multi-Species Hatchery</option>
+                                  <option value="INSTITUTE OF ENVIRONMENTAL SCIENCE">Institute of Environmental Science</option>
+                                  <option value="OFFICE OF THE DIRECTOR FOR RESEARCH SERVICES">Office of the Director for Research Services</option>
+                                  <option value="MARINE SCIENCE MUSEUM">Marine Science Museum</option>
+                                  <option value="OCEANES">OCEANES</option>
+                                  <option value="ZAMDIQA">ZAMDIQA</option>
+                                  <option value="GENDER AND DEVELOPMENT OFFICE">Gender and Development Office</option>
+                                  <option value="OFFICE OF THE AUDITOR">Office of the Auditor</option>
+                                  <option value="TAWSIH RESIDENCE HALL">Tawsih Residence Hall</option>
+                                  <option value="LINGGISAN RESIDENCE HALL">Linggisan Residence Hall</option>
+                                  <option value="INSTITUTE FOR PEACE & DEVELOPMENT IN MINDANAO">Institute for Peace & Development in Mindanao</option>
+                                  <option value="RADYO KASANNANGAN">Radyo Kasannangan</option>
+                                  <option value="FOOD INNOVATION CENTER">Food Innovation Center</option>
+                                  <option value="SAMA STUDIES CENTER">Sama Studies Center</option>
+                                  <option value="AMERICAN CORNER">American Corner</option>
                                   <option value="QUALITY ASSURANCE & ACCREDITATION OFFICE">Quality Assurance & Accreditation Office</option>
+                                  <option value="COLLEGE OF LAW TAWI-TAWI EXTENSION">College of Law Tawi-Tawi Extension</option>
+                                  <option value="INTEGRATED LABORATORY SCHOOL - STANDARD MADRASAH EDUCATION CURRICULUM">Integrated Laboratory School - Standard Madrasah Education Curriculum</option>
+                                  <option value="SECURITY FORCE BONGAO CAMPUS">Security Force Bongao Campus</option>
+                                  <option value="SECURITY FORCE SANGA-SANGA CAMPUS">Security Force Sanga-Sanga Campus</option>
+                                  <option value="HENRY V. KONG GYM">Henry V. Kong Gym</option>
+                                  <option value="INTEGRATED LABORATORY SCHOOL - SENIOR HIGH SCHOOL DEPARTMENT">Integrated Laboratory School - Senior High School Department</option>
+                                  <option value="SENTRO NG WIKA AT KULTURA">Sentro ng Wika at Kultura</option>
+                                  <option value="BOYS DORMITORY">Boys Dormitory</option>
+                                  <option value="GIRLS DORMITORY">Girls Dormitory</option>
+                                  <option value="FLOATING CAGE">Floating Cage</option>
+                                  <option value="MSU-TCTO FISHPOND">MSU-TCTO Fishpond</option>
+                                  <option value="SEARDEC">SEARDEC</option>
+                                  <option value="COLLEGE OF ARTS AND SCIENCES">College of Arts and Sciences</option>
+                                  <option value="GUIDANCE AND COUNSELING OFFICE">Guidance and Counseling Office</option>
+                                  <option value="OFFICE OF THE VICE CHANCELLOR FOR PLANNING & DEVELOPMENT">Office of the Vice Chancellor for Planning & Development</option>
                                 </optgroup>
                               </select>
                               <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
@@ -792,7 +868,7 @@ const currentPath = Astro.url.pathname;
         
         // Create search results dropdown
         const searchResults = document.createElement('div');
-        searchResults.className = 'absolute z-10 mt-1 w-full bg-white shadow-lg rounded-lg border border-gray-300 hidden';
+        searchResults.className = 'absolute z-10 mt-1 w-full bg-white text-black shadow-lg rounded-lg border border-gray-300 hidden';
         searchResults.id = 'searchResults';
         globalSearch.parentNode.appendChild(searchResults);
         
