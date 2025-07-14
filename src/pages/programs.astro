@@ -38,23 +38,47 @@ const currentPath = Astro.url.pathname;
         </div>
 
         <!-- Stats Section -->
-        <div class="py-16 bg-msu-blue/10">
+        <div class="py-16 bg-gradient-to-br from-msu-blue/5 to-msu-gold/5">
             <div class="container mx-auto px-4 xl:px-0">
+                <div class="text-center mb-12">
+                    <h2 class="headings text-3xl font-bold text-msu-main-color mb-4">Our Impact in Numbers</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-msu-blue to-msu-gold mx-auto"></div>
+                </div>
                 <div class="grid xl:grid-cols-3 xs:grid-cols-2 justify-items-center gap-8">
-                    <div class="bg-white p-8 rounded-xl shadow-lg text-center max-w-[360px]">
+                    <div class="bg-white p-8 rounded-xl shadow-lg text-center max-w-[360px] transform hover:scale-105 transition-transform duration-300 border-t-4 border-msu-blue">
+                        <div class="w-16 h-16 bg-msu-blue/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-msu-blue" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+                            </svg>
+                        </div>
                         <h2 class="headings text-5xl font-bold text-msu-main-color mb-2">102+</h2>
                         <p class="paragraph p2 text-gray-700">National and International Partners</p>
                     </div>
-                    <div class="bg-white p-8 rounded-xl shadow-lg text-center max-w-[360px]">
-                        <h2 class="headings text-5xl font-bold text-msu-main-color  mb-2">55+</h2>
+                    <div class="bg-white p-8 rounded-xl shadow-lg text-center max-w-[360px] transform hover:scale-105 transition-transform duration-300 border-t-4 border-emerald-500">
+                        <div class="w-16 h-16 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <h2 class="headings text-5xl font-bold text-msu-main-color mb-2">55+</h2>
                         <p class="paragraph p2 text-gray-700">Ongoing local research for biodiversity</p>
                     </div>
-                    <div class="bg-white p-8 rounded-xl shadow-lg text-center max-w-[360px] xl:block xs:hidden">
-                        <h2 class="headings text-5xl font-bold text-msu-main-color  mb-2">30+</h2>
+                    <div class="bg-white p-8 rounded-xl shadow-lg text-center max-w-[360px] xl:block xs:hidden transform hover:scale-105 transition-transform duration-300 border-t-4 border-purple-500">
+                        <div class="w-16 h-16 bg-purple-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.138-3.5.38v.449A7.98 7.98 0 009 13.804M14.5 4c1.255 0 2.443.138 3.5.38v.449A7.98 7.98 0 0011 13.804M9 4.804A7.968 7.968 0 0112.5 4c1.255 0 2.443.138 3.5.38v.449A7.98 7.98 0 009 13.804M14.5 4c1.255 0 2.443.138 3.5.38v.449A7.98 7.98 0 0011 13.804"/>
+                            </svg>
+                        </div>
+                        <h2 class="headings text-5xl font-bold text-msu-main-color mb-2">30+</h2>
                         <p class="paragraph p2 text-gray-700">Curriculum programs of TCTO</p>
                     </div>
                 </div>
-                <div class="bg-white p-8 rounded-xl shadow-lg text-center max-w-[360px] mx-auto mt-8 xl:hidden xs:block">
+                <div class="bg-white p-8 rounded-xl shadow-lg text-center max-w-[360px] mx-auto mt-8 xl:hidden xs:block transform hover:scale-105 transition-transform duration-300 border-t-4 border-purple-500">
+                    <div class="w-16 h-16 bg-purple-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.138-3.5.38v.449A7.98 7.98 0 009 13.804M14.5 4c1.255 0 2.443.138 3.5.38v.449A7.98 7.98 0 0011 13.804M9 4.804A7.968 7.968 0 0112.5 4c1.255 0 2.443.138 3.5.38v.449A7.98 7.98 0 009 13.804M14.5 4c1.255 0 2.443.138 3.5.38v.449A7.98 7.98 0 0011 13.804"/>
+                        </svg>
+                    </div>
                     <h2 class="headings text-5xl font-bold text-msu-dark-blue mb-2">30+</h2>
                     <p class="paragraph p2 text-gray-700">Curriculum programs of TCTO</p>
                 </div>
@@ -70,22 +94,34 @@ const currentPath = Astro.url.pathname;
                 </div>
 
                 <!-- College of Arts and Sciences -->
-                <div class="mb-16 bg-gray-50 rounded-xl p-8 shadow-md">
-                    <div class="flex flex-col md:flex-row items-center gap-8 mb-8">
-                        <img src="/images/College Logo/LOGO CAS.png" class="w-40 h-40 object-contain" alt="CAS Logo">
-                        <div>
-                            <h3 class="headings text-3xl font-bold text-msu-main-color mb-2">
-                                <a href="/cas" class="hover:text-msu-blue transition-colors">College of Arts and Sciences</a>
-                            </h3>
-                        </div>
+                <div class="mb-16 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8 shadow-lg border border-blue-100">
+                    <div class="text-center mb-8">
+                        <h3 class="headings text-4xl font-bold text-msu-main-color mb-4">
+                            <a href="/cas" class="hover:text-msu-blue transition-colors">College of Arts and Sciences</a>
+                        </h3>
+                        <div class="w-32 h-1 bg-gradient-to-r from-msu-blue to-msu-gold mx-auto"></div>
                     </div>
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                            <h4 class="headings text-xl font-semibold text-msu-dark-blue mb-3">Graduate Programs</h4>
-                            <ul class="space-y-2 paragraph p2 text-gray-700">
-                                <li><a href="#" class="hover:text-msu-blue transition-colors">Master in Public Administration</a></li>
-                                <li><a href="#" class="hover:text-msu-blue transition-colors">Master of Science in Teaching Mathematics</a></li>
-                                <li><a href="https://drive.google.com/file/d/1-nR4D-JxwCTGbQnqUWM1zACgGk-QF4ME/view?usp=drive_link" class="hover:text-msu-blue transition-colors">Master of Arts in English Language Teaching</a></li>
+                        <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 border-l-4 border-msu-blue hover:border-msu-gold">
+                            <h4 class="headings text-xl font-semibold text-msu-dark-blue mb-3 flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-msu-blue" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
+                                </svg>
+                                Graduate Programs
+                            </h4>
+                            <ul class="space-y-3 paragraph p2 text-gray-700">
+                                <li class="flex items-center">
+                                    <div class="w-2 h-2 bg-msu-blue rounded-full mr-3"></div>
+                                    <a href="#" class="hover:text-msu-blue transition-colors">Master in Public Administration</a>
+                                </li>
+                                <li class="flex items-center">
+                                    <div class="w-2 h-2 bg-msu-blue rounded-full mr-3"></div>
+                                    <a href="#" class="hover:text-msu-blue transition-colors">Master of Science in Teaching Mathematics</a>
+                                </li>
+                                <li class="flex items-center">
+                                    <div class="w-2 h-2 bg-msu-blue rounded-full mr-3"></div>
+                                    <a href="https://drive.google.com/file/d/1-nR4D-JxwCTGbQnqUWM1zACgGk-QF4ME/view?usp=drive_link" class="hover:text-msu-blue transition-colors">Master of Arts in English Language Teaching</a>
+                                </li>
                             </ul>
                         </div>
                         <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
@@ -108,14 +144,12 @@ const currentPath = Astro.url.pathname;
                 </div>
 
                 <!-- College of Islamic & Arabic Studies -->
-                <div class="mb-16 bg-gray-50 rounded-xl p-8 shadow-md">
-                    <div class="flex flex-col md:flex-row items-center gap-8 mb-8">
-                        <img src="/images/College Logo/LOGO CIAS.png" class="w-40 h-40 object-contain" alt="CIAS Logo">
-                        <div>
-                            <h3 class="headings text-3xl font-bold text-msu-main-color mb-2">
-                                <a href="/cias" class="hover:text-msu-blue transition-colors">College of Islamic & Arabic Studies</a>
-                            </h3>
-                        </div>
+                <div class="mb-16 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl p-8 shadow-lg border border-emerald-100">
+                    <div class="text-center mb-8">
+                        <h3 class="headings text-4xl font-bold text-msu-main-color mb-4">
+                            <a href="/cias" class="hover:text-msu-blue transition-colors">College of Islamic & Arabic Studies</a>
+                        </h3>
+                        <div class="w-32 h-1 bg-gradient-to-r from-emerald-500 to-teal-500 mx-auto"></div>
                     </div>
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
@@ -135,14 +169,12 @@ const currentPath = Astro.url.pathname;
                 </div>
 
                 <!-- College of Education -->
-                <div class="mb-16 bg-gray-50 rounded-xl p-8 shadow-md">
-                    <div class="flex flex-col md:flex-row items-center gap-8 mb-8">
-                        <img src="/images/College Logo/LOGO COED.png" class="w-40 h-40 object-contain" alt="COED Logo">
-                        <div>
-                            <h3 class="headings text-3xl font-bold text-msu-main-color mb-2">
-                                <a href="/coed" class="hover:text-msu-blue transition-colors">College of Education</a>
-                            </h3>
-                        </div>
+                <div class="mb-16 bg-gradient-to-br from-purple-50 to-violet-50 rounded-xl p-8 shadow-lg border border-purple-100">
+                    <div class="text-center mb-8">
+                        <h3 class="headings text-4xl font-bold text-msu-main-color mb-4">
+                            <a href="/coed" class="hover:text-msu-blue transition-colors">College of Education</a>
+                        </h3>
+                        <div class="w-32 h-1 bg-gradient-to-r from-purple-500 to-violet-500 mx-auto"></div>
                     </div>
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
@@ -169,14 +201,12 @@ const currentPath = Astro.url.pathname;
                 </div>
 
                 <!-- College of Fisheries -->
-                <div class="mb-16 bg-gray-50 rounded-xl p-8 shadow-md">
-                    <div class="flex flex-col md:flex-row items-center gap-8 mb-8">
-                        <img src="/images/College Logo/LOGO COF.png" class="w-40 h-40 object-contain" alt="COF Logo">
-                        <div>
-                            <h3 class="headings text-3xl font-bold text-msu-main-color mb-2">
-                                <a href="/cof" class="hover:text-msu-blue transition-colors">College of Fisheries</a>
-                            </h3>
-                        </div>
+                <div class="mb-16 bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl p-8 shadow-lg border border-cyan-100">
+                    <div class="text-center mb-8">
+                        <h3 class="headings text-4xl font-bold text-msu-main-color mb-4">
+                            <a href="/cof" class="hover:text-msu-blue transition-colors">College of Fisheries</a>
+                        </h3>
+                        <div class="w-32 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto"></div>
                     </div>
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
@@ -203,14 +233,12 @@ const currentPath = Astro.url.pathname;
                 </div>
 
                 <!-- Institute of Information and Communication Technology -->
-                <div class="mb-16 bg-gray-50 rounded-xl p-8 shadow-md">
-                    <div class="flex flex-col md:flex-row items-center gap-8 mb-8">
-                        <img src="/images/College Logo/LOGO IICT.png" class="w-40 h-40 object-contain" alt="IICT Logo">
-                        <div>
-                            <h3 class="headings text-3xl font-bold text-msu-main-color mb-2">
-                                <a href="/iict" class="hover:text-msu-blue transition-colors">Institute of Information and Communication Technology</a>
-                            </h3>
-                        </div>
+                <div class="mb-16 bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-8 shadow-lg border border-orange-100">
+                    <div class="text-center mb-8">
+                        <h3 class="headings text-4xl font-bold text-msu-main-color mb-4">
+                            <a href="/iict" class="hover:text-msu-blue transition-colors">Institute of Information and Communication Technology</a>
+                        </h3>
+                        <div class="w-32 h-1 bg-gradient-to-r from-orange-500 to-red-500 mx-auto"></div>
                     </div>
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
@@ -224,14 +252,12 @@ const currentPath = Astro.url.pathname;
                 </div>
 
                 <!-- Institute of Oceanography and Environmental Science -->
-                <div class="mb-16 bg-gray-50 rounded-xl p-8 shadow-md">
-                    <div class="flex flex-col md:flex-row items-center gap-8 mb-8">
-                        <img src="/images/College Logo/IOES Logo.png" class="w-40 h-40 object-contain" alt="IOES Logo">
-                        <div>
-                            <h3 class="headings text-3xl font-bold text-msu-main-color mb-2">
-                                <a href="/ioes" class="hover:text-msu-blue transition-colors">Institute of Oceanography and Environmental Science</a>
-                            </h3>
-                        </div>
+                <div class="mb-16 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8 shadow-lg border border-green-100">
+                    <div class="text-center mb-8">
+                        <h3 class="headings text-4xl font-bold text-msu-main-color mb-4">
+                            <a href="/ioes" class="hover:text-msu-blue transition-colors">Institute of Oceanography and Environmental Science</a>
+                        </h3>
+                        <div class="w-32 h-1 bg-gradient-to-r from-green-500 to-emerald-500 mx-auto"></div>
                     </div>
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <div class="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
@@ -258,7 +284,7 @@ const currentPath = Astro.url.pathname;
         <!-- Footer -->
         <Footer />
 
-        <style global>
+        <style>
             :root {
                 --msu-dark-blue: #003366;
                 --msu-blue: #0066CC;

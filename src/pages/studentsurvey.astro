@@ -87,7 +87,15 @@
                     <label class="block text-sm font-medium text-gray-700 mb-2">
                       Student Number <span class="text-msu-maroon">*</span>
                     </label>
-                    <input type="text" name="entry.413035083" class="text-msu-maroon-900 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-msu-main-color focus:border-msu-main-color" placeholder="e.g. 2023-12345" required>
+                    <input 
+                      type="text" 
+                      name="entry.413035083" 
+                      pattern="[0-9-]*"
+                      onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 45"
+                      class="text-msu-maroon-900 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-msu-main-color focus:border-msu-main-color" 
+                      placeholder="e.g. 25-12345"
+                      required
+                    >
                   </div>
 
                 <!-- Add this right after the Student Number field in your form -->
@@ -141,43 +149,43 @@
                             </svg>`,
                       questions: [
                         { 
-                          text: "1. The admission staff responds to questions and concerns in a timely manner. ", 
+                          text: "The admission staff responds to questions and concerns in a timely manner. ", 
                           entry: "entry.1132405313"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "2. The admissions policies and procedures are posted in a clear and systematic manner in bulletin boards.   ", 
+                          text: "The admissions policies and procedures are posted in a clear and systematic manner in bulletin boards.   ", 
                           entry: "entry.470748009"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "3. The website used for registration is efficient and user-friendly.    ", 
+                          text: "The website used for registration is efficient and user-friendly.    ", 
                           entry: "entry.1461034551"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "4. Efficiency and Orderliness of the procedures are strictly observed.    ", 
+                          text: "Efficiency and Orderliness of the procedures are strictly observed.    ", 
                           entry: "entry.409425690"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "5. The application process was student friendly.     ", 
+                          text: "The application process was student friendly.     ", 
                           entry: "entry.190100243"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "6. My interaction with the Admissions office played a positive part in my decision to attend MSU-TCTO.      ", 
+                          text: "My interaction with the Admissions office played a positive part in my decision to attend MSU-TCTO.      ", 
                           entry: "entry.1065385484"  // Use the exact Google Form field name
                         },
                          { 
-                          text: "7. I received my notice of acceptance in a timely manner.      ", 
+                          text: "I received my notice of acceptance in a timely manner.      ", 
                           entry: "entry.1053564623"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "8. The selection of programs is well-communicated with the applicants before the final registration.       ", 
+                          text: "The selection of programs is well-communicated with the applicants before the final registration.       ", 
                           entry: "entry.1858192816"  // Use the exact Google Form field name
                         },
                        { 
-                          text: "9. The Admissions office is accessible.        ", 
+                          text: "The Admissions office is accessible.        ", 
                           entry: "entry.1930952706"  // Use the exact Google Form field name
                         },
                                                { 
-                          text: "10. Updates from the social media page of the office are timely and relevant.        ", 
+                          text: "Updates from the social media page of the office are timely and relevant.        ", 
                           entry: "entry.461394408"  // Use the exact Google Form field name
                         },
                         
@@ -196,43 +204,43 @@
                               </svg>`,
                       questions: [
                         { 
-                          text: "1. The counselor seemed well-trained and skilled.  ", 
+                          text: "The counselor seemed well-trained and skilled.  ", 
                           entry: "entry.1908417319"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "2. The waiting area is comfortable and well-ventilated.   ", 
+                          text: "The waiting area is comfortable and well-ventilated.   ", 
                           entry: "entry.182997037"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "3. The guidance and counseling procedures are well communicated.     ", 
+                          text: "The guidance and counseling procedures are well communicated.     ", 
                           entry: "entry.877735723"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "4. The counselor and the staff are courteous and prompt.    ", 
+                          text: "The counselor and the staff are courteous and prompt.    ", 
                           entry: "entry.1747292146"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "5. The counseling area is well-lit, comfortable and provides privacy.      ", 
+                          text: "The counseling area is well-lit, comfortable and provides privacy.      ", 
                           entry: "entry.139211950"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "6. My concerns have been improved because of the services provided.       ", 
+                          text: "My concerns have been improved because of the services provided.       ", 
                           entry: "entry.739530064"  // Use the exact Google Form field name
                         },
                          { 
-                          text: "7. My counselor understood my problems and concerns.      ", 
+                          text: "My counselor understood my problems and concerns.      ", 
                           entry: "entry.1625956601"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "8. I was treated considerately and respectfully by the Counseling staff.        ", 
+                          text: "I was treated considerately and respectfully by the Counseling staff.        ", 
                           entry: "entry.1825320977"  // Use the exact Google Form field name
                         },
                        { 
-                          text: "9. I would recommend the service to my friends.        ", 
+                          text: "I would recommend the service to my friends.        ", 
                           entry: "entry.139972847"  // Use the exact Google Form field name
                         },
                                                { 
-                          text: "10. Referral services are available and communicated well.        ", 
+                          text: "Referral services are available and communicated well.        ", 
                           entry: "entry.1440470180"  // Use the exact Google Form field name
                         },
                         
@@ -260,43 +268,43 @@
                           </svg>`,
                       questions: [
                         { 
-                          text: "1. The infirmary personnel are available and efficient.   ", 
+                          text: "The infirmary personnel are available and efficient.   ", 
                           entry: "entry.1230310625"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "2. The medical and dental programs offered are clearly posted.    ", 
+                          text: "The medical and dental programs offered are clearly posted.    ", 
                           entry: "entry.557952169"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "3. The physician's schedule is posted.      ", 
+                          text: "The physician's schedule is posted.      ", 
                           entry: "entry.1574762898"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "4. The infirmary personnel assists in the orientation of the procedures and reminders before each session.     ", 
+                          text: "The infirmary personnel assists in the orientation of the procedures and reminders before each session.     ", 
                           entry: "entry.952340677"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "5. Medicines and medical kits are readily available.      ", 
+                          text: "Medicines and medical kits are readily available.      ", 
                           entry: "entry.219828953"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "6. The patient rooms are clean and well-maintained.       ", 
+                          text: "The patient rooms are clean and well-maintained.       ", 
                           entry: "entry.1665306060"  // Use the exact Google Form field name
                         },
                          { 
-                          text: "7. The physician's diagnosis is precise and reliable.       ", 
+                          text: "The physician's diagnosis is precise and reliable.       ", 
                           entry: "entry.1700661155"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "8. The issuance of medical certificates is systematic and hassle-free.       ", 
+                          text: "The issuance of medical certificates is systematic and hassle-free.       ", 
                           entry: "entry.1590571010"  // Use the exact Google Form field name
                         },
                        { 
-                          text: "9. Client profiling is done in a courteous and prompt manner.          ", 
+                          text: "Client profiling is done in a courteous and prompt manner.          ", 
                           entry: "entry.45416038"  // Use the exact Google Form field name
                         },
                                                { 
-                          text: "10. The infirmary offers referral services to distinguished health clinics around the area.          ", 
+                          text: "The infirmary offers referral services to distinguished health clinics around the area.          ", 
                           entry: "entry.883745635"  // Use the exact Google Form field name
                         },
                         
@@ -326,43 +334,43 @@
                           </svg>`,
                       questions: [
                         { 
-                          text: "1. The buildings in the campus are logically organized and easy to find.     ", 
+                          text: "The buildings in the campus are logically organized and easy to find.     ", 
                           entry: "entry.219780789"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "2. The buildings are equipped with fire extinguishers and emergency exits.    ", 
+                          text: "The buildings are equipped with fire extinguishers and emergency exits.    ", 
                           entry: "entry.1409199805"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "3. The comfort rooms are neat and clean.      ", 
+                          text: "The comfort rooms are neat and clean.      ", 
                           entry: "entry.594250787"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "4. The free wi-fi connection is easily accessed and provides an active internet connection.      ", 
+                          text: "The free wi-fi connection is easily accessed and provides an active internet connection.      ", 
                           entry: "entry.1062600403"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "5. The cafeteria is spacious and well-ventilated.      ", 
+                          text: "The cafeteria is spacious and well-ventilated.      ", 
                           entry: "entry.1633357096"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "6. The offices present in the campus are well-labeled and manned.        ", 
+                          text: "The offices present in the campus are well-labeled and manned.        ", 
                           entry: "entry.1291044789"  // Use the exact Google Form field name
                         },
                          { 
-                          text: "7. The campus premises are free from clutters and other debris that may cause hazards.        ", 
+                          text: "The campus premises are free from clutters and other debris that may cause hazards.        ", 
                           entry: "entry.1402911528"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "8. Student Lounges are available and comfortable.        ", 
+                          text: "Student Lounges are available and comfortable.        ", 
                           entry: "entry.207769118"  // Use the exact Google Form field name
                         },
                        { 
-                          text: "9. The gymnasium is well-maintained and can accommodate large groups of people without causing too much crowding.          ", 
+                          text: "The gymnasium is well-maintained and can accommodate large groups of people without causing too much crowding.          ", 
                           entry: "entry.1269709801"  // Use the exact Google Form field name
                         },
                                                { 
-                          text: "10. The covered pathways provide shade from the sun and shield from the rain.          ", 
+                          text: "The covered pathways provide shade from the sun and shield from the rain.          ", 
                           entry: "entry.424815213"  // Use the exact Google Form field name
                         },
                         
@@ -394,43 +402,43 @@
                             </svg>`,
                       questions: [
                         { 
-                          text: "1. The Registrar's office staff members are respectful and polite.   ", 
+                          text: "The Registrar's office staff members are respectful and polite.   ", 
                           entry: "entry.873793740"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "2. The Registrar's Office staff members displayed professionalism during interactions.     ", 
+                          text: "The Registrar's Office staff members displayed professionalism during interactions.     ", 
                           entry: "entry.790874569"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "3. The service was done in a reasonable amount of time.       ", 
+                          text: "The service was done in a reasonable amount of time.       ", 
                           entry: "entry.417482068"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "4. The issues raised to the office were addressed and they provided the necessary steps needed for the resolution and/or update until the request was fulfilled.       ", 
+                          text: "The issues raised to the office were addressed and they provided the necessary steps needed for the resolution and/or update until the request was fulfilled.       ", 
                           entry: "entry.615257091"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "5. Step-by-Step procedures are visible at the most conspicuous places.      ", 
+                          text: "Step-by-Step procedures are visible at the most conspicuous places.      ", 
                           entry: "entry.171005161"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "6. The physical facilities offered are adequate and appealing.        ", 
+                          text: "The physical facilities offered are adequate and appealing.        ", 
                           entry: "entry.1033057264"  // Use the exact Google Form field name
                         },
                          { 
-                          text: "7. There is quality completeness and accuracy of document/s, service/s, information requested..        ", 
+                          text: "There is quality completeness and accuracy of document/s, service/s, information requested..        ", 
                           entry: "entry.1069805834"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "8. The office has operating hours convenient to customers.         ", 
+                          text: "The office has operating hours convenient to customers.         ", 
                           entry: "entry.1887940505"  // Use the exact Google Form field name
                         },
                        { 
-                          text: "9. The staff members answered inquiries correctly the first time.           ", 
+                          text: "The staff members answered inquiries correctly the first time.           ", 
                           entry: "entry.1064475469"  // Use the exact Google Form field name
                         },
                                                { 
-                          text: "10. The waiting lounge is comfortable for the customers.           ", 
+                          text: "The waiting lounge is comfortable for the customers.           ", 
                           entry: "entry.2080739566"  // Use the exact Google Form field name
                         },
                         
@@ -464,43 +472,43 @@
                             </svg>`,
                       questions: [
                         { 
-                          text: "1. The orientation program is well-organized and interactive.    ", 
+                          text: "The orientation program is well-organized and interactive.    ", 
                           entry: "entry.1124864109"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "2. The program facilitators are knowledgeable and respectful.      ", 
+                          text: "The program facilitators are knowledgeable and respectful.      ", 
                           entry: "entry.1788790174"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "3. The topics covered helped to better understand the goals of the university.        ", 
+                          text: "The topics covered helped to better understand the goals of the university.        ", 
                           entry: "entry.1155650238"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "4. The orientation materials provided helpful information about the campus resources.        ", 
+                          text: "The orientation materials provided helpful information about the campus resources.        ", 
                           entry: "entry.1127478906"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "5. The campus tour follows the designated routes in accordance with the provided schedule.      ", 
+                          text: "The campus tour follows the designated routes in accordance with the provided schedule.      ", 
                           entry: "entry.1368534626"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "6. The orientation program is timely and relevant.          ", 
+                          text: "The orientation program is timely and relevant.          ", 
                           entry: "entry.1788732301"  // Use the exact Google Form field name
                         },
                          { 
-                          text: "7. The program facilitators responded to questions kindly.       ", 
+                          text: "The program facilitators responded to questions kindly.       ", 
                           entry: "entry.1679863227"  // Use the exact Google Form field name
                         },
                         { 
-                          text: "8. The safety and comfort of the students are ensured during the entire duration of the program.          ", 
+                          text: "The safety and comfort of the students are ensured during the entire duration of the program.          ", 
                           entry: "entry.1075065667"  // Use the exact Google Form field name
                         },
                        { 
-                          text: "9. The refreshments provided during the program are satisfying.           ", 
+                          text: "The refreshments provided during the program are satisfying.           ", 
                           entry: "entry.2100687734"  // Use the exact Google Form field name
                         },
                                                { 
-                          text: "10. The orientation increases the confidence that MSU-TCTO is the right choice for a university.           ", 
+                          text: "The orientation increases the confidence that MSU-TCTO is the right choice for a university.           ", 
                           entry: "entry.1382450669"  // Use the exact Google Form field name
                         },
                         
@@ -1205,20 +1213,14 @@ document.addEventListener('DOMContentLoaded', function() {
               </div>
             </div>
             
-
-            
-
-            
             <!-- Status Message -->
-            <p class="text-gray-700 font-medium text-center mb-2 transition-opacity duration-300">Processing your survey submission...</p>
-            <p class="text-sm text-gray-500 text-center transition-opacity duration-300">Please wait while we validate and submit your responses</p>
+            <p class="status-message text-gray-700 font-medium text-center mb-2 transition-opacity duration-300">Processing your survey submission...</p>
+            <p class="status-subtext text-sm text-gray-500 text-center transition-opacity duration-300">Please wait while we validate and submit your responses</p>
             
             <!-- Spinning Loader -->
             <div class="mt-4">
               <div class="loader animate-spin rounded-full h-8 w-8 border-2 border-msu-main-color border-t-transparent"></div>
             </div>
-            
-
           </div>
         `;
         document.body.appendChild(loader);
@@ -1404,44 +1406,52 @@ document.addEventListener('DOMContentLoaded', function() {
     showModal('error', 'Internet connection lost. Please reconnect to submit your survey.');
   });
 
-            // Simplified status animation function
+            // Enhanced status animation function
     function startProgressAnimation() {
-      const statusMessage = document.querySelector('.loader-container p:first-of-type');
-      const statusSubtext = document.querySelector('.loader-container p:last-of-type');
+      const statusMessage = document.querySelector('.status-message');
+      const statusSubtext = document.querySelector('.status-subtext');
+      
+      if (!statusMessage || !statusSubtext) {
+        console.error('Status message elements not found');
+        return;
+      }
       
       const statusMessages = [
         { main: 'Validating your information...', sub: 'Checking student details and form completeness' },
         { main: 'Processing survey responses...', sub: 'Analyzing your feedback and ratings' },
         { main: 'Submitting to server...', sub: 'Sending your responses securely' },
-        { main: 'Finalizing submission...', sub: 'Preparing your receipt and confirmation' }
+        { main: 'Finalizing submission...', sub: 'Completing your survey submission' }
       ];
       
       let currentStep = 0;
       
       function updateStatus() {
-        currentStep++;
-        
-        // Update status messages
-        if (statusMessages[currentStep - 1]) {
-          statusMessage.style.transition = 'opacity 0.4s ease';
-          statusSubtext.style.transition = 'opacity 0.4s ease';
+        if (currentStep < statusMessages.length) {
+          // Fade out current messages
+          statusMessage.style.transition = 'opacity 0.3s ease';
+          statusSubtext.style.transition = 'opacity 0.3s ease';
           statusMessage.style.opacity = '0';
           statusSubtext.style.opacity = '0';
           
           setTimeout(() => {
-            statusMessage.textContent = statusMessages[currentStep - 1].main;
-            statusSubtext.textContent = statusMessages[currentStep - 1].sub;
+            // Update messages
+            statusMessage.textContent = statusMessages[currentStep].main;
+            statusSubtext.textContent = statusMessages[currentStep].sub;
+            
+            // Fade in new messages
             statusMessage.style.opacity = '1';
             statusSubtext.style.opacity = '1';
+            
+            currentStep++;
           }, 300);
         }
       }
       
-      // Start status updates
-      setTimeout(() => updateStatus(), 1000);
-      setTimeout(() => updateStatus(), 3000);
-      setTimeout(() => updateStatus(), 5000);
-      setTimeout(() => updateStatus(), 7000);
+      // Start status updates with proper timing
+      setTimeout(() => updateStatus(), 1500);
+      setTimeout(() => updateStatus(), 3500);
+      setTimeout(() => updateStatus(), 5500);
+      setTimeout(() => updateStatus(), 7500);
     }
       
 
