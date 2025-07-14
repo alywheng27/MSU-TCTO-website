@@ -1,14 +1,21 @@
 // Smooth scroll for explore button
-    document.querySelector('.explore-btn').addEventListener('click', (e) => {
+const exploreBtn = document.querySelector('.explore-btn');
+if (exploreBtn) {
+    exploreBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        document.querySelector('.timeline-container').scrollIntoView({
-            behavior: 'smooth'
-        });
+        const timelineContainer = document.querySelector('.timeline-container');
+        if (timelineContainer) {
+            timelineContainer.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
     });
-    
-    // Animate elements on scroll
-    const animateElements = document.querySelectorAll('[data-aos]');
-    
+}
+
+// Animate elements on scroll
+const animateElements = document.querySelectorAll('[data-aos]');
+
+if (animateElements.length > 0) {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -20,10 +27,12 @@
     animateElements.forEach(element => {
         observer.observe(element);
     });
-    
-    // Interactive gallery hover effect
-    const galleryItems = document.querySelectorAll('.hover-gallery-item');
-    
+}
+
+// Interactive gallery hover effect
+const galleryItems = document.querySelectorAll('.hover-gallery-item');
+
+if (galleryItems.length > 0) {
     galleryItems.forEach(item => {
         item.addEventListener('mousemove', (e) => {
             const x = e.clientX - item.getBoundingClientRect().left;
@@ -32,3 +41,4 @@
             item.style.transformOrigin = `${x}px ${y}px`;
         });
     });
+}

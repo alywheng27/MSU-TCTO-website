@@ -156,7 +156,7 @@ const Navbar = ({ path }) => {
       icon: <FaHome className="text-lg" />,
       items: [
         { link: "/", label: "Overview" },
-        { link: "/404", label: "Office Feedback" },
+        { link: "/officefeedback", label: "Office Feedback" },
         { link: "/partners", label: "Local and International Partners" }
       ]
     },
@@ -215,6 +215,16 @@ const Navbar = ({ path }) => {
       icon: <FaBriefcase className="text-lg" />,
       items: [
         { link: "/careers", label: "Open Positions" },
+     
+      ]
+    },
+
+    {
+      title: "Graduation",
+      icon: <FaGraduationCap className="text-lg" />,
+      items: [
+        { link: "/404", label: "Commencement Exercises" },
+    
       ]
     }
   ];

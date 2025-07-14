@@ -48,7 +48,7 @@
         </div>
 
         <div class="p-6 sm:p-8">
-          <form id="studentSurveyForm" class="space-y-8">
+                          <form id="regstudentSurveyForm" class="space-y-8">
             <!-- Student Information -->
             <div class="grid md:grid-cols-2 gap-6">
               <div class="form-group">
@@ -57,19 +57,19 @@
                 </label>
                 <div class="grid grid-cols-4 gap-2">
                   <label class="flex items-center">
-                    <input type="radio" name="regyearlevels" value="1st" class="h-4 w-4 text-msu-main-color focus:ring-msu-main-color">
+                    <input type="radio" name="entry.1602134174" value="1st" class="h-4 w-4 text-msu-main-color focus:ring-msu-main-color">
                     <span class="ml-2 text-sm text-gray-700">1st</span>
                   </label>
                   <label class="flex items-center">
-                    <input type="radio" name="regyearlevels" value="2nd" class="h-4 w-4 text-msu-main-color focus:ring-msu-main-color">
+                    <input type="radio" name="entry.1602134174" value="2nd" class="h-4 w-4 text-msu-main-color focus:ring-msu-main-color">
                     <span class="ml-2 text-sm text-gray-700">2nd</span>
                   </label>
                   <label class="flex items-center">
-                    <input type="radio" name="regyearlevels" value="3rd" class="h-4 w-4 text-msu-main-color focus:ring-msu-main-color">
+                    <input type="radio" name="entry.1602134174" value="3rd" class="h-4 w-4 text-msu-main-color focus:ring-msu-main-color">
                     <span class="ml-2 text-sm text-gray-700">3rd</span>
                   </label>
                   <label class="flex items-center">
-                    <input type="radio" name="regyearlevels" value="4th" class="h-4 w-4 text-msu-main-color focus:ring-msu-main-color">
+                    <input type="radio" name="entry.1602134174" value="4th" class="h-4 w-4 text-msu-main-color focus:ring-msu-main-color">
                     <span class="ml-2 text-sm text-gray-700">4th</span>
                   </label>
                 </div>
@@ -79,7 +79,7 @@
                 <label class="block text-sm font-medium text-gray-700 mb-2">
                   Course <span class="text-msu-maroon">*</span>
                 </label>
-                <input type="text" name="regcourses" class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-msu-main-color focus:border-msu-main-color" placeholder="Enter your course" required>
+                <input type="text" name="entry.938986881" class="text-black block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-msu-main-color focus:border-msu-main-color" placeholder="Enter your course" required>
               </div>
             </div>
 
@@ -87,7 +87,15 @@
               <label class="block text-sm font-medium text-gray-700 mb-2">
                 Student Number <span class="text-msu-maroon">*</span>
               </label>
-              <input type="text" name="regstudids" class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-msu-main-color focus:border-msu-main-color" placeholder="e.g. 2023-12345" required>
+              <input 
+                type="text" 
+                name="entry.1609254934" 
+                pattern="[0-9-]*"
+                onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 45"
+                class="text-black block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-msu-main-color focus:border-msu-main-color" 
+                placeholder="e.g. 25-12345" 
+                required
+              >
             </div>
 
             <!-- Reference Code Field -->
@@ -98,9 +106,9 @@
               <div class="flex items-center">
                 <input 
                   type="text" 
-                  name="references" 
+                  name="entry.132807391" 
                   id="regreferenceCodeInputs"
-                  class="block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-msu-main-color focus:border-msu-main-color bg-gray-100 font-mono" 
+                  class="text-black block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-msu-main-color focus:border-msu-main-color bg-gray-100 font-mono" 
                   placeholder="Will be generated automatically" 
                   readonly
                   required
@@ -131,43 +139,230 @@
               </p>
             </div>
 
-            <!-- Service Sections -->
-            {[
-              {
-                title: "Library Services",
-                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h8m-8 4h5M17 14a2 2 0 100-4 2 2 0 000 4z" />
-                        <circle cx="17" cy="17" r="2" stroke="currentColor" stroke-width="2" fill="none"/>
-                      </svg>`,
-                questions: [
-                  { 
-                    text: "1. The admission staff responds to questions and concerns in a timely manner.", 
-                    entry: "entry.1132405313"
-                  },
-                  { 
-                    text: "2. The admissions policies and procedures are posted in a clear and systematic manner in bulletin boards.", 
-                    entry: "entry.470748009"
-                  },
-                  // Add more questions as needed
-                ],
-                commentsEntry: "entry.1263059269",
-                suggestionsEntry: "entry.415098962"
-              },
-              {
-                title: "Guidance Services",
-                icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                   <!-- Service Sections -->
+                   {[
+                    {
+                      title: "Library Services",
+                      icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                       </svg>`,
-                questions: [
-                  { 
-                    text: "1. The guidance staff are approachable and accommodating.", 
-                    entry: "entry.987654321"
-                  },
-                  // Add more questions as needed
-                ],
-                commentsEntry: "entry.987654322",
-                suggestionsEntry: "entry.987654323"
-              }
+                      questions: [
+                        { text: " Library Staff are professional in their dealings with me.", entry: "entry.1228358537" },
+                        { text: "Library staff are knowledgeable", entry: "entry.1152867899" },
+                        { text: "Library staff respond in a timely manner", entry: "entry.1999245978" },
+                        { text: "Computers and electronic equipment and electronic equipment are accessible in the library.", entry: "entry.426145925" },
+                        { text: "Printing and photocopying services are adequate", entry: "entry.2068230753" },
+                        { text: "The library's collection meets my research needs", entry: "entry.463347271" },
+                        { text: "Group study areas are adequate", entry: "entry.2136922460" },
+                        { text: "Library keeps me informed about new services and collections. ", entry: "entry.1878621100" },
+                        { text: "Resources are current and relevant", entry: "entry.60058532" },
+                        { text: "Borrowing policies and procedures are clearly stated", entry: "entry.1954591289" }
+                      ],
+                      commentsEntry: "entry.1980894463",
+                      suggestionsEntry: "entry.893157908"
+                    },
+                    {
+                            title: "Security Services",
+                            icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                            </svg>`,
+                            questions: [
+                            { text: "Emergency drills are performed regularly", entry: "entry.348536619" },
+                            { text:  "The school monitors the campus's activities via CCTV cameras placed strategically in the campus", entry: "entry.1682782302" },
+                            { text: "The security guards identify visitors from students and employees to ensure security",  entry: "entry.1213898326" },
+                            { text:  "Roaming around the campus is done with the confidence of being always in safety", entry: "entry.433818447" },
+                            { text: "The security guards are polite and diligent when performing their duties", entry: "entry.77788445" },
+                            { text: "The security guards are easily identifiable through uniforms even during school events", entry: "entry.990445392" },
+                            { text: "Adults in the school apply the same rules to all students equally", entry: "entry.154748050" },
+                            { text: "The dress code is strictly implemented in allowing students to enter the school premises", entry: "entry.1625236559" },
+                            { text: "The school requires students and employees to wear badges or ID's", entry: "entry.1243398479" },
+                            { text:  "Provide a structured anonymous threat reporting system", entry: "entry.1288197922" }
+                               ],
+                             commentsEntry: "entry.1852251220",
+                            suggestionsEntry: "entry.1923499308"
+                          },
+                          {
+                            title: "Admission Services",
+                            icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                            </svg>`,
+                            questions: [
+                             { text: "The admission staff responds to questions and concerns in a timely manner", entry: "entry.820828130" },
+                             { text:  "The admissions policies and procedures are posted in a clear and systematic manner in bulletin boards", entry: "entry.1738082272" },
+                             { text:  "The website used for registration is efficient and user-friendly", entry: "entry.1722614618" },
+                             { text:  "Efficiency and Orderliness of the procedures are strictly observed", entry: "entry.1544337904" },
+                             { text:  "The application process was student friendly", entry: "entry.3192744" },
+                             { text:  "My interaction with the Admissions office played a positive part in my decision to attend MSU-TCTO", entry: "entry.723483980" },
+                              { text: "I received my notice of acceptance in a timely manner", entry: "entry.1214996999" },
+                             { text:  "The selection of programs is well-communicated with the applicants before the final registration", entry: "entry.1110642989" },
+                             { text:  "The Admissions office is accessible", entry: "entry.1346429120" },
+                            { text:   "Updates from the social media page of the office are timely and relevant", entry: "entry.693757894" }
+                              ],
+                             commentsEntry: "entry.872598532",
+                            suggestionsEntry: "entry.728610204"
+                          },
+                          { ///to be continues
+                            title: "Guidance Services",
+                            icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                            </svg>`,
+                            questions: [
+                             { text: "The counselor seemed well-trained and skilled.", entry: "entry.195651681" },
+                             { text: "The waiting area is comfortable and well-ventilated.", entry: "entry.384100751" },
+                             { text: "The guidance and counseling procedures are well communicated.", entry: "entry.1617377256" },
+                             { text: "The counselor and the staff are courteous and prompt.", entry: "entry.182063419" },
+                             { text: "The counseling area is well-lit, comfortable and provides privacy.", entry: "entry.1415483722" },
+                             { text: "My concerns have been improved because of the services provided.", entry: "entry.1667958942" },
+                            { text:"My counselor understood my problems and concerns.", entry: "entry.1815506704" },
+                            { text:"I was treated considerately and respectfully by the Counseling staff.", entry: "entry.2021525868" },
+                             { text: "I would recommend the service to my friends.", entry: "entry.178359300" },
+                             { text: "Updates from the social media page of the office are timely and relevant", entry: "entry.779545470" }
+                               ],
+                             commentsEntry: "entry.1904930656",
+                            suggestionsEntry: "entry.1494873212"
+                          },
+                          {
+                            //tobe cont
+                            title: "Laboratory Services",
+                            icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                            </svg>`,
+                            questions: [
+                              { text: "The laboratory premises are clean and organized.", entry: "entry.1575962710" },
+                              { text: "The laboratory is well lighted and ventilated.",entry: "entry.1142625376" },
+                              { text: "Emergency exits and other laboratory facilities are clearly labeled with legible lettering.", entry: "entry.1834731960" },
+                              { text:"Important signs, procedures and information are placed strategically.",entry: "entry.1591873216" },
+                              { text:"Chemicals are prepared by professionals and the students are informed of the precautions before the start of the class.", entry: "entry.297430620" },
+                              { text:"Proper dress code is strictly observed.",entry: "entry.786886324" },
+                              { text: "The units in the computer laboratories are usable and system updated.",entry: "entry.1724527374" },
+                              { text: "There is a laboratory for different technologies.",entry: "entry.763779563" },
+                              { text:  "The laboratory staff are knowledgeable about the technologies used and procedures implemented in the laboratory.",entry: "entry.520082546" },
+                              { text: "Safety equipment and devices are available and within easy reach in case of emergency.",entry: "entry.1809450268" }
+                                 ],
+                             commentsEntry: "entry.1202246591",
+                            suggestionsEntry: "entry.69510103"
+                          },
+                          {
+                            // to be cont food
+                            title: "Food Services",
+                            icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>`,
+                            questions: [
+                             {text : "The atmosphere in the cafeteria is welcoming.",entry: "entry.299195989" },
+                             { text: "There is a variety of options available in the cafeteria.",entry: "entry.752190045" },
+                             { text: "The eating utensils are clean and easily accessible.",entry: "entry.1745681586" },
+                             { text: "The staff members are friendly and knowledgeable.",entry: "entry.944423033" },
+                             { text:  "The prices of the food are within reasonable range.",entry: "entry.1810344743" },
+                             { text: "The food portions are generous.",entry: "entry.752973906" },
+                             { text: "Water is readily available in the cafeteria.",entry: "entry.29717497" },
+                             { text:  "The food served in the cafeteria are tasty and flavorful.",entry: "entry.815718323" },
+                             { text: "The cafeteria can accommodate the number of students even during breaktime.",entry: "entry.254090614" },
+                             { text:  "The sanitation in preparing the food is maintained.",entry: "entry.1166268262" }
+                                      ],
+                             commentsEntry: "entry.471843829",
+                            suggestionsEntry: "entry.303333185"
+                          },
+                          {
+                            title: "Health Services",
+                            icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                            </svg>`,
+                            questions: [
+                             {text: "The infirmary personnel are available and efficient.",entry: "entry.1652209592" },
+                             {text: "The medical and dental programs offered are clearly posted.",entry: "entry.1112716636" },
+                             {text: "The physician's schedule is posted.",entry: "entry.1339656405" },
+                              {text:"The infirmary personnel assists in the orientation of the procedures and reminders before each session.",entry: "entry.6187455" },
+                             {text: "Medicines and medical kits are readily available.",entry: "entry.257976003" },
+                             {text: "The patient rooms are clean and well-maintained.",entry: "entry.491957462" },
+                             {text: "The physician's diagnosis is precise and reliable.",entry: "entry.1649677844" },
+                             {text:"The issuance of medical certificates is systematic and hassle-free.",entry: "entry.852565957" },
+                             {text: "Client profiling is done in a courteous and prompt manner.",entry: "entry.561225562" },
+                             {text: "The infirmary offers referral services to distinguished health clinics around the area.",entry: "entry.2036875015" }
+                                           ],
+                             commentsEntry: "entry.2006632079",
+                            suggestionsEntry: "entry.640114302"
+                          },
+                          {
+                            title: "Facilities Services",
+                            icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                            </svg>`,
+                            questions: [
+                            { text:  "The buildings in the campus are logically organized and easy to find.",entry: "entry.2024344394" },
+                             { text:   "The buildings are equipped with fire extinguishers and emergency exits.",entry: "entry.867687873" },
+                             { text:   "The comfort rooms are neat and clean.",entry: "entry.486371300" },
+                             { text:   "The free wi-fi connection is easily accessed and provides an active internet connection.",entry: "entry.735043764" },
+                             { text:   "The cafeteria is spacious and well-ventilated.",entry: "entry.1337035907" },
+                             { text:   "The offices present in the campus are well-labeled and manned.",entry: "entry.1522481148" },
+                             { text:   "The campus premises are free from clutters and other debris that may cause hazards.",entry: "entry.892697473" },
+                             { text:   "Student Lounges are available and comfortable.",entry: "entry.1156854469" },
+                             { text:   "The gymnasium is well-maintained and can accommodate large groups of people without causing too much crowding.",entry: "entry.1945769610" },
+                             { text:   "The covered pathways provide shade from the sun and shield from the rain.",entry: "entry.1342739760" }
+                                            ],
+                             commentsEntry: "entry.2002771406",
+                            suggestionsEntry: "entry.379808948"
+                          },
+                          {
+                            title: "Campus Services",
+                            icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>`,
+                            questions: [
+                             { text: "The orientation program is well-organized and interactive.",entry: "entry.52034271" },
+                             { text: "The program facilitators are knowledgeable and respectful.",entry: "entry.228529193" },
+                             { text: "The topics covered helped to better understand the goals of the university.",entry: "entry.1892109534" },
+                             { text: "The orientation materials provided helpful information about the campus resources.",entry: "entry.716993758" },
+                             { text: "The campus tour follows the designated routes in accordance with the provided schedule.",entry: "entry.654254064" },
+                             { text: "The orientation program is timely and relevant.",entry: "entry.1388959466" },
+                             { text: "The program facilitators responded to questions kindly.",entry: "entry.222410380" },
+                             { text:"The safety and comfort of the students are ensured during the entire duration of the program.",entry: "entry.554954556" },
+                             { text:"The refreshments provided during the program are satisfying.",entry: "entry.1183780922" },
+                             { text: "The orientation increases the confidence that MSU-TCTO is the right choice for a university.",entry: "entry.200465265" }
+                                            ],
+                             commentsEntry: "entry.618982936",
+                            suggestionsEntry: "entry.1377631791"
+                          },
+                          {
+                            title: "Registrar Services",
+                            icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>`,
+                            questions: [
+                             { text: "The Registrar's office staff members are respectful and polite.",entry: "entry.1867963151" },
+                             { text: "The Registrar's Office staff members displayed professionalism during interactions.",entry: "entry.1565652822" },
+                             { text: "The service was done in a reasonable amount of time.",entry: "entry.269917060" },
+                             { text: "The issues raised to the office were addressed and they provided the necessary steps needed for the resolution and/or update until the request was fulfilled.",entry: "entry.1811206048" },
+                             { text: "Step-by-Step procedures are visible at the most conspicuous places.",entry: "entry.891932734" },
+                             { text: "The physical facilities offered are adequate and appealing.",entry: "entry.1418589719" },
+                             { text: "There is quality completeness and accuracy of document/s, service/s, information requested.",entry: "entry.149996940" },
+                             { text: "The office has operating hours convenient to customers.",entry: "entry.1921167358" },
+                             { text: "The staff members answered inquiries correctly the first time.",entry: "entry.1683544165" },
+                             { text: "The waiting lounge is comfortable for the customers.",entry: "entry.413438944" }
+                                           ],
+                             commentsEntry: "entry.138009429",
+                            suggestionsEntry: "entry.1835533127"
+                          },
+                          {
+                            title: "Cashiering Services",
+                            icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>`,
+                            questions: [
+                             { text:  "The cashiering lanes are sufficient.",entry: "entry.1755141063" },
+                             { text: "There is a separate lane for people in need of special assistance.",entry: "entry.604334080" },
+                              { text: "The office is accessible to customers through in-person mode.",entry: "entry.267937341" },
+                              { text: "The office is responsive to requests or problems within an acceptable time.",entry: "entry.979448957" },
+                              { text: "Provides effective advice, support, and guidance.",entry: "entry.1562938829" },
+                              { text:"The staff are knowledgeable of the office transaction procedures.",entry: "entry.1662282862" },
+                              { text: "Problems are resolved effectively.",entry: "entry.2026069748" },
+                              { text: "The staff are helpful and courteous.",entry: "entry.1739606190" },
+                              { text: "Payment transactions are well-documented through the issuance of official receipts and other documents.",entry: "entry.49070514" },
+                              { text: "The cashier promptly acknowledges the customer's needs upon arrival.",entry: "entry.694777175" }
+                                          ],
+                             commentsEntry: "entry.336650484",
+                            suggestionsEntry: "entry.1615297073"
+                          },
               // Add more services as needed
             ].map((servicereg, serviceIndex) => (
               <div class="service-section">
@@ -324,6 +519,12 @@ document.addEventListener('DOMContentLoaded', function() {
     (tabButtons[0] as HTMLElement).click();
   }
 
+  // Create hidden iframe for form submission
+  const hiddenIframe = document.createElement('iframe');
+  hiddenIframe.name = 'hidden_iframe';
+  hiddenIframe.style.display = 'none';
+  document.body.appendChild(hiddenIframe);
+
   // Initialize student survey
   function initializeStudentSurveyreg() {
     // Check internet connectivity
@@ -336,10 +537,22 @@ document.addEventListener('DOMContentLoaded', function() {
       // Clear existing services
       Object.keys(services).forEach(key => delete services[key]);
       
-      // Define the exact services that should be in this survey
-      const expectedServices = ['Library Services', 'Guidance Services'];
+      // Define all the services that should be in this survey
+      const expectedServices = [
+        'Library Services',
+        'Security Services', 
+        'Admission Services',
+        'Guidance Services',
+        'Laboratory Services',
+        'Food Services',
+        'Health Services',
+        'Facilities Services',
+        'Campus Services',
+        'Registrar Services',
+        'Cashiering Services'
+      ];
       
-      // Only add services that are in our expected list
+      // Add only the expected 11 services to tracking
       document.querySelectorAll('.service-card').forEach(card => {
         const titleElement = card.querySelector('.service-card-title');
         if (!titleElement) return;
@@ -347,19 +560,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const title = titleElement.textContent?.trim();
         if (!title) return;
         
-        // Only add if it's in our expected services list
+        // Only track services that are in our expected list
         if (expectedServices.includes(title)) {
           services[title] = { completed: false, verified: false };
           updateVerificationStatus(card as HTMLElement, services[title]);
-        } else {
-          console.log('Skipping service not in expected list:', title);
         }
       });
       
       // Debug log to verify services count
       console.log('Services initialized:', Object.keys(services).length, 'services:', Object.keys(services));
       console.log('Expected services:', expectedServices);
-      console.log('Services match expected:', Object.keys(services).length === expectedServices.length);
+      console.log('Services found in survey:', Object.keys(services));
     }
 
     // Update verification status UI
@@ -404,22 +615,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Service card selection and validation
     document.querySelectorAll('.service-card').forEach(card => {
-      const cardElement = card as HTMLElement;
-      const checkbox = card.querySelector('.service-card-checkbox') as HTMLInputElement;
-      const titleElement = card.querySelector('.service-card-title');
-      if (!titleElement) return;
+      const checkbox = card.querySelector('.service-card-checkbox');
       
-      const title = titleElement.textContent?.trim();
-      if (!title) return;
-      
-      // Only work with services that are in our expected list
-      const expectedServices = ['Library Services', 'Guidance Services'];
-      if (!expectedServices.includes(title)) {
-        console.log('Skipping service not in expected list:', title);
-        return; // Skip this card if not in our expected services list
-      }
-      
-      cardElement.addEventListener('click', function(e) {
+      card.addEventListener('click', function(e) {
         const target = e.target as HTMLElement;
         if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.closest('.form-group')) {
           return;
@@ -433,17 +631,17 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         });
         
-        cardElement.classList.toggle('selected');
-        if (checkbox) checkbox.checked = cardElement.classList.contains('selected');
+        card.classList.toggle('selected');
+        if (checkbox) (checkbox as HTMLInputElement).checked = card.classList.contains('selected');
         
-        if (cardElement.classList.contains('selected')) {
-          cardElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        if (card.classList.contains('selected')) {
+          card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
       });
       
       if (checkbox) {
         checkbox.addEventListener('change', function() {
-          cardElement.classList.toggle('selected', this.checked);
+          card.classList.toggle('selected', this.checked);
         });
       }
     });
@@ -460,9 +658,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const title = titleElement.textContent?.trim();
         if (!title) return;
         
-        // Only update if this service is in our expected list
-        const expectedServices = ['Library Services', 'Guidance Services'];
-        if (expectedServices.includes(title) && services[title]) {
+        // Update all services found in the survey
+        if (services[title]) {
           services[title].completed = validateServiceQuestions(serviceCard);
           updateVerificationStatus(serviceCard, services[title]);
           updateRegProgressTracker();
@@ -555,25 +752,17 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
       
-      const expectedServices = ['Library Services', 'Guidance Services'];
-      const totalServices = expectedServices.length; // Always use expected count
+      const totalServices = Object.keys(services).length;
       const completedServices = Object.values(services).filter(s => s.completed || s.verified).length;
-      const percentage = Math.round((completedServices / totalServices) * 100);
+      const percentage = totalServices > 0 ? Math.round((completedServices / totalServices) * 100) : 0;
       
       // Debug logging
       console.log('Reg Progress Tracker Update:');
-      console.log('Expected services:', expectedServices);
-      console.log('Total services (expected):', totalServices);
+      console.log('Total services (fixed):', totalServices);
       console.log('Completed services:', completedServices);
       console.log('Percentage:', percentage);
       console.log('Services status:', services);
-      
-      // Verify we have the right services
-      const actualServices = Object.keys(services);
-      if (actualServices.length !== totalServices) {
-        console.warn('Warning: Expected', totalServices, 'services, but found', actualServices.length);
-        console.log('Actual services found:', actualServices);
-      }
+      console.log('All services:', Object.keys(services));
       
       const progressFill = document.querySelector('.reg-progress-fill') as HTMLElement;
       const progressText = document.querySelector('.reg-progress-text') as HTMLElement;
@@ -597,19 +786,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Show progress summary for regular students
     function showRegProgressSummary() {
-      const expectedServices = ['Library Services', 'Guidance Services'];
-      const totalServices = expectedServices.length; // Always use expected count
+      const totalServices = Object.keys(services).length;
       const completedServices = Object.values(services).filter(s => s.completed && !s.verified).length;
       const verifiedServices = Object.values(services).filter(s => s.verified).length;
       const remainingServices = totalServices - completedServices - verifiedServices;
       
       // Debug logging
       console.log('Reg Progress Summary:');
-      console.log('Expected services:', expectedServices);
-      console.log('Total services (expected):', totalServices);
+      console.log('Total services (fixed):', totalServices);
       console.log('Completed (not submitted):', completedServices);
       console.log('Verified (submitted):', verifiedServices);
       console.log('Remaining:', remainingServices);
+      console.log('All services:', Object.keys(services));
       
       const modal = document.getElementById('feedbackModal') as HTMLElement;
       const modalMessage = document.getElementById('modalMessage') as HTMLElement;
@@ -678,9 +866,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Setup reference code generation
     function setupReferenceCodeGenerationreg() {
-      const regstudentNumberInput = document.querySelector('input[name="regstudids"]') as HTMLInputElement;
-      const regcourseInput = document.querySelector('input[name="regcourses"]') as HTMLInputElement;
-      const regyearLevelInputs = document.querySelectorAll('input[name="regyearlevels"]') as NodeListOf<HTMLInputElement>;
+      const regstudentNumberInput = document.querySelector('input[name="entry.1609254934"]') as HTMLInputElement;
+      const regcourseInput = document.querySelector('input[name="entry.938986881"]') as HTMLInputElement;
+      const regyearLevelInputs = document.querySelectorAll('input[name="entry.1602134174"]') as NodeListOf<HTMLInputElement>;
       const regreferenceCodeInput = document.getElementById('regreferenceCodeInputs') as HTMLInputElement;
       const regcopyBtn = document.getElementById('regcopyReferenceCodeBtns') as HTMLElement;
       
@@ -740,27 +928,48 @@ document.addEventListener('DOMContentLoaded', function() {
       regupdateReferenceCode();
     }
 
-    // Form submission handler
-    const surveyForm = document.getElementById('studentSurveyForm') as HTMLFormElement;
+    // Form submission handler with hidden iframe
+    const surveyForm = document.querySelector('#regstudentSurveyForm') as HTMLFormElement;
     if (surveyForm) {
       let isSubmitting = false;
       
       surveyForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        if (isSubmitting) return;
+        // Prevent multiple submissions
+        if (isSubmitting) {
+          return;
+        }
         isSubmitting = true;
         
-        // Create and show loader
+        // Create and show enhanced process animation
         const loader = document.createElement('div');
         loader.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
         loader.innerHTML = `
-          <div class="loader-container bg-white p-6 rounded-lg shadow-xl flex flex-col items-center">
-            <div class="loader animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-msu-main-color mb-4"></div>
-            <p class="text-gray-700 font-medium">Submitting your survey...</p>
+          <div class="loader-container bg-white p-8 rounded-xl shadow-2xl flex flex-col items-center max-w-md mx-4">
+            <!-- MSU Logo Animation -->
+            <div class="loader-logo mb-6">
+              <div class="w-16 h-16 bg-gradient-to-br from-msu-main-color to-msu-maroon rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+            </div>
+            
+            <!-- Status Message -->
+            <p class="text-gray-700 font-medium text-center mb-2 transition-opacity duration-300">Processing your survey submission...</p>
+            <p class="text-sm text-gray-500 text-center transition-opacity duration-300">Please wait while we validate and submit your responses</p>
+            
+            <!-- Spinning Loader -->
+            <div class="mt-4">
+              <div class="loader animate-spin rounded-full h-8 w-8 border-2 border-msu-main-color border-t-transparent"></div>
+            </div>
           </div>
         `;
         document.body.appendChild(loader);
+        
+        // Start the progress animation
+        startProgressAnimation();
         
         // Disable submit button
         const submitButton = surveyForm.querySelector('button[type="submit"]') as HTMLButtonElement;
@@ -771,103 +980,83 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Check internet connection
         if (!checkInternetConnectionreg()) {
-          loader.remove();
-          isSubmitting = false;
-          if (submitButton) {
-            submitButton.disabled = false;
-            submitButton.innerHTML = 'Submit Survey';
-          }
-          showModal('error', 'No internet connection detected. Please connect to the internet to submit your survey.');
+          stopAnimationAndShowError('No internet connection detected. Please connect to the internet to submit your survey.');
           return;
         }
         
         // Validate student info
-        const regyearLevel = document.querySelector('input[name="regyearlevels"]:checked') as HTMLInputElement;
-        const regcourse = document.querySelector('input[name="regcourses"]') as HTMLInputElement;
-        const regstudentNumber = document.querySelector('input[name="regstudids"]') as HTMLInputElement;
+        const regyearLevel = document.querySelector('input[name="entry.1602134174"]:checked') as HTMLInputElement;
+        const regcourse = document.querySelector('input[name="entry.938986881"]') as HTMLInputElement;
+        const regstudentNumber = document.querySelector('input[name="entry.1609254934"]') as HTMLInputElement;
         
         if (!regyearLevel) {
-          loader.remove();
-          isSubmitting = false;
-          if (submitButton) {
-            submitButton.disabled = false;
-            submitButton.innerHTML = 'Submit Survey';
-          }
-          showModal('error', 'Please select your year level');
+          stopAnimationAndShowError('Please select your year level');
           return;
         }
         
         if (!regcourse || !regcourse.value.trim()) {
           regcourse.classList.add('border-red-500');
-          loader.remove();
-          isSubmitting = false;
-          if (submitButton) {
-            submitButton.disabled = false;
-            submitButton.innerHTML = 'Submit Survey';
-          }
-          showModal('error', 'Please enter your course');
+          stopAnimationAndShowError('Please enter your course');
           return;
         }
         
         if (!regstudentNumber || !regstudentNumber.value.trim()) {
           regstudentNumber.classList.add('border-red-500');
-          loader.remove();
-          isSubmitting = false;
-          if (submitButton) {
-            submitButton.disabled = false;
-            submitButton.innerHTML = 'Submit Survey';
-          }
-          showModal('error', 'Please enter your student number');
+          stopAnimationAndShowError('Please enter your student number');
+          return;
+        }
+        
+        // Validate student info
+        const yearLevel = document.querySelector('input[name="entry.1602134174"]:checked') as HTMLInputElement;
+        const course = document.querySelector('input[name="entry.938986881"]') as HTMLInputElement;
+        const studentNumber = document.querySelector('input[name="entry.1609254934"]') as HTMLInputElement;
+        
+        if (!yearLevel) {
+          stopAnimationAndShowError('Please select your year level');
+          return;
+        }
+        
+        if (!course || !course.value.trim()) {
+          course.classList.add('border-red-500');
+          stopAnimationAndShowError('Please enter your course');
+          return;
+        }
+        
+        if (!studentNumber || !studentNumber.value.trim()) {
+          studentNumber.classList.add('border-red-500');
+          stopAnimationAndShowError('Please enter your student number');
           return;
         }
         
         // Validate selected services
         const selectedServices = document.querySelectorAll('.service-card.selected');
         let allServicesValid = true;
-        let invalidServices: string[] = [];
+        let invalidServices = [];
         
         selectedServices.forEach(card => {
-          const cardElement = card as HTMLElement;
-          const titleElement = cardElement.querySelector('.service-card-title');
-          if (!titleElement) return;
-          
-          const title = titleElement.textContent?.trim();
-          if (!title) return;
-          
-          const isValid = validateServiceQuestions(cardElement);
+          const title = (card as HTMLElement).querySelector('.service-card-title')?.textContent?.trim() || '';
+          const isValid = validateServiceQuestions(card as HTMLElement);
           
           if (!isValid) {
             allServicesValid = false;
             invalidServices.push(title);
-            cardElement.classList.add('border-red-500');
+            card.classList.add('border-red-500');
           }
         });
         
         if (!allServicesValid) {
-          loader.remove();
-          isSubmitting = false;
-          if (submitButton) {
-            submitButton.disabled = false;
-            submitButton.innerHTML = 'Submit Survey';
-          }
-          showModal('error', `Please complete all questions in these services:<br><br>${invalidServices.join('<br>')}`);
+          stopAnimationAndShowError(`Please complete all questions in these services:<br><br>${invalidServices.join('<br>')}`);
           return;
         }
         
         // Prepare form data
         const formData = new FormData(surveyForm);
         
-        // Create hidden iframe for form submission
-        const hiddenIframe = document.createElement('iframe');
-        hiddenIframe.name = 'hidden_iframe';
-        hiddenIframe.style.display = 'none';
-        document.body.appendChild(hiddenIframe);
-        
         // Create hidden form for submission
         const hiddenForm = document.createElement('form');
         hiddenForm.style.display = 'none';
         hiddenForm.method = 'POST';
-        hiddenForm.action = 'https://docs.google.com/forms/u/1/d/e/1FAIpQLSdLYEEuopI3SKfJZ8bsklxYmHUPZoLtPK2QRtv81_YBFBrHFw/formResponse';
+        hiddenForm.action = 'https://docs.google.com/forms/u/1/d/e/1FAIpQLSdFTCUPcb915oJekigyIf5sY-ol34gIiRpLAOSOf1uouoacVw/formResponse';
         hiddenForm.target = 'hidden_iframe';
         
         formData.forEach((value, key) => {
@@ -891,35 +1080,37 @@ document.addEventListener('DOMContentLoaded', function() {
         // Show success message with details
         const studentData = {
           regreferenceCode: (document.getElementById('regreferenceCodeInputs') as HTMLInputElement).value,
-          regstudentId: regstudentNumber?.value || '',
-          regcourse: regcourse?.value || '',
-          regyearLevel: regyearLevel?.value || ''
+          regstudentId: studentNumber.value,
+          regcourse: course.value,
+          regyearLevel: yearLevel.value
         };
-        
-        // Remove loader before showing success message
-        loader.remove();
-        showSubmissionSuccess(studentData);
         
         // Submit the form
         hiddenForm.submit();
         
-        // Remove the hidden form after submission
+        // Allow animation to complete before showing success message
         setTimeout(() => {
-          hiddenForm.remove();
-          hiddenIframe.remove();
-        }, 1000);
-        
-        // Reset form after successful submission
-        setTimeout(() => {
-          surveyForm.reset();
-          initializeVerificationStatusreg();
-          updateRegProgressTracker();
-          isSubmitting = false;
-          if (submitButton) {
-            submitButton.disabled = false;
-            submitButton.innerHTML = 'Submit Survey';
-          }
-        }, 3000);
+          // Remove loader before showing success message
+          loader.remove();
+          showSubmissionSuccess(studentData);
+          
+          // Remove the hidden form after submission
+          setTimeout(() => {
+            hiddenForm.remove();
+          }, 1000);
+          
+          // Reset form after successful submission
+          setTimeout(() => {
+            surveyForm.reset();
+            initializeVerificationStatusreg();
+            updateRegProgressTracker();
+            isSubmitting = false;
+            if (submitButton) {
+              submitButton.disabled = false;
+              submitButton.innerHTML = 'Submit Survey';
+            }
+          }, 3000);
+        }, 6000); // Wait for animation to complete
       });
     }
 
@@ -1154,12 +1345,119 @@ document.addEventListener('DOMContentLoaded', function() {
     setupReferenceCodeGenerationreg();
     updateRegProgressTracker();
     
-    // Verify services count matches survey
-    const expectedServices = ['Library Services', 'Guidance Services'];
+    // Log all services found in the survey
     const actualServices = Object.keys(services);
-    console.log('Expected services:', expectedServices);
-    console.log('Actual services found:', actualServices);
-    console.log('Services count match:', expectedServices.length === actualServices.length);
+    console.log('All services found in survey:', actualServices);
+    console.log('Total services count:', actualServices.length);
+  }
+
+  // Simplified status animation function
+  function startProgressAnimation() {
+    const statusMessage = document.querySelector('.loader-container p:first-of-type') as HTMLElement;
+    const statusSubtext = document.querySelector('.loader-container p:last-of-type') as HTMLElement;
+    
+    const statusMessages = [
+      { main: 'Validating your information...', sub: 'Checking student details and form completeness' },
+      { main: 'Processing survey responses...', sub: 'Analyzing your feedback and ratings' },
+      { main: 'Submitting to server...', sub: 'Sending your responses securely' },
+      { main: 'Finalizing submission...', sub: 'Preparing your receipt and confirmation' }
+    ];
+    
+    let currentStep = 0;
+    
+    function updateStatus() {
+      currentStep++;
+      
+      // Update status messages
+      if (statusMessages[currentStep - 1] && statusMessage && statusSubtext) {
+        statusMessage.style.transition = 'opacity 0.4s ease';
+        statusSubtext.style.transition = 'opacity 0.4s ease';
+        statusMessage.style.opacity = '0';
+        statusSubtext.style.opacity = '0';
+        
+        setTimeout(() => {
+          if (statusMessage && statusSubtext) {
+            statusMessage.textContent = statusMessages[currentStep - 1].main;
+            statusSubtext.textContent = statusMessages[currentStep - 1].sub;
+            statusMessage.style.opacity = '1';
+            statusSubtext.style.opacity = '1';
+          }
+        }, 300);
+      }
+    }
+    
+    // Start status updates (faster timing for 2-second total)
+    setTimeout(() => updateStatus(), 500);
+    setTimeout(() => updateStatus(), 1000);
+    setTimeout(() => updateStatus(), 1500);
+    setTimeout(() => updateStatus(), 2000);
+  }
+  
+  // Function to stop animation and show error
+  function stopAnimationAndShowError(message: string) {
+    const loader = document.querySelector('.fixed.inset-0');
+    if (loader) {
+      loader.remove();
+    }
+    
+    const submitButton = document.querySelector('#regstudentSurveyForm button[type="submit"]') as HTMLButtonElement;
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.innerHTML = 'Submit Survey';
+    }
+    
+    // Reset isSubmitting flag
+    const surveyForm = document.getElementById('regstudentSurveyForm') as HTMLFormElement;
+    if (surveyForm) {
+      (surveyForm as any).isSubmitting = false;
+    }
+    
+    showModal('error', message);
+  }
+
+  // Modal control function
+  function showModal(type: 'success' | 'error', message: string) {
+    const modal = document.getElementById('feedbackModal') as HTMLElement;
+    const modalMessage = document.getElementById('modalMessage') as HTMLElement;
+    const modalIcon = modal.querySelector('.modal-icon') as HTMLElement;
+    const modalTitle = modal.querySelector('.modal-title') as HTMLElement;
+    
+    modalMessage.innerHTML = message;
+    
+    if (type === 'success') {
+      modal.classList.remove('modal-error');
+      modal.classList.add('modal-success');
+      modalTitle.textContent = 'Success!';
+      modalIcon.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+      `;
+    } else {
+      modal.classList.remove('modal-success');
+      modal.classList.add('modal-error');
+      modalTitle.textContent = 'Attention Required';
+      modalIcon.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+      `;
+    }
+    
+    modal.classList.add('active');
+    
+    const closeButton = document.getElementById('modalCloseButton') as HTMLElement;
+    if (closeButton) {
+      closeButton.onclick = function() {
+        modal.classList.remove('active');
+      };
+    }
+    
+    modal.onclick = function(e) {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+      }
+    };
   }
 
   // Add connectivity status monitoring
@@ -1168,51 +1466,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   window.addEventListener('offline', () => {
-    // Define showModal function in global scope for offline event
-    function showModal(type: 'success' | 'error', message: string) {
-      const modal = document.getElementById('feedbackModal') as HTMLElement;
-      const modalMessage = document.getElementById('modalMessage') as HTMLElement;
-      const modalIcon = modal.querySelector('.modal-icon') as HTMLElement;
-      const modalTitle = modal.querySelector('.modal-title') as HTMLElement;
-      
-      modalMessage.innerHTML = message;
-      
-      if (type === 'success') {
-        modal.classList.remove('modal-error');
-        modal.classList.add('modal-success');
-        modalTitle.textContent = 'Success!';
-        modalIcon.innerHTML = `
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-          </svg>
-        `;
-      } else {
-        modal.classList.remove('modal-success');
-        modal.classList.add('modal-error');
-        modalTitle.textContent = 'Attention Required';
-        modalIcon.innerHTML = `
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-          </svg>
-        `;
-      }
-      
-      modal.classList.add('active');
-      
-      const closeButton = document.getElementById('modalCloseButton') as HTMLElement;
-      if (closeButton) {
-        closeButton.onclick = function() {
-          modal.classList.remove('active');
-        };
-      }
-      
-      modal.onclick = function(e) {
-        if (e.target === modal) {
-          modal.classList.remove('active');
-        }
-      };
-    }
-    
     showModal('error', 'Internet connection lost. Please reconnect to submit your survey.');
   });
 
@@ -1469,7 +1722,25 @@ document.addEventListener('DOMContentLoaded', function() {
     iframe[name="hidden_iframe"] {
       display: none;
     }
-    /* Loader Styles */
+    /* Enhanced Loader Styles */
+    .loader-container {
+      min-width: 320px;
+      max-width: 90%;
+      transition: all 0.3s ease;
+      animation: slideIn 0.5s ease-out;
+    }
+    
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    
     .loader {
       border-top-color: #1a4b8c;
       border-right-color: #1a4b8c;
@@ -1477,29 +1748,31 @@ document.addEventListener('DOMContentLoaded', function() {
       border-left-color: #d4af37;
       animation-timing-function: cubic-bezier(0.53, 0.21, 0.29, 0.67);
     }
+    
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+    
     .animate-spin {
       animation: spin 1.2s linear infinite;
     }
-    .loader-container {
-      min-width: 320px;
-      max-width: 90%;
-      transition: all 0.3s ease;
-    }
+    
     .progress-bar {
-      transition: width 0.6s ease;
+      transition: width 0.8s ease;
+      background: linear-gradient(90deg, #1a4b8c 0%, #8b1a1a 50%, #d4af37 100%);
     }
+    
     .loader-logo {
       animation: pulse 2s infinite;
     }
+    
     @keyframes pulse {
       0% { transform: scale(1); opacity: 1; }
       50% { transform: scale(1.05); opacity: 0.9; }
       100% { transform: scale(1); opacity: 1; }
     }
+    
     button[disabled] {
       opacity: 0.7;
       cursor: not-allowed;
