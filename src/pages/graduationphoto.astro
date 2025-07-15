@@ -36,7 +36,7 @@ const currentPath = Astro.url.pathname;
                             src="/images/commencement/53rd text.png" 
                             alt="MSU Official Seal" 
                             class="h-16 sm:h-20 md:h-24 lg:h-32 mx-auto transition-all duration-500 hover:scale-105"
-                            loading="eager"
+                            loading="lazy"
                         >
                     </div>
                     
@@ -51,6 +51,7 @@ const currentPath = Astro.url.pathname;
                                         src="/images/commencement/assoc.jpg" 
                                         alt="Guest Speaker" 
                                         class="w-full h-full object-cover"
+                                        loading="lazy"
                                     >
                                 </div>
                                 <h3 class="text-white font-bold text-sm sm:text-base md:text-lg leading-tight">Assoc. Prof. Aljemedin Jaudinez</h3>
@@ -65,6 +66,7 @@ const currentPath = Astro.url.pathname;
                                         src="/images/commencement/atty.jpg" 
                                         alt="Guest Speaker" 
                                         class="w-full h-full object-cover"
+                                        loading="lazy"
                                     >
                                 </div>
                                 <h3 class="text-white font-bold text-sm sm:text-base md:text-lg leading-tight">Atty. Mohammad Jamalul J. Giducos, LL.M.</h3>
@@ -79,6 +81,7 @@ const currentPath = Astro.url.pathname;
                                         src="/images/commencement/engr.jpg" 
                                         alt="Guest Speaker" 
                                         class="w-full h-full object-cover"
+                                        loading="lazy"
                                     >
                                 </div>
                                 <h3 class="text-white font-bold text-sm sm:text-base md:text-lg leading-tight">Engr. Firash Zhed S. Ututalum, MS</h3>
@@ -93,6 +96,7 @@ const currentPath = Astro.url.pathname;
                                         src="/images/commencement/director.jpg" 
                                         alt="Guest Speaker" 
                                         class="w-full h-full object-cover"
+                                        loading="lazy"
                                     >
                                 </div>
                                 <h3 class="text-white font-bold text-sm sm:text-base md:text-lg leading-tight">Dr. Jayeel S. Cornelio</h3>
@@ -110,7 +114,7 @@ const currentPath = Astro.url.pathname;
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                 </svg>
                             </button>
-                            <img id="modalImage" src="" alt="" class="w-full h-auto max-h-[80vh] rounded-lg animate-scaleIn object-contain">
+                            <img id="modalImage" src="" alt="" class="w-full h-auto max-h-[80vh] rounded-lg animate-scaleIn object-contain" loading="lazy">
                             <p id="modalCaption" class="text-white text-center mt-2 sm:mt-4 text-sm sm:text-base md:text-xl px-4"></p>
                         </div>
                     </div>
@@ -953,7 +957,7 @@ const currentPath = Astro.url.pathname;
                             <h3 class="text-xl font-bold text-red-700 mb-2">No Photos Found</h3>
                             <p class="text-red-600 mb-4">Please verify your information or contact:</p>
                             <a href="https://www.msutcto.edu.ph/oipp" class="inline-flex items-center gap-3 text-msu-main-color hover:text-msu-deep-ocean transition-colors">
-                                <img src="/images/commencement/oipp.png" alt="OIPP Logo" class="w-10 h-10"/>
+                                <img src="/images/commencement/oipp.png" alt="OIPP Logo" class="w-10 h-10" loading="lazy"/>
                                 <span class="font-medium">MSU TCTO - Office of Information, Press and Publications</span>
                             </a>
                         </div>
