@@ -223,7 +223,7 @@ const Navbar = ({ path }) => {
       title: "Graduation",
       icon: <FaGraduationCap className="text-lg" />,
       items: [
-        { link: "/graduationphoto", label: "Graduation Photo" },
+        { link: "/graduationphoto", label: "Graduation  Photos" },
     
       ]
     }
