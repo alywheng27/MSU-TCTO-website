@@ -447,7 +447,7 @@ const currentPath = Astro.url.pathname;
                                         </span>
                                     </div>
                                     <div class="text-right">
-                                        <span class="text-xs font-semibold inline-block text-msu-deep-ocean progress-percentage" data-target="0">
+                                        <span class="text-xs font-semibold inline-block text-msu-deep-ocean progress-percentage" data-target="25">
                                             0%
                                         </span>
                                     </div>
@@ -901,7 +901,6 @@ const currentPath = Astro.url.pathname;
                     <form id="photoSearchForm" class="space-y-4 sm:space-y-6">
                         <div class="flex flex-col sm:flex-row gap-4">
                             <div class="flex-1">
-                                <label for="searchName" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
                                 <input 
                                     type="text"
                                     name="name"
@@ -912,12 +911,10 @@ const currentPath = Astro.url.pathname;
                                 />
                             </div>
                             <div class="sm:w-48">
-                                <label for="searchBirthdate" class="block text-sm font-medium text-gray-700 mb-1">Date of Birth</label>
                                 <input 
                                     type="date"
                                     name="birthdate"
                                     id="searchBirthdate"
-                                    placeholder="Birthday (M/D/Y)"
                                     class="w-full px-5 py-4 rounded-xl border-2 border-msu-main-color/20 focus:border-msu-gold focus:ring-4 focus:ring-msu-gold/20 transition-all duration-300 text-lg"
                                     required
                                 />
