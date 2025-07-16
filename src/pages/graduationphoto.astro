@@ -470,7 +470,7 @@ const currentPath = Astro.url.pathname;
                                 <div class="flex mb-2 items-center justify-between">
                                     <div>
                                         <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-white bg-gradient-to-r from-teal-500 to-cyan-500 animate-pulse">
-                                            Progress
+                                            Completed
                                         </span>
                                     </div>
                                     <div class="text-right">
@@ -480,7 +480,7 @@ const currentPath = Astro.url.pathname;
                                     </div>
                                 </div>
                                 <div class="progress-container h-3 mb-4">
-                                    <div class="progress-bar" data-percentage="0">
+                                    <div class="progress-bar" data-percentage="100">
                                     </div>
                                 </div>
                                 <div class="flex justify-between text-xs text-gray-500">
@@ -519,7 +519,7 @@ const currentPath = Astro.url.pathname;
 
                         <!-- College of Education -->
                         <div class="bg-white rounded-xl p-6 border border-gray-200 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105">
-                            <h3 class="text-msu-deep-ocean font-bold text-lg mb-3">College of Education</h3>
+                            <h3 class="text-msu-deep-ocean font-bold text-lg mb-3">COED</h3>
                             <div class="relative pt-1">
                                 <div class="flex mb-2 items-center justify-between">
                                     <div>
@@ -551,7 +551,7 @@ const currentPath = Astro.url.pathname;
                                 <div class="flex mb-2 items-center justify-between">
                                     <div>
                                         <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-white bg-gradient-to-r from-indigo-500 to-purple-600 animate-pulse">
-                                            Progress
+                                            Completed
                                         </span>
                                     </div>
                                     <div class="text-right">
@@ -578,7 +578,7 @@ const currentPath = Astro.url.pathname;
                                 <div class="flex mb-2 items-center justify-between">
                                     <div>
                                         <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-white bg-gradient-to-r from-cyan-500 to-blue-600 animate-pulse">
-                                            Progress
+                                            Completed
                                         </span>
                                     </div>
                                     <div class="text-right">
@@ -721,7 +721,7 @@ const currentPath = Astro.url.pathname;
                         mid: '#60a5fa',
                         end: '#3b82f6'
                     },
-                    'College of Education': {
+                    'COED': {
                         start: '#ec4899',
                         mid: '#2563eb',
                         end: '#ec4899'
@@ -767,10 +767,11 @@ const currentPath = Astro.url.pathname;
                                 }, 100);
                             }
                             
-                            // Find corresponding percentage text
+                            // Find corresponding percentage text and status text
                             const percentageText = progressBar.closest('.relative').querySelector('.progress-percentage');
+                            const statusText = progressBar.closest('.relative').querySelector('.text-xs.font-semibold');
                             if (percentageText) {
-                                animatePercentage(percentageText, parseInt(percentage));
+                                animatePercentage(percentageText, parseInt(percentage), statusText);
                             }
                         }
                     });
@@ -780,7 +781,7 @@ const currentPath = Astro.url.pathname;
                 progressBars.forEach(bar => observer.observe(bar));
                 
                 // Animate percentage counter
-                function animatePercentage(element, targetPercentage) {
+                function animatePercentage(element, targetPercentage, statusElement) {
                     let currentPercentage = 0;
                     const increment = targetPercentage / 50; // 50 steps for smooth animation
                     const interval = setInterval(() => {
@@ -788,6 +789,11 @@ const currentPath = Astro.url.pathname;
                         if (currentPercentage >= targetPercentage) {
                             currentPercentage = targetPercentage;
                             clearInterval(interval);
+                            
+                            // Update status text to "Completed" if percentage is 100
+                            if (statusElement && targetPercentage === 100) {
+                                statusElement.textContent = 'Completed';
+                            }
                         }
                         element.textContent = Math.round(currentPercentage) + '%';
                     }, 40); // 40ms per step = 2 seconds total
@@ -846,6 +852,7 @@ const currentPath = Astro.url.pathname;
                             // Simulate data refresh
                             const progressBar = this.querySelector('.progress-bar');
                             const percentageText = this.querySelector('.progress-percentage');
+                            const statusText = this.querySelector('.text-xs.font-semibold');
                             const targetPercentage = parseInt(progressBar.getAttribute('data-percentage'));
                             
                             // Add some randomness to simulate real updates
@@ -864,7 +871,7 @@ const currentPath = Astro.url.pathname;
                                     progressBar.style.width = newPercentage + '%';
                                 }
                                 progressBar.classList.add('fuel-effect');
-                                animatePercentage(percentageText, newPercentage);
+                                animatePercentage(percentageText, newPercentage, statusText);
                             }, 100);
                         }, 300);
                     });
@@ -876,6 +883,18 @@ const currentPath = Astro.url.pathname;
                         if (bar.getBoundingClientRect().top < window.innerHeight) {
                             const event = new Event('intersect');
                             bar.dispatchEvent(event);
+                        }
+                    });
+                    
+                    // Check for completed progress bars on page load
+                    progressBars.forEach(bar => {
+                        const percentage = parseInt(bar.getAttribute('data-percentage'));
+                        if (percentage === 100) {
+                            const card = bar.closest('.bg-white.rounded-xl');
+                            const statusText = card.querySelector('.text-xs.font-semibold');
+                            if (statusText) {
+                                statusText.textContent = 'Completed';
+                            }
                         }
                     });
                 }, 500);
