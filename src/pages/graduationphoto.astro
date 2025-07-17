@@ -190,10 +190,28 @@ const currentPath = Astro.url.pathname;
                                   Graduation Photos
                         </a>
                         <a 
-                            href="#progressphoto" 
-                            class="bg-white/10 border border-white hover:bg-white/20 text-white font-medium py-2 sm:py-3 px-4 sm:px-6 rounded-full transition-all duration-300 inline-flex items-center justify-center hover:shadow-lg text-sm sm:text-base"
+                            href="#progressphoto"
+                            class="relative bg-gradient-to-r from-msu-gold/20 via-msu-deep-ocean/30 to-msu-gold/20 hover:from-msu-gold/30 hover:via-msu-deep-ocean/40 hover:to-msu-gold/30 border border-white/30 text-white font-medium py-2 sm:py-3 px-4 sm:px-6 rounded-full transition-all duration-500 inline-flex items-center justify-center hover:shadow-lg text-sm sm:text-base group overflow-hidden"
                         >
-                            Ceremony Schedule
+                            <span class="absolute inset-0 bg-gradient-to-r from-white/10 via-white/20 to-white/10 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000 blur-sm"></span>
+                            <span class="absolute inset-0 bg-gradient-to-r from-msu-gold/10 via-msu-deep-ocean/20 to-msu-gold/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></span>
+                            <span class="relative flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-gradient-to-r from-msu-gold via-white to-msu-gold animate-pulse"></span>
+                                <span class="relative inline-flex items-center">
+                                    <span class="absolute -left-1 w-0 h-full bg-gradient-to-r from-msu-gold/30 via-white/40 to-msu-gold/30 group-hover:w-[calc(100%+0.5rem)] transition-all duration-700"></span>
+                                    <span class="relative bg-gradient-to-r from-white via-msu-gold to-white bg-clip-text text-transparent group-hover:text-white transition-colors duration-500">Photo Upload Progress</span>
+                                </span>
+                            </span>
+                        </a>
+                        <a 
+                            href="#mission" 
+                            class="bg-gradient-to-r from-msu-gold via-msu-deep-ocean to-msu-gold text-white font-medium py-2 sm:py-3 px-4 sm:px-6 rounded-full transition-all duration-300 inline-flex items-center justify-center hover:shadow-xl hover:scale-105 group relative overflow-hidden"
+                        >
+                            <span class="absolute inset-0 bg-gradient-to-r from-msu-gold/20 via-transparent to-msu-gold/20 transform -skew-x-12 group-hover:animate-shimmer"></span>
+                            <span class="relative flex items-center">
+                                <span class="mr-2 transform group-hover:rotate-12 transition-transform duration-300">🎯</span>
+                                <span class="group-hover:text-msu-gold transition-colors duration-300">Mission Accomplished</span>
+                            </span>
                         </a>
                     </div>
                 </div>
@@ -534,7 +552,7 @@ const currentPath = Astro.url.pathname;
                                     </div>
                                 </div>
                                 <div class="progress-container h-3 mb-4">
-                                    <div class="progress-bar" data-percentage="0">
+                                    <div class="progress-bar" data-percentage="100">
                                     </div>
                                 </div>
                                 <div class="flex justify-between text-xs text-gray-500">
@@ -604,8 +622,8 @@ const currentPath = Astro.url.pathname;
                     </div>
 
                     <div class="text-center mt-8 animate-fadeInUp delay-200">
-                        <p class="text-gray-600 text-sm">Last updated: <span id="lastUpdated">{new Date().toLocaleDateString()}</span></p>
-                        <p class="text-gray-500 text-xs mt-2">Photos are being processed and uploaded continuously. Check back regularly for updates.</p>
+                        <!-- <p class="text-gray-600 text-sm">Last updated: <span id="lastUpdated">{new Date().toLocaleDateString()}</span></p>
+                        <p class="text-gray-500 text-xs mt-2">Photos are being processed and uploaded continuously. Check back regularly for updates.</p> -->
                     </div>
                 </div>
             </div>
@@ -900,6 +918,68 @@ const currentPath = Astro.url.pathname;
                 }, 500);
             });
         </script>
+
+        <!-- Congratulations Upload Complete Section -->
+        <section id="mission" class="bg-gradient-to-br from-msu-main-color via-msu-deep-ocean to-msu-main-color py-20 relative overflow-hidden">
+            <div class="absolute inset-0 bg-[url('/images/confetti.svg')] opacity-10 animate-pulse"></div>
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1)_0%,transparent_70%)]"></div>
+            
+            <div class="container mx-auto px-4 relative">
+                <div class="max-w-4xl mx-auto text-center">
+                    <div class="mb-10">
+                        <div class="relative inline-block">
+                            <div class="absolute inset-0 animate-ping">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-white transform hover:scale-110 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <h2 class="text-4xl sm:text-5xl font-black text-white mb-6 animate-fadeInUp">
+                        Mission Accomplished! 🎓
+                    </h2>
+                    
+                    <div class="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl p-10 mb-10 transform hover:scale-[1.02] transition-all duration-500">
+                        <div class="text-6xl font-black bg-gradient-to-r from-msu-main-color to-msu-deep-ocean bg-clip-text text-transparent animate-pulse mb-3">
+                            1,115
+                        </div>
+                        <p class="text-gray-700 text-lg font-medium">
+                            Graduation Memories Captured & Preserved
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
+                        <div class="bg-white/95 backdrop-blur-xl rounded-2xl p-8 shadow-2xl transform hover:scale-105 transition-all duration-500">
+                            <div class="text-3xl font-black text-msu-deep-ocean mb-2">
+                                6
+                            </div>
+                            <p class="text-gray-700 font-medium">
+                                Academic Colleges
+                            </p>
+                            <div class="w-12 h-1 bg-gradient-to-r from-msu-gold to-msu-deep-ocean mx-auto mt-4"></div>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur-xl rounded-2xl p-8 shadow-2xl transform hover:scale-105 transition-all duration-500">
+                            <div class="text-3xl font-black text-green-600 mb-2">
+                                100%
+                            </div>
+                            <p class="text-gray-700 font-medium">
+                                Success Rate
+                            </p>
+                            <div class="w-12 h-1 bg-gradient-to-r from-green-400 to-green-600 mx-auto mt-4"></div>
+                        </div>
+                    </div>
+
+                    <p class="text-white text-lg font-medium leading-relaxed">
+                        Every precious moment has been expertly captured and is now ready for you to cherish forever.
+                        <span class="block mt-2 text-white/80 text-base italic">Browse through your memories in our comprehensive gallery.</span>
+                    </p>
+                </div>
+            </div>
+        </section>
 
         <!-- Enhanced Photo Gallery Search Section -->
         <section id="photos" class="relative bg-white py-16 sm:py-20 md:py-24 px-4 overflow-hidden">
