@@ -1004,24 +1004,41 @@ export async function getCommencementPhotos(name, birthDate) {
       console.log('No photos found in Sanity');
       return [];
     }
-    
-    // Filter photos by name and birthDate on the client side
+
+    // Helper to normalize names: remove special chars, lowercase, trim, collapse spaces
+    const normalizeName = (str) => {
+      return str
+        .toLowerCase()
+        .replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+    };
+
+    const normalizedSearch = normalizeName(name);
+
+    // Filter photos by normalized name and birthDate
     const filteredPhotos = photos.filter(photo => {
       const graduateName = photo.graduate?.name || '';
       const photoBirthDate = photo.birthDate;
+      const normalizedGraduateName = normalizeName(graduateName);
+      
+      // Allow partial match anywhere in the name
+      const nameMatch = normalizedGraduateName.includes(normalizedSearch);
+      const dateMatch = photoBirthDate === birthDate;
       
       console.log('Comparing photo:', {
         photoId: photo._id,
         searchName: name,
         graduateName: graduateName,
+        normalizedSearch,
+        normalizedGraduateName,
         searchBirthDate: birthDate,
         photoBirthDate: photoBirthDate,
-        nameMatch: graduateName.toLowerCase().includes(name.toLowerCase()),
-        dateMatch: photoBirthDate === birthDate
+        nameMatch,
+        dateMatch
       });
       
-      return graduateName.toLowerCase().includes(name.toLowerCase()) && 
-             photoBirthDate === birthDate;
+      return nameMatch && dateMatch;
     });
     
     console.log('Filtered photos:', filteredPhotos);
