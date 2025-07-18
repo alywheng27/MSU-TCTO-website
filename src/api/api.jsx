@@ -1005,41 +1005,380 @@ export async function getCommencementPhotos(name, birthDate) {
       return [];
     }
 
-    // Helper to normalize names: remove special chars, lowercase, trim, collapse spaces
+    // Helper to normalize names: handle symbols, lowercase, trim, collapse spaces
     const normalizeName = (str) => {
+      if (!str) return '';
       return str
         .toLowerCase()
+        // Replace common symbols with spaces, but preserve them for matching
         .replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, ' ')
         .replace(/\s+/g, ' ')
         .trim();
     };
 
-    const normalizedSearch = normalizeName(name);
+    // Helper to extract name parts for flexible matching
+    const extractNameParts = (name) => {
+      if (!name) return [];
+      
+      // First normalize the name
+      const normalized = normalizeName(name);
+      
+      // Split by spaces and filter out empty parts
+      const parts = normalized.split(' ').filter(part => part.length > 0);
+      
+      // Identify different types of name parts
+      const nameParts = {
+        familyName: '',
+        givenName: '',
+        middleName: '',
+        initials: [],
+        allParts: parts
+      };
+      
+      if (parts.length >= 1) {
+        // Last part is typically family name
+        nameParts.familyName = parts[parts.length - 1];
+      }
+      
+      if (parts.length >= 2) {
+        // First part is typically given name
+        nameParts.givenName = parts[0];
+        
+        // Middle parts (if any)
+        if (parts.length > 2) {
+          nameParts.middleName = parts.slice(1, -1).join(' ');
+        }
+      }
+      
+      // Extract initials (single letters)
+      nameParts.initials = parts.filter(part => part.length === 1);
+      
+      return nameParts;
+    };
+
+    // Helper to check if names match (more flexible)
+    const namesMatch = (searchName, graduateName) => {
+      if (!searchName || !graduateName) return false;
+      
+      // Extract name parts for both search and graduate names
+      const searchParts = extractNameParts(searchName);
+      const graduateParts = extractNameParts(graduateName);
+      
+      // If search has only one word, check if it appears anywhere in graduate name
+      if (searchParts.allParts.length === 1) {
+        const searchWord = searchParts.allParts[0];
+        return graduateParts.allParts.some(word => 
+          word.includes(searchWord) || searchWord.includes(word)
+        );
+      }
+      
+      // Handle different name formats with enhanced matching
+      if (searchParts.allParts.length > 1) {
+        // Check for exact word matches (case insensitive)
+        const exactMatches = searchParts.allParts.filter(searchWord => 
+          graduateParts.allParts.some(graduateWord => graduateWord === searchWord)
+        );
+        
+        // Check for partial matches (one word contains another)
+        const partialMatches = searchParts.allParts.filter(searchWord => 
+          graduateParts.allParts.some(graduateWord => 
+            graduateWord.includes(searchWord) || searchWord.includes(graduateWord)
+          )
+        );
+        
+        // Check for initial matches (single letters)
+        const initialMatches = searchParts.allParts.filter(searchWord => 
+          searchWord.length === 1 && graduateParts.allParts.some(graduateWord => 
+            graduateWord.startsWith(searchWord)
+          )
+        );
+        
+        // Enhanced name format matching with family name priority
+        const checkNameOrderPatterns = () => {
+          // Pattern 1: "FamilyName, GivenName" vs "GivenName FamilyName"
+          if (searchParts.familyName && graduateParts.familyName) {
+            const familyMatch = searchParts.familyName === graduateParts.familyName ||
+                              graduateParts.familyName.includes(searchParts.familyName) ||
+                              searchParts.familyName.includes(graduateParts.familyName);
+            
+            if (familyMatch && searchParts.givenName && graduateParts.givenName) {
+              const givenMatch = searchParts.givenName === graduateParts.givenName ||
+                               graduateParts.givenName.includes(searchParts.givenName) ||
+                               searchParts.givenName.includes(graduateParts.givenName);
+              if (givenMatch) return true;
+            }
+            
+            // If only family name matches and search has no given name, still match
+            if (familyMatch && !searchParts.givenName) return true;
+          }
+          
+          // Pattern 2: "GivenName FamilyName" vs "FamilyName GivenName" (reversed order)
+          if (searchParts.allParts.length === 2 && graduateParts.allParts.length === 2) {
+            const searchReversed = [searchParts.allParts[1], searchParts.allParts[0]];
+            const matchesReversed = searchReversed.every((word, index) => 
+              graduateParts.allParts[index] === word || 
+              graduateParts.allParts[index].includes(word) || 
+              word.includes(graduateParts.allParts[index])
+            );
+            if (matchesReversed) return true;
+          }
+          
+          // Pattern 3: Initial matching (e.g., "J Smith" vs "John Smith")
+          if (searchParts.initials.length > 0 && searchParts.familyName) {
+            const initialMatch = searchParts.initials.some(initial => 
+              graduateParts.givenName && graduateParts.givenName.startsWith(initial)
+            );
+            
+            if (initialMatch) {
+              const familyMatch = graduateParts.allParts.some(word => 
+                word === searchParts.familyName || 
+                word.includes(searchParts.familyName) || 
+                searchParts.familyName.includes(word)
+              );
+              if (familyMatch) return true;
+            }
+          }
+          
+          // Pattern 4: "FamilyName, GivenName Initial" vs "GivenName Initial FamilyName"
+          if (searchParts.familyName && searchParts.givenName && searchParts.initials.length > 0) {
+            const familyMatch = searchParts.familyName === graduateParts.familyName ||
+                              graduateParts.familyName.includes(searchParts.familyName) ||
+                              searchParts.familyName.includes(graduateParts.familyName);
+            
+            if (familyMatch) {
+              const givenMatch = searchParts.givenName === graduateParts.givenName ||
+                               graduateParts.givenName.includes(searchParts.givenName) ||
+                               searchParts.givenName.includes(graduateParts.givenName);
+              
+              const initialMatch = searchParts.initials.some(initial => 
+                graduateParts.allParts.some(word => word.startsWith(initial))
+              );
+              
+              if (givenMatch || initialMatch) return true;
+            }
+          }
+          
+          // Pattern 5: Complete name with middle name/initial
+          if (searchParts.allParts.length >= 3 && graduateParts.allParts.length >= 3) {
+            // Check if family names match
+            const familyMatch = searchParts.familyName === graduateParts.familyName ||
+                              graduateParts.familyName.includes(searchParts.familyName) ||
+                              searchParts.familyName.includes(graduateParts.familyName);
+            
+            if (familyMatch) {
+              // Check if given names match
+              const givenMatch = searchParts.givenName === graduateParts.givenName ||
+                               graduateParts.givenName.includes(searchParts.givenName) ||
+                               searchParts.givenName.includes(graduateParts.givenName);
+              
+              // Check if middle parts match (initials or full names)
+              const middleMatch = searchParts.middleName === graduateParts.middleName ||
+                                graduateParts.middleName.includes(searchParts.middleName) ||
+                                searchParts.middleName.includes(graduateParts.middleName);
+              
+              if (givenMatch && middleMatch) return true;
+            }
+          }
+          
+          return false;
+        };
+        
+        // Check name order patterns
+        if (checkNameOrderPatterns()) {
+          return true;
+        }
+        
+        // Combine all types of matches
+        const allMatches = [...new Set([...exactMatches, ...partialMatches, ...initialMatches])];
+        
+        // If we have multiple search words, require at least 2 matches
+        if (searchParts.allParts.length >= 2) {
+          return allMatches.length >= Math.min(2, searchParts.allParts.length);
+        }
+        
+        // For single word searches, any match is good
+        return allMatches.length > 0;
+      }
+      
+      // Fallback to simple includes check
+      const normalizedSearch = normalizeName(searchName);
+      const normalizedGraduate = normalizeName(graduateName);
+      return normalizedGraduate.includes(normalizedSearch) || normalizedSearch.includes(normalizedGraduate);
+    };
+
+    // Helper to check if dates match (more flexible)
+    const datesMatch = (searchDate, photoDate) => {
+      if (!searchDate || !photoDate) return false;
+      
+      // If search date is empty, return all photos
+      if (searchDate === '') return true;
+      
+      // Try exact match first
+      if (searchDate === photoDate) return true;
+      
+      // Handle multiple date formats
+      const parseDate = (dateStr) => {
+        if (!dateStr) return null;
+        
+        // Check if it's in MM-DD-YYYY format (user input)
+        const mmddyyyyMatch = dateStr.match(/^(\d{2})-(\d{2})-(\d{4})$/);
+        if (mmddyyyyMatch) {
+          const [, month, day, year] = mmddyyyyMatch;
+          return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+        }
+        
+        // Check if it's in MM/DD/YY format (user input)
+        const mmddyyMatch = dateStr.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2})$/);
+        if (mmddyyMatch) {
+          const [, month, day, year] = mmddyyMatch;
+          // Convert 2-digit year to 4-digit year
+          const fullYear = parseInt(year) < 50 ? 2000 + parseInt(year) : 1900 + parseInt(year);
+          return new Date(fullYear, parseInt(month) - 1, parseInt(day));
+        }
+        
+        // Check if it's in "Month Day, Year" format (Sanity format like "December 2, 2004")
+        const monthDayYearMatch = dateStr.match(/^([A-Za-z]+)\s+(\d{1,2}),?\s+(\d{4})$/);
+        if (monthDayYearMatch) {
+          const [, monthName, day, year] = monthDayYearMatch;
+          const monthNames = [
+            'january', 'february', 'march', 'april', 'may', 'june',
+            'july', 'august', 'september', 'october', 'november', 'december'
+          ];
+          const monthIndex = monthNames.indexOf(monthName.toLowerCase());
+          if (monthIndex !== -1) {
+            return new Date(parseInt(year), monthIndex, parseInt(day));
+          }
+        }
+        
+        // Check if it's in "Month Day Year" format (without comma)
+        const monthDayYearNoCommaMatch = dateStr.match(/^([A-Za-z]+)\s+(\d{1,2})\s+(\d{4})$/);
+        if (monthDayYearNoCommaMatch) {
+          const [, monthName, day, year] = monthDayYearNoCommaMatch;
+          const monthNames = [
+            'january', 'february', 'march', 'april', 'may', 'june',
+            'july', 'august', 'september', 'october', 'november', 'december'
+          ];
+          const monthIndex = monthNames.indexOf(monthName.toLowerCase());
+          if (monthIndex !== -1) {
+            return new Date(parseInt(year), monthIndex, parseInt(day));
+          }
+        }
+        
+        // Try other formats
+        const dateObj = new Date(dateStr);
+        return isNaN(dateObj.getTime()) ? null : dateObj;
+      };
+      
+      const searchDateObj = parseDate(searchDate);
+      const photoDateObj = parseDate(photoDate);
+      
+      // Check if dates are valid and match
+      if (searchDateObj && photoDateObj) {
+        return searchDateObj.toISOString().split('T')[0] === photoDateObj.toISOString().split('T')[0];
+      }
+      
+      return false;
+    };
+
+    // Helper to check for exact name matches (for duplicate detection)
+    const exactNameMatch = (searchName, graduateName) => {
+      if (!searchName || !graduateName) return false;
+      
+      // Extract name parts for both search and graduate names
+      const searchParts = extractNameParts(searchName);
+      const graduateParts = extractNameParts(graduateName);
+      
+      // For exact matching, we need more strict criteria
+      const searchWords = searchParts.allParts;
+      const graduateWords = graduateParts.allParts;
+      
+      // Check if all search words are present in graduate name (in any order)
+      const allSearchWordsFound = searchWords.every(searchWord => 
+        graduateWords.some(graduateWord => 
+          graduateWord === searchWord || 
+          (searchWord.length > 1 && graduateWord.includes(searchWord)) ||
+          (searchWord.length === 1 && graduateWord.startsWith(searchWord))
+        )
+      );
+      
+      // Check if all graduate words are present in search (for exact matches)
+      const allGraduateWordsFound = graduateWords.every(graduateWord => 
+        searchWords.some(searchWord => 
+          searchWord === graduateWord || 
+          (graduateWord.length > 1 && searchWord.includes(graduateWord)) ||
+          (graduateWord.length === 1 && searchWord.startsWith(graduateWord))
+        )
+      );
+      
+      return allSearchWordsFound && allGraduateWordsFound;
+    };
 
     // Filter photos by normalized name and birthDate
     const filteredPhotos = photos.filter(photo => {
       const graduateName = photo.graduate?.name || '';
       const photoBirthDate = photo.birthDate;
-      const normalizedGraduateName = normalizeName(graduateName);
       
-      // Allow partial match anywhere in the name
-      const nameMatch = normalizedGraduateName.includes(normalizedSearch);
-      const dateMatch = photoBirthDate === birthDate;
+      const nameMatch = namesMatch(name, graduateName);
+      const dateMatch = datesMatch(birthDate, photoBirthDate);
       
       console.log('Comparing photo:', {
         photoId: photo._id,
         searchName: name,
         graduateName: graduateName,
-        normalizedSearch,
-        normalizedGraduateName,
         searchBirthDate: birthDate,
         photoBirthDate: photoBirthDate,
         nameMatch,
         dateMatch
       });
       
+      // If no birth date provided, only check name
+      if (!birthDate || birthDate === '') {
+        return nameMatch;
+      }
+      
+      // If no name provided, only check date
+      if (!name || name === '') {
+        return dateMatch;
+      }
+      
+      // Both name and date must match
       return nameMatch && dateMatch;
     });
+
+    // Check for potential duplicates
+    if (filteredPhotos.length > 1 && name) {
+      // Check if there are multiple people with similar names
+      const nameGroups = {};
+      filteredPhotos.forEach(photo => {
+        const graduateName = photo.graduate?.name || '';
+        const normalizedName = normalizeName(graduateName);
+        if (!nameGroups[normalizedName]) {
+          nameGroups[normalizedName] = [];
+        }
+        nameGroups[normalizedName].push(photo);
+      });
+
+      // If we have multiple different people with similar names, require more specific search
+      const uniqueNames = Object.keys(nameGroups);
+      if (uniqueNames.length > 1) {
+        console.log('Multiple people found with similar names:', uniqueNames);
+        
+        // Check if the search is specific enough (exact match)
+        const exactMatches = filteredPhotos.filter(photo => {
+          const graduateName = photo.graduate?.name || '';
+          return exactNameMatch(name, graduateName);
+        });
+
+        if (exactMatches.length > 0) {
+          console.log('Found exact matches, returning those only');
+          return exactMatches;
+        } else {
+          console.log('No exact matches found, requiring more specific search');
+          // Return empty array to force user to be more specific
+          return [];
+        }
+      }
+    }
     
     console.log('Filtered photos:', filteredPhotos);
     console.log('Number of filtered photos:', filteredPhotos.length);
