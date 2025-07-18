@@ -1121,13 +1121,12 @@ const currentPath = Astro.url.pathname;
                            <br/>
                             <span class="italic text-msu-main-color">Examples: Bonifacio, Andres M. or Bonifacio Andres M</span>
                             <span class="italic text-msu-main-color">and enter your birth date to search the official gallery.</span>
-                          
+                            <!-- <span class="block mt-2 font-semibold text-red-600">⚠️ Both fields are required for search.</span> -->
                         </p>
                         <div class="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
                             <h4 class="text-sm font-semibold text-blue-800 mb-2">💡 Search Tips:</h4>
                             <ul class="text-xs text-blue-700 space-y-1">
-                          
-                                <li>• Include your birth date for more specific results</li>
+                                <li>• <strong>Both fields are required:</strong> Full name and date of birth</li>
                                 <li>• Family name first: "Bonifacio, Andress M." or "Bonifacio Andress M" will find "Andress M. Bonifacio"</li>
                                 <li>• Given name first: "Andress M. Bonifacio" will find "Bonifacio, Andress M."</li>
                                 <li>• Initials work: "A Bonifacio" will find "Andress Bonifacio"</li>
@@ -1152,7 +1151,7 @@ const currentPath = Astro.url.pathname;
                                 />
                                 <div id="nameError" class="hidden mt-2 p-3 rounded-lg bg-red-100 border border-red-300 text-red-800 text-sm flex items-center gap-2 shadow-md transition-all duration-300" role="alert" aria-live="polite">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-                                    <span>Please enter your full name</span>
+                                    <span>Full name is required to search for your graduation photos</span>
                                 </div>
                             </div>
                             <div class="sm:w-48">
@@ -1180,7 +1179,7 @@ const currentPath = Astro.url.pathname;
                                 </div>
                                 <div id="birthdateError" class="hidden mt-2 p-3 rounded-lg bg-red-100 border border-red-300 text-red-800 text-sm flex items-center gap-2 shadow-md transition-all duration-300" role="alert" aria-live="polite">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-                                    <span id="birthdateErrorText">Please enter your birth date in MM-DD-YYYY format (e.g., 12-02-2004 for December 2, 2004)</span>
+                                    <span id="birthdateErrorText">Date of birth is required to search for your graduation photos. Use MM-DD-YYYY format (e.g., 12-02-2004 for December 2, 2004)</span>
                                 </div>
                                 
                                 <!-- Calendar Modal -->
@@ -1509,6 +1508,9 @@ const currentPath = Astro.url.pathname;
 
         let lastSearchedPhotos = [];
 
+        // Define currentDate to fix linter errors
+        let currentDate = new Date();
+        let selectedDate: Date | null = null;
 
         function renderMonthPicker() {
             const monthGrid = document.getElementById('monthGrid');
@@ -2199,6 +2201,50 @@ const currentPath = Astro.url.pathname;
             }
         }
 
+        // Enhanced warning modal for both fields required
+        function showEnhancedWarningModal() {
+            hideAllStates();
+            const warningModal = document.getElementById('warningModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            if (warningModal && modalContent) {
+                // Update modal content for enhanced warning
+                const modalBody = warningModal.querySelector('.px-6.pb-6');
+                if (modalBody) {
+                    modalBody.innerHTML = `
+                        <div class="bg-gradient-to-r from-red-50 to-orange-50 rounded-xl p-4 border border-red-200">
+                            <p class="text-gray-700 leading-relaxed font-semibold">
+                                ⚠️ Both fields are required to search for your graduation photos:
+                            </p>
+                            <ul class="mt-3 space-y-2 text-sm text-gray-600">
+                                <li class="flex items-start gap-2">
+                                    <span class="w-1.5 h-1.5 bg-red-500 rounded-full mt-2 flex-shrink-0"></span>
+                                    <span><strong>Full Name:</strong> Enter your complete name (Examples: Bonifacio, Andres M. or Bonifacio Andres M)</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-1.5 h-1.5 bg-red-500 rounded-full mt-2 flex-shrink-0"></span>
+                                    <span><strong>Date of Birth:</strong> Use MM-DD-YYYY format (e.g., 12-02-2004 for December 2, 2004)</span>
+                                </li>
+                            </ul>
+                            <div class="mt-4 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+                                <p class="text-yellow-800 text-sm font-medium">
+                                    💡 Tip: Both fields must be filled to ensure accurate search results and avoid duplicates.
+                                </p>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                warningModal.classList.remove('hidden');
+                
+                // Trigger animation after a brief delay
+                setTimeout(() => {
+                    modalContent.classList.remove('scale-95', 'opacity-0');
+                    modalContent.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            }
+        }
+
         // Close modal when clicking backdrop or close button
         document.addEventListener('click', function(e) {
             const warningModal = document.getElementById('warningModal');
@@ -2284,9 +2330,34 @@ const currentPath = Astro.url.pathname;
             const name = (nameInput instanceof HTMLInputElement) ? nameInput.value.trim() : '';
             const birthdate = (birthdateInput instanceof HTMLInputElement) ? birthdateInput.value.trim() : '';
             
-            // At least one field must be filled
-            if (!name && !birthdate) {
-                showWarningModal();
+            // Both fields must be filled
+            if (!name || !birthdate) {
+                // Show specific error messages for missing fields
+                const nameError = document.getElementById('nameError');
+                const birthdateError = document.getElementById('birthdateError');
+                
+                if (!name && nameError) {
+                    nameError.classList.remove('hidden');
+                    nameError.classList.add('animate-fade-in');
+                    nameInput?.focus();
+                    nameInput?.scrollIntoView({behavior: 'smooth', block: 'center'});
+                } else if (nameError) {
+                    nameError.classList.add('hidden');
+                    nameError.classList.remove('animate-fade-in');
+                }
+                
+                if (!birthdate && birthdateError) {
+                    birthdateError.classList.remove('hidden');
+                    birthdateError.classList.add('animate-fade-in');
+                    birthdateInput?.focus();
+                    birthdateInput?.scrollIntoView({behavior: 'smooth', block: 'center'});
+                } else if (birthdateError) {
+                    birthdateError.classList.add('hidden');
+                    birthdateError.classList.remove('animate-fade-in');
+                }
+                
+                // Show enhanced warning modal
+                showEnhancedWarningModal();
                 return;
             }
             
@@ -2366,9 +2437,34 @@ const currentPath = Astro.url.pathname;
             const name = (nameInput instanceof HTMLInputElement) ? nameInput.value.trim() : '';
             const birthdate = (birthdateInput instanceof HTMLInputElement) ? birthdateInput.value.trim() : '';
             
-            // At least one field must be filled
-            if (!name && !birthdate) {
-                showWarningModal();
+            // Both fields must be filled
+            if (!name || !birthdate) {
+                // Show specific error messages for missing fields
+                const nameError = document.getElementById('nameError');
+                const birthdateError = document.getElementById('birthdateError');
+                
+                if (!name && nameError) {
+                    nameError.classList.remove('hidden');
+                    nameError.classList.add('animate-fade-in');
+                    nameInput?.focus();
+                    nameInput?.scrollIntoView({behavior: 'smooth', block: 'center'});
+                } else if (nameError) {
+                    nameError.classList.add('hidden');
+                    nameError.classList.remove('animate-fade-in');
+                }
+                
+                if (!birthdate && birthdateError) {
+                    birthdateError.classList.remove('hidden');
+                    birthdateError.classList.add('animate-fade-in');
+                    birthdateInput?.focus();
+                    birthdateInput?.scrollIntoView({behavior: 'smooth', block: 'center'});
+                } else if (birthdateError) {
+                    birthdateError.classList.add('hidden');
+                    birthdateError.classList.remove('animate-fade-in');
+                }
+                
+                // Show enhanced warning modal
+                showEnhancedWarningModal();
                 return;
             }
             
