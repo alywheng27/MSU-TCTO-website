@@ -15,33 +15,24 @@ import {
   FaUserTie
 } from 'react-icons/fa';
 import { FiChevronDown, FiChevronRight } from 'react-icons/fi';
-import HeroMainHeading from './HeroMainHeading';
-import HeroAdmissionHeading from './HeroAdmissionHeading';
-import HeroProgramHeading from './HeroProgramHeading';
-import HeroCASHeading from './HeroCASHeading';
-import HeroCIASHeading from './HeroCIASHeading';
-import HeroCOEDHeading from './HeroCOEDHeading';
-import HeroCOFHeading from './HeroCOFHeading';
-import HeroIICTHeading from './HeroIICTHeading';
-import HeroIOESHeading from './HeroIOESHeading';
-import HeroPublicationHeading from './HeroPublicationHeading';
-import HeroOfficeHeading from './HeroOfficeHeading';
-import HeroCampusHeading from './HeroCampusHeading';
 
-const Dropdown = ({ title, items, icon, isMobile, activeDropdown, setActiveDropdown, index }) => {
+const Dropdown = ({ title, items, icon, isMobile, activeDropdown, setActiveDropdown, index, closeMobileMenu }) => {
   const isActive = activeDropdown === index;
   
   return (
     <li className={`group relative ${isMobile ? 'py-3 border-b border-gray-200 border-opacity-10' : 'py-4'}`}>
       <a 
-        href="#" 
+        href={items.length === 0 ? '#' : null} 
         className={`flex items-center transition-all duration-300 ${isMobile ? 'justify-between px-4' : 'xl:justify-start'} ${
           isActive ? 'text-msu-gold' : 'text-white hover:text-msu-gold'
         }`}
         onClick={(e) => {
-          if (isMobile) {
+          if (isMobile && items.length > 0) {
             e.preventDefault();
             setActiveDropdown(isActive ? null : index);
+          }
+          if (items.length === 0 && isMobile) {
+            closeMobileMenu();
           }
         }}
       >
@@ -49,31 +40,36 @@ const Dropdown = ({ title, items, icon, isMobile, activeDropdown, setActiveDropd
           {icon && <span className="mr-3 text-lg">{icon}</span>}
           <span className="font-medium text-sm uppercase tracking-wider">{title}</span>
         </div>
-        {isMobile ? (
-          <FiChevronRight className={`transform transition-transform duration-300 ${isActive ? 'rotate-90 text-msu-gold' : 'text-gray-300'}`} />
-        ) : (
-          <FiChevronDown className={`ml-2 transition-all duration-300 ${isActive ? 'rotate-180 text-msu-gold' : 'text-gray-300 group-hover:rotate-180 group-hover:text-msu-gold'}`} />
+        {items.length > 0 && (
+          isMobile ? (
+            <FiChevronRight className={`transform transition-transform duration-300 ${isActive ? 'rotate-90 text-msu-gold' : 'text-gray-300'}`} />
+          ) : (
+            <FiChevronDown className={`ml-2 transition-all duration-300 ${isActive ? 'rotate-180 text-msu-gold' : 'text-gray-300 group-hover:rotate-180 group-hover:text-msu-gold'}`} />
+          )
         )}
       </a>
-      <ul 
-        className={`${isMobile ? 
-          `pl-8 overflow-hidden transition-all duration-300 ${isActive ? 'max-h-screen py-2' : 'max-h-0'}` : 
-          'absolute left-0 mt-0 w-56 bg-msu-deep-ocean shadow-xl rounded-md py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 -translate-y-2 z-50 border-t-2 border-msu-gold'}`
-        }
-      >
-        {items.map((item, idx) => (
-          <li key={idx}>
-            <a 
-              href={item.link} 
-              className={`block px-4 py-3 text-white hover:bg-msu-main-color transition-colors duration-200 text-sm ${
-                isMobile ? 'border-b border-gray-200 border-opacity-10' : ''
-              }`}
-            >
-              {item.label}
-            </a>
-          </li>
-        ))}
-      </ul>
+      {items.length > 0 && (
+        <ul 
+          className={`${isMobile ? 
+            `pl-8 overflow-hidden transition-all duration-300 ${isActive ? 'max-h-screen py-2' : 'max-h-0'}` : 
+            'absolute left-0 mt-0 w-56 bg-msu-deep-ocean shadow-xl rounded-md py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 -translate-y-2 z-50 border-t-2 border-msu-gold'}`
+          }
+        >
+          {items.map((item, idx) => (
+            <li key={idx}>
+              <a 
+                href={item.link} 
+                className={`block px-4 py-3 text-white hover:bg-msu-main-color transition-colors duration-200 text-sm ${
+                  isMobile ? 'border-b border-gray-200 border-opacity-10' : ''
+                }`}
+                onClick={() => isMobile && closeMobileMenu()}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
     </li>
   );
 };
@@ -87,6 +83,11 @@ const Navbar = ({ path }) => {
 
   const toggleNavbar = useCallback(() => {
     setIsOpen((prev) => !prev);
+    setActiveDropdown(null);
+  }, []);
+
+  const closeMobileMenu = useCallback(() => {
+    setIsOpen(false);
     setActiveDropdown(null);
   }, []);
 
@@ -107,48 +108,6 @@ const Navbar = ({ path }) => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const getBackgroundClass = (path) => {
-    const backgroundClasses = {
-      '/admissions/admissions': 'hero-admission-img xl:h-[440px] xs:h-[164px]',
-      '/programs': 'hero-program-img xl:h-[440px] xs:h-[164px]',
-      '/cas': 'hero-cas-img xl:h-[440px] xs:h-[164px]',
-      '/cias': 'hero-cias-img',
-      '/coed': 'hero-coed-img',
-      '/cof': 'hero-cof-img',
-      '/iict': 'hero-iict-img',
-      '/ioes': 'hero-ioes-img',
-      '/offices/offices': 'hero-office-img xl:h-[440px] xs:h-[164px]',
-      '/publications': 'hero-publication-img xl:h-[440px] xs:h-[220px]',
-      '/about/campus': 'hero-campus-img xl:h-[440px] xs:h-[220px]',
-      '/articles': 'hero-main-img xl:h-[980px] xs:h-[770px]',
-      '/annual-reports': 'hero-main-img xl:h-[980px] xs:h-[770px]',
-      '/gazette': 'hero-main-img xl:h-[980px] xs:h-[770px]',
-      '/careers': 'hero-admission-img xl:h-[440px] xs:h-[164px]',
-      '/application': 'hero-admission-img xl:h-[440px] xs:h-[164px]',
-    };
-    return backgroundClasses[path] || '';
-  };
-
-  const getComponent = (path) => {
-    const components = {
-      '/admissions/admissions': <HeroAdmissionHeading />,
-      '/programs': <HeroProgramHeading />,
-      '/cas': <HeroCASHeading />,
-      '/cias': <HeroCIASHeading />,
-      '/coed': <HeroCOEDHeading />,
-      '/cof': <HeroCOFHeading />,
-      '/iict': <HeroIICTHeading />,
-      '/ioes': <HeroIOESHeading />,
-      '/offices/offices': <HeroOfficeHeading />,
-      '/publications': <HeroPublicationHeading />,
-      '/about/campus': <HeroCampusHeading />,
-    };
-    return components[path] || null;
-  };
-
-  const bg = getBackgroundClass(path);
-  const component = getComponent(path);
 
   const navItems = [
     {
@@ -215,16 +174,14 @@ const Navbar = ({ path }) => {
       icon: <FaBriefcase className="text-lg" />,
       items: [
         { link: "/careers", label: "Open Positions" },
-     
       ]
     },
-
     {
       title: "Graduation",
-      icon: <FaGraduationCap className="text-lg" />,
+      icon: <FaBriefcase className="text-lg" />,
       items: [
-        { link: "/graduationphoto", label: "Graduation  Photos" },
-    
+        { link: "/graduationphoto", label: "Graduation Photos" },
+
       ]
     }
   ];
@@ -249,20 +206,18 @@ const Navbar = ({ path }) => {
             </div>
             
             <div className="flex items-center">
-                          
-                    <a 
-              href="https://msutawitawiedu.sharepoint.com/sites/Tawitawi" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center text-xs sm:text-sm hover:text-msu-gold transition-colors duration-200"
-            >
-              <img 
-                src="https://dev-tcto.etpbx.com/Picture1-removebg-preview.png" 
-                alt="Logo" 
-                className="w-[90px] mr-2"
-              />
-            
-            </a>
+              <a 
+                href="https://msutawitawiedu.sharepoint.com/sites/Tawitawi" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center text-xs sm:text-sm hover:text-msu-gold transition-colors duration-200"
+              >
+                <img 
+                  src="https://dev-tcto.etpbx.com/Picture1-removebg-preview.png" 
+                  alt="Logo" 
+                  className="w-[90px] mr-2"
+                />
+              </a>
             </div>
           </div>
         </div>
@@ -281,7 +236,7 @@ const Navbar = ({ path }) => {
                 <img
                   src="/images/TAWI-TAWI COLLEGE OF TECHNOLOGY AND OCEANOGRAPHY.png"
                   alt="MSU Logo"
-                  className={`transition-all duration-300 ${scrolled ? 'h-8 sm:h-10' : 'h-10 sm:h-12'}`}
+                  className={`tawi-tawi-logo transition-all duration-300 ${scrolled ? 'h-9 sm:h-10' : 'h-10 sm:h-12'}`}
                 />
               </div>
             </a>
@@ -299,6 +254,7 @@ const Navbar = ({ path }) => {
                     index={index}
                     activeDropdown={activeDropdown}
                     setActiveDropdown={setActiveDropdown}
+                    closeMobileMenu={closeMobileMenu}
                   />
                 ))}
               </ul>
@@ -392,6 +348,7 @@ const Navbar = ({ path }) => {
                   index={index}
                   activeDropdown={activeDropdown}
                   setActiveDropdown={setActiveDropdown}
+                  closeMobileMenu={closeMobileMenu}
                 />
               ))}
             </ul>
@@ -400,7 +357,7 @@ const Navbar = ({ path }) => {
                 href="https://msutawitawiedu.sharepoint.com/sites/Tawitawi" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className=" bg-msu-main-color hover:bg-msu-gold-dark text-white px-4 py-3 rounded text-center font-medium transition-colors duration-300 flex items-center justify-center text-sm"
+                className="bg-msu-main-color hover:bg-msu-gold-dark text-white px-4 py-3 rounded text-center font-medium transition-colors duration-300 flex items-center justify-center text-sm"
               >
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 

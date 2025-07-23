@@ -1,0 +1,419 @@
+---
+import Layout from '../layouts/introloader.astro';
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer.astro";
+import '../styles/css/global.css';
+import '../styles/css/globalanimate.css';
+
+const currentPath = Astro.url.pathname;
+---
+
+<Layout title="MSU-TCTO | Commencement Exercise Invitation">
+    <main class="font-sans antialiased text-gray-800 leading-normal overflow-x-hidden">
+        <!-- Navbar -->
+        <Navbar path={currentPath} client:visible />
+
+        <!-- Hero Section - Elegant Invitation -->
+        <section class="relative bg-gradient-to-br from-msu-main-color via-msu-deep-ocean to-purple-900 min-h-screen flex items-center overflow-hidden pt-16 sm:pt-20 md:pt-24 lg:pt-[80px] pb-20">
+            <!-- Animated Background Elements -->
+            <div class="absolute inset-0 z-0 overflow-hidden">
+                <img src="/images/commencement.jpg" alt="MSU-TCTO Commencement Exercise" class="w-full h-full object-cover opacity-30" />
+                <div class="absolute inset-0 bg-gradient-to-br from-msu-main-color/80 via-msu-deep-ocean/80 to-purple-900/80"></div>
+                
+                <!-- Floating Elements -->
+                <div class="absolute top-20 left-10 w-20 h-20 bg-msu-gold/20 rounded-full animate-pulse"></div>
+                <div class="absolute top-40 right-20 w-16 h-16 bg-white/10 rounded-full animate-bounce"></div>
+                <div class="absolute bottom-40 left-20 w-12 h-12 bg-msu-gold/30 rounded-full animate-ping"></div>
+                <div class="absolute bottom-20 right-10 w-24 h-24 bg-white/5 rounded-full animate-pulse"></div>
+            </div>
+            
+            <!-- Content -->
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 z-10 relative">
+                <div class="max-w-5xl mx-auto text-center">
+                    <!-- Elegant Header -->
+                    <div class="mb-8 animate-fadeIn">
+                        <div class="inline-block p-4 bg-white/10 backdrop-blur-sm rounded-full mb-6">
+                            <img src="/images/MSU Seal New (Official).png" alt="MSU-TCTO Seal" class="w-16 h-16 mx-auto" />
+                        </div>
+                        <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold text-white mb-4 font-serif">
+                            Commencement Exercise
+                        </h1>
+                        <div class="w-32 h-1 bg-msu-gold mx-auto mb-6"></div>
+                        <p class="text-xl sm:text-2xl text-white/90 font-light">
+                            Class of 2024
+                        </p>
+                    </div>
+
+                    <!-- Invitation Card -->
+                    <div class="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 sm:p-12 mb-8 animate-fadeInUp delay-300">
+                        <div class="text-center mb-8">
+                            <h2 class="text-3xl sm:text-4xl font-bold text-msu-deep-ocean mb-4">You Are Cordially Invited</h2>
+                            <p class="text-gray-600 text-lg">to celebrate the academic achievements of our graduating students</p>
+                        </div>
+
+                        <!-- Event Details -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                            <div class="text-center p-6 bg-gradient-to-br from-msu-main-color to-msu-deep-ocean rounded-2xl text-white">
+                                <div class="mb-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold mb-2">Date & Time</h3>
+                                <p class="text-lg">June 15, 2024</p>
+                                <p class="text-lg">2:00 PM</p>
+                            </div>
+
+                            <div class="text-center p-6 bg-gradient-to-br from-msu-gold to-yellow-600 rounded-2xl text-white">
+                                <div class="mb-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold mb-2">Venue</h3>
+                                <p class="text-lg">MSU-TCTO Gymnasium</p>
+                                <p class="text-lg">Bongao, Tawi-Tawi</p>
+                            </div>
+                        </div>
+
+                        <!-- RSVP Button -->
+                        <div class="text-center">
+                            <a href="#rsvp" class="inline-block px-12 py-4 bg-gradient-to-r from-msu-main-color to-msu-deep-ocean text-white rounded-full font-bold text-lg hover:from-msu-deep-ocean hover:to-msu-main-color transition-all duration-300 transform hover:scale-105 shadow-lg">
+                                RSVP Now
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Call to Action -->
+                    <div class="flex flex-wrap justify-center gap-4 animate-fadeInUp delay-500">
+                        <a href="#souvenirs" class="px-8 py-3 bg-msu-gold text-white rounded-full font-semibold hover:bg-yellow-600 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                            View Souvenirs
+                        </a>
+                        <a href="#details" class="px-8 py-3 bg-white/20 backdrop-blur-sm text-white rounded-full font-semibold hover:bg-white/30 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                            Event Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Souvenirs Section -->
+        <section id="souvenirs" class="py-20 bg-gradient-to-br from-gray-50 to-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl sm:text-5xl font-bold text-msu-deep-ocean mb-6">Exclusive Graduation Souvenirs</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">Commemorate this special milestone with our curated collection of premium graduation memorabilia</p>
+                </div>
+
+                <!-- Premium Souvenirs Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Premium Graduation Package -->
+                    <div class="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 transform hover:-translate-y-2">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="/images/graduation/image1.png" alt="Premium Graduation Package" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute top-4 right-4 bg-msu-gold text-white px-3 py-1 rounded-full text-sm font-bold">
+                                PREMIUM
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-msu-deep-ocean mb-4">Premium Graduation Package</h3>
+                            <div class="space-y-3 mb-6">
+                                <div class="flex items-center text-gray-700">
+                                    <svg class="w-5 h-5 text-msu-gold mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>Complete Academic Regalia</span>
+                                </div>
+                                <div class="flex items-center text-gray-700">
+                                    <svg class="w-5 h-5 text-msu-gold mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>Personalized Graduation Ring</span>
+                                </div>
+                                <div class="flex items-center text-gray-700">
+                                    <svg class="w-5 h-5 text-msu-gold mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>Elegant Diploma Frame</span>
+                                </div>
+                                <div class="flex items-center text-gray-700">
+                                    <svg class="w-5 h-5 text-msu-gold mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>Commemorative Photo Album</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-2xl font-bold text-msu-deep-ocean">₱2,500</span>
+                                <a href="/order/premium-package" class="px-6 py-3 bg-gradient-to-r from-msu-main-color to-msu-deep-ocean text-white rounded-full font-semibold hover:from-msu-deep-ocean hover:to-msu-main-color transition-all duration-300">
+                                    Order Now
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Graduation Ring Collection -->
+                    <div class="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 transform hover:-translate-y-2">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="/images/graduation/image2.png" alt="Graduation Ring Collection" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute top-4 right-4 bg-purple-600 text-white px-3 py-1 rounded-full text-sm font-bold">
+                                POPULAR
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-msu-deep-ocean mb-4">Graduation Ring Collection</h3>
+                            <div class="space-y-3 mb-6">
+                                <div class="flex items-center text-gray-700">
+                                    <svg class="w-5 h-5 text-purple-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>18K Gold Plated</span>
+                                </div>
+                                <div class="flex items-center text-gray-700">
+                                    <svg class="w-5 h-5 text-purple-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>Personalized Engraving</span>
+                                </div>
+                                <div class="flex items-center text-gray-700">
+                                    <svg class="w-5 h-5 text-purple-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>University Seal Design</span>
+                                </div>
+                                <div class="flex items-center text-gray-700">
+                                    <svg class="w-5 h-5 text-purple-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>Lifetime Warranty</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-2xl font-bold text-msu-deep-ocean">₱1,800</span>
+                                <a href="/order/graduation-ring" class="px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-800 text-white rounded-full font-semibold hover:from-purple-800 hover:to-purple-600 transition-all duration-300">
+                                    Order Now
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Commemorative Collection -->
+                    <div class="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 transform hover:-translate-y-2">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="/images/MSU Seal New (Official).png" alt="Commemorative Collection" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold">
+                                NEW
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <h3 class="text-2xl font-bold text-msu-deep-ocean mb-4">Commemorative Collection</h3>
+                            <div class="space-y-3 mb-6">
+                                <div class="flex items-center text-gray-700">
+                                    <svg class="w-5 h-5 text-green-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>Premium Photo Album</span>
+                                </div>
+                                <div class="flex items-center text-gray-700">
+                                    <svg class="w-5 h-5 text-green-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>University Mug Set</span>
+                                </div>
+                                <div class="flex items-center text-gray-700">
+                                    <svg class="w-5 h-5 text-green-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>Custom T-shirt & Hoodie</span>
+                                </div>
+                                <div class="flex items-center text-gray-700">
+                                    <svg class="w-5 h-5 text-green-600 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>Graduation Teddy Bear</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-2xl font-bold text-msu-deep-ocean">₱1,200</span>
+                                <a href="/order/commemorative" class="px-6 py-3 bg-gradient-to-r from-green-600 to-green-800 text-white rounded-full font-semibold hover:from-green-800 hover:to-green-600 transition-all duration-300">
+                                    Order Now
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Event Details Section -->
+        <section id="details" class="py-20 bg-gradient-to-br from-msu-main-color to-msu-deep-ocean">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl sm:text-5xl font-bold text-white mb-6">Event Details</h2>
+                        <p class="text-xl text-white/90 max-w-3xl mx-auto">Everything you need to know about the commencement exercise</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                        <!-- Schedule -->
+                        <div class="bg-white/10 backdrop-blur-sm rounded-3xl p-8">
+                            <h3 class="text-2xl font-bold text-white mb-6 flex items-center">
+                                <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                Schedule
+                            </h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center p-4 bg-white/20 rounded-xl">
+                                    <div class="w-12 h-12 bg-msu-gold rounded-full flex items-center justify-center mr-4">
+                                        <span class="text-white font-bold">1</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-white font-semibold">Registration & Check-in</h4>
+                                        <p class="text-white/80">12:00 PM - 1:30 PM</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center p-4 bg-white/20 rounded-xl">
+                                    <div class="w-12 h-12 bg-msu-gold rounded-full flex items-center justify-center mr-4">
+                                        <span class="text-white font-bold">2</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-white font-semibold">Academic Procession</h4>
+                                        <p class="text-white/80">1:45 PM - 2:00 PM</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center p-4 bg-white/20 rounded-xl">
+                                    <div class="w-12 h-12 bg-msu-gold rounded-full flex items-center justify-center mr-4">
+                                        <span class="text-white font-bold">3</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-white font-semibold">Commencement Ceremony</h4>
+                                        <p class="text-white/80">2:00 PM - 5:00 PM</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center p-4 bg-white/20 rounded-xl">
+                                    <div class="w-12 h-12 bg-msu-gold rounded-full flex items-center justify-center mr-4">
+                                        <span class="text-white font-bold">4</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-white font-semibold">Reception & Souvenir Pickup</h4>
+                                        <p class="text-white/80">5:00 PM - 7:00 PM</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Guidelines -->
+                        <div class="bg-white/10 backdrop-blur-sm rounded-3xl p-8">
+                            <h3 class="text-2xl font-bold text-white mb-6 flex items-center">
+                                <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                Guidelines
+                            </h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start p-4 bg-white/20 rounded-xl">
+                                    <svg class="w-6 h-6 text-msu-gold mr-3 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <div>
+                                        <h4 class="text-white font-semibold">Dress Code</h4>
+                                        <p class="text-white/80">Complete academic regalia required for graduates</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start p-4 bg-white/20 rounded-xl">
+                                    <svg class="w-6 h-6 text-msu-gold mr-3 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <div>
+                                        <h4 class="text-white font-semibold">Arrival Time</h4>
+                                        <p class="text-white/80">Please arrive 1 hour before the ceremony</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start p-4 bg-white/20 rounded-xl">
+                                    <svg class="w-6 h-6 text-msu-gold mr-3 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <div>
+                                        <h4 class="text-white font-semibold">Photography</h4>
+                                        <p class="text-white/80">Professional photos will be available for purchase</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start p-4 bg-white/20 rounded-xl">
+                                    <svg class="w-6 h-6 text-msu-gold mr-3 mt-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <div>
+                                        <h4 class="text-white font-semibold">Souvenirs</h4>
+                                        <p class="text-white/80">Pre-ordered souvenirs available for pickup after ceremony</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RSVP Section -->
+        <section id="rsvp" class="py-20 bg-gradient-to-br from-gray-50 to-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl sm:text-5xl font-bold text-msu-deep-ocean mb-6">RSVP</h2>
+                        <p class="text-xl text-gray-600">Please confirm your attendance for the commencement exercise</p>
+                    </div>
+
+                    <div class="bg-white rounded-3xl shadow-2xl p-8 sm:p-12">
+                        <form class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">Full Name</label>
+                                    <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-msu-main-color focus:border-transparent" placeholder="Enter your full name">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">Email Address</label>
+                                    <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-msu-main-color focus:border-transparent" placeholder="Enter your email">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">Phone Number</label>
+                                    <input type="tel" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-msu-main-color focus:border-transparent" placeholder="Enter your phone number">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">Number of Guests</label>
+                                    <select class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-msu-main-color focus:border-transparent">
+                                        <option>Select number of guests</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5+</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Special Requirements</label>
+                                <textarea class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-msu-main-color focus:border-transparent" rows="4" placeholder="Any special requirements or requests"></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="px-12 py-4 bg-gradient-to-r from-msu-main-color to-msu-deep-ocean text-white rounded-full font-bold text-lg hover:from-msu-deep-ocean hover:to-msu-main-color transition-all duration-300 transform hover:scale-105 shadow-lg">
+                                    Confirm Attendance
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <Footer class="relative z-50" />
+    </main>
+</Layout>
+
+<script src="../js/animate.js"></script>
+<script src="../js/loadinganim.js"></script>
+<script src="../js/smoothscroll.js"></script>

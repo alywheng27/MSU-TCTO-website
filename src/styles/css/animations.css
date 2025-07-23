@@ -36,8 +36,10 @@
     animation: loadingBar 1.5s ease-in-out infinite;
   }
 
-
-
-  
+@media (max-width: 1700px) {
+  .tawi-tawi-logo {
+    display: none !important;
+  }
+}
   
   

@@ -1,10 +1,18 @@
 export function getYear(date) {
+    if (!date || typeof date !== 'string') {
+        console.warn('getYear: Invalid date format:', date);
+        return '';
+    }
     var year = date.substr(0, 4);
     
     return year;
 }
 
 export function getWordMonth(date) { 
+    if (!date || typeof date !== 'string') {
+        console.warn('getWordMonth: Invalid date format:', date);
+        return '';
+    }
     // 0000-00-00
     var year = date.substr(0, 4);
     var month = date.substr(5, 2);
@@ -75,6 +83,10 @@ export function get3LettersMonth(date) {
 }
 
 export function getDay(date) {
+    if (!date || typeof date !== 'string') {
+        console.warn('getDay: Invalid date format:', date);
+        return '';
+    }
     // 0000-00-00
     var year = date.substr(0, 4);
     var month = date.substr(5, 2);
