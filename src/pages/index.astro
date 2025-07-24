@@ -24,6 +24,8 @@ import { get4UpcomingEvents } from '../api/api';
 import { get3LatestGazette } from '../api/api';
 import { get3LatestAnnualReport } from '../api/api';
 import { sulimbanglatestshown } from '../api/api';
+import { testCalendarData } from '../api/api';
+import { getAllCalendarEvents } from '../api/api';
 
 const threeLatestArticles = await get3LatestArticle();
 const latestFeaturedArticle = await getLatestFeaturedArticle();
@@ -31,6 +33,30 @@ const fourUpcomingEvents = await get4UpcomingEvents();
 const threeLatestGazette = await get3LatestGazette();
 const latestsulimbang = await sulimbanglatestshown();
 const threeLatestAnnualReport = await get3LatestAnnualReport();
+
+// Test calendar data
+const testCalendar = await testCalendarData();
+
+// Get all calendar events for the complete dropdown
+const allCalendarEvents = await getAllCalendarEvents();
+
+// Debug logging
+console.log('=== DEBUG: Upcoming Events Data ===');
+console.log('fourUpcomingEvents:', fourUpcomingEvents);
+console.log('fourUpcomingEvents length:', fourUpcomingEvents?.length);
+console.log('fourUpcomingEvents type:', typeof fourUpcomingEvents);
+console.log('testCalendar:', testCalendar);
+console.log('testCalendar length:', testCalendar?.length);
+if (fourUpcomingEvents && fourUpcomingEvents.length > 0) {
+  console.log('First event:', fourUpcomingEvents[0]);
+  console.log('First event date:', fourUpcomingEvents[0]?.date);
+  console.log('First event title:', fourUpcomingEvents[0]?.title);
+}
+if (testCalendar && testCalendar.length > 0) {
+  console.log('Test calendar first event:', testCalendar[0]);
+  console.log('Test calendar first event date:', testCalendar[0]?.date);
+  console.log('Test calendar first event title:', testCalendar[0]?.title);
+}
 ---
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
@@ -295,49 +321,215 @@ const threeLatestAnnualReport = await get3LatestAnnualReport();
 
         <!-- Rest of your existing code remains the same -->
         <!-- Upcoming Events Section -->
-        <!-- <section class="bg-[#61063B] py-16 text-white">
+        <section class="bg-gradient-to-b from-white to-gray-50 py-20">
             <div class="container mx-auto px-4 xl:px-32">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold mb-4">Upcoming Events</h2>
-                    <div class="w-20 h-1 bg-msu-gold mx-auto"></div>
-                    <p class="text-2xl">🚧 This feature is currently under development. Please check back soon.</p>
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-msu-deep-ocean mb-4">Featured Calendar Events</h2>
+                    <p class="text-lg text-gray-600 mb-4">All events from the academic calendar</p>
+                    <div class="flex items-center justify-center gap-2">
+                        <div class="w-16 h-1 bg-msu-gold"></div>
+                        <!-- <div class="w-4 h-1 bg-msu-maroon"></div>
+                        <div class="w-16 h-1 bg-msu-gold"></div> -->
+                    </div>
                 </div>
                 
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {fourUpcomingEvents.map((calendar) => {
-                        const bgColor = calendar.holiday.holiday === 'Academic Holiday' 
-                            ? 'bg-gradient-ocean' 
-                            : 'bg-gradient-maroon';
-                        return (
-                            <div class={`${bgColor} rounded-lg shadow-lg overflow-hidden transition-transform hover:scale-105`}>
-                                <div class="p-6">
-                                    <div class="mb-4">
-                                        <p class="text-sm uppercase tracking-wider">{getWordMonth(calendar.date)}</p>
-                                        <p class="text-4xl font-bold">{getDay(calendar.date)}</p>
+                <!-- Initial 4 Events Display -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                    {(fourUpcomingEvents && fourUpcomingEvents.length > 0) || (testCalendar && testCalendar.length > 0) ? (
+                        (fourUpcomingEvents && fourUpcomingEvents.length > 0 ? fourUpcomingEvents : testCalendar).slice(0, 4).map((calendar) => {
+                            console.log('Processing calendar event:', calendar);
+                            
+                            let displayDate = calendar.date;
+                            if (typeof calendar.date === 'object' && calendar.date._type === 'datetime') {
+                                displayDate = calendar.date.utc;
+                            }
+                            
+                            const bgColor = calendar?.holiday?.holiday === 'Academic Holiday' 
+                                ? 'bg-gradient-to-br from-msu-shallow-ocean to-msu-deep-ocean' 
+                                : 'bg-gradient-to-br from-msu-maroon to-msu-dark-pink';
+                            
+                            return (
+                                <div class={`${bgColor} rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl group`}>
+                                    <div class="p-8 relative">
+                                        <div class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-12 -mt-12"></div>
+                                        <!-- Featured Badge -->
+                                        <div class="absolute top-2 left-4">
+                                            <span class="bg-gradient-to-r from-msu-gold to-yellow-400 text-white text-xs px-3 py-1 rounded-full font-semibold shadow-lg">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                                </svg>
+                                                Featured
+                                            </span>
+                                        </div>
+                                        <div class="mb-6 border-b border-white/20 pb-4">
+                                            <p class="text-lg uppercase tracking-wider text-msu-gold font-medium">{getWordMonth(displayDate)}</p>
+                                            <p class="text-5xl font-bold text-white mt-1">{getDay(displayDate)}</p>
+                                            <p class="text-sm text-white/80 mt-1">{getYear(displayDate)}</p>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-2xl font-bold text-white mb-3 group-hover:text-msu-gold transition-colors">
+                                                {calendar.title}
+                                            </h4>
+                                            <p class="text-gray-200/90 line-clamp-3 text-sm leading-relaxed">
+                                                {calendar.body?.[0]?.children?.[0]?.text || 'No description available'}
+                                            </p>
+                                        </div>
+                                        <div class="absolute bottom-4 right-4">
+                                            <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-msu-gold transition-colors">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                                </svg>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <h4 class="text-xl font-semibold mb-2">{calendar.title}</h4>
-                                        <p class="text-gray-200 line-clamp-3">
-                                            {calendar.body[0].children[0].text}
-                                        </p>
+                                </div>
+                            );
+                        })
+                    ) : (
+                        <div class="col-span-4 text-center py-12 bg-white/50 backdrop-blur-sm rounded-2xl shadow-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            <p class="text-2xl font-semibold text-gray-700">No upcoming events at this time</p>
+                            <p class="text-gray-500 mt-2">Check back later for new events</p>
+                        </div>
+                    )}
+                </div>
+                
+                <!-- Stunning Dropdown for All Events -->
+                {(allCalendarEvents && allCalendarEvents.length > 4) ? (
+                    <div class="text-center">
+                        <!-- Backdrop Overlay -->
+                        <div id="eventsBackdrop" class="fixed inset-0 bg-black/50 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 z-[9998]"></div>
+                        
+                        <div class="relative inline-block">
+                            <button 
+                                id="eventsDropdownBtn"
+                                class="group relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-msu-deep-ocean to-msu-deep-ocean text-white rounded-full font-semibold hover:from-msu-main-color hover:to-msu-deep-ocean transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg gap-3 overflow-hidden"
+                            >
+                                <span class="relative z-10">View Complete Calendar</span>
+                                <svg id="dropdownArrow" class="relative z-10 h-5 w-5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                                <div class="absolute inset-0 bg-gradient-to-r from-msu-main-color to-msu-deep-ocean opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            </button>
+                            
+                            <!-- Dropdown Content -->
+                            <div 
+                                id="eventsDropdown"
+                                class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[95vw] max-w-7xl max-h-[90vh] bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/50 opacity-0 pointer-events-none transition-all duration-500 scale-95 z-[9999]"
+                            >
+                                <div class="p-8 relative">
+                                    <!-- Close Button -->
+                                    <button 
+                                        id="closeEventsModal"
+                                        class="absolute top-4 right-4 z-10 group bg-msu-deep-ocean text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-black/80 transition-all duration-200 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/50"
+                                        aria-label="Close calendar"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </button>
+                                    
+                                    <div class="text-center mb-8">
+                                        <div class="flex items-center justify-center gap-3 mb-4">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-msu-deep-ocean" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                            </svg>
+                                            <h3 class="text-4xl font-bold text-msu-deep-ocean">Complete Event Calendar</h3>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-msu-deep-ocean" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                            </svg>
+                                        </div>
+                                        <div class="w-32 h-1.5 bg-gradient-to-r from-msu-gold via-msu-maroon to-msu-gold mx-auto rounded-full mb-4"></div>
+                                        <p class="text-lg text-gray-600 max-w-2xl mx-auto">Explore all calendar events and important dates at MSU-TCTO</p>
+                                    </div>
+                                    
+                                    <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 max-h-[60vh] overflow-y-auto custom-scrollbar">
+                                        {allCalendarEvents.map((calendar, index) => {
+                                            let displayDate = calendar.date;
+                                            if (typeof calendar.date === 'object' && calendar.date._type === 'datetime') {
+                                                displayDate = calendar.date.utc;
+                                            }
+                                            
+                                            const bgColor = calendar?.holiday?.holiday === 'Academic Holiday' 
+                                                ? 'bg-gradient-to-br from-msu-shallow-ocean to-msu-deep-ocean' 
+                                                : 'bg-gradient-to-br from-msu-maroon to-msu-dark-pink';
+                                            
+                                            return (
+                                                <div class={`${bgColor} rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl group ${index < 4 ? 'ring-2 ring-msu-gold/50' : ''}`}>
+                                                    <div class="p-6 relative">
+                                                        <div class="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full -mr-8 -mt-8"></div>
+                                                        
+                                                        <!-- Enhanced Date Display -->
+                                                        <div class="mb-4 border-b border-white/20 pb-4">
+                                                            <div class="flex items-center justify-between mb-2">
+                                                                <p class="text-sm uppercase tracking-wider text-msu-gold font-semibold">{getWordMonth(displayDate)}</p>
+                                                                <div class="flex items-center gap-1">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-msu-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                                    </svg>
+                                                                    <span class="text-xs text-white/80 font-medium">Event</span>
+                                                                </div>
+                                                            </div>
+                                                            <p class="text-4xl font-bold text-white mt-1 leading-none">{getDay(displayDate)}</p>
+                                                            <p class="text-xs text-white/70 mt-1">{getYear(displayDate)}</p>
+                                                        </div>
+                                                        
+                                                        <!-- Enhanced Content -->
+                                                        <div>
+                                                            <h4 class="text-lg font-bold text-white mb-3 group-hover:text-msu-gold transition-colors line-clamp-2 leading-tight">
+                                                                {calendar.title}
+                                                            </h4>
+                                                            <p class="text-gray-200/90 line-clamp-3 text-sm leading-relaxed">
+                                                                {calendar.body?.[0]?.children?.[0]?.text || 'No description available'}
+                                                            </p>
+                                                        </div>
+                                                        
+                                                        <!-- Enhanced Featured Badge -->
+                                                        {index < 4 && (
+                                                            <div class="absolute top-0  left-3">
+                                                                <span class="bg-gradient-to-r from-msu-gold to-yellow-400 text-white text-xs px-3 py-1 rounded-full font-semibold shadow-lg">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                                                    </svg>
+                                                                    Featured
+                                                                </span>
+                                                            </div>
+                                                        )}
+                                                        
+                                                        <!-- Event Type Indicator -->
+                                                        <div class="absolute bottom-3 right-3">
+                                                            <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-msu-gold transition-colors">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            );
+                                        })}
                                     </div>
                                 </div>
                             </div>
-                        );
-                    })}
-                </div>
-                
-                <div class="text-center mt-10">
-                    <a
-                    href="#"
-                    class="inline-block px-6 py-3 bg-gray-200 text-gray-500 rounded-lg font-medium cursor-not-allowed pointer-events-none"
-                    aria-disabled="true"
-                  >
-                    View All Events (Coming Soon)
-                  </a>
-                </div>
+                        </div>
+                    </div>
+                ) : (
+                    <div class="text-center">
+                        <a
+                            href="/events"
+                            class="inline-flex items-center px-8 py-4 bg-msu-deep-ocean text-white rounded-full font-semibold hover:bg-msu-maroon transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg gap-2"
+                        >
+                            View All Events
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                        </a>
+                    </div>
+                )}
             </div>
-        </section> -->
+        </section>
 
         <!-- Campus Life Section -->
         <section class="relative bg-gray-50 py-20 overflow-hidden">
@@ -419,7 +611,7 @@ const threeLatestAnnualReport = await get3LatestAnnualReport();
 			<div class="container mx-auto px-4 xl:px-24">
 			  <!-- Heading -->
 			  <div class="text-center mb-16">
-				<h2 class="text-4xl font-extrabold text-msu-main-color mb-4 tracking-tight">University Publications</h2>
+				<h2 class="text-4xl font-extrabold text-msu-deep-ocean mb-4 tracking-tight">University Publications</h2>
 				<p class="text-lg text-gray-600 max-w-2xl mx-auto">
 				  Discover our Sulimbang and Annual Reports in visual format.
 				</p>
@@ -889,7 +1081,7 @@ window.addEventListener('load', function() {
         tooltip.classList.remove('hidden');
         setTimeout(() => {
           if (tooltip) tooltip.classList.remove('opacity-0');
-        }, 100); // Small delay for transition
+        }, 10); // Small delay for transition
         
         setTimeout(() => {
           if (tooltip) {
@@ -947,4 +1139,151 @@ window.addEventListener('load', function() {
 <script src="../js/animate.js" ></script>
 <script src="../js/loadinganim.js" ></script>
 <script src="../js/smoothscroll.js" ></script>
+
+<!-- Events Dropdown JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const dropdownBtn = document.getElementById('eventsDropdownBtn');
+    const dropdown = document.getElementById('eventsDropdown');
+    const dropdownArrow = document.getElementById('dropdownArrow');
+    const backdrop = document.getElementById('eventsBackdrop');
+    const closeBtn = document.getElementById('closeEventsModal');
+    
+    if (dropdownBtn && dropdown && dropdownArrow && backdrop && closeBtn) {
+        let isOpen = false;
+        
+        function openModal() {
+            isOpen = true;
+            backdrop.classList.remove('opacity-0', 'pointer-events-none');
+            backdrop.classList.add('opacity-100', 'pointer-events-auto');
+            dropdown.classList.remove('opacity-0', 'pointer-events-none', 'scale-95');
+            dropdown.classList.add('opacity-100', 'pointer-events-auto', 'scale-100');
+            dropdownArrow.style.transform = 'rotate(180deg)';
+            dropdownBtn.classList.add('ring-2', 'ring-msu-gold/50');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+        
+        function closeModal() {
+            isOpen = false;
+            backdrop.classList.add('opacity-0', 'pointer-events-none');
+            backdrop.classList.remove('opacity-100', 'pointer-events-auto');
+            dropdown.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+            dropdown.classList.remove('opacity-100', 'pointer-events-auto', 'scale-100');
+            dropdownArrow.style.transform = 'rotate(0deg)';
+            dropdownBtn.classList.remove('ring-2', 'ring-msu-gold/50');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+        
+        dropdownBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (isOpen) {
+                closeModal();
+            } else {
+                openModal();
+            }
+        });
+        
+        // Close dropdown when clicking backdrop
+        backdrop.addEventListener('click', function() {
+            if (isOpen) {
+                closeModal();
+            }
+        });
+        
+        // Close dropdown when clicking close button
+        closeBtn.addEventListener('click', function() {
+            if (isOpen) {
+                closeModal();
+            }
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            const target = e.target as Node;
+            if (!dropdownBtn.contains(target) && !dropdown.contains(target) && !backdrop.contains(target)) {
+                if (isOpen) {
+                    closeModal();
+                }
+            }
+        });
+        
+        // Close dropdown on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && isOpen) {
+                closeModal();
+            }
+        });
+    }
+});
+</script>
+
+<!-- Custom Scrollbar Styles -->
+<style>
+.custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #1e3a8a #e5e7eb;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f3f4f6;
+    border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #1e3a8a, #7c3aed);
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #1e40af, #6d28d9);
+}
+
+/* Enhanced animations for dropdown */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.95);
+    }
+}
+
+/* Hover effects for event cards in dropdown */
+#eventsDropdown .group:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Featured badge animation */
+#eventsDropdown .ring-2 {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(245, 158, 11, 0);
+    }
+}
+</style>
 
