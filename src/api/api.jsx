@@ -386,7 +386,7 @@ export async function get3LatestFeaturedArticle() {
 }
 
 export async function get3UpcomingEvents() {
-  const query = groq`*[_type == "calendar" && date >= now()] | order(date asc)[0..2] {
+  const query = groq`*[_type == "calendar"] | order(date desc)[0..2] {
     title,
     date,
     body[]{
@@ -404,29 +404,36 @@ export async function get3UpcomingEvents() {
 }
 
 export async function get4UpcomingEvents() {
-  const query = groq`*[_type == "calendar" && date >= now()] | order(date asc)[0..3] {
-  title,
-  date,
-  body[]{
-    ...,
-    children[]{ text }
-  },
-  "image": asset->url,
-  semester->{
-    title
-  },
-  holiday->{
-    name
+  try {
+    console.log('=== DEBUG: get4UpcomingEvents ===');
+    
+    // Get all calendar events without date filtering
+    const query = groq`*[_type == "calendar"] | order(date desc)[0..3] {
+      title,
+      date,
+      body[]{
+        children[]{
+          text
+        },
+        asset->{url},
+      },
+      semester->{semester},
+      holiday->{holiday},
+    }`;
+    
+    const fourUpcomingEvents = await useSanityClient().fetch(query);
+    console.log('All calendar events (first 4):', fourUpcomingEvents);
+    console.log('Total events found:', fourUpcomingEvents?.length);
+    
+    return fourUpcomingEvents || [];
+  } catch (error) {
+    console.error('Error in get4UpcomingEvents:', error);
+    return [];
   }
-}
-`;
-
-  const fourUpcomingEvents = await useSanityClient().fetch(query);
-  return fourUpcomingEvents;
 }
 
 export async function get8UpcomingEvents() {
-  const query = groq`*[_type == "calendar" && date >= now()] | order(date asc)[0..7] {
+  const query = groq`*[_type == "calendar"] | order(date desc)[0..7] {
     title,
     date,
     body[]{
@@ -444,7 +451,7 @@ export async function get8UpcomingEvents() {
 }
 
 export async function get16UpcomingEvents() {
-  const query = groq`*[_type == "calendar" && date >= now()] | order(date asc)[0..15] {
+  const query = groq`*[_type == "calendar"] | order(date desc)[0..15] {
     title,
     date,
     body[]{
@@ -462,7 +469,7 @@ export async function get16UpcomingEvents() {
 }
 
 export async function get16FirstSemesterUpcomingEvents() {
-  const query = groq`*[_type == "calendar" && semester._ref in *[_type=="semester" && semester=="1st Semester"]._id && date >= now()] | order(date asc)[0..15] {
+  const query = groq`*[_type == "calendar" && semester._ref in *[_type=="semester" && semester=="1st Semester"]._id && date >= now()] | order(date desc)[0..15] {
     title,
     date,
     body[]{
@@ -480,7 +487,7 @@ export async function get16FirstSemesterUpcomingEvents() {
 }
 
 export async function get16SecondSemesterUpcomingEvents() {
-  const query = groq`*[_type == "calendar" && semester._ref in *[_type=="semester" && semester=="2nd Semester"]._id && date >= now()] | order(date asc)[0..15] {
+  const query = groq`*[_type == "calendar" && semester._ref in *[_type=="semester" && semester=="2nd Semester"]._id && date >= now()] | order(date desc)[0..15] {
     title,
     date,
     body[]{
@@ -498,7 +505,7 @@ export async function get16SecondSemesterUpcomingEvents() {
 }
 
 export async function get16SummerUpcomingEvents() {
-  const query = groq`*[_type == "calendar" && semester._ref in *[_type=="semester" && semester=="Summer"]._id && date >= now()] | order(date asc)[0..15] {
+  const query = groq`*[_type == "calendar" && semester._ref in *[_type=="semester" && semester=="Summer"]._id && date >= now()] | order(date desc)[0..15] {
     title,
     date,
     body[]{
@@ -516,7 +523,7 @@ export async function get16SummerUpcomingEvents() {
 }
 
 export async function get16SecondSummerUpcomingEvents() {
-  const query = groq`*[_type == "calendar" && semester._ref in *[_type=="semester" && semester=="Second Summer"]._id && date >= now()] | order(date asc)[0..15] {
+  const query = groq`*[_type == "calendar" && semester._ref in *[_type=="semester" && semester=="Second Summer"]._id && date >= now()] | order(date desc)[0..15] {
     title,
     date,
     body[]{
@@ -534,7 +541,7 @@ export async function get16SecondSummerUpcomingEvents() {
 }
 
 export async function get6FirstSemesterUpcomingEvents() {
-  const query = groq`*[_type == "calendar" && semester._ref in *[_type=="semester" && semester=="1st Semester"]._id && date >= now()] | order(date asc)[0..15] {
+  const query = groq`*[_type == "calendar" && semester._ref in *[_type=="semester" && semester=="1st Semester"]._id && date >= now()] | order(date desc)[0..15] {
     title,
     date,
     body[]{
@@ -552,7 +559,7 @@ export async function get6FirstSemesterUpcomingEvents() {
 }
 
 export async function get6SecondSemesterUpcomingEvents() {
-  const query = groq`*[_type == "calendar" && semester._ref in *[_type=="semester" && semester=="2nd Semester"]._id && date >= now()] | order(date asc)[0..15] {
+  const query = groq`*[_type == "calendar" && semester._ref in *[_type=="semester" && semester=="2nd Semester"]._id && date >= now()] | order(date desc)[0..15] {
     title,
     date,
     body[]{
@@ -570,7 +577,7 @@ export async function get6SecondSemesterUpcomingEvents() {
 }
 
 export async function get6SummerUpcomingEvents() {
-  const query = groq`*[_type == "calendar" && semester._ref in *[_type=="semester" && semester=="Summer"]._id && date >= now()] | order(date asc)[0..15] {
+  const query = groq`*[_type == "calendar" && semester._ref in *[_type=="semester" && semester=="Summer"]._id && date >= now()] | order(date desc)[0..15] {
     title,
     date,
     body[]{
@@ -588,7 +595,7 @@ export async function get6SummerUpcomingEvents() {
 }
 
 export async function get6SecondSummerUpcomingEvents() {
-  const query = groq`*[_type == "calendar" && semester._ref in *[_type=="semester" && semester=="Second Summer"]._id && date >= now()] | order(date asc)[0..15] {
+  const query = groq`*[_type == "calendar" && semester._ref in *[_type=="semester" && semester=="Second Summer"]._id && date >= now()] | order(date desc)[0..15] {
     title,
     date,
     body[]{
@@ -1403,5 +1410,66 @@ export async function testSanityConnection() {
   } catch (error) {
     console.error('Sanity connection test failed:', error);
     return null;
+  }
+}
+
+export async function testCalendarData() {
+  try {
+    const testQuery = groq`*[_type == "calendar"] | order(date desc) {
+      _id,
+      title,
+      date,
+      body[]{
+        children[]{
+          text
+        },
+        asset->{url},
+      },
+      semester->{semester},
+      holiday->{holiday},
+    }`;
+    
+    console.log('=== TEST: Getting all calendar data ===');
+    const allCalendarData = await useSanityClient().fetch(testQuery);
+    console.log('All calendar data:', allCalendarData);
+    console.log('Total calendar events:', allCalendarData?.length);
+    
+    if (allCalendarData && allCalendarData.length > 0) {
+      console.log('First event:', allCalendarData[0]);
+      console.log('First event date:', allCalendarData[0].date);
+      console.log('First event date type:', typeof allCalendarData[0].date);
+    }
+    
+    return allCalendarData;
+  } catch (error) {
+    console.error('Error in testCalendarData:', error);
+    return [];
+  }
+}
+
+// New function to get all calendar events for the complete calendar dropdown
+export async function getAllCalendarEvents() {
+  try {
+    const query = groq`*[_type == "calendar"] | order(date desc) {
+      title,
+      date,
+      body[]{
+        children[]{
+          text
+        },
+        asset->{url},
+      },
+      semester->{semester},
+      holiday->{holiday},
+    }`;
+    
+    const allEvents = await useSanityClient().fetch(query);
+    console.log('=== DEBUG: getAllCalendarEvents ===');
+    console.log('Total events found:', allEvents?.length);
+    
+    return allEvents || [];
+  } catch (error) {
+    console.error('Error in getAllCalendarEvents:', error);
+    return [];
   }
 }
