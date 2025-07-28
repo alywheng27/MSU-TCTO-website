@@ -21,10 +21,31 @@ const singleLatestArticle = await getSingleLatestArticle();
 import { get4LatestArticles } from '../../api/api';
 const fourLatestArticles = await get4LatestArticles();
 
+// Meta data for social sharing
+const pageTitle = "Articles - MSU Tawi-Tawi College of Technology and Oceanography";
+const pageDescription = "Discover the latest news, research, and stories from MSU Tawi-Tawi College of Technology and Oceanography. Read our featured articles and stay updated with campus developments.";
+const siteUrl = Astro.url.origin;
+const currentUrl = `${siteUrl}${currentPath}`;
+// Ensure absolute URL for social media with optimized dimensions and quality
+const baseFeaturedImageUrl = singleLatestArticle 
+  ? urlForImage(singleLatestArticle.mainImage.asset.url).width(1200).height(630).fit('crop').quality(85).format('jpg').url() 
+  : '/images/MSU Seal New (Official).png';
+const featuredImageUrl = baseFeaturedImageUrl.startsWith('http') ? baseFeaturedImageUrl : `${siteUrl}${baseFeaturedImageUrl.startsWith('/') ? '' : '/'}${baseFeaturedImageUrl}`;
+
 ---
 
 
-<Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
+<Layout 
+    title={pageTitle}
+    description={pageDescription}
+    ogTitle={pageTitle}
+    ogDescription={pageDescription}
+    ogImage={featuredImageUrl}
+    ogUrl={currentUrl}
+    twitterTitle={pageTitle}
+    twitterDescription={pageDescription}
+    twitterImage={featuredImageUrl}
+>
     <main class="bg-white min-h-screen">
         <Navbar path={currentPath} client:visible />
 

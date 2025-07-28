@@ -7,10 +7,11 @@ import Footer from "../../components/Footer.astro";
 import GazetteTab from "../../components/GazetteTab";
 import '../../styles/css/global.css';
 import '../../styles/css/globalanimate.css';
+import '../../styles/css/pdf-viewer.css';
 
 const currentPath = Astro.url.pathname;
 
-import { urlForImage } from '../../api/api';
+import { urlForImage, urlForPDF } from '../../api/api';
 
 import { getYear } from '../../js/date';
 import { getWordMonth } from '../../js/date';
@@ -52,6 +53,172 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
     <main class="bg-white">
         <Navbar path={currentPath} client:visible />
+        
+        <!-- Stunning Full-Screen PDF Viewer Modal -->
+        <div id="pdfViewerModal" class="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-md hidden">
+            <div class="w-full h-full">
+                <div class="bg-white w-full h-full flex flex-col overflow-hidden">
+                    <!-- Stunning Header with MSU Gradient -->
+                    <div class="flex items-center justify-between p-6 bg-gradient-to-r from-msu-blue via-msu-dark-blue to-msu-blue text-white shadow-lg">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex items-center justify-center w-14 h-14 bg-white/20 rounded-xl backdrop-blur-sm">
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 id="modalPdfTitle" class="text-2xl font-bold text-white">MSU-TCTO Gazette Viewer</h3>
+                                <p class="text-white/90 text-sm font-medium">Professional PDF Document Viewer</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <!-- Enhanced Zoom Controls -->
+                            <div class="flex items-center space-x-2 bg-msu-deep-ocean/20 rounded-xl px-4 py-2 backdrop-blur-sm border border-msu-deep-ocean/30">
+                                <button id="zoomOut" class="flex items-center justify-center w-10 h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40" title="Zoom Out">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
+                                    </svg>
+                                </button>
+                                <span id="zoomLevel" class="text-white text-sm font-bold min-w-[4rem] text-center px-3 py-1 bg-msu-deep-ocean/20 rounded-lg border border-msu-deep-ocean/30">100%</span>
+                                <button id="zoomIn" class="flex items-center justify-center w-10 h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40" title="Zoom In">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                    </svg>
+                                </button>
+                                <button id="zoomFit" class="flex items-center justify-center w-10 h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40" title="Fit to Screen">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                    
+                            <!-- Professional Page Navigation -->
+                            <div class="flex items-center space-x-2 bg-msu-deep-ocean/20 rounded-xl px-4 py-2 backdrop-blur-sm border border-msu-deep-ocean/30">
+                                <button id="pdfPrevPage" class="flex items-center justify-center w-10 h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                    </svg>
+                                </button>
+                                <span id="pageInfo" class="text-white text-sm font-bold min-w-[5rem] text-center px-3 py-1 bg-msu-deep-ocean/20 rounded-lg border border-msu-deep-ocean/30">1 / 1</span>
+                                <button id="pdfNextPage" class="flex items-center justify-center w-10 h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <!-- Stunning Action Buttons -->
+                            <div class="flex items-center space-x-3">
+                                <button onclick="openPdfInNewTab()" class="flex items-center justify-center space-x-2 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-msu-deep-ocean/40">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                    </svg>
+                                    <span class="text-sm font-medium">Open</span>
+                                </button>
+                                <button onclick="downloadPdf()" class="flex items-center justify-center space-x-2 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-msu-deep-ocean/40">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                    </svg>
+                                    <span class="text-sm font-medium">Download</span>
+                                </button>
+                                <button onclick="closePdfViewer()" class="flex items-center justify-center w-12 h-12 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-xl transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-msu-deep-ocean/40">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                            
+                    <!-- Stunning PDF Viewer Content -->
+                    <div class="flex-1 bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden">
+                        <!-- Professional Loading State -->
+                        <div id="pdfLoading" class="absolute inset-0 flex items-center justify-center bg-white/98 backdrop-blur-sm z-20">
+                            <div class="text-center max-w-sm mx-auto p-8">
+                                <div class="relative mb-8">
+                                    <!-- Main loading ring -->
+                                    <div class="animate-spin rounded-full h-24 w-24 border-4 border-blue-100 border-t-blue-600 mx-auto"></div>
+                                    <!-- Secondary ring -->
+                                    <div class="absolute inset-2 rounded-full h-20 w-20 border-4 border-transparent border-t-blue-400 animate-spin mx-auto" style="animation-duration: 1.5s; animation-direction: reverse;"></div>
+                                    <!-- Inner pulse -->
+                                    <div class="absolute inset-6 rounded-full h-12 w-12 bg-blue-600/20 animate-pulse mx-auto"></div>
+                                    <!-- Center dot -->
+                                    <div class="absolute inset-10 rounded-full h-4 w-4 bg-blue-600 mx-auto animate-ping"></div>
+                                </div>
+                                
+                                <!-- Loading text with animation -->
+                                <div class="space-y-3">
+                                    <h3 class="text-xl font-bold text-gray-800 animate-pulse">Loading PDF...</h3>
+                                    <p class="text-gray-600 text-sm leading-relaxed">Please wait while we prepare your document for viewing</p>
+                                    
+                                    <!-- Progress dots -->
+                                    <div class="flex justify-center space-x-2 mt-4">
+                                        <div class="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style="animation-delay: 0ms;"></div>
+                                        <div class="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style="animation-delay: 150ms;"></div>
+                                        <div class="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style="animation-delay: 300ms;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Stunning PDF Container with Book Flip Animation -->
+                        <div id="pdfContainer" class="w-full h-full overflow-auto bg-gradient-to-br from-gray-50 to-gray-100">
+                            <div id="pdfViewer" class="w-full h-full flex items-center justify-center p-4 relative">
+                                <!-- PDF Canvas Container with Flip Animation -->
+                                <div id="pdfCanvasContainer" class="relative perspective-1000 w-full h-full flex items-center justify-center">
+                                    <div id="pageFlipContainer" class="relative transform-style-preserve-3d transition-transform duration-700 ease-in-out">
+                                        <!-- Current Page -->
+                                        <div id="currentPageContainer" class="flex items-center justify-center w-full h-full backface-hidden">
+                                            <!-- PDF canvas will be inserted here -->
+                                        </div>
+                                        
+                                        <!-- Next Page (for flip animation) -->
+                                        <div id="nextPageContainer" class="flex items-center justify-center w-full h-full backface-hidden transform rotateY-180 opacity-0 absolute inset-0">
+                                            <!-- Next page canvas will be inserted here during animation -->
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Page Turn Shadow Effect -->
+                                <div id="pageTurnShadow" class="absolute inset-0 pointer-events-none opacity-0 transition-opacity duration-700">
+                                    <div class="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black/20 to-transparent"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Professional Error State -->
+                        <div id="pdfError" class="absolute inset-0 flex items-center justify-center bg-white/95 backdrop-blur-sm z-20 hidden">
+                            <div class="text-center max-w-lg mx-auto p-8">
+                                <div class="w-32 h-32 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-8">
+                                    <svg class="w-16 h-16 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-3xl font-bold text-gray-800 mb-4">Unable to Load PDF</h3>
+                                <p class="text-gray-600 mb-8 leading-relaxed text-lg">
+                                    The PDF file could not be loaded. This might be due to browser security restrictions or the file being unavailable.
+                                </p>
+                                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">
+                                    <button onclick="openPdfInNewTab()" class="flex items-center justify-center space-x-3 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                        </svg>
+                                        <span>Open in New Tab</span>
+                                    </button>
+                                    <button onclick="downloadPdf()" class="flex items-center justify-center space-x-3 bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                        </svg>
+                                        <span>Download PDF</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Hero Section -->
         <div class="relative pt-24 pb-12 bg-white">
@@ -118,14 +285,37 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                                 {latestGazette.body[0].children[0].text}
                             </p>
                             <div class="flex flex-wrap gap-4">
+                                <button
+                                    id="viewLatestPDF"
+                                    data-pdf-url={urlForPDF(latestGazette.file)}
+                                    data-title={latestGazette.title}
+                                    class="inline-flex items-center justify-center bg-msu-main-color hover:bg-msu-deep-ocean text-white font-bold py-3 px-6 rounded-lg shadow-md transform transition-all duration-300 hover:scale-[1.02]"
+                                >
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                    </svg>
+                                    View PDF
+                                </button>
+                                <a
+                                    href={latestGazette.file.asset.url} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center justify-center bg-msu-blue hover:bg-msu-deep-ocean text-white font-bold py-3 px-6 rounded-lg shadow-md transform transition-all duration-300 hover:scale-[1.02]"
+                                >
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                    </svg>
+                                    Open in New Tab
+                                </a>
                                 <a
                                     href={latestGazette.file.asset.url} 
                                     target="_blank" 
                                     rel="noopener noreferrer"
                                     download
-                                    class="inline-flex items-center justify-center bg-msu-main-color hover:bg-msu-deep-ocean text-white font-bold py-3 px-6 rounded-lg shadow-md transform transition-all duration-300 hover:scale-[1.02]"
+                                    class="inline-flex items-center justify-center bg-white border border-msu-blue text-msu-blue hover:bg-msu-blue/5 font-medium py-3 px-6 rounded-lg shadow-sm transform transition-all duration-300 hover:scale-[1.02]"
                                 >
-                                    <svg class="w-5 h-5 gap-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                                     </svg>
                                     Download PDF
@@ -220,14 +410,13 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                                     alt={gazette.title}
                                 />
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                                    <a 
-                                        href={gazette.file.asset.url} 
-                                        target="_blank" 
-                                        rel="noopener noreferrer"
-                                        class="inline-flex items-center justify-center bg-msu-main-color hover:bg-msu-deep-ocean text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300"
+                                    <button 
+                                        class="view-pdf-btn inline-flex items-center justify-center bg-msu-main-color hover:bg-msu-deep-ocean text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300"
+                                        data-pdf-url={urlForPDF(gazette.file)}
+                                        data-title={gazette.title}
                                     >
-                                        Download
-                                    </a>
+                                        View PDF
+                                    </button>
                                 </div>
                             </div>
                             <div class="p-6">
@@ -257,7 +446,7 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                 <!-- Pagination -->
                 <div class="flex justify-center">
                     <div id="pagination" class="flex items-center space-x-2">
-                        <button id="prevPage" class="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-full hover:bg-msu-blue/10 hover:border-msu-blue/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        <button id="prevPage" class="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed" style="border-color: #61063B;" onmouseenter="this.style.backgroundColor='#03045e'; this.style.color='#ffffff';" onmouseleave="this.style.backgroundColor='#ffffff'; this.style.color='#6b7280';" disabled>
                             <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                             </svg>
@@ -267,7 +456,7 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                             <!-- Page numbers will be dynamically inserted here -->
                         </div>
 
-                        <button id="nextPage" class="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-full hover:bg-msu-blue/10 hover:border-msu-blue/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+                        <button id="nextPage" class="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed" style="border-color: #61063B;" onmouseenter="this.style.backgroundColor='#03045e'; this.style.color='#ffffff';" onmouseleave="this.style.backgroundColor='#ffffff'; this.style.color='#6b7280';">
                             <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                             </svg>
@@ -294,15 +483,589 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
 <script src="../../js/smoothscroll.js" ></script>
 
 
-        <!-- Search and Pagination Functionality -->
-        <script client:load>
+        <!-- Professional PDF Viewer Script -->
+        <script>
+            // TypeScript declarations for PDF.js
+            declare const pdfjsLib: any;
+            
+            // Global variables for PDF viewer
+            let currentPdfUrl = '';
+            let currentPdfTitle = '';
+            let pdfDoc: any = null;
+            let pageNum = 1;
+            let pageRendering = false;
+            let pageNumPending: number | null = null;
+            let scale = 1.0;
+            let canvas: HTMLCanvasElement | null = null;
+            let ctx: CanvasRenderingContext2D | null = null;
+            let nextCanvas: HTMLCanvasElement | null = null;
+            let nextCtx: CanvasRenderingContext2D | null = null;
+            let isAnimating = false;
+            let baseScale = 1.0; // Base scale for fit-to-screen
+
+            // Professional PDF Viewer functions
+            async function openPdfViewer(pdfUrl, title) {
+                console.log('Opening professional PDF viewer:', { pdfUrl, title });
+                
+                // Check if PDF URL is valid
+                if (!pdfUrl || pdfUrl === '' || pdfUrl === '#') {
+                    console.error('Invalid PDF URL:', pdfUrl);
+                    alert('PDF file not available for this publication.');
+                    return;
+                }
+                
+                // Store current PDF info
+                currentPdfUrl = pdfUrl;
+                currentPdfTitle = title;
+                
+                // Open the modal
+                const modal = document.getElementById('pdfViewerModal');
+                const titleElement = document.getElementById('modalPdfTitle');
+                const loadingElement = document.getElementById('pdfLoading');
+                const errorElement = document.getElementById('pdfError');
+                
+                if (modal && titleElement) {
+                    // Set title
+                    const displayTitle = title && title.length > 40 ? title.substring(0, 40) + '...' : title;
+                    titleElement.textContent = displayTitle || 'MSU-TCTO Gazette Viewer';
+                    
+                    // Show loading state
+                    if (loadingElement) loadingElement.classList.remove('hidden');
+                    if (errorElement) errorElement.classList.add('hidden');
+                    
+                    // Open modal
+                    modal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Initialize PDF viewer
+                    await initializePdfViewer();
+                }
+            }
+
+            async function initializePdfViewer() {
+                try {
+                    // Load PDF.js library dynamically
+                    if (typeof pdfjsLib === 'undefined') {
+                        await loadPdfJs();
+                    }
+                    
+                    // Set up canvas containers
+                    const currentPageContainer = document.getElementById('currentPageContainer');
+                    const nextPageContainer = document.getElementById('nextPageContainer');
+                    if (!currentPageContainer || !nextPageContainer) return;
+                    
+                    // Clear previous content
+                    currentPageContainer.innerHTML = '';
+                    nextPageContainer.innerHTML = '';
+                    
+                    // Create main canvas
+                    canvas = document.createElement('canvas');
+                    canvas.id = 'pdfCanvas';
+                    canvas.className = 'shadow-lg border border-gray-200 rounded-lg';
+                    canvas.style.maxWidth = '100%';
+                    canvas.style.maxHeight = '100%';
+                    canvas.style.width = 'auto';
+                    canvas.style.height = 'auto';
+                    ctx = canvas.getContext('2d');
+                    
+                    // Create next page canvas for animations
+                    nextCanvas = document.createElement('canvas');
+                    nextCanvas.id = 'nextPdfCanvas';
+                    nextCanvas.className = 'shadow-lg border border-gray-200 rounded-lg';
+                    nextCanvas.style.maxWidth = '100%';
+                    nextCanvas.style.maxHeight = '100%';
+                    nextCanvas.style.width = 'auto';
+                    nextCanvas.style.height = 'auto';
+                    nextCtx = nextCanvas.getContext('2d');
+                    
+                    currentPageContainer.appendChild(canvas);
+                    nextPageContainer.appendChild(nextCanvas);
+                    
+                    // Load the PDF
+                    const loadingTask = pdfjsLib.getDocument(currentPdfUrl);
+                    pdfDoc = await loadingTask.promise;
+                    
+                    // Update page info
+                    updatePageInfo();
+                    
+                    // Render first page
+                    await renderPage(pageNum);
+                    
+                    // Hide loading
+                    const loadingElement = document.getElementById('pdfLoading');
+                    if (loadingElement) loadingElement.classList.add('hidden');
+                    
+                } catch (error) {
+                    console.error('Error loading PDF:', error);
+                    showPdfError();
+                }
+            }
+
+            async function loadPdfJs(): Promise<void> {
+                return new Promise<void>((resolve, reject) => {
+                    // Load PDF.js from CDN
+                    const script = document.createElement('script');
+                    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+                    script.onload = () => {
+                        // Set worker path
+                        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+                        resolve();
+                    };
+                    script.onerror = reject;
+                    document.head.appendChild(script);
+                });
+            }
+
+            function updatePageInfo() {
+                const pageInfoElement = document.getElementById('pageInfo');
+                if (pageInfoElement && pdfDoc) {
+                    pageInfoElement.textContent = `${pageNum} / ${pdfDoc.numPages}`;
+                }
+                
+                updateNavigationButtons();
+            }
+
+            function updateNavigationButtons() {
+                // Update navigation buttons in PDF viewer modal
+                const prevButton = document.querySelector('#pdfViewerModal #pdfPrevPage') as HTMLButtonElement;
+                const nextButton = document.querySelector('#pdfViewerModal #pdfNextPage') as HTMLButtonElement;
+                
+                if (prevButton) {
+                    prevButton.disabled = pageNum <= 1 || isAnimating;
+                    if (prevButton.disabled) {
+                        prevButton.classList.add('opacity-50', 'cursor-not-allowed');
+                    } else {
+                        prevButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                    }
+                }
+                
+                if (nextButton) {
+                    nextButton.disabled = pageNum >= pdfDoc?.numPages || isAnimating;
+                    if (nextButton.disabled) {
+                        nextButton.classList.add('opacity-50', 'cursor-not-allowed');
+                    } else {
+                        nextButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                    }
+                }
+            }
+
+            async function renderPage(num) {
+                pageRendering = true;
+                
+                try {
+                    const page = await pdfDoc.getPage(num);
+                    
+                    // Calculate optimal scale to fit the container
+                    const container = document.getElementById('pageFlipContainer');
+                    if (container) {
+                        const containerRect = container.getBoundingClientRect();
+                        const pageViewport = page.getViewport({ scale: 1.0 });
+                        
+                        // Calculate scale to fit both width and height with padding
+                        const scaleX = (containerRect.width - 40) / pageViewport.width;
+                        const scaleY = (containerRect.height - 40) / pageViewport.height;
+                        const fitScale = Math.min(scaleX, scaleY, 3.0); // Max scale of 3.0
+                        
+                        // Set base scale for fit-to-screen if not set
+                        if (baseScale === 1.0) {
+                            baseScale = fitScale;
+                        }
+                        
+                        const optimalScale = fitScale * scale;
+                        
+                        const viewport = page.getViewport({ scale: optimalScale });
+                        
+                        // Set canvas dimensions
+                        canvas.height = viewport.height;
+                        canvas.width = viewport.width;
+                        
+                        // Render PDF page into canvas context
+                        const renderContext = {
+                            canvasContext: ctx,
+                            viewport: viewport
+                        };
+                        
+                        await page.render(renderContext).promise;
+                    }
+                    
+                    pageRendering = false;
+                    
+                    if (pageNumPending !== null) {
+                        renderPage(pageNumPending);
+                        pageNumPending = null;
+                    }
+                    
+                } catch (error) {
+                    console.error('Error rendering page:', error);
+                    pageRendering = false;
+                }
+            }
+
+            async function onPrevPage() {
+                console.log('onPrevPage called:', { pageNum, isAnimating, totalPages: pdfDoc?.numPages });
+                if (pageNum <= 1 || isAnimating) {
+                    console.log('onPrevPage blocked:', { reason: pageNum <= 1 ? 'first page' : 'animating' });
+                    return;
+                }
+                try {
+                    await animatePageFlip('prev');
+                } catch (error) {
+                    console.error('Error in onPrevPage:', error);
+                    isAnimating = false;
+                    updateNavigationButtons();
+                }
+            }
+
+            async function onNextPage() {
+                console.log('onNextPage called:', { pageNum, isAnimating, totalPages: pdfDoc?.numPages });
+                if (pageNum >= pdfDoc?.numPages || isAnimating) {
+                    console.log('onNextPage blocked:', { reason: pageNum >= pdfDoc?.numPages ? 'last page' : 'animating' });
+                    return;
+                }
+                try {
+                    await animatePageFlip('next');
+                } catch (error) {
+                    console.error('Error in onNextPage:', error);
+                    isAnimating = false;
+                    updateNavigationButtons();
+                }
+            }
+
+            async function animatePageFlip(direction) {
+                console.log('animatePageFlip called:', { direction, isAnimating, pageNum });
+                if (isAnimating) {
+                    console.log('Animation already in progress, returning');
+                    return;
+                }
+                
+                isAnimating = true;
+                updateNavigationButtons(); // Disable buttons immediately
+
+                const pageFlipContainer = document.getElementById('pageFlipContainer');
+                const nextPageContainer = document.getElementById('nextPageContainer');
+                const pageTurnShadow = document.getElementById('pageTurnShadow');
+                
+                if (!pageFlipContainer || !nextPageContainer || !pageTurnShadow) {
+                    isAnimating = false;
+                    return;
+                }
+
+                // Calculate target page number
+                const targetPage = direction === 'next' ? pageNum + 1 : pageNum - 1;
+                
+                // Play subtle page turn sound effect (optional)
+                playPageTurnSound();
+                
+                // Pre-render the target page on the next canvas
+                await renderPageOnCanvas(targetPage, nextCanvas, nextCtx);
+                
+                // Add page curl effect
+                addPageCurlEffect(direction);
+                
+                // Show shadow effect with animation
+                pageTurnShadow.classList.remove('opacity-0');
+                pageTurnShadow.classList.add('opacity-100');
+                
+                // Show next page container with stagger effect
+                nextPageContainer.classList.remove('opacity-0');
+                nextPageContainer.classList.add('opacity-100');
+                
+                // Apply sophisticated flip animation
+                if (direction === 'next') {
+                    pageFlipContainer.style.transform = 'rotateY(-180deg) scale(0.95)';
+                } else {
+                    pageFlipContainer.style.transform = 'rotateY(180deg) scale(0.95)';
+                }
+                
+                // Wait for animation to complete
+                await new Promise(resolve => setTimeout(resolve, 700));
+                
+                // Update page number
+                pageNum = targetPage;
+                
+                // Swap canvases - move next page to current
+                const currentPageContainer = document.getElementById('currentPageContainer');
+                if (currentPageContainer && nextCanvas) {
+                    // Copy next canvas content to main canvas
+                    canvas.width = nextCanvas.width;
+                    canvas.height = nextCanvas.height;
+                    ctx?.drawImage(nextCanvas, 0, 0);
+                }
+                
+                // Reset animation state first
+                isAnimating = false;
+                console.log('Animation completed, isAnimating set to false');
+                
+                // Update page info and navigation buttons
+                updatePageInfo();
+                
+                // Reset visual states
+                pageFlipContainer.style.transform = 'rotateY(0deg)';
+                nextPageContainer.classList.remove('opacity-100');
+                nextPageContainer.classList.add('opacity-0');
+                pageTurnShadow.classList.remove('opacity-100');
+                pageTurnShadow.classList.add('opacity-0');
+                
+                // Safety timeout to ensure buttons are re-enabled
+                setTimeout(() => {
+                    if (isAnimating) {
+                        console.warn('Animation state stuck, forcing reset');
+                        isAnimating = false;
+                        updateNavigationButtons();
+                    }
+                }, 1000);
+            }
+
+            async function renderPageOnCanvas(pageNumber, targetCanvas, targetCtx) {
+                if (!pdfDoc || !targetCanvas || !targetCtx) return;
+                
+                try {
+                    const page = await pdfDoc.getPage(pageNumber);
+                    
+                    // Calculate optimal scale to fit the container
+                    const container = document.getElementById('pageFlipContainer');
+                    if (container) {
+                        const containerRect = container.getBoundingClientRect();
+                        const pageViewport = page.getViewport({ scale: 1.0 });
+                        
+                        // Calculate scale to fit both width and height with padding
+                        const scaleX = (containerRect.width - 40) / pageViewport.width;
+                        const scaleY = (containerRect.height - 40) / pageViewport.height;
+                        const fitScale = Math.min(scaleX, scaleY, 3.0); // Max scale of 3.0
+                        
+                        const optimalScale = fitScale * scale;
+                        
+                        const viewport = page.getViewport({ scale: optimalScale });
+                        
+                        // Set canvas dimensions
+                        targetCanvas.height = viewport.height;
+                        targetCanvas.width = viewport.width;
+                        
+                        // Render PDF page into canvas context
+                        const renderContext = {
+                            canvasContext: targetCtx,
+                            viewport: viewport
+                        };
+                        
+                        await page.render(renderContext).promise;
+                    }
+                } catch (error) {
+                    console.error('Error rendering page:', error);
+                }
+            }
+
+            function queueRenderPage(num) {
+                if (pageRendering) {
+                    pageNumPending = num;
+                } else {
+                    renderPage(num);
+                }
+            }
+
+            function playPageTurnSound() {
+                // Create a subtle audio context for page turn sound
+                try {
+                    const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+                    oscillator.frequency.exponentialRampToValueAtTime(100, audioContext.currentTime + 0.1);
+                    
+                    gainNode.gain.setValueAtTime(0.02, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.1);
+                    
+                    oscillator.type = 'sine';
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.1);
+                } catch (error) {
+                    // Silently fail if audio context is not supported
+                }
+            }
+
+            function addPageCurlEffect(direction) {
+                const pdfContainer = document.getElementById('pdfContainer');
+                if (!pdfContainer) return;
+                
+                // Add temporary curl effect class
+                pdfContainer.classList.add('page-curling');
+                
+                // Remove curl effect after animation
+                setTimeout(() => {
+                    pdfContainer.classList.remove('page-curling');
+                }, 700);
+            }
+
+            function zoomFit() {
+                if (!pdfDoc) return;
+                
+                // Reset to fit-to-screen scale
+                scale = baseScale;
+                renderPage(pageNum);
+                updateZoomLevel();
+                updateNavigationButtons();
+            }
+
+            async function zoomIn() {
+                if (isAnimating) return;
+                scale *= 1.25; // Increased zoom increment for better visibility
+                await renderPage(pageNum);
+                updateZoomLevel();
+                updateNavigationButtons(); // Ensure buttons stay enabled
+            }
+
+            async function zoomOut() {
+                if (isAnimating) return;
+                scale /= 1.25; // Consistent zoom decrement
+                if (scale < 0.5) scale = 0.5; // Minimum zoom limit
+                await renderPage(pageNum);
+                updateZoomLevel();
+                updateNavigationButtons(); // Ensure buttons stay enabled
+            }
+
+            function updateZoomLevel() {
+                const zoomElement = document.getElementById('zoomLevel');
+                if (zoomElement) {
+                    zoomElement.textContent = `${Math.round(scale * 100)}%`;
+                }
+            }
+
+            function showPdfError() {
+                const loadingElement = document.getElementById('pdfLoading');
+                const errorElement = document.getElementById('pdfError');
+                
+                if (loadingElement) loadingElement.classList.add('hidden');
+                if (errorElement) errorElement.classList.remove('hidden');
+            }
+
+            function closePdfViewer() {
+                const modal = document.getElementById('pdfViewerModal');
+                
+                if (modal) {
+                    modal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                    
+                    // Reset state
+                    pdfDoc = null;
+                    pageNum = 1;
+                    pageRendering = false;
+                    pageNumPending = null;
+                    scale = 1.0;
+                    baseScale = 1.0;
+                    isAnimating = false; // Ensure animation state is reset
+                }
+            }
+
+            function openPdfInNewTab() {
+                if (currentPdfUrl) {
+                    window.open(currentPdfUrl, '_blank');
+                }
+            }
+
+            function downloadPdf() {
+                if (currentPdfUrl) {
+                    const link = document.createElement('a');
+                    link.href = currentPdfUrl;
+                    link.download = currentPdfTitle || 'document.pdf';
+                    link.click();
+                }
+            }
+
+            // Make functions global
+            (window as any).openPdfViewer = openPdfViewer;
+            (window as any).closePdfViewer = closePdfViewer;
+            (window as any).openPdfInNewTab = openPdfInNewTab;
+            (window as any).downloadPdf = downloadPdf;
+            (window as any).onPrevPage = onPrevPage;
+            (window as any).onNextPage = onNextPage;
+            (window as any).zoomIn = zoomIn;
+            (window as any).zoomOut = zoomOut;
+            (window as any).zoomFit = zoomFit;
+            
             document.addEventListener('DOMContentLoaded', () => {
+                // PDF Viewer functionality
+                const viewLatestPDFBtn = document.getElementById('viewLatestPDF');
+                const viewPdfBtns = document.querySelectorAll('.view-pdf-btn');
+
+                // Add event listeners for PDF viewer buttons
+                if (viewLatestPDFBtn) {
+                    viewLatestPDFBtn.addEventListener('click', () => {
+                        const pdfUrl = viewLatestPDFBtn.getAttribute('data-pdf-url');
+                        const title = viewLatestPDFBtn.getAttribute('data-title');
+                        openPdfViewer(pdfUrl, title);
+                    });
+                }
+
+                viewPdfBtns.forEach((btn) => {
+                    btn.addEventListener('click', () => {
+                        const pdfUrl = btn.getAttribute('data-pdf-url');
+                        const title = btn.getAttribute('data-title');
+                        openPdfViewer(pdfUrl, title);
+                    });
+                });
+
+                // PDF Viewer Controls - Use specific selectors for modal buttons
+                const zoomInBtn = document.querySelector('#pdfViewerModal #zoomIn');
+                const zoomOutBtn = document.querySelector('#pdfViewerModal #zoomOut');
+                const zoomFitBtn = document.querySelector('#pdfViewerModal #zoomFit');
+                const prevPageBtn = document.querySelector('#pdfViewerModal #pdfPrevPage');
+                const nextPageBtn = document.querySelector('#pdfViewerModal #pdfNextPage');
+
+                if (zoomInBtn) {
+                    zoomInBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        zoomIn();
+                    });
+                }
+
+                if (zoomOutBtn) {
+                    zoomOutBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        zoomOut();
+                    });
+                }
+
+                if (zoomFitBtn) {
+                    zoomFitBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        zoomFit();
+                    });
+                }
+
+                if (prevPageBtn) {
+                    prevPageBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        onPrevPage();
+                    });
+                }
+
+                if (nextPageBtn) {
+                    nextPageBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        onNextPage();
+                    });
+                }
+            });
+        </script>
+
+        <!-- Search and Pagination Functionality -->
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                // Pagination functionality
                 const itemsPerPage = 6;
                 const gazetteGrid = document.getElementById('gazetteGrid');
                 const allGazetteItems = Array.from(gazetteGrid.querySelectorAll('.gazette-item'));
-                const yearFilter = document.getElementById('yearFilter');
-                const quarterFilter = document.getElementById('quarterFilter');
-                const searchFilter = document.getElementById('searchFilter');
+                const yearFilter = document.getElementById('yearFilter') as HTMLSelectElement;
+                const quarterFilter = document.getElementById('quarterFilter') as HTMLSelectElement;
+                const searchFilter = document.getElementById('searchFilter') as HTMLInputElement;
                 const prevPageButton = document.getElementById('prevPage');
                 const nextPageButton = document.getElementById('nextPage');
                 const pageNumbersContainer = document.getElementById('pageNumbers');
@@ -382,8 +1145,26 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                 function createPageButton(pageNumber) {
                     const pageButton = document.createElement('button');
                     pageButton.className = `w-10 h-10 flex items-center justify-center rounded-full transition-all ${
-                        currentPage === pageNumber ? 'bg-msu-blue text-white font-medium' : 'bg-white text-gray-600 hover:bg-gray-100'
+                        currentPage === pageNumber ? 'text-white font-medium' : 'bg-white text-gray-600'
                     }`;
+                    pageButton.style.backgroundColor = currentPage === pageNumber ? '#61063B' : '#ffffff';
+                    pageButton.style.color = currentPage === pageNumber ? '#ffffff' : '#6b7280';
+                    
+                    // Add hover effect
+                    pageButton.addEventListener('mouseenter', () => {
+                        if (currentPage !== pageNumber) {
+                            pageButton.style.backgroundColor = '#03045e';
+                            pageButton.style.color = '#ffffff';
+                        }
+                    });
+                    
+                    pageButton.addEventListener('mouseleave', () => {
+                        if (currentPage !== pageNumber) {
+                            pageButton.style.backgroundColor = '#ffffff';
+                            pageButton.style.color = '#6b7280';
+                        }
+                    });
+                    
                     pageButton.textContent = pageNumber;
                     pageButton.addEventListener('click', () => changePage(pageNumber));
                     return pageButton;
@@ -424,13 +1205,14 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
             });
         </script>
 
-        <style global>
+        <style>
             :root {
                 --msu-dark-blue: #003366;
                 --msu-blue: #61063B;
                 --msu-light-blue: #E6F2FF;
                 --msu-gold: #FFCC00;
                 --msu-dark-gold: #E6B800;
+                --msu-deep-ocean: #1e3a8a;
             }
             
             .bg-msu-dark-blue {
@@ -477,6 +1259,18 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                 color: var(--msu-dark-blue);
             }
             
+            .bg-msu-deep-ocean {
+                background-color: var(--msu-deep-ocean);
+            }
+            
+            .text-msu-deep-ocean {
+                color: var(--msu-deep-ocean);
+            }
+            
+            .border-msu-deep-ocean {
+                border-color: var(--msu-deep-ocean);
+            }
+            
             .line-clamp-2 {
                 display: -webkit-box;
                 -webkit-line-clamp: 2;
@@ -497,6 +1291,491 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
             
             .shadow-md {
                 box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            }
+            
+            .shadow-lg {
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            }
+            
+            /* Stunning PDF Viewer Styles */
+            #pdfViewerModal {
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                backdrop-filter: blur(12px);
+            }
+            
+            #pdfViewerModal.hidden {
+                opacity: 0;
+                pointer-events: none;
+                transform: scale(0.9) translateY(20px);
+            }
+            
+            #pdfViewerModal:not(.hidden) {
+                opacity: 1;
+                pointer-events: auto;
+                transform: scale(1) translateY(0);
+            }
+            
+            /* Stunning modal container */
+            #pdfViewerModal .bg-white {
+                box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.4);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(20px);
+            }
+            
+            /* Stunning buttons with glassmorphism */
+            #pdfViewerModal button {
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.15);
+                backdrop-filter: blur(10px);
+            }
+            
+            #pdfViewerModal button:hover {
+                transform: translateY(-2px) scale(1.05);
+                box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.2);
+            }
+            
+            /* Stunning animations */
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px) scale(0.95);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+            }
+            
+            @keyframes slideInFromTop {
+                from {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            #pdfViewerModal:not(.hidden) .bg-white {
+                animation: fadeInUp 0.5s ease-out;
+            }
+            
+            #pdfViewerModal:not(.hidden) .bg-gradient-to-r {
+                animation: slideInFromTop 0.6s ease-out 0.1s both;
+            }
+            
+            /* Stunning PDF Canvas Styles */
+            #pdfCanvas {
+                max-width: 100%;
+                height: auto;
+                box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+                border-radius: 12px;
+                background: white;
+                border: 1px solid rgba(0, 0, 0, 0.05);
+            }
+            
+            /* Stunning PDF Container Scrollbar */
+            #pdfContainer::-webkit-scrollbar {
+                width: 12px;
+                height: 12px;
+            }
+            
+            #pdfContainer::-webkit-scrollbar-track {
+                background: rgba(241, 241, 241, 0.8);
+                border-radius: 6px;
+                backdrop-filter: blur(10px);
+            }
+            
+            #pdfContainer::-webkit-scrollbar-thumb {
+                background: linear-gradient(135deg, #c1c1c1, #a8a8a8);
+                border-radius: 6px;
+                border: 2px solid rgba(241, 241, 241, 0.8);
+            }
+            
+            #pdfContainer::-webkit-scrollbar-thumb:hover {
+                background: linear-gradient(135deg, #a8a8a8, #909090);
+            }
+            
+            /* Stunning Loading Animation */
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+            
+            @keyframes ping {
+                75%, 100% {
+                    transform: scale(1.2);
+                    opacity: 0;
+                }
+            }
+            
+            .animate-spin {
+                animation: spin 1s linear infinite;
+            }
+            
+            .animate-ping {
+                animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+            }
+            
+            /* Stunning MSU header gradient */
+            #pdfViewerModal .bg-gradient-to-r {
+                background: linear-gradient(135deg, #61063B 0%, #003366 50%, #61063B 100%);
+                box-shadow: 0 4px 20px -4px rgba(97, 6, 59, 0.3);
+            }
+            
+            /* Stunning button states */
+            #pdfViewerModal button:disabled {
+                opacity: 0.4;
+                cursor: not-allowed;
+                transform: none !important;
+                box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.1);
+            }
+            
+            #pdfViewerModal button:disabled:hover {
+                transform: none !important;
+                box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.1);
+            }
+            
+            /* Stunning glassmorphism effects */
+            #pdfViewerModal .bg-white\/15 {
+                background: rgba(255, 255, 255, 0.15);
+                backdrop-filter: blur(15px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+            
+            #pdfViewerModal .bg-white\/20 {
+                background: rgba(255, 255, 255, 0.2);
+                backdrop-filter: blur(15px);
+                border: 1px solid rgba(255, 255, 255, 0.25);
+            }
+            
+            #pdfViewerModal .bg-white\/20:hover {
+                background: rgba(255, 255, 255, 0.3);
+                transform: translateY(-2px) scale(1.05);
+                box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.2);
+            }
+            
+            /* Stunning responsive design */
+            @media (max-width: 640px) {
+                #pdfViewerModal .bg-white {
+                    border-radius: 0;
+                    margin: 0;
+                }
+                
+                #pdfViewerModal .p-4 {
+                    padding: 0;
+                }
+                
+                #pdfViewerModal .flex.items-center.space-x-4 {
+                    flex-direction: column;
+                    gap: 0.75rem;
+                }
+            }
+            
+            /* Stunning touch-friendly button sizes */
+            @media (max-width: 768px) {
+                #pdfViewerModal button {
+                    min-height: 48px;
+                    min-width: 48px;
+                }
+            }
+            
+            /* Stunning smooth transitions for all interactive elements */
+            #pdfViewerModal * {
+                transition-property: all;
+                transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+                transition-duration: 300ms;
+            }
+            
+            /* Stunning backdrop blur effects */
+            #pdfViewerModal .backdrop-blur-sm {
+                backdrop-filter: blur(8px);
+            }
+            
+            #pdfViewerModal .backdrop-blur-md {
+                backdrop-filter: blur(12px);
+            }
+            
+            /* Stunning hover scale effects */
+            #pdfViewerModal .hover\:scale-105:hover {
+                transform: scale(1.05);
+            }
+            
+            /* Stunning shadow effects */
+            #pdfViewerModal .shadow-lg {
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            }
+            
+            /* Stunning gradient backgrounds */
+            #pdfViewerModal .bg-gradient-to-br {
+                background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+            }
+            
+            /* Stunning Book Flip Animation Styles */
+            .perspective-1000 {
+                perspective: 1000px;
+            }
+            
+            .transform-style-preserve-3d {
+                transform-style: preserve-3d;
+            }
+            
+            .backface-hidden {
+                backface-visibility: hidden;
+            }
+            
+            .rotateY-180 {
+                transform: rotateY(180deg);
+            }
+            
+            #pdfCanvasContainer {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            #pageFlipContainer {
+                transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                transform-origin: center;
+                width: 100%;
+                height: 100%;
+                max-width: calc(100vw - 2rem);
+                max-height: calc(100vh - 12rem);
+            }
+            
+            #currentPageContainer, #nextPageContainer {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+            }
+            
+            /* Professional page turn shadow effects */
+            #pageTurnShadow {
+                transition: opacity 0.7s ease-in-out;
+            }
+            
+            /* Enhanced canvas styling for flip effect */
+            #pdfCanvas, #nextPdfCanvas {
+                transition: all 0.3s ease-in-out;
+                border: 2px solid rgba(0, 0, 0, 0.1);
+                box-shadow: 
+                    0 20px 40px -10px rgba(0, 0, 0, 0.15),
+                    0 0 0 1px rgba(255, 255, 255, 0.5);
+                border-radius: 12px;
+                background: white;
+                max-width: 100%;
+                max-height: 100%;
+                width: auto;
+                height: auto;
+                object-fit: contain;
+            }
+            
+            /* Page flip hover effects */
+            #pdfPrevPage:hover, #pdfNextPage:hover {
+                background: rgba(255, 255, 255, 0.35);
+                transform: translateY(-2px) scale(1.1);
+                box-shadow: 0 15px 30px -8px rgba(0, 0, 0, 0.25);
+            }
+            
+            /* Disable buttons during animation */
+            #pdfViewerModal #pdfPrevPage:disabled, 
+            #pdfViewerModal #pdfNextPage:disabled {
+                opacity: 0.3 !important;
+                cursor: not-allowed !important;
+                pointer-events: none !important;
+                transform: none !important;
+            }
+            
+            #pdfViewerModal #pdfPrevPage:not(:disabled):hover, 
+            #pdfViewerModal #pdfNextPage:not(:disabled):hover {
+                background: rgba(255, 255, 255, 0.35);
+                transform: translateY(-2px) scale(1.1);
+                box-shadow: 0 15px 30px -8px rgba(0, 0, 0, 0.25);
+            }
+            
+            /* Professional flip animation keyframes */
+            @keyframes pageFlipIn {
+                0% {
+                    transform: rotateY(90deg);
+                    opacity: 0;
+                }
+                50% {
+                    opacity: 0.5;
+                }
+                100% {
+                    transform: rotateY(0deg);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes pageFlipOut {
+                0% {
+                    transform: rotateY(0deg);
+                    opacity: 1;
+                }
+                50% {
+                    opacity: 0.5;
+                }
+                100% {
+                    transform: rotateY(-90deg);
+                    opacity: 0;
+                }
+            }
+            
+            @keyframes shadowPulse {
+                0%, 100% {
+                    opacity: 0;
+                }
+                50% {
+                    opacity: 0.3;
+                }
+            }
+            
+            /* Page curling effect */
+            .page-curling {
+                animation: pageCurl 0.7s ease-in-out;
+            }
+            
+            @keyframes pageCurl {
+                0% {
+                    transform: perspective(600px) rotateX(0deg);
+                }
+                25% {
+                    transform: perspective(600px) rotateX(-2deg) scale(1.02);
+                }
+                50% {
+                    transform: perspective(600px) rotateX(-1deg) scale(1.01);
+                }
+                75% {
+                    transform: perspective(600px) rotateX(-0.5deg) scale(1.005);
+                }
+                100% {
+                    transform: perspective(600px) rotateX(0deg) scale(1);
+                }
+            }
+            
+            /* Enhanced page flip container effects */
+            #pageFlipContainer.flipping {
+                animation: sophisticatedFlip 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            }
+            
+            @keyframes sophisticatedFlip {
+                0% {
+                    transform: rotateY(0deg) scale(1);
+                    filter: brightness(1);
+                }
+                25% {
+                    transform: rotateY(-45deg) scale(0.98);
+                    filter: brightness(0.9);
+                }
+                50% {
+                    transform: rotateY(-90deg) scale(0.95);
+                    filter: brightness(0.8);
+                }
+                75% {
+                    transform: rotateY(-135deg) scale(0.98);
+                    filter: brightness(0.9);
+                }
+                100% {
+                    transform: rotateY(-180deg) scale(1);
+                    filter: brightness(1);
+                }
+            }
+            
+            /* Professional page turn effects */
+            #pageTurnShadow.active {
+                animation: shadowWave 0.7s ease-in-out;
+            }
+            
+            @keyframes shadowWave {
+                0%, 100% {
+                    opacity: 0;
+                }
+                25% {
+                    opacity: 0.1;
+                }
+                50% {
+                    opacity: 0.3;
+                }
+                75% {
+                    opacity: 0.2;
+                }
+            }
+            
+            /* Enhanced loading animation */
+            @keyframes loadingPulse {
+                0%, 100% {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+                50% {
+                    opacity: 0.6;
+                    transform: scale(1.05);
+                }
+            }
+            
+            #pdfLoading h3 {
+                animation: loadingPulse 2s ease-in-out infinite;
+            }
+            
+            /* Responsive adjustments for flip animation */
+            @media (max-width: 768px) {
+                #pageFlipContainer {
+                    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                    max-height: calc(100vh - 8rem);
+                    max-width: calc(100vw - 1rem);
+                }
+                
+                #pdfViewer {
+                    padding: 0.5rem;
+                }
+                
+                #pdfLoading .relative {
+                    margin-bottom: 1.5rem;
+                }
+                
+                #pdfLoading h3 {
+                    font-size: 1.125rem;
+                }
+                
+                @keyframes pageCurl {
+                    0% {
+                        transform: perspective(400px) rotateX(0deg);
+                    }
+                    50% {
+                        transform: perspective(400px) rotateX(-1deg) scale(1.01);
+                    }
+                    100% {
+                        transform: perspective(400px) rotateX(0deg) scale(1);
+                    }
+                }
+            }
+            
+            /* Enhanced Zoom Controls */
+            #zoomFit:hover {
+                background: rgba(30, 58, 138, 0.6) !important;
+                box-shadow: 0 0 15px rgba(30, 58, 138, 0.4);
+            }
+            
+            /* Full screen adjustments */
+            @media (min-width: 769px) {
+                #pageFlipContainer {
+                    max-height: calc(100vh - 10rem);
+                    max-width: calc(100vw - 3rem);
+                }
+            }
+            
+            /* Mobile zoom adjustments */
+            @media (max-width: 768px) {
+                #zoomLevel {
+                    min-width: 3rem;
+                    font-size: 0.75rem;
+                }
             }
         </style>
     </main>

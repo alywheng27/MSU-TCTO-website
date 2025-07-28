@@ -24,9 +24,45 @@ if (!article) return Astro.redirect("/404");
 const { title, author, publishedAt, articleSubject, college, topic, mainImage, body } = article;
 
 // Now we can safely use the title since it's been initialized
-const siteUrl = Astro.site ? new URL(Astro.site).origin : 'https://msutawi-tawi.edu.ph/';
+const siteUrl = Astro.site ? new URL(Astro.site).origin : 'https://msutcto.edu.ph';
 const currentUrl = new URL(currentPath, siteUrl).href;
 const shareTitle = `${title} | MSU TCTO`;
+
+// Social media meta data
+const articleDescription = body[0]?.children[0]?.text || `Read ${title} - Latest news and stories from MSU Tawi-Tawi College of Technology and Oceanography`;
+
+// Force the use of the article's main image for social media sharing
+let socialMediaImageUrl;
+if (mainImage?.asset?.url) {
+  // Create a high-quality social media optimized version
+  socialMediaImageUrl = urlForImage(mainImage.asset.url)
+    .width(1200)
+    .height(630)
+    .fit('crop')
+    .quality(95)
+    .format('jpg')
+    .url();
+  
+  // Ensure it's an absolute URL
+  if (!socialMediaImageUrl.startsWith('http')) {
+    socialMediaImageUrl = socialMediaImageUrl.startsWith('//') ? `https:${socialMediaImageUrl}` : `https://${socialMediaImageUrl}`;
+  }
+} else {
+  // Only use logo if absolutely no image is available
+  socialMediaImageUrl = `${siteUrl}/images/MSU Seal New (Official).png`;
+}
+
+// Final absolute URL with cache busting
+const cacheBustingImageUrl = socialMediaImageUrl + '?v=' + Date.now() + '&social=true';
+
+// Debug logging for development
+console.log('Social Media Image Debug:', {
+  hasMainImage: !!mainImage?.asset?.url,
+  mainImageUrl: mainImage?.asset?.url,
+  socialMediaImageUrl,
+  cacheBustingImageUrl,
+  articleTitle: title
+});
 
 const relatedArticles = await getRelatedArticles(article._id, articleSubject._id, 3);
 ---
@@ -34,9 +70,24 @@ const relatedArticles = await getRelatedArticles(article._id, articleSubject._id
 <Layout2 
   title={shareTitle}
   header={title} 
-  image={mainImage.asset.url} 
-  description={body[0]?.children[0]?.text || ''}
+  image={cacheBustingImageUrl} 
+  description={articleDescription}
+  ogTitle={shareTitle}
+  ogDescription={articleDescription}
+  ogImage={cacheBustingImageUrl}
+  ogUrl={currentUrl}
+  twitterTitle={shareTitle}
+  twitterDescription={articleDescription}
+  twitterImage={cacheBustingImageUrl}
 >
+  <!-- 
+  SOCIAL MEDIA DEBUG INFO:
+  - Has Main Image: {!!mainImage?.asset?.url}
+  - Raw Image URL: {mainImage?.asset?.url || 'NONE'}
+  - Social Media URL: {socialMediaImageUrl}
+  - Final URL with Cache Busting: {cacheBustingImageUrl}
+  - Article Title: {title}
+  -->
   
   <!-- Premium Navigation with Glass Morphism Effect -->
   <Navbar path={currentPath} client:visible />
