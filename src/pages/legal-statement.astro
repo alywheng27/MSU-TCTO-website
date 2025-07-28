@@ -1,0 +1,534 @@
+---
+// src/pages/legal-statement.astro
+import Layout from '../layouts/Layout.astro';
+import Navbar from "../components/Navbar";
+import FooterNav from "../components/FooterNav.astro";
+import Footer from "../components/Footer.astro";
+
+import '../styles/css/global.css';
+
+const currentPath = Astro.url.pathname;
+const pageTitle = "Legal Statement | MSU-TCTO";
+---
+
+<Layout title={pageTitle}>
+    <main class="min-h-screen flex flex-col">
+        <Navbar path={currentPath} client:visible />
+
+        <!-- Hero Section -->
+        <section class="relative bg-gradient-to-br from-msu-deep-ocean via-msu-main-color to-msu-deep-ocean py-20 md:py-32 overflow-hidden">
+            <!-- Enhanced Background Pattern -->
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-0 left-0 w-72 h-72 bg-msu-gold rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
+                <div class="absolute top-0 right-0 w-72 h-72 bg-msu-main-color rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000"></div>
+                <div class="absolute -bottom-8 left-20 w-72 h-72 bg-msu-gold rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000"></div>
+            </div>
+            
+            <div class="relative z-10 container mx-auto px-4 xl:px-[12.5%] xs:px-[5%] text-center">
+                <div class="max-w-4xl mx-auto">
+                    <!-- Enhanced Icon with Animation -->
+                    <div class="mb-8 flex justify-center">
+                        <div class="bg-white/10 backdrop-blur-sm rounded-full p-6 border border-white/20 relative group hover:scale-110 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-r from-msu-gold/20 to-transparent rounded-full animate-pulse"></div>
+                            <svg class="w-16 h-16 text-white relative z-10 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <h1 class="headings xl:h2 xs:h3 text-white font-bold mb-6 leading-tight">
+                        Legal Statement
+                    </h1>
+                    <p class="paragraph xl:p1 xs:p2 text-white/90 max-w-2xl mx-auto leading-relaxed">
+                        Comprehensive legal framework governing the use of our digital platforms, 
+                        ensuring transparency, security, and compliance with applicable laws and regulations.
+                    </p>
+                    
+                    <!-- Enhanced Last Updated Badge -->
+                    <div class="mt-8 inline-flex items-center bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 border border-white/20 group hover:bg-white/20 transition-all duration-300 hover:scale-105">
+                        <div class="relative">
+                            <svg class="w-5 h-5 text-white mr-2 animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-white text-sm font-medium">Last Updated: July 2025</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section class="bg-white py-16 md:py-24">
+            <div class="container mx-auto px-4 xl:px-[12.5%] xs:px-[5%]">
+                <div class="max-w-6xl mx-auto">
+                    
+                    <!-- Enhanced Table of Contents -->
+                    <div class="mb-12 bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl p-8 border border-gray-200 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-msu-deep-ocean text-white rounded-full p-3 mr-4">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                                </svg>
+                            </div>
+                            <h2 class="headings xl:h4 xs:h5 text-msu-deep-ocean font-bold">Legal Framework Overview</h2>
+                        </div>
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <a href="#privacy-statement" class="flex items-center p-4 rounded-lg text-gray-700 hover:text-msu-main-color hover:bg-white transition-all duration-200 group shadow-sm hover:shadow-md">
+                                <span class="w-3 h-3 bg-msu-main-color rounded-full mr-4 group-hover:scale-150 transition-transform duration-200"></span>
+                                <span class="text-sm font-medium">1. Privacy Statement</span>
+                                <svg class="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                            <a href="#copyright" class="flex items-center p-4 rounded-lg text-gray-700 hover:text-msu-main-color hover:bg-white transition-all duration-200 group shadow-sm hover:shadow-md">
+                                <span class="w-3 h-3 bg-msu-main-color rounded-full mr-4 group-hover:scale-150 transition-transform duration-200"></span>
+                                <span class="text-sm font-medium">2. Copyright</span>
+                                <svg class="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                            <a href="#usage-policy" class="flex items-center p-4 rounded-lg text-gray-700 hover:text-msu-main-color hover:bg-white transition-all duration-200 group shadow-sm hover:shadow-md">
+                                <span class="w-3 h-3 bg-msu-main-color rounded-full mr-4 group-hover:scale-150 transition-transform duration-200"></span>
+                                <span class="text-sm font-medium">3. Usage Policy</span>
+                                <svg class="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                            <a href="#terms-conditions" class="flex items-center p-4 rounded-lg text-gray-700 hover:text-msu-main-color hover:bg-white transition-all duration-200 group shadow-sm hover:shadow-md">
+                                <span class="w-3 h-3 bg-msu-main-color rounded-full mr-4 group-hover:scale-150 transition-transform duration-200"></span>
+                                <span class="text-sm font-medium">4. Terms & Conditions</span>
+                                <svg class="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                            <a href="#disclaimer" class="flex items-center p-4 rounded-lg text-gray-700 hover:text-msu-main-color hover:bg-white transition-all duration-200 group shadow-sm hover:shadow-md">
+                                <span class="w-3 h-3 bg-msu-main-color rounded-full mr-4 group-hover:scale-150 transition-transform duration-200"></span>
+                                <span class="text-sm font-medium">5. Disclaimer</span>
+                                <svg class="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Policy Sections -->
+                    <div class="space-y-16">
+                        
+                        <!-- Section 1: Privacy Statement -->
+                        <section id="privacy-statement" class="scroll-mt-20">
+                            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-200 shadow-lg">
+                                <div class="flex items-center mb-6">
+                                    <div class="bg-blue-600 text-white rounded-full p-3 mr-4">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                                        </svg>
+                                    </div>
+                                    <h2 class="headings xl:h4 xs:h5 text-msu-deep-ocean font-bold">Privacy Statement</h2>
+                                </div>
+                                <div class="space-y-6">
+                                    <div class="bg-white/50 rounded-lg p-6">
+                                        <h3 class="headings xl:h5 xs:h6 text-msu-deep-ocean font-semibold mb-4">Information Collection</h3>
+                                        <p class="paragraph xl:p2 xs:p3 text-gray-700 leading-relaxed mb-4">
+                                            We collect information that you provide directly to us, such as when you register for academic programs, submit applications, contact us through our website, or participate in surveys and research studies.
+                                        </p>
+                                        <div class="grid md:grid-cols-2 gap-6">
+                                            <div class="space-y-3">
+                                                <div class="flex items-start">
+                                                    <span class="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                    <span class="paragraph xl:p2 xs:p3 text-gray-700">Personal identification information</span>
+                                                </div>
+                                                <div class="flex items-start">
+                                                    <span class="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                    <span class="paragraph xl:p2 xs:p3 text-gray-700">Academic and educational records</span>
+                                                </div>
+                                                <div class="flex items-start">
+                                                    <span class="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                    <span class="paragraph xl:p2 xs:p3 text-gray-700">Contact and communication data</span>
+                                                </div>
+                                            </div>
+                                            <div class="space-y-3">
+                                                <div class="flex items-start">
+                                                    <span class="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                    <span class="paragraph xl:p2 xs:p3 text-gray-700">Website usage analytics</span>
+                                                </div>
+                                                <div class="flex items-start">
+                                                    <span class="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                    <span class="paragraph xl:p2 xs:p3 text-gray-700">Research participation data</span>
+                                                </div>
+                                                <div class="flex items-start">
+                                                    <span class="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                    <span class="paragraph xl:p2 xs:p3 text-gray-700">Administrative records</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-white/50 rounded-lg p-6">
+                                        <h3 class="headings xl:h5 xs:h6 text-msu-deep-ocean font-semibold mb-4">Data Protection</h3>
+                                        <div class="space-y-3">
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">Encryption of sensitive data transmission and storage</span>
+                                            </div>
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">Regular security audits and system updates</span>
+                                            </div>
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">Access controls and authentication systems</span>
+                                            </div>
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">Compliance with data protection regulations</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Section 2: Copyright -->
+                        <section id="copyright" class="scroll-mt-20">
+                            <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-8 border border-green-200 shadow-lg">
+                                <div class="flex items-center mb-6">
+                                    <div class="bg-green-600 text-white rounded-full p-3 mr-4">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"></path>
+                                        </svg>
+                                    </div>
+                                    <h2 class="headings xl:h4 xs:h5 text-msu-deep-ocean font-bold">Copyright</h2>
+                                </div>
+                                <div class="space-y-6">
+                                    <div class="bg-white/50 rounded-lg p-6">
+                                        <h3 class="headings xl:h5 xs:h6 text-msu-deep-ocean font-semibold mb-4">Copyright Protection</h3>
+                                        <p class="paragraph xl:p2 xs:p3 text-gray-700 leading-relaxed mb-4">
+                                            All content on this website, including but not limited to text, graphics, images, logos, audio clips, digital downloads, data compilations, and software, is the property of Mindanao State University - Tawi-Tawi College of Technology and Oceanography or its content suppliers and is protected by Philippine and international copyright laws.
+                                        </p>
+                                        <p class="paragraph xl:p2 xs:p3 text-gray-700 leading-relaxed">
+                                            The compilation of all content on this website is the exclusive property of MSU-TCTO and is protected by copyright laws.
+                                        </p>
+                                    </div>
+                                    
+                                    <div class="bg-white/50 rounded-lg p-6">
+                                        <h3 class="headings xl:h5 xs:h6 text-msu-deep-ocean font-semibold mb-4">Permitted Uses</h3>
+                                        <div class="grid md:grid-cols-2 gap-6">
+                                            <div class="space-y-3">
+                                                <div class="flex items-start">
+                                                    <span class="w-2 h-2 bg-green-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                    <span class="paragraph xl:p2 xs:p3 text-gray-700">Personal, non-commercial use</span>
+                                                </div>
+                                                <div class="flex items-start">
+                                                    <span class="w-2 h-2 bg-green-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                    <span class="paragraph xl:p2 xs:p3 text-gray-700">Educational and research purposes</span>
+                                                </div>
+                                                <div class="flex items-start">
+                                                    <span class="w-2 h-2 bg-green-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                    <span class="paragraph xl:p2 xs:p3 text-gray-700">Academic citation with proper attribution</span>
+                                                </div>
+                                            </div>
+                                            <div class="space-y-3">
+                                                <div class="flex items-start">
+                                                    <span class="w-2 h-2 bg-green-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                    <span class="paragraph xl:p2 xs:p3 text-gray-700">Government and public service use</span>
+                                                </div>
+                                                <div class="flex items-start">
+                                                    <span class="w-2 h-2 bg-green-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                    <span class="paragraph xl:p2 xs:p3 text-gray-700">News reporting and commentary</span>
+                                                </div>
+                                                <div class="flex items-start">
+                                                    <span class="w-2 h-2 bg-green-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                    <span class="paragraph xl:p2 xs:p3 text-gray-700">Fair use as defined by law</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-white/50 rounded-lg p-6">
+                                        <h3 class="headings xl:h5 xs:h6 text-msu-deep-ocean font-semibold mb-4">Restrictions</h3>
+                                        <div class="space-y-3">
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">Commercial reproduction without permission</span>
+                                            </div>
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">Modification or alteration of content</span>
+                                            </div>
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">Distribution without proper attribution</span>
+                                            </div>
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">Use that may damage reputation or integrity</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Section 3: Usage Policy -->
+                        <section id="usage-policy" class="scroll-mt-20">
+                            <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-8 border border-purple-200 shadow-lg">
+                                <div class="flex items-center mb-6">
+                                    <div class="bg-purple-600 text-white rounded-full p-3 mr-4">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9"></path>
+                                        </svg>
+                                    </div>
+                                    <h2 class="headings xl:h4 xs:h5 text-msu-deep-ocean font-bold">Usage Policy</h2>
+                                </div>
+                                <div class="space-y-6">
+                                    <div class="bg-white/50 rounded-lg p-6">
+                                        <h3 class="headings xl:h5 xs:h6 text-msu-deep-ocean font-semibold mb-4">Acceptable Use Guidelines</h3>
+                                        <div class="grid md:grid-cols-2 gap-6">
+                                            <div class="space-y-3">
+                                                <div class="flex items-start">
+                                                    <span class="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                    <span class="paragraph xl:p2 xs:p3 text-gray-700">Academic research and educational purposes</span>
+                                                </div>
+                                                <div class="flex items-start">
+                                                    <span class="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                    <span class="paragraph xl:p2 xs:p3 text-gray-700">Official university communications</span>
+                                                </div>
+                                                <div class="flex items-start">
+                                                    <span class="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                    <span class="paragraph xl:p2 xs:p3 text-gray-700">Administrative and operational activities</span>
+                                                </div>
+                                            </div>
+                                            <div class="space-y-3">
+                                                <div class="flex items-start">
+                                                    <span class="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                    <span class="paragraph xl:p2 xs:p3 text-gray-700">Collaborative research projects</span>
+                                                </div>
+                                                <div class="flex items-start">
+                                                    <span class="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                    <span class="paragraph xl:p2 xs:p3 text-gray-700">Student and faculty development</span>
+                                                </div>
+                                                <div class="flex items-start">
+                                                    <span class="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                    <span class="paragraph xl:p2 xs:p3 text-gray-700">Community outreach programs</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-white/50 rounded-lg p-6">
+                                        <h3 class="headings xl:h5 xs:h6 text-msu-deep-ocean font-semibold mb-4">Prohibited Activities</h3>
+                                        <div class="space-y-3">
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">Unauthorized access to systems or data</span>
+                                            </div>
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">Distribution of malicious software or content</span>
+                                            </div>
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">Violation of intellectual property rights</span>
+                                            </div>
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">Excessive bandwidth consumption</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Section 4: Terms and Conditions -->
+                        <section id="terms-conditions" class="scroll-mt-20">
+                            <div class="bg-gradient-to-r from-yellow-50 to-amber-50 rounded-2xl p-8 border border-yellow-200 shadow-lg">
+                                <div class="flex items-center mb-6">
+                                    <div class="bg-yellow-600 text-white rounded-full p-3 mr-4">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                        </svg>
+                                    </div>
+                                    <h2 class="headings xl:h4 xs:h5 text-msu-deep-ocean font-bold">Terms and Conditions</h2>
+                                </div>
+                                <div class="space-y-6">
+                                    <div class="bg-white/50 rounded-lg p-6">
+                                        <h3 class="headings xl:h5 xs:h6 text-msu-deep-ocean font-semibold mb-4">Acceptance of Terms</h3>
+                                        <p class="paragraph xl:p2 xs:p3 text-gray-700 leading-relaxed mb-4">
+                                            By accessing and using this website, you accept and agree to be bound by the terms and provisions of this agreement. These terms apply to all visitors, users, and others who access or use the website.
+                                        </p>
+                                        <p class="paragraph xl:p2 xs:p3 text-gray-700 leading-relaxed">
+                                            Your continued use of the website following the posting of any changes to these terms constitutes acceptance of those changes.
+                                        </p>
+                                    </div>
+                                    
+                                    <div class="bg-white/50 rounded-lg p-6">
+                                        <h3 class="headings xl:h5 xs:h6 text-msu-deep-ocean font-semibold mb-4">User Responsibilities</h3>
+                                        <div class="grid md:grid-cols-2 gap-6">
+                                            <div class="space-y-3">
+                                                <div class="flex items-start">
+                                                    <span class="w-2 h-2 bg-yellow-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                    <span class="paragraph xl:p2 xs:p3 text-gray-700">Comply with all applicable laws and regulations</span>
+                                                </div>
+                                                <div class="flex items-start">
+                                                    <span class="w-2 h-2 bg-yellow-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                    <span class="paragraph xl:p2 xs:p3 text-gray-700">Respect intellectual property rights</span>
+                                                </div>
+                                                <div class="flex items-start">
+                                                    <span class="w-2 h-2 bg-yellow-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                    <span class="paragraph xl:p2 xs:p3 text-gray-700">Maintain account security</span>
+                                                </div>
+                                            </div>
+                                            <div class="space-y-3">
+                                                <div class="flex items-start">
+                                                    <span class="w-2 h-2 bg-yellow-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                    <span class="paragraph xl:p2 xs:p3 text-gray-700">Report security incidents promptly</span>
+                                                </div>
+                                                <div class="flex items-start">
+                                                    <span class="w-2 h-2 bg-yellow-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                    <span class="paragraph xl:p2 xs:p3 text-gray-700">Use resources responsibly</span>
+                                                </div>
+                                                <div class="flex items-start">
+                                                    <span class="w-2 h-2 bg-yellow-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                    <span class="paragraph xl:p2 xs:p3 text-gray-700">Respect privacy of others</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Section 5: Disclaimer -->
+                        <section id="disclaimer" class="scroll-mt-20">
+                            <div class="bg-gradient-to-r from-red-50 to-orange-50 rounded-2xl p-8 border border-red-200 shadow-lg">
+                                <div class="flex items-center mb-6">
+                                    <div class="bg-red-600 text-white rounded-full p-3 mr-4">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                                        </svg>
+                                    </div>
+                                    <h2 class="headings xl:h4 xs:h5 text-msu-deep-ocean font-bold">Disclaimer</h2>
+                                </div>
+                                <div class="space-y-6">
+                                    <div class="bg-white/50 rounded-lg p-6">
+                                        <h3 class="headings xl:h5 xs:h6 text-msu-deep-ocean font-semibold mb-4">Information Accuracy</h3>
+                                        <p class="paragraph xl:p2 xs:p3 text-gray-700 leading-relaxed mb-4">
+                                            The information on this website is provided on an "as is" basis. While we strive to ensure accuracy and completeness, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability of the information, products, services, or related graphics contained on the website.
+                                        </p>
+                                        <p class="paragraph xl:p2 xs:p3 text-gray-700 leading-relaxed">
+                                            Any reliance you place on such information is strictly at your own risk.
+                                        </p>
+                                    </div>
+                                    
+                                    <div class="bg-white/50 rounded-lg p-6">
+                                        <h3 class="headings xl:h5 xs:h6 text-msu-deep-ocean font-semibold mb-4">Limitation of Liability</h3>
+                                        <div class="space-y-3">
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">We are not liable for any direct, indirect, incidental, or consequential damages</span>
+                                            </div>
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">No warranty for uninterrupted or error-free operation</span>
+                                            </div>
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">Information may be subject to change without notice</span>
+                                            </div>
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">External links are not under our control</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                    </div>
+
+                    <!-- Enhanced Call to Action -->
+                    <div class="mt-16 text-center">
+                        <div class="bg-gradient-to-r from-msu-deep-ocean to-msu-main-color rounded-2xl p-8 text-white relative overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-300">
+                            <div class="relative z-10">
+                                <div class="mb-6 flex justify-center">
+                                    <div class="bg-white/20 backdrop-blur-sm rounded-full p-4 border border-white/30">
+                                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="headings xl:h4 xs:h5 font-bold mb-4">Need Legal Assistance?</h3>
+                                <p class="paragraph xl:p2 xs:p3 text-white/90 mb-8 max-w-2xl mx-auto">
+                                    For questions about our legal policies, copyright permissions, or to report violations, please contact our legal and compliance team.
+                                </p>
+                                
+                                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                                    <a href="mailto:admissions@msutawi-tawi.edu.ph" class="inline-flex items-center bg-white text-msu-deep-ocean px-8 py-4 rounded-lg font-medium hover:bg-gray-100 hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                        </svg>
+                                        Contact Legal Team
+                                    </a>
+                                    
+                                    <a href="tel:+639099826063" class="inline-flex items-center bg-msu-gold text-msu-deep-ocean px-8 py-4 rounded-lg font-medium hover:bg-yellow-400 hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                        </svg>
+                                        Call for Support
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer Navigation -->
+        <FooterNav />
+
+        <!-- Main Footer -->
+        <Footer />
+    </main>
+</Layout>
+
+<style>
+    .headings {
+        letter-spacing: -0.025em;
+    }
+    
+    /* Smooth scrolling */
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    /* Animation delays */
+    .animation-delay-2000 {
+        animation-delay: 2s;
+    }
+    .animation-delay-4000 {
+        animation-delay: 4s;
+    }
+    
+    /* Custom animations */
+    .animate-spin-slow {
+        animation: spin 3s linear infinite;
+    }
+    
+    /* Enhanced shadows */
+    .shadow-3xl {
+        box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+    }
+    
+    /* Gradient text */
+    .gradient-text {
+        background: linear-gradient(135deg, #61063B, #03045e);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+</style> 

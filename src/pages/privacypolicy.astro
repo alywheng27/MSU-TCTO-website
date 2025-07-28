@@ -1,0 +1,614 @@
+---
+// src/pages/privacypolicy.astro
+import Layout from '../layouts/Layout.astro';
+import Navbar from "../components/Navbar";
+import FooterNav from "../components/FooterNav.astro";
+import Footer from "../components/Footer.astro";
+import '../styles/css/global.css';
+
+const currentPath = Astro.url.pathname;
+const pageTitle = "Privacy Policy | MSU-TCTO";
+---
+
+<Layout title={pageTitle}>
+    <main class="min-h-screen flex flex-col">
+        <Navbar path={currentPath} client:visible />
+
+        <!-- Hero Section -->
+        <section class="relative bg-gradient-to-br from-msu-deep-ocean via-msu-main-color to-msu-deep-ocean py-20 md:py-32 overflow-hidden">
+            <!-- Enhanced Background Pattern -->
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-0 left-0 w-72 h-72 bg-msu-gold rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
+                <div class="absolute top-0 right-0 w-72 h-72 bg-msu-main-color rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000"></div>
+                <div class="absolute -bottom-8 left-20 w-72 h-72 bg-msu-gold rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000"></div>
+                <!-- Additional geometric patterns -->
+                <div class="absolute top-1/4 right-1/4 w-32 h-32 bg-white/20 rounded-full animate-bounce animation-delay-1000"></div>
+                <div class="absolute bottom-1/4 left-1/3 w-24 h-24 bg-msu-gold/30 rounded-full animate-ping animation-delay-3000"></div>
+            </div>
+            
+            <!-- Floating Elements -->
+            <div class="absolute inset-0 pointer-events-none">
+                <div class="absolute top-20 left-10 w-2 h-2 bg-white/60 rounded-full animate-ping"></div>
+                <div class="absolute top-40 right-20 w-1 h-1 bg-msu-gold/80 rounded-full animate-pulse"></div>
+                <div class="absolute bottom-20 left-1/4 w-3 h-3 bg-white/40 rounded-full animate-bounce"></div>
+            </div>
+            
+            <div class="relative z-10 container mx-auto px-4 xl:px-[12.5%] xs:px-[5%] text-center">
+                <div class="max-w-4xl mx-auto">
+                    <!-- Enhanced Icon with Animation -->
+                    <div class="mb-8 flex justify-center">
+                        <div class="bg-white/10 backdrop-blur-sm rounded-full p-6 border border-white/20 relative group hover:scale-110 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-r from-msu-gold/20 to-transparent rounded-full animate-pulse"></div>
+                            <svg class="w-16 h-16 text-white relative z-10 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg>
+                            <!-- Glow effect -->
+                            <div class="absolute inset-0 bg-msu-gold/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                    </div>
+                    
+                    <h1 class="headings xl:h2 xs:h3 text-white font-bold mb-6 leading-tight">
+                        Privacy Policy
+                    </h1>
+                    <p class="paragraph xl:p1 xs:p2 text-white/90 max-w-2xl mx-auto leading-relaxed">
+                        We are committed to protecting your privacy and ensuring the security of your personal information. 
+                        This policy outlines how we collect, use, and safeguard your data.
+                    </p>
+                    
+                    <!-- Enhanced Last Updated Badge -->
+                    <div class="mt-8 inline-flex items-center bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 border border-white/20 group hover:bg-white/20 transition-all duration-300 hover:scale-105">
+                        <div class="relative">
+                            <svg class="w-5 h-5 text-white mr-2 animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div class="absolute inset-0 bg-msu-gold/30 rounded-full blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                        <span class="text-white text-sm font-medium">Last Updated: December 2024</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section class="bg-white py-16 md:py-24">
+            <div class="container mx-auto px-4 xl:px-[12.5%] xs:px-[5%]">
+                <div class="max-w-4xl mx-auto">
+                    
+                    <!-- Enhanced Table of Contents -->
+                    <div class="mb-12 bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl p-8 border border-gray-200 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-msu-deep-ocean text-white rounded-full p-3 mr-4">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                                </svg>
+                            </div>
+                            <h2 class="headings xl:h4 xs:h5 text-msu-deep-ocean font-bold">Table of Contents</h2>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="space-y-4">
+                                <a href="#information-collection" class="flex items-center p-3 rounded-lg text-gray-700 hover:text-msu-main-color hover:bg-white transition-all duration-200 group shadow-sm hover:shadow-md">
+                                    <span class="w-3 h-3 bg-msu-main-color rounded-full mr-4 group-hover:scale-150 transition-transform duration-200"></span>
+                                    <span class="text-sm font-medium">1. Information Collection</span>
+                                    <svg class="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <a href="#information-usage" class="flex items-center p-3 rounded-lg text-gray-700 hover:text-msu-main-color hover:bg-white transition-all duration-200 group shadow-sm hover:shadow-md">
+                                    <span class="w-3 h-3 bg-msu-main-color rounded-full mr-4 group-hover:scale-150 transition-transform duration-200"></span>
+                                    <span class="text-sm font-medium">2. Information Usage</span>
+                                    <svg class="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <a href="#information-sharing" class="flex items-center p-3 rounded-lg text-gray-700 hover:text-msu-main-color hover:bg-white transition-all duration-200 group shadow-sm hover:shadow-md">
+                                    <span class="w-3 h-3 bg-msu-main-color rounded-full mr-4 group-hover:scale-150 transition-transform duration-200"></span>
+                                    <span class="text-sm font-medium">3. Information Sharing</span>
+                                    <svg class="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <a href="#data-security" class="flex items-center p-3 rounded-lg text-gray-700 hover:text-msu-main-color hover:bg-white transition-all duration-200 group shadow-sm hover:shadow-md">
+                                    <span class="w-3 h-3 bg-msu-main-color rounded-full mr-4 group-hover:scale-150 transition-transform duration-200"></span>
+                                    <span class="text-sm font-medium">4. Data Security</span>
+                                    <svg class="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="space-y-4">
+                                <a href="#your-rights" class="flex items-center p-3 rounded-lg text-gray-700 hover:text-msu-main-color hover:bg-white transition-all duration-200 group shadow-sm hover:shadow-md">
+                                    <span class="w-3 h-3 bg-msu-main-color rounded-full mr-4 group-hover:scale-150 transition-transform duration-200"></span>
+                                    <span class="text-sm font-medium">5. Your Rights</span>
+                                    <svg class="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <a href="#cookies" class="flex items-center p-3 rounded-lg text-gray-700 hover:text-msu-main-color hover:bg-white transition-all duration-200 group shadow-sm hover:shadow-md">
+                                    <span class="w-3 h-3 bg-msu-main-color rounded-full mr-4 group-hover:scale-150 transition-transform duration-200"></span>
+                                    <span class="text-sm font-medium">6. Cookies Policy</span>
+                                    <svg class="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <a href="#contact" class="flex items-center p-3 rounded-lg text-gray-700 hover:text-msu-main-color hover:bg-white transition-all duration-200 group shadow-sm hover:shadow-md">
+                                    <span class="w-3 h-3 bg-msu-main-color rounded-full mr-4 group-hover:scale-150 transition-transform duration-200"></span>
+                                    <span class="text-sm font-medium">7. Contact Us</span>
+                                    <svg class="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                                <a href="#updates" class="flex items-center p-3 rounded-lg text-gray-700 hover:text-msu-main-color hover:bg-white transition-all duration-200 group shadow-sm hover:shadow-md">
+                                    <span class="w-3 h-3 bg-msu-main-color rounded-full mr-4 group-hover:scale-150 transition-transform duration-200"></span>
+                                    <span class="text-sm font-medium">8. Policy Updates</span>
+                                    <svg class="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Policy Sections -->
+                    <div class="space-y-16">
+                        
+                        <!-- Section 1: Information Collection -->
+                        <section id="information-collection" class="scroll-mt-20">
+                            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-200">
+                                <div class="flex items-center mb-6">
+                                    <div class="bg-msu-main-color text-white rounded-full p-3 mr-4">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                        </svg>
+                                    </div>
+                                    <h2 class="headings xl:h4 xs:h5 text-msu-deep-ocean font-bold">Information Collection</h2>
+                                </div>
+                                <div class="space-y-4">
+                                    <p class="paragraph xl:p2 xs:p3 text-gray-700 leading-relaxed">
+                                        We collect information that you provide directly to us, such as when you:
+                                    </p>
+                                    <ul class="space-y-3 ml-6">
+                                        <li class="flex items-start">
+                                            <span class="w-2 h-2 bg-msu-main-color rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                            <span class="paragraph xl:p2 xs:p3 text-gray-700">Register for academic programs or services</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="w-2 h-2 bg-msu-main-color rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                            <span class="paragraph xl:p2 xs:p3 text-gray-700">Submit applications for admission or employment</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="w-2 h-2 bg-msu-main-color rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                            <span class="paragraph xl:p2 xs:p3 text-gray-700">Contact us through our website or communication channels</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="w-2 h-2 bg-msu-main-color rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                            <span class="paragraph xl:p2 xs:p3 text-gray-700">Participate in surveys, research studies, or events</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Section 2: Information Usage -->
+                        <section id="information-usage" class="scroll-mt-20">
+                            <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-8 border border-green-200">
+                                <div class="flex items-center mb-6">
+                                    <div class="bg-green-600 text-white rounded-full p-3 mr-4">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                        </svg>
+                                    </div>
+                                    <h2 class="headings xl:h4 xs:h5 text-msu-deep-ocean font-bold">Information Usage</h2>
+                                </div>
+                                <div class="space-y-4">
+                                    <p class="paragraph xl:p2 xs:p3 text-gray-700 leading-relaxed">
+                                        We use the collected information for the following purposes:
+                                    </p>
+                                    <div class="grid md:grid-cols-2 gap-6">
+                                        <div class="space-y-3">
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-green-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">Academic administration and student services</span>
+                                            </div>
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-green-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">Research and institutional improvement</span>
+                                            </div>
+                                        </div>
+                                        <div class="space-y-3">
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-green-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">Communication and outreach activities</span>
+                                            </div>
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-green-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">Compliance with legal obligations</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Section 3: Information Sharing -->
+                        <section id="information-sharing" class="scroll-mt-20">
+                            <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-8 border border-purple-200">
+                                <div class="flex items-center mb-6">
+                                    <div class="bg-purple-600 text-white rounded-full p-3 mr-4">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                        </svg>
+                                    </div>
+                                    <h2 class="headings xl:h4 xs:h5 text-msu-deep-ocean font-bold">Information Sharing</h2>
+                                </div>
+                                <p class="paragraph xl:p2 xs:p3 text-gray-700 leading-relaxed mb-4">
+                                    We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except in the following circumstances:
+                                </p>
+                                <div class="space-y-3">
+                                    <div class="flex items-start">
+                                        <span class="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                        <span class="paragraph xl:p2 xs:p3 text-gray-700">When required by law or government authorities</span>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <span class="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                        <span class="paragraph xl:p2 xs:p3 text-gray-700">With trusted partners who assist in our operations</span>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <span class="w-2 h-2 bg-purple-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                        <span class="paragraph xl:p2 xs:p3 text-gray-700">To protect our rights, property, or safety</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Section 4: Data Security -->
+                        <section id="data-security" class="scroll-mt-20">
+                            <div class="bg-gradient-to-r from-red-50 to-orange-50 rounded-2xl p-8 border border-red-200">
+                                <div class="flex items-center mb-6">
+                                    <div class="bg-red-600 text-white rounded-full p-3 mr-4">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                                        </svg>
+                                    </div>
+                                    <h2 class="headings xl:h4 xs:h5 text-msu-deep-ocean font-bold">Data Security</h2>
+                                </div>
+                                <div class="space-y-4">
+                                    <p class="paragraph xl:p2 xs:p3 text-gray-700 leading-relaxed">
+                                        We implement appropriate security measures to protect your personal information:
+                                    </p>
+                                    <div class="grid md:grid-cols-2 gap-6">
+                                        <div class="space-y-3">
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">Encryption of sensitive data</span>
+                                            </div>
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">Regular security audits</span>
+                                            </div>
+                                        </div>
+                                        <div class="space-y-3">
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">Access controls and authentication</span>
+                                            </div>
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">Secure data storage systems</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Section 5: Your Rights -->
+                        <section id="your-rights" class="scroll-mt-20">
+                            <div class="bg-gradient-to-r from-yellow-50 to-amber-50 rounded-2xl p-8 border border-yellow-200">
+                                <div class="flex items-center mb-6">
+                                    <div class="bg-yellow-600 text-white rounded-full p-3 mr-4">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                    </div>
+                                    <h2 class="headings xl:h4 xs:h5 text-msu-deep-ocean font-bold">Your Rights</h2>
+                                </div>
+                                <div class="space-y-4">
+                                    <p class="paragraph xl:p2 xs:p3 text-gray-700 leading-relaxed">
+                                        You have the following rights regarding your personal information:
+                                    </p>
+                                    <div class="grid md:grid-cols-2 gap-6">
+                                        <div class="space-y-3">
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-yellow-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">Access your personal data</span>
+                                            </div>
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-yellow-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">Request data correction</span>
+                                            </div>
+                                        </div>
+                                        <div class="space-y-3">
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-yellow-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">Request data deletion</span>
+                                            </div>
+                                            <div class="flex items-start">
+                                                <span class="w-2 h-2 bg-yellow-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">Object to data processing</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Section 6: Cookies Policy -->
+                        <section id="cookies" class="scroll-mt-20">
+                            <div class="bg-gradient-to-r from-teal-50 to-cyan-50 rounded-2xl p-8 border border-teal-200">
+                                <div class="flex items-center mb-6">
+                                    <div class="bg-teal-600 text-white rounded-full p-3 mr-4">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"></path>
+                                        </svg>
+                                    </div>
+                                    <h2 class="headings xl:h4 xs:h5 text-msu-deep-ocean font-bold">Cookies Policy</h2>
+                                </div>
+                                <div class="space-y-4">
+                                    <p class="paragraph xl:p2 xs:p3 text-gray-700 leading-relaxed">
+                                        We use cookies and similar technologies to enhance your browsing experience:
+                                    </p>
+                                    <div class="space-y-3">
+                                        <div class="flex items-start">
+                                            <span class="w-2 h-2 bg-teal-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                            <span class="paragraph xl:p2 xs:p3 text-gray-700"><strong>Essential cookies:</strong> Required for website functionality</span>
+                                        </div>
+                                        <div class="flex items-start">
+                                            <span class="w-2 h-2 bg-teal-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                            <span class="paragraph xl:p2 xs:p3 text-gray-700"><strong>Analytics cookies:</strong> Help us understand website usage</span>
+                                        </div>
+                                        <div class="flex items-start">
+                                            <span class="w-2 h-2 bg-teal-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                            <span class="paragraph xl:p2 xs:p3 text-gray-700"><strong>Preference cookies:</strong> Remember your settings and choices</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Section 7: Contact Us -->
+                        <section id="contact" class="scroll-mt-20">
+                            <div class="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-2xl p-8 border border-indigo-200">
+                                <div class="flex items-center mb-6">
+                                    <div class="bg-indigo-600 text-white rounded-full p-3 mr-4">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                        </svg>
+                                    </div>
+                                    <h2 class="headings xl:h4 xs:h5 text-msu-deep-ocean font-bold">Contact Us</h2>
+                                </div>
+                                <div class="space-y-4">
+                                    <p class="paragraph xl:p2 xs:p3 text-gray-700 leading-relaxed">
+                                        If you have any questions about this Privacy Policy, please contact us:
+                                    </p>
+                                    <div class="grid md:grid-cols-2 gap-6">
+                                        <div class="space-y-3">
+                                            <div class="flex items-center">
+                                                <svg class="w-5 h-5 text-indigo-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                                </svg>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">admissions@msutawi-tawi.edu.ph</span>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <svg class="w-5 h-5 text-indigo-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                                </svg>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">+63 909 982 6063</span>
+                                            </div>
+                                        </div>
+                                        <div class="space-y-3">
+                                            <div class="flex items-center">
+                                                <svg class="w-5 h-5 text-indigo-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                </svg>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">Bongao, Tawi-Tawi, Philippines</span>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <svg class="w-5 h-5 text-indigo-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                </svg>
+                                                <span class="paragraph xl:p2 xs:p3 text-gray-700">Monday - Friday, 8:00 AM - 5:00 PM</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Section 8: Policy Updates -->
+                        <section id="updates" class="scroll-mt-20">
+                            <div class="bg-gradient-to-r from-gray-50 to-slate-50 rounded-2xl p-8 border border-gray-200">
+                                <div class="flex items-center mb-6">
+                                    <div class="bg-gray-600 text-white rounded-full p-3 mr-4">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                        </svg>
+                                    </div>
+                                    <h2 class="headings xl:h4 xs:h5 text-msu-deep-ocean font-bold">Policy Updates</h2>
+                                </div>
+                                <div class="space-y-4">
+                                    <p class="paragraph xl:p2 xs:p3 text-gray-700 leading-relaxed">
+                                        We may update this Privacy Policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons. We will notify you of any material changes by:
+                                    </p>
+                                    <div class="space-y-3">
+                                        <div class="flex items-start">
+                                            <span class="w-2 h-2 bg-gray-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                            <span class="paragraph xl:p2 xs:p3 text-gray-700">Posting the updated policy on our website</span>
+                                        </div>
+                                        <div class="flex items-start">
+                                            <span class="w-2 h-2 bg-gray-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                            <span class="paragraph xl:p2 xs:p3 text-gray-700">Sending email notifications to registered users</span>
+                                        </div>
+                                        <div class="flex items-start">
+                                            <span class="w-2 h-2 bg-gray-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                            <span class="paragraph xl:p2 xs:p3 text-gray-700">Displaying prominent notices on our platforms</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                    </div>
+
+                    <!-- Enhanced Call to Action -->
+                    <div class="mt-16 text-center">
+                        <div class="bg-gradient-to-r from-msu-deep-ocean to-msu-main-color rounded-2xl p-8 text-white relative overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-300">
+                            <!-- Background Pattern -->
+                            <div class="absolute inset-0 opacity-10">
+                                <div class="absolute top-0 right-0 w-32 h-32 bg-white/20 rounded-full"></div>
+                                <div class="absolute bottom-0 left-0 w-24 h-24 bg-msu-gold/30 rounded-full"></div>
+                            </div>
+                            
+                            <div class="relative z-10">
+                                <div class="mb-6 flex justify-center">
+                                    <div class="bg-white/20 backdrop-blur-sm rounded-full p-4 border border-white/30">
+                                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="headings xl:h4 xs:h5 font-bold mb-4">Have Questions?</h3>
+                                <p class="paragraph xl:p2 xs:p3 text-white/90 mb-8 max-w-2xl mx-auto">
+                                    We're here to help! If you have any questions about our privacy practices or need assistance with your data rights, don't hesitate to reach out to us.
+                                </p>
+                                
+                                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                                    <a href="mailto:admissions@msutawi-tawi.edu.ph" class="inline-flex items-center bg-white text-msu-deep-ocean px-8 py-4 rounded-lg font-medium hover:bg-gray-100 hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                        </svg>
+                                        Contact Our Privacy Team
+                                    </a>
+                                    
+                                    <a href="tel:+639099826063" class="inline-flex items-center bg-msu-gold text-msu-deep-ocean px-8 py-4 rounded-lg font-medium hover:bg-yellow-400 hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                        </svg>
+                                        Call Us Now
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer Navigation -->
+        <FooterNav />
+
+        <!-- Main Footer -->
+        <Footer />
+    </main>
+</Layout>
+
+<style>
+    .prose {
+        line-height: 1.75;
+    }
+    .prose p {
+        margin-bottom: 1.25em;
+    }
+    .headings {
+        letter-spacing: -0.025em;
+    }
+    
+    /* Smooth scrolling */
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    /* Animation delays */
+    .animation-delay-2000 {
+        animation-delay: 2s;
+    }
+    .animation-delay-4000 {
+        animation-delay: 4s;
+    }
+    .animation-delay-1000 {
+        animation-delay: 1s;
+    }
+    .animation-delay-3000 {
+        animation-delay: 3s;
+    }
+    
+    /* Custom animations */
+    .animate-spin-slow {
+        animation: spin 3s linear infinite;
+    }
+    
+    .animate-bounce-slow {
+        animation: bounce 2s infinite;
+    }
+    
+    /* Enhanced hover effects */
+    .hover-lift {
+        transition: transform 0.2s ease-in-out;
+    }
+    .hover-lift:hover {
+        transform: translateY(-2px);
+    }
+    
+    /* Card hover effects */
+    .card-hover {
+        transition: all 0.3s ease-in-out;
+    }
+    .card-hover:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    
+    /* Glow effects */
+    .glow-on-hover:hover {
+        box-shadow: 0 0 20px rgba(97, 6, 59, 0.3);
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #61063B;
+        border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #03045e;
+    }
+    
+    /* Enhanced shadows */
+    .shadow-3xl {
+        box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+    }
+    
+    /* Gradient text */
+    .gradient-text {
+        background: linear-gradient(135deg, #61063B, #03045e);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    /* Floating animation */
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+    .animate-float {
+        animation: float 3s ease-in-out infinite;
+    }
+</style>

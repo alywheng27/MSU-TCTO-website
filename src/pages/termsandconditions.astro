@@ -1,0 +1,407 @@
+---
+// src/pages/termsandconditions.astro
+import Layout from '../layouts/Layout.astro';
+import Navbar from "../components/Navbar";
+import FooterNav from "../components/FooterNav.astro";
+import Footer from "../components/Footer.astro";
+import '../styles/css/global.css';
+
+const currentPath = Astro.url.pathname;
+const pageTitle = "Terms and Conditions | MSU-TCTO";
+---
+
+<Layout title={pageTitle}>
+    <main class="min-h-screen flex flex-col">
+        <Navbar path={currentPath} client:visible />
+
+        <!-- Hero Section -->
+        <section class="relative bg-gradient-to-br from-msu-deep-ocean via-msu-main-color to-msu-deep-ocean py-20 md:py-32 overflow-hidden">
+            <!-- Enhanced Background Pattern -->
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-0 left-0 w-72 h-72 bg-msu-gold rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
+                <div class="absolute top-0 right-0 w-72 h-72 bg-msu-main-color rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000"></div>
+                <div class="absolute -bottom-8 left-20 w-72 h-72 bg-msu-gold rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000"></div>
+            </div>
+            
+            <div class="relative z-10 container mx-auto px-4 xl:px-[12.5%] xs:px-[5%] text-center">
+                <div class="max-w-4xl mx-auto">
+                    <!-- Enhanced Icon with Animation -->
+                    <div class="mb-8 flex justify-center">
+                        <div class="bg-white/10 backdrop-blur-sm rounded-full p-6 border border-white/20 relative group hover:scale-110 transition-transform duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-r from-msu-gold/20 to-transparent rounded-full animate-pulse"></div>
+                            <svg class="w-16 h-16 text-white relative z-10 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <h1 class="headings xl:h2 xs:h3 text-white font-bold mb-6 leading-tight">
+                        Terms and Conditions
+                    </h1>
+                    <p class="paragraph xl:p1 xs:p2 text-white/90 max-w-2xl mx-auto leading-relaxed">
+                        Please read these terms and conditions carefully before using our website and services. 
+                        By accessing or using our website, you agree to be bound by these terms.
+                    </p>
+                    
+                    <!-- Enhanced Last Updated Badge -->
+                    <div class="mt-8 inline-flex items-center bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 border border-white/20 group hover:bg-white/20 transition-all duration-300 hover:scale-105">
+                        <div class="relative">
+                            <svg class="w-5 h-5 text-white mr-2 animate-spin-slow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-white text-sm font-medium">Last Updated: December 2024</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section class="bg-white py-16 md:py-24">
+            <div class="container mx-auto px-4 xl:px-[12.5%] xs:px-[5%]">
+                <div class="max-w-4xl mx-auto">
+                    
+                    <!-- Enhanced Table of Contents -->
+                    <div class="mb-12 bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl p-8 border border-gray-200 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <div class="flex items-center mb-6">
+                            <div class="bg-msu-deep-ocean text-white rounded-full p-3 mr-4">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                                </svg>
+                            </div>
+                            <h2 class="headings xl:h4 xs:h5 text-msu-deep-ocean font-bold">Table of Contents</h2>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="space-y-4">
+                                <a href="#acceptance" class="flex items-center p-3 rounded-lg text-gray-700 hover:text-msu-main-color hover:bg-white transition-all duration-200 group shadow-sm hover:shadow-md">
+                                    <span class="w-3 h-3 bg-msu-main-color rounded-full mr-4 group-hover:scale-150 transition-transform duration-200"></span>
+                                    <span class="text-sm font-medium">1. Acceptance of Terms</span>
+                                </a>
+                                <a href="#use-of-website" class="flex items-center p-3 rounded-lg text-gray-700 hover:text-msu-main-color hover:bg-white transition-all duration-200 group shadow-sm hover:shadow-md">
+                                    <span class="w-3 h-3 bg-msu-main-color rounded-full mr-4 group-hover:scale-150 transition-transform duration-200"></span>
+                                    <span class="text-sm font-medium">2. Use of Website</span>
+                                </a>
+                                <a href="#intellectual-property" class="flex items-center p-3 rounded-lg text-gray-700 hover:text-msu-main-color hover:bg-white transition-all duration-200 group shadow-sm hover:shadow-md">
+                                    <span class="w-3 h-3 bg-msu-main-color rounded-full mr-4 group-hover:scale-150 transition-transform duration-200"></span>
+                                    <span class="text-sm font-medium">3. Intellectual Property</span>
+                                </a>
+                                <a href="#user-conduct" class="flex items-center p-3 rounded-lg text-gray-700 hover:text-msu-main-color hover:bg-white transition-all duration-200 group shadow-sm hover:shadow-md">
+                                    <span class="w-3 h-3 bg-msu-main-color rounded-full mr-4 group-hover:scale-150 transition-transform duration-200"></span>
+                                    <span class="text-sm font-medium">4. User Conduct</span>
+                                </a>
+                            </div>
+                            <div class="space-y-4">
+                                <a href="#disclaimer" class="flex items-center p-3 rounded-lg text-gray-700 hover:text-msu-main-color hover:bg-white transition-all duration-200 group shadow-sm hover:shadow-md">
+                                    <span class="w-3 h-3 bg-msu-main-color rounded-full mr-4 group-hover:scale-150 transition-transform duration-200"></span>
+                                    <span class="text-sm font-medium">5. Disclaimer</span>
+                                </a>
+                                <a href="#limitation-liability" class="flex items-center p-3 rounded-lg text-gray-700 hover:text-msu-main-color hover:bg-white transition-all duration-200 group shadow-sm hover:shadow-md">
+                                    <span class="w-3 h-3 bg-msu-main-color rounded-full mr-4 group-hover:scale-150 transition-transform duration-200"></span>
+                                    <span class="text-sm font-medium">6. Limitation of Liability</span>
+                                </a>
+                                <a href="#termination" class="flex items-center p-3 rounded-lg text-gray-700 hover:text-msu-main-color hover:bg-white transition-all duration-200 group shadow-sm hover:shadow-md">
+                                    <span class="w-3 h-3 bg-msu-main-color rounded-full mr-4 group-hover:scale-150 transition-transform duration-200"></span>
+                                    <span class="text-sm font-medium">7. Termination</span>
+                                </a>
+                                <a href="#governing-law" class="flex items-center p-3 rounded-lg text-gray-700 hover:text-msu-main-color hover:bg-white transition-all duration-200 group shadow-sm hover:shadow-md">
+                                    <span class="w-3 h-3 bg-msu-main-color rounded-full mr-4 group-hover:scale-150 transition-transform duration-200"></span>
+                                    <span class="text-sm font-medium">8. Governing Law</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Terms Sections -->
+                    <div class="space-y-16">
+                        
+                        <!-- Section 1: Acceptance of Terms -->
+                        <section id="acceptance" class="scroll-mt-20">
+                            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-200">
+                                <div class="flex items-center mb-6">
+                                    <div class="bg-msu-main-color text-white rounded-full p-3 mr-4">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                    </div>
+                                    <h2 class="headings xl:h4 xs:h5 text-msu-deep-ocean font-bold">Acceptance of Terms</h2>
+                                </div>
+                                <div class="space-y-4">
+                                    <p class="paragraph xl:p2 xs:p3 text-gray-700 leading-relaxed">
+                                        By accessing and using this website, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
+                                    </p>
+                                    <p class="paragraph xl:p2 xs:p3 text-gray-700 leading-relaxed">
+                                        These terms apply to all visitors, users, and others who access or use the website. Your continued use of the website following the posting of any changes to these terms constitutes acceptance of those changes.
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Section 2: Use of Website -->
+                        <section id="use-of-website" class="scroll-mt-20">
+                            <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-8 border border-green-200">
+                                <div class="flex items-center mb-6">
+                                    <div class="bg-green-600 text-white rounded-full p-3 mr-4">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9"></path>
+                                        </svg>
+                                    </div>
+                                    <h2 class="headings xl:h4 xs:h5 text-msu-deep-ocean font-bold">Use of Website</h2>
+                                </div>
+                                <div class="space-y-4">
+                                    <p class="paragraph xl:p2 xs:p3 text-gray-700 leading-relaxed">
+                                        You may use our website for lawful purposes only. You agree not to use the website:
+                                    </p>
+                                    <ul class="space-y-3 ml-6">
+                                        <li class="flex items-start">
+                                            <span class="w-2 h-2 bg-green-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                            <span class="paragraph xl:p2 xs:p3 text-gray-700">In any way that violates any applicable federal, state, local, or international law or regulation</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="w-2 h-2 bg-green-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                            <span class="paragraph xl:p2 xs:p3 text-gray-700">To transmit, or procure the sending of, any advertising or promotional material</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="w-2 h-2 bg-green-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                            <span class="paragraph xl:p2 xs:p3 text-gray-700">To impersonate or attempt to impersonate the university, a university employee, or any other person</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Section 3: Intellectual Property -->
+                        <section id="intellectual-property" class="scroll-mt-20">
+                            <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-8 border border-purple-200">
+                                <div class="flex items-center mb-6">
+                                    <div class="bg-purple-600 text-white rounded-full p-3 mr-4">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"></path>
+                                        </svg>
+                                    </div>
+                                    <h2 class="headings xl:h4 xs:h5 text-msu-deep-ocean font-bold">Intellectual Property</h2>
+                                </div>
+                                <div class="space-y-4">
+                                    <p class="paragraph xl:p2 xs:p3 text-gray-700 leading-relaxed">
+                                        The website and its original content, features, and functionality are and will remain the exclusive property of Mindanao State University - Tawi-Tawi College of Technology and Oceanography and its licensors.
+                                    </p>
+                                    <p class="paragraph xl:p2 xs:p3 text-gray-700 leading-relaxed">
+                                        The website is protected by copyright, trademark, and other laws. Our trademarks and trade dress may not be used in connection with any product or service without our prior written consent.
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Section 4: User Conduct -->
+                        <section id="user-conduct" class="scroll-mt-20">
+                            <div class="bg-gradient-to-r from-red-50 to-orange-50 rounded-2xl p-8 border border-red-200">
+                                <div class="flex items-center mb-6">
+                                    <div class="bg-red-600 text-white rounded-full p-3 mr-4">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                                        </svg>
+                                    </div>
+                                    <h2 class="headings xl:h4 xs:h5 text-msu-deep-ocean font-bold">User Conduct</h2>
+                                </div>
+                                <div class="space-y-4">
+                                    <p class="paragraph xl:p2 xs:p3 text-gray-700 leading-relaxed">
+                                        You agree not to engage in any of the following prohibited activities:
+                                    </p>
+                                    <ul class="space-y-3 ml-6">
+                                        <li class="flex items-start">
+                                            <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                            <span class="paragraph xl:p2 xs:p3 text-gray-700">Using the website for any unlawful purpose or to solicit others to perform unlawful acts</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                            <span class="paragraph xl:p2 xs:p3 text-gray-700">Attempting to gain unauthorized access to any portion of the website</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                            <span class="paragraph xl:p2 xs:p3 text-gray-700">Interfering with or disrupting the website or servers connected to the website</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Section 5: Disclaimer -->
+                        <section id="disclaimer" class="scroll-mt-20">
+                            <div class="bg-gradient-to-r from-yellow-50 to-amber-50 rounded-2xl p-8 border border-yellow-200">
+                                <div class="flex items-center mb-6">
+                                    <div class="bg-yellow-600 text-white rounded-full p-3 mr-4">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                                        </svg>
+                                    </div>
+                                    <h2 class="headings xl:h4 xs:h5 text-msu-deep-ocean font-bold">Disclaimer</h2>
+                                </div>
+                                <div class="space-y-4">
+                                    <p class="paragraph xl:p2 xs:p3 text-gray-700 leading-relaxed">
+                                        The information on this website is provided on an "as is" basis. To the fullest extent permitted by law, this university:
+                                    </p>
+                                    <ul class="space-y-3 ml-6">
+                                        <li class="flex items-start">
+                                            <span class="w-2 h-2 bg-yellow-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                            <span class="paragraph xl:p2 xs:p3 text-gray-700">Excludes all representations, warranties, conditions and terms whether express or implied</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="w-2 h-2 bg-yellow-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                            <span class="paragraph xl:p2 xs:p3 text-gray-700">Does not guarantee the accuracy, completeness, or usefulness of any information</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="w-2 h-2 bg-yellow-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                            <span class="paragraph xl:p2 xs:p3 text-gray-700">Is not responsible for any errors or omissions in the content</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Section 6: Limitation of Liability -->
+                        <section id="limitation-liability" class="scroll-mt-20">
+                            <div class="bg-gradient-to-r from-teal-50 to-cyan-50 rounded-2xl p-8 border border-teal-200">
+                                <div class="flex items-center mb-6">
+                                    <div class="bg-teal-600 text-white rounded-full p-3 mr-4">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                                        </svg>
+                                    </div>
+                                    <h2 class="headings xl:h4 xs:h5 text-msu-deep-ocean font-bold">Limitation of Liability</h2>
+                                </div>
+                                <div class="space-y-4">
+                                    <p class="paragraph xl:p2 xs:p3 text-gray-700 leading-relaxed">
+                                        In no event shall Mindanao State University - Tawi-Tawi College of Technology and Oceanography, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from:
+                                    </p>
+                                    <ul class="space-y-3 ml-6">
+                                        <li class="flex items-start">
+                                            <span class="w-2 h-2 bg-teal-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                            <span class="paragraph xl:p2 xs:p3 text-gray-700">Your use or inability to use the website</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="w-2 h-2 bg-teal-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                            <span class="paragraph xl:p2 xs:p3 text-gray-700">Any unauthorized access to or use of our servers and/or any personal information stored therein</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="w-2 h-2 bg-teal-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                                            <span class="paragraph xl:p2 xs:p3 text-gray-700">Any interruption or cessation of transmission to or from the website</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Section 7: Termination -->
+                        <section id="termination" class="scroll-mt-20">
+                            <div class="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-2xl p-8 border border-indigo-200">
+                                <div class="flex items-center mb-6">
+                                    <div class="bg-indigo-600 text-white rounded-full p-3 mr-4">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                        </svg>
+                                    </div>
+                                    <h2 class="headings xl:h4 xs:h5 text-msu-deep-ocean font-bold">Termination</h2>
+                                </div>
+                                <div class="space-y-4">
+                                    <p class="paragraph xl:p2 xs:p3 text-gray-700 leading-relaxed">
+                                        We may terminate or suspend your access immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.
+                                    </p>
+                                    <p class="paragraph xl:p2 xs:p3 text-gray-700 leading-relaxed">
+                                        Upon termination, your right to use the website will cease immediately. If you wish to terminate your account, you may simply discontinue using the website.
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Section 8: Governing Law -->
+                        <section id="governing-law" class="scroll-mt-20">
+                            <div class="bg-gradient-to-r from-gray-50 to-slate-50 rounded-2xl p-8 border border-gray-200">
+                                <div class="flex items-center mb-6">
+                                    <div class="bg-gray-600 text-white rounded-full p-3 mr-4">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16l-3-9m3 9l3-9"></path>
+                                        </svg>
+                                    </div>
+                                    <h2 class="headings xl:h4 xs:h5 text-msu-deep-ocean font-bold">Governing Law</h2>
+                                </div>
+                                <div class="space-y-4">
+                                    <p class="paragraph xl:p2 xs:p3 text-gray-700 leading-relaxed">
+                                        These Terms shall be interpreted and governed by the laws of the Philippines, without regard to its conflict of law provisions. Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights.
+                                    </p>
+                                    <p class="paragraph xl:p2 xs:p3 text-gray-700 leading-relaxed">
+                                        If any provision of these Terms is held to be invalid or unenforceable by a court, the remaining provisions of these Terms will remain in effect.
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+
+                    </div>
+
+                    <!-- Enhanced Call to Action -->
+                    <div class="mt-16 text-center">
+                        <div class="bg-gradient-to-r from-msu-deep-ocean to-msu-main-color rounded-2xl p-8 text-white relative overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-300">
+                            <div class="relative z-10">
+                                <div class="mb-6 flex justify-center">
+                                    <div class="bg-white/20 backdrop-blur-sm rounded-full p-4 border border-white/30">
+                                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                
+                                <h3 class="headings xl:h4 xs:h5 font-bold mb-4">Questions About These Terms?</h3>
+                                <p class="paragraph xl:p2 xs:p3 text-white/90 mb-8 max-w-2xl mx-auto">
+                                    If you have any questions about these Terms and Conditions, please contact our legal team.
+                                </p>
+                                
+                                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                                    <a href="mailto:admissions@msutawi-tawi.edu.ph" class="inline-flex items-center bg-white text-msu-deep-ocean px-8 py-4 rounded-lg font-medium hover:bg-gray-100 hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                        </svg>
+                                        Contact Legal Team
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer Navigation -->
+        <FooterNav />
+
+        <!-- Main Footer -->
+        <Footer />
+    </main>
+</Layout>
+
+<style>
+    .headings {
+        letter-spacing: -0.025em;
+    }
+    
+    /* Smooth scrolling */
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    /* Animation delays */
+    .animation-delay-2000 {
+        animation-delay: 2s;
+    }
+    .animation-delay-4000 {
+        animation-delay: 4s;
+    }
+    
+    /* Custom animations */
+    .animate-spin-slow {
+        animation: spin 3s linear infinite;
+    }
+    
+    /* Enhanced shadows */
+    .shadow-3xl {
+        box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+    }
+</style> 

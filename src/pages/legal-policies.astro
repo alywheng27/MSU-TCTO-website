@@ -1,0 +1,1253 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from "../components/Navbar";
+import FooterNav from "../components/FooterNav.astro";
+import Footer from "../components/Footer.astro";
+
+const currentPath = Astro.url.pathname;
+---
+
+<Layout title="Legal Policies - MSU-TCTO">
+  <!-- Header Navigation -->
+  <Navbar path={currentPath} client:visible />
+
+  <div class="legal-policies-container">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-icon">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h1 class="hero-title">Legal Policies & Guidelines</h1>
+        <p class="hero-subtitle">Comprehensive legal framework governing the use of MSU-TCTO's digital resources and services</p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number">5</span>
+            <span class="stat-label">Policies</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Compliance</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">24/7</span>
+            <span class="stat-label">Protection</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <section class="nav-section">
+      <div class="nav-container">
+        <nav class="policy-nav">
+          <button class="nav-tab active" data-target="net-usage">Net Usage Policy</button>
+          <button class="nav-tab" data-target="terms">Terms & Conditions</button>
+          <button class="nav-tab" data-target="disclaimer">Website Disclaimer</button>
+          <button class="nav-tab" data-target="privacy">Privacy & Security</button>
+          <button class="nav-tab" data-target="copyright">Copyright Notice</button>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Content Sections -->
+    <section class="content-section">
+      <div class="content-container">
+        
+        <!-- Net Usage Policy -->
+        <div class="policy-content active" id="net-usage">
+          <div class="policy-header">
+            <div class="policy-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h2>Net Usage Policy</h2>
+            <p class="policy-description">Comprehensive guidelines for managing computer data networks and digital resources at MSU-TCTO</p>
+          </div>
+
+          <div class="policy-body">
+            <div class="policy-section">
+              <h3>Overview</h3>
+              <p>This constitutes an MSU-TCTO Institute-wide policy for managing computer data networks and the resources they make available, as well as stand-alone computers that are owned and administered by the Institute. The policy reflects the ethical principles of the Institute community and indicates, in general, what privileges and responsibilities are characteristic of the Institute computing environment. Because some networks may operate in environments in which specific items in this policy do not apply, system administrators are free to create policies that are at variance with this one, as long as the principles related to legal use and the Institute's mission are preserved. In such cases, it is the responsibility of the system administrators to make relevant variances known to their users.</p>
+            </div>
+
+            <div class="policy-section">
+              <h3>Definitions</h3>
+              <div class="definition-grid">
+                <div class="definition-card">
+                  <h4>Institute</h4>
+                  <p>The Tawi-Tawi College of Technology and Oceanography of the Mindanao State University network (TCTOnet) is a connection of networks of the member units of the Mindanao State University – Tawi-Tawi College of Technology and Oceanography (referred here as the Institute) and affiliated units.</p>
+                </div>
+                <div class="definition-card">
+                  <h4>Network Member</h4>
+                  <p>An Institute member or affiliated unit connected to the TCTOnet is referred to here as a network member.</p>
+                  <p>The MSU-TCTO Information and Communications Technology Office (ICTO) is responsible for the connection of the Institute members and affiliated units to TCTOnet and for TCTOnet to the Internet.</p>
+                </div>
+                <div class="definition-card">
+                  <h4>System Administrator</h4>
+                  <p>A system administrator is a person or group with system privileges responsible for the operation and security of one or more networked computing resources, as determined by the network member.</p>
+                </div>
+                <div class="definition-card">
+                  <h4>User</h4>
+                  <p>A user is a person who is given exclusive access by the network member to an account on the network member's computer system. When the phrase "your account" is used, this pertains to the account described above. The network member owns all accounts on its computer systems. A user should only use his/her account for the purposes for which it has been issued.</p>
+                </div>
+                <div class="definition-card">
+                  <h4>Password</h4>
+                  <p>A password is an access code that must be a combination of letters and numbers. Each user is responsible for using a good password. A poor password is one that is found in the dictionary or one that is easily related to the user (e.g., name, nickname, birthday, address, favorite food, and the like). A user must not write his/her password on a sheet of paper, notebook, electronic organizer, or the like.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="policy-section">
+              <h3>Purpose</h3>
+              <p>The TCTOnet aims to contribute to the realization of the MSU-TCTO Institute Mission-Vision Statement and to provide access to the Internet to contribute broadly to educational, research, and economic development in the Philippines.</p>
+            </div>
+
+            <div class="policy-section">
+              <h3>Acceptable Use</h3>
+              <p>This represents a guide to the acceptable use of TCTOnet. Any network member - in order to use the network or any other networks which are used as a result of their TCTOnet connection - must comply with this policy and the stated purposes and Acceptable Use Policies of any other networks or hosts used. Each network member is responsible for its users' activity and ensuring that its users are familiar with the TCTOnet Acceptable Use Policy or an equivalent policy. In addition, it is expected that each member will maintain and enforce its own Acceptable Use Policy. At a minimum, the Institute expects such policy will include:</p>
+              <div class="guidelines-list">
+                <div class="guideline-item">
+                  <div class="guideline-icon">✓</div>
+                  <div class="guideline-content">
+                    <h4>Respect Privacy</h4>
+                    <p>To respect the privacy of other users. For example, users shall not intentionally seek information on, obtain copies of, or modify files, other data, or passwords belonging to other users, or represent themselves as another user unless explicitly authorized to do so by that user.</p>
+                  </div>
+                </div>
+                <div class="guideline-item">
+                  <div class="guideline-icon">✓</div>
+                  <div class="guideline-content">
+                    <h4>Respect Legal Protection</h4>
+                    <p>Respect the legal protection provided by copyright and license to programs and data.</p>
+                  </div>
+                </div>
+                <div class="guideline-item">
+                  <div class="guideline-icon">✓</div>
+                  <div class="guideline-content">
+                    <h4>Respect System Integrity</h4>
+                    <p>To respect the integrity of computing systems. For example, users shall not intentionally develop programs that harass other users; infiltrate a computer or computing system; send bogus aliases/messages via electronic mail, newsgroups, or any Internet service; and/or damage or alter the software components of a computer or computing system.</p>
+                  </div>
+                </div>
+                <div class="guideline-item">
+                  <div class="guideline-icon">✓</div>
+                  <div class="guideline-content">
+                    <h4>Research and Experimentation</h4>
+                    <p>Use by member units as a laboratory for research and experimentation in computer communications, where such use does not interfere with production usage. However, any experimental use requiring modification to router software or protocol layers below ISO layer 4 requires prior review by ICTO.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="policy-section">
+              <h3>Policies and Guidelines</h3>
+              <p>The following policies and guidelines will be applied to determine whether or not a particular use of TCTOnet is appropriate:</p>
+              <ul>
+                <li>The intent of this policy is to make clear certain uses which are consistent with the purposes of TCTOnet, not to exhaustively enumerate all such possible uses.</li>
+                <li>The Institute may at any time make determinations that particular uses are or are not consistent with the purposes of TCTOnet.</li>
+                <li>Computing resource users are encouraged to practice cooperative computing. For example:
+                  <ul>
+                    <li>Regular deletion of unneeded files from one's accounts on shared computing resources</li>
+                    <li>Refraining from overuse of connect time, information storage space, printing facilities, or processing capacity</li>
+                    <li>Refraining from overuse of interactive network utilities</li>
+                    <li>Refraining from use of sounds and visuals which might be disruptive to others</li>
+                    <li>Refraining from use of any computing resource in an irresponsible manner</li>
+                    <li>Refraining from unauthorized use of departmental or individual computing resources, such as a personal or departmental laser printer or modem.</li>
+                  </ul>
+                </li>
+                <li>Malicious use is not acceptable. Use should be consistent with the ethical standards accepted by the Institute community. TCTOnet may not be used in ways that violate applicable laws or regulations. Use of TCTOnet and any attached network in a manner that precludes or significantly hampers its use by others is not allowed. Examples of unacceptable use include, but are not limited to, the following:
+                  <ul>
+                    <li>Accessing or attempting to access the password of an account that does not belong to you</li>
+                    <li>Harassment of other users</li>
+                    <li>Libeling or slandering other users</li>
+                    <li>Destruction of or damage to equipment, software, or data belonging to the Institute or other users</li>
+                    <li>Disruption or unauthorized monitoring of electronic communications</li>
+                    <li>Unauthorized copying of copyright-protected material</li>
+                    <li>Violation of computer system security</li>
+                    <li>Unauthorized use of computer accounts, access codes, or network identification numbers assigned to others</li>
+                    <li>Use of bogus aliases</li>
+                    <li>Use of TCTOnet and Internet services to send information repeatedly (e.g., posting an article in numerous newsgroups; sending electronic mail to several users and/or mailing lists)</li>
+                    <li>Use of TCTOnet and Internet services to send or attempt to send information forming a chain, pyramid, or similar scheme or artifice</li>
+                    <li>Use of computer communications facilities in ways that unnecessarily impeded the computing activities of others (such as randomly initiating interactive electronic communications or e-mail exchanges, overuse of interactive network utilities, and so forth)</li>
+                    <li>Academic dishonesty (plagiarism, cheating, et al)</li>
+                    <li>Violation of software license agreements</li>
+                    <li>Violation of another user's privacy</li>
+                  </ul>
+                </li>
+                <li>Connections which create routing patterns that are inconsistent with the effective and shared use of the network may not be established.</li>
+                <li>Unsolicited advertising is not acceptable. Advertising is permitted on some mailing lists and news groups if the mailing list or news group explicitly allows advertising. Announcements of new products or services are acceptable.</li>
+                <li>Faculty, staff, and students may use them only for purposes related to their studies, their responsibilities for providing instruction, the discharge of their duties as employees, their official business with the Institute, and other Institute-sanctioned activities. The use of Institute computing resources for commercial purposes is permitted only by special arrangement with the appropriate Institute official or as defined in existing Institute policies.</li>
+                <li>Use of the network for recreational games is not acceptable when such use places a heavy load on scarce resources.</li>
+              </ul>
+            </div>
+
+            <div class="policy-section">
+              <h3>Security</h3>
+              <p>The Institute assumes that users are aware that electronic files are not necessarily secure. Users will be informed of methods available for protecting information on TCTOnet from loss, tampering, unauthorized search, or other access. Levels of obtainable security will vary depending on the computer system. Information on procedures appropriate to each resource will be available from the MSU-TCTO ICTO.</p>
+            </div>
+
+            <div class="policy-section">
+              <h3>Confidentiality</h3>
+              <p>In general, the Institute will treat information stored on computers as confidential (whether or not the computer operating system protects that information). Requests for disclosure of information will be honored only under one of the following conditions:</p>
+              <ul>
+                <li>when approved by the MSU-TCTO administration;</li>
+                <li>when authorized by the owners of the information;</li>
+                <li>when required by the Philippine law.</li>
+              </ul>
+              <p>Except when inappropriate, computer users will receive prior notice of such disclosures. (Viewing of information in the course of normal system maintenance does not constitute disclosure.)</p>
+            </div>
+
+            <div class="policy-section">
+              <h3>Warning</h3>
+              <p>Users of electronic mail systems should be aware that electronic mail, in its current form, cannot be fully secured and is, therefore, extremely vulnerable to unauthorized access and modification. Users must take caution when sending information via TCTOnet and the Internet.</p>
+            </div>
+
+            <div class="policy-section">
+              <h3>Responsibility of Users</h3>
+              <p>The user is responsible for the correct and sufficient use of the tools available for maintaining the security of information stored on each computer system. The following precautions are strongly recommended:</p>
+              <ul>
+                <li>Computer accounts, passwords, and other types of authorization that are assigned to individual users should not be shared with others.</li>
+                <li>The user should assign an obscure account password and change it frequently.</li>
+                <li>The user should understand the level of protection each computer system automatically applies to files and supplement it, if necessary, for sensitive information.</li>
+                <li>The microcomputer user should be aware of computer viruses and other destructive computer programs and take steps to avoid being a victim or unwitting distributor of these processes.</li>
+              </ul>
+              <p>Ultimate responsibility for the resolution of problems related to the invasion of the user's privacy or loss of data rests with the user. However, a reasonable effort will be made to lessen the impact of such loss or damage.</p>
+            </div>
+
+            <div class="policy-section">
+              <h3>Account Expiration</h3>
+              <p>Access to the network will be discontinued at the end of each semester, in both the undergraduate and graduate levels. The student may reactivate the expired account online after enrollment.</p>
+            </div>
+
+            <div class="policy-section">
+              <h3>Remedial Actions</h3>
+              <p>When ICTO learns of possible inappropriate use, ICTO staff will notify the member responsible, which must take immediate remedial action and inform ICTO of their action. In an emergency, to prevent further unauthorized activity, ICTO may temporarily disconnect the member from TCTOnet. If deemed necessary by ICTO staff, every effort will be made to inform the member prior to disconnection, and every effort will be made to reestablish the connection as soon as it is mutually deemed safe. Violators of this policy will be subject to the Institute's standard disciplinary procedures and may also lose their computing privileges. Violations of the policies described above regarding the legal and ethical use of TCTOnet will be addressed in a serious and appropriate manner. Illegal acts involving TCTOnet may also be subject to prosecution by the proper authorities. Any determination of non-acceptable usage serious enough to require disconnection shall be promptly communicated to every representative of the TCTOnet member through an established means of publication.</p>
+            </div>
+
+            <div class="policy-section">
+              <h3>Disclaimer</h3>
+              <p>As part of the services available through TCTOnet, the Institute provides access to a large number of conferences, lists, bulletin boards, and information servers. Some of these may contain objectionable material. For those facilities for which the Institute has control, the policies described here apply. The Institute takes no responsibility for the content of those entities over which it has no control. Please be aware that potentially offensive material may be found in those archives, and use the system with the understanding that the Institute neither assumes responsibility for nor endorses any content found therein.</p>
+            </div>
+
+            <div class="policy-section">
+              <h3>Use of This Document</h3>
+              <p>This document may be used or copied without alteration for information dissemination. It may also be copied or modified to formulate an acceptable use policy for another institution.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Terms and Conditions -->
+        <div class="policy-content" id="terms">
+          <div class="policy-header">
+            <div class="policy-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h2>Website Usage Terms and Conditions</h2>
+            <p class="policy-description">Terms governing the use of MSU-TCTO's website and digital services</p>
+          </div>
+
+          <div class="policy-body">
+            <div class="policy-section">
+              <p>Welcome to our website. If you continue to browse and use this website, you are agreeing to comply with and be bound by the following terms and conditions of use, which govern Tawi-Tawi College of Technology and Oceanography of the Mindanao State University's relationship with you in relation to this website.</p>
+              <p>The term "Tawi-Tawi College of Technology and Oceanography of the Mindanao State University" or "Mindanao State University-Tawi-Tawi College of Technology and Oceanography" or "MSU-Tawi-Tawi College of Technology and Oceanography" or "MSU-Tawi-Tawi" or "MSU-TCTO" or "us" or "we" refers to the owner of the website, whose office is MSU-Tawi-Tawi College of Technology and Oceanography (MSU-TCTO), Boheh Sallang, Sanga-Sanga, 7500 Bongao, Tawi-Tawi, Philippines. MSU-TCTO was established on August 4, 1969 as provided for by Republic Act (RA) 6060 and Batas Pambansa BLG. 197, The term "you" refers to the user or viewer of our website.</p>
+              <p>The use of this website is subject to the following terms of use:</p>
+              <ul>
+                <li>The content of the pages of this website is for your general information and use only. It is subject to change without notice.</li>
+                <li>Neither we nor any third parties provide any warranty or guarantee as to the accuracy, timeliness, performance, completeness or suitability of the information and materials found or offered on this website for any particular purpose. You acknowledge that such information and materials may contain inaccuracies or errors, and we expressly exclude liability for any such inaccuracies or errors to the fullest extent permitted by law.</li>
+                <li>Your use of any information or materials on this website is entirely at your own risk, for which we shall not be liable. It shall be your own responsibility to ensure that any products, services, or information available through this website meet your specific requirements.</li>
+                <li>This website contains material that is owned by or licensed to us. This material includes, but is not limited to, the design, layout, look, appearance, and graphics. Reproduction is prohibited other than in accordance with the copyright notice, which forms part of these terms and conditions.</li>
+                <li>All trademarks reproduced in this website that are not the property of, or licensed to, the operator are acknowledged on the website.</li>
+                <li>Unauthorized use of this website may give rise to a claim for damages and/or be a criminal offence.</li>
+                <li>From time to time, this website may also include links to other websites. These links are provided for your convenience to provide further information. They do not signify that we endorse the website(s). We have no responsibility for the content of the linked website(s).</li>
+                <li>You may not create a link to this website from another website or document without Tawi-Tawi College of Technology and Oceanography of the Mindanao State University's prior written consent.</li>
+                <li>Your use of this website and any dispute arising out of such use of the website is subject to the laws of the Philippines.</li>
+              </ul>
+            </div>
+
+            <div class="contact-info">
+              <h3>Contact Information</h3>
+              <p>For site-related comments, send them to: <a href="mailto:icto@msutawi-tawi.edu.ph">icto@msutawi-tawi.edu.ph</a></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Website Disclaimer -->
+        <div class="policy-content" id="disclaimer">
+          <div class="policy-header">
+            <div class="policy-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 9V13M12 17H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h2>Website Disclaimer</h2>
+            <p class="policy-description">Important disclaimers regarding the use of information on this website</p>
+          </div>
+
+          <div class="policy-body">
+            <div class="policy-section">
+              <p>The information contained in this website is for general information purposes only. The information is provided by "Tawi-Tawi College of Technology and Oceanography of the Mindanao State University" and whilst we endeavor to keep the information up-to-date and correct, we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability or availability with respect to the website or the information, products, services, or related graphics contained on the website for any purpose. Any reliance you place on such information is therefore strictly at your own risk.</p>
+              <p>In no event will we be liable for any loss or damage, including without limitation, indirect or consequential loss or damage, or any loss or damage whatsoever arising from loss of data or profits, arising out of, or in connection with, the use of this website.</p>
+              <p>Through this website, you are able to link to other websites which are not under the control of "Tawi-Tawi College of Technology and Oceanography of the Mindanao State University." We have no control over the nature, content, and availability of those sites. The inclusion of any links does not necessarily imply a recommendation or endorse the views expressed within them.</p>
+              <p>Every effort is made to keep the website up and running smoothly. However, "Tawi-Tawi College of Technology and Oceanography of the Mindanao State University" takes no responsibility for, and will not be liable for, the website being temporarily unavailable due to technical issues beyond our control.</p>
+            </div>
+
+            <div class="contact-info">
+              <h3>Contact Information</h3>
+              <p>For site-related comments, send them to: <a href="mailto:icto@msutawi-tawi.edu.ph">icto@msutawi-tawi.edu.ph</a></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Privacy and Security Policy -->
+        <div class="policy-content" id="privacy">
+          <div class="policy-header">
+            <div class="policy-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 15V3M12 15L8 11M12 15L16 11M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h2>Website Privacy and Security Policy</h2>
+            <p class="policy-description">Comprehensive privacy and security guidelines for protecting user information</p>
+          </div>
+
+          <div class="policy-body">
+            <div class="policy-section">
+              <p>The purpose of this document is to establish and promote the ethical, legal, and secure use of computing and electronic communications for all members of the Tawi-Tawi College of Technology and Oceanography of the Mindanao State University (MSU-TCTO).</p>
+              <p>The Tawi-Tawi College of Technology and Oceanography of the Mindanao State University cherishes freedom of expression, the diversity of values and perspectives inherent in an academic institution, the right to acknowledgment, and the value of privacy for all members of the MSU-TCTO community. At the same time, MSU-TCTO may find it necessary to access and disclose information from computer and network users' accounts to the extent required by law, to uphold contractual obligations of other MSU-TCTO policies, or to diagnose and correct technical problems. For this reason, the ultimate privacy of messages and files cannot be ensured. In addition, system failures may lead to loss of data, so users should not assume that their messages and files are secure.</p>
+              <p>Neither MSU-TCTO nor its agents restrict the content of material transported across its networks. While MSU-TCTO does not position itself as a censor, it reserves the right to limit access to its networks or to remove material stored or posted on MSU-TCTO computers when applicable to MSU-TCTO policies, contractual obligations, or if Philippine laws are violated. Alleged violations will receive the same academic due process as any other alleged violation of MSU-TCTO policy, contractual obligations, or Philippine laws.</p>
+              <h4>General</h4>
+              <p>The Tawi-Tawi College of Technology and Oceanography of the Mindanao State University (MSU-TCTO) respects the privacy of every individual who visits our site. This Privacy Policy outlines the information that the MSU-TCTO Website may collect and how we may use that information. MSU-TCTO reserves the right to alter this policy at any time by posting a new privacy policy at this location.</p>
+              <h4>Definition</h4>
+              <p>The "Tawi-Tawi College of Technology and Oceanography of the Mindanao State University Website" (MSU-TCTO Website) refers to publicly accessible pages hosted under the domain msutawi-tawi.edu.ph, as well as private, secure student, employee, and alumni pages under the same domain.</p>
+              <p>The MSU-TCTO Website contains links to other non-MSU-TCTO sites, such as external sites for alumni groups. Please be aware that MSU-TCTO is not responsible for the privacy practices of those sites. This policy applies solely to information collected by this Website.</p>
+              <h4>Personal Data</h4>
+              <p>Tawi-Tawi College of Technology and Oceanography of the Mindanao State University (MSU-TCTO) will not collect any personally identifiable information about you, such as name, address, telephone number, or e-mail address ("personal data") through our site unless you have provided it to us voluntarily on our public pages or through our private, secure students, employees, and alumni pages for which you must register. If you do not want your personal data collected, please do not submit it to us.</p>
+              <p>When you do provide us with personal data, we may use that information in the following ways, unless stated otherwise: we may process that information in order to fulfill a request you have placed with us; we may update our alumni database; we may store and process that information to better understand your needs and how we can improve our products and services; we (or a fulfillment house or other third party on our behalf in connection with a promotion) may use that information to contact you; and/or we may provide other third parties with aggregate-but not individual-information about visitors to, or users of, our site. We will NOT sell, rent, or market personal data about you to third parties.</p>
+              <h4>Children/Direct Notice to Parents</h4>
+              <p>The Tawi-Tawi College of Technology and Oceanography of the Mindanao State University Website (MSU-TCTO Website) has no intention of collecting any personal data from individuals under 13 years of age without parental consent. Where appropriate, we will specifically instruct those under age 13 not to submit such information on our site and/or will take reasonable steps to ensure parental consent to such submissions.</p>
+              <h4>Additional Information Collected Automatically</h4>
+              <p>In some cases, Tawi-Tawi College of Technology and Oceanography of the Mindanao State University (MSU-TCTO) may automatically (i.e., not via registration) collect information about you that is not personally identifiable. Examples of this type of information include the type of Internet browser you are using, the type of computer operating system you are using, the IP address of your computer, and the domain name of the Website from which you linked to our site. This information is used to ensure that our site meets the needs of the majority of our users, as well as to diagnose problems with our server. This information also helps us produce statistics on how often our various pages are visited.</p>
+              <h4>Information Placed Automatically on Your Computer/Cookies</h4>
+              <p>When you view our site, we may store some information on your computer. This information will be in the form of a "cookie" or similar file and can help us in many ways. For example, cookies allow us to tailor a Website to better match your interests and preferences. With most Internet browsers, you can erase cookies from your computer's hard drive, block all cookies, or receive a warning before a cookie is stored. Please refer to your browser instructions or "help" screen to learn more about these functions.</p>
+              <h4>Public Forums</h4>
+              <p>This site may make message boards available for public use. Please remember that any information that is disclosed in these areas becomes public information; you should exercise caution when deciding to disclose any personal information.</p>
+              <h4>Security</h4>
+              <p>Tawi-Tawi College of Technology and Oceanography of the Mindanao State University Website (MSU-TCTO Website) takes every precaution to protect our users' information. When users submit sensitive information via our site, this information is encrypted and remains secure during all stages of transmission. MSU-TCTO complies with all Philippine statutes requiring safeguards on specific types of information.</p>
+              <h4>Integrated Services</h4>
+              <p>You may be given the option to access or register for the Service through the use of your user name and passwords for certain services provided by third parties (each, an "Integrated Service"), such as through the use of your Google account, or otherwise have the option to authorize an Integrated Service to provide Personal Data or other information to us. By authorizing us to connect with an Integrated Service, you authorize us to access and store your name, email address(es), and basic profile information that the Integrated Service makes available to us, and to use and disclose it in accordance with this Policy. You should check your privacy settings on each Integrated Service to understand what information that Integrated Service makes available to us, and make changes as appropriate. Please review each Integrated Service's terms of use and privacy policies carefully before using their services and connecting to our Service.</p>
+              <h4>Concerns/More Information</h4>
+              <p>Please contact us with any concerns or questions at:</p>
+              <h5>Contact Us</h5>
+              <p>The MSU-TCTO Web Development Team<br>
+              Information and Communication Technology Office<br>
+              2/F Bulante Hall, Admin Building<br>
+              MSU-Tawi-Tawi College of Technology and Oceanography<br>
+              Boheh Sallang, Sanga-Sanga, 7500 Bongao, Tawi-Tawi, Philippines<br>
+              Email: icto@msutawi-tawi.edu.ph</p>
+            </div>
+            </div>
+
+            <div class="policy-section">
+              <h3>Contact Information</h3>
+              <div class="contact-card">
+                <h4>The MSU-TCTO Web Development Team</h4>
+                <p>Information and Communication Technology Office</p>
+                <p>2/F Bulante Hall, Admin Building</p>
+                <p>MSU-Tawi-Tawi College of Technology and Oceanography</p>
+                <p>Boheh Sallang, Sanga-Sanga, 7500 Bongao, Tawi-Tawi, Philippines</p>
+                <p>Email: <a href="mailto:icto@msutawi-tawi.edu.ph">icto@msutawi-tawi.edu.ph</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Copyright Notice -->
+        <div class="policy-content" id="copyright">
+          <div class="policy-header">
+            <div class="policy-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h2>Internet Copyright Notice</h2>
+            <p class="policy-description">Copyright protection and usage rights for MSU-TCTO's digital content</p>
+          </div>
+
+          <div class="policy-body">
+            <div class="policy-section">
+              <p>This website and its content is copyright of " Tawi-Tawi College of Technology and Oceanography of the Mindanao State University" - © "MSU-Tawi-Tawi College of Technology and Oceanography" 2000 - 2025. All rights reserved.</p>
+              <p>Any redistribution or reproduction of part or all of the contents in any form is prohibited other than the following:</p>
+              <ul>
+                <li>You may print or download to a local hard disk extracts for your personal and non-commercial use only</li>
+                <li>You may copy the content to individual third parties for their personal use, but only if you acknowledge the website as the source of the material</li>
+              </ul>
+              <p>You may not, except with our express written permission, distribute or commercially exploit the content. Nor may you transmit it or store it in any other website or other form of electronic retrieval system.</p>
+            </div>
+
+            <div class="contact-info">
+              <h3>Contact Information</h3>
+              <p>For site-related comments, send them to: <a href="mailto:icto@msutawi-tawi.edu.ph">icto@msutawi-tawi.edu.ph</a></p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer Navigation -->
+  <FooterNav />
+  
+  <!-- Main Footer -->
+  <Footer />
+
+  <style>
+    /* Legal Policies Page Styles */
+    .legal-policies-container {
+      min-height: 100vh;
+      background: #ffffff;
+      color: #333333;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      padding-top: 0; /* Ensure no top padding */
+      position: relative;
+      z-index: 1; /* Lower than navigation */
+    }
+
+    /* Hero Section */
+    .hero-section {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f8f9fa 100%);
+      position: relative;
+      overflow: hidden;
+      margin-top: 0; /* Ensure no top margin */
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(0,0,0,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero-icon {
+      margin-bottom: 2rem;
+      animation: float 3s ease-in-out infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .hero-icon svg {
+      color: #61063B;
+      filter: drop-shadow(0 0 10px rgba(97, 6, 59, 0.3));
+      width: 64px;
+      height: 64px;
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #61063B, #8B0D5E);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      margin-bottom: 3rem;
+      opacity: 0.7;
+      color: #666666;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: fadeIn 1s ease-out 0.3s both;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 2rem;
+      animation: fadeIn 1s ease-out 0.6s both;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 1rem;
+      background: rgba(97, 6, 59, 0.1);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(97, 6, 59, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .stat-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-number {
+      display: block;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #61063B;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      color: #666666;
+    }
+
+    /* Navigation Section */
+    .nav-section {
+      background: rgba(97, 6, 59, 0.05);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(97, 6, 59, 0.1);
+      position: sticky;
+      top: 120px; /* Exact positioning to eliminate gap */
+      z-index: 1000; /* Higher z-index to stay above footer */
+      margin-top: 0;
+      padding-top: 0; /* Remove padding to eliminate gap */
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .policy-nav {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding: 1rem 0;
+    }
+
+    .nav-tab {
+      background: rgba(97, 6, 59, 0.1);
+      border: 1px solid rgba(97, 6, 59, 0.2);
+      color: #61063B;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+      font-weight: 500;
+    }
+
+    .nav-tab:hover {
+      background: rgba(97, 6, 59, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .nav-tab.active {
+      background: linear-gradient(135deg, #61063B, #8B0D5E);
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(97, 6, 59, 0.3);
+    }
+
+    /* Content Section */
+    .content-section {
+      padding: 4rem 2rem;
+      position: relative;
+      z-index: 10; /* Lower than navigation */
+      margin-top: 0; /* Remove margin to eliminate gap */
+      background: #ffffff;
+    }
+
+    .content-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .policy-content {
+      display: none;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    .policy-content.active {
+      display: block;
+    }
+
+    .policy-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: rgba(97, 6, 59, 0.05);
+      border-radius: 16px;
+      border: 1px solid rgba(97, 6, 59, 0.1);
+    }
+
+    .policy-icon {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .policy-icon svg {
+      color: #61063B;
+      width: 32px;
+      height: 32px;
+    }
+
+    .policy-header h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #61063B, #8B0D5E);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .policy-description {
+      font-size: 1.1rem;
+      opacity: 0.7;
+      color: #666666;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .policy-body {
+      display: grid;
+      gap: 3rem;
+    }
+
+    .policy-section {
+      background: rgba(97, 6, 59, 0.02);
+      border-radius: 12px;
+      padding: 2rem;
+      border: 1px solid rgba(97, 6, 59, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .policy-section h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #61063B;
+    }
+
+    .policy-section p {
+      line-height: 1.7;
+      margin-bottom: 1rem;
+      color: #333333;
+    }
+
+    /* Custom bullet point styling */
+    .policy-section ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 1rem 0;
+    }
+
+    .policy-section ul li {
+      position: relative;
+      padding-left: 2rem;
+      margin-bottom: 0.75rem;
+      line-height: 1.6;
+      color: #333333;
+    }
+
+    .policy-section ul li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #61063B;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .policy-section ul ul {
+      margin: 0.5rem 0;
+      padding-left: 1rem;
+    }
+
+    .policy-section ul ul li {
+      padding-left: 1.5rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .policy-section ul ul li::before {
+      content: "◦";
+      color: #8B0D5E;
+      font-size: 1rem;
+    }
+
+    /* Special styling for main bullet points */
+    .policy-section ul li:has(ul) {
+      font-weight: 600;
+      color: #61063B;
+      margin-bottom: 1rem;
+    }
+
+    .policy-section ul li:has(ul)::before {
+      content: "▶";
+      color: #61063B;
+      font-size: 0.9rem;
+    }
+
+    /* Definition Grid */
+    .definition-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .definition-card {
+      background: rgba(97, 6, 59, 0.05);
+      border-radius: 8px;
+      padding: 1.5rem;
+      border: 1px solid rgba(97, 6, 59, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .definition-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .definition-card h4 {
+      color: #61063B;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    /* Guidelines List */
+    .guidelines-list {
+      display: grid;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .guideline-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      background: rgba(97, 6, 59, 0.05);
+      border-radius: 8px;
+      padding: 1.5rem;
+      border: 1px solid rgba(97, 6, 59, 0.1);
+    }
+
+    .guideline-icon {
+      background: #4CAF50;
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .guideline-content h4 {
+      color: #61063B;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    /* Security Grid */
+    .security-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .security-card {
+      background: rgba(97, 6, 59, 0.05);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      border: 1px solid rgba(97, 6, 59, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .security-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .security-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .security-card h4 {
+      color: #61063B;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    /* Terms List */
+    .terms-list {
+      display: grid;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .term-item {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      background: rgba(97, 6, 59, 0.05);
+      border-radius: 8px;
+      padding: 1.5rem;
+      border: 1px solid rgba(97, 6, 59, 0.1);
+    }
+
+    .term-number {
+      background: linear-gradient(135deg, #61063B, #8B0D5E);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .term-content p {
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* Privacy Grid */
+    .privacy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .privacy-card {
+      background: rgba(97, 6, 59, 0.05);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      border: 1px solid rgba(97, 6, 59, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .privacy-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .privacy-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .privacy-card h4 {
+      color: #61063B;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    /* Contact Info */
+    .contact-info {
+      background: linear-gradient(135deg, rgba(97, 6, 59, 0.1), rgba(139, 13, 94, 0.1));
+      border-radius: 12px;
+      padding: 2rem;
+      border: 1px solid rgba(97, 6, 59, 0.3);
+      text-align: center;
+    }
+
+    .contact-info h3 {
+      color: #61063B;
+      margin-bottom: 1rem;
+    }
+
+    .contact-info a {
+      color: #61063B;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+
+    /* Contact Card */
+    .contact-card {
+      background: rgba(97, 6, 59, 0.05);
+      border-radius: 12px;
+      padding: 2rem;
+      border: 1px solid rgba(97, 6, 59, 0.1);
+      text-align: center;
+    }
+
+    .contact-card h4 {
+      color: #61063B;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .contact-card p {
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-card a {
+      color: #61063B;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* Copyright Banner */
+    .copyright-banner {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      background: linear-gradient(135deg, rgba(97, 6, 59, 0.1), rgba(139, 13, 94, 0.1));
+      border-radius: 12px;
+      padding: 2rem;
+      border: 1px solid rgba(97, 6, 59, 0.3);
+    }
+
+    .copyright-icon {
+      font-size: 4rem;
+      color: #61063B;
+      font-weight: bold;
+    }
+
+    .copyright-text h4 {
+      color: #61063B;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    /* Usage Grid */
+    .usage-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .usage-card {
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      border: 1px solid rgba(97, 6, 59, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .usage-card.allowed {
+      background: rgba(76, 175, 80, 0.1);
+      border-color: rgba(76, 175, 80, 0.3);
+    }
+
+    .usage-card.prohibited {
+      background: rgba(244, 67, 54, 0.1);
+      border-color: rgba(244, 67, 54, 0.3);
+    }
+
+    .usage-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .usage-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: bold;
+    }
+
+    .usage-card.allowed .usage-icon {
+      color: #4CAF50;
+    }
+
+    .usage-card.prohibited .usage-icon {
+      color: #F44336;
+    }
+
+    .usage-card h4 {
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .usage-card.allowed h4 {
+      color: #4CAF50;
+    }
+
+    .usage-card.prohibited h4 {
+      color: #F44336;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+
+      .hero-stats {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .nav-section {
+        top: 60px; /* Adjust for mobile navbar height - reduced for better alignment */
+        z-index: 1000; /* Higher z-index to stay above footer */
+        padding: 0.5rem 0; /* Reduce padding for mobile */
+      }
+
+      .nav-container {
+        padding: 0 1rem; /* Reduce container padding */
+      }
+
+      .policy-nav {
+        flex-wrap: nowrap; /* Force horizontal scroll */
+        gap: 0.25rem; /* Reduce gap for mobile */
+        padding: 0.5rem 0; /* Reduce padding */
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+      }
+
+      .nav-tab {
+        flex: 0 0 auto; /* Don't allow shrinking */
+        min-width: 140px; /* Minimum width for touch */
+        padding: 0.75rem 1rem; /* Adjust padding for mobile */
+        font-size: 0.875rem; /* Smaller font for mobile */
+        white-space: nowrap;
+        border-radius: 6px; /* Slightly smaller radius */
+      }
+
+      .definition-grid,
+      .security-grid,
+      .privacy-grid,
+      .usage-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem; /* Reduce gap for mobile */
+      }
+
+      .policy-section {
+        padding: 1.5rem; /* Reduce padding for mobile */
+        margin-bottom: 1.5rem;
+      }
+
+      .policy-header {
+        padding: 1.5rem; /* Reduce padding for mobile */
+      }
+
+      .policy-header h2 {
+        font-size: 1.75rem; /* Smaller title for mobile */
+      }
+
+      .content-section {
+        padding: 2rem 1rem; /* Reduce padding for mobile */
+      }
+
+      .copyright-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem; /* Reduce padding for mobile */
+      }
+
+      .guideline-item,
+      .term-item {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem; /* Reduce padding for mobile */
+      }
+
+      .definition-card,
+      .security-card,
+      .privacy-card,
+      .usage-card {
+        padding: 1.5rem; /* Reduce padding for mobile */
+      }
+
+      .contact-info,
+      .contact-card {
+        padding: 1.5rem; /* Reduce padding for mobile */
+      }
+    }
+
+    /* Additional fixes for navbar overlap */
+    @media (min-width: 769px) {
+      .nav-section {
+        top: 120px; /* Exact positioning for desktop */
+        z-index: 1000; /* Higher z-index to stay above footer */
+      }
+    }
+
+    /* Extra small mobile devices */
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 1.75rem;
+      }
+
+      .nav-section {
+        top: 55px; /* Further reduced for very small screens */
+      }
+
+      .nav-tab {
+        min-width: 120px;
+        font-size: 0.8rem;
+        padding: 0.5rem 0.75rem;
+      }
+
+      .policy-nav {
+        gap: 0.125rem;
+      }
+
+      .content-section {
+        padding: 1.5rem 0.75rem;
+      }
+
+      .policy-section {
+        padding: 1rem;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+  </style>
+
+  <script>
+    // Tab Navigation
+    document.addEventListener('DOMContentLoaded', function() {
+      const tabs = document.querySelectorAll('.nav-tab');
+      const contents = document.querySelectorAll('.policy-content');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          // Remove active class from all tabs and contents
+          tabs.forEach(t => t.classList.remove('active'));
+          contents.forEach(c => c.classList.remove('active'));
+
+          // Add active class to clicked tab
+          tab.classList.add('active');
+
+          // Show corresponding content
+          const target = tab.getAttribute('data-target');
+          const targetContent = document.getElementById(target);
+          if (targetContent) {
+            targetContent.classList.add('active');
+          }
+        });
+      });
+
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+
+      // Add scroll effect to navigation
+      window.addEventListener('scroll', () => {
+        const nav = document.querySelector('.nav-section');
+        if (nav) {
+          if (window.scrollY > 100) {
+            nav.style.background = 'rgba(0, 0, 0, 0.3)';
+          } else {
+            nav.style.background = 'rgba(0, 0, 0, 0.2)';
+          }
+        }
+      });
+
+      // Handle anchor links from footer
+      function handleAnchorLinks() {
+        const hash = window.location.hash;
+        if (hash) {
+          // Remove the # from the hash
+          const targetId = hash.substring(1);
+          
+          // Find the corresponding tab and content
+          const targetTab = document.querySelector(`[data-target="${targetId}"]`);
+          const targetContent = document.getElementById(targetId);
+          
+          if (targetTab && targetContent) {
+            // Remove active class from all tabs and contents
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+            
+            // Add active class to target tab and content
+            targetTab.classList.add('active');
+            targetContent.classList.add('active');
+            
+            // Smooth scroll to the content
+            setTimeout(() => {
+              targetContent.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+              });
+            }, 100);
+          }
+        }
+      }
+
+      // Handle anchor links on page load
+      handleAnchorLinks();
+
+      // Handle anchor links when hash changes
+      window.addEventListener('hashchange', handleAnchorLinks);
+    });
+  </script>
+</Layout>
+
+
+
+
+
+

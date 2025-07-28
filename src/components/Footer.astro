@@ -575,16 +575,32 @@ const threeLatestArticles = await get3LatestArticle();
     </div>
 
     <!-- Copyright Section -->
-    <div class="bg-msu-dark-blue/80 py-8 border-t border-msu-main-color/20">
+    <div class="bg-msu-dark-blue/80 py-6 sm:py-8 border-t border-msu-main-color/20">
         <div class="container mx-auto px-4 xl:px-[12.5%]">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <p class="text-titanium text-center md:text-left mb-4 md:mb-0">
-                    © <span id="currentYear"></span> Mindanao State University - Tawi-Tawi College of Technology and Oceanography. All rights reserved.
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+                <p class="text-titanium text-center justify-center text-sm sm:text-base">
+                    © 2025 Mindanao State University - Tawi-Tawi College of Technology and Oceanography. All rights reserved.
                 </p>
-                <div class="flex space-x-4">
-                    <a href="#" class="text-titanium hover:text-msu-gold transition-colors hover:underline">Privacy Policy</a>
-                    <a href="#" class="text-titanium hover:text-msu-gold transition-colors hover:underline">Terms of Service</a>
-                    <a href="#" class="text-titanium hover:text-msu-gold transition-colors hover:underline">Accessibility</a>
+                <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="/legal-policies#privacy" class="text-titanium hover:text-msu-gold transition-all duration-300 hover:scale-105 text-sm sm:text-base">
+                            PRIVACY STATEMENT
+                        </a>
+                        <a href="/legal-policies#copyright" class="text-titanium hover:text-msu-gold transition-all duration-300 hover:scale-105 text-sm sm:text-base">
+                            COPYRIGHT
+                        </a>
+                        <a href="/legal-policies#net-usage" class="text-titanium hover:text-msu-gold transition-all duration-300 hover:scale-105 text-sm sm:text-base">
+                            Usage Policy
+                        </a>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="/legal-policies#terms" class="text-titanium hover:text-msu-gold transition-all duration-300 hover:scale-105 text-sm sm:text-base">
+                            Terms and Conditions
+                        </a>
+                        <a href="/legal-policies#disclaimer" class="text-titanium hover:text-msu-gold transition-all duration-300 hover:scale-105 text-sm sm:text-base">
+                            Disclaimer
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

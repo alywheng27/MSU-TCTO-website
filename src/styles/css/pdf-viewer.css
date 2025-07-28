@@ -1,0 +1,274 @@
+/* PDF Viewer Styles - MSU-IIT Style */
+.pdf-viewer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.pdf-viewer-container {
+  width: 100%;
+  max-width: 90vw;
+  height: 90vh;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.pdf-viewer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: #1f2937;
+  color: white;
+  border-bottom: 1px solid #374151;
+}
+
+.pdf-viewer-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pdf-viewer-page-info {
+  font-size: 0.875rem;
+  color: #d1d5db;
+  margin-left: 1rem;
+}
+
+.pdf-viewer-close {
+  background: none;
+  border: none;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.pdf-viewer-close:hover {
+  background-color: #374151;
+}
+
+.pdf-viewer-content {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.pdf-viewer-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.pdf-viewer-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9fafb;
+}
+
+.pdf-viewer-error {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9fafb;
+}
+
+.pdf-viewer-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: #1f2937;
+  color: white;
+  border-top: 1px solid #374151;
+}
+
+.pdf-viewer-control-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pdf-viewer-button {
+  background: none;
+  border: none;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pdf-viewer-button:hover:not(:disabled) {
+  background-color: #374151;
+}
+
+.pdf-viewer-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pdf-viewer-zoom-display {
+  font-size: 0.875rem;
+  font-weight: 500;
+  min-width: 60px;
+  text-align: center;
+}
+
+/* Animation for modal appearance */
+@keyframes pdfViewerFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.pdf-viewer-container {
+  animation: pdfViewerFadeIn 0.3s ease-out;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .pdf-viewer-container {
+    max-width: 95vw;
+    height: 95vh;
+  }
+  
+  .pdf-viewer-controls {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .pdf-viewer-control-group {
+    justify-content: center;
+  }
+}
+
+/* Custom scrollbar for the PDF container */
+.pdf-viewer-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.pdf-viewer-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.pdf-viewer-content::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.pdf-viewer-content::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Enhanced button styles for MSU-IIT style */
+.pdf-viewer-button {
+  background: none;
+  border: none;
+  color: #d1d5db;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+}
+
+.pdf-viewer-button:hover {
+  background-color: #374151;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.pdf-viewer-button:active {
+  transform: translateY(0);
+}
+
+/* Loading animation enhancement */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Error state styling */
+.pdf-viewer-error {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+/* Zoom controls styling */
+.zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(31, 41, 55, 0.1);
+  padding: 0.25rem;
+  border-radius: 0.5rem;
+}
+
+/* Fullscreen button enhancement */
+.fullscreen-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.fullscreen-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(59, 130, 246, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.fullscreen-button:hover::before {
+  width: 100%;
+  height: 100%;
+} 
