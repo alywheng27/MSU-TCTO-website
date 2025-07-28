@@ -7,6 +7,7 @@ import netlify from "@astrojs/netlify";  // ✅ Correct import
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://msutcto.edu.ph',
   integrations: [react(), tailwind(), sanity({
     projectId: 'w8lfrsa6',
     dataset: 'production',

@@ -14,49 +14,131 @@ const currentPath = Astro.url.pathname;
 	<main class="font-sans">
 		<Navbar path={currentPath} client:visible />
 
-		<!-- Hero Section with Video Background -->
+		<!-- Hero Section with Enhanced Video Background -->
 		<section class="relative bg-msu-main-color h-screen min-h-[700px] flex items-center overflow-hidden pt-[80px]">
-			<!-- Video Background -->
+			<!-- Enhanced Video Background with Parallax -->
 			<div class="absolute inset-0 z-0 overflow-hidden">
-				<video autoplay muted loop class="w-full h-full object-cover">
+				<video autoplay muted loop class="w-full h-full object-cover transform scale-110" id="heroVideo">
 					<source src="/video/msucamp.mp4" type="video/mp4">
 					<!-- Fallback image -->
-					<img src="/images/cof/cof.jpg" alt="College of Fisheries" class="w-full h-full object-cover">
+					<!-- Professional CAS Icon -->
+					<div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-msu-deep-ocean/5 to-msu-gold/10 p-8">
+						<svg class="w-40 h-40 text-msu-deep-ocean" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<circle cx="60" cy="60" r="55" fill="none" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+							<circle cx="60" cy="60" r="45" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
+							<rect x="35" y="40" width="50" height="35" fill="none" stroke="currentColor" stroke-width="2"/>
+							<rect x="40" y="45" width="40" height="25" fill="url(#buildingGradient)" stroke="currentColor" stroke-width="1"/>
+							<rect x="45" y="50" width="8" height="8" fill="currentColor" opacity="0.7"/>
+							<rect x="67" y="50" width="8" height="8" fill="currentColor" opacity="0.7"/>
+							<rect x="45" y="62" width="8" height="8" fill="currentColor" opacity="0.7"/>
+							<rect x="67" y="62" width="8" height="8" fill="currentColor" opacity="0.7"/>
+							<rect x="55" y="65" width="10" height="10" fill="currentColor" opacity="0.8"/>
+							<circle cx="25" cy="35" r="8" fill="url(#artsGradient)" stroke="currentColor" stroke-width="1.5"/>
+							<circle cx="28" cy="32" r="2" fill="white"/>
+							<circle cx="32" cy="36" r="2" fill="white"/>
+							<circle cx="26" cy="40" r="2" fill="white"/>
+							<circle cx="95" cy="35" r="8" fill="url(#sciencesGradient)" stroke="currentColor" stroke-width="1.5"/>
+							<circle cx="95" cy="35" r="3" fill="currentColor"/>
+							<ellipse cx="95" cy="35" rx="10" ry="4" fill="none" stroke="currentColor" stroke-width="1" transform="rotate(30 95 35)"/>
+							<ellipse cx="95" cy="35" rx="10" ry="4" fill="none" stroke="currentColor" stroke-width="1" transform="rotate(-30 95 35)"/>
+							<text x="25" y="85" text-anchor="middle" font-family="serif" font-size="14" font-weight="bold" fill="currentColor">∑</text>
+							<path d="M85 80 Q90 75 95 80 Q100 85 105 80" fill="none" stroke="currentColor" stroke-width="2"/>
+							<path d="M105 80 L110 75" stroke="currentColor" stroke-width="1.5"/>
+							<circle cx="60" cy="20" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+							<circle cx="60" cy="20" r="2" fill="currentColor"/>
+							<path d="M60 20 L60 40" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+							<path d="M25 35 L35 40" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+							<path d="M95 35 L75 40" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+							<path d="M25 85 L35 75" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+							<path d="M105 80 L75 75" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+							<rect x="58" y="75" width="4" height="15" fill="currentColor" opacity="0.6"/>
+							<defs>
+								<linearGradient id="buildingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+									<stop offset="0%" style="stop-color:#002855;stop-opacity:0.2"/>
+									<stop offset="100%" style="stop-color:#D4AF37;stop-opacity:0.3"/>
+								</linearGradient>
+								<linearGradient id="artsGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+									<stop offset="0%" style="stop-color:#FF6B6B"/>
+									<stop offset="100%" style="stop-color:#FF8E53"/>
+								</linearGradient>
+								<linearGradient id="sciencesGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+									<stop offset="0%" style="stop-color:#4ECDC4"/>
+									<stop offset="100%" style="stop-color:#45B7D1"/>
+								</linearGradient>
+							</defs>
+						</svg>
+						<div class="absolute bottom-6 left-1/2 transform -translate-x-1/2">
+							<div class="bg-gradient-to-r from-msu-deep-ocean to-msu-gold text-white px-4 py-2 rounded-full shadow-lg">
+								<div class="text-center">
+									<div class="text-sm font-bold">COLLEGE OF</div>
+									<div class="text-lg font-bold">ARTS & SCIENCES</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</video>
-				<div class="absolute inset-0 bg-black/40"></div>
+				<div class="absolute inset-0 bg-black/50"></div>
 			</div>
 			
-			<!-- Gradient overlay -->
-			<div class="absolute inset-0 bg-gradient-to-t from-msu-deep-ocean/90 via-msu-main-color/50 to-transparent z-1"></div>
+			<!-- Enhanced Gradient overlay with animated particles -->
+			<div class="absolute inset-0 bg-gradient-to-t from-msu-deep-ocean/95 via-msu-main-color/60 to-transparent z-1"></div>
 			
-			<div class="container mx-auto px-6 z-10 relative bottom-11">
-				<div class="max-w-4xl mx-auto text-center">
-					<div class="mb-8 bottom-11">
-						<img src="/images/College Logo/LOGO CAS.png" alt="College of Fisheries Logo" class="h-32 mx-auto mb-6">
+			<!-- Animated floating particles -->
+			<div class="absolute inset-0 z-2 overflow-hidden">
+				<div class="particles-container">
+					<div class="particle"></div>
+					<div class="particle"></div>
+					<div class="particle"></div>
+					<div class="particle"></div>
+					<div class="particle"></div>
+					<div class="particle"></div>
+				</div>
+			</div>
+			
+			<div class="container mx-auto px-6 z-10 relative">
+				<div class="max-w-5xl mx-auto text-center">
+					<!-- Enhanced Logo with glow effect -->
+					<div class="mb-4 animate-fadeInUp">
+						<div class="relative inline-block">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-32 w-32 mx-auto mb-3 text-white">
+								<path fill="currentColor" d="M12 3L1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82Z"/>
+							</svg>
+							<div class="absolute inset-0 bg-msu-gold/20 blur-xl rounded-full animate-ping"></div>
+						</div>
 					</div>
-					<h1 class="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight animate-fadeInUp">
-						College of <span class="text-white font-bold">Arts and Sciences</span>
+					<!-- Enhanced Typography with gradient text -->
+					<h1 class="text-6xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight animate-fadeInUp">
+						<span class="bg-gradient-to-r from-white via-msu-gold to-white bg-clip-text text-transparent">
+							College of Arts and Sciences
+						</span>
 					</h1>
-					<p class="text-xl text-white mb-8 max-w-2xl mx-auto animate-fadeInUp delay-100">
-						The Heart of Thought, the Soul of Innovation.
-					</p>
+					
+					<!-- Enhanced subtitle with animated underline -->
+					<div class="relative mb-12 animate-fadeInUp delay-100">
+						<p class="text-2xl md:text-3xl text-white font-light max-w-3xl mx-auto leading-relaxed">
+							The Heart of Thought, the Soul of Innovation
+						</p>
+						<div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-transparent via-msu-gold to-transparent animate-pulse"></div>
+					</div>
 				
-					<div class="flex flex-wrap justify-center gap-4 animate-fadeInUp delay-200">
+					<!-- Enhanced CTA buttons with hover effects -->
+					<div class="flex flex-wrap justify-center gap-6 animate-fadeInUp delay-200 mb-16 md:mb-20">
 						<a 
 							href="#programs" 
-							class="bg-msu-main-color hover:bg-msu-deep-ocean text-white font-bold py-3 px-8 rounded-full transition-all duration-300 inline-flex items-center hover:shadow-lg hover:-translate-y-1"
+							class="group bg-gradient-to-r from-msu-main-color to-msu-deep-ocean hover:from-msu-gold hover:to-msu-gold-dark text-white font-bold py-4 px-10 rounded-full transition-all duration-500 inline-flex items-center hover:shadow-2xl hover:-translate-y-2 transform hover:scale-105"
 						>
-							Explore Programs
-							<svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+							<span class="relative z-10">Explore Programs</span>
+							<svg class="w-6 h-6 ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
 							</svg>
+							<div class="absolute inset-0 bg-white/20 rounded-full blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 						</a>
 						<a 
 							href="#contact" 
-							class="bg-transparent border-2 border-white hover:bg-white/20 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 inline-flex items-center hover:shadow-lg hover:-translate-y-1"
+							class="group bg-transparent border-2 border-white hover:border-msu-gold text-white font-bold py-4 px-10 rounded-full transition-all duration-500 inline-flex items-center hover:shadow-2xl hover:-translate-y-2 transform hover:scale-105 backdrop-blur-sm"
 						>
-							Contact Us
-							<svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+							<span class="relative z-10">Contact Us</span>
+							<svg class="w-6 h-6 ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
 							</svg>
 						</a>
@@ -64,11 +146,20 @@ const currentPath = Astro.url.pathname;
 				</div>
 			</div>
 			
-			<!-- Scrolling indicator -->
-			<div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 animate-bounce">
-				<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-				</svg>
+			<!-- Enhanced scrolling indicator with mobile responsiveness -->
+			<div class="absolute bottom-2 md:bottom-4 left-1/2 transform -translate-x-1/2 z-10">
+				<div class="flex flex-col items-center space-y-1 md:space-y-2">
+					<span class="text-white text-xs md:text-sm font-light animate-pulse">Scroll to explore</span>
+					<div class="w-5 h-8 md:w-6 md:h-10 border-2 border-white rounded-full flex justify-center relative">
+						<div class="w-1 h-2 md:h-3 bg-white rounded-full mt-1 md:mt-2 animate-bounce"></div>
+						<!-- Enhanced scroll indicator with dots -->
+						<div class="absolute -bottom-4 md:-bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-1">
+							<div class="w-1 h-1 bg-white rounded-full animate-pulse"></div>
+							<div class="w-1 h-1 bg-white rounded-full animate-pulse" style="animation-delay: 0.2s;"></div>
+							<div class="w-1 h-1 bg-white rounded-full animate-pulse" style="animation-delay: 0.4s;"></div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</section>
 
@@ -97,71 +188,145 @@ const currentPath = Astro.url.pathname;
 			</div>
 		</section>
 
-		<!-- About Section with Tabs -->
-		<section class="py-20 bg-gray-50">
+		<!-- Enhanced About Section with Tabs -->
+		<section class="py-24 bg-gradient-to-br from-gray-50 to-white">
 			<div class="container mx-auto px-6">
-				<div class="flex flex-col lg:flex-row items-start gap-12">
+				<div class="text-center mb-16">
+					<h2 class="text-5xl font-bold text-msu-deep-ocean mb-6">About the College of Arts and Sciences</h2>
+					<p class="text-xl text-gray-600 max-w-3xl mx-auto">
+						Where intellectual curiosity meets academic excellence, fostering critical thinking and innovation across diverse disciplines
+					</p>
+				</div>
+				
+				<div class="flex flex-col lg:flex-row items-start gap-16">
 					<div class="lg:w-1/2">
-						<div class="relative rounded-xl overflow-hidden shadow-2xl group cursor-pointer h-full">
-							<img src="/images/cof/cof.jpg" alt="College of Fisheries Building" 
-								class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+						<div class="relative rounded-2xl overflow-hidden shadow-2xl group cursor-pointer h-96">
+							<img src="/images/cas/cas.jpg" alt="College of Arts and Sciences Building" 
+								class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
 							
-							<div class="absolute inset-0 bg-gradient-to-t from-msu-deep-ocean/70 via-transparent to-transparent flex items-end p-8">
-								<div>
-									<h3 class="text-2xl font-bold text-white mb-2">Our Facilities</h3>
-									<p class="text-gray-200">State-of-the-art laboratories and research facilities</p>
+							<div class="absolute inset-0 bg-gradient-to-t from-msu-deep-ocean/80 via-transparent to-transparent flex items-end p-8">
+								<div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+									<h3 class="text-3xl font-bold text-white mb-3">Our Academic Excellence</h3>
+									<p class="text-gray-200 text-lg">State-of-the-art facilities and innovative learning environments</p>
 								</div>
+							</div>
+							
+							<!-- Floating elements -->
+							<div class="absolute top-6 right-6 bg-msu-gold/90 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-semibold">
+								Est. 1985
 							</div>
 						</div>
 					</div>
 					
 					<div class="lg:w-1/2">
-						<h2 class="text-4xl font-bold text-msu-deep-ocean mb-6">About the College of Arts and Sciences</h2>
-						
-						<div class="mb-6 border-b border-gray-200">
+						<div class="mb-8 border-b border-gray-200">
 							<nav class="-mb-px flex space-x-8">
-								<button class="tab-button active py-4 px-1 border-b-2 font-medium text-sm border-msu-gold text-msu-deep-ocean" data-tab="mission">
-									Goal
+								<button class="tab-button active py-4 px-1 border-b-2 font-medium text-sm border-msu-gold text-msu-deep-ocean transition-all duration-300" data-tab="mission">
+									<span class="flex items-center">
+										<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+										</svg>
+										Mission
+									</span>
 								</button>
-								<button class="tab-button py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="vision">
-									Objectives
+								<button class="tab-button py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 transition-all duration-300" data-tab="vision">
+									<span class="flex items-center">
+										<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+										</svg>
+										Vision
+									</span>
 								</button>
-								<button class="tab-button py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-tab="history">
-									History
+								<button class="tab-button py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 transition-all duration-300" data-tab="history">
+									<span class="flex items-center">
+										<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+										</svg>
+										History
+									</span>
 								</button>
 							</nav>
 						</div>
 						
 						<div class="tab-content active" id="mission-content">
-							<div class="space-y-4 text-gray-700 text-justify">
-								<p class="text-lg">
-									The College of Fisheries is committed to providing quality education, research, and extension services in fisheries and aquatic sciences to produce competent and ethical professionals who will contribute to the sustainable development of the fisheries sector.
+							<div class="space-y-6 text-gray-700">
+								<p class="text-xl leading-relaxed">
+									The College of Arts and Sciences is dedicated to fostering intellectual growth, critical thinking, and creative expression across diverse academic disciplines. We strive to develop well-rounded individuals who are prepared to address complex challenges in our rapidly evolving world.
 								</p>
-								<ul class="space-y-3 list-disc pl-5">
-									<li>Provide relevant and innovative academic programs in fisheries</li>
-									<li>Conduct cutting-edge research in aquatic sciences</li>
-									<li>Deliver extension services to fishing communities</li>
-									<li>Promote sustainable fisheries practices</li>
-									<li>Foster partnerships with industry and government</li>
-								</ul>
+								<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+									<div class="bg-gradient-to-r from-msu-gold/10 to-transparent p-4 rounded-lg border-l-4 border-msu-gold">
+										<h4 class="font-semibold text-msu-deep-ocean mb-2">Academic Excellence</h4>
+										<p class="text-sm">Rigorous curriculum designed to challenge and inspire</p>
+									</div>
+									<div class="bg-gradient-to-r from-msu-gold/10 to-transparent p-4 rounded-lg border-l-4 border-msu-gold">
+										<h4 class="font-semibold text-msu-deep-ocean mb-2">Research Innovation</h4>
+										<p class="text-sm">Cutting-edge research across multiple disciplines</p>
+									</div>
+									<div class="bg-gradient-to-r from-msu-gold/10 to-transparent p-4 rounded-lg border-l-4 border-msu-gold">
+										<h4 class="font-semibold text-msu-deep-ocean mb-2">Community Engagement</h4>
+										<p class="text-sm">Active participation in local and global initiatives</p>
+									</div>
+									<div class="bg-gradient-to-r from-msu-gold/10 to-transparent p-4 rounded-lg border-l-4 border-msu-gold">
+										<h4 class="font-semibold text-msu-deep-ocean mb-2">Cultural Diversity</h4>
+										<p class="text-sm">Celebrating and promoting cultural understanding</p>
+									</div>
+								</div>
 							</div>
 						</div>
 						
 						<div class="tab-content hidden" id="vision-content">
-							<div class="space-y-4 text-gray-700 text-justify">
-								<p class="text-lg">
-									To be the leading institution in fisheries education and research in Southern Philippines, recognized for excellence in producing globally competitive fisheries professionals and for contributing to sustainable aquatic resource management.
+							<div class="space-y-6 text-gray-700">
+								<p class="text-xl leading-relaxed">
+									To be a leading institution in liberal arts education, recognized for academic excellence, innovative research, and commitment to producing graduates who are critical thinkers, effective communicators, and responsible global citizens.
 								</p>
+								<div class="bg-gradient-to-r from-msu-deep-ocean/5 to-msu-gold/5 p-6 rounded-xl border border-msu-gold/20">
+									<h4 class="font-bold text-msu-deep-ocean mb-3">Our Aspirations</h4>
+									<ul class="space-y-2 text-gray-600">
+										<li class="flex items-center">
+											<svg class="w-4 h-4 text-msu-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											Excellence in teaching and learning
+										</li>
+										<li class="flex items-center">
+											<svg class="w-4 h-4 text-msu-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											Innovation in research and scholarship
+										</li>
+										<li class="flex items-center">
+											<svg class="w-4 h-4 text-msu-gold mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											Global perspective and cultural awareness
+										</li>
+									</ul>
+								</div>
 							</div>
 						</div>
 						
 						<div class="tab-content hidden" id="history-content">
-							<div class="space-y-4 text-gray-700 text-justify">
-								<p class="text-lg">
-									Established in 1985, the College of Fisheries at MSU-TCTO has grown to become a premier institution for fisheries education in the region. With its strategic location in the rich fishing grounds of Tawi-Tawi, the college has developed unique expertise in tropical fisheries and marine resource management.
+							<div class="space-y-6 text-gray-700">
+								<p class="text-xl leading-relaxed">
+									Established in 1985, the College of Arts and Sciences has been the cornerstone of liberal arts education at MSU-TCTO. From its humble beginnings with a few core programs, the college has grown into a comprehensive academic unit offering diverse programs in humanities, social sciences, and natural sciences.
 								</p>
-								<p>
-									The college initially offered a Bachelor of Science in Fisheries program and has since expanded to include graduate programs and specialized training in aquaculture, marine biology, and fisheries technology.
+								<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+									<div class="text-center p-4 bg-gradient-to-b from-msu-gold/10 to-transparent rounded-lg">
+										<div class="text-3xl font-bold text-msu-deep-ocean">1985</div>
+										<div class="text-sm text-gray-600">Foundation Year</div>
+									</div>
+									<div class="text-center p-4 bg-gradient-to-b from-msu-gold/10 to-transparent rounded-lg">
+										<div class="text-3xl font-bold text-msu-deep-ocean">12+</div>
+										<div class="text-sm text-gray-600">Academic Programs</div>
+									</div>
+									<div class="text-center p-4 bg-gradient-to-b from-msu-gold/10 to-transparent rounded-lg">
+										<div class="text-3xl font-bold text-msu-deep-ocean">1000+</div>
+										<div class="text-sm text-gray-600">Graduates</div>
+									</div>
+								</div>
+								<p class="text-gray-600">
+									Today, the college continues to evolve, embracing new technologies and methodologies while maintaining the core values of liberal arts education that have guided our institution for decades.
 								</p>
 							</div>
 						</div>
@@ -212,28 +377,83 @@ const currentPath = Astro.url.pathname;
 			</style>
 		</section>
 
-		<!-- Stats Section with Animated Counters -->
-		<section class="py-16 bg-msu-main-color text-white">
-			<div class="container mx-auto px-6">
-				<div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-					<div class="p-6">
-						<div class="text-5xl font-bold mb-2 counter" data-target="1200">0</div>
-						<div class="text-xl">Students Enrolled</div>
+		<!-- Enhanced Stats Section with Animated Counters -->
+		<section class="py-20 bg-gradient-to-r from-msu-main-color via-msu-deep-ocean to-msu-main-color text-white relative overflow-hidden">
+			<!-- Animated background elements -->
+			<div class="absolute inset-0 opacity-10">
+				<div class="absolute top-10 left-10 w-20 h-20 bg-msu-gold rounded-full animate-pulse"></div>
+				<div class="absolute top-20 right-20 w-16 h-16 bg-white rounded-full animate-ping"></div>
+				<div class="absolute bottom-10 left-1/4 w-12 h-12 bg-msu-gold rounded-full animate-bounce"></div>
+				<div class="absolute bottom-20 right-1/3 w-8 h-8 bg-white rounded-full animate-pulse"></div>
+			</div>
+			
+			<div class="container mx-auto px-6 relative z-10">
+				<div class="text-center mb-16">
+					<h2 class="text-4xl font-bold mb-4">Our Impact in Numbers</h2>
+					<p class="text-xl text-gray-300 max-w-2xl mx-auto">
+						Discover the scale of our academic excellence and community impact
+					</p>
+				</div>
+				
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+					<div class="group p-8 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
+						<div class="text-center">
+							<div class="relative mb-4">
+								<svg class="w-16 h-16 mx-auto text-msu-gold mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+								</svg>
+								<div class="absolute inset-0 bg-msu-gold/20 rounded-full blur-lg group-hover:scale-150 transition-transform duration-500"></div>
+							</div>
+							<div class="text-5xl font-bold mb-2 counter" data-target="1500">0</div>
+							<div class="text-xl font-semibold">Students Enrolled</div>
+							<div class="text-sm text-gray-300 mt-2">Active learners across all programs</div>
+						</div>
 					</div>
-					<div class="p-6">
-						<div class="text-5xl font-bold mb-2 counter" data-target="45">0</div>
-						<div class="text-xl">Faculty Members</div>
+					
+					<div class="group p-8 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
+						<div class="text-center">
+							<div class="relative mb-4">
+								<svg class="w-16 h-16 mx-auto text-msu-gold mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+								</svg>
+								<div class="absolute inset-0 bg-msu-gold/20 rounded-full blur-lg group-hover:scale-150 transition-transform duration-500"></div>
+							</div>
+							<div class="text-5xl font-bold mb-2 counter" data-target="65">0</div>
+							<div class="text-xl font-semibold">Faculty Members</div>
+							<div class="text-sm text-gray-300 mt-2">Expert educators and researchers</div>
+						</div>
 					</div>
-					<div class="p-6">
-						<div class="text-5xl font-bold mb-2 counter" data-target="5">0</div>
-						<div class="text-xl">Academic Programs</div>
+					
+					<div class="group p-8 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
+						<div class="text-center">
+							<div class="relative mb-4">
+								<svg class="w-16 h-16 mx-auto text-msu-gold mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+								</svg>
+								<div class="absolute inset-0 bg-msu-gold/20 rounded-full blur-lg group-hover:scale-150 transition-transform duration-500"></div>
+							</div>
+							<div class="text-5xl font-bold mb-2 counter" data-target="12">0</div>
+							<div class="text-xl font-semibold">Academic Programs</div>
+							<div class="text-sm text-gray-300 mt-2">Diverse fields of study</div>
+						</div>
 					</div>
-					<div class="p-6">
-						<div class="text-5xl font-bold mb-2 counter" data-target="15">0</div>
-						<div class="text-xl">Research Projects</div>
+					
+					<div class="group p-8 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
+						<div class="text-center">
+							<div class="relative mb-4">
+								<svg class="w-16 h-16 mx-auto text-msu-gold mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+								</svg>
+								<div class="absolute inset-0 bg-msu-gold/20 rounded-full blur-lg group-hover:scale-150 transition-transform duration-500"></div>
+							</div>
+							<div class="text-5xl font-bold mb-2 counter" data-target="25">0</div>
+							<div class="text-xl font-semibold">Research Projects</div>
+							<div class="text-sm text-gray-300 mt-2">Ongoing innovative studies</div>
+						</div>
 					</div>
 				</div>
 			</div>
+		</section>
 			
 			<script>
 			document.addEventListener('DOMContentLoaded', function() {
@@ -242,25 +462,25 @@ const currentPath = Astro.url.pathname;
 				
 				counters.forEach(counter => {
 					const target = +counter.getAttribute('data-target');
-					const count = +counter.innerText;
+					const count = +counter.textContent;
 					const increment = target / speed;
 					
 					if (count < target) {
-						counter.innerText = Math.ceil(count + increment);
+						counter.textContent = Math.ceil(count + increment).toString();
 						setTimeout(updateCount, 1);
 					} else {
-						counter.innerText = target;
+						counter.textContent = target.toString();
 					}
 					
 					function updateCount() {
-						const count = +counter.innerText;
+						const count = +counter.textContent;
 						const increment = target / speed;
 						
 						if (count < target) {
-							counter.innerText = Math.ceil(count + increment);
+							counter.textContent = Math.ceil(count + increment).toString();
 							setTimeout(updateCount, 1);
 						} else {
-							counter.innerText = target;
+							counter.textContent = target.toString();
 						}
 					}
 				});
@@ -1225,14 +1445,14 @@ document.addEventListener('DOMContentLoaded', function() {
         let isValid = true;
         
         // Name validation
-        const name = document.getElementById('name').value.trim();
+        const name = (document.getElementById('name') as HTMLInputElement).value.trim();
         if (!name) {
             document.getElementById('nameError').classList.remove('hidden');
             isValid = false;
         }
         
         // Email validation
-        const email = document.getElementById('email').value.trim();
+        const email = (document.getElementById('email') as HTMLInputElement).value.trim();
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!email) {
             document.getElementById('emailError').textContent = 'Please enter your email address';
@@ -1245,14 +1465,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Subject validation
-        const subject = document.getElementById('subject').value;
+        const subject = (document.getElementById('subject') as HTMLSelectElement).value;
         if (!subject) {
             document.getElementById('subjectError').classList.remove('hidden');
             isValid = false;
         }
         
         // Message validation
-        const message = document.getElementById('message').value.trim();
+        const message = (document.getElementById('message') as HTMLTextAreaElement).value.trim();
         if (!message) {
             document.getElementById('messageError').classList.remove('hidden');
             isValid = false;
@@ -1265,7 +1485,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Show loading state
         submitText.classList.add('hidden');
         submitSpinner.classList.remove('hidden');
-        submitBtn.disabled = true;
+        (submitBtn as HTMLButtonElement).disabled = true;
         
         // Create a temporary iframe to handle the form submission
         const iframe = document.createElement('iframe');
@@ -1274,7 +1494,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.appendChild(iframe);
         
         // Set the form target to the iframe
-        contactForm.target = 'form-iframe';
+        (contactForm as HTMLFormElement).target = 'form-iframe';
         
         // Handle the iframe load event to detect when the form submission is complete
         iframe.onload = function() {
@@ -1283,24 +1503,24 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.classList.add('overflow-hidden');
             
             // Reset form
-            contactForm.reset();
+            (contactForm as HTMLFormElement).reset();
             
             // Reset button state
             submitText.classList.remove('hidden');
             submitSpinner.classList.add('hidden');
-            submitBtn.disabled = false;
+            (submitBtn as HTMLButtonElement).disabled = false;
             
             // Remove the iframe
             document.body.removeChild(iframe);
         };
         
         // Submit the form
-        contactForm.submit();
+        (contactForm as HTMLFormElement).submit();
     });
     
     // Real-time validation for better UX
-    document.getElementById('email').addEventListener('input', function() {
-        const email = this.value.trim();
+    (document.getElementById('email') as HTMLInputElement).addEventListener('input', function() {
+        const email = (this as HTMLInputElement).value.trim();
         const emailError = document.getElementById('emailError');
         
         if (!email) {
@@ -1399,10 +1619,11 @@ document.head.appendChild(style);
 		</section> -->
 	</main>
 
-    	    <button class="scroll-to-top" aria-label="Scroll to top">
-			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-			</svg>
+    	    <!-- Enhanced Scroll to Top Button -->
+    	    <button id="scrollToTop" class="fixed bottom-8 right-8 z-50 bg-gradient-to-r from-msu-main-color to-msu-deep-ocean hover:from-msu-gold hover:to-msu-gold-dark text-white p-4 rounded-full shadow-2xl transition-all duration-300 opacity-0 invisible hover:scale-110 hover:shadow-3xl" aria-label="Scroll to top">
+				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+				</svg>
 			</button> 
 
 	<FooterNav />
@@ -1413,13 +1634,95 @@ document.head.appendChild(style);
 
 
 	
-			<!-- HTML file -->
+			<!-- Enhanced JavaScript -->
 			<script src="../../js/animate.js" ></script>
 			<script src="../../js/loadinganim.js" ></script>
 			<script src="../../js/smoothscroll.js" ></script>
+			
+			<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				// Enhanced Scroll to Top functionality
+				const scrollToTopBtn = document.getElementById('scrollToTop');
+				
+				window.addEventListener('scroll', function() {
+					if (window.pageYOffset > 300) {
+						scrollToTopBtn.classList.remove('opacity-0', 'invisible');
+						scrollToTopBtn.classList.add('opacity-100', 'visible');
+					} else {
+						scrollToTopBtn.classList.add('opacity-0', 'invisible');
+						scrollToTopBtn.classList.remove('opacity-100', 'visible');
+					}
+				});
+				
+				scrollToTopBtn.addEventListener('click', function() {
+					window.scrollTo({
+						top: 0,
+						behavior: 'smooth'
+					});
+				});
+				
+				// Keep video steady - no parallax effect
+				const heroVideo = document.getElementById('heroVideo');
+				if (heroVideo) {
+					// Remove any existing transform to keep video steady
+					heroVideo.style.transform = 'scale(1.1)';
+				}
+				
+				// Enhanced counter animation with intersection observer
+				const counters = document.querySelectorAll('.counter');
+				const observerOptions = {
+					threshold: 0.5,
+					rootMargin: '0px 0px -100px 0px'
+				};
+				
+				const counterObserver = new IntersectionObserver(function(entries) {
+					entries.forEach(entry => {
+						if (entry.isIntersecting) {
+							const counter = entry.target;
+							const target = +counter.getAttribute('data-target');
+							const speed = 200;
+							let count = 0;
+							
+							const updateCounter = () => {
+								const increment = target / speed;
+								if (count < target) {
+									count += increment;
+									counter.textContent = Math.ceil(count).toString();
+									setTimeout(updateCounter, 1);
+								} else {
+									counter.textContent = target.toString();
+								}
+							};
+							
+							updateCounter();
+							counterObserver.unobserve(counter);
+						}
+					});
+				}, observerOptions);
+				
+				counters.forEach(counter => {
+					counterObserver.observe(counter);
+				});
+				
+				// Enhanced smooth scrolling for anchor links
+				document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+					anchor.addEventListener('click', function (e) {
+						e.preventDefault();
+						const target = document.querySelector(this.getAttribute('href'));
+						if (target) {
+							target.scrollIntoView({
+								behavior: 'smooth',
+								block: 'start'
+							});
+						}
+					});
+				});
+			});
+			</script>
 
 
 	<style>
+		/* Enhanced Button Styles */
 		.btn-gold {
 			display: inline-block;
 			background-color: #D4AF37;
@@ -1457,42 +1760,297 @@ document.head.appendChild(style);
 			box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 		}
 
-		  /* ... your existing styles ... */
+		/* Enhanced Wave animation effect */
+		.btn-gold, .btn-outline-white {
+			position: relative;
+			overflow: hidden;
+		}
 
-  /* Wave animation effect */
-  .btn-gold, .btn-outline-white {
-    position: relative;
-    overflow: hidden;
-  }
+		.btn-gold:after, .btn-outline-white:after {
+			content: "";
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 5px;
+			height: 5px;
+			background: rgba(255, 255, 255, 0.5);
+			opacity: 0;
+			border-radius: 100%;
+			transform: scale(1, 1) translate(-50%);
+			transform-origin: 50% 50%;
+		}
 
-  .btn-gold:after, .btn-outline-white:after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 5px;
-    height: 5px;
-    background: rgba(255, 255, 255, 0.5);
-    opacity: 0;
-    border-radius: 100%;
-    transform: scale(1, 1) translate(-50%);
-    transform-origin: 50% 50%;
-  }
+		.btn-gold:focus:not(:active)::after,
+		.btn-outline-white:focus:not(:active)::after {
+			animation: ripple 1s ease-out;
+		}
 
-  .btn-gold:focus:not(:active)::after,
-  .btn-outline-white:focus:not(:active)::after {
-    animation: ripple 1s ease-out;
-  }
+		@keyframes ripple {
+			0% {
+				transform: scale(0, 0);
+				opacity: 0.5;
+			}
+			100% {
+				transform: scale(20, 20);
+				opacity: 0;
+			}
+		}
 
-  @keyframes ripple {
-    0% {
-      transform: scale(0, 0);
-      opacity: 0.5;
-    }
-    100% {
-      transform: scale(20, 20);
-      opacity: 0;
-    }
-  }
+		/* Enhanced Particle Animation */
+		.particles-container {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+
+		.particle {
+			position: absolute;
+			width: 4px;
+			height: 4px;
+			background: rgba(212, 175, 55, 0.6);
+			border-radius: 50%;
+			animation: float 6s ease-in-out infinite;
+		}
+
+		.particle:nth-child(1) {
+			left: 10%;
+			animation-delay: 0s;
+			animation-duration: 8s;
+		}
+
+		.particle:nth-child(2) {
+			left: 20%;
+			animation-delay: 1s;
+			animation-duration: 10s;
+		}
+
+		.particle:nth-child(3) {
+			left: 30%;
+			animation-delay: 2s;
+			animation-duration: 7s;
+		}
+
+		.particle:nth-child(4) {
+			left: 40%;
+			animation-delay: 3s;
+			animation-duration: 9s;
+		}
+
+		.particle:nth-child(5) {
+			left: 50%;
+			animation-delay: 4s;
+			animation-duration: 6s;
+		}
+
+		.particle:nth-child(6) {
+			left: 60%;
+			animation-delay: 5s;
+			animation-duration: 8s;
+		}
+
+		@keyframes float {
+			0%, 100% {
+				transform: translateY(100vh) scale(0);
+				opacity: 0;
+			}
+			10% {
+				opacity: 1;
+			}
+			90% {
+				opacity: 1;
+			}
+			100% {
+				transform: translateY(-100px) scale(1);
+				opacity: 0;
+			}
+		}
+
+		/* Enhanced Fade In Animations */
+		@keyframes fadeInUp {
+			from {
+				opacity: 0;
+				transform: translateY(30px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		.animate-fadeInUp {
+			animation: fadeInUp 0.8s ease-out forwards;
+		}
+
+		.delay-100 {
+			animation-delay: 0.1s;
+		}
+
+		.delay-200 {
+			animation-delay: 0.2s;
+		}
+
+		/* Steady Video Background */
+		#heroVideo {
+			transform: scale(1.1);
+			position: relative;
+			z-index: 0;
+		}
+
+		/* Enhanced Glow Effects */
+		.drop-shadow-2xl {
+			filter: drop-shadow(0 25px 25px rgba(0, 0, 0, 0.15));
+		}
+
+		/* Enhanced Gradient Text */
+		.bg-clip-text {
+			-webkit-background-clip: text;
+			background-clip: text;
+		}
+
+		/* Enhanced Scroll Indicator with Mobile Responsiveness */
+		.scroll-indicator {
+			animation: bounce 2s infinite;
+		}
+
+		@keyframes bounce {
+			0%, 20%, 50%, 80%, 100% {
+				transform: translateY(0);
+			}
+			40% {
+				transform: translateY(-10px);
+			}
+			60% {
+				transform: translateY(-5px);
+			}
+		}
+
+		/* Mobile-specific scroll indicator styles */
+		@media (max-width: 768px) {
+			.scroll-indicator {
+				animation: bounce 1.5s infinite;
+			}
+			
+			.scroll-text {
+				font-size: 0.75rem;
+				padding: 0.25rem 0.75rem;
+			}
+			
+			.scroll-mouse {
+				width: 1.25rem;
+				height: 2rem;
+			}
+		}
+
+		/* Enhanced backdrop blur for better text readability */
+		.backdrop-blur-sm {
+			backdrop-filter: blur(8px);
+			-webkit-backdrop-filter: blur(8px);
+		}
+
+		/* Enhanced Hover Effects */
+		.hover\:scale-105:hover {
+			transform: scale(1.05);
+		}
+
+		.hover\:-translate-y-2:hover {
+			transform: translateY(-8px);
+		}
+
+		/* Enhanced Backdrop Blur */
+		.backdrop-blur-sm {
+			backdrop-filter: blur(4px);
+		}
+
+		/* Enhanced Shadow Effects */
+		.hover\:shadow-2xl:hover {
+			box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+		}
+		
+		/* Enhanced 3D Shadow Effect */
+		.hover\:shadow-3xl:hover {
+			box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.35);
+		}
+		
+		/* Enhanced Gradient Text Animation */
+		.bg-gradient-to-r {
+			background-size: 200% 200%;
+			animation: gradientShift 3s ease infinite;
+		}
+		
+		@keyframes gradientShift {
+			0%, 100% {
+				background-position: 0% 50%;
+			}
+			50% {
+				background-position: 100% 50%;
+			}
+		}
+		
+		/* Enhanced Card Hover Effects */
+		.program-card {
+			transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		}
+		
+		.program-card:hover {
+			transform: translateY(-8px) scale(1.02);
+			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+		}
+		
+		/* Enhanced Tab Transitions */
+		.tab-content {
+			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		}
+		
+		/* Enhanced Loading Animation */
+		@keyframes shimmer {
+			0% {
+				background-position: -200px 0;
+			}
+			100% {
+				background-position: calc(200px + 100%) 0;
+			}
+		}
+		
+		.shimmer {
+			background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+			background-size: 200px 100%;
+			animation: shimmer 1.5s infinite;
+		}
+		
+		/* Enhanced Focus States */
+		.focus\:ring-2:focus {
+			box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.5);
+		}
+		
+		/* Enhanced Backdrop Blur */
+		.backdrop-blur-sm {
+			backdrop-filter: blur(8px);
+			-webkit-backdrop-filter: blur(8px);
+		}
+		
+		/* Enhanced Text Selection */
+		::selection {
+			background-color: rgba(212, 175, 55, 0.3);
+			color: #002855;
+		}
+		
+		/* Enhanced Scrollbar */
+		::-webkit-scrollbar {
+			width: 8px;
+		}
+		
+		::-webkit-scrollbar-track {
+			background: #f1f1f1;
+		}
+		
+		::-webkit-scrollbar-thumb {
+			background: linear-gradient(to bottom, #002855, #D4AF37);
+			border-radius: 4px;
+		}
+		
+		::-webkit-scrollbar-thumb:hover {
+			background: linear-gradient(to bottom, #D4AF37, #002855);
+		}
 	</style>
 </Layout>

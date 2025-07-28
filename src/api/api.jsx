@@ -16,6 +16,67 @@ export function urlForImage(source) {
   return imageBuilder.image(source);
 }
 
+export function urlForPDF(source) {
+  console.log('urlForPDF input:', source);
+  
+  if (!source) {
+    console.log('urlForPDF: No source provided');
+    return null;
+  }
+  
+  if (!source.asset) {
+    console.log('urlForPDF: No asset in source');
+    return null;
+  }
+  
+  if (!source.asset.url) {
+    console.log('urlForPDF: No URL in asset');
+    return null;
+  }
+  
+  const url = source.asset.url;
+  console.log('urlForPDF: Original URL:', url);
+  
+  // Check if it's already a CDN URL
+  if (url.includes('cdn.sanity.io')) {
+    console.log('urlForPDF: Already a CDN URL, returning as is');
+    return url;
+  }
+  
+  // For Sanity URLs, we need to handle different formats
+  // Example: https://cdn.sanity.io/files/w8lfrsa6/production/filename.pdf
+  if (url.includes('sanity.io')) {
+    // If it's a Sanity URL but not CDN, try to convert it
+    if (url.includes('/files/')) {
+      console.log('urlForPDF: Converting Sanity URL to CDN');
+      return url;
+    }
+  }
+  
+  // Extract the file ID from the Sanity URL
+  // Handle different URL formats
+  let fileId;
+  if (url.includes('/files/')) {
+    // URL format: https://cdn.sanity.io/files/w8lfrsa6/production/filename.pdf
+    const parts = url.split('/');
+    fileId = parts[parts.length - 1];
+  } else if (url.includes('?')) {
+    // URL format: https://cdn.sanity.io/files/w8lfrsa6/production/filename.pdf?dl=...
+    fileId = url.split('/').pop().split('?')[0];
+  } else {
+    // Fallback: just get the last part
+    fileId = url.split('/').pop();
+  }
+  
+  console.log('urlForPDF: Extracted file ID:', fileId);
+  
+  // Construct the CDN URL
+  const cdnUrl = `https://cdn.sanity.io/files/w8lfrsa6/production/${fileId}`;
+  console.log('urlForPDF: Generated CDN URL:', cdnUrl);
+  
+  return cdnUrl;
+}
+
 export async function getArticle() {
   const query = groq`*[_type == "article"] | order(publishedAt desc){
     title,
@@ -673,7 +734,7 @@ export async function getallSulimbang() {
     sulimbangQuarter->{sulimbangQuarter},
   }`;
 
-  const allsulimbang = await client.fetch(query);
+  const allsulimbang = await useSanityClient().fetch(query);
   return allsulimbang;
 }
 
