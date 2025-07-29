@@ -154,8 +154,8 @@ const Navbar = ({ path }) => {
       title: "Programs",
       icon: <FaUniversity className="text-lg" />,
       items: [
-        { link: "/programs/cas", label: "College of Arts and Sciences" },
-        { link: "/programs/cias", label: "College of Islamic & Arabic Studies" },
+        { link: "/404.astro", label: "College of Arts and Sciences" },
+        { link: "/404.astro", label: "College of Islamic & Arabic Studies" },
         { link: "/404.astro", label: "College of Education" },
         { link: "/404.astro", label: "College of Fisheries" },
         { link: "/404.astro", label: "Institute of Information and Communication Technology" },
