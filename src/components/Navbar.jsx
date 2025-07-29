@@ -129,7 +129,7 @@ const Navbar = ({ path }) => {
       icon: <FaHome className="text-lg" />,
       items: [
         { link: "/", label: "Overview" },
-        { link: "/officefeedback", label: "Office Feedback" },
+        { link: "/officefeedback", label: "Office & Student Survey" },
         { link: "/partners", label: "Local and International Partners" }
       ]
     },
@@ -176,6 +176,7 @@ const Navbar = ({ path }) => {
       title: "Publications",
       icon: <FaNewspaper className="text-lg" />,
       items: [
+        // { link: "/publications/offices", label: "Offices & Resources" },
         { link: "/publications/articles", label: "Articles" },
         { link: "/publications/sulimbang", label: "Sulimbang" },
         { link: "/publications/gazette", label: "Gazettes" },

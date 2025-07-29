@@ -50,37 +50,14 @@
               <div class="p-6 sm:p-8">
                 <form id="studentSurveyForm"  class="space-y-8">
                   <!-- Student Information -->
-                  <div class="grid md:grid-cols-2 gap-6">
-                    <div class="form-group">
-                      <label class="block text-sm font-medium text-gray-700 mb-2">
-                        Year Level <span class="text-msu-maroon">*</span>
-                      </label>
-                      <div class="grid grid-cols-4 gap-2">
-                        <label class="flex items-center">
-                          <input type="radio" name="entry.881935922" value="1st" class="h-4 w-4 text-msu-main-color focus:ring-msu-main-color">
-                          <span class="ml-2 text-sm text-gray-700">1st</span>
-                        </label>
-                        <label class="flex items-center">
-                          <input type="radio" name="entry.881935922" value="2nd" class="h-4 w-4 text-msu-main-color focus:ring-msu-main-color">
-                          <span class="ml-2 text-sm text-gray-700">2nd</span>
-                        </label>
-                        <label class="flex items-center">
-                          <input type="radio" name="entry.881935922" value="3rd" class="h-4 w-4 text-msu-main-color focus:ring-msu-main-color">
-                          <span class="ml-2 text-sm text-gray-700">3rd</span>
-                        </label>
-                        <label class="flex items-center">
-                          <input type="radio" name="entry.881935922" value="4th" class="h-4 w-4 text-msu-main-color focus:ring-msu-main-color">
-                          <span class="ml-2 text-sm text-gray-700">4th</span>
-                        </label>
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="block text-sm font-medium text-gray-700 mb-2">
-                        Course <span class="text-msu-maroon">*</span>
-                      </label>
-                      <input type="text" name="entry.1662743243" class="text-msu-maroon-900 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-msu-main-color focus:border-msu-main-color" placeholder="Enter your course" required>
-                    </div>
+                  <!-- Hidden Year Level Field -->
+                  <input type="hidden" name="entry.881935922" value="1st">
+                  
+                  <div class="form-group">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                      Course <span class="text-msu-maroon">*</span>
+                    </label>
+                    <input type="text" name="entry.1662743243" class="text-msu-maroon-900 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-msu-main-color focus:border-msu-main-color" placeholder="Enter your course" required>
                   </div>
 
                   <div class="form-group">
@@ -109,7 +86,7 @@
                         name="entry.1892298780" 
                         id="referenceCodeInput"
                         class="text-msu-maroon-900 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-msu-main-color focus:border-msu-main-color bg-gray-100 font-mono" 
-                        placeholder="Will be generated automatically" 
+                        placeholder="Fill Course and Student Number to generate" 
                         readonly
                         required
                       />
@@ -124,7 +101,7 @@
                         </svg>
                       </button>
                     </div>
-                    <p class="mt-1 text-xs text-gray-500">This unique code identifies your submission</p>
+                    <p class="mt-1 text-xs text-gray-500">Code will generate automatically after entering Course and Student Number</p>
                   </div>
 
                   <!-- Introductory Message -->
@@ -686,6 +663,12 @@ document.addEventListener('DOMContentLoaded', function() {
   hiddenIframe.style.display = 'none';
   document.body.appendChild(hiddenIframe);
 
+  // Add load event listener to detect when submission is complete
+  hiddenIframe.addEventListener('load', function() {
+    // This fires when Google Forms submission is complete
+    console.log('Form submission completed');
+  });
+
   // Student survey specific functionality
   function initializeStudentSurvey() {
     // Initialize services tracking
@@ -965,34 +948,31 @@ document.addEventListener('DOMContentLoaded', function() {
     function setupReferenceCodeGeneration() {
       const studentNumberInput = document.querySelector('input[name="entry.413035083"]');
       const courseInput = document.querySelector('input[name="entry.1662743243"]');
-      const yearLevelInputs = document.querySelectorAll('input[name="entry.881935922"]');
+      // Year level is now fixed to "1st" - no need for event listeners
       const referenceCodeInput = document.getElementById('referenceCodeInput');
       const copyBtn = document.getElementById('copyReferenceCodeBtnreg');
       
       function updateReferenceCode() {
         const studentNumber = studentNumberInput?.value.trim();
         const course = courseInput?.value.trim();
-        const yearLevel = document.querySelector('input[name="entry.881935922"]:checked')?.value;
+        const yearLevel = document.querySelector('input[name="entry.881935922"]')?.value || '1st';
         
-        if (studentNumber && course && yearLevel) {
+        if (studentNumber && course) {
           const code = generateReferenceCode();
           referenceCodeInput.value = code;
           referenceCodeInput.classList.remove('bg-gray-100');
-          referenceCodeInput.classList.add('bg-yellow-100', 'border-yellow-300');
+          referenceCodeInput.classList.add('bg-green-100', 'border-green-300');
+          referenceCodeInput.placeholder = code;
         } else {
           referenceCodeInput.value = '';
           referenceCodeInput.classList.add('bg-gray-100');
-          referenceCodeInput.classList.remove('bg-yellow-100', 'border-yellow-300');
+          referenceCodeInput.classList.remove('bg-green-100', 'border-green-300');
+          referenceCodeInput.placeholder = 'Fill Course and Student Number to generate';
         }
       }
       
       if (studentNumberInput) studentNumberInput.addEventListener('input', updateReferenceCode);
       if (courseInput) courseInput.addEventListener('input', updateReferenceCode);
-      if (yearLevelInputs) {
-        yearLevelInputs.forEach(input => {
-          input.addEventListener('change', updateReferenceCode);
-        });
-      }
       
       if (copyBtn) {
         copyBtn.addEventListener('click', () => {
@@ -1014,7 +994,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
       }
       
-      // Initial update
+      // Initial update - will only generate when both fields are filled
       updateReferenceCode();
     }
 
@@ -1242,24 +1222,32 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Validate student info
-        const yearLevel = document.querySelector('input[name="entry.881935922"]:checked');
         const course = document.querySelector('input[name="entry.1662743243"]');
         const studentNumber = document.querySelector('input[name="entry.413035083"]');
+        const referenceCode = document.querySelector('input[name="entry.1892298780"]');
         
-        if (!yearLevel) {
-          stopAnimationAndShowError('Please select your year level');
-          return;
-        }
+        // Clear previous error styling
+        if (course) course.classList.remove('border-red-500');
+        if (studentNumber) studentNumber.classList.remove('border-red-500');
+        if (referenceCode) referenceCode.classList.remove('border-red-500');
         
         if (!course || !course.value.trim()) {
           course.classList.add('border-red-500');
+          course.focus();
           stopAnimationAndShowError('Please enter your course');
           return;
         }
         
         if (!studentNumber || !studentNumber.value.trim()) {
           studentNumber.classList.add('border-red-500');
+          studentNumber.focus();
           stopAnimationAndShowError('Please enter your student number');
+          return;
+        }
+        
+        if (!referenceCode || !referenceCode.value.trim()) {
+          referenceCode.classList.add('border-red-500');
+          stopAnimationAndShowError('Please ensure a reference code is generated by filling in both Course and Student Number');
           return;
         }
         
@@ -1313,39 +1301,52 @@ document.addEventListener('DOMContentLoaded', function() {
         updateProgressTracker();
         
         // Show success message with details
+        const yearLevelInput = document.querySelector('input[name="entry.881935922"]');
         const studentData = {
           referenceCode: document.getElementById('referenceCodeInput').value,
           studentId: studentNumber.value,
           course: course.value,
-          yearLevel: yearLevel.value
+          yearLevel: yearLevelInput ? yearLevelInput.value : '1st'
         };
+        
+        // Set up completion handler for this specific submission
+        let submissionCompleted = false;
+        const submissionHandler = function() {
+          if (submissionCompleted) return;
+          submissionCompleted = true;
+          
+          // Remove the event listener to prevent multiple triggers
+          hiddenIframe.removeEventListener('load', submissionHandler);
+          
+          // Remove loader and show success message
+          setTimeout(() => {
+            loader.remove();
+            showSubmissionSuccess(studentData);
+            
+            // Remove the hidden form after submission
+            setTimeout(() => {
+              hiddenForm.remove();
+            }, 1000);
+            
+            // Reset form after successful submission
+            setTimeout(() => {
+              surveyForm.reset();
+              initializeVerificationStatus();
+              updateProgressTracker();
+              isSubmitting = false;
+              if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.innerHTML = 'Submit Survey';
+              }
+            }, 3000);
+          }, 1000);
+        };
+        
+        // Add the event listener for this submission
+        hiddenIframe.addEventListener('load', submissionHandler);
         
         // Submit the form
         hiddenForm.submit();
-        
-        // Allow animation to complete before showing success message
-        setTimeout(() => {
-          // Remove loader before showing success message
-          loader.remove();
-          showSubmissionSuccess(studentData);
-          
-          // Remove the hidden form after submission
-          setTimeout(() => {
-            hiddenForm.remove();
-          }, 1000);
-          
-          // Reset form after successful submission
-          setTimeout(() => {
-            surveyForm.reset();
-            initializeVerificationStatus();
-            updateProgressTracker();
-            isSubmitting = false;
-            if (submitButton) {
-              submitButton.disabled = false;
-              submitButton.innerHTML = 'Submit Survey';
-            }
-          }, 3000);
-        }, 6000); // Wait for animation to complete
       });
     }
 
