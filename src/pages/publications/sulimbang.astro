@@ -49,76 +49,77 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
     <main class="bg-white">
         <Navbar path={currentPath} client:visible />
         
-        <!-- Stunning Full-Screen PDF Viewer Modal -->
+        <!-- Mobile-Optimized Full-Screen PDF Viewer Modal -->
         <div id="pdfViewerModal" class="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-md hidden">
             <div class="w-full h-full">
                 <div class="bg-white w-full h-full flex flex-col overflow-hidden">
-                    <!-- Stunning Header with MSU Gradient -->
-                    <div class="flex items-center justify-between p-6 bg-gradient-to-r from-msu-blue via-msu-dark-blue to-msu-blue text-white shadow-lg">
-                        <div class="flex items-center space-x-4">
-                            <div class="flex items-center justify-center w-14 h-14 bg-white/20 rounded-xl backdrop-blur-sm">
-                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <!-- Mobile-Optimized Header -->
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-6 bg-gradient-to-r from-msu-blue via-msu-dark-blue to-msu-blue text-white shadow-lg">
+                        <div class="flex items-center space-x-2 sm:space-x-4 w-full sm:w-auto mb-3 sm:mb-0">
+                            <div class="flex items-center justify-center w-10 h-10 sm:w-14 sm:h-14 bg-white/20 rounded-xl backdrop-blur-sm">
+                                <svg class="w-5 h-5 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                 </svg>
                             </div>
-                            <div>
-                                <h3 id="modalPdfTitle" class="text-2xl font-bold text-white">MSU-TCTO Publication Viewer</h3>
-                                <p class="text-white/90 text-sm font-medium">Professional PDF Document Viewer</p>
+                            <div class="flex-1 min-w-0">
+                                <h3 id="modalPdfTitle" class="text-sm sm:text-2xl font-bold text-white truncate">MSU-TCTO Publication Viewer</h3>
+                                <p class="text-white/90 text-xs sm:text-sm font-medium hidden sm:block">Professional PDF Document Viewer</p>
                             </div>
                         </div>
                         
-                        <div class="flex items-center space-x-4">
-                            <!-- Enhanced Zoom Controls -->
-                            <div class="flex items-center space-x-2 bg-msu-deep-ocean/20 rounded-xl px-4 py-2 backdrop-blur-sm border border-msu-deep-ocean/30">
-                                <button id="zoomOut" class="flex items-center justify-center w-10 h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40" title="Zoom Out">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <!-- Mobile-Optimized Controls -->
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
+                            <!-- Zoom Controls - Stacked on mobile -->
+                            <div class="flex items-center justify-center space-x-1 sm:space-x-2 bg-msu-deep-ocean/20 rounded-xl px-2 sm:px-4 py-2 backdrop-blur-sm border border-msu-deep-ocean/30">
+                                <button id="zoomOut" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40" title="Zoom Out">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
                                     </svg>
                                 </button>
-                                <span id="zoomLevel" class="text-white text-sm font-bold min-w-[4rem] text-center px-3 py-1 bg-msu-deep-ocean/20 rounded-lg border border-msu-deep-ocean/30">100%</span>
-                                <button id="zoomIn" class="flex items-center justify-center w-10 h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40" title="Zoom In">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <span id="zoomLevel" class="text-white text-xs sm:text-sm font-bold min-w-[3rem] sm:min-w-[4rem] text-center px-2 sm:px-3 py-1 bg-msu-deep-ocean/20 rounded-lg border border-msu-deep-ocean/30">100%</span>
+                                <button id="zoomIn" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40" title="Zoom In">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                     </svg>
                                 </button>
-                                <button id="zoomFit" class="flex items-center justify-center w-10 h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40" title="Fit to Screen">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <button id="zoomFit" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40" title="Fit to Screen">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
                                     </svg>
                                 </button>
                             </div>
                             
-                            <!-- Professional Page Navigation -->
-                            <div class="flex items-center space-x-2 bg-msu-deep-ocean/20 rounded-xl px-4 py-2 backdrop-blur-sm border border-msu-deep-ocean/30">
-                                <button id="pdfPrevPage" class="flex items-center justify-center w-10 h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <!-- Page Navigation - Responsive -->
+                            <div class="flex items-center justify-center space-x-1 sm:space-x-2 bg-msu-deep-ocean/20 rounded-xl px-2 sm:px-4 py-2 backdrop-blur-sm border border-msu-deep-ocean/30">
+                                <button id="pdfPrevPage" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                                     </svg>
                                 </button>
-                                <span id="pageInfo" class="text-white text-sm font-bold min-w-[5rem] text-center px-3 py-1 bg-msu-deep-ocean/20 rounded-lg border border-msu-deep-ocean/30">1 / 1</span>
-                                <button id="pdfNextPage" class="flex items-center justify-center w-10 h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <span id="pageInfo" class="text-white text-xs sm:text-sm font-bold min-w-[3rem] sm:min-w-[5rem] text-center px-2 sm:px-3 py-1 bg-msu-deep-ocean/20 rounded-lg border border-msu-deep-ocean/30">1 / 1</span>
+                                <button id="pdfNextPage" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                                     </svg>
                                 </button>
                             </div>
                             
-                            <!-- Stunning Action Buttons -->
-                            <div class="flex items-center space-x-3">
-                                <button onclick="openPdfInNewTab()" class="flex items-center justify-center space-x-2 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-msu-deep-ocean/40">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <!-- Action Buttons - Responsive -->
+                            <div class="flex items-center justify-center space-x-2 sm:space-x-3">
+                                <button onclick="openPdfInNewTab()" class="flex items-center justify-center space-x-1 sm:space-x-2 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white px-2 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-msu-deep-ocean/40">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                                     </svg>
-                                    <span class="text-sm font-medium">Open</span>
+                                    <span class="text-xs sm:text-sm font-medium hidden sm:inline">Open</span>
                                 </button>
-                                <button onclick="downloadPdf()" class="flex items-center justify-center space-x-2 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-msu-deep-ocean/40">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <button onclick="downloadPdf()" class="flex items-center justify-center space-x-1 sm:space-x-2 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white px-2 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-msu-deep-ocean/40">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                                     </svg>
-                                    <span class="text-sm font-medium">Download</span>
+                                    <span class="text-xs sm:text-sm font-medium hidden sm:inline">Download</span>
                                 </button>
-                                <button onclick="closePdfViewer()" class="flex items-center justify-center w-12 h-12 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-xl transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-msu-deep-ocean/40">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <button onclick="closePdfViewer()" class="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-xl transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-msu-deep-ocean/40">
+                                    <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                     </svg>
                                 </button>
@@ -126,28 +127,23 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                         </div>
                     </div>
                     
-                    <!-- Stunning PDF Viewer Content -->
+                    <!-- Mobile-Optimized PDF Viewer Content -->
                     <div class="flex-1 bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden">
-                        <!-- Professional Loading State -->
+                        <!-- Mobile-Optimized Loading State -->
                         <div id="pdfLoading" class="absolute inset-0 flex items-center justify-center bg-white/98 backdrop-blur-sm z-20">
-                            <div class="text-center max-w-sm mx-auto p-8">
-                                <div class="relative mb-8">
-                                    <!-- Main loading ring -->
-                                    <div class="animate-spin rounded-full h-24 w-24 border-4 border-blue-100 border-t-blue-600 mx-auto"></div>
-                                    <!-- Secondary ring -->
-                                    <div class="absolute inset-2 rounded-full h-20 w-20 border-4 border-transparent border-t-blue-400 animate-spin mx-auto" style="animation-duration: 1.5s; animation-direction: reverse;"></div>
-                                    <!-- Inner pulse -->
-                                    <div class="absolute inset-6 rounded-full h-12 w-12 bg-blue-600/20 animate-pulse mx-auto"></div>
-                                    <!-- Center dot -->
-                                    <div class="absolute inset-10 rounded-full h-4 w-4 bg-blue-600 mx-auto animate-ping"></div>
+                            <div class="text-center max-w-xs sm:max-w-sm mx-auto p-4 sm:p-8">
+                                <div class="relative mb-4 sm:mb-8">
+                                    <!-- Responsive loading ring -->
+                                    <div class="animate-spin rounded-full h-16 w-16 sm:h-24 sm:w-24 border-4 border-blue-100 border-t-blue-600 mx-auto"></div>
+                                    <div class="absolute inset-1 sm:inset-2 rounded-full h-14 w-14 sm:h-20 sm:w-20 border-4 border-transparent border-t-blue-400 animate-spin mx-auto" style="animation-duration: 1.5s; animation-direction: reverse;"></div>
+                                    <div class="absolute inset-4 sm:inset-6 rounded-full h-8 w-8 sm:h-12 sm:w-12 bg-blue-600/20 animate-pulse mx-auto"></div>
+                                    <div class="absolute inset-6 sm:inset-10 rounded-full h-4 w-4 bg-blue-600 mx-auto animate-ping"></div>
                                 </div>
                                 
-                                <!-- Loading text with animation -->
-                                <div class="space-y-3">
-                                    <h3 class="text-xl font-bold text-gray-800 animate-pulse">Loading PDF...</h3>
-                                    <p class="text-gray-600 text-sm leading-relaxed">Please wait while we prepare your document for viewing</p>
+                                <div class="space-y-2 sm:space-y-3">
+                                    <h3 class="text-lg sm:text-xl font-bold text-gray-800 animate-pulse">Loading PDF...</h3>
+                                    <p class="text-gray-600 text-sm leading-relaxed">Please wait while we prepare your document</p>
                                     
-                                    <!-- Progress dots -->
                                     <div class="flex justify-center space-x-2 mt-4">
                                         <div class="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style="animation-delay: 0ms;"></div>
                                         <div class="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style="animation-delay: 150ms;"></div>
@@ -157,52 +153,47 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                             </div>
                         </div>
                         
-                        <!-- Stunning PDF Container with Book Flip Animation -->
+                        <!-- Mobile-Optimized PDF Container -->
                         <div id="pdfContainer" class="w-full h-full overflow-auto bg-gradient-to-br from-gray-50 to-gray-100">
-                            <div id="pdfViewer" class="w-full h-full flex items-center justify-center p-4 relative">
-                                <!-- PDF Canvas Container with Flip Animation -->
+                            <div id="pdfViewer" class="w-full h-full flex items-center justify-center p-2 sm:p-4 relative">
                                 <div id="pdfCanvasContainer" class="relative perspective-1000 w-full h-full flex items-center justify-center">
                                     <div id="pageFlipContainer" class="relative transform-style-preserve-3d transition-transform duration-700 ease-in-out">
-                                        <!-- Current Page -->
                                         <div id="currentPageContainer" class="flex items-center justify-center w-full h-full backface-hidden">
                                             <!-- PDF canvas will be inserted here -->
                                         </div>
-                                        
-                                        <!-- Next Page (for flip animation) -->
                                         <div id="nextPageContainer" class="flex items-center justify-center w-full h-full backface-hidden transform rotateY-180 opacity-0 absolute inset-0">
                                             <!-- Next page canvas will be inserted here during animation -->
                                         </div>
                                     </div>
                                 </div>
                                 
-                                <!-- Page Turn Shadow Effect -->
                                 <div id="pageTurnShadow" class="absolute inset-0 pointer-events-none opacity-0 transition-opacity duration-700">
-                                    <div class="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black/20 to-transparent"></div>
+                                    <div class="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-black/20 to-transparent"></div>
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- Professional Error State -->
+                        <!-- Mobile-Optimized Error State -->
                         <div id="pdfError" class="absolute inset-0 flex items-center justify-center bg-white/95 backdrop-blur-sm z-20 hidden">
-                            <div class="text-center max-w-lg mx-auto p-8">
-                                <div class="w-32 h-32 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-8">
-                                    <svg class="w-16 h-16 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="text-center max-w-xs sm:max-w-lg mx-auto p-4 sm:p-8">
+                                <div class="w-20 h-20 sm:w-32 sm:h-32 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-8">
+                                    <svg class="w-10 h-10 sm:w-16 sm:h-16 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
                                     </svg>
                                 </div>
-                                <h3 class="text-3xl font-bold text-gray-800 mb-4">Unable to Load PDF</h3>
-                                <p class="text-gray-600 mb-8 leading-relaxed text-lg">
-                                    The PDF file could not be loaded. This might be due to browser security restrictions or the file being unavailable.
+                                <h3 class="text-xl sm:text-3xl font-bold text-gray-800 mb-3 sm:mb-4">Unable to Load PDF</h3>
+                                <p class="text-gray-600 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-lg">
+                                    The PDF file could not be loaded. This might be due to browser restrictions.
                                 </p>
-                                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">
-                                    <button onclick="openPdfInNewTab()" class="flex items-center justify-center space-x-3 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg">
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="flex flex-col space-y-3 sm:space-y-4">
+                                    <button onclick="openPdfInNewTab()" class="flex items-center justify-center space-x-2 sm:space-x-3 bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg text-sm sm:text-base">
+                                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                                         </svg>
                                         <span>Open in New Tab</span>
                                     </button>
-                                    <button onclick="downloadPdf()" class="flex items-center justify-center space-x-3 bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg">
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <button onclick="downloadPdf()" class="flex items-center justify-center space-x-2 sm:space-x-3 bg-green-600 hover:bg-green-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg text-sm sm:text-base">
+                                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                                         </svg>
                                         <span>Download PDF</span>
@@ -215,75 +206,75 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
             </div>
         </div>
 
-        <!-- Hero Section -->
-        <div class="relative pt-24 pb-16 bg-white">
+        <!-- Mobile-Optimized Hero Section -->
+        <div class="relative pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-12 lg:pb-16 bg-white">
             <div class="absolute inset-0 overflow-hidden">
                 <div class="absolute inset-0 bg-gradient-to-r from-msu-light-blue/10 to-white"></div>
                 <div class="absolute top-0 right-0 w-1/2 h-full bg-msu-blue/5 -skew-x-12 transform origin-top-right"></div>
             </div>
             
             <div class="container mx-auto px-4 xl:px-0 relative">
-                <!-- Breadcrumb -->
-                <div class="mb-8">
-                    <p class="paragraph p2 text-gray-600">
+                <!-- Mobile-Optimized Breadcrumb -->
+                <div class="mb-4 sm:mb-6 lg:mb-8">
+                    <p class="paragraph p2 text-gray-600 text-sm sm:text-base">
                         <a href="/home" class="hover:text-msu-blue transition-colors">Home</a> / 
                         <a href="/publications" class="hover:text-msu-blue transition-colors">Publications</a> / 
                         <span class="text-msu-blue font-medium">Sulimbang</span>
                     </p>
                 </div>
 
-                <!-- Hero Content -->
-                <div class="text-center mb-16">
-                    <h1 class="headings text-5xl font-bold text-msu-main-color mb-6">Sulimbang</h1>
-                    <div class="w-24 h-1.5 bg-msu-deep-ocean mx-auto mb-6"></div>
-                    <p class="paragraph p2 text-gray-600 max-w-3xl mx-auto text-lg">
+                <!-- Mobile-Optimized Hero Content -->
+                <div class="text-center mb-8 sm:mb-12 lg:mb-16">
+                    <h1 class="headings text-3xl sm:text-4xl lg:text-5xl font-bold text-msu-main-color mb-4 sm:mb-6">Sulimbang</h1>
+                    <div class="w-16 sm:w-20 lg:w-24 h-1 sm:h-1.5 bg-msu-deep-ocean mx-auto mb-4 sm:mb-6"></div>
+                    <p class="paragraph p2 text-gray-600 max-w-3xl mx-auto text-base sm:text-lg px-4 sm:px-0">
                         Official publications of MSU Tawi-Tawi College of Technology and Oceanography
                     </p>
                 </div>
             </div>
         </div>
 
-        <!-- Latest Publication Section -->
-        <div class="py-16 bg-gray-50 border-t border-b border-gray-100">
+        <!-- Mobile-Optimized Latest Publication Section -->
+        <div class="py-8 sm:py-12 lg:py-16 bg-gray-50 border-t border-b border-gray-100">
             <div class="container mx-auto px-4 xl:px-0">
-                <div class="flex flex-col lg:flex-row gap-12 items-center">
-                    <!-- Publication Cover -->
-                    <div class="lg:w-1/2">
-                        <div class="relative group overflow-hidden rounded-xl shadow-xl">
+                <div class="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-12 items-center">
+                    <!-- Mobile-Optimized Publication Cover -->
+                    <div class="w-full lg:w-1/2">
+                        <div class="relative group overflow-hidden rounded-xl shadow-xl max-w-md mx-auto lg:max-w-none">
                             <img
                                 src={urlForImage(latestsulimbang.mainImage.asset.url).url()}
                                 class="w-full h-auto object-cover transform transition-all duration-500 group-hover:scale-105"
                                 alt={latestsulimbang.title}
                             />
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
-                                <h3 class="text-2xl font-bold text-white">{latestsulimbang.title}</h3>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 sm:p-6 lg:p-8">
+                                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-white">{latestsulimbang.title}</h3>
                             </div>
-                            <div class="absolute top-4 right-4 bg-msu-main-color text-white font-bold px-3 py-1 rounded-full text-sm">
+                            <div class="absolute top-2 sm:top-4 right-2 sm:right-4 bg-msu-main-color text-white font-bold px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">
                                 Latest Issue
                             </div>
                         </div>
                     </div>
 
-                    <!-- Publication Details -->
-                    <div class="lg:w-1/2">
-                        <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-                            <h2 class="headings text-3xl font-bold text-msu-dark-blue mb-4">{latestsulimbang.title}</h2>
-                            <div class="flex items-center mb-6">
+                    <!-- Mobile-Optimized Publication Details -->
+                    <div class="w-full lg:w-1/2">
+                        <div class="bg-white p-4 sm:p-6 lg:p-8 rounded-xl shadow-lg border border-gray-100">
+                            <h2 class="headings text-xl sm:text-2xl lg:text-3xl font-bold text-msu-dark-blue mb-3 sm:mb-4">{latestsulimbang.title}</h2>
+                            <div class="flex items-center mb-4 sm:mb-6">
                                 <span class="bg-msu-blue/10 text-msu-blue px-3 py-1 rounded-full text-sm font-medium">
                                     {getYear(latestsulimbang.publishedAt)}
                                 </span>
                             </div>
-                            <p class="paragraph p2 text-gray-600 mb-8 leading-relaxed">
+                            <p class="paragraph p2 text-gray-600 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
                                 {latestsulimbang.body[0].children[0].text}
                             </p>
-                            <div class="flex flex-wrap gap-4">
+                            <div class="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
                                 <button
                                     id="viewLatestPDF"
                                     data-pdf-url={latestPdfUrl || ''}
                                     data-title={latestsulimbang.title}
-                                    class="inline-flex items-center justify-center bg-msu-main-color hover:bg-msu-deep-ocean text-white font-bold py-3 px-6 rounded-lg shadow-md transform transition-all duration-300 hover:scale-[1.02]"
+                                    class="inline-flex items-center justify-center bg-msu-main-color hover:bg-msu-deep-ocean text-white font-bold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg shadow-md transform transition-all duration-300 hover:scale-[1.02] text-sm sm:text-base"
                                 >
-                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                                     </svg>
@@ -293,24 +284,24 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                                     href={latestPdfUrl || '#'} 
                                     target="_blank" 
                                     rel="noopener noreferrer"
-                                    class="inline-flex items-center justify-center bg-msu-blue hover:bg-msu-deep-ocean text-white font-bold py-3 px-6 rounded-lg shadow-md transform transition-all duration-300 hover:scale-[1.02]"
+                                    class="inline-flex items-center justify-center bg-msu-blue hover:bg-msu-deep-ocean text-white font-bold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg shadow-md transform transition-all duration-300 hover:scale-[1.02] text-sm sm:text-base"
                                 >
-                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                                     </svg>
-                                    Open in New Tab
+                                    Open
                                 </a>
                                 <a
                                     href={latestPdfUrl || '#'} 
                                     target="_blank" 
                                     rel="noopener noreferrer"
                                     download
-                                    class="inline-flex items-center justify-center bg-white border border-msu-blue text-msu-blue hover:bg-msu-blue/5 font-medium py-3 px-6 rounded-lg shadow-sm transform transition-all duration-300 hover:scale-[1.02]"
+                                    class="inline-flex items-center justify-center bg-white border border-msu-blue text-msu-blue hover:bg-msu-blue/5 font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg shadow-sm transform transition-all duration-300 hover:scale-[1.02] text-sm sm:text-base"
                                 >
-                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                                     </svg>
-                                    Download PDF
+                                    Download
                                 </a>
                             </div>
                         </div>
@@ -319,43 +310,43 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
             </div>
         </div>
 
-        <!-- Publication Archive Section -->
-        <div class="py-16 bg-white">
+        <!-- Mobile-Optimized Publication Archive Section -->
+        <div class="py-8 sm:py-12 lg:py-16 bg-white">
             <div class="container mx-auto px-4 xl:px-0">
-                <!-- Search and Filter -->
-                <div class="mb-16 max-w-4xl mx-auto">
+                <!-- Mobile-Optimized Search and Filter -->
+                <div class="mb-8 sm:mb-12 lg:mb-16 max-w-4xl mx-auto">
                     <div class="relative">
                         <input
                             type="text"
                             id="searchInput"
-                            placeholder="Search Sulimbang by title, year or keyword..."
-                            class="w-full p-4 pl-12 pr-6 border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-msu-gold focus:border-msu-gold outline-none transition-all duration-300"
+                            placeholder="Search Sulimbang..."
+                            class="w-full p-3 sm:p-4 pl-10 sm:pl-12 pr-4 sm:pr-6 border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-msu-gold focus:border-msu-gold outline-none transition-all duration-300 text-sm sm:text-base"
                         />
-                        <svg class="absolute left-4 top-4 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="absolute left-3 sm:left-4 top-3 sm:top-4 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
                     </div>
                 </div>
 
-                <!-- Section Header -->
-                <div class="text-center mb-12">
-                    <h2 class="headings text-4xl font-bold text-msu-main-color mb-4">Sulimbang Archive</h2>
-                    <div class="w-24 h-1.5 bg-msu-deep-ocean mx-auto"></div>
+                <!-- Mobile-Optimized Section Header -->
+                <div class="text-center mb-8 sm:mb-10 lg:mb-12">
+                    <h2 class="headings text-2xl sm:text-3xl lg:text-4xl font-bold text-msu-main-color mb-3 sm:mb-4">Sulimbang Archive</h2>
+                    <div class="w-16 sm:w-20 lg:w-24 h-1 sm:h-1.5 bg-msu-deep-ocean mx-auto"></div>
                 </div>
 
-                <!-- Publications Grid -->
-                <div id="sulimbangContainer" class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-8 mb-16">
+                <!-- Mobile-Optimized Publications Grid -->
+                <div id="sulimbangContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 lg:mb-16">
                     {allPdfUrls.map((sulimbang) => (
                         <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-                            <div class="relative group h-100 overflow-hidden">
+                            <div class="relative group h-48 sm:h-56 lg:h-64 overflow-hidden">
                                 <img 
                                     src={sulimbang.mainImage.asset.url} 
                                     class="w-full h-full object-cover transform transition-all duration-500 group-hover:scale-110"
                                     alt={sulimbang.title}
                                 />
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3 sm:p-4">
                                     <button 
-                                        class="view-pdf-btn inline-flex items-center justify-center bg-msu-main-color hover:bg-msu-deep-ocean text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300"
+                                        class="view-pdf-btn inline-flex items-center justify-center bg-msu-main-color hover:bg-msu-deep-ocean text-white font-medium py-2 px-3 sm:px-4 rounded-lg transition-colors duration-300 text-sm"
                                         data-pdf-url={sulimbang.pdfUrl || ''}
                                         data-title={sulimbang.title}
                                     >
@@ -363,28 +354,28 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                                     </button>
                                 </div>
                             </div>
-                            <div class="p-6">
-                                <h3 class="headings text-xl font-bold text-msu-dark-blue mb-2 line-clamp-2">{sulimbang.title}</h3>
-                                <p class="paragraph p2 text-gray-600 mb-4 line-clamp-3">{sulimbang.body[0].children[0].text}</p>
-                                <div class="flex justify-between items-center">
+                            <div class="p-4 sm:p-5 lg:p-6">
+                                <h3 class="headings text-base sm:text-lg lg:text-xl font-bold text-msu-dark-blue mb-2 line-clamp-2">{sulimbang.title}</h3>
+                                <p class="paragraph p2 text-gray-600 mb-3 sm:mb-4 line-clamp-3 text-sm sm:text-base">{sulimbang.body[0].children[0].text}</p>
+                                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
                                     <span class="text-sm font-medium text-msu-blue">{getYear(sulimbang.publishedAt)}</span>
-                                    <div class="flex gap-2">
+                                    <div class="flex gap-2 w-full sm:w-auto">
                                         <a 
                                             href={sulimbang.pdfUrl || '#'} 
                                             target="_blank" 
                                             rel="noopener noreferrer"
-                                            class="text-sm font-medium text-msu-blue hover:text-msu-dark-blue transition-colors flex items-center"
+                                            class="text-xs sm:text-sm font-medium text-msu-blue hover:text-msu-dark-blue transition-colors flex items-center flex-1 sm:flex-none justify-center sm:justify-start"
                                         >
-                                            Open <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                            Open <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                                         </a>
                                         <a 
                                             href={sulimbang.pdfUrl || '#'} 
                                             target="_blank" 
                                             rel="noopener noreferrer"
                                             download
-                                            class="text-sm font-medium text-msu-blue hover:text-msu-dark-blue transition-colors flex items-center"
+                                            class="text-xs sm:text-sm font-medium text-msu-blue hover:text-msu-dark-blue transition-colors flex items-center flex-1 sm:flex-none justify-center sm:justify-start"
                                         >
-                                            Download <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                            Download <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                         </a>
                                     </div>
                                 </div>
@@ -393,21 +384,21 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                     ))}
                 </div>
 
-                <!-- Pagination -->
+                <!-- Mobile-Optimized Pagination -->
                 <div class="flex justify-center">
-                    <div id="pagination" class="flex items-center space-x-2">
-                        <button id="prevPage" class="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed" style="border-color: #61063B;" onmouseenter="this.style.backgroundColor='#03045e'; this.style.color='#ffffff';" onmouseleave="this.style.backgroundColor='#ffffff'; this.style.color='#6b7280';" disabled>
-                            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <div id="pagination" class="flex items-center space-x-1 sm:space-x-2">
+                        <button id="prevPage" class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-white border border-gray-200 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed text-xs sm:text-sm" style="border-color: #61063B;" onmouseenter="this.style.backgroundColor='#03045e'; this.style.color='#ffffff';" onmouseleave="this.style.backgroundColor='#ffffff'; this.style.color='#6b7280';" disabled>
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                             </svg>
                         </button>
 
-                        <div id="pageNumbers" class="flex items-center space-x-2">
+                        <div id="pageNumbers" class="flex items-center space-x-1 sm:space-x-2">
                             <!-- Page numbers will be dynamically inserted here -->
                         </div>
 
-                        <button id="nextPage" class="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed" style="border-color: #61063B;" onmouseenter="this.style.backgroundColor='#03045e'; this.style.color='#ffffff';" onmouseleave="this.style.backgroundColor='#ffffff'; this.style.color='#6b7280';">
-                            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <button id="nextPage" class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-white border border-gray-200 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed text-xs sm:text-sm" style="border-color: #61063B;" onmouseenter="this.style.backgroundColor='#03045e'; this.style.color='#ffffff';" onmouseleave="this.style.backgroundColor='#ffffff'; this.style.color='#6b7280';">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                             </svg>
                         </button>
@@ -420,14 +411,14 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
         <FooterNav />
         <Footer />
 
-        <!-- Scroll to Top Button -->
-        <button class="scroll-to-top" aria-label="Scroll to top">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <!-- Mobile-Optimized Scroll to Top Button -->
+        <button class="scroll-to-top fixed bottom-4 right-4 w-12 h-12 bg-msu-blue hover:bg-msu-deep-ocean text-white rounded-full shadow-lg transition-all duration-300 hover:scale-105 z-50" aria-label="Scroll to top">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6 mx-auto">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
             </svg>
         </button>
 
-        <!-- Professional PDF Viewer Script -->
+        <!-- Enhanced Mobile-Optimized PDF Viewer Script -->
         <script>
             // TypeScript declarations for PDF.js
             declare const pdfjsLib: any;
@@ -448,7 +439,7 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
             let baseScale = 1.0; // Base scale for fit-to-screen
 
             // Professional PDF Viewer functions
-            async function openPdfViewer(pdfUrl, title) {
+            async function openPdfViewer(pdfUrl: string, title: string) {
                 console.log('Opening professional PDF viewer:', { pdfUrl, title });
                 
                 // Check if PDF URL is valid
@@ -470,8 +461,10 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                 const pdfViewerElement = document.getElementById('pdfViewer');
                 
                 if (modal && titleElement) {
-                    // Set title
-                    const displayTitle = title && title.length > 40 ? title.substring(0, 40) + '...' : title;
+                    // Set title - more mobile-friendly truncation
+                    const isMobile = window.innerWidth < 640;
+                    const maxLength = isMobile ? 25 : 40;
+                    const displayTitle = title && title.length > maxLength ? title.substring(0, maxLength) + '...' : title;
                     titleElement.textContent = displayTitle || 'MSU-TCTO Publication Viewer';
                     
                     // Show loading state
@@ -594,22 +587,26 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                 }
             }
 
-            async function renderPage(num) {
+            async function renderPage(num: number) {
                 pageRendering = true;
                 
                 try {
                     const page = await pdfDoc.getPage(num);
                     
-                    // Calculate optimal scale to fit the container
+                    // Calculate optimal scale to fit the container - Enhanced for mobile
                     const container = document.getElementById('pageFlipContainer');
                     if (container) {
                         const containerRect = container.getBoundingClientRect();
                         const pageViewport = page.getViewport({ scale: 1.0 });
                         
+                        // Mobile-optimized padding
+                        const isMobile = window.innerWidth < 768;
+                        const padding = isMobile ? 20 : 40;
+                        
                         // Calculate scale to fit both width and height with padding
-                        const scaleX = (containerRect.width - 40) / pageViewport.width;
-                        const scaleY = (containerRect.height - 40) / pageViewport.height;
-                        const fitScale = Math.min(scaleX, scaleY, 3.0); // Max scale of 3.0
+                        const scaleX = (containerRect.width - padding) / pageViewport.width;
+                        const scaleY = (containerRect.height - padding) / pageViewport.height;
+                        const fitScale = Math.min(scaleX, scaleY, isMobile ? 2.0 : 3.0); // Lower max scale for mobile
                         
                         // Set base scale for fit-to-screen if not set
                         if (baseScale === 1.0) {
@@ -621,16 +618,18 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                         const viewport = page.getViewport({ scale: optimalScale });
                         
                         // Set canvas dimensions
-                        canvas.height = viewport.height;
-                        canvas.width = viewport.width;
-                        
-                        // Render PDF page into canvas context
-                        const renderContext = {
-                            canvasContext: ctx,
-                            viewport: viewport
-                        };
-                        
-                        await page.render(renderContext).promise;
+                        if (canvas && ctx) {
+                            canvas.height = viewport.height;
+                            canvas.width = viewport.width;
+                            
+                            // Render PDF page into canvas context
+                            const renderContext = {
+                                canvasContext: ctx,
+                                viewport: viewport
+                            };
+                            
+                            await page.render(renderContext).promise;
+                        }
                     }
                     
                     pageRendering = false;
@@ -646,7 +645,7 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                 }
             }
 
-            function queueRenderPage(num) {
+            function queueRenderPage(num: number) {
                 if (pageRendering) {
                     pageNumPending = num;
                 } else {
@@ -684,7 +683,7 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                 }
             }
 
-            async function animatePageFlip(direction) {
+            async function animatePageFlip(direction: 'prev' | 'next') {
                 console.log('animatePageFlip called:', { direction, isAnimating, pageNum });
                 if (isAnimating) {
                     console.log('Animation already in progress, returning');
@@ -730,19 +729,20 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                     pageFlipContainer.style.transform = 'rotateY(180deg) scale(0.95)';
                 }
                 
-                // Wait for animation to complete
-                await new Promise(resolve => setTimeout(resolve, 700));
+                // Wait for animation to complete - Shorter duration for mobile
+                const animationDuration = window.innerWidth < 768 ? 500 : 700;
+                await new Promise(resolve => setTimeout(resolve, animationDuration));
                 
                 // Update page number
                 pageNum = targetPage;
                 
                 // Swap canvases - move next page to current
                 const currentPageContainer = document.getElementById('currentPageContainer');
-                if (currentPageContainer && nextCanvas) {
+                if (currentPageContainer && nextCanvas && canvas && ctx) {
                     // Copy next canvas content to main canvas
                     canvas.width = nextCanvas.width;
                     canvas.height = nextCanvas.height;
-                    ctx?.drawImage(nextCanvas, 0, 0);
+                    ctx.drawImage(nextCanvas, 0, 0);
                 }
                 
                 // Reset animation state first
@@ -769,7 +769,7 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                 }, 1000);
             }
 
-            async function renderPageOnCanvas(pageNumber, targetCanvas, targetCtx) {
+            async function renderPageOnCanvas(pageNumber: number, targetCanvas: HTMLCanvasElement | null, targetCtx: CanvasRenderingContext2D | null) {
                 if (!pdfDoc || !targetCanvas || !targetCtx) return;
                 
                 try {
@@ -781,10 +781,14 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                         const containerRect = container.getBoundingClientRect();
                         const pageViewport = page.getViewport({ scale: 1.0 });
                         
+                        // Mobile-optimized padding
+                        const isMobile = window.innerWidth < 768;
+                        const padding = isMobile ? 20 : 40;
+                        
                         // Calculate scale to fit both width and height with padding
-                        const scaleX = (containerRect.width - 40) / pageViewport.width;
-                        const scaleY = (containerRect.height - 40) / pageViewport.height;
-                        const optimalScale = Math.min(scaleX, scaleY, 2.0) * scale; // Max scale of 2.0
+                        const scaleX = (containerRect.width - padding) / pageViewport.width;
+                        const scaleY = (containerRect.height - padding) / pageViewport.height;
+                        const optimalScale = Math.min(scaleX, scaleY, isMobile ? 1.5 : 2.0) * scale; // Lower max scale for mobile
                         
                         const viewport = page.getViewport({ scale: optimalScale });
                         
@@ -829,24 +833,26 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                 }
             }
 
-            function addPageCurlEffect(direction) {
+            function addPageCurlEffect(direction: 'prev' | 'next') {
                 const pdfContainer = document.getElementById('pdfContainer');
                 if (!pdfContainer) return;
                 
                 // Add temporary curl effect class
                 pdfContainer.classList.add('page-curling');
                 
-                // Remove curl effect after animation
+                // Remove curl effect after animation - Shorter for mobile
+                const duration = window.innerWidth < 768 ? 500 : 700;
                 setTimeout(() => {
                     pdfContainer.classList.remove('page-curling');
-                }, 700);
+                }, duration);
             }
 
             function zoomFit() {
                 if (!pdfDoc) return;
                 
                 // Reset to fit-to-screen scale
-                scale = baseScale;
+                scale = 1.0;  // Reset to base scale calculation
+                baseScale = 1.0; // Reset base scale to recalculate
                 renderPage(pageNum);
                 updateZoomLevel();
                 updateNavigationButtons();
@@ -854,19 +860,21 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
 
             async function zoomIn() {
                 if (isAnimating) return;
-                scale *= 1.25; // Increased zoom increment for better visibility
+                const zoomFactor = window.innerWidth < 768 ? 1.2 : 1.25; // Smaller increments for mobile
+                scale *= zoomFactor;
                 await renderPage(pageNum);
                 updateZoomLevel();
-                updateNavigationButtons(); // Ensure buttons stay enabled
+                updateNavigationButtons();
             }
 
             async function zoomOut() {
                 if (isAnimating) return;
-                scale /= 1.25; // Consistent zoom decrement
-                if (scale < 0.5) scale = 0.5; // Minimum zoom limit
+                const zoomFactor = window.innerWidth < 768 ? 1.2 : 1.25; // Smaller increments for mobile
+                scale /= zoomFactor;
+                if (scale < 0.3) scale = 0.3; // Lower minimum for mobile viewing
                 await renderPage(pageNum);
                 updateZoomLevel();
-                updateNavigationButtons(); // Ensure buttons stay enabled
+                updateNavigationButtons();
             }
 
             function updateZoomLevel() {
@@ -898,7 +906,7 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                     pageNumPending = null;
                     scale = 1.0;
                     baseScale = 1.0;
-                    isAnimating = false; // Ensure animation state is reset
+                    isAnimating = false;
                 }
             }
 
@@ -938,7 +946,7 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                     viewLatestPDFBtn.addEventListener('click', () => {
                         const pdfUrl = viewLatestPDFBtn.getAttribute('data-pdf-url');
                         const title = viewLatestPDFBtn.getAttribute('data-title');
-                        openPdfViewer(pdfUrl, title);
+                        openPdfViewer(pdfUrl || '', title || '');
                     });
                 }
 
@@ -946,7 +954,7 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                     btn.addEventListener('click', () => {
                         const pdfUrl = btn.getAttribute('data-pdf-url');
                         const title = btn.getAttribute('data-title');
-                        openPdfViewer(pdfUrl, title);
+                        openPdfViewer(pdfUrl || '', title || '');
                     });
                 });
 
@@ -1001,22 +1009,24 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                     });
                 }
 
-                // Pagination functionality
-                const itemsPerPage = 8;
+                // Enhanced Mobile-Optimized Pagination functionality
+                const itemsPerPage = window.innerWidth < 640 ? 4 : window.innerWidth < 1024 ? 6 : 8; // Responsive items per page
                 const sulimbangContainer = document.getElementById('sulimbangContainer');
-                const allSulimbangItems = Array.from(sulimbangContainer.querySelectorAll('.bg-white.rounded-xl'));
-                const searchInput = document.getElementById('searchInput');
-                const prevPageButton = document.getElementById('prevPage');
-                const nextPageButton = document.getElementById('nextPage');
+                const allSulimbangItems = Array.from(sulimbangContainer?.querySelectorAll('.bg-white.rounded-xl') || []);
+                const searchInput = document.getElementById('searchInput') as HTMLInputElement;
+                const prevPageButton = document.getElementById('prevPage') as HTMLButtonElement;
+                const nextPageButton = document.getElementById('nextPage') as HTMLButtonElement;
                 const pageNumbersContainer = document.getElementById('pageNumbers');
 
                 let currentPage = 1;
                 let filteredItems = allSulimbangItems;
 
-                function filterItems(query) {
+                function filterItems(query: string) {
                     filteredItems = allSulimbangItems.filter(item => {
-                        const title = item.querySelector('h3').textContent.toLowerCase();
-                        const year = item.querySelector('span').textContent.toLowerCase();
+                        const titleElement = item.querySelector('h3');
+                        const yearElement = item.querySelector('span');
+                        const title = titleElement?.textContent?.toLowerCase() || '';
+                        const year = yearElement?.textContent?.toLowerCase() || '';
                         return title.includes(query) || year.includes(query);
                     });
                     currentPage = 1;
@@ -1026,47 +1036,53 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
 
                 function renderPagination() {
                     const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
-                    pageNumbersContainer.innerHTML = '';
+                    if (pageNumbersContainer) {
+                        pageNumbersContainer.innerHTML = '';
 
-                    if (totalPages > 0) {
-                        const firstPageButton = createPageButton(1);
-                        pageNumbersContainer.appendChild(firstPageButton);
+                        // Mobile-optimized pagination - show fewer pages
+                        const isMobile = window.innerWidth < 640;
+                        const maxVisiblePages = isMobile ? 3 : 5;
+
+                        if (totalPages > 0) {
+                            const firstPageButton = createPageButton(1);
+                            pageNumbersContainer.appendChild(firstPageButton);
+                        }
+
+                        const startPage = Math.max(2, currentPage - Math.floor(maxVisiblePages / 2));
+                        const endPage = Math.min(totalPages - 1, startPage + maxVisiblePages - 3);
+
+                        if (startPage > 2) {
+                            const ellipsis = document.createElement('span');
+                            ellipsis.className = 'px-1 sm:px-2 text-gray-500 text-xs sm:text-sm';
+                            ellipsis.textContent = '...';
+                            pageNumbersContainer.appendChild(ellipsis);
+                        }
+
+                        for (let i = startPage; i <= endPage; i++) {
+                            const pageButton = createPageButton(i);
+                            pageNumbersContainer.appendChild(pageButton);
+                        }
+
+                        if (endPage < totalPages - 1 && totalPages > maxVisiblePages) {
+                            const ellipsis = document.createElement('span');
+                            ellipsis.className = 'px-1 sm:px-2 text-gray-500 text-xs sm:text-sm';
+                            ellipsis.textContent = '...';
+                            pageNumbersContainer.appendChild(ellipsis);
+                        }
+
+                        if (totalPages > 1) {
+                            const lastPageButton = createPageButton(totalPages);
+                            pageNumbersContainer.appendChild(lastPageButton);
+                        }
                     }
 
-                    const startPage = Math.max(2, currentPage - 1);
-                    const endPage = Math.min(totalPages - 1, currentPage + 1);
-
-                    if (startPage > 2) {
-                        const ellipsis = document.createElement('span');
-                        ellipsis.className = 'px-2 text-gray-500';
-                        ellipsis.textContent = '...';
-                        pageNumbersContainer.appendChild(ellipsis);
-                    }
-
-                    for (let i = startPage; i <= endPage; i++) {
-                        const pageButton = createPageButton(i);
-                        pageNumbersContainer.appendChild(pageButton);
-                    }
-
-                    if (endPage < totalPages - 1) {
-                        const ellipsis = document.createElement('span');
-                        ellipsis.className = 'px-2 text-gray-500';
-                        ellipsis.textContent = '...';
-                        pageNumbersContainer.appendChild(ellipsis);
-                    }
-
-                    if (totalPages > 1) {
-                        const lastPageButton = createPageButton(totalPages);
-                        pageNumbersContainer.appendChild(lastPageButton);
-                    }
-
-                    (prevPageButton as HTMLButtonElement).disabled = currentPage === 1;
-                    (nextPageButton as HTMLButtonElement).disabled = currentPage === totalPages || totalPages === 0;
+                    if (prevPageButton) prevPageButton.disabled = currentPage === 1;
+                    if (nextPageButton) nextPageButton.disabled = currentPage === totalPages || totalPages === 0;
                 }
 
-                function createPageButton(pageNumber) {
+                function createPageButton(pageNumber: number) {
                     const pageButton = document.createElement('button');
-                    pageButton.className = `w-10 h-10 flex items-center justify-center rounded-full transition-all ${
+                    pageButton.className = `w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full transition-all text-xs sm:text-sm ${
                         currentPage === pageNumber ? 'text-white font-medium' : 'bg-white text-gray-600'
                     }`;
                     pageButton.style.backgroundColor = currentPage === pageNumber ? '#61063B' : '#ffffff';
@@ -1087,12 +1103,12 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                         }
                     });
                     
-                    pageButton.textContent = pageNumber;
+                    pageButton.textContent = pageNumber.toString();
                     pageButton.addEventListener('click', () => changePage(pageNumber));
                     return pageButton;
                 }
 
-                function changePage(page) {
+                function changePage(page: number) {
                     currentPage = page;
                     const startIndex = (currentPage - 1) * itemsPerPage;
                     const endIndex = startIndex + itemsPerPage;
@@ -1108,21 +1124,33 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                     renderPagination();
                 }
 
-                searchInput.addEventListener('input', (e) => {
-                    const query = (e.target as HTMLInputElement).value.toLowerCase();
-                    filterItems(query);
-                });
+                if (searchInput) {
+                    searchInput.addEventListener('input', (e) => {
+                        const query = (e.target as HTMLInputElement).value.toLowerCase();
+                        filterItems(query);
+                    });
+                }
 
-                prevPageButton.addEventListener('click', () => {
-                    if (currentPage > 1) changePage(currentPage - 1);
-                });
+                if (prevPageButton) {
+                    prevPageButton.addEventListener('click', () => {
+                        if (currentPage > 1) changePage(currentPage - 1);
+                    });
+                }
 
-                nextPageButton.addEventListener('click', () => {
-                    if (currentPage < Math.ceil(filteredItems.length / itemsPerPage)) changePage(currentPage + 1);
-                });
+                if (nextPageButton) {
+                    nextPageButton.addEventListener('click', () => {
+                        if (currentPage < Math.ceil(filteredItems.length / itemsPerPage)) changePage(currentPage + 1);
+                    });
+                }
 
+                // Initialize
                 filterItems('');
                 renderPagination();
+
+                // Handle window resize to adjust pagination
+                window.addEventListener('resize', () => {
+                    renderPagination();
+                });
             });
         </script>
 
@@ -1210,7 +1238,7 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                 box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
             }
             
-            /* Stunning PDF Viewer Styles */
+            /* Mobile-First Responsive PDF Viewer Styles */
             #pdfViewerModal {
                 transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
                 backdrop-filter: blur(12px);
@@ -1228,30 +1256,34 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                 transform: scale(1) translateY(0);
             }
             
-            /* Stunning modal container */
+            /* Mobile-optimized modal container */
             #pdfViewerModal .bg-white {
                 box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.4);
                 border: 1px solid rgba(255, 255, 255, 0.2);
                 backdrop-filter: blur(20px);
             }
             
-            /* Stunning buttons with glassmorphism */
+            /* Mobile-optimized buttons */
             #pdfViewerModal button {
                 transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.15);
+                box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.1);
                 backdrop-filter: blur(10px);
+                touch-action: manipulation; /* Improve touch responsiveness */
             }
             
-            #pdfViewerModal button:hover {
-                transform: translateY(-2px) scale(1.05);
-                box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.2);
+            /* Mobile hover states - only apply on non-touch devices */
+            @media (hover: hover) {
+                #pdfViewerModal button:hover {
+                    transform: translateY(-1px) scale(1.02);
+                    box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.15);
+                }
             }
             
-            /* Stunning animations */
+            /* Mobile animations */
             @keyframes fadeInUp {
                 from {
                     opacity: 0;
-                    transform: translateY(30px) scale(0.95);
+                    transform: translateY(20px) scale(0.98);
                 }
                 to {
                     opacity: 1;
@@ -1262,7 +1294,7 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
             @keyframes slideInFromTop {
                 from {
                     opacity: 0;
-                    transform: translateY(-20px);
+                    transform: translateY(-15px);
                 }
                 to {
                     opacity: 1;
@@ -1271,46 +1303,41 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
             }
             
             #pdfViewerModal:not(.hidden) .bg-white {
-                animation: fadeInUp 0.5s ease-out;
+                animation: fadeInUp 0.4s ease-out;
             }
             
             #pdfViewerModal:not(.hidden) .bg-gradient-to-r {
-                animation: slideInFromTop 0.6s ease-out 0.1s both;
+                animation: slideInFromTop 0.5s ease-out 0.1s both;
             }
             
-            /* Stunning PDF Canvas Styles */
+            /* Mobile-optimized PDF Canvas Styles */
             #pdfCanvas {
                 max-width: 100%;
                 height: auto;
-                box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
-                border-radius: 12px;
+                box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
                 background: white;
                 border: 1px solid rgba(0, 0, 0, 0.05);
             }
             
-            /* Stunning PDF Container Scrollbar */
+            /* Mobile-optimized scrollbar */
             #pdfContainer::-webkit-scrollbar {
-                width: 12px;
-                height: 12px;
+                width: 8px;
+                height: 8px;
             }
             
             #pdfContainer::-webkit-scrollbar-track {
                 background: rgba(241, 241, 241, 0.8);
-                border-radius: 6px;
-                backdrop-filter: blur(10px);
+                border-radius: 4px;
             }
             
             #pdfContainer::-webkit-scrollbar-thumb {
                 background: linear-gradient(135deg, #c1c1c1, #a8a8a8);
-                border-radius: 6px;
-                border: 2px solid rgba(241, 241, 241, 0.8);
+                border-radius: 4px;
+                border: 1px solid rgba(241, 241, 241, 0.8);
             }
             
-            #pdfContainer::-webkit-scrollbar-thumb:hover {
-                background: linear-gradient(135deg, #a8a8a8, #909090);
-            }
-            
-            /* Stunning Loading Animation */
+            /* Mobile loading animation */
             @keyframes spin {
                 0% { transform: rotate(0deg); }
                 100% { transform: rotate(360deg); }
@@ -1318,7 +1345,7 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
             
             @keyframes ping {
                 75%, 100% {
-                    transform: scale(1.2);
+                    transform: scale(1.1);
                     opacity: 0;
                 }
             }
@@ -1331,103 +1358,72 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                 animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
             }
             
-            /* Stunning MSU header gradient */
+            /* Mobile MSU header gradient */
             #pdfViewerModal .bg-gradient-to-r {
                 background: linear-gradient(135deg, #61063B 0%, #003366 50%, #61063B 100%);
-                box-shadow: 0 4px 20px -4px rgba(97, 6, 59, 0.3);
+                box-shadow: 0 2px 10px -2px rgba(97, 6, 59, 0.2);
             }
             
-            /* Stunning button states */
+            /* Mobile button disabled states */
             #pdfViewerModal button:disabled {
                 opacity: 0.4;
                 cursor: not-allowed;
                 transform: none !important;
-                box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);
             }
             
-            #pdfViewerModal button:disabled:hover {
-                transform: none !important;
-                box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.1);
-            }
-            
-            /* Stunning glassmorphism effects */
+            /* Mobile glassmorphism effects */
             #pdfViewerModal .bg-white\/15 {
                 background: rgba(255, 255, 255, 0.15);
-                backdrop-filter: blur(15px);
+                backdrop-filter: blur(10px);
                 border: 1px solid rgba(255, 255, 255, 0.2);
             }
             
             #pdfViewerModal .bg-white\/20 {
                 background: rgba(255, 255, 255, 0.2);
-                backdrop-filter: blur(15px);
+                backdrop-filter: blur(10px);
                 border: 1px solid rgba(255, 255, 255, 0.25);
             }
             
-            #pdfViewerModal .bg-white\/20:hover {
-                background: rgba(255, 255, 255, 0.3);
-                transform: translateY(-2px) scale(1.05);
-                box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.2);
-            }
-            
-            /* Stunning responsive design */
-            @media (max-width: 640px) {
+            /* Mobile-specific responsive breakpoints */
+            @media (max-width: 480px) {
                 #pdfViewerModal .bg-white {
                     border-radius: 0;
                     margin: 0;
+                    height: 100vh;
                 }
                 
-                #pdfViewerModal .p-4 {
-                    padding: 0;
+                #pdfViewerModal .p-3 {
+                    padding: 0.75rem;
                 }
                 
-                #pdfViewerModal .flex.items-center.space-x-4 {
-                    flex-direction: column;
-                    gap: 0.75rem;
+                #pdfViewerModal .flex.flex-col.sm\\:flex-row {
+                    gap: 0.5rem;
+                }
+                
+                #pdfViewerModal .space-x-2 > :not([hidden]) ~ :not([hidden]) {
+                    margin-left: 0.25rem;
                 }
             }
             
-            /* Stunning touch-friendly button sizes */
+            /* Enhanced mobile touch targets */
             @media (max-width: 768px) {
                 #pdfViewerModal button {
-                    min-height: 48px;
-                    min-width: 48px;
+                    min-height: 44px;
+                    min-width: 44px;
+                    touch-action: manipulation;
+                }
+                
+                #pdfViewerModal input,
+                #pdfViewerModal select {
+                    min-height: 44px;
+                    font-size: 16px; /* Prevent zoom on iOS */
                 }
             }
             
-            /* Stunning smooth transitions for all interactive elements */
-            #pdfViewerModal * {
-                transition-property: all;
-                transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-                transition-duration: 300ms;
-            }
-            
-            /* Stunning backdrop blur effects */
-            #pdfViewerModal .backdrop-blur-sm {
-                backdrop-filter: blur(8px);
-            }
-            
-            #pdfViewerModal .backdrop-blur-md {
-                backdrop-filter: blur(12px);
-            }
-            
-            /* Stunning hover scale effects */
-            #pdfViewerModal .hover\:scale-105:hover {
-                transform: scale(1.05);
-            }
-            
-            /* Stunning shadow effects */
-            #pdfViewerModal .shadow-lg {
-                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            }
-            
-            /* Stunning gradient backgrounds */
-            #pdfViewerModal .bg-gradient-to-br {
-                background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
-            }
-            
-            /* Stunning Book Flip Animation Styles */
+            /* Mobile Book Flip Animation Styles */
             .perspective-1000 {
-                perspective: 1000px;
+                perspective: 800px; /* Reduced for mobile */
             }
             
             .transform-style-preserve-3d {
@@ -1451,12 +1447,21 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
             }
             
             #pageFlipContainer {
-                transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
                 transform-origin: center;
                 width: 100%;
                 height: 100%;
-                max-width: calc(100vw - 2rem);
-                max-height: calc(100vh - 12rem);
+                max-width: calc(100vw - 1rem);
+                max-height: calc(100vh - 8rem);
+            }
+            
+            /* Mobile-optimized flip animations */
+            @media (max-width: 768px) {
+                #pageFlipContainer {
+                    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                    max-height: calc(100vh - 6rem);
+                    max-width: calc(100vw - 0.5rem);
+                }
             }
             
             #currentPageContainer, #nextPageContainer {
@@ -1467,19 +1472,19 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                 height: 100%;
             }
             
-            /* Professional page turn shadow effects */
+            /* Mobile page turn shadow effects */
             #pageTurnShadow {
-                transition: opacity 0.7s ease-in-out;
+                transition: opacity 0.5s ease-in-out;
             }
             
-            /* Enhanced canvas styling for flip effect */
+            /* Mobile-enhanced canvas styling */
             #pdfCanvas, #nextPdfCanvas {
                 transition: all 0.3s ease-in-out;
-                border: 2px solid rgba(0, 0, 0, 0.1);
+                border: 1px solid rgba(0, 0, 0, 0.08);
                 box-shadow: 
-                    0 20px 40px -10px rgba(0, 0, 0, 0.15),
+                    0 10px 20px -5px rgba(0, 0, 0, 0.1),
                     0 0 0 1px rgba(255, 255, 255, 0.5);
-                border-radius: 12px;
+                border-radius: 8px;
                 background: white;
                 max-width: 100%;
                 max-height: 100%;
@@ -1488,14 +1493,16 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                 object-fit: contain;
             }
             
-            /* Page flip hover effects */
-            #pdfPrevPage:hover, #pdfNextPage:hover {
-                background: rgba(255, 255, 255, 0.35);
-                transform: translateY(-2px) scale(1.1);
-                box-shadow: 0 15px 30px -8px rgba(0, 0, 0, 0.25);
+            /* Mobile page flip hover effects - only on hover-capable devices */
+            @media (hover: hover) {
+                #pdfPrevPage:hover, #pdfNextPage:hover {
+                    background: rgba(255, 255, 255, 0.35);
+                    transform: translateY(-1px) scale(1.05);
+                    box-shadow: 0 8px 15px -4px rgba(0, 0, 0, 0.15);
+                }
             }
             
-            /* Disable buttons during animation */
+            /* Mobile disabled button states */
             #pdfViewerModal #pdfPrevPage:disabled, 
             #pdfViewerModal #pdfNextPage:disabled {
                 opacity: 0.3 !important;
@@ -1504,193 +1511,159 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                 transform: none !important;
             }
             
-            #pdfViewerModal #pdfPrevPage:not(:disabled):hover, 
-            #pdfViewerModal #pdfNextPage:not(:disabled):hover {
-                background: rgba(255, 255, 255, 0.35);
-                transform: translateY(-2px) scale(1.1);
-                box-shadow: 0 15px 30px -8px rgba(0, 0, 0, 0.25);
+            /* Mobile page curl effect */
+            .page-curling {
+                animation: mobilePagCurl 0.5s ease-in-out;
             }
             
-            /* Professional flip animation keyframes */
-            @keyframes pageFlipIn {
+            @keyframes mobilePagCurl {
                 0% {
-                    transform: rotateY(90deg);
-                    opacity: 0;
+                    transform: perspective(400px) rotateX(0deg);
                 }
                 50% {
-                    opacity: 0.5;
+                    transform: perspective(400px) rotateX(-0.5deg) scale(1.005);
                 }
                 100% {
-                    transform: rotateY(0deg);
-                    opacity: 1;
+                    transform: perspective(400px) rotateX(0deg) scale(1);
                 }
             }
             
-            @keyframes pageFlipOut {
-                0% {
-                    transform: rotateY(0deg);
-                    opacity: 1;
-                }
-                50% {
-                    opacity: 0.5;
-                }
-                100% {
-                    transform: rotateY(-90deg);
-                    opacity: 0;
-                }
-            }
-            
-            @keyframes shadowPulse {
+            /* Mobile-optimized loading animation */
+            @keyframes mobileLoadingPulse {
                 0%, 100% {
-                    opacity: 0;
+                    opacity: 1;
+                    transform: scale(1);
                 }
                 50% {
-                    opacity: 0.3;
+                    opacity: 0.7;
+                    transform: scale(1.02);
                 }
             }
             
-                         /* Page curling effect */
-             .page-curling {
-                 animation: pageCurl 0.7s ease-in-out;
-             }
-             
-             @keyframes pageCurl {
-                 0% {
-                     transform: perspective(600px) rotateX(0deg);
-                 }
-                 25% {
-                     transform: perspective(600px) rotateX(-2deg) scale(1.02);
-                 }
-                 50% {
-                     transform: perspective(600px) rotateX(-1deg) scale(1.01);
-                 }
-                 75% {
-                     transform: perspective(600px) rotateX(-0.5deg) scale(1.005);
-                 }
-                 100% {
-                     transform: perspective(600px) rotateX(0deg) scale(1);
-                 }
-             }
-             
-             /* Enhanced page flip container effects */
-             #pageFlipContainer.flipping {
-                 animation: sophisticatedFlip 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-             }
-             
-             @keyframes sophisticatedFlip {
-                 0% {
-                     transform: rotateY(0deg) scale(1);
-                     filter: brightness(1);
-                 }
-                 25% {
-                     transform: rotateY(-45deg) scale(0.98);
-                     filter: brightness(0.9);
-                 }
-                 50% {
-                     transform: rotateY(-90deg) scale(0.95);
-                     filter: brightness(0.8);
-                 }
-                 75% {
-                     transform: rotateY(-135deg) scale(0.98);
-                     filter: brightness(0.9);
-                 }
-                 100% {
-                     transform: rotateY(-180deg) scale(1);
-                     filter: brightness(1);
-                 }
-             }
-             
-             /* Professional page turn effects */
-             #pageTurnShadow.active {
-                 animation: shadowWave 0.7s ease-in-out;
-             }
-             
-             @keyframes shadowWave {
-                 0%, 100% {
-                     opacity: 0;
-                 }
-                 25% {
-                     opacity: 0.1;
-                 }
-                 50% {
-                     opacity: 0.3;
-                 }
-                 75% {
-                     opacity: 0.2;
-                 }
-             }
-             
-             /* Enhanced loading animation */
-             @keyframes loadingPulse {
-                 0%, 100% {
-                     opacity: 1;
-                     transform: scale(1);
-                 }
-                 50% {
-                     opacity: 0.6;
-                     transform: scale(1.05);
-                 }
-             }
-             
-             #pdfLoading h3 {
-                 animation: loadingPulse 2s ease-in-out infinite;
-             }
-             
-             /* Responsive adjustments for flip animation */
-             @media (max-width: 768px) {
-                 #pageFlipContainer {
-                     transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-                     max-height: calc(100vh - 8rem);
-                     max-width: calc(100vw - 1rem);
-                 }
-                 
-                 #pdfViewer {
-                     padding: 0.5rem;
-                 }
-                 
-                 #pdfLoading .relative {
-                     margin-bottom: 1.5rem;
-                 }
-                 
-                 #pdfLoading h3 {
-                     font-size: 1.125rem;
-                 }
-                 
-                 @keyframes pageCurl {
-                     0% {
-                         transform: perspective(400px) rotateX(0deg);
-                     }
-                     50% {
-                         transform: perspective(400px) rotateX(-1deg) scale(1.01);
-                     }
-                     100% {
-                         transform: perspective(400px) rotateX(0deg) scale(1);
-                     }
-                 }
-             }
-             
-             /* Enhanced Zoom Controls */
-             #zoomFit:hover {
-                 background: rgba(30, 58, 138, 0.6) !important;
-                 box-shadow: 0 0 15px rgba(30, 58, 138, 0.4);
-             }
-             
-             /* Full screen adjustments */
-             @media (min-width: 769px) {
-                 #pageFlipContainer {
-                     max-height: calc(100vh - 10rem);
-                     max-width: calc(100vw - 3rem);
-                 }
-             }
-             
-             /* Mobile zoom adjustments */
-             @media (max-width: 768px) {
-                 #zoomLevel {
-                     min-width: 3rem;
-                     font-size: 0.75rem;
-                 }
-             }
+            #pdfLoading h3 {
+                animation: mobileLoadingPulse 1.5s ease-in-out infinite;
+            }
+            
+            /* Mobile scroll to top button */
+            .scroll-to-top {
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease-in-out;
+            }
+            
+            .scroll-to-top.show {
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            @media (max-width: 768px) {
+                .scroll-to-top {
+                    bottom: 1rem;
+                    right: 1rem;
+                    width: 48px;
+                    height: 48px;
+                }
+            }
+            
+            /* Mobile-optimized grid layout */
+            @media (max-width: 640px) {
+                .grid {
+                    gap: 1rem;
+                }
+                
+                .container {
+                    padding-left: 1rem;
+                    padding-right: 1rem;
+                }
+            }
+            
+            /* Mobile text sizing */
+            @media (max-width: 480px) {
+                .text-3xl {
+                    font-size: 1.875rem;
+                    line-height: 2.25rem;
+                }
+                
+                .text-2xl {
+                    font-size: 1.5rem;
+                    line-height: 2rem;
+                }
+                
+                .text-xl {
+                    font-size: 1.25rem;
+                    line-height: 1.75rem;
+                }
+            }
+            
+            /* Mobile button sizing improvements */
+            @media (max-width: 640px) {
+                .inline-flex {
+                    min-height: 44px;
+                    justify-content: center;
+                    align-items: center;
+                }
+                
+                .view-pdf-btn {
+                    font-size: 0.875rem;
+                    padding: 0.5rem 0.75rem;
+                }
+            }
+            
+            /* Mobile pagination improvements */
+            @media (max-width: 480px) {
+                #pagination {
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    gap: 0.25rem;
+                }
+                
+                #pageNumbers {
+                    order: 2;
+                    width: 100%;
+                    justify-content: center;
+                    margin-top: 0.5rem;
+                }
+                
+                #prevPage, #nextPage {
+                    order: 1;
+                }
+            }
+            
+            /* Improved mobile search */
+            @media (max-width: 640px) {
+                #searchInput {
+                    font-size: 16px; /* Prevent zoom on iOS */
+                    padding: 0.875rem 2.5rem 0.875rem 2.5rem;
+                }
+                
+                #searchInput::placeholder {
+                    font-size: 0.875rem;
+                }
+            }
+            
+            /* Mobile-optimized hero section */
+            @media (max-width: 640px) {
+                .relative.pt-16 {
+                    padding-top: 4rem;
+                    padding-bottom: 2rem;
+                }
+                
+                .mb-8.sm\\:mb-12.lg\\:mb-16 {
+                    margin-bottom: 2rem;
+                }
+            }
+            
+            /* Mobile latest publication section */
+            @media (max-width: 640px) {
+                .py-8.sm\\:py-12.lg\\:py-16 {
+                    padding-top: 2rem;
+                    padding-bottom: 2rem;
+                }
+                
+                .gap-6.sm\\:gap-8.lg\\:gap-12 {
+                    gap: 1.5rem;
+                }
+            }
         </style>
     </main>
-</Layout>
 </Layout>
