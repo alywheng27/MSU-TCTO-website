@@ -54,76 +54,77 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
     <main class="bg-white">
         <Navbar path={currentPath} client:visible />
         
-        <!-- Stunning Full-Screen PDF Viewer Modal -->
+        <!-- Mobile-Optimized Full-Screen PDF Viewer Modal -->
         <div id="pdfViewerModal" class="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-md hidden">
             <div class="w-full h-full">
                 <div class="bg-white w-full h-full flex flex-col overflow-hidden">
-                    <!-- Stunning Header with MSU Gradient -->
-                    <div class="flex items-center justify-between p-6 bg-gradient-to-r from-msu-blue via-msu-dark-blue to-msu-blue text-white shadow-lg">
-                        <div class="flex items-center space-x-4">
-                            <div class="flex items-center justify-center w-14 h-14 bg-white/20 rounded-xl backdrop-blur-sm">
-                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <!-- Mobile-Optimized Header -->
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-6 bg-gradient-to-r from-msu-blue via-msu-dark-blue to-msu-blue text-white shadow-lg">
+                        <div class="flex items-center space-x-2 sm:space-x-4 w-full sm:w-auto mb-3 sm:mb-0">
+                            <div class="flex items-center justify-center w-10 h-10 sm:w-14 sm:h-14 bg-white/20 rounded-xl backdrop-blur-sm">
+                                <svg class="w-5 h-5 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                 </svg>
                             </div>
-                            <div>
-                                <h3 id="modalPdfTitle" class="text-2xl font-bold text-white">MSU-TCTO Gazette Viewer</h3>
-                                <p class="text-white/90 text-sm font-medium">Professional PDF Document Viewer</p>
+                            <div class="flex-1 min-w-0">
+                                <h3 id="modalPdfTitle" class="text-sm sm:text-2xl font-bold text-white truncate">MSU-TCTO Gazette Viewer</h3>
+                                <p class="text-white/90 text-xs sm:text-sm font-medium hidden sm:block">Professional PDF Document Viewer</p>
                             </div>
                         </div>
                         
-                        <div class="flex items-center space-x-4">
-                            <!-- Enhanced Zoom Controls -->
-                            <div class="flex items-center space-x-2 bg-msu-deep-ocean/20 rounded-xl px-4 py-2 backdrop-blur-sm border border-msu-deep-ocean/30">
-                                <button id="zoomOut" class="flex items-center justify-center w-10 h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40" title="Zoom Out">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <!-- Mobile-Optimized Controls -->
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
+                            <!-- Zoom Controls - Stacked on mobile -->
+                            <div class="flex items-center justify-center space-x-1 sm:space-x-2 bg-msu-deep-ocean/20 rounded-xl px-2 sm:px-4 py-2 backdrop-blur-sm border border-msu-deep-ocean/30">
+                                <button id="zoomOut" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40" title="Zoom Out">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
                                     </svg>
                                 </button>
-                                <span id="zoomLevel" class="text-white text-sm font-bold min-w-[4rem] text-center px-3 py-1 bg-msu-deep-ocean/20 rounded-lg border border-msu-deep-ocean/30">100%</span>
-                                <button id="zoomIn" class="flex items-center justify-center w-10 h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40" title="Zoom In">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <span id="zoomLevel" class="text-white text-xs sm:text-sm font-bold min-w-[3rem] sm:min-w-[4rem] text-center px-2 sm:px-3 py-1 bg-msu-deep-ocean/20 rounded-lg border border-msu-deep-ocean/30">100%</span>
+                                <button id="zoomIn" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40" title="Zoom In">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                     </svg>
                                 </button>
-                                <button id="zoomFit" class="flex items-center justify-center w-10 h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40" title="Fit to Screen">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <button id="zoomFit" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40" title="Fit to Screen">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
                                     </svg>
                                 </button>
                             </div>
                     
-                            <!-- Professional Page Navigation -->
-                            <div class="flex items-center space-x-2 bg-msu-deep-ocean/20 rounded-xl px-4 py-2 backdrop-blur-sm border border-msu-deep-ocean/30">
-                                <button id="pdfPrevPage" class="flex items-center justify-center w-10 h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <!-- Page Navigation - Responsive -->
+                            <div class="flex items-center justify-center space-x-1 sm:space-x-2 bg-msu-deep-ocean/20 rounded-xl px-2 sm:px-4 py-2 backdrop-blur-sm border border-msu-deep-ocean/30">
+                                <button id="pdfPrevPage" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                                     </svg>
                                 </button>
-                                <span id="pageInfo" class="text-white text-sm font-bold min-w-[5rem] text-center px-3 py-1 bg-msu-deep-ocean/20 rounded-lg border border-msu-deep-ocean/30">1 / 1</span>
-                                <button id="pdfNextPage" class="flex items-center justify-center w-10 h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <span id="pageInfo" class="text-white text-xs sm:text-sm font-bold min-w-[3rem] sm:min-w-[5rem] text-center px-2 sm:px-3 py-1 bg-msu-deep-ocean/20 rounded-lg border border-msu-deep-ocean/30">1 / 1</span>
+                                <button id="pdfNextPage" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                                     </svg>
                                 </button>
                             </div>
                             
-                            <!-- Stunning Action Buttons -->
-                            <div class="flex items-center space-x-3">
-                                <button onclick="openPdfInNewTab()" class="flex items-center justify-center space-x-2 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-msu-deep-ocean/40">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <!-- Action Buttons - Responsive -->
+                            <div class="flex items-center justify-center space-x-2 sm:space-x-3">
+                                <button onclick="openPdfInNewTab()" class="flex items-center justify-center space-x-1 sm:space-x-2 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white px-2 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-msu-deep-ocean/40">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                                     </svg>
-                                    <span class="text-sm font-medium">Open</span>
+                                    <span class="text-xs sm:text-sm font-medium hidden sm:inline">Open</span>
                                 </button>
-                                <button onclick="downloadPdf()" class="flex items-center justify-center space-x-2 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-msu-deep-ocean/40">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <button onclick="downloadPdf()" class="flex items-center justify-center space-x-1 sm:space-x-2 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white px-2 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-msu-deep-ocean/40">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                                     </svg>
-                                    <span class="text-sm font-medium">Download</span>
+                                    <span class="text-xs sm:text-sm font-medium hidden sm:inline">Download</span>
                                 </button>
-                                <button onclick="closePdfViewer()" class="flex items-center justify-center w-12 h-12 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-xl transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-msu-deep-ocean/40">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <button onclick="closePdfViewer()" class="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-xl transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-msu-deep-ocean/40">
+                                    <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                     </svg>
                                 </button>
@@ -131,28 +132,23 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                         </div>
                     </div>
                             
-                    <!-- Stunning PDF Viewer Content -->
+                    <!-- Mobile-Optimized PDF Viewer Content -->
                     <div class="flex-1 bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden">
-                        <!-- Professional Loading State -->
+                        <!-- Mobile-Optimized Loading State -->
                         <div id="pdfLoading" class="absolute inset-0 flex items-center justify-center bg-white/98 backdrop-blur-sm z-20">
-                            <div class="text-center max-w-sm mx-auto p-8">
-                                <div class="relative mb-8">
-                                    <!-- Main loading ring -->
-                                    <div class="animate-spin rounded-full h-24 w-24 border-4 border-blue-100 border-t-blue-600 mx-auto"></div>
-                                    <!-- Secondary ring -->
-                                    <div class="absolute inset-2 rounded-full h-20 w-20 border-4 border-transparent border-t-blue-400 animate-spin mx-auto" style="animation-duration: 1.5s; animation-direction: reverse;"></div>
-                                    <!-- Inner pulse -->
-                                    <div class="absolute inset-6 rounded-full h-12 w-12 bg-blue-600/20 animate-pulse mx-auto"></div>
-                                    <!-- Center dot -->
-                                    <div class="absolute inset-10 rounded-full h-4 w-4 bg-blue-600 mx-auto animate-ping"></div>
+                            <div class="text-center max-w-xs sm:max-w-sm mx-auto p-4 sm:p-8">
+                                <div class="relative mb-4 sm:mb-8">
+                                    <!-- Responsive loading ring -->
+                                    <div class="animate-spin rounded-full h-16 w-16 sm:h-24 sm:w-24 border-4 border-blue-100 border-t-blue-600 mx-auto"></div>
+                                    <div class="absolute inset-1 sm:inset-2 rounded-full h-14 w-14 sm:h-20 sm:w-20 border-4 border-transparent border-t-blue-400 animate-spin mx-auto" style="animation-duration: 1.5s; animation-direction: reverse;"></div>
+                                    <div class="absolute inset-4 sm:inset-6 rounded-full h-8 w-8 sm:h-12 sm:w-12 bg-blue-600/20 animate-pulse mx-auto"></div>
+                                    <div class="absolute inset-6 sm:inset-10 rounded-full h-4 w-4 bg-blue-600 mx-auto animate-ping"></div>
                                 </div>
                                 
-                                <!-- Loading text with animation -->
-                                <div class="space-y-3">
-                                    <h3 class="text-xl font-bold text-gray-800 animate-pulse">Loading PDF...</h3>
-                                    <p class="text-gray-600 text-sm leading-relaxed">Please wait while we prepare your document for viewing</p>
+                                <div class="space-y-2 sm:space-y-3">
+                                    <h3 class="text-lg sm:text-xl font-bold text-gray-800 animate-pulse">Loading PDF...</h3>
+                                    <p class="text-gray-600 text-sm leading-relaxed">Please wait while we prepare your document</p>
                                     
-                                    <!-- Progress dots -->
                                     <div class="flex justify-center space-x-2 mt-4">
                                         <div class="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style="animation-delay: 0ms;"></div>
                                         <div class="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style="animation-delay: 150ms;"></div>
@@ -162,52 +158,47 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                             </div>
                         </div>
                         
-                        <!-- Stunning PDF Container with Book Flip Animation -->
+                        <!-- Mobile-Optimized PDF Container -->
                         <div id="pdfContainer" class="w-full h-full overflow-auto bg-gradient-to-br from-gray-50 to-gray-100">
-                            <div id="pdfViewer" class="w-full h-full flex items-center justify-center p-4 relative">
-                                <!-- PDF Canvas Container with Flip Animation -->
+                            <div id="pdfViewer" class="w-full h-full flex items-center justify-center p-2 sm:p-4 relative">
                                 <div id="pdfCanvasContainer" class="relative perspective-1000 w-full h-full flex items-center justify-center">
                                     <div id="pageFlipContainer" class="relative transform-style-preserve-3d transition-transform duration-700 ease-in-out">
-                                        <!-- Current Page -->
                                         <div id="currentPageContainer" class="flex items-center justify-center w-full h-full backface-hidden">
                                             <!-- PDF canvas will be inserted here -->
                                         </div>
-                                        
-                                        <!-- Next Page (for flip animation) -->
                                         <div id="nextPageContainer" class="flex items-center justify-center w-full h-full backface-hidden transform rotateY-180 opacity-0 absolute inset-0">
                                             <!-- Next page canvas will be inserted here during animation -->
                                         </div>
                                     </div>
                                 </div>
                                 
-                                <!-- Page Turn Shadow Effect -->
                                 <div id="pageTurnShadow" class="absolute inset-0 pointer-events-none opacity-0 transition-opacity duration-700">
-                                    <div class="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black/20 to-transparent"></div>
+                                    <div class="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-black/20 to-transparent"></div>
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- Professional Error State -->
+                        <!-- Mobile-Optimized Error State -->
                         <div id="pdfError" class="absolute inset-0 flex items-center justify-center bg-white/95 backdrop-blur-sm z-20 hidden">
-                            <div class="text-center max-w-lg mx-auto p-8">
-                                <div class="w-32 h-32 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-8">
-                                    <svg class="w-16 h-16 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="text-center max-w-xs sm:max-w-lg mx-auto p-4 sm:p-8">
+                                <div class="w-20 h-20 sm:w-32 sm:h-32 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-8">
+                                    <svg class="w-10 h-10 sm:w-16 sm:h-16 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
                                     </svg>
                                 </div>
-                                <h3 class="text-3xl font-bold text-gray-800 mb-4">Unable to Load PDF</h3>
-                                <p class="text-gray-600 mb-8 leading-relaxed text-lg">
-                                    The PDF file could not be loaded. This might be due to browser security restrictions or the file being unavailable.
+                                <h3 class="text-xl sm:text-3xl font-bold text-gray-800 mb-3 sm:mb-4">Unable to Load PDF</h3>
+                                <p class="text-gray-600 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-lg">
+                                    The PDF file could not be loaded. This might be due to browser restrictions.
                                 </p>
-                                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">
-                                    <button onclick="openPdfInNewTab()" class="flex items-center justify-center space-x-3 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg">
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="flex flex-col space-y-3 sm:space-y-4">
+                                    <button onclick="openPdfInNewTab()" class="flex items-center justify-center space-x-2 sm:space-x-3 bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg text-sm sm:text-base">
+                                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                                         </svg>
                                         <span>Open in New Tab</span>
                                     </button>
-                                    <button onclick="downloadPdf()" class="flex items-center justify-center space-x-3 bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg">
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <button onclick="downloadPdf()" class="flex items-center justify-center space-x-2 sm:space-x-3 bg-green-600 hover:bg-green-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg text-sm sm:text-base">
+                                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                                         </svg>
                                         <span>Download PDF</span>
@@ -220,60 +211,60 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
             </div>
         </div>
 
-        <!-- Hero Section -->
-        <div class="relative pt-24 pb-12 bg-white">
+        <!-- Mobile-Optimized Hero Section -->
+        <div class="relative pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-12 bg-white">
             <div class="absolute inset-0 overflow-hidden">
                 <div class="absolute inset-0 bg-gradient-to-r from-msu-light-blue/10 to-white"></div>
                 <div class="absolute top-0 right-0 w-1/2 h-full bg-msu-blue/5 -skew-x-12 transform origin-top-right"></div>
             </div>
             
             <div class="container mx-auto px-4 xl:px-0 relative">
-                <!-- Breadcrumb -->
-                <div class="mb-8">
-                    <p class="paragraph p2 text-gray-600">
+                <!-- Mobile-Optimized Breadcrumb -->
+                <div class="mb-4 sm:mb-6 lg:mb-8">
+                    <p class="paragraph p2 text-gray-600 text-sm sm:text-base">
                         <a href="/home" class="hover:text-msu-blue transition-colors">Home</a> / 
                         <a href="/publications" class="hover:text-msu-blue transition-colors">Publications</a> / 
                         <span class="text-msu-blue font-medium">Gazette</span>
                     </p>
                 </div>
 
-                <!-- Hero Content -->
-                <div class="text-center mb-12">
-                    <h1 class="headings text-5xl font-bold text-msu-main-color  mb-6">Gazette</h1>
-                    <div class="w-24 h-1.5 bg-msu-deep-ocean mx-auto mb-6"></div>
-                    <p class="paragraph p2 text-gray-600 max-w-3xl mx-auto text-lg">
+                <!-- Mobile-Optimized Hero Content -->
+                <div class="text-center mb-8 sm:mb-12">
+                    <h1 class="headings text-3xl sm:text-4xl lg:text-5xl font-bold text-msu-main-color mb-4 sm:mb-6">Gazette</h1>
+                    <div class="w-16 sm:w-20 lg:w-24 h-1 sm:h-1.5 bg-msu-deep-ocean mx-auto mb-4 sm:mb-6"></div>
+                    <p class="paragraph p2 text-gray-600 max-w-3xl mx-auto text-base sm:text-lg px-4 sm:px-0">
                         Official publications of MSU Tawi-Tawi College of Technology and Oceanography
                     </p>
                 </div>
             </div>
         </div>
 
-        <!-- Latest Publication Section -->
-        <div class="py-16 bg-gray-50 border-t border-b border-gray-100">
+        <!-- Mobile-Optimized Latest Publication Section -->
+        <div class="py-8 sm:py-12 lg:py-16 bg-gray-50 border-t border-b border-gray-100">
             <div class="container mx-auto px-4 xl:px-0">
-                <div class="flex flex-col lg:flex-row gap-12 items-center">
-                    <!-- Publication Cover -->
-                    <div class="lg:w-1/2">
-                        <div class="relative group overflow-hidden rounded-xl shadow-xl">
+                <div class="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-12 items-center">
+                    <!-- Mobile-Optimized Publication Cover -->
+                    <div class="w-full lg:w-1/2">
+                        <div class="relative group overflow-hidden rounded-xl shadow-xl max-w-md mx-auto lg:max-w-none">
                             <img
                                 src={urlForImage(latestGazette.mainImage.asset.url).url()}
                                 class="w-full h-auto object-cover transform transition-all duration-500 group-hover:scale-105"
                                 alt={latestGazette.title}
                             />
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
-                                <h3 class="text-2xl font-bold text-white">{latestGazette.title}</h3>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 sm:p-6 lg:p-8">
+                                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-white">{latestGazette.title}</h3>
                             </div>
-                            <div class="absolute top-4 right-4 bg-msu-main-color text-white font-bold px-3 py-1 rounded-full text-sm">
+                            <div class="absolute top-2 sm:top-4 right-2 sm:right-4 bg-msu-main-color text-white font-bold px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">
                                 Latest Issue
                             </div>
                         </div>
                     </div>
 
-                    <!-- Publication Details -->
-                    <div class="lg:w-1/2">
-                        <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-                            <h2 class="headings text-3xl font-bold text-msu-dark-blue mb-4">{latestGazette.title}</h2>
-                            <div class="flex items-center gap-4 mb-6">
+                    <!-- Mobile-Optimized Publication Details -->
+                    <div class="w-full lg:w-1/2">
+                        <div class="bg-white p-4 sm:p-6 lg:p-8 rounded-xl shadow-lg border border-gray-100">
+                            <h2 class="headings text-xl sm:text-2xl lg:text-3xl font-bold text-msu-dark-blue mb-3 sm:mb-4">{latestGazette.title}</h2>
+                            <div class="flex flex-wrap items-center gap-2 sm:gap-4 mb-4 sm:mb-6">
                                 <span class="bg-msu-blue/10 text-msu-blue px-3 py-1 rounded-full text-sm font-medium">
                                     {getYear(latestGazette.publishedAt)}
                                 </span>
@@ -281,17 +272,17 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                                     {latestGazette.gazetteQuarter.gazetteQuarter}
                                 </span>
                             </div>
-                            <p class="paragraph p2 text-gray-600 mb-8 leading-relaxed">
+                            <p class="paragraph p2 text-gray-600 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
                                 {latestGazette.body[0].children[0].text}
                             </p>
-                            <div class="flex flex-wrap gap-4">
+                            <div class="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
                                 <button
                                     id="viewLatestPDF"
                                     data-pdf-url={urlForPDF(latestGazette.file)}
                                     data-title={latestGazette.title}
-                                    class="inline-flex items-center justify-center bg-msu-main-color hover:bg-msu-deep-ocean text-white font-bold py-3 px-6 rounded-lg shadow-md transform transition-all duration-300 hover:scale-[1.02]"
+                                    class="inline-flex items-center justify-center bg-msu-main-color hover:bg-msu-deep-ocean text-white font-bold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg shadow-md transform transition-all duration-300 hover:scale-[1.02] text-sm sm:text-base"
                                 >
-                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                                     </svg>
@@ -301,24 +292,24 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                                     href={latestGazette.file.asset.url} 
                                     target="_blank" 
                                     rel="noopener noreferrer"
-                                    class="inline-flex items-center justify-center bg-msu-blue hover:bg-msu-deep-ocean text-white font-bold py-3 px-6 rounded-lg shadow-md transform transition-all duration-300 hover:scale-[1.02]"
+                                    class="inline-flex items-center justify-center bg-msu-blue hover:bg-msu-deep-ocean text-white font-bold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg shadow-md transform transition-all duration-300 hover:scale-[1.02] text-sm sm:text-base"
                                 >
-                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                                     </svg>
-                                    Open in New Tab
+                                    Open
                                 </a>
                                 <a
                                     href={latestGazette.file.asset.url} 
                                     target="_blank" 
                                     rel="noopener noreferrer"
                                     download
-                                    class="inline-flex items-center justify-center bg-white border border-msu-blue text-msu-blue hover:bg-msu-blue/5 font-medium py-3 px-6 rounded-lg shadow-sm transform transition-all duration-300 hover:scale-[1.02]"
+                                    class="inline-flex items-center justify-center bg-white border border-msu-blue text-msu-blue hover:bg-msu-blue/5 font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg shadow-sm transform transition-all duration-300 hover:scale-[1.02] text-sm sm:text-base"
                                 >
-                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                                     </svg>
-                                    Download PDF
+                                    Download
                                 </a>
                                 <!-- <a
                                     href={latestGazette.file.asset.url}
@@ -337,64 +328,64 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
             </div>
         </div>
 
-        <!-- Publication Archive Section -->
-        <div class="py-16 bg-white">
+        <!-- Mobile-Optimized Publication Archive Section -->
+        <div class="py-8 sm:py-12 lg:py-16 bg-white">
             <div class="container mx-auto px-4 xl:px-0">
-                <!-- Search and Filter -->
-                <div class="mb-16 max-w-6xl mx-auto">
-                    <div class="flex flex-col md:flex-row gap-4">
+                <!-- Mobile-Optimized Search and Filter -->
+                <div class="mb-8 sm:mb-12 lg:mb-16 max-w-6xl mx-auto">
+                    <div class="flex flex-col gap-3 sm:gap-4">
                         <!-- Year Filter -->
-                        <div class="relative flex-1">
-                            <select id="yearFilter" class="filter-dropdown w-full">
+                        <div class="relative">
+                            <select id="yearFilter" class="filter-dropdown w-full text-sm sm:text-base">
                                 <option value="All">All Years</option>
                                 {
-                                    uniqueYears.map(year => (
+                                    uniqueYears.map((year: string) => (
                                         <option value={year}>{year}</option>
                                     ))
                                 }
                             </select>
-                            <svg class="absolute right-3 top-3 w-5 h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="absolute right-3 top-3 w-4 h-4 sm:w-5 sm:h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </div>
 
                         <!-- Quarter Filter -->
-                        <div class="relative flex-1">
-                            <select id="quarterFilter" class="filter-dropdown w-full">
+                        <div class="relative">
+                            <select id="quarterFilter" class="filter-dropdown w-full text-sm sm:text-base">
                                 {
                                     uniqueQuarters.map(gazetteQuarter => (
                                         <option value={gazetteQuarter}>{gazetteQuarter}</option>
                                     ))
                                 }
                             </select>
-                            <svg class="absolute right-3 top-3 w-5 h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="absolute right-3 top-3 w-4 h-4 sm:w-5 sm:h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </div>
 
                         <!-- Search Input -->
-                        <div class="relative flex-1">
+                        <div class="relative">
                             <input 
                                 type="text" 
                                 id="searchFilter" 
-                                class="filter-dropdown w-full pl-10" 
+                                class="filter-dropdown w-full pl-8 sm:pl-10 text-sm sm:text-base" 
                                 placeholder="Search Gazette..." 
                             />
-                            <svg class="absolute left-3 top-3 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="absolute left-2 sm:left-3 top-3 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                             </svg>
                         </div>
                     </div>
                 </div>
 
-                <!-- Section Header -->
-                <div class="text-center mb-12">
-                    <h2 class="headings text-4xl font-bold text-msu-main-color mb-4">Gazette Archive</h2>
-                    <div class="w-24 h-1.5 bg-msu-deep-ocean mx-auto"></div>
+                <!-- Mobile-Optimized Section Header -->
+                <div class="text-center mb-8 sm:mb-10 lg:mb-12">
+                    <h2 class="headings text-2xl sm:text-3xl lg:text-4xl font-bold text-msu-main-color mb-3 sm:mb-4">Gazette Archive</h2>
+                    <div class="w-16 sm:w-20 lg:w-24 h-1 sm:h-1.5 bg-msu-deep-ocean mx-auto"></div>
                 </div>
 
-                <!-- Publications Grid -->
-                <div id="gazetteGrid" class="grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-1 gap-8 mb-16">
+                <!-- Mobile-Optimized Publications Grid -->
+                <div id="gazetteGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 lg:mb-16">
                     {allGazette.map((gazette) => (
                         <div 
                             class="gazette-item bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
@@ -403,15 +394,15 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                             data-title={gazette.title}
                             data-content={gazette.body[0].children[0].text}
                         >
-                            <div class="relative group h-100 overflow-hidden">
+                            <div class="relative group h-48 sm:h-56 lg:h-64 overflow-hidden">
                                 <img 
                                     src={gazette.mainImage.asset.url} 
                                     class="w-full h-full object-cover transform transition-all duration-500 group-hover:scale-110"
                                     alt={gazette.title}
                                 />
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3 sm:p-4">
                                     <button 
-                                        class="view-pdf-btn inline-flex items-center justify-center bg-msu-main-color hover:bg-msu-deep-ocean text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300"
+                                        class="view-pdf-btn inline-flex items-center justify-center bg-msu-main-color hover:bg-msu-deep-ocean text-white font-medium py-2 px-3 sm:px-4 rounded-lg transition-colors duration-300 text-sm"
                                         data-pdf-url={urlForPDF(gazette.file)}
                                         data-title={gazette.title}
                                     >
@@ -419,11 +410,11 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                                     </button>
                                 </div>
                             </div>
-                            <div class="p-6">
-                                <h3 class="headings text-xl font-bold text-msu-dark-blue mb-2 line-clamp-2">{gazette.title}</h3>
-                                <p class="paragraph p2 text-gray-600 mb-4 line-clamp-3">{gazette.body[0].children[0].text}</p>
-                                <div class="flex justify-between items-center">
-                                    <div class="flex items-center gap-2">
+                            <div class="p-4 sm:p-5 lg:p-6">
+                                <h3 class="headings text-base sm:text-lg lg:text-xl font-bold text-msu-dark-blue mb-2 line-clamp-2">{gazette.title}</h3>
+                                <p class="paragraph p2 text-gray-600 mb-3 sm:mb-4 line-clamp-3 text-sm sm:text-base">{gazette.body[0].children[0].text}</p>
+                                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0">
+                                    <div class="flex flex-wrap items-center gap-2">
                                         <span class="text-sm font-medium text-msu-blue">{getYear(gazette.publishedAt)}</span>
                                         <span class="text-xs bg-msu-blue/10 text-msu-blue px-2 py-1 rounded-full">
                                             {gazette.gazetteQuarter.gazetteQuarter}
@@ -433,9 +424,9 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                                         href={gazette.file.asset.url} 
                                         target="_blank" 
                                         rel="noopener noreferrer"
-                                        class="text-sm font-medium text-msu-blue hover:text-msu-dark-blue transition-colors flex items-center"
+                                        class="text-sm font-medium text-msu-blue hover:text-msu-dark-blue transition-colors flex items-center w-full sm:w-auto justify-center sm:justify-start"
                                     >
-                                        View <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                        View <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                                     </a>
                                 </div>
                             </div>
@@ -443,21 +434,21 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                     ))}
                 </div>
 
-                <!-- Pagination -->
+                <!-- Mobile-Optimized Pagination -->
                 <div class="flex justify-center">
-                    <div id="pagination" class="flex items-center space-x-2">
-                        <button id="prevPage" class="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed" style="border-color: #61063B;" onmouseenter="this.style.backgroundColor='#03045e'; this.style.color='#ffffff';" onmouseleave="this.style.backgroundColor='#ffffff'; this.style.color='#6b7280';" disabled>
-                            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <div id="pagination" class="flex items-center space-x-1 sm:space-x-2">
+                        <button id="prevPage" class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-white border border-gray-200 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed text-xs sm:text-sm" style="border-color: #61063B;" onmouseenter="this.style.backgroundColor='#03045e'; this.style.color='#ffffff';" onmouseleave="this.style.backgroundColor='#ffffff'; this.style.color='#6b7280';" disabled>
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                             </svg>
                         </button>
 
-                        <div id="pageNumbers" class="flex items-center space-x-2">
+                        <div id="pageNumbers" class="flex items-center space-x-1 sm:space-x-2">
                             <!-- Page numbers will be dynamically inserted here -->
                         </div>
 
-                        <button id="nextPage" class="w-10 h-10 flex items-center justify-center bg-white border border-gray-200 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed" style="border-color: #61063B;" onmouseenter="this.style.backgroundColor='#03045e'; this.style.color='#ffffff';" onmouseleave="this.style.backgroundColor='#ffffff'; this.style.color='#6b7280';">
-                            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <button id="nextPage" class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-white border border-gray-200 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed text-xs sm:text-sm" style="border-color: #61063B;" onmouseenter="this.style.backgroundColor='#03045e'; this.style.color='#ffffff';" onmouseleave="this.style.backgroundColor='#ffffff'; this.style.color='#6b7280';">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                             </svg>
                         </button>
@@ -1059,15 +1050,15 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
         <!-- Search and Pagination Functionality -->
         <script>
             document.addEventListener('DOMContentLoaded', () => {
-                // Pagination functionality
-                const itemsPerPage = 6;
+                // Enhanced Mobile-Optimized Pagination functionality
+                const itemsPerPage = window.innerWidth < 640 ? 4 : window.innerWidth < 1024 ? 6 : 6; // Responsive items per page
                 const gazetteGrid = document.getElementById('gazetteGrid');
-                const allGazetteItems = Array.from(gazetteGrid.querySelectorAll('.gazette-item'));
+                const allGazetteItems = Array.from(gazetteGrid?.querySelectorAll('.gazette-item') || []);
                 const yearFilter = document.getElementById('yearFilter') as HTMLSelectElement;
                 const quarterFilter = document.getElementById('quarterFilter') as HTMLSelectElement;
                 const searchFilter = document.getElementById('searchFilter') as HTMLInputElement;
-                const prevPageButton = document.getElementById('prevPage');
-                const nextPageButton = document.getElementById('nextPage');
+                const prevPageButton = document.getElementById('prevPage') as HTMLButtonElement;
+                const nextPageButton = document.getElementById('nextPage') as HTMLButtonElement;
                 const pageNumbersContainer = document.getElementById('pageNumbers');
 
                 let currentPage = 1;
@@ -1098,53 +1089,59 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
 
                 function renderPagination() {
                     const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
-                    pageNumbersContainer.innerHTML = '';
+                    if (pageNumbersContainer) {
+                        pageNumbersContainer.innerHTML = '';
 
-                    // Always show first page
-                    if (totalPages > 0) {
-                        const firstPageButton = createPageButton(1);
-                        pageNumbersContainer.appendChild(firstPageButton);
+                        // Mobile-optimized pagination - show fewer pages
+                        const isMobile = window.innerWidth < 640;
+                        const maxVisiblePages = isMobile ? 3 : 5;
+
+                        // Always show first page
+                        if (totalPages > 0) {
+                            const firstPageButton = createPageButton(1);
+                            pageNumbersContainer.appendChild(firstPageButton);
+                        }
+
+                        // Show current page and neighbors
+                        const startPage = Math.max(2, currentPage - Math.floor(maxVisiblePages / 2));
+                        const endPage = Math.min(totalPages - 1, startPage + maxVisiblePages - 3);
+
+                        // Add ellipsis if needed
+                        if (startPage > 2) {
+                            const ellipsis = document.createElement('span');
+                            ellipsis.className = 'px-1 sm:px-2 text-gray-500 text-xs sm:text-sm';
+                            ellipsis.textContent = '...';
+                            pageNumbersContainer.appendChild(ellipsis);
+                        }
+
+                        // Add middle pages
+                        for (let i = startPage; i <= endPage; i++) {
+                            const pageButton = createPageButton(i);
+                            pageNumbersContainer.appendChild(pageButton);
+                        }
+
+                        // Add ellipsis if needed
+                        if (endPage < totalPages - 1 && totalPages > maxVisiblePages) {
+                            const ellipsis = document.createElement('span');
+                            ellipsis.className = 'px-1 sm:px-2 text-gray-500 text-xs sm:text-sm';
+                            ellipsis.textContent = '...';
+                            pageNumbersContainer.appendChild(ellipsis);
+                        }
+
+                        // Always show last page if different from first
+                        if (totalPages > 1) {
+                            const lastPageButton = createPageButton(totalPages);
+                            pageNumbersContainer.appendChild(lastPageButton);
+                        }
                     }
 
-                    // Show current page and neighbors
-                    const startPage = Math.max(2, currentPage - 1);
-                    const endPage = Math.min(totalPages - 1, currentPage + 1);
-
-                    // Add ellipsis if needed
-                    if (startPage > 2) {
-                        const ellipsis = document.createElement('span');
-                        ellipsis.className = 'px-2 text-gray-500';
-                        ellipsis.textContent = '...';
-                        pageNumbersContainer.appendChild(ellipsis);
-                    }
-
-                    // Add middle pages
-                    for (let i = startPage; i <= endPage; i++) {
-                        const pageButton = createPageButton(i);
-                        pageNumbersContainer.appendChild(pageButton);
-                    }
-
-                    // Add ellipsis if needed
-                    if (endPage < totalPages - 1) {
-                        const ellipsis = document.createElement('span');
-                        ellipsis.className = 'px-2 text-gray-500';
-                        ellipsis.textContent = '...';
-                        pageNumbersContainer.appendChild(ellipsis);
-                    }
-
-                    // Always show last page if different from first
-                    if (totalPages > 1) {
-                        const lastPageButton = createPageButton(totalPages);
-                        pageNumbersContainer.appendChild(lastPageButton);
-                    }
-
-                    prevPageButton.disabled = currentPage === 1;
-                    nextPageButton.disabled = currentPage === totalPages || totalPages === 0;
+                    if (prevPageButton) prevPageButton.disabled = currentPage === 1;
+                    if (nextPageButton) nextPageButton.disabled = currentPage === totalPages || totalPages === 0;
                 }
 
-                function createPageButton(pageNumber) {
+                function createPageButton(pageNumber: number) {
                     const pageButton = document.createElement('button');
-                    pageButton.className = `w-10 h-10 flex items-center justify-center rounded-full transition-all ${
+                    pageButton.className = `w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full transition-all text-xs sm:text-sm ${
                         currentPage === pageNumber ? 'text-white font-medium' : 'bg-white text-gray-600'
                     }`;
                     pageButton.style.backgroundColor = currentPage === pageNumber ? '#61063B' : '#ffffff';
@@ -1165,7 +1162,7 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                         }
                     });
                     
-                    pageButton.textContent = pageNumber;
+                    pageButton.textContent = pageNumber.toString();
                     pageButton.addEventListener('click', () => changePage(pageNumber));
                     return pageButton;
                 }
@@ -1176,11 +1173,11 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                     const endIndex = startIndex + itemsPerPage;
 
                     allGazetteItems.forEach((item) => {
-                        item.style.display = 'none';
+                        (item as HTMLElement).style.display = 'none';
                     });
 
                     filteredItems.slice(startIndex, endIndex).forEach((item) => {
-                        item.style.display = 'block';
+                        (item as HTMLElement).style.display = 'block';
                     });
 
                     renderPagination();
@@ -1202,6 +1199,11 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                 // Initial render
                 filterItems();
                 renderPagination();
+
+                // Handle window resize to adjust pagination
+                window.addEventListener('resize', () => {
+                    renderPagination();
+                });
             });
         </script>
 
@@ -1297,7 +1299,7 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                 box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
             }
             
-            /* Stunning PDF Viewer Styles */
+            /* Mobile-First Responsive PDF Viewer Styles */
             #pdfViewerModal {
                 transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
                 backdrop-filter: blur(12px);
@@ -1322,16 +1324,20 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                 backdrop-filter: blur(20px);
             }
             
-            /* Stunning buttons with glassmorphism */
+            /* Mobile-optimized buttons */
             #pdfViewerModal button {
                 transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.15);
+                box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.1);
                 backdrop-filter: blur(10px);
+                touch-action: manipulation; /* Improve touch responsiveness */
             }
             
-            #pdfViewerModal button:hover {
-                transform: translateY(-2px) scale(1.05);
-                box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.2);
+            /* Mobile hover states - only apply on non-touch devices */
+            @media (hover: hover) {
+                #pdfViewerModal button:hover {
+                    transform: translateY(-1px) scale(1.02);
+                    box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.15);
+                }
             }
             
             /* Stunning animations */
@@ -1456,28 +1462,39 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                 box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.2);
             }
             
-            /* Stunning responsive design */
-            @media (max-width: 640px) {
+            /* Mobile-specific responsive breakpoints */
+            @media (max-width: 480px) {
                 #pdfViewerModal .bg-white {
                     border-radius: 0;
                     margin: 0;
+                    height: 100vh;
                 }
                 
-                #pdfViewerModal .p-4 {
-                    padding: 0;
+                #pdfViewerModal .p-3 {
+                    padding: 0.75rem;
                 }
                 
-                #pdfViewerModal .flex.items-center.space-x-4 {
-                    flex-direction: column;
-                    gap: 0.75rem;
+                #pdfViewerModal .flex.flex-col.sm\\:flex-row {
+                    gap: 0.5rem;
+                }
+                
+                #pdfViewerModal .space-x-2 > :not([hidden]) ~ :not([hidden]) {
+                    margin-left: 0.25rem;
                 }
             }
             
-            /* Stunning touch-friendly button sizes */
+            /* Enhanced mobile touch targets */
             @media (max-width: 768px) {
                 #pdfViewerModal button {
-                    min-height: 48px;
-                    min-width: 48px;
+                    min-height: 44px;
+                    min-width: 44px;
+                    touch-action: manipulation;
+                }
+                
+                #pdfViewerModal input,
+                #pdfViewerModal select {
+                    min-height: 44px;
+                    font-size: 16px; /* Prevent zoom on iOS */
                 }
             }
             
@@ -1775,6 +1792,116 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                 #zoomLevel {
                     min-width: 3rem;
                     font-size: 0.75rem;
+                }
+            }
+            
+            /* Comprehensive Mobile Enhancements */
+            
+            /* Mobile-optimized grid layout */
+            @media (max-width: 640px) {
+                .grid {
+                    gap: 1rem;
+                }
+                
+                .container {
+                    padding-left: 1rem;
+                    padding-right: 1rem;
+                }
+            }
+            
+            /* Mobile text sizing */
+            @media (max-width: 480px) {
+                .text-3xl {
+                    font-size: 1.875rem;
+                    line-height: 2.25rem;
+                }
+                
+                .text-2xl {
+                    font-size: 1.5rem;
+                    line-height: 2rem;
+                }
+                
+                .text-xl {
+                    font-size: 1.25rem;
+                    line-height: 1.75rem;
+                }
+            }
+            
+            /* Mobile button sizing improvements */
+            @media (max-width: 640px) {
+                .inline-flex {
+                    min-height: 44px;
+                    justify-content: center;
+                    align-items: center;
+                }
+                
+                .view-pdf-btn {
+                    font-size: 0.875rem;
+                    padding: 0.5rem 0.75rem;
+                }
+            }
+            
+            /* Mobile filter dropdown improvements */
+            @media (max-width: 640px) {
+                .filter-dropdown {
+                    font-size: 16px; /* Prevent zoom on iOS */
+                    padding: 0.875rem 2.5rem 0.875rem 0.75rem;
+                }
+                
+                .filter-dropdown::placeholder {
+                    font-size: 0.875rem;
+                }
+            }
+            
+            /* Mobile hero section */
+            @media (max-width: 640px) {
+                .relative.pt-16 {
+                    padding-top: 4rem;
+                    padding-bottom: 2rem;
+                }
+                
+                .mb-8.sm\\:mb-12 {
+                    margin-bottom: 2rem;
+                }
+            }
+            
+            /* Mobile latest publication section */
+            @media (max-width: 640px) {
+                .py-8.sm\\:py-12.lg\\:py-16 {
+                    padding-top: 2rem;
+                    padding-bottom: 2rem;
+                }
+                
+                .gap-6.sm\\:gap-8.lg\\:gap-12 {
+                    gap: 1.5rem;
+                }
+            }
+            
+            /* Mobile archive section responsive spacing */
+            @media (max-width: 768px) {
+                .py-8.sm\\:py-12.lg\\:py-16 {
+                    padding-top: 3rem;
+                    padding-bottom: 3rem;
+                }
+            }
+            
+            /* Mobile pagination improvements */
+            @media (max-width: 480px) {
+                #pagination {
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    gap: 0.25rem;
+                }
+                
+                #pageNumbers {
+                    order: 2;
+                    width: 100%;
+                    justify-content: center;
+                    margin-top: 0.5rem;
+                }
+                
+                #prevPage, #nextPage {
+                    order: 1;
                 }
             }
         </style>
