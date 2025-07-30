@@ -385,12 +385,13 @@ const currentPath = Astro.url.pathname;
                         <div class="form-group">
                           <label for="comments" class="block text-sm font-medium text-gray-700 mb-2">
                             Specific feedback or suggestions for improvement
+                            <span class="text-sm text-gray-500 font-normal">(Optional)</span>
                           </label>
                           <textarea 
                             id="comments" 
                             name="entry.1589457788" 
                             rows="4"
-                            placeholder="Please share any specific experiences or suggestions that could help us improve..."
+                            placeholder="Please share any specific experiences or suggestions that could help us improve... (This field is optional)"
                             class="block w-full px-4 py-3 text-gray-700 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-msu-main-color/50 focus:border-msu-main-color transition-all hover:border-gray-400"
                           ></textarea>
                         </div>
@@ -954,10 +955,8 @@ const currentPath = Astro.url.pathname;
         const submitSpinner = document.getElementById('submitSpinner');
         const submitArrow = document.getElementById('submitArrow');
         
-        // Validate form on submit
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
+        // Pre-submit validation and processing
+        form.addEventListener('submit', function(e) {
             // Reset error states
             document.querySelectorAll('.text-red-600').forEach(el => el.classList.add('hidden'));
             let isValid = true;
@@ -996,12 +995,19 @@ const currentPath = Astro.url.pathname;
             });
             
             if (!isValid) {
+                e.preventDefault();
                 // Scroll to first error
                 const firstError = document.querySelector('.text-red-600:not(.hidden)');
                 if (firstError) {
                     firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
-                return;
+                return false;
+            }
+            
+            // Ensure comments field has a value for Google Forms submission
+            const commentsField = document.getElementById('comments');
+            if (!commentsField.value.trim()) {
+                commentsField.value = 'No additional feedback provided';
             }
             
             // Show loading state
@@ -1010,33 +1016,23 @@ const currentPath = Astro.url.pathname;
             submitArrow.classList.add('hidden');
             submitSpinner.classList.remove('hidden');
             
-            try {
-                // Submit to Google Forms
-                const formData = new FormData(form);
-                
-                // Create a fallback timeout in case the iframe doesn't load
-                const submissionTimeout = setTimeout(() => {
-                    showResultModal('success', 'Evaluation submitted successfully!');
-                    form.reset();
-                    resetSubmitButton();
-                }, 5000);
-                
-                // Listen for iframe load (though Google Forms doesn't provide a proper response)
-                const iframe = document.querySelector('iframe[name="hiddenFrame"]');
-                iframe.onload = function() {
-                    clearTimeout(submissionTimeout);
-                    showResultModal('success', 'Evaluation submitted successfully!');
-                    form.reset();
-                    resetSubmitButton();
-                };
-                
-                // Submit the form
-                form.submit();
-                
-            } catch (error) {
-                showResultModal('error', 'There was an error submitting your evaluation. Please try again.');
+            // Set up success handling
+            const iframe = document.querySelector('iframe[name="hiddenFrame"]');
+            
+            // Remove any existing load handlers
+            iframe.onload = null;
+            
+            // Create a timeout for success feedback
+            setTimeout(() => {
+                showResultModal('success', 'Your evaluation has been submitted successfully! Thank you for your feedback.');
+                form.reset();
+                // Clear any placeholder text from comments field after reset
+                document.getElementById('comments').value = '';
                 resetSubmitButton();
-            }
+            }, 3000);
+            
+            // Allow the form to submit naturally to Google Forms
+            return true;
         });
         
         function resetSubmitButton() {
