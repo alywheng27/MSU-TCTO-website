@@ -1070,11 +1070,19 @@ document.addEventListener('DOMContentLoaded', function() {
       
       document.getElementById('modalCloseButton').onclick = function() {
         modal.classList.remove('active');
+        // Trigger comprehensive form reset when modal is closed
+        setTimeout(() => {
+          performComprehensiveReset();
+        }, 500);
       };
       
       modal.onclick = function(e) {
         if (e.target === modal) {
           modal.classList.remove('active');
+          // Trigger comprehensive form reset when modal is closed
+          setTimeout(() => {
+            performComprehensiveReset();
+          }, 500);
         }
       };
 
@@ -1132,6 +1140,13 @@ document.addEventListener('DOMContentLoaded', function() {
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
             </svg>
           `;
+          
+          // Auto-close modal and reset form after successful download
+          setTimeout(() => {
+            const modal = document.getElementById('feedbackModal');
+            modal.classList.remove('active');
+            performComprehensiveReset();
+          }, 2000);
         } catch (error) {
           console.error('Error generating image:', error);
           // Show error feedback
@@ -1163,6 +1178,117 @@ document.addEventListener('DOMContentLoaded', function() {
           document.head.appendChild(script);
         });
       }
+    }
+
+    // Comprehensive form reset function
+    function performComprehensiveReset() {
+      console.log('Performing comprehensive form reset...');
+      
+      // Reset the form
+      const surveyForm = document.querySelector('#studentSurveyForm');
+      if (surveyForm) {
+        surveyForm.reset();
+      }
+      
+      // Clear all error styling from inputs
+      document.querySelectorAll('input, textarea, select').forEach(input => {
+        input.classList.remove('border-red-500', 'border-red-300', 'bg-red-50');
+        input.classList.remove('border-yellow-500', 'border-yellow-300', 'bg-yellow-50');
+        input.classList.remove('border-green-500', 'border-green-300', 'bg-green-50', 'bg-green-100');
+        input.classList.remove('bg-gray-100'); // Remove this first to reset
+        // Reset to default styling
+        if (!input.readOnly) {
+          input.classList.add('border-gray-300');
+        }
+      });
+      
+      // Reset reference code field specifically
+      const referenceCodeInput = document.getElementById('referenceCodeInput');
+      if (referenceCodeInput) {
+        referenceCodeInput.value = '';
+        referenceCodeInput.placeholder = 'Fill Course and Student Number to generate';
+        referenceCodeInput.classList.remove('bg-green-100', 'border-green-300', 'border-red-500');
+        referenceCodeInput.classList.add('bg-gray-100', 'border-gray-300');
+      }
+      
+      // Reset all service cards
+      document.querySelectorAll('.service-card').forEach(card => {
+        card.classList.remove('selected', 'border-red-500', 'border-yellow-500', 'border-green-500');
+        card.classList.add('border-gray-300');
+        
+        // Uncheck service card checkboxes
+        const checkbox = card.querySelector('.service-card-checkbox');
+        if (checkbox) {
+          checkbox.checked = false;
+        }
+        
+        // Clear all radio button selections in this service
+        card.querySelectorAll('input[type="radio"]').forEach(radio => {
+          radio.checked = false;
+        });
+        
+        // Clear textarea values in this service
+        card.querySelectorAll('textarea').forEach(textarea => {
+          textarea.value = '';
+        });
+      });
+      
+      // Reset services tracking object
+      const serviceTitles = [
+        'Admission Services',
+        'Guidance Services', 
+        'Health Services',
+        'Facilities Services',
+        'Registrar Services',
+        'Campus Orientation Services'
+      ];
+      
+      serviceTitles.forEach(title => {
+        if (services[title]) {
+          services[title] = { completed: false, verified: false };
+        }
+      });
+      
+      // Reset verification status for all service cards
+      initializeVerificationStatus();
+      
+      // Reset progress tracker
+      updateProgressTracker();
+      
+      // Clear any error messages or highlights
+      document.querySelectorAll('.missing-question').forEach(el => {
+        el.classList.remove('missing-question');
+      });
+      
+      // Reset submit button state
+      const submitButton = surveyForm?.querySelector('button[type="submit"]');
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.innerHTML = 'Submit Survey';
+      }
+      
+      // Reset any global submission state
+      isSubmitting = false;
+      
+      // Remove any lingering loaders or overlays
+      document.querySelectorAll('.fixed.inset-0').forEach(overlay => {
+        if (overlay.querySelector('.loader-container')) {
+          overlay.remove();
+        }
+      });
+      
+      // Scroll to top of the form to show fresh state
+      setTimeout(() => {
+        const formContainer = document.querySelector('#student-survey');
+        if (formContainer) {
+          formContainer.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+          });
+        }
+      }, 100);
+      
+      console.log('Comprehensive form reset completed');
     }
 
     // Form submission handler with hidden iframe
@@ -1328,17 +1454,8 @@ document.addEventListener('DOMContentLoaded', function() {
               hiddenForm.remove();
             }, 1000);
             
-            // Reset form after successful submission
-            setTimeout(() => {
-              surveyForm.reset();
-              initializeVerificationStatus();
-              updateProgressTracker();
-              isSubmitting = false;
-              if (submitButton) {
-                submitButton.disabled = false;
-                submitButton.innerHTML = 'Submit Survey';
-              }
-            }, 3000);
+            // Note: Form reset will be handled when user closes modal or downloads receipt
+            // This ensures user has time to view/download their receipt before reset
           }, 1000);
         };
         
