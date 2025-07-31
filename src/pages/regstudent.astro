@@ -1096,19 +1096,72 @@ document.addEventListener('DOMContentLoaded', function() {
             hiddenForm.remove();
           }, 1000);
           
-          // Reset form after successful submission
-          setTimeout(() => {
-            surveyForm.reset();
-            initializeVerificationStatusreg();
-            updateRegProgressTracker();
-            isSubmitting = false;
-            if (submitButton) {
-              submitButton.disabled = false;
-              submitButton.innerHTML = 'Submit Survey';
-            }
-          }, 3000);
+          // Reset isSubmitting flag after successful submission
+          // Form reset will be handled when modal is closed
+          isSubmitting = false;
         }, 6000); // Wait for animation to complete
       });
+    }
+
+    // Function to reset form and clear all states
+    function resetFormAndClearStates() {
+      const surveyForm = document.getElementById('regstudentSurveyForm') as HTMLFormElement;
+      if (surveyForm) {
+        // Reset the form
+        surveyForm.reset();
+        
+        // Clear any error styling
+        const errorInputs = surveyForm.querySelectorAll('.border-red-500');
+        errorInputs.forEach(input => {
+          input.classList.remove('border-red-500');
+        });
+        
+        // Clear selected service cards
+        document.querySelectorAll('.service-card.selected').forEach(card => {
+          card.classList.remove('selected');
+          const checkbox = card.querySelector('.service-card-checkbox') as HTMLInputElement;
+          if (checkbox) checkbox.checked = false;
+        });
+        
+        // Reset verification status
+        initializeVerificationStatusreg();
+        updateRegProgressTracker();
+        
+        // Reset submit button
+        const submitButton = surveyForm.querySelector('button[type="submit"]') as HTMLButtonElement;
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.innerHTML = 'Submit Survey';
+        }
+        
+        // Reset reference code field
+        const regreferenceCodeInput = document.getElementById('regreferenceCodeInputs') as HTMLInputElement;
+        if (regreferenceCodeInput) {
+          regreferenceCodeInput.value = '';
+          regreferenceCodeInput.classList.add('bg-gray-100');
+          regreferenceCodeInput.classList.remove('bg-yellow-100', 'border-yellow-300');
+        }
+        
+        // Scroll to the top of the survey form smoothly
+        setTimeout(() => {
+          const surveySection = document.getElementById('studentreg-survey');
+          if (surveySection) {
+            surveySection.scrollIntoView({ 
+              behavior: 'smooth', 
+              block: 'start',
+              inline: 'nearest'
+            });
+          } else {
+            // Fallback: scroll to top of page if survey section not found
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+          }
+        }, 200); // Small delay to ensure all DOM updates are complete
+        
+        console.log('Form and states reset successfully with scroll to top');
+      }
     }
 
     // Show submission success with details
@@ -1185,12 +1238,20 @@ document.addEventListener('DOMContentLoaded', function() {
       if (closeButton) {
         closeButton.onclick = function() {
           modal.classList.remove('active');
+          // Reset form immediately when modal is closed
+          setTimeout(() => {
+            resetFormAndClearStates();
+          }, 100);
         };
       }
       
       modal.onclick = function(e) {
         if (e.target === modal) {
           modal.classList.remove('active');
+          // Reset form immediately when modal is closed by clicking outside
+          setTimeout(() => {
+            resetFormAndClearStates();
+          }, 100);
         }
       };
 
@@ -1256,6 +1317,15 @@ document.addEventListener('DOMContentLoaded', function() {
               </svg>
             `;
           }
+          
+          // Close modal and reset form after successful download
+          setTimeout(() => {
+            const modal = document.getElementById('feedbackModal') as HTMLElement;
+            if (modal) {
+              modal.classList.remove('active');
+            }
+            resetFormAndClearStates();
+          }, 1500);
         } catch (error) {
           console.error('Error generating image:', error);
           // Show error feedback
@@ -1408,6 +1478,12 @@ document.addEventListener('DOMContentLoaded', function() {
     if (surveyForm) {
       (surveyForm as any).isSubmitting = false;
     }
+    
+    // Clear any error styling from previous attempts
+    const errorInputs = document.querySelectorAll('.border-red-500');
+    errorInputs.forEach(input => {
+      input.classList.remove('border-red-500');
+    });
     
     showModal('error', message);
   }
