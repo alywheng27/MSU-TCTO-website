@@ -15,9 +15,11 @@ const ThemeToggle = () => {
 
   const applyTheme = (theme) => {
     if (theme === "dark") {
-      document.documentElement.setAttribute("data-theme", "dark");
+      document.documentElement.classList.add("dark");
+      document.body.classList.add("dark");
     } else if (theme === "light") {
-      document.documentElement.setAttribute("data-theme", "light");
+      document.documentElement.classList.remove("dark");
+      document.body.classList.remove("dark");
     } else {
       applySystemTheme();
     }
@@ -25,9 +27,11 @@ const ThemeToggle = () => {
 
   const applySystemTheme = () => {
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      document.documentElement.setAttribute("data-theme", "dark");
+      document.documentElement.classList.add("dark");
+      document.body.classList.add("dark");
     } else {
-      document.documentElement.setAttribute("data-theme", "light");
+      document.documentElement.classList.remove("dark");
+      document.body.classList.remove("dark");
     }
   };
 

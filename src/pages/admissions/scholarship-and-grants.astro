@@ -17,7 +17,7 @@ const currentPath = Astro.url.pathname;
 ---
 
 <Layout title="MSU Tawi-Tawi | Scholarships & Grants">
-	<main class="font-sans antialiased">
+	<main class="font-sans antialiased dark:bg-gray-900">
 
 				<!-- Navigation -->
 				<Navbar path={currentPath} client:visible />
@@ -85,22 +85,22 @@ const currentPath = Astro.url.pathname;
 		</section>
 
 		<!-- Scholarship Overview Section -->
-		<section id="scholarship" class="bg-white py-20 px-4 md:px-[12.5%]">
+		<section id="scholarship" class="bg-white dark:bg-gray-900 py-20 px-4 md:px-[12.5%]">
 			<div class="max-w-7xl mx-auto">
 				<div class="text-center mb-16 animate-fade-in">
-					<span class="text-msu-rusty-red font-semibold mb-2 block">FINANCIAL SUPPORT</span>
-					<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+					<span class="text-msu-rusty-red dark:text-yellow-400 font-semibold mb-2 block">FINANCIAL SUPPORT</span>
+					<h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
 						Scholarship and Grant Programs
 					</h2>
-					<div class="w-24 h-1 bg-msu-rusty-red mx-auto mb-6"></div>
-					<p class="text-lg text-gray-600 max-w-3xl mx-auto">
+					<div class="w-24 h-1 bg-msu-rusty-red dark:bg-yellow-400 mx-auto mb-6"></div>
+					<p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
 						Comprehensive financial assistance to empower students in achieving academic excellence
 					</p>
 				</div>
 
 				<div class="grid md:grid-cols-2 gap-12 mb-20">
 					<!-- Externally Funded Card -->
-					<div class="bg-white rounded-xl shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover-grow">
+					<div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover-grow">
 						<div class="h-48 overflow-hidden relative">
 							<img 
 								src={marineBiology.src}
@@ -114,17 +114,17 @@ const currentPath = Astro.url.pathname;
 							</div>
 						</div>
 						<div class="p-8">
-							<p class="text-gray-700 mb-6 leading-relaxed">
+							<p class="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
 								Special scholarships for Fisheries, Marine Biology, Environmental Science and Badjao students designed to attract more enrollees to our mandated programs and support indigenous communities.
 							</p>
-							<p class="text-gray-600 text-sm italic">
+							<p class="text-gray-600 dark:text-gray-400 text-sm italic">
 								Funded from the P5,000,000 allocated by the national government beginning AY 2014-15 (R.A. 10633).
 							</p>
 						</div>
 					</div>
 
 					<!-- Internally Funded Card -->
-					<div class="bg-white rounded-xl shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover-grow">
+					<div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover-grow">
 						<div class="h-48 overflow-hidden relative">
 							<img 
 								src={badjaoStudents.src}
@@ -140,31 +140,31 @@ const currentPath = Astro.url.pathname;
 						<div class="p-8">
 							<ul class="space-y-3 mb-6">
 								<li class="flex items-start">
-									<svg class="w-5 h-5 text-msu-rusty-red mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+									<svg class="w-5 h-5 text-msu-rusty-red dark:text-yellow-400 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
 										<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
 									</svg>
-									<span class="text-gray-700">Academic Scholarship</span>
+									<span class="text-gray-700 dark:text-gray-300">Academic Scholarship</span>
 								</li>
 								<li class="flex items-start">
-									<svg class="w-5 h-5 text-msu-rusty-red mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+									<svg class="w-5 h-5 text-msu-rusty-red dark:text-yellow-400 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
 										<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
 									</svg>
-									<span class="text-gray-700">MSU Tawi-Tawi Scholarship for Science and Mathematics (SSM)</span>
+									<span class="text-gray-700 dark:text-gray-300">MSU Tawi-Tawi Scholarship for Science and Mathematics (SSM)</span>
 								</li>
 								<li class="flex items-start">
-									<svg class="w-5 h-5 text-msu-rusty-red mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+									<svg class="w-5 h-5 text-msu-rusty-red dark:text-yellow-400 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
 										<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
 									</svg>
-									<span class="text-gray-700">Cultural Community Grant (CCG)</span>
+									<span class="text-gray-700 dark:text-gray-300">Cultural Community Grant (CCG)</span>
 								</li>
 								<li class="flex items-start">
-									<svg class="w-5 h-5 text-msu-rusty-red mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+									<svg class="w-5 h-5 text-msu-rusty-red dark:text-yellow-400 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
 										<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
 									</svg>
-									<span class="text-gray-700">Skill/Talent Study Grant (Tambuli Cultural Troupe, Band members and Athletes)</span>
+									<span class="text-gray-700 dark:text-gray-300">Skill/Talent Study Grant (Tambuli Cultural Troupe, Band members and Athletes)</span>
 								</li>
 							</ul>
-							<p class="text-gray-600 text-sm">
+							<p class="text-gray-600 dark:text-gray-400 text-sm">
 								Scholarship policies governed by BOR RES #66, 2013
 							</p>
 						</div>
@@ -172,21 +172,21 @@ const currentPath = Astro.url.pathname;
 				</div>
 
 				<!-- General Policies Section -->
-				<div class="bg-gray-50 rounded-xl p-8 md:p-12 shadow-md animate-fade-in border border-gray-200">
+				<div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-8 md:p-12 shadow-md animate-fade-in border border-gray-200 dark:border-gray-600">
 					<div class="max-w-4xl mx-auto">
-						<h3 class="text-2xl md:text-3xl font-bold text-msu-rusty-red mb-6 text-center">
+						<h3 class="text-2xl md:text-3xl font-bold text-msu-rusty-red dark:text-yellow-400 mb-6 text-center">
 							General Policies On Scholarships And Grants
 						</h3>
-						<p class="text-center font-medium text-gray-700 mb-8">
+						<p class="text-center font-medium text-gray-700 dark:text-gray-300 mb-8">
 							(TERTIARY LEVEL)
 						</p>
-						<p class="text-gray-700 mb-6 leading-relaxed">
+						<p class="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
 							Privileges granted to a select group of students in the campus are generally classified as scholarships or grants. A scholarship refers to privileges obtained on the basis of one's high score in the MSU System Admission and Scholarship Examination (SASE) (administered annually throughout Mindanao) or very good scholastic performance. A grant, while not disregarding such factors, is based more on other attributes such as special skills or one's ethnic origin.
 						</p>
 						<div class="text-center mt-8">
 							<a 
 								href="#" 
-								class="inline-flex items-center border border-msu-rusty-red text-msu-rusty-red hover:bg-msu-rusty-red hover:text-white px-6 py-3 rounded-full transition-colors duration-300 hover-grow"
+								class="inline-flex items-center border border-msu-rusty-red dark:border-yellow-400 text-msu-rusty-red dark:text-yellow-400 hover:bg-msu-rusty-red dark:hover:bg-yellow-400 hover:text-white dark:hover:text-gray-900 px-6 py-3 rounded-full transition-colors duration-300 hover-grow"
 							>
 								<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
@@ -200,118 +200,118 @@ const currentPath = Astro.url.pathname;
 		</section>
 
 		<!-- Scholarship Types Section -->
-		<section id="scholarship-types" class="py-20 bg-gradient-to-b from-blue-50 to-white">
+		<section id="scholarship-types" class="py-20 bg-gradient-to-b from-blue-50 dark:from-gray-800 to-white dark:to-gray-900">
 			<div class="max-w-7xl mx-auto px-4 md:px-[12.5%]">
 				<div class="text-center mb-16 animate-fade-in">
-					<span class="text-msu-rusty-red font-semibold mb-2 block">OPPORTUNITIES</span>
-					<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+					<span class="text-msu-rusty-red dark:text-yellow-400 font-semibold mb-2 block">OPPORTUNITIES</span>
+					<h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
 						Available Scholarship Programs
 					</h2>
-					<div class="w-24 h-1 bg-msu-rusty-red mx-auto mb-6"></div>
-					<p class="text-lg text-gray-600 max-w-3xl mx-auto">
+					<div class="w-24 h-1 bg-msu-rusty-red dark:bg-yellow-400 mx-auto mb-6"></div>
+					<p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
 						Explore our comprehensive range of scholarship and grant opportunities
 					</p>
 				</div>
 				<div class="text-center mb-8">
-					<h2 class="text-3xl font-bold text-msu-maroon">Scholarships and Grants</h2>
-					<p class="text-gray-600 mt-4 max-w-3xl mx-auto">Privileges granted to a select group of students in the MSU-Tawi-Tawi campus are generally classified as scholarships or grants. A scholarship refers to privileges obtained on the basis of one's a sufficiently high score in the Mindanao State University System Admission and Scholarship Examination (MSU-SASE) or an academic performance deemed at least "very good". A grant, requiring only a minimum level of scholastic proficiency, is based more on other attributes such as special skills or talents, indigent family background, or even one's ethnic origin.</p>
+					<h2 class="text-3xl font-bold text-msu-maroon dark:text-yellow-400">Scholarships and Grants</h2>
+					<p class="text-gray-600 dark:text-gray-300 mt-4 max-w-3xl mx-auto">Privileges granted to a select group of students in the MSU-Tawi-Tawi campus are generally classified as scholarships or grants. A scholarship refers to privileges obtained on the basis of one's a sufficiently high score in the Mindanao State University System Admission and Scholarship Examination (MSU-SASE) or an academic performance deemed at least "very good". A grant, requiring only a minimum level of scholastic proficiency, is based more on other attributes such as special skills or talents, indigent family background, or even one's ethnic origin.</p>
 				</div>
 				
-				<div class="bg-white p-8 rounded-xl shadow-md hover-grow transition-all duration-300 border border-gray-100 max-w-4xl mx-auto">
+				<div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-md hover-grow transition-all duration-300 border border-gray-100 dark:border-gray-600 max-w-4xl mx-auto">
 					<div class="grid md:grid-cols-2 gap-8">
 						<div>
-							<h3 class="text-2xl font-bold text-msu-maroon mb-6">SCHOLARSHIPS</h3>
+							<h3 class="text-2xl font-bold text-msu-maroon dark:text-yellow-400 mb-6">SCHOLARSHIPS</h3>
 							<ul class="space-y-4">
 								<li class="flex items-start group">
-									<div class="bg-msu-rusty-red rounded-full p-1 mr-3 mt-1">
+									<div class="bg-msu-rusty-red dark:bg-yellow-400 rounded-full p-1 mr-3 mt-1">
 										<svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
 											<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
 										</svg>
 									</div>
 									<div>
-										<h4 class="font-semibold text-gray-800 group-hover:text-msu-rusty-red transition-colors duration-300">Academic Excellence Scholarship</h4>
-										<p class="text-gray-600 text-sm mt-1">For students with outstanding academic performance</p>
+										<h4 class="font-semibold text-gray-800 dark:text-gray-200 group-hover:text-msu-rusty-red dark:group-hover:text-yellow-400 transition-colors duration-300">Academic Excellence Scholarship</h4>
+										<p class="text-gray-600 dark:text-gray-300 text-sm mt-1">For students with outstanding academic performance</p>
 									</div>
 								</li>
 								<li class="flex items-start group">
-									<div class="bg-msu-rusty-red rounded-full p-1 mr-3 mt-1">
+									<div class="bg-msu-rusty-red dark:bg-yellow-400 rounded-full p-1 mr-3 mt-1">
 										<svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
 											<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
 										</svg>
 									</div>
 									<div>
-										<h4 class="font-semibold text-gray-800 group-hover:text-msu-rusty-red transition-colors duration-300">Science & Mathematics Scholarship (SSM)</h4>
-										<p class="text-gray-600 text-sm mt-1">For students excelling in STEM fields</p>
+										<h4 class="font-semibold text-gray-800 dark:text-gray-200 group-hover:text-msu-rusty-red dark:group-hover:text-yellow-400 transition-colors duration-300">Science & Mathematics Scholarship (SSM)</h4>
+										<p class="text-gray-600 dark:text-gray-300 text-sm mt-1">For students excelling in STEM fields</p>
 									</div>
 								</li>
 								<li class="flex items-start group">
-									<div class="bg-msu-rusty-red rounded-full p-1 mr-3 mt-1">
+									<div class="bg-msu-rusty-red dark:bg-yellow-400 rounded-full p-1 mr-3 mt-1">
 										<svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
 											<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
 										</svg>
 									</div>
 									<div>
-										<h4 class="font-semibold text-gray-800 group-hover:text-msu-rusty-red transition-colors duration-300">Fisheries Technology Scholarship</h4>
-										<p class="text-gray-600 text-sm mt-1">For students in fisheries programs</p>
+										<h4 class="font-semibold text-gray-800 dark:text-gray-200 group-hover:text-msu-rusty-red dark:group-hover:text-yellow-400 transition-colors duration-300">Fisheries Technology Scholarship</h4>
+										<p class="text-gray-600 dark:text-gray-300 text-sm mt-1">For students in fisheries programs</p>
 									</div>
 								</li>
 							</ul>
 						</div>
 						
 						<div>
-							<h3 class="text-2xl font-bold text-msu-maroon mb-6">OTHER STUDENT GRANTS</h3>
+							<h3 class="text-2xl font-bold text-msu-maroon dark:text-yellow-400 mb-6">OTHER STUDENT GRANTS</h3>
 							<ul class="space-y-4">
 								<li class="flex items-start group">
-									<div class="bg-msu-rusty-red rounded-full p-1 mr-3 mt-1">
+									<div class="bg-msu-rusty-red dark:bg-yellow-400 rounded-full p-1 mr-3 mt-1">
 										<svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
 											<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
 										</svg>
 									</div>
 									<div>
-										<h4 class="font-semibold text-gray-800 group-hover:text-msu-rusty-red transition-colors duration-300">Badjao Student Grant</h4>
-										<p class="text-gray-600 text-sm mt-1">Supporting indigenous Badjao students</p>
+										<h4 class="font-semibold text-gray-800 dark:text-gray-200 group-hover:text-msu-rusty-red dark:group-hover:text-yellow-400 transition-colors duration-300">Badjao Student Grant</h4>
+										<p class="text-gray-600 dark:text-gray-300 text-sm mt-1">Supporting indigenous Badjao students</p>
 									</div>
 								</li>
 								<li class="flex items-start group">
-									<div class="bg-msu-rusty-red rounded-full p-1 mr-3 mt-1">
+									<div class="bg-msu-rusty-red dark:bg-yellow-400 rounded-full p-1 mr-3 mt-1">
 										<svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
 											<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
 										</svg>
 									</div>
 									<div>
-										<h4 class="font-semibold text-gray-800 group-hover:text-msu-rusty-red transition-colors duration-300">Cultural Community Grant (CCG)</h4>
-										<p class="text-gray-600 text-sm mt-1">For students from cultural communities</p>
+										<h4 class="font-semibold text-gray-800 dark:text-gray-200 group-hover:text-msu-rusty-red dark:group-hover:text-yellow-400 transition-colors duration-300">Cultural Community Grant (CCG)</h4>
+										<p class="text-gray-600 dark:text-gray-300 text-sm mt-1">For students from cultural communities</p>
 									</div>
 								</li>
 								<li class="flex items-start group">
-									<div class="bg-msu-rusty-red rounded-full p-1 mr-3 mt-1">
+									<div class="bg-msu-rusty-red dark:bg-yellow-400 rounded-full p-1 mr-3 mt-1">
 										<svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
 											<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
 										</svg>
 									</div>
 									<div>
-										<h4 class="font-semibold text-gray-800 group-hover:text-msu-rusty-red transition-colors duration-300">Talent/Skill Study Grant</h4>
-										<p class="text-gray-600 text-sm mt-1">For students with exceptional talents</p>
+										<h4 class="font-semibold text-gray-800 dark:text-gray-200 group-hover:text-msu-rusty-red dark:group-hover:text-yellow-400 transition-colors duration-300">Talent/Skill Study Grant</h4>
+										<p class="text-gray-600 dark:text-gray-300 text-sm mt-1">For students with exceptional talents</p>
 									</div>
 								</li>
 							</ul>
 						</div>
 					</div>
 			
-					<div class="mt-8 pt-8 border-t border-gray-200">
-						<h4 class="text-xl font-semibold text-msu-rusty-red mb-4">Additional Opportunities</h4>
+					<div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-600">
+						<h4 class="text-xl font-semibold text-msu-rusty-red dark:text-yellow-400 mb-4">Additional Opportunities</h4>
 						<ul class="grid md:grid-cols-2 gap-4">
 							<li class="flex items-start">
-								<svg class="w-5 h-5 text-msu-rusty-red mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<svg class="w-5 h-5 text-msu-rusty-red dark:text-yellow-400 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
 									<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
 								</svg>
-								<span class="text-gray-700">On-the-Job Training (OJT) Grant</span>
+								<span class="text-gray-700 dark:text-gray-300">On-the-Job Training (OJT) Grant</span>
 							</li>
 							<li class="flex items-start">
-								<svg class="w-5 h-5 text-msu-rusty-red mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+								<svg class="w-5 h-5 text-msu-rusty-red dark:text-yellow-400 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
 									<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
 								</svg>
-								<span class="text-gray-700">Review for Licensure Examinations Grant</span>
+								<span class="text-gray-700 dark:text-gray-300">Review for Licensure Examinations Grant</span>
 							</li>
 						</ul>
 					</div>
@@ -320,38 +320,38 @@ const currentPath = Astro.url.pathname;
 		</section>
 
 		<!-- Application Process Section -->
-		<section id="application-process" class="py-20 bg-white">
+		<section id="application-process" class="py-20 bg-white dark:bg-gray-900">
 			<div class="max-w-7xl mx-auto px-4 md:px-[12.5%]">
 				<div class="text-center mb-16">
-					<span class="text-msu-rusty-red font-semibold mb-2 block">HOW TO APPLY</span>
-					<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+					<span class="text-msu-rusty-red dark:text-yellow-400 font-semibold mb-2 block">HOW TO APPLY</span>
+					<h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
 						Application Process
 					</h2>
-					<div class="w-24 h-1 bg-msu-rusty-red mx-auto mb-6"></div>
-					<p class="text-lg text-gray-600 max-w-3xl mx-auto">
+					<div class="w-24 h-1 bg-msu-rusty-red dark:bg-yellow-400 mx-auto mb-6"></div>
+					<p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
 						Follow these simple steps to apply for our scholarship programs
 					</p>
 				</div>
 
 				<div class="grid md:grid-cols-3 gap-8">
-					<div class="bg-gray-50 p-8 rounded-xl border border-gray-200 hover-grow transition-all duration-300">
-						<div class="bg-msu-rusty-red text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mb-6">1</div>
-						<h3 class="text-xl font-bold text-gray-900 mb-4">Check Eligibility</h3>
-						<p class="text-gray-700">
+					<div class="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl border border-gray-200 dark:border-gray-600 hover-grow transition-all duration-300">
+						<div class="bg-msu-rusty-red dark:bg-yellow-400 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mb-6">1</div>
+						<h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">Check Eligibility</h3>
+						<p class="text-gray-700 dark:text-gray-300">
 							Review the requirements for each scholarship program to ensure you qualify before applying.
 						</p>
 					</div>
-					<div class="bg-gray-50 p-8 rounded-xl border border-gray-200 hover-grow transition-all duration-300">
-						<div class="bg-msu-rusty-red text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mb-6">2</div>
-						<h3 class="text-xl font-bold text-gray-900 mb-4">Prepare Documents</h3>
-						<p class="text-gray-700">
+					<div class="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl border border-gray-200 dark:border-gray-600 hover-grow transition-all duration-300">
+						<div class="bg-msu-rusty-red dark:bg-yellow-400 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mb-6">2</div>
+						<h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">Prepare Documents</h3>
+						<p class="text-gray-700 dark:text-gray-300">
 							Gather all required documents including academic records, recommendation letters, and identification.
 						</p>
 					</div>
-					<div class="bg-gray-50 p-8 rounded-xl border border-gray-200 hover-grow transition-all duration-300">
-						<div class="bg-msu-rusty-red text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mb-6">3</div>
-						<h3 class="text-xl font-bold text-gray-900 mb-4">Submit Application</h3>
-						<p class="text-gray-700">
+					<div class="bg-gray-50 dark:bg-gray-800 p-8 rounded-xl border border-gray-200 dark:border-gray-600 hover-grow transition-all duration-300">
+						<div class="bg-msu-rusty-red dark:bg-yellow-400 text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mb-6">3</div>
+						<h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">Submit Application</h3>
+						<p class="text-gray-700 dark:text-gray-300">
 							Complete the online application form and upload all required documents before the deadline.
 						</p>
 					</div>
