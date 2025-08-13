@@ -253,7 +253,7 @@ export default function AdmissionProcedure() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white px-[5%] xl:pt-[80px] xs:pt-[60px] pb-20">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 dark:from-gray-900 to-white dark:to-gray-800 px-[5%] xl:pt-[80px] xs:pt-[60px] pb-20">
       {/* Hero Section */}
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
@@ -264,10 +264,10 @@ export default function AdmissionProcedure() {
         <div className="absolute -top-10 -left-10 w-32 h-32 bg-msu-maroon/10 rounded-full filter blur-3xl"></div>
         <div className="absolute -bottom-5 -right-5 w-40 h-40 bg-msu-green/10 rounded-full filter blur-3xl"></div>
         
-        <h1 className="text-4xl md:text-5xl font-bold text-msu-deep-ocean mb-4 relative z-10">
-          Admission <span className="text-msu-green">Procedures</span>
+        <h1 className="text-4xl md:text-5xl font-bold text-msu-deep-ocean dark:text-gray-100 dark:text-gray-100 mb-4 relative z-10">
+          Admission <span className="text-msu-green dark:text-yellow-400">Procedures</span>
         </h1>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto relative z-10">
+        <p className="text-xl text-gray-600 dark:text-gray-300 dark:text-gray-300 max-w-3xl mx-auto relative z-10">
           Your journey to academic excellence starts here. Explore our streamlined admission process.
         </p>
         
@@ -285,7 +285,7 @@ export default function AdmissionProcedure() {
           </a>
           <a 
             href="#contact" 
-            className="px-6 py-3 bg-white text-msu-maroon rounded-lg font-medium hover:bg-gray-100 transition-colors shadow-md hover:shadow-lg border border-gray-200"
+            className="px-6 py-3 bg-white text-msu-maroon dark:text-yellow-400 rounded-lg font-medium hover:bg-gray-100 transition-colors shadow-md hover:shadow-lg border border-gray-200 dark:border-gray-600"
           >
             Contact Us
           </a> */}
@@ -293,7 +293,7 @@ export default function AdmissionProcedure() {
       </motion.div>
 
       {/* Main Content Container */}
-      <div className="max-w-7xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 relative">
+      <div className="max-w-7xl mx-auto bg-white dark:bg-gray-800 rounded-3xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700 relative">
         {/* Decorative elements */}
         <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-msu-maroon via-msu-green to-msu-gold"></div>
         
@@ -325,15 +325,15 @@ export default function AdmissionProcedure() {
                 </div>
               </SwiperSlide>
             ))}
-            <div onClick={handlePrevSlide} className="swiper-button-prev text-msu-maroon hover:text-msu-dark-maroon"></div>
-            <div onClick={handleNextSlide} className="swiper-button-next text-msu-maroon hover:text-msu-dark-maroon"></div>
+            <div onClick={handlePrevSlide} className="swiper-button-prev text-msu-maroon dark:text-yellow-400 hover:text-msu-dark-maroon"></div>
+            <div onClick={handleNextSlide} className="swiper-button-next text-msu-maroon dark:text-yellow-400 hover:text-msu-dark-maroon"></div>
           </Swiper>
         </div>
 
         {/* Desktop Layout */}
         <div className="flex flex-col xl:flex-row">
           {/* Sidebar for Desktop */}
-          <div className="xl:w-1/4 xs:w-full bg-gradient-to-b from-gray-50 to-white p-6 border-r border-gray-200 relative">
+          <div className="xl:w-1/4 xs:w-full bg-gradient-to-b from-gray-50 dark:from-gray-800 to-white dark:to-gray-700 p-6 border-r border-gray-200 dark:border-gray-600 relative">
             <div className="sticky top-24">
               <motion.div 
                 className="flex flex-col gap-4"
@@ -345,7 +345,7 @@ export default function AdmissionProcedure() {
                   onClick={() => dispatch({ type: 'freshmenAndTransferee' })}
                   className={`text-left p-4 rounded-xl transition-all flex items-center ${state.freshmenAndTransferee ? 
                     'bg-gradient-to-r from-msu-deep-ocean to-msu-dark-maroon text-white font-bold shadow-lg' : 
-                    'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 shadow-sm hover:shadow-md'}`}
+                    'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600 dark:border-gray-600 shadow-sm hover:shadow-md'}`}
                   variants={itemVariants}
                   whileHover={{ scale: 1.02 }}
                 >
@@ -360,7 +360,7 @@ export default function AdmissionProcedure() {
                   onClick={() => dispatch({ type: 'returningShiftingAndRemedial' })}
                   className={`text-left p-4 rounded-xl transition-all flex items-center ${state.returningShiftingAndRemedial ? 
                     'bg-gradient-to-r from-msu-deep-ocean to-msu-dark-maroon text-white font-bold shadow-lg' : 
-                    'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 shadow-sm hover:shadow-md'}`}
+                    'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600 dark:border-gray-600 shadow-sm hover:shadow-md'}`}
                   variants={itemVariants}
                   whileHover={{ scale: 1.02 }}
                 >
@@ -375,7 +375,7 @@ export default function AdmissionProcedure() {
                   onClick={() => dispatch({ type: 'studentFees' })}
                   className={`text-left p-4 rounded-xl transition-all flex items-center ${state.studentFees ? 
                     'bg-gradient-to-r from-msu-deep-ocean to-msu-dark-maroon text-white font-bold shadow-lg' : 
-                    'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 shadow-sm hover:shadow-md'}`}
+                    'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600 dark:border-gray-600 shadow-sm hover:shadow-md'}`}
                   variants={itemVariants}
                   whileHover={{ scale: 1.02 }}
                 >
@@ -387,18 +387,18 @@ export default function AdmissionProcedure() {
                 </motion.button>
 
                 <motion.div 
-                  className="mt-8 p-6 bg-white rounded-xl border border-msu-maroon/20 shadow-md"
+                  className="mt-8 p-6 bg-white dark:bg-gray-700 rounded-xl border border-msu-maroon/20 dark:border-yellow-400/30 shadow-md"
                   variants={itemVariants}
                 >
-                  <h4 className="text-msu-maroon font-bold mb-3 flex items-center">
+                  <h4 className="text-msu-maroon dark:text-yellow-400 dark:text-yellow-400 font-bold mb-3 flex items-center">
                     <FiInfo className="mr-2" /> Need Help?
                   </h4>
-                  <p className="text-gray-600 text-sm mb-4">Our admission team is ready to assist you with any questions about the application process.</p>
+                  <p className="text-gray-600 dark:text-gray-300 dark:text-gray-300 text-sm mb-4">Our admission team is ready to assist you with any questions about the application process.</p>
                   <div className="space-y-3">
-                    <a href="mailto:admissions@msutawitawi.edu.ph" className="flex items-center text-sm text-gray-700 hover:text-msu-maroon">
+                    <a href="mailto:admissions@msutawitawi.edu.ph" className="flex items-center text-sm text-gray-700 dark:text-gray-300 dark:text-gray-300 hover:text-msu-maroon dark:text-yellow-400 dark:hover:text-yellow-400">
                       <FiMail className="mr-2" /> admissions@msutawitawi.edu.ph
                     </a>
-                    <a href="tel:+639123456789" className="flex items-center text-sm text-gray-700 hover:text-msu-maroon">
+                    <a href="tel:+639123456789" className="flex items-center text-sm text-gray-700 dark:text-gray-300 dark:text-gray-300 hover:text-msu-maroon dark:text-yellow-400 dark:hover:text-yellow-400">
                       <FiPhone className="mr-2" /> (0909) 982 6063
                     </a>
                   </div>
@@ -408,26 +408,26 @@ export default function AdmissionProcedure() {
                 </motion.div>
 
                 <motion.div 
-                  className="p-6 bg-white rounded-xl border border-msu-maroon/20 shadow-md"
+                  className="p-6 bg-white dark:bg-gray-700 rounded-xl border border-msu-maroon/20 dark:border-yellow-400/30 shadow-md"
                   variants={itemVariants}
                 >
-                  <h4 className="text-msu-maroon font-bold mb-3 flex items-center">
+                  <h4 className="text-msu-maroon dark:text-yellow-400 dark:text-yellow-400 font-bold mb-3 flex items-center">
                     <FiDownload className="mr-2" /> Download Forms
                   </h4>
                   <div className="flex flex-col gap-3">
-                    <a href="#" className="text-gray-700 text-sm flex items-center justify-between hover:text-msu-maroon p-2 hover:bg-gray-50 rounded-lg">
+                    <a href="#" className="text-gray-700 dark:text-gray-300 dark:text-gray-300 text-sm flex items-center justify-between hover:text-msu-maroon dark:text-yellow-400 dark:hover:text-yellow-400 p-2 hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg">
                       <span>Application Form</span>
                       <FiExternalLink />
                     </a>
-                    <a href="#" className="text-gray-700 text-sm flex items-center justify-between hover:text-msu-maroon p-2 hover:bg-gray-50 rounded-lg">
+                    <a href="#" className="text-gray-700 dark:text-gray-300 dark:text-gray-300 text-sm flex items-center justify-between hover:text-msu-maroon dark:text-yellow-400 dark:hover:text-yellow-400 p-2 hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg">
                       <span>Medical Form</span>
                       <FiExternalLink />
                     </a>
-                    <a href="#" className="text-gray-700 text-sm flex items-center justify-between hover:text-msu-maroon p-2 hover:bg-gray-50 rounded-lg">
+                    <a href="#" className="text-gray-700 dark:text-gray-300 dark:text-gray-300 text-sm flex items-center justify-between hover:text-msu-maroon dark:text-yellow-400 dark:hover:text-yellow-400 p-2 hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg">
                       <span>Fee Structure</span>
                       <FiExternalLink />
                     </a>
-                    <a href="#" className="text-gray-700 text-sm flex items-center justify-between hover:text-msu-maroon p-2 hover:bg-gray-50 rounded-lg">
+                    <a href="#" className="text-gray-700 dark:text-gray-300 dark:text-gray-300 text-sm flex items-center justify-between hover:text-msu-maroon dark:text-yellow-400 dark:hover:text-yellow-400 p-2 hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg">
                       <span>Scholarship Forms</span>
                       <FiExternalLink />
                     </a>
@@ -438,7 +438,7 @@ export default function AdmissionProcedure() {
           </div>
 
           {/* Content Area */}
-          <div className="xl:w-3/4 xs:w-full p-8 bg-white relative" id="process">
+          <div className="xl:w-3/4 xs:w-full p-8 bg-white dark:bg-gray-800 relative" id="process">
             <div className="absolute -top-20 right-0 w-64 h-64 bg-msu-green/5 rounded-full filter blur-3xl"></div>
             
             <AnimatePresence mode="wait">
@@ -457,70 +457,70 @@ export default function AdmissionProcedure() {
                     animate="visible"
                     variants={containerVariants}
                   >
-                    <motion.h2 className="text-3xl font-bold text-msu-deep-ocean mb-6 flex items-center" variants={itemVariants}>
+                    <motion.h2 className="text-3xl font-bold text-msu-deep-ocean dark:text-gray-100 mb-6 flex items-center" variants={itemVariants}>
                       <span className="bg-msu-deep-ocean text-white rounded-full w-10 h-10 flex items-center justify-center text-lg mr-4">🎓</span>
                       Freshmen & Transferee Admission
                     </motion.h2>
                     
-                    <motion.div className="bg-gradient-to-r from-msu-maroon/5 to-msu-green/5 p-6 rounded-xl mb-8 border border-gray-200 shadow-sm" variants={itemVariants}>
-                      <h3 className="text-xl font-semibold text-msu-deep-ocean mb-4 flex items-center">
+                    <motion.div className="bg-gradient-to-r from-msu-maroon/5 to-msu-green/5 p-6 rounded-xl mb-8 border border-gray-200 dark:border-gray-600 shadow-sm" variants={itemVariants}>
+                      <h3 className="text-xl font-semibold text-msu-deep-ocean dark:text-gray-100 mb-4 flex items-center">
                         <FiInfo className="mr-2" /> Required Documents
                       </h3>
                       <div className="grid md:grid-cols-2 gap-6">
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                          <h4 className="text-lg font-medium text-gray-800 mb-3 border-b pb-2 border-gray-200">For Freshmen:</h4>
+                        <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-100 dark:border-gray-600">
+                          <h4 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-3 border-b pb-2 border-gray-200">For Freshmen:</h4>
                           <ul className="space-y-3">
                             <li className="flex items-start">
-                              <span className="text-msu-maroon mr-2 mt-1">•</span>
-                              <span className="text-gray-700">Senior High School Report Card (Form 138-A)</span>
+                              <span className="text-msu-maroon dark:text-yellow-400 mr-2 mt-1">•</span>
+                              <span className="text-gray-700 dark:text-gray-300">Senior High School Report Card (Form 138-A)</span>
                             </li>
                             <li className="flex items-start">
-                              <span className="text-msu-maroon mr-2 mt-1">•</span>
-                              <span className="text-gray-700">MSU SASE Report of Rating (with passing score)</span>
+                              <span className="text-msu-maroon dark:text-yellow-400 mr-2 mt-1">•</span>
+                              <span className="text-gray-700 dark:text-gray-300">MSU SASE Report of Rating (with passing score)</span>
                             </li>
                             <li className="flex items-start">
-                              <span className="text-msu-maroon mr-2 mt-1">•</span>
-                              <span className="text-gray-700">PSA/NSO-Authenticated Birth Certificate (original)</span>
+                              <span className="text-msu-maroon dark:text-yellow-400 mr-2 mt-1">•</span>
+                              <span className="text-gray-700 dark:text-gray-300">PSA/NSO-Authenticated Birth Certificate (original)</span>
                             </li>
                             <li className="flex items-start">
-                              <span className="text-msu-maroon mr-2 mt-1">•</span>
-                              <span className="text-gray-700">Certificate of Good Moral Character</span>
+                              <span className="text-msu-maroon dark:text-yellow-400 mr-2 mt-1">•</span>
+                              <span className="text-gray-700 dark:text-gray-300">Certificate of Good Moral Character</span>
                             </li>
                             <li className="flex items-start">
-                              <span className="text-msu-maroon mr-2 mt-1">•</span>
-                              <span className="text-gray-700">2x2 ID photos (white background)</span>
+                              <span className="text-msu-maroon dark:text-yellow-400 mr-2 mt-1">•</span>
+                              <span className="text-gray-700 dark:text-gray-300">2x2 ID photos (white background)</span>
                             </li>
                           </ul>
                         </div>
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                          <h4 className="text-lg font-medium text-gray-800 mb-3 border-b pb-2 border-gray-200">For Transferees:</h4>
+                        <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-100 dark:border-gray-600">
+                          <h4 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-3 border-b pb-2 border-gray-200">For Transferees:</h4>
                           <ul className="space-y-3">
                             <li className="flex items-start">
-                              <span className="text-msu-maroon mr-2 mt-1">•</span>
-                              <span className="text-gray-700">Honorable Dismissal</span>
+                              <span className="text-msu-maroon dark:text-yellow-400 mr-2 mt-1">•</span>
+                              <span className="text-gray-700 dark:text-gray-300">Honorable Dismissal</span>
                             </li>
                             <li className="flex items-start">
-                              <span className="text-msu-maroon mr-2 mt-1">•</span>
-                              <span className="text-gray-700">Transcript of Records (TOR)</span>
+                              <span className="text-msu-maroon dark:text-yellow-400 mr-2 mt-1">•</span>
+                              <span className="text-gray-700 dark:text-gray-300">Transcript of Records (TOR)</span>
                             </li>
                             <li className="flex items-start">
-                              <span className="text-msu-maroon mr-2 mt-1">•</span>
-                              <span className="text-gray-700">PSA/NSO-Authenticated Birth Certificate (original)</span>
+                              <span className="text-msu-maroon dark:text-yellow-400 mr-2 mt-1">•</span>
+                              <span className="text-gray-700 dark:text-gray-300">PSA/NSO-Authenticated Birth Certificate (original)</span>
                             </li>
                             <li className="flex items-start">
-                              <span className="text-msu-maroon mr-2 mt-1">•</span>
-                              <span className="text-gray-700">MSU SASE Report of Rating (with passing score)</span>
+                              <span className="text-msu-maroon dark:text-yellow-400 mr-2 mt-1">•</span>
+                              <span className="text-gray-700 dark:text-gray-300">MSU SASE Report of Rating (with passing score)</span>
                             </li>
                             <li className="flex items-start">
-                              <span className="text-msu-maroon mr-2 mt-1">•</span>
-                              <span className="text-gray-700">Certificate of Good Moral Character</span>
+                              <span className="text-msu-maroon dark:text-yellow-400 mr-2 mt-1">•</span>
+                              <span className="text-gray-700 dark:text-gray-300">Certificate of Good Moral Character</span>
                             </li>
                           </ul>
                         </div>
                       </div>
                     </motion.div>
 
-                    <motion.h3 className="text-2xl font-bold text-msu-deep-ocean mb-6 flex items-center" variants={itemVariants}>
+                    <motion.h3 className="text-2xl font-bold text-msu-deep-ocean dark:text-gray-100 mb-6 flex items-center" variants={itemVariants}>
                       <span className="bg-msu-deep-ocean text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">1-6</span>
                       Admission Process Steps
                     </motion.h3>
@@ -532,7 +532,7 @@ export default function AdmissionProcedure() {
                       {freshmenSteps.map((step, index) => (
                         <motion.div
                           key={index}
-                          className={`bg-white p-6 rounded-xl shadow-sm cursor-pointer border border-gray-200 hover:border-msu-maroon transition-all ${hoveredStep === index ? 'ring-2 ring-msu-maroon' : ''}`}
+                          className={`bg-white dark:bg-gray-700 p-6 rounded-xl shadow-sm cursor-pointer border border-gray-200 dark:border-gray-600 dark:border-gray-600 hover:border-msu-maroon dark:hover:border-yellow-400 transition-all ${hoveredStep === index ? 'ring-2 ring-msu-maroon' : ''}`}
                           variants={itemVariants}
                           whileHover={{ scale: 1.03, boxShadow: "0 10px 25px rgba(0,0,0,0.1)", borderColor: "#8B1D1D" }}
                           onMouseEnter={() => setHoveredStep(index)}
@@ -543,14 +543,14 @@ export default function AdmissionProcedure() {
                               {step.step}
                             </div>
                             <div className="flex-1">
-                              <h4 className="text-lg font-semibold text-gray-800 flex items-center">
+                              <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-200 flex items-center">
                                 <span className="mr-2 text-xl">{step.icon}</span>
                                 {step.title}
                               </h4>
-                              <p className="text-gray-600 mt-2 text-sm">{step.description}</p>
+                              <p className="text-gray-600 dark:text-gray-300 mt-2 text-sm">{step.description}</p>
                               
                               <button 
-                                className="mt-3 text-msu-maroon text-sm font-medium flex items-center"
+                                className="mt-3 text-msu-maroon dark:text-yellow-400 text-sm font-medium flex items-center"
                                 onClick={() => toggleAccordion(index)}
                               >
                                 {activeAccordion === index ? 'Hide details' : 'View details'}
@@ -564,10 +564,10 @@ export default function AdmissionProcedure() {
                                   animate={{ opacity: 1, height: 'auto' }}
                                   exit={{ opacity: 0, height: 0 }}
                                 >
-                                  <ul className="space-y-2 text-gray-600 text-sm">
+                                  <ul className="space-y-2 text-gray-600 dark:text-gray-300 text-sm">
                                     {step.details.map((detail, i) => (
                                       <li key={i} className="flex items-start">
-                                        <span className="text-msu-maroon mr-2 mt-1 text-xs">▪</span>
+                                        <span className="text-msu-maroon dark:text-yellow-400 mr-2 mt-1 text-xs">▪</span>
                                         <span>{detail}</span>
                                       </li>
                                     ))}
@@ -581,22 +581,22 @@ export default function AdmissionProcedure() {
                     </motion.div>
 
                     <motion.div 
-                      className="mt-8 bg-gradient-to-r from-msu-green/5 to-msu-maroon/5 p-6 rounded-xl border border-gray-200 shadow-sm"
+                      className="mt-8 bg-gradient-to-r from-msu-green/5 to-msu-maroon/5 p-6 rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm"
                       variants={itemVariants}
                     >
-                      {/* <h3 className="text-xl font-semibold text-msu-maroon mb-4">Important Dates</h3>
+                      {/* <h3 className="text-xl font-semibold text-msu-maroon dark:text-yellow-400 mb-4">Important Dates</h3>
                       <div className="grid md:grid-cols-3 gap-4">
-                        <div className="bg-white p-4 rounded-lg border border-gray-200">
+                        <div className="bg-white p-4 rounded-lg border border-gray-200 dark:border-gray-600">
                           <div className="text-sm text-msu-green font-medium">Application Period</div>
-                          <div className="text-gray-700">April 1 - June 15, 2023</div>
+                          <div className="text-gray-700 dark:text-gray-300">April 1 - June 15, 2023</div>
                         </div>
-                        <div className="bg-white p-4 rounded-lg border border-gray-200">
+                        <div className="bg-white p-4 rounded-lg border border-gray-200 dark:border-gray-600">
                           <div className="text-sm text-msu-green font-medium">Entrance Exam</div>
-                          <div className="text-gray-700">June 20-25, 2023</div>
+                          <div className="text-gray-700 dark:text-gray-300">June 20-25, 2023</div>
                         </div>
-                        <div className="bg-white p-4 rounded-lg border border-gray-200">
+                        <div className="bg-white p-4 rounded-lg border border-gray-200 dark:border-gray-600">
                           <div className="text-sm text-msu-green font-medium">Enrollment</div>
-                          <div className="text-gray-700">July 10-15, 2023</div>
+                          <div className="text-gray-700 dark:text-gray-300">July 10-15, 2023</div>
                         </div>
                       </div> */}
                     </motion.div>
@@ -619,45 +619,45 @@ export default function AdmissionProcedure() {
                     animate="visible"
                     variants={containerVariants}
                   >
-                    <motion.h2 className="text-3xl font-bold text-msu-deep-ocean mb-6 flex items-center" variants={itemVariants}>
+                    <motion.h2 className="text-3xl font-bold text-msu-deep-ocean dark:text-gray-100 mb-6 flex items-center" variants={itemVariants}>
                       <span className="bg-msu-deep-ocean text-white rounded-full w-10 h-10 flex items-center justify-center text-lg mr-4">🔄</span>
                       Returning, Shifting & Remedial Programs
                     </motion.h2>
                     
-                    <motion.div className="bg-gradient-to-r from-msu-maroon/5 to-msu-green/5 p-6 rounded-xl mb-8 border border-gray-200 shadow-sm" variants={itemVariants}>
-                      <h3 className="text-xl font-semibold text-msu-deep-ocean mb-4 flex items-center">
+                    <motion.div className="bg-gradient-to-r from-msu-maroon/5 to-msu-green/5 p-6 rounded-xl mb-8 border border-gray-200 dark:border-gray-600 shadow-sm" variants={itemVariants}>
+                      <h3 className="text-xl font-semibold text-msu-deep-ocean dark:text-gray-100 mb-4 flex items-center">
                         <FiInfo className="mr-2" /> For Returning and Shifting Students
                       </h3>
                       <div className="grid md:grid-cols-1 gap-12">
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                          <p className="text-gray-700 mb-4">
+                        <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-100 dark:border-gray-600">
+                          <p className="text-gray-700 dark:text-gray-300 mb-4">
                             Students who wish to return after a leave of absence or shift to another program must follow these procedures.
                           </p>
-                          <div className="text-sm bg-msu-maroon/10 text-msu-maroon p-3 rounded-lg">
+                          <div className="text-sm bg-msu-maroon/10 text-msu-maroon dark:text-yellow-400 p-3 rounded-lg">
                             <strong>Note:</strong> Minimum CGPA requirements vary by program. Please check with your department.
                           </div>
                         </div>
-                        {/* <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                          <h4 className="text-lg font-medium text-gray-800 mb-3 border-b pb-2 border-gray-200">Required Documents:</h4>
+                        {/* <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-100 dark:border-gray-600">
+                          <h4 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-3 border-b pb-2 border-gray-200">Required Documents:</h4>
                           <ul className="space-y-2">
                             <li className="flex items-start">
-                              <span className="text-msu-maroon mr-2 mt-1">•</span>
-                              <span className="text-gray-700">Official Transcript of Records</span>
+                              <span className="text-msu-maroon dark:text-yellow-400 mr-2 mt-1">•</span>
+                              <span className="text-gray-700 dark:text-gray-300">Official Transcript of Records</span>
                             </li>
                             <li className="flex items-start">
-                              <span className="text-msu-maroon mr-2 mt-1">•</span>
-                              <span className="text-gray-700">Letter of Intent</span>
+                              <span className="text-msu-maroon dark:text-yellow-400 mr-2 mt-1">•</span>
+                              <span className="text-gray-700 dark:text-gray-300">Letter of Intent</span>
                             </li>
                             <li className="flex items-start">
-                              <span className="text-msu-maroon mr-2 mt-1">•</span>
-                              <span className="text-gray-700">Approval from both departments</span>
+                              <span className="text-msu-maroon dark:text-yellow-400 mr-2 mt-1">•</span>
+                              <span className="text-gray-700 dark:text-gray-300">Approval from both departments</span>
                             </li>
                           </ul>
                         </div> */}
                       </div>
                     </motion.div>
 
-                    <motion.h3 className="text-2xl font-bold text-msu-deep-ocean mb-6 flex items-center" variants={itemVariants}>
+                    <motion.h3 className="text-2xl font-bold text-msu-deep-ocean dark:text-gray-100 mb-6 flex items-center" variants={itemVariants}>
                       <span className="bg-msu-deep-ocean text-white rounded-full w-8 h-8 flex items-center justify-center text-sm mr-3">1-6</span>
                       Process Steps
                     </motion.h3>
@@ -669,7 +669,7 @@ export default function AdmissionProcedure() {
                       {returnSteps.map((step, index) => (
                         <motion.div
                           key={index}
-                          className={`bg-white p-6 rounded-xl shadow-sm cursor-pointer border border-gray-200 hover:border-msu-maroon transition-all ${hoveredStep === index+6 ? 'ring-2 ring-msu-maroon' : ''}`}
+                          className={`bg-white dark:bg-gray-700 p-6 rounded-xl shadow-sm cursor-pointer border border-gray-200 dark:border-gray-600 dark:border-gray-600 hover:border-msu-maroon dark:hover:border-yellow-400 transition-all ${hoveredStep === index+6 ? 'ring-2 ring-msu-maroon' : ''}`}
                           variants={itemVariants}
                           whileHover={{ scale: 1.03, boxShadow: "0 10px 25px rgba(0,0,0,0.1)", borderColor: "#8B1D1D" }}
                           onMouseEnter={() => setHoveredStep(index+6)}
@@ -680,14 +680,14 @@ export default function AdmissionProcedure() {
                               {step.step}
                             </div>
                             <div className="flex-1">
-                              <h4 className="text-lg font-semibold text-gray-800 flex items-center">
+                              <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-200 flex items-center">
                                 <span className="mr-2 text-xl">{step.icon}</span>
                                 {step.title}
                               </h4>
-                              <p className="text-gray-600 mt-2 text-sm">{step.description}</p>
+                              <p className="text-gray-600 dark:text-gray-300 mt-2 text-sm">{step.description}</p>
                               
                               <button 
-                                className="mt-3 text-msu-maroon text-sm font-medium flex items-center"
+                                className="mt-3 text-msu-maroon dark:text-yellow-400 text-sm font-medium flex items-center"
                                 onClick={() => toggleAccordion(index)}
                               >
                                 {activeAccordion === index ? 'Hide details' : 'View details'}
@@ -701,10 +701,10 @@ export default function AdmissionProcedure() {
                                   animate={{ opacity: 1, height: 'auto' }}
                                   exit={{ opacity: 0, height: 0 }}
                                 >
-                                  <ul className="space-y-2 text-gray-600 text-sm">
+                                  <ul className="space-y-2 text-gray-600 dark:text-gray-300 text-sm">
                                     {step.details.map((detail, i) => (
                                       <li key={i} className="flex items-start">
-                                        <span className="text-msu-maroon mr-2 mt-1 text-xs">▪</span>
+                                        <span className="text-msu-maroon dark:text-yellow-400 mr-2 mt-1 text-xs">▪</span>
                                         <span>{detail}</span>
                                       </li>
                                     ))}
@@ -718,34 +718,34 @@ export default function AdmissionProcedure() {
                     </motion.div>
 
                     <motion.div 
-                      className="mt-8 bg-gradient-to-r from-msu-green/5 to-msu-maroon/5 p-6 rounded-xl border border-gray-200 shadow-sm"
+                      className="mt-8 bg-gradient-to-r from-msu-green/5 to-msu-maroon/5 p-6 rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm"
                       variants={itemVariants}
                     >
-                      <h3 className="text-xl font-semibold text-msu-deep-ocean mb-4">Remedial Program</h3>
+                      <h3 className="text-xl font-semibold text-msu-deep-ocean dark:text-gray-100 mb-4">Remedial Program</h3>
                       <div className="grid md:grid-cols-2 gap-6">
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                          <p className="text-gray-700">
+                        <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-100 dark:border-gray-600">
+                          <p className="text-gray-700 dark:text-gray-300">
                             The MSU-Tawi-Tawi, in order to accommodate those whose scores are a little lower than the median, has been implementing the so-called Remedial Program wherein for the first semester of the student's stay on campus, he is enrolled in a 9-hour per week remedial Math and another 9-hour per week remedial English. (Only upon passing both subjects is the student deemed qualified to be treated as a regular student.)
                           </p>
                         </div>
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                          <h4 className="text-lg font-medium text-gray-800 mb-3 border-b pb-2 border-gray-200">Remedial Program Details:</h4>
+                        <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-100 dark:border-gray-600">
+                          <h4 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-3 border-b pb-2 border-gray-200">Remedial Program Details:</h4>
                           <ul className="space-y-2">
                             <li className="flex items-start">
-                              <span className="text-msu-maroon mr-2 mt-1">•</span>
-                              <span className="text-gray-700">9 hours/week remedial Math</span>
+                              <span className="text-msu-maroon dark:text-yellow-400 mr-2 mt-1">•</span>
+                              <span className="text-gray-700 dark:text-gray-300">9 hours/week remedial Math</span>
                             </li>
                             <li className="flex items-start">
-                              <span className="text-msu-maroon mr-2 mt-1">•</span>
-                              <span className="text-gray-700">9 hours/week remedial English</span>
+                              <span className="text-msu-maroon dark:text-yellow-400 mr-2 mt-1">•</span>
+                              <span className="text-gray-700 dark:text-gray-300">9 hours/week remedial English</span>
                             </li>
                             <li className="flex items-start">
-                              <span className="text-msu-maroon mr-2 mt-1">•</span>
-                              <span className="text-gray-700">Must pass both to become regular</span>
+                              <span className="text-msu-maroon dark:text-yellow-400 mr-2 mt-1">•</span>
+                              <span className="text-gray-700 dark:text-gray-300">Must pass both to become regular</span>
                             </li>
                             <li className="flex items-start">
-                              <span className="text-msu-maroon mr-2 mt-1">•</span>
-                              <span className="text-gray-700">Limited slots available</span>
+                              <span className="text-msu-maroon dark:text-yellow-400 mr-2 mt-1">•</span>
+                              <span className="text-gray-700 dark:text-gray-300">Limited slots available</span>
                             </li>
                           </ul>
                         </div>
@@ -770,38 +770,38 @@ export default function AdmissionProcedure() {
                     animate="visible"
                     variants={containerVariants}
                   >
-                    <motion.h2 className="text-3xl font-bold text-msu-deep-ocean mb-6 flex items-center" variants={itemVariants}>
+                    <motion.h2 className="text-3xl font-bold text-msu-deep-ocean dark:text-gray-100 mb-6 flex items-center" variants={itemVariants}>
                       <span className="bg-msu-deep-ocean text-white rounded-full w-10 h-10 flex items-center justify-center text-lg mr-4">💲</span>
                       Student Fees Structure
                     </motion.h2>
                     
-                    <motion.div className="bg-gradient-to-r from-msu-maroon/5 to-msu-green/5 p-12 rounded-xl mb-8 border border-gray-200 shadow-sm" variants={itemVariants}>
-                      <h3 className="text-xl font-semibold text-msu-maroon mb-4 flex items-center">
+                    <motion.div className="bg-gradient-to-r from-msu-maroon/5 to-msu-green/5 p-12 rounded-xl mb-8 border border-gray-200 dark:border-gray-600 shadow-sm" variants={itemVariants}>
+                      <h3 className="text-xl font-semibold text-msu-maroon dark:text-yellow-400 mb-4 flex items-center">
                         <FiInfo className="mr-2" /> For Student Fees (BOR RES #50, Series 2005)
                       </h3>
                       <div className="grid md:grid-cols-1 gap-6">
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                          <p className="text-gray-700 mb-4">
+                        <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-100 dark:border-gray-600">
+                          <p className="text-gray-700 dark:text-gray-300 mb-4">
                             Below is the complete breakdown of fees for all students. Fees are subject to change without prior notice.
                           </p>
-                          <div className="text-sm bg-msu-maroon/10 text-msu-maroon p-3 rounded-lg">
+                          <div className="text-sm bg-msu-maroon/10 text-msu-maroon dark:text-yellow-400 p-3 rounded-lg">
                             <strong>Note:</strong> All fees are per semester unless otherwise specified.
                           </div>
                         </div>
-                        {/* <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                          <h4 className="text-lg font-medium text-gray-800 mb-3 border-b pb-2 border-gray-200">Payment Deadlines:</h4>
+                        {/* <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-100 dark:border-gray-600">
+                          <h4 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-3 border-b pb-2 border-gray-200">Payment Deadlines:</h4>
                           <ul className="space-y-2">
                             <li className="flex items-start">
-                              <span className="text-msu-maroon mr-2 mt-1">•</span>
-                              <span className="text-gray-700">First Semester: July 15 - August 15</span>
+                              <span className="text-msu-maroon dark:text-yellow-400 mr-2 mt-1">•</span>
+                              <span className="text-gray-700 dark:text-gray-300">First Semester: July 15 - August 15</span>
                             </li>
                             <li className="flex items-start">
-                              <span className="text-msu-maroon mr-2 mt-1">•</span>
-                              <span className="text-gray-700">Second Semester: December 1 - January 15</span>
+                              <span className="text-msu-maroon dark:text-yellow-400 mr-2 mt-1">•</span>
+                              <span className="text-gray-700 dark:text-gray-300">Second Semester: December 1 - January 15</span>
                             </li>
                             <li className="flex items-start">
-                              <span className="text-msu-maroon mr-2 mt-1">•</span>
-                              <span className="text-gray-700">Summer: April 1 - May 1</span>
+                              <span className="text-msu-maroon dark:text-yellow-400 mr-2 mt-1">•</span>
+                              <span className="text-gray-700 dark:text-gray-300">Summer: April 1 - May 1</span>
                             </li>
                           </ul>
                         </div> */}
@@ -820,15 +820,15 @@ export default function AdmissionProcedure() {
                             <th className="py-4 px-6 text-left font-bold">Description</th>
                           </tr>
                         </thead>
-                        <tbody className="divide-y divide-gray-200">
+                        <tbody className="divide-y divide-gray-200 dark:divide-gray-600">
                           {feesData.map((fee, index) => (
                             <tr 
                               key={index} 
-                              className={`${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} hover:bg-gray-100 transition-colors`}
+                              className={`${index % 2 === 0 ? 'bg-white dark:bg-gray-700' : 'bg-gray-50 dark:bg-gray-600'} hover:bg-gray-100 dark:hover:bg-gray-500 transition-colors`}
                             >
-                              <td className="py-4 px-6 text-gray-700 font-medium">{fee.name}</td>
-                              <td className="py-4 px-6 text-right text-msu-deep-ocean font-medium whitespace-nowrap">{fee.amount}</td>
-                              <td className="py-4 px-6 text-gray-600 text-sm">{fee.description}</td>
+                              <td className="py-4 px-6 text-gray-700 dark:text-gray-300 font-medium">{fee.name}</td>
+                              <td className="py-4 px-6 text-right text-msu-deep-ocean dark:text-gray-100 font-medium whitespace-nowrap">{fee.amount}</td>
+                              <td className="py-4 px-6 text-gray-600 dark:text-gray-300 text-sm">{fee.description}</td>
                             </tr>
                           ))}
                         </tbody>
@@ -836,13 +836,13 @@ export default function AdmissionProcedure() {
                     </motion.div>
 
                     <motion.div 
-                      className="mt-8 bg-gradient-to-r from-msu-green/5 to-msu-maroon/5 p-6 rounded-xl border border-gray-200 shadow-sm"
+                      className="mt-8 bg-gradient-to-r from-msu-green/5 to-msu-maroon/5 p-6 rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm"
                       variants={itemVariants}
                     >
-                      <h3 className="text-xl font-semibold text-msu-deep-ocean mb-4">Payment Information</h3>
+                      <h3 className="text-xl font-semibold text-msu-deep-ocean dark:text-gray-100 mb-4">Payment Information</h3>
                       <div className="grid md:grid-cols-2 gap-6">
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                          <h4 className="text-lg font-medium text-gray-800 mb-2 border-b pb-2 border-gray-200">Payment Methods:</h4>
+                        <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-100 dark:border-gray-600">
+                          <h4 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-2 border-b pb-2 border-gray-200">Payment Methods:</h4>
                           <ul className="space-y-3">
                             <motion.li 
                               className="flex items-center p-3 rounded-lg hover:bg-gray-50"
@@ -850,8 +850,8 @@ export default function AdmissionProcedure() {
                             >
                               <div className="bg-msu-deep-ocean text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3">1</div>
                               <div>
-                                <div className="font-medium text-gray-800">Cash payment</div>
-                                <div className="text-gray-600 text-sm">At the Cashier's Office, Admin Building</div>
+                                <div className="font-medium text-gray-800 dark:text-gray-200">Cash payment</div>
+                                <div className="text-gray-600 dark:text-gray-300 text-sm">At the Cashier's Office, Admin Building</div>
                               </div>
                             </motion.li>
                             <motion.li 
@@ -860,8 +860,8 @@ export default function AdmissionProcedure() {
                             >
                               <div className="bg-msu-deep-ocean text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3">2</div>
                               <div>
-                                <div className="font-medium text-gray-800">Bank transfer</div>
-                                <div className="text-gray-600 text-sm">Account details available at Finance Office</div>
+                                <div className="font-medium text-gray-800 dark:text-gray-200">Bank transfer</div>
+                                <div className="text-gray-600 dark:text-gray-300 text-sm">Account details available at Finance Office</div>
                               </div>
                             </motion.li>
                             <motion.li 
@@ -870,41 +870,41 @@ export default function AdmissionProcedure() {
                             >
                               <div className="bg-msu-deep-ocean text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-3">3</div>
                               <div>
-                                <div className="font-medium text-gray-800">Online payment</div>
-                                <div className="text-gray-600 text-sm">Through MSU Payment Portal (coming soon)</div>
+                                <div className="font-medium text-gray-800 dark:text-gray-200">Online payment</div>
+                                <div className="text-gray-600 dark:text-gray-300 text-sm">Through MSU Payment Portal (coming soon)</div>
                               </div>
                             </motion.li>
                           </ul>
                         </div>
-                        <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-100">
-                          <h4 className="text-lg font-medium text-gray-800 mb-2 border-b pb-2 border-gray-200">Important Notes:</h4>
+                        <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-100 dark:border-gray-600">
+                          <h4 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-2 border-b pb-2 border-gray-200">Important Notes:</h4>
                           <ul className="space-y-3">
                             <li className="flex items-start p-3 rounded-lg hover:bg-gray-50">
-                              <div className="bg-msu-maroon/10 text-msu-maroon rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3">!</div>
+                              <div className="bg-msu-maroon/10 text-msu-maroon dark:text-yellow-400 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3">!</div>
                               <div>
-                                <div className="font-medium text-gray-800">All fees must be paid before enrollment</div>
-                                <div className="text-gray-600 text-sm">Unpaid fees will prevent course registration</div>
+                                <div className="font-medium text-gray-800 dark:text-gray-200">All fees must be paid before enrollment</div>
+                                <div className="text-gray-600 dark:text-gray-300 text-sm">Unpaid fees will prevent course registration</div>
                               </div>
                             </li>
                             <li className="flex items-start p-3 rounded-lg hover:bg-gray-50">
-                              <div className="bg-msu-maroon/10 text-msu-maroon rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3">!</div>
+                              <div className="bg-msu-maroon/10 text-msu-maroon dark:text-yellow-400 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3">!</div>
                               <div>
-                                <div className="font-medium text-gray-800">Late payments may incur additional charges</div>
-                                <div className="text-gray-600 text-sm">Php 50/day penalty after deadline</div>
+                                <div className="font-medium text-gray-800 dark:text-gray-200">Late payments may incur additional charges</div>
+                                <div className="text-gray-600 dark:text-gray-300 text-sm">Php 50/day penalty after deadline</div>
                               </div>
                             </li>
                             <li className="flex items-start p-3 rounded-lg hover:bg-gray-50">
-                              <div className="bg-msu-maroon/10 text-msu-maroon rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3">!</div>
+                              <div className="bg-msu-maroon/10 text-msu-maroon dark:text-yellow-400 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3">!</div>
                               <div>
-                                <div className="font-medium text-gray-800">Scholarship students</div>
-                                <div className="text-gray-600 text-sm">Must present scholarship documents to qualify for exemptions</div>
+                                <div className="font-medium text-gray-800 dark:text-gray-200">Scholarship students</div>
+                                <div className="text-gray-600 dark:text-gray-300 text-sm">Must present scholarship documents to qualify for exemptions</div>
                               </div>
                             </li>
                             {/* <li className="flex items-start p-3 rounded-lg hover:bg-gray-50">
-                              <div className="bg-msu-maroon/10 text-msu-maroon rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3">!</div>
+                              <div className="bg-msu-maroon/10 text-msu-maroon dark:text-yellow-400 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3">!</div>
                               <div>
-                                <div className="font-medium text-gray-800">Installment plans available</div>
-                                <div className="text-gray-600 text-sm">Approval required from Finance Office</div>
+                                <div className="font-medium text-gray-800 dark:text-gray-200">Installment plans available</div>
+                                <div className="text-gray-600 dark:text-gray-300 text-sm">Approval required from Finance Office</div>
                               </div>
                             </li> */}
                           </ul>
@@ -913,13 +913,13 @@ export default function AdmissionProcedure() {
                     </motion.div>
 
                     <motion.div 
-                      className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm mt-8"
+                      className="bg-white dark:bg-gray-700 p-6 rounded-xl border border-gray-200 dark:border-gray-600 dark:border-gray-600 shadow-sm mt-8"
                       variants={itemVariants}
                     >
-                      {/* <h3 className="text-xl font-semibold text-msu-maroon mb-4">Estimated Cost Calculator</h3>
+                      {/* <h3 className="text-xl font-semibold text-msu-maroon dark:text-yellow-400 mb-4">Estimated Cost Calculator</h3>
                       <div className="grid md:grid-cols-3 gap-6">
                         <div>
-                          <label className="block text-gray-700 text-sm font-medium mb-2">Number of Units</label>
+                          <label className="block text-gray-700 dark:text-gray-300 text-sm font-medium mb-2">Number of Units</label>
                           <input 
                             type="number" 
                             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-msu-maroon/50" 
@@ -929,7 +929,7 @@ export default function AdmissionProcedure() {
                           />
                         </div>
                         <div>
-                          <label className="block text-gray-700 text-sm font-medium mb-2">Laboratory Courses</label>
+                          <label className="block text-gray-700 dark:text-gray-300 text-sm font-medium mb-2">Laboratory Courses</label>
                           <select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-msu-maroon/50">
                             <option>0 courses</option>
                             <option>1 course</option>
@@ -938,23 +938,23 @@ export default function AdmissionProcedure() {
                           </select>
                         </div>
                         <div>
-                          <label className="block text-gray-700 text-sm font-medium mb-2">Special Fees</label>
+                          <label className="block text-gray-700 dark:text-gray-300 text-sm font-medium mb-2">Special Fees</label>
                           <div className="space-y-2">
                             <label className="flex items-center">
-                              <input type="checkbox" className="form-checkbox text-msu-maroon rounded" />
-                              <span className="ml-2 text-gray-700">ROTC/CWTS</span>
+                              <input type="checkbox" className="form-checkbox text-msu-maroon dark:text-yellow-400 rounded" />
+                              <span className="ml-2 text-gray-700 dark:text-gray-300">ROTC/CWTS</span>
                             </label>
                             <label className="flex items-center">
-                              <input type="checkbox" className="form-checkbox text-msu-maroon rounded" />
-                              <span className="ml-2 text-gray-700">Athletic Fee</span>
+                              <input type="checkbox" className="form-checkbox text-msu-maroon dark:text-yellow-400 rounded" />
+                              <span className="ml-2 text-gray-700 dark:text-gray-300">Athletic Fee</span>
                             </label>
                           </div>
                         </div>
                       </div>
                       <div className="mt-6 p-4 bg-msu-maroon/5 rounded-lg border border-msu-maroon/20">
                         <div className="flex justify-between items-center">
-                          <div className="text-gray-700 font-medium">Estimated Total:</div>
-                          <div className="text-2xl font-bold text-msu-maroon">Php 2,450.00</div>
+                          <div className="text-gray-700 dark:text-gray-300 font-medium">Estimated Total:</div>
+                          <div className="text-2xl font-bold text-msu-maroon dark:text-yellow-400">Php 2,450.00</div>
                         </div>
                         <div className="text-sm text-gray-500 mt-1">* This is an estimate. Actual fees may vary.</div>
                       </div>

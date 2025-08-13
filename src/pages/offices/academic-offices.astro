@@ -76,7 +76,7 @@ const academicOffices = [
 ---
 
 <Layout title="MSUTCTO | Academic Offices">
- <main class="font-sans antialiased text-gray-800">
+ <main class="font-sans antialiased text-gray-800 dark:bg-gray-900">
 		<Navbar path={currentPath} client:visible />
 
 		<!-- Hero Section -->
@@ -100,36 +100,36 @@ const academicOffices = [
 		</div>
 
 		<!-- Academic Offices Grid -->
-		<div class="py-16 bg-gray-50">
+		<div class="py-16 bg-gray-50 dark:bg-gray-800">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 					{academicOffices.map((office) => (
 						<div class="group">
 							<a href={office.link} class="block">
-								<div class="office-card bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 overflow-hidden">
+								<div class="office-card bg-white dark:bg-gray-700 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 dark:border-gray-600 overflow-hidden">
 									<!-- Header with gradient -->
-									<div class={`bg-gradient-to-r ${office.color} p-6 text-gray-800 relative overflow-hidden`}>
+									<div class={`bg-gradient-to-r ${office.color} dark:from-gray-600 dark:to-gray-700 p-6 text-gray-800 dark:text-gray-200 relative overflow-hidden`}>
 										<div class="absolute top-0 right-0 opacity-10">
 											<span class="text-6xl">{office.icon}</span>
 										</div>
 										<div class="relative z-10">
 											<div class="text-3xl mb-2">{office.icon}</div>
 											<h3 class="text-lg font-bold mb-1">{office.shortName}</h3>
-											<p class="text-sm text-gray-700">{office.name}</p>
+											<p class="text-sm text-gray-700 dark:text-gray-300">{office.name}</p>
 										</div>
 									</div>
 									
 									<!-- Content -->
 									<div class="p-6">
-										<p class="text-gray-600 text-sm leading-relaxed mb-4">
+										<p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4">
 											{office.description}
 										</p>
 										
 										<!-- Learn More Button -->
 										<div class="flex items-center justify-between">
-											<span class="text-sm font-medium text-gray-500">Learn More</span>
-											<div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center group-hover:bg-blue-100 transition-colors duration-300">
-												<svg class="w-4 h-4 text-gray-400 group-hover:text-blue-600 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<span class="text-sm font-medium text-gray-500 dark:text-gray-400">Learn More</span>
+											<div class="w-8 h-8 bg-gray-100 dark:bg-gray-600 rounded-full flex items-center justify-center group-hover:bg-blue-100 dark:group-hover:bg-blue-600 transition-colors duration-300">
+												<svg class="w-4 h-4 text-gray-400 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
 												</svg>
 											</div>
@@ -144,19 +144,19 @@ const academicOffices = [
 		</div>
 
 		<!-- Call to Action Section -->
-		<div class="bg-gradient-to-r from-blue-50 to-indigo-50 py-16">
+		<div class="bg-gradient-to-r from-blue-50 dark:from-gray-800 to-indigo-50 dark:to-gray-700 py-16">
 			<div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-				<h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+				<h2 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-gray-100 mb-6">
 					Ready to Start Your Academic Journey?
 				</h2>
-				<p class="text-xl text-gray-600 mb-8">
+				<p class="text-xl text-gray-600 dark:text-gray-300 mb-8">
 					Explore our programs and discover the perfect path for your future
 				</p>
 				<div class="flex flex-col sm:flex-row gap-4 justify-center">
-					<a href="/admissions/admissions" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300">
+					<a href="/admissions/admissions" class="bg-blue-600 dark:bg-blue-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors duration-300">
 						Apply Now
 					</a>
-					<a href="/404" class="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-600 hover:text-white transition-colors duration-300">
+					<a href="/404" class="border-2 border-blue-600 dark:border-blue-500 text-blue-600 dark:text-blue-400 px-8 py-3 rounded-lg font-semibold hover:bg-blue-600 dark:hover:bg-blue-500 hover:text-white dark:hover:text-white transition-colors duration-300">
 						View Programs
 					</a>
 				</div>

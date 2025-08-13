@@ -15,9 +15,9 @@ const currentPath = Astro.url.pathname;
 
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography - Admissions">
-    <main class="font-sans antialiased text-gray-800 leading-normal">
+    <main class="font-sans antialiased text-gray-800 dark:text-gray-200 leading-normal dark:bg-gray-900">
         <!-- Enhanced Navbar -->
-        <Navbar path={currentPath} client:visible class="bg-white shadow-md" />
+        <Navbar path={currentPath} client:visible />
 
 
 
@@ -73,24 +73,24 @@ const currentPath = Astro.url.pathname;
     </section>
 
     <!-- Stats Section -->
-    <section class="py-16 bg-white">
+    <section class="py-16 bg-white dark:bg-gray-900">
       <div class="container mx-auto px-6">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          <div class="p-6 rounded-xl hover:shadow-lg transition duration-300">
-            <div class="text-4xl md:text-5xl font-bold text-msu-main-color mb-2 counter" data-target="12">0</div>
-            <div class="text-gray-600">AACCUP Program Certified</div>
+          <div class="p-6 rounded-xl hover:shadow-lg dark:hover:shadow-gray-700 transition duration-300">
+            <div class="text-4xl md:text-5xl font-bold text-msu-main-color dark:text-yellow-400 mb-2 counter" data-target="12">0</div>
+            <div class="text-gray-600 dark:text-gray-300">AACCUP Program Certified</div>
           </div>
-          <div class="p-6 rounded-xl hover:shadow-lg transition duration-300">
-            <div class="text-4xl md:text-5xl font-bold text-msu-main-color mb-2 counter" data-target="39">0</div>
-            <div class="text-gray-600">Programs Offered</div>
+          <div class="p-6 rounded-xl hover:shadow-lg dark:hover:shadow-gray-700 transition duration-300">
+            <div class="text-4xl md:text-5xl font-bold text-msu-main-color dark:text-yellow-400 mb-2 counter" data-target="39">0</div>
+            <div class="text-gray-600 dark:text-gray-300">Programs Offered</div>
           </div>
-          <div class="p-6 rounded-xl hover:shadow-lg transition duration-300">
-            <div class="text-4xl md:text-5xl font-bold text-msu-main-color mb-2 counter" data-target="3772">0</div>
-            <div class="text-gray-600">Total Graduates</div>
+          <div class="p-6 rounded-xl hover:shadow-lg dark:hover:shadow-gray-700 transition duration-300">
+            <div class="text-4xl md:text-5xl font-bold text-msu-main-color dark:text-yellow-400 mb-2 counter" data-target="3772">0</div>
+            <div class="text-gray-600 dark:text-gray-300">Total Graduates</div>
           </div>
-          <div class="p-6 rounded-xl hover:shadow-lg transition duration-300">
-            <div class="text-4xl md:text-5xl font-bold text-msu-main-color mb-2 counter" data-target="3008">0</div>
-            <div class="text-gray-600">Student Scholars</div>
+          <div class="p-6 rounded-xl hover:shadow-lg dark:hover:shadow-gray-700 transition duration-300">
+            <div class="text-4xl md:text-5xl font-bold text-msu-main-color dark:text-yellow-400 mb-2 counter" data-target="3008">0</div>
+            <div class="text-gray-600 dark:text-gray-300">Student Scholars</div>
           </div>
         </div>
       </div>
@@ -119,17 +119,17 @@ const currentPath = Astro.url.pathname;
         }
     </style>
 
-     <section class="bg-white py-20 relative overflow-hidden">
+     <section class="bg-white dark:bg-gray-900 py-20 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header -->
             <div class="text-center mb-16">
                 <span class="inline-block mb-4 px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full">
                     OUR PARTNERS
                 </span>
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
                     <span class="gradient-text">Trusted Worldwide</span>
                 </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
                     Collaborating with leading institutions across the globe
                 </p>
             </div>
@@ -137,8 +137,8 @@ const currentPath = Astro.url.pathname;
             <!-- Logo Marquee -->
             <div class="relative h-40 w-full overflow-hidden">
                 <!-- Gradient fade -->
-                <div class="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-gray-50 to-transparent z-10"></div>
-                <div class="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-gray-50 to-transparent z-10"></div>
+                <div class="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white dark:from-gray-900 to-transparent z-10"></div>
+                <div class="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white dark:from-gray-900 to-transparent z-10"></div>
                 
                 <!-- Marquee Container -->
                 <div class="absolute inset-0 flex items-center">
@@ -192,7 +192,7 @@ const currentPath = Astro.url.pathname;
 
 
     <!-- Admission Procedure -->
-    <section id="admission" class="py-16 bg-gray-100">
+    <section id="admission" class="py-16 bg-gray-100 dark:bg-gray-800">
       <AdmissionProcedure client:visible />
     </section>
 

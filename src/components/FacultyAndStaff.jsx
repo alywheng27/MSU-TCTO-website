@@ -155,7 +155,7 @@ const FacultyAndStaff = () => {
 
   // Loading component
   const LoadingIndicator = () => (
-    <div className="fixed inset-0 bg-white bg-opacity-90 z-50 flex flex-col items-center justify-center backdrop-filter backdrop-blur-sm">
+    <div className="fixed inset-0 bg-white dark:bg-gray-900 bg-opacity-90 dark:bg-opacity-90 z-50 flex flex-col items-center justify-center backdrop-filter backdrop-blur-sm">
       <div className="text-center animate-pulse">
         <div className="relative w-24 h-24 mb-6 mx-auto">
           <img 
@@ -165,8 +165,8 @@ const FacultyAndStaff = () => {
           />
           <div className="absolute inset-0 border-4 border-transparent border-t-blue-500 border-r-blue-500 rounded-full animate-spin"></div>
         </div>
-        <h3 className="text-xl font-semibold text-gray-700 mb-2">Loading Faculty Directory</h3>
-        <p className="text-sm text-gray-500">Curating academic excellence...</p>
+        <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-200 mb-2">Loading Faculty Directory</h3>
+        <p className="text-sm text-gray-500 dark:text-gray-400">Curating academic excellence...</p>
       </div>
     </div>
   );
@@ -174,7 +174,7 @@ const FacultyAndStaff = () => {
   // Faculty card component
   const FacultyCard = ({ member }) => (
     <div 
-      className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-gray-100 cursor-pointer"
+      className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-gray-100 dark:border-gray-700 cursor-pointer"
       onClick={() => setSelectedPerson(member)}
     >
       <div className="p-6 flex flex-col items-center">
@@ -182,7 +182,7 @@ const FacultyAndStaff = () => {
           <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 group-hover:opacity-30 blur-md transition-opacity duration-300"></div>
           <img
             src={member.image?.asset?.url || '/default-avatar.jpg'}
-            className="relative h-32 w-32 rounded-full border-4 border-white object-cover shadow-md"
+            className="relative h-32 w-32 rounded-full border-4 border-white dark:border-gray-200 object-cover shadow-md"
             alt={member.name}
             onError={(e) => {
               e.target.onerror = null;
@@ -192,11 +192,11 @@ const FacultyAndStaff = () => {
         </div>
         
         <div className="text-center">
-          <h3 className="text-lg font-bold text-gray-900 mb-1">
+          <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-1">
             {member.name}
           </h3>
-          <p className="text-sm text-blue-600 mb-1">{member.teachingLevel}</p>
-          <p className="text-xs text-gray-500 line-clamp-2">{member.advisory}</p>
+          <p className="text-sm text-blue-600 dark:text-blue-400 mb-1">{member.teachingLevel}</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-2">{member.advisory}</p>
         </div>
       </div>
     </div>
@@ -210,22 +210,22 @@ const FacultyAndStaff = () => {
           <div className="absolute inset-0 bg-gray-900 opacity-75"></div>
         </div>
         
-        <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
-          <div className="bg-white px-6 pt-5 pb-4 sm:p-6 sm:pb-4">
+        <div className="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
+          <div className="bg-white dark:bg-gray-800 px-6 pt-5 pb-4 sm:p-6 sm:pb-4">
             <div className="sm:flex sm:items-start">
               <div className="mt-3 text-center sm:mt-0 sm:text-left w-full">
                 <div className="flex justify-between items-start">
                   <div>
-                    <h3 className="text-2xl font-bold text-gray-900">
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                       {person.name}
                     </h3>
-                    <p className="text-lg text-blue-600 mt-1">
+                    <p className="text-lg text-blue-600 dark:text-blue-400 mt-1">
                       {person.teachingLevel}
                     </p>
                   </div>
                   <button
                     onClick={onClose}
-                    className="text-gray-400 hover:text-gray-500"
+                    className="text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400"
                   >
                     <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -237,7 +237,7 @@ const FacultyAndStaff = () => {
                   <div className="flex-shrink-0">
                     <img
                       src={person.image?.asset?.url || '/default-avatar.jpg'}
-                      className="h-32 w-32 rounded-full border-4 border-white object-cover shadow-md"
+                      className="h-32 w-32 rounded-full border-4 border-white dark:border-gray-200 object-cover shadow-md"
                       alt={person.name}
                     />
                   </div>
@@ -245,15 +245,15 @@ const FacultyAndStaff = () => {
                   <div className="space-y-4">
                     {person.advisory && (
                       <div>
-                        <h4 className="font-semibold text-gray-900">Advisory Role</h4>
-                        <p className="text-gray-700">{person.advisory}</p>
+                        <h4 className="font-semibold text-gray-900 dark:text-gray-100">Advisory Role</h4>
+                        <p className="text-gray-700 dark:text-gray-300">{person.advisory}</p>
                       </div>
                     )}
                     
                     {person.educations?.length > 0 && (
                       <div>
-                        <h4 className="font-semibold text-gray-900">Education</h4>
-                        <ul className="list-disc list-inside text-gray-700">
+                        <h4 className="font-semibold text-gray-900 dark:text-gray-100">Education</h4>
+                        <ul className="list-disc list-inside text-gray-700 dark:text-gray-300">
                           {person.educations.map((edu, idx) => (
                             <li key={idx}>{edu.title}</li>
                           ))}
@@ -263,10 +263,10 @@ const FacultyAndStaff = () => {
                     
                     {person.email && (
                       <div>
-                        <h4 className="font-semibold text-gray-900">Contact</h4>
+                        <h4 className="font-semibold text-gray-900 dark:text-gray-100">Contact</h4>
                         <a
                           href={`mailto:${person.email}`}
-                          className="text-blue-600 hover:text-blue-800"
+                          className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
                         >
                           {person.email}
                         </a>
@@ -277,11 +277,11 @@ const FacultyAndStaff = () => {
               </div>
             </div>
           </div>
-          <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+          <div className="bg-gray-50 dark:bg-gray-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
             <button
               type="button"
               onClick={onClose}
-              className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+              className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-gray-600 shadow-sm px-4 py-2 bg-white dark:bg-gray-700 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
             >
               Close
             </button>
@@ -292,7 +292,7 @@ const FacultyAndStaff = () => {
   );
 
   return (
-    <div className="relative min-h-screen bg-gray-50">
+    <div className="relative min-h-screen bg-gray-50 dark:bg-gray-900">
       {isLoading && <LoadingIndicator />}
 
       {/* Header Section */}
@@ -325,7 +325,7 @@ const FacultyAndStaff = () => {
       </div>
 
       {/* Department Navigation */}
-      <div className="bg-white border-b border-gray-200 sticky top-0 z-10 shadow-sm">
+      <div className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-10 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 overflow-x-auto">
           <nav className="flex space-x-1 py-2">
             {tabs.map((tab) => (
@@ -337,8 +337,8 @@ const FacultyAndStaff = () => {
                 }}
                 className={`px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap transition-colors ${
                   activeTab === tab.id
-                    ? 'bg-msu-main-color text-white border-b-2 border-blue-600'
-                    : 'text-gray-700 hover:bg-gray-100'
+                    ? 'bg-msu-main-color dark:bg-yellow-600 text-white border-b-2 border-blue-600 dark:border-yellow-400'
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                 }`}
               >
                 {tab.icon} {tab.label}
@@ -351,12 +351,12 @@ const FacultyAndStaff = () => {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="text-center mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
             {searchQuery 
               ? `Search Results (${globalSearchResults.length})` 
               : tabs[activeTab].title}
           </h2>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-gray-300">
             {tabs[activeTab].description}
           </p>
         </div>
@@ -372,9 +372,9 @@ const FacultyAndStaff = () => {
 
             {/* Pagination */}
             {totalPages > 1 && !searchQuery && (
-              <div className="mt-8 flex flex-col sm:flex-row items-center justify-between border-t border-gray-200 pt-6">
+              <div className="mt-8 flex flex-col sm:flex-row items-center justify-between border-t border-gray-200 dark:border-gray-700 pt-6">
                 <div className="mb-4 sm:mb-0">
-                  <p className="text-sm text-gray-700">
+                  <p className="text-sm text-gray-700 dark:text-gray-300">
                     Showing page <span className="font-medium">{currentPage}</span> of{' '}
                     <span className="font-medium">{totalPages}</span>
                   </p>
@@ -385,8 +385,8 @@ const FacultyAndStaff = () => {
                     disabled={currentPage === 1}
                     className={`px-4 py-2 border rounded-md text-sm font-medium ${
                       currentPage === 1
-                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                        : 'bg-white text-gray-700 hover:bg-gray-50'
+                        ? 'bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed'
+                        : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600'
                     }`}
                   >
                     Previous
@@ -411,8 +411,8 @@ const FacultyAndStaff = () => {
                           onClick={() => setCurrentPage(pageNum)}
                           className={`px-4 py-2 border rounded-md text-sm font-medium ${
                             currentPage === pageNum
-                              ? 'bg-blue-50 border-blue-500 text-blue-600'
-                              : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'
+                              ? 'bg-blue-50 dark:bg-blue-900 border-blue-500 dark:border-blue-400 text-blue-600 dark:text-blue-400'
+                              : 'bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600'
                           }`}
                         >
                           {pageNum}
@@ -421,13 +421,13 @@ const FacultyAndStaff = () => {
                     })}
                     
                     {totalPages > 5 && currentPage < totalPages - 2 && (
-                      <span className="px-4 py-2 text-gray-500">...</span>
+                      <span className="px-4 py-2 text-gray-500 dark:text-gray-400">...</span>
                     )}
                     
                     {totalPages > 5 && currentPage < totalPages - 2 && (
                       <button
                         onClick={() => setCurrentPage(totalPages)}
-                        className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium bg-white text-gray-700 hover:bg-gray-50"
+                        className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm font-medium bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600"
                       >
                         {totalPages}
                       </button>
@@ -439,8 +439,8 @@ const FacultyAndStaff = () => {
                     disabled={currentPage === totalPages}
                     className={`px-4 py-2 border rounded-md text-sm font-medium ${
                       currentPage === totalPages
-                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                        : 'bg-white text-gray-700 hover:bg-gray-50'
+                        ? 'bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed'
+                        : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600'
                     }`}
                   >
                     Next
@@ -450,9 +450,9 @@ const FacultyAndStaff = () => {
             )}
           </>
         ) : (
-          <div className="text-center py-16 bg-white rounded-lg shadow-sm border border-gray-200">
+          <div className="text-center py-16 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
             <svg
-              className="mx-auto h-12 w-12 text-gray-400"
+              className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -464,10 +464,10 @@ const FacultyAndStaff = () => {
                 d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            <h3 className="mt-4 text-lg font-medium text-gray-900">
+            <h3 className="mt-4 text-lg font-medium text-gray-900 dark:text-gray-100">
               {searchQuery ? 'No matching faculty found' : 'No faculty members in this department'}
             </h3>
-            <p className="mt-2 text-gray-500">
+            <p className="mt-2 text-gray-500 dark:text-gray-400">
               {searchQuery
                 ? 'Try adjusting your search criteria'
                 : 'Please check back later for updates'}

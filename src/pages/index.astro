@@ -61,7 +61,7 @@ if (testCalendar && testCalendar.length > 0) {
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
     
-    <main class="font-sans antialiased text-gray-800 leading-normal">
+            <main class="font-sans antialiased text-gray-800 dark:text-white dark:bg-gray-900 leading-normal">
         <!-- Enhanced Navbar -->
         <Navbar path={currentPath} client:visible />
 
@@ -256,7 +256,7 @@ if (testCalendar && testCalendar.length > 0) {
 
 
         <!-- Featured News Section -->
-        <section class="bg-white py-16">
+        <section class="bg-white dark:bg-gray-900 py-16">
             <div class="container mx-auto px-4 xl:px-32">
                 <div class="flex flex-col lg:flex-row gap-8">
                     <!-- Featured Article -->
@@ -270,7 +270,7 @@ if (testCalendar && testCalendar.length > 0) {
                             <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-8">
                                 <div class="max-w-2xl">
                                     <a href={`/${latestFeaturedArticle.slug.current}`}>
-                                        <h3 class="text-2xl md:text-3xl font-bold text-white mb-2 hover:text-msu-gold transition-colors">
+                                        <h3 class="text-2xl md:text-3xl font-bold text-white mb-2 hover:text-[#61063B] transition-colors">
                                             {latestFeaturedArticle.title}
                                         </h3>
                                     </a>
@@ -284,7 +284,7 @@ if (testCalendar && testCalendar.length > 0) {
                     
                     <!-- Latest Articles -->
                     <div class="lg:w-1/3 space-y-6">
-                        <h4 class="text-xl font-semibold border-b pb-2 text-msu-main-color">Latest News</h4>
+                        <h4 class="text-xl font-semibold border-b pb-2 text-msu-main-color dark:text-white dark:text-outline">Latest News</h4>
                         {threeLatestArticles.map((article) => (
                             <div class="flex gap-4 group">
                                 <div class="flex-shrink-0 w-24 h-24 overflow-hidden rounded">
@@ -296,18 +296,18 @@ if (testCalendar && testCalendar.length > 0) {
                                 </div>
                                 <div>
                                     <a href={`/${article.slug.current}`}>
-                                        <h5 class="font-medium text-gray-900 group-hover:text-msu-maroon transition-colors line-clamp-2">
+                                        <h5 class="font-medium text-gray-900 dark:text-gray-100 group-hover:text-msu-maroon dark:group-hover:text-[#61063B] transition-colors line-clamp-2">
                                             {article.title}
                                         </h5>
                                     </a>
-                                    <p class="text-sm text-gray-600 mt-1 line-clamp-3">
+                                    <p class="text-sm text-gray-600 dark:text-gray-300 mt-1 line-clamp-3">
                                         {article.body[0].children[0].text}
                                     </p>
                                 </div>
                             </div>
                         ))}
                         <div class="pt-4">
-                            <a href="/publications/articles" class="text-msu-maroon font-medium hover:underline flex items-center">
+                            <a href="/publications/articles" class="text-msu-maroon dark:text-white font-medium hover:underline flex items-center">
                                 View all news
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -687,13 +687,13 @@ if (testCalendar && testCalendar.length > 0) {
             </div>
         </section> -->
         <!-- Upcoming Events Section -->
-        <section class="bg-gradient-to-b from-white to-gray-50 py-20">
+        <section class="bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 py-20">
             <div class="container mx-auto px-4 xl:px-32">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl font-bold text-msu-deep-ocean mb-4">Featured Calendar Events</h2>
-                    <p class="text-lg text-gray-600 mb-4">All events from the academic calendar</p>
+                    <h2 class="text-4xl font-bold text-msu-deep-ocean dark:text-white dark:text-outline mb-4">Featured Calendar Events</h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-300 mb-4">All events from the academic calendar</p>
                     <div class="flex items-center justify-center gap-2">
-                        <div class="w-16 h-1 bg-msu-gold"></div>
+                        <div class="w-16 h-1 bg-[#61063B]"></div>
                         <!-- <div class="w-4 h-1 bg-msu-maroon"></div>
                         <div class="w-16 h-1 bg-msu-gold"></div> -->
                     </div>
@@ -752,12 +752,12 @@ if (testCalendar && testCalendar.length > 0) {
                             );
                         })
                     ) : (
-                        <div class="col-span-4 text-center py-12 bg-white/50 backdrop-blur-sm rounded-2xl shadow-lg">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <div class="col-span-4 text-center py-12 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm rounded-2xl shadow-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-gray-400 dark:text-gray-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
-                            <p class="text-2xl font-semibold text-gray-700">No upcoming events at this time</p>
-                            <p class="text-gray-500 mt-2">Check back later for new events</p>
+                            <p class="text-2xl font-semibold text-gray-700 dark:text-gray-200">No upcoming events at this time</p>
+                            <p class="text-gray-500 dark:text-gray-400 mt-2">Check back later for new events</p>
                         </div>
                     )}
                 </div>
@@ -771,7 +771,7 @@ if (testCalendar && testCalendar.length > 0) {
                         <div class="relative inline-block">
                             <button 
                                 id="eventsDropdownBtn"
-                                class="group relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-msu-deep-ocean to-msu-deep-ocean text-white rounded-full font-semibold hover:from-msu-main-color hover:to-msu-deep-ocean transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg gap-3 overflow-hidden"
+                                class="group relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-msu-deep-ocean to-msu-deep-ocean dark:from-[#61063B] dark:to-[#61063B] dark:btn-outline text-white rounded-full font-semibold hover:from-msu-main-color hover:to-msu-deep-ocean dark:hover:from-[#61063B] dark:hover:to-[#03045e] transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg gap-3 overflow-hidden"
                             >
                                 <span class="relative z-10">View Complete Calendar</span>
                                 <svg id="dropdownArrow" class="relative z-10 h-5 w-5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -783,13 +783,13 @@ if (testCalendar && testCalendar.length > 0) {
                             <!-- Dropdown Content -->
                             <div 
                                 id="eventsDropdown"
-                                class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[95vw] max-w-7xl max-h-[90vh] bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/50 opacity-0 pointer-events-none transition-all duration-500 scale-95 z-[9999]"
+                                class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[95vw] max-w-7xl max-h-[90vh] bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-2xl shadow-2xl border border-gray-200/50 dark:border-gray-600/50 opacity-0 pointer-events-none transition-all duration-500 scale-95 z-[9999]"
                             >
                                 <div class="p-8 relative">
                                     <!-- Close Button -->
                                     <button 
                                         id="closeEventsModal"
-                                        class="absolute top-4 right-4 z-10 group bg-msu-deep-ocean text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-black/80 transition-all duration-200 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/50"
+                                        class="absolute top-4 right-4 z-10 group bg-msu-deep-ocean dark:bg-[#61063B] dark:btn-outline text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-black/80 dark:hover:bg-[#03045e] transition-all duration-200 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white/50 dark:focus:ring-[#61063B]/50"
                                         aria-label="Close calendar"
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -799,16 +799,16 @@ if (testCalendar && testCalendar.length > 0) {
                                     
                                     <div class="text-center mb-8">
                                         <div class="flex items-center justify-center gap-3 mb-4">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-msu-deep-ocean" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-msu-deep-ocean dark:text-[#61063B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                             </svg>
-                                            <h3 class="text-4xl font-bold text-msu-deep-ocean">Complete Event Calendar</h3>
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-msu-deep-ocean" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <h3 class="text-4xl font-bold text-msu-deep-ocean dark:text-white dark:text-outline">Complete Event Calendar</h3>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-msu-deep-ocean dark:text-[#61063B]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                             </svg>
                                         </div>
-                                        <div class="w-32 h-1.5 bg-gradient-to-r from-msu-gold via-msu-maroon to-msu-gold mx-auto rounded-full mb-4"></div>
-                                        <p class="text-lg text-gray-600 max-w-2xl mx-auto">Explore all calendar events and important dates at MSU-TCTO</p>
+                                        <div class="w-32 h-1.5 bg-gradient-to-r from-[#61063B] via-msu-maroon to-[#61063B] mx-auto rounded-full mb-4"></div>
+                                        <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Explore all calendar events and important dates at MSU-TCTO</p>
                                     </div>
                                     
                                     <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 max-h-[60vh] overflow-y-auto custom-scrollbar">
@@ -885,7 +885,7 @@ if (testCalendar && testCalendar.length > 0) {
                     <div class="text-center">
                         <a
                             href="/events"
-                            class="inline-flex items-center px-8 py-4 bg-msu-deep-ocean text-white rounded-full font-semibold hover:bg-msu-maroon transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg gap-2"
+                            class="inline-flex items-center px-8 py-4 bg-msu-deep-ocean dark:bg-[#61063B] dark:btn-outline text-white rounded-full font-semibold hover:bg-msu-maroon dark:hover:bg-[#03045e] transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg gap-2"
                         >
                             View All Events
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -898,20 +898,20 @@ if (testCalendar && testCalendar.length > 0) {
         </section>
 
         <!-- Campus Life Section -->
-        <section class="relative bg-gray-50 py-20 overflow-hidden">
+        <section class="relative bg-gray-50 dark:bg-gray-800 py-20 overflow-hidden">
             <div class="absolute inset-0 bg-[url('/images/campus-life-bg.jpg')] bg-cover bg-center opacity-10"></div>
             <div class="container mx-auto px-4 xl:px-32 relative">
                 <div class="flex flex-col lg:flex-row items-center gap-12">
                     <div class="lg:w-1/3">
-                        <h2 class="text-3xl font-bold text-msu-main-color mb-6">Experience MSU-TCTO's Campus Life</h2>
-                        <p class="text-gray-700 mb-8">
+                        <h2 class="text-3xl font-bold text-msu-main-color dark:text-white dark:text-outline mb-6">Experience MSU-TCTO's Campus Life</h2>
+                        <p class="text-gray-700 dark:text-gray-300 mb-8">
                             As an innovative research university, MSU-TCTO offers a vibrant campus life at the heart of the Sulu Archipelago. 
                             Experience diverse cultures, engage in the rich heritage of Tawi-Tawians, and participate in community engagements. 
                             Your campus experiences will change your mind and enrich your heart forever.
                         </p>
                         <a 
                             href="../../about/campus" 
-                            class="inline-block px-8 py-3 bg-msu-main-color text-white rounded-full font-medium hover:bg-msu-maroon-dark transition-colors"
+                            class="inline-block px-8 py-3 bg-gradient-to-r from-msu-deep-ocean to-msu-deep-ocean bg-msu-main-color hover:to-msu-deep-ocean dark:hover:from-[#61063B] dark:hover:to-[#03045e] dark:btn-outline text-white rounded-full font-medium  transition-colors "
                         >
                             Explore The Campus
                         </a>
@@ -919,49 +919,49 @@ if (testCalendar && testCalendar.length > 0) {
                     
                     <div class="lg:w-2/3 grid md:grid-cols-3 gap-6">
                         <!-- Academic Programs Card -->
-                        <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105">
+                        <div class="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105">
                             <img src="/images/student_center/image1.png" alt="Academic Programs" class="w-full h-48 object-cover">
                             <div class="p-6">
-                                <h3 class="text-xl font-semibold text-msu-main-color mb-4">Explore Academic Programs</h3>
-                                <ul class="space-y-2 text-gray-700">
-                                    <li><a href="/programs/coed" class="hover:text-msu-maroon transition-colors">Education</a></li>
-                                    <li><a href="/programs/cof" class="hover:text-msu-maroon transition-colors">Fishery</a></li>
-                                    <li><a href="/programs/iict" class="hover:text-msu-maroon transition-colors">Information Technology</a></li>
-                                    <li><a href="/programs/cias" class="hover:text-msu-maroon transition-colors">Islamic & Arabic Studies</a></li>
-                                    <li><a href="/programs/ioes" class="hover:text-msu-maroon transition-colors">Oceanography</a></li>
-                                    <li><a href="/programs/cas" class="hover:text-msu-maroon transition-colors">Science and Arts</a></li>
+                                <h3 class="text-xl font-semibold text-msu-main-color dark:text-white mb-4">Explore Academic Programs</h3>
+                                <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                                    <li><a href="/programs/coed" class="hover:text-msu-maroon dark:hover:text-[#61063B] transition-colors">Education</a></li>
+                                    <li><a href="/programs/cof" class="hover:text-msu-maroon dark:hover:text-[#61063B] transition-colors">Fishery</a></li>
+                                    <li><a href="/programs/iict" class="hover:text-msu-maroon dark:hover:text-[#61063B] transition-colors">Information Technology</a></li>
+                                    <li><a href="/programs/cias" class="hover:text-msu-maroon dark:hover:text-[#61063B] transition-colors">Islamic & Arabic Studies</a></li>
+                                    <li><a href="/programs/ioes" class="hover:text-msu-maroon dark:hover:text-[#61063B] transition-colors">Oceanography</a></li>
+                                    <li><a href="/programs/cas" class="hover:text-msu-maroon dark:hover:text-[#61063B] transition-colors">Science and Arts</a></li>
                                 </ul>
                             </div>
                         </div>
                         
                         <!-- Admissions Card -->
-                        <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105">
+                        <div class="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105">
                             <img src="/images/admission_scholarship/image1.png" alt="Admissions" class="w-full h-48 object-cover">
                             <div class="p-6">
-                                <h3 class="text-xl font-semibold text-msu-main-color mb-4">Admission and Scholarships</h3>
-                                <ul class="space-y-2 text-gray-700">
-                                    <li><a href="/admissions/admissions" class="hover:text-msu-maroon transition-colors">Freshmen</a></li>
-                                    <li><a href="/admissions/admissions" class="hover:text-msu-maroon transition-colors">Transferee</a></li>
-                                    <li><a href="/admissions/admissions" class="hover:text-msu-maroon transition-colors">Returning / Shifting</a></li>
-                                    <li><a href="/admissions/admissions" class="hover:text-msu-maroon transition-colors">Remedial Program</a></li>
-                                    <li><a href="/admissions/admissions" class="hover:text-msu-maroon transition-colors">Student Fees</a></li>
-                                    <li><a href="/admissions/admissions" class="hover:text-msu-maroon transition-colors">Scholarships and Grants</a></li>
+                                <h3 class="text-xl font-semibold text-msu-main-color dark:text-white mb-4">Admission and Scholarships</h3>
+                                <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                                    <li><a href="/admissions/admissions" class="hover:text-msu-maroon dark:hover:text-[#61063B] transition-colors">Freshmen</a></li>
+                                    <li><a href="/admissions/admissions" class="hover:text-msu-maroon dark:hover:text-[#61063B] transition-colors">Transferee</a></li>
+                                    <li><a href="/admissions/admissions" class="hover:text-msu-maroon dark:hover:text-[#61063B] transition-colors">Returning / Shifting</a></li>
+                                    <li><a href="/admissions/admissions" class="hover:text-msu-maroon dark:hover:text-[#61063B] transition-colors">Remedial Program</a></li>
+                                    <li><a href="/admissions/admissions" class="hover:text-msu-maroon dark:hover:text-[#61063B] transition-colors">Student Fees</a></li>
+                                    <li><a href="/admissions/admissions" class="hover:text-msu-maroon dark:hover:text-[#61063B] transition-colors">Scholarships and Grants</a></li>
                                 </ul>
                             </div>
                         </div>
                         
                         <!-- Offices Card -->
-                        <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105">
+                        <div class="bg-white dark:bg-gray-700 rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105">
                             <img src="/images/administrative_office/image1.png" alt="Administrative Offices" class="w-full h-48 object-cover">
                             <div class="p-6">
-                                <h3 class="text-xl font-semibold text-msu-main-color mb-4">Visit Our Offices</h3>
-                                <ul class="space-y-2 text-gray-700">
-                                    <li><a href="/offices/offices" class="hover:text-msu-maroon transition-colors">Office of the Chancellor</a></li>
-                                    <li><a href="/offices/offices" class="hover:text-msu-maroon transition-colors">Admin and Finance</a></li>
-                                    <li><a href="/offices/offices" class="hover:text-msu-maroon transition-colors">Planning and Development</a></li>
-                                    <li><a href="/offices/offices" class="hover:text-msu-maroon transition-colors">Administrative Offices</a></li>
-                                    <li><a href="/offices/offices" class="hover:text-msu-maroon transition-colors">Academic Offices</a></li>
-                                    <li><a href="/offices/offices" class="hover:text-msu-maroon transition-colors">Roster of Faculties</a></li>
+                                <h3 class="text-xl font-semibold text-msu-main-color dark:text-white mb-4">Visit Our Offices</h3>
+                                <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                                    <li><a href="/offices/offices" class="hover:text-msu-maroon dark:hover:text-[#61063B] transition-colors">Office of the Chancellor</a></li>
+                                    <li><a href="/offices/offices" class="hover:text-msu-maroon dark:hover:text-[#61063B] transition-colors">Admin and Finance</a></li>
+                                    <li><a href="/offices/offices" class="hover:text-msu-maroon dark:hover:text-[#61063B] transition-colors">Planning and Development</a></li>
+                                    <li><a href="/offices/offices" class="hover:text-msu-maroon dark:hover:text-[#61063B] transition-colors">Administrative Offices</a></li>
+                                    <li><a href="/offices/offices" class="hover:text-msu-maroon dark:hover:text-[#61063B] transition-colors">Academic Offices</a></li>
+                                    <li><a href="/offices/offices" class="hover:text-msu-maroon dark:hover:text-[#61063B] transition-colors">Roster of Faculties</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -973,21 +973,21 @@ if (testCalendar && testCalendar.length > 0) {
         <!-- Chancellor's Message -->
         <!-- <ChancellorMessage /> -->
 
-		<section id="publications"  class="bg-gray-50 py-20">
+		<section id="publications"  class="bg-gray-50 dark:bg-gray-900 py-20">
 			<div class="container mx-auto px-4 xl:px-24">
 			  <!-- Heading -->
 			  <div class="text-center mb-16">
-				<h2 class="text-4xl font-extrabold text-msu-deep-ocean mb-4 tracking-tight">University Publications</h2>
-				<p class="text-lg text-gray-600 max-w-2xl mx-auto">
+				<h2 class="text-4xl font-extrabold text-msu-deep-ocean dark:text-white dark:text-outline mb-4 tracking-tight">University Publications</h2>
+				<p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
 				  Discover our Sulimbang and Annual Reports in visual format.
 				</p>
-				<div class="w-20 h-1 bg-msu-gold mx-auto mt-6 rounded-full"></div>
+				<div class="w-20 h-1 bg-[#61063B] mx-auto mt-6 rounded-full"></div>
 			  </div>
 		  
 			  <div class="grid grid-cols-1 md:grid-cols-2 gap-14">
 				<!-- Gazette Section -->
 				<div class="flex flex-col items-center text-center">
-				  <h3 class="text-2xl font-semibold text-msu-main-color mb-4">
+				  <h3 class="text-2xl font-semibold text-msu-main-color dark:text-white dark:text-outline mb-4">
 					<a href="/gazette" class="hover:underline">Sulimbang</a>
 				  </h3>
 		  
@@ -1004,14 +1004,14 @@ if (testCalendar && testCalendar.length > 0) {
 					))}
 				  </div>
 		  
-				  <a href="/publications/sulimbang" class="mt-6 inline-flex items-center px-6 py-3 border border-msu-main-color text-msu-main-color rounded-full font-medium hover:bg-msu-main-color hover:text-white transition duration-300">
+				  <a href="/publications/sulimbang" class="mt-6 inline-flex items-center px-6 py-3 border border-msu-main-color dark:border-[#61063B] text-msu-main-color dark:text-white dark:btn-outline rounded-full font-medium hover:bg-msu-main-color dark:hover:bg-[#03045e] hover:text-white transition duration-300">
 					View All Sulimbang
 				  </a>
 				</div>
 		  
 				<!-- Annual Reports Section -->
 				<div class="flex flex-col items-center text-center">
-				  <h3 class="text-2xl font-semibold text-msu-main-color mb-4">
+				  <h3 class="text-3xl font-semibold text-msu-main-color dark:text-white dark:text-outline mb-4">
 					<a href="/annual-reports" class="hover:underline">Annual Reports</a>
 				  </h3>
 		  
@@ -1027,7 +1027,7 @@ if (testCalendar && testCalendar.length > 0) {
 					))}
 				  </div>
 		  
-				  <a href="/publications/annual-reports" class="mt-6 inline-flex items-center px-6 py-3 border border-msu-main-color text-msu-main-color rounded-full font-medium hover:bg-msu-main-color hover:text-white transition duration-300">
+				  <a href="/publications/annual-reports" class="mt-6 inline-flex items-center px-6 py-3 border border-msu-main-color dark:border-[#61063B] text-msu-main-color dark:text-white dark:btn-outline rounded-full font-medium hover:bg-msu-main-color dark:hover:bg-[#03045e] hover:text-white transition duration-300">
 					View All Reports
 				  </a>
 				</div>
@@ -1741,7 +1741,7 @@ document.addEventListener('DOMContentLoaded', function() {
             dropdown.classList.remove('opacity-0', 'pointer-events-none', 'scale-95');
             dropdown.classList.add('opacity-100', 'pointer-events-auto', 'scale-100');
             dropdownArrow.style.transform = 'rotate(180deg)';
-            dropdownBtn.classList.add('ring-2', 'ring-msu-gold/50');
+            dropdownBtn.classList.add('ring-2', 'ring-[#61063B]/50');
             document.body.style.overflow = 'hidden'; // Prevent background scrolling
         }
         
@@ -1752,7 +1752,7 @@ document.addEventListener('DOMContentLoaded', function() {
             dropdown.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
             dropdown.classList.remove('opacity-100', 'pointer-events-auto', 'scale-100');
             dropdownArrow.style.transform = 'rotate(0deg)';
-            dropdownBtn.classList.remove('ring-2', 'ring-msu-gold/50');
+            dropdownBtn.classList.remove('ring-2', 'ring-[#61063B]/50');
             document.body.style.overflow = ''; // Restore scrolling
         }
         
@@ -1801,6 +1801,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- Custom Scrollbar Styles -->
 <style>
+/* Dark mode text styling */
+.dark .text-outline {
+    color: white !important;
+}
+
+/* Button styling for dark mode */
+.dark .btn-outline {
+    color: white !important;
+    border: 2px solid #61063B;
+    background: transparent;
+    box-shadow: 0 0 10px rgba(97, 6, 59, 0.3);
+}
+
+.dark .btn-outline:hover {
+    background: linear-gradient(135deg, #61063B 0%, #03045e 100%);
+    color: white !important;
+    box-shadow: 0 0 15px rgba(97, 6, 59, 0.6);
+}
+
 .custom-scrollbar {
     scrollbar-width: thin;
     scrollbar-color: #1e3a8a #e5e7eb;
@@ -1861,10 +1880,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 @keyframes pulse {
     0%, 100% {
-        box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7);
+        box-shadow: 0 0 0 0 rgba(97, 6, 59, 0.7);
     }
     50% {
-        box-shadow: 0 0 0 10px rgba(245, 158, 11, 0);
+        box-shadow: 0 0 0 10px rgba(97, 6, 59, 0);
     }
 }
 
@@ -1947,7 +1966,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* Progress line animation */
 #progress-line {
-    background: linear-gradient(90deg, #1e40af, #f59e0b, #10b981);
+    background: linear-gradient(90deg, #1e40af, #61063B, #10b981);
     box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
 }
 
@@ -2023,10 +2042,10 @@ svg {
 
 @keyframes main-bubble-glow {
     0%, 100% {
-        filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.7)) drop-shadow(0 0 12px rgba(245, 158, 11, 0.4));
+        filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.7)) drop-shadow(0 0 12px rgba(97, 6, 59, 0.4));
     }
     50% {
-        filter: drop-shadow(0 0 12px rgba(255, 255, 255, 1)) drop-shadow(0 0 24px rgba(245, 158, 11, 0.8));
+        filter: drop-shadow(0 0 12px rgba(255, 255, 255, 1)) drop-shadow(0 0 24px rgba(97, 6, 59, 0.8));
     }
 }
 

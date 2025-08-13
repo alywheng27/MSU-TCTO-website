@@ -63,6 +63,12 @@ const { title } = Astro.props;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       margin: 0;
       padding: 0;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    
+    .dark body {
+      background-color: #111827;
+      color: #f9fafb;
     }
     
     /* Loading container */
@@ -77,6 +83,12 @@ const { title } = Astro.props;
       align-items: center;
       justify-content: center;
       z-index: 50;
+      background-color: #61063B;
+      transition: background-color 0.3s ease;
+    }
+    
+    .dark #loading-container {
+      background-color: #111827;
     }
     
     /* Logo container */
@@ -161,6 +173,14 @@ const { title } = Astro.props;
       background: linear-gradient(135deg, #EF4444, #DC2626);
     }
     
+    .dark .status-indicator {
+      background: rgba(249,250,251,0.1);
+    }
+    
+    .dark .status-indicator.pending::before {
+      background: linear-gradient(135deg, #f9fafb, #EE4C7C) border-box;
+    }
+    
     /* Progress bar */
     .progress-track {
       height: 6px;
@@ -187,9 +207,28 @@ const { title } = Astro.props;
       animation: shimmer 2s infinite;
     }
     
+    .dark .progress-track {
+      background: rgba(249,250,251,0.1);
+    }
+    
+    .dark .progress-thumb {
+      background: linear-gradient(90deg, #f9fafb 0%, #EE4C7C 100%);
+    }
+    
+    .dark .progress-thumb::after {
+      background: linear-gradient(90deg, rgba(249,250,251,0.3) 0%, rgba(249,250,251,0.8) 50%, rgba(249,250,251,0.3) 100%);
+    }
+    
     /* Typography */
     .text-gradient {
       background: linear-gradient(90deg, #ffffff 0%, #EE4C7C 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .dark .text-gradient {
+      background: linear-gradient(90deg, #f9fafb 0%, #EE4C7C 100%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -215,6 +254,11 @@ const { title } = Astro.props;
     #logo-container:hover .tooltip {
       opacity: 1;
       bottom: -25px;
+    }
+    
+    .dark .tooltip {
+      background: rgba(17,24,39,0.9);
+      color: #f9fafb;
     }
     
     /* Dot animation */
@@ -254,6 +298,13 @@ const { title } = Astro.props;
       50%, 100% { opacity: 0.3; }
     }
     
+    .dark .dot-flashing,
+    .dark .dot-flashing::before,
+    .dark .dot-flashing::after {
+      background-color: #f9fafb;
+      color: #f9fafb;
+    }
+    
     /* Easter egg panel */
     .easter-egg {
       background: rgba(0,0,0,0.3);
@@ -263,6 +314,11 @@ const { title } = Astro.props;
       padding: 1rem;
       margin-top: 1rem;
       max-width: 400px;
+    }
+    
+    .dark .easter-egg {
+      background: rgba(17,24,39,0.6);
+      border: 1px solid rgba(249,250,251,0.1);
     }
     
     /* Animated rings */
@@ -295,6 +351,18 @@ const { title } = Astro.props;
       border-top-color: rgba(154, 23, 80, 0.5);
       animation: spin 2s linear infinite;
       animation-delay: 0.4s;
+    }
+    
+    .dark .ring-1 {
+      border-top-color: rgba(249,250,251,0.3);
+    }
+    
+    .dark .ring-2 {
+      border-top-color: rgba(238, 76, 124, 0.5);
+    }
+    
+    .dark .ring-3 {
+      border-top-color: rgba(154, 23, 80, 0.6);
     }
   </style>
 </head>

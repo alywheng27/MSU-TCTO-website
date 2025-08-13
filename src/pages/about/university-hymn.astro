@@ -10,7 +10,7 @@ const currentPath = Astro.url.pathname;
 ---
 
 <Layout title="MSU Hymn | Tawi-Tawi College of Technology and Oceanography">
-    <main class="bg-white text-gray-900 font-sans antialiased">
+    <main class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-200 font-sans antialiased">
       <Navbar path={currentPath} client:visible />
 
 
@@ -35,28 +35,28 @@ const currentPath = Astro.url.pathname;
       <section class="py-16 md:py-24">
         <div class="container mx-auto px-6 max-w-4xl">
           <!-- Enhanced Audio Player with Progress Bar -->
-          <div class="bg-white rounded-2xl shadow-xl p-6 mb-12">
+          <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 mb-12">
             <div class="flex items-center justify-between mb-3">
-              <h3 class="text-lg font-semibold text-msu-main-color flex items-center">
+              <h3 class="text-lg font-semibold text-msu-main-color dark:text-yellow-400 flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
                 </svg>
                 Now Playing
               </h3>
-              <div class="text-sm text-gray-500">
+              <div class="text-sm text-gray-500 dark:text-gray-400">
                 <span id="current-time">0:00</span> / <span id="duration">0:45</span>
               </div>
             </div>
             <audio id="hymn-audio" controls class="w-full audio-player">
               <source src="/audio/himno_tcto.mp3" type="audio/mpeg">
             </audio>
-            <div id="progress-bar" class="h-1 bg-gray-200 mt-2 rounded-full overflow-hidden">
-              <div id="progress" class="h-full bg-msu-main-color" style="width: 0%"></div>
+            <div id="progress-bar" class="h-1 bg-gray-200 dark:bg-gray-600 mt-2 rounded-full overflow-hidden">
+              <div id="progress" class="h-full bg-msu-main-color dark:bg-yellow-400" style="width: 0%"></div>
             </div>
           </div>
   
           <!-- Lyrics Container with Perfect Sync -->
-          <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+          <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
             <div class="bg-gradient-to-r from-msu-main-color to-msu-dark-maroon text-white py-5 px-8">
               <h2 class="text-2xl font-bold flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -70,50 +70,50 @@ const currentPath = Astro.url.pathname;
               <div id="lyrics-container" class="space-y-6 text-center">
                 <!-- Verse 1 (Timing adjusted for actual singing) -->
                 <div data-start="8" data-end="23" class="lyric-verse transition-all duration-300">
-                  <p class="text-xl md:text-2xl text-gray-700 mb-2">Silahis ang katulad mong</p>
-                  <p class="text-xl md:text-2xl text-gray-700">nagsabog ng liwanag</p>
+                  <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-2">Silahis ang katulad mong</p>
+                  <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300">nagsabog ng liwanag</p>
                 </div>
                 
                 <!-- Verse 2 -->
                 <div data-start="24" data-end="36" class="lyric-verse transition-all duration-300">
-                  <p class="text-xl md:text-2xl text-gray-700 mb-2">Ng pag-asa't hangarin</p>
-                  <p class="text-xl md:text-2xl text-gray-700">ng pag-unlad.</p>
+                  <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-2">Ng pag-asa't hangarin</p>
+                  <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300">ng pag-unlad.</p>
                 </div>
                 
                 <!-- Verse 3 -->
                 <div data-start="36" data-end="47" class="lyric-verse transition-all duration-300">
-                  <p class="text-xl md:text-2xl text-gray-700 mb-2">Ang pook ng Mindanao</p>
-                  <p class="text-xl md:text-2xl text-gray-700">tinanglaw at pinalad,</p>
+                  <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-2">Ang pook ng Mindanao</p>
+                  <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300">tinanglaw at pinalad,</p>
                 </div>
                 
                 <!-- Verse 4 -->
                 <div data-start="48" data-end="59" class="lyric-verse transition-all duration-300">
-                  <p class="text-xl md:text-2xl text-gray-700 mb-2">Nang ika'y isilang</p>
-                  <p class="text-xl md:text-2xl text-gray-700">na dakila ang hangad.</p>
+                  <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-2">Nang ika'y isilang</p>
+                  <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300">na dakila ang hangad.</p>
                 </div>
                 
                 <!-- Verse 5 -->
                 <div data-start="59" data-end="72" class="lyric-verse transition-all duration-300">
-                  <p class="text-xl md:text-2xl text-gray-700 mb-2">Ating ipagkapuri</p>
-                  <p class="text-xl md:text-2xl text-gray-700">Itong Pamantasan,</p>
+                  <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-2">Ating ipagkapuri</p>
+                  <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300">Itong Pamantasan,</p>
                 </div>
                 
                 <!-- Verse 6 -->
                 <div data-start="72" data-end="82" class="lyric-verse transition-all duration-300">
-                  <p class="text-xl md:text-2xl text-gray-700 mb-2">Ang buhay at pag-ibig</p>
-                  <p class="text-xl md:text-2xl text-gray-700">sa kanya'y iaalay;</p>
+                  <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-2">Ang buhay at pag-ibig</p>
+                  <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300">sa kanya'y iaalay;</p>
                 </div>
                 
                 <!-- Verse 7 -->
                 <div data-start="82" data-end="96" class="lyric-verse transition-all duration-300">
-                  <p class="text-xl md:text-2xl text-gray-700 mb-2">Saan man naroroon</p>
-                  <p class="text-xl md:text-2xl text-gray-700">ay bigyang karangalan,</p>
+                  <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-2">Saan man naroroon</p>
+                  <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300">ay bigyang karangalan,</p>
                 </div>
                 
                 <!-- Final Verse (Highlighted throughout) -->
                 <div data-start="96" data-end="109" class="lyric-verse transition-all duration-300">
-                  <p class="text-xl md:text-2xl text-gray-700 mb-2">Dakilang paaralan</p>
-                  <p class="text-xl md:text-2xl text-msu-maroon font-bold">Pamantasang Mindanao.</p>
+                  <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-2">Dakilang paaralan</p>
+                  <p class="text-xl md:text-2xl text-msu-maroon dark:text-yellow-400 font-bold">Pamantasang Mindanao.</p>
                 </div>
               </div>
             </div>
@@ -121,11 +121,11 @@ const currentPath = Astro.url.pathname;
   
           <!-- University Seal -->
           <div class="mt-16 text-center">
-            <div class="inline-flex items-center justify-center p-4 bg-white rounded-full shadow-lg border-4 border-msu-maroon/20">
+            <div class="inline-flex items-center justify-center p-4 bg-white dark:bg-white rounded-full shadow-lg border-4 border-msu-maroon/20 dark:border-yellow-400/30">
               <img src="/images/MSU Seal New (Official).png" alt="MSU Seal" class="h-20 w-20" loading="lazy">
             </div>
-            <h3 class="mt-6 text-2xl font-bold text-msu-maroon">Mindanao State University</h3>
-            <p class="text-lg text-gray-600 mt-2">Tawi-Tawi College of Technology and Oceanography</p>
+            <h3 class="mt-6 text-2xl font-bold text-msu-maroon dark:text-yellow-400">Mindanao State University</h3>
+            <p class="text-lg text-gray-600 dark:text-gray-300 mt-2">Tawi-Tawi College of Technology and Oceanography</p>
           </div>
         </div>
       </section>
@@ -151,6 +151,15 @@ const currentPath = Astro.url.pathname;
         html, body {
          
          width: 100%;
+       }
+
+       /* Dark mode audio player */
+       .dark .audio-player {
+         background: #374151 !important;
+       }
+       
+       .dark .audio-player::-webkit-media-controls-panel {
+         background: #374151 !important;
        }
 
        </style>
@@ -198,10 +207,10 @@ const currentPath = Astro.url.pathname;
               
               if (currentTime >= start && currentTime <= end) {
                 // Highlight current verse
-                verse.classList.add('active-verse', 'bg-msu-maroon/5', 'border-l-4', 'border-msu-maroon', 'pl-4');
+                verse.classList.add('active-verse', 'bg-msu-maroon/5', 'dark:bg-yellow-400/5', 'border-l-4', 'border-msu-maroon', 'dark:border-yellow-400', 'pl-4');
                 verse.querySelectorAll('p').forEach(p => {
-                  p.classList.add('text-msu-maroon', 'font-medium');
-                  p.classList.remove('text-gray-700');
+                  p.classList.add('text-msu-maroon', 'dark:text-yellow-400', 'font-medium');
+                  p.classList.remove('text-gray-700', 'dark:text-gray-300');
                 });
                 
                 // Auto-scroll to verse (only if not already in view)
@@ -211,10 +220,10 @@ const currentPath = Astro.url.pathname;
                 }
               } else {
                 // Reset other verses
-                verse.classList.remove('active-verse', 'bg-msu-maroon/5', 'border-l-4', 'border-msu-maroon', 'pl-4');
+                verse.classList.remove('active-verse', 'bg-msu-maroon/5', 'dark:bg-yellow-400/5', 'border-l-4', 'border-msu-maroon', 'dark:border-yellow-400', 'pl-4');
                 verse.querySelectorAll('p').forEach(p => {
-                  p.classList.remove('text-msu-maroon', 'font-medium');
-                  p.classList.add('text-gray-700');
+                  p.classList.remove('text-msu-maroon', 'dark:text-yellow-400', 'font-medium');
+                  p.classList.add('text-gray-700', 'dark:text-gray-300');
                 });
                 verse.scrollIntoViewOnActive = false;
               }
@@ -257,6 +266,10 @@ const currentPath = Astro.url.pathname;
       background-color: #e5e7eb;
     }
     
+    .dark #progress-bar:hover {
+      background-color: #4b5563;
+    }
+    
     /* Lyrics Styling */
     .lyric-verse {
       transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
@@ -273,6 +286,10 @@ const currentPath = Astro.url.pathname;
     
     .lyric-verse:hover {
       background-color: rgba(115, 38, 67, 0.05) !important;
+    }
+    
+    .dark .lyric-verse:hover {
+      background-color: rgba(251, 191, 36, 0.05) !important;
     }
     
     /* Active Verse Styling */
