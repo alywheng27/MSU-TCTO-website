@@ -148,7 +148,7 @@ const officeData = {
 
 <Layout title="University Offices | MSU Tawi-Tawi College of Technology and Oceanography" 
        description="Comprehensive directory of all university offices and administrative clusters at MSU TCTO">
-  <main class="bg-white text-gray-900 font-sans antialiased overflow-hidden">
+  <main class="bg-white text-gray-900 font-sans antialiased overflow-hidden dark:bg-gray-900 dark:text-white">
     <!-- Premium Navigation -->
     <Navbar path={currentPath} client:visible />
     
@@ -194,21 +194,21 @@ const officeData = {
     </section>
 
     <!-- Quick Navigation -->
-    <section class="py-12 bg-gray-50">
+    <section class="py-12 bg-gray-50 dark:bg-gray-800">
       <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-msu-dark-ocean">Quick Navigation</h2>
-          <p class="mt-4 text-gray-600">Jump to any office cluster</p>
+                     <h2 class="text-3xl font-bold text-msu-dark-ocean dark:text-yellow-400">Quick Navigation</h2>
+           <p class="mt-4 text-gray-600 dark:text-yellow-300">Jump to any office cluster</p>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {Object.entries(officeData).map(([key, cluster]) => (
             <a href={`#${key}`} 
-               class="group bg-white p-4 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105 border border-gray-100">
+               class="group bg-white p-4 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105 border border-gray-100 dark:bg-gray-700 dark:border-gray-600">
               <div class="text-center">
                 <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">{cluster.icon}</div>
-                <h3 class="text-sm font-semibold text-gray-800 group-hover:text-msu-main-color transition-colors leading-tight">
-                  {cluster.title.replace('Office of the ', '').replace('Cluster', '')}
-                </h3>
+                                 <h3 class="text-sm font-semibold text-gray-800 group-hover:text-msu-main-color transition-colors leading-tight dark:text-yellow-400">
+                   {cluster.title.replace('Office of the ', '').replace('Cluster', '')}
+                 </h3>
               </div>
             </a>
           ))}
@@ -227,15 +227,15 @@ const officeData = {
                 <div class={`inline-flex items-center justify-center w-20 h-20 bg-${cluster.color} rounded-full mb-6 shadow-lg`}>
                   <span class="text-4xl">{cluster.icon}</span>
                 </div>
-                <h2 class="text-4xl font-bold text-msu-dark-ocean mb-4">{cluster.title}</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-msu-gold to-msu-golden-fog mx-auto mb-6 rounded-full"></div>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">{cluster.description}</p>
+                                 <h2 class="text-4xl font-bold text-msu-dark-ocean mb-4 dark:text-white">{cluster.title}</h2>
+                 <div class="w-24 h-1 bg-gradient-to-r from-msu-gold to-msu-golden-fog mx-auto mb-6 rounded-full"></div>
+                 <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed dark:text-yellow-300">{cluster.description}</p>
               </div>
 
               <!-- Office Cards Grid -->
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {cluster.offices.map((office, officeIndex) => (
-                  <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 overflow-hidden hover:scale-105">
+                  <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 overflow-hidden hover:scale-105 dark:bg-gray-800 dark:border-gray-700">
                     <!-- Card Header -->
                     <div class={`h-2 bg-gradient-to-r from-${cluster.color} to-${cluster.color}/80`}></div>
                     
@@ -248,10 +248,10 @@ const officeData = {
                           </svg>
                         </div>
                         <div class="flex-1">
-                          <h3 class="text-lg font-semibold text-gray-900 group-hover:text-msu-main-color transition-colors leading-tight">
-                            {office}
-                          </h3>
-                          <div class="mt-4 flex items-center text-sm text-gray-500">
+                                                     <h3 class="text-lg font-semibold text-gray-900 group-hover:text-msu-main-color transition-colors leading-tight dark:text-yellow-400">
+                             {office}
+                           </h3>
+                           <div class="mt-4 flex items-center text-sm text-gray-500 dark:text-yellow-300">
                             <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -263,9 +263,9 @@ const officeData = {
                       
                       <!-- Hover Action -->
                       <div class="mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div class="flex items-center text-sm text-msu-main-color font-medium">
-                          Learn more
-                          <svg class="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                 <div class="flex items-center text-sm text-msu-main-color font-medium dark:text-yellow-400">
+                           Learn more
+                           <svg class="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                           </svg>
                         </div>
@@ -401,6 +401,19 @@ const officeData = {
 
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Dark mode icon styling */
+  .dark .text-3xl {
+    color: #fbbf24 !important; /* yellow-400 */
+  }
+
+  .dark .text-4xl {
+    color: #fbbf24 !important; /* yellow-400 */
+  }
+
+  .dark svg {
+    color: #fbbf24 !important; /* yellow-400 */
   }
 </style>
 

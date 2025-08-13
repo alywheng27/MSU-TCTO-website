@@ -6,31 +6,201 @@ import Footer from "../components/Footer.astro";
 import DataTableComponent from '../api/DataTableComponent.jsx';
 import '../styles/css/global.css';
 import '../styles/css/globalanimate.css';
+import '../styles/css/pdf-viewer.css';
 
 const currentPath = Astro.url.pathname;
 import { getBidding } from '../api/api';
+import { urlForPDF } from '../api/api';
 
 const bidding = await getBidding();
+
+// Debug logging
+console.log('Bidding data:', bidding);
+
+// Ensure data is available
+if (!bidding) {
+    throw new Error("Failed to fetch Bidding data.");
+}
+
+// Generate PDF URLs
+const allBiddingUrls = bidding.map(bid => ({
+    ...bid,
+    pdfUrl: bid.file ? urlForPDF(bid.file) : null,
+    originalUrl: bid.file?.asset?.url || ''
+}));
 ---
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
-  <main>
+  <main class="bg-white dark:bg-gray-900 transition-colors duration-300">
     <Navbar path={currentPath} client:visible />
+    
+
+
+    <!-- Mobile-Optimized Full-Screen PDF Viewer Modal -->
+    <div id="pdfViewerModal" class="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-md hidden">
+        <div class="w-full h-full">
+            <div class="bg-white dark:bg-gray-900 w-full h-full flex flex-col overflow-hidden">
+                <!-- Mobile-Optimized Header -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-6 bg-gradient-to-r from-msu-blue via-msu-dark-blue to-msu-blue dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 text-white shadow-lg">
+                    <div class="flex items-center space-x-2 sm:space-x-4 w-full sm:w-auto mb-3 sm:mb-0">
+                        <div class="flex items-center justify-center w-10 h-10 sm:w-14 sm:h-14 bg-white/20 rounded-xl backdrop-blur-sm">
+                            <svg class="w-5 h-5 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 id="modalPdfTitle" class="text-sm sm:text-2xl font-bold text-white truncate">MSU-TCTO Bidding Document Viewer</h3>
+                            <p class="text-white/90 text-xs sm:text-sm font-medium hidden sm:block">Professional PDF Document Viewer</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Mobile-Optimized Controls -->
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
+                        <!-- Zoom Controls -->
+                        <div class="flex items-center justify-center space-x-1 sm:space-x-2 bg-msu-deep-ocean/20 dark:bg-gray-700/20 rounded-xl px-2 sm:px-4 py-2 backdrop-blur-sm border border-msu-deep-ocean/30 dark:border-gray-600/30">
+                            <button id="zoomOut" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 dark:bg-gray-700/30 hover:bg-msu-deep-ocean/50 dark:hover:bg-gray-600/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40 dark:border-gray-600/40" title="Zoom Out">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
+                                </svg>
+                            </button>
+                            <span id="zoomLevel" class="text-white text-xs sm:text-sm font-bold min-w-[3rem] sm:min-w-[4rem] text-center px-2 sm:px-3 py-1 bg-msu-deep-ocean/20 dark:bg-gray-700/20 rounded-lg border border-msu-deep-ocean/30 dark:border-gray-600/30">100%</span>
+                            <button id="zoomIn" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 dark:bg-gray-700/30 hover:bg-msu-deep-ocean/50 dark:hover:bg-gray-600/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40 dark:border-gray-600/40" title="Zoom In">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                </svg>
+                            </button>
+                            <button id="zoomFit" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 dark:bg-gray-700/30 hover:bg-msu-deep-ocean/50 dark:hover:bg-gray-600/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40 dark:border-gray-600/40" title="Fit to Screen">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <!-- Page Navigation -->
+                        <div class="flex items-center justify-center space-x-1 sm:space-x-2 bg-msu-deep-ocean/20 dark:bg-gray-700/20 rounded-xl px-2 sm:px-4 py-2 backdrop-blur-sm border border-msu-deep-ocean/30 dark:border-gray-600/30">
+                            <button id="pdfPrevPage" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 dark:bg-gray-700/30 hover:bg-msu-deep-ocean/50 dark:hover:bg-gray-600/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40 dark:border-gray-600/40">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                </svg>
+                            </button>
+                            <span id="pageInfo" class="text-white text-xs sm:text-sm font-bold min-w-[3rem] sm:min-w-[5rem] text-center px-2 sm:px-3 py-1 bg-msu-deep-ocean/20 dark:bg-gray-700/20 rounded-lg border border-msu-deep-ocean/30 dark:border-gray-600/30">1 / 1</span>
+                            <button id="pdfNextPage" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 dark:bg-gray-700/30 hover:bg-msu-deep-ocean/50 dark:hover:bg-gray-600/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40 dark:border-gray-600/40">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <!-- Action Buttons -->
+                        <div class="flex items-center justify-center space-x-2 sm:space-x-3">
+                            <button onclick="openPdfInNewTab()" class="flex items-center justify-center space-x-1 sm:space-x-2 bg-msu-deep-ocean/30 dark:bg-gray-700/30 hover:bg-msu-deep-ocean/50 dark:hover:bg-gray-600/50 text-white px-2 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-msu-deep-ocean/40 dark:border-gray-600/40">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                                <span class="text-xs sm:text-sm font-medium hidden sm:inline">Open</span>
+                            </button>
+                            <button onclick="downloadPdf()" class="flex items-center justify-center space-x-1 sm:space-x-2 bg-msu-deep-ocean/30 dark:bg-gray-700/30 hover:bg-msu-deep-ocean/50 dark:hover:bg-gray-600/50 text-white px-2 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-msu-deep-ocean/40 dark:border-gray-600/40">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                                <span class="text-xs sm:text-sm font-medium hidden sm:inline">Download</span>
+                            </button>
+                            <button onclick="closePdfViewer()" class="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-msu-deep-ocean/30 dark:bg-gray-700/30 hover:bg-msu-deep-ocean/50 dark:hover:bg-gray-600/50 text-white rounded-xl transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-msu-deep-ocean/40 dark:border-gray-600/40">
+                                <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- PDF Viewer Content -->
+                <div class="flex-1 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 relative overflow-hidden">
+                    <!-- Loading State -->
+                    <div id="pdfLoading" class="absolute inset-0 flex items-center justify-center bg-white/98 dark:bg-gray-900/98 backdrop-blur-sm z-20">
+                        <div class="text-center max-w-xs sm:max-w-sm mx-auto p-4 sm:p-8">
+                            <div class="relative mb-4 sm:mb-8">
+                                <div class="animate-spin rounded-full h-16 w-16 sm:h-24 sm:w-24 border-4 border-blue-100 dark:border-gray-700 border-t-blue-600 dark:border-t-blue-400 mx-auto"></div>
+                                <div class="absolute inset-1 sm:inset-2 rounded-full h-14 w-14 sm:h-20 sm:w-20 border-4 border-transparent border-t-blue-400 dark:border-t-blue-300 animate-spin mx-auto" style="animation-duration: 1.5s; animation-direction: reverse;"></div>
+                                <div class="absolute inset-4 sm:inset-6 rounded-full h-8 w-8 sm:h-12 sm:w-12 bg-blue-600/20 dark:bg-blue-400/20 animate-pulse mx-auto"></div>
+                                <div class="absolute inset-6 sm:inset-10 rounded-full h-4 w-4 bg-blue-600 dark:bg-blue-400 mx-auto animate-ping"></div>
+                            </div>
+                            <div class="space-y-2 sm:space-y-3">
+                                <h3 class="text-lg sm:text-xl font-bold text-gray-800 dark:text-gray-200 animate-pulse">Loading PDF...</h3>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">Please wait while we prepare your document</p>
+                                <div class="flex justify-center space-x-2 mt-4">
+                                    <div class="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full animate-bounce" style="animation-delay: 0ms;"></div>
+                                    <div class="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full animate-bounce" style="animation-delay: 150ms;"></div>
+                                    <div class="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full animate-bounce" style="animation-delay: 300ms;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- PDF Container -->
+                    <div id="pdfContainer" class="w-full h-full overflow-auto bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900">
+                        <div id="pdfViewer" class="w-full h-full flex items-center justify-center p-2 sm:p-4 relative">
+                            <div id="pdfCanvasContainer" class="relative perspective-1000 w-full h-full flex items-center justify-center">
+                                <div id="pageFlipContainer" class="relative transform-style-preserve-3d transition-transform duration-700 ease-in-out">
+                                    <div id="currentPageContainer" class="flex items-center justify-center w-full h-full backface-hidden">
+                                        <!-- PDF canvas will be inserted here -->
+                                    </div>
+                                    <div id="nextPageContainer" class="flex items-center justify-center w-full h-full backface-hidden transform rotateY-180 opacity-0 absolute inset-0">
+                                        <!-- Next page canvas will be inserted here during animation -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="pageTurnShadow" class="absolute inset-0 pointer-events-none opacity-0 transition-opacity duration-700">
+                                <div class="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-black/20 to-transparent"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Error State -->
+                    <div id="pdfError" class="absolute inset-0 flex items-center justify-center bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm z-20 hidden">
+                        <div class="text-center max-w-xs sm:max-w-lg mx-auto p-4 sm:p-8">
+                            <div class="w-20 h-20 sm:w-32 sm:h-32 bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-8">
+                                <svg class="w-10 h-10 sm:w-16 sm:h-16 text-red-500 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-xl sm:text-3xl font-bold text-gray-800 dark:text-gray-200 mb-3 sm:mb-4">Unable to Load PDF</h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-lg">The PDF file could not be loaded. This might be due to browser restrictions.</p>
+                            <div class="flex flex-col space-y-3 sm:space-y-4">
+                                <button onclick="openPdfInNewTab()" class="flex items-center justify-center space-x-2 sm:space-x-3 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg text-sm sm:text-base">
+                                    <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                    </svg>
+                                    <span>Open in New Tab</span>
+                                </button>
+                                <button onclick="downloadPdf()" class="flex items-center justify-center space-x-2 sm:space-x-3 bg-green-600 hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg text-sm sm:text-base">
+                                    <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                    </svg>
+                                    <span>Download PDF</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Approval Section -->
-    <section class="bg-white-pure w-full xl:px-[12.5%] xs:px-[5%] py-[60px]">
-      <h4 class="xl:h4 xs:h5 text-msu-deep-ocean text-center font-semibold mb-6">
+    <section class="bg-white-pure dark:bg-gray-900 w-full xl:px-[12.5%] xs:px-[5%] py-[60px] transition-colors duration-300">
+      <h4 class="xl:h4 xs:h5 text-msu-main-color dark:text-yellow-400 text-center font-semibold mb-6 transition-colors duration-300">
         Bidding Opportunities
       </h4>
 
       <!-- Render React Component -->
-      <DataTableComponent data={bidding} client:visible />
+      <DataTableComponent data={allBiddingUrls} client:visible />
     </section>
 
 
     
     <!-- Scroll to Top Button -->
-    <button class="scroll-to-top" aria-label="Scroll to top">
+    <button class="scroll-to-top dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700" aria-label="Scroll to top">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
       </svg>
@@ -44,6 +214,639 @@ const bidding = await getBidding();
   </main>
 </Layout>
 
+
+<!-- Enhanced Mobile-Optimized PDF Viewer Script -->
+<script>
+    // TypeScript declarations for PDF.js
+    declare const pdfjsLib: any;
+    
+    // Global variables for PDF viewer
+    let currentPdfUrl = '';
+    let currentPdfTitle = '';
+    let pdfDoc: any = null;
+    let pageNum = 1;
+    let pageRendering = false;
+    let pageNumPending: number | null = null;
+    let scale = 1.0;
+    let canvas: HTMLCanvasElement | null = null;
+    let ctx: CanvasRenderingContext2D | null = null;
+    let nextCanvas: HTMLCanvasElement | null = null;
+    let nextCtx: CanvasRenderingContext2D | null = null;
+    let isAnimating = false;
+    let baseScale = 1.0; // Base scale for fit-to-screen
+
+    // Professional PDF Viewer functions
+    async function openPdfViewer(pdfUrl: string, title: string) {
+        console.log('Opening professional PDF viewer:', { pdfUrl, title });
+        
+        // Check if PDF URL is valid
+        if (!pdfUrl || pdfUrl === '' || pdfUrl === '#') {
+            console.error('Invalid PDF URL:', pdfUrl);
+            alert('PDF file not available for this document.');
+            return;
+        }
+        
+        // Store current PDF info
+        currentPdfUrl = pdfUrl;
+        currentPdfTitle = title;
+        
+        // Open the modal
+        const modal = document.getElementById('pdfViewerModal');
+        const titleElement = document.getElementById('modalPdfTitle');
+        const loadingElement = document.getElementById('pdfLoading');
+        const errorElement = document.getElementById('pdfError');
+        
+        if (modal && titleElement) {
+            // Set title - more mobile-friendly truncation
+            const isMobile = window.innerWidth < 640;
+            const maxLength = isMobile ? 25 : 40;
+            const displayTitle = title && title.length > maxLength ? title.substring(0, maxLength) + '...' : title;
+            titleElement.textContent = displayTitle || 'MSU-TCTO Bidding Document Viewer';
+            
+            // Show loading state
+            if (loadingElement) loadingElement.classList.remove('hidden');
+            if (errorElement) errorElement.classList.add('hidden');
+            
+            // Open modal
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            
+            // Initialize PDF viewer
+            await initializePdfViewer();
+        }
+    }
+
+    async function initializePdfViewer() {
+        try {
+            // Load PDF.js library dynamically
+            if (typeof pdfjsLib === 'undefined') {
+                await loadPdfJs();
+            }
+            
+            // Set up canvas containers
+            const currentPageContainer = document.getElementById('currentPageContainer');
+            const nextPageContainer = document.getElementById('nextPageContainer');
+            if (!currentPageContainer || !nextPageContainer) return;
+            
+            // Clear previous content
+            currentPageContainer.innerHTML = '';
+            nextPageContainer.innerHTML = '';
+            
+            // Create main canvas
+            canvas = document.createElement('canvas');
+            canvas.id = 'pdfCanvas';
+            canvas.className = 'shadow-lg border border-gray-200 rounded-lg';
+            canvas.style.maxWidth = '100%';
+            canvas.style.maxHeight = '100%';
+            canvas.style.width = 'auto';
+            canvas.style.height = 'auto';
+            ctx = canvas.getContext('2d');
+            
+            // Create next page canvas for animations
+            nextCanvas = document.createElement('canvas');
+            nextCanvas.id = 'nextPdfCanvas';
+            nextCanvas.className = 'shadow-lg border border-gray-200 rounded-lg';
+            nextCanvas.style.maxWidth = '100%';
+            nextCanvas.style.maxHeight = '100%';
+            nextCanvas.style.width = 'auto';
+            nextCanvas.style.height = 'auto';
+            nextCtx = nextCanvas.getContext('2d');
+            
+            currentPageContainer.appendChild(canvas);
+            nextPageContainer.appendChild(nextCanvas);
+            
+            // Load the PDF
+            const loadingTask = pdfjsLib.getDocument(currentPdfUrl);
+            pdfDoc = await loadingTask.promise;
+            
+            // Update page info
+            updatePageInfo();
+            
+            // Render first page
+            await renderPage(pageNum);
+            
+            // Hide loading
+            const loadingElement = document.getElementById('pdfLoading');
+            if (loadingElement) loadingElement.classList.add('hidden');
+            
+        } catch (error) {
+            console.error('Error loading PDF:', error);
+            showPdfError();
+        }
+    }
+
+    async function loadPdfJs(): Promise<void> {
+        return new Promise<void>((resolve, reject) => {
+            // Load PDF.js from CDN
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+            script.onload = () => {
+                // Set worker path
+                pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+                resolve();
+            };
+            script.onerror = reject;
+            document.head.appendChild(script);
+        });
+    }
+
+    function updatePageInfo() {
+        const pageInfoElement = document.getElementById('pageInfo');
+        if (pageInfoElement && pdfDoc) {
+            pageInfoElement.textContent = `${pageNum} / ${pdfDoc.numPages}`;
+        }
+        
+        updateNavigationButtons();
+    }
+
+    function updateNavigationButtons() {
+        // Update navigation buttons in PDF viewer modal
+        const prevButton = document.querySelector('#pdfViewerModal #pdfPrevPage') as HTMLButtonElement;
+        const nextButton = document.querySelector('#pdfViewerModal #pdfNextPage') as HTMLButtonElement;
+        
+        if (prevButton) {
+            prevButton.disabled = pageNum <= 1 || isAnimating;
+            if (prevButton.disabled) {
+                prevButton.classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                prevButton.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        }
+        
+        if (nextButton) {
+            nextButton.disabled = pageNum >= pdfDoc?.numPages || isAnimating;
+            if (nextButton.disabled) {
+                nextButton.classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                nextButton.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        }
+    }
+
+    async function renderPage(num: number) {
+        pageRendering = true;
+        
+        try {
+            const page = await pdfDoc.getPage(num);
+            
+            // Calculate optimal scale to fit the container - Enhanced for mobile
+            const container = document.getElementById('pageFlipContainer');
+            if (container) {
+                const containerRect = container.getBoundingClientRect();
+                const pageViewport = page.getViewport({ scale: 1.0 });
+                
+                // Mobile-optimized padding
+                const isMobile = window.innerWidth < 768;
+                const padding = isMobile ? 20 : 40;
+                
+                // Calculate scale to fit both width and height with padding
+                const scaleX = (containerRect.width - padding) / pageViewport.width;
+                const scaleY = (containerRect.height - padding) / pageViewport.height;
+                const fitScale = Math.min(scaleX, scaleY, isMobile ? 2.0 : 3.0); // Lower max scale for mobile
+                
+                // Set base scale for fit-to-screen if not set
+                if (baseScale === 1.0) {
+                    baseScale = fitScale;
+                }
+                
+                const optimalScale = fitScale * scale;
+                
+                const viewport = page.getViewport({ scale: optimalScale });
+                
+                // Set canvas dimensions
+                if (canvas && ctx) {
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+                    
+                    // Render PDF page into canvas context
+                    const renderContext = {
+                        canvasContext: ctx,
+                        viewport: viewport
+                    };
+                    
+                    await page.render(renderContext).promise;
+                }
+            }
+            
+            pageRendering = false;
+            
+            if (pageNumPending !== null) {
+                renderPage(pageNumPending);
+                pageNumPending = null;
+            }
+            
+        } catch (error) {
+            console.error('Error rendering page:', error);
+            pageRendering = false;
+        }
+    }
+
+    function queueRenderPage(num: number) {
+        if (pageRendering) {
+            pageNumPending = num;
+        } else {
+            renderPage(num);
+        }
+    }
+
+    async function onPrevPage() {
+        if (pageNum <= 1 || isAnimating) return;
+        try {
+            await animatePageFlip('prev');
+        } catch (error) {
+            console.error('Error in onPrevPage:', error);
+            isAnimating = false;
+            updateNavigationButtons();
+        }
+    }
+
+    async function onNextPage() {
+        if (pageNum >= pdfDoc?.numPages || isAnimating) return;
+        try {
+            await animatePageFlip('next');
+        } catch (error) {
+            console.error('Error in onNextPage:', error);
+            isAnimating = false;
+            updateNavigationButtons();
+        }
+    }
+
+    async function animatePageFlip(direction: 'prev' | 'next') {
+        if (isAnimating) return;
+        
+        isAnimating = true;
+        updateNavigationButtons();
+
+        const pageFlipContainer = document.getElementById('pageFlipContainer');
+        const nextPageContainer = document.getElementById('nextPageContainer');
+        const pageTurnShadow = document.getElementById('pageTurnShadow');
+        
+        if (!pageFlipContainer || !nextPageContainer || !pageTurnShadow) {
+            isAnimating = false;
+            return;
+        }
+
+        // Calculate target page number
+        const targetPage = direction === 'next' ? pageNum + 1 : pageNum - 1;
+        
+        // Pre-render the target page on the next canvas
+        await renderPageOnCanvas(targetPage, nextCanvas, nextCtx);
+        
+        // Show shadow effect with animation
+        pageTurnShadow.classList.remove('opacity-0');
+        pageTurnShadow.classList.add('opacity-100');
+        
+        // Show next page container with stagger effect
+        nextPageContainer.classList.remove('opacity-0');
+        nextPageContainer.classList.add('opacity-100');
+        
+        // Apply sophisticated flip animation
+        if (direction === 'next') {
+            pageFlipContainer.style.transform = 'rotateY(-180deg) scale(0.95)';
+        } else {
+            pageFlipContainer.style.transform = 'rotateY(180deg) scale(0.95)';
+        }
+        
+        // Wait for animation to complete
+        const animationDuration = window.innerWidth < 768 ? 500 : 700;
+        await new Promise(resolve => setTimeout(resolve, animationDuration));
+        
+        // Update page number
+        pageNum = targetPage;
+        
+        // Swap canvases - move next page to current
+        const currentPageContainer = document.getElementById('currentPageContainer');
+        if (currentPageContainer && nextCanvas && canvas && ctx) {
+            // Copy next canvas content to main canvas
+            canvas.width = nextCanvas.width;
+            canvas.height = nextCanvas.height;
+            ctx.drawImage(nextCanvas, 0, 0);
+        }
+        
+        // Reset animation state first
+        isAnimating = false;
+        
+        // Update page info and navigation buttons
+        updatePageInfo();
+        
+        // Reset visual states
+        pageFlipContainer.style.transform = 'rotateY(0deg)';
+        nextPageContainer.classList.remove('opacity-100');
+        nextPageContainer.classList.add('opacity-0');
+        pageTurnShadow.classList.remove('opacity-100');
+        pageTurnShadow.classList.add('opacity-0');
+    }
+
+    async function renderPageOnCanvas(pageNumber: number, targetCanvas: HTMLCanvasElement | null, targetCtx: CanvasRenderingContext2D | null) {
+        if (!pdfDoc || !targetCanvas || !targetCtx) return;
+        
+        try {
+            const page = await pdfDoc.getPage(pageNumber);
+            
+            // Calculate optimal scale to fit the container
+            const container = document.getElementById('pageFlipContainer');
+            if (container) {
+                const containerRect = container.getBoundingClientRect();
+                const pageViewport = page.getViewport({ scale: 1.0 });
+                
+                // Mobile-optimized padding
+                const isMobile = window.innerWidth < 768;
+                const padding = isMobile ? 20 : 40;
+                
+                // Calculate scale to fit both width and height with padding
+                const scaleX = (containerRect.width - padding) / pageViewport.width;
+                const scaleY = (containerRect.height - padding) / pageViewport.height;
+                const optimalScale = Math.min(scaleX, scaleY, isMobile ? 1.5 : 2.0) * scale;
+                
+                const viewport = page.getViewport({ scale: optimalScale });
+                
+                // Set canvas dimensions
+                targetCanvas.height = viewport.height;
+                targetCanvas.width = viewport.width;
+                
+                // Render PDF page into canvas context
+                const renderContext = {
+                    canvasContext: targetCtx,
+                    viewport: viewport
+                };
+                
+                await page.render(renderContext).promise;
+            }
+        } catch (error) {
+            console.error('Error rendering page:', error);
+        }
+    }
+
+    function zoomFit() {
+        if (!pdfDoc) return;
+        
+        // Reset to fit-to-screen scale
+        scale = 1.0;
+        baseScale = 1.0;
+        renderPage(pageNum);
+        updateZoomLevel();
+        updateNavigationButtons();
+    }
+
+    async function zoomIn() {
+        if (isAnimating) return;
+        const zoomFactor = window.innerWidth < 768 ? 1.2 : 1.25;
+        scale *= zoomFactor;
+        await renderPage(pageNum);
+        updateZoomLevel();
+        updateNavigationButtons();
+    }
+
+    async function zoomOut() {
+        if (isAnimating) return;
+        const zoomFactor = window.innerWidth < 768 ? 1.2 : 1.25;
+        scale /= zoomFactor;
+        if (scale < 0.3) scale = 0.3;
+        await renderPage(pageNum);
+        updateZoomLevel();
+        updateNavigationButtons();
+    }
+
+    function updateZoomLevel() {
+        const zoomElement = document.getElementById('zoomLevel');
+        if (zoomElement) {
+            zoomElement.textContent = `${Math.round(scale * 100)}%`;
+        }
+    }
+
+    function showPdfError() {
+        const loadingElement = document.getElementById('pdfLoading');
+        const errorElement = document.getElementById('pdfError');
+        
+        if (loadingElement) loadingElement.classList.add('hidden');
+        if (errorElement) errorElement.classList.remove('hidden');
+    }
+
+    function closePdfViewer() {
+        const modal = document.getElementById('pdfViewerModal');
+        
+        if (modal) {
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+            
+            // Reset state
+            pdfDoc = null;
+            pageNum = 1;
+            pageRendering = false;
+            pageNumPending = null;
+            scale = 1.0;
+            baseScale = 1.0;
+            isAnimating = false;
+        }
+    }
+
+    function openPdfInNewTab() {
+        if (currentPdfUrl) {
+            window.open(currentPdfUrl, '_blank');
+        }
+    }
+
+    function downloadPdf() {
+        if (currentPdfUrl) {
+            const link = document.createElement('a');
+            link.href = currentPdfUrl;
+            link.download = currentPdfTitle || 'document.pdf';
+            link.click();
+        }
+    }
+
+
+    
+    // Make functions global
+    (window as any).openPdfViewer = openPdfViewer;
+    (window as any).closePdfViewer = closePdfViewer;
+    (window as any).openPdfInNewTab = openPdfInNewTab;
+    (window as any).downloadPdf = downloadPdf;
+    (window as any).onPrevPage = onPrevPage;
+    (window as any).onNextPage = onNextPage;
+    (window as any).zoomIn = zoomIn;
+    (window as any).zoomOut = zoomOut;
+    (window as any).zoomFit = zoomFit;
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        // PDF Viewer Controls - Use specific selectors for modal buttons
+        const zoomInBtn = document.querySelector('#pdfViewerModal #zoomIn');
+        const zoomOutBtn = document.querySelector('#pdfViewerModal #zoomOut');
+        const zoomFitBtn = document.querySelector('#pdfViewerModal #zoomFit');
+        const prevPageBtn = document.querySelector('#pdfViewerModal #pdfPrevPage');
+        const nextPageBtn = document.querySelector('#pdfViewerModal #pdfNextPage');
+
+        if (zoomInBtn) {
+            zoomInBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                zoomIn();
+            });
+        }
+
+        if (zoomOutBtn) {
+            zoomOutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                zoomOut();
+            });
+        }
+
+        if (zoomFitBtn) {
+            zoomFitBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                zoomFit();
+            });
+        }
+
+        if (prevPageBtn) {
+            prevPageBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (!isAnimating && pageNum > 1) {
+                    onPrevPage();
+                }
+            });
+        }
+
+        if (nextPageBtn) {
+            nextPageBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (!isAnimating && pageNum < pdfDoc?.numPages) {
+                    onNextPage();
+                }
+            });
+        }
+    });
+</script>
+
+<!-- Enhanced PDF Viewer Styles -->
+<style>
+    :root {
+        --msu-dark-blue: #003366;
+        --msu-blue: #61063B;
+        --msu-light-blue: #E6F2FF;
+        --msu-gold: #FFCC00;
+        --msu-dark-gold: #E6B800;
+        --msu-deep-ocean: #1e3a8a;
+    }
+    
+    .bg-msu-dark-blue { background-color: var(--msu-dark-blue); }
+    .bg-msu-blue { background-color: var(--msu-blue); }
+    .bg-msu-light-blue { background-color: var(--msu-light-blue); }
+    .bg-msu-gold { background-color: var(--msu-gold); }
+    .bg-msu-dark-gold { background-color: var(--msu-dark-gold); }
+    .text-msu-dark-blue { color: var(--msu-dark-blue); }
+    .text-msu-blue { color: var(--msu-blue); }
+    .text-msu-gold { color: var(--msu-gold); }
+    .border-msu-blue { border-color: var(--msu-blue); }
+    .hover\:bg-msu-dark-gold:hover { background-color: var(--msu-dark-gold); }
+    .hover\:text-msu-dark-blue:hover { color: var(--msu-dark-blue); }
+    .bg-msu-deep-ocean { background-color: var(--msu-deep-ocean); }
+    .text-msu-deep-ocean { color: var(--msu-deep-ocean); }
+    .border-msu-deep-ocean { border-color: var(--msu-deep-ocean); }
+    
+    /* Mobile-First Responsive PDF Viewer Styles */
+    #pdfViewerModal {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(12px);
+    }
+    
+    #pdfViewerModal.hidden {
+        opacity: 0;
+        pointer-events: none;
+        transform: scale(0.9) translateY(20px);
+    }
+    
+    #pdfViewerModal:not(.hidden) {
+        opacity: 1;
+        pointer-events: auto;
+        transform: scale(1) translateY(0);
+    }
+    
+    /* Mobile-optimized modal container */
+    #pdfViewerModal .bg-white {
+        box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(20px);
+    }
+    
+    /* Mobile-optimized buttons */
+    #pdfViewerModal button {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        touch-action: manipulation;
+    }
+    
+    /* Mobile hover states - only apply on non-touch devices */
+    @media (hover: hover) {
+        #pdfViewerModal button:hover {
+            transform: translateY(-1px) scale(1.02);
+            box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.15);
+        }
+    }
+    
+    /* Mobile-optimized PDF Canvas Styles */
+    #pdfCanvas, #nextPdfCanvas {
+        max-width: 100%;
+        height: auto;
+        box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        background: white;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    /* Mobile Book Flip Animation Styles */
+    .perspective-1000 { perspective: 800px; }
+    .transform-style-preserve-3d { transform-style: preserve-3d; }
+    .backface-hidden { backface-visibility: hidden; }
+    .rotateY-180 { transform: rotateY(180deg); }
+    
+    #pageFlipContainer {
+        transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transform-origin: center;
+        width: 100%;
+        height: 100%;
+        max-width: calc(100vw - 1rem);
+        max-height: calc(100vh - 8rem);
+    }
+    
+    /* Mobile-optimized flip animations */
+    @media (max-width: 768px) {
+        #pageFlipContainer {
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            max-height: calc(100vh - 6rem);
+            max-width: calc(100vw - 0.5rem);
+        }
+        
+        #pdfViewerModal button {
+            min-height: 44px;
+            min-width: 44px;
+            touch-action: manipulation;
+        }
+    }
+    
+    /* Mobile disabled button states */
+    #pdfViewerModal #pdfPrevPage:disabled, 
+    #pdfViewerModal #pdfNextPage:disabled {
+        opacity: 0.3 !important;
+        cursor: not-allowed !important;
+        pointer-events: none !important;
+        transform: none !important;
+    }
+    
+    /* MSU header gradient */
+    #pdfViewerModal .bg-gradient-to-r {
+        background: linear-gradient(135deg, #61063B 0%, #003366 50%, #61063B 100%);
+        box-shadow: 0 2px 10px -2px rgba(97, 6, 59, 0.2);
+    }
+    
+
+</style>
 
 <script src="../js/animate.js" ></script>
 <script src="../js/loadinganim.js" ></script>

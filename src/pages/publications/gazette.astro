@@ -51,8 +51,24 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
 ---
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
-    <main class="bg-white">
+    <main class="bg-white dark:bg-gray-900 transition-colors duration-300">
         <Navbar path={currentPath} client:visible />
+        
+        <!-- Dark Mode Toggle Button -->
+        <!-- <div class="fixed top-24 right-4 z-50">
+          <button 
+            id="darkModeToggle"
+            class="bg-msu-deep-ocean dark:bg-gray-700 hover:bg-msu-dark-pink dark:hover:bg-gray-600 text-white dark:text-gray-200 p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-msu-gold dark:focus:ring-yellow-400"
+            aria-label="Toggle dark mode"
+          >
+            <svg id="sunIcon" class="w-6 h-6 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            <svg id="moonIcon" class="w-6 h-6 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+          </button>
+        </div> -->
         
         <!-- Mobile-Optimized Full-Screen PDF Viewer Modal -->
         <div id="pdfViewerModal" class="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-md hidden">
@@ -212,27 +228,27 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
         </div>
 
         <!-- Mobile-Optimized Hero Section -->
-        <div class="relative pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-12 bg-white">
+        <div class="relative pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-12 bg-white dark:bg-gray-900 transition-colors duration-300">
             <div class="absolute inset-0 overflow-hidden">
-                <div class="absolute inset-0 bg-gradient-to-r from-msu-light-blue/10 to-white"></div>
-                <div class="absolute top-0 right-0 w-1/2 h-full bg-msu-blue/5 -skew-x-12 transform origin-top-right"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-msu-light-blue/10 to-white dark:from-gray-800/10 dark:to-gray-900"></div>
+                <div class="absolute top-0 right-0 w-1/2 h-full bg-msu-blue/5 dark:bg-gray-700/5 -skew-x-12 transform origin-top-right"></div>
             </div>
             
             <div class="container mx-auto px-4 xl:px-0 relative">
                 <!-- Mobile-Optimized Breadcrumb -->
                 <div class="mb-4 sm:mb-6 lg:mb-8">
-                    <p class="paragraph p2 text-gray-600 text-sm sm:text-base">
-                        <a href="/home" class="hover:text-msu-blue transition-colors">Home</a> / 
-                        <a href="/publications" class="hover:text-msu-blue transition-colors">Publications</a> / 
-                        <span class="text-msu-blue font-medium">Gazette</span>
+                    <p class="paragraph p2 text-gray-600 dark:text-gray-400 text-sm sm:text-base transition-colors duration-300">
+                        <a href="/home" class="hover:text-msu-blue dark:hover:text-yellow-300 transition-colors">Home</a> / 
+                        <a href="/publications" class="hover:text-msu-blue dark:hover:text-yellow-300 transition-colors">Publications</a> / 
+                        <span class="text-msu-blue dark:text-yellow-300 font-medium">Gazette</span>
                     </p>
                 </div>
 
                 <!-- Mobile-Optimized Hero Content -->
                 <div class="text-center mb-8 sm:mb-12">
-                    <h1 class="headings text-3xl sm:text-4xl lg:text-5xl font-bold text-msu-main-color mb-4 sm:mb-6">Gazette</h1>
-                    <div class="w-16 sm:w-20 lg:w-24 h-1 sm:h-1.5 bg-msu-deep-ocean mx-auto mb-4 sm:mb-6"></div>
-                    <p class="paragraph p2 text-gray-600 max-w-3xl mx-auto text-base sm:text-lg px-4 sm:px-0">
+                    <h1 class="headings text-3xl sm:text-4xl lg:text-5xl font-bold text-msu-main-color dark:text-yellow-300 mb-4 sm:mb-6 transition-colors duration-300">Gazette</h1>
+                    <div class="w-16 sm:w-20 lg:w-24 h-1 sm:h-1.5 bg-msu-deep-ocean dark:bg-yellow-400 mx-auto mb-4 sm:mb-6 transition-colors duration-300"></div>
+                    <p class="paragraph p2 text-gray-600 dark:text-gray-300 max-w-3xl mx-auto text-base sm:text-lg px-4 sm:px-0 transition-colors duration-300">
                         Official publications of MSU Tawi-Tawi College of Technology and Oceanography
                     </p>
                 </div>
@@ -240,7 +256,7 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
         </div>
 
         <!-- Mobile-Optimized Latest Publication Section -->
-        <div class="py-8 sm:py-12 lg:py-16 bg-gray-50 border-t border-b border-gray-100">
+        <div class="py-8 sm:py-12 lg:py-16 bg-gray-50 dark:bg-gray-800 border-t border-b border-gray-100 dark:border-gray-700 transition-colors duration-300">
             <div class="container mx-auto px-4 xl:px-0">
                 <div class="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-12 items-center">
                     <!-- Mobile-Optimized Publication Cover -->
@@ -251,7 +267,7 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                                 class="w-full h-auto object-cover transform transition-all duration-500 group-hover:scale-105"
                                 alt={latestGazette.title}
                             />
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 sm:p-6 lg:p-8">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-msu-main-color dark:text-yellow-400 flex items-end p-4 sm:p-6 lg:p-8">
                                 <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-white">{latestGazette.title}</h3>
                             </div>
                             <div class="absolute top-2 sm:top-4 right-2 sm:right-4 bg-msu-main-color text-white font-bold px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">
@@ -262,17 +278,17 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
 
                     <!-- Mobile-Optimized Publication Details -->
                     <div class="w-full lg:w-1/2">
-                        <div class="bg-white p-4 sm:p-6 lg:p-8 rounded-xl shadow-lg border border-gray-100">
-                            <h2 class="headings text-xl sm:text-2xl lg:text-3xl font-bold text-msu-dark-blue mb-3 sm:mb-4">{latestGazette.title}</h2>
+                        <div class="bg-white dark:bg-gray-900 p-4 sm:p-6 lg:p-8 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 transition-colors duration-300">
+                            <h2 class="headings text-xl sm:text-2xl lg:text-3xl font-bold text-msu-main-color dark:text-yellow-300 mb-3 sm:mb-4 transition-colors duration-300">{latestGazette.title}</h2>
                             <div class="flex flex-wrap items-center gap-2 sm:gap-4 mb-4 sm:mb-6">
-                                <span class="bg-msu-blue/10 text-msu-blue px-3 py-1 rounded-full text-sm font-medium">
+                                <span class="bg-msu-blue/10 dark:bg-yellow-400/20 text-msu-main-color dark:text-yellow-300 px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300">
                                     {getYear(latestGazette.publishedAt)}
                                 </span>
-                                <span class="bg-msu-gold/10 text-msu-dark-blue px-3 py-1 rounded-full text-sm font-medium">
+                                <span class="bg-msu-gold/10 dark:bg-yellow-400/20 text-msu-main-color dark:text-yellow-300 px-3 py-1 rounded-full text-sm font-medium transition-colors duration-300">
                                     {latestGazette.gazetteQuarter.gazetteQuarter}
                                 </span>
                             </div>
-                            <p class="paragraph p2 text-gray-600 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
+                            <p class="paragraph p2 text-gray-600 dark:text-gray-300 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base transition-colors duration-300">
                                 {latestGazette.body[0].children[0].text}
                             </p>
                             <div class="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
@@ -329,14 +345,14 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
         </div>
 
         <!-- Mobile-Optimized Publication Archive Section -->
-        <div class="py-8 sm:py-12 lg:py-16 bg-white">
+        <div class="py-8 sm:py-12 lg:py-16 bg-white dark:bg-gray-900 transition-colors duration-300">
             <div class="container mx-auto px-4 xl:px-0">
                 <!-- Mobile-Optimized Search and Filter -->
                 <div class="mb-8 sm:mb-12 lg:mb-16 max-w-6xl mx-auto">
                     <div class="flex flex-col gap-3 sm:gap-4">
                         <!-- Year Filter -->
-                        <div class="relative">
-                            <select id="yearFilter" class="filter-dropdown w-full text-sm sm:text-base">
+                        <div class="relative ">
+                            <select id="yearFilter" class="filter-dropdown w-full text-sm sm:text-base  dark:border-gray-700 dark:focus:border-yellow-400">
                                 <option value="All">All Years</option>
                                 {
                                     uniqueYears.map((year: string) => (
@@ -344,21 +360,21 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                                     ))
                                 }
                             </select>
-                            <svg class="absolute right-3 top-3 w-4 h-4 sm:w-5 sm:h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="absolute right-3 top-3 w-4 h-4 sm:w-5 sm:h-5 text-gray-400 dark:text-gray-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </div>
 
                         <!-- Quarter Filter -->
                         <div class="relative">
-                            <select id="quarterFilter" class="filter-dropdown w-full text-sm sm:text-base">
+                            <select id="quarterFilter" class="filter-dropdown w-full text-sm sm:text-base dark:text-white dark:border-gray-700 dark:focus:border-yellow-400">
                                 {
                                     uniqueQuarters.map(gazetteQuarter => (
                                         <option value={gazetteQuarter}>{gazetteQuarter}</option>
                                     ))
                                 }
                             </select>
-                            <svg class="absolute right-3 top-3 w-4 h-4 sm:w-5 sm:h-5 text-gray-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="absolute right-3 top-3 w-4 h-4 sm:w-5 sm:h-5 text-gray-400 dark:text-gray-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </div>
@@ -368,10 +384,10 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                             <input 
                                 type="text" 
                                 id="searchFilter" 
-                                class="filter-dropdown w-full pl-8 sm:pl-10 text-sm sm:text-base" 
+                                class="filter-dropdown w-full pl-8 sm:pl-10 text-sm sm:text-base  dark:text-white dark:border-gray-700 dark:focus:border-yellow-400" 
                                 placeholder="Search Gazette..." 
                             />
-                            <svg class="absolute left-2 sm:left-3 top-3 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="absolute left-2 sm:left-3 top-3 w-4 h-4 sm:w-5 sm:h-5 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                             </svg>
                         </div>
@@ -380,15 +396,15 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
 
                 <!-- Mobile-Optimized Section Header -->
                 <div class="text-center mb-8 sm:mb-10 lg:mb-12">
-                    <h2 class="headings text-2xl sm:text-3xl lg:text-4xl font-bold text-msu-main-color mb-3 sm:mb-4">Gazette Archive</h2>
-                    <div class="w-16 sm:w-20 lg:w-24 h-1 sm:h-1.5 bg-msu-deep-ocean mx-auto"></div>
+                    <h2 class="headings text-2xl sm:text-3xl lg:text-4xl font-bold text-msu-main-color dark:text-yellow-300 mb-3 sm:mb-4 transition-colors duration-300">Gazette Archive</h2>
+                    <div class="w-16 sm:w-20 lg:w-24 h-1 sm:h-1.5 bg-msu-deep-ocean dark:bg-yellow-400 mx-auto transition-colors duration-300"></div>
                 </div>
 
                 <!-- Mobile-Optimized Publications Grid -->
                 <div id="gazetteGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 lg:mb-16">
                     {allGazette.map((gazette) => (
                         <div 
-                            class="gazette-item bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+                            class="gazette-item bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden  border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
                             data-year={getYear(gazette.publishedAt)}
                             data-quarter={gazette.gazetteQuarter.gazetteQuarter}
                             data-title={gazette.title}
@@ -411,12 +427,12 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                                 </div>
                             </div>
                             <div class="p-4 sm:p-5 lg:p-6">
-                                <h3 class="headings text-base sm:text-lg lg:text-xl font-bold text-msu-dark-blue mb-2 line-clamp-2">{gazette.title}</h3>
-                                <p class="paragraph p2 text-gray-600 mb-3 sm:mb-4 line-clamp-3 text-sm sm:text-base">{gazette.body[0].children[0].text}</p>
+                                <h3 class="headings text-base sm:text-lg lg:text-xl font-bold text-msu-main-color dark:text-yellow-300 mb-2 line-clamp-2 transition-colors duration-300">{gazette.title}</h3>
+                                <p class="paragraph p2 text-gray-600 dark:text-gray-300 mb-3 sm:mb-4 line-clamp-3 text-sm sm:text-base transition-colors duration-300">{gazette.body[0].children[0].text}</p>
                                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0">
                                     <div class="flex flex-wrap items-center gap-2">
-                                        <span class="text-sm font-medium text-msu-blue">{getYear(gazette.publishedAt)}</span>
-                                        <span class="text-xs bg-msu-blue/10 text-msu-blue px-2 py-1 rounded-full">
+                                        <span class="text-sm font-medium text-msu-main-color dark:text-yellow-300 transition-colors duration-300">{getYear(gazette.publishedAt)}</span>
+                                        <span class="text-xs bg-msu-blue/10 dark:bg-yellow-400/20 text-msu-main-color dark:text-yellow-300 px-2 py-1 rounded-full transition-colors duration-300">
                                             {gazette.gazetteQuarter.gazetteQuarter}
                                         </span>
                                     </div>
@@ -424,7 +440,7 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                                         href={gazette.file.asset.url} 
                                         target="_blank" 
                                         rel="noopener noreferrer"
-                                        class="text-sm font-medium text-msu-blue hover:text-msu-dark-blue transition-colors flex items-center w-full sm:w-auto justify-center sm:justify-start"
+                                        class="text-sm font-medium text-msu-main-color dark:text-yellow-300 hover:text-msu-dark-blue dark:hover:text-yellow-400 transition-colors flex items-center w-full sm:w-auto justify-center sm:justify-start"
                                     >
                                         View <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                                     </a>
@@ -437,8 +453,8 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                 <!-- Mobile-Optimized Pagination -->
                 <div class="flex justify-center">
                     <div id="pagination" class="flex items-center space-x-1 sm:space-x-2">
-                        <button id="prevPage" class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-white border border-gray-200 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed text-xs sm:text-sm" style="border-color: #61063B;" onmouseenter="this.style.backgroundColor='#03045e'; this.style.color='#ffffff';" onmouseleave="this.style.backgroundColor='#ffffff'; this.style.color='#6b7280';" disabled>
-                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <button id="prevPage" class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed text-xs sm:text-sm dark:text-gray-300" style="border-color: #61063B;" onmouseenter="this.style.backgroundColor='#03045e'; this.style.color='#ffffff';" onmouseleave="this.style.backgroundColor='#ffffff'; this.style.color='#6b7280';" disabled>
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                             </svg>
                         </button>
@@ -447,8 +463,8 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                             <!-- Page numbers will be dynamically inserted here -->
                         </div>
 
-                        <button id="nextPage" class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-white border border-gray-200 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed text-xs sm:text-sm" style="border-color: #61063B;" onmouseenter="this.style.backgroundColor='#03045e'; this.style.color='#ffffff';" onmouseleave="this.style.backgroundColor='#ffffff'; this.style.color='#6b7280';">
-                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <button id="nextPage" class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed text-xs sm:text-sm dark:text-gray-300" style="border-color: #61063B;" onmouseenter="this.style.backgroundColor='#03045e'; this.style.color='#ffffff';" onmouseleave="this.style.backgroundColor='#ffffff'; this.style.color='#6b7280';">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                             </svg>
                         </button>
@@ -1049,7 +1065,103 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
 
         <!-- Search and Pagination Functionality -->
         <script>
+            // Dark Mode Toggle Functionality
+            function initializeDarkMode() {
+                const darkModeToggle = document.getElementById('darkModeToggle');
+                const sunIcon = document.getElementById('sunIcon');
+                const moonIcon = document.getElementById('moonIcon');
+                
+                // Check for saved dark mode preference or default to light mode
+                const isDarkMode = localStorage.getItem('darkMode') === 'true' || 
+                                  (!localStorage.getItem('darkMode') && 
+                                   window.matchMedia('(prefers-color-scheme: dark)').matches);
+                
+                // Apply initial theme
+                if (isDarkMode) {
+                    document.documentElement.classList.add('dark');
+                    document.body.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    document.body.classList.remove('dark');
+                }
+                
+                // Update toggle button state
+                updateDarkModeToggle(isDarkMode);
+                
+                // Add click event listener
+                if (darkModeToggle) {
+                    darkModeToggle.addEventListener('click', toggleDarkMode);
+                }
+            }
+            
+            function toggleDarkMode() {
+                const isDarkMode = document.documentElement.classList.contains('dark');
+                const newDarkMode = !isDarkMode;
+                
+                // Apply theme
+                if (newDarkMode) {
+                    document.documentElement.classList.add('dark');
+                    document.body.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    document.body.classList.remove('dark');
+                }
+                
+                // Save preference
+                localStorage.setItem('darkMode', newDarkMode.toString());
+                
+                // Update toggle button
+                updateDarkModeToggle(newDarkMode);
+                
+                // Add smooth transition effect
+                document.documentElement.style.transition = 'background-color 0.3s ease, color 0.3s ease';
+                document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
+                
+                // Remove transition after animation
+                setTimeout(() => {
+                    document.documentElement.style.transition = '';
+                    document.body.style.transition = '';
+                }, 300);
+            }
+            
+            function updateDarkModeToggle(isDarkMode) {
+                const sunIcon = document.getElementById('sunIcon');
+                const moonIcon = document.getElementById('moonIcon');
+                
+                if (sunIcon && moonIcon) {
+                    if (isDarkMode) {
+                        sunIcon.classList.remove('hidden');
+                        sunIcon.classList.add('block');
+                        moonIcon.classList.remove('block');
+                        moonIcon.classList.add('hidden');
+                    } else {
+                        sunIcon.classList.remove('block');
+                        sunIcon.classList.add('hidden');
+                        moonIcon.classList.remove('hidden');
+                        moonIcon.classList.add('block');
+                    }
+                }
+                
+                // Update pagination buttons for dark mode
+                updatePaginationForDarkMode(isDarkMode);
+            }
+            
+            function updatePaginationForDarkMode(isDarkMode) {
+                const pageButtons = document.querySelectorAll('#pageNumbers button');
+                pageButtons.forEach(button => {
+                    const pageNumber = parseInt(button.textContent || '0');
+                    const isCurrentPage = pageNumber === (window as any).currentPage;
+                    
+                    if (!isCurrentPage) {
+                        (button as HTMLElement).style.backgroundColor = isDarkMode ? '#1f2937' : '#ffffff';
+                        (button as HTMLElement).style.color = isDarkMode ? '#d1d5db' : '#6b7280';
+                    }
+                });
+            }
+            
             document.addEventListener('DOMContentLoaded', () => {
+                // Initialize dark mode
+                initializeDarkMode();
                 // Enhanced Mobile-Optimized Pagination functionality
                 const itemsPerPage = window.innerWidth < 640 ? 4 : window.innerWidth < 1024 ? 6 : 6; // Responsive items per page
                 const gazetteGrid = document.getElementById('gazetteGrid');
@@ -1141,11 +1253,20 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
 
                 function createPageButton(pageNumber: number) {
                     const pageButton = document.createElement('button');
+                    const isDarkMode = document.documentElement.classList.contains('dark');
+                    const currentPage = (window as any).currentPage || 1;
+                    
                     pageButton.className = `w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full transition-all text-xs sm:text-sm ${
-                        currentPage === pageNumber ? 'text-white font-medium' : 'bg-white text-gray-600'
+                        currentPage === pageNumber ? 'text-white font-medium' : 'bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300'
                     }`;
-                    pageButton.style.backgroundColor = currentPage === pageNumber ? '#61063B' : '#ffffff';
-                    pageButton.style.color = currentPage === pageNumber ? '#ffffff' : '#6b7280';
+                    
+                    if (currentPage === pageNumber) {
+                        pageButton.style.backgroundColor = '#61063B';
+                        pageButton.style.color = '#ffffff';
+                    } else {
+                        pageButton.style.backgroundColor = isDarkMode ? '#1f2937' : '#ffffff';
+                        pageButton.style.color = isDarkMode ? '#d1d5db' : '#6b7280';
+                    }
                     
                     // Add hover effect
                     pageButton.addEventListener('mouseenter', () => {
@@ -1157,8 +1278,8 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                     
                     pageButton.addEventListener('mouseleave', () => {
                         if (currentPage !== pageNumber) {
-                            pageButton.style.backgroundColor = '#ffffff';
-                            pageButton.style.color = '#6b7280';
+                            pageButton.style.backgroundColor = isDarkMode ? '#1f2937' : '#ffffff';
+                            pageButton.style.color = isDarkMode ? '#d1d5db' : '#6b7280';
                         }
                     });
                     
@@ -1271,6 +1392,34 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
             
             .border-msu-deep-ocean {
                 border-color: var(--msu-deep-ocean);
+            }
+            
+            /* Dark Mode Toggle Button Styles */
+            #darkModeToggle {
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.15);
+            }
+            
+            #darkModeToggle:hover {
+                transform: scale(1.1) rotate(5deg);
+                box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.25);
+            }
+            
+            #darkModeToggle:active {
+                transform: scale(0.95);
+            }
+            
+            /* Dark Mode Icon Transitions */
+            #sunIcon, #moonIcon {
+                transition: all 0.3s ease;
+            }
+            
+            /* Dark Mode Responsive Adjustments */
+            @media (max-width: 768px) {
+                #darkModeToggle {
+                    top: 5rem;
+                    right: 1rem;
+                }
             }
             
             .line-clamp-2 {

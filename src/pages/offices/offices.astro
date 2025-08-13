@@ -13,74 +13,74 @@ const currentPath = Astro.url.pathname;
 ---
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
-	<main class="overflow-x-hidden bg-white">
+	<main class="overflow-x-hidden bg-white dark:bg-gray-900">
 		<Navbar path={currentPath} client:visible />
 		
 		
 		<!-- Hero Section -->
-		<section class="relative bg-white pt-[200px]">
-			<div class="absolute inset-0 bg-gradient-to-r from-msu-maroon/5 to-msu-dark-ocean/5 z-0"></div>
+		<section class="relative bg-white dark:bg-gray-900 pt-[200px]">
+			<div class="absolute inset-0 bg-gradient-to-r from-msu-maroon/5 dark:from-msu-maroon/10 to-msu-dark-ocean/5 dark:to-msu-dark-ocean/10 z-0"></div>
 			<div class="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 py-24">
 				<div class="text-center">
-					<h1 class="text-5xl font-bold tracking-tight text-msu-deep-ocean sm:text-6xl">
+					<h1 class="text-5xl font-bold tracking-tight text-msu-deep-ocean dark:text-gray-100 sm:text-6xl">
 						<span class="block">MSU Tawi-Tawi College of</span>
-						<span class="block text-msu-main-color">Technology and Oceanography</span>
+						<span class="block text-msu-main-color dark:text-yellow-400">Technology and Oceanography</span>
 					</h1>
-					<p class="mt-6 text-xl leading-8 text-gray-600 max-w-3xl mx-auto">
+					<p class="mt-6 text-xl leading-8 text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
 						Where innovation meets ocean conservation in the heart of the Sulu Archipelago
 					</p>
 					<div class="mt-10 flex items-center justify-center gap-x-6">
-						<a href="/about/campus" class="rounded-md bg-msu-main-color px-6 py-3 text-lg font-semibold text-white shadow-sm hover:bg-msu-dark-ocean focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-msu-maroon transition-all">
+						<a href="/about/campus" class="rounded-md bg-msu-main-color dark:bg-yellow-500 px-6 py-3 text-lg font-semibold text-white shadow-sm hover:bg-msu-dark-ocean dark:hover:bg-yellow-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-msu-maroon dark:focus-visible:outline-yellow-400 transition-all">
 							Explore Our Campus
 						</a>
-						<a href="/404.astro" class="text-lg font-semibold leading-6 text-msu-dark-ocean hover:text-msu-maroon transition-colors">
+						<a href="/404.astro" class="text-lg font-semibold leading-6 text-msu-dark-ocean dark:text-yellow-400 hover:text-msu-maroon dark:hover:text-yellow-300 transition-colors">
 							Academic Programs <span aria-hidden="true">→</span>
 						</a>
 					</div>
 				</div>
 			</div>
-			<div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent z-20"></div>
+			<div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white dark:from-gray-900 to-transparent z-20"></div>
 		</section>
 
 		<!-- Stats Section -->
-		<section id="explore" class="bg-gray-50 py-24 sm:py-32">
+		<section id="explore" class="bg-gray-50 dark:bg-gray-800 py-24 sm:py-32">
 			<div class="mx-auto max-w-7xl px-6 lg:px-8">
 				<div class="mx-auto max-w-2xl text-center">
-					<h2 class="text-3xl font-bold tracking-tight text-msu-dark-ocean sm:text-4xl">
+					<h2 class="text-3xl font-bold tracking-tight text-msu-dark-ocean dark:text-gray-100 sm:text-4xl">
                         A warm welcome awaits you</h2>
-					<p class="mt-6 text-lg leading-8 text-gray-600">
+					<p class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
 						Wherever you go, our student-centered approach is manifested in all our offices. We believe that comfort is critical to our students' success.
 					</p>
 				</div>
 				<div class="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-					<div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 transform transition-all hover:scale-105">
-						<div class="text-msu-maroon mb-6">
+					<div class="bg-white dark:bg-gray-700 p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-600 transform transition-all hover:scale-105">
+						<div class="text-msu-maroon dark:text-yellow-400 mb-6">
 							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
 								<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
 							</svg>
 						</div>
-						<h3 class="text-2xl font-bold text-msu-dark-ocean">500+</h3>
-						<p class="mt-2 text-base text-gray-600">Smart Facilities</p>
+						<h3 class="text-2xl font-bold text-msu-dark-ocean dark:text-gray-100">500+</h3>
+						<p class="mt-2 text-base text-gray-600 dark:text-gray-300">Smart Facilities</p>
 					</div>
 
-					<div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 transform transition-all hover:scale-105">
-						<div class="text-msu-maroon mb-6">
+					<div class="bg-white dark:bg-gray-700 p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-600 transform transition-all hover:scale-105">
+						<div class="text-msu-maroon dark:text-yellow-400 mb-6">
 							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
 								<path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75m-16.5 0v3.75m16.5 0v3.75" />
 							</svg>
 						</div>
-						<h3 class="text-2xl font-bold text-msu-dark-ocean">120+</h3>
-						<p class="mt-2 text-base text-gray-600">Ongoing research projects in marine biodiversity</p>
+						<h3 class="text-2xl font-bold text-msu-dark-ocean dark:text-gray-100">120+</h3>
+						<p class="mt-2 text-base text-gray-600 dark:text-gray-300">Ongoing research projects in marine biodiversity</p>
 					</div>
 
-					<div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 transform transition-all hover:scale-105">
-						<div class="text-msu-maroon mb-6">
+					<div class="bg-white dark:bg-gray-700 p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-600 transform transition-all hover:scale-105">
+						<div class="text-msu-maroon dark:text-yellow-400 mb-6">
 							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
 								<path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
 							</svg>
 						</div>
-						<h3 class="text-2xl font-bold text-msu-dark-ocean">50+</h3>
-						<p class="mt-2 text-base text-gray-600">Multiple programs for the ocean</p>
+						<h3 class="text-2xl font-bold text-msu-dark-ocean dark:text-gray-100">50+</h3>
+						<p class="mt-2 text-base text-gray-600 dark:text-gray-300">Multiple programs for the ocean</p>
 					</div>
 				</div>
 			</div>
@@ -107,72 +107,72 @@ const currentPath = Astro.url.pathname;
 		<!-- <ChancellorMessage /> -->
 
 		<!-- Administrative Offices -->
-		<section id="administrative" class="py-24 bg-gray-50">
+		<section id="administrative" class="py-24 bg-gray-50 dark:bg-gray-800">
 			<div class="mx-auto max-w-7xl px-6 lg:px-8">
 				<div class="text-center">
-					<h2 class="text-4xl font-bold text-msu-dark-ocean">Administrative Offices</h2>
-					<p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+					<h2 class="text-4xl font-bold text-msu-dark-ocean dark:text-gray-100">Administrative Offices</h2>
+					<p class="mt-4 text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
 						Our dedicated administration supports the academic mission of the college
 					</p>
 				</div>
 
 				<div class="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-12">
-					<div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
-						<h3 class="text-2xl font-bold text-msu-maroon pb-4 mb-8 border-b border-gray-200">Chancellor's Office</h3>
+					<div class="bg-white dark:bg-gray-700 p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-600">
+						<h3 class="text-2xl font-bold text-msu-maroon dark:text-yellow-400 pb-4 mb-8 border-b border-gray-200 dark:border-gray-500">Chancellor's Office</h3>
 						<ul class="space-y-4">
 							<li class="flex items-start">
-								<svg class="h-6 w-6 flex-shrink-0 text-msu-maroon mt-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+								<svg class="h-6 w-6 flex-shrink-0 text-msu-maroon dark:text-yellow-400 mt-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
 									<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
 								</svg>
-								<span class="ml-3 text-lg text-gray-700 hover:text-msu-maroon transition-colors cursor-pointer">Office of the Campus Secretary</span>
+								<span class="ml-3 text-lg text-gray-700 dark:text-gray-300 hover:text-msu-maroon dark:hover:text-yellow-400 transition-colors cursor-pointer">Office of the Campus Secretary</span>
 							</li>
 							<li class="flex items-start">
-								<svg class="h-6 w-6 flex-shrink-0 text-msu-maroon mt-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+								<svg class="h-6 w-6 flex-shrink-0 text-msu-maroon dark:text-yellow-400 mt-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
 									<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
 								</svg>
-								<span class="ml-3 text-lg text-gray-700 hover:text-msu-maroon transition-colors cursor-pointer">Budget Management Office</span>
+								<span class="ml-3 text-lg text-gray-700 dark:text-gray-300 hover:text-msu-maroon dark:hover:text-yellow-400 transition-colors cursor-pointer">Budget Management Office</span>
 							</li>
 							<li class="flex items-start">
-								<svg class="h-6 w-6 flex-shrink-0 text-msu-maroon mt-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+								<svg class="h-6 w-6 flex-shrink-0 text-msu-maroon dark:text-yellow-400 mt-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
 									<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
 								</svg>
-								<span class="ml-3 text-lg text-gray-700 hover:text-msu-maroon transition-colors cursor-pointer">Internal Control & Audit Unit</span>
+								<span class="ml-3 text-lg text-gray-700 dark:text-gray-300 hover:text-msu-maroon dark:hover:text-yellow-400 transition-colors cursor-pointer">Internal Control & Audit Unit</span>
 							</li>
 							<li class="flex items-start">
-								<svg class="h-6 w-6 flex-shrink-0 text-msu-maroon mt-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+								<svg class="h-6 w-6 flex-shrink-0 text-msu-maroon dark:text-yellow-400 mt-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
 									<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
 								</svg>
-								<span class="ml-3 text-lg text-gray-700 hover:text-msu-maroon transition-colors cursor-pointer">Office of Legal Services</span>
+								<span class="ml-3 text-lg text-gray-700 dark:text-gray-300 hover:text-msu-maroon dark:hover:text-yellow-400 transition-colors cursor-pointer">Office of Legal Services</span>
 							</li>
 							<li class="flex items-start">
-								<svg class="h-6 w-6 flex-shrink-0 text-msu-maroon mt-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+								<svg class="h-6 w-6 flex-shrink-0 text-msu-maroon dark:text-yellow-400 mt-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
 									<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
 								</svg>
-								<span class="ml-3 text-lg text-gray-700 hover:text-msu-maroon transition-colors cursor-pointer">Office of Information, Press, & Publications</span>
+								<span class="ml-3 text-lg text-gray-700 dark:text-gray-300 hover:text-msu-maroon dark:hover:text-yellow-400 transition-colors cursor-pointer">Office of Information, Press, & Publications</span>
 							</li>
 						</ul>
 					</div>
 
-					<div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
-						<h3 class="text-2xl font-bold text-msu-maroon pb-4 mb-8 border-b border-gray-200">Vice Chancellor Offices</h3>
+					<div class="bg-white dark:bg-gray-700 p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-600">
+						<h3 class="text-2xl font-bold text-msu-maroon dark:text-yellow-400 pb-4 mb-8 border-b border-gray-200 dark:border-gray-500">Vice Chancellor Offices</h3>
 						<ul class="space-y-4">
 							<li class="flex items-start">
-								<svg class="h-6 w-6 flex-shrink-0 text-msu-maroon mt-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+								<svg class="h-6 w-6 flex-shrink-0 text-msu-maroon dark:text-yellow-400 mt-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
 									<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
 								</svg>
-								<span class="ml-3 text-lg text-gray-700 hover:text-msu-maroon transition-colors cursor-pointer">Vice-Chancellor for Research, Innovation, Development & Extension</span>
+								<span class="ml-3 text-lg text-gray-700 dark:text-gray-300 hover:text-msu-maroon dark:hover:text-yellow-400 transition-colors cursor-pointer">Vice-Chancellor for Research, Innovation, Development & Extension</span>
 							</li>
 							<li class="flex items-start">
-								<svg class="h-6 w-6 flex-shrink-0 text-msu-maroon mt-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+								<svg class="h-6 w-6 flex-shrink-0 text-msu-maroon dark:text-yellow-400 mt-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
 									<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
 								</svg>
-								<span class="ml-3 text-lg text-gray-700 hover:text-msu-maroon transition-colors cursor-pointer">Vice-Chancellor for Academic Affairs</span>
+								<span class="ml-3 text-lg text-gray-700 dark:text-gray-300 hover:text-msu-maroon dark:hover:text-yellow-400 transition-colors cursor-pointer">Vice-Chancellor for Academic Affairs</span>
 							</li>
 							<li class="flex items-start">
-								<svg class="h-6 w-6 flex-shrink-0 text-msu-maroon mt-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+								<svg class="h-6 w-6 flex-shrink-0 text-msu-maroon dark:text-yellow-400 mt-1" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
 									<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
 								</svg>
-								<span class="ml-3 text-lg text-gray-700 hover:text-msu-maroon transition-colors cursor-pointer">Vice-Chancellor for Administration & Finance</span>
+								<span class="ml-3 text-lg text-gray-700 dark:text-gray-300 hover:text-msu-maroon dark:hover:text-yellow-400 transition-colors cursor-pointer">Vice-Chancellor for Administration & Finance</span>
 							</li>
 						</ul>
 					</div>
@@ -180,7 +180,7 @@ const currentPath = Astro.url.pathname;
 
 				<div class="mt-16 text-center">
 					<a href="https://drive.google.com/file/d/10AHPJVf1ePe2KGkAn9ynYndbc9Rx2yes/view?usp=drive_link" 
-					   class="inline-flex items-center rounded-full border border-msu-maroon px-8 py-3 text-lg font-medium text-msu-maroon hover:bg-msu-maroon hover:text-white transition-colors duration-300">
+					   class="inline-flex items-center rounded-full border border-msu-maroon dark:border-yellow-400 px-8 py-3 text-lg font-medium text-msu-maroon dark:text-yellow-400 hover:bg-msu-maroon dark:hover:bg-yellow-400 hover:text-white dark:hover:text-gray-900 transition-colors duration-300">
 						View Complete Directory
 						<svg class="ml-2 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
 							<path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -191,11 +191,11 @@ const currentPath = Astro.url.pathname;
 		</section>
 
 		<!-- Faculty & Staff -->
-		<section id="facultyStaff" class="py-24 bg-white">
+		<section id="facultyStaff" class="py-24 bg-white dark:bg-gray-900">
 			<div class="mx-auto max-w-7xl px-6 lg:px-8">
 				<div class="text-center">
-					<!-- <h2 class="text-4xl font-bold text-msu-dark-ocean">Our Distinguished Faculty</h2>
-					<p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+					<!-- <h2 class="text-4xl font-bold text-msu-dark-ocean dark:text-gray-100">Our Distinguished Faculty</h2>
+					<p class="mt-4 text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
 						Meet the experts guiding the next generation of marine scientists and technologists
 					</p> -->
 				</div>

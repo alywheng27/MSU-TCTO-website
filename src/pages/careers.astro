@@ -19,11 +19,10 @@ const bidding = await getBidding();
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography - Careers">
       <Navbar path={currentPath} client:visible />
-  <main class="min-h-screen flex flex-col">
-
+  <main class="min-h-screen flex flex-col bg-white dark:bg-gray-900 transition-colors duration-300">
 
  <!-- Hero Section with Enhanced Background -->
-<section class="relative bg-gradient-to-r from-[#61063B] to-blue-900 w-full py-20 md:py-28 mt-10">
+<section class="relative bg-gradient-to-r from-[#61063B] to-blue-900 dark:from-[#61063B] dark:to-yellow-600 w-full py-20 md:py-28">
   <div class="absolute inset-0 bg-[url('/images/careers-hero-bg.jpg')] bg-cover bg-center opacity-20"></div>
   <div class="container mx-auto px-7 xl:px-[12.5%] xs:px-[5%] relative z-10 text-center">
     <h1 class="text-4xl md:text-5xl font-bold text-white mt-10">Join Our Team</h1>
@@ -40,40 +39,40 @@ const bidding = await getBidding();
 </section>
 
     <!-- Stats Section with Enhanced Cards -->
-    <section class="bg-gray-50 py-16">
+    <section class="bg-gray-50 dark:bg-gray-800 py-16 transition-colors duration-300">
       <div class="container mx-auto px-4 xl:px-[12.5%] xs:px-[5%]">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="text-center p-8 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border-l-4 border-[#61063B]">
-            <div class="text-5xl font-bold text-[#61063B] mb-2">50+</div>
-            <div class="text-gray-600 font-medium">Faculty Members</div>
+          <div class="text-center p-8 bg-white dark:bg-gray-700 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border-l-4 border-[#61063B] dark:border-yellow-400">
+            <div class="text-5xl font-bold text-[#61063B] dark:text-yellow-400 mb-2">50+</div>
+            <div class="text-gray-600 dark:text-gray-300 font-medium">Faculty Members</div>
           </div>
-          <div class="text-center p-8 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border-l-4 border-[#61063B]">
-            <div class="text-5xl font-bold text-[#61063B] mb-2">100+</div>
-            <div class="text-gray-600 font-medium">Staff Members</div>
+          <div class="text-center p-8 bg-white dark:bg-gray-700 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border-l-4 border-[#61063B] dark:border-yellow-400">
+            <div class="text-5xl font-bold text-[#61063B] dark:text-yellow-400 mb-2">100+</div>
+            <div class="text-gray-600 dark:text-gray-300 font-medium">Staff Members</div>
           </div>
-          <div class="text-center p-8 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border-l-4 border-[#61063B]">
-            <div class="text-5xl font-bold text-[#61063B] mb-2">10+</div>
-            <div class="text-gray-600 font-medium">Research Projects</div>
+          <div class="text-center p-8 bg-white dark:bg-gray-700 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border-l-4 border-[#61063B] dark:border-yellow-400">
+            <div class="text-5xl font-bold text-[#61063B] dark:text-yellow-400 mb-2">10+</div>
+            <div class="text-gray-600 dark:text-gray-300 font-medium">Research Projects</div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Job Openings Section with Enhanced Search -->
-    <section id="open-positions" class="w-full xl:px-[12.5%] xs:px-[5%] py-16 bg-white">
+    <section id="open-positions" class="w-full xl:px-[12.5%] xs:px-[5%] py-16 bg-white dark:bg-gray-900 transition-colors duration-300">
       <div class="container mx-auto">
         <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-[#61063B] mb-4">Current Job Openings</h2>
-          <p class="text-gray-600 max-w-2xl mx-auto">
+          <h2 class="text-3xl font-bold text-[#61063B] dark:text-yellow-400 mb-4">Current Job Openings</h2>
+          <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Browse through our available positions and find the perfect opportunity to grow your career with us.
           </p>
         </div>
 
         <!-- Enhanced Search and Filter Bar -->
-        <div class="mb-8 bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+        <div class="mb-8 bg-gray-50 dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 transition-colors duration-300">
       
         <!-- Enhanced Table Component -->
-        <div class="overflow-hidden rounded-xl shadow-lg border border-gray-200">
+        <div class="overflow-hidden rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 transition-colors duration-300">
           <OpenPositionsTable client:load />
         </div>
 
@@ -82,10 +81,10 @@ const bidding = await getBidding();
 
         <!-- Enhanced Email Subscription -->
    <!-- In your HTML section, replace the subscription form and success message with this: -->
-   <div class="mt-16 bg-gradient-to-r from-[#61063B]/5 to-blue-900/5 p-8 rounded-xl text-center border border-gray-200 shadow-sm relative overflow-hidden">
+   <div class="mt-16 bg-gradient-to-r from-[#61063B]/5 to-blue-900/5 dark:from-yellow-400/5 dark:to-yellow-600/5 p-8 rounded-xl text-center border border-gray-200 dark:border-gray-700 shadow-sm relative overflow-hidden transition-colors duration-300">
      <div id="subscription-container">
-       <h3 class="text-2xl font-semibold text-[#61063B] mb-4">Stay Updated on New Opportunities</h3>
-       <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
+       <h3 class="text-2xl font-semibold text-[#61063B] dark:text-yellow-400 mb-4">Stay Updated on New Opportunities</h3>
+       <p class="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
          Sign up to receive notifications when new positions matching your interests become available.
        </p>
        <form id="subscription-form" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
@@ -93,36 +92,36 @@ const bidding = await getBidding();
            type="email" 
            id="subscription-email"
            placeholder="Your email address" 
-           class="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#61063B] focus:border-transparent bg-white"
+           class="flex-1 px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-[#61063B] dark:focus:ring-yellow-400 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors duration-300"
            required
          />
-         <button type="submit" class="bg-[#61063B] text-white px-6 py-3 rounded-lg hover:bg-[#4a052e] transition-colors shadow-md hover:shadow-lg">
+         <button type="submit" class="bg-[#61063B] dark:bg-yellow-500 text-white dark:text-gray-900 px-6 py-3 rounded-lg hover:bg-[#4a052e] dark:hover:bg-yellow-600 transition-colors shadow-md hover:shadow-lg">
            Subscribe
          </button>
        </form>
-       <p class="text-xs text-gray-500 mt-3">We respect your privacy. Unsubscribe at any time.</p>
+       <p class="text-xs text-gray-500 dark:text-gray-400 mt-3">We respect your privacy. Unsubscribe at any time.</p>
      </div>
   
 <!-- Enhanced Success Message -->
 <div id="success-message" class="fixed text-msu-maroon-900 inset-0 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
   <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
-  <div class="relative bg-white rounded-xl shadow-2xl overflow-hidden w-full max-w-md transform scale-95 transition-all duration-300" id="success-card">
-    <div class="h-2 bg-gradient-to-r from-[#61063B] to-blue-900"></div>
+  <div class="relative bg-white dark:bg-gray-800 rounded-xl shadow-2xl overflow-hidden w-full max-w-md transform scale-95 transition-all duration-300" id="success-card">
+         <div class="h-2 bg-gradient-to-r from-[#61063B] to-blue-900 dark:from-yellow-400 dark:to-yellow-600"></div>
     <div class="p-8 text-center">
       <div class="relative mx-auto w-20 h-20 mb-6">
         <svg class="absolute inset-0 w-full h-full text-green-500 opacity-0 transition-opacity duration-500 delay-100" 
              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        <div class="absolute inset-0 border-4 border-[#61063B]/10 rounded-full animate-spin duration-1000"></div>
+                 <div class="absolute inset-0 border-4 border-[#61063B]/10 dark:border-yellow-500/10 rounded-full animate-spin duration-1000"></div>
       </div>
-      <h3 class="text-2xl md:text-3xl font-bold text-[#61063B] mb-2 transform translate-y-4 opacity-0 transition-all duration-500 delay-300">
+      <h3 class="text-2xl md:text-3xl font-bold text-[#61063B] dark:text-yellow-400 mb-2 transform translate-y-4 opacity-0 transition-all duration-500 delay-300">
         Subscription Confirmed!
       </h3>
-      <p class="text-gray-600 mb-6 transform translate-y-4 opacity-0 transition-all duration-500 delay-500">
+      <p class="text-gray-600 dark:text-gray-300 mb-6 transform translate-y-4 opacity-0 transition-all duration-500 delay-500">
         Thank you for subscribing. We've sent a confirmation to your email address.
       </p>
-      <button id="reset-form" class="px-6 py-3 bg-[#61063B] text-white rounded-lg font-medium hover:bg-[#4a052e] transition-colors transform translate-y-4 opacity-0 transition-all duration-500 delay-700">
+      <button id="reset-form" class="px-6 py-3 bg-[#61063B] dark:bg-yellow-500 text-white dark:text-gray-900 rounded-lg font-medium hover:bg-[#4a052e] dark:hover:bg-yellow-600 transition-colors transform translate-y-4 opacity-0 transition-all duration-500 delay-700">
         Close
       </button>
     </div>
@@ -133,52 +132,55 @@ const bidding = await getBidding();
     </section>
 
     <!-- Enhanced Why Work With Us Section -->
-    <section class="bg-gray-50 py-16">
+    <section class="bg-gray-50 dark:bg-gray-800 py-16 transition-colors duration-300">
       <div class="container mx-auto px-4 xl:px-[12.5%] xs:px-[5%]">
         <div class="text-center mb-12">
-          <h2 class="text-3xl font-bold text-[#61063B] mb-4">Why Work With Us?</h2>
-          <p class="text-gray-600 max-w-2xl mx-auto">
+          <h2 class="text-3xl font-bold text-[#61063B] dark:text-yellow-400 mb-4">Why Work With Us?</h2>
+          <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Discover the benefits of being part of the MSU Tawi-Tawi College of Technology and Oceanography.
           </p>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border-t-4 border-[#61063B]">
-            <div class="text-[#61063B] mb-4">
+          <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border-t-4 border-[#61063B] dark:border-yellow-400">
+            <div class="text-[#61063B] dark:text-yellow-400 mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
             </div>
-            <h3 class="text-xl font-semibold text-gray-800 mb-2">Professional Growth</h3>
-            <p class="text-gray-600">Access to training programs, workshops, and opportunities for career advancement in a dynamic academic environment.</p>
+            <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-2">Professional Growth</h3>
+            <p class="text-gray-600 dark:text-gray-300">Access to training programs, workshops, and opportunities for career advancement in a dynamic academic environment.</p>
           </div>
           
-          <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border-t-4 border-[#61063B]">
-            <div class="text-[#61063B] mb-4">
+          <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border-t-4 border-[#61063B] dark:border-yellow-400">
+            <div class="text-[#61063B] dark:text-yellow-400 mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
               </svg>
             </div>
-            <h3 class="text-xl font-semibold text-gray-800 mb-2">Comprehensive Benefits</h3>
-            <p class="text-gray-600">Competitive salary packages, health insurance, retirement plans, and other employee benefits.</p>
+            <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-2">Comprehensive Benefits</h3>
+            <p class="text-gray-600 dark:text-gray-300">Competitive salary packages, health insurance, retirement plans, and other employee benefits.</p>
           </div>
           
-          <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border-t-4 border-[#61063B]">
-            <div class="text-[#61063B] mb-4">
+          <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border-t-4 border-[#61063B] dark:border-yellow-400">
+            <div class="text-[#61063B] dark:text-yellow-400 mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
             </div>
-            <h3 class="text-xl font-semibold text-gray-800 mb-2">Collaborative Environment</h3>
-            <p class="text-gray-600">Work with talented professionals and researchers in a supportive and inclusive academic community.</p>
+            <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-2">Collaborative Environment</h3>
+            <p class="text-gray-600 dark:text-gray-300">Work with talented professionals and researchers in a supportive and inclusive academic community.</p>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- Application Requirements Section -->
+
+
 
     <!-- Scroll to Top Button -->
-    <button class="scroll-to-top" aria-label="Scroll to top">
+    <button class="scroll-to-top bg-[#61063B] dark:bg-yellow-500 text-white dark:text-gray-900 hover:bg-[#4a052e] dark:hover:bg-yellow-600 transition-colors duration-300" aria-label="Scroll to top">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
       </svg>
@@ -196,6 +198,7 @@ const bidding = await getBidding();
 <!-- Replace all your script tags with this single, optimized version: -->
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+
     // Subscription form handling
     const subscriptionForm = document.getElementById('subscription-form');
     const subscriptionContainer = document.getElementById('subscription-container');
@@ -298,6 +301,35 @@ const bidding = await getBidding();
     document.getElementById('reset-form').addEventListener('click', hideSuccessAnimation);
   });
 </script>
+
+<style>
+  /* Scroll to top button dark mode styles */
+  .scroll-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Dark mode transitions */
+  .dark * {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  }
+</style>
 
   </main>
 </Layout>

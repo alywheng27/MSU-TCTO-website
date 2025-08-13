@@ -26,11 +26,11 @@ const one_sixLatestAnnualReport = await get1_6LatestAnnualReport();
 ---
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
-    <main class="bg-white">
+    <main class="bg-white dark:bg-gray-900">
         <Navbar path={currentPath} client:visible />
 
         <!-- Hero Section -->
-        <div class="relative pt-24 pb-12 bg-white">
+        <div class="relative pt-24 pb-12 bg-white dark:bg-gray-900">
             <div class="absolute inset-0 overflow-hidden">
                 <div class="absolute inset-0 bg-gradient-to-r from-msu-light-blue/10 to-white"></div>
                 <div class="absolute top-0 right-0 w-1/2 h-full bg-msu-blue/5 -skew-x-12 transform origin-top-right"></div>
@@ -39,18 +39,18 @@ const one_sixLatestAnnualReport = await get1_6LatestAnnualReport();
             <div class="container mx-auto px-4 xl:px-0 relative">
                 <!-- Breadcrumb -->
                 <div class="mb-8">
-                    <p class="paragraph p2 text-gray-600">
-                        <a href="/home" class="hover:text-msu-blue transition-colors">Home</a> / 
-                        <a href="/publications" class="hover:text-msu-blue transition-colors">Publications</a> / 
-                        <span class="text-msu-blue font-medium">Annual Report</span>
+                    <p class="paragraph p2 text-gray-600 dark:text-gray-300">
+                        <a href="/home" class="hover:text-msu-blue dark:hover:text-blue-400 transition-colors">Home</a> / 
+                        <a href="/publications" class="hover:text-msu-blue dark:hover:text-blue-400 transition-colors">Publications</a> / 
+                        <span class="text-msu-blue dark:text-blue-400 font-medium">Annual Report</span>
                     </p>
                 </div>
 
                 <!-- Hero Content -->
                 <div class="text-center mb-12">
-                    <h1 class="headings text-5xl font-bold text-msu-main-color mb-6">Annual Report</h1>
-                    <div class="w-24 h-1.5 bg-msu-deep-ocean mx-auto mb-6"></div>
-                    <p class="paragraph p2 text-gray-600 max-w-3xl mx-auto text-lg">
+                    <h1 class="headings text-5xl font-bold text-msu-main-color dark:text-yellow-400 mb-6">Annual Report</h1>
+                    <div class="w-24 h-1.5 bg-msu-deep-ocean dark:bg-yellow-400 mx-auto mb-6"></div>
+                    <p class="paragraph p2 text-gray-600 dark:text-gray-300 max-w-3xl mx-auto text-lg">
                         Comprehensive yearly reports of MSU Tawi-Tawi College of Technology and Oceanography
                     </p>
                 </div>
@@ -58,7 +58,7 @@ const one_sixLatestAnnualReport = await get1_6LatestAnnualReport();
         </div>
 
         <!-- Latest Report Section -->
-        <div class="py-16 bg-gray-50 border-t border-b border-gray-100">
+        <div class="py-16 bg-gray-50 dark:bg-gray-800 border-t border-b border-gray-100 dark:border-gray-700">
             <div class="container mx-auto px-4 xl:px-0">
                 <div class="flex flex-col lg:flex-row gap-12 items-center">
                     <!-- Report Cover Image -->
@@ -80,14 +80,14 @@ const one_sixLatestAnnualReport = await get1_6LatestAnnualReport();
 
                     <!-- Report Details -->
                     <div class="lg:w-1/2">
-                        <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-                            <h2 class="headings text-3xl font-bold text-msu-dark-blue mb-4">{latestAnnualReport.title}</h2>
+                        <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700">
+                            <h2 class="headings text-3xl font-bold text-msu-dark-blue dark:text-gray-100 mb-4">{latestAnnualReport.title}</h2>
                             <div class="flex items-center gap-4 mb-6">
-                                <span class="bg-msu-blue/10 text-msu-blue px-3 py-1 rounded-full text-sm font-medium">
+                                <span class="bg-msu-blue/10 dark:bg-blue-900/20 text-msu-blue dark:text-blue-400 px-3 py-1 rounded-full text-sm font-medium">
                                     {getYear(latestAnnualReport.publishedAt)}
                                 </span>
                             </div>
-                            <p class="paragraph p2 text-gray-600 mb-8 leading-relaxed">
+                            <p class="paragraph p2 text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
                                 {latestAnnualReport.body[0].children[0].text}
                             </p>
                             <a
@@ -95,7 +95,7 @@ const one_sixLatestAnnualReport = await get1_6LatestAnnualReport();
                                 target="_blank" 
                                 rel="noopener noreferrer"
                                 download
-                                class="inline-flex items-center justify-center bg-msu-main-color hover:bg-msu-deep-ocean text-white font-bold py-3 px-6 rounded-lg shadow-md transform transition-all duration-300 hover:scale-[1.02]"
+                                class="inline-flex items-center justify-center bg-msu-main-color dark:bg-yellow-600 hover:bg-msu-deep-ocean dark:hover:bg-yellow-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transform transition-all duration-300 hover:scale-[1.02]"
                             >
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
@@ -109,16 +109,16 @@ const one_sixLatestAnnualReport = await get1_6LatestAnnualReport();
         </div>
 
         <!-- Recent Reports Section -->
-        <div class="py-16 bg-white">
+        <div class="py-16 bg-white dark:bg-gray-900">
             <div class="container mx-auto px-4 xl:px-0">
                 <div class="text-center mb-12">
-                    <h2 class="headings text-4xl font-bold text-msu-main-color mb-4">Previous Annual Reports</h2>
-                    <div class="w-24 h-1.5 bg-msu-deep-ocean mx-auto"></div>
+                    <h2 class="headings text-4xl font-bold text-msu-main-color dark:text-yellow-400 mb-4">Previous Annual Reports</h2>
+                    <div class="w-24 h-1.5 bg-msu-deep-ocean dark:bg-yellow-400 mx-auto"></div>
                 </div>
 
                 <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-8 mb-16">
                     {one_fourLatestAnnualReport.map((report) => (
-                        <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
                             <div class="relative group h-100 overflow-hidden">
                                 <img 
                                     src={report.mainImage.asset.url} 
@@ -137,15 +137,15 @@ const one_sixLatestAnnualReport = await get1_6LatestAnnualReport();
                                 </div>
                             </div>
                             <div class="p-6">
-                                <h3 class="headings text-xl font-bold text-msu-dark-blue mb-2 line-clamp-2">{report.title}</h3>
-                                <p class="paragraph p2 text-gray-600 mb-4 line-clamp-3">{report.body[0].children[0].text}</p>
+                                <h3 class="headings text-xl font-bold text-msu-dark-blue dark:text-gray-100 mb-2 line-clamp-2">{report.title}</h3>
+                                <p class="paragraph p2 text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">{report.body[0].children[0].text}</p>
                                 <div class="flex justify-between items-center">
-                                    <span class="text-sm font-medium text-msu-blue">{getYear(report.publishedAt)}</span>
+                                    <span class="text-sm font-medium text-msu-blue dark:text-blue-400">{getYear(report.publishedAt)}</span>
                                     <a 
                                         href={report.file.asset.url} 
                                         target="_blank" 
                                         rel="noopener noreferrer"
-                                        class="text-sm font-medium text-msu-blue hover:text-msu-dark-blue transition-colors flex items-center"
+                                        class="text-sm font-medium text-msu-blue dark:text-blue-400 hover:text-msu-dark-blue dark:hover:text-blue-300 transition-colors flex items-center"
                                     >
                                         View <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                                     </a>
@@ -221,7 +221,7 @@ const one_sixLatestAnnualReport = await get1_6LatestAnnualReport();
 <script src="../../js/smoothscroll.js" ></script>
 
 
-        <style global>
+        <style is:global>
             :root {
                 --msu-dark-blue: #003366;
                 --msu-blue: #0066CC;

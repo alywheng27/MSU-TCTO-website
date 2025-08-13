@@ -11,7 +11,7 @@ const currentPath = Astro.url.pathname;
 ---
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
-  <main class="bg-gray-50">
+  <main class="bg-gray-50 dark:bg-gray-900">
     <Navbar path={currentPath} client:visible />
     
     <!-- Hero Section -->
@@ -29,18 +29,18 @@ const currentPath = Astro.url.pathname;
     </section>
 
     <!-- Vision Section -->
-    <section class="py-20 bg-white">
+    <section class="py-20 bg-white dark:bg-gray-900">
       <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto text-center">
-          <span class="inline-block bg-msu-rusty-red/10 text-msu-rusty-red px-4 py-2 rounded-full text-sm font-semibold mb-6 animate-fade-in">
+          <span class="inline-block bg-msu-rusty-red/10 dark:bg-yellow-400/20 text-msu-rusty-red dark:text-yellow-400 px-4 py-2 rounded-full text-sm font-semibold mb-6 animate-fade-in">
             OUR VISION
           </span>
-          <h2 class="headings text-3xl md:text-4xl font-bold text-msu-maroon mb-8 animate-fade-in-up">
+          <h2 class="headings text-3xl md:text-4xl font-bold text-msu-maroon dark:text-gray-100 mb-8 animate-fade-in-up">
             A university in the Sulu Archipelago renowned for Fisheries, Marine and Environmental Science
           </h2>
           <div class="relative">
-            <div class="absolute -inset-4 bg-msu-rusty-red/10 rounded-xl blur-sm opacity-75 animate-pulse-slow"></div>
-            <p class="paragraph text-lg md:text-xl text-gray-700 relative z-10 leading-relaxed animate-fade-in-up delay-100">
+            <div class="absolute -inset-4 bg-msu-rusty-red/10 dark:bg-yellow-400/10 rounded-xl blur-sm opacity-75 animate-pulse-slow"></div>
+            <p class="paragraph text-lg md:text-xl text-gray-700 dark:text-gray-300 relative z-10 leading-relaxed animate-fade-in-up delay-100">
               We envision MSU-TCTO as a beacon of excellence in marine sciences, environmental studies, and related disciplines, serving as a catalyst for sustainable development in the Sulu Archipelago region.
             </p>
           </div>
@@ -49,14 +49,14 @@ const currentPath = Astro.url.pathname;
     </section>
 
     <!-- Mission Section -->
-    <section class="py-20 bg-gray-50">
+    <section class="py-20 bg-gray-50 dark:bg-gray-800">
       <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto">
           <div class="text-center mb-16">
-            <span class="inline-block bg-msu-rusty-red/10 text-msu-rusty-red px-4 py-2 rounded-full text-sm font-semibold animate-fade-in">
+            <span class="inline-block bg-msu-rusty-red/10 dark:bg-yellow-400/20 text-msu-rusty-red dark:text-yellow-400 px-4 py-2 rounded-full text-sm font-semibold animate-fade-in">
               OUR MISSION
             </span>
-            <h2 class="headings text-3xl md:text-4xl font-bold text-msu-maroon mt-4 mb-6 animate-fade-in-up">
+            <h2 class="headings text-3xl md:text-4xl font-bold text-msu-maroon dark:text-gray-100 mt-4 mb-6 animate-fade-in-up">
               Commitment to Excellence and Service
             </h2>
           </div>
@@ -64,37 +64,37 @@ const currentPath = Astro.url.pathname;
           <!-- Mission Items Grid -->
           <div class="grid md:grid-cols-2 gap-8">
             <!-- Item 1 -->
-            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-msu-maroon animate-fade-in-up delay-100">
-              <div class="text-msu-maroon text-4xl mb-4">01</div>
-              <h3 class="text-xl font-bold text-gray-800 mb-3">Quality Education</h3>
-              <p class="text-gray-600">
+            <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-msu-maroon dark:border-yellow-400 animate-fade-in-up delay-100">
+              <div class="text-msu-maroon dark:text-yellow-400 text-4xl mb-4">01</div>
+              <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">Quality Education</h3>
+              <p class="text-gray-600 dark:text-gray-300">
                 Provide relevant quality education especially to Muslims and other indigenous groups
               </p>
             </div>
 
             <!-- Item 2 -->
-            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-msu-maroon animate-fade-in-up delay-200">
-              <div class="text-msu-maroon text-4xl mb-4">02</div>
-              <h3 class="text-xl font-bold text-gray-800 mb-3">Environmental Stewardship</h3>
-              <p class="text-gray-600">
+            <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-msu-maroon dark:border-yellow-400 animate-fade-in-up delay-200">
+              <div class="text-msu-maroon dark:text-yellow-400 text-4xl mb-4">02</div>
+              <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">Environmental Stewardship</h3>
+              <p class="text-gray-600 dark:text-gray-300">
                 Promote environmental conservation and sustainable utilization of fisheries and marine resources
               </p>
             </div>
 
             <!-- Item 3 -->
-            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-msu-maroon animate-fade-in-up delay-300">
-              <div class="text-msu-maroon text-4xl mb-4">03</div>
-              <h3 class="text-xl font-bold text-gray-800 mb-3">Knowledge Transfer</h3>
-              <p class="text-gray-600">
+            <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-msu-maroon dark:border-yellow-400 animate-fade-in-up delay-300">
+              <div class="text-msu-maroon dark:text-yellow-400 text-4xl mb-4">03</div>
+              <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">Knowledge Transfer</h3>
+              <p class="text-gray-600 dark:text-gray-300">
                 Develop and transfer new knowledge and innovative technology to the community
               </p>
             </div>
 
             <!-- Item 4 -->
-            <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-msu-maroon animate-fade-in-up delay-400">
-              <div class="text-msu-maroon text-4xl mb-4">04</div>
-              <h3 class="text-xl font-bold text-gray-800 mb-3">Community Engagement</h3>
-              <p class="text-gray-600">
+            <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-msu-maroon dark:border-yellow-400 animate-fade-in-up delay-400">
+              <div class="text-msu-maroon dark:text-yellow-400 text-4xl mb-4">04</div>
+              <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">Community Engagement</h3>
+              <p class="text-gray-600 dark:text-gray-300">
                 Engage stakeholders in peace and socio-economic development endeavors
               </p>
             </div>

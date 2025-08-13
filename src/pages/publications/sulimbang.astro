@@ -46,15 +46,15 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
 ---
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
-    <main class="bg-white">
+    <main class="bg-white dark:bg-gray-900">
         <Navbar path={currentPath} client:visible />
         
         <!-- Mobile-Optimized Full-Screen PDF Viewer Modal -->
         <div id="pdfViewerModal" class="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-md hidden">
             <div class="w-full h-full">
-                <div class="bg-white w-full h-full flex flex-col overflow-hidden">
+                <div class="bg-white dark:bg-gray-800 w-full h-full flex flex-col overflow-hidden">
                     <!-- Mobile-Optimized Header -->
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-6 bg-gradient-to-r from-msu-blue via-msu-dark-blue to-msu-blue text-white shadow-lg">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-6 bg-gradient-to-r from-msu-blue dark:from-yellow-500 via-msu-dark-blue dark:via-yellow-600 to-msu-blue dark:to-yellow-500 text-white shadow-lg">
                         <div class="flex items-center space-x-2 sm:space-x-4 w-full sm:w-auto mb-3 sm:mb-0">
                             <div class="flex items-center justify-center w-10 h-10 sm:w-14 sm:h-14 bg-white/20 rounded-xl backdrop-blur-sm">
                                 <svg class="w-5 h-5 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -70,19 +70,19 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                         <!-- Mobile-Optimized Controls -->
                         <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
                             <!-- Zoom Controls - Stacked on mobile -->
-                            <div class="flex items-center justify-center space-x-1 sm:space-x-2 bg-msu-deep-ocean/20 rounded-xl px-2 sm:px-4 py-2 backdrop-blur-sm border border-msu-deep-ocean/30">
-                                <button id="zoomOut" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40" title="Zoom Out">
+                            <div class="flex items-center justify-center space-x-1 sm:space-x-2 bg-msu-deep-ocean/20 dark:bg-yellow-500/20 rounded-xl px-2 sm:px-4 py-2 backdrop-blur-sm border border-msu-deep-ocean/30 dark:border-yellow-500/30">
+                                <button id="zoomOut" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 dark:bg-yellow-500/30 hover:bg-msu-deep-ocean/50 dark:hover:bg-yellow-500/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40 dark:border-yellow-500/40" title="Zoom Out">
                                     <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
                                     </svg>
                                 </button>
-                                <span id="zoomLevel" class="text-white text-xs sm:text-sm font-bold min-w-[3rem] sm:min-w-[4rem] text-center px-2 sm:px-3 py-1 bg-msu-deep-ocean/20 rounded-lg border border-msu-deep-ocean/30">100%</span>
-                                <button id="zoomIn" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40" title="Zoom In">
+                                <span id="zoomLevel" class="text-white text-xs sm:text-sm font-bold min-w-[3rem] sm:min-w-[4rem] text-center px-2 sm:px-3 py-1 bg-msu-deep-ocean/20 dark:bg-yellow-500/20 rounded-lg border border-msu-deep-ocean/30 dark:border-yellow-500/30">100%</span>
+                                <button id="zoomIn" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 dark:bg-yellow-500/30 hover:bg-msu-deep-ocean/50 dark:hover:bg-yellow-500/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40 dark:border-yellow-500/40" title="Zoom In">
                                     <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                     </svg>
                                 </button>
-                                <button id="zoomFit" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40" title="Fit to Screen">
+                                <button id="zoomFit" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 dark:bg-yellow-500/30 hover:bg-msu-deep-ocean/50 dark:hover:bg-yellow-500/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40 dark:border-yellow-500/40" title="Fit to Screen">
                                     <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
                                     </svg>
@@ -90,14 +90,14 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                             </div>
                             
                             <!-- Page Navigation - Responsive -->
-                            <div class="flex items-center justify-center space-x-1 sm:space-x-2 bg-msu-deep-ocean/20 rounded-xl px-2 sm:px-4 py-2 backdrop-blur-sm border border-msu-deep-ocean/30">
-                                <button id="pdfPrevPage" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40">
+                            <div class="flex items-center justify-center space-x-1 sm:space-x-2 bg-msu-deep-ocean/20 dark:bg-yellow-500/20 rounded-xl px-2 sm:px-4 py-2 backdrop-blur-sm border border-msu-deep-ocean/30 dark:border-yellow-500/30">
+                                <button id="pdfPrevPage" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 dark:bg-yellow-500/30 hover:bg-msu-deep-ocean/50 dark:hover:bg-yellow-500/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40 dark:border-yellow-500/40">
                                     <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                                     </svg>
                                 </button>
-                                <span id="pageInfo" class="text-white text-xs sm:text-sm font-bold min-w-[3rem] sm:min-w-[5rem] text-center px-2 sm:px-3 py-1 bg-msu-deep-ocean/20 rounded-lg border border-msu-deep-ocean/30">1 / 1</span>
-                                <button id="pdfNextPage" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40">
+                                <span id="pageInfo" class="text-white text-xs sm:text-sm font-bold min-w-[3rem] sm:min-w-[5rem] text-center px-2 sm:px-3 py-1 bg-msu-deep-ocean/20 dark:bg-yellow-500/20 rounded-lg border border-msu-deep-ocean/30 dark:border-yellow-500/30">1 / 1</span>
+                                <button id="pdfNextPage" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 dark:bg-yellow-500/30 hover:bg-msu-deep-ocean/50 dark:hover:bg-yellow-500/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40 dark:border-yellow-500/40">
                                     <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                                     </svg>
@@ -106,19 +106,19 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                             
                             <!-- Action Buttons - Responsive -->
                             <div class="flex items-center justify-center space-x-2 sm:space-x-3">
-                                <button onclick="openPdfInNewTab()" class="flex items-center justify-center space-x-1 sm:space-x-2 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white px-2 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-msu-deep-ocean/40">
+                                <button onclick="openPdfInNewTab()" class="flex items-center justify-center space-x-1 sm:space-x-2 bg-msu-deep-ocean/30 dark:bg-yellow-500/30 hover:bg-msu-deep-ocean/50 dark:hover:bg-yellow-500/50 text-white px-2 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-msu-deep-ocean/40 dark:border-yellow-500/40">
                                     <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                                     </svg>
                                     <span class="text-xs sm:text-sm font-medium hidden sm:inline">Open</span>
                                 </button>
-                                <button onclick="downloadPdf()" class="flex items-center justify-center space-x-1 sm:space-x-2 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white px-2 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-msu-deep-ocean/40">
+                                <button onclick="downloadPdf()" class="flex items-center justify-center space-x-1 sm:space-x-2 bg-msu-deep-ocean/30 dark:bg-yellow-500/30 hover:bg-msu-deep-ocean/50 dark:hover:bg-yellow-500/50 text-white px-2 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-msu-deep-ocean/40 dark:border-yellow-500/40">
                                     <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                                     </svg>
                                     <span class="text-xs sm:text-sm font-medium hidden sm:inline">Download</span>
                                 </button>
-                                <button onclick="closePdfViewer()" class="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-msu-deep-ocean/30 hover:bg-msu-deep-ocean/50 text-white rounded-xl transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-msu-deep-ocean/40">
+                                <button onclick="closePdfViewer()" class="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-msu-deep-ocean/30 dark:bg-yellow-500/30 hover:bg-msu-deep-ocean/50 dark:hover:bg-yellow-500/50 text-white rounded-xl transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-msu-deep-ocean/40 dark:border-yellow-500/40">
                                     <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                     </svg>
@@ -128,9 +128,9 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                     </div>
                     
                     <!-- Mobile-Optimized PDF Viewer Content -->
-                    <div class="flex-1 bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden">
+                    <div class="flex-1 bg-gradient-to-br from-gray-50 dark:from-gray-800 to-gray-100 dark:to-gray-900 relative overflow-hidden">
                         <!-- Mobile-Optimized Loading State -->
-                        <div id="pdfLoading" class="absolute inset-0 flex items-center justify-center bg-white/98 backdrop-blur-sm z-20">
+                        <div id="pdfLoading" class="absolute inset-0 flex items-center justify-center bg-white/98 dark:bg-gray-900/98 backdrop-blur-sm z-20">
                             <div class="text-center max-w-xs sm:max-w-sm mx-auto p-4 sm:p-8">
                                 <div class="relative mb-4 sm:mb-8">
                                     <!-- Responsive loading ring -->
@@ -141,8 +141,8 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                                 </div>
                                 
                                 <div class="space-y-2 sm:space-y-3">
-                                    <h3 class="text-lg sm:text-xl font-bold text-gray-800 animate-pulse">Loading PDF...</h3>
-                                    <p class="text-gray-600 text-sm leading-relaxed">Please wait while we prepare your document</p>
+                                    <h3 class="text-lg sm:text-xl font-bold text-gray-800 dark:text-yellow-400 animate-pulse">Loading PDF...</h3>
+                                    <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Please wait while we prepare your document</p>
                                     
                                     <div class="flex justify-center space-x-2 mt-4">
                                         <div class="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style="animation-delay: 0ms;"></div>
@@ -154,7 +154,7 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                         </div>
                         
                         <!-- Mobile-Optimized PDF Container -->
-                        <div id="pdfContainer" class="w-full h-full overflow-auto bg-gradient-to-br from-gray-50 to-gray-100">
+                        <div id="pdfContainer" class="w-full h-full overflow-auto bg-gradient-to-br from-gray-50 dark:from-gray-800 to-gray-100 dark:to-gray-900">
                             <div id="pdfViewer" class="w-full h-full flex items-center justify-center p-2 sm:p-4 relative">
                                 <div id="pdfCanvasContainer" class="relative perspective-1000 w-full h-full flex items-center justify-center">
                                     <div id="pageFlipContainer" class="relative transform-style-preserve-3d transition-transform duration-700 ease-in-out">
@@ -174,25 +174,25 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                         </div>
                         
                         <!-- Mobile-Optimized Error State -->
-                        <div id="pdfError" class="absolute inset-0 flex items-center justify-center bg-white/95 backdrop-blur-sm z-20 hidden">
+                        <div id="pdfError" class="absolute inset-0 flex items-center justify-center bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm z-20 hidden">
                             <div class="text-center max-w-xs sm:max-w-lg mx-auto p-4 sm:p-8">
                                 <div class="w-20 h-20 sm:w-32 sm:h-32 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-8">
                                     <svg class="w-10 h-10 sm:w-16 sm:h-16 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
                                     </svg>
                                 </div>
-                                <h3 class="text-xl sm:text-3xl font-bold text-gray-800 mb-3 sm:mb-4">Unable to Load PDF</h3>
-                                <p class="text-gray-600 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-lg">
+                                <h3 class="text-xl sm:text-3xl font-bold text-gray-800 dark:text-yellow-400 mb-3 sm:mb-4">Unable to Load PDF</h3>
+                                <p class="text-gray-600 dark:text-gray-300 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-lg">
                                     The PDF file could not be loaded. This might be due to browser restrictions.
                                 </p>
                                 <div class="flex flex-col space-y-3 sm:space-y-4">
-                                    <button onclick="openPdfInNewTab()" class="flex items-center justify-center space-x-2 sm:space-x-3 bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg text-sm sm:text-base">
+                                    <button onclick="openPdfInNewTab()" class="flex items-center justify-center space-x-2 sm:space-x-3 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg text-sm sm:text-base">
                                         <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                                         </svg>
                                         <span>Open in New Tab</span>
                                     </button>
-                                    <button onclick="downloadPdf()" class="flex items-center justify-center space-x-2 sm:space-x-3 bg-green-600 hover:bg-green-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg text-sm sm:text-base">
+                                    <button onclick="downloadPdf()" class="flex items-center justify-center space-x-2 sm:space-x-3 bg-green-600 dark:bg-green-500 hover:bg-green-700 dark:hover:bg-green-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg text-sm sm:text-base">
                                         <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                                         </svg>
@@ -207,7 +207,7 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
         </div>
 
         <!-- Mobile-Optimized Hero Section -->
-        <div class="relative pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-12 lg:pb-16 bg-white">
+        <div class="relative pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-12 lg:pb-16 bg-white dark:bg-gray-900">
             <div class="absolute inset-0 overflow-hidden">
                 <div class="absolute inset-0 bg-gradient-to-r from-msu-light-blue/10 to-white"></div>
                 <div class="absolute top-0 right-0 w-1/2 h-full bg-msu-blue/5 -skew-x-12 transform origin-top-right"></div>
@@ -216,18 +216,18 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
             <div class="container mx-auto px-4 xl:px-0 relative">
                 <!-- Mobile-Optimized Breadcrumb -->
                 <div class="mb-4 sm:mb-6 lg:mb-8">
-                    <p class="paragraph p2 text-gray-600 text-sm sm:text-base">
-                        <a href="/home" class="hover:text-msu-blue transition-colors">Home</a> / 
-                        <a href="/publications" class="hover:text-msu-blue transition-colors">Publications</a> / 
-                        <span class="text-msu-blue font-medium">Sulimbang</span>
+                    <p class="paragraph p2 text-gray-600 dark:text-gray-300 text-sm sm:text-base">
+                        <a href="/home" class="hover:text-msu-blue dark:hover:text-yellow-400 transition-colors">Home</a> / 
+                        <a href="/publications" class="hover:text-msu-blue dark:hover:text-yellow-400 transition-colors">Publications</a> / 
+                        <span class="text-msu-blue dark:text-yellow-400 font-medium">Sulimbang</span>
                     </p>
                 </div>
 
                 <!-- Mobile-Optimized Hero Content -->
                 <div class="text-center mb-8 sm:mb-12 lg:mb-16">
-                    <h1 class="headings text-3xl sm:text-4xl lg:text-5xl font-bold text-msu-main-color mb-4 sm:mb-6">Sulimbang</h1>
-                    <div class="w-16 sm:w-20 lg:w-24 h-1 sm:h-1.5 bg-msu-deep-ocean mx-auto mb-4 sm:mb-6"></div>
-                    <p class="paragraph p2 text-gray-600 max-w-3xl mx-auto text-base sm:text-lg px-4 sm:px-0">
+                    <h1 class="headings text-3xl sm:text-4xl lg:text-5xl font-bold text-msu-main-color dark:text-yellow-400 mb-4 sm:mb-6">Sulimbang</h1>
+                    <div class="w-16 sm:w-20 lg:w-24 h-1 sm:h-1.5 bg-msu-deep-ocean dark:bg-yellow-400 mx-auto mb-4 sm:mb-6"></div>
+                    <p class="paragraph p2 text-gray-600 dark:text-gray-300 max-w-3xl mx-auto text-base sm:text-lg px-4 sm:px-0">
                         Official publications of MSU Tawi-Tawi College of Technology and Oceanography
                     </p>
                 </div>
@@ -235,7 +235,7 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
         </div>
 
         <!-- Mobile-Optimized Latest Publication Section -->
-        <div class="py-8 sm:py-12 lg:py-16 bg-gray-50 border-t border-b border-gray-100">
+        <div class="py-8 sm:py-12 lg:py-16 bg-gray-50 dark:bg-gray-800 border-t border-b border-gray-100 dark:border-gray-700">
             <div class="container mx-auto px-4 xl:px-0">
                 <div class="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-12 items-center">
                     <!-- Mobile-Optimized Publication Cover -->
@@ -246,8 +246,8 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                                 class="w-full h-auto object-cover transform transition-all duration-500 group-hover:scale-105"
                                 alt={latestsulimbang.title}
                             />
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 sm:p-6 lg:p-8">
-                                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-white">{latestsulimbang.title}</h3>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity  duration-300 flex items-end p-4 sm:p-6 lg:p-8">
+                                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-white ">{latestsulimbang.title}</h3>
                             </div>
                             <div class="absolute top-2 sm:top-4 right-2 sm:right-4 bg-msu-main-color text-white font-bold px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">
                                 Latest Issue
@@ -257,14 +257,14 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
 
                     <!-- Mobile-Optimized Publication Details -->
                     <div class="w-full lg:w-1/2">
-                        <div class="bg-white p-4 sm:p-6 lg:p-8 rounded-xl shadow-lg border border-gray-100">
-                            <h2 class="headings text-xl sm:text-2xl lg:text-3xl font-bold text-msu-dark-blue mb-3 sm:mb-4">{latestsulimbang.title}</h2>
+                        <div class="bg-white dark:bg-gray-800 p-4 sm:p-6 lg:p-8 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700">
+                            <h2 class="headings text-xl sm:text-2xl lg:text-3xl font-bold text-msu-main-color dark:text-yellow-400 mb-3 sm:mb-4">{latestsulimbang.title}</h2>
                             <div class="flex items-center mb-4 sm:mb-6">
-                                <span class="bg-msu-blue/10 text-msu-blue px-3 py-1 rounded-full text-sm font-medium">
+                                <span class="bg-msu-blue/10 dark:bg-gray-700 text-msu-main-color dark:text-yellow-400 px-3 py-1 rounded-full text-sm font-medium">
                                     {getYear(latestsulimbang.publishedAt)}
                                 </span>
                             </div>
-                            <p class="paragraph p2 text-gray-600 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
+                            <p class="paragraph p2 text-gray-600 dark:text-gray-300 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
                                 {latestsulimbang.body[0].children[0].text}
                             </p>
                             <div class="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
@@ -272,7 +272,7 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                                     id="viewLatestPDF"
                                     data-pdf-url={latestPdfUrl || ''}
                                     data-title={latestsulimbang.title}
-                                    class="inline-flex items-center justify-center bg-msu-main-color hover:bg-msu-deep-ocean text-white font-bold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg shadow-md transform transition-all duration-300 hover:scale-[1.02] text-sm sm:text-base"
+                                    class="inline-flex items-center justify-center bg-msu-main-color dark:bg-yellow-600 hover:bg-msu-deep-ocean dark:hover:bg-yellow-700 text-white font-bold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg shadow-md transform transition-all duration-300 hover:scale-[1.02] text-sm sm:text-base"
                                 >
                                     <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -284,7 +284,7 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                                     href={latestPdfUrl || '#'} 
                                     target="_blank" 
                                     rel="noopener noreferrer"
-                                    class="inline-flex items-center justify-center bg-msu-blue hover:bg-msu-deep-ocean text-white font-bold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg shadow-md transform transition-all duration-300 hover:scale-[1.02] text-sm sm:text-base"
+                                    class="inline-flex items-center justify-center bg-msu-blue dark:bg-yellow-600 hover:bg-msu-deep-ocean dark:hover:bg-yellow-700 text-white font-bold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg shadow-md transform transition-all duration-300 hover:scale-[1.02] text-sm sm:text-base"
                                 >
                                     <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
@@ -296,7 +296,7 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                                     target="_blank" 
                                     rel="noopener noreferrer"
                                     download
-                                    class="inline-flex items-center justify-center bg-white border border-msu-blue text-msu-blue hover:bg-msu-blue/5 font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg shadow-sm transform transition-all duration-300 hover:scale-[1.02] text-sm sm:text-base"
+                                    class="inline-flex items-center justify-center bg-white dark:bg-gray-700 border border-msu-blue dark:border-yellow-400 text-msu-main-color dark:text-yellow-400 hover:bg-msu-blue/5 dark:hover:bg-yellow-400/10 font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg shadow-sm transform transition-all duration-300 hover:scale-[1.02] text-sm sm:text-base"
                                 >
                                     <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
@@ -311,7 +311,7 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
         </div>
 
         <!-- Mobile-Optimized Publication Archive Section -->
-        <div class="py-8 sm:py-12 lg:py-16 bg-white">
+        <div class="py-8 sm:py-12 lg:py-16 bg-white dark:bg-gray-900">
             <div class="container mx-auto px-4 xl:px-0">
                 <!-- Mobile-Optimized Search and Filter -->
                 <div class="mb-8 sm:mb-12 lg:mb-16 max-w-4xl mx-auto">
@@ -320,9 +320,9 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                             type="text"
                             id="searchInput"
                             placeholder="Search Sulimbang..."
-                            class="w-full p-3 sm:p-4 pl-10 sm:pl-12 pr-4 sm:pr-6 border border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-msu-gold focus:border-msu-gold outline-none transition-all duration-300 text-sm sm:text-base"
+                            class="w-full p-3 sm:p-4 pl-10 sm:pl-12 pr-4 sm:pr-6 border border-gray-200 dark:border-gray-600 rounded-xl shadow-sm focus:ring-2 focus:ring-msu-gold dark:focus:ring-yellow-500 focus:border-msu-gold dark:focus:border-yellow-500 outline-none transition-all duration-300 text-sm sm:text-base bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 dark:placeholder-gray-400"
                         />
-                        <svg class="absolute left-3 sm:left-4 top-3 sm:top-4 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="absolute left-3 sm:left-4 top-3 sm:top-4 w-4 h-4 sm:w-5 sm:h-5 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
                     </div>
@@ -330,14 +330,14 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
 
                 <!-- Mobile-Optimized Section Header -->
                 <div class="text-center mb-8 sm:mb-10 lg:mb-12">
-                    <h2 class="headings text-2xl sm:text-3xl lg:text-4xl font-bold text-msu-main-color mb-3 sm:mb-4">Sulimbang Archive</h2>
-                    <div class="w-16 sm:w-20 lg:w-24 h-1 sm:h-1.5 bg-msu-deep-ocean mx-auto"></div>
+                    <h2 class="headings text-2xl sm:text-3xl lg:text-4xl font-bold text-msu-main-color dark:text-yellow-400 mb-3 sm:mb-4">Sulimbang Archive</h2>
+                    <div class="w-16 sm:w-20 lg:w-24 h-1 sm:h-1.5 bg-msu-deep-ocean dark:bg-yellow-400 mx-auto"></div>
                 </div>
 
                 <!-- Mobile-Optimized Publications Grid -->
                 <div id="sulimbangContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12 lg:mb-16">
                     {allPdfUrls.map((sulimbang) => (
-                        <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+                        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
                             <div class="relative group h-48 sm:h-56 lg:h-64 overflow-hidden">
                                 <img 
                                     src={sulimbang.mainImage.asset.url} 
@@ -355,16 +355,16 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                                 </div>
                             </div>
                             <div class="p-4 sm:p-5 lg:p-6">
-                                <h3 class="headings text-base sm:text-lg lg:text-xl font-bold text-msu-dark-blue mb-2 line-clamp-2">{sulimbang.title}</h3>
-                                <p class="paragraph p2 text-gray-600 mb-3 sm:mb-4 line-clamp-3 text-sm sm:text-base">{sulimbang.body[0].children[0].text}</p>
+                                <h3 class="headings text-base sm:text-lg lg:text-xl font-bold text-msu-main-color dark:text-yellow-400 mb-2 line-clamp-2">{sulimbang.title}</h3>
+                                <p class="paragraph p2 text-gray-600 dark:text-gray-300 mb-3 sm:mb-4 line-clamp-3 text-sm sm:text-base">{sulimbang.body[0].children[0].text}</p>
                                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
-                                    <span class="text-sm font-medium text-msu-blue">{getYear(sulimbang.publishedAt)}</span>
+                                    <span class="text-sm font-medium text-msu-main-color dark:text-yellow-400">{getYear(sulimbang.publishedAt)}</span>
                                     <div class="flex gap-2 w-full sm:w-auto">
                                         <a 
                                             href={sulimbang.pdfUrl || '#'} 
                                             target="_blank" 
                                             rel="noopener noreferrer"
-                                            class="text-xs sm:text-sm font-medium text-msu-blue hover:text-msu-dark-blue transition-colors flex items-center flex-1 sm:flex-none justify-center sm:justify-start"
+                                            class="text-xs sm:text-sm font-medium text-msu-main-color dark:text-yellow-400 hover:text-msu-dark-blue dark:hover:text-yellow-300 transition-colors flex items-center flex-1 sm:flex-none justify-center sm:justify-start"
                                         >
                                             Open <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                                         </a>
@@ -373,7 +373,7 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                                             target="_blank" 
                                             rel="noopener noreferrer"
                                             download
-                                            class="text-xs sm:text-sm font-medium text-msu-blue hover:text-msu-dark-blue transition-colors flex items-center flex-1 sm:flex-none justify-center sm:justify-start"
+                                            class="text-xs sm:text-sm font-medium text-msu-main-color dark:text-yellow-400 hover:text-msu-dark-blue dark:hover:text-yellow-300 transition-colors flex items-center flex-1 sm:flex-none justify-center sm:justify-start"
                                         >
                                             Download <svg class="w-3 h-3 sm:w-4 sm:h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                         </a>
@@ -387,8 +387,8 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                 <!-- Mobile-Optimized Pagination -->
                 <div class="flex justify-center">
                     <div id="pagination" class="flex items-center space-x-1 sm:space-x-2">
-                        <button id="prevPage" class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-white border border-gray-200 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed text-xs sm:text-sm" style="border-color: #61063B;" onmouseenter="this.style.backgroundColor='#03045e'; this.style.color='#ffffff';" onmouseleave="this.style.backgroundColor='#ffffff'; this.style.color='#6b7280';" disabled>
-                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <button id="prevPage" class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-white dark:bg-gray-700 border border-gray-200 dark:border-yellow-400 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed text-xs sm:text-sm text-gray-600 dark:text-yellow-400" style="border-color: #61063B;" onmouseenter="this.style.backgroundColor='#03045e'; this.style.color='#ffffff';" onmouseleave="this.style.backgroundColor='#ffffff'; this.style.color='#6b7280';" disabled>
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                             </svg>
                         </button>
@@ -397,8 +397,8 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                             <!-- Page numbers will be dynamically inserted here -->
                         </div>
 
-                        <button id="nextPage" class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-white border border-gray-200 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed text-xs sm:text-sm" style="border-color: #61063B;" onmouseenter="this.style.backgroundColor='#03045e'; this.style.color='#ffffff';" onmouseleave="this.style.backgroundColor='#ffffff'; this.style.color='#6b7280';">
-                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <button id="nextPage" class="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-white dark:bg-gray-700 border border-gray-200 dark:border-yellow-400 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed text-xs sm:text-sm text-gray-600 dark:text-yellow-400" style="border-color: #61063B;" onmouseenter="this.style.backgroundColor='#03045e'; this.style.color='#ffffff';" onmouseleave="this.style.backgroundColor='#ffffff'; this.style.color='#6b7280';">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                             </svg>
                         </button>
@@ -412,7 +412,7 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
         <Footer />
 
         <!-- Mobile-Optimized Scroll to Top Button -->
-        <button class="scroll-to-top fixed bottom-4 right-4 w-12 h-12 bg-msu-blue hover:bg-msu-deep-ocean text-white rounded-full shadow-lg transition-all duration-300 hover:scale-105 z-50" aria-label="Scroll to top">
+        <button class="scroll-to-top fixed bottom-4 right-4 w-12 h-12 bg-msu-blue dark:bg-yellow-600 hover:bg-msu-deep-ocean dark:hover:bg-yellow-700 text-white rounded-full shadow-lg transition-all duration-300 hover:scale-105 z-50" aria-label="Scroll to top">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6 mx-auto">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
             </svg>
@@ -937,6 +937,16 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
             (window as any).zoomFit = zoomFit;
             
             document.addEventListener('DOMContentLoaded', () => {
+                // Initialize dark mode from localStorage
+                const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+                if (savedDarkMode) {
+                    document.documentElement.classList.add('dark');
+                    document.body.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    document.body.classList.remove('dark');
+                }
+                
                 // PDF Viewer functionality
                 const viewLatestPDFBtn = document.getElementById('viewLatestPDF');
                 const viewPdfBtns = document.querySelectorAll('.view-pdf-btn');
@@ -1162,6 +1172,201 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                 --msu-gold: #FFCC00;
                 --msu-dark-gold: #E6B800;
                 --msu-deep-ocean: #1e3a8a;
+            }
+            
+            /* Dark mode color overrides - using Tailwind's dark class */
+            .dark {
+                --msu-dark-blue: #fbbf24;
+                --msu-blue: #fbbf24;
+                --msu-light-blue: #1f2937;
+                --msu-gold: #fbbf24;
+                --msu-dark-gold: #f59e0b;
+                --msu-deep-ocean: #fbbf24;
+            }
+            
+            /* MSU brand colors for light mode */
+            .bg-msu-dark-blue {
+                background-color: var(--msu-dark-blue);
+            }
+            
+            .bg-msu-blue {
+                background-color: var(--msu-blue);
+            }
+            
+            .bg-msu-light-blue {
+                background-color: var(--msu-light-blue);
+            }
+            
+            .bg-msu-gold {
+                background-color: var(--msu-gold);
+            }
+            
+            .bg-msu-dark-gold {
+                background-color: var(--msu-dark-gold);
+            }
+            
+            .text-msu-dark-blue {
+                color: var(--msu-dark-blue);
+            }
+            
+            .text-msu-blue {
+                color: var(--msu-blue);
+            }
+            
+            .text-msu-gold {
+                color: var(--msu-gold);
+            }
+            
+            .border-msu-blue {
+                border-color: var(--msu-blue);
+            }
+            
+            .hover\:bg-msu-dark-gold:hover {
+                background-color: var(--msu-dark-gold);
+            }
+            
+            .hover\:text-msu-dark-blue:hover {
+                color: var(--msu-dark-blue);
+            }
+            
+            .bg-msu-deep-ocean {
+                background-color: var(--msu-deep-ocean);
+            }
+            
+            .text-msu-deep-ocean {
+                color: var(--msu-deep-ocean);
+            }
+            
+            .border-msu-deep-ocean {
+                border-color: var(--msu-deep-ocean);
+            }
+            
+            /* Dark mode specific overrides - only when dark class is present */
+            .dark .text-msu-blue,
+            .dark .text-msu-dark-blue,
+            .dark .text-msu-main-color,
+            .dark .text-msu-deep-ocean {
+                color: #fbbf24;
+            }
+            
+            .dark .bg-msu-blue,
+            .dark .bg-msu-main-color,
+            .dark .bg-msu-deep-ocean {
+                background-color: #fbbf24;
+            }
+            
+            .dark .border-msu-blue,
+            .dark .border-msu-deep-ocean {
+                border-color: #fbbf24;
+            }
+            
+            .dark .hover\:text-msu-blue:hover,
+            .dark .hover\:text-msu-dark-blue:hover {
+                color: #f59e0b;
+            }
+            
+            .dark .hover\:bg-msu-deep-ocean:hover {
+                background-color: #f59e0b;
+            }
+            
+            .dark .bg-msu-blue\/10 {
+                background-color: rgba(251, 191, 36, 0.1);
+            }
+            
+            .dark .border-msu-blue\/30,
+            .dark .border-msu-deep-ocean\/30 {
+                border-color: rgba(251, 191, 36, 0.3);
+            }
+            
+            .dark .border-msu-blue\/40,
+            .dark .border-msu-deep-ocean\/40 {
+                border-color: rgba(251, 191, 36, 0.4);
+            }
+            
+            .dark .bg-msu-deep-ocean\/20 {
+                background-color: rgba(251, 191, 36, 0.2);
+            }
+            
+            .dark .bg-msu-deep-ocean\/30 {
+                background-color: rgba(251, 191, 36, 0.3);
+            }
+            
+            .dark .bg-msu-deep-ocean\/50 {
+                background-color: rgba(251, 191, 36, 0.5);
+            }
+            
+            /* Dark mode headings */
+            .dark h1,
+            .dark h2,
+            .dark h3,
+            .dark .headings {
+                color: #fbbf24;
+            }
+            
+            /* Dark mode publication cards */
+            .dark .bg-white.dark\:bg-gray-800 h3,
+            .dark .bg-white.dark\:bg-gray-800 h2,
+            .dark .bg-white.dark\:bg-gray-800 h1 {
+                color: #fbbf24;
+            }
+            
+            /* Dark mode links and buttons */
+            .dark a[class*="text-msu"],
+            .dark button[class*="bg-msu"] {
+                color: #fbbf24;
+            }
+            
+            .dark button[class*="bg-msu"] {
+                background-color: #fbbf24;
+            }
+            
+            /* Dark mode blue color overrides */
+            .dark .text-blue-400,
+            .dark .text-blue-500,
+            .dark .text-blue-600,
+            .dark .text-blue-700 {
+                color: #fbbf24;
+            }
+            
+            /* Enhanced dark mode readability for publication cards */
+            .dark .bg-white.dark\:bg-gray-800 h3,
+            .dark .bg-white.dark\:bg-gray-800 h2,
+            .dark .bg-white.dark\:bg-gray-800 h1 {
+                color: #fbbf24 !important;
+                font-weight: 600;
+            }
+            
+            /* Force all text in publication cards to be readable in dark mode */
+            .dark .bg-white.dark\:bg-gray-800 .text-msu-blue,
+            .dark .bg-white.dark\:bg-gray-800 .text-msu-dark-blue,
+            .dark .bg-white.dark\:bg-gray-800 .text-msu-main-color {
+                color: #fbbf24 !important;
+            }
+            
+            /* Ensure links are visible in dark mode */
+            .dark .bg-white.dark\:bg-gray-800 a {
+                color: #fbbf24 !important;
+            }
+            
+            .dark .bg-white.dark\:bg-gray-800 a:hover {
+                color: #f59e0b !important;
+            }
+            
+            /* Force all publication card text to be readable */
+            .dark .bg-white.dark\:bg-gray-800 * {
+                color: inherit;
+            }
+            
+            /* Specific override for publication titles */
+            .dark .bg-white.dark\:bg-gray-800 .headings {
+                color: #fbbf24 !important;
+                font-weight: 600;
+            }
+            
+            /* Ensure year and links are visible */
+            .dark .bg-white.dark\:bg-gray-800 span,
+            .dark .bg-white.dark\:bg-gray-800 a {
+                color: #fbbf24 !important;
             }
             
             .bg-msu-dark-blue {
@@ -1575,6 +1780,80 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
                     padding-left: 1rem;
                     padding-right: 1rem;
                 }
+            }
+            
+            /* Enhanced dark mode publication card styling */
+            .dark .bg-white.dark\:bg-gray-800 {
+                background-color: #1f2937 !important;
+                border-color: #374151 !important;
+            }
+            
+            /* Ensure all text in dark mode publication cards is readable */
+            .dark .bg-white.dark\:bg-gray-800 .text-gray-600 {
+                color: #d1d5db !important;
+            }
+            
+            .dark .bg-white.dark\:bg-gray-800 .text-gray-300 {
+                color: #d1d5db !important;
+            }
+            
+            /* Force golden yellow for all MSU brand colors in dark mode */
+            .dark .bg-white.dark\:bg-gray-800 [class*="text-msu"] {
+                color: #fbbf24 !important;
+            }
+            
+            /* Ensure SVG icons are also visible */
+            .dark .bg-white.dark\:bg-gray-800 svg {
+                color: #fbbf24 !important;
+            }
+            
+            /* Hover states for better interaction */
+            .dark .bg-white.dark\:bg-gray-800 a:hover svg {
+                color: #f59e0b !important;
+            }
+            
+            /* Specific targeting for Sulimbang publication cards */
+            .dark .bg-white.dark\:bg-gray-800.rounded-xl {
+                background-color: #1f2937 !important;
+                border-color: #374151 !important;
+            }
+            
+            /* Force all text in Sulimbang cards to be readable */
+            .dark .bg-white.dark\:bg-gray-800.rounded-xl h3,
+            .dark .bg-white.dark\:bg-gray-800.rounded-xl h2,
+            .dark .bg-white.dark\:bg-gray-800.rounded-xl h1 {
+                color: #fbbf24 !important;
+                font-weight: 600;
+            }
+            
+            .dark .bg-white.dark\:bg-gray-800.rounded-xl p {
+                color: #d1d5db !important;
+            }
+            
+            .dark .bg-white.dark\:bg-gray-800.rounded-xl span {
+                color: #fbbf24 !important;
+            }
+            
+            .dark .bg-white.dark\:bg-gray-800.rounded-xl a {
+                color: #fbbf24 !important;
+            }
+            
+            .dark .bg-white.dark\:bg-gray-800.rounded-xl a:hover {
+                color: #f59e0b !important;
+            }
+            
+            .dark .bg-white.dark\:bg-gray-800.rounded-xl svg {
+                color: #fbbf24 !important;
+            }
+            
+            /* Ensure all MSU brand colors are golden in dark mode */
+            .dark .bg-white.dark\:bg-gray-800.rounded-xl [class*="text-msu"] {
+                color: #fbbf24 !important;
+            }
+            
+            /* Force all text elements to inherit the golden color */
+            .dark .bg-white.dark\:bg-gray-800.rounded-xl * {
+                color: inherit;
             }
             
             /* Mobile text sizing */

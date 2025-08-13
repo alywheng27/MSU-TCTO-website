@@ -92,7 +92,7 @@ const relatedArticles = await getRelatedArticles(article._id, articleSubject._id
   <!-- Premium Navigation with Glass Morphism Effect -->
   <Navbar path={currentPath} client:visible />
   
-  <main class="bg-white text-gray-900 font-sans antialiased overflow-hidden ">
+  <main class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans antialiased overflow-hidden transition-colors duration-300">
     <!-- Animated Breadcrumb with Microinteractions -->
     <div class='bg-gradient-to-r from-msu-deep-ocean to-msu-main-color h-[50px] xl:px-[12.5%] xs:px-[5%] '>
       <nav class="paragraph p2 py-[15px] text-titanium flex items-center overflow-x-auto whitespace-nowrap scrollbar-hide">
@@ -194,7 +194,7 @@ const relatedArticles = await getRelatedArticles(article._id, articleSubject._id
     </div>
 
     <!-- Premium Article Content Section -->
-    <div class="bg-white-pure xl:px-[15%] xs:px-[5%] py-16">
+    <div class="bg-white-pure dark:bg-gray-800 xl:px-[15%] xs:px-[5%] py-16 transition-colors duration-300">
       <!-- Premium Featured Image with Floating Effect and Caption -->
       <div class="mb-16 relative group">
         <div class="rounded-3xl overflow-hidden shadow-2xl transform group-hover:shadow-3xl transition-all duration-500 group-hover:-translate-y-1">
@@ -208,7 +208,7 @@ const relatedArticles = await getRelatedArticles(article._id, articleSubject._id
           <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none"></div>
         </div>
         {mainImage.caption && (
-          <p class="text-center text-sm text-gray-500 mt-3 italic">{mainImage.caption}</p>
+          <p class="text-center text-sm text-gray-500 dark:text-gray-400 mt-3 italic">{mainImage.caption}</p>
         )}
       </div>
       
@@ -235,7 +235,7 @@ const relatedArticles = await getRelatedArticles(article._id, articleSubject._id
       </div>
 
       <!-- Premium Article Body with Enhanced Typography -->
-      <article class="prose xl:prose-xl xs:prose-lg max-w-none mx-auto text-gray-800" style="font-family: 'Inter', sans-serif;">
+      <article class="prose xl:prose-xl xs:prose-lg max-w-none mx-auto text-gray-800 dark:text-gray-200 transition-colors duration-300" style="font-family: 'Inter', sans-serif;">
         {
           body.filter((con) => {
             if (con.children == null || con.children == undefined) {
@@ -254,7 +254,7 @@ const relatedArticles = await getRelatedArticles(article._id, articleSubject._id
                   <a href={`${child.text}`} target="_blank" class="text-msu-crimson-ground underline hover:text-msu-deep-ocean transition-colors duration-300 font-medium">
                     {child.text}
                   </a> : 
-                  <p class="text-gray-800 leading-relaxed mb-8 text-justify">
+                  <p class="text-gray-800 dark:text-gray-200 leading-relaxed mb-8 text-justify">
                     {child.text}
                   </p>
                 }
@@ -265,8 +265,8 @@ const relatedArticles = await getRelatedArticles(article._id, articleSubject._id
       </article>
 
       <!-- Premium Social Sharing with Floating Icons -->
-      <div class="mt-20 pt-12 border-t border-gray-100">
-        <h4 class="headings h4 text-charcoal mb-8 text-center tracking-wider uppercase text-sm font-semibold text-gray-500">
+      <div class="mt-20 pt-12 border-t border-gray-100 dark:border-gray-700 transition-colors duration-300">
+        <h4 class="headings h4 text-charcoal dark:text-gray-300 mb-8 text-center tracking-wider uppercase text-sm font-semibold text-gray-500 dark:text-gray-400">
           Share This Article
         </h4>
         <div class="flex gap-6 justify-center">
@@ -340,15 +340,15 @@ const relatedArticles = await getRelatedArticles(article._id, articleSubject._id
       <!-- Premium Related Articles Section -->
       {relatedArticles.length > 0 && (
         <div class="mt-24">
-          <div class="border-b border-gray-200 pb-6 mb-10">
-            <h3 class="headings h3 text-charcoal">Related Articles</h3>
-            <p class="paragraph p2 text-gray-500 mt-2">Discover more content you might enjoy</p>
+          <div class="border-b border-gray-200 dark:border-gray-700 pb-6 mb-10 transition-colors duration-300">
+            <h3 class="headings h3 text-charcoal dark:text-gray-100">Related Articles</h3>
+            <p class="paragraph p2 text-gray-500 dark:text-gray-400 mt-2">Discover more content you might enjoy</p>
           </div>
           
           <div class="grid xl:grid-cols-3 xs:grid-cols-1 gap-8">
             {relatedArticles.map((relatedArticle) => (
               <a href={`/articles/${relatedArticle.slug.current}`} class="group">
-                <div class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col border border-gray-100 hover:border-msu-main-color/30">
+                <div class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-gray-700 hover:border-msu-main-color/30 dark:hover:border-yellow-500/30">
                   <div class="relative overflow-hidden h-48">
                     <img 
                       src={urlForImage(relatedArticle.mainImage.asset.url).width(600).url()} 
@@ -364,13 +364,13 @@ const relatedArticles = await getRelatedArticles(article._id, articleSubject._id
                     </div>
                   </div>
                   <div class="p-6 flex-grow">
-                    <h4 class="headings h4 text-charcoal mb-3 group-hover:text-msu-main-color transition-colors duration-300 line-clamp-2">
+                    <h4 class="headings h4 text-charcoal dark:text-gray-100 mb-3 group-hover:text-msu-main-color dark:group-hover:text-yellow-500 transition-colors duration-300 line-clamp-2">
                       {relatedArticle.title}
                     </h4>
-                    <p class="paragraph p3 text-gray-500 mb-4 line-clamp-2">
+                    <p class="paragraph p3 text-gray-500 dark:text-gray-400 mb-4 line-clamp-2">
                       {relatedArticle.body[0]?.children[0]?.text || ''}
                     </p>
-                    <div class="flex items-center text-sm text-gray-400">
+                    <div class="flex items-center text-sm text-gray-400 dark:text-gray-500">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                       </svg>
@@ -386,9 +386,9 @@ const relatedArticles = await getRelatedArticles(article._id, articleSubject._id
     </div>
 
     <!-- Mobile Stories -->
-    <div class="flex xl:hidden xs:block bg-gray-50">
+    <!-- <div class="flex xl:hidden xs:block bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       <Stories />
-    </div>
+    </div> -->
 
     <!-- Footer Navigation -->
     <div class="flex xl:block xs:hidden">
@@ -501,6 +501,10 @@ const relatedArticles = await getRelatedArticles(article._id, articleSubject._id
     color: #374151;
   }
 
+  .dark .prose {
+    color: #e5e7eb;
+  }
+
   .prose p {
     margin-bottom: 1.75em;
   }
@@ -513,9 +517,17 @@ const relatedArticles = await getRelatedArticles(article._id, articleSubject._id
     transition: all 0.3s ease;
   }
 
+  .dark .prose a {
+    color: #fbbf24;
+  }
+
   .prose a:hover {
     color: #991b1b;
     text-decoration-thickness: 2px;
+  }
+
+  .dark .prose a:hover {
+    color: #f59e0b;
   }
 
   /* Glass Morphism Effect */

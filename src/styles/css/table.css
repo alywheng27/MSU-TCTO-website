@@ -27,6 +27,11 @@
     border: 0.1px solid;
   }
   
+  /* Dark mode for thead */
+  .dark thead {
+    background: #374151;
+    color: #fff;
+  }
 
   .table td:nth-child(1) {
     overflow: hidden;
@@ -81,9 +86,27 @@
     border: 0.1px solid;
   }
   
+  /* Dark mode for table cells */
+  .dark .table td:nth-child(1),
+  .dark .table td:nth-child(2),
+  .dark .table td:nth-child(3),
+  .dark .table td:nth-child(4),
+  .dark .table td:nth-child(5),
+  .dark .table td:nth-child(6),
+  .dark .table td:nth-child(7),
+  .dark .table td:nth-child(8) {
+    background: #4b5563;
+    color: #fff;
+    border-color: #6b7280;
+  }
   
   .highlight {
     background: #ffff99;
+  }
+  
+  /* Dark mode for highlight */
+  .dark .highlight {
+    background: #fbbf24;
   }
   
   @media only screen and (max-width: 767px) {
@@ -170,6 +193,11 @@
 
       }
       
+    /* Dark mode for mobile table cells */
+    .dark .table td:nth-child(1) {
+      background: #374151;
+      color: #fff;
+    }
   
     .dataTables_length {
       display: none;
@@ -183,6 +211,11 @@
     color: #333;
   }
   
+  /* Dark mode for table text */
+  .dark table {
+    color: #fff;
+  }
+  
   th, td {
     text-align: left;
     padding: 12px;
@@ -193,12 +226,29 @@
     color: #fff;
   }
   
+  /* Dark mode for table headers */
+  .dark th {
+    background-color: #374151;
+    color: #fff;
+  }
+  
   td {
     background-color: #fff;
   }
   
+  /* Dark mode for table cells */
+  .dark td {
+    background-color: #4b5563;
+    color: #fff;
+  }
+  
   tr:hover td {
     background-color: #f3f3f3;
+  }
+  
+  /* Dark mode for hover effect */
+  .dark tr:hover td {
+    background-color: #6b7280;
   }
   
   a {
@@ -210,6 +260,15 @@
   a:hover {
     color: #d4af37; /* MSU Gold */
   }
-
+  
+  /* Dark mode for links */
+  .dark a {
+    color: #fbbf24;
+  }
+  
+  .dark a:hover {
+    color: #f59e0b;
+  }
+  
   
   
