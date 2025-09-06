@@ -43,25 +43,35 @@ if (mainImage?.asset?.url) {
     .format('jpg')
     .url();
   
-  // Ensure it's an absolute URL
+  // Ensure it's an absolute URL - handle Sanity CDN URLs properly
   if (!socialMediaImageUrl.startsWith('http')) {
-    socialMediaImageUrl = socialMediaImageUrl.startsWith('//') ? `https:${socialMediaImageUrl}` : `https://${socialMediaImageUrl}`;
+    if (socialMediaImageUrl.startsWith('//')) {
+      // CDN URL starting with //
+      socialMediaImageUrl = `https:${socialMediaImageUrl}`;
+    } else if (socialMediaImageUrl.startsWith('/')) {
+      // Relative URL
+      socialMediaImageUrl = `${siteUrl}${socialMediaImageUrl}`;
+    } else {
+      // No protocol or slash
+      socialMediaImageUrl = `https://${socialMediaImageUrl}`;
+    }
   }
 } else {
   // Only use logo if absolutely no image is available
   socialMediaImageUrl = `${siteUrl}/images/MSU Seal New (Official).png`;
 }
 
-// Final absolute URL with cache busting
-const cacheBustingImageUrl = socialMediaImageUrl + '?v=' + Date.now() + '&social=true';
+// Final absolute URL - remove cache busting which can cause issues with social media platforms
+const cacheBustingImageUrl = socialMediaImageUrl;
 
 // Debug logging for development
 console.log('Social Media Image Debug:', {
   hasMainImage: !!mainImage?.asset?.url,
   mainImageUrl: mainImage?.asset?.url,
   socialMediaImageUrl,
-  cacheBustingImageUrl,
-  articleTitle: title
+  finalImageUrl: cacheBustingImageUrl,
+  articleTitle: title,
+  siteUrl
 });
 
 const relatedArticles = await getRelatedArticles(article._id, articleSubject._id, 3);

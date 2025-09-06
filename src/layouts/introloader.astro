@@ -10,10 +10,13 @@ const { title } = Astro.props;
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width" />
-  <link rel="icon" type="image/svg+xml" href="/images/MSU Seal New (Official).png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="generator" content={Astro.generator} />
+  <link rel="icon" type="image/svg+xml" href="/images/MSU Seal New (Official).png" />
+  
+  <!-- Facebook Domain Verification -->
+  <meta name="facebook-domain-verification" content="63d47sat4plmhjgb73ob4sbrleldy4" />
+  
   <title>{title}</title>
   <style>
     /* Modern animation keyframes */
@@ -369,24 +372,8 @@ const { title } = Astro.props;
 <body>
   <!-- Loading Container -->
   <div id="loading-container">
-    <!-- Logo with Loading Rings -->
+    <!-- Clean Logo -->
     <div id="logo-wrapper">
-      <!-- Animated Rings -->
-      <div class="loading-ring ring-1"></div>
-      <div class="loading-ring ring-2"></div>
-      <div class="loading-ring ring-3"></div>
-      
-      <!-- Progress Ring -->
-      <svg class="loading-ring" width="180" height="180" viewBox="0 0 100 100">
-        <circle class="progress-ring__circle" stroke="url(#gradient)" stroke-width="4" stroke-dasharray="283" stroke-dashoffset="283" fill="transparent" r="45" cx="50" cy="50" />
-        <defs>
-          <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#ffffff" />
-            <stop offset="100%" stop-color="#EE4C7C" />
-          </linearGradient>
-        </defs>
-      </svg>
-      
       <!-- Interactive Logo -->
       <div id="logo-container">
         <img src="/images/MSU Seal New (Official).png" alt="University Logo" 
@@ -398,7 +385,6 @@ const { title } = Astro.props;
     <!-- Loading Information -->
     <div class="text-center max-w-md px-4">
       <h2 class="text-gradient text-4xl font-bold mb-4 tracking-tight">{title}</h2>
-      <div id="loading-percentage" class="text-6xl font-black text-gradient mb-2">0%</div>
       <p id="loading-status" class="mt-4 text-white/80 font-medium text-lg">
         Starting verification process<span class="dot-flashing ml-1"></span>
       </p>
@@ -476,7 +462,7 @@ const { title } = Astro.props;
       const percentageDisplay = document.getElementById('loading-percentage');
       const loadingStatus = document.getElementById('loading-status');
       const content = document.getElementById('content');
-      const progressCircle = document.querySelector('.progress-ring__circle');
+      // Removed progress circle reference since we removed the ring
       const progressBar = document.getElementById('progress-bar');
       const progressDetail = document.getElementById('progress-detail');
       const securityBadge = document.getElementById('security-badge');
@@ -515,9 +501,7 @@ const { title } = Astro.props;
         verificationSteps.appendChild(stepElement);
       });
       
-      // Set initial state
-      progressCircle.style.strokeDasharray = circumference;
-      progressCircle.style.strokeDashoffset = circumference;
+      // Set initial state (progress circle removed)
       
       // Status messages
       const statusMessages = [
@@ -670,9 +654,9 @@ const { title } = Astro.props;
         
         // Update displays
         const displayProgress = Math.floor(progress);
-        percentageDisplay.textContent = `${displayProgress}%`;
+        // Percentage display removed
         progressBar.style.width = `${progress}%`;
-        progressCircle.style.strokeDashoffset = circumference - (progress / 100) * circumference;
+        // Progress circle removed - no longer needed
         
         // Update status message
         const currentStatus = statusMessages.reduce((prev, curr) => 
@@ -693,7 +677,7 @@ const { title } = Astro.props;
           
           setTimeout(() => {
             loadingStatus.innerHTML = "System ready <span class='text-green-300'>✓</span>";
-            percentageDisplay.textContent = "100%";
+            // Percentage display removed
             progressDetail.textContent = "All systems operational";
             
             setTimeout(() => {
