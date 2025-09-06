@@ -1,9 +1,9 @@
 ---
 export interface Props {
   title: string;
-  description?: string;
-  image?: string;
   header?: string;
+  image?: string;
+  description?: string;
   ogTitle?: string;
   ogDescription?: string;
   ogImage?: string;
@@ -14,58 +14,63 @@ export interface Props {
 }
 
 const { 
-  title,
-  description = "MSU Tawi-Tawi College of Technology and Oceanography - Excellence in Education, Research and Innovation",
-  image = "/images/MSU Seal New (Official).png",
-  header = title,
-  ogTitle = title,
-  ogDescription = description,
-  ogImage = image,
-  ogUrl = Astro.url.href,
-  twitterTitle = ogTitle,
-  twitterDescription = ogDescription,
-  twitterImage = ogImage
+  title, 
+  header, 
+  image, 
+  description, 
+  ogTitle, 
+  ogDescription, 
+  ogImage, 
+  ogUrl,
+  twitterTitle,
+  twitterDescription,
+  twitterImage
 } = Astro.props;
+
+// Get current URL for canonical and og:url
+const currentUrl = ogUrl || Astro.url.href;
 ---
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width" />
-  <link rel="icon" type="image/svg+xml" href="/images/MSU Seal New (Official).png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="generator" content={Astro.generator} />
-  <meta name="description" content={description} />
+  <link rel="icon" type="image/svg+xml" href="/images/MSU Seal New (Official).png" />
+  <link rel="canonical" href={currentUrl} />
+  
+  <!-- Primary Meta Tags -->
+  <title>{title}</title>
+  {description && <meta name="description" content={description} />}
   
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="article" />
-  <meta property="og:url" content={ogUrl} />
-  <meta property="og:title" content={ogTitle} />
-  <meta property="og:description" content={ogDescription} />
-  <meta property="og:image" content={ogImage} />
-  <meta property="og:image:secure_url" content={ogImage} />
-  <meta property="og:image:type" content="image/jpeg" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content={ogTitle} />
+  <meta property="og:url" content={currentUrl} />
+  <meta property="og:title" content={ogTitle || title} />
+  <meta property="og:description" content={ogDescription || description || title} />
   <meta property="og:site_name" content="MSU Tawi-Tawi College of Technology and Oceanography" />
+  {ogImage && <meta property="og:image" content={ogImage} />}
+  {ogImage && <meta property="og:image:width" content="1200" />}
+  {ogImage && <meta property="og:image:height" content="630" />}
+  {ogImage && <meta property="og:image:type" content="image/jpeg" />}
   
   <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content={ogUrl} />
-  <meta property="twitter:title" content={twitterTitle} />
-  <meta property="twitter:description" content={twitterDescription} />
-  <meta property="twitter:image" content={twitterImage} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content={currentUrl} />
+  <meta name="twitter:title" content={twitterTitle || ogTitle || title} />
+  <meta name="twitter:description" content={twitterDescription || ogDescription || description || title} />
+  {twitterImage && <meta name="twitter:image" content={twitterImage} />}
+  <meta name="twitter:site" content="@msutcto" />
+  <meta name="twitter:creator" content="@msutcto" />
   
-  <!-- Additional SEO Meta Tags -->
-  <meta name="robots" content="index, follow" />
-  <meta name="author" content="MSU Tawi-Tawi College of Technology and Oceanography" />
+  <!-- Additional Social Media Meta Tags -->
+  {ogImage && <meta property="og:image:alt" content={`${ogTitle || title} - MSU TCTO Article`} />}
+  <meta property="article:publisher" content="MSU Tawi-Tawi College of Technology and Oceanography" />
+  <meta property="og:locale" content="en_US" />
   
-  <!-- DEBUG: Social Media Image URL -->
-  <!-- Image URL: {ogImage} -->
-  
-  <title>{title}</title>
+  <!-- WhatsApp specific -->
+  {ogImage && <meta property="og:image:secure_url" content={ogImage} />}
   <style>
     /* Modern animation keyframes */
     @keyframes heartbeat {
@@ -417,27 +422,11 @@ const {
     }
   </style>
 </head>
-<body class="bg-msu-deep-ocean dark:bg-gray-900">
+<body>
   <!-- Loading Container -->
   <div id="loading-container">
-    <!-- Logo with Loading Rings -->
+    <!-- Clean Logo -->
     <div id="logo-wrapper">
-      <!-- Animated Rings -->
-      <div class="loading-ring ring-1"></div>
-      <div class="loading-ring ring-2"></div>
-      <div class="loading-ring ring-3"></div>
-      
-      <!-- Progress Ring -->
-      <svg class="loading-ring" width="180" height="180" viewBox="0 0 100 100">
-        <circle class="progress-ring__circle" stroke="url(#gradient)" stroke-width="4" stroke-dasharray="283" stroke-dashoffset="283" fill="transparent" r="45" cx="50" cy="50" />
-        <defs>
-          <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#ffffff" />
-            <stop offset="100%" stop-color="#EE4C7C" />
-          </linearGradient>
-        </defs>
-      </svg>
-      
       <!-- Interactive Logo -->
       <div id="logo-container">
         <img src="/images/MSU Seal New (Official).png" alt="University Logo" 
@@ -449,7 +438,6 @@ const {
     <!-- Loading Information -->
     <div class="text-center max-w-md px-4">
       <h2 class="text-gradient text-4xl font-bold mb-4 tracking-tight">{title}</h2>
-      <div id="loading-percentage" class="text-6xl font-black text-gradient mb-2">0%</div>
       <p id="loading-status" class="mt-4 text-white/80 font-medium text-lg">
         Starting verification process<span class="dot-flashing ml-1"></span>
       </p>
@@ -517,7 +505,7 @@ const {
   </div>
 
   <!-- Main Content -->
-  <div id="content" class="hidden min-h-screen bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+  <div id="content" class="hidden min-h-screen">
     <slot />
   </div>
 
@@ -527,7 +515,7 @@ const {
       const percentageDisplay = document.getElementById('loading-percentage');
       const loadingStatus = document.getElementById('loading-status');
       const content = document.getElementById('content');
-      const progressCircle = document.querySelector('.progress-ring__circle');
+      // Removed progress circle reference since we removed the ring
       const progressBar = document.getElementById('progress-bar');
       const progressDetail = document.getElementById('progress-detail');
       const securityBadge = document.getElementById('security-badge');
@@ -566,9 +554,7 @@ const {
         verificationSteps.appendChild(stepElement);
       });
       
-      // Set initial state
-      progressCircle.style.strokeDasharray = circumference;
-      progressCircle.style.strokeDashoffset = circumference;
+      // Set initial state (progress circle removed)
       
       // Status messages
       const statusMessages = [
@@ -721,9 +707,9 @@ const {
         
         // Update displays
         const displayProgress = Math.floor(progress);
-        percentageDisplay.textContent = `${displayProgress}%`;
+        // Percentage display removed
         progressBar.style.width = `${progress}%`;
-        progressCircle.style.strokeDashoffset = circumference - (progress / 100) * circumference;
+        // Progress circle removed - no longer needed
         
         // Update status message
         const currentStatus = statusMessages.reduce((prev, curr) => 
@@ -744,7 +730,7 @@ const {
           
           setTimeout(() => {
             loadingStatus.innerHTML = "System ready <span class='text-green-300'>✓</span>";
-            percentageDisplay.textContent = "100%";
+            // Percentage display removed
             progressDetail.textContent = "All systems operational";
             
             setTimeout(() => {

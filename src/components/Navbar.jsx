@@ -15,7 +15,8 @@ import {
   FaUserTie,
   FaBars,
   FaMoon,
-  FaSun
+  FaSun,
+  FaUsers
 } from 'react-icons/fa';
 import { FiChevronDown, FiChevronRight } from 'react-icons/fi';
 
@@ -212,7 +213,6 @@ const Navbar = ({ path }) => {
       title: "Publications",
       icon: <FaNewspaper className="text-lg" />,
       items: [
-        // { link: "/publications/offices", label: "Offices & Resources" },
         { link: "/publications/articles", label: "Articles" },
         { link: "/publications/sulimbang", label: "Sulimbang" },
         { link: "/publications/gazette", label: "Gazettes" },
@@ -233,6 +233,14 @@ const Navbar = ({ path }) => {
       icon: <FaGraduationCap className="text-lg" />,
       items: [
         { link: "/graduationphoto", label: "Graduation Photos" },
+      ]
+    },
+
+    {
+      title: "Conference",
+      icon: <FaUsers className="text-lg" />,
+      items: [
+        { link: "404", label: "ICIIE 2025", disabled: true },
       ]
     }
   ];
