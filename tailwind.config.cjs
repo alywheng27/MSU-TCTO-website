@@ -7,7 +7,9 @@ module.exports = {
 		extend: {
 			fontFamily: {
 			  atkinson: ['Atkinson Hyperlegible', 'sans-serif'],
-			  merchant: ['Merchant', 'serif'], philosopher: ['Philosopher', 'sans-serif'],
+			  merchant: ['Merchant', 'serif'], 
+			  philosopher: ['Philosopher', 'sans-serif'],
+			  dirtylane: ['Dirtylane', 'cursive'],
 			},
 			fontSize: {
 			  '178px': '178px',
