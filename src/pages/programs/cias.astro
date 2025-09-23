@@ -6,690 +6,2151 @@ import Footer from "../../components/Footer.astro";
 import '../../styles/css/global.css';
 import '../../styles/css/globalanimate.css';
 
+
 const currentPath = Astro.url.pathname;
 ---
 
-<Layout title="College of Islamic & Arabic Studies| MSU-TCTO">
+<Layout title="College of Islamic and Arabic Studies | MSU-TCTO">
 	<main class="font-sans">
 		<Navbar path={currentPath} client:visible />
 
-
-		<!-- Hero Section -->
-<section class="relative bg-msu-deep-ocean h-[80vh] min-h-[600px] flex items-center overflow-hidden pt-[200px]">
-	  <div class="absolute inset-0 bg-gradient-to-t from-[#61063B]/90 via-[#61063B]/50 to-transparent z-10"></div>
-	<!-- Parallax Background Image -->
-	<div 
-	  class="absolute inset-0 bg-black/30 z-0"
-	  style="
-		background-image: url('/images/cias/cias.jpg');
-		background-size: cover;
-		background-position: center;
-		background-attachment: fixed;
-	  "
-	></div>
-
-	
-	
-	<div class="container mx-auto px-6 z-10 relative">
-	  <div class="max-w-7xl mx-auto text-center">
-		<h1 class="text-2xl md:text-6xl font-bold text-white mb-2 leading-tight">
-
-		  College of <span class="relative text-msu-main-color font-bold" style="text-shadow: 
-				  -1px -1px 0 #fff, 
-				   1px -1px 0 #fff, 
-				  -1px  1px 0 #fff, 
-				   1px  1px 0 #fff;">
-			Islamic and Arabic Studies
-				</span>
-		</h1>
-		<p class="text-xl text-white mb-8 max-w-2xl mx-auto">
-            Seeking knowledge is an obligation upon every Muslim. — Prophet Muhammad ﷺ (Sunan Ibn Majah, Book 1, Hadith 224)
-		</p>
-    	<div class="flex flex-wrap justify-center gap-4">
-					<a 
-						href="#programs" 
-						class="bg-msu-rusty-red hover:bg-msu-maroon text-white font-bold py-3 px-8 rounded-full transition-all duration-300 inline-block hover-grow"
-					>
-						Explore Programs
-					</a>
-					<a 
-						href="#contact" 
-						class="bg-transparent border-2 border-white hover:bg-white/10 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 inline-block hover-grow"
-					>
-						Contact Us
-					</a>
-				</div>
-          
-	  </div>
-	</div>
-	<div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent"></div>
-  </section>
-
-
-  <!-- Trusted Organizations Section -->
-		<section class="py-12 bg-gray-50">
-			<div class="container mx-auto px-6">
-				<div class="text-center mb-10">
-					<h3 class="text-xl font-medium text-gray-500 mb-2">TRUSTED BY LEADING ORGANIZATIONS</h3>
-					<div class="w-24 h-1 bg-msu-gold mx-auto"></div>
-				</div>
-				
-				<div class="relative overflow-hidden">
-					<!-- Slider Container -->
-					<div class="logos-slider flex items-center justify-center gap-12 py-4">
-						<!-- Partner Logos - Duplicated for infinite loop effect -->
-						<div class="logos-slide flex items-center justify-center gap-12">
-							<img src="/images/social media/aaccup.png" alt="AACCUP" class="h-12 object-contain opacity-80 hover:opacity-100 transition-opacity">
-							<img src="/images/social media/chedlogo.png" alt="CHED" class="h-12 object-contain opacity-80 hover:opacity-100 transition-opacity">
-							<img src="/images/social media/dost.png" alt="DOST" class="h-12 object-contain opacity-80 hover:opacity-100 transition-opacity">
-							<img src="/images/social media/ched.png" alt="CHED" class="h-12 object-contain opacity-80 hover:opacity-100 transition-opacity">
-							<img src="/images/social media/msu.png" alt="MSU System" class="h-12 object-contain opacity-80 hover:opacity-100 transition-opacity">
-						</div>
-						<div class="logos-slide flex items-center justify-center gap-12">
-							<img src="/images/social media/aaccup.png" alt="AACCUP" class="h-12 object-contain opacity-80 hover:opacity-100 transition-opacity">
-							<img src="/images/social media/chedlogo.png" alt="CHED" class="h-12 object-contain opacity-80 hover:opacity-100 transition-opacity">
-							<img src="/images/social media/dost.png" alt="DOST" class="h-12 object-contain opacity-80 hover:opacity-100 transition-opacity">
-							<img src="/images/social media/ched.png" alt="CHED" class="h-12 object-contain opacity-80 hover:opacity-100 transition-opacity">
-							<img src="/images/social media/msu.png" alt="MSU System" class="h-12 object-contain opacity-80 hover:opacity-100 transition-opacity">
+		<!-- Hero Section with Enhanced Video Background -->
+		<section class="relative bg-msu-main-color h-screen min-h-[500px] md:min-h-[700px] flex items-center overflow-hidden pt-[80px] md:pt-[100px]">
+			<!-- Enhanced Video Background with Parallax -->
+			<div class="absolute inset-0 z-0 overflow-hidden">
+				<video autoplay muted loop class="w-full h-full object-cover transform scale-110" id="heroVideo">
+					<source src="/video/msucamp.mp4" type="video/mp4">
+					<!-- Fallback image -->
+					<!-- Professional CAS Icon -->
+					<div class="w-full h-full flex items-center justify-center bg-gradient-to-r from-msu-main-color to-msu-deep-ocean p-8">
+						<svg class="w-40 h-40 text-msu-bgc-color" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<circle cx="60" cy="60" r="55" fill="none" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+							<circle cx="60" cy="60" r="45" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
+							<rect x="35" y="40" width="50" height="35" fill="none" stroke="currentColor" stroke-width="2"/>
+							<rect x="40" y="45" width="40" height="25" fill="url(#buildingGradient)" stroke="currentColor" stroke-width="1"/>
+							<rect x="45" y="50" width="8" height="8" fill="currentColor" opacity="0.7"/>
+							<rect x="67" y="50" width="8" height="8" fill="currentColor" opacity="0.7"/>
+							<rect x="45" y="62" width="8" height="8" fill="currentColor" opacity="0.7"/>
+							<rect x="67" y="62" width="8" height="8" fill="currentColor" opacity="0.7"/>
+							<rect x="55" y="65" width="10" height="10" fill="currentColor" opacity="0.8"/>
+							<circle cx="25" cy="35" r="8" fill="url(#artsGradient)" stroke="currentColor" stroke-width="1.5"/>
+							<circle cx="28" cy="32" r="2" fill="white"/>
+							<circle cx="32" cy="36" r="2" fill="white"/>
+							<circle cx="26" cy="40" r="2" fill="white"/>
+							<circle cx="95" cy="35" r="8" fill="url(#sciencesGradient)" stroke="currentColor" stroke-width="1.5"/>
+							<circle cx="95" cy="35" r="3" fill="currentColor"/>
+							<ellipse cx="95" cy="35" rx="10" ry="4" fill="none" stroke="currentColor" stroke-width="1" transform="rotate(30 95 35)"/>
+							<ellipse cx="95" cy="35" rx="10" ry="4" fill="none" stroke="currentColor" stroke-width="1" transform="rotate(-30 95 35)"/>
+							<text x="25" y="85" text-anchor="middle" font-family="serif" font-size="14" font-weight="bold" fill="currentColor">∑</text>
+							<path d="M85 80 Q90 75 95 80 Q100 85 105 80" fill="none" stroke="currentColor" stroke-width="2"/>
+							<path d="M105 80 L110 75" stroke="currentColor" stroke-width="1.5"/>
+							<circle cx="60" cy="20" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+							<circle cx="60" cy="20" r="2" fill="currentColor"/>
+							<path d="M60 20 L60 40" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+							<path d="M25 35 L35 40" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+							<path d="M95 35 L75 40" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+							<path d="M25 85 L35 75" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+							<path d="M105 80 L75 75" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+							<rect x="58" y="75" width="4" height="15" fill="currentColor" opacity="0.6"/>
+							<defs>
+								<linearGradient id="buildingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+									<stop offset="0%" style="stop-color:var(--tw-gradient-from, #03045e);stop-opacity:0.2"/>
+									<stop offset="100%" style="stop-color:var(--tw-gradient-to, #61063B);stop-opacity:0.3"/>
+								</linearGradient>
+								<linearGradient id="artsGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+									<stop offset="0%" style="stop-color:var(--tw-gradient-from, #03045e)"/>
+									<stop offset="100%" style="stop-color:var(--tw-gradient-to, #61063B)"/>
+								</linearGradient>
+								<linearGradient id="sciencesGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+									<stop offset="0%" style="stop-color:var(--tw-gradient-from, #61063B)"/>
+									<stop offset="100%" style="stop-color:var(--tw-gradient-to, #03045e)"/>
+								</linearGradient>
+							</defs>
+						</svg>
+						<div class="absolute bottom-6 left-1/2 transform -translate-x-1/2">
+							<div class=" text-white px-4 py-2 rounded-full shadow-lg">
+								<div class="text-center">
+									<div class="text-sm font-bold">COLLEGE OF</div>
+									<div class="text-lg font-bold">ARTS & SCIENCES</div>
+								</div>
+							</div>
 						</div>
 					</div>
-					
-					<!-- Gradient overlays -->
-					<div class="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-gray-50 to-transparent z-10"></div>
-					<div class="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-gray-50 to-transparent z-10"></div>
+				</video>
+				<div class="absolute inset-0 bg-black/50"></div>
+			</div>
+			
+			<!-- Enhanced Gradient overlay with animated particles -->
+			<div class="absolute inset-0 bg-gradient-to-t from-msu-deep-ocean/95 via-msu-main-color/60 to-transparent z-1"></div>
+			
+			<!-- Animated floating particles -->
+			<div class="absolute inset-0 z-2 overflow-hidden">
+				<div class="particles-container">
+					<div class="particle"></div>
+					<div class="particle"></div>
+					<div class="particle"></div>
+					<div class="particle"></div>
+					<div class="particle"></div>
+					<div class="particle"></div>
 				</div>
 			</div>
 			
-			<style is:global>
-				@keyframes slide {
-					0% { transform: translateX(0); }
-					100% { transform: translateX(-100%); }
+			<div class="container mx-auto px-6 z-10 relative">
+				<div class="max-w-5xl mx-auto text-center">
+					<!-- Enhanced Logo with glow effect -->
+					<div class="mb-4 animate-fadeInUp">
+						<div class="relative inline-block">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-32 w-32 mx-auto mb-3 text-white">
+								<path fill="currentColor" d="M12 3L1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82Z"/>
+							</svg>
+							<div class="absolute inset-0 bg-msu-deep-ocean/20 blur-xl rounded-full animate-ping"></div>
+						</div>
+					</div>
+					<!-- Enhanced Typography with gradient text using Poppins font -->
+					<h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 md:mb-8 leading-tight animate-fadeInUp px-4" style="font-family: 'Poppins', Arial, sans-serif; font-weight: 400;">
+						<span class="bg-gradient-to-r from-msu-bgc-color via-msu-deep-ocean via-msu-deep-ocean to-msu-bgc-color bg-clip-text text-transparent">
+							College of Islamic and Arabic Studies
+						</span>
+					</h1>
+					<!-- Enhanced subtitle with animated underline -->
+					<div class="relative mb-8 md:mb-12 animate-fadeInUp delay-100 px-4">
+						<p class="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white font-light max-w-3xl mx-auto leading-relaxed">
+							Seeking knowledge is an obligation upon every Muslim. — Prophet Muhammad ﷺ
+						</p>
+						<div class="absolute -bottom-6 md:-bottom-8 left-1/2 transform -translate-x-1/2 w-24 md:w-32 h-1 bg-gradient-to-r from-msu-bgc-color via-msu-deep-ocean via-msu-deep-ocean to-msu-bgc-color animate-pulse"></div>
+					</div>
+				
+					<!-- Enhanced CTA buttons with hover effects -->
+					<div class="flex flex-col sm:flex-row flex-wrap justify-center gap-4 sm:gap-6 animate-fadeInUp delay-200 mb-12 md:mb-16 lg:mb-20 px-4">
+						<a 
+							href="#programs" 
+							class="group bg-gradient-to-r from-msu-main-color to-msu-deep-ocean hover:from-msu-deep-ocean hover:to-msu-main-color text-white font-bold py-3 px-6 sm:py-4 sm:px-10 rounded-full transition-all duration-500 inline-flex items-center justify-center hover:shadow-2xl hover:-translate-y-2 transform hover:scale-105 text-sm sm:text-base"
+						>
+							<span class="relative z-10">Explore Programs</span>
+							<svg class="w-5 h-5 sm:w-6 sm:h-6 ml-2 sm:ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+							</svg>
+							<div class="absolute inset-0 bg-white/20 rounded-full blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+						</a>
+						<a 
+							href="#contact" 
+							class="group bg-transparent border-2 border-white hover:border-msu-deep-ocean text-white font-bold py-3 px-6 sm:py-4 sm:px-10 rounded-full transition-all duration-500 inline-flex items-center justify-center hover:shadow-2xl hover:-translate-y-2 transform hover:scale-105 backdrop-blur-sm text-sm sm:text-base"
+						>
+							<span class="relative z-10">Contact Us</span>
+							<svg class="w-5 h-5 sm:w-6 sm:h-6 ml-2 sm:ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+							</svg>
+						</a>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Enhanced scrolling indicator with mobile responsiveness -->
+			<div class="absolute bottom-2 md:bottom-4 left-1/2 transform -translate-x-1/2 z-10">
+				<div class="flex flex-col items-center space-y-1 md:space-y-2">
+					<span class="text-white text-xs md:text-sm font-light animate-pulse hidden sm:block">Scroll to explore</span>
+					<div class="w-4 h-6 sm:w-5 sm:h-8 md:w-6 md:h-10 border-2 border-white rounded-full flex justify-center relative">
+						<div class="w-1 h-1.5 sm:h-2 md:h-3 bg-white rounded-full mt-1 sm:mt-1.5 md:mt-2 animate-bounce"></div>
+						<!-- Enhanced scroll indicator with dots -->
+						<div class="absolute -bottom-3 sm:-bottom-4 md:-bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-1">
+							<div class="w-1 h-1 bg-white rounded-full animate-pulse"></div>
+							<div class="w-1 h-1 bg-white rounded-full animate-pulse" style="animation-delay: 0.2s;"></div>
+							<div class="w-1 h-1 bg-white rounded-full animate-pulse" style="animation-delay: 0.4s;"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- University Seal & Accreditation -->
+		<section class="py-8 md:py-12 bg-white">
+			<div class="container mx-auto px-4 sm:px-6">
+				<div class="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 lg:gap-16">
+					<div class="text-center">
+						<img src="/images/MSU Seal New (Official).png" alt="MSU Seal" class="h-24 sm:h-28 md:h-32 mx-auto mb-3 md:mb-4 lazy-image" loading="lazy">
+						<h3 class="text-base sm:text-lg font-semibold text-msu-bgc-color">Mindanao State University</h3>
+						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Tawi-Tawi College of Technology and Oceanography</p>
+					</div>
+					<div class="h-16 md:h-20 w-px bg-gray-200 hidden md:block"></div>
+					<div class="text-center">
+						<img src="/images/social media/aaccup.png" alt="AACCUP Accredited" class="h-24 sm:h-28 md:h-32 mx-auto mb-3 md:mb-4 lazy-image" loading="lazy">
+						<h3 class="text-base sm:text-lg font-semibold text-msu-bgc-color">AACCUP Accredited</h3>
+						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Level III Re-Accredited Status</p>
+					</div>
+					<div class="h-16 md:h-20 w-px bg-gray-200 hidden md:block"></div>
+					<div class="text-center">
+						<img src="/images/social media/chedlogo.png" alt="CHED Recognized" class="h-24 sm:h-28 md:h-32 mx-auto mb-3 md:mb-4 lazy-image" loading="lazy">
+						<h3 class="text-base sm:text-lg font-semibold text-msu-bgc-color">CHED Recognized</h3>
+						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Center of Excellence in Fisheries Education</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Enhanced About Section with Tabs -->
+		<section class="py-12 md:py-16 lg:py-24 bg-gradient-to-br from-gray-50 to-white">
+			<div class="container mx-auto px-4 sm:px-6">
+				<div class="text-center mb-8 md:mb-12 lg:mb-16">
+					<h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-4 md:mb-6">About the College of Islamic and Arabic Studies</h2>
+					<p class="text-lg sm:text-xl text-msu-main-color dark:text-msu-bgc-color max-w-3xl mx-auto px-4">
+						Where Islamic scholarship and Arabic language excellence meet, nurturing faith, intellect, and service to the Muslim Ummah and the nation.
+					</p>
+				</div>
+				
+				<div class="flex flex-col lg:flex-row items-start gap-8 md:gap-12 lg:gap-16">
+					<div class="lg:w-1/2">
+						<div class="relative rounded-2xl overflow-hidden shadow-2xl group cursor-pointer h-64 sm:h-80 md:h-96">
+							<img src="/images/cias/cias-building.jpg" alt="College of Islamic and Arabic Studies Building" 
+								class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image" loading="lazy" />
+							
+							<div class="absolute inset-0 bg-gradient-to-t from-msu-deep-ocean/80 via-transparent to-transparent flex items-end p-4 sm:p-6 md:p-8">
+								<div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+									<h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 md:mb-3">Our Islamic and Arabic Heritage</h3>
+									<p class="text-gray-200 text-sm sm:text-base md:text-lg">A center for Islamic learning and Arabic language mastery in the southern Philippines</p>
+								</div>
+							</div>
+							
+							<!-- Floating elements -->
+							<div class="absolute top-4 right-4 sm:top-6 sm:right-6 bg-msu-deep-ocean/90 backdrop-blur-sm text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold">
+								Est. 1982
+							</div>
+						</div>
+					</div>
+					
+					<div class="lg:w-1/2">
+						<div class="mb-6 md:mb-8 border-b border-gray-200">
+							<nav class="-mb-px flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 md:space-x-8">
+								<button class="tab-button active py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm border-msu-deep-ocean text-msu-main-color dark:text-msu-bgc-color transition-all duration-300" data-tab="mission">
+									<span class="flex items-center justify-center sm:justify-start">
+										<svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+										</svg>
+										<span class="hidden sm:inline">Mission</span>
+										<span class="sm:hidden">Mission</span>
+									</span>
+								</button>
+								<button class="tab-button py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm border-transparent text-msu-main-color dark:text-msu-bgc-color hover:text-msu-deep-ocean hover:border-gray-300 transition-all duration-300" data-tab="vision">
+									<span class="flex items-center justify-center sm:justify-start">
+										<svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+										</svg>
+										<span class="hidden sm:inline">Vision</span>
+										<span class="sm:hidden">Vision</span>
+									</span>
+								</button>
+								<button class="tab-button py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm border-transparent text-msu-main-color dark:text-msu-bgc-color hover:text-msu-deep-ocean hover:border-gray-300 transition-all duration-300" data-tab="history">
+									<span class="flex items-center justify-center sm:justify-start">
+										<svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+										</svg>
+										<span class="hidden sm:inline">History</span>
+										<span class="sm:hidden">History</span>
+									</span>
+								</button>
+							</nav>
+						</div>
+						
+						<div class="tab-content active" id="mission-content">
+							<div class="space-y-6 text-msu-main-color dark:text-msu-bgc-color">
+								<p class="text-xl leading-relaxed">
+									The College of Islamic and Arabic Studies is committed to providing quality education in Islamic sciences and Arabic language, guided by the principles of Islam and the needs of the Bangsamoro and Filipino communities. We aim to produce graduates who are grounded in Islamic values, proficient in Arabic, and equipped to serve as leaders, educators, and scholars.
+								</p>
+								<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+									<div class="bg-gradient-to-r from-msu-deep-ocean/10 to-transparent p-4 rounded-lg border-l-4 border-msu-deep-ocean">
+										<h4 class="font-semibold text-msu-main-color mb-2">Islamic Scholarship</h4>
+										<p class="text-sm">Deepening understanding of Qur’an, Hadith, Fiqh, and Islamic civilization</p>
+									</div>
+									<div class="bg-gradient-to-r from-msu-deep-ocean/10 to-transparent p-4 rounded-lg border-l-4 border-msu-deep-ocean">
+										<h4 class="font-semibold text-msu-main-color mb-2">Arabic Language Mastery</h4>
+										<p class="text-sm">Promoting fluency in Arabic for academic and professional excellence</p>
+									</div>
+									<div class="bg-gradient-to-r from-msu-deep-ocean/10 to-transparent p-4 rounded-lg border-l-4 border-msu-deep-ocean">
+										<h4 class="font-semibold text-msu-main-color mb-2">Community Service</h4>
+										<p class="text-sm">Serving the Muslim Ummah and society through education and outreach</p>
+									</div>
+									<div class="bg-gradient-to-r from-msu-deep-ocean/10 to-transparent p-4 rounded-lg border-l-4 border-msu-deep-ocean">
+										<h4 class="font-semibold text-msu-main-color mb-2">Cultural Preservation</h4>
+										<p class="text-sm">Upholding Islamic and local traditions in a diverse and changing world</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="tab-content hidden" id="vision-content">
+							<div class="space-y-6 text-msu-main-color dark:text-msu-bgc-color">
+								<p class="text-xl leading-relaxed">
+									To be a premier center of Islamic and Arabic education in the Philippines, recognized for academic excellence, research, and leadership in promoting Islamic values, peace, and cultural understanding.
+								</p>
+								<div class="bg-gradient-to-r from-msu-deep-ocean/5 to-msu-deep-ocean/5 p-6 rounded-xl border border-msu-deep-ocean/20">
+									<h4 class="font-bold text-msu-bgc-color mb-3">Our Aspirations</h4>
+									<ul class="space-y-2 text-msu-main-color dark:text-msu-bgc-color">
+										<li class="flex items-center">
+											<svg class="w-4 h-4 text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											Excellence in Islamic and Arabic education
+										</li>
+										<li class="flex items-center">
+											<svg class="w-4 h-4 text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											Leadership in research and community engagement
+										</li>
+										<li class="flex items-center">
+											<svg class="w-4 h-4 text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											Promotion of peace, unity, and cultural heritage
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						
+						<div class="tab-content hidden" id="history-content">
+							<div class="space-y-6 text-msu-main-color dark:text-msu-bgc-color">
+								<p class="text-xl leading-relaxed">
+									Established in 1982, the College of Islamic and Arabic Studies (CIAS) was founded to address the educational and spiritual needs of the Muslim population in Tawi-Tawi and beyond. CIAS began with a vision to cultivate Islamic scholarship and Arabic proficiency among the youth of the region.
+								</p>
+								<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+									<div class="text-center p-4 bg-gradient-to-b from-msu-deep-ocean/10 to-transparent rounded-lg">
+										<div class="text-3xl font-bold text-msu-bgc-color">1982</div>
+										<div class="text-sm text-msu-main-color dark:text-msu-bgc-color">Foundation Year</div>
+									</div>
+									<div class="text-center p-4 bg-gradient-to-b from-msu-deep-ocean/10 to-transparent rounded-lg">
+										<div class="text-3xl font-bold text-msu-bgc-color">5+</div>
+										<div class="text-sm text-msu-main-color dark:text-msu-bgc-color">Degree Programs</div>
+									</div>
+									<div class="text-center p-4 bg-gradient-to-b from-msu-deep-ocean/10 to-transparent rounded-lg">
+										<div class="text-3xl font-bold text-msu-bgc-color">1000+</div>
+										<div class="text-sm text-msu-main-color dark:text-msu-bgc-color">Graduates</div>
+									</div>
+								</div>
+								<p class="text-msu-main-color dark:text-msu-bgc-color">
+									Today, CIAS continues to be a beacon of Islamic and Arabic education, producing graduates who serve as imams, teachers, scholars, and community leaders throughout the Bangsamoro and the Philippines.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+			<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				const tabButtons = document.querySelectorAll('.tab-button');
+				
+				tabButtons.forEach(button => {
+					button.addEventListener('click', function() {
+						// Remove active class from all buttons and contents
+						document.querySelectorAll('.tab-button').forEach(btn => {
+							btn.classList.remove('active');
+							btn.classList.add('border-transparent', 'text-gray-500');
+							btn.classList.remove('border-msu-deep-ocean', 'text-msu-bgc-color');
+						});
+						
+						document.querySelectorAll('.tab-content').forEach(content => {
+							content.classList.add('hidden');
+							content.classList.remove('active');
+						});
+						
+						// Add active class to clicked button
+						this.classList.add('active', 'border-msu-deep-ocean', 'text-msu-bgc-color');
+						this.classList.remove('border-transparent', 'text-gray-500');
+						
+						// Show corresponding content
+						const tabId = this.getAttribute('data-tab');
+						document.getElementById(`${tabId}-content`).classList.remove('hidden');
+						document.getElementById(`${tabId}-content`).classList.add('active');
+					});
+				});
+			});
+			</script>
+			
+			<style>
+				.tab-content {
+					transition: opacity 0.3s ease;
 				}
 				
-				.logos-slider {
-					width: 100%;
-					overflow: hidden;
-					position: relative;
+				.tab-button.active {
+					color: #03045e;
+					border-color: #61063B;
 				}
 				
-				.logos-slide {
-					display: flex;
-					animation: slide 20s linear infinite;
-					width: calc(250px * 10); /* Adjust based on number of logos */
-				}
-				
-				.logos-slider:hover .logos-slide {
-					animation-play-state: paused;
+				.dark .tab-button.active {
+					color: #ffffff;
 				}
 			</style>
 		</section>
 
-	<!-- About Section -->
-<section class="py-20 bg-white">
-	<div class="container mx-auto px-6">
-	  <div class="flex flex-col lg:flex-row items-center gap-12">
-		<div class="lg:w-1/2">
-		  <div class="relative rounded-xl overflow-hidden shadow-2xl group cursor-pointer">
-			<!-- Logo Container with enhanced hover effects -->
-			<div class="relative overflow-hidden transition-all duration-500">
-			  <!-- Main Logo -->
-			  <img src="/images/College Logo/LOGO CIAS.png" alt="CAS Logo" 
-				   class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105 group-hover:rotate-1" />
-			  
-			  <!-- Animated Overlay Elements -->
-			  <div class="absolute inset-0 bg-msu-deep-ocean/20 transition-opacity duration-500 group-hover:opacity-30"></div>
-			  
-			  <!-- Particle Effects (hidden until hover) -->
-			  <div class="absolute inset-0 overflow-hidden pointer-events-none">
-				<!-- Multiple floating elements that appear on hover -->
-				<div class="absolute particle  w-3 h-3 bg-msu-gold rounded-full opacity-0 group-hover:opacity-80 transition-all duration-1000"></div>
-				<div class="absolute particle  w-4 h-4 bg-msu-gold rounded-full opacity-0 group-hover:opacity-80 transition-all duration-1200"></div>
-				<div class="absolute particle w-2 h-2 bg-msu-gold rounded-full opacity-0 group-hover:opacity-80 transition-all duration-900"></div>
-				<div class="absolute particle  w-3 h-3 bg-msu-gold rounded-full opacity-0 group-hover:opacity-80 transition-all duration-1100"></div>
-			  </div>
-			  
-			  <!-- Glow Effect -->
-			  <div class="absolute inset-0  opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+		<!-- Enhanced Stats Section with Animated Counters -->
+		<section class="py-20 bg-gradient-to-r from-msu-main-color via-msu-deep-ocean to-msu-main-color text-white relative overflow-hidden">
+			<!-- Animated background elements -->
+			<div class="absolute inset-0 opacity-10">
+				<div class="absolute top-10 left-10 w-20 h-20 bg-msu-deep-ocean rounded-full animate-pulse"></div>
+				<div class="absolute top-20 right-20 w-16 h-16 bg-msu-bgc-color rounded-full animate-ping"></div>
+				<div class="absolute bottom-10 left-1/4 w-12 h-12 bg-msu-deep-ocean rounded-full animate-bounce"></div>
+				<div class="absolute bottom-20 right-1/3 w-8 h-8 bg-msu-bgc-color rounded-full animate-pulse"></div>
 			</div>
 			
-			<!-- Floating Label (appears on hover) -->
-			<div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-msu-deep-ocean/90 text-white px-4 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-			  College of Arts & Sciences
-			</div>
-		  </div>
-		</div>
-		
-		<div class="lg:w-1/2">
-		  <h2 class="text-3xl font-bold text-msu-deep-ocean mb-6">About Our College</h2>
-		  <div class="space-y-4 text-gray-700">
-			<p>
-                To produce highly motivated and competent teachers who will:			</p>
-			<p>
-                provide leadership in their respective disciplines through quality instruction, research, extension and innovation;			</p>
-			<p>
-                respond to the demands of their social environment and its diverse cultures;			</p>
-			<p>
-                Be effective agents of peace and development in the Sulu Archipelago.			</p>
-		  </div>
-		</div>
-	  </div>
-	</div>
-  </section>
-  
-  <style>
-	/* Particle animation */
-
-	
-	@keyframes float {
-	  0%, 100% {
-		transform: translateY(0) translateX(0);
-	  }
-	  50% {
-		transform: translateY(-20px) translateX(10px);
-	  }
-	}
-
-	/* Cursor tracking effect */
-	.logo-container {
-	  position: relative;
-	  overflow: hidden;
-	}
-  </style>
-  
-  <script>
-  document.addEventListener('DOMContentLoaded', function() {
-	const logoContainer = document.querySelector('.group');
-	
-	// Enhanced cursor position tracking for more interactive effects
-	logoContainer.addEventListener('mousemove', (e) => {
-	  const rect = logoContainer.getBoundingClientRect();
-	  const x = e.clientX - rect.left;
-	  const y = e.clientY - rect.top;
-	  const centerX = rect.width / 2;
-	  const centerY = rect.height / 2;
-	  
-	  // Calculate distance from center
-	  const distanceX = x - centerX;
-	  const distanceY = y - centerY;
-	  
-	  // Adjust particles based on cursor position
-	  const particles = document.querySelectorAll('.particle');
-	  particles.forEach((particle, index) => {
-		const speed = index * 0.5 + 1;
-		particle.style.transform = `translate(${distanceX * 0.01 * speed}px, ${distanceY * 0.01 * speed}px)`;
-	  });
-	  
-	  // Create a subtle parallax effect
-	  const logo = logoContainer.querySelector('img');
-	  logo.style.transform = `scale(1.05) rotate(${distanceX * 0.01}deg)`;
-	  
-	  // Dynamic glow effect
-	  const glow = logoContainer.querySelector('.glow-effect');
-	  glow.style.left = `${x}px`;
-	  glow.style.top = `${y}px`;
-	});
-	
-	// Reset on mouse leave
-	logoContainer.addEventListener('mouseleave', () => {
-	  const particles = document.querySelectorAll('.particle');
-	  particles.forEach(particle => {
-		particle.style.transform = '';
-	  });
-	  
-	  const logo = logoContainer.querySelector('img');
-	  logo.style.transform = '';
-	});
-  });
-  </script>
-		<!-- Stats Section -->
-		<section class="py-16 bg-msu-main-color text-white">
-			<div class="container mx-auto px-6">
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-					<div class="p-6">
-						<div class="text-5xl font-bold mb-2">2</div>
-						<div class="text-xl">Undergraduate Programs</div>
+			<div class="container mx-auto px-6 relative z-10">
+				<div class="text-center mb-16">
+					<h2 class="text-4xl font-bold mb-4">Our Impact in Numbers</h2>
+					<p class="text-xl text-gray-300 max-w-2xl mx-auto">
+						Discover the scale of our academic excellence and community impact
+					</p>
+				</div>
+				
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+					<div class="group p-8 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
+						<div class="text-center">
+							<div class="relative mb-4">
+								<svg class="w-16 h-16 mx-auto text-msu-bgc-color mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+								</svg>
+								<div class="absolute inset-0 bg-msu-bgc-color/20 rounded-full blur-lg group-hover:scale-150 transition-transform duration-500"></div>
+							</div>
+							<div class="text-5xl font-bold mb-2 counter" data-target="1500">0</div>
+							<div class="text-xl font-semibold">Students Enrolled</div>
+							<div class="text-sm text-gray-300 mt-2">Active learners across all programs</div>
+						</div>
 					</div>
-					<div class="p-6">
-						<div class="text-5xl font-bold mb-2">1</div>
-						<div class="text-xl">Graduate Programs</div>
+					
+					<div class="group p-8 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
+						<div class="text-center">
+							<div class="relative mb-4">
+								<svg class="w-16 h-16 mx-auto text-msu-bgc-color mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+								</svg>
+								<div class="absolute inset-0 bg-msu-bgc-color/20 rounded-full blur-lg group-hover:scale-150 transition-transform duration-500"></div>
+							</div>
+							<div class="text-5xl font-bold mb-2 counter" data-target="65">0</div>
+							<div class="text-xl font-semibold">Faculty Members</div>
+							<div class="text-sm text-gray-300 mt-2">Expert educators and researchers</div>
+						</div>
 					</div>
-					<div class="p-6">
-						<div class="text-5xl font-bold mb-2">5</div>
-						<div class="text-xl">Academic Departments</div>
+					
+					<div class="group p-8 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
+						<div class="text-center">
+							<div class="relative mb-4">
+								<svg class="w-16 h-16 mx-auto text-msu-bgc-color mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+								</svg>
+								<div class="absolute inset-0 bg-msu-bgc-color/20 rounded-full blur-lg group-hover:scale-150 transition-transform duration-500"></div>
+							</div>
+							<div class="text-5xl font-bold mb-2 counter" data-target="12">0</div>
+							<div class="text-xl font-semibold">Academic Programs</div>
+							<div class="text-sm text-gray-300 mt-2">Diverse fields of study</div>
+						</div>
+					</div>
+					
+					<div class="group p-8 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
+						<div class="text-center">
+							<div class="relative mb-4">
+								<svg class="w-16 h-16 mx-auto text-msu-bgc-color mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+								</svg>
+								<div class="absolute inset-0 bg-msu-bgc-color/20 rounded-full blur-lg group-hover:scale-150 transition-transform duration-500"></div>
+							</div>
+							<div class="text-5xl font-bold mb-2 counter" data-target="25">0</div>
+							<div class="text-xl font-semibold">Research Projects</div>
+							<div class="text-sm text-gray-300 mt-2">Ongoing innovative studies</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</section>
+			
+			<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				const counters = document.querySelectorAll('.counter');
+				const speed = 200;
+				
+				counters.forEach(counter => {
+					const target = +counter.getAttribute('data-target');
+					const count = +counter.textContent;
+					const increment = target / speed;
+					
+					if (count < target) {
+						counter.textContent = Math.ceil(count + increment).toString();
+						setTimeout(updateCount, 1);
+					} else {
+						counter.textContent = target.toString();
+					}
+					
+					function updateCount() {
+						const count = +counter.textContent;
+						const increment = target / speed;
+						
+						if (count < target) {
+							counter.textContent = Math.ceil(count + increment).toString();
+							setTimeout(updateCount, 1);
+						} else {
+							counter.textContent = target.toString();
+						}
+					}
+				});
+			});
+			</script>
+		</section>
 
-	<!-- Programs Section -->
-<section id="programs" class="py-20 bg-gray-50">
+<!-- Programs Section with Cards -->
+<section id="programs" class="py-20 bg-white">
     <div class="container mx-auto px-6">
         <div class="text-center mb-16">
-            <h2 class="text-3xl font-bold text-msu-deep-ocean mb-4">Our Academic Programs</h2>
-            <p class="text-gray-600 max-w-2xl mx-auto">
-                Explore our diverse range of accredited programs designed to prepare students for success in various fields
+            <h2 class="text-3xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-4">Academic Programs</h2>
+            <p class="text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto">
+                Comprehensive fisheries education programs designed to meet industry needs
             </p>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-8">
-            <!-- Undergraduate Programs -->
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                <div class="bg-msu-main-color py-4 px-6">
-                    <h3 class="text-xl font-bold text-white">Undergraduate Programs</h3>
+        <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+            <!-- First 4 Visible Programs -->
+            <!-- Program 1 -->
+            <div class="program-card bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
+                <div class="h-50 overflow-hidden">
+                    <img src="/images/pdf/pdf.jpg" alt="Bachelor of Science in Mathematics" class="w-full h-full object-cover lazy-image" loading="lazy">
                 </div>
                 <div class="p-6">
-                    <ul class="space-y-4">
-                   
-
-                        <li>
-                            <div class="flex items-start">
-                                <svg class="h-5 w-5 text-msu-deep-ocean mt-1 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <a href="https://docs.google.com/document/d/1rRuFXcbhHzkQ6pkt9-kTvK05XwrZHMK3/edit?usp=drive_link" class="font-medium hover:text-msu-gold hover:underline flex items-center">
-                                    Bachelor of Arts in Islamic Studies Major in Sharia
-                                    <svg class="h-4 w-4 ml-1 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                    </svg>
-                                </a>
-                            </div>
-                        </li>
-
-                        <li>
-                            <div class="flex items-start">
-                                <svg class="h-5 w-5 text-msu-deep-ocean mt-1 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <a href="https://drive.google.com/file/d/13p2k38zFJObS_8c3PHjSdTSDudITklZ8/view?usp=drive_link" class="font-medium hover:text-msu-gold hover:underline flex items-center">
-                                    Bachelor of Science in Teaching Arabic 
-                                    <svg class="h-4 w-4 ml-1 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                    </svg>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Bachelor of Science in Mathematics</h3>
+                        <span class="bg-msu-deep-ocean/10 text-msu-bgc-color text-xs font-semibold px-2.5 py-0.5 rounded">Undergraduate</span>
+                    </div>
+                    <p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+                        A four-year degree program focusing on advanced mathematical theories, applications, and problem-solving techniques.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <a href="#" class="text-msu-deep-ocean font-medium hover:underline flex items-center">
+                            Learn More
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Program 2 -->
+            <div class="program-card bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
+                <div class="h-50 overflow-hidden">
+                    <img src="/images/pdf/pdf.jpg" alt="Bachelor of Science in History" class="w-full h-full object-cover lazy-image" loading="lazy">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Bachelor of Science in History</h3>
+                        <span class="bg-msu-deep-ocean/10 text-msu-bgc-color text-xs font-semibold px-2.5 py-0.5 rounded">Undergraduate</span>
+                    </div>
+                    <p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+                        Explore historical events, cultures, and societies to understand the present and shape the future.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <a href="#" class="text-msu-deep-ocean font-medium hover:underline flex items-center">
+                            Learn More
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <!-- Graduate & Diploma Programs -->
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-                <div class="bg-msu-deep-ocean py-4 px-6">
-                    <h3 class="text-xl font-bold text-white">Graduate & Diploma Programs</h3>
+            <!-- Program 3 -->
+            <div class="program-card bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
+                <div class="h-50 overflow-hidden">
+                    <img src="/images/pdf/pdf.jpg" alt="Bachelor in English Language Studies" class="w-full h-full object-cover lazy-image" loading="lazy">
                 </div>
                 <div class="p-6">
-                    <ul class="space-y-4">
-                        <li>
-                            <div class="flex items-start">
-                                <svg class="h-5 w-5 text-msu-deep-ocean mt-1 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <a href="https://drive.google.com/file/d/1o6V4gWfdf--bOOI0G8fyhg41hAJJvRLc/view?usp=drive_link" class="font-medium hover:text-msu-deep-ocean hover:underline flex items-center">
-                                    Master of Arts in Islamic Education
-                                    <svg class="h-4 w-4 ml-1 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                    </svg>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Bachelor in English Language Studies</h3>
+                        <span class="bg-msu-deep-ocean/10 text-msu-bgc-color text-xs font-semibold px-2.5 py-0.5 rounded">Diploma</span>
+                    </div>
+                    <p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+                        Study the English language, literature, and linguistics to develop critical thinking and communication skills.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <a href="#" class="text-msu-deep-ocean font-medium hover:underline flex items-center">
+                            Learn More
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Program 4 -->
+            <div class="program-card bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
+                <div class="h-50 overflow-hidden">
+                    <img src="/images/pdf/pdf.jpg" alt="Bachelor of Science in Political Science" class="w-full h-full object-cover lazy-image" loading="lazy">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Bachelor of Science in Political Science</h3>
+                        <span class="bg-msu-deep-ocean/10 text-msu-bgc-color text-xs font-semibold px-2.5 py-0.5 rounded">Diploma</span>
+                    </div>
+                    <p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+                        Examine political systems, theories, and behaviors to understand governance and public policy.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <a href="#" class="text-msu-deep-ocean font-medium hover:underline flex items-center">
+                            Learn More
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hidden Programs (will be shown when "View All" is clicked) -->
+            <!-- Program 5 -->
+            <div class="program-card hidden bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
+                <div class="h-50 overflow-hidden">
+                    <img src="/images/pdf/pdf.jpg" alt="Bachelor of Science in Biology" class="w-full h-full object-cover lazy-image" loading="lazy">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Bachelor of Science in Statistics</h3>
+                        <span class="bg-msu-deep-ocean/10 text-msu-bgc-color text-xs font-semibold px-2.5 py-0.5 rounded">Undergraduate</span>
+                    </div>
+                    <p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+                        Study living organisms and their relationships to each other and their environments.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <a href="#" class="text-msu-deep-ocean font-medium hover:underline flex items-center">
+                            Learn More
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Program 6 -->
+            <div class="program-card hidden bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
+                <div class="h-50 overflow-hidden">
+                    <img src="/images/pdf/pdf.jpg" alt="Bachelor of Science in Chemistry" class="w-full h-full object-cover lazy-image" loading="lazy">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Master in Public Administration</h3>
+                        <span class="bg-msu-deep-ocean/10 text-msu-bgc-color text-xs font-semibold px-2.5 py-0.5 rounded">Undergraduate</span>
+                    </div>
+                    <p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+                        Explore the composition, structure, properties, and changes of matter.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <a href="#" class="text-msu-deep-ocean font-medium hover:underline flex items-center">
+                            Learn More
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Program 7 -->
+            <div class="program-card hidden bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
+                <div class="h-50 overflow-hidden">
+                    <img src="/images/pdf/pdf.jpg" alt="Bachelor of Science in Chemistry" class="w-full h-full object-cover lazy-image" loading="lazy">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Master of Science in Teaching Mathematics</h3>
+                        <span class="bg-msu-deep-ocean/10 text-msu-bgc-color text-xs font-semibold px-2.5 py-0.5 rounded">Undergraduate</span>
+                    </div>
+                    <p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+                        Explore the composition, structure, properties, and changes of matter.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <a href="https://drive.google.com/file/d/1-nR4D-JxwCTGbQnqUWM1zACgGk-QF4ME/view?usp=drive_link" class="text-msu-deep-ocean font-medium hover:underline flex items-center">
+                            Learn More
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Program 8 -->
+            <div class="program-card hidden bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
+                <div class="h-50 overflow-hidden">
+                    <img src="/images/pdf/pdf.jpg" alt="Bachelor of Science in Chemistry" class="w-full h-full object-cover lazy-image" loading="lazy">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Bachelor of Public Administration</h3>
+                        <span class="bg-msu-deep-ocean/10 text-msu-bgc-color text-xs font-semibold px-2.5 py-0.5 rounded">Undergraduate</span>
+                    </div>
+                    <p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+                        Explore the composition, structure, properties, and changes of matter.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <a href="https://drive.google.com/file/d/1nnhyYyiE3kl3SUm-LC5218bhlJUwHk3_/view?usp=drive_link" class="text-msu-deep-ocean font-medium hover:underline flex items-center">
+                            Learn More
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Program 9 -->
+            <div class="program-card hidden bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
+                <div class="h-50 overflow-hidden">
+                    <img src="/images/pdf/pdf.jpg" alt="Bachelor of Science in Chemistry" class="w-full h-full object-cover lazy-image" loading="lazy">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Bachelor of Science in Business Administration (Marketing Management)</h3>
+                        <span class="bg-msu-deep-ocean/10 text-msu-bgc-color text-xs font-semibold px-2.5 py-0.5 rounded">Undergraduate</span>
+                    </div>
+                    <p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+                        Explore the composition, structure, properties, and changes of matter.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <a href="https://drive.google.com/file/d/1opvINEN2o8nhu30Kq6PAZhUwHdBIEOYm/view?usp=drive_link" class="text-msu-deep-ocean font-medium hover:underline flex items-center">
+                            Learn More
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Program 10 -->
+            <div class="program-card hidden bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
+                <div class="h-50 overflow-hidden">
+                    <img src="/images/pdf/pdf.jpg" alt="Bachelor of Science in Chemistry" class="w-full h-full object-cover lazy-image" loading="lazy">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Bachelor of Science in Literary and Cultural Studies</h3>
+                        <span class="bg-msu-deep-ocean/10 text-msu-bgc-color text-xs font-semibold px-2.5 py-0.5 rounded">Undergraduate</span>
+                    </div>
+                    <p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+                        Explore the composition, structure, properties, and changes of matter.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <a href="https://drive.google.com/file/d/1nVHOCbhiUkXvxmpzWnoXZxjMhoYwipG7/view?usp=drive_link" class="text-msu-deep-ocean font-medium hover:underline flex items-center">
+                            Learn More
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Program 11 -->
+            <div class="program-card hidden bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
+                <div class="h-50 overflow-hidden">
+                    <img src="/images/pdf/pdf.jpg" alt="Bachelor of Science in Chemistry" class="w-full h-full object-cover lazy-image" loading="lazy">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">BA in English Language Studies</h3>
+                        <span class="bg-msu-deep-ocean/10 text-msu-bgc-color text-xs font-semibold px-2.5 py-0.5 rounded">Undergraduate</span>
+                    </div>
+                    <p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+                        Explore the composition, structure, properties, and changes of matter.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <a href="https://drive.google.com/file/d/1-q3se6aH5VEn8mHv2PNM6vrKO_wAcuEg/view?usp=drive_link" class="text-msu-deep-ocean font-medium hover:underline flex items-center">
+                            Learn More
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Program 12 -->
+            <div class="program-card hidden bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
+                <div class="h-50 overflow-hidden">
+                    <img src="/images/pdf/pdf.jpg" alt="Bachelor of Science in Chemistry" class="w-full h-full object-cover lazy-image" loading="lazy">
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Diploma in Office Management</h3>
+                        <span class="bg-msu-deep-ocean/10 text-msu-bgc-color text-xs font-semibold px-2.5 py-0.5 rounded">Undergraduate</span>
+                    </div>
+                    <p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+                        Explore the composition, structure, properties, and changes of matter.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <a href="https://drive.google.com/file/d/1p04fYLXUYcL7LUQIN6-9tjKrqgbOyNRu/view?usp=drive_link" class="text-msu-deep-ocean font-medium hover:underline flex items-center">
+                            Learn More
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
+        
+        <!-- View All Programs Button -->
+        <div class="text-center mt-12">
+            <button id="viewAllBtn" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-msu-main-color hover:bg-msu-deep-ocean-dark hover:shadow-md transition-all duration-300">
+                View All Academic Programs
+                <svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+            </button>
+        </div>
+    </div> 
+</section>
 
-        <!-- Accreditation Badges -->
-        <div class="mt-16 bg-white rounded-xl shadow-lg p-8">
-            <div class="text-center mb-3">
-                <h3 class="text-xl font-bold text-msu-deep-ocean">Program Accreditations</h3>
-                <p class="text-gray-600 mt-2">Our programs meet the highest standards of quality education</p>
-            </div>
-            <div class="flex flex-wrap justify-center gap-8">
-                <div class="flex flex-col items-center">
-                    <div class="bg-gray-50 p-4 rounded-lg shadow-md mb-2">
-                        <img src="/images/social media/aaccup.png" alt="AACCUP Logo" class="h-16 w-auto object-contain">
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const viewAllBtn = document.getElementById('viewAllBtn');
+    const hiddenPrograms = document.querySelectorAll('.program-card.hidden');
+    
+    viewAllBtn.addEventListener('click', function() {
+        // Toggle all hidden programs
+        hiddenPrograms.forEach(program => {
+            program.classList.toggle('hidden');
+        });
+        
+        // Change button text based on state
+        if (viewAllBtn.textContent.includes('View All')) {
+            viewAllBtn.innerHTML = 'Show Less <svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"></path></svg>';
+        } else {
+            viewAllBtn.innerHTML = 'View All Academic Programs <svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>';
+        }
+    });
+});
+</script>
+
+		<!-- Research & Innovation Section -->
+		<section class="py-20 bg-gray-50">
+			<div class="container mx-auto px-6">
+				<div class="text-center mb-16">
+					<h2 class="text-3xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-4">Research & Innovation</h2>
+					<p class="text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto">
+						Cutting-edge research initiatives addressing critical challenges in fisheries and marine sciences
+					</p>
+				</div>
+				
+				<div class="grid md:grid-cols-3 gap-8 mb-12">
+					<div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+						<div class="text-msu-bgc-color mb-4">
+							<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+							</svg>
+						</div>
+						<h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-3">Aquaculture Development</h3>
+						<p class="text-msu-main-color dark:text-msu-bgc-color">
+							Research on sustainable aquaculture practices, species diversification, and feed technology to enhance production efficiency.
+						</p>
+					</div>
+					
+					<div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+						<div class="text-msu-bgc-color mb-4">
+							<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+							</svg>
+						</div>
+						<h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-3">Marine Conservation</h3>
+						<p class="text-msu-main-color dark:text-msu-bgc-color">
+							Studies on marine biodiversity, habitat protection, and ecosystem-based management of coastal resources.
+						</p>
+					</div>
+					
+					<div class="bg-white p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+						<div class="text-msu-bgc-color mb-4">
+							<svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+							</svg>
+						</div>
+						<h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-3">Post-Harvest Technology</h3>
+						<p class="text-msu-main-color dark:text-msu-bgc-color">
+							Innovations in fish processing, preservation, and value-added product development to reduce post-harvest losses.
+						</p>
+					</div>
+				</div>
+				
+				<!-- <div class="text-center">
+					<a href="#" class="inline-flex items-center px-6 py-3 border border-msu-deep-ocean text-base font-medium rounded-full shadow-sm text-msu-bgc-color bg-white hover:bg-gray-50 hover:shadow-md transition-all duration-300">
+						Explore Research Projects
+						<svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+						</svg>
+					</a>
+				</div>
+			</div> -->
+		</section>
+
+		<!-- Student Life Section -->
+		<section class="py-20 bg-white">
+			<div class="container mx-auto px-6">
+				<div class="text-center mb-16">
+					<h2 class="text-3xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-4">Student Life</h2>
+					<p class="text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto">
+						A vibrant community of scholars engaged in academic, research, and extracurricular activities
+					</p>
+				</div>
+				
+				<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+					<div class="relative group overflow-hidden rounded-xl shadow-lg h-64 transition-all duration-300 hover:shadow-xl">
+						<img src="/images/cof/image3.png" alt="Laboratory Work" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 lazy-image" loading="lazy" />
+						<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+							<div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+								<h3 class="text-white font-bold text-xl mb-2">Hands-on Learning</h3>
+								<p class="text-gray-200 text-sm">State-of-the-art laboratories for practical training</p>
+							</div>
+						</div>
+					</div>
+					
+					<div class="relative group overflow-hidden rounded-xl shadow-lg h-64 transition-all duration-300 hover:shadow-xl">
+						<img src="/images/cof/image3.png" alt="Field Work" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 lazy-image" loading="lazy" />
+						<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+							<div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+								<h3 class="text-white font-bold text-xl mb-2">Field Research</h3>
+								<p class="text-gray-200 text-sm">Immersion in marine ecosystems and fishing communities</p>
+							</div>
+						</div>
+					</div>
+					
+					<div class="relative group overflow-hidden rounded-xl shadow-lg h-64 transition-all duration-300 hover:shadow-xl">
+						<img src="/images/cof/image3.png" alt="Student Organizations" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 lazy-image" loading="lazy" />
+						<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+							<div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+								<h3 class="text-white font-bold text-xl mb-2">Student Organizations</h3>
+								<p class="text-gray-200 text-sm">Active participation in professional societies</p>
+							</div>
+						</div>
+					</div>
+					
+					<div class="relative group overflow-hidden rounded-xl shadow-lg h-64 transition-all duration-300 hover:shadow-xl">
+						<img src="/images/cof/image3.png" alt="Campus Events" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 lazy-image" loading="lazy" />
+						<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+							<div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+								<h3 class="text-white font-bold text-xl mb-2">Campus Events</h3>
+								<p class="text-gray-200 text-sm">Academic conferences and cultural activities</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- <div class="text-center">
+					<a href="#" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-msu-deep-ocean hover:bg-msu-deep-ocean-dark hover:shadow-md transition-all duration-300">
+						Explore Student Life
+						<svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+						</svg>
+					</a>
+				</div>
+			</div> -->
+		</section>
+
+		<!-- Faculty Spotlight -->
+		<section class="py-20 bg-gray-50">
+			<div class="container mx-auto px-6">
+				<div class="text-center mb-16">
+					<h2 class="text-3xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-4">Faculty Spotlight</h2>
+					<p class="text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto">
+						Our distinguished faculty members who are experts in their respective fields
+					</p>
+				</div>
+				
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+						<div class="h-64 overflow-hidden relative">
+							<img src="/images/cof/faculty1.jpg" alt="Dr. Maria Santos" class="w-full h-full object-cover lazy-image" loading="lazy">
+							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+								<h3 class="text-white font-bold text-xl">Dr. Maria Santos</h3>
+								<p class="text-gray-300 text-sm">Professor of Aquaculture</p>
+							</div>
+						</div>
+						<div class="p-6">
+							<div class="flex items-center mb-4">
+								<svg class="w-5 h-5 text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+								</svg>
+								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Aquaculture Systems</span>
+							</div>
+							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+								Specializing in sustainable aquaculture practices with over 20 years of research experience in Southeast Asia.
+							</p>
+							<a href="#" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm">
+								View Profile
+								<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+								</svg>
+							</a>
+						</div>
+					</div>
+					
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+						<div class="h-64 overflow-hidden relative">
+							<img src="/images/cof/faculty2.jpg" alt="Prof. Juan Dela Cruz" class="w-full h-full object-cover lazy-image" loading="lazy">
+							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+								<h3 class="text-white font-bold text-xl">Prof. Juan Dela Cruz</h3>
+								<p class="text-gray-300 text-sm">Associate Professor of Marine Biology</p>
+							</div>
+						</div>
+						<div class="p-6">
+							<div class="flex items-center mb-4">
+								<svg class="w-5 h-5 text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+								</svg>
+								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Coral Reef Ecology</span>
+							</div>
+							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+								Leading researcher in coral reef conservation and marine biodiversity in the Sulu-Sulawesi Seascape.
+							</p>
+							<a href="#" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm">
+								View Profile
+								<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+								</svg>
+							</a>
+						</div>
+					</div>
+					
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+						<div class="h-64 overflow-hidden relative">
+							<img src="/images/cof/faculty3.jpg" alt="Dr. Amina Rahman" class="w-full h-full object-cover lazy-image" loading="lazy">
+							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+								<h3 class="text-white font-bold text-xl">Dr. Amina Rahman</h3>
+								<p class="text-gray-300 text-sm">Professor of Fisheries Economics</p>
+							</div>
+						</div>
+						<div class="p-6">
+							<div class="flex items-center mb-4">
+								<svg class="w-5 h-5 text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+								</svg>
+								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Fisheries Policy</span>
+							</div>
+							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+								Expert in fisheries policy, value chain analysis, and socio-economic aspects of small-scale fisheries.
+							</p>
+							<a href="#" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm">
+								View Profile
+								<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+								</svg>
+							</a>
+						</div>
+					</div>
+				</div>
+				
+				<!-- <div class="text-center mt-12">
+					<a href="#" class="inline-flex items-center px-6 py-3 border border-msu-deep-ocean text-base font-medium rounded-full shadow-sm text-msu-bgc-color bg-white hover:bg-gray-50 hover:shadow-md transition-all duration-300">
+						View All Faculty Members
+						<svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+						</svg>
+					</a>
+				</div>
+			</div> -->
+		</section>
+
+		<!-- Alumni Success Stories -->
+		<section class="py-20 bg-msu-main-color text-white">
+			<div class="container mx-auto px-6">
+				<div class="text-center mb-16">
+					<h2 class="text-3xl font-bold mb-4">Alumni Success Stories</h2>
+					<p class="text-gray-300 max-w-2xl mx-auto">
+						Our graduates making waves in fisheries and marine sciences worldwide
+					</p>
+				</div>
+				
+				<!-- Alumni Carousel Container -->
+				<div class="relative">
+					<!-- Carousel Wrapper -->
+					<div class="overflow-hidden rounded-2xl">
+						<div id="alumniCarousel" class="flex transition-transform duration-700 ease-in-out">
+							<!-- Alumni Slide 1 -->
+							<div class="w-full flex-shrink-0">
+								<div class="bg-gradient-to-br from-white/10 to-white/5 p-8 rounded-2xl backdrop-blur-sm border border-white/20">
+									<div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+										<div class="flex-shrink-0">
+											<div class="relative">
+												<img src="/images/cof/alumni1.jpg" alt="Sarah Lim" class="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-4 border-white shadow-lg lazy-image" loading="lazy">
+												<div class="absolute -top-2 -right-2 w-8 h-8 bg-msu-bgc-color rounded-full flex items-center justify-center shadow-lg">
+													<svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+														<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+													</svg>
+												</div>
+											</div>
+										</div>
+										<div class="flex-1 text-center md:text-left">
+											<h3 class="text-2xl md:text-3xl font-bold text-white mb-2">Sarah Lim</h3>
+											<p class="text-lg text-msu-bgc-color mb-4 font-medium">BS Fisheries, 2010</p>
+											<blockquote class="text-lg text-gray-200 italic leading-relaxed mb-6">
+												"MSU-TCTO's fisheries program gave me the technical skills and field experience that launched my career as a marine conservation specialist with WWF."
+											</blockquote>
+											<div class="flex items-center justify-center md:justify-start text-sm text-gray-300">
+												<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+												</svg>
+												<span>Marine Conservation Specialist, WWF</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<!-- Alumni Slide 2 -->
+							<div class="w-full flex-shrink-0">
+								<div class="bg-gradient-to-br from-white/10 to-white/5 p-8 rounded-2xl backdrop-blur-sm border border-white/20">
+									<div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+										<div class="flex-shrink-0">
+											<div class="relative">
+												<img src="/images/cof/alumni2.jpg" alt="Ahmed Hassan" class="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-4 border-white shadow-lg lazy-image" loading="lazy">
+												<div class="absolute -top-2 -right-2 w-8 h-8 bg-msu-deep-ocean rounded-full flex items-center justify-center shadow-lg">
+													<svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+														<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+													</svg>
+												</div>
+											</div>
+										</div>
+										<div class="flex-1 text-center md:text-left">
+											<h3 class="text-2xl md:text-3xl font-bold text-white mb-2">Ahmed Hassan</h3>
+											<p class="text-lg text-msu-bgc-color mb-4 font-medium">MS Marine Biology, 2015</p>
+											<blockquote class="text-lg text-gray-200 italic leading-relaxed mb-6">
+												"The research opportunities at MSU-TCTO prepared me for my PhD and current work on coral reef resilience to climate change."
+											</blockquote>
+											<div class="flex items-center justify-center md:justify-start text-sm text-gray-300">
+												<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+												</svg>
+												<span>Research Scientist, Australian Institute of Marine Science</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<!-- Alumni Slide 3 -->
+							<div class="w-full flex-shrink-0">
+								<div class="bg-gradient-to-br from-white/10 to-white/5 p-8 rounded-2xl backdrop-blur-sm border border-white/20">
+									<div class="flex flex-col md:flex-row items-center md:items-start gap-6">
+										<div class="flex-shrink-0">
+											<div class="relative">
+												<img src="/images/cof/alumni3.jpg" alt="Maria Tan" class="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-4 border-white shadow-lg lazy-image" loading="lazy">
+												<div class="absolute -top-2 -right-2 w-8 h-8 bg-msu-bgc-color rounded-full flex items-center justify-center shadow-lg">
+													<svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+														<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+													</svg>
+												</div>
+											</div>
+										</div>
+										<div class="flex-1 text-center md:text-left">
+											<h3 class="text-2xl md:text-3xl font-bold text-white mb-2">Maria Tan</h3>
+											<p class="text-lg text-msu-bgc-color mb-4 font-medium">BS Aquaculture, 2018</p>
+											<blockquote class="text-lg text-gray-200 italic leading-relaxed mb-6">
+												"My aquaculture training led to establishing a successful seaweed farming cooperative that now exports to international markets."
+											</blockquote>
+											<div class="flex items-center justify-center md:justify-start text-sm text-gray-300">
+												<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+												</svg>
+												<span>CEO, Tawi-Tawi Seaweed Producers Cooperative</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Navigation Controls -->
+					<div class="flex items-center justify-center mt-8 space-x-4">
+						<!-- Previous Button -->
+						<button id="prevAlumni" class="p-3 rounded-full bg-white/20 text-white hover:bg-white/30 transition-all duration-300 transform hover:scale-110 shadow-lg backdrop-blur-sm">
+							<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+							</svg>
+						</button>
+						
+						<!-- Dots Indicator -->
+						<div class="flex space-x-2">
+							<button class="alumni-dot w-3 h-3 rounded-full bg-white transition-all duration-300" data-slide="0"></button>
+							<button class="alumni-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all duration-300" data-slide="1"></button>
+							<button class="alumni-dot w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all duration-300" data-slide="2"></button>
+						</div>
+						
+						<!-- Next Button -->
+						<button id="nextAlumni" class="p-3 rounded-full bg-white/20 text-white hover:bg-white/30 transition-all duration-300 transform hover:scale-110 shadow-lg backdrop-blur-sm">
+							<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+							</svg>
+						</button>
+					</div>
+					
+					<!-- Auto-play Indicator -->
+					<div class="flex items-center justify-center mt-4">
+						<button id="autoPlayToggle" class="flex items-center space-x-2 px-4 py-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-all duration-300 backdrop-blur-sm">
+							<svg id="playIcon" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+								<path d="M8 5v10l8-5-8-5z"></path>
+							</svg>
+							<span id="autoPlayText" class="text-sm font-medium">Auto Play</span>
+						</button>
+					</div>
+				</div>
+				
+				<!-- <div class="text-center mt-12">
+					<a href="#" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-msu-bgc-color bg-msu-deep-ocean hover:bg-msu-deep-ocean-dark hover:shadow-md transition-all duration-300">
+						More Alumni Stories
+						<svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+						</svg>
+					</a>
+				</div>
+			</div> -->
+		</section>
+
+		<!-- News & Events Section -->
+		<!-- <section class="py-20 bg-white">
+			<div class="container mx-auto px-6">
+				<div class="text-center mb-16">
+					<h2 class="text-3xl font-bold text-msu-bgc-color mb-4">News & Events</h2>
+					<p class="text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto">
+						Stay updated with the latest happenings at the College of Fisheries
+					</p>
+				</div>
+				
+				<div class="grid md:grid-cols-3 gap-8 mb-12">
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+						<div class="h-48 overflow-hidden">
+							<img src="/images/cof/news1.jpg" alt="Research Symposium" class="w-full h-full object-cover">
+							<div class="absolute top-4 right-4 bg-msu-deep-ocean text-white text-xs font-bold px-3 py-1 rounded-full">
+								Event
+							</div>
+						</div>
+						<div class="p-6">
+							<div class="flex items-center text-sm text-gray-500 mb-2">
+								<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+								</svg>
+								June 15, 2023
+							</div>
+							<h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-3">Annual Fisheries Research Symposium</h3>
+							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+								Join us for the presentation of groundbreaking research by our faculty and students.
+							</p>
+							<a href="#" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm">
+								Read More
+								<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+								</svg>
+							</a>
+						</div>
+					</div>
+					
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+						<div class="h-48 overflow-hidden">
+							<img src="/images/cof/news2.jpg" alt="New Research Grant" class="w-full h-full object-cover">
+							<div class="absolute top-4 right-4 bg-msu-deep-ocean text-white text-xs font-bold px-3 py-1 rounded-full">
+								News
+							</div>
+						</div>
+						<div class="p-6">
+							<div class="flex items-center text-sm text-gray-500 mb-2">
+								<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+								</svg>
+								May 28, 2023
+							</div>
+							<h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-3">$1.2M Grant for Sustainable Aquaculture Research</h3>
+							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+								College secures major funding to develop eco-friendly aquaculture systems for small-scale fishers.
+							</p>
+							<a href="#" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm">
+								Read More
+								<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+								</svg>
+							</a>
+						</div>
+					</div>
+					
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+						<div class="h-48 overflow-hidden">
+							<img src="/images/cof/news3.jpg" alt="Student Achievement" class="w-full h-full object-cover">
+							<div class="absolute top-4 right-4 bg-msu-deep-ocean text-white text-xs font-bold px-3 py-1 rounded-full">
+								Achievement
+							</div>
+						</div>
+						<div class="p-6">
+							<div class="flex items-center text-sm text-gray-500 mb-2">
+								<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+								</svg>
+								April 10, 2023
+							</div>
+							<h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-3">Fisheries Students Win International Competition</h3>
+							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+								Team develops innovative solution to reduce bycatch in small-scale fisheries.
+							</p>
+							<a href="#" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm">
+								Read More
+								<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+								</svg>
+							</a>
+						</div>
+					</div>
+				</div>
+				
+				<div class="text-center">
+					<a href="#" class="inline-flex items-center px-6 py-3 border border-msu-deep-ocean text-base font-medium rounded-full shadow-sm text-msu-bgc-color bg-white hover:bg-gray-50 hover:shadow-md transition-all duration-300">
+						View All News & Events
+						<svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+						</svg>
+					</a>
+				</div>
+			</div>
+		</section> -->
+
+<!-- Contact Section -->
+<section id="contact" class="py-20 bg-gray-100">
+    <div class="container mx-auto px-6">
+        <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+            <div class="md:flex">
+                <div class="md:w-1/2 bg-msu-main-color text-white p-12">
+                    <!-- Left column content remains the same -->
+                    <h2 class="text-3xl font-bold mb-6">Contact Us</h2>
+                    <p class="text-gray-300 mb-8">
+                        Have questions about our programs or admission process? Reach out to us through any of the channels below.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-msu-deep-ocean/10 p-3 rounded-lg">
+                                <svg class="w-6 h-6 text-msu-bgc-color" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium">Email</h3>
+                                <p class="text-gray-300">msutctocof@msutawi-tawi.edu.ph</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-msu-deep-ocean/10 p-3 rounded-lg">
+                                <svg class="w-6 h-6 text-msu-bgc-color" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium">Phone</h3>
+                                <p class="text-gray-300">+63 917 134 7952</p>
+                                <p class="text-gray-300">+63 905 242 2820</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-msu-deep-ocean/10 p-3 rounded-lg">
+                                <svg class="w-6 h-6 text-msu-bgc-color" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium">Address</h3>
+                                <p class="text-gray-300">College of Fisheries, MSU-TCTO Campus</p>
+                                <p class="text-gray-300">Sanga-Sanga, Bongao, Tawi-Tawi, Philippines</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-msu-deep-ocean/10 p-3 rounded-lg">
+                                <svg class="w-6 h-6 text-msu-bgc-color" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium">Office Hours</h3>
+                                <p class="text-gray-300">Monday - Friday: 8:00 AM - 5:00 PM</p>
+                                <!-- <p class="text-gray-300">Saturday: 8:00 AM - 12:00 PM</p> -->
+                            </div>
+                        </div>
                     </div>
-                    <span class="text-sm font-medium text-gray-700">AACCUP Accredited Programs</span>
                 </div>
-                <div class="flex flex-col items-center">
-                    <div class="bg-gray-50 p-4 rounded-lg shadow-md mb-2">
-                        <img src="/images/social media/chedlogo.png" alt="CHED Logo" class="h-16 w-auto object-contain">
-                    </div>
-                    <span class="text-sm font-medium text-gray-700">CHED Certificate of Program Compliance</span>
+                
+                <div class="md:w-1/2 p-12">
+                    <h3 class="text-2xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-6">Send Us a Message</h3>
+                    <form id="contactForm" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSderS6A0qtRPw6zVVeTY-tTTjszHFz1cO-aSDaru4aXyUH6QA/formResponse" target="_self" method="POST" class="space-y-6">
+                        <!-- Status Message -->
+                        <div id="formStatus" class="hidden p-4 rounded-lg mb-6"></div>
+                        
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-msu-main-color dark:text-msu-bgc-color mb-1">Full Name *</label>
+                            <input type="text" id="name" name="entry.757250837" required
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-msu-deep-ocean focus:border-transparent"
+                                placeholder="Your name">
+                            <div id="nameError" class="text-red-500 text-sm mt-1 hidden">Please enter your name</div>
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-msu-main-color dark:text-msu-bgc-color mb-1">Email Address *</label>
+                            <input type="email" id="email" name="entry.1493463705" required
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-msu-deep-ocean focus:border-transparent"
+                                placeholder="your.email@example.com">
+                            <div id="emailError" class="text-red-500 text-sm mt-1 hidden">Please enter a valid email address</div>
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-msu-main-color dark:text-msu-bgc-color mb-1">Subject *</label>
+                            <select id="subject" name="entry.638146523" required
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-msu-deep-ocean focus:border-transparent">
+                                <option value="">Select a subject</option>
+                                <option value="admission">Admission Inquiry</option>
+                                <option value="program">Program Inquiry</option>
+                                <option value="research">Research Collaboration</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <div id="subjectError" class="text-red-500 text-sm mt-1 hidden">Please select a subject</div>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-msu-main-color dark:text-msu-bgc-color mb-1">Message *</label>
+                            <textarea id="message" name="entry.1174451292" rows="5" required
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-msu-deep-ocean focus:border-transparent"
+                                placeholder="Your message here..."></textarea>
+                            <div id="messageError" class="text-red-500 text-sm mt-1 hidden">Please enter your message</div>
+                        </div>
+
+                        <input type="text" id="department" name="entry.1918216475" value="COF" required
+                            class="hidden" hidden>
+                        
+                        <div>
+                            <button type="submit" id="submitBtn"
+                                class="w-full py-3 px-6 bg-msu-main-color hover:bg-msu-deep-ocean text-white font-medium rounded-lg transition-all duration-300 shadow-md hover:shadow-lg">
+                                <span id="submitText">Send Message</span>
+                                <span id="submitSpinner" class="hidden">
+                                    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                    Processing...
+                                </span>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </section>
-		<!-- Gallery Section -->
-		<section class="py-20 bg-white">
-			<div class="container mx-auto px-6">
-				<div class="text-center mb-16">
-					<h2 class="text-3xl font-bold text-msu-deep-ocean mb-4">Campus Life</h2>
-					<p class="text-gray-600 max-w-2xl mx-auto">
-						Experience the vibrant academic community at the College of Arts and Sciences
-					</p>
-				</div>
 
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-					<div class="relative group overflow-hidden rounded-xl shadow-lg h-64">
-						<img src="/images/cias/image1.png" alt="CAS Campus" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-						<div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-							<span class="text-white font-bold text-lg">Classroom Discussions</span>
-						</div>
-					</div>
-					<div class="relative group overflow-hidden rounded-xl shadow-lg h-64">
-						<img src="/images/cias/image2.png" alt="CAS Students" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-						<div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-							<span class="text-white font-bold text-lg">Student Activities</span>
-						</div>
-					</div>
-					<div class="relative group overflow-hidden rounded-xl shadow-lg h-64">
-						<img src="/images/cias/image3.png" alt="CAS Facilities" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-						<div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-							<span class="text-white font-bold text-lg">Academic Events</span>
-						</div>
-					</div>
-					<div class="relative group overflow-hidden rounded-xl shadow-lg h-64 md:col-span-2">
-						<img src="/images/cias/image4.png" alt="CAS Laboratory" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-						<div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-							<span class="text-white font-bold text-lg">Research Facilities</span>
-						</div>
-					</div>
-					<div class="relative group overflow-hidden rounded-xl shadow-lg h-64">
-						<img src="/images/cias/image5.png" alt="CAS Library" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-						<div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-							<span class="text-white font-bold text-lg">Learning Spaces</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+<!-- Thank You Modal -->
+<div id="thankYouModal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <!-- Background overlay -->
+        <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+            <div class="absolute inset-0 bg-gray-900 opacity-75"></div>
+        </div>
+        
+        <!-- Modal content -->
+        <div class="inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div class="bg-white px-8 pt-8 pb-6 sm:p-8 sm:pb-6">
+                <div class="text-center">
+                    <!-- Animated checkmark -->
+                    <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-6">
+                        <svg class="h-12 w-12 text-green-600 animate-check" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    
+                    <h3 class="text-2xl leading-8 font-bold text-gray-900 mb-2">Thank You!</h3>
+                    <div class="mt-2">
+                        <p class="text-lg text-msu-main-color dark:text-msu-bgc-color">
+                            Your message has been sent successfully. We'll get back to you soon.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-8 py-6 sm:px-8 sm:py-6 flex justify-center">
+                <button id="closeModalBtn" type="button" class="w-full sm:w-auto px-6 py-3 bg-msu-main-color text-white font-medium rounded-lg shadow-sm hover:bg-msu-deep-ocean transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-msu-deep-ocean">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
-		<!-- Contact Section -->
-		<section id="contact" class="py-20 bg-msu-deep-ocean text-white">
-			<div class="container mx-auto px-6">
-				<div class="max-w-4xl mx-auto">
-					<div class="text-center mb-12">
-						<h2 class="text-3xl font-bold mb-4">Contact the College of Islamic and Arabic Studies</h2>
-						<p class="text-gray-300">
-							Have questions about our programs or admission process? Reach out to us.
-						</p>
-					</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const submitText = document.getElementById('submitText');
+    const submitSpinner = document.getElementById('submitSpinner');
+    const formStatus = document.getElementById('formStatus');
+    const thankYouModal = document.getElementById('thankYouModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
 
-					<div class="grid md:grid-cols-2 gap-8">
-						<div>
-							<h3 class="text-xl font-bold mb-4">Contact Information</h3>
-							<ul class="space-y-4">
-								<li class="flex items-start">
-									<svg class="h-6 w-6 text-msu-main-color mr-4 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-									</svg>
-									<span>najeebrazulsali@msutawi-tawi.edu.ph</span>
-								</li>
-								<li class="flex items-start">
-									<svg class="h-6 w-6 text-msu-main-color mr-4 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-									</svg>
-									<div>
-										<p>0970-9165-267</p>
-								
-									</div>
-								</li>
-								<li class="flex items-start">
-									<svg class="h-6 w-6 text-msu-main-color mr-4 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-									</svg>
-									<span>MSU-TCTO Campus, Sanga-Sanga, Bongao, Tawi-Tawi, Philippines</span>
-								</li>
-							</ul>
-						</div>
+    // Close modal function
+    function closeModal() {
+        thankYouModal.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+    }
 
-						<div>
-							<section class="py-12 px-4">
-								<div class="max-w-4xl mx-auto">
-								  <div class="bg-msu-deep-ocean rounded-lg shadow-lg overflow-hidden">
-									<div class="p-8">
-									  <h3 class="text-2xl font-bold mb-6 text-white">Send Us a Message</h3>
-									  
-									  <!-- Form Container -->
-									  <div id="form-container">
-										<form id="contact-form" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSderS6A0qtRPw6zVVeTY-tTTjszHFz1cO-aSDaru4aXyUH6QA/formResponse" method="POST" class="space-y-6">
-										  <div>
-											<label for="name" class="block mb-2 text-gray-300">Name <span class="text-msu-gold">*</span></label>
-											<input type="text" id="name" name="entry.757250837" required
-											  class="w-full px-4 py-3 rounded bg-msu-deep-ocean-light border border-gray-600 focus:outline-none focus:ring-2 focus:ring-msu-gold text-white placeholder-gray-400"
-											  placeholder="Your name">
-											<div id="name-error" class="text-red-400 text-sm mt-1 hidden">Please enter your name</div>
-										  </div>
-										  
-										  <div>
-											<label for="email" class="block mb-2 text-gray-300">Email <span class="text-msu-gold">*</span></label>
-											<input type="email" id="email" name="entry.1493463705" required
-											  class="w-full px-4 py-3 rounded bg-msu-deep-ocean-light border border-gray-600 focus:outline-none focus:ring-2 focus:ring-msu-gold text-white placeholder-gray-400"
-											  placeholder="your.email@example.com">
-											<div id="email-error" class="text-red-400 text-sm mt-1 hidden">Please enter a valid email address</div>
-										  </div>
-										  
-										  <div>
-											<label for="message" class="block mb-2 text-gray-300">Message <span class="text-msu-gold">*</span></label>
-											<textarea id="message" name="entry.1174451292" rows="5" required
-											  class="w-full px-4 py-3 rounded bg-msu-deep-ocean-light border border-gray-600 focus:outline-none focus:ring-2 focus:ring-msu-gold text-white placeholder-gray-400"
-											  placeholder="Your message here..."></textarea>
-											<div id="message-error" class="text-red-400 text-sm mt-1 hidden">Please enter your message</div>
-										  </div>
+    // Close modal when clicking the button
+    closeModalBtn.addEventListener('click', closeModal);
 
-										  <div>
-						
-											<input type="text" id="name" name="entry.757250837" value="CIAS" required
-											  class="w-full px-4 py-3 rounded bg-msu-deep-ocean-light border border-gray-600 focus:outline-none focus:ring-2 focus:ring-msu-gold text-white placeholder-gray-400"
-											  placeholder="Your name" hidden>
-											<div id="name-error" class="text-red-400 text-sm mt-1 hidden">Please enter Department</div>
-										  </div>
-										  
-										<div class="pt-2">
-											<button 
-												type="submit" 
-												id="submit-btn" 
-												class="w-full py-3 px-6 rounded-lg font-medium transition-all duration-300 flex items-center justify-center
-													bg-gradient-to-r from-msu-main-color to-msu-deep-ocean hover:bg-gradient-to-br
-													text-white shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-											>
-												<span id="btn-text">Send Message</span>
-												<svg id="spinner" class="hidden w-5 h-5 ml-2 text-white animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-												<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-												<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-												</svg>
-											</button>
-											</div>
-										</form>
-									  </div>
-									  
-									  <!-- Success Message -->
-									  <div id="thank-you" class="hidden p-6 bg-green-900/30 rounded-lg border border-green-500 text-center">
-										<div class="text-green-400 text-5xl mb-4">✓</div>
-										<h4 class="text-xl font-bold text-green-100 mb-2">Message Sent Successfully!</h4>
-										<p class="text-gray-300">Thank you for contacting us. We'll get back to you soon.</p>
-										<button id="new-message-btn" class="mt-6 text-msu-gold hover:text-msu-gold-light underline">Send another message</button>
-									  </div>
-									</div>
-								  </div>
-								</div>
-							  </section>
-							  
-							  <script>
-							  document.addEventListener('DOMContentLoaded', function() {
-								const form = document.getElementById('contact-form');
-								const formContainer = document.getElementById('form-container');
-								const thankYou = document.getElementById('thank-you');
-								const submitBtn = document.getElementById('submit-btn');
-								const btnText = document.getElementById('btn-text');
-								const spinner = document.getElementById('spinner');
-								const newMessageBtn = document.getElementById('new-message-btn');
-								
-								// Error elements
-								const nameError = document.getElementById('name-error');
-								const emailError = document.getElementById('email-error');
-								const messageError = document.getElementById('message-error');
-								
-								// Validate form on submit
-								form.addEventListener('submit', function(e) {
-								  e.preventDefault();
-								  
-								  // Reset errors
-								  nameError.classList.add('hidden');
-								  emailError.classList.add('hidden');
-								  messageError.classList.add('hidden');
-								  
-								  // Validate fields
-								  let isValid = true;
-								  const name = document.getElementById('name').value.trim();
-								  const email = document.getElementById('email').value.trim();
-								  const message = document.getElementById('message').value.trim();
-								  
-								  if (!name) {
-									nameError.classList.remove('hidden');
-									isValid = false;
-								  }
-								  
-								  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-									emailError.classList.remove('hidden');
-									isValid = false;
-								  }
-								  
-								  if (!message) {
-									messageError.classList.remove('hidden');
-									isValid = false;
-								  }
-								  
-								  if (!isValid) return;
-								  
-								  // Show loading state
-								  submitBtn.disabled = true;
-								  btnText.textContent = 'Sending...';
-								  spinner.classList.remove('hidden');
-								  
-								  // Submit form data
-								  const formData = new FormData(form);
-								  
-								  fetch(form.action, {
-									method: 'POST',
-									mode: 'no-cors',
-									body: formData
-								  })
-								  .then(() => {
-									// Show success message
-									formContainer.style.display = 'none';
-									thankYou.classList.remove('hidden');
-									
-									// Reset form
-									form.reset();
-								  })
-								  .catch((error) => {
-									console.error('Error:', error);
-									alert('There was an error sending your message. Please try again later.');
-								  })
-								  .finally(() => {
-									// Reset button state
-									submitBtn.disabled = false;
-									btnText.textContent = 'Send Message';
-									spinner.classList.add('hidden');
-								  });
-								});
-								
-								// New message button
-								newMessageBtn.addEventListener('click', function() {
-								  formContainer.style.display = 'block';
-								  thankYou.classList.add('hidden');
-								});
-								
-								// Real-time validation
-								document.getElementById('name').addEventListener('input', function() {
-								  if (this.value.trim()) nameError.classList.add('hidden');
-								});
-								
-								document.getElementById('email').addEventListener('input', function() {
-								  if (this.value.trim() && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.value)) {
-									emailError.classList.add('hidden');
-								  }
-								});
-								
-								document.getElementById('message').addEventListener('input', function() {
-								  if (this.value.trim()) messageError.classList.add('hidden');
-								});
-							  });
-							  </script>
-							  
-							  <style>
-							  .btn-gold {
-								background-color: #FFD700; /* MSU gold */
-								color: #002855; /* MSU deep ocean */
-								font-weight: 600;
-							  }
-							  
-							  .btn-gold:hover {
-								background-color: #E6C200;
-							  }
-							  
-							  .bg-msu-deep-ocean-light {
-								background-color: #003366;
-							  }
-							  
-							  /* Add any additional custom styles here */
-							  </style>
-					</div>
+    // Close modal when clicking outside the modal content
+    thankYouModal.addEventListener('click', function(e) {
+        if (e.target === thankYouModal) {
+            closeModal();
+        }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !thankYouModal.classList.contains('hidden')) {
+            closeModal();
+        }
+    });
+
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Reset error messages
+        document.querySelectorAll('[id$="Error"]').forEach(el => el.classList.add('hidden'));
+        
+        // Validate form
+        let isValid = true;
+        
+        // Name validation
+        const name = (document.getElementById('name') as HTMLInputElement).value.trim();
+        if (!name) {
+            document.getElementById('nameError').classList.remove('hidden');
+            isValid = false;
+        }
+        
+        // Email validation
+        const email = (document.getElementById('email') as HTMLInputElement).value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email) {
+            document.getElementById('emailError').textContent = 'Please enter your email address';
+            document.getElementById('emailError').classList.remove('hidden');
+            isValid = false;
+        } else if (!emailRegex.test(email)) {
+            document.getElementById('emailError').textContent = 'Please enter a valid email address';
+            document.getElementById('emailError').classList.remove('hidden');
+            isValid = false;
+        }
+        
+        // Subject validation
+        const subject = (document.getElementById('subject') as HTMLSelectElement).value;
+        if (!subject) {
+            document.getElementById('subjectError').classList.remove('hidden');
+            isValid = false;
+        }
+        
+        // Message validation
+        const message = (document.getElementById('message') as HTMLTextAreaElement).value.trim();
+        if (!message) {
+            document.getElementById('messageError').classList.remove('hidden');
+            isValid = false;
+        }
+        
+        if (!isValid) {
+            return;
+        }
+        
+        // Show loading state
+        submitText.classList.add('hidden');
+        submitSpinner.classList.remove('hidden');
+        (submitBtn as HTMLButtonElement).disabled = true;
+        
+        // Create a temporary iframe to handle the form submission
+        const iframe = document.createElement('iframe');
+        iframe.name = 'form-iframe';
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+        
+        // Set the form target to the iframe
+        (contactForm as HTMLFormElement).target = 'form-iframe';
+        
+        // Handle the iframe load event to detect when the form submission is complete
+        iframe.onload = function() {
+            // Show the thank you modal
+            thankYouModal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+            
+            // Reset form
+            (contactForm as HTMLFormElement).reset();
+            
+            // Reset button state
+            submitText.classList.remove('hidden');
+            submitSpinner.classList.add('hidden');
+            (submitBtn as HTMLButtonElement).disabled = false;
+            
+            // Remove the iframe
+            document.body.removeChild(iframe);
+        };
+        
+        // Submit the form
+        (contactForm as HTMLFormElement).submit();
+    });
+    
+    // Real-time validation for better UX
+    (document.getElementById('email') as HTMLInputElement).addEventListener('input', function() {
+        const email = (this as HTMLInputElement).value.trim();
+        const emailError = document.getElementById('emailError');
+        
+        if (!email) {
+            emailError.textContent = 'Please enter your email address';
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            emailError.textContent = 'Please enter a valid email address';
+        } else {
+            emailError.classList.add('hidden');
+        }
+    });
+});
+
+// Add animation for the checkmark
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes check {
+        0% { transform: scale(0); opacity: 0; }
+        50% { transform: scale(1.2); opacity: 1; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+    .animate-check {
+        animation: check 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+    }
+`;
+document.head.appendChild(style);
+</script>
+<!-- Map Section -->
+<!-- Map Section -->
+<section class="bg-white py-12">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-2">Our Location</h2>
+      <p class="text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto">
+        College of Fisheries, MSU-TCTO Campus<br>
+        2PPV+PC7, Sanga-Sanga, Bongao, Tawi-Tawi
+      </p>
+    </div>
+    
+    <div class="rounded-xl overflow-hidden shadow-xl h-96">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.123456789012!2d119.87654321!3d5.01234567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwMDAnNDQuNCJOIDExOcKwNTInMzYuNiJF!5e0!3m2!1sen!2sph!4v1234567890123!5m2!1sen!2sph" 
+        width="100%" 
+        height="100%" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy"
+        title="College of Fisheries, MSU-TCTO Location"
+      ></iframe>
+    </div>
+    
+    <div class="text-center mt-6">
+      <a 
+        href="https://www.google.com/maps/place/2PPV%2BPC7+Sanga-Sanga,+Bongao,+Tawi-Tawi" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-msu-main-color hover:bg-msu-deep-ocean shadow-sm transition-colors duration-300"
+      >
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+        </svg>
+        Get Directions
+      </a>
+    </div>
+  </div>
+</section>
+
+		<!-- Call to Action Section -->
+		<!-- <section class="py-16 bg-msu-deep-ocean text-white">
+			<div class="container mx-auto px-6 text-center">
+				<h2 class="text-3xl font-bold mb-6">Ready to Dive Into Fisheries Education?</h2>
+				<p class="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+					Join the College of Fisheries and become part of the next generation of marine scientists and fisheries professionals.
+				</p>
+				<div class="flex flex-wrap justify-center gap-4">
+					<a 
+						href="#" 
+						class="bg-msu-deep-ocean hover:bg-msu-deep-ocean-dark text-msu-bgc-color font-bold py-3 px-8 rounded-full transition-all duration-300 inline-flex items-center hover:shadow-lg hover:-translate-y-1"
+					>
+						Apply Now
+						<svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+						</svg>
+					</a>
+					<a 
+						href="#" 
+						class="bg-transparent border-2 border-white hover:bg-white/20 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 inline-flex items-center hover:shadow-lg hover:-translate-y-1"
+					>
+						Request Information
+						<svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+						</svg>
+					</a>
 				</div>
 			</div>
-		</section>
-
-
-		
-    <!-- Scroll to Top Button -->
-    <button class="scroll-to-top" aria-label="Scroll to top">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-      </svg>
-    </button>
-
-
-			
-
-
-		<!-- FooterNav -->
-		<FooterNav />
-		
-		<!-- Footer -->
-		<Footer />
+		</section> -->
 	</main>
 
-						<!-- HTML file -->
-				<script src="../../js/animate.js" ></script>
-				<script src="../../js/loadinganim.js" ></script>
-				<script src="../../js/smoothscroll.js" ></script>
+    	    <!-- Enhanced Scroll to Top Button -->
+    	    <button id="scrollToTop" class="fixed bottom-8 left-8 z-50 bg-gradient-to-r from-msu-main-color to-msu-deep-ocean hover:from-msu-deep-ocean hover:to-msu-main-color text-white p-4 rounded-full shadow-2xl transition-all duration-300 opacity-0 invisible hover:scale-110 hover:shadow-3xl" aria-label="Scroll to top">
+				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+				</svg>
+			</button> 
 
-    <script>
-        module.exports = {
-  theme: {
-    extend: {
-      keyframes: {
-        'fade-in-up': {
-          '0%': { opacity: 0, transform: 'translateY(20px)' },
-          '100%': { opacity: 1, transform: 'translateY(0)' },
-        },
-      },
-      animation: {
-        'fade-in-up': 'fade-in-up 0.8s ease-out forwards',
-      },
-    },
-  },
-}
+	<FooterNav />
+	<Footer />
+</Layout>
+                
+	
 
-    </script>
+
+	
+			<!-- Enhanced JavaScript -->
+			<script src="../../js/animate.js" ></script>
+			<script src="../../js/loadinganim.js" ></script>
+			<script src="../../js/smoothscroll.js" ></script>
+			
+			<script>
+			// Enhanced dark mode functionality for CAS page
+			function applyDarkMode(isDark) {
+				if (isDark) {
+					document.documentElement.classList.add('dark');
+					document.body.classList.add('dark');
+					document.documentElement.style.backgroundColor = '#111827'; /* gray-900 */
+					document.body.style.backgroundColor = '#111827'; /* gray-900 */
+					
+					// Apply dark mode to all sections
+					const sections = document.querySelectorAll('section');
+					sections.forEach(section => {
+						section.classList.add('dark-mode-section');
+					});
+					
+					// Apply dark mode to containers
+					const containers = document.querySelectorAll('.container');
+					containers.forEach(container => {
+						container.classList.add('dark-mode-container');
+					});
+					
+					// Apply dark mode to About section specifically - matching navbar colors
+					const aboutSection = document.querySelector('section.bg-gradient-to-br') as HTMLElement;
+					if (aboutSection) {
+						aboutSection.style.background = 'linear-gradient(to bottom right, #1f2937, #111827)'; /* gray-800 to gray-900 */
+					}
+					
+					// Apply dark mode to tab buttons
+					const tabButtons = document.querySelectorAll('.tab-button');
+					tabButtons.forEach(button => {
+						(button as HTMLElement).style.color = '#ffffff';
+					});
+					
+					// Apply dark mode to tab content
+					const tabContents = document.querySelectorAll('.tab-content');
+					tabContents.forEach(content => {
+						const paragraphs = content.querySelectorAll('p');
+						const headings = content.querySelectorAll('h4');
+						const lists = content.querySelectorAll('li');
+						
+						paragraphs.forEach(p => (p as HTMLElement).style.color = '#ffffff');
+						headings.forEach(h => (h as HTMLElement).style.color = '#ffffff');
+						lists.forEach(li => (li as HTMLElement).style.color = '#ffffff');
+					});
+					
+					// Apply dark mode to Contact form cards
+					const contactCards = document.querySelectorAll('.max-w-6xl.mx-auto.bg-white, .md\\:w-1\\/2.bg-msu-main-color, .md\\:w-1\\/2.p-12');
+					contactCards.forEach(card => {
+						(card as HTMLElement).style.backgroundColor = '#1f2937'; /* gray-800 */
+					});
+					
+					// Apply dark mode to Academic Programs cards
+					const programCards = document.querySelectorAll('.program-card.bg-white');
+					programCards.forEach(card => {
+						(card as HTMLElement).style.backgroundColor = '#374151'; /* gray-700 */
+						(card as HTMLElement).style.border = '1px solid #4b5563'; /* gray-600 */
+					});
+					
+					// Apply dark mode to form inputs
+					const formInputs = document.querySelectorAll('input, select, textarea');
+					formInputs.forEach(input => {
+						(input as HTMLElement).style.backgroundColor = '#374151'; /* gray-700 */
+						(input as HTMLElement).style.borderColor = '#4b5563'; /* gray-600 */
+						(input as HTMLElement).style.color = '#ffffff';
+					});
+					
+					// Apply dark mode to select dropdown specifically
+					const selectElements = document.querySelectorAll('select');
+					selectElements.forEach(select => {
+						(select as HTMLElement).style.backgroundColor = '#374151'; /* gray-700 */
+						(select as HTMLElement).style.color = '#ffffff';
+						(select as HTMLElement).style.borderColor = '#4b5563'; /* gray-600 */
+					});
+					
+					// Apply dark mode to select options
+					const selectOptions = document.querySelectorAll('select option');
+					selectOptions.forEach(option => {
+						(option as HTMLElement).style.backgroundColor = '#374151'; /* gray-700 */
+						(option as HTMLElement).style.color = '#ffffff';
+					});
+					
+					// Apply dark mode to labels
+					const labels = document.querySelectorAll('label');
+					labels.forEach(label => {
+						(label as HTMLElement).style.color = '#ffffff';
+					});
+					
+					// Apply dark mode to Faculty Spotlight cards
+					const facultyCards = document.querySelectorAll('.bg-white.rounded-xl.shadow-lg');
+					facultyCards.forEach(card => {
+						(card as HTMLElement).style.backgroundColor = '#374151'; /* gray-700 */
+						(card as HTMLElement).style.border = '1px solid #4b5563'; /* gray-600 */
+					});
+					
+					// Apply dark mode to Research & Innovation cards
+					const researchCards = document.querySelectorAll('.bg-white.p-8.rounded-xl.shadow-md');
+					researchCards.forEach(card => {
+						(card as HTMLElement).style.backgroundColor = '#374151'; /* gray-700 */
+						(card as HTMLElement).style.border = '1px solid #4b5563'; /* gray-600 */
+					});
+					
+					// Apply dark mode to Student Life cards
+					const studentLifeCards = document.querySelectorAll('.relative.group.overflow-hidden.rounded-xl.shadow-lg');
+					studentLifeCards.forEach(card => {
+						(card as HTMLElement).style.backgroundColor = '#374151'; /* gray-700 */
+						(card as HTMLElement).style.border = '1px solid #4b5563'; /* gray-600 */
+					});
+					
+					// Apply dark mode to Alumni cards
+					const alumniCards = document.querySelectorAll('.bg-white\\/10.p-8.rounded-xl.backdrop-blur-sm');
+					alumniCards.forEach(card => {
+						(card as HTMLElement).style.backgroundColor = 'rgba(55, 65, 81, 0.8)'; /* gray-700 with opacity */
+						(card as HTMLElement).style.border = '1px solid #4b5563'; /* gray-600 */
+					});
+					
+					console.log('Dark mode applied to CAS page');
+				} else {
+					document.documentElement.classList.remove('dark');
+					document.body.classList.remove('dark');
+					document.documentElement.style.backgroundColor = '';
+					document.body.style.backgroundColor = '';
+					
+					// Remove dark mode from sections
+					const sections = document.querySelectorAll('section');
+					sections.forEach(section => {
+						section.classList.remove('dark-mode-section');
+					});
+					
+					// Remove dark mode from containers
+					const containers = document.querySelectorAll('.container');
+					containers.forEach(container => {
+						container.classList.remove('dark-mode-container');
+					});
+					
+					// Reset About section to light mode
+					const aboutSection = document.querySelector('section.bg-gradient-to-br') as HTMLElement;
+					if (aboutSection) {
+						aboutSection.style.background = '';
+					}
+					
+					// Reset tab buttons to light mode
+					const tabButtons = document.querySelectorAll('.tab-button');
+					tabButtons.forEach(button => {
+						(button as HTMLElement).style.color = '';
+					});
+					
+					// Reset tab content to light mode
+					const tabContents = document.querySelectorAll('.tab-content');
+					tabContents.forEach(content => {
+						const paragraphs = content.querySelectorAll('p');
+						const headings = content.querySelectorAll('h4');
+						const lists = content.querySelectorAll('li');
+						
+						paragraphs.forEach(p => (p as HTMLElement).style.color = '');
+						headings.forEach(h => (h as HTMLElement).style.color = '');
+						lists.forEach(li => (li as HTMLElement).style.color = '');
+					});
+					
+					// Reset Contact form cards to light mode
+					const contactCards = document.querySelectorAll('.max-w-6xl.mx-auto.bg-white, .md\\:w-1\\/2.bg-msu-main-color, .md\\:w-1\\/2.p-12');
+					contactCards.forEach(card => {
+						(card as HTMLElement).style.backgroundColor = '';
+					});
+					
+					// Reset Academic Programs cards to light mode
+					const programCards = document.querySelectorAll('.program-card.bg-white');
+					programCards.forEach(card => {
+						(card as HTMLElement).style.backgroundColor = '';
+						(card as HTMLElement).style.border = '';
+					});
+					
+					// Reset form inputs to light mode
+					const formInputs = document.querySelectorAll('input, select, textarea');
+					formInputs.forEach(input => {
+						(input as HTMLElement).style.backgroundColor = '';
+						(input as HTMLElement).style.borderColor = '';
+						(input as HTMLElement).style.color = '';
+					});
+					
+					// Reset select dropdown to light mode
+					const selectElements = document.querySelectorAll('select');
+					selectElements.forEach(select => {
+						(select as HTMLElement).style.backgroundColor = '';
+						(select as HTMLElement).style.color = '';
+						(select as HTMLElement).style.borderColor = '';
+					});
+					
+					// Reset select options to light mode
+					const selectOptions = document.querySelectorAll('select option');
+					selectOptions.forEach(option => {
+						(option as HTMLElement).style.backgroundColor = '';
+						(option as HTMLElement).style.color = '';
+					});
+					
+					// Reset labels to light mode
+					const labels = document.querySelectorAll('label');
+					labels.forEach(label => {
+						(label as HTMLElement).style.color = '';
+					});
+					
+					// Reset Faculty Spotlight cards to light mode
+					const facultyCards = document.querySelectorAll('.bg-white.rounded-xl.shadow-lg');
+					facultyCards.forEach(card => {
+						(card as HTMLElement).style.backgroundColor = '';
+						(card as HTMLElement).style.border = '';
+					});
+					
+					// Reset Research & Innovation cards to light mode
+					const researchCards = document.querySelectorAll('.bg-white.p-8.rounded-xl.shadow-md');
+					researchCards.forEach(card => {
+						(card as HTMLElement).style.backgroundColor = '';
+						(card as HTMLElement).style.border = '';
+					});
+					
+					// Reset Student Life cards to light mode
+					const studentLifeCards = document.querySelectorAll('.relative.group.overflow-hidden.rounded-xl.shadow-lg');
+					studentLifeCards.forEach(card => {
+						(card as HTMLElement).style.backgroundColor = '';
+						(card as HTMLElement).style.border = '';
+					});
+					
+					// Reset Alumni cards to light mode
+					const alumniCards = document.querySelectorAll('.bg-white\\/10.p-8.rounded-xl.backdrop-blur-sm');
+					alumniCards.forEach(card => {
+						(card as HTMLElement).style.backgroundColor = '';
+						(card as HTMLElement).style.border = '';
+					});
+					
+					console.log('Light mode applied to CAS page');
+				}
+			}
+
+			// Apply dark mode immediately on script load (before DOMContentLoaded)
+			(function() {
+				const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+				console.log('Immediate dark mode check for CAS:', savedDarkMode);
+				if (savedDarkMode) {
+					document.documentElement.classList.add('dark');
+					document.body.classList.add('dark');
+					document.documentElement.style.backgroundColor = '#111827'; /* gray-900 */
+					document.body.style.backgroundColor = '#111827'; /* gray-900 */
+				}
+			})();
+
+			document.addEventListener('DOMContentLoaded', function() {
+				// Initialize dark mode from localStorage immediately
+				const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+				console.log('Initial dark mode state for CAS:', savedDarkMode);
+				applyDarkMode(savedDarkMode);
+				
+				// Listen for dark mode changes from navbar
+				window.addEventListener('darkModeChanged', function(event) {
+					const customEvent = event as CustomEvent;
+					console.log('Dark mode event received in CAS:', customEvent.detail);
+					if (customEvent.detail && customEvent.detail.isDarkMode !== undefined) {
+						applyDarkMode(customEvent.detail.isDarkMode);
+					}
+				});
+				
+				// Additional event listener for direct dark mode toggle
+				window.addEventListener('toggleDarkMode', function(event) {
+					console.log('Direct dark mode toggle received in CAS');
+					const currentMode = localStorage.getItem('darkMode') === 'true';
+					applyDarkMode(!currentMode);
+				});
+				
+				// Listen for clicks on dark mode toggle button
+				document.addEventListener('click', function(event) {
+					const target = event.target as HTMLElement;
+					if (target && target.id === 'darkModeToggle') {
+						console.log('Dark mode toggle clicked in CAS');
+						setTimeout(() => {
+							const currentMode = localStorage.getItem('darkMode') === 'true';
+							applyDarkMode(!currentMode);
+						}, 100);
+					}
+				});
+				
+				// Also listen for storage changes (backup method)
+				window.addEventListener('storage', function(e) {
+					if (e.key === 'darkMode') {
+						const isDarkMode = e.newValue === 'true';
+						console.log('Storage change detected in CAS:', isDarkMode);
+						applyDarkMode(isDarkMode);
+					}
+				});
+				
+				// Check dark mode state more frequently (fallback)
+				setInterval(function() {
+					const currentDarkMode = localStorage.getItem('darkMode') === 'true';
+					const hasDarkClass = document.documentElement.classList.contains('dark');
+					
+					if (currentDarkMode && !hasDarkClass) {
+						console.log('Dark mode sync needed in CAS - applying dark mode');
+						applyDarkMode(true);
+					} else if (!currentDarkMode && hasDarkClass) {
+						console.log('Light mode sync needed in CAS - applying light mode');
+						applyDarkMode(false);
+					}
+				}, 500);
+				
+				// Enhanced Scroll to Top functionality
+				const scrollToTopBtn = document.getElementById('scrollToTop');
+				
+				window.addEventListener('scroll', function() {
+					if (window.pageYOffset > 300) {
+						scrollToTopBtn.classList.remove('opacity-0', 'invisible');
+						scrollToTopBtn.classList.add('opacity-100', 'visible');
+					} else {
+						scrollToTopBtn.classList.add('opacity-0', 'invisible');
+						scrollToTopBtn.classList.remove('opacity-100', 'visible');
+					}
+				});
+				
+				scrollToTopBtn.addEventListener('click', function() {
+					window.scrollTo({
+						top: 0,
+						behavior: 'smooth'
+					});
+				});
+				
+				// Keep video steady - no parallax effect
+				const heroVideo = document.getElementById('heroVideo');
+				if (heroVideo) {
+					// Remove any existing transform to keep video steady
+					heroVideo.style.transform = 'scale(1.1)';
+				}
+				
+				// Enhanced counter animation with intersection observer
+				const counters = document.querySelectorAll('.counter');
+				const observerOptions = {
+					threshold: 0.5,
+					rootMargin: '0px 0px -100px 0px'
+				};
+				
+				const counterObserver = new IntersectionObserver(function(entries) {
+					entries.forEach(entry => {
+						if (entry.isIntersecting) {
+							const counter = entry.target;
+							const target = +counter.getAttribute('data-target');
+							const speed = 200;
+							let count = 0;
+							
+							const updateCounter = () => {
+								const increment = target / speed;
+								if (count < target) {
+									count += increment;
+									counter.textContent = Math.ceil(count).toString();
+									setTimeout(updateCounter, 1);
+								} else {
+									counter.textContent = target.toString();
+								}
+							};
+							
+							updateCounter();
+							counterObserver.unobserve(counter);
+						}
+					});
+				}, observerOptions);
+				
+				counters.forEach(counter => {
+					counterObserver.observe(counter);
+				});
+				
+				// Enhanced smooth scrolling for anchor links
+				document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+					anchor.addEventListener('click', function (e) {
+						e.preventDefault();
+						const target = document.querySelector(this.getAttribute('href'));
+						if (target) {
+							target.scrollIntoView({
+								behavior: 'smooth',
+								block: 'start'
+							});
+						}
+					});
+				});
+				
+				// Lazy Loading with Intersection Observer
+				const lazyImages = document.querySelectorAll('.lazy-image');
+				
+				if ('IntersectionObserver' in window) {
+					const imageObserver = new IntersectionObserver((entries, observer) => {
+						entries.forEach(entry => {
+							if (entry.isIntersecting) {
+								const img = entry.target;
+								const src = img.src;
+								
+								// Create a new image to preload
+								const newImg = new Image();
+								newImg.onload = () => {
+									img.classList.add('loaded');
+									img.style.opacity = '1';
+								};
+								newImg.onerror = () => {
+									img.classList.add('loaded');
+									img.style.opacity = '1';
+									// Fallback for broken images
+									img.style.background = 'linear-gradient(45deg, #f0f0f0, #e0e0e0)';
+								};
+								newImg.src = src;
+								
+								observer.unobserve(img);
+							}
+						});
+					}, {
+						rootMargin: '50px 0px',
+						threshold: 0.01
+					});
+					
+					lazyImages.forEach(img => {
+						imageObserver.observe(img);
+					});
+				} else {
+					// Fallback for browsers without IntersectionObserver
+					lazyImages.forEach(img => {
+						img.classList.add('loaded');
+						img.style.opacity = '1';
+					});
+				}
+			});
+			</script>
+
+
 	<style>
+		/* Enhanced Button Styles */
 		.btn-gold {
 			display: inline-block;
-			background-color: #D4AF37;
-			color: #002855;
+			background-color: #61063B;
+			color: #ffffff;
 			font-weight: 600;
 			padding: 12px 24px;
 			border-radius: 50px;
@@ -698,9 +2159,9 @@ const currentPath = Astro.url.pathname;
 		}
 		
 		.btn-gold:hover {
-			background-color: #c2a030;
+			background-color: #03045e;
 			transform: translateY(-2px);
-			box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+			box-shadow: 0 4px 12px rgba(97, 6, 59, 0.3);
 		}
 		
 		.btn-outline-white {
@@ -723,84 +2184,955 @@ const currentPath = Astro.url.pathname;
 			box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 		}
 
-		  /* ... your existing styles ... */
+		/* Enhanced Wave animation effect */
+		.btn-gold, .btn-outline-white {
+			position: relative;
+			overflow: hidden;
+		}
 
-  /* Wave animation effect */
-  .btn-gold, .btn-outline-white {
-    position: relative;
-    overflow: hidden;
-  }
+		.btn-gold:after, .btn-outline-white:after {
+			content: "";
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 5px;
+			height: 5px;
+			background: rgba(255, 255, 255, 0.5);
+			opacity: 0;
+			border-radius: 100%;
+			transform: scale(1, 1) translate(-50%);
+			transform-origin: 50% 50%;
+		}
 
-  .btn-gold:after, .btn-outline-white:after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 5px;
-    height: 5px;
-    background: rgba(255, 255, 255, 0.5);
-    opacity: 0;
-    border-radius: 100%;
-    transform: scale(1, 1) translate(-50%);
-    transform-origin: 50% 50%;
-  }
+		.btn-gold:focus:not(:active)::after,
+		.btn-outline-white:focus:not(:active)::after {
+			animation: ripple 1s ease-out;
+		}
 
-  .btn-gold:focus:not(:active)::after,
-  .btn-outline-white:focus:not(:active)::after {
-    animation: ripple 1s ease-out;
-  }
+		@keyframes ripple {
+			0% {
+				transform: scale(0, 0);
+				opacity: 0.5;
+			}
+			100% {
+				transform: scale(20, 20);
+				opacity: 0;
+			}
+		}
 
-  @keyframes ripple {
-    0% {
-      transform: scale(0, 0);
-      opacity: 0.5;
-    }
-    100% {
-      transform: scale(20, 20);
-      opacity: 0;
-    }
-  }
+		/* Enhanced Particle Animation */
+		.particles-container {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+
+		.particle {
+			position: absolute;
+			width: 4px;
+			height: 4px;
+			background: rgba(97, 6, 59, 0.6);
+			border-radius: 50%;
+			animation: float 6s ease-in-out infinite;
+		}
+
+		.particle:nth-child(1) {
+			left: 10%;
+			animation-delay: 0s;
+			animation-duration: 8s;
+		}
+
+		.particle:nth-child(2) {
+			left: 20%;
+			animation-delay: 1s;
+			animation-duration: 10s;
+		}
+
+		.particle:nth-child(3) {
+			left: 30%;
+			animation-delay: 2s;
+			animation-duration: 7s;
+		}
+
+		.particle:nth-child(4) {
+			left: 40%;
+			animation-delay: 3s;
+			animation-duration: 9s;
+		}
+
+		.particle:nth-child(5) {
+			left: 50%;
+			animation-delay: 4s;
+			animation-duration: 6s;
+		}
+
+		.particle:nth-child(6) {
+			left: 60%;
+			animation-delay: 5s;
+			animation-duration: 8s;
+		}
+
+		@keyframes float {
+			0%, 100% {
+				transform: translateY(100vh) scale(0);
+				opacity: 0;
+			}
+			10% {
+				opacity: 1;
+			}
+			90% {
+				opacity: 1;
+			}
+			100% {
+				transform: translateY(-100px) scale(1);
+				opacity: 0;
+			}
+		}
+
+		/* Enhanced Fade In Animations */
+		@keyframes fadeInUp {
+			from {
+				opacity: 0;
+				transform: translateY(30px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		.animate-fadeInUp {
+			animation: fadeInUp 0.8s ease-out forwards;
+		}
+
+		.delay-100 {
+			animation-delay: 0.1s;
+		}
+
+		.delay-200 {
+			animation-delay: 0.2s;
+		}
+
+		/* Steady Video Background */
+		#heroVideo {
+			transform: scale(1.1);
+			position: relative;
+			z-index: 0;
+		}
+
+		/* Enhanced Glow Effects */
+		.drop-shadow-2xl {
+			filter: drop-shadow(0 25px 25px rgba(0, 0, 0, 0.15));
+		}
+
+		/* Enhanced Gradient Text */
+		.bg-clip-text {
+			-webkit-background-clip: text;
+			background-clip: text;
+		}
+
+		/* Enhanced Scroll Indicator with Mobile Responsiveness */
+		.scroll-indicator {
+			animation: bounce 2s infinite;
+		}
+
+		@keyframes bounce {
+			0%, 20%, 50%, 80%, 100% {
+				transform: translateY(0);
+			}
+			40% {
+				transform: translateY(-10px);
+			}
+			60% {
+				transform: translateY(-5px);
+			}
+		}
+
+		/* Mobile-specific scroll indicator styles */
+		@media (max-width: 768px) {
+			.scroll-indicator {
+				animation: bounce 1.5s infinite;
+			}
+			
+			.scroll-text {
+				font-size: 0.75rem;
+				padding: 0.25rem 0.75rem;
+			}
+			
+			.scroll-mouse {
+				width: 1.25rem;
+				height: 2rem;
+			}
+		}
+
+		/* Enhanced backdrop blur for better text readability */
+		.backdrop-blur-sm {
+			backdrop-filter: blur(8px);
+			-webkit-backdrop-filter: blur(8px);
+		}
+
+		/* Enhanced Hover Effects */
+		.hover\:scale-105:hover {
+			transform: scale(1.05);
+		}
+
+		.hover\:-translate-y-2:hover {
+			transform: translateY(-8px);
+		}
+
+		/* Enhanced Backdrop Blur */
+		.backdrop-blur-sm {
+			backdrop-filter: blur(4px);
+		}
+
+		/* Enhanced Shadow Effects */
+		.hover\:shadow-2xl:hover {
+			box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+		}
+		
+		/* Enhanced 3D Shadow Effect */
+		.hover\:shadow-3xl:hover {
+			box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.35);
+		}
+		
+		/* Enhanced Gradient Text Animation */
+		.bg-gradient-to-r {
+			background-size: 200% 200%;
+			animation: gradientShift 3s ease infinite;
+		}
+		
+		@keyframes gradientShift {
+			0%, 100% {
+				background-position: 0% 50%;
+			}
+			50% {
+				background-position: 100% 50%;
+			}
+		}
+		
+		/* Enhanced Card Hover Effects */
+		.program-card {
+			transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		}
+		
+		.program-card:hover {
+			transform: translateY(-8px) scale(1.02);
+			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+		}
+		
+		/* Enhanced Tab Transitions */
+		.tab-content {
+			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		}
+		
+		/* Enhanced Loading Animation */
+		@keyframes shimmer {
+			0% {
+				background-position: -200px 0;
+			}
+			100% {
+				background-position: calc(200px + 100%) 0;
+			}
+		}
+		
+		.shimmer {
+			background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+			background-size: 200px 100%;
+			animation: shimmer 1.5s infinite;
+		}
+		
+		/* Enhanced Focus States */
+		.focus\:ring-2:focus {
+			box-shadow: 0 0 0 3px rgba(97, 6, 59, 0.5);
+		}
+		
+		/* Enhanced Backdrop Blur */
+		.backdrop-blur-sm {
+			backdrop-filter: blur(8px);
+			-webkit-backdrop-filter: blur(8px);
+		}
+		
+		/* Enhanced Text Selection */
+		::selection {
+			background-color: rgba(97, 6, 59, 0.3);
+			color: #03045e;
+		}
+		
+		/* Enhanced Scrollbar */
+		::-webkit-scrollbar {
+			width: 8px;
+		}
+		
+		::-webkit-scrollbar-track {
+			background: #f1f1f1;
+		}
+		
+		::-webkit-scrollbar-thumb {
+			background: linear-gradient(to bottom, #03045e, #61063B);
+			border-radius: 4px;
+		}
+		
+		::-webkit-scrollbar-thumb:hover {
+			background: linear-gradient(to bottom, #61063B, #03045e);
+		}
+		
+		/* Enhanced Dark Mode Transitions */
+		* {
+			transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+		}
+		
+		/* Ensure dark mode classes work properly */
+		.dark {
+			color-scheme: dark;
+		}
+		
+		/* Dark mode specific styles for CAS page - matching navbar colors */
+		.dark .bg-white {
+			background-color: #1f2937 !important; /* gray-800 */
+		}
+		
+		.dark .bg-gray-50 {
+			background-color: #1f2937 !important; /* gray-800 */
+		}
+		
+		.dark .bg-gray-100 {
+			background-color: #1f2937 !important; /* gray-800 */
+		}
+		
+		.dark .bg-gradient-to-br {
+			background: linear-gradient(to bottom right, #1f2937, #111827) !important; /* gray-800 to gray-900 */
+		}
+		
+		.dark .bg-gradient-to-r {
+			background: linear-gradient(to right, #1f2937, #111827) !important; /* gray-800 to gray-900 */
+		}
+		
+		.dark .bg-gradient-to-t {
+			background: linear-gradient(to top, #1f2937, #111827) !important; /* gray-800 to gray-900 */
+		}
+		
+		.dark .bg-gradient-to-b {
+			background: linear-gradient(to bottom, #1f2937, #111827) !important; /* gray-800 to gray-900 */
+		}
+		
+		/* Ensure all section backgrounds match navbar in dark mode */
+		.dark section {
+			background-color: #1f2937 !important; /* gray-800 */
+		}
+		
+		.dark .container {
+			background-color: transparent !important;
+		}
+		
+		/* Dark mode section specific styles - matching navbar */
+		.dark-mode-section {
+			background-color: #1f2937 !important; /* gray-800 */
+		}
+		
+		.dark-mode-container {
+			background-color: transparent !important;
+		}
+		
+		/* Override specific background colors in dark mode - matching navbar */
+		.dark .bg-white {
+			background-color: #1f2937 !important; /* gray-800 */
+		}
+		
+		.dark .bg-gray-50 {
+			background-color: #1f2937 !important; /* gray-800 */
+		}
+		
+		.dark .bg-gray-100 {
+			background-color: #1f2937 !important; /* gray-800 */
+		}
+		
+		.dark body {
+			background-color: #111827 !important; /* gray-900 */
+		}
+		
+		.dark html {
+			background-color: #111827 !important; /* gray-900 */
+		}
+		
+		/* Dark mode text colors */
+		.dark .text-msu-main-color {
+			color: #ffffff !important;
+		}
+		
+		.dark .text-msu-bgc-color {
+			color: #ffffff !important;
+		}
+		
+		/* Dark mode card backgrounds - matching navbar */
+		.dark .program-card {
+			background-color: #374151 !important; /* gray-700 */
+			border: 1px solid #4b5563 !important; /* gray-600 */
+		}
+		
+		.dark .program-card:hover {
+			background-color: #4b5563 !important; /* gray-600 */
+		}
+		
+		/* Dark mode form elements - matching navbar */
+		.dark input, .dark select, .dark textarea {
+			background-color: #374151 !important; /* gray-700 */
+			border-color: #4b5563 !important; /* gray-600 */
+			color: #ffffff !important;
+		}
+		
+		.dark input:focus, .dark select:focus, .dark textarea:focus {
+			border-color: #61063B !important;
+			box-shadow: 0 0 0 3px rgba(97, 6, 59, 0.3) !important;
+		}
+		
+		/* Dark mode button styles */
+		.dark button {
+			background-color: #61063B !important;
+			color: #ffffff !important;
+		}
+		
+		.dark button:hover {
+			background-color: #03045e !important;
+		}
+		
+		/* Dark mode shadow adjustments */
+		.dark .shadow-lg {
+			box-shadow: 0 10px 15px -3px rgba(255, 255, 255, 0.1) !important;
+		}
+		
+		.dark .shadow-xl {
+			box-shadow: 0 20px 25px -5px rgba(255, 255, 255, 0.1) !important;
+		}
+		
+		/* Dark mode border adjustments - matching navbar */
+		.dark .border-gray-200 {
+			border-color: #4b5563 !important; /* gray-600 */
+		}
+		
+		.dark .border-gray-300 {
+			border-color: #6b7280 !important; /* gray-500 */
+		}
+		
+		/* Specific dark mode fixes for About section - matching navbar */
+		.dark .bg-gradient-to-br {
+			background: linear-gradient(to bottom right, #1f2937, #111827) !important; /* gray-800 to gray-900 */
+		}
+		
+		.dark .bg-gradient-to-r {
+			background: linear-gradient(to right, #1f2937, #111827) !important; /* gray-800 to gray-900 */
+		}
+		
+		.dark .bg-gradient-to-t {
+			background: linear-gradient(to top, #1f2937, #111827) !important; /* gray-800 to gray-900 */
+		}
+		
+		.dark .bg-gradient-to-b {
+			background: linear-gradient(to bottom, #1f2937, #111827) !important; /* gray-800 to gray-900 */
+		}
+		
+		/* Dark mode for About section tabs */
+		.dark .tab-button {
+			color: #ffffff !important;
+		}
+		
+		.dark .tab-button.active {
+			color: #ffffff !important;
+			border-color: #61063B !important;
+		}
+		
+		.dark .tab-button:hover {
+			color: #61063B !important;
+			border-color: #61063B !important;
+		}
+		
+		/* Dark mode for About section content */
+		.dark .tab-content {
+			background-color: transparent !important;
+		}
+		
+		.dark .tab-content p {
+			color: #ffffff !important;
+		}
+		
+		.dark .tab-content h4 {
+			color: #ffffff !important;
+		}
+		
+		.dark .tab-content li {
+			color: #ffffff !important;
+		}
+		
+		/* Dark mode for About section cards */
+		.dark .bg-gradient-to-r.from-msu-deep-ocean\/10 {
+			background: linear-gradient(to right, rgba(97, 6, 59, 0.2), transparent) !important;
+		}
+		
+		.dark .bg-gradient-to-b.from-msu-deep-ocean\/10 {
+			background: linear-gradient(to bottom, rgba(97, 6, 59, 0.2), transparent) !important;
+		}
+		
+		/* Dark mode for About section image overlay */
+		.dark .bg-gradient-to-t.from-msu-deep-ocean\/80 {
+			background: linear-gradient(to top, rgba(97, 6, 59, 0.8), transparent) !important;
+		}
+		
+		/* Dark mode for About section floating elements */
+		.dark .bg-msu-deep-ocean\/90 {
+			background-color: rgba(97, 6, 59, 0.9) !important;
+		}
+		
+		/* Dark mode for About section borders */
+		.dark .border-msu-deep-ocean {
+			border-color: #61063B !important;
+		}
+		
+		/* Dark mode for About section text in overlays */
+		.dark .text-gray-200 {
+			color: #ffffff !important;
+		}
+		
+		.dark .text-gray-300 {
+			color: #ffffff !important;
+		}
+		
+		/* Dark mode for About section background gradients */
+		.dark .bg-gradient-to-r.from-msu-deep-ocean\/5 {
+			background: linear-gradient(to right, rgba(97, 6, 59, 0.1), rgba(97, 6, 59, 0.1)) !important;
+		}
+		
+		.dark .border-msu-deep-ocean\/20 {
+			border-color: rgba(97, 6, 59, 0.3) !important;
+		}
+		
+		/* Dark mode for Contact form card */
+		.dark .max-w-6xl.mx-auto.bg-white {
+			background-color: #1f2937 !important; /* gray-800 */
+		}
+		
+		.dark .md\:w-1\/2.bg-msu-main-color {
+			background-color: #1f2937 !important; /* gray-800 */
+		}
+		
+		.dark .md\:w-1\/2.p-12 {
+			background-color: #374151 !important; /* gray-700 */
+		}
+		
+		/* Dark mode for Academic Programs cards */
+		.dark .program-card.bg-white {
+			background-color: #374151 !important; /* gray-700 */
+			border: 1px solid #4b5563 !important; /* gray-600 */
+		}
+		
+		.dark .program-card.bg-white:hover {
+			background-color: #4b5563 !important; /* gray-600 */
+		}
+		
+		/* Dark mode for Contact form text */
+		.dark .text-msu-main-color {
+			color: #ffffff !important;
+		}
+		
+		.dark .text-gray-300 {
+			color: #ffffff !important;
+		}
+		
+		/* Dark mode for Contact form labels */
+		.dark label {
+			color: #ffffff !important;
+		}
+		
+		/* Dark mode for Contact form inputs */
+		.dark .w-full.px-4.py-3.rounded-lg.border {
+			background-color: #374151 !important; /* gray-700 */
+			border-color: #4b5563 !important; /* gray-600 */
+			color: #ffffff !important;
+		}
+		
+		.dark .w-full.px-4.py-3.rounded-lg.border:focus {
+			border-color: #61063B !important;
+			box-shadow: 0 0 0 3px rgba(97, 6, 59, 0.3) !important;
+		}
+		
+		/* Dark mode for dropdown options */
+		.dark select option {
+			background-color: #374151 !important; /* gray-700 */
+			color: #ffffff !important;
+		}
+		
+		.dark select {
+			background-color: #374151 !important; /* gray-700 */
+			color: #ffffff !important;
+		}
+		
+		/* Dark mode for select dropdown arrow */
+		.dark select {
+			background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e") !important;
+		}
+		
+		/* Dark mode for Contact form button */
+		.dark .w-full.py-3.px-6.bg-msu-main-color {
+			background-color: #61063B !important;
+			color: #ffffff !important;
+		}
+		
+		.dark .w-full.py-3.px-6.bg-msu-main-color:hover {
+			background-color: #03045e !important;
+		}
+		
+		/* Dark mode for Academic Programs section */
+		.dark .py-20.bg-white {
+			background-color: #1f2937 !important; /* gray-800 */
+		}
+		
+		/* Dark mode for Contact section */
+		.dark .py-20.bg-gray-100 {
+			background-color: #1f2937 !important; /* gray-800 */
+		}
+		
+		/* Dark mode for Map section */
+		.dark .bg-white.py-12 {
+			background-color: #1f2937 !important; /* gray-800 */
+		}
+		
+		/* Dark mode for rounded containers */
+		.dark .rounded-xl {
+			background-color: #374151 !important; /* gray-700 */
+		}
+		
+		.dark .rounded-2xl {
+			background-color: #374151 !important; /* gray-700 */
+		}
+		
+		/* Dark mode for shadow containers */
+		.dark .shadow-lg {
+			box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3) !important;
+		}
+		
+		.dark .shadow-xl {
+			box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3) !important;
+		}
+		
+		/* Dark mode for Faculty Spotlight section */
+		.dark .py-20.bg-gray-50 {
+			background-color: #1f2937 !important; /* gray-800 */
+		}
+		
+		/* Dark mode for Faculty cards */
+		.dark .bg-white.rounded-xl.shadow-lg {
+			background-color: #374151 !important; /* gray-700 */
+			border: 1px solid #4b5563 !important; /* gray-600 */
+		}
+		
+		.dark .bg-white.rounded-xl.shadow-lg:hover {
+			background-color: #4b5563 !important; /* gray-600 */
+		}
+		
+		/* Dark mode for Faculty card content */
+		.dark .h-64.overflow-hidden.relative {
+			background-color: #374151 !important; /* gray-700 */
+		}
+		
+		.dark .absolute.bottom-0.left-0.right-0.bg-gradient-to-t {
+			background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent) !important;
+		}
+		
+		.dark .text-white.font-bold.text-xl {
+			color: #ffffff !important;
+		}
+		
+		.dark .text-gray-300.text-sm {
+			color: #ffffff !important;
+		}
+		
+		/* Dark mode for Research & Innovation section */
+		.dark .py-20.bg-gray-50 {
+			background-color: #1f2937 !important; /* gray-800 */
+		}
+		
+		/* Dark mode for Research cards */
+		.dark .bg-white.p-8.rounded-xl.shadow-md {
+			background-color: #374151 !important; /* gray-700 */
+			border: 1px solid #4b5563 !important; /* gray-600 */
+		}
+		
+		.dark .bg-white.p-8.rounded-xl.shadow-md:hover {
+			background-color: #4b5563 !important; /* gray-600 */
+		}
+		
+		/* Dark mode for Research card text */
+		.dark .text-xl.font-bold.text-msu-main-color {
+			color: #ffffff !important;
+		}
+		
+		.dark .text-msu-main-color {
+			color: #ffffff !important;
+		}
+		
+		/* Dark mode for Research card icons */
+		.dark .text-msu-bgc-color {
+			color: #ffffff !important;
+		}
+		
+		/* Dark mode for Student Life section */
+		.dark .py-20.bg-white {
+			background-color: #1f2937 !important; /* gray-800 */
+		}
+		
+		/* Dark mode for Student Life cards */
+		.dark .relative.group.overflow-hidden.rounded-xl.shadow-lg {
+			background-color: #374151 !important; /* gray-700 */
+			border: 1px solid #4b5563 !important; /* gray-600 */
+		}
+		
+		.dark .relative.group.overflow-hidden.rounded-xl.shadow-lg:hover {
+			background-color: #4b5563 !important; /* gray-600 */
+		}
+		
+		/* Dark mode for Alumni Success Stories section */
+		.dark .py-20.bg-msu-main-color {
+			background-color: #1f2937 !important; /* gray-800 */
+		}
+		
+		/* Dark mode for Alumni cards */
+		.dark .bg-white\/10.p-8.rounded-xl.backdrop-blur-sm {
+			background-color: rgba(55, 65, 81, 0.8) !important; /* gray-700 with opacity */
+			border: 1px solid #4b5563 !important; /* gray-600 */
+		}
+		
+		.dark .bg-white\/10.p-8.rounded-xl.backdrop-blur-sm:hover {
+			background-color: rgba(75, 85, 99, 0.8) !important; /* gray-600 with opacity */
+		}
+		
+		/* Dark mode for Alumni text */
+		.dark .text-gray-300 {
+			color: #ffffff !important;
+		}
+		
+		.dark .text-gray-400 {
+			color: #d1d5db !important; /* gray-300 */
+		}
+		
+		/* Dark mode for Alumni images */
+		.dark .w-16.h-16.rounded-full.object-cover.border-2 {
+			border-color: #4b5563 !important; /* gray-600 */
+		}
+		
+		/* Lazy Loading Styles */
+		.lazy-image {
+			opacity: 0;
+			transition: opacity 0.6s ease-in-out;
+			background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+			background-size: 200% 100%;
+			animation: shimmer 1.5s infinite;
+		}
+		
+		.lazy-image.loaded {
+			opacity: 1;
+			animation: none;
+			background: none;
+		}
+		
+		/* Shimmer animation for loading placeholder */
+		@keyframes shimmer {
+			0% {
+				background-position: -200px 0;
+			}
+			100% {
+				background-position: calc(200px + 100%) 0;
+			}
+		}
+		
+		/* Dark mode shimmer effect */
+		.dark .lazy-image {
+			background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+			background-size: 200% 100%;
+		}
+		
+		/* Smooth loading transition */
+		.lazy-image {
+			transition: opacity 0.6s ease-in-out, transform 0.3s ease-in-out;
+		}
+		
+		.lazy-image.loaded {
+			transform: scale(1);
+		}
 	</style>
+
+	<script>
+		// Alumni Carousel Functionality
+		let currentAlumniSlide = 0;
+		let alumniAutoPlay = true;
+		let alumniInterval;
+
+		function initAlumniCarousel() {
+			const carousel = document.getElementById('alumniCarousel');
+			const dots = document.querySelectorAll('.alumni-dot');
+			const prevBtn = document.getElementById('prevAlumni');
+			const nextBtn = document.getElementById('nextAlumni');
+			const autoPlayBtn = document.getElementById('autoPlayToggle');
+			const playIcon = document.getElementById('playIcon');
+			const autoPlayText = document.getElementById('autoPlayText');
+			
+			if (!carousel || !dots.length || !prevBtn || !nextBtn || !autoPlayBtn) {
+				console.error('Alumni carousel elements not found');
+				return;
+			}
+			
+			// Update carousel position
+			function updateCarousel() {
+				carousel.style.transform = `translateX(-${currentAlumniSlide * 100}%)`;
+				
+				// Update dots
+				dots.forEach((dot, index) => {
+					if (index === currentAlumniSlide) {
+						dot.classList.remove('bg-white/50');
+						dot.classList.add('bg-white');
+					} else {
+						dot.classList.remove('bg-white');
+						dot.classList.add('bg-white/50');
+					}
+				});
+			}
+			
+			// Next slide
+			function nextSlide() {
+				currentAlumniSlide = (currentAlumniSlide + 1) % 3;
+				updateCarousel();
+			}
+			
+			// Previous slide
+			function prevSlide() {
+				currentAlumniSlide = (currentAlumniSlide - 1 + 3) % 3;
+				updateCarousel();
+			}
+			
+			// Go to specific slide
+			function goToSlide(slideIndex) {
+				currentAlumniSlide = slideIndex;
+				updateCarousel();
+			}
+			
+			// Auto-play functionality
+			function startAutoPlay() {
+				if (alumniAutoPlay) {
+					alumniInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+				}
+			}
+			
+			function stopAutoPlay() {
+				clearInterval(alumniInterval);
+			}
+			
+			function toggleAutoPlay() {
+				alumniAutoPlay = !alumniAutoPlay;
+				
+				if (alumniAutoPlay) {
+					playIcon.innerHTML = '<path d="M8 5v10l8-5-8-5z"></path>';
+					autoPlayText.textContent = 'Auto Play';
+					startAutoPlay();
+				} else {
+					playIcon.innerHTML = '<path d="M5 3h4v18H5V3zm10 0h4v18h-4V3z"></path>';
+					autoPlayText.textContent = 'Paused';
+					stopAutoPlay();
+				}
+			}
+			
+			// Event listeners
+			nextBtn.addEventListener('click', () => {
+				nextSlide();
+				if (alumniAutoPlay) {
+					stopAutoPlay();
+					startAutoPlay();
+				}
+			});
+			
+			prevBtn.addEventListener('click', () => {
+				prevSlide();
+				if (alumniAutoPlay) {
+					stopAutoPlay();
+					startAutoPlay();
+				}
+			});
+			
+			dots.forEach((dot, index) => {
+				dot.addEventListener('click', () => {
+					goToSlide(index);
+					if (alumniAutoPlay) {
+						stopAutoPlay();
+						startAutoPlay();
+					}
+				});
+			});
+			
+			autoPlayBtn.addEventListener('click', toggleAutoPlay);
+			
+			// Touch/swipe support
+			let startX = 0;
+			let endX = 0;
+			
+			carousel.addEventListener('touchstart', (e) => {
+				startX = e.touches[0].clientX;
+			});
+			
+			carousel.addEventListener('touchend', (e) => {
+				endX = e.changedTouches[0].clientX;
+				handleSwipe();
+			});
+			
+			function handleSwipe() {
+				const threshold = 50;
+				const diff = startX - endX;
+				
+				if (Math.abs(diff) > threshold) {
+					if (diff > 0) {
+						nextSlide(); // Swipe left - next slide
+					} else {
+						prevSlide(); // Swipe right - previous slide
+					}
+					
+					if (alumniAutoPlay) {
+						stopAutoPlay();
+						startAutoPlay();
+					}
+				}
+			}
+			
+			// Keyboard navigation
+			document.addEventListener('keydown', (e) => {
+				if (e.key === 'ArrowLeft') {
+					prevSlide();
+					if (alumniAutoPlay) {
+						stopAutoPlay();
+						startAutoPlay();
+					}
+				} else if (e.key === 'ArrowRight') {
+					nextSlide();
+					if (alumniAutoPlay) {
+						stopAutoPlay();
+						startAutoPlay();
+					}
+				}
+			});
+			
+			// Initialize
+			updateCarousel();
+			startAutoPlay();
+			
+			// Pause auto-play when page is not visible
+			document.addEventListener('visibilitychange', () => {
+				if (document.hidden) {
+					stopAutoPlay();
+				} else if (alumniAutoPlay) {
+					startAutoPlay();
+				}
+			});
+		}
+
+		// Initialize carousel when DOM is loaded
+		document.addEventListener('DOMContentLoaded', initAlumniCarousel);
+
+		// Make functions globally accessible
+		window.initAlumniCarousel = initAlumniCarousel;
+	</script>
 </Layout>
-
-
-
-
-
-
-
-<style is:global>
-	@keyframes spin {
-	  0% { transform: rotate(0deg); }
-	  100% { transform: rotate(360deg); }
-	}
-	
-	.animate-spin {
-	  animation: spin 1.5s linear infinite;
-	}
-	
-	.animation-delay-200 {
-	  animation-delay: 0.2s;
-	}
-	
-	.animation-delay-400 {
-	  animation-delay: 0.4s;
-	}
-	
-	/* Hide loading animation when page loads */
-	html.wf-active #loading-animation,
-	html.loaded #loading-animation {
-	  opacity: 0;
-	  pointer-events: none;
-	}
-  </style>
-  
-  <script is:inline>
-	// Hide loading animation when page is loaded
-	window.addEventListener('load', function() {
-	  document.documentElement.classList.add('loaded');
-	  setTimeout(function() {
-		document.getElementById('loading-animation').style.display = 'none';
-	  }, 500);
-	});
-  </script>

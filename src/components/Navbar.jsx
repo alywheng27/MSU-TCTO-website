@@ -191,13 +191,13 @@ const Navbar = ({ path }) => {
       title: "Programs",
       icon: <FaUniversity className="text-lg" />,
       items: [
-        { link: "/404.astro", label: "College of Arts and Sciences" },
-        { link: "/404.astro", label: "College of Islamic & Arabic Studies" },
-        { link: "/404.astro", label: "College of Education" },
-        { link: "/404.astro", label: "College of Fisheries" },
-        { link: "/404.astro", label: "Institute of Information and Communication Technology" },
-        { link: "/404.astro", label: "Institute of Oceanography and Environmental Science" },
-        { link: "/404.astro", label: "College of Law" },
+        { link: "/404", label: "College of Arts and Sciences" },
+        { link: "/404", label: "College of Islamic & Arabic Studies" },
+        { link: "/404", label: "College of Education" },
+        { link: "/404", label: "College of Fisheries" },
+        { link: "/404", label: "Institute of Information and Communication Technology" },
+        { link: "/404", label: "Institute of Oceanography and Environmental Science" },
+        { link: "/404", label: "College of Law" },
       ]
     },
     {
@@ -213,6 +213,7 @@ const Navbar = ({ path }) => {
       title: "Publications",
       icon: <FaNewspaper className="text-lg" />,
       items: [
+        { link: "/publications/offices", label: "Offices & Resources" },
         { link: "/publications/articles", label: "Articles" },
         { link: "/publications/sulimbang", label: "Sulimbang" },
         { link: "/publications/gazette", label: "Gazettes" },
@@ -240,7 +241,8 @@ const Navbar = ({ path }) => {
       title: "Conference",
       icon: <FaUsers className="text-lg" />,
       items: [
-        { link: "404", label: "ICIIE 2025", disabled: true },
+        // { link: "404", label: "ICIIE 2025", disabled: true },
+        { link: "/iciie2025", label: "ICIIE 2025" },
       ]
     }
   ];
@@ -383,12 +385,12 @@ const Navbar = ({ path }) => {
 
       {/* Sidebar Menu */}
       <div 
-        className={`sidebar-menu fixed top-0 right-0 h-full w-80 bg-msu-deep-ocean dark:bg-gray-900 text-white dark:text-gray-100 transform transition-transform duration-300 ease-in-out z-50 shadow-2xl ${
+        className={`sidebar-menu fixed top-0 right-0 h-full w-80 bg-msu-deep-ocean dark:bg-gray-900 text-white dark:text-gray-100 transform transition-transform duration-300 ease-in-out z-50 shadow-2xl flex flex-col ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         {/* Sidebar Header */}
-        <div className="flex items-center justify-between p-6 border-b border-msu-main-color dark:border-gray-700 border-opacity-30">
+        <div className="flex items-center justify-between p-6 border-b border-msu-main-color dark:border-gray-700 border-opacity-30 flex-shrink-0">
           <div className="flex items-center">
             <img 
               src="/images/MSU Seal New (Official).png" 
@@ -408,27 +410,29 @@ const Navbar = ({ path }) => {
           </button>
         </div>
 
-        {/* Sidebar Navigation */}
-        <div className="flex-1 overflow-y-auto py-6">
-          <ul className="space-y-2 px-4">
-            {navItems.map((item, index) => (
-              <Dropdown
-                key={index}
-                title={item.title}
-                icon={item.icon}
-                items={item.items}
-                isMobile={true}
-                index={index}
-                activeDropdown={activeDropdown}
-                setActiveDropdown={setActiveDropdown}
-                closeMobileMenu={closeMobileMenu}
-              />
-            ))}
-          </ul>
+        {/* Sidebar Navigation - Scrollable Content */}
+        <div className="flex-1 overflow-y-auto custom-scrollbar">
+          <div className="py-6">
+            <ul className="space-y-2 px-4">
+              {navItems.map((item, index) => (
+                <Dropdown
+                  key={index}
+                  title={item.title}
+                  icon={item.icon}
+                  items={item.items}
+                  isMobile={true}
+                  index={index}
+                  activeDropdown={activeDropdown}
+                  setActiveDropdown={setActiveDropdown}
+                  closeMobileMenu={closeMobileMenu}
+                />
+              ))}
+            </ul>
+          </div>
         </div>
 
-        {/* Sidebar Footer */}
-        <div className="p-6 border-t border-msu-main-color dark:border-gray-700 border-opacity-30">
+        {/* Sidebar Footer - Always Visible */}
+        <div className="p-6 border-t border-msu-main-color dark:border-gray-700 border-opacity-30 flex-shrink-0">
           <a 
             href="https://msutawitawiedu.sharepoint.com/sites/Tawitawi" 
             target="_blank" 
