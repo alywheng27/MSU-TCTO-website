@@ -1,3 +1,11 @@
+# MSU-TCTO Website
+
+## 👨‍💻 Developers
+- **Micho A. Robledo** - Developer
+- **Aly Mama** - Developer
+
+---
+
 # Astro Starter Kit: Basics
 
 ```
