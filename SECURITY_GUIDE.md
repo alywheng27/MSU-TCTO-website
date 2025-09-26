@@ -9,8 +9,8 @@ Your contact form credentials have been **SECURED** and are no longer exposed in
 ### Before (INSECURE):
 ```javascript
 // ❌ DANGEROUS - Credentials visible in source code
-const gmailUser = process.env.GMAIL_USER || 'icto@msutawi-tawi.edu.ph';
-const gmailPassword = process.env.GMAIL_APP_PASSWORD || 'krmb lmjc kbmq tias';
+const gmailUser = process.env.GMAIL_USER || 'your-email@example.com';
+const gmailPassword = process.env.GMAIL_APP_PASSWORD || 'your-app-password-here';
 ```
 
 ### After (SECURE):
@@ -35,8 +35,8 @@ cp env.example .env
 
 ### 2. Add your credentials to `.env`:
 ```env
-GMAIL_USER=icto@msutawi-tawi.edu.ph
-GMAIL_APP_PASSWORD=krmb lmjc kbmq tias
+GMAIL_USER=your-email@example.com
+GMAIL_APP_PASSWORD=your-app-password-here
 ```
 
 ### 3. Ensure `.env` is in your `.gitignore`:
@@ -53,8 +53,8 @@ GMAIL_APP_PASSWORD=krmb lmjc kbmq tias
 1. Go to your Netlify dashboard
 2. Navigate to Site Settings → Environment Variables
 3. Add these variables:
-   - `GMAIL_USER` = `icto@msutawi-tawi.edu.ph`
-   - `GMAIL_APP_PASSWORD` = `krmb lmjc kbmq tias`
+   - `GMAIL_USER` = `your-email@example.com`
+   - `GMAIL_APP_PASSWORD` = `your-app-password-here`
 
 ### For Vercel Deployment:
 1. Go to your Vercel dashboard
