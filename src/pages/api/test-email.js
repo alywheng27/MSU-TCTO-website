@@ -39,7 +39,6 @@ export async function GET({ request }) {
             success: true,
             message: 'Gmail configuration is working correctly',
             details: {
-                user: gmailUser,
                 connectionVerified: true
             }
         }), {

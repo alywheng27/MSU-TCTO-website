@@ -17,10 +17,4 @@ export default defineConfig({
   })],
   output: "server",
   adapter: netlify(),
-  vite: {
-    define: {
-      'process.env.GMAIL_USER': JSON.stringify(process.env.GMAIL_USER),
-      'process.env.GMAIL_APP_PASSWORD': JSON.stringify(process.env.GMAIL_APP_PASSWORD)
-    }
-  }
 });
