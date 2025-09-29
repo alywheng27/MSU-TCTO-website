@@ -2853,11 +2853,11 @@ document.head.appendChild(style);
 						if (entry.isIntersecting) {
 							const img = entry.target;
 							img.classList.add('loaded');
-							img.onload = () => {
+							(img as HTMLImageElement).onload = () => {
 								img.classList.add('loaded');
 							};
-							img.onerror = () => {
-								console.error('Failed to load image:', img.src);
+							(img as HTMLImageElement).onerror = () => {
+								console.error('Failed to load image:', (img as HTMLImageElement).src);
 								// Optional: Add a fallback image or error state
 							};
 							observer.unobserve(img);

@@ -3,6 +3,7 @@ import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
 import sanity from "astro-sanity";
 import netlify from "@astrojs/netlify";  // ✅ Correct import
+import { loadEnv } from 'vite';
 
 
 // https://astro.build/config
@@ -15,5 +16,5 @@ export default defineConfig({
     useCdn: true
   })],
   output: "server",
-  adapter: netlify()
+  adapter: netlify(),
 });

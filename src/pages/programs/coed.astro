@@ -8,15 +8,90 @@ import FooterNav from "../../components/FooterNav.astro";
 
 import Footer from "../../components/Footer.astro";
 
+import PDFViewer from "../../components/PDFViewer.jsx";
+
 import '../../styles/css/global.css';
 
 import '../../styles/css/globalanimate.css';
+
+import '../../styles/css/pdf-viewer.css';
+
+import { getCOEDPrograms } from '../../api/api.jsx';
 
 
 
 
 
 const currentPath = Astro.url.pathname;
+
+// Fetch COED programs data from Sanity
+let programsData = [];
+let filterOptions = {
+  degrees: [] as string[],
+  levels: [] as string[],
+  departments: [] as string[]
+};
+
+// Helper function to extract text from Sanity block content
+function extractTextFromBlocks(blocks: any[]): string {
+  if (!blocks || !Array.isArray(blocks)) return '';
+  
+  return blocks
+    .map(block => {
+      if (block._type === 'block' && block.children) {
+        return block.children
+          .map((child: any) => child.text || '')
+          .join('');
+      }
+      return '';
+    })
+    .join(' ')
+    .trim();
+}
+
+try {
+  const rawProgramsData = await getCOEDPrograms();
+  
+  // Transform Sanity data to match frontend expectations
+  programsData = rawProgramsData.map(program => ({
+    _id: program._id,
+    program: program.title,
+    description: extractTextFromBlocks(program.description) || '',
+    degree: program.degree?.degree || '',
+    level: program.level?.level || '',
+    duration: program.duration?.duration || '',
+    accreditation: program.accreditation || '',
+    fileUrl: program.file?.asset?.url || null,
+    name: program.title,
+    department: program.department?.department || ''
+  }));
+  
+  // Extract unique filter options
+  const degreeSet = new Set<string>();
+  const levelSet = new Set<string>();
+  const departmentSet = new Set<string>();
+  
+  programsData.forEach(program => {
+    if (program.degree) degreeSet.add(program.degree);
+    if (program.level) levelSet.add(program.level);
+    if (program.department) departmentSet.add(program.department);
+  });
+  
+  // Convert Sets to Arrays for easier use
+  filterOptions.degrees = Array.from(degreeSet);
+  filterOptions.levels = Array.from(levelSet);
+  filterOptions.departments = Array.from(departmentSet);
+  
+  console.log('COED Programs loaded:', programsData.length);
+  console.log('Filter options:', filterOptions);
+  console.log('Sample program:', programsData[0]);
+  console.log('Sample program description:', programsData[0]?.description);
+  console.log('Raw description data:', rawProgramsData[0]?.description);
+} catch (error) {
+  console.error('Error fetching COED programs data:', error);
+  // Fallback to empty array if fetch fails
+  programsData = [];
+}
 
 ---
 
@@ -347,7 +422,7 @@ const currentPath = Astro.url.pathname;
 						<img src="/images/social media/aaccup.png" alt="AACCUP Accredited" class="h-24 sm:h-28 md:h-32 mx-auto mb-3 md:mb-4 lazy-image" loading="lazy">
 						<h3 class="text-base sm:text-lg font-semibold text-msu-bgc-color">AACCUP Accredited</h3>
 
-						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Level III Re-Accredited Status</p>
+						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Level II Re-Accredited Status</p>
 
 					</div>
 
@@ -440,7 +515,7 @@ const currentPath = Astro.url.pathname;
 
 							<nav class="-mb-px flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 md:space-x-8">
 
-								<button class="tab-button active py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm border-msu-deep-ocean text-msu-main-color dark:text-msu-bgc-color transition-all duration-300" data-tab="mission">
+								<button class="tab-button active py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm border-msu-deep-ocean text-msu-main-color dark:text-msu-bgc-color transition-all duration-300" data-tab="goal">
 
 									<span class="flex items-center justify-center sm:justify-start">
 
@@ -450,15 +525,15 @@ const currentPath = Astro.url.pathname;
 
 										</svg>
 
-										<span class="hidden sm:inline">Mission</span>
+										<span class="hidden sm:inline">Goal</span>
 
-										<span class="sm:hidden">Mission</span>
+										<span class="sm:hidden">Goal</span>
 
 									</span>
 
 								</button>
 
-								<button class="tab-button py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm border-transparent text-msu-main-color dark:text-msu-bgc-color hover:text-msu-deep-ocean hover:border-gray-300 transition-all duration-300" data-tab="vision">
+								<button class="tab-button py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm border-transparent text-msu-main-color dark:text-msu-bgc-color hover:text-msu-deep-ocean hover:border-gray-300 transition-all duration-300" data-tab="objectives">
 
 									<span class="flex items-center justify-center sm:justify-start">
 
@@ -470,9 +545,9 @@ const currentPath = Astro.url.pathname;
 
 										</svg>
 
-										<span class="hidden sm:inline">Vision</span>
+										<span class="hidden sm:inline">Objectives</span>
 
-										<span class="sm:hidden">Vision</span>
+										<span class="sm:hidden">Objectives</span>
 
 									</span>
 
@@ -502,14 +577,29 @@ const currentPath = Astro.url.pathname;
 
 						
 
-						<div class="tab-content active" id="mission-content">
+						<div class="tab-content active" id="goal-content">
 
 							<div class="space-y-6 text-msu-main-color dark:text-msu-bgc-color">
 
 								<p class="text-xl leading-relaxed">
 
-									The College of Education is mandated to provide quality teacher education through instruction, research, extension, and professional training. Its primary responsibility is to prepare future educators who are competent in curriculum development, instruction, and assessment; ethically grounded and committed to upholding professional standards; innovative and research-oriented, contributing to educational improvement; responsive to the needs of learners and society; and community-engaged, supporting lifelong learning and inclusive education.
+									To produce highly motivated and competent teachers who will:
 								</p>
+								
+								<div class="space-y-4">
+									<div class="flex items-start">
+										<span class="text-msu-deep-ocean font-bold mr-3 mt-1">a)</span>
+										<p class="text-lg">provide leadership in their respective disciplines through quality instruction, research, extension and innovation;</p>
+									</div>
+									<div class="flex items-start">
+										<span class="text-msu-deep-ocean font-bold mr-3 mt-1">b)</span>
+										<p class="text-lg">respond to the demands of their social environment and its diverse cultures; and</p>
+									</div>
+									<div class="flex items-start">
+										<span class="text-msu-deep-ocean font-bold mr-3 mt-1">c)</span>
+										<p class="text-lg">be effective agents of peace and development in the Sulu Archipelago.</p>
+									</div>
+								</div>
 
 								<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
@@ -545,52 +635,60 @@ const currentPath = Astro.url.pathname;
 
 						
 
-						<div class="tab-content hidden" id="vision-content">
+						<div class="tab-content hidden" id="objectives-content">
 
 							<div class="space-y-6 text-msu-main-color dark:text-msu-bgc-color">
 
 								<p class="text-xl leading-relaxed">
 
-									To be a premier center of teacher education in the Philippines, recognized for academic excellence, research, and leadership in developing highly skilled, values-driven, and globally competitive educators who contribute to the transformation of the Philippine educational landscape.
+									To achieve its goal, the College of Education is tasked to accomplish the following:
 								</p>
 
-								<div class="bg-gradient-to-r from-msu-deep-ocean/5 to-msu-deep-ocean/5 p-6 rounded-xl border border-msu-deep-ocean/20">
-
-									<h4 class="font-bold text-msu-deep-ocean dark:text-msu-bgc-color mb-3">Our Aspirations</h4>
-									<ul class="space-y-2 text-msu-main-color dark:text-msu-bgc-color">
-
-										<li class="flex items-center">
-
-											<svg class="w-4 h-4 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-
-											</svg>
-
-											Excellence in teacher education and pedagogical innovation
-										</li>
-
-										<li class="flex items-center">
-
-											<svg class="w-4 h-4 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-
-											</svg>
-
-											Leadership in educational research and community engagement
-										</li>
-
-										<li class="flex items-center">
-
-											<svg class="w-4 h-4 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-
-											</svg>
-
-											Promotion of inclusive education and lifelong learning
-										</li>
-
-									</ul>
-
+								<div class="space-y-4">
+									<div class="flex items-start">
+										<span class="text-msu-deep-ocean font-bold mr-3 mt-1">1.</span>
+										<p class="text-lg">Plan, adopt, develop and offer academic curricula/programs in different fields of specialization that answer the teacher education and professional manpower needs of the community in the elementary, secondary, tertiary and advanced education;</p>
+									</div>
+									<div class="flex items-start">
+										<span class="text-msu-deep-ocean font-bold mr-3 mt-1">2.</span>
+										<p class="text-lg">Develop students to become teachers who are not only equipped with relevant content, assessment, pedagogical and technological knowledge and skills but also imbued with desirable character, work ethics, self-discipline and sense of nationalism;</p>
+									</div>
+									<div class="flex items-start">
+										<span class="text-msu-deep-ocean font-bold mr-3 mt-1">3.</span>
+										<p class="text-lg">Nurture teachers who are cognizant and responsive to the needs of their socio-cultural environment;</p>
+									</div>
+									<div class="flex items-start">
+										<span class="text-msu-deep-ocean font-bold mr-3 mt-1">4.</span>
+										<p class="text-lg">Develop teachers who can conduct research, provide extension services and introduce innovations for the benefit of their profession and their respective communities;</p>
+									</div>
+									<div class="flex items-start">
+										<span class="text-msu-deep-ocean font-bold mr-3 mt-1">5.</span>
+										<p class="text-lg">Provide adequate facilities and maintain a standard laboratory school for the training and exposure of pre-service teachers;</p>
+									</div>
+									<div class="flex items-start">
+										<span class="text-msu-deep-ocean font-bold mr-3 mt-1">6.</span>
+										<p class="text-lg">Provide support and encourage its faculty members to pursue advanced studies in their respective fields at reputable universities in the country and abroad;</p>
+									</div>
+									<div class="flex items-start">
+										<span class="text-msu-deep-ocean font-bold mr-3 mt-1">7.</span>
+										<p class="text-lg">Provide support and encourage its faculty and students to actively participate in the local, national and international conferences and other professional meetings to keep abreast with and share relevant knowledge and practices with colleagues in the profession;</p>
+									</div>
+									<div class="flex items-start">
+										<span class="text-msu-deep-ocean font-bold mr-3 mt-1">8.</span>
+										<p class="text-lg">Provide support and encourage its faculty and students to publish their research outputs in reputable journals and for its faculty to develop and produce instructional materials such as course modules, monograph and books;</p>
+									</div>
+									<div class="flex items-start">
+										<span class="text-msu-deep-ocean font-bold mr-3 mt-1">9.</span>
+										<p class="text-lg">Establish linkage with other teacher education institutions, government agencies and professional associations to forge collaborations on relevant undertakings;</p>
+									</div>
+									<div class="flex items-start">
+										<span class="text-msu-deep-ocean font-bold mr-3 mt-1">10.</span>
+										<p class="text-lg">Forge partnership with the local government units in related undertakings and seek relevant support for its programs and activities; and</p>
+									</div>
+									<div class="flex items-start">
+										<span class="text-msu-deep-ocean font-bold mr-3 mt-1">11.</span>
+										<p class="text-lg">Train future and current teachers in relevant specializations through pre-service and in-service trainings, reviews, seminars/seminar-workshops, and conferences for the effective transfer of learning that spurs socio-economic activities, peace building and development in the Sulu Archipelago.</p>
+									</div>
 								</div>
 
 							</div>
@@ -605,37 +703,45 @@ const currentPath = Astro.url.pathname;
 
 								<p class="text-xl leading-relaxed">
 
-									Established in 1990, the College of Education was founded to address the growing need for quality teacher education in the region. Over the years, the College has continuously evolved to meet the challenges of the 21st-century learning environment, offering comprehensive undergraduate and graduate programs that equip future educators with pedagogical expertise, research capabilities, leadership competencies, and a strong commitment to community service.
+									Established in 1990, the College of Education has evolved into a premier academic unit committed to developing highly skilled, values-driven, and globally competitive educators. The College operates an Integrated Laboratory School (MSU TCTO CoEd ILS) with Elementary, Junior High School, and Senior High School departments, serving as a training ground for pre-service teachers.
 								</p>
 
-								<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+								<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-									<div class="text-center p-4 bg-gradient-to-b from-msu-deep-ocean/10 to-transparent rounded-lg">
+									<div class="bg-gradient-to-r from-msu-deep-ocean/10 to-transparent p-6 rounded-lg border-l-4 border-msu-deep-ocean">
 
-										<div class="text-3xl font-bold text-msu-deep-ocean dark:text-msu-bgc-color">1990</div>
-										<div class="text-sm text-msu-main-color dark:text-msu-bgc-color">Foundation Year</div>
-
-									</div>
-
-									<div class="text-center p-4 bg-gradient-to-b from-msu-deep-ocean/10 to-transparent rounded-lg">
-
-										<div class="text-3xl font-bold text-msu-deep-ocean dark:text-msu-bgc-color">8+</div>
-										<div class="text-sm text-msu-main-color dark:text-msu-bgc-color">Degree Programs</div>
+										<h4 class="font-bold text-msu-deep-ocean dark:text-msu-bgc-color mb-3">Academic Excellence</h4>
+										<ul class="space-y-2 text-sm">
+											<li>• CHED-recognized and COPC-compliant programs</li>
+											<li>• AACCUP Level I & II accredited programs</li>
+											<li>• 100% faculty with Master's degrees or higher</li>
+											<li>• Comprehensive undergraduate and graduate programs</li>
+										</ul>
 
 									</div>
 
-									<div class="text-center p-4 bg-gradient-to-b from-msu-deep-ocean/10 to-transparent rounded-lg">
+									<div class="bg-gradient-to-r from-msu-deep-ocean/10 to-transparent p-6 rounded-lg border-l-4 border-msu-deep-ocean">
 
-										<div class="text-3xl font-bold text-msu-deep-ocean dark:text-msu-bgc-color">100%</div>
-										<div class="text-sm text-msu-main-color dark:text-msu-bgc-color">Faculty with Master's+</div>
+										<h4 class="font-bold text-msu-deep-ocean dark:text-msu-bgc-color mb-3">Community Impact</h4>
+										<ul class="space-y-2 text-sm">
+											<li>• Professional development seminars and trainings</li>
+											<li>• LET review programs for aspiring teachers</li>
+											<li>• Research and extension programs</li>
+											<li>• Literacy improvement initiatives</li>
+										</ul>
+
 									</div>
 
 								</div>
 
-								<p class="text-msu-main-color dark:text-msu-bgc-color">
+								<div class="bg-gradient-to-r from-msu-deep-ocean/5 to-msu-deep-ocean/5 p-6 rounded-xl border border-msu-deep-ocean/20">
 
-									Today, the College of Education continues to be a beacon of teacher education, producing graduates who serve as educators, administrators, researchers, and community leaders throughout the region and beyond, contributing to the transformation of the Philippine educational landscape.
-								</p>
+									<h4 class="font-bold text-msu-deep-ocean dark:text-msu-bgc-color mb-3">Mission & Vision</h4>
+									<p class="text-msu-main-color dark:text-msu-bgc-color">
+										The College is mandated to provide quality teacher education through instruction, research, extension, and professional training. It prepares future educators who are competent in curriculum development, ethically grounded, innovative and research-oriented, responsive to learner needs, and community-engaged in supporting lifelong learning and inclusive education.
+									</p>
+
+								</div>
 
 							</div>
 
@@ -779,15 +885,15 @@ const currentPath = Astro.url.pathname;
 
 				
 
-				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-9xl mx-auto">
 
-					<div class="group p-8 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
+					<div class="group p-12 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
 
 						<div class="text-center">
 
-							<div class="relative mb-4">
+							<div class="relative mb-6">
 
-								<svg class="w-16 h-16 mx-auto text-msu-bgc-color mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<svg class="w-24 h-24 mx-auto text-msu-bgc-color mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 
 									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
 								</svg>
@@ -796,11 +902,11 @@ const currentPath = Astro.url.pathname;
 
 							</div>
 
-							<div class="text-5xl font-bold mb-2 counter" data-target="1500">0</div>
+							<div class="text-8xl font-bold mb-4 counter" data-target="779">0</div>
 
-							<div class="text-xl font-semibold">Students Enrolled</div>
+							<div class="text-3xl font-semibold mb-3">Students Enrolled</div>
 
-							<div class="text-sm text-gray-300 mt-2">Active learners across all programs</div>
+							<div class="text-xl text-gray-300 mt-2">Active learners across all programs</div>
 
 						</div>
 
@@ -808,13 +914,13 @@ const currentPath = Astro.url.pathname;
 
 					
 
-					<div class="group p-8 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
+					<div class="group p-12 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
 
 						<div class="text-center">
 
-							<div class="relative mb-4">
+							<div class="relative mb-6">
 
-								<svg class="w-16 h-16 mx-auto text-msu-bgc-color mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<svg class="w-24 h-24 mx-auto text-msu-bgc-color mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 
 									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
 
@@ -824,11 +930,11 @@ const currentPath = Astro.url.pathname;
 
 							</div>
 
-							<div class="text-5xl font-bold mb-2 counter" data-target="65">0</div>
+							<div class="text-8xl font-bold mb-4 counter" data-target="73">0</div>
 
-							<div class="text-xl font-semibold">Faculty Members</div>
+							<div class="text-3xl font-semibold mb-3">Faculty Members</div>
 
-							<div class="text-sm text-gray-300 mt-2">Expert educators and researchers</div>
+							<div class="text-xl text-gray-300 mt-2">Expert educators and researchers</div>
 
 						</div>
 
@@ -836,13 +942,13 @@ const currentPath = Astro.url.pathname;
 
 					
 
-					<div class="group p-8 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
+					<div class="group p-12 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
 
 						<div class="text-center">
 
-							<div class="relative mb-4">
+							<div class="relative mb-6">
 
-								<svg class="w-16 h-16 mx-auto text-msu-bgc-color mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<svg class="w-24 h-24 mx-auto text-msu-bgc-color mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 
 									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
 
@@ -852,11 +958,11 @@ const currentPath = Astro.url.pathname;
 
 							</div>
 
-							<div class="text-5xl font-bold mb-2 counter" data-target="12">0</div>
+							<div class="text-8xl font-bold mb-4 counter" data-target="8">0</div>
 
-							<div class="text-xl font-semibold">Academic Programs</div>
+							<div class="text-3xl font-semibold mb-3">Academic Programs</div>
 
-							<div class="text-sm text-gray-300 mt-2">Diverse fields of study</div>
+							<div class="text-xl text-gray-300 mt-2">Diverse fields of study</div>
 
 						</div>
 
@@ -864,7 +970,7 @@ const currentPath = Astro.url.pathname;
 
 					
 
-					<div class="group p-8 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
+					<!-- <div class="group p-8 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
 
 						<div class="text-center">
 
@@ -886,9 +992,9 @@ const currentPath = Astro.url.pathname;
 
 							<div class="text-sm text-gray-300 mt-2">Ongoing innovative studies</div>
 
-						</div>
+						</div> -->
 
-					</div>
+			
 
 				</div>
 
@@ -976,7 +1082,7 @@ const currentPath = Astro.url.pathname;
 
             <p class="text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto">
 
-                Comprehensive fisheries education programs designed to meet industry needs
+                Innovative teacher education programs preparing future educators and leaders
 
             </p>
 
@@ -984,601 +1090,138 @@ const currentPath = Astro.url.pathname;
 
 
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
-
-            <!-- First 4 Visible Programs -->
-
-            <!-- Program 1 -->
-
-            <div class="program-card bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
-
-                <div class="h-50 overflow-hidden">
-
-                    <img src="/images/pdf/pdf.jpg" alt="Bachelor of Science in Mathematics" class="w-full h-full object-cover lazy-image" loading="lazy">
+        <!-- Search and Filter Controls -->
+        <div class="mb-8">
+            <div class="flex flex-col lg:flex-row gap-4 items-center justify-between">
+                <!-- Global Search -->
+                <div class="relative w-full lg:w-96">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                    <input 
+                        type="text" 
+                        id="globalSearch" 
+                        placeholder="Search programs, degrees, or specializations..." 
+                        class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-msu-main-color focus:border-msu-main-color transition-all duration-300"
+                    >
                 </div>
 
-                <div class="p-6">
+                <!-- Filter Controls -->
+                <div class="flex flex-wrap gap-3">
+                    <select id="degreeFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-msu-main-color focus:border-msu-main-color transition-all duration-300">
+                        <option value="">All Degrees</option>
+                        {filterOptions.degrees.map(degree => (
+                            <option value={degree}>{degree}</option>
+                        ))}
+                    </select>
 
-                    <div class="flex justify-between items-start mb-4">
+                    <select id="levelFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-msu-main-color focus:border-msu-main-color transition-all duration-300">
+                        <option value="">All Levels</option>
+                        {filterOptions.levels.map(level => (
+                            <option value={level}>{level}</option>
+                        ))}
+                    </select>
 
-                        <h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Bachelor of Science in Mathematics</h3>
-
-                        <span class="bg-msu-deep-ocean/10 text-msu-bgc-color text-xs font-semibold px-2.5 py-0.5 rounded">Undergraduate</span>
-
-                    </div>
-
-                    <p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-
-                        A four-year degree program focusing on advanced mathematical theories, applications, and problem-solving techniques.
-
-                    </p>
-
-                    <div class="flex justify-between items-center">
-
-                        <a href="#" class="text-msu-deep-ocean font-medium hover:underline flex items-center">
-
-                            Learn More
-
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-
-                            </svg>
-
-                        </a>
-
-                    </div>
-
+                    <button id="clearFilters" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-all duration-300">
+                        Clear Filters
+                    </button>
                 </div>
-
             </div>
-
-            
-
-            <!-- Program 2 -->
-
-            <div class="program-card bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
-
-                <div class="h-50 overflow-hidden">
-
-                    <img src="/images/pdf/pdf.jpg" alt="Bachelor of Science in History" class="w-full h-full object-cover lazy-image" loading="lazy">
-                </div>
-
-                <div class="p-6">
-
-                    <div class="flex justify-between items-start mb-4">
-
-                        <h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Bachelor of Science in History</h3>
-
-                        <span class="bg-msu-deep-ocean/10 text-msu-bgc-color text-xs font-semibold px-2.5 py-0.5 rounded">Undergraduate</span>
-
-                    </div>
-
-                    <p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-
-                        Explore historical events, cultures, and societies to understand the present and shape the future.
-
-                    </p>
-
-                    <div class="flex justify-between items-center">
-
-                        <a href="#" class="text-msu-deep-ocean font-medium hover:underline flex items-center">
-
-                            Learn More
-
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-
-                            </svg>
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- Program 3 -->
-
-            <div class="program-card bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
-
-                <div class="h-50 overflow-hidden">
-
-                    <img src="/images/pdf/pdf.jpg" alt="Bachelor in English Language Studies" class="w-full h-full object-cover lazy-image" loading="lazy">
-                </div>
-
-                <div class="p-6">
-
-                    <div class="flex justify-between items-start mb-4">
-
-                        <h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Bachelor in English Language Studies</h3>
-
-                        <span class="bg-msu-deep-ocean/10 text-msu-bgc-color text-xs font-semibold px-2.5 py-0.5 rounded">Diploma</span>
-
-                    </div>
-
-                    <p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-
-                        Study the English language, literature, and linguistics to develop critical thinking and communication skills.
-
-                    </p>
-
-                    <div class="flex justify-between items-center">
-
-                        <a href="#" class="text-msu-deep-ocean font-medium hover:underline flex items-center">
-
-                            Learn More
-
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-
-                            </svg>
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            
-
-            <!-- Program 4 -->
-
-            <div class="program-card bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
-
-                <div class="h-50 overflow-hidden">
-
-                    <img src="/images/pdf/pdf.jpg" alt="Bachelor of Science in Political Science" class="w-full h-full object-cover lazy-image" loading="lazy">
-                </div>
-
-                <div class="p-6">
-
-                    <div class="flex justify-between items-start mb-4">
-
-                        <h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Bachelor of Science in Political Science</h3>
-
-                        <span class="bg-msu-deep-ocean/10 text-msu-bgc-color text-xs font-semibold px-2.5 py-0.5 rounded">Diploma</span>
-
-                    </div>
-
-                    <p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-
-                        Examine political systems, theories, and behaviors to understand governance and public policy.
-
-                    </p>
-
-                    <div class="flex justify-between items-center">
-
-                        <a href="#" class="text-msu-deep-ocean font-medium hover:underline flex items-center">
-
-                            Learn More
-
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-
-                            </svg>
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- Hidden Programs (will be shown when "View All" is clicked) -->
-
-            <!-- Program 5 -->
-
-            <div class="program-card hidden bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
-
-                <div class="h-50 overflow-hidden">
-
-                    <img src="/images/pdf/pdf.jpg" alt="Bachelor of Science in Biology" class="w-full h-full object-cover lazy-image" loading="lazy">
-                </div>
-
-                <div class="p-6">
-
-                    <div class="flex justify-between items-start mb-4">
-
-                        <h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Bachelor of Science in Statistics</h3>
-
-                        <span class="bg-msu-deep-ocean/10 text-msu-bgc-color text-xs font-semibold px-2.5 py-0.5 rounded">Undergraduate</span>
-
-                    </div>
-
-                    <p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-
-                        Study living organisms and their relationships to each other and their environments.
-
-                    </p>
-
-                    <div class="flex justify-between items-center">
-
-                        <a href="#" class="text-msu-deep-ocean font-medium hover:underline flex items-center">
-
-                            Learn More
-
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-
-                            </svg>
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            
-
-            <!-- Program 6 -->
-
-            <div class="program-card hidden bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
-
-                <div class="h-50 overflow-hidden">
-
-                    <img src="/images/pdf/pdf.jpg" alt="Bachelor of Science in Chemistry" class="w-full h-full object-cover lazy-image" loading="lazy">
-                </div>
-
-                <div class="p-6">
-
-                    <div class="flex justify-between items-start mb-4">
-
-                        <h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Master in Public Administration</h3>
-
-                        <span class="bg-msu-deep-ocean/10 text-msu-bgc-color text-xs font-semibold px-2.5 py-0.5 rounded">Undergraduate</span>
-
-                    </div>
-
-                    <p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-
-                        Explore the composition, structure, properties, and changes of matter.
-
-                    </p>
-
-                    <div class="flex justify-between items-center">
-
-                        <a href="#" class="text-msu-deep-ocean font-medium hover:underline flex items-center">
-
-                            Learn More
-
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-
-                            </svg>
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- Program 7 -->
-
-            <div class="program-card hidden bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
-
-                <div class="h-50 overflow-hidden">
-
-                    <img src="/images/pdf/pdf.jpg" alt="Bachelor of Science in Chemistry" class="w-full h-full object-cover lazy-image" loading="lazy">
-                </div>
-
-                <div class="p-6">
-
-                    <div class="flex justify-between items-start mb-4">
-
-                        <h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Master of Science in Teaching Mathematics</h3>
-
-                        <span class="bg-msu-deep-ocean/10 text-msu-bgc-color text-xs font-semibold px-2.5 py-0.5 rounded">Undergraduate</span>
-
-                    </div>
-
-                    <p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-
-                        Explore the composition, structure, properties, and changes of matter.
-
-                    </p>
-
-                    <div class="flex justify-between items-center">
-
-                        <a href="https://drive.google.com/file/d/1-nR4D-JxwCTGbQnqUWM1zACgGk-QF4ME/view?usp=drive_link" class="text-msu-deep-ocean font-medium hover:underline flex items-center">
-
-                            Learn More
-
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-
-                            </svg>
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            
-
-            <!-- Program 8 -->
-
-            <div class="program-card hidden bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
-
-                <div class="h-50 overflow-hidden">
-
-                    <img src="/images/pdf/pdf.jpg" alt="Bachelor of Science in Chemistry" class="w-full h-full object-cover lazy-image" loading="lazy">
-                </div>
-
-                <div class="p-6">
-
-                    <div class="flex justify-between items-start mb-4">
-
-                        <h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Bachelor of Public Administration</h3>
-
-                        <span class="bg-msu-deep-ocean/10 text-msu-bgc-color text-xs font-semibold px-2.5 py-0.5 rounded">Undergraduate</span>
-
-                    </div>
-
-                    <p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-
-                        Explore the composition, structure, properties, and changes of matter.
-
-                    </p>
-
-                    <div class="flex justify-between items-center">
-
-                        <a href="https://drive.google.com/file/d/1nnhyYyiE3kl3SUm-LC5218bhlJUwHk3_/view?usp=drive_link" class="text-msu-deep-ocean font-medium hover:underline flex items-center">
-
-                            Learn More
-
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-
-                            </svg>
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            
-
-            <!-- Program 9 -->
-
-            <div class="program-card hidden bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
-
-                <div class="h-50 overflow-hidden">
-
-                    <img src="/images/pdf/pdf.jpg" alt="Bachelor of Science in Chemistry" class="w-full h-full object-cover lazy-image" loading="lazy">
-                </div>
-
-                <div class="p-6">
-
-                    <div class="flex justify-between items-start mb-4">
-
-                        <h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Bachelor of Science in Business Administration (Marketing Management)</h3>
-
-                        <span class="bg-msu-deep-ocean/10 text-msu-bgc-color text-xs font-semibold px-2.5 py-0.5 rounded">Undergraduate</span>
-
-                    </div>
-
-                    <p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-
-                        Explore the composition, structure, properties, and changes of matter.
-
-                    </p>
-
-                    <div class="flex justify-between items-center">
-
-                        <a href="https://drive.google.com/file/d/1opvINEN2o8nhu30Kq6PAZhUwHdBIEOYm/view?usp=drive_link" class="text-msu-deep-ocean font-medium hover:underline flex items-center">
-
-                            Learn More
-
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-
-                            </svg>
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            
-
-            <!-- Program 10 -->
-
-            <div class="program-card hidden bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
-
-                <div class="h-50 overflow-hidden">
-
-                    <img src="/images/pdf/pdf.jpg" alt="Bachelor of Science in Chemistry" class="w-full h-full object-cover lazy-image" loading="lazy">
-                </div>
-
-                <div class="p-6">
-
-                    <div class="flex justify-between items-start mb-4">
-
-                        <h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Bachelor of Science in Literary and Cultural Studies</h3>
-
-                        <span class="bg-msu-deep-ocean/10 text-msu-bgc-color text-xs font-semibold px-2.5 py-0.5 rounded">Undergraduate</span>
-
-                    </div>
-
-                    <p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-
-                        Explore the composition, structure, properties, and changes of matter.
-
-                    </p>
-
-                    <div class="flex justify-between items-center">
-
-                        <a href="https://drive.google.com/file/d/1nVHOCbhiUkXvxmpzWnoXZxjMhoYwipG7/view?usp=drive_link" class="text-msu-deep-ocean font-medium hover:underline flex items-center">
-
-                            Learn More
-
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-
-                            </svg>
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            
-
-            <!-- Program 11 -->
-
-            <div class="program-card hidden bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
-
-                <div class="h-50 overflow-hidden">
-
-                    <img src="/images/pdf/pdf.jpg" alt="Bachelor of Science in Chemistry" class="w-full h-full object-cover lazy-image" loading="lazy">
-                </div>
-
-                <div class="p-6">
-
-                    <div class="flex justify-between items-start mb-4">
-
-                        <h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">BA in English Language Studies</h3>
-
-                        <span class="bg-msu-deep-ocean/10 text-msu-bgc-color text-xs font-semibold px-2.5 py-0.5 rounded">Undergraduate</span>
-
-                    </div>
-
-                    <p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-
-                        Explore the composition, structure, properties, and changes of matter.
-
-                    </p>
-
-                    <div class="flex justify-between items-center">
-
-                        <a href="https://drive.google.com/file/d/1-q3se6aH5VEn8mHv2PNM6vrKO_wAcuEg/view?usp=drive_link" class="text-msu-deep-ocean font-medium hover:underline flex items-center">
-
-                            Learn More
-
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-
-                            </svg>
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            
-
-            <!-- Program 12 -->
-
-            <div class="program-card hidden bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
-
-                <div class="h-50 overflow-hidden">
-
-                    <img src="/images/pdf/pdf.jpg" alt="Bachelor of Science in Chemistry" class="w-full h-full object-cover lazy-image" loading="lazy">
-                </div>
-
-                <div class="p-6">
-
-                    <div class="flex justify-between items-start mb-4">
-
-                        <h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Diploma in Office Management</h3>
-
-                        <span class="bg-msu-deep-ocean/10 text-msu-bgc-color text-xs font-semibold px-2.5 py-0.5 rounded">Undergraduate</span>
-
-                    </div>
-
-                    <p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-
-                        Explore the composition, structure, properties, and changes of matter.
-
-                    </p>
-
-                    <div class="flex justify-between items-center">
-
-                        <a href="https://drive.google.com/file/d/1p04fYLXUYcL7LUQIN6-9tjKrqgbOyNRu/view?usp=drive_link" class="text-msu-deep-ocean font-medium hover:underline flex items-center">
-
-                            Learn More
-
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-
-                            </svg>
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
         </div>
 
-        
+        <!-- Programs Table - Desktop View -->
+        <div class="hidden lg:block bg-white rounded-xl shadow-lg overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gradient-to-r from-msu-main-color to-msu-deep-ocean">
+                        <tr>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-white uppercase tracking-wider cursor-pointer hover:bg-msu-deep-ocean transition-colors duration-300" data-sort="program">
+                                Program Name
+                                <svg class="inline-block w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
+                                </svg>
+                            </th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-white uppercase tracking-wider cursor-pointer hover:bg-msu-deep-ocean transition-colors duration-300" data-sort="degree">
+                                Degree Type
+                                <svg class="inline-block w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
+                                </svg>
+                            </th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-white uppercase tracking-wider cursor-pointer hover:bg-msu-deep-ocean transition-colors duration-300" data-sort="level">
+                                Level
+                                <svg class="inline-block w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
+                                </svg>
+                            </th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-white uppercase tracking-wider cursor-pointer hover:bg-msu-deep-ocean transition-colors duration-300" data-sort="duration">
+                                Duration
+                                <svg class="inline-block w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
+                                </svg>
+                            </th>
+                            <th scope="col" class="px-6 py-4 text-left text-xs font-medium text-white uppercase tracking-wider cursor-pointer hover:bg-msu-deep-ocean transition-colors duration-300" data-sort="accreditation">
+                                Accreditation
+                                <svg class="inline-block w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"></path>
+                                </svg>
+                            </th>
+                            <th scope="col" class="px-6 py-4 text-center text-xs font-medium text-white uppercase tracking-wider">
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="programsTableBody" class="bg-white divide-y divide-gray-200">
+                        <!-- Programs will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-        <!-- View All Programs Button -->
+        <!-- Mobile Cards View -->
+        <div class="lg:hidden space-y-4" id="mobileProgramsContainer">
+            <!-- Mobile cards will be populated by JavaScript -->
+        </div>
 
-        <div class="text-center mt-12">
+        <!-- No Results Message -->
+        <div id="noResults" class="hidden text-center py-12">
+            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.29-1.009-5.824-2.5M15 6.5a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+            <h3 class="mt-2 text-sm font-medium text-gray-900">No programs found</h3>
+            <p class="mt-1 text-sm text-gray-500">Try adjusting your search or filter criteria.</p>
+        </div>
 
-            <button id="viewAllBtn" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-msu-main-color hover:bg-msu-deep-ocean-dark hover:shadow-md transition-all duration-300">
+        <!-- Results Summary -->
+        <div class="mt-4 flex justify-between items-center text-sm text-gray-600">
+            <div id="resultsCount">Showing all programs</div>
+            <div class="flex items-center space-x-2">
+                <span>Rows per page:</span>
+                <select id="rowsPerPage" class="px-2 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-msu-main-color focus:border-msu-main-color">
+                    <option value="10">10</option>
+                    <option value="25" selected>25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+        </div>
 
-                View All Academic Programs
-
-                <svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-
-                </svg>
-
-            </button>
-
+        <!-- Pagination -->
+        <div id="pagination" class="mt-6 flex justify-center">
+            <!-- Pagination will be generated by JavaScript -->
         </div>
 
     </div> 
 
 </section>
 
-
+<script define:vars={{ programsData }}>
+    // Pass Sanity data to client-side JavaScript
+    console.log('=== SETTING SANITY DATA ===');
+    window.serverProgramsData = JSON.stringify(programsData);
+    console.log('Sanity data set to window.serverProgramsData:', window.serverProgramsData);
+</script>
 
 <script>
 
@@ -1689,7 +1332,7 @@ function openFacultyModal(facultyId) {
 		abubakar: {
 			name: "Dr. Fatima B. Abubakar, Ed.D.",
 			position: "Former Schools Division Superintendent",
-			image: "/images/coed/Profile/abubakar.png",
+			image: "/images/coed/Profile/msufaculty.png",
 			education: [
 				"Doctor of Education, major in Educational Administration - Western Mindanao State University, Zamboanga City",
 				"Master of Arts in Education, specializing in Values Education - University of Asia and the Pacific, Ortigas, Pasig City",
@@ -1969,12 +1612,619 @@ document.addEventListener('keydown', function(e) {
 	}
 });
 
+// Enhanced Mobile-Optimized PDF Viewer System (Sulimbang Style)
+let currentPdfUrl = '';
+let currentPdfTitle = '';
+let pdfDoc = null;
+let pageNum = 1;
+let pageRendering = false;
+let pageNumPending = null;
+let scale = 1.0;
+let canvas = null;
+let ctx = null;
+let nextCanvas = null;
+let nextCtx = null;
+let isAnimating = false;
+let baseScale = 1.0;
+
+// Professional PDF Viewer functions
+async function openPDFViewer(pdfUrl, title) {
+	console.log('Opening professional PDF viewer:', { pdfUrl, title });
+	
+	// Check if PDF URL is valid
+	if (!pdfUrl || pdfUrl === '' || pdfUrl === '#') {
+		console.error('Invalid PDF URL:', pdfUrl);
+		alert('PDF file not available for this program.');
+		return;
+	}
+	
+	// Store current PDF info
+	currentPdfUrl = pdfUrl;
+	currentPdfTitle = title;
+	
+	// Open the modal
+	const modal = document.getElementById('pdfViewerModal');
+	const titleElement = document.getElementById('modalPdfTitle');
+	const loadingElement = document.getElementById('pdfLoading');
+	const errorElement = document.getElementById('pdfError');
+	const pdfViewerElement = document.getElementById('pdfViewer');
+	
+	if (modal && titleElement) {
+		// Set title - more mobile-friendly truncation
+		const isMobile = window.innerWidth < 640;
+		const maxLength = isMobile ? 25 : 40;
+		const displayTitle = title && title.length > maxLength ? title.substring(0, maxLength) + '...' : title;
+		titleElement.textContent = displayTitle || 'MSU-TCTO Program Viewer';
+		
+		// Show loading state
+		if (loadingElement) loadingElement.classList.remove('hidden');
+		if (errorElement) errorElement.classList.add('hidden');
+		
+		// Open modal
+		modal.classList.remove('hidden');
+		document.body.style.overflow = 'hidden';
+		
+		// Initialize PDF viewer
+		await initializePdfViewer();
+	}
+}
+
+async function initializePdfViewer() {
+	try {
+		// Load PDF.js library dynamically
+		if (typeof (window as any).pdfjsLib === 'undefined') {
+			await loadPdfJs();
+		}
+		
+		// Set up canvas containers
+		const currentPageContainer = document.getElementById('currentPageContainer');
+		const nextPageContainer = document.getElementById('nextPageContainer');
+		if (!currentPageContainer || !nextPageContainer) return;
+		
+		// Clear previous content
+		currentPageContainer.innerHTML = '';
+		nextPageContainer.innerHTML = '';
+		
+		// Create main canvas
+		canvas = document.createElement('canvas');
+		canvas.id = 'pdfCanvas';
+		canvas.className = 'shadow-lg border border-gray-200 rounded-lg';
+		canvas.style.maxWidth = '100%';
+		canvas.style.maxHeight = '100%';
+		canvas.style.width = 'auto';
+		canvas.style.height = 'auto';
+		ctx = canvas.getContext('2d');
+		
+		// Create next page canvas for animations
+		nextCanvas = document.createElement('canvas');
+		nextCanvas.id = 'nextPdfCanvas';
+		nextCanvas.className = 'shadow-lg border border-gray-200 rounded-lg';
+		nextCanvas.style.maxWidth = '100%';
+		nextCanvas.style.maxHeight = '100%';
+		nextCanvas.style.width = 'auto';
+		nextCanvas.style.height = 'auto';
+		nextCtx = nextCanvas.getContext('2d');
+		
+		currentPageContainer.appendChild(canvas);
+		nextPageContainer.appendChild(nextCanvas);
+		
+		// Load the PDF
+		const loadingTask = (window as any).pdfjsLib.getDocument(currentPdfUrl);
+		pdfDoc = await loadingTask.promise;
+		
+		// Update page info
+		updatePageInfo();
+		
+		// Render first page
+		await renderPage(pageNum);
+		
+		// Hide loading
+		const loadingElement = document.getElementById('pdfLoading');
+		if (loadingElement) loadingElement.classList.add('hidden');
+		
+	} catch (error) {
+		console.error('Error loading PDF:', error);
+		showPdfError();
+	}
+}
+
+async function loadPdfJs() {
+	return new Promise((resolve, reject) => {
+		// Load PDF.js from CDN
+		const script = document.createElement('script');
+		script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+		script.onload = () => {
+			// Set worker path
+			(window as any).pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+			resolve(undefined);
+		};
+		script.onerror = reject;
+		document.head.appendChild(script);
+	});
+}
+
+function updatePageInfo() {
+	const pageInfoElement = document.getElementById('pageInfo');
+	if (pageInfoElement && pdfDoc) {
+		pageInfoElement.textContent = `${pageNum} / ${pdfDoc.numPages}`;
+		console.log('Page info updated:', `${pageNum} / ${pdfDoc.numPages}`);
+	}
+	
+	updateNavigationButtons();
+}
+
+function updateNavigationButtons() {
+	// Update navigation buttons in PDF viewer modal
+	const prevButton = document.getElementById('pdfPrevPage');
+	const nextButton = document.getElementById('pdfNextPage');
+	
+	if (prevButton) {
+		const isDisabled = pageNum <= 1 || isAnimating;
+		(prevButton as HTMLButtonElement).disabled = isDisabled;
+		if (isDisabled) {
+			prevButton.classList.add('opacity-50', 'cursor-not-allowed');
+			prevButton.style.pointerEvents = 'none';
+		} else {
+			prevButton.classList.remove('opacity-50', 'cursor-not-allowed');
+			prevButton.style.pointerEvents = 'auto';
+		}
+		console.log('Previous button state:', { pageNum, isAnimating, disabled: isDisabled });
+	}
+	
+	if (nextButton) {
+		const isDisabled = pageNum >= pdfDoc?.numPages || isAnimating;
+		(nextButton as HTMLButtonElement).disabled = isDisabled;
+		if (isDisabled) {
+			nextButton.classList.add('opacity-50', 'cursor-not-allowed');
+			nextButton.style.pointerEvents = 'none';
+		} else {
+			nextButton.classList.remove('opacity-50', 'cursor-not-allowed');
+			nextButton.style.pointerEvents = 'auto';
+		}
+		console.log('Next button state:', { pageNum, totalPages: pdfDoc?.numPages, isAnimating, disabled: isDisabled });
+	}
+}
+
+async function renderPage(num) {
+	pageRendering = true;
+	
+	try {
+		const page = await pdfDoc.getPage(num);
+		
+		// Calculate optimal scale to fit the container - Enhanced for mobile
+		const container = document.getElementById('pageFlipContainer');
+		if (container) {
+			const containerRect = container.getBoundingClientRect();
+			const pageViewport = page.getViewport({ scale: 1.0 });
+			
+			// Mobile-optimized padding
+			const isMobile = window.innerWidth < 768;
+			const padding = isMobile ? 20 : 40;
+			
+			// Calculate scale to fit both width and height with padding
+			const scaleX = (containerRect.width - padding) / pageViewport.width;
+			const scaleY = (containerRect.height - padding) / pageViewport.height;
+			const fitScale = Math.min(scaleX, scaleY, isMobile ? 2.0 : 3.0); // Lower max scale for mobile
+			
+			// Set base scale for fit-to-screen if not set
+			if (baseScale === 1.0) {
+				baseScale = fitScale;
+			}
+			
+			const optimalScale = fitScale * scale;
+			
+			const viewport = page.getViewport({ scale: optimalScale });
+			
+			// Set canvas dimensions
+			if (canvas && ctx) {
+				canvas.height = viewport.height;
+				canvas.width = viewport.width;
+				
+				// Render PDF page into canvas context
+				const renderContext = {
+					canvasContext: ctx,
+					viewport: viewport
+				};
+				
+				await page.render(renderContext).promise;
+			}
+		}
+		
+		pageRendering = false;
+		
+		if (pageNumPending !== null) {
+			renderPage(pageNumPending);
+			pageNumPending = null;
+		}
+		
+	} catch (error) {
+		console.error('Error rendering page:', error);
+		pageRendering = false;
+	}
+}
+
+function queueRenderPage(num) {
+	if (pageRendering) {
+		pageNumPending = num;
+	} else {
+		renderPage(num);
+	}
+}
+
+async function onPrevPage() {
+	console.log('onPrevPage called:', { pageNum, isAnimating, totalPages: pdfDoc?.numPages });
+	if (pageNum <= 1 || isAnimating) {
+		console.log('onPrevPage blocked:', { reason: pageNum <= 1 ? 'first page' : 'animating' });
+		return;
+	}
+	try {
+		console.log('Starting previous page animation...');
+		await animatePageFlip('prev');
+		console.log('Previous page animation completed');
+	} catch (error) {
+		console.error('Error in onPrevPage:', error);
+		isAnimating = false;
+		updateNavigationButtons();
+	}
+}
+
+async function onNextPage() {
+	console.log('onNextPage called:', { pageNum, isAnimating, totalPages: pdfDoc?.numPages });
+	if (pageNum >= pdfDoc?.numPages || isAnimating) {
+		console.log('onNextPage blocked:', { reason: pageNum >= pdfDoc?.numPages ? 'last page' : 'animating' });
+		return;
+	}
+	try {
+		console.log('Starting next page animation...');
+		await animatePageFlip('next');
+		console.log('Next page animation completed');
+	} catch (error) {
+		console.error('Error in onNextPage:', error);
+		isAnimating = false;
+		updateNavigationButtons();
+	}
+}
+
+async function animatePageFlip(direction) {
+	console.log('animatePageFlip called:', { direction, isAnimating, pageNum });
+	if (isAnimating) {
+		console.log('Animation already in progress, returning');
+		return;
+	}
+	
+	isAnimating = true;
+	updateNavigationButtons(); // Disable buttons immediately
+
+	const pageFlipContainer = document.getElementById('pageFlipContainer');
+	const nextPageContainer = document.getElementById('nextPageContainer');
+	const pageTurnShadow = document.getElementById('pageTurnShadow');
+	
+	if (!pageFlipContainer || !nextPageContainer || !pageTurnShadow) {
+		isAnimating = false;
+		return;
+	}
+
+	// Calculate target page number
+	const targetPage = direction === 'next' ? pageNum + 1 : pageNum - 1;
+	
+	// Play subtle page turn sound effect (optional)
+	playPageTurnSound();
+	
+	// Pre-render the target page on the next canvas
+	await renderPageOnCanvas(targetPage, nextCanvas, nextCtx);
+	
+	// Add page curl effect
+	addPageCurlEffect(direction);
+	
+	// Show shadow effect with animation
+	pageTurnShadow.classList.remove('opacity-0');
+	pageTurnShadow.classList.add('opacity-100');
+	
+	// Show next page container with stagger effect
+	nextPageContainer.classList.remove('opacity-0');
+	nextPageContainer.classList.add('opacity-100');
+	
+	// Apply sophisticated flip animation
+	if (direction === 'next') {
+		pageFlipContainer.style.transform = 'rotateY(-180deg) scale(0.95)';
+	} else {
+		pageFlipContainer.style.transform = 'rotateY(180deg) scale(0.95)';
+	}
+	
+	// Wait for animation to complete - Shorter duration for mobile
+	const animationDuration = window.innerWidth < 768 ? 500 : 700;
+	await new Promise(resolve => setTimeout(resolve, animationDuration));
+	
+	// Update page number
+	pageNum = targetPage;
+	
+	// Swap canvases - move next page to current
+	const currentPageContainer = document.getElementById('currentPageContainer');
+	if (currentPageContainer && nextCanvas && canvas && ctx) {
+		// Copy next canvas content to main canvas
+		canvas.width = nextCanvas.width;
+		canvas.height = nextCanvas.height;
+		ctx.drawImage(nextCanvas, 0, 0);
+	}
+	
+	// Reset animation state first
+	isAnimating = false;
+	console.log('Animation completed, isAnimating set to false');
+	
+	// Update page info and navigation buttons
+	updatePageInfo();
+	
+	// Reset visual states
+	pageFlipContainer.style.transform = 'rotateY(0deg)';
+	nextPageContainer.classList.remove('opacity-100');
+	nextPageContainer.classList.add('opacity-0');
+	pageTurnShadow.classList.remove('opacity-100');
+	pageTurnShadow.classList.add('opacity-0');
+	
+	// Force update navigation buttons after animation
+	setTimeout(() => {
+		updateNavigationButtons();
+		console.log('Navigation buttons updated after animation');
+	}, 100);
+	
+	// Safety timeout to ensure buttons are re-enabled
+	setTimeout(() => {
+		if (isAnimating) {
+			console.warn('Animation state stuck, forcing reset');
+			isAnimating = false;
+			updateNavigationButtons();
+		}
+	}, 1000);
+}
+
+async function renderPageOnCanvas(pageNumber, targetCanvas, targetCtx) {
+	if (!pdfDoc || !targetCanvas || !targetCtx) return;
+	
+	try {
+		const page = await pdfDoc.getPage(pageNumber);
+		
+		// Calculate optimal scale to fit the container
+		const container = document.getElementById('pageFlipContainer');
+		if (container) {
+			const containerRect = container.getBoundingClientRect();
+			const pageViewport = page.getViewport({ scale: 1.0 });
+			
+			// Mobile-optimized padding
+			const isMobile = window.innerWidth < 768;
+			const padding = isMobile ? 20 : 40;
+			
+			// Calculate scale to fit both width and height with padding
+			const scaleX = (containerRect.width - padding) / pageViewport.width;
+			const scaleY = (containerRect.height - padding) / pageViewport.height;
+			const optimalScale = Math.min(scaleX, scaleY, isMobile ? 1.5 : 2.0) * scale; // Lower max scale for mobile
+			
+			const viewport = page.getViewport({ scale: optimalScale });
+			
+			// Set canvas dimensions
+			targetCanvas.height = viewport.height;
+			targetCanvas.width = viewport.width;
+			
+			// Render PDF page into canvas context
+			const renderContext = {
+				canvasContext: targetCtx,
+				viewport: viewport
+			};
+			
+			await page.render(renderContext).promise;
+		}
+	} catch (error) {
+		console.error('Error rendering page:', error);
+	}
+}
+
+function playPageTurnSound() {
+	// Create a subtle audio context for page turn sound
+	try {
+		const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+		const oscillator = audioContext.createOscillator();
+		const gainNode = audioContext.createGain();
+		
+		oscillator.connect(gainNode);
+		gainNode.connect(audioContext.destination);
+		
+		oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+		oscillator.frequency.exponentialRampToValueAtTime(100, audioContext.currentTime + 0.1);
+		
+		gainNode.gain.setValueAtTime(0.02, audioContext.currentTime);
+		gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.1);
+		
+		oscillator.type = 'sine';
+		oscillator.start(audioContext.currentTime);
+		oscillator.stop(audioContext.currentTime + 0.1);
+	} catch (error) {
+		// Silently fail if audio context is not supported
+	}
+}
+
+function addPageCurlEffect(direction) {
+	const pdfContainer = document.getElementById('pdfContainer');
+	if (!pdfContainer) return;
+	
+	// Add temporary curl effect class
+	pdfContainer.classList.add('page-curling');
+	
+	// Remove curl effect after animation - Shorter for mobile
+	const duration = window.innerWidth < 768 ? 500 : 700;
+	setTimeout(() => {
+		pdfContainer.classList.remove('page-curling');
+	}, duration);
+}
+
+function zoomFit() {
+	if (!pdfDoc) return;
+	
+	// Reset to fit-to-screen scale
+	scale = 1.0;  // Reset to base scale calculation
+	baseScale = 1.0; // Reset base scale to recalculate
+	renderPage(pageNum);
+	updateZoomLevel();
+	updateNavigationButtons();
+}
+
+async function zoomIn() {
+	if (isAnimating) return;
+	const zoomFactor = window.innerWidth < 768 ? 1.2 : 1.25; // Smaller increments for mobile
+	scale *= zoomFactor;
+	await renderPage(pageNum);
+	updateZoomLevel();
+	updateNavigationButtons();
+}
+
+async function zoomOut() {
+	if (isAnimating) return;
+	const zoomFactor = window.innerWidth < 768 ? 1.2 : 1.25; // Smaller increments for mobile
+	scale /= zoomFactor;
+	if (scale < 0.3) scale = 0.3; // Lower minimum for mobile viewing
+	await renderPage(pageNum);
+	updateZoomLevel();
+	updateNavigationButtons();
+}
+
+function updateZoomLevel() {
+	const zoomElement = document.getElementById('zoomLevel');
+	if (zoomElement) {
+		zoomElement.textContent = `${Math.round(scale * 100)}%`;
+	}
+}
+
+function showPdfError() {
+	const loadingElement = document.getElementById('pdfLoading');
+	const errorElement = document.getElementById('pdfError');
+	
+	if (loadingElement) loadingElement.classList.add('hidden');
+	if (errorElement) errorElement.classList.remove('hidden');
+}
+
+function closePdfViewer() {
+	const modal = document.getElementById('pdfViewerModal');
+	
+	if (modal) {
+		modal.classList.add('hidden');
+		document.body.style.overflow = '';
+		
+		// Reset state
+		pdfDoc = null;
+		pageNum = 1;
+		pageRendering = false;
+		pageNumPending = null;
+		scale = 1.0;
+		baseScale = 1.0;
+		isAnimating = false;
+	}
+}
+
+function openPdfInNewTab() {
+	if (currentPdfUrl) {
+		window.open(currentPdfUrl, '_blank');
+	}
+}
+
+function downloadPdf() {
+	if (currentPdfUrl) {
+		const link = document.createElement('a');
+		link.href = currentPdfUrl;
+		link.download = currentPdfTitle || 'document.pdf';
+		link.click();
+	}
+}
+
 // Make functions globally accessible
-window.openFacultyModal = openFacultyModal;
-window.closeFacultyModal = closeFacultyModal;
+(window as any).openFacultyModal = openFacultyModal;
+(window as any).closeFacultyModal = closeFacultyModal;
+(window as any).openPDFViewer = openPDFViewer;
+(window as any).closePdfViewer = closePdfViewer;
+(window as any).openPdfInNewTab = openPdfInNewTab;
+(window as any).downloadPdf = downloadPdf;
+(window as any).onPrevPage = onPrevPage;
+(window as any).onNextPage = onNextPage;
+(window as any).zoomIn = zoomIn;
+(window as any).zoomOut = zoomOut;
+(window as any).zoomFit = zoomFit;
+
+// Add event listeners for PDF viewer controls
+document.addEventListener('DOMContentLoaded', function() {
+	// PDF Viewer Controls - Navigation buttons
+	const prevPageBtn = document.getElementById('pdfPrevPage');
+	const nextPageBtn = document.getElementById('pdfNextPage');
+	const zoomInBtn = document.getElementById('zoomIn');
+	const zoomOutBtn = document.getElementById('zoomOut');
+	const zoomFitBtn = document.getElementById('zoomFit');
+
+	// Navigation button event listeners
+	if (prevPageBtn) {
+		prevPageBtn.addEventListener('click', function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+			console.log('Previous page button clicked');
+			onPrevPage();
+		});
+	}
+
+	if (nextPageBtn) {
+		nextPageBtn.addEventListener('click', function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+			console.log('Next page button clicked');
+			onNextPage();
+		});
+	}
+
+	// Zoom control event listeners
+	if (zoomInBtn) {
+		zoomInBtn.addEventListener('click', function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+			console.log('Zoom in button clicked');
+			zoomIn();
+		});
+	}
+
+	if (zoomOutBtn) {
+		zoomOutBtn.addEventListener('click', function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+			console.log('Zoom out button clicked');
+			zoomOut();
+		});
+	}
+
+	if (zoomFitBtn) {
+		zoomFitBtn.addEventListener('click', function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+			console.log('Zoom fit button clicked');
+			zoomFit();
+		});
+	}
+
+	// Close PDF viewer when clicking outside
+	const pdfModal = document.getElementById('pdfViewerModal');
+	if (pdfModal) {
+		pdfModal.addEventListener('click', function(e) {
+			if (e.target === this) {
+				closePdfViewer();
+			}
+		});
+	}
+
+	// Close PDF viewer with Escape key
+	document.addEventListener('keydown', function(e) {
+		if (e.key === 'Escape') {
+			const modal = document.getElementById('pdfViewerModal');
+			if (modal && !modal.classList.contains('hidden')) {
+				closePdfViewer();
+			}
+		}
+	});
+});
 
 // Test function
-window.testModal = function() {
+(window as any).testModal = function() {
 	console.log('Testing modal...');
 	openFacultyModal('jemsy');
 };
@@ -2033,7 +2283,7 @@ function toggleFacultyView() {
 }
 
 // Make function globally accessible
-window.toggleFacultyView = toggleFacultyView;
+(window as any).toggleFacultyView = toggleFacultyView;
 
 // Alumni Carousel Functionality
 let currentAlumniSlide = 0;
@@ -2045,11 +2295,8 @@ function initAlumniCarousel() {
 	const dots = document.querySelectorAll('.alumni-dot');
 	const prevBtn = document.getElementById('prevAlumni');
 	const nextBtn = document.getElementById('nextAlumni');
-	const autoPlayBtn = document.getElementById('autoPlayToggle');
-	const playIcon = document.getElementById('playIcon');
-	const autoPlayText = document.getElementById('autoPlayText');
 	
-	if (!carousel || !dots.length || !prevBtn || !nextBtn || !autoPlayBtn) {
+	if (!carousel || !dots.length || !prevBtn || !nextBtn) {
 		console.error('Alumni carousel elements not found');
 		return;
 	}
@@ -2099,19 +2346,6 @@ function initAlumniCarousel() {
 		clearInterval(alumniInterval);
 	}
 	
-	function toggleAutoPlay() {
-		alumniAutoPlay = !alumniAutoPlay;
-		
-		if (alumniAutoPlay) {
-			playIcon.innerHTML = '<path d="M8 5v10l8-5-8-5z"></path>';
-			autoPlayText.textContent = 'Auto Play';
-			startAutoPlay();
-		} else {
-			playIcon.innerHTML = '<path d="M5 3h4v18H5V3zm10 0h4v18h-4V3z"></path>';
-			autoPlayText.textContent = 'Paused';
-			stopAutoPlay();
-		}
-	}
 	
 	// Event listeners
 	nextBtn.addEventListener('click', () => {
@@ -2140,7 +2374,6 @@ function initAlumniCarousel() {
 		});
 	});
 	
-	autoPlayBtn.addEventListener('click', toggleAutoPlay);
 	
 	// Touch/swipe support
 	let startX = 0;
@@ -2208,7 +2441,349 @@ function initAlumniCarousel() {
 document.addEventListener('DOMContentLoaded', initAlumniCarousel);
 
 // Make functions globally accessible
-window.initAlumniCarousel = initAlumniCarousel;
+(window as any).initAlumniCarousel = initAlumniCarousel;
+
+// Programs Table Functionality
+// Data will be populated from server-side
+let programsData = [];
+
+let currentPage = 1;
+let rowsPerPage = 25;
+let currentSort = { column: 'program', direction: 'asc' };
+let filteredData = [];
+
+// Function to initialize programs data (data is already loaded server-side)
+function initializeProgramsData() {
+    try {
+        console.log('=== CLIENT-SIDE INITIALIZATION ===');
+        console.log('Initializing programs data...');
+        console.log('window.serverProgramsData exists:', !!(window as any).serverProgramsData);
+        console.log('window.serverProgramsData value:', (window as any).serverProgramsData);
+        
+        // Get data from window variable injected by Astro
+        if ((window as any).serverProgramsData) {
+            console.log('Parsing server data...');
+            programsData = JSON.parse((window as any).serverProgramsData);
+            console.log('Loaded server-side programsData:', programsData);
+            console.log('ProgramsData length:', programsData.length);
+            console.log('ProgramsData type:', typeof programsData);
+            console.log('First program:', programsData[0]);
+        } else {
+            console.log('No server-side data found, using empty array');
+            programsData = [];
+        }
+        
+        // If no data is found, show empty state
+        if (programsData.length === 0) {
+            console.log('No programs data found - will show empty state');
+        }
+        
+        // Data is now available
+        filteredData = [...programsData];
+        console.log('Filtered data initialized:', filteredData);
+        return true;
+    } catch (error) {
+        console.error('Error initializing programs data:', error);
+        programsData = [];
+        filteredData = [];
+        return false;
+    }
+}
+
+function initProgramsTable() {
+    const tableBody = document.getElementById('programsTableBody');
+    const mobileContainer = document.getElementById('mobileProgramsContainer');
+    const globalSearch = document.getElementById('globalSearch');
+    const degreeFilter = document.getElementById('degreeFilter');
+    const levelFilter = document.getElementById('levelFilter');
+    const clearFilters = document.getElementById('clearFilters');
+    const rowsPerPageSelect = document.getElementById('rowsPerPage');
+    const resultsCount = document.getElementById('resultsCount');
+    const noResults = document.getElementById('noResults');
+
+    // Render table (Desktop)
+    function renderTable() {
+        const startIndex = (currentPage - 1) * rowsPerPage;
+        const endIndex = startIndex + rowsPerPage;
+        const pageData = filteredData.slice(startIndex, endIndex);
+
+        if (pageData.length === 0) {
+            tableBody.innerHTML = '';
+            mobileContainer.innerHTML = '';
+            noResults.classList.remove('hidden');
+            return;
+        }
+
+        noResults.classList.add('hidden');
+        
+        // Desktop table view
+        tableBody.innerHTML = pageData.map(program => `
+            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm font-medium text-gray-900">${program.program}</div>
+                    <div class="text-sm text-gray-500">${program.description}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-msu-main-color/10 text-msu-main-color">
+                        ${program.degree}
+                    </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${program.level}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${program.duration}</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                        ${program.accreditation}
+                    </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                    ${program.fileUrl ? 
+                        `<button onclick="openPDFViewer('${program.fileUrl}', '${program.name}')" class="text-msu-main-color hover:text-msu-deep-ocean transition-colors duration-200 cursor-pointer">
+                            View Details
+                        </button>` : 
+                        `<span class="text-gray-400">No file available</span>`
+                    }
+                </td>
+            </tr>
+        `).join('');
+
+        // Mobile card view
+        mobileContainer.innerHTML = pageData.map(program => `
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <div class="p-6">
+                    <!-- Program Header -->
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-bold text-msu-main-color leading-tight">${program.program}</h3>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-msu-main-color/10 text-msu-main-color ml-2 flex-shrink-0">
+                            ${program.degree}
+                        </span>
+                    </div>
+                    
+                    <!-- Description -->
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed">${program.description}</p>
+                    
+                    <!-- Program Details Grid -->
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div class="bg-gray-50 rounded-lg p-3">
+                            <div class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-1">Level</div>
+                            <div class="text-sm font-semibold text-gray-900">${program.level}</div>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-3">
+                            <div class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-1">Duration</div>
+                            <div class="text-sm font-semibold text-gray-900">${program.duration}</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Accreditation -->
+                    <div class="mb-4">
+                        <div class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                            <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            ${program.accreditation}
+                        </div>
+                    </div>
+                    
+                    <!-- Action Button -->
+                    <div class="flex justify-end">
+                        ${program.fileUrl ? 
+                            `<button onclick="openPDFViewer('${program.fileUrl}', '${program.name}')" class="inline-flex items-center px-4 py-2 bg-msu-main-color text-white text-sm font-medium rounded-lg hover:bg-msu-deep-ocean transition-colors duration-200 shadow-sm hover:shadow-md cursor-pointer">
+                                View Details
+                                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                            </button>` : 
+                            `<span class="inline-flex items-center px-4 py-2 bg-gray-300 text-gray-500 text-sm font-medium rounded-lg cursor-not-allowed">
+                                No file available
+                            </span>`
+                        }
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
+        // Update results count
+        resultsCount.textContent = `Showing ${startIndex + 1}-${Math.min(endIndex, filteredData.length)} of ${filteredData.length} programs`;
+    }
+
+    // Filter and search
+    function filterData() {
+        const searchTerm = (globalSearch as HTMLInputElement).value.toLowerCase();
+        const degreeFilterValue = (degreeFilter as HTMLSelectElement).value;
+        const levelFilterValue = (levelFilter as HTMLSelectElement).value;
+
+        filteredData = programsData.filter(program => {
+            const matchesSearch = !searchTerm || 
+                program.program.toLowerCase().includes(searchTerm) ||
+                program.description.toLowerCase().includes(searchTerm) ||
+                program.degree.toLowerCase().includes(searchTerm) ||
+                program.level.toLowerCase().includes(searchTerm);
+
+            const matchesDegree = !degreeFilterValue || program.degree === degreeFilterValue;
+            const matchesLevel = !levelFilterValue || program.level === levelFilterValue;
+
+            return matchesSearch && matchesDegree && matchesLevel;
+        });
+
+        currentPage = 1;
+        renderTable();
+        renderPagination();
+    }
+
+    // Sort data
+    function sortData(column) {
+        if (currentSort.column === column) {
+            currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+        } else {
+            currentSort.column = column;
+            currentSort.direction = 'asc';
+        }
+
+        filteredData.sort((a, b) => {
+            let aVal = a[column];
+            let bVal = b[column];
+
+            if (typeof aVal === 'string') {
+                aVal = aVal.toLowerCase();
+                bVal = bVal.toLowerCase();
+            }
+
+            if (currentSort.direction === 'asc') {
+                return aVal > bVal ? 1 : -1;
+            } else {
+                return aVal < bVal ? 1 : -1;
+            }
+        });
+
+        renderTable();
+    }
+
+    // Render pagination
+    function renderPagination() {
+        const totalPages = Math.ceil(filteredData.length / rowsPerPage);
+        const pagination = document.getElementById('pagination');
+
+        if (totalPages <= 1) {
+            pagination.innerHTML = '';
+            return;
+        }
+
+        let paginationHTML = '<nav class="flex items-center space-x-1">';
+        
+        // Previous button
+        paginationHTML += `
+            <button onclick="changePage(${currentPage - 1})" 
+                    ${currentPage === 1 ? 'disabled' : ''} 
+                    class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                Previous
+            </button>
+        `;
+
+        // Page numbers
+        const startPage = Math.max(1, currentPage - 2);
+        const endPage = Math.min(totalPages, currentPage + 2);
+
+        if (startPage > 1) {
+            paginationHTML += `<button onclick="changePage(1)" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 hover:bg-gray-50">1</button>`;
+            if (startPage > 2) {
+                paginationHTML += '<span class="px-3 py-2 text-sm font-medium text-gray-500">...</span>';
+            }
+        }
+
+        for (let i = startPage; i <= endPage; i++) {
+            paginationHTML += `
+                <button onclick="changePage(${i})" 
+                        class="px-3 py-2 text-sm font-medium ${i === currentPage ? 'text-white bg-msu-main-color border-msu-main-color' : 'text-gray-500 bg-white border-gray-300 hover:bg-gray-50'} border">
+                    ${i}
+                </button>
+            `;
+        }
+
+        if (endPage < totalPages) {
+            if (endPage < totalPages - 1) {
+                paginationHTML += '<span class="px-3 py-2 text-sm font-medium text-gray-500">...</span>';
+            }
+            paginationHTML += `<button onclick="changePage(${totalPages})" class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 hover:bg-gray-50">${totalPages}</button>`;
+        }
+
+        // Next button
+        paginationHTML += `
+            <button onclick="changePage(${currentPage + 1})" 
+                    ${currentPage === totalPages ? 'disabled' : ''} 
+                    class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                Next
+            </button>
+        `;
+
+        paginationHTML += '</nav>';
+        pagination.innerHTML = paginationHTML;
+    }
+
+    // Change page
+    (window as any).changePage = function(page: number) {
+        const totalPages = Math.ceil(filteredData.length / rowsPerPage);
+        if (page >= 1 && page <= totalPages) {
+            currentPage = page;
+            renderTable();
+            renderPagination();
+        }
+    };
+
+    // Event listeners
+    globalSearch.addEventListener('input', filterData);
+    degreeFilter.addEventListener('change', filterData);
+    levelFilter.addEventListener('change', filterData);
+    rowsPerPageSelect.addEventListener('change', (e) => {
+        rowsPerPage = parseInt((e.target as HTMLSelectElement).value);
+        currentPage = 1;
+        renderTable();
+        renderPagination();
+    });
+
+    clearFilters.addEventListener('click', () => {
+        (globalSearch as HTMLInputElement).value = '';
+        (degreeFilter as HTMLSelectElement).value = '';
+        (levelFilter as HTMLSelectElement).value = '';
+        filterData();
+    });
+
+    // Sort event listeners
+    document.querySelectorAll('[data-sort]').forEach(header => {
+        header.addEventListener('click', () => {
+            sortData((header as HTMLElement).dataset.sort);
+        });
+    });
+
+    // Initial render
+    renderTable();
+    renderPagination();
+}
+
+// Initialize programs table when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    const success = initializeProgramsData();
+    if (success) {
+        initProgramsTable();
+    } else {
+        console.error('Failed to load programs data');
+        // Show error message to user
+        const tableBody = document.getElementById('programsTableBody');
+        const mobileContainer = document.getElementById('mobileProgramsContainer');
+        const noResults = document.getElementById('noResults');
+        
+        if (tableBody) tableBody.innerHTML = '';
+        if (mobileContainer) mobileContainer.innerHTML = '';
+        if (noResults) {
+            noResults.classList.remove('hidden');
+            noResults.innerHTML = `
+                <svg class="mx-auto h-12 w-12 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                </svg>
+                <h3 class="mt-2 text-sm font-medium text-gray-900">Failed to load programs</h3>
+                <p class="mt-1 text-sm text-gray-500">Please refresh the page to try again.</p>
+            `;
+        }
+    }
+});
 </script>
 
 
@@ -2320,125 +2895,168 @@ window.initAlumniCarousel = initAlumniCarousel;
 
 
 
-		<!-- Student Life Section -->
+		<!-- Student Life Section - Professional Slider -->
 
-		<section class="py-20 bg-white">
+		<!-- <section class="py-20 bg-gradient-to-r from-msu-main-color via-msu-deep-ocean to-msu-main-color text-white relative overflow-hidden">
 
-			<div class="container mx-auto px-6">
+			<div class="absolute inset-0 opacity-10">
+				<div class="absolute top-10 left-10 w-20 h-20 bg-msu-deep-ocean rounded-full animate-pulse"></div>
+				<div class="absolute top-20 right-20 w-16 h-16 bg-msu-bgc-color rounded-full animate-ping"></div>
+				<div class="absolute bottom-10 left-1/4 w-12 h-12 bg-msu-deep-ocean rounded-full animate-bounce"></div>
+				<div class="absolute bottom-20 right-1/3 w-8 h-8 bg-msu-bgc-color rounded-full animate-pulse"></div>
+			</div>
 
-				<div class="text-center mb-16">
+			<div class="container mx-auto px-6 relative z-10">
 
-					<h2 class="text-3xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-4">Student Life</h2>
-
-					<p class="text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto">
-
-						A vibrant community of scholars engaged in academic, research, and extracurricular activities
-
+				<div class="mb-16 max-w-5xl">
+					<p class="text-white text-lg md:text-xl leading-relaxed font-light text-reveal">
+						Highly regarded as a leading maritime and technological institution in the Philippines, MSU-TCTO provides a comprehensive curriculum for senior high school students, undergraduates, graduates, and those interested in specialized maritime programs. A world-class education is at the heart of every degree and program, ensuring students are well-prepared to compete on a global scale. The university's rigorous academic program emphasizes practical skills and character development to position students for industry leadership and environmental stewardship. Explore your options today and join one of the many programs offered by MSU-TCTO.
 					</p>
+				</div>
+
+
+				<div class="relative mb-12">
+		
+					<div class="student-life-slider overflow-hidden rounded-2xl">
+						<div id="slider-track" class="flex transition-transform duration-700 ease-in-out">
+							
+		
+							<div class="slider-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/4 px-3">
+								<div class="relative group overflow-hidden rounded-2xl shadow-2xl h-80 student-life-card bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
+									<img src="/images/cof/image3.png" alt="Online Learning" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
+									<div class="absolute inset-0 card-overlay flex items-end">
+										<div class="w-full p-6">
+											<h3 class="text-msu-bgc-color font-bold text-lg md:text-xl text-center transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 drop-shadow-lg">
+												Fully Online
+											</h3>
+											<p class="text-white text-sm text-center mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+												Flexible learning from anywhere
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+
+		
+							<div class="slider-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/4 px-3">
+								<div class="relative group overflow-hidden rounded-2xl shadow-2xl h-80 student-life-card bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
+									<img src="/images/cof/image3.png" alt="Senior High School Students" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
+									<div class="absolute inset-0 card-overlay flex items-end">
+										<div class="w-full p-6">
+											<h3 class="text-msu-bgc-color font-bold text-lg md:text-xl text-center transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 drop-shadow-lg">
+												Senior High School
+											</h3>
+											<p class="text-white text-sm text-center mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+												Foundation for future success
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+
+					
+							<div class="slider-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/4 px-3">
+								<div class="relative group overflow-hidden rounded-2xl shadow-2xl h-80 student-life-card bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
+									<img src="/images/cof/image3.png" alt="Undergraduate Students" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
+									<div class="absolute inset-0 card-overlay flex items-end">
+										<div class="w-full p-6">
+											<h3 class="text-msu-bgc-color font-bold text-lg md:text-xl text-center transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 drop-shadow-lg">
+												Undergraduate
+											</h3>
+											<p class="text-white text-sm text-center mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+												Bachelor's degree programs
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+
+			
+							<div class="slider-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/4 px-3">
+								<div class="relative group overflow-hidden rounded-2xl shadow-2xl h-80 student-life-card bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
+									<img src="/images/cof/image3.png" alt="Graduate Students" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
+									<div class="absolute inset-0 card-overlay flex items-end">
+										<div class="w-full p-6">
+											<h3 class="text-msu-bgc-color font-bold text-lg md:text-xl text-center transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 drop-shadow-lg">
+												Graduate
+											</h3>
+											<p class="text-white text-sm text-center mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+												Advanced degree programs
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="slider-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/4 px-3">
+								<div class="relative group overflow-hidden rounded-2xl shadow-2xl h-80 student-life-card bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
+									<img src="/images/cof/image3.png" alt="Research Programs" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
+									<div class="absolute inset-0 card-overlay flex items-end">
+										<div class="w-full p-6">
+											<h3 class="text-msu-bgc-color font-bold text-lg md:text-xl text-center transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 drop-shadow-lg">
+												Research
+											</h3>
+											<p class="text-white text-sm text-center mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+												Cutting-edge research initiatives
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+							<div class="slider-slide flex-shrink-0 w-full md:w-1/2 lg:w-1/4 px-3">
+								<div class="relative group overflow-hidden rounded-2xl shadow-2xl h-80 student-life-card bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
+									<img src="/images/cof/image3.png" alt="Professional Development" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
+									<div class="absolute inset-0 card-overlay flex items-end">
+										<div class="w-full p-6">
+											<h3 class="text-msu-bgc-color font-bold text-lg md:text-xl text-center transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300 drop-shadow-lg">
+												Professional Development
+											</h3>
+											<p class="text-white text-sm text-center mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+												Career advancement programs
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+
+					<div class="flex justify-between items-center mt-8">
+					
+						<div class="flex space-x-3">
+							<button class="slider-dot w-3 h-3 rounded-full bg-white/30 transition-all duration-300 hover:bg-msu-main-color active" data-slide="0"></button>
+							<button class="slider-dot w-3 h-3 rounded-full bg-white/30 transition-all duration-300 hover:bg-msu-main-color" data-slide="1"></button>
+							<button class="slider-dot w-3 h-3 rounded-full bg-white/30 transition-all duration-300 hover:bg-msu-main-color" data-slide="2"></button>
+							<button class="slider-dot w-3 h-3 rounded-full bg-white/30 transition-all duration-300 hover:bg-msu-main-color" data-slide="3"></button>
+							<button class="slider-dot w-3 h-3 rounded-full bg-white/30 transition-all duration-300 hover:bg-msu-main-color" data-slide="4"></button>
+							<button class="slider-dot w-3 h-3 rounded-full bg-white/30 transition-all duration-300 hover:bg-msu-main-color" data-slide="5"></button>
+						</div>
+
+		
+						<div class="flex space-x-4">
+							<button id="prevBtn" class="w-12 h-12 nav-button bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center group">
+								<svg class="w-6 h-6 text-white group-hover:text-msu-bgc-color transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+								</svg>
+							</button>
+							
+							<button id="nextBtn" class="w-12 h-12 nav-button bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center group">
+								<svg class="w-6 h-6 text-white group-hover:text-msu-bgc-color transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+								</svg>
+							</button>
+						</div>
+					</div>
 
 				</div>
 
-				
+			</div>
 
-				<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-
-					<div class="relative group overflow-hidden rounded-xl shadow-lg h-64 transition-all duration-300 hover:shadow-xl">
-
-						<img src="/images/cof/image3.png" alt="Laboratory Work" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 lazy-image" loading="lazy" />
-						<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-
-							<div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-
-								<h3 class="text-white font-bold text-xl mb-2">Hands-on Learning</h3>
-
-								<p class="text-gray-200 text-sm">State-of-the-art laboratories for practical training</p>
-
-							</div>
-
-						</div>
-
-					</div>
-
-					
-
-					<div class="relative group overflow-hidden rounded-xl shadow-lg h-64 transition-all duration-300 hover:shadow-xl">
-
-						<img src="/images/cof/image3.png" alt="Field Work" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 lazy-image" loading="lazy" />
-						<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-
-							<div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-
-								<h3 class="text-white font-bold text-xl mb-2">Field Research</h3>
-
-								<p class="text-gray-200 text-sm">Immersion in marine ecosystems and fishing communities</p>
-
-							</div>
-
-						</div>
-
-					</div>
-
-					
-
-					<div class="relative group overflow-hidden rounded-xl shadow-lg h-64 transition-all duration-300 hover:shadow-xl">
-
-						<img src="/images/cof/image3.png" alt="Student Organizations" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 lazy-image" loading="lazy" />
-						<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-
-							<div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-
-								<h3 class="text-white font-bold text-xl mb-2">Student Organizations</h3>
-
-								<p class="text-gray-200 text-sm">Active participation in professional societies</p>
-
-							</div>
-
-						</div>
-
-					</div>
-
-					
-
-					<div class="relative group overflow-hidden rounded-xl shadow-lg h-64 transition-all duration-300 hover:shadow-xl">
-
-						<img src="/images/cof/image3.png" alt="Campus Events" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 lazy-image" loading="lazy" />
-						<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-
-							<div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-
-								<h3 class="text-white font-bold text-xl mb-2">Campus Events</h3>
-
-								<p class="text-gray-200 text-sm">Academic conferences and cultural activities</p>
-
-							</div>
-
-						</div>
-
-					</div>
-
-				</div>
-
-				
-
-				<!-- <div class="text-center">
-
-					<a href="#" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-msu-deep-ocean hover:bg-msu-deep-ocean-dark hover:shadow-md transition-all duration-300">
-
-						Explore Student Life
-
-						<svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-
-						</svg>
-
-					</a>
-
-				</div>
-
-			</div> -->
-
-		</section>
+		</section> -->
 
 
 
@@ -2625,7 +3243,7 @@ window.initAlumniCarousel = initAlumniCarousel;
 				
 				<!-- Show More Button -->
 				<div class="text-center mt-12">
-					<button onclick="toggleFacultyView()" id="showMoreBtn" class="inline-flex items-center px-8 py-4 border border-msu-deep-ocean text-base font-medium rounded-full shadow-sm text-msu-bgc-color bg-msu-deep-ocean hover:bg-msu-deep-ocean-dark hover:shadow-md transition-all duration-300 transform hover:scale-105">
+					<button onclick="toggleFacultyView()" id="showMoreBtn" class="inline-flex items-center px-8 py-4 border border-msu-deep-ocean text-base font-medium rounded-full shadow-sm text-msu-bgc-color bg-[#61063B] hover:bg-msu-deep-ocean-dark hover:shadow-md transition-all duration-300 transform hover:scale-105">
 						<span id="showMoreText">Show More Faculty</span>
 						<svg id="showMoreIcon" class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -2675,17 +3293,181 @@ window.initAlumniCarousel = initAlumniCarousel;
 			</div>
 		</div>
 
+		<!-- Mobile-Optimized Full-Screen PDF Viewer Modal -->
+		<div id="pdfViewerModal" class="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-md hidden">
+			<div class="w-full h-full">
+				<div class="bg-white dark:bg-gray-800 w-full h-full flex flex-col overflow-hidden">
+					<!-- Mobile-Optimized Header -->
+					<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-6 bg-gradient-to-r from-msu-blue dark:from-yellow-500 via-msu-dark-blue dark:via-yellow-600 to-msu-blue dark:to-yellow-500 text-white shadow-lg">
+						<div class="flex items-center space-x-2 sm:space-x-4 w-full sm:w-auto mb-3 sm:mb-0">
+							<div class="flex items-center justify-center w-10 h-10 sm:w-14 sm:h-14 bg-white/20 rounded-xl backdrop-blur-sm">
+								<svg class="w-5 h-5 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+								</svg>
+							</div>
+							<div class="flex-1 min-w-0">
+								<h3 id="modalPdfTitle" class="text-sm sm:text-2xl font-bold text-white truncate">MSU-TCTO Program Viewer</h3>
+								<p class="text-white/90 text-xs sm:text-sm font-medium hidden sm:block">Professional PDF Document Viewer</p>
+							</div>
+						</div>
+						
+						<!-- Mobile-Optimized Controls -->
+						<div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
+							<!-- Zoom Controls - Stacked on mobile -->
+							<div class="flex items-center justify-center space-x-1 sm:space-x-2 bg-msu-deep-ocean/20 dark:bg-yellow-500/20 rounded-xl px-2 sm:px-4 py-2 backdrop-blur-sm border border-msu-deep-ocean/30 dark:border-yellow-500/30">
+								<button id="zoomOut" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 dark:bg-yellow-500/30 hover:bg-msu-deep-ocean/50 dark:hover:bg-yellow-500/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40 dark:border-yellow-500/40" title="Zoom Out">
+									<svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
+									</svg>
+								</button>
+								<span id="zoomLevel" class="text-white text-xs sm:text-sm font-bold min-w-[3rem] sm:min-w-[4rem] text-center px-2 sm:px-3 py-1 bg-msu-deep-ocean/20 dark:bg-yellow-500/20 rounded-lg border border-msu-deep-ocean/30 dark:border-yellow-500/30">100%</span>
+								<button id="zoomIn" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 dark:bg-yellow-500/30 hover:bg-msu-deep-ocean/50 dark:hover:bg-yellow-500/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40 dark:border-yellow-500/40" title="Zoom In">
+									<svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+									</svg>
+								</button>
+								<button id="zoomFit" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 dark:bg-yellow-500/30 hover:bg-msu-deep-ocean/50 dark:hover:bg-yellow-500/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40 dark:border-yellow-500/40" title="Fit to Screen">
+									<svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
+									</svg>
+								</button>
+							</div>
+							
+							<!-- Page Navigation - Responsive -->
+							<div class="flex items-center justify-center space-x-1 sm:space-x-2 bg-msu-deep-ocean/20 dark:bg-yellow-500/20 rounded-xl px-2 sm:px-4 py-2 backdrop-blur-sm border border-msu-deep-ocean/30 dark:border-yellow-500/30">
+								<button id="pdfPrevPage" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 dark:bg-yellow-500/30 hover:bg-msu-deep-ocean/50 dark:hover:bg-yellow-500/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40 dark:border-yellow-500/40">
+									<svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+									</svg>
+								</button>
+								<span id="pageInfo" class="text-white text-xs sm:text-sm font-bold min-w-[3rem] sm:min-w-[5rem] text-center px-2 sm:px-3 py-1 bg-msu-deep-ocean/20 dark:bg-yellow-500/20 rounded-lg border border-msu-deep-ocean/30 dark:border-yellow-500/30">1 / 1</span>
+								<button id="pdfNextPage" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-msu-deep-ocean/30 dark:bg-yellow-500/30 hover:bg-msu-deep-ocean/50 dark:hover:bg-yellow-500/50 text-white rounded-lg transition-all duration-200 hover:scale-105 border border-msu-deep-ocean/40 dark:border-yellow-500/40">
+									<svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+									</svg>
+								</button>
+							</div>
+							
+							<!-- Action Buttons - Responsive -->
+							<div class="flex items-center justify-center space-x-2 sm:space-x-3">
+								<button onclick="openPdfInNewTab()" class="flex items-center justify-center space-x-1 sm:space-x-2 bg-msu-deep-ocean/30 dark:bg-yellow-500/30 hover:bg-msu-deep-ocean/50 dark:hover:bg-yellow-500/50 text-white px-2 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-msu-deep-ocean/40 dark:border-yellow-500/40">
+									<svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+									</svg>
+									<span class="text-xs sm:text-sm font-medium hidden sm:inline">Open</span>
+								</button>
+								<button onclick="downloadPdf()" class="flex items-center justify-center space-x-1 sm:space-x-2 bg-msu-deep-ocean/30 dark:bg-yellow-500/30 hover:bg-msu-deep-ocean/50 dark:hover:bg-yellow-500/50 text-white px-2 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-msu-deep-ocean/40 dark:border-yellow-500/40">
+									<svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+									</svg>
+									<span class="text-xs sm:text-sm font-medium hidden sm:inline">Download</span>
+								</button>
+								<button onclick="closePdfViewer()" class="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-msu-deep-ocean/30 dark:bg-yellow-500/30 hover:bg-msu-deep-ocean/50 dark:hover:bg-yellow-500/50 text-white rounded-xl transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-msu-deep-ocean/40 dark:border-yellow-500/40">
+									<svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+									</svg>
+								</button>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Mobile-Optimized PDF Viewer Content -->
+					<div class="flex-1 bg-gradient-to-br from-gray-50 dark:from-gray-800 to-gray-100 dark:to-gray-900 relative overflow-hidden">
+						<!-- Mobile-Optimized Loading State -->
+						<div id="pdfLoading" class="absolute inset-0 flex items-center justify-center bg-white/98 dark:bg-gray-900/98 backdrop-blur-sm z-20">
+							<div class="text-center max-w-xs sm:max-w-sm mx-auto p-4 sm:p-8">
+								<div class="relative mb-4 sm:mb-8">
+									<!-- Responsive loading ring -->
+									<div class="animate-spin rounded-full h-16 w-16 sm:h-24 sm:w-24 border-4 border-blue-100 border-t-blue-600 mx-auto"></div>
+									<div class="absolute inset-1 sm:inset-2 rounded-full h-14 w-14 sm:h-20 sm:w-20 border-4 border-transparent border-t-blue-400 animate-spin mx-auto" style="animation-duration: 1.5s; animation-direction: reverse;"></div>
+									<div class="absolute inset-4 sm:inset-6 rounded-full h-8 w-8 sm:h-12 sm:w-12 bg-blue-600/20 animate-pulse mx-auto"></div>
+									<div class="absolute inset-6 sm:inset-10 rounded-full h-4 w-4 bg-blue-600 mx-auto animate-ping"></div>
+								</div>
+								
+								<div class="space-y-2 sm:space-y-3">
+									<h3 class="text-lg sm:text-xl font-bold text-gray-800 dark:text-yellow-400 animate-pulse">Loading PDF...</h3>
+									<p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">Please wait while we prepare your document</p>
+									
+									<div class="flex justify-center space-x-2 mt-4">
+										<div class="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style="animation-delay: 0ms;"></div>
+										<div class="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style="animation-delay: 150ms;"></div>
+										<div class="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style="animation-delay: 300ms;"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Mobile-Optimized PDF Container -->
+						<div id="pdfContainer" class="w-full h-full overflow-auto bg-gradient-to-br from-gray-50 dark:from-gray-800 to-gray-100 dark:to-gray-900">
+							<div id="pdfViewer" class="w-full h-full flex items-center justify-center p-2 sm:p-4 relative">
+								<div id="pdfCanvasContainer" class="relative perspective-1000 w-full h-full flex items-center justify-center">
+									<div id="pageFlipContainer" class="relative transform-style-preserve-3d transition-transform duration-700 ease-in-out">
+										<div id="currentPageContainer" class="flex items-center justify-center w-full h-full backface-hidden">
+											<!-- PDF canvas will be inserted here -->
+										</div>
+										<div id="nextPageContainer" class="flex items-center justify-center w-full h-full backface-hidden transform rotateY-180 opacity-0 absolute inset-0">
+											<!-- Next page canvas will be inserted here during animation -->
+										</div>
+									</div>
+								</div>
+								
+								<div id="pageTurnShadow" class="absolute inset-0 pointer-events-none opacity-0 transition-opacity duration-700">
+									<div class="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-black/20 to-transparent"></div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Mobile-Optimized Error State -->
+						<div id="pdfError" class="absolute inset-0 flex items-center justify-center bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm z-20 hidden">
+							<div class="text-center max-w-xs sm:max-w-lg mx-auto p-4 sm:p-8">
+								<div class="w-20 h-20 sm:w-32 sm:h-32 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-8">
+									<svg class="w-10 h-10 sm:w-16 sm:h-16 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+									</svg>
+								</div>
+								<h3 class="text-xl sm:text-3xl font-bold text-gray-800 dark:text-yellow-400 mb-3 sm:mb-4">Unable to Load PDF</h3>
+								<p class="text-gray-600 dark:text-gray-300 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-lg">
+									The PDF file could not be loaded. This might be due to browser restrictions.
+								</p>
+								<div class="flex flex-col space-y-3 sm:space-y-4">
+									<button onclick="openPdfInNewTab()" class="flex items-center justify-center space-x-2 sm:space-x-3 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg text-sm sm:text-base">
+										<svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+										</svg>
+										<span>Open in New Tab</span>
+									</button>
+									<button onclick="downloadPdf()" class="flex items-center justify-center space-x-2 sm:space-x-3 bg-green-600 dark:bg-green-500 hover:bg-green-700 dark:hover:bg-green-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg text-sm sm:text-base">
+										<svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+										</svg>
+										<span>Download PDF</span>
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 
 		<!-- Alumni Success Stories -->
 
-		<section class="py-20 bg-msu-main-color text-white">
+		<section class="py-20 bg-gradient-to-r from-msu-main-color via-msu-deep-ocean to-msu-main-color text-white relative overflow-hidden">
+			<!-- Animated background elements -->
+			<div class="absolute inset-0 opacity-10">
+				<div class="absolute top-10 left-10 w-20 h-20 bg-msu-deep-ocean rounded-full animate-pulse"></div>
+				<div class="absolute top-20 right-20 w-16 h-16 bg-msu-bgc-color rounded-full animate-ping"></div>
+				<div class="absolute bottom-10 left-1/4 w-12 h-12 bg-msu-deep-ocean rounded-full animate-bounce"></div>
+				<div class="absolute bottom-20 right-1/3 w-8 h-8 bg-msu-bgc-color rounded-full animate-pulse"></div>
+			</div>
 
-			<div class="container mx-auto px-6">
+			<div class="container mx-auto px-6 relative z-10">
 
 				<div class="text-center mb-16">
 
-					<h2 class="text-3xl font-bold mb-4">Distinguished Alumni</h2>
-					<p class="text-gray-300 max-w-2xl mx-auto">
+					<h2 class="text-4xl font-bold mb-4">Distinguished Alumni</h2>
+					<p class="text-xl text-gray-300 max-w-4xl mx-auto">
 
 						Our graduates making significant contributions to education and academic leadership
 					</p>
@@ -2701,17 +3483,17 @@ window.initAlumniCarousel = initAlumniCarousel;
 						<div id="alumniCarousel" class="flex transition-transform duration-700 ease-in-out">
 							<!-- Alumni Slide 1 -->
 							<div class="w-full flex-shrink-0">
-								<div class="bg-gradient-to-br from-white/10 to-white/5 p-8 rounded-2xl backdrop-blur-sm border border-white/20">
+								<div class="group bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 p-8">
 									<div class="flex flex-col md:flex-row items-center md:items-start gap-6">
 										<div class="flex-shrink-0">
 											<div class="relative">
 												<img src="/images/coed/Profile/jemsy.png" alt="Prof. Alhisan U. Jemsy" class="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-4 border-white shadow-lg lazy-image" loading="lazy">
-												<div class="absolute -top-2 -right-2 w-8 h-8 bg-msu-bgc-color rounded-full flex items-center justify-center shadow-lg">
-													<svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+												<div class="absolute -top-2 -right-2 w-8 h-8 bg-msu-deep-ocean rounded-full flex items-center justify-center shadow-lg">
+													<svg class="w-4 h-4 text-msu-bgc-color" fill="currentColor" viewBox="0 0 20 20">
 														<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
 													</svg>
 							</div>
-
+												<div class="absolute inset-0 bg-msu-bgc-color/20 rounded-full blur-lg group-hover:scale-150 transition-transform duration-500"></div>
 						</div>
 
 										</div>
@@ -2739,17 +3521,17 @@ window.initAlumniCarousel = initAlumniCarousel;
 
 							<!-- Alumni Slide 2 -->
 							<div class="w-full flex-shrink-0">
-								<div class="bg-gradient-to-br from-white/10 to-white/5 p-8 rounded-2xl backdrop-blur-sm border border-white/20">
+								<div class="group bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 p-8">
 									<div class="flex flex-col md:flex-row items-center md:items-start gap-6">
 										<div class="flex-shrink-0">
 											<div class="relative">
 												<img src="/images/coed/Profile/cherry.png" alt="Prof. Cherry T. Budlong-Alih" class="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-4 border-white shadow-lg lazy-image" loading="lazy">
 												<div class="absolute -top-2 -right-2 w-8 h-8 bg-msu-deep-ocean rounded-full flex items-center justify-center shadow-lg">
-													<svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+													<svg class="w-4 h-4 text-msu-bgc-color" fill="currentColor" viewBox="0 0 20 20">
 														<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
 													</svg>
 							</div>
-
+												<div class="absolute inset-0 bg-msu-bgc-color/20 rounded-full blur-lg group-hover:scale-150 transition-transform duration-500"></div>
 						</div>
 
 										</div>
@@ -2777,17 +3559,17 @@ window.initAlumniCarousel = initAlumniCarousel;
 
 							<!-- Alumni Slide 3 -->
 							<div class="w-full flex-shrink-0">
-								<div class="bg-gradient-to-br from-white/10 to-white/5 p-8 rounded-2xl backdrop-blur-sm border border-white/20">
+								<div class="group bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 p-8">
 									<div class="flex flex-col md:flex-row items-center md:items-start gap-6">
 										<div class="flex-shrink-0">
 											<div class="relative">
 												<img src="/images/coed/Profile/msufaculty.png" alt="Dr. Fatima B. Abubakar" class="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-4 border-white shadow-lg lazy-image" loading="lazy">
-												<div class="absolute -top-2 -right-2 w-8 h-8 bg-msu-bgc-color rounded-full flex items-center justify-center shadow-lg">
-													<svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+												<div class="absolute -top-2 -right-2 w-8 h-8 bg-msu-deep-ocean rounded-full flex items-center justify-center shadow-lg">
+													<svg class="w-4 h-4 text-msu-bgc-color" fill="currentColor" viewBox="0 0 20 20">
 														<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
 													</svg>
 							</div>
-
+												<div class="absolute inset-0 bg-msu-bgc-color/20 rounded-full blur-lg group-hover:scale-150 transition-transform duration-500"></div>
 						</div>
 
 										</div>
@@ -2800,7 +3582,7 @@ window.initAlumniCarousel = initAlumniCarousel;
 											<div class="flex items-center justify-center md:justify-start text-sm text-gray-300">
 							<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 
-													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
 							</svg>
 
 												<span>Former Schools Division Superintendent</span>
@@ -2813,16 +3595,17 @@ window.initAlumniCarousel = initAlumniCarousel;
 							
 							<!-- Alumni Slide 4 -->
 							<div class="w-full flex-shrink-0">
-								<div class="bg-gradient-to-br from-white/10 to-white/5 p-8 rounded-2xl backdrop-blur-sm border border-white/20">
+								<div class="group bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 p-8">
 									<div class="flex flex-col md:flex-row items-center md:items-start gap-6">
 										<div class="flex-shrink-0">
 											<div class="relative">
 												<img src="/images/coed/Profile/colicol.png" alt="Asst. Prof. Fernigil L. Colicol" class="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-4 border-white shadow-lg lazy-image" loading="lazy">
 												<div class="absolute -top-2 -right-2 w-8 h-8 bg-msu-deep-ocean rounded-full flex items-center justify-center shadow-lg">
-													<svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+													<svg class="w-4 h-4 text-msu-bgc-color" fill="currentColor" viewBox="0 0 20 20">
 														<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
 													</svg>
 												</div>
+												<div class="absolute inset-0 bg-msu-bgc-color/20 rounded-full blur-lg group-hover:scale-150 transition-transform duration-500"></div>
 											</div>
 										</div>
 										<div class="flex-1 text-center md:text-left">
@@ -2869,15 +3652,6 @@ window.initAlumniCarousel = initAlumniCarousel;
 						</button>
 					</div>
 					
-					<!-- Auto-play Indicator -->
-					<div class="flex items-center justify-center mt-4">
-						<button id="autoPlayToggle" class="flex items-center space-x-2 px-4 py-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-all duration-300 backdrop-blur-sm">
-							<svg id="playIcon" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-								<path d="M8 5v10l8-5-8-5z"></path>
-							</svg>
-							<span id="autoPlayText" class="text-sm font-medium">Auto Play</span>
-						</button>
-					</div>
 
 				</div>
 
@@ -3115,17 +3889,17 @@ window.initAlumniCarousel = initAlumniCarousel;
 
 <!-- Contact Section -->
 
-<section id="contact" class="py-20 bg-gray-100">
+<section id="contact" class="py-20 bg-msu-bgc-color">
 
     <div class="container mx-auto px-6">
 
-        <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+        <div class="max-w-6xl mx-auto bg-white/10 backdrop-msu-deep-ocean rounded-xl shadow-lg overflow-hidden border border-white/20">
 
             <div class="md:flex">
 
-                <div class="md:w-1/2 bg-msu-main-color text-white p-12">
+                <div class="md:w-1/2 bg-[#61063B] text-white p-12">
 
-                    <!-- Left column content remains the same -->
+        
 
                     <h2 class="text-3xl font-bold mb-6">Contact Us</h2>
 
@@ -3155,7 +3929,7 @@ window.initAlumniCarousel = initAlumniCarousel;
 
                                 <h3 class="text-lg font-medium">Email</h3>
 
-                                <p class="text-gray-300">msutctocof@msutawi-tawi.edu.ph</p>
+                                <p class="text-gray-300">msutctocoed@msutawi-tawi.edu.ph</p>
 
                             </div>
 
@@ -3179,9 +3953,7 @@ window.initAlumniCarousel = initAlumniCarousel;
 
                                 <h3 class="text-lg font-medium">Phone</h3>
 
-                                <p class="text-gray-300">+63 917 134 7952</p>
-
-                                <p class="text-gray-300">+63 905 242 2820</p>
+                                <p class="text-gray-300">(0917) 159 1947</p>
 
                             </div>
 
@@ -3207,9 +3979,9 @@ window.initAlumniCarousel = initAlumniCarousel;
 
                                 <h3 class="text-lg font-medium">Address</h3>
 
-                                <p class="text-gray-300">College of Fisheries, MSU-TCTO Campus</p>
+                                <p class="text-gray-300">College of Education, MSU-TCTO</p>
 
-                                <p class="text-gray-300">Sanga-Sanga, Bongao, Tawi-Tawi, Philippines</p>
+                                <p class="text-gray-300">Sanga Sanga Bridge, Bongao, Tawi-Tawi</p>
 
                             </div>
 
@@ -3247,11 +4019,11 @@ window.initAlumniCarousel = initAlumniCarousel;
 
                 
 
-                <div class="md:w-1/2 p-12">
+                <div class="md:w-1/2 p-12 bg-white dark:bg-white/5 backdrop-blur-sm">
 
-                    <h3 class="text-2xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-6">Send Us a Message</h3>
+                    <h3 class="text-2xl font-bold text-black dark:text-white mb-6">Send Us a Message</h3>
 
-                    <form id="contactForm" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSderS6A0qtRPw6zVVeTY-tTTjszHFz1cO-aSDaru4aXyUH6QA/formResponse" target="_self" method="POST" class="space-y-6">
+                    <form id="contactForm" class="space-y-6">
 
                         <!-- Status Message -->
 
@@ -3261,11 +4033,11 @@ window.initAlumniCarousel = initAlumniCarousel;
 
                         <div>
 
-                            <label for="name" class="block text-sm font-medium text-msu-main-color dark:text-msu-bgc-color mb-1">Full Name *</label>
+                            <label for="name" class="block text-sm font-medium text-black dark:text-white mb-1">Full Name *</label>
 
-                            <input type="text" id="name" name="entry.757250837" required
+                            <input type="text" id="name" name="name" required
 
-                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-msu-deep-ocean focus:border-transparent"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-white/30 bg-white dark:bg-white/10 text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-msu-bgc-color focus:border-transparent"
 
                                 placeholder="Your name">
 
@@ -3277,11 +4049,11 @@ window.initAlumniCarousel = initAlumniCarousel;
 
                         <div>
 
-                            <label for="email" class="block text-sm font-medium text-msu-main-color dark:text-msu-bgc-color mb-1">Email Address *</label>
+                            <label for="email" class="block text-sm font-medium text-black dark:text-white mb-1">Email Address *</label>
 
-                            <input type="email" id="email" name="entry.1493463705" required
+                            <input type="email" id="email" name="email" required
 
-                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-msu-deep-ocean focus:border-transparent"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-white/30 bg-white dark:bg-white/10 text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-msu-bgc-color focus:border-transparent"
 
                                 placeholder="your.email@example.com">
 
@@ -3293,11 +4065,11 @@ window.initAlumniCarousel = initAlumniCarousel;
 
                         <div>
 
-                            <label for="subject" class="block text-sm font-medium text-msu-main-color dark:text-msu-bgc-color mb-1">Subject *</label>
+                            <label for="subject" class="block text-sm font-medium text-black dark:text-white mb-1">Subject *</label>
 
-                            <select id="subject" name="entry.638146523" required
+                            <select id="subject" name="subject" required
 
-                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-msu-deep-ocean focus:border-transparent">
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-white/30 bg-white dark:bg-white/10 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-msu-bgc-color focus:border-transparent">
 
                                 <option value="">Select a subject</option>
 
@@ -3319,11 +4091,11 @@ window.initAlumniCarousel = initAlumniCarousel;
 
                         <div>
 
-                            <label for="message" class="block text-sm font-medium text-msu-main-color dark:text-msu-bgc-color mb-1">Message *</label>
+                            <label for="message" class="block text-sm font-medium text-black dark:text-white mb-1">Message *</label>
 
-                            <textarea id="message" name="entry.1174451292" rows="5" required
+                            <textarea id="message" name="message" rows="5" required
 
-                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-msu-deep-ocean focus:border-transparent"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-white/30 bg-white dark:bg-white/10 text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-msu-bgc-color focus:border-transparent"
 
                                 placeholder="Your message here..."></textarea>
 
@@ -3333,9 +4105,6 @@ window.initAlumniCarousel = initAlumniCarousel;
 
 
 
-                        <input type="text" id="department" name="entry.1918216475" value="COF" required
-
-                            class="hidden" hidden>
 
                         
 
@@ -3343,7 +4112,7 @@ window.initAlumniCarousel = initAlumniCarousel;
 
                             <button type="submit" id="submitBtn"
 
-                                class="w-full py-3 px-6 bg-msu-main-color hover:bg-msu-deep-ocean text-white font-medium rounded-lg transition-all duration-300 shadow-md hover:shadow-lg">
+                                class="w-full py-3 px-6 bg-[#61063B] hover:bg-[#61063B]/80 dark:bg-white dark:hover:bg-gray-100 text-white dark:text-black font-medium rounded-lg transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105">
 
                                 <span id="submitText">Send Message</span>
 
@@ -3755,9 +4524,9 @@ document.head.appendChild(style);
 
       <p class="text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto">
 
-        College of Fisheries, MSU-TCTO Campus<br>
+        College of Education, MSU-TCTO<br>
 
-        2PPV+PC7, Sanga-Sanga, Bongao, Tawi-Tawi
+		2PQW+V2C, MSU-TCTO, Sanga Sanga Bridge, Bongao, Tawi-Tawi
 
       </p>
 
@@ -3767,23 +4536,19 @@ document.head.appendChild(style);
 
     <div class="rounded-xl overflow-hidden shadow-xl h-96">
 
-      <iframe 
-
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.123456789012!2d119.87654321!3d5.01234567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwMDAnNDQuNCJOIDExOcKwNTInMzYuNiJF!5e0!3m2!1sen!2sph!4v1234567890123!5m2!1sen!2sph" 
-
-        width="100%" 
-
-        height="100%" 
-
-        style="border:0;" 
-
-        allowfullscreen="" 
-
-        loading="lazy"
-
-        title="College of Fisheries, MSU-TCTO Location"
-
-      ></iframe>
+      <div class="embed-map-responsive">
+        <div class="embed-map-container">
+          <iframe 
+            class="embed-map-frame" 
+            frameborder="0" 
+            scrolling="no" 
+            marginheight="0" 
+            marginwidth="0" 
+            src="https://maps.google.com/maps?width=600&height=400&hl=en&q=MSUTCTO%20COLLEGE%20OF%20EDUCATION%20&t=h&z=14&ie=UTF8&iwloc=B&output=embed"
+            title="College of Education, MSU-TCTO Location"
+          ></iframe>
+        </div>
+      </div>
 
     </div>
 
@@ -3793,13 +4558,13 @@ document.head.appendChild(style);
 
       <a 
 
-        href="https://www.google.com/maps/place/2PPV%2BPC7+Sanga-Sanga,+Bongao,+Tawi-Tawi" 
+        href="https://www.google.com/maps/place/College+of+Education,+MSU-TCTO/@5.0384759,119.741455,17z/data=!3m1!4b1!4m6!3m5!1s0x32410b2e33c75f35:0x8359e168f5974d1d!8m2!3d5.0384706!4d119.7440353!16s%2Fg%2F11s7_67s63?entry=ttu&g_ep=EgoyMDI1MDkxNy4wIKXMDSoASAFQAw%3D%3D" 
 
         target="_blank" 
 
         rel="noopener noreferrer"
 
-        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-msu-main-color hover:bg-msu-deep-ocean shadow-sm transition-colors duration-300"
+        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-[#61063B] hover:bg-msu-deep-ocean shadow-sm transition-colors duration-300"
 
       >
 
@@ -3820,6 +4585,34 @@ document.head.appendChild(style);
   </div>
 
 </section>
+
+<style>
+.embed-map-responsive {
+  position: relative;
+  text-align: right;
+  width: 100%;
+  height: 0;
+  padding-bottom: 66.66666666666666%;
+}
+
+.embed-map-container {
+  overflow: hidden;
+  background: none !important;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.embed-map-frame {
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+</style>
 
 
 
@@ -3903,6 +4696,445 @@ document.head.appendChild(style);
 
 	<Footer />
 
+	<style>
+		/* Enhanced Mobile-Optimized PDF Viewer Styles (Sulimbang Style) */
+		:root {
+			--msu-dark-blue: #003366;
+			--msu-blue: #61063B;
+			--msu-light-blue: #E6F2FF;
+			--msu-gold: #FFCC00;
+			--msu-dark-gold: #E6B800;
+			--msu-deep-ocean: #1e3a8a;
+		}
+		
+		/* Dark mode color overrides - using Tailwind's dark class */
+		.dark {
+			--msu-dark-blue: #fbbf24;
+			--msu-blue: #fbbf24;
+			--msu-light-blue: #1f2937;
+			--msu-gold: #fbbf24;
+			--msu-dark-gold: #f59e0b;
+			--msu-deep-ocean: #fbbf24;
+		}
+		
+		/* MSU brand colors for light mode */
+		.bg-msu-dark-blue {
+			background-color: var(--msu-dark-blue);
+		}
+		
+		.bg-msu-blue {
+			background-color: var(--msu-blue);
+		}
+		
+		.bg-msu-light-blue {
+			background-color: var(--msu-light-blue);
+		}
+		
+		.bg-msu-gold {
+			background-color: var(--msu-gold);
+		}
+		
+		.bg-msu-dark-gold {
+			background-color: var(--msu-dark-gold);
+		}
+		
+		.text-msu-dark-blue {
+			color: var(--msu-dark-blue);
+		}
+		
+		.text-msu-blue {
+			color: var(--msu-blue);
+		}
+		
+		.text-msu-gold {
+			color: var(--msu-gold);
+		}
+		
+		.border-msu-blue {
+			border-color: var(--msu-blue);
+		}
+		
+		.hover\:bg-msu-dark-gold:hover {
+			background-color: var(--msu-dark-gold);
+		}
+		
+		.hover\:text-msu-dark-blue:hover {
+			color: var(--msu-dark-blue);
+		}
+		
+		.bg-msu-deep-ocean {
+			background-color: var(--msu-deep-ocean);
+		}
+		
+		.text-msu-deep-ocean {
+			color: var(--msu-deep-ocean);
+		}
+		
+		.border-msu-deep-ocean {
+			border-color: var(--msu-deep-ocean);
+		}
+		
+		/* Dark mode specific overrides - only when dark class is present */
+		.dark .text-msu-blue,
+		.dark .text-msu-dark-blue,
+		.dark .text-msu-main-color,
+		.dark .text-msu-deep-ocean {
+			color: #fbbf24;
+		}
+		
+		.dark .bg-msu-blue,
+		.dark .bg-msu-main-color,
+		.dark .bg-msu-deep-ocean {
+			background-color: #fbbf24;
+		}
+		
+		.dark .border-msu-blue,
+		.dark .border-msu-deep-ocean {
+			border-color: #fbbf24;
+		}
+		
+		.dark .hover\:text-msu-blue:hover,
+		.dark .hover\:text-msu-dark-blue:hover {
+			color: #f59e0b;
+		}
+		
+		.dark .hover\:bg-msu-deep-ocean:hover {
+			background-color: #f59e0b;
+		}
+		
+		.dark .bg-msu-blue\/10 {
+			background-color: rgba(251, 191, 36, 0.1);
+		}
+		
+		.dark .border-msu-blue\/30,
+		.dark .border-msu-deep-ocean\/30 {
+			border-color: rgba(251, 191, 36, 0.3);
+		}
+		
+		.dark .border-msu-blue\/40,
+		.dark .border-msu-deep-ocean\/40 {
+			border-color: rgba(251, 191, 36, 0.4);
+		}
+		
+		.dark .bg-msu-deep-ocean\/20 {
+			background-color: rgba(251, 191, 36, 0.2);
+		}
+		
+		.dark .bg-msu-deep-ocean\/30 {
+			background-color: rgba(251, 191, 36, 0.3);
+		}
+		
+		.dark .bg-msu-deep-ocean\/50 {
+			background-color: rgba(251, 191, 36, 0.5);
+		}
+		
+		/* Mobile-First Responsive PDF Viewer Styles */
+		#pdfViewerModal {
+			transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+			backdrop-filter: blur(12px);
+		}
+		
+		#pdfViewerModal.hidden {
+			opacity: 0;
+			pointer-events: none;
+			transform: scale(0.9) translateY(20px);
+		}
+		
+		#pdfViewerModal:not(.hidden) {
+			opacity: 1;
+			pointer-events: auto;
+			transform: scale(1) translateY(0);
+		}
+		
+		/* Mobile-optimized modal container */
+		#pdfViewerModal .bg-white {
+			box-shadow: 0 32px 64px -12px rgba(0, 0, 0, 0.4);
+			border: 1px solid rgba(255, 255, 255, 0.2);
+			backdrop-filter: blur(20px);
+		}
+		
+		/* Mobile-optimized buttons */
+		#pdfViewerModal button {
+			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.1);
+			backdrop-filter: blur(10px);
+			touch-action: manipulation; /* Improve touch responsiveness */
+		}
+		
+		/* Mobile hover states - only apply on non-touch devices */
+		@media (hover: hover) {
+			#pdfViewerModal button:hover {
+				transform: translateY(-1px) scale(1.02);
+				box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.15);
+			}
+		}
+		
+		/* Mobile animations */
+		@keyframes fadeInUp {
+			from {
+				opacity: 0;
+				transform: translateY(20px) scale(0.98);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0) scale(1);
+			}
+		}
+		
+		@keyframes slideInFromTop {
+			from {
+				opacity: 0;
+				transform: translateY(-15px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+		
+		#pdfViewerModal:not(.hidden) .bg-white {
+			animation: fadeInUp 0.4s ease-out;
+		}
+		
+		#pdfViewerModal:not(.hidden) .bg-gradient-to-r {
+			animation: slideInFromTop 0.5s ease-out 0.1s both;
+		}
+		
+		/* Mobile-optimized PDF Canvas Styles */
+		#pdfCanvas {
+			max-width: 100%;
+			height: auto;
+			box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+			border-radius: 8px;
+			background: white;
+			border: 1px solid rgba(0, 0, 0, 0.05);
+		}
+		
+		/* Mobile-optimized scrollbar */
+		#pdfContainer::-webkit-scrollbar {
+			width: 8px;
+			height: 8px;
+		}
+		
+		#pdfContainer::-webkit-scrollbar-track {
+			background: rgba(241, 241, 241, 0.8);
+			border-radius: 4px;
+		}
+		
+		#pdfContainer::-webkit-scrollbar-thumb {
+			background: linear-gradient(135deg, #c1c1c1, #a8a8a8);
+			border-radius: 4px;
+			border: 1px solid rgba(241, 241, 241, 0.8);
+		}
+		
+		/* Mobile loading animation */
+		@keyframes spin {
+			0% { transform: rotate(0deg); }
+			100% { transform: rotate(360deg); }
+		}
+		
+		@keyframes ping {
+			75%, 100% {
+				transform: scale(1.1);
+				opacity: 0;
+			}
+		}
+		
+		.animate-spin {
+			animation: spin 1s linear infinite;
+		}
+		
+		.animate-ping {
+			animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+		}
+		
+		/* Mobile MSU header gradient */
+		#pdfViewerModal .bg-gradient-to-r {
+			background: linear-gradient(135deg, #61063B 0%, #003366 50%, #61063B 100%);
+			box-shadow: 0 2px 10px -2px rgba(97, 6, 59, 0.2);
+		}
+		
+		/* Mobile button disabled states */
+		#pdfViewerModal button:disabled {
+			opacity: 0.4;
+			cursor: not-allowed;
+			transform: none !important;
+			box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);
+		}
+		
+		/* Mobile glassmorphism effects */
+		#pdfViewerModal .bg-white\/15 {
+			background: rgba(255, 255, 255, 0.15);
+			backdrop-filter: blur(10px);
+			border: 1px solid rgba(255, 255, 255, 0.2);
+		}
+		
+		#pdfViewerModal .bg-white\/20 {
+			background: rgba(255, 255, 255, 0.2);
+			backdrop-filter: blur(10px);
+			border: 1px solid rgba(255, 255, 255, 0.25);
+		}
+		
+		/* Mobile-specific responsive breakpoints */
+		@media (max-width: 480px) {
+			#pdfViewerModal .bg-white {
+				border-radius: 0;
+				margin: 0;
+				height: 100vh;
+			}
+			
+			#pdfViewerModal .p-3 {
+				padding: 0.75rem;
+			}
+			
+			#pdfViewerModal .flex.flex-col.sm\\:flex-row {
+				gap: 0.5rem;
+			}
+			
+			#pdfViewerModal .space-x-2 > :not([hidden]) ~ :not([hidden]) {
+				margin-left: 0.25rem;
+			}
+		}
+		
+		/* Enhanced mobile touch targets */
+		@media (max-width: 768px) {
+			#pdfViewerModal button {
+				min-height: 44px;
+				min-width: 44px;
+				touch-action: manipulation;
+			}
+			
+			#pdfViewerModal input,
+			#pdfViewerModal select {
+				min-height: 44px;
+				font-size: 16px; /* Prevent zoom on iOS */
+			}
+		}
+		
+		/* Mobile Book Flip Animation Styles */
+		.perspective-1000 {
+			perspective: 800px; /* Reduced for mobile */
+		}
+		
+		.transform-style-preserve-3d {
+			transform-style: preserve-3d;
+		}
+		
+		.backface-hidden {
+			backface-visibility: hidden;
+		}
+		
+		.rotateY-180 {
+			transform: rotateY(180deg);
+		}
+		
+		#pdfCanvasContainer {
+			width: 100%;
+			height: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		
+		#pageFlipContainer {
+			transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+			transform-origin: center;
+			width: 100%;
+			height: 100%;
+			max-width: calc(100vw - 1rem);
+			max-height: calc(100vh - 8rem);
+		}
+		
+		/* Mobile-optimized flip animations */
+		@media (max-width: 768px) {
+			#pageFlipContainer {
+				transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+				max-height: calc(100vh - 6rem);
+				max-width: calc(100vw - 0.5rem);
+			}
+		}
+		
+		#currentPageContainer, #nextPageContainer {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+			height: 100%;
+		}
+		
+		/* Mobile page turn shadow effects */
+		#pageTurnShadow {
+			transition: opacity 0.5s ease-in-out;
+		}
+		
+		/* Mobile-enhanced canvas styling */
+		#pdfCanvas, #nextPdfCanvas {
+			transition: all 0.3s ease-in-out;
+			border: 1px solid rgba(0, 0, 0, 0.08);
+			box-shadow: 
+				0 10px 20px -5px rgba(0, 0, 0, 0.1),
+				0 0 0 1px rgba(255, 255, 255, 0.5);
+			border-radius: 8px;
+			background: white;
+			max-width: 100%;
+			max-height: 100%;
+			width: auto;
+			height: auto;
+			object-fit: contain;
+		}
+		
+		/* Mobile page flip hover effects - only on hover-capable devices */
+		@media (hover: hover) {
+			#pdfPrevPage:hover, #pdfNextPage:hover {
+				background: rgba(255, 255, 255, 0.35);
+				transform: translateY(-1px) scale(1.05);
+				box-shadow: 0 8px 15px -4px rgba(0, 0, 0, 0.15);
+			}
+		}
+		
+		/* Mobile disabled button states */
+		#pdfViewerModal #pdfPrevPage:disabled, 
+		#pdfViewerModal #pdfNextPage:disabled {
+			opacity: 0.3 !important;
+			cursor: not-allowed !important;
+			pointer-events: none !important;
+			transform: none !important;
+		}
+		
+		/* Mobile page curl effect */
+		.page-curling {
+			animation: mobilePagCurl 0.5s ease-in-out;
+		}
+		
+		@keyframes mobilePagCurl {
+			0% {
+				transform: perspective(400px) rotateX(0deg);
+			}
+			50% {
+				transform: perspective(400px) rotateX(-0.5deg) scale(1.005);
+			}
+			100% {
+				transform: perspective(400px) rotateX(0deg) scale(1);
+			}
+		}
+		
+		/* Mobile-optimized loading animation */
+		@keyframes mobileLoadingPulse {
+			0%, 100% {
+				opacity: 1;
+				transform: scale(1);
+			}
+			50% {
+				opacity: 0.7;
+				transform: scale(1.02);
+			}
+		}
+		
+		#pdfLoading h3 {
+			animation: mobileLoadingPulse 1.5s ease-in-out infinite;
+		}
+	</style>
+
 </Layout>
 
                 
@@ -3922,6 +5154,9 @@ document.head.appendChild(style);
 			<script src="../../js/loadinganim.js" ></script>
 
 			<script src="../../js/smoothscroll.js" ></script>
+
+			<!-- Contact form handler -->
+			<script src="../../js/contact-form-api.js"></script>
 
 			
 
@@ -4687,20 +5922,20 @@ document.head.appendChild(style);
 					const imageObserver = new IntersectionObserver((entries, observer) => {
 						entries.forEach(entry => {
 							if (entry.isIntersecting) {
-								const img = entry.target;
+								const img = entry.target as HTMLImageElement;
 								const src = img.src;
 								
 								// Create a new image to preload
 								const newImg = new Image();
 								newImg.onload = () => {
 									img.classList.add('loaded');
-									img.style.opacity = '1';
+									(img as HTMLElement).style.opacity = '1';
 								};
 								newImg.onerror = () => {
 									img.classList.add('loaded');
-									img.style.opacity = '1';
+									(img as HTMLElement).style.opacity = '1';
 									// Fallback for broken images
-									img.style.background = 'linear-gradient(45deg, #f0f0f0, #e0e0e0)';
+									(img as HTMLElement).style.background = 'linear-gradient(45deg, #f0f0f0, #e0e0e0)';
 								};
 								newImg.src = src;
 								
@@ -4719,7 +5954,7 @@ document.head.appendChild(style);
 					// Fallback for browsers without IntersectionObserver
 					lazyImages.forEach(img => {
 						img.classList.add('loaded');
-						img.style.opacity = '1';
+						(img as HTMLElement).style.opacity = '1';
 					});
 				}
 			});
@@ -6314,6 +7549,338 @@ document.head.appendChild(style);
 		.lazy-image.loaded {
 			transform: scale(1);
 		}
+
+		/* Slider Animation Styles */
+		.student-life-slider {
+			position: relative;
+			overflow: hidden;
+			border-radius: 1rem;
+		}
+
+		.slider-track {
+			display: flex;
+			transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+			will-change: transform;
+		}
+
+		.slider-slide {
+			flex-shrink: 0;
+			transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+			transform-origin: center;
+		}
+
+		.slider-slide:hover {
+			transform: scale(1.02);
+		}
+
+		.slider-dot.active {
+			background-color: #fbbf24 !important;
+			transform: scale(1.2);
+		}
+
+		.slider-dot:hover {
+			background-color: #fcd34d !important;
+		}
+
+		/* Enhanced slider animations */
+		@keyframes slideInFromLeft {
+			from {
+				opacity: 0;
+				transform: translateX(-30px) scale(0.95);
+			}
+			to {
+				opacity: 1;
+				transform: translateX(0) scale(1);
+			}
+		}
+
+		@keyframes slideInFromRight {
+			from {
+				opacity: 0;
+				transform: translateX(30px) scale(0.95);
+			}
+			to {
+				opacity: 1;
+				transform: translateX(0) scale(1);
+			}
+		}
+
+		@keyframes slideFadeIn {
+			from {
+				opacity: 0;
+				transform: scale(0.9);
+			}
+			to {
+				opacity: 1;
+				transform: scale(1);
+			}
+		}
+
+		.slide-enter-left {
+			animation: slideInFromLeft 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		}
+
+		.slide-enter-right {
+			animation: slideInFromRight 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		}
+
+		.slide-fade-in {
+			animation: slideFadeIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		}
+
+		/* Smooth transition effects for active slides */
+		.slider-slide.transitioning {
+			opacity: 0.7;
+			transform: scale(0.98);
+		}
+
+		.slider-slide.active {
+			opacity: 1;
+			transform: scale(1);
+		}
+
+		/* Responsive slider adjustments */
+		@media (max-width: 768px) {
+			.slider-slide {
+				width: 100% !important;
+			}
+		}
+
+		@media (min-width: 769px) and (max-width: 1024px) {
+			.slider-slide {
+				width: 50% !important;
+			}
+		}
+
+		@media (min-width: 1025px) {
+			.slider-slide {
+				width: 25% !important;
+			}
+		}
 	</style>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			// Student Life Slider Functionality
+			const sliderTrack = document.getElementById('slider-track');
+			const prevBtn = document.getElementById('prevBtn');
+			const nextBtn = document.getElementById('nextBtn');
+			const dots = document.querySelectorAll('.slider-dot');
+
+			let currentSlide = 0;
+			let isAutoplay = true;
+			let autoplayInterval;
+			const totalSlides = 6;
+
+			// Get slide width based on screen size
+			function getSlideWidth() {
+				const screenWidth = window.innerWidth;
+				if (screenWidth < 768) return 100; // Mobile: 1 slide
+				if (screenWidth < 1024) return 50; // Tablet: 2 slides
+				return 25; // Desktop: 4 slides
+			}
+
+			// Update slider position with smooth transitions
+			function updateSlider() {
+				const slideWidth = getSlideWidth();
+				const translateX = -(currentSlide * slideWidth);
+				
+				// Add transitioning class for smooth effects
+				sliderTrack.classList.add('transitioning');
+				
+				// Use requestAnimationFrame for smoother animation
+				requestAnimationFrame(() => {
+					sliderTrack.style.transform = `translateX(${translateX}%)`;
+					
+					// Remove transitioning class after animation completes
+					setTimeout(() => {
+						sliderTrack.classList.remove('transitioning');
+					}, 800); // Match CSS transition duration
+				});
+				
+				// Update dots with smooth transition
+				dots.forEach((dot, index) => {
+					const isActive = index === currentSlide;
+					dot.classList.toggle('active', isActive);
+					
+					// Add smooth scale effect to active dot
+					if (isActive) {
+						(dot as HTMLElement).style.transform = 'scale(1.2)';
+					} else {
+						(dot as HTMLElement).style.transform = 'scale(1)';
+					}
+				});
+			}
+
+			// Next slide
+			function nextSlide() {
+				currentSlide = (currentSlide + 1) % totalSlides;
+				updateSlider();
+			}
+
+			// Previous slide
+			function prevSlide() {
+				currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+				updateSlider();
+			}
+
+			// Go to specific slide
+			function goToSlide(slideIndex) {
+				currentSlide = slideIndex;
+				updateSlider();
+			}
+
+			// Start autoplay
+			function startAutoplay() {
+				if (autoplayInterval) clearInterval(autoplayInterval);
+				autoplayInterval = setInterval(nextSlide, 3000); // 3 seconds for more dynamic feel
+			}
+
+			// Stop autoplay
+			function stopAutoplay() {
+				if (autoplayInterval) {
+					clearInterval(autoplayInterval);
+					autoplayInterval = null;
+				}
+			}
+
+
+			// Event listeners
+			nextBtn.addEventListener('click', () => {
+				nextSlide();
+				if (isAutoplay) {
+					stopAutoplay();
+					setTimeout(startAutoplay, 1000); // Restart after 1 second
+				}
+			});
+
+			prevBtn.addEventListener('click', () => {
+				prevSlide();
+				if (isAutoplay) {
+					stopAutoplay();
+					setTimeout(startAutoplay, 1000); // Restart after 1 second
+				}
+			});
+
+
+			// Dot navigation
+			dots.forEach((dot, index) => {
+				dot.addEventListener('click', () => {
+					goToSlide(index);
+					if (isAutoplay) {
+						stopAutoplay();
+						setTimeout(startAutoplay, 1000); // Restart after 1 second
+					}
+				});
+			});
+
+			// Pause autoplay on hover
+			const sliderContainer = document.querySelector('.student-life-slider');
+			sliderContainer.addEventListener('mouseenter', stopAutoplay);
+			sliderContainer.addEventListener('mouseleave', () => {
+				if (isAutoplay) startAutoplay();
+			});
+
+			// Touch/swipe support for mobile
+			let startX = 0;
+			let startY = 0;
+			let distX = 0;
+			let distY = 0;
+
+			sliderContainer.addEventListener('touchstart', (e) => {
+				const touchEvent = e as TouchEvent;
+				const touch = touchEvent.touches[0];
+				startX = touch.clientX;
+				startY = touch.clientY;
+			});
+
+			sliderContainer.addEventListener('touchmove', (e) => {
+				e.preventDefault(); // Prevent scrolling
+			});
+
+			sliderContainer.addEventListener('touchend', (e) => {
+				const touchEvent = e as TouchEvent;
+				const touch = touchEvent.changedTouches[0];
+				distX = touch.clientX - startX;
+				distY = touch.clientY - startY;
+
+				// Only trigger if horizontal swipe is greater than vertical
+				if (Math.abs(distX) > Math.abs(distY) && Math.abs(distX) > 50) {
+					if (distX > 0) {
+						prevSlide();
+					} else {
+						nextSlide();
+					}
+					if (isAutoplay) {
+						stopAutoplay();
+						setTimeout(startAutoplay, 1000);
+					}
+				}
+			});
+
+			// Keyboard navigation
+			document.addEventListener('keydown', (e) => {
+				if (e.key === 'ArrowLeft') {
+					prevSlide();
+					if (isAutoplay) {
+						stopAutoplay();
+						setTimeout(startAutoplay, 1000);
+					}
+				} else if (e.key === 'ArrowRight') {
+					nextSlide();
+					if (isAutoplay) {
+						stopAutoplay();
+						setTimeout(startAutoplay, 1000);
+					}
+				}
+			});
+
+			// Handle window resize
+			window.addEventListener('resize', () => {
+				updateSlider();
+			});
+
+			// Initialize slider
+			updateSlider();
+			
+			// Start autoplay immediately with a small delay for smooth initialization
+			setTimeout(() => {
+				if (isAutoplay) startAutoplay();
+			}, 1000);
+
+			// Add entrance animations to slides with smooth preloading
+			const slides = document.querySelectorAll('.slider-slide');
+			slides.forEach((slide, index) => {
+				(slide as HTMLElement).style.animationDelay = `${index * 0.1}s`;
+				slide.classList.add('slide-enter-right');
+				
+				// Preload images for smoother transitions
+				const img = slide.querySelector('img') as HTMLImageElement;
+				if (img) {
+					// Add loading optimization
+					img.addEventListener('load', () => {
+						img.style.opacity = '1';
+						img.style.transition = 'opacity 0.3s ease';
+					});
+					
+					// Set initial opacity for smooth loading
+					img.style.opacity = '0';
+				}
+			});
+
+			// Add smooth hover effects to navigation buttons
+			const navButtons = document.querySelectorAll('.nav-button');
+			navButtons.forEach(button => {
+				button.addEventListener('mouseenter', () => {
+					(button as HTMLElement).style.transform = 'scale(1.1)';
+					(button as HTMLElement).style.transition = 'transform 0.2s ease';
+				});
+				
+				button.addEventListener('mouseleave', () => {
+					(button as HTMLElement).style.transform = 'scale(1)';
+				});
+			});
+		});
+	</script>
 
 </Layout>

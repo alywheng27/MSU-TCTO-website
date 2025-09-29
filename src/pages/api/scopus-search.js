@@ -5,7 +5,7 @@ export async function GET({ request, url }) {
     const start = searchParams.get('start') || '0';
     const count = searchParams.get('count') || '25';
     
-    const SCOPUS_API_KEY = '989a27d9e8f51e8e12a530dbaa6cca46';
+    const SCOPUS_API_KEY = import.meta.env.SCOPUS_API_KEY || process.env.SCOPUS_API_KEY || '';
     const SCOPUS_BASE_URL = 'https://api.elsevier.com/content/search/scopus';
     
     const apiUrl = `${SCOPUS_BASE_URL}?query=${encodeURIComponent(query)}&start=${start}&count=${count}&apiKey=${SCOPUS_API_KEY}&httpAccept=application/json`;
