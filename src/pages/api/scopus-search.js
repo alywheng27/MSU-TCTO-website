@@ -5,8 +5,27 @@ export async function GET({ request, url }) {
     const start = searchParams.get('start') || '0';
     const count = searchParams.get('count') || '25';
     
-    const SCOPUS_API_KEY = '989a27d9e8f51e8e12a530dbaa6cca46';
+    const SCOPUS_API_KEY = process.env.SCOPUS_API_KEY || '';
     const SCOPUS_BASE_URL = 'https://api.elsevier.com/content/search/scopus';
+    
+    // Check if API key is configured
+    if (!SCOPUS_API_KEY) {
+      console.log('⚠️ Scopus API key not configured - returning sample data');
+      return new Response(JSON.stringify({ 
+        error: 'Scopus API key not configured',
+        message: 'API key is required to access Scopus data. Please configure SCOPUS_API_KEY environment variable.',
+        statusCode: 'API_KEY_MISSING',
+        sampleData: true
+      }), {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type'
+        }
+      });
+    }
     
     const apiUrl = `${SCOPUS_BASE_URL}?query=${encodeURIComponent(query)}&start=${start}&count=${count}&apiKey=${SCOPUS_API_KEY}&httpAccept=application/json`;
     

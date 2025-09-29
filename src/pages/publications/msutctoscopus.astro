@@ -16,7 +16,7 @@ const currentUrl = `${siteUrl}${currentPath}`;
 const featuredImageUrl = `${siteUrl}/images/MSU Seal New (Official).png`;
 
 // Scopus API Configuration
-const SCOPUS_API_KEY = '989a27d9e8f51e8e12a530dbaa6cca46';
+const SCOPUS_API_KEY = import.meta.env.SCOPUS_API_KEY || '';
 const SCOPUS_BASE_URL = 'https://api.elsevier.com/content/search/scopus';
 
 // Default search parameters for MSU TCTO
@@ -620,7 +620,8 @@ try {
         public currentData: any;
 
         constructor() {
-            this.apiKey = '989a27d9e8f51e8e12a530dbaa6cca46';
+            // API key should be handled server-side only for security
+            this.apiKey = '';
             this.baseUrl = 'https://api.elsevier.com/content/search/scopus';
             this.currentPage = 1;
             this.resultsPerPage = 25;
