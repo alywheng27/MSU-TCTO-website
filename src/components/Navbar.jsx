@@ -191,6 +191,7 @@ const Navbar = ({ path }) => {
       title: "Programs",
       icon: <FaUniversity className="text-lg" />,
       items: [
+<<<<<<< HEAD
         { link: "/programs/404", label: "College of Arts and Sciences" },
         { link: "/programs/404", label: "College of Islamic & Arabic Studies" },
         { link: "/programs/coed", label: "College of Education" },
@@ -198,6 +199,15 @@ const Navbar = ({ path }) => {
         { link: "/programs/404", label: "Institute of Information and Communication Technology" },
         { link: "/programs/404", label: "Institute of Oceanography and Environmental Science" },
         { link: "/programs/404", label: "College of Law" },
+=======
+        { link: "/404", label: "College of Arts and Sciences" },
+        { link: "/404", label: "College of Islamic & Arabic Studies" },
+        { link: "/404", label: "College of Education" },
+        { link: "/404", label: "College of Fisheries" },
+        { link: "/404", label: "Institute of Information and Communication Technology" },
+        { link: "/404", label: "Institute of Oceanography and Environmental Science" },
+        { link: "/404", label: "College of Law" },
+>>>>>>> upstream/master
       ]
     },
     {

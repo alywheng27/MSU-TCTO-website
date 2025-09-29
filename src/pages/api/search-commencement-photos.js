@@ -1,4 +1,4 @@
-import { getCommencementPhotos } from '../../api/api.jsx';
+import { getCommencementPhotos, testSanityConnection } from '../../api/api.jsx';
 
 export async function GET({ request }) {
   return new Response(JSON.stringify({ message: 'API endpoint is working' }), {
@@ -27,6 +27,11 @@ export async function POST({ request }) {
         }
       });
     }
+
+    // Test Sanity connection first
+    console.log('Testing Sanity connection...');
+    const testResult = await testSanityConnection();
+    console.log('Sanity connection test result:', testResult);
 
     // Call the Sanity API function
     console.log('Calling getCommencementPhotos...');

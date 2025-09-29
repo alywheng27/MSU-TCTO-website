@@ -24,6 +24,10 @@ import { get4UpcomingEvents } from '../api/api';
 import { get3LatestGazette } from '../api/api';
 import { get3LatestAnnualReport } from '../api/api';
 import { sulimbanglatestshown } from '../api/api';
+<<<<<<< HEAD
+=======
+import { testCalendarData } from '../api/api';
+>>>>>>> upstream/master
 import { getAllCalendarEvents } from '../api/api';
 
 const threeLatestArticles = await get3LatestArticle();
@@ -33,6 +37,11 @@ const threeLatestGazette = await get3LatestGazette();
 const latestsulimbang = await sulimbanglatestshown();
 const threeLatestAnnualReport = await get3LatestAnnualReport();
 
+<<<<<<< HEAD
+=======
+// Test calendar data
+const testCalendar = await testCalendarData();
+>>>>>>> upstream/master
 
 // Get all calendar events for the complete dropdown
 const allCalendarEvents = await getAllCalendarEvents();
@@ -42,11 +51,24 @@ console.log('=== DEBUG: Upcoming Events Data ===');
 console.log('fourUpcomingEvents:', fourUpcomingEvents);
 console.log('fourUpcomingEvents length:', fourUpcomingEvents?.length);
 console.log('fourUpcomingEvents type:', typeof fourUpcomingEvents);
+<<<<<<< HEAD
+=======
+console.log('testCalendar:', testCalendar);
+console.log('testCalendar length:', testCalendar?.length);
+>>>>>>> upstream/master
 if (fourUpcomingEvents && fourUpcomingEvents.length > 0) {
   console.log('First event:', fourUpcomingEvents[0]);
   console.log('First event date:', fourUpcomingEvents[0]?.date);
   console.log('First event title:', fourUpcomingEvents[0]?.title);
 }
+<<<<<<< HEAD
+=======
+if (testCalendar && testCalendar.length > 0) {
+  console.log('Test calendar first event:', testCalendar[0]);
+  console.log('Test calendar first event date:', testCalendar[0]?.date);
+  console.log('Test calendar first event title:', testCalendar[0]?.title);
+}
+>>>>>>> upstream/master
 ---
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
@@ -691,8 +713,13 @@ if (fourUpcomingEvents && fourUpcomingEvents.length > 0) {
                 
                 <!-- Initial 4 Events Display -->
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+<<<<<<< HEAD
                     {fourUpcomingEvents && fourUpcomingEvents.length > 0 ? (
                         fourUpcomingEvents.slice(0, 4).map((calendar) => {
+=======
+                    {(fourUpcomingEvents && fourUpcomingEvents.length > 0) || (testCalendar && testCalendar.length > 0) ? (
+                        (fourUpcomingEvents && fourUpcomingEvents.length > 0 ? fourUpcomingEvents : testCalendar).slice(0, 4).map((calendar) => {
+>>>>>>> upstream/master
                             console.log('Processing calendar event:', calendar);
                             
                             let displayDate = calendar.date;

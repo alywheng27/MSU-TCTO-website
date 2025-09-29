@@ -1457,6 +1457,56 @@ export async function getCommencementPhotos(name, birthDate) {
   }
 }
 
+// Test function to check Sanity connection
+export async function testSanityConnection() {
+  try {
+    const query = groq`*[_type == "commencement"] | order(_createdAt desc)[0]{
+      _id,
+      _type
+    }`;
+    
+    const result = await client.fetch(query);
+    console.log('Sanity connection test result:', result);
+    return result;
+  } catch (error) {
+    console.error('Sanity connection test failed:', error);
+    return null;
+  }
+}
+
+export async function testCalendarData() {
+  try {
+    const testQuery = groq`*[_type == "calendar"] | order(date desc) {
+      _id,
+      title,
+      date,
+      body[]{
+        children[]{
+          text
+        },
+        asset->{url},
+      },
+      semester->{semester},
+      holiday->{holiday},
+    }`;
+    
+    console.log('=== TEST: Getting all calendar data ===');
+    const allCalendarData = await useSanityClient().fetch(testQuery);
+    console.log('All calendar data:', allCalendarData);
+    console.log('Total calendar events:', allCalendarData?.length);
+    
+    if (allCalendarData && allCalendarData.length > 0) {
+      console.log('First event:', allCalendarData[0]);
+      console.log('First event date:', allCalendarData[0].date);
+      console.log('First event date type:', typeof allCalendarData[0].date);
+    }
+    
+    return allCalendarData;
+  } catch (error) {
+    console.error('Error in testCalendarData:', error);
+    return [];
+  }
+}
 
 // New function to get all calendar events for the complete calendar dropdown
 export async function getAllCalendarEvents() {
@@ -1481,94 +1531,6 @@ export async function getAllCalendarEvents() {
     return allEvents || [];
   } catch (error) {
     console.error('Error in getAllCalendarEvents:', error);
-    return [];
-  }
-}
-
-// Function to fetch COED programs data (works with current data structure)
-export async function getCOEDPrograms() {
-  try {
-    console.log('=== DEBUG: Starting getCOEDPrograms ===');
-    
-    // First, let's check what document types exist
-    const allTypesQuery = groq`*[_type == "program" || _type == "department" || _type == "degree" || _type == "level" || _type == "duration"] {
-      _type,
-      _id,
-      title,
-      name
-    }`;
-    
-    const allTypes = await useSanityClient().fetch(allTypesQuery);
-    console.log('All document types found:', allTypes);
-    
-    // Check specifically for departments
-    const departmentsQuery = groq`*[_type == "department"] {
-      _id,
-      name,
-      title
-    }`;
-    
-    const departments = await useSanityClient().fetch(departmentsQuery);
-    console.log('All departments found:', departments);
-    
-    // Check for COED department specifically
-    const coedDepartmentQuery = groq`*[_type == "department" && department == "College of Education"] {
-      _id,
-      name,
-      title,
-      department
-    }`;
-
-    const coedDepartment = await useSanityClient().fetch(coedDepartmentQuery);
-    console.log('COED department found:', coedDepartment);
-
-    // Use the provided query to fetch College of Education programs with all fields
-    const query = groq`*[_type == "program" && department->department == "College of Education"]{ 
-      _id,
-      title,
-      description,
-      accreditation,
-      file {
-        asset->{
-          url,
-          originalFilename
-        }
-      },
-      department->{department},
-      degree->{degree},
-      level->{level},
-      duration->{duration}
-    }`;
-
-    const allPrograms = await useSanityClient().fetch(query);
-    console.log('=== DEBUG: getCOEDPrograms ===');
-    console.log('Total College of Education programs found:', allPrograms?.length);
-    console.log('Raw programs data:', allPrograms);
-    
-    // Use all programs from Sanity without filtering
-    const programs = allPrograms;
-    
-    console.log('All COED programs from Sanity:', programs.length);
-    console.log('Programs data:', programs);
-    
-    // Transform the data to match the expected format - using real data from Sanity
-    const transformedPrograms = programs.map((program, index) => ({
-      id: index + 1,
-      program: program.title || '',
-      degree: program.degree?.degree || '',
-      level: program.level?.level || '',
-      duration: program.duration?.duration || '',
-      accreditation: program.accreditation || '',
-      description: program.description?.[0]?.children?.[0]?.text || '',
-      department: program.department?.department || '',
-      fileUrl: program.file?.asset?.url || null,
-      fileName: program.file?.asset?.originalFilename || null
-    }));
-
-    console.log('Transformed COED programs:', transformedPrograms);
-    return transformedPrograms || [];
-  } catch (error) {
-    console.error('Error in getCOEDPrograms:', error);
     return [];
   }
 }
