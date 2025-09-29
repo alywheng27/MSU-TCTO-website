@@ -23,13 +23,19 @@ export async function POST({ request }) {
             });
         }
 
-        // Get Gmail credentials
-        const gmailUser = process.env.GMAIL_USER;
-        const gmailPassword = process.env.GMAIL_APP_PASSWORD;
+        // Get Gmail credentials from environment variables
+        const gmailUser = import.meta.env.GMAIL_USER || process.env.GMAIL_USER;
+        const gmailPassword = import.meta.env.GMAIL_APP_PASSWORD || process.env.GMAIL_APP_PASSWORD;
         
         console.log('Credentials check:', {
             user: gmailUser ? 'Set' : 'Not set',
             password: gmailPassword ? 'Set' : 'Not set'
+        });
+        console.log('Environment variables available:', {
+            'import.meta.env.GMAIL_USER': !!import.meta.env.GMAIL_USER,
+            'process.env.GMAIL_USER': !!process.env.GMAIL_USER,
+            'import.meta.env.GMAIL_APP_PASSWORD': !!import.meta.env.GMAIL_APP_PASSWORD,
+            'process.env.GMAIL_APP_PASSWORD': !!process.env.GMAIL_APP_PASSWORD
         });
 
         if (!gmailUser || !gmailPassword) {
@@ -39,6 +45,7 @@ export async function POST({ request }) {
             console.log('👤 From:', email);
             console.log('💬 Message:', message);
             console.log('✅ Form submission processed (simulation mode)');
+            console.log('🔧 To fix: Create .env file with GMAIL_USER and GMAIL_APP_PASSWORD');
         } else {
             // Send actual email using Gmail SMTP
             console.log('📧 SENDING ACTUAL EMAIL...');

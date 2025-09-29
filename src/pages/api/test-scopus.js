@@ -1,6 +1,6 @@
 export async function GET() {
   try {
-    const SCOPUS_API_KEY = '989a27d9e8f51e8e12a530dbaa6cca46';
+    const SCOPUS_API_KEY = import.meta.env.SCOPUS_API_KEY || process.env.SCOPUS_API_KEY || '';
     const SCOPUS_BASE_URL = 'https://api.elsevier.com/content/search/scopus';
     
     // Test with a simple query

@@ -22,18 +22,12 @@
     "axios": "^1.8.1",
     "bootstrap": "^5.3.3",
     "cors": "^2.8.5",
-<<<<<<< HEAD
     "dotenv": "^17.2.2",
-=======
->>>>>>> upstream/master
     "force": "^0.0.3",
     "framer-motion": "^12.4.10",
     "groq": "^3.78.0",
     "next": "^15.3.1",
-<<<<<<< HEAD
     "nodemailer": "^6.10.1",
-=======
->>>>>>> upstream/master
     "pdfjs-dist": "^5.3.93",
     "react": "^18.3.1",
     "react-awesome-reveal": "^4.2.8",

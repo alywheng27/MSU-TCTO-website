@@ -16,7 +16,7 @@ const currentUrl = `${siteUrl}${currentPath}`;
 const featuredImageUrl = `${siteUrl}/images/MSU Seal New (Official).png`;
 
 // Scopus API Configuration
-const SCOPUS_API_KEY = import.meta.env.SCOPUS_API_KEY || '';
+const SCOPUS_API_KEY = import.meta.env.SCOPUS_API_KEY || process.env.SCOPUS_API_KEY || '';
 const SCOPUS_BASE_URL = 'https://api.elsevier.com/content/search/scopus';
 
 // Default search parameters for MSU TCTO
@@ -209,14 +209,6 @@ try {
 
 <Layout 
     title={pageTitle}
-    description={pageDescription}
-    ogTitle={pageTitle}
-    ogDescription={pageDescription}
-    ogImage={featuredImageUrl}
-    ogUrl={currentUrl}
-    twitterTitle={pageTitle}
-    twitterDescription={pageDescription}
-    twitterImage={featuredImageUrl}
 >
     <main class="bg-white dark:bg-gray-900 min-h-screen">
         <Navbar path={currentPath} client:visible />
@@ -578,7 +570,7 @@ try {
                             </div>
                             <div>
                                 <strong>API Key:</strong> 
-                                <span class="ml-2 font-mono text-xs">{SCOPUS_API_KEY.substring(0, 8)}...</span>
+                                <span class="ml-2 font-mono text-xs">{SCOPUS_API_KEY ? 'Configured' : 'Not Set'}</span>
                             </div>
                         </div>
                         <div class="mt-4">
@@ -620,7 +612,6 @@ try {
         public currentData: any;
 
         constructor() {
-            // API key should be handled server-side only for security
             this.apiKey = '';
             this.baseUrl = 'https://api.elsevier.com/content/search/scopus';
             this.currentPage = 1;
