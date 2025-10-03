@@ -1564,3 +1564,35 @@ export async function getCOEDPrograms() {
     return [];
   }
 }
+
+
+
+export async function getCOLPrograms() {
+  try {
+    const query = groq`*[_type == "program" && department->department == "College of Law"]{ 
+      _id,
+      title,
+      description,
+      accreditation,
+      file {
+        asset->{
+          url,
+          originalFilename
+        }
+      },
+      department->{department},
+      degree->{degree},
+      level->{level},
+      duration->{duration}
+    }`;
+    
+    const programs = await useSanityClient().fetch(query);
+    console.log('=== DEBUG: getCOEDPrograms ===');
+    console.log('Total COED programs found:', programs?.length);
+    
+    return programs || [];
+  } catch (error) {
+    console.error('Error in getCOEDPrograms:', error);
+    return [];
+  }
+}

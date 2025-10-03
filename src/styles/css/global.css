@@ -1,6 +1,13 @@
+/* 
+ * Tailwind CSS Global Styles
+ * This file contains Tailwind CSS directives and custom styles
+ * The @tailwind and @apply directives are valid Tailwind CSS syntax
+ */
+
 @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Dirtylane&display=swap');
 
+/* Tailwind CSS directives - these are valid Tailwind syntax */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
