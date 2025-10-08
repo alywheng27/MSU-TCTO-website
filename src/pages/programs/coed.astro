@@ -464,7 +464,7 @@ try {
 							</svg>
 						</div>
 					</div>
-					<h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-4 md:mb-6">About the College of Education</h2>
+					<h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-[#61063B] dark:text-msu-bgc-color" >About the College of Education</h2>
 					<p class="text-lg sm:text-xl text-msu-main-color dark:text-msu-bgc-color max-w-3xl mx-auto px-4">
 
 						The College of Education, established in 1990, is a premier academic unit committed to developing highly skilled, values-driven, and globally competitive educators. Over the years, the College has continuously evolved to meet the challenges of the 21st-century learning environment.
@@ -1078,7 +1078,7 @@ try {
 
         <div class="text-center mb-16">
 
-            <h2 class="text-3xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-4">Academic Programs</h2>
+            <h2 class="text-3xl font-bold mb-4 text-[#61063B] dark:text-msu-bgc-color" >Academic Programs</h2>
 
             <p class="text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto">
 
@@ -2798,7 +2798,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 				<div class="text-center mb-16">
 
-					<h2 class="text-3xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-4">Research & Innovation</h2>
+					<h2 class="text-3xl font-bold mb-4 text-[#61063B] dark:text-msu-bgc-color" >Research & Innovation</h2>
 
 					<p class="text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto">
 
@@ -3068,7 +3068,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 				<div class="text-center mb-16">
 
-					<h2 class="text-3xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-4">Faculty Spotlight</h2>
+					<h2 class="text-3xl font-bold mb-4 text-[#61063B] dark:text-msu-bgc-color" >Faculty Spotlight</h2>
 
 					<p class="text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto">
 
@@ -4520,7 +4520,7 @@ document.head.appendChild(style);
 
     <div class="text-center mb-8">
 
-      <h2 class="text-3xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-2">Our Location</h2>
+      <h2 class="text-3xl font-bold mb-2" style="color: #61063B;" data-dark-color="white">Our Location</h2>
 
       <p class="text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto">
 
@@ -5671,6 +5671,9 @@ document.head.appendChild(style);
 					if (customEvent.detail && customEvent.detail.isDarkMode !== undefined) {
 
 						applyDarkMode(customEvent.detail.isDarkMode);
+						
+						// Update heading colors for dark mode
+						updateHeadingColors();
 
 					}
 
@@ -5687,6 +5690,9 @@ document.head.appendChild(style);
 					const currentMode = localStorage.getItem('darkMode') === 'true';
 
 					applyDarkMode(!currentMode);
+					
+					// Update heading colors for dark mode
+					updateHeadingColors();
 
 				});
 
@@ -5707,6 +5713,9 @@ document.head.appendChild(style);
 							const currentMode = localStorage.getItem('darkMode') === 'true';
 
 							applyDarkMode(!currentMode);
+							
+							// Update heading colors for dark mode
+							updateHeadingColors();
 
 						}, 100);
 
@@ -5727,10 +5736,32 @@ document.head.appendChild(style);
 						console.log('Storage change detected in CAS:', isDarkMode);
 
 						applyDarkMode(isDarkMode);
+						
+						// Update heading colors for dark mode
+						updateHeadingColors();
 
 					}
 
 				});
+				
+				// Function to update heading colors based on dark mode
+				function updateHeadingColors() {
+					const isDark = document.documentElement.classList.contains('dark');
+					const headings = document.querySelectorAll('h2[data-dark-color]') as NodeListOf<HTMLElement>;
+					
+					headings.forEach(heading => {
+						if (isDark) {
+							heading.style.color = heading.getAttribute('data-dark-color') || 'white';
+						} else {
+							heading.style.color = '#61063B';
+						}
+					});
+				}
+				
+				// Initialize heading colors on page load
+				setTimeout(() => {
+					updateHeadingColors();
+				}, 100);
 
 				
 
