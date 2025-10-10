@@ -1,0 +1,1210 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from "../../components/Navbar";
+import FooterNav from "../../components/FooterNav.astro";
+import Footer from "../../components/Footer.astro";
+import '../../styles/css/global.css';
+import '../../styles/css/globalanimate.css';
+import '../../styles/css/pdf-viewer.css';
+
+const currentPath = Astro.url.pathname;
+
+// Sample KAWASA publications data - Replace with actual API calls when available
+const latestPublication = {
+    id: 1,
+    title: "Marine Biodiversity Assessment in Tawi-Tawi Coastal Waters",
+    author: "Maria Isabella Santos",
+    program: "BS Marine Biology",
+    year: "2024",
+    semester: "1st Semester",
+    category: "Research Paper",
+    abstract: "This comprehensive study examines the diverse marine ecosystems found in the coastal waters of Tawi-Tawi, documenting over 200 species and analyzing their ecological significance. The research provides valuable insights into conservation strategies for protecting these vital marine habitats.",
+    mainImage: "/images/default-publication.jpg",
+    file: { asset: { url: "#" } },
+    publishedAt: "2024-03-15T00:00:00.000Z",
+    views: 1245,
+    citations: 15,
+    downloads: 342
+};
+
+const allPublications = [
+    {
+        id: 1,
+        title: "Marine Biodiversity Assessment in Tawi-Tawi Coastal Waters",
+        author: "Maria Isabella Santos",
+        program: "BS Marine Biology",
+        year: "2024",
+        semester: "1st Semester",
+        category: "Research Paper",
+        abstract: "A comprehensive study on marine ecosystems...",
+        mainImage: "/images/default-publication.jpg",
+        file: { asset: { url: "#" } },
+        publishedAt: "2024-03-15T00:00:00.000Z",
+        views: 1245,
+        citations: 15
+    },
+    {
+        id: 2,
+        title: "Sustainable Fishing Practices in Mindanao Communities",
+        author: "Ahmad Abdullah",
+        program: "BS Fisheries",
+        year: "2024",
+        semester: "1st Semester",
+        category: "Case Study",
+        abstract: "Exploring traditional and modern sustainable fishing techniques...",
+        mainImage: "/images/default-publication.jpg",
+        file: { asset: { url: "#" } },
+        publishedAt: "2024-03-10T00:00:00.000Z",
+        views: 892,
+        citations: 8
+    },
+    {
+        id: 3,
+        title: "Cultural Heritage of Sama-Bajau Communities",
+        author: "Fatima Hassan",
+        program: "BA Anthropology",
+        year: "2023",
+        semester: "2nd Semester",
+        category: "Thesis",
+        abstract: "A comprehensive documentation of cultural practices...",
+        mainImage: "/images/default-publication.jpg",
+        file: { asset: { url: "#" } },
+        publishedAt: "2023-12-20T00:00:00.000Z",
+        views: 2103,
+        citations: 23
+    },
+    {
+        id: 4,
+        title: "Climate Change Impact on Coral Reef Ecosystems",
+        author: "John Dela Cruz",
+        program: "BS Environmental Science",
+        year: "2024",
+        semester: "1st Semester",
+        category: "Research Paper",
+        abstract: "An analysis of climate change effects on coral reefs...",
+        mainImage: "/images/default-publication.jpg",
+        file: { asset: { url: "#" } },
+        publishedAt: "2024-02-28T00:00:00.000Z",
+        views: 756,
+        citations: 12
+    },
+    {
+        id: 5,
+        title: "Innovation in Aquaculture Technology",
+        author: "Sarah Karim",
+        program: "BS Aquaculture",
+        year: "2024",
+        semester: "1st Semester",
+        category: "Capstone Project",
+        abstract: "Developing new technologies for sustainable aquaculture...",
+        mainImage: "/images/default-publication.jpg",
+        file: { asset: { url: "#" } },
+        publishedAt: "2024-02-15T00:00:00.000Z",
+        views: 634,
+        citations: 6
+    },
+    {
+        id: 6,
+        title: "Traditional Boat Building Techniques in Tawi-Tawi",
+        author: "Abdul Rahman",
+        program: "BS Naval Architecture",
+        year: "2023",
+        semester: "2nd Semester",
+        category: "Case Study",
+        abstract: "Documenting traditional boat building methods...",
+        mainImage: "/images/default-publication.jpg",
+        file: { asset: { url: "#" } },
+        publishedAt: "2023-11-30T00:00:00.000Z",
+        views: 1120,
+        citations: 18
+    }
+];
+
+// Extract unique years and categories for filtering
+const uniqueYears = [...new Set(allPublications.map(pub => pub.year))];
+const uniqueCategories = ['All', 'Research Paper', 'Thesis', 'Case Study', 'Capstone Project', 'Literary Works', 'Creative Arts'];
+const uniquePrograms = ['All', ...new Set(allPublications.map(pub => pub.program))];
+
+function getYear(dateString: string) {
+    return new Date(dateString).getFullYear().toString();
+}
+---
+
+<Layout title="KAWASA - Student Publications | MSU-TCTO">
+    <main class="bg-gradient-to-br from-gray-50 via-white to-blue-50/30 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 min-h-screen transition-colors duration-300">
+        <Navbar path={currentPath} client:visible />
+        
+        <!-- Professional PDF Viewer Modal -->
+        <div id="pdfViewerModal" class="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-md hidden">
+            <div class="w-full h-full">
+                <div class="bg-white dark:bg-gray-900 w-full h-full flex flex-col overflow-hidden">
+                    <!-- PDF Viewer Header -->
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-6 bg-gradient-to-r from-msu-blue via-msu-dark-blue to-msu-blue text-white shadow-2xl">
+                        <div class="flex items-center space-x-2 sm:space-x-4 w-full sm:w-auto mb-3 sm:mb-0">
+                            <div class="flex items-center justify-center w-10 h-10 sm:w-14 sm:h-14 bg-white/20 rounded-xl backdrop-blur-sm">
+                                <svg class="w-5 h-5 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 id="modalPdfTitle" class="text-sm sm:text-2xl font-bold text-msu-deep-ocean truncate">KAWASA Publication Viewer</h3>
+                                <p class="text-white/90 text-xs sm:text-sm font-medium hidden sm:block">Student Research Repository</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Viewer Controls -->
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
+                            <!-- Zoom Controls -->
+                            <div class="flex items-center justify-center space-x-1 sm:space-x-2 bg-white/10 rounded-xl px-2 sm:px-4 py-2 backdrop-blur-sm border border-white/20">
+                                <button id="zoomOut" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-white/20 hover:bg-white/30 text-white rounded-lg transition-all duration-200 hover:scale-105" title="Zoom Out">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
+                                    </svg>
+                                </button>
+                                <span id="zoomLevel" class="text-white text-xs sm:text-sm font-bold min-w-[3rem] sm:min-w-[4rem] text-center px-2 sm:px-3 py-1 bg-white/10 rounded-lg">100%</span>
+                                <button id="zoomIn" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-white/20 hover:bg-white/30 text-white rounded-lg transition-all duration-200 hover:scale-105" title="Zoom In">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                    </svg>
+                                </button>
+                                <button id="zoomFit" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-white/20 hover:bg-white/30 text-white rounded-lg transition-all duration-200 hover:scale-105" title="Fit to Screen">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                    
+                            <!-- Page Navigation -->
+                            <div class="flex items-center justify-center space-x-1 sm:space-x-2 bg-white/10 rounded-xl px-2 sm:px-4 py-2 backdrop-blur-sm border border-white/20">
+                                <button id="pdfPrevPage" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-white/20 hover:bg-white/30 text-white rounded-lg transition-all duration-200 hover:scale-105">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                    </svg>
+                                </button>
+                                <span id="pageInfo" class="text-white text-xs sm:text-sm font-bold min-w-[3rem] sm:min-w-[5rem] text-center px-2 sm:px-3 py-1 bg-white/10 rounded-lg">1 / 1</span>
+                                <button id="pdfNextPage" class="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-white/20 hover:bg-white/30 text-white rounded-lg transition-all duration-200 hover:scale-105">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <!-- Action Buttons -->
+                            <div class="flex items-center justify-center space-x-2 sm:space-x-3">
+                                <button onclick="openPdfInNewTab()" class="flex items-center justify-center space-x-1 sm:space-x-2 bg-white/20 hover:bg-white/30 text-white px-2 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-white/20">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                    </svg>
+                                    <span class="text-xs sm:text-sm font-medium hidden sm:inline">Open</span>
+                                </button>
+                                <button onclick="downloadPdf()" class="flex items-center justify-center space-x-1 sm:space-x-2 bg-white/20 hover:bg-white/30 text-white px-2 sm:px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-white/20">
+                                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                    </svg>
+                                    <span class="text-xs sm:text-sm font-medium hidden sm:inline">Download</span>
+                                </button>
+                                <button onclick="closePdfViewer()" class="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-white/20 hover:bg-white/30 text-white rounded-xl transition-all duration-200 hover:scale-105 backdrop-blur-sm border border-white/20">
+                                    <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                            
+                    <!-- PDF Viewer Content -->
+                    <div class="flex-1 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 relative overflow-hidden">
+                        <!-- Loading State -->
+                        <div id="pdfLoading" class="absolute inset-0 flex items-center justify-center bg-white/98 dark:bg-gray-900/98 backdrop-blur-sm z-20">
+                            <div class="text-center max-w-xs sm:max-w-sm mx-auto p-4 sm:p-8">
+                                <div class="relative mb-4 sm:mb-8">
+                                    <div class="animate-spin rounded-full h-16 w-16 sm:h-24 sm:w-24 border-4 border-purple-100 dark:border-purple-900 border-t-purple-600 mx-auto"></div>
+                                    <div class="absolute inset-1 sm:inset-2 rounded-full h-14 w-14 sm:h-20 sm:w-20 border-4 border-transparent border-t-blue-400 animate-spin mx-auto" style="animation-duration: 1.5s; animation-direction: reverse;"></div>
+                                </div>
+                                <h3 class="text-lg sm:text-xl font-bold text-gray-800 dark:text-gray-200 animate-pulse">Loading Publication...</h3>
+                                <p class="text-gray-600 dark:text-gray-400 text-sm mt-2">Please wait</p>
+                            </div>
+                        </div>
+                        
+                        <!-- PDF Container -->
+                        <div id="pdfContainer" class="w-full h-full overflow-auto bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900">
+                            <div id="pdfViewer" class="w-full h-full flex items-center justify-center p-2 sm:p-4 relative">
+                                <div id="pdfCanvasContainer" class="relative perspective-1000 w-full h-full flex items-center justify-center">
+                                    <div id="pageFlipContainer" class="relative transform-style-preserve-3d transition-transform duration-700 ease-in-out">
+                                        <div id="currentPageContainer" class="flex items-center justify-center w-full h-full backface-hidden">
+                                            <!-- PDF canvas will be inserted here -->
+                                        </div>
+                                        <div id="nextPageContainer" class="flex items-center justify-center w-full h-full backface-hidden transform rotateY-180 opacity-0 absolute inset-0">
+                                            <!-- Next page canvas will be inserted here -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="pageTurnShadow" class="absolute inset-0 pointer-events-none opacity-0 transition-opacity duration-700">
+                                    <div class="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-black/20 to-transparent"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Error State -->
+                        <div id="pdfError" class="absolute inset-0 flex items-center justify-center bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm z-20 hidden">
+                            <div class="text-center max-w-xs sm:max-w-lg mx-auto p-4 sm:p-8">
+                                <div class="w-20 h-20 sm:w-32 sm:h-32 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-8">
+                                    <svg class="w-10 h-10 sm:w-16 sm:h-16 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl sm:text-3xl font-bold text-gray-800 dark:text-gray-200 mb-3 sm:mb-4">Unable to Load PDF</h3>
+                                <p class="text-gray-600 dark:text-gray-400 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-lg">
+                                    The PDF file could not be loaded. Please try again or download the file.
+                                </p>
+                                <div class="flex flex-col space-y-3 sm:space-y-4">
+                                    <button onclick="openPdfInNewTab()" class="flex items-center justify-center space-x-2 sm:space-x-3 bg-purple-600 hover:bg-purple-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg text-sm sm:text-base">
+                                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                        </svg>
+                                        <span>Open in New Tab</span>
+                                    </button>
+                                    <button onclick="downloadPdf()" class="flex items-center justify-center space-x-2 sm:space-x-3 bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg text-sm sm:text-base">
+                                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                        </svg>
+                                        <span>Download PDF</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="relative pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-12 bg-gradient-to-br from-white via-blue-50/30 to-purple-50/20 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-300 overflow-hidden">
+            <!-- Animated Background -->
+            <div class="absolute inset-0 overflow-hidden pointer-events-none">
+                <div class="absolute inset-0 bg-gradient-to-r from-msu-light-blue/10 to-white dark:from-gray-800/10 dark:to-gray-900"></div>
+                <div class="absolute top-0 right-0 w-1/2 h-full bg-msu-blue/5 dark:bg-gray-700/5 -skew-x-12 transform origin-top-right"></div>
+            </div>
+            
+            <div class="container mx-auto px-4 xl:px-0 relative z-10">
+                <!-- Breadcrumb -->
+                <div class="mb-4 sm:mb-6 lg:mb-8 animate-fade-in">
+                    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 transition-colors duration-300">
+                        <a href="/home" class="hover:text-msu-blue dark:hover:text-yellow-300 transition-colors">Home</a> / 
+                        <a href="/publications" class="hover:text-msu-blue dark:hover:text-yellow-300 transition-colors">Publications</a> / 
+                        <span class="text-msu-blue dark:text-yellow-300 font-semibold">KAWASA</span>
+                    </p>
+                </div>
+
+                <!-- Hero Content -->
+                <div class="text-center mb-8 sm:mb-12">
+                    <div class="inline-block mb-4 sm:mb-6 animate-bounce-slow">
+                        <div class="bg-gradient-to-r from-msu-blue to-msu-deep-ocean text-white px-6 py-2 rounded-full text-sm font-bold shadow-xl">
+                            ✨ Student Excellence Repository
+                        </div>
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black mb-4 sm:mb-6 animate-slide-up">
+                        <span class="bg-gradient-to-r from-msu-blue via-msu-dark-blue to-msu-deep-ocean bg-clip-text text-transparent">
+                            KAWASA
+                        </span>
+                    </h1>
+                    
+                    <div class="w-20 sm:w-24 lg:w-32 h-1.5 sm:h-2 bg-gradient-to-r from-msu-blue to-msu-deep-ocean mx-auto mb-4 sm:mb-6 rounded-full transition-colors duration-300 animate-slide-up" style="animation-delay: 0.1s;"></div>
+                    
+                    <p class="text-base sm:text-lg lg:text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0 transition-colors duration-300 animate-slide-up" style="animation-delay: 0.2s;">
+                        Empowering Student Research & Creative Excellence at MSU Tawi-Tawi College of Technology and Oceanography
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Latest Publication Section -->
+        <div class="py-8 sm:py-12 lg:py-16 bg-white/50 dark:bg-gray-800/50 border-t border-b border-gray-100 dark:border-gray-700 transition-colors duration-300">
+            <div class="container mx-auto px-4 xl:px-0">
+                <div class="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-12 items-center">
+                    <!-- Publication Cover -->
+                    <div class="w-full lg:w-1/2">
+                        <div class="relative group overflow-hidden rounded-2xl shadow-2xl max-w-md mx-auto lg:max-w-none transform transition-all duration-500 hover:scale-[1.02]">
+                            <!-- Placeholder with gradient -->
+                            <div class="aspect-[3/4] bg-gradient-to-br from-msu-blue via-msu-dark-blue to-msu-deep-ocean flex items-center justify-center">
+                                <div class="text-center text-white p-8">
+                                    <svg class="w-24 h-24 mx-auto mb-4 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                    </svg>
+                                    <h3 class="text-2xl font-bold">{latestPublication.title}</h3>
+                            </div>
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                                <div class="text-white">
+                                    <h3 class="text-xl font-bold mb-2">{latestPublication.title}</h3>
+                                    <p class="text-sm">Click to view publication</p>
+                                </div>
+                            </div>
+                            <div class="absolute top-4 right-4 bg-msu-main-color text-white font-bold px-4 py-2 rounded-full text-xs sm:text-sm shadow-lg">
+                                Latest Publication
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Publication Details -->
+                    <div class="w-full lg:w-1/2">
+                        <div class="bg-white dark:bg-gray-900 p-6 sm:p-8 lg:p-10 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 transition-colors duration-300">
+                            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-msu-main-color dark:text-yellow-300 mb-4 sm:mb-6 transition-colors duration-300">
+                                {latestPublication.title}
+                            </h2>
+                            
+                            <!-- Author Info -->
+                            <div class="flex items-center space-x-3 mb-4 sm:mb-6">
+                                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-msu-blue to-msu-deep-ocean flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                                    {latestPublication.author.split(' ').map(n => n[0]).join('')}
+                                </div>
+                                <div>
+                                    <p class="font-bold text-gray-800 dark:text-white text-sm sm:text-base">{latestPublication.author}</p>
+                                    <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400">{latestPublication.program}</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Meta Info -->
+                            <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                                <span class="bg-msu-blue/10 dark:bg-yellow-400/20 text-msu-main-color dark:text-yellow-300 px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-colors duration-300">
+                                    {latestPublication.year}
+                                </span>
+                                <span class="bg-msu-gold/10 dark:bg-yellow-400/20 text-msu-main-color dark:text-yellow-300 px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-colors duration-300">
+                                    {latestPublication.category}
+                                </span>
+                                <span class="bg-msu-deep-ocean/10 dark:bg-yellow-400/20 text-msu-main-color dark:text-yellow-300 px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-colors duration-300">
+                                    {latestPublication.semester}
+                                </span>
+                            </div>
+                            
+                            <!-- Stats -->
+                            <div class="grid grid-cols-3 gap-3 mb-6 sm:mb-8">
+                                <div class="text-center p-3 bg-gradient-to-br from-blue-50 to-gray-50 dark:from-blue-900/20 dark:to-gray-800/20 rounded-xl border border-blue-100 dark:border-blue-800">
+                                    <div class="text-xl sm:text-2xl font-black text-msu-blue dark:text-blue-400">{latestPublication.views}</div>
+                                    <div class="text-xs text-gray-600 dark:text-gray-400 font-medium">Views</div>
+                                </div>
+                                <div class="text-center p-3 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-800/20 dark:to-blue-900/20 rounded-xl border border-gray-100 dark:border-gray-700">
+                                    <div class="text-xl sm:text-2xl font-black text-msu-dark-blue dark:text-blue-300">{latestPublication.citations}</div>
+                                    <div class="text-xs text-gray-600 dark:text-gray-400 font-medium">Citations</div>
+                                </div>
+                                <div class="text-center p-3 bg-gradient-to-br from-blue-50 to-gray-50 dark:from-blue-900/20 dark:to-gray-800/20 rounded-xl border border-blue-100 dark:border-blue-800">
+                                    <div class="text-xl sm:text-2xl font-black text-msu-deep-ocean dark:text-blue-400">{latestPublication.downloads}</div>
+                                    <div class="text-xs text-gray-600 dark:text-gray-400 font-medium">Downloads</div>
+                                </div>
+                            </div>
+                            
+                            <p class="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-6 sm:mb-8 leading-relaxed transition-colors duration-300">
+                                {latestPublication.abstract}
+                            </p>
+                            
+                            <!-- Action Buttons -->
+                            <div class="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
+                                <button
+                                    id="viewLatestPDF"
+                                    data-pdf-url={latestPublication.file.asset.url}
+                                    data-title={latestPublication.title}
+                                    class="inline-flex items-center justify-center bg-msu-main-color hover:bg-msu-deep-ocean text-white font-bold py-3 sm:py-3.5 px-5 sm:px-7 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl text-sm sm:text-base"
+                                >
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                    </svg>
+                                    View Publication
+                                </button>
+                                <a
+                                    href={latestPublication.file.asset.url} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center justify-center bg-white dark:bg-gray-800 border-2 border-msu-blue text-msu-blue dark:text-blue-400 hover:bg-msu-blue/5 dark:hover:bg-gray-700 font-semibold py-3 sm:py-3.5 px-5 sm:px-7 rounded-xl shadow-md transform transition-all duration-300 hover:scale-105 text-sm sm:text-base"
+                                >
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                    </svg>
+                                    Download PDF
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Publications Archive Section -->
+        <div class="py-8 sm:py-12 lg:py-16 bg-gradient-to-br from-gray-50 via-white to-blue-50/20 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-300">
+            <div class="container mx-auto px-4 xl:px-0">
+                <!-- Search and Filter -->
+                <div class="mb-8 sm:mb-12 lg:mb-16 max-w-6xl mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
+                        <!-- Year Filter -->
+                        <div class="relative">
+                            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                                <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                Year
+                            </label>
+                            <select id="yearFilter" class="kawasa-filter-dropdown w-full">
+                                <option value="All">All Years</option>
+                                {uniqueYears.map((year) => (
+                                        <option value={year}>{year}</option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <!-- Category Filter -->
+                        <div class="relative">
+                            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                                <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                            </svg>
+                                Category
+                            </label>
+                            <select id="categoryFilter" class="kawasa-filter-dropdown w-full">
+                                {uniqueCategories.map((category) => (
+                                    <option value={category}>{category}</option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <!-- Search Input -->
+                        <div class="relative">
+                            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                                <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                                Search
+                            </label>
+                            <input 
+                                type="text" 
+                                id="searchFilter" 
+                                class="kawasa-filter-dropdown w-full" 
+                                placeholder="Search publications, authors..." 
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Header -->
+                <div class="text-center mb-8 sm:mb-10 lg:mb-12">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-msu-main-color dark:text-yellow-300 mb-4 transition-colors duration-300">
+                        Publications Archive
+                    </h2>
+                    <div class="w-24 sm:w-32 h-1.5 sm:h-2 bg-msu-deep-ocean dark:bg-yellow-400 mx-auto rounded-full transition-colors duration-300"></div>
+                </div>
+
+                <!-- Publications Grid -->
+                <div id="publicationsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12 lg:mb-16">
+                    {allPublications.map((pub) => (
+                        <div 
+                            class="publication-item group bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden border border-gray-100 dark:border-gray-700 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+                            data-year={pub.year}
+                            data-category={pub.category}
+                            data-title={pub.title}
+                            data-author={pub.author}
+                            data-content={pub.abstract}
+                        >
+                            <!-- Image -->
+                            <div class="relative h-48 sm:h-56 lg:h-64 overflow-hidden bg-gradient-to-br from-msu-blue/30 via-msu-dark-blue/30 to-msu-deep-ocean/30">
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <svg class="w-20 h-20 text-msu-blue/20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                    </svg>
+                                </div>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 sm:p-5">
+                                    <button 
+                                        class="view-pdf-btn w-full inline-flex items-center justify-center bg-msu-main-color hover:bg-msu-deep-ocean text-white font-semibold py-2.5 px-4 rounded-xl transition-all duration-300 text-sm"
+                                        data-pdf-url={pub.file.asset.url}
+                                        data-title={pub.title}
+                                    >
+                                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                        </svg>
+                                        View PDF
+                                    </button>
+                                </div>
+                                <div class="absolute top-3 right-3 bg-msu-main-color text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+                                    {pub.category}
+                            </div>
+                            </div>
+                            
+                            <!-- Content -->
+                            <div class="p-5 sm:p-6">
+                                <h3 class="text-lg sm:text-xl font-bold text-gray-800 dark:text-white mb-3 line-clamp-2 group-hover:text-msu-blue dark:group-hover:text-yellow-300 transition-all duration-300">
+                                    {pub.title}
+                                </h3>
+                                
+                                <!-- Author -->
+                                <div class="flex items-center space-x-2 mb-3">
+                                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-msu-blue to-msu-deep-ocean flex items-center justify-center text-white font-bold text-xs shadow">
+                                        {pub.author.split(' ').map(n => n[0]).join('')}
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-semibold text-gray-800 dark:text-white">{pub.author}</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400">{pub.program}</p>
+                                    </div>
+                                </div>
+                                
+                                <p class="text-sm text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
+                                    {pub.abstract}
+                                </p>
+                                
+                                <!-- Meta -->
+                                <div class="flex items-center justify-between text-xs sm:text-sm">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="bg-msu-blue/10 dark:bg-yellow-400/20 text-msu-main-color dark:text-yellow-300 px-2.5 py-1 rounded-full font-semibold">
+                                            {pub.year}
+                                        </span>
+                                    </div>
+                                    <div class="flex items-center space-x-1 text-gray-500 dark:text-gray-400">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                        </svg>
+                                        <span>{pub.views}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                <!-- Pagination -->
+                <div class="flex justify-center">
+                    <div id="pagination" class="flex items-center space-x-2">
+                        <button id="prevPage" class="w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 rounded-xl transition-all hover:bg-msu-blue hover:text-white hover:border-msu-blue disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white dark:disabled:hover:bg-gray-800 disabled:hover:text-gray-600 dark:disabled:hover:text-gray-400 disabled:hover:border-gray-200 dark:disabled:hover:border-gray-700" disabled>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                        </button>
+
+                        <div id="pageNumbers" class="flex items-center space-x-2">
+                            <!-- Page numbers will be dynamically inserted here -->
+                        </div>
+
+                        <button id="nextPage" class="w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 rounded-xl transition-all hover:bg-msu-blue hover:text-white hover:border-msu-blue disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white dark:disabled:hover:bg-gray-800 disabled:hover:text-gray-600 dark:disabled:hover:text-gray-400 disabled:hover:border-gray-200 dark:disabled:hover:border-gray-700">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" aria-label="Scroll to top">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+      </svg>
+    </button>
+     
+        <FooterNav />
+        <Footer />
+
+        <script src="../../js/animate.js"></script>
+        <script src="../../js/loadinganim.js"></script>
+        <script src="../../js/smoothscroll.js"></script>
+
+        <!-- PDF Viewer Script -->
+        <script is:inline>
+            // Global variables for PDF viewer
+            let currentPdfUrl = '';
+            let currentPdfTitle = '';
+            let pdfDoc = null;
+            let pageNum = 1;
+            let pageRendering = false;
+            let pageNumPending = null;
+            let scale = 1.0;
+            let canvas = null;
+            let ctx = null;
+            let nextCanvas = null;
+            let nextCtx = null;
+            let isAnimating = false;
+            let baseScale = 1.0;
+
+            // PDF Viewer functions
+            async function openPdfViewer(pdfUrl, title) {
+                console.log('Opening PDF viewer:', { pdfUrl, title });
+                
+                if (!pdfUrl || pdfUrl === '' || pdfUrl === '#') {
+                    alert('PDF file not available for this publication.');
+                    return;
+                }
+                
+                currentPdfUrl = pdfUrl;
+                currentPdfTitle = title;
+                
+                const modal = document.getElementById('pdfViewerModal');
+                const titleElement = document.getElementById('modalPdfTitle');
+                const loadingElement = document.getElementById('pdfLoading');
+                const errorElement = document.getElementById('pdfError');
+                
+                if (modal && titleElement) {
+                    const displayTitle = title && title.length > 40 ? title.substring(0, 40) + '...' : title;
+                    titleElement.textContent = displayTitle || 'KAWASA Publication Viewer';
+                    
+                    if (loadingElement) loadingElement.classList.remove('hidden');
+                    if (errorElement) errorElement.classList.add('hidden');
+                    
+                    modal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                    
+                    await initializePdfViewer();
+                }
+            }
+
+            async function initializePdfViewer() {
+                try {
+                    if (typeof pdfjsLib === 'undefined') {
+                        await loadPdfJs();
+                    }
+                    
+                    const currentPageContainer = document.getElementById('currentPageContainer');
+                    const nextPageContainer = document.getElementById('nextPageContainer');
+                    if (!currentPageContainer || !nextPageContainer) return;
+                    
+                    currentPageContainer.innerHTML = '';
+                    nextPageContainer.innerHTML = '';
+                    
+                    canvas = document.createElement('canvas');
+                    canvas.id = 'pdfCanvas';
+                    canvas.className = 'shadow-2xl border-2 border-gray-200 dark:border-gray-700 rounded-xl';
+                    canvas.style.maxWidth = '100%';
+                    canvas.style.maxHeight = '100%';
+                    canvas.style.width = 'auto';
+                    canvas.style.height = 'auto';
+                    ctx = canvas.getContext('2d');
+                    
+                    nextCanvas = document.createElement('canvas');
+                    nextCanvas.id = 'nextPdfCanvas';
+                    nextCanvas.className = 'shadow-2xl border-2 border-gray-200 dark:border-gray-700 rounded-xl';
+                    nextCanvas.style.maxWidth = '100%';
+                    nextCanvas.style.maxHeight = '100%';
+                    nextCanvas.style.width = 'auto';
+                    nextCanvas.style.height = 'auto';
+                    nextCtx = nextCanvas.getContext('2d');
+                    
+                    currentPageContainer.appendChild(canvas);
+                    nextPageContainer.appendChild(nextCanvas);
+                    
+                    const loadingTask = pdfjsLib.getDocument(currentPdfUrl);
+                    pdfDoc = await loadingTask.promise;
+                    
+                    updatePageInfo();
+                    await renderPage(pageNum);
+                    
+                    const loadingElement = document.getElementById('pdfLoading');
+                    if (loadingElement) loadingElement.classList.add('hidden');
+                    
+                } catch (error) {
+                    console.error('Error loading PDF:', error);
+                    showPdfError();
+                }
+            }
+
+            async function loadPdfJs() {
+                return new Promise((resolve, reject) => {
+                    const script = document.createElement('script');
+                    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+                    script.onload = () => {
+                        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+                        resolve();
+                    };
+                    script.onerror = reject;
+                    document.head.appendChild(script);
+                });
+            }
+
+            function updatePageInfo() {
+                const pageInfoElement = document.getElementById('pageInfo');
+                if (pageInfoElement && pdfDoc) {
+                    pageInfoElement.textContent = `${pageNum} / ${pdfDoc.numPages}`;
+                }
+                updateNavigationButtons();
+            }
+
+            function updateNavigationButtons() {
+                const prevButton = document.querySelector('#pdfViewerModal #pdfPrevPage');
+                const nextButton = document.querySelector('#pdfViewerModal #pdfNextPage');
+                
+                if (prevButton) {
+                    prevButton.disabled = pageNum <= 1 || isAnimating;
+                }
+                
+                if (nextButton) {
+                    nextButton.disabled = pageNum >= pdfDoc?.numPages || isAnimating;
+                }
+            }
+
+            async function renderPage(num) {
+                pageRendering = true;
+                
+                try {
+                    const page = await pdfDoc.getPage(num);
+                    const container = document.getElementById('pageFlipContainer');
+                    
+                    if (container) {
+                        const containerRect = container.getBoundingClientRect();
+                        const pageViewport = page.getViewport({ scale: 1.0 });
+                        
+                        const scaleX = (containerRect.width - 40) / pageViewport.width;
+                        const scaleY = (containerRect.height - 40) / pageViewport.height;
+                        const fitScale = Math.min(scaleX, scaleY, 3.0);
+                        
+                        if (baseScale === 1.0) {
+                            baseScale = fitScale;
+                        }
+                        
+                        const optimalScale = fitScale * scale;
+                        const viewport = page.getViewport({ scale: optimalScale });
+                        
+                        canvas.height = viewport.height;
+                        canvas.width = viewport.width;
+                        
+                        const renderContext = {
+                            canvasContext: ctx,
+                            viewport: viewport
+                        };
+                        
+                        await page.render(renderContext).promise;
+                    }
+                    
+                    pageRendering = false;
+                    
+                    if (pageNumPending !== null) {
+                        renderPage(pageNumPending);
+                        pageNumPending = null;
+                    }
+                    
+                } catch (error) {
+                    console.error('Error rendering page:', error);
+                    pageRendering = false;
+                }
+            }
+
+            async function onPrevPage() {
+                if (pageNum <= 1 || isAnimating) return;
+                pageNum--;
+                await renderPage(pageNum);
+                updatePageInfo();
+            }
+
+            async function onNextPage() {
+                if (pageNum >= pdfDoc?.numPages || isAnimating) return;
+                pageNum++;
+                await renderPage(pageNum);
+                updatePageInfo();
+            }
+
+            async function zoomIn() {
+                if (isAnimating) return;
+                scale *= 1.25;
+                await renderPage(pageNum);
+                updateZoomLevel();
+            }
+
+            async function zoomOut() {
+                if (isAnimating) return;
+                scale /= 1.25;
+                if (scale < 0.5) scale = 0.5;
+                await renderPage(pageNum);
+                updateZoomLevel();
+            }
+
+            function zoomFit() {
+                if (!pdfDoc) return;
+                scale = baseScale;
+                renderPage(pageNum);
+                updateZoomLevel();
+            }
+
+            function updateZoomLevel() {
+                const zoomElement = document.getElementById('zoomLevel');
+                if (zoomElement) {
+                    zoomElement.textContent = `${Math.round(scale * 100)}%`;
+                }
+            }
+
+            function showPdfError() {
+                const loadingElement = document.getElementById('pdfLoading');
+                const errorElement = document.getElementById('pdfError');
+                
+                if (loadingElement) loadingElement.classList.add('hidden');
+                if (errorElement) errorElement.classList.remove('hidden');
+            }
+
+            function closePdfViewer() {
+                const modal = document.getElementById('pdfViewerModal');
+                
+                if (modal) {
+                    modal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                    
+                    pdfDoc = null;
+                    pageNum = 1;
+                    pageRendering = false;
+                    pageNumPending = null;
+                    scale = 1.0;
+                    baseScale = 1.0;
+                    isAnimating = false;
+                }
+            }
+
+            function openPdfInNewTab() {
+                if (currentPdfUrl) {
+                    window.open(currentPdfUrl, '_blank');
+                }
+            }
+
+            function downloadPdf() {
+                if (currentPdfUrl) {
+                    const link = document.createElement('a');
+                    link.href = currentPdfUrl;
+                    link.download = currentPdfTitle || 'publication.pdf';
+                    link.click();
+                }
+            }
+
+            window.openPdfViewer = openPdfViewer;
+            window.closePdfViewer = closePdfViewer;
+            window.openPdfInNewTab = openPdfInNewTab;
+            window.downloadPdf = downloadPdf;
+            window.onPrevPage = onPrevPage;
+            window.onNextPage = onNextPage;
+            window.zoomIn = zoomIn;
+            window.zoomOut = zoomOut;
+            window.zoomFit = zoomFit;
+            
+            document.addEventListener('DOMContentLoaded', () => {
+                const viewLatestPDFBtn = document.getElementById('viewLatestPDF');
+                const viewPdfBtns = document.querySelectorAll('.view-pdf-btn');
+
+                if (viewLatestPDFBtn) {
+                    viewLatestPDFBtn.addEventListener('click', () => {
+                        const pdfUrl = viewLatestPDFBtn.getAttribute('data-pdf-url');
+                        const title = viewLatestPDFBtn.getAttribute('data-title');
+                        openPdfViewer(pdfUrl, title);
+                    });
+                }
+
+                viewPdfBtns.forEach((btn) => {
+                    btn.addEventListener('click', () => {
+                        const pdfUrl = btn.getAttribute('data-pdf-url');
+                        const title = btn.getAttribute('data-title');
+                        openPdfViewer(pdfUrl, title);
+                    });
+                });
+
+                const zoomInBtn = document.querySelector('#pdfViewerModal #zoomIn');
+                const zoomOutBtn = document.querySelector('#pdfViewerModal #zoomOut');
+                const zoomFitBtn = document.querySelector('#pdfViewerModal #zoomFit');
+                const prevPageBtn = document.querySelector('#pdfViewerModal #pdfPrevPage');
+                const nextPageBtn = document.querySelector('#pdfViewerModal #pdfNextPage');
+
+                if (zoomInBtn) zoomInBtn.addEventListener('click', (e) => { e.preventDefault(); zoomIn(); });
+                if (zoomOutBtn) zoomOutBtn.addEventListener('click', (e) => { e.preventDefault(); zoomOut(); });
+                if (zoomFitBtn) zoomFitBtn.addEventListener('click', (e) => { e.preventDefault(); zoomFit(); });
+                if (prevPageBtn) prevPageBtn.addEventListener('click', (e) => { e.preventDefault(); onPrevPage(); });
+                if (nextPageBtn) nextPageBtn.addEventListener('click', (e) => { e.preventDefault(); onNextPage(); });
+            });
+        </script>
+
+        <!-- Filter and Pagination Script -->
+        <script is:inline>
+            document.addEventListener('DOMContentLoaded', () => {
+                const itemsPerPage = window.innerWidth < 640 ? 4 : window.innerWidth < 1024 ? 6 : 6;
+                const publicationsGrid = document.getElementById('publicationsGrid');
+                const allPublicationItems = Array.from(publicationsGrid?.querySelectorAll('.publication-item') || []);
+                const yearFilter = document.getElementById('yearFilter');
+                const categoryFilter = document.getElementById('categoryFilter');
+                const searchFilter = document.getElementById('searchFilter');
+                const prevPageButton = document.getElementById('prevPage');
+                const nextPageButton = document.getElementById('nextPage');
+                const pageNumbersContainer = document.getElementById('pageNumbers');
+
+                let currentPage = 1;
+                let filteredItems = allPublicationItems;
+
+                function filterItems() {
+                    const selectedYear = yearFilter.value.toLowerCase();
+                    const selectedCategory = categoryFilter.value.toLowerCase();
+                    const searchQuery = searchFilter.value.toLowerCase();
+
+                    filteredItems = allPublicationItems.filter(item => {
+                        const year = item.getAttribute('data-year').toLowerCase();
+                        const category = item.getAttribute('data-category').toLowerCase();
+                        const title = item.getAttribute('data-title').toLowerCase();
+                        const author = item.getAttribute('data-author').toLowerCase();
+                        const content = item.getAttribute('data-content').toLowerCase();
+
+                        const yearMatch = selectedYear === 'all' || year === selectedYear;
+                        const categoryMatch = selectedCategory === 'all' || category === selectedCategory;
+                        const searchMatch = title.includes(searchQuery) || author.includes(searchQuery) || content.includes(searchQuery);
+
+                        return yearMatch && categoryMatch && searchMatch;
+                    });
+
+                    currentPage = 1;
+                    renderPagination();
+                    changePage(currentPage);
+                }
+
+                function renderPagination() {
+                    const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+                    if (pageNumbersContainer) {
+                        pageNumbersContainer.innerHTML = '';
+
+                        const isMobile = window.innerWidth < 640;
+                        const maxVisiblePages = isMobile ? 3 : 5;
+
+                        if (totalPages > 0) {
+                            const firstPageButton = createPageButton(1);
+                            pageNumbersContainer.appendChild(firstPageButton);
+                        }
+
+                        const startPage = Math.max(2, currentPage - Math.floor(maxVisiblePages / 2));
+                        const endPage = Math.min(totalPages - 1, startPage + maxVisiblePages - 3);
+
+                        if (startPage > 2) {
+                            const ellipsis = document.createElement('span');
+                            ellipsis.className = 'px-2 text-gray-500 text-sm';
+                            ellipsis.textContent = '...';
+                            pageNumbersContainer.appendChild(ellipsis);
+                        }
+
+                        for (let i = startPage; i <= endPage; i++) {
+                            const pageButton = createPageButton(i);
+                            pageNumbersContainer.appendChild(pageButton);
+                        }
+
+                        if (endPage < totalPages - 1 && totalPages > maxVisiblePages) {
+                            const ellipsis = document.createElement('span');
+                            ellipsis.className = 'px-2 text-gray-500 text-sm';
+                            ellipsis.textContent = '...';
+                            pageNumbersContainer.appendChild(ellipsis);
+                        }
+
+                        if (totalPages > 1) {
+                            const lastPageButton = createPageButton(totalPages);
+                            pageNumbersContainer.appendChild(lastPageButton);
+                        }
+                    }
+
+                    if (prevPageButton) prevPageButton.disabled = currentPage === 1;
+                    if (nextPageButton) nextPageButton.disabled = currentPage === totalPages || totalPages === 0;
+                }
+
+                function createPageButton(pageNumber) {
+                    const pageButton = document.createElement('button');
+                    const isDarkMode = document.documentElement.classList.contains('dark');
+                    
+                    if (currentPage === pageNumber) {
+                        pageButton.style.backgroundColor = '#61063B';
+                        pageButton.style.color = '#ffffff';
+                        pageButton.className = 'w-10 h-10 flex items-center justify-center rounded-xl font-semibold text-white shadow-lg';
+                    } else {
+                        pageButton.style.backgroundColor = isDarkMode ? '#1f2937' : '#ffffff';
+                        pageButton.style.color = isDarkMode ? '#d1d5db' : '#6b7280';
+                        pageButton.style.borderColor = '#61063B';
+                        pageButton.className = 'w-10 h-10 flex items-center justify-center rounded-xl font-semibold border-2 transition-all';
+                    
+                    // Add hover effect
+                    pageButton.addEventListener('mouseenter', () => {
+                        if (currentPage !== pageNumber) {
+                            pageButton.style.backgroundColor = '#03045e';
+                            pageButton.style.color = '#ffffff';
+                        }
+                    });
+                    
+                    pageButton.addEventListener('mouseleave', () => {
+                        if (currentPage !== pageNumber) {
+                            pageButton.style.backgroundColor = isDarkMode ? '#1f2937' : '#ffffff';
+                            pageButton.style.color = isDarkMode ? '#d1d5db' : '#6b7280';
+                        }
+                    });
+                    }
+                    
+                    pageButton.textContent = pageNumber.toString();
+                    pageButton.addEventListener('click', () => changePage(pageNumber));
+                    return pageButton;
+                }
+
+                function changePage(page) {
+                    currentPage = page;
+                    const startIndex = (currentPage - 1) * itemsPerPage;
+                    const endIndex = startIndex + itemsPerPage;
+
+                    allPublicationItems.forEach((item) => {
+                        item.style.display = 'none';
+                    });
+
+                    filteredItems.slice(startIndex, endIndex).forEach((item) => {
+                        item.style.display = 'block';
+                    });
+
+                    renderPagination();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+
+                yearFilter.addEventListener('change', filterItems);
+                categoryFilter.addEventListener('change', filterItems);
+                searchFilter.addEventListener('input', filterItems);
+
+                prevPageButton.addEventListener('click', () => {
+                    if (currentPage > 1) changePage(currentPage - 1);
+                });
+
+                nextPageButton.addEventListener('click', () => {
+                    if (currentPage < Math.ceil(filteredItems.length / itemsPerPage)) changePage(currentPage + 1);
+                });
+
+                filterItems();
+                renderPagination();
+
+                window.addEventListener('resize', () => {
+                    renderPagination();
+                });
+            });
+        </script>
+
+        <style>
+            /* CSS Variables */
+            :root {
+                --msu-deep-ocean: #61063B;
+                --msu-main-color: #03045e;
+                --msu-blue: #03045e;
+                --msu-dark-blue: #0C1C59;
+                --msu-gold: #F7D93C;
+                --msu-light-blue: #E6F2FF;
+            }
+
+            /* Animations */
+            @keyframes fade-in {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+
+            @keyframes slide-up {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            @keyframes bounce-slow {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-10px); }
+            }
+
+            .animate-fade-in {
+                animation: fade-in 0.8s ease-out;
+            }
+
+            .animate-slide-up {
+                animation: slide-up 0.8s ease-out;
+                opacity: 0;
+                animation-fill-mode: forwards;
+            }
+
+            .animate-bounce-slow {
+                animation: bounce-slow 3s ease-in-out infinite;
+            }
+
+            /* Filter Dropdown Styling */
+            .kawasa-filter-dropdown {
+                @apply px-4 py-3 border-2 border-gray-200 dark:border-gray-700 rounded-xl shadow-sm focus:ring-2 focus:ring-msu-gold focus:border-msu-gold dark:focus:ring-yellow-400 dark:focus:border-yellow-400 outline-none transition-all duration-300 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200;
+            }
+
+            .kawasa-filter-dropdown:hover {
+                border-color: var(--msu-blue);
+            }
+
+            /* Line clamp utilities */
+            .line-clamp-2 {
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            
+            .line-clamp-3 {
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+            
+            /* Gradient text */
+            .bg-clip-text {
+                -webkit-background-clip: text;
+                background-clip: text;
+            }
+
+            /* PDF Viewer Styles */
+            .perspective-1000 {
+                perspective: 1000px;
+            }
+            
+            .transform-style-preserve-3d {
+                transform-style: preserve-3d;
+            }
+            
+            .backface-hidden {
+                backface-visibility: hidden;
+            }
+            
+            #pdfCanvas, #nextPdfCanvas {
+                transition: all 0.3s ease-in-out;
+                border: 2px solid rgba(0, 0, 0, 0.1);
+                box-shadow: 
+                    0 20px 40px -10px rgba(0, 0, 0, 0.15),
+                    0 0 0 1px rgba(255, 255, 255, 0.5);
+                border-radius: 12px;
+                background: white;
+                max-width: 100%;
+                max-height: 100%;
+                width: auto;
+                height: auto;
+                object-fit: contain;
+            }
+            
+            /* Custom scrollbar */
+            ::-webkit-scrollbar {
+                width: 12px;
+            }
+
+            ::-webkit-scrollbar-track {
+                background: #f1f1f1;
+                border-radius: 6px;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: linear-gradient(135deg, var(--msu-main-color), var(--msu-deep-ocean));
+                border-radius: 6px;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: linear-gradient(135deg, var(--msu-dark-blue), var(--msu-deep-ocean));
+            }
+
+            /* Dark mode scrollbar */
+            .dark ::-webkit-scrollbar-track {
+                background: #1f2937;
+            }
+
+            /* Mobile optimizations */
+            @media (max-width: 640px) {
+                .container {
+                    padding-left: 1rem;
+                    padding-right: 1rem;
+                }
+            }
+        </style>
+    </main>
+</Layout>

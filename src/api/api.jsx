@@ -1587,12 +1587,44 @@ export async function getCOLPrograms() {
     }`;
     
     const programs = await useSanityClient().fetch(query);
-    console.log('=== DEBUG: getCOEDPrograms ===');
+    console.log('=== DEBUG: getCOLPrograms ===');
     console.log('Total COED programs found:', programs?.length);
     
     return programs || [];
   } catch (error) {
-    console.error('Error in getCOEDPrograms:', error);
+    console.error('Error in getCOLPrograms:', error);
+    return [];
+  }
+}
+
+
+
+export async function getIICTPrograms() {
+  try {
+    const query = groq`*[_type == "program" && department->department == "College of Computer Studies"]{ 
+      _id,
+      title,
+      description,
+      accreditation,
+      file {
+        asset->{
+          url,
+          originalFilename
+        }
+      },
+      department->{department},
+      degree->{degree},
+      level->{level},
+      duration->{duration}
+    }`;
+    
+    const programs = await useSanityClient().fetch(query);
+    console.log('=== DEBUG: getIICTPrograms ===');
+    console.log('Total COED programs found:', programs?.length);
+    
+    return programs || [];
+  } catch (error) {
+    console.error('Error in getIICTPrograms:', error);
     return [];
   }
 }

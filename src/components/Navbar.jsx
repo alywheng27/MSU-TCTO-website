@@ -195,7 +195,7 @@ const Navbar = ({ path }) => {
         { link: "/programs/404", label: "College of Islamic & Arabic Studies" },
         { link: "/programs/coed", label: "College of Education" },
         { link: "/programs/404", label: "College of Fisheries" },
-        { link: "/programs/404", label: "Institute of Information and Communication Technology" },
+        { link: "/programs/iict", label: "Institute of Information and Communication Technology" },
         { link: "/programs/404", label: "Institute of Oceanography and Environmental Science" },
         { link: "/programs/col", label: "College of Law" },
       ]
@@ -219,6 +219,7 @@ const Navbar = ({ path }) => {
         { link: "/publications/gazette", label: "Gazettes" },
         { link: "/bidding", label: "Bidding" },
         { link: "/publications/annual-reports", label: "Annual Reports" },
+        { link: "/underprocess", label: "KAWASA Publications" },
         // { link: "/publications/msutctoscopus", label: "Scopus" },
       ]
     },
