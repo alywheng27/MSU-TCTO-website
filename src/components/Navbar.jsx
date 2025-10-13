@@ -196,7 +196,7 @@ const Navbar = ({ path }) => {
         { link: "/programs/coed", label: "College of Education" },
         { link: "/programs/404", label: "College of Fisheries" },
         { link: "/programs/iict", label: "Institute of Information and Communication Technology" },
-        { link: "/programs/404", label: "Institute of Oceanography and Environmental Science" },
+        { link: "/programs/ioes", label: "Institute of Oceanography and Environmental Science" },
         { link: "/programs/col", label: "College of Law" },
       ]
     },

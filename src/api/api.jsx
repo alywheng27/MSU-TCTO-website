@@ -1628,3 +1628,35 @@ export async function getIICTPrograms() {
     return [];
   }
 }
+
+
+
+export async function getIOESPrograms() {
+  try {
+    const query = groq`*[_type == "program" && department->department == "IOES"]{ 
+      _id,
+      title,
+      description,
+      accreditation,
+      file {
+        asset->{
+          url,
+          originalFilename
+        }
+      },
+      department->{department},
+      degree->{degree},
+      level->{level},
+      duration->{duration}
+    }`;
+    
+    const programs = await useSanityClient().fetch(query);
+    console.log('=== DEBUG: getIICTPrograms ===');
+    console.log('Total IOES programs found:', programs?.length);
+    
+    return programs || [];
+  } catch (error) {
+    console.error('Error in getIOESPrograms:', error);
+    return [];
+  }
+}
