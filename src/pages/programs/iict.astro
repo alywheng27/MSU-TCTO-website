@@ -82,7 +82,7 @@ try {
   filterOptions.levels = Array.from(levelSet);
   filterOptions.departments = Array.from(departmentSet);
   
-  console.log('COED Programs loaded:', programsData.length);
+  console.log('CCS Programs loaded:', programsData.length);
   console.log('Filter options:', filterOptions);
   console.log('Sample program:', programsData[0]);
   console.log('Sample program description:', programsData[0]?.description);
@@ -97,7 +97,7 @@ try {
 
 
 
-<Layout title="Institute of Information and Communications Technology | MSU-TCTO">
+<Layout title="College of Computer Studies (CCS) | MSU-TCTO">
 	<main class="font-sans">
 
 		<Navbar path={currentPath} client:visible />
@@ -465,10 +465,10 @@ try {
 							</svg>
 						</div>
 					</div>
-					<h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-[#61063B] dark:text-msu-bgc-color" >About the Institute of Information and Communications Technology</h2>
+					<h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-[#61063B] dark:text-msu-bgc-color" >About the College of Computer Studies</h2>
 					<p class="text-lg sm:text-xl text-msu-main-color dark:text-msu-bgc-color max-w-3xl mx-auto px-4">
 
-						The Institute of Information and Communications Technology (IICT) is a premier academic unit at MSU-TCTO dedicated to advancing education, research, and innovation in information technology and computer science, producing highly competent IT professionals for the Sulu Archipelago and beyond.
+						The College of Computer Studies (CCS), formerly known as the Institute of Information and Communications Technology (IICT), is the premier center for computing education at Mindanao State University – Tawi-Tawi College of Technology and Oceanography (MSU-TCTO). Established through BOR Resolution No. 62, Series of 1999, the college continues its commitment to excellence in information technology and computer studies, providing quality education that blends theory with hands-on learning.
 					</p>
 
 				</div>
@@ -481,7 +481,7 @@ try {
 
 						<div class="relative rounded-2xl overflow-hidden shadow-2xl group cursor-pointer h-64 sm:h-80 md:h-96">
 
-							<img src="/images/iict/bgcol.jpg" alt="IICT Building" 
+							<img src="/images/iict/bgcol.jpg" alt="CCS Building" 
 								class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image" loading="lazy" />
 							
 
@@ -611,7 +611,7 @@ try {
 						<div class="tab-content hidden" id="goal-content">
 							<div class="space-y-6 text-msu-main-color dark:text-msu-bgc-color">
 								<div class="bg-gradient-to-r from-msu-deep-ocean/10 to-transparent p-6 rounded-lg border-l-4 border-msu-deep-ocean">
-									<h4 class="font-bold text-msu-deep-ocean dark:text-msu-bgc-color mb-4 text-xl">IICT Goal</h4>
+									<h4 class="font-bold text-msu-deep-ocean dark:text-msu-bgc-color mb-4 text-xl">CCS Goal</h4>
 									<p class="text-lg leading-relaxed">
 										A premier institute in ICT education and innovation in the Southernmost part of the country.
 									</p>
@@ -625,7 +625,7 @@ try {
 						<div class="tab-content hidden" id="objectives-content">
 							<div class="space-y-6 text-msu-main-color dark:text-msu-bgc-color">
 								<div class="bg-gradient-to-r from-msu-deep-ocean/10 to-transparent p-6 rounded-lg border-l-4 border-msu-deep-ocean">
-									<h4 class="font-bold text-msu-deep-ocean dark:text-msu-bgc-color mb-4 text-xl">IICT Objectives</h4>
+									<h4 class="font-bold text-msu-deep-ocean dark:text-msu-bgc-color mb-4 text-xl">CCS Objectives</h4>
 								<div class="space-y-4">
 									<div class="flex items-start">
 											<span class="text-msu-deep-ocean font-bold mr-3 mt-1 text-lg">1.</span>
@@ -1176,7 +1176,7 @@ function openFacultyModal(facultyId) {
 	const facultyData = {
 		mingoc: {
 			name: "Nerico L. Mingoc, MSIT",
-			position: "Dean, IICT | Chairperson BSIT",
+			position: "Dean, CCS | Chairperson BSIT",
 			rank: "Associate Professor V",
 			image: "/images/iict/Profile/NERICO L. MINGOC.jpg",
 			education: [
@@ -1341,7 +1341,7 @@ function openFacultyModal(facultyId) {
 			],
 			achievements: [
 				"Director for Administration and Services",
-				"Former Dean of IICT (7 years)",
+				"Former Dean of CCS (7 years)",
 				"Presented research papers at national and international conferences",
 				"Published works as primary author and co-author",
 				"Involved in MOST-BARMM Project"
@@ -1385,7 +1385,7 @@ function openFacultyModal(facultyId) {
 			publications: [
 				"Design and Development of MASTR: A classroom Mobile Assistance Supervision Tool and Reporting for Teachers (2024) - Procedia Computer Science"
 			],
-			description: "Mr. Antao is a faculty member of IICT, with an initial specialization in multimedia, and is currently pursuing a master's degree in Informatics at Telkom University in Bandung, Indonesia. He is expanding his expertise in Social Computing, Image processing and Computer Vision, with a research focus on deep learning techniques for crop disease recognition. While still gaining experience in AI and image analysis, he is deeply committed to lifelong learning and leveraging technology to create meaningful impact in agriculture and society."
+			description: "Mr. Antao is a faculty member of CCS, with an initial specialization in multimedia, and is currently pursuing a master's degree in Informatics at Telkom University in Bandung, Indonesia. He is expanding his expertise in Social Computing, Image processing and Computer Vision, with a research focus on deep learning techniques for crop disease recognition. While still gaining experience in AI and image analysis, he is deeply committed to lifelong learning and leveraging technology to create meaningful impact in agriculture and society."
 		},
 		uddin: {
 			name: "Fadzlorrahiem H. Uddin",
@@ -2425,7 +2425,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	
 	// Faculty data for search (matching modal data structure)
 	const facultySearchData = {
-		'mingoc': { name: 'Nerico L. Mingoc, MSIT', position: 'Dean, IICT', specialization: ['Multimedia', 'Programming', 'Human Computer Interaction', 'Gamification', 'IT Projects Management'] },
+		'mingoc': { name: 'Nerico L. Mingoc, MSIT', position: 'Dean, CCS', specialization: ['Multimedia', 'Programming', 'Human Computer Interaction', 'Gamification', 'IT Projects Management'] },
 		'llema': { name: 'Charisa F. Llema-Abalie, MSIT', position: 'Director, ICTO', specialization: ['Mobile Programming', 'IoT', 'Cloud Computing', 'Human Computer Interaction'] },
 		'bakili': { name: 'Engr. Irene A. Bakili', position: 'University Registrar', specialization: ['Wireless Networking', 'Image Classification', 'Mobile Programming', 'Hardware', 'Embedded Systems'] },
 		'andas': { name: 'Joseph V. Andas', position: 'Director for Admin', specialization: ['Educational Technology', 'ICT Integration', 'Basic IT'] },
@@ -3388,7 +3388,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							<img src="/images/iict/Profile/NERICO L. MINGOC.jpg" alt="Nerico L. Mingoc" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg lazy-image" loading="lazy">
 						</div>
 						<h3 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Nerico L. Mingoc, MSIT</h3>
-						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Dean, IICT</p>
+						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Dean, CCS</p>
 					</div>
 				</div>
 
@@ -3495,7 +3495,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
 
 								<h3 class="text-white font-bold text-xl">Nerico L. Mingoc, MSIT</h3>
-								<p class="text-gray-300 text-sm">Dean, IICT</p>
+								<p class="text-gray-300 text-sm">Dean, CCS</p>
 							</div>
 
 						</div>
@@ -3636,7 +3636,7 @@ document.addEventListener('DOMContentLoaded', function() {
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Educational Technology</span>
 							</div>
 							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-								Associate Professor with expertise in ICT integration in education and former IICT Dean.
+								Associate Professor with expertise in ICT integration in education and former CCS Dean.
 							</p>
 							<button onclick="openFacultyModal('andas')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
 								View Profile
@@ -5763,8 +5763,8 @@ document.head.appendChild(style);
             scrolling="no" 
             marginheight="0" 
             marginwidth="0" 
-            src="https://maps.google.com/maps?width=600&height=400&hl=en&q=5.038691,119.74473+(Indanan+Anni+Hall,+IICT,+MSU-TCTO)&t=h&z=17&ie=UTF8&iwloc=B&output=embed"
-            title="IICT, 3rd Floor, New Academic Building, Indanan Anni Hall, MSU-TCTO Location"
+            src="https://maps.google.com/maps?width=600&height=400&hl=en&q=5.038691,119.74473+(Indanan+Anni+Hall,+CCS,+MSU-TCTO)&t=h&z=17&ie=UTF8&iwloc=B&output=embed"
+            title="CCS, 3rd Floor, New Academic Building, Indanan Anni Hall, MSU-TCTO Location"
           ></iframe>
         </div>
       </div>
