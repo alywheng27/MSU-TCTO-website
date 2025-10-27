@@ -1660,3 +1660,67 @@ export async function getIOESPrograms() {
     return [];
   }
 }
+
+
+
+export async function getCIASPrograms() {
+  try {
+    const query = groq`*[_type == "program" && department->department == "CIAS"]{ 
+      _id,
+      title,
+      description,
+      accreditation,
+      file {
+        asset->{
+          url,
+          originalFilename
+        }
+      },
+      department->{department},
+      degree->{degree},
+      level->{level},
+      duration->{duration}
+    }`;
+    
+    const programs = await useSanityClient().fetch(query);
+    console.log('=== DEBUG: getCIASPrograms ===');
+    console.log('Total CIAS programs found:', programs?.length);
+    
+    return programs || [];
+  } catch (error) {
+    console.error('Error in getCIASPrograms:', error);
+    return [];
+  }
+}
+
+
+
+export async function getCASPrograms() {
+  try {
+    const query = groq`*[_type == "program" && department->department == "CAS"]{ 
+      _id,
+      title,
+      description,
+      accreditation,
+      file {
+        asset->{
+          url,
+          originalFilename
+        }
+      },
+      department->{department},
+      degree->{degree},
+      level->{level},
+      duration->{duration}
+    }`;
+    
+    const programs = await useSanityClient().fetch(query);
+    console.log('=== DEBUG: getCASPrograms ===');
+    console.log('Total CIAS programs found:', programs?.length);
+    
+    return programs || [];
+  } catch (error) {
+    console.error('Error in getCASPrograms:', error);
+    return [];
+  }
+}

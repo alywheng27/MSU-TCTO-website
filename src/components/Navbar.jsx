@@ -3,7 +3,6 @@ import {
   FaHome, 
   FaInfoCircle, 
   FaGraduationCap, 
-  FaBook, 
   FaBriefcase, 
   FaSearch,
   FaPhone,
@@ -18,24 +17,24 @@ import {
   FaSun,
   FaUsers
 } from 'react-icons/fa';
-import { FiChevronDown, FiChevronRight } from 'react-icons/fi';
+import { FiChevronRight } from 'react-icons/fi';
 
-const Dropdown = ({ title, items, icon, isMobile, activeDropdown, setActiveDropdown, index, closeMobileMenu }) => {
+const Dropdown = ({ title, items, icon, activeDropdown, setActiveDropdown, index, closeMobileMenu }) => {
   const isActive = activeDropdown === index;
   
   return (
-    <li className={`group relative ${isMobile ? 'border-b border-gray-200 dark:border-gray-600 border-opacity-20' : ''}`}>
+    <li className="group relative border-b border-gray-200 dark:border-gray-600 border-opacity-20">
       <a 
         href={items.length === 0 ? '#' : null} 
-        className={`flex items-center justify-between px-4 py-3 transition-all duration-300 ${
+        className={`flex items-center justify-between px-4 py-3 transition-all duration-300 text-lg ${
           isActive ? 'text-msu-gold dark:text-yellow-400 bg-msu-main-color dark:bg-gray-700 bg-opacity-20' : 'text-white dark:text-gray-200 hover:text-msu-gold dark:hover:text-yellow-400 hover:bg-msu-main-color dark:hover:bg-gray-700 hover:bg-opacity-20'
-        } ${isMobile ? 'text-lg' : 'text-base'}`}
+        }`}
         onClick={(e) => {
-          if (isMobile && items.length > 0) {
+          if (items.length > 0) {
             e.preventDefault();
             setActiveDropdown(isActive ? null : index);
           }
-          if (items.length === 0 && isMobile) {
+          if (items.length === 0) {
             closeMobileMenu();
           }
         }}
@@ -45,28 +44,19 @@ const Dropdown = ({ title, items, icon, isMobile, activeDropdown, setActiveDropd
           <span className="font-medium">{title}</span>
         </div>
         {items.length > 0 && (
-          isMobile ? (
-            <FiChevronRight className={`transform transition-transform duration-300 ${isActive ? 'rotate-90 text-msu-gold dark:text-yellow-400' : 'text-gray-300 dark:text-gray-400'}`} />
-          ) : (
-            <FiChevronDown className={`ml-2 transition-all duration-300 ${isActive ? 'rotate-180 text-msu-gold dark:text-yellow-400' : 'text-gray-300 dark:text-gray-400 group-hover:rotate-180 group-hover:text-msu-gold dark:group-hover:text-yellow-400'}`} />
-          )
+          <FiChevronRight className={`transform transition-transform duration-300 ${isActive ? 'rotate-90 text-msu-gold dark:text-yellow-400' : 'text-gray-300 dark:text-gray-400'}`} />
         )}
       </a>
       {items.length > 0 && (
         <ul 
-          className={`${isMobile ? 
-            `overflow-hidden transition-all duration-300 ${isActive ? 'max-h-screen opacity-100 visible' : 'max-h-0 opacity-0 invisible'}` : 
-            'absolute left-0 mt-0 w-64 bg-msu-deep-ocean dark:bg-gray-800 shadow-xl rounded-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 -translate-y-2 z-50 border border-msu-main-color dark:border-gray-600'}`
-          }
+          className={`overflow-hidden transition-all duration-300 ${isActive ? 'max-h-screen opacity-100 visible' : 'max-h-0 opacity-0 invisible'}`}
         >
           {items.map((item, idx) => (
             <li key={idx}>
               <a 
                 href={item.link} 
-                className={`block px-4 py-3 text-white dark:text-gray-200 hover:bg-msu-main-color dark:hover:bg-gray-700 hover:bg-opacity-20 transition-colors duration-200 text-sm ${
-                  isMobile ? 'border-b border-gray-200 dark:border-gray-600 border-opacity-20' : ''
-                }`}
-                onClick={() => isMobile && closeMobileMenu()}
+                className="block px-4 py-3 text-white dark:text-gray-200 hover:bg-msu-main-color dark:hover:bg-gray-700 hover:bg-opacity-20 transition-colors duration-200 text-sm border-b border-gray-200 dark:border-gray-600 border-opacity-20"
+                onClick={() => closeMobileMenu()}
               >
                 {item.label}
               </a>
@@ -191,11 +181,11 @@ const Navbar = ({ path }) => {
       title: "Programs",
       icon: <FaUniversity className="text-lg" />,
       items: [
-        { link: "/programs/404", label: "College of Arts and Sciences" },
+        { link: "/programs/cas", label: "College of Arts and Sciences" },
         { link: "/programs/404", label: "College of Islamic & Arabic Studies" },
         { link: "/programs/coed", label: "College of Education" },
         { link: "/programs/404", label: "College of Fisheries" },
-        { link: "/programs/iict", label: "Institute of Information and Communication Technology" },
+        { link: "/programs/ccs", label: "College of Computer Studies (CCS)" },
         { link: "/programs/ioes", label: "Institute of Oceanography and Environmental Science" },
         { link: "/programs/col", label: "College of Law" },
       ]
@@ -421,7 +411,6 @@ const Navbar = ({ path }) => {
                   title={item.title}
                   icon={item.icon}
                   items={item.items}
-                  isMobile={true}
                   index={index}
                   activeDropdown={activeDropdown}
                   setActiveDropdown={setActiveDropdown}
