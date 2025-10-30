@@ -182,7 +182,7 @@ const Navbar = ({ path }) => {
       icon: <FaUniversity className="text-lg" />,
       items: [
         { link: "/programs/cas", label: "College of Arts and Sciences" },
-        { link: "/programs/404", label: "College of Islamic & Arabic Studies" },
+        { link: "/programs/cias", label: "College of Islamic & Arabic Studies" },
         { link: "/programs/coed", label: "College of Education" },
         { link: "/programs/404", label: "College of Fisheries" },
         { link: "/programs/ccs", label: "College of Computer Studies (CCS)" },
