@@ -1520,8 +1520,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const floatingProgress = document.getElementById('floating-progress');
         const currentStepIndicator = document.getElementById('current-step-indicator');
         
-        if (!steps.length) {
-            console.warn('Enrollment animation elements not found');
+        // Early return if elements don't exist - enrollment section is commented out
+        if (!steps.length || steps.length === 0) {
+            // Silently return - enrollment section is disabled
+            return;
+        }
+        
+        // Additional safety check - if any required elements are missing, return
+        if (!progressBar || !progressText || !floatingProgress || !currentStepIndicator) {
             return;
         }
         
@@ -1540,7 +1546,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Intersection Observer for scroll-triggered animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting && !isAnimating) {
+                if (entry.isIntersecting && !isAnimating && steps.length > 0) {
                     startEnrollmentAnimation();
                 }
             });
@@ -1549,9 +1555,9 @@ document.addEventListener('DOMContentLoaded', function() {
             rootMargin: '-50px 0px'
         });
         
-        // Observe the enrollment section
+        // Observe the enrollment section only if it exists
         const enrollmentSection = document.querySelector('.enrollment-step')?.closest('section');
-        if (enrollmentSection) {
+        if (enrollmentSection && steps.length > 0) {
             observer.observe(enrollmentSection);
         }
         
