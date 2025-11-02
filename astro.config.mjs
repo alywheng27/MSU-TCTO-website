@@ -3,6 +3,7 @@ import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
 import sanity from "astro-sanity";
 import netlify from "@astrojs/netlify";  // ✅ Correct import
+import vercel from "@astrojs/vercel/serverless";
 import { loadEnv } from 'vite';
 
 
@@ -16,5 +17,5 @@ export default defineConfig({
     useCdn: true
   })],
   output: "server",
-  adapter: netlify(),
+  adapter: vercel(),
 });
