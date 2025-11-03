@@ -14,12 +14,26 @@ import { getSearchArticleCount, getSearchArticle } from '../../api/api';
 const currentPath = Astro.url.pathname;
 const { search } = Astro.params;
 const splitSearch = search.split('/');
-const maxCount = await getSearchArticleCount(splitSearch[0], splitSearch[1]);
-const articles = await getSearchArticle(splitSearch[0], splitSearch[1], splitSearch[2]);
+const searchQuery = decodeURIComponent(splitSearch[0] || '');
+const category = splitSearch[1] || 'All';
+const page = splitSearch[2] || '1';
+
+// Get search results
+let maxCount = [];
+let articles = [];
+
+try {
+  maxCount = await getSearchArticleCount(searchQuery, category === 'All' ? undefined : category);
+  articles = await getSearchArticle(searchQuery, category === 'All' ? undefined : category, page);
+} catch (error) {
+  console.error('Search error:', error);
+}
 
 // Metadata
-const pageTitle = `"${splitSearch[0]}" Search Results | MSU TCTO`;
-const pageDescription = `Find ${maxCount.length} results for ${splitSearch[0]} at MSU Tawi-Tawi College`;
+const pageTitle = searchQuery ? `"${searchQuery}" Search Results | MSU TCTO` : `Search | MSU TCTO`;
+const pageDescription = searchQuery 
+  ? `Find ${maxCount.length} results for ${searchQuery} at MSU Tawi-Tawi College` 
+  : `Search MSU Tawi-Tawi College of Technology and Oceanography`;
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
@@ -31,8 +45,13 @@ const pageDescription = `Find ${maxCount.length} results for ${splitSearch[0]} a
     <header class="bg-msu-deep-ocean from-msu-crimson-ground to-msu-deep-ocean py-16">
       <div class="container mx-auto px-6 text-center">
         <h1 class="text-4xl font-bold text-white mb-4">Search Results</h1>
-        <div class="max-w-1xl mx-auto">
-          <SearchForm search={splitSearch[0]} />
+        <div class="max-w-1xl mx-auto relative">
+          <SearchForm search={searchQuery} />
+          {searchQuery && (
+            <p class="text-white/80 text-sm mt-2">
+              Press <kbd class="px-2 py-1 bg-white/20 rounded text-xs">Ctrl+K</kbd> or <kbd class="px-2 py-1 bg-white/20 rounded text-xs">Cmd+K</kbd> to search from anywhere
+            </p>
+          )}
         </div>
       </div>
     </header>
@@ -42,36 +61,46 @@ const pageDescription = `Find ${maxCount.length} results for ${splitSearch[0]} a
       <!-- Results Summary -->
       <div class="flex justify-between items-center mb-8 border-b pb-6">
         <p class="text-gray-600">
-          Showing <span class="font-semibold text-msu-crimson-ground">{maxCount.length}</span> results for 
-          <span class="font-semibold">"{splitSearch[0]}"</span>
+          {searchQuery ? (
+            <>
+              Showing <span class="font-semibold text-msu-crimson-ground">{maxCount.length}</span> results for 
+              <span class="font-semibold">"{searchQuery}"</span>
+            </>
+          ) : (
+            <span class="text-gray-500">Enter a search term to find content</span>
+          )}
         </p>
         
         <!-- Category Filters -->
         <div class="flex space-x-2">
-          <a 
-            href={`/search/${splitSearch[0]}/All`} 
-            class={`px-4 py-2 rounded-full text-sm font-medium ${!splitSearch[1] ? 'bg-msu-crimson-ground text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-700'}`}
-          >
-            All
-          </a>
-          <a 
-            href={`/search/${splitSearch[0]}/Events`} 
-            class={`px-4 py-2 rounded-full text-sm font-medium ${splitSearch[1] === "Events" ? 'bg-msu-crimson-ground text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-700'}`}
-          >
-            Events
-          </a>
-          <a 
-            href={`/search/${splitSearch[0]}/News`} 
-            class={`px-4 py-2 rounded-full text-sm font-medium ${splitSearch[1] === "News" ? 'bg-msu-crimson-ground text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-700'}`}
-          >
-            News
-          </a>
-          <a 
-            href={`/search/${splitSearch[0]}/Academics`} 
-            class={`px-4 py-2 rounded-full text-sm font-medium ${splitSearch[1] === "Academics" ? 'bg-msu-crimson-ground text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-700'}`}
-          >
-            Academics
-          </a>
+          {searchQuery && (
+            <>
+              <a 
+                href={`/search/${encodeURIComponent(searchQuery)}/All`} 
+                class={`px-4 py-2 rounded-full text-sm font-medium ${category === 'All' || !category ? 'bg-msu-crimson-ground text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'}`}
+              >
+                All
+              </a>
+              <a 
+                href={`/search/${encodeURIComponent(searchQuery)}/Events`} 
+                class={`px-4 py-2 rounded-full text-sm font-medium ${category === "Events" ? 'bg-msu-crimson-ground text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'}`}
+              >
+                Events
+              </a>
+              <a 
+                href={`/search/${encodeURIComponent(searchQuery)}/News`} 
+                class={`px-4 py-2 rounded-full text-sm font-medium ${category === "News" ? 'bg-msu-crimson-ground text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'}`}
+              >
+                News
+              </a>
+              <a 
+                href={`/search/${encodeURIComponent(searchQuery)}/Academics`} 
+                class={`px-4 py-2 rounded-full text-sm font-medium ${category === "Academics" ? 'bg-msu-crimson-ground text-white' : 'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600'}`}
+              >
+                Academics
+              </a>
+            </>
+          )}
         </div>
       </div>
 
@@ -130,7 +159,10 @@ const pageDescription = `Find ${maxCount.length} results for ${splitSearch[0]} a
           </svg>
           <h2 class="text-2xl font-bold text-gray-700 mt-6 mb-2">No results found</h2>
           <p class="text-gray-500 max-w-md mx-auto mb-8">
-            We couldn't find any matches for "{splitSearch[0]}". Try different keywords or check the suggestions below.
+            {searchQuery 
+              ? `We couldn't find any matches for "${searchQuery}". Try different keywords or check the suggestions below.`
+              : 'Start typing to search for articles, programs, faculty, and more.'
+            }
           </p>
           <div class="flex flex-wrap justify-center gap-3">
             <a href="/news" class="px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full font-medium transition-colors">

@@ -114,6 +114,29 @@ const Navbar = ({ path }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Keyboard shortcut for search (Ctrl/Cmd + K)
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        setIsSearchVisible(true);
+        setTimeout(() => {
+          const searchInput = document.getElementById('global-search-input');
+          if (searchInput) {
+            searchInput.focus();
+          }
+        }, 100);
+      }
+      // ESC to close search
+      if (e.key === 'Escape' && isSearchVisible) {
+        setIsSearchVisible(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isSearchVisible]);
+
   // Close sidebar when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -298,10 +321,14 @@ const Navbar = ({ path }) => {
             <div className="flex items-center space-x-3">
               <button 
                 onClick={toggleSearch}
-                className="text-white dark:text-gray-200 hover:text-msu-gold dark:hover:text-yellow-400 hover:bg-msu-main-color dark:hover:bg-gray-700 hover:bg-opacity-20 transition-colors duration-300 p-2 rounded-full"
+                className="text-white dark:text-gray-200 hover:text-msu-gold dark:hover:text-yellow-400 hover:bg-msu-main-color dark:hover:bg-gray-700 hover:bg-opacity-20 transition-colors duration-300 p-2 rounded-full relative group"
                 aria-label="Toggle search"
+                title="Search (Ctrl+K or Cmd+K)"
               >
                 <FaSearch className="text-lg" />
+                <span className="absolute -bottom-1 -right-1 text-[8px] bg-msu-main-color dark:bg-yellow-600 text-white px-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                  K
+                </span>
               </button>
               <button 
                 onClick={toggleDarkMode}
@@ -332,20 +359,46 @@ const Navbar = ({ path }) => {
         {/* Search Bar */}
         <div 
           className={`w-full bg-msu-deep-ocean dark:bg-gray-900 border-b border-msu-main-color dark:border-gray-700 border-opacity-30 transition-all duration-300 ease-in-out overflow-hidden ${
-            isSearchVisible ? 'max-h-20 py-3' : 'max-h-0 py-0'
+            isSearchVisible ? 'max-h-96 py-3' : 'max-h-0 py-0'
           }`}
         >
           <div className="container mx-auto px-4 xl:px-6">
             <div className="relative max-w-2xl mx-auto">
-              <form action={`/search/${url}`} method="post" className="flex">
-                <input 
-                  type="search" 
-                  autoComplete="off" 
-                  onChange={(e) => setUrl(e.target.value)} 
-                  placeholder="Search..." 
-                  className="flex-grow px-4 py-2 text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-l-md focus:outline-none focus:ring-2 focus:ring-msu-main-color dark:focus:ring-yellow-400 focus:border-msu-main-color dark:focus:border-yellow-400"
-                  required
-                />
+              <form 
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (url.trim()) {
+                    window.location.href = `/search/${encodeURIComponent(url.trim())}`;
+                  }
+                }} 
+                className="flex"
+              >
+                <div className="flex-grow relative">
+                  <input 
+                    type="search" 
+                    id="global-search-input"
+                    autoComplete="off" 
+                    value={url}
+                    onChange={(e) => setUrl(e.target.value)} 
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && url.trim()) {
+                        window.location.href = `/search/${encodeURIComponent(url.trim())}`;
+                      }
+                    }}
+                    placeholder="Search articles, programs, faculty..." 
+                    className="w-full px-4 py-2 pr-10 text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-l-md focus:outline-none focus:ring-2 focus:ring-msu-main-color dark:focus:ring-yellow-400 focus:border-msu-main-color dark:focus:border-yellow-400"
+                  />
+                  {url && (
+                    <button
+                      type="button"
+                      onClick={() => setUrl("")}
+                      className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-1"
+                      aria-label="Clear search"
+                    >
+                      <FaTimes className="text-sm" />
+                    </button>
+                  )}
+                </div>
                 <button 
                   type="submit" 
                   className="bg-msu-main-color dark:bg-yellow-600 text-white px-4 py-2 hover:bg-msu-deep-ocean dark:hover:bg-yellow-700 transition-colors duration-300 flex items-center"
@@ -361,6 +414,31 @@ const Navbar = ({ path }) => {
                   <FaTimes />
                 </button>
               </form>
+              
+              {/* Quick Search Suggestions */}
+              {isSearchVisible && url.length === 0 && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-lg z-50 max-h-64 overflow-y-auto">
+                  <div className="p-4">
+                    <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Popular Searches</p>
+                    <div className="flex flex-wrap gap-2">
+                      {['Admissions', 'College of Education', 'Scholarships', 'Graduation', 'Faculty', 'Programs', 'News', 'Events'].map((term) => (
+                        <button
+                          key={term}
+                          onClick={() => {
+                            setUrl(term);
+                            setTimeout(() => {
+                              window.location.href = `/search/${encodeURIComponent(term)}`;
+                            }, 100);
+                          }}
+                          className="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full hover:bg-msu-main-color hover:text-white dark:hover:bg-yellow-600 transition-colors"
+                        >
+                          {term}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -445,8 +523,8 @@ const Navbar = ({ path }) => {
       {/* Spacer to account for fixed navbar */}
       <div className={`w-full transition-all duration-300 ${
         scrolled 
-          ? (isSearchVisible ? 'h-[140px] sm:h-[160px]' : 'h-[100px] sm:h-[110px]') 
-          : (isSearchVisible ? 'h-[180px] sm:h-[200px]' : 'h-[140px] sm:h-[160px]')
+          ? (isSearchVisible ? 'h-[180px] sm:h-[200px]' : 'h-[100px] sm:h-[110px]') 
+          : (isSearchVisible ? 'h-[220px] sm:h-[240px]' : 'h-[140px] sm:h-[160px]')
       }`}></div>
     </>
   );
