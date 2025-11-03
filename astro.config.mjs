@@ -3,7 +3,7 @@ import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
 import sanity from "astro-sanity";
 import netlify from "@astrojs/netlify";
-import vercel from "@astrojs/vercel/serverless";
+import vercel from "@astrojs/vercel";
 import { loadEnv } from 'vite';
 
 // Determine adapter based on environment variable or default to Netlify
