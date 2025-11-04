@@ -2124,7 +2124,7 @@ function openFacultyModal(facultyId) {
 				"Mathematics"
 			],
 			publications: [
-				"Common Fixed Points of Triplet Mappings in Gm-Spaces with Applications to AI Convergence and Cryptographic Consensus"
+				"Common Fixed Points of Triplet Mappings in Gm-Spaces with Applications to A-Convergence and C-Asymptotic Consensus"
 			],
 			accomplishments: [],
 			description: "Prof. Jamil Julhijiri Hamja is a Professor specializing in Mathematics. He holds a Bachelor of Science in Mathematics, Master of Science in Mathematics, and Doctor of Philosophy in Mathematics. He has published research on 'Common Fixed Points of Triplet Mappings in G-Metric Spaces with Applications to A-Convergence and C-Asymptotic Consensus.'"
@@ -3173,6 +3173,361 @@ document.addEventListener('keydown', function(e) {
 	}
 });
 
+// Personnel Modal System
+function openPersonnelModal(personnelId) {
+	console.log('Opening personnel modal for:', personnelId);
+	const modal = document.getElementById('personnelModal');
+	const modalContent = document.getElementById('personnelModalContent');
+	const modalBody = document.getElementById('personnelModalBody');
+	
+	if (!modal || !modalContent || !modalBody) {
+		console.error('Personnel modal elements not found');
+		return;
+	}
+	
+	// Personnel data
+	const personnelData = {
+		langoh: {
+			name: "Prof. Mona Froida M. Langoh",
+			position: "Dean, College of Arts and Sciences",
+			rank: "Professor VI",
+			image: "/images/cas/Profile/LANGOH.png",
+			education: ["Bachelor of Arts in English",
+				"Doctor of Philosophy in Education, major in English Language Teaching",
+				"Master of Arts in English Language Teaching"
+			],
+			specialization: [
+				"Reading, Language, and Literature"
+			],
+			awards: [],
+			description: "Prof.Mona Froida M. Langoh is a Professor V specializing in Reading, Language, and Literature. She holds a Master of Arts in English Language Teaching and Doctor of Philosophy in Education, major in English Language Teaching."
+		},
+		lee: {
+			name: "Roddalyn Attani Lee",
+			position: "Staff",
+			rank: "Administrative Assistant I",
+			image: "/images/cas/Staff/LEE.png",
+			education: [
+				"Bachelor of Science in Computer Engineering"
+			],
+			specialization: [
+				"IT/Computer - Network/System/Database Admin"
+			],
+			awards: [],
+			description: "Roddalyn Attani Lee is an Administrative Assistant I with a Bachelor of Science in Computer Engineering. She specializes in IT/Computer systems, network administration, and database administration."
+		},
+		pon: {
+			name: "Kimberly Jane Manonggong Pon",
+			position: "Staff",
+			rank: "Administrative Aide IV",
+			image: "/images/cas/Staff/PON.png",
+			education: [
+				"Bachelor of Secondary Education, major in Mathematics",
+				"Master of Science in Mathematics (Ongoing)"
+			],
+			specialization: [
+				"Mathematics"
+			],
+			awards: [
+				"Legal Closed Hop Neighborhood Independent Sequences in Graphs"
+			],
+			description: "Kimberly Jane Manonggong Pon is an Administrative Aide IV with a Bachelor of Secondary Education, major in Mathematics, and is currently pursuing a Master of Science in Mathematics. She specializes in Mathematics."
+		},
+		edubos_staff: {
+			name: "Jerimy Invierno Edubos",
+			position: "Station Manager, MSU-TCTO Nutriskwela Radyo Kasannangan",
+			rank: "Administrative Aide VI",
+			image: "/images/cas/Staff/EDUBOS.png",
+			education: [
+				"Bachelor of Arts in Political Science",
+				"Master of Public Administration, Major in Organization and Management"
+			],
+			specialization: [
+				"Political Science",
+				"Public Administration",
+				"Youth and Community Development Work",
+				"Politics and Governance"
+			],
+			awards: [
+				"Speaker, Tawi-Tawi Youth Parliament (1st Cohort)",
+				"Speaker, Bangsamoro Youth Parliament (2nd Cohort)"
+			],
+			description: "Jerimy Invierno Edubos serves as the Station Manager for MSU-TCTO Nutriskwela Radyo Kasannangan and holds the rank of Administrative Aide VI. He holds a Bachelor of Arts in Political Science and a Master of Public Administration, Major in Organization and Management. He has served as Speaker in both the Tawi-Tawi Youth Parliament (1st Cohort) and Bangsamoro Youth Parliament (2nd Cohort)."
+		},
+		abdurasa: {
+			name: "Benhal Mallang Abdurasa",
+			position: "Staff",
+			rank: "Administrative Aide I",
+			image: "/images/cas/Staff/ABDURASA.png",
+			education: [
+				"Bachelor of Arts in Political Science",
+				"Master of Public Administration, Major in Organization and Management"
+			],
+			specialization: [
+				"Political Science",
+				"Public Administration"
+			],
+			awards: [],
+			description: "Benhal Mallang Abdurasa is an Administrative Aide I with a Bachelor of Arts in Political Science and a Master of Public Administration, Major in Organization and Management. He specializes in Political Science and Public Administration."
+		},
+		ibnosali: {
+			name: "Annahar Hadjiula Ibnosali",
+			position: "Staff",
+			rank: "Agricultural Technician I",
+			image: "/images/cas/Staff/IBNOSALI.png",
+			education: [
+				"Bachelor of Science in Biology"
+			],
+			specialization: [
+				"Biology"
+			],
+			awards: [],
+			description: "Annahar Hadjiula Ibnosali is an Agricultural Technician I with a Doctor of Science in Biology. She specializes in Biology and supports agricultural and technical operations within the college."
+		},
+		abdul_staff: {
+			name: "Saidata Bakil Abdul",
+			position: "Staff",
+			rank: "Administrative Aide I",
+			image: "/images/cas/Staff/ABDUL.png",
+			education: [
+				"Associate in Secretarial Science"
+			],
+			specialization: [
+				"Secretarial Science"
+			],
+			awards: [],
+			description: "Saidata Bakil Abdul is an Administrative Aide with an Associate in Secretarial Science. She specializes in Secretarial Science and provides essential administrative support to the College of Arts and Sciences."
+		},
+		jalalain: {
+			name: "Sulayman Mattuh Jalalain",
+			position: "Staff",
+			rank: "Administrative Aide I",
+			image: "/images/cas/Staff/JALALAIN.png",
+			education: [],
+			specialization: [],
+			awards: [],
+			description: "Sulayman Mattuh Jalalain is an Administrative Aide who assists with administrative functions within the College of Arts and Sciences."
+		},
+		bakil: {
+			name: "Meqailah Abdurahim Bakil",
+			position: "Staff",
+			rank: "Administrative Aide IV",
+			image: "/images/cas/Staff/BAKIL.png",
+			education: [
+				"Bachelor of Arts in Poltical Science"
+			],
+			specialization: [
+				"Political Science"
+			],
+			awards: [],
+			description: "Meqailah Abdurahim Bakil is currently serving as an Administrative Aide IV at the Department of Political Science, College of Arts and Sciences, Mindanao State University – Tawi-Tawi College of Technology and Oceanography (MSU-TCTO). She graduated Magna Cum Laude with a Bachelor of Arts in Political Science from the same institution in July 2025. Throughout her academic journey, she consistently demonstrated excellence in both scholarship and leadership, earning distinctions such as the Community Service Award, Leadership Award, and being recognized as the College of Arts and Sciences' Valedictorian. Her experiences reflect a strong commitment to public service, academic integrity, and community engagement—values she continues to uphold in her professional and scholarly pursuits."
+		},
+		gaddong: {
+			name: "Muslima Asaril Gaddong",
+			position: "Staff",
+			rank: "Administrative Aide IV",
+			image: "/images/cas/Staff/GADDONG.png",
+			education: [
+				"Bachelor of Elementary Education",
+				"Master of Arts in Education, major in Reading"
+			],
+			specialization: [
+				"Education"
+			],
+			awards: [],
+			description: "Muslima Asaril Gaddong is an Administrative Aide IV with a Bachelor of Elementary Education and a Master of Arts in Education, major in Reading. She specializes in Education and assists with administrative tasks and operations within the College of Arts and Sciences."
+		},
+		jalilul: {
+			name: "Abdulhan Asgari Jalilul",
+			position: "Staff",
+			rank: "Administrative Aide IV",
+			image: "/images/cas/Staff/JALILUL (1).png",
+			education: [
+				"Bachelor of Arts in Political Science"
+			],
+			specialization: [
+				"Political Science"
+			],
+			awards: [],
+			description: "Abdulhan A. Jalilul is a native Sama of Bongao. He graduated from MSU-TCTO with a Bachelor of Arts in Political Science (Cum Laude) under the College of Arts and Sciences. A dedicated individual, he has worked in various establishments, serving as a Receptionist, Barista, Pattisier, and Service Crew for 10 months at the Yalus Beach House. He also seized the opportunity to serve as a manager for 6 months at D'Originals By: Je Dreamshoppe at Roadside Commercial Center. He is now working at MSU-TCTO as Staff of Public Administration under the College of Arts and Sciences."
+		},
+		janang: {
+			name: "Halima Abdulhamid Janang",
+			position: "Staff",
+			rank: "Administrative Aide IV",
+			image: "/images/cas/Staff/JANANG.png",
+			education: [
+				"Bachelor of Arts in History"
+			],
+			specialization: [
+				"History - Education"
+			],
+			awards: [],
+			description: "Halima Abdulhamid Janang is an Administrative Aide IV with a Bachelor of Arts in History. She specializes in History - Education and assists with administrative functions within the College of Arts and Sciences."
+		},
+		gambe: {
+			name: "Jaime Beloy Gambe, Sr.",
+			position: "Staff",
+			rank: "Administrative Aide I",
+			image: "/images/cas/Staff/GAMBE.png",
+			education: [],
+			specialization: [],
+			awards: [],
+			description: "Jaime Beloy Gambe, Sr. is an Administrative Aide I who provides essential administrative support to the College of Arts and Sciences."
+		}
+	};
+	
+	const personnel = personnelData[personnelId];
+	if (!personnel) {
+		console.error('Personnel data not found for:', personnelId);
+		return;
+	}
+	
+	// Create modal content
+	modalBody.innerHTML = `
+		<div class="relative">
+			<!-- Hero Section -->
+			<div class="relative bg-gradient-to-r from-msu-deep-ocean to-msu-bgc-color rounded-t-2xl">
+				<div class="flex flex-col items-center justify-center py-8 px-4 md:px-8">
+					<div class="w-40 h-40 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-white shadow-lg bg-white mb-6">
+						<img src="${personnel.image}" alt="${personnel.name}" class="w-full h-full object-contain" />
+					</div>
+					<h1 class="text-3xl md:text-4xl font-bold text-white mb-2 text-center">${personnel.name}</h1>
+					<p class="text-xl text-gray-200 text-center">${personnel.position}</p>
+					${personnel.rank ? `<p class="text-lg text-gray-300 text-center mt-2">${personnel.rank}</p>` : ''}
+				</div>
+			</div>
+			<!-- Content Section -->
+			<div class="p-8 space-y-8">
+				<!-- Description -->
+				<div class="bg-gradient-to-r from-msu-deep-ocean/10 to-transparent p-6 rounded-xl border-l-4 border-msu-deep-ocean">
+					<p class="text-lg text-msu-main-color dark:text-msu-bgc-color leading-relaxed">${personnel.description}</p>
+				</div>
+				
+				<!-- Education -->
+				${personnel.education && personnel.education.length > 0 ? `
+				<div>
+					<h3 class="text-2xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-4 flex items-center">
+						<svg class="w-6 h-6 text-msu-deep-ocean mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+						</svg>
+						Educational Background
+					</h3>
+					<div class="space-y-3">
+						${personnel.education.map(edu => `
+							<div class="flex items-start">
+								<svg class="w-5 h-5 text-msu-deep-ocean mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+								</svg>
+								<p class="text-msu-main-color dark:text-msu-bgc-color">${edu}</p>
+							</div>
+						`).join('')}
+					</div>
+				</div>
+				` : ''}
+				
+				<!-- Specialization -->
+				${personnel.specialization && personnel.specialization.length > 0 ? `
+				<div>
+					<h3 class="text-2xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-4 flex items-center">
+						<svg class="w-6 h-6 text-msu-deep-ocean mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+						</svg>
+						Areas of Specialization
+					</h3>
+					<div class="grid md:grid-cols-2 gap-3">
+						${personnel.specialization.map(spec => `
+							<div class="bg-gradient-to-r from-msu-deep-ocean/10 to-transparent p-3 rounded-lg border-l-4 border-msu-deep-ocean">
+								<p class="text-msu-main-color dark:text-msu-bgc-color font-medium">${spec}</p>
+							</div>
+						`).join('')}
+					</div>
+				</div>
+				` : ''}
+				
+				<!-- Awards & Recognitions -->
+				${personnel.awards && personnel.awards.length > 0 ? `
+				<div>
+					<h3 class="text-2xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-4 flex items-center">
+						<svg class="w-6 h-6 text-msu-deep-ocean mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+						</svg>
+						Awards & Recognitions
+					</h3>
+					<div class="space-y-3">
+						${personnel.awards.map(award => `
+							<div class="flex items-start">
+								<svg class="w-5 h-5 text-msu-deep-ocean mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+								</svg>
+								<p class="text-msu-main-color dark:text-msu-bgc-color">${award}</p>
+							</div>
+						`).join('')}
+					</div>
+				</div>
+				` : ''}
+			</div>
+		</div>
+	`;
+	
+	// Show modal with animation
+	modal.style.display = 'flex';
+	modal.classList.remove('hidden');
+	
+	// Trigger animation
+	setTimeout(() => {
+		modalContent.classList.remove('scale-95', 'opacity-0');
+		modalContent.classList.add('scale-100', 'opacity-100');
+	}, 10);
+	
+	// Prevent body scroll
+	document.body.style.overflow = 'hidden';
+}
+
+function closePersonnelModal() {
+	console.log('Closing personnel modal');
+	const modal = document.getElementById('personnelModal');
+	const modalContent = document.getElementById('personnelModalContent');
+	
+	if (!modal || !modalContent) {
+		console.error('Personnel modal elements not found for closing');
+		return;
+	}
+	
+	// Animate out
+	modalContent.classList.remove('scale-100', 'opacity-100');
+	modalContent.classList.add('scale-95', 'opacity-0');
+	
+	// Hide modal after animation
+	setTimeout(() => {
+		modal.style.display = 'none';
+		modal.classList.add('hidden');
+		document.body.style.overflow = 'auto';
+	}, 300);
+}
+
+// Close personnel modal when clicking outside
+document.addEventListener('DOMContentLoaded', function() {
+	const personnelModal = document.getElementById('personnelModal');
+	if (personnelModal) {
+		personnelModal.addEventListener('click', function(e) {
+			if (e.target === this) {
+				closePersonnelModal();
+			}
+		});
+	}
+});
+
+// Close personnel modal with Escape key
+document.addEventListener('keydown', function(e) {
+	if (e.key === 'Escape') {
+		const personnelModal = document.getElementById('personnelModal');
+		if (personnelModal && !personnelModal.classList.contains('hidden')) {
+			closePersonnelModal();
+		}
+	}
+});
+
 // Enhanced Mobile-Optimized PDF Viewer System (Sulimbang Style)
 let currentPdfUrl = '';
 let currentPdfTitle = '';
@@ -3697,6 +4052,8 @@ function downloadPdf() {
 // Make functions globally accessible
 (window as any).openFacultyModal = openFacultyModal;
 (window as any).closeFacultyModal = closeFacultyModal;
+(window as any).openPersonnelModal = openPersonnelModal;
+(window as any).closePersonnelModal = closePersonnelModal;
 (window as any).openPDFViewer = openPDFViewer;
 (window as any).closePdfViewer = closePdfViewer;
 (window as any).openPdfInNewTab = openPdfInNewTab;
@@ -4995,9 +5352,9 @@ document.addEventListener('DOMContentLoaded', function() {
 				<!-- Leadership Section - Dean -->
 				<div class="flex flex-col sm:flex-row justify-center items-center gap-8 sm:gap-10 md:gap-12 mb-8 sm:mb-10 md:mb-12">
 					<!-- Mona Isada M. Largon - Dean -->
-					<div class="text-center w-full sm:w-auto">
+					<div class="text-center w-full sm:w-auto cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('langoh')">
 						<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
-							<img src="/images/cas/Profile/LANGOH.png" alt="Mona Isada M. Largon" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg lazy-image" loading="lazy">
+							<img src="/images/cas/Profile/LANGOH.png" alt="Mona Isada M. Largon" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
 						</div>
 						<h3 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Prof. Mona Froida M. Langoh</h3>
 						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Dean, College of Arts and Sciences</p>
@@ -5009,9 +5366,9 @@ document.addEventListener('DOMContentLoaded', function() {
 				<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12 justify-items-center">
 					
 					<!-- Roddalyn Attani Lee -->
-					<div class="text-center">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
-							<img src="/images/cas/Profile/msufaculty.png" alt="Roddalyn Attani Lee" class="w-full h-full object-cover lazy-image" loading="lazy">
+					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('lee')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+							<img src="/images/cas/Staff/LEE.png" alt="Roddalyn Attani Lee" class="w-full h-full object-cover lazy-image" loading="lazy">
 						</div>
 						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Roddalyn Attani Lee</h3>
 						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
@@ -5019,9 +5376,9 @@ document.addEventListener('DOMContentLoaded', function() {
 					</div>
 
 					<!-- Kimberly Jane Manonggong Pon -->
-					<div class="text-center">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
-							<img src="/images/cas/Profile/msufaculty.png" alt="Kimberly Jane Manonggong Pon" class="w-full h-full object-cover lazy-image" loading="lazy">
+					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('pon')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+							<img src="/images/cas/Staff/PON.png" alt="Kimberly Jane Manonggong Pon" class="w-full h-full object-cover lazy-image" loading="lazy">
 						</div>
 						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Kimberly Jane Manonggong Pon</h3>
 						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
@@ -5029,19 +5386,19 @@ document.addEventListener('DOMContentLoaded', function() {
 					</div>
 
 					<!-- Jermy Inthong Edilson -->
-					<div class="text-center">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
-							<img src="/images/cas/Profile/msufaculty.png" alt="Jermy Inthong Edilson" class="w-full h-full object-cover lazy-image" loading="lazy">
+					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('edubos_staff')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+							<img src="/images/cas/Staff/EDUBOS.png" alt="Jermy Inthong Edilson" class="w-full h-full object-cover lazy-image" loading="lazy">
 						</div>
-						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Jermy Inthong Edilson</h3>
+						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Jerimy Invierno Edubos</h3>
 						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Station Manager, MSU-TCTO</p>
 						<p class="text-xs text-gray-500 italic px-2">Administrative Aide VI</p>
 					</div>
 
 					<!-- Benhal Mallang Abdurasa -->
-					<div class="text-center">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
-							<img src="/images/cas/Profile/msufaculty.png" alt="Benhal Mallang Abdurasa" class="w-full h-full object-cover lazy-image" loading="lazy">
+					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('abdurasa')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+							<img src="/images/cas/Staff/ABDURASA.png" alt="Benhal Mallang Abdurasa" class="w-full h-full object-cover lazy-image" loading="lazy">
 						</div>
 						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Benhal Mallang Abdurasa</h3>
 						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
@@ -5049,9 +5406,9 @@ document.addEventListener('DOMContentLoaded', function() {
 					</div>
 
 					<!-- Annahar Hadjiula Ibnosali -->
-					<div class="text-center">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
-							<img src="/images/cas/Profile/msufaculty.png" alt="Annahar Hadjiula Ibnosali" class="w-full h-full object-cover lazy-image" loading="lazy">
+					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('ibnosali')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+							<img src="/images/cas/Staff/IBNOSALI.png" alt="Annahar Hadjiula Ibnosali" class="w-full h-full object-cover lazy-image" loading="lazy">
 						</div>
 						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Annahar Hadjiula Ibnosali</h3>
 						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
@@ -5059,9 +5416,9 @@ document.addEventListener('DOMContentLoaded', function() {
 					</div>
 
 					<!-- Saidata Bakil Abdul -->
-					<div class="text-center">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
-							<img src="/images/cas/Profile/msufaculty.png" alt="Saidata Bakil Abdul" class="w-full h-full object-cover lazy-image" loading="lazy">
+					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('abdul_staff')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+							<img src="/images/cas/Staff/ABDUL.png" alt="Saidata Bakil Abdul" class="w-full h-full object-cover lazy-image" loading="lazy">
 						</div>
 						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Saidata Bakil Abdul</h3>
 						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
@@ -5069,9 +5426,9 @@ document.addEventListener('DOMContentLoaded', function() {
 					</div>
 
 					<!-- Sulayman Mattuh Jalalain -->
-					<div class="text-center">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
-							<img src="/images/cas/Profile/msufaculty.png" alt="Sulayman Mattuh Jalalain" class="w-full h-full object-cover lazy-image" loading="lazy">
+					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('jalalain')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+							<img src="/images/cas/Staff/JALALAIN.png" alt="Sulayman Mattuh Jalalain" class="w-full h-full object-cover lazy-image" loading="lazy">
 						</div>
 						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Sulayman Mattuh Jalalain</h3>
 						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
@@ -5079,9 +5436,9 @@ document.addEventListener('DOMContentLoaded', function() {
 					</div>
 
 					<!-- Meqailah Abdurahim Bakil -->
-					<div class="text-center">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
-							<img src="/images/cas/Profile/msufaculty.png" alt="Meqailah Abdurahim Bakil" class="w-full h-full object-cover lazy-image" loading="lazy">
+					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('bakil')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+							<img src="/images/cas/Staff/BAKIL.png" alt="Meqailah Abdurahim Bakil" class="w-full h-full object-cover lazy-image" loading="lazy">
 						</div>
 						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Meqailah Abdurahim Bakil</h3>
 						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
@@ -5089,9 +5446,9 @@ document.addEventListener('DOMContentLoaded', function() {
 					</div>
 
 					<!-- Muslima Asaril Gaddong -->
-					<div class="text-center">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
-							<img src="/images/cas/Profile/msufaculty.png" alt="Muslima Asaril Gaddong" class="w-full h-full object-cover lazy-image" loading="lazy">
+					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('gaddong')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+							<img src="/images/cas/Staff/GADDONG.png" alt="Muslima Asaril Gaddong" class="w-full h-full object-cover lazy-image" loading="lazy">
 						</div>
 						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Muslima Asaril Gaddong</h3>
 						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
@@ -5099,9 +5456,9 @@ document.addEventListener('DOMContentLoaded', function() {
 					</div>
 
 					<!-- Abdulhan Asgari Jalilul -->
-					<div class="text-center">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
-							<img src="/images/cas/Profile/msufaculty.png" alt="Abdulhan Asgari Jalilul" class="w-full h-full object-cover lazy-image" loading="lazy">
+					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('jalilul')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+							<img src="/images/cas/Staff/JALILUL (1).png" alt="Abdulhan Asgari Jalilul" class="w-full h-full object-cover lazy-image" loading="lazy">
 						</div>
 						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Abdulhan Asgari Jalilul</h3>
 						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
@@ -5109,9 +5466,9 @@ document.addEventListener('DOMContentLoaded', function() {
 					</div>
 
 					<!-- Halima Abdulhamid Janang -->
-					<div class="text-center">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
-							<img src="/images/cas/Profile/msufaculty.png" alt="Halima Abdulhamid Janang" class="w-full h-full object-cover lazy-image" loading="lazy">
+					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('janang')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+							<img src="/images/cas/Staff/JANANG.png" alt="Halima Abdulhamid Janang" class="w-full h-full object-cover lazy-image" loading="lazy">
 						</div>
 						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Halima Abdulhamid Janang</h3>
 						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
@@ -5119,9 +5476,9 @@ document.addEventListener('DOMContentLoaded', function() {
 					</div>
 
 					<!-- Jamil Beloy Gamba, Sr. -->
-					<div class="text-center">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
-							<img src="/images/cas/Profile/msufaculty.png" alt="Jamil Bobby Gamba, Sr." class="w-full h-full object-cover lazy-image" loading="lazy">
+					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('gambe')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+							<img src="/images/cas/Staff/GAMBE.png" alt="Jamil Bobby Gamba, Sr." class="w-full h-full object-cover lazy-image" loading="lazy">
 						</div>
 						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Jaime Beloy Gambe, Sr.</h3>
 						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
@@ -5417,7 +5774,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							<img src="/images/cas/Profile/SAMANIEGO.png" alt="Rachel Alawi Samaniego" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
 								<h3 class="text-white font-bold text-xl">Rachel Alawi Samaniego</h3>
-								<p class="text-gray-300 text-sm">Faculty</p>
+								<p class="text-gray-300 text-sm">Instructor III</p>
 							</div>
 						</div>
 						<div class="p-6">
@@ -5617,7 +5974,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							<img src="/images/cas/Profile/HASHIM.png" alt="Charity Joy Bayle Hashim" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
 								<h3 class="text-white font-bold text-xl">Associate Prof. Charity Joy Bayle Hashim</h3>
-								<p class="text-gray-300 text-sm">Faculty</p>
+								<p class="text-gray-300 text-sm">Associate Professor V</p>
 							</div>
 						</div>
 						<div class="p-6">
@@ -5646,7 +6003,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							<img src="/images/cas/Profile/JALIL.png" alt="Ruhil Malinao Jalil" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
 								<h3 class="text-white font-bold text-xl">Ruhil Malinao Jalil</h3>
-								<p class="text-gray-300 text-sm">Faculty</p>
+								<p class="text-gray-300 text-sm">Instructor I</p>
 							</div>
 						</div>
 						<div class="p-6">
@@ -5674,7 +6031,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							<img src="/images/cas/Profile/JUMSALI.png" alt="Myrnahil Hasim Jumsali" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
 								<h3 class="text-white font-bold text-xl">Myrnahil Hasim Jumsali</h3>
-								<p class="text-gray-300 text-sm">Faculty</p>
+								<p class="text-gray-300 text-sm">Instructor I</p>
 							</div>
 						</div>
 						<div class="p-6">
@@ -5702,7 +6059,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							<img src="/images/cas/Profile/MAMA.png" alt="Aly Lagunda Mama" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
 								<h3 class="text-white font-bold text-xl">Associate Prof. Aly Lagunda Mama</h3>
-								<p class="text-gray-300 text-sm">Faculty</p>
+								<p class="text-gray-300 text-sm">Associate Professor V</p>
 							</div>
 						</div>
 						<div class="p-6">
@@ -5730,7 +6087,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							<img src="/images/cas/Profile/OLMEDO.png" alt="Chamborlain Dablo Olmodo" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
 								<h3 class="text-white font-bold text-xl">Chamberlain Dablo Olmedo</h3>
-								<p class="text-gray-300 text-sm">Faculty</p>
+								<p class="text-gray-300 text-sm">Instructor I</p>
 							</div>
 						</div>
 						<div class="p-6">
@@ -5758,7 +6115,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							<img src="/images/cas/Profile/RAJIK.png" alt="Bayah Jaujali Amiruddin-Rajik" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
 								<h3 class="text-white font-bold text-xl">Associate Prof. Bayah Jaujali Amiruddin-Rajik</h3>
-								<p class="text-gray-300 text-sm">Faculty</p>
+								<p class="text-gray-300 text-sm">Associate Professor V</p>
 							</div>
 						</div>
 						<div class="p-6">
@@ -5787,7 +6144,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							<img src="/images/cas/Profile/ARTES.png" alt="Rosalio Gaid Artes, Jr." class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
 								<h3 class="text-white font-bold text-xl">Associate Prof. Rosalio Gaid Artes, Jr.</h3>
-								<p class="text-gray-300 text-sm">Faculty</p>
+								<p class="text-gray-300 text-sm">Associate Professor V</p>
 							</div>
 						</div>
 						<div class="p-6">
@@ -5816,7 +6173,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							<img src="/images/cas/Profile/FABILLAR.png" alt="Edwin Bello Fabillar" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
 								<h3 class="text-white font-bold text-xl">Associate Prof. Edwin Bello Fabillar</h3>
-								<p class="text-gray-300 text-sm">Faculty</p>
+								<p class="text-gray-300 text-sm">Associate Professor V</p>
 							</div>
 						</div>
 						<div class="p-6">
@@ -5845,7 +6202,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							<img src="/images/cas/Profile/HAMJA.png" alt="Jamil Julhijiri Hamja" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
 								<h3 class="text-white font-bold text-xl">Prof. Jamil Julhijiri Hamja</h3>
-								<p class="text-gray-300 text-sm">Professor</p>
+								<p class="text-gray-300 text-sm">Professor I</p>
 							</div>
 						</div>
 						<div class="p-6">
@@ -5857,7 +6214,7 @@ document.addEventListener('DOMContentLoaded', function() {
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Mathematics</span>
 							</div>
 							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-								Professor specializing in Mathematics. Holds a Bachelor of Science in Mathematics, Master of Science in Mathematics, and Doctor of Philosophy in Mathematics. Has published research on "Common Fixed Points of Triplet Mappings in G-Metric Spaces with Applications to A-Convergence and C-Asymptotic Consensus."
+								Professor specializing in Mathematics. Holds a Bachelor of Science in Mathematics, Master of Science in Mathematics, and Doctor of Philosophy in Mathematics. Has published research on "Common Fixed Points of Triplet Mappings in Gm-Spaces with Applications to AI Convergence and Cryptographic Consensus."
 							</p>
 							<button onclick="openFacultyModal('hamja')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
 								View Profile
@@ -5874,7 +6231,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							<img src="/images/cas/Profile/HASSAN.png" alt="Javier Abdurajan Hassan" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
 								<h3 class="text-white font-bold text-xl">Prof. Javier Abdurajan Hassan</h3>
-								<p class="text-gray-300 text-sm">Chairperson, Professor I</p>
+								<p class="text-gray-300 text-sm">Chairperson, Professor II</p>
 							</div>
 						</div>
 						<div class="p-6">
@@ -5903,7 +6260,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							<img src="/images/cas/Profile/msufaculty.png" alt="Ebni Atiulla Jal-Usman" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
 								<h3 class="text-white font-bold text-xl">Ebni Atiulla Jal-Usman</h3>
-								<p class="text-gray-300 text-sm">Faculty</p>
+								<p class="text-gray-300 text-sm">Instructor II</p>
 							</div>
 						</div>
 						<div class="p-6">
@@ -6442,7 +6799,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							<img src="/images/cas/Profile/MATOLO.png" alt="Al-Haniff Loc Maiolo" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
 								<h3 class="text-white font-bold text-xl">Associate Prof. Al-Haniff Lee Matolo</h3>
-								<p class="text-gray-300 text-sm">Faculty</p>
+								<p class="text-gray-300 text-sm">Associate Professor V</p>
 							</div>
 						</div>
 						<div class="p-6">
@@ -6778,7 +7135,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							<img src="/images/cas/Profile/MUYONG.png" alt="Kaisher Bangali Muyong" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
 								<h3 class="text-white font-bold text-xl">Kaisher Bangali Muyong</h3>
-								<p class="text-gray-300 text-sm">Instructor</p>
+								<p class="text-gray-300 text-sm">Instructor I</p>
 							</div>
 						</div>
 						<div class="p-6">
@@ -7127,6 +7484,25 @@ document.addEventListener('DOMContentLoaded', function() {
 					
 					<!-- Modal Content -->
 					<div id="modalBody" class="p-0">
+						<!-- Content will be dynamically loaded here -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Personnel Modal -->
+		<div id="personnelModal" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 hidden items-center justify-center p-4" style="display: none;">
+			<div class="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0" id="personnelModalContent">
+				<div class="relative">
+					<!-- Close Button -->
+					<button onclick="closePersonnelModal()" class="absolute top-4 right-4 z-10 bg-white dark:bg-gray-800 rounded-full p-2 shadow-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+						<svg class="w-6 h-6 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+						</svg>
+					</button>
+					
+					<!-- Modal Content -->
+					<div id="personnelModalBody" class="p-0">
 						<!-- Content will be dynamically loaded here -->
 					</div>
 				</div>
