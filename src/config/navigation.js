@@ -38,13 +38,13 @@ export const navigationConfig = {
   programs: {
     title: "Programs",
     links: [
-      { label: "College of Arts and Sciences", href: "/programs/cas", footerLabel: "College of Arts and Sciences (CAS)" },
-      { label: "College of Islamic & Arabic Studies", href: "/programs/cias", footerLabel: "College of Islamic and Arabic Studies (CIAS)" },
-      { label: "College of Education", href: "/programs/coed", footerLabel: "College of Education (COED)" },
-      { label: "College of Fisheries", href: "/programs/404", footerLabel: "College of Fisheries (COF)", footerHref: "/programs/cof" },
-      { label: "College of Computer Studies (CCS)", href: "/programs/ccs", footerLabel: "College of Computer Studies (CCS)" },
-      { label: "Institute of Oceanography and Environmental Science", href: "/programs/ioes", footerLabel: "Institute of Oceanography and Environmental Sciences (IOES)" },
-      { label: "College of Law", href: "/programs/col", footerLabel: "College of Law (COL)" },
+      { label: "College of Arts and Sciences", href: "/programs/cas", footerLabel: "College of Arts and Sciences (CAS)", footerHref: "/programs/cas" },
+      { label: "College of Islamic & Arabic Studies", href: "/programs/404", footerLabel: "College of Islamic and Arabic Studies (CIAS)", footerHref: "/programs/404" },
+      { label: "College of Education", href: "/programs/404", footerLabel: "College of Education (COED)", footerHref: "/programs/404" },
+      { label: "College of Fisheries", href: "/programs/404", footerLabel: "College of Fisheries (COF)", footerHref: "/programs/404" },
+      { label: "College of Computer Studies (CCS)", href: "/programs/ccs", footerLabel: "College of Computer Studies (CCS)", footerHref: "/programs/ccs" },
+      { label: "Institute of Oceanography and Environmental Science", href: "/programs/ioes", footerLabel: "Institute of Oceanography and Environmental Sciences (IOES)", footerHref: "/programs/ioes" },
+      { label: "College of Law", href: "/programs/col", footerLabel: "College of Law (COL)", footerHref: "/programs/col" },
     ]
   },
 
