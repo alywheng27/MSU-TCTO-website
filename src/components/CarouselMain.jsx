@@ -5,7 +5,6 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import { getBanner } from '../api/api';
 
 export default function MySwiper() {
   const [banner, setBanner] = useState([]);
@@ -15,7 +14,11 @@ export default function MySwiper() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getBanner();
+        const response = await fetch('/api/get-banner');
+        if (!response.ok) {
+          throw new Error('Failed to fetch banner data');
+        }
+        const data = await response.json();
         setBanner(data);
       } catch (error) {
         console.error('Error fetching banner data:', error);

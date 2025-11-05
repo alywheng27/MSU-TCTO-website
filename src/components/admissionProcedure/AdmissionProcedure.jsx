@@ -7,7 +7,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiChevronRight, FiChevronLeft, FiDownload, FiExternalLink, FiInfo, FiMail, FiPhone } from 'react-icons/fi';
+import { FiChevronRight, FiDownload, FiExternalLink, FiInfo, FiMail, FiPhone } from 'react-icons/fi';
 
 // Reducer function
 const reducer = (state, action) => {

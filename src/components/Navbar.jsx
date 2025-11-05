@@ -18,6 +18,7 @@ import {
   FaUsers
 } from 'react-icons/fa';
 import { FiChevronRight } from 'react-icons/fi';
+import { getNavbarItems } from '../config/navigation.js';
 
 const Dropdown = ({ title, items, icon, activeDropdown, setActiveDropdown, index, closeMobileMenu }) => {
   const isActive = activeDropdown === index;
@@ -114,6 +115,29 @@ const Navbar = ({ path }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Keyboard shortcut for search (Ctrl/Cmd + K)
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        setIsSearchVisible(true);
+        setTimeout(() => {
+          const searchInput = document.getElementById('global-search-input');
+          if (searchInput) {
+            searchInput.focus();
+          }
+        }, 100);
+      }
+      // ESC to close search
+      if (e.key === 'Escape' && isSearchVisible) {
+        setIsSearchVisible(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isSearchVisible]);
+
   // Close sidebar when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -150,93 +174,34 @@ const Navbar = ({ path }) => {
     }));
   }, [isDarkMode]);
 
-  const navItems = [
-    {
-      title: "Home",
-      icon: <FaHome className="text-lg" />,
-      items: [
-        { link: "/", label: "Overview" },
-        { link: "/officefeedback", label: "Office & Student Survey" },
-        { link: "/partners", label: "Local and International Partners" }
-      ]
-    },
-    {
-      title: "About",
-      icon: <FaInfoCircle className="text-lg" />,
-      items: [
-        { link: "/about/campus", label: "Brief History" },
-        { link: "/about/mission-vision", label: "Mission/Vision" },
-        { link: "/about/university-hymn", label: "University Hymn" },
-      ]
-    },
-    {
-      title: "Admissions",
-      icon: <FaUserGraduate className="text-lg" />,
-      items: [
-        { link: "/admissions/admissions", label: "Admission Procedures" },
-        { link: "/admissions/scholarship-and-grants", label: "Scholarship and Grants" },
-      ]
-    },
-    {
-      title: "Programs",
-      icon: <FaUniversity className="text-lg" />,
-      items: [
-        { link: "/programs/404", label: "College of Arts and Sciences" },
-        { link: "/programs/404", label: "College of Islamic & Arabic Studies" },
-        { link: "/programs/404", label: "College of Education" },
-        { link: "/programs/404", label: "College of Fisheries" },
-        { link: "/programs/ccs", label: "College of Computer Studies (CCS)" },
-        { link: "/programs/ioes", label: "Institute of Oceanography and Environmental Science" },
-        { link: "/programs/col", label: "College of Law" },
-      ]
-    },
-    {
-      title: "Offices",
-      icon: <FaUserTie className="text-lg" />,
-      items: [
-        { link: "/offices/offices", label: "Administrative Offices" },
-        { link: "/offices/academic-offices", label: "Academic Offices" },
-        { link: "/offices/faculty-staff", label: "Faculty & Staff" },
-      ]
-    },
-    {
-      title: "Publications",
-      icon: <FaNewspaper className="text-lg" />,
-      items: [
-        { link: "/publications/offices", label: "Offices & Resources" },
-        { link: "/publications/articles", label: "Articles" },
-        { link: "/publications/sulimbang", label: "Sulimbang" },
-        { link: "/publications/gazette", label: "Gazettes" },
-        { link: "/bidding", label: "Bidding" },
-        { link: "/publications/annual-reports", label: "Annual Reports" },
-        { link: "/underprocess", label: "KAWASA Publications" },
-        // { link: "/publications/msutctoscopus", label: "Scopus" },
-      ]
-    },
-    {
-      title: "Careers",
-      icon: <FaBriefcase className="text-lg" />,
-      items: [
-        { link: "/careers", label: "Open Positions" },
-      ]
-    },
-    {
-      title: "Graduation",
-      icon: <FaGraduationCap className="text-lg" />,
-      items: [
-        { link: "/graduationphoto", label: "Graduation Photos" },
-      ]
-    },
+  // Get navigation items from shared config
+  const navConfig = getNavbarItems();
+  
+  // Icon mapping for navbar items
+  const iconMap = {
+    "Home": <FaHome className="text-lg" />,
+    "University": <FaInfoCircle className="text-lg" />,
+    "About": <FaInfoCircle className="text-lg" />,
+    "Admissions": <FaUserGraduate className="text-lg" />,
+    "Programs": <FaUniversity className="text-lg" />,
+    "Offices": <FaUserTie className="text-lg" />,
+    "Publications": <FaNewspaper className="text-lg" />,
+    "Careers": <FaBriefcase className="text-lg" />,
+    "Graduation": <FaGraduationCap className="text-lg" />,
+    "Conference": <FaUsers className="text-lg" />,
+  };
 
-    {
-      title: "Conference",
-      icon: <FaUsers className="text-lg" />,
-      items: [
-        // { link: "404", label: "ICIIE 2025", disabled: true },
-        { link: "/iciie2025", label: "ICIIE 2025" },
-      ]
-    }
-  ];
+  // Transform config to navbar format
+  const navItems = navConfig.map((section) => ({
+    title: section.title === "University" ? "About" : section.title, // Map "University" to "About" for navbar
+    icon: iconMap[section.title] || iconMap["Home"],
+    items: section.links
+      .filter(link => !link.footerOnly) // Filter out footer-only links (keep navbarOnly and regular links)
+      .map(link => ({
+        link: link.href,
+        label: link.label
+      }))
+  }));
 
   return (
     <>
@@ -298,10 +263,14 @@ const Navbar = ({ path }) => {
             <div className="flex items-center space-x-3">
               <button 
                 onClick={toggleSearch}
-                className="text-white dark:text-gray-200 hover:text-msu-gold dark:hover:text-yellow-400 hover:bg-msu-main-color dark:hover:bg-gray-700 hover:bg-opacity-20 transition-colors duration-300 p-2 rounded-full"
+                className="text-white dark:text-gray-200 hover:text-msu-gold dark:hover:text-yellow-400 hover:bg-msu-main-color dark:hover:bg-gray-700 hover:bg-opacity-20 transition-colors duration-300 p-2 rounded-full relative group"
                 aria-label="Toggle search"
+                title="Search (Ctrl+K or Cmd+K)"
               >
                 <FaSearch className="text-lg" />
+                <span className="absolute -bottom-1 -right-1 text-[8px] bg-msu-main-color dark:bg-yellow-600 text-white px-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                  K
+                </span>
               </button>
               <button 
                 onClick={toggleDarkMode}
@@ -332,20 +301,46 @@ const Navbar = ({ path }) => {
         {/* Search Bar */}
         <div 
           className={`w-full bg-msu-deep-ocean dark:bg-gray-900 border-b border-msu-main-color dark:border-gray-700 border-opacity-30 transition-all duration-300 ease-in-out overflow-hidden ${
-            isSearchVisible ? 'max-h-20 py-3' : 'max-h-0 py-0'
+            isSearchVisible ? 'max-h-96 py-3' : 'max-h-0 py-0'
           }`}
         >
           <div className="container mx-auto px-4 xl:px-6">
             <div className="relative max-w-2xl mx-auto">
-              <form action={`/search/${url}`} method="post" className="flex">
-                <input 
-                  type="search" 
-                  autoComplete="off" 
-                  onChange={(e) => setUrl(e.target.value)} 
-                  placeholder="Search..." 
-                  className="flex-grow px-4 py-2 text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-l-md focus:outline-none focus:ring-2 focus:ring-msu-main-color dark:focus:ring-yellow-400 focus:border-msu-main-color dark:focus:border-yellow-400"
-                  required
-                />
+              <form 
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (url.trim()) {
+                    window.location.href = `/search/${encodeURIComponent(url.trim())}`;
+                  }
+                }} 
+                className="flex"
+              >
+                <div className="flex-grow relative">
+                  <input 
+                    type="search" 
+                    id="global-search-input"
+                    autoComplete="off" 
+                    value={url}
+                    onChange={(e) => setUrl(e.target.value)} 
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && url.trim()) {
+                        window.location.href = `/search/${encodeURIComponent(url.trim())}`;
+                      }
+                    }}
+                    placeholder="Search articles, programs, faculty..." 
+                    className="w-full px-4 py-2 pr-10 text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-l-md focus:outline-none focus:ring-2 focus:ring-msu-main-color dark:focus:ring-yellow-400 focus:border-msu-main-color dark:focus:border-yellow-400"
+                  />
+                  {url && (
+                    <button
+                      type="button"
+                      onClick={() => setUrl("")}
+                      className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-1"
+                      aria-label="Clear search"
+                    >
+                      <FaTimes className="text-sm" />
+                    </button>
+                  )}
+                </div>
                 <button 
                   type="submit" 
                   className="bg-msu-main-color dark:bg-yellow-600 text-white px-4 py-2 hover:bg-msu-deep-ocean dark:hover:bg-yellow-700 transition-colors duration-300 flex items-center"
@@ -361,6 +356,31 @@ const Navbar = ({ path }) => {
                   <FaTimes />
                 </button>
               </form>
+              
+              {/* Quick Search Suggestions */}
+              {isSearchVisible && url.length === 0 && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-lg z-50 max-h-64 overflow-y-auto">
+                  <div className="p-4">
+                    <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Popular Searches</p>
+                    <div className="flex flex-wrap gap-2">
+                      {['Admissions', 'College of Education', 'Scholarships', 'Graduation', 'Faculty', 'Programs', 'News', 'Events'].map((term) => (
+                        <button
+                          key={term}
+                          onClick={() => {
+                            setUrl(term);
+                            setTimeout(() => {
+                              window.location.href = `/search/${encodeURIComponent(term)}`;
+                            }, 100);
+                          }}
+                          className="px-3 py-1 text-sm bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full hover:bg-msu-main-color hover:text-white dark:hover:bg-yellow-600 transition-colors"
+                        >
+                          {term}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -445,8 +465,8 @@ const Navbar = ({ path }) => {
       {/* Spacer to account for fixed navbar */}
       <div className={`w-full transition-all duration-300 ${
         scrolled 
-          ? (isSearchVisible ? 'h-[140px] sm:h-[160px]' : 'h-[100px] sm:h-[110px]') 
-          : (isSearchVisible ? 'h-[180px] sm:h-[200px]' : 'h-[140px] sm:h-[160px]')
+          ? (isSearchVisible ? 'h-[180px] sm:h-[200px]' : 'h-[100px] sm:h-[110px]') 
+          : (isSearchVisible ? 'h-[220px] sm:h-[240px]' : 'h-[140px] sm:h-[160px]')
       }`}></div>
     </>
   );

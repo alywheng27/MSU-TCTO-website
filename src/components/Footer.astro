@@ -1,8 +1,10 @@
 ---
 import { urlForImage } from '../api/api';
-
 import { get3LatestArticle } from '../api/api';
+import { getFooterSections } from '../config/navigation.js';
+
 const threeLatestArticles = await get3LatestArticle();
+const footerSections = getFooterSections();
 ---
 
 
@@ -69,51 +71,19 @@ const threeLatestArticles = await get3LatestArticle();
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-white dark:text-gray-200" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
                         </svg>
-                        University
+                        {footerSections.university.title}
                     </h3>
                     <ul class="space-y-3">
-                        <li><a href="../../about/campus" class="text-titanium dark:text-gray-300 hover:text-msu-gold dark:hover:text-yellow-400 transition-colors flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                            </svg>
-                            History
-                        </a></li>
-                        <li><a href="../../about/mission-vision" class="text-titanium dark:text-gray-300 hover:text-msu-gold dark:hover:text-yellow-400 transition-colors flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                            </svg>
-                            Mission / Vision
-                        </a></li>
-                        <li><a href="../../about/university-hymn" class="text-titanium dark:text-gray-300 hover:text-msu-gold dark:hover:text-yellow-400 transition-colors flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                            </svg>
-                            University Hymn
-                        </a></li>
-                        <li><a href="../../articles/articles" class="text-titanium dark:text-gray-300 hover:text-msu-gold dark:hover:text-yellow-400 transition-colors flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                            </svg>
-                            Articles
-                        </a></li>
-                        <li><a href="../../articles/gazette" class="text-titanium dark:text-gray-300 hover:text-msu-gold dark:hover:text-yellow-400 transition-colors flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                            </svg>
-                            Gazette
-                        </a></li>
-                        <li><a href="/academic-calendar" class="text-titanium dark:text-gray-300 hover:text-msu-gold dark:hover:text-yellow-400 transition-colors flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                            </svg>
-                            Events
-                        </a></li>
-                        <li><a href="../../publications/annual-reports" class="text-titanium dark:text-gray-300 hover:text-msu-gold dark:hover:text-yellow-400 transition-colors flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                            </svg>
-                            Annual Report
-                        </a></li>
+                        {footerSections.university.links.map((link) => (
+                            <li>
+                                <a href={link.href} class="text-titanium dark:text-gray-300 hover:text-msu-gold dark:hover:text-yellow-400 transition-colors flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                    </svg>
+                                    {link.label}
+                                </a>
+                            </li>
+                        ))}
                     </ul>
                 </div>
 
@@ -123,45 +93,23 @@ const threeLatestArticles = await get3LatestArticle();
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-white dark:text-gray-200" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
                         </svg>
-                        Admissions
+                        {footerSections.admissions.title}
                     </h3>
                     <ul class="space-y-3">
-                        <li><a href="../../admissions/admissions#freshmen" class="text-titanium dark:text-gray-300 hover:text-msu-gold dark:hover:text-yellow-400 transition-colors flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                            </svg>
-                            Freshmen
-                        </a></li>
-                        <li><a href="../../admissions/admissions#transferee" class="text-titanium dark:text-gray-300 hover:text-msu-gold dark:hover:text-yellow-400 transition-colors flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                            </svg>
-                            Transferee
-                        </a></li>
-                        <li><a href="../../admissions/admissions#shifting" class="text-titanium dark:text-gray-300 hover:text-msu-gold dark:hover:text-yellow-400 transition-colors flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                            </svg>
-                            Returning / Shifting
-                        </a></li>
-                        <li><a href="../../admissions/admissions#remedial" class="text-titanium dark:text-gray-300 hover:text-msu-gold dark:hover:text-yellow-400 transition-colors flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                            </svg>
-                            Remedial Program
-                        </a></li>
-                        <li><a href="../../admissions/admissions#fees" class="text-titanium dark:text-gray-300 hover:text-msu-gold dark:hover:text-yellow-400 transition-colors flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                            </svg>
-                            Student Fees
-                        </a></li>
-                        <li><a href="../../admissions/scholarship-and-grants" class="text-titanium dark:text-gray-300 hover:text-msu-gold dark:hover:text-yellow-400 transition-colors flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                            </svg>
-                            Scholarships & Grants
-                        </a></li>
+                        {footerSections.admissions.links.map((link) => {
+                            const displayLabel = link.footerLabel || link.label;
+                            const displayHref = link.footerHref || link.href;
+                            return (
+                                <li>
+                                    <a href={displayHref} class="text-titanium dark:text-gray-300 hover:text-msu-gold dark:hover:text-yellow-400 transition-colors flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                        </svg>
+                                        {displayLabel}
+                                    </a>
+                                </li>
+                            );
+                        })}
                     </ul>
                 </div>
 
@@ -178,42 +126,22 @@ const threeLatestArticles = await get3LatestArticle();
                                 Academic Programs
                             </h3>
                             <ul class="space-y-3">
-                                <li><a href="../../programs/cas" class="text-titanium dark:text-gray-300 hover:text-msu-gold dark:hover:text-yellow-400 transition-colors flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                                    </svg>
-                                    College of Arts and Sciences (CAS)
-                                </a></li>
-                                <li><a href="../../programs/cias" class="text-titanium dark:text-gray-300 hover:text-msu-gold dark:hover:text-yellow-400 transition-colors flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                                    </svg>
-                                    College of Islamic and Arabic Studies (CIAS)
-                                </a></li>
-                                <li><a href="../../programs/cof" class="text-titanium dark:text-gray-300 hover:text-msu-gold dark:hover:text-yellow-400 transition-colors flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                                    </svg>
-                                    College of Fisheries (COF)
-                                </a></li>
-                                <li><a href="../../programs/coed" class="text-titanium dark:text-gray-300 hover:text-msu-gold dark:hover:text-yellow-400 transition-colors flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                                    </svg>
-                                    College of Education (COED)
-                                </a></li>
-                                <li><a href="../../programs/iict" class="text-titanium dark:text-gray-300 hover:text-msu-gold dark:hover:text-yellow-400 transition-colors flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                                    </svg>
-                                    Institute of Information and Computing Technology (IICT)
-                                </a></li>
-                                <li><a href="../../programs/ioes" class="text-titanium dark:text-gray-300 hover:text-msu-gold dark:hover:text-yellow-400 transition-colors flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                                    </svg>
-                                    Institute of Oceanography and Environmental Sciences (IOES)
-                                </a></li>
+                                {footerSections.programs.links
+                                    .filter(link => !link.footerOnly && !link.navbarOnly)
+                                    .map((link) => {
+                                        const displayLabel = link.footerLabel || link.label;
+                                        const displayHref = link.footerHref || link.href;
+                                        return (
+                                            <li>
+                                                <a href={displayHref} class="text-titanium dark:text-gray-300 hover:text-msu-gold dark:hover:text-yellow-400 transition-colors flex items-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                                    </svg>
+                                                    {displayLabel}
+                                                </a>
+                                            </li>
+                                        );
+                                    })}
                             </ul>
                         </div>
 
@@ -226,24 +154,20 @@ const threeLatestArticles = await get3LatestArticle();
                                 University Offices
                             </h3>
                             <ul class="space-y-3">
-                                <li><a href="../../offices/offices#administrative" class="text-titanium dark:text-gray-300 hover:text-msu-gold dark:hover:text-yellow-400 transition-colors flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                                    </svg>
-                                    Administrative Offices
-                                </a></li>
-                                <li><a href="../../offices/academic-offices" class="text-titanium dark:text-gray-300 hover:text-msu-gold dark:hover:text-yellow-400 transition-colors flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                                    </svg>
-                                    Academic Offices
-                                </a></li>
-                                <li><a href="../../offices/faculty-staff" class="text-titanium dark:text-gray-300 hover:text-msu-gold dark:hover:text-yellow-400 transition-colors flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                                    </svg>
-                                    Faculty and Staff
-                                </a></li>
+                                {footerSections.offices.links.map((link) => {
+                                    const displayLabel = link.footerLabel || link.label;
+                                    const displayHref = link.footerHref || link.href;
+                                    return (
+                                        <li>
+                                            <a href={displayHref} class="text-titanium dark:text-gray-300 hover:text-msu-gold dark:hover:text-yellow-400 transition-colors flex items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                                </svg>
+                                                {displayLabel}
+                                            </a>
+                                        </li>
+                                    );
+                                })}
                             </ul>
                         </div>
                     </div>
