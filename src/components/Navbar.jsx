@@ -18,6 +18,7 @@ import {
   FaUsers
 } from 'react-icons/fa';
 import { FiChevronRight } from 'react-icons/fi';
+import { getNavbarItems } from '../config/navigation.js';
 
 const Dropdown = ({ title, items, icon, activeDropdown, setActiveDropdown, index, closeMobileMenu }) => {
   const isActive = activeDropdown === index;
@@ -173,93 +174,34 @@ const Navbar = ({ path }) => {
     }));
   }, [isDarkMode]);
 
-  const navItems = [
-    {
-      title: "Home",
-      icon: <FaHome className="text-lg" />,
-      items: [
-        { link: "/", label: "Overview" },
-        { link: "/officefeedback", label: "Office & Student Survey" },
-        { link: "/partners", label: "Local and International Partners" }
-      ]
-    },
-    {
-      title: "About",
-      icon: <FaInfoCircle className="text-lg" />,
-      items: [
-        { link: "/about/campus", label: "Brief History" },
-        { link: "/about/mission-vision", label: "Mission/Vision" },
-        { link: "/about/university-hymn", label: "University Hymn" },
-      ]
-    },
-    {
-      title: "Admissions",
-      icon: <FaUserGraduate className="text-lg" />,
-      items: [
-        { link: "/admissions/admissions", label: "Admission Procedures" },
-        { link: "/admissions/scholarship-and-grants", label: "Scholarship and Grants" },
-      ]
-    },
-    {
-      title: "Programs",
-      icon: <FaUniversity className="text-lg" />,
-      items: [
-        { link: "/programs/cas", label: "College of Arts and Sciences" },
-        { link: "/programs/cias", label: "College of Islamic & Arabic Studies" },
-        { link: "/programs/coed", label: "College of Education" },
-        { link: "/programs/404", label: "College of Fisheries" },
-        { link: "/programs/ccs", label: "College of Computer Studies (CCS)" },
-        { link: "/programs/ioes", label: "Institute of Oceanography and Environmental Science" },
-        { link: "/programs/col", label: "College of Law" },
-      ]
-    },
-    {
-      title: "Offices",
-      icon: <FaUserTie className="text-lg" />,
-      items: [
-        { link: "/offices/offices", label: "Administrative Offices" },
-        { link: "/offices/academic-offices", label: "Academic Offices" },
-        { link: "/offices/faculty-staff", label: "Faculty & Staff" },
-      ]
-    },
-    {
-      title: "Publications",
-      icon: <FaNewspaper className="text-lg" />,
-      items: [
-        { link: "/publications/offices", label: "Offices & Resources" },
-        { link: "/publications/articles", label: "Articles" },
-        { link: "/publications/sulimbang", label: "Sulimbang" },
-        { link: "/publications/gazette", label: "Gazettes" },
-        { link: "/bidding", label: "Bidding" },
-        { link: "/publications/annual-reports", label: "Annual Reports" },
-        { link: "/underprocess", label: "KAWASA Publications" },
-        // { link: "/publications/msutctoscopus", label: "Scopus" },
-      ]
-    },
-    {
-      title: "Careers",
-      icon: <FaBriefcase className="text-lg" />,
-      items: [
-        { link: "/careers", label: "Open Positions" },
-      ]
-    },
-    {
-      title: "Graduation",
-      icon: <FaGraduationCap className="text-lg" />,
-      items: [
-        { link: "/graduationphoto", label: "Graduation Photos" },
-      ]
-    },
+  // Get navigation items from shared config
+  const navConfig = getNavbarItems();
+  
+  // Icon mapping for navbar items
+  const iconMap = {
+    "Home": <FaHome className="text-lg" />,
+    "University": <FaInfoCircle className="text-lg" />,
+    "About": <FaInfoCircle className="text-lg" />,
+    "Admissions": <FaUserGraduate className="text-lg" />,
+    "Programs": <FaUniversity className="text-lg" />,
+    "Offices": <FaUserTie className="text-lg" />,
+    "Publications": <FaNewspaper className="text-lg" />,
+    "Careers": <FaBriefcase className="text-lg" />,
+    "Graduation": <FaGraduationCap className="text-lg" />,
+    "Conference": <FaUsers className="text-lg" />,
+  };
 
-    {
-      title: "Conference",
-      icon: <FaUsers className="text-lg" />,
-      items: [
-        // { link: "404", label: "ICIIE 2025", disabled: true },
-        { link: "/iciie2025", label: "ICIIE 2025" },
-      ]
-    }
-  ];
+  // Transform config to navbar format
+  const navItems = navConfig.map((section) => ({
+    title: section.title === "University" ? "About" : section.title, // Map "University" to "About" for navbar
+    icon: iconMap[section.title] || iconMap["Home"],
+    items: section.links
+      .filter(link => !link.footerOnly) // Filter out footer-only links (keep navbarOnly and regular links)
+      .map(link => ({
+        link: link.href,
+        label: link.label
+      }))
+  }));
 
   return (
     <>
