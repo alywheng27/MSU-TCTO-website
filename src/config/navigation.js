@@ -39,7 +39,7 @@ export const navigationConfig = {
     title: "Programs",
     links: [
       { label: "College of Arts and Sciences", href: "/programs/cas", footerLabel: "College of Arts and Sciences (CAS)", footerHref: "/programs/cas" },
-      { label: "College of Islamic & Arabic Studies", href: "/programs/404", footerLabel: "College of Islamic and Arabic Studies (CIAS)", footerHref: "/programs/404" },
+      { label: "College of Islamic & Arabic Studies", href: "/programs/cias", footerLabel: "College of Islamic and Arabic Studies (CIAS)", footerHref: "/programs/cias" },
       { label: "College of Education", href: "/programs/coed", footerLabel: "College of Education (COED)", footerHref: "/programs/coed" },
       { label: "College of Fisheries", href: "/programs/404", footerLabel: "College of Fisheries (COF)", footerHref: "/programs/404" },
       { label: "College of Computer Studies (CCS)", href: "/programs/ccs", footerLabel: "College of Computer Studies (CCS)", footerHref: "/programs/ccs" },
