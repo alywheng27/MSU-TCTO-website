@@ -349,6 +349,24 @@ try {
 
 						<a 
 
+							href="#facultySpotlight" 
+
+							class="group bg-white/10 hover:bg-white/20 border-2 border-white/40 text-white font-bold py-3 px-6 sm:py-4 sm:px-10 rounded-full transition-all duration-500 inline-flex items-center justify-center hover:shadow-2xl hover:-translate-y-2 transform hover:scale-105 backdrop-blur-sm text-sm sm:text-base"
+
+						>
+
+							<span class="relative z-10">Faculty Spotlight</span>
+
+							<svg class="w-5 h-5 sm:w-6 sm:h-6 ml-2 sm:ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-9 9-4-4-6 6"></path>
+
+							</svg>
+
+						</a>
+
+						<a 
+
 							href="#contact" 
 
 							class="group bg-transparent border-2 border-white hover:border-msu-deep-ocean text-white font-bold py-3 px-6 sm:py-4 sm:px-10 rounded-full transition-all duration-500 inline-flex items-center justify-center hover:shadow-2xl hover:-translate-y-2 transform hover:scale-105 backdrop-blur-sm text-sm sm:text-base"
@@ -5337,158 +5355,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		</section> -->
 
-
-		<!-- Personnel Spotlight - Mobile Optimized -->
-		<section class="py-12 sm:py-16 md:py-20 bg-white">
-			<div class="container mx-auto px-4 sm:px-6">
-				<div class="text-center mb-8 sm:mb-12 md:mb-16">
-					<h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-3 sm:mb-4 px-4">Personnel Spotlight</h2>
-					<p class="text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto px-4">
-						Meet our dedicated faculty and support staff who contribute to the excellence of our College of Arts and Sciences
-					</p>
-				</div>
-
-				<!-- Leadership Section - Dean -->
-				<div class="flex flex-col sm:flex-row justify-center items-center gap-8 sm:gap-10 md:gap-12 mb-8 sm:mb-10 md:mb-12">
-					<!-- Mona Isada M. Largon - Dean -->
-					<div class="text-center w-full sm:w-auto cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('langoh')">
-						<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
-							<img src="/images/cas/Profile/LANGOH.png" alt="Mona Isada M. Largon" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
-						</div>
-						<h3 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Prof. Mona Froida Matolo Langoh, Ph.D.</h3>
-						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Dean, College of Arts and Sciences</p>
-						<p class="text-xs text-gray-600 dark:text-gray-400 px-2">Professor VI</p>
-					</div>
-				</div>
-
-				<!-- Staff Personnel Grid - 4 Column Layout -->
-				<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12 justify-items-center">
-					
-					<!-- Roddalyn Attani Lee -->
-					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('lee')">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-							<img src="/images/cas/Staff/LEE.png" alt="Roddalyn Attani Lee" class="w-full h-full object-cover lazy-image" loading="lazy">
-						</div>
-						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Roddalyn Attani Lee</h3>
-						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
-						<p class="text-xs text-gray-500 italic px-2">Administrative Assistant I</p>
-					</div>
-
-					<!-- Kimberly Jane Manonggong Pon -->
-					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('pon')">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-							<img src="/images/cas/Staff/PON.png" alt="Kimberly Jane Manonggong Pon" class="w-full h-full object-cover lazy-image" loading="lazy">
-						</div>
-						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Kimberly Jane Manonggong Pon</h3>
-						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
-						<p class="text-xs text-gray-500 italic px-2">Administrative Aide IV</p>
-					</div>
-
-					<!-- Jermy Inthong Edilson -->
-					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('edubos_staff')">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-							<img src="/images/cas/Staff/EDUBOS.png" alt="Jermy Inthong Edilson" class="w-full h-full object-cover lazy-image" loading="lazy">
-						</div>
-						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Jerimy Invierno Edubos</h3>
-						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Station Manager, MSU-TCTO</p>
-						<p class="text-xs text-gray-500 italic px-2">Administrative Aide VI</p>
-					</div>
-
-					<!-- Benhal Mallang Abdurasa -->
-					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('abdurasa')">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-							<img src="/images/cas/Staff/ABDURASA.png" alt="Benhal Mallang Abdurasa" class="w-full h-full object-cover lazy-image" loading="lazy">
-						</div>
-						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Benhal Mallang Abdurasa</h3>
-						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
-						<p class="text-xs text-gray-500 italic px-2">Administrative Aide I</p>
-					</div>
-
-					<!-- Annahar Hadjiula Ibnosali -->
-					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('ibnosali')">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-							<img src="/images/cas/Staff/IBNOSALI.png" alt="Annahar Hadjiula Ibnosali" class="w-full h-full object-cover lazy-image" loading="lazy">
-						</div>
-						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Annahar Hadjiula Ibnosali</h3>
-						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
-						<p class="text-xs text-gray-500 italic px-2">Aquacultural Technician I</p>
-					</div>
-
-					<!-- Saidata Bakil Abdul -->
-					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('abdul_staff')">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-							<img src="/images/cas/Staff/ABDUL.png" alt="Saidata Bakil Abdul" class="w-full h-full object-cover lazy-image" loading="lazy">
-						</div>
-						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Saidata Bakil Abdul</h3>
-						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
-						<p class="text-xs text-gray-500 italic px-2">Administrative Aide I</p>
-					</div>
-
-					<!-- Sulayman Mattuh Jalalain -->
-					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('jalalain')">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-							<img src="/images/cas/Staff/JALALAIN.png" alt="Sulayman Mattuh Jalalain" class="w-full h-full object-cover lazy-image" loading="lazy">
-						</div>
-						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Sulayman Mattuh Jalalain</h3>
-						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
-						<p class="text-xs text-gray-500 italic px-2">Administrative Aide I</p>
-					</div>
-
-					<!-- Meqailah Abdurahim Bakil -->
-					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('bakil')">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-							<img src="/images/cas/Staff/BAKIL.png" alt="Meqailah Abdurahim Bakil" class="w-full h-full object-cover lazy-image" loading="lazy">
-						</div>
-						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Meqailah Abdurahim Bakil</h3>
-						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
-						<p class="text-xs text-gray-500 italic px-2">Administrative Aide IV</p>
-					</div>
-
-					<!-- Muslima Asaril Gaddong -->
-					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('gaddong')">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-							<img src="/images/cas/Staff/GADDONG.png" alt="Muslima Asaril Gaddong" class="w-full h-full object-cover lazy-image" loading="lazy">
-						</div>
-						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Muslima Asaril Gaddong</h3>
-						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
-						<p class="text-xs text-gray-500 italic px-2">Administrative Aide IV</p>
-					</div>
-
-					<!-- Abdulhan Asgari Jalilul -->
-					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('jalilul')">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-							<img src="/images/cas/Staff/JALILUL (1).png" alt="Abdulhan Asgari Jalilul" class="w-full h-full object-cover lazy-image" loading="lazy">
-						</div>
-						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Abdulhan Asgari Jalilul</h3>
-						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
-						<p class="text-xs text-gray-500 italic px-2">Administrative Aide IV</p>
-					</div>
-
-					<!-- Halima Abdulhamid Janang -->
-					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('janang')">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-							<img src="/images/cas/Staff/JANANG.png" alt="Halima Abdulhamid Janang" class="w-full h-full object-cover lazy-image" loading="lazy">
-						</div>
-						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Halima Abdulhamid Janang</h3>
-						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
-						<p class="text-xs text-gray-500 italic px-2">Administrative Aide IV</p>
-					</div>
-
-					<!-- Jamil Beloy Gamba, Sr. -->
-					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('gambe')">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-							<img src="/images/cas/Staff/GAMBE.png" alt="Jamil Bobby Gamba, Sr." class="w-full h-full object-cover lazy-image" loading="lazy">
-						</div>
-						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Jaime Beloy Gambe, Sr.</h3>
-						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
-						<p class="text-xs text-gray-500 italic px-2">Administrative Aide I</p>
-					</div>
-
-				</div>
-			</div>
-		</section>
-
-
 		<!-- Faculty Spotlight -->
 
 		<section id="facultySpotlight" class="py-20 bg-gray-50">
@@ -7470,6 +7336,156 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		</section>
 
+		<!-- Personnel Spotlight - Mobile Optimized -->
+		<section class="py-12 sm:py-16 md:py-20 bg-white">
+			<div class="container mx-auto px-4 sm:px-6">
+				<div class="text-center mb-8 sm:mb-12 md:mb-16">
+					<h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-3 sm:mb-4 px-4">Personnel Spotlight</h2>
+					<p class="text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto px-4">
+						Meet our dedicated faculty and support staff who contribute to the excellence of our College of Arts and Sciences
+					</p>
+				</div>
+
+				<!-- Leadership Section - Dean -->
+				<div class="flex flex-col sm:flex-row justify-center items-center gap-8 sm:gap-10 md:gap-12 mb-8 sm:mb-10 md:mb-12">
+					<!-- Mona Isada M. Largon - Dean -->
+					<div class="text-center w-full sm:w-auto cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('langoh')">
+						<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
+							<img src="/images/cas/Profile/LANGOH.png" alt="Mona Isada M. Largon" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
+						</div>
+						<h3 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Prof. Mona Froida Matolo Langoh, Ph.D.</h3>
+						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Dean, College of Arts and Sciences</p>
+						<p class="text-xs text-gray-600 dark:text-gray-400 px-2">Professor VI</p>
+					</div>
+				</div>
+
+				<!-- Staff Personnel Grid - 4 Column Layout -->
+				<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12 justify-items-center">
+					
+					<!-- Roddalyn Attani Lee -->
+					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('lee')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+							<img src="/images/cas/Staff/LEE.png" alt="Roddalyn Attani Lee" class="w-full h-full object-cover lazy-image" loading="lazy">
+						</div>
+						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Roddalyn Attani Lee</h3>
+						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
+						<p class="text-xs text-gray-500 italic px-2">Administrative Assistant I</p>
+					</div>
+
+					<!-- Kimberly Jane Manonggong Pon -->
+					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('pon')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+							<img src="/images/cas/Staff/PON.png" alt="Kimberly Jane Manonggong Pon" class="w-full h-full object-cover lazy-image" loading="lazy">
+						</div>
+						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Kimberly Jane Manonggong Pon</h3>
+						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
+						<p class="text-xs text-gray-500 italic px-2">Administrative Aide IV</p>
+					</div>
+
+					<!-- Jermy Inthong Edilson -->
+					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('edubos_staff')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+							<img src="/images/cas/Staff/EDUBOS.png" alt="Jermy Inthong Edilson" class="w-full h-full object-cover lazy-image" loading="lazy">
+						</div>
+						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Jerimy Invierno Edubos</h3>
+						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Station Manager, MSU-TCTO</p>
+						<p class="text-xs text-gray-500 italic px-2">Administrative Aide VI</p>
+					</div>
+
+					<!-- Benhal Mallang Abdurasa -->
+					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('abdurasa')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+							<img src="/images/cas/Staff/ABDURASA.png" alt="Benhal Mallang Abdurasa" class="w-full h-full object-cover lazy-image" loading="lazy">
+						</div>
+						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Benhal Mallang Abdurasa</h3>
+						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
+						<p class="text-xs text-gray-500 italic px-2">Administrative Aide I</p>
+					</div>
+
+					<!-- Annahar Hadjiula Ibnosali -->
+					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('ibnosali')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+							<img src="/images/cas/Staff/IBNOSALI.png" alt="Annahar Hadjiula Ibnosali" class="w-full h-full object-cover lazy-image" loading="lazy">
+						</div>
+						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Annahar Hadjiula Ibnosali</h3>
+						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
+						<p class="text-xs text-gray-500 italic px-2">Aquacultural Technician I</p>
+					</div>
+
+					<!-- Saidata Bakil Abdul -->
+					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('abdul_staff')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+							<img src="/images/cas/Staff/ABDUL.png" alt="Saidata Bakil Abdul" class="w-full h-full object-cover lazy-image" loading="lazy">
+						</div>
+						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Saidata Bakil Abdul</h3>
+						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
+						<p class="text-xs text-gray-500 italic px-2">Administrative Aide I</p>
+					</div>
+
+					<!-- Sulayman Mattuh Jalalain -->
+					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('jalalain')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+							<img src="/images/cas/Staff/JALALAIN.png" alt="Sulayman Mattuh Jalalain" class="w-full h-full object-cover lazy-image" loading="lazy">
+						</div>
+						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Sulayman Mattuh Jalalain</h3>
+						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
+						<p class="text-xs text-gray-500 italic px-2">Administrative Aide I</p>
+					</div>
+
+					<!-- Meqailah Abdurahim Bakil -->
+					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('bakil')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+							<img src="/images/cas/Staff/BAKIL.png" alt="Meqailah Abdurahim Bakil" class="w-full h-full object-cover lazy-image" loading="lazy">
+						</div>
+						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Meqailah Abdurahim Bakil</h3>
+						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
+						<p class="text-xs text-gray-500 italic px-2">Administrative Aide IV</p>
+					</div>
+
+					<!-- Muslima Asaril Gaddong -->
+					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('gaddong')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+							<img src="/images/cas/Staff/GADDONG.png" alt="Muslima Asaril Gaddong" class="w-full h-full object-cover lazy-image" loading="lazy">
+						</div>
+						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Muslima Asaril Gaddong</h3>
+						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
+						<p class="text-xs text-gray-500 italic px-2">Administrative Aide IV</p>
+					</div>
+
+					<!-- Abdulhan Asgari Jalilul -->
+					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('jalilul')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+							<img src="/images/cas/Staff/JALILUL (1).png" alt="Abdulhan Asgari Jalilul" class="w-full h-full object-cover lazy-image" loading="lazy">
+						</div>
+						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Abdulhan Asgari Jalilul</h3>
+						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
+						<p class="text-xs text-gray-500 italic px-2">Administrative Aide IV</p>
+					</div>
+
+					<!-- Halima Abdulhamid Janang -->
+					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('janang')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+							<img src="/images/cas/Staff/JANANG.png" alt="Halima Abdulhamid Janang" class="w-full h-full object-cover lazy-image" loading="lazy">
+						</div>
+						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Halima Abdulhamid Janang</h3>
+						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
+						<p class="text-xs text-gray-500 italic px-2">Administrative Aide IV</p>
+					</div>
+
+					<!-- Jamil Beloy Gamba, Sr. -->
+					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('gambe')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+							<img src="/images/cas/Staff/GAMBE.png" alt="Jamil Bobby Gamba, Sr." class="w-full h-full object-cover lazy-image" loading="lazy">
+						</div>
+						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Jaime Beloy Gambe, Sr.</h3>
+						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
+						<p class="text-xs text-gray-500 italic px-2">Administrative Aide I</p>
+					</div>
+
+				</div>
+			</div>
+		</section>
+
 
 		<!-- Faculty Modal -->
 		<div id="facultyModal" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 hidden items-center justify-center p-4" style="display: none;">
@@ -8211,7 +8227,7 @@ document.addEventListener('DOMContentLoaded', function() {
 									<div class="flex flex-col md:flex-row items-center md:items-start gap-6">
 										<div class="flex-shrink-0">
 											<div class="relative">
-												<img src="/images/coed/Profile/jemsy.png" alt="Prof. Alhisan U. Jemsy" class="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-4 border-white shadow-lg lazy-image" loading="lazy">
+									<img src="/images/coed/Profile/JEMSY.png" alt="Prof. Alhisan U. Jemsy" class="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-4 border-white shadow-lg lazy-image" loading="lazy">
 												<div class="absolute -top-2 -right-2 w-8 h-8 bg-msu-deep-ocean rounded-full flex items-center justify-center shadow-lg">
 													<svg class="w-4 h-4 text-msu-bgc-color" fill="currentColor" viewBox="0 0 20 20">
 														<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>

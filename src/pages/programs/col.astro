@@ -3761,7 +3761,7 @@ function searchGuestLecturers() {
 		const cardElement = card as HTMLElement;
 		const nameElement = cardElement.querySelector('h3');
 		const positionElement = cardElement.querySelector('p');
-		const specializationElement = cardElement.querySelector('span');
+		const specializationElements = cardElement.querySelectorAll('.guest-lecturer-specialization');
 		const descriptionElement = cardElement.querySelector('.text-msu-main-color');
 		
 		let isMatch = false;
@@ -3773,7 +3773,9 @@ function searchGuestLecturers() {
 			// Check if any text content matches the search term
 			const nameText = nameElement?.textContent?.toLowerCase() || '';
 			const positionText = positionElement?.textContent?.toLowerCase() || '';
-			const specializationText = specializationElement?.textContent?.toLowerCase() || '';
+			const specializationText = Array.from(specializationElements)
+				.map(el => el.textContent?.toLowerCase() || '')
+				.join(' ');
 			const descriptionText = descriptionElement?.textContent?.toLowerCase() || '';
 			
 			isMatch = nameText.includes(searchTerm) || 
@@ -5100,7 +5102,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		<!-- Research & Innovation Section - Mobile Optimized -->
 
-		<section class="py-12 sm:py-16 md:py-20 bg-gray-50">
+		<section id="guestLecturerSection" class="py-12 sm:py-16 md:py-20 bg-gray-50">
 
 			<div class="container mx-auto px-4 sm:px-6">
 
@@ -5202,6 +5204,144 @@ document.addEventListener('DOMContentLoaded', function() {
 		</section>
 
 
+
+		<section class="py-12 sm:py-16 md:py-20 bg-white">
+			<div class="container mx-auto px-4 sm:px-6">
+				<div class="bg-white dark:bg-gray-800 rounded-3xl shadow-xl border border-gray-100 dark:border-gray-700 p-6 sm:p-10 md:p-14 relative overflow-hidden">
+					<div class="absolute inset-0 pointer-events-none">
+						<div class="absolute -top-24 -right-24 w-64 h-64 bg-msu-deep-ocean/10 dark:bg-yellow-500/10 rounded-full blur-3xl"></div>
+						<div class="absolute -bottom-32 -left-10 w-72 h-72 bg-msu-main-color/5 dark:bg-yellow-500/5 rounded-full blur-[120px]"></div>
+					</div>
+
+					<div class="relative">
+						<div class="text-center mb-8 sm:mb-12">
+							<h3 class="text-2xl sm:text-3xl md:text-4xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-4">
+								Meet Our Research Leaders
+							</h3>
+							<p class="text-sm sm:text-base md:text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+								Our legal scholars, guest lecturers, and judicial partners advance transformative research in constitutional development, access to justice, and emerging legal technologies—bridging courtroom practice with academic inquiry to build a responsive legal system for Mindanao and beyond.
+							</p>
+						</div>
+
+						<div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-10 sm:mb-12">
+							<div class="text-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-700 dark:to-gray-800 rounded-2xl p-5 shadow-md">
+								<div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+									<svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+									</svg>
+								</div>
+								<h4 class="font-bold text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">15+ Legal Publications</h4>
+								<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Peer-reviewed journals & policy papers</p>
+							</div>
+							<div class="text-center bg-gradient-to-br from-green-50 to-emerald-100 dark:from-gray-700 dark:to-gray-800 rounded-2xl p-5 shadow-md">
+								<div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+									<svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+									</svg>
+								</div>
+								<h4 class="font-bold text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">12+ Judicial Innovations</h4>
+								<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Benchcraft projects & courtroom trainings</p>
+							</div>
+							<div class="text-center bg-gradient-to-br from-purple-50 to-pink-100 dark:from-gray-700 dark:to-gray-800 rounded-2xl p-5 shadow-md">
+								<div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+									<svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+									</svg>
+								</div>
+								<h4 class="font-bold text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">8+ Research Partnerships</h4>
+								<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Courts, law firms, policy institutions</p>
+							</div>
+							<div class="text-center bg-gradient-to-br from-orange-50 to-rose-100 dark:from-gray-700 dark:to-gray-800 rounded-2xl p-5 shadow-md">
+								<div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+									<svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+									</svg>
+								</div>
+								<h4 class="font-bold text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">18+ Legal Mentors</h4>
+								<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Judges, prosecutors, law reform advocates</p>
+							</div>
+						</div>
+
+						<div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+							<div class="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-xl p-6 shadow-md border border-blue-100/60 dark:border-gray-600">
+								<div class="flex items-center mb-4">
+									<svg class="w-8 h-8 text-msu-deep-ocean dark:text-yellow-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+									</svg>
+									<h4 class="text-lg sm:text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Judicial Leadership & Courtroom Practice</h4>
+								</div>
+								<ul class="space-y-3 text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">
+									<li>
+										<strong>Judge Jamel T. Mamutuk, CPA, CESE, SCL</strong> — Executive Judge, RTC Initao
+										<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Criminal Procedure • Civil Procedure • Evidence • Shari’ah Procedure</span>
+									</li>
+									<li>
+										<strong>Judge Joventino V. Diamante</strong> — Judge, RTC Branch 2-Family Court, Bongao
+										<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Civil Law • Criminal Law • Judicial Processes</span>
+									</li>
+									<li>
+										<strong>Provincial Prosecutor J. Jerry Cuento</strong> — Provincial Prosecutor, Fiscal’s Office Tawi-Tawi
+										<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Criminal Prosecution • Legal Advocacy • Case Strategy</span>
+									</li>
+								</ul>
+							</div>
+
+							<div class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-gray-800 dark:to-gray-700 rounded-xl p-6 shadow-md border border-emerald-100/60 dark:border-gray-600">
+								<div class="flex items-center mb-4">
+									<svg class="w-8 h-8 text-msu-deep-ocean dark:text-yellow-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+									</svg>
+									<h4 class="text-lg sm:text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Legal Advocacy & Access to Justice</h4>
+								</div>
+								<ul class="space-y-3 text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">
+									<li>
+										<strong>Prosecutor Jamairah A. Nagamora</strong> — National Prosecution Service Tawi-Tawi
+										<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Litigation • Legislation • Human Rights Advocacy</span>
+									</li>
+									<li>
+										<strong>Atty. Junaid G. Cader</strong> — Attorney II, Public Attorney’s Office Marawi
+										<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Criminal Law • Public Defense • Client Representation</span>
+									</li>
+									<li>
+										<strong>Atty. Ymil Rjiv D. Matba</strong> — Managing Partner, Batocabe & Partners Law Offices
+										<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Civil & Criminal Litigation • Labor Compliance • Corporate Practice</span>
+									</li>
+								</ul>
+							</div>
+
+							<div class="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-800 dark:to-gray-700 rounded-xl p-6 shadow-md border border-purple-100/60 dark:border-gray-600">
+								<div class="flex items-center mb-4">
+									<svg class="w-8 h-8 text-msu-deep-ocean dark:text-yellow-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+									</svg>
+									<h4 class="text-lg sm:text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Constitutional & Policy Leadership</h4>
+								</div>
+								<ul class="space-y-3 text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">
+									<li>
+										<strong>Assoc. Prof. Atty. Datu Esma Mikee P. Maruhom</strong> — Assistant Dean, College of Law
+										<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Constitutional Law • Peacebuilding • Shari’ah Legal Education</span>
+									</li>
+									<li>
+										<strong>Atty. Mohamad M. Rayyan Domado, SCL</strong> — Attorney IV, Bangsamoro Attorney General’s Office
+										<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Islamic Law • Administrative Law • Climate Justice</span>
+									</li>
+									<li>
+										<strong>Atty. Rashid V. Pandi, LL.M.</strong> — Legal Practitioner & Guest Lecturer
+										<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Advanced Legal Studies • Comparative Law • Legal Research Methods</span>
+									</li>
+								</ul>
+							</div>
+						</div>
+
+						<div class="mt-8 text-center">
+							<p class="text-sm sm:text-base text-gray-600 dark:text-gray-300">
+								Discover more about our mentors in the <a href="#guestLecturerSection" class="text-msu-deep-ocean font-semibold hover:underline">Guest Lecturer</a> and <a href="#facultySpotlight" class="text-msu-deep-ocean font-semibold hover:underline">Faculty Spotlight</a> sections.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
 		<!-- Student Life Section - Professional Slider -->
 
@@ -5371,133 +5511,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		<!-- Faculty Spotlight - Mobile Optimized -->
 
-		<section class="py-12 sm:py-16 md:py-20 bg-white">
-
-			<div class="container mx-auto px-4 sm:px-6">
-
-				<div class="text-center mb-8 sm:mb-12 md:mb-16">
-
-					<h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-3 sm:mb-4 px-4">Personnel Spotlight</h2>
-
-					<p class="text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto px-4">
-						Meet our dedicated personnel who are committed to excellence in legal education and academic leadership.
-					</p>
-
-				</div>
-
-				
-
-				<!-- Leadership Section - Dean and Assistant Dean - Mobile Optimized -->
-				<div class="flex flex-col sm:flex-row justify-center items-center gap-8 sm:gap-10 md:gap-12 mb-8 sm:mb-10 md:mb-12">
-					<!-- Prof. Norhabib B. Barodi, Ll.M., SCL - Dean -->
-					<div class="text-center w-full sm:w-auto">
-						<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
-							<img src="/images/col/Profile/Prof. Norhabib Bin Suod S. Barodi.jpg" alt="Prof. Norhabib B. Barodi" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg lazy-image" loading="lazy">
-						</div>
-						<h3 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Prof. Norhabib B. Barodi, Ll.M., SCL</h3>
-						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Dean</p>
-					</div>
-
-					<!-- Assoc. Prof. Atty. Datu Esma Mikee P. Maruhom - Assistant Dean -->
-					<div class="text-center w-full sm:w-auto">
-						<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
-							<img src="/images/col/Profile/DATU ESMA MIKEE P. MARUHOM.jpg" alt="Assoc. Prof. Atty. Datu Esma Mikee P. Maruhom" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg lazy-image" loading="lazy">
-						</div>
-						<h3 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Assoc. Prof. Atty. Datu Esma Mikee P. Maruhom</h3>
-						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Assistant Dean</p>
-					</div>
-				</div>
-
-				<!-- Staff Personnel Grid - Custom Layout for Organizational Chart -->
-				<div id="facultyGrid">
-					<!-- First Row: 3 Personnel -->
-					<div class="grid grid-cols-1 xs:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12 justify-items-center">
-						<!-- Ms. Norsheen B. Sanuddin -->
-						<div class="text-center">
-							<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
-								<img src="/images/col/Profile/NORSHEEN B. SANUDDIN.jpg" alt="Ms. Norsheen B. Sanuddin" class="w-full h-full object-cover lazy-image" loading="lazy">
-							</div>
-							<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Ms. Norsheen B. Sanuddin, MSci</h3>
-							<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Senior Supervising Officer</p>
-						</div>
-
-						<!-- Mr. Asnawi C. Edris -->
-						<div class="text-center">
-							<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
-								<img src="/images/col/Profile/ASNAWI C. EDRIS.jpg" alt="Mr. Asnawi C. Edris" class="w-full h-full object-cover lazy-image" loading="lazy">
-							</div>
-							<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Mr. Asnawi C. Edris, RL</h3>
-							<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Librarian I</p>
-						</div>
-
-						<!-- MS. PHRIEA M. JUMAT -->
-						<div class="text-center">
-							<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
-								<img src="/images/col/Profile/PHRIEA M. JUMAT.jpg" alt="Ms. Phriea M. Jumat" class="w-full h-full object-cover lazy-image" loading="lazy">
-							</div>
-							<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Ms. Phriea M. Jumat, LPT</h3>
-							<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Administrative Aide IV</p>
-						</div>
-					</div>
-
-					<!-- Second Row: 2 Personnel Centered -->
-					<div class="flex justify-center gap-6 sm:gap-16 md:gap-24 lg:gap-32 mb-8 sm:mb-12">
-						<!-- MR. NAJER S. PANANDIGAN -->
-						<div class="text-center">
-							<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
-								<img src="/images/col/Profile/NAJER S. PANANDIGAN.jpg" alt="Mr. Najer S. Panandigan" class="w-full h-full object-cover lazy-image" loading="lazy">
-							</div>
-							<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Mr. Najer S. Panandigan</h3>
-							<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Administrative Aide IV</p>
-						</div>
-
-						<!-- MR. NUR R. JAAFAR -->
-						<div class="text-center">
-							<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
-								<img src="/images/col/Profile/NUR R. JAAFAR.jpg" alt="Mr. Nur R. Jaafar" class="w-full h-full object-cover lazy-image" loading="lazy">
-							</div>
-							<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Mr. Nur R. Jaafar</h3>
-							<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Administrative Aide I</p>
-						</div>
-					</div>
-				</div>
-
-				
-
-					<!-- Prosecutor Jamairah A. Nagamora -->
-					<!-- <div class="text-center cursor-pointer hover:scale-105 transition-transform duration-200" onclick="openFacultyModal('nagamora')">
-						<div class="relative w-40 h-40 mx-auto mb-4">
-							<img src="/images/col/Faculty/nagamora.png" alt="Prosecutor Jamairah A. Nagamora" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg" loading="lazy">
-						</div>
-						<h3 class="font-bold text-lg text-msu-main-color dark:text-msu-bgc-color mb-2">Prosecutor Jamairah A. Nagamora</h3>
-						<p class="text-sm text-msu-main-color dark:text-msu-bgc-color">Lecturer</p>
-					</div> -->
-
-
-				</div>
-
-				
-
-				<!-- <div class="text-center mt-12">
-
-					<a href="#" class="inline-flex items-center px-6 py-3 border border-msu-deep-ocean text-base font-medium rounded-full shadow-sm text-msu-bgc-color bg-white hover:bg-gray-50 hover:shadow-md transition-all duration-300">
-
-						View All Faculty Members
-
-						<svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-
-						</svg>
-
-					</a>
-
-				</div>
-
-			</div> -->
-
-		</section>
-
+	
 
 		<!-- Faculty Modal -->
 		<div id="facultyModal" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 hidden items-center justify-center p-4" style="display: none;">
@@ -5768,6 +5782,12 @@ document.addEventListener('DOMContentLoaded', function() {
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Executive Judge</span>
 							</div>
 
+							<div class="flex flex-wrap gap-2 mb-4">
+								<span class="inline-flex items-center px-3 py-1 rounded-full bg-msu-deep-ocean/10 text-msu-deep-ocean text-xs sm:text-sm font-semibold guest-lecturer-specialization">
+									Specializations: Criminal Procedure • Civil Procedure • Evidence • Shari'ah Procedure
+								</span>
+							</div>
+
 							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
 
 								Executive Judge at the Regional Trial Court of Initao with CPA, CESE, and SCL credentials, bringing judicial expertise and administrative excellence to legal education.
@@ -5808,6 +5828,12 @@ document.addEventListener('DOMContentLoaded', function() {
 								</svg>
 
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Judge, RTC Branch 2-FC</span>
+							</div>
+
+							<div class="flex flex-wrap gap-2 mb-4">
+								<span class="inline-flex items-center px-3 py-1 rounded-full bg-msu-deep-ocean/10 text-msu-deep-ocean text-xs sm:text-sm font-semibold guest-lecturer-specialization">
+									Specializations: Civil Law • Criminal Law • Judicial Processes
+								</span>
 							</div>
 
 							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
@@ -5851,6 +5877,12 @@ document.addEventListener('DOMContentLoaded', function() {
 								</svg>
 
 								<span class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color">Provincial Prosecutor</span>
+							</div>
+
+							<div class="flex flex-wrap gap-2 mb-4">
+								<span class="inline-flex items-center px-3 py-1 rounded-full bg-msu-deep-ocean/10 text-msu-deep-ocean text-xs sm:text-sm font-semibold guest-lecturer-specialization">
+									Specializations: Criminal Prosecution • Criminal Law • Legal Advocacy
+								</span>
 							</div>
 
 							<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color mb-4">
@@ -5899,6 +5931,11 @@ document.addEventListener('DOMContentLoaded', function() {
 								</svg>
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Prosecution Attorney</span>
 							</div>
+							<div class="flex flex-wrap gap-2 mb-4">
+								<span class="inline-flex items-center px-3 py-1 rounded-full bg-msu-deep-ocean/10 text-msu-deep-ocean text-xs sm:text-sm font-semibold guest-lecturer-specialization">
+									Specializations: Litigation • Legislation • Human Rights Advocacy
+								</span>
+							</div>
 							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
 								Prosecution Attorney at the National Prosecution Service - Tawi-Tawi, providing students with practical insights into the prosecutorial process and legal advocacy.
 							</p>
@@ -5926,6 +5963,11 @@ document.addEventListener('DOMContentLoaded', function() {
 									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
 								</svg>
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Advanced Legal Studies</span>
+							</div>
+							<div class="flex flex-wrap gap-2 mb-4">
+								<span class="inline-flex items-center px-3 py-1 rounded-full bg-msu-deep-ocean/10 text-msu-deep-ocean text-xs sm:text-sm font-semibold guest-lecturer-specialization">
+									Specializations: Advanced Legal Studies • Comparative Law • Legal Research Methods
+								</span>
 							</div>
 							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
 								Attorney with Master of Laws (LL.M.) degree, bringing advanced legal knowledge and specialized expertise to enhance student learning.
@@ -5955,6 +5997,11 @@ document.addEventListener('DOMContentLoaded', function() {
 								</svg>
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Director, National Amnesty Commission</span>
 							</div>
+							<div class="flex flex-wrap gap-2 mb-4">
+								<span class="inline-flex items-center px-3 py-1 rounded-full bg-msu-deep-ocean/10 text-msu-deep-ocean text-xs sm:text-sm font-semibold guest-lecturer-specialization">
+									Specializations: Amnesty Operations • Administrative Law • Policy Implementation
+								</span>
+							</div>
 							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
 								Director of Legal and Amnesty Operations at the National Amnesty Commission, providing comprehensive legal knowledge and practical insights to aspiring legal professionals.
 							</p>
@@ -5982,6 +6029,11 @@ document.addEventListener('DOMContentLoaded', function() {
 									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
 								</svg>
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Attorney III, DPWH RO IX</span>
+							</div>
+							<div class="flex flex-wrap gap-2 mb-4">
+								<span class="inline-flex items-center px-3 py-1 rounded-full bg-msu-deep-ocean/10 text-msu-deep-ocean text-xs sm:text-sm font-semibold guest-lecturer-specialization">
+									Specializations: Civil Law • Infrastructure Law • Public Works Compliance
+								</span>
 							</div>
 							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
 								Attorney III at the Department of Public Works and Highways Regional Office IX with Master of Laws (LL.M.) degree, sharing advanced legal knowledge and practical experience with law students.
@@ -6012,6 +6064,11 @@ document.addEventListener('DOMContentLoaded', function() {
 								</svg>
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Attorney IV, Bangsamoro Attorney General</span>
 							</div>
+							<div class="flex flex-wrap gap-2 mb-4">
+								<span class="inline-flex items-center px-3 py-1 rounded-full bg-msu-deep-ocean/10 text-msu-deep-ocean text-xs sm:text-sm font-semibold guest-lecturer-specialization">
+									Specializations: Shari'ah Law • Administrative Law • Climate Justice
+								</span>
+							</div>
 							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
 								Attorney IV at the Office of the Bangsamoro Attorney General with dual bar credentials (Philippine Bar & Shari'ah Bar), specializing in Islamic Law, Administrative Law, and Climate Justice.
 							</p>
@@ -6039,6 +6096,11 @@ document.addEventListener('DOMContentLoaded', function() {
 									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
 								</svg>
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Legal & Accounting</span>
+							</div>
+							<div class="flex flex-wrap gap-2 mb-4">
+								<span class="inline-flex items-center px-3 py-1 rounded-full bg-msu-deep-ocean/10 text-msu-deep-ocean text-xs sm:text-sm font-semibold guest-lecturer-specialization">
+									Specializations: Tax Law • Corporate Compliance • Financial Forensics
+								</span>
 							</div>
 							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
 								Attorney and Certified Public Accountant, providing unique insights into the intersection of law and accounting in legal practice.
@@ -6068,6 +6130,11 @@ document.addEventListener('DOMContentLoaded', function() {
 								</svg>
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Assistant Dean</span>
 							</div>
+							<div class="flex flex-wrap gap-2 mb-4">
+								<span class="inline-flex items-center px-3 py-1 rounded-full bg-msu-deep-ocean/10 text-msu-deep-ocean text-xs sm:text-sm font-semibold guest-lecturer-specialization">
+									Specializations: Constitutional Law • Peacebuilding • Shari'ah Legal Education
+								</span>
+							</div>
 							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
 								Assistant Dean of MSU College of Law – Tawi-Tawi Extension, providing leadership insights and expertise in legal education.
 							</p>
@@ -6095,6 +6162,11 @@ document.addEventListener('DOMContentLoaded', function() {
 									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
 								</svg>
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Attorney II, PAO Marawi</span>
+							</div>
+							<div class="flex flex-wrap gap-2 mb-4">
+								<span class="inline-flex items-center px-3 py-1 rounded-full bg-msu-deep-ocean/10 text-msu-deep-ocean text-xs sm:text-sm font-semibold guest-lecturer-specialization">
+									Specializations: Criminal Law • Litigation • Public Service
+								</span>
 							</div>
 							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
 								Attorney II at the Public Attorney's Office – Marawi City, specializing in criminal law and litigation, serving the public interest since 2022.
@@ -6124,6 +6196,11 @@ document.addEventListener('DOMContentLoaded', function() {
 								</svg>
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Attorney II, PAO Tawi-Tawi</span>
 							</div>
+							<div class="flex flex-wrap gap-2 mb-4">
+								<span class="inline-flex items-center px-3 py-1 rounded-full bg-msu-deep-ocean/10 text-msu-deep-ocean text-xs sm:text-sm font-semibold guest-lecturer-specialization">
+									Specializations: Remedial Law • Criminal Procedure • Rules on Evidence
+								</span>
+							</div>
 							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
 								Attorney II at the Public Attorney's Office – Tawi-Tawi with comprehensive legal expertise, providing valuable insights into various aspects of legal practice and advocacy.
 							</p>
@@ -6151,6 +6228,11 @@ document.addEventListener('DOMContentLoaded', function() {
 									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
 								</svg>
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Attorney III, Marawi Compensation Board</span>
+							</div>
+							<div class="flex flex-wrap gap-2 mb-4">
+								<span class="inline-flex items-center px-3 py-1 rounded-full bg-msu-deep-ocean/10 text-msu-deep-ocean text-xs sm:text-sm font-semibold guest-lecturer-specialization">
+									Specializations: Constitutional Law • Property Law • Community Rehabilitation Policy
+								</span>
 							</div>
 							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
 								Attorney III at the Marawi Compensation Board, dedicated law educator admitted to the Philippine Bar in 2023, specializing in Constitutional Law and Property Law.
@@ -6180,6 +6262,11 @@ document.addEventListener('DOMContentLoaded', function() {
 								</svg>
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Director General, MSSD</span>
 							</div>
+							<div class="flex flex-wrap gap-2 mb-4">
+								<span class="inline-flex items-center px-3 py-1 rounded-full bg-msu-deep-ocean/10 text-msu-deep-ocean text-xs sm:text-sm font-semibold guest-lecturer-specialization">
+									Specializations: Constitutional Law • Labor & Administrative Law • Bangsamoro Organic Law
+								</span>
+							</div>
 							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
 								Director General at the Ministry of Social Services and Development, law professor, and legal practitioner with extensive expertise in Constitutional Law and Bangsamoro Organic Law.
 							</p>
@@ -6207,6 +6294,11 @@ document.addEventListener('DOMContentLoaded', function() {
 									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
 								</svg>
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Legal Assistant, MSU-IIT</span>
+							</div>
+							<div class="flex flex-wrap gap-2 mb-4">
+								<span class="inline-flex items-center px-3 py-1 rounded-full bg-msu-deep-ocean/10 text-msu-deep-ocean text-xs sm:text-sm font-semibold guest-lecturer-specialization">
+									Specializations: Expropriation Law • Administrative Law • Policy Development • GAD Mainstreaming
+								</span>
 							</div>
 							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
 								Legal Assistant at the MSU-IIT Legal Office, lawyer and legal researcher specializing in policy development, governance, expropriation law, and gender mainstreaming.
@@ -6236,6 +6328,11 @@ document.addEventListener('DOMContentLoaded', function() {
 								</svg>
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Managing Partner</span>
 							</div>
+							<div class="flex flex-wrap gap-2 mb-4">
+								<span class="inline-flex items-center px-3 py-1 rounded-full bg-msu-deep-ocean/10 text-msu-deep-ocean text-xs sm:text-sm font-semibold guest-lecturer-specialization">
+									Specializations: Civil Litigation • Criminal Litigation • Labor Compliance
+								</span>
+							</div>
 							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
 								Managing Partner at Batocabe and Partners Law Offices, specializing in civil and criminal litigation and labor compliance.
 							</p>
@@ -6260,6 +6357,135 @@ document.addEventListener('DOMContentLoaded', function() {
 				</div>
 			</div>
 		</section>
+
+
+		<section class="py-12 sm:py-16 md:py-20 bg-white">
+
+			<div class="container mx-auto px-4 sm:px-6">
+
+				<div class="text-center mb-8 sm:mb-12 md:mb-16">
+
+					<h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-3 sm:mb-4 px-4">Personnel Spotlight</h2>
+
+					<p class="text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto px-4">
+						Meet our dedicated personnel who are committed to excellence in legal education and academic leadership.
+					</p>
+
+				</div>
+
+				
+
+				<!-- Leadership Section - Dean and Assistant Dean - Mobile Optimized -->
+				<div class="flex flex-col sm:flex-row justify-center items-center gap-8 sm:gap-10 md:gap-12 mb-8 sm:mb-10 md:mb-12">
+					<!-- Prof. Norhabib B. Barodi, Ll.M., SCL - Dean -->
+					<div class="text-center w-full sm:w-auto">
+						<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
+							<img src="/images/col/Profile/Prof. Norhabib Bin Suod S. Barodi.jpg" alt="Prof. Norhabib B. Barodi" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg lazy-image" loading="lazy">
+						</div>
+						<h3 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Prof. Norhabib B. Barodi, Ll.M., SCL</h3>
+						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Dean</p>
+					</div>
+
+					<!-- Assoc. Prof. Atty. Datu Esma Mikee P. Maruhom - Assistant Dean -->
+					<div class="text-center w-full sm:w-auto">
+						<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
+							<img src="/images/col/Profile/DATU ESMA MIKEE P. MARUHOM.jpg" alt="Assoc. Prof. Atty. Datu Esma Mikee P. Maruhom" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg lazy-image" loading="lazy">
+						</div>
+						<h3 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Assoc. Prof. Atty. Datu Esma Mikee P. Maruhom</h3>
+						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Assistant Dean</p>
+					</div>
+				</div>
+
+				<!-- Staff Personnel Grid - Custom Layout for Organizational Chart -->
+				<div id="facultyGrid">
+					<!-- First Row: 3 Personnel -->
+					<div class="grid grid-cols-1 xs:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12 justify-items-center">
+						<!-- Ms. Norsheen B. Sanuddin -->
+						<div class="text-center">
+							<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
+								<img src="/images/col/Profile/NORSHEEN B. SANUDDIN.jpg" alt="Ms. Norsheen B. Sanuddin" class="w-full h-full object-cover lazy-image" loading="lazy">
+							</div>
+							<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Ms. Norsheen B. Sanuddin, MSci</h3>
+							<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Senior Supervising Officer</p>
+						</div>
+
+						<!-- Mr. Asnawi C. Edris -->
+						<div class="text-center">
+							<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
+								<img src="/images/col/Profile/ASNAWI C. EDRIS.jpg" alt="Mr. Asnawi C. Edris" class="w-full h-full object-cover lazy-image" loading="lazy">
+							</div>
+							<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Mr. Asnawi C. Edris, RL</h3>
+							<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Librarian I</p>
+						</div>
+
+						<!-- MS. PHRIEA M. JUMAT -->
+						<div class="text-center">
+							<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
+								<img src="/images/col/Profile/PHRIEA M. JUMAT.jpg" alt="Ms. Phriea M. Jumat" class="w-full h-full object-cover lazy-image" loading="lazy">
+							</div>
+							<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Ms. Phriea M. Jumat, LPT</h3>
+							<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Administrative Aide IV</p>
+						</div>
+					</div>
+
+					<!-- Second Row: 2 Personnel Centered -->
+					<div class="flex justify-center gap-6 sm:gap-16 md:gap-24 lg:gap-32 mb-8 sm:mb-12">
+						<!-- MR. NAJER S. PANANDIGAN -->
+						<div class="text-center">
+							<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
+								<img src="/images/col/Profile/NAJER S. PANANDIGAN.jpg" alt="Mr. Najer S. Panandigan" class="w-full h-full object-cover lazy-image" loading="lazy">
+							</div>
+							<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Mr. Najer S. Panandigan</h3>
+							<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Administrative Aide IV</p>
+						</div>
+
+						<!-- MR. NUR R. JAAFAR -->
+						<div class="text-center">
+							<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
+								<img src="/images/col/Profile/NUR R. JAAFAR.jpg" alt="Mr. Nur R. Jaafar" class="w-full h-full object-cover lazy-image" loading="lazy">
+							</div>
+							<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Mr. Nur R. Jaafar</h3>
+							<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Administrative Aide I</p>
+						</div>
+					</div>
+				</div>
+
+				
+
+					<!-- Prosecutor Jamairah A. Nagamora -->
+					<!-- <div class="text-center cursor-pointer hover:scale-105 transition-transform duration-200" onclick="openFacultyModal('nagamora')">
+						<div class="relative w-40 h-40 mx-auto mb-4">
+							<img src="/images/col/Faculty/nagamora.png" alt="Prosecutor Jamairah A. Nagamora" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg" loading="lazy">
+						</div>
+						<h3 class="font-bold text-lg text-msu-main-color dark:text-msu-bgc-color mb-2">Prosecutor Jamairah A. Nagamora</h3>
+						<p class="text-sm text-msu-main-color dark:text-msu-bgc-color">Lecturer</p>
+					</div> -->
+
+
+				</div>
+
+				
+
+				<!-- <div class="text-center mt-12">
+
+					<a href="#" class="inline-flex items-center px-6 py-3 border border-msu-deep-ocean text-base font-medium rounded-full shadow-sm text-msu-bgc-color bg-white hover:bg-gray-50 hover:shadow-md transition-all duration-300">
+
+						View All Faculty Members
+
+						<svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+
+						</svg>
+
+					</a>
+
+				</div>
+
+			</div> -->
+
+		</section>
+
 
 
 		<!-- Alumni Success Stories -->

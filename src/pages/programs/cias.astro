@@ -339,6 +339,24 @@ try {
 
 						<a 
 
+							href="#facultySpotlight" 
+
+							class="group bg-white/10 hover:bg-white/20 border-2 border-white/40 text-white font-bold py-3 px-6 sm:py-4 sm:px-10 rounded-full transition-all duration-500 inline-flex items-center justify-center hover:shadow-2xl hover:-translate-y-2 transform hover:scale-105 backdrop-blur-sm text-sm sm:text-base"
+
+						>
+
+							<span class="relative z-10">Faculty Spotlight</span>
+
+							<svg class="w-5 h-5 sm:w-6 sm:h-6 ml-2 sm:ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-9 9-4-4-6 6"></path>
+
+							</svg>
+
+						</a>
+
+						<a 
+
 							href="#contact" 
 
 							class="group bg-transparent border-2 border-white hover:border-msu-deep-ocean text-white font-bold py-3 px-6 sm:py-4 sm:px-10 rounded-full transition-all duration-500 inline-flex items-center justify-center hover:shadow-2xl hover:-translate-y-2 transform hover:scale-105 backdrop-blur-sm text-sm sm:text-base"
@@ -3767,97 +3785,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         </section> -->
 
-	<!-- Personnel Spotlight - Mobile Optimized -->
-	<section class="py-12 sm:py-16 md:py-20 bg-white">
-		<div class="container mx-auto px-4 sm:px-6">
-			<div class="text-center mb-8 sm:mb-12 md:mb-16">
-				<h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-3 sm:mb-4 px-4">Personnel Spotlight</h2>
-				<p class="text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto px-4">
-					Meet the dedicated CIAS staff who support academic excellence, student services, and community outreach every day.
-				</p>
-			</div>
-
-			<!-- Leadership Section - Acting Dean -->
-			<div class="flex flex-col sm:flex-row justify-center items-center gap-8 sm:gap-10 md:gap-12 mb-8 sm:mb-10 md:mb-12">
-				<div class="text-center w-full sm:w-auto cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('sali_staff')">
-					<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
-						<img src="/images/cias/Faculty/msufaculty.png" alt="Associate Prof. Najeeb Razul A. Sali, Ph.D." class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
-					</div>
-					<h3 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Associate Prof. Najeeb Razul A. Sali, Ph.D.</h3>
-					<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Acting Dean, CIAS</p>
-					<p class="text-xs text-gray-600 dark:text-gray-400 px-2">Associate Professor V</p>
-				</div>
-			</div>
-
-			<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12 justify-items-center">
-				<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('yunus')">
-					<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-						<img src="/images/cias/Faculty/msufaculty.png" alt="Mohammad Ejat K. Yunus" class="w-full h-full object-cover lazy-image" loading="lazy">
-					</div>
-					<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Mohammad Ejat K. Yunus</h3>
-					<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
-					<p class="text-xs text-gray-500 italic px-2">Administrative Aide IV</p>
-				</div>
-
-				<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('hassan_staff')">
-					<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-						<img src="/images/cias/Faculty/msufaculty.png" alt="Dionesia C. Hassan" class="w-full h-full object-cover lazy-image" loading="lazy">
-					</div>
-					<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Dionesia C. Hassan</h3>
-					<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
-					<p class="text-xs text-gray-500 italic px-2">Administrative Aide V</p>
-				</div>
-
-				<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('noor')">
-					<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-						<img src="/images/cias/Faculty/msufaculty.png" alt="Al-Hatta Y. Noor" class="w-full h-full object-cover lazy-image" loading="lazy">
-					</div>
-					<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Al-Hatta Y. Noor</h3>
-					<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
-					<p class="text-xs text-gray-500 italic px-2">Administrative Aide IV</p>
-				</div>
-
-				<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('macam')">
-					<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-						<img src="/images/cias/Faculty/msufaculty.png" alt="Meheedev Nadeen C. Macam" class="w-full h-full object-cover lazy-image" loading="lazy">
-					</div>
-					<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Meheedev Nadeen C. Macam</h3>
-					<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
-					<p class="text-xs text-gray-500 italic px-2">Administrative Aide VI</p>
-				</div>
-
-				<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('kawasan')">
-					<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-						<img src="/images/cias/Faculty/msufaculty.png" alt="Gary J. Kawasan" class="w-full h-full object-cover lazy-image" loading="lazy">
-					</div>
-					<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Gary J. Kawasan</h3>
-					<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
-					<p class="text-xs text-gray-500 italic px-2">Administrative Aide IV</p>
-				</div>
-
-				<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('hussien')">
-					<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-						<img src="/images/cias/Faculty/msufaculty.png" alt="Aminkadra Hussien" class="w-full h-full object-cover lazy-image" loading="lazy">
-					</div>
-					<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Aminkadra Hussien</h3>
-					<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
-					<p class="text-xs text-gray-500 italic px-2">Administrative Aide I</p>
-				</div>
-
-				<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('akmad')">
-					<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-						<img src="/images/cias/Faculty/msufaculty.png" alt="Pekkeong H. Akmad" class="w-full h-full object-cover lazy-image" loading="lazy">
-					</div>
-					<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Pekkeong H. Akmad</h3>
-					<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
-					<p class="text-xs text-gray-500 italic px-2">Administrative Aide I</p>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- Research & Innovation Section -->
-
 	<section class="py-12 sm:py-16 md:py-20 bg-gray-50">
 
 		<div class="container mx-auto px-4 sm:px-6">
@@ -4441,6 +4368,95 @@ document.addEventListener('DOMContentLoaded', function() {
 				</div>
 			</div>
 		</section>
+
+	<!-- Personnel Spotlight - Mobile Optimized -->
+	<section class="py-12 sm:py-16 md:py-20 bg-white">
+		<div class="container mx-auto px-4 sm:px-6">
+			<div class="text-center mb-8 sm:mb-12 md:mb-16">
+				<h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-3 sm:mb-4 px-4">Personnel Spotlight</h2>
+				<p class="text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto px-4">
+					Meet the dedicated CIAS staff who support academic excellence, student services, and community outreach every day.
+				</p>
+			</div>
+
+			<!-- Leadership Section - Acting Dean -->
+			<div class="flex flex-col sm:flex-row justify-center items-center gap-8 sm:gap-10 md:gap-12 mb-8 sm:mb-10 md:mb-12">
+				<div class="text-center w-full sm:w-auto cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('sali_staff')">
+					<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
+						<img src="/images/cias/Faculty/msufaculty.png" alt="Associate Prof. Najeeb Razul A. Sali, Ph.D." class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
+					</div>
+					<h3 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Associate Prof. Najeeb Razul A. Sali, Ph.D.</h3>
+					<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Acting Dean, CIAS</p>
+					<p class="text-xs text-gray-600 dark:text-gray-400 px-2">Associate Professor V</p>
+				</div>
+			</div>
+
+			<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12 justify-items-center">
+				<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('yunus')">
+					<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+						<img src="/images/cias/Faculty/msufaculty.png" alt="Mohammad Ejat K. Yunus" class="w-full h-full object-cover lazy-image" loading="lazy">
+					</div>
+					<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Mohammad Ejat K. Yunus</h3>
+					<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
+					<p class="text-xs text-gray-500 italic px-2">Administrative Aide IV</p>
+				</div>
+
+				<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('hassan_staff')">
+					<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+						<img src="/images/cias/Faculty/msufaculty.png" alt="Dionesia C. Hassan" class="w-full h-full object-cover lazy-image" loading="lazy">
+					</div>
+					<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Dionesia C. Hassan</h3>
+					<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
+					<p class="text-xs text-gray-500 italic px-2">Administrative Aide V</p>
+				</div>
+
+				<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('noor')">
+					<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+						<img src="/images/cias/Faculty/msufaculty.png" alt="Al-Hatta Y. Noor" class="w-full h-full object-cover lazy-image" loading="lazy">
+					</div>
+					<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Al-Hatta Y. Noor</h3>
+					<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
+					<p class="text-xs text-gray-500 italic px-2">Administrative Aide IV</p>
+				</div>
+
+				<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('macam')">
+					<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+						<img src="/images/cias/Faculty/msufaculty.png" alt="Meheedev Nadeen C. Macam" class="w-full h-full object-cover lazy-image" loading="lazy">
+					</div>
+					<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Meheedev Nadeen C. Macam</h3>
+					<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
+					<p class="text-xs text-gray-500 italic px-2">Administrative Aide VI</p>
+				</div>
+
+				<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('kawasan')">
+					<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+						<img src="/images/cias/Faculty/msufaculty.png" alt="Gary J. Kawasan" class="w-full h-full object-cover lazy-image" loading="lazy">
+					</div>
+					<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Gary J. Kawasan</h3>
+					<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
+					<p class="text-xs text-gray-500 italic px-2">Administrative Aide IV</p>
+				</div>
+
+				<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('hussien')">
+					<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+						<img src="/images/cias/Faculty/msufaculty.png" alt="Aminkadra Hussien" class="w-full h-full object-cover lazy-image" loading="lazy">
+					</div>
+					<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Aminkadra Hussien</h3>
+					<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
+					<p class="text-xs text-gray-500 italic px-2">Administrative Aide I</p>
+				</div>
+
+				<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('akmad')">
+					<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
+						<img src="/images/cias/Faculty/msufaculty.png" alt="Pekkeong H. Akmad" class="w-full h-full object-cover lazy-image" loading="lazy">
+					</div>
+					<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Pekkeong H. Akmad</h3>
+					<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
+					<p class="text-xs text-gray-500 italic px-2">Administrative Aide I</p>
+				</div>
+			</div>
+		</div>
+	</section>
 
 		<!-- Personnel Spotlight - Mobile Optimized -->
 		<!-- <section class="py-12 sm:py-16 md:py-20 bg-white">
