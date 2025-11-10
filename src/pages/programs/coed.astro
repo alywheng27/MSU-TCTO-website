@@ -25,7 +25,20 @@ import { getCOEDPrograms } from '../../api/api.jsx';
 const currentPath = Astro.url.pathname;
 
 // Fetch COED programs data from Sanity
-let programsData = [];
+type ProgramDataItem = {
+  _id: string;
+  program: string;
+  description: string;
+  degree: string;
+  level: string;
+  duration: string;
+  accreditation: string;
+  fileUrl: string | null;
+  name: string;
+  department: string;
+};
+
+let programsData: ProgramDataItem[] = [];
 let filterOptions = {
   degrees: [] as string[],
   levels: [] as string[],
@@ -92,6 +105,34 @@ try {
   // Fallback to empty array if fetch fails
   programsData = [];
 }
+
+const targetDepartments = [
+  'Department of Early Childhood and Elementary Education',
+  'Department of Educational Leadership and Professional Services',
+  'Department of Language Education',
+  'Department of Science and Mathematics Education',
+  'Department of Physical Education'
+];
+
+const normalizeDepartmentName = (value: string) =>
+  (value || '')
+    .toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+const departmentProgramsMap = targetDepartments.reduce<Record<string, ProgramDataItem[]>>((acc, department) => {
+  const normalizedTarget = normalizeDepartmentName(department);
+  acc[department] = programsData.filter((program) => {
+    const normalizedProgramDepartment = normalizeDepartmentName(program.department);
+    return normalizedProgramDepartment === normalizedTarget ||
+      normalizedProgramDepartment.includes(normalizedTarget) ||
+      normalizedTarget.includes(normalizedProgramDepartment);
+  });
+  return acc;
+}, {});
+
+console.log('Department programs map created for departments:', Object.keys(departmentProgramsMap));
 
 ---
 
@@ -320,13 +361,13 @@ try {
 
 						<a 
 
-							href="#programs" 
+							href="#facultySpotlight" 
 
 							class="group bg-gradient-to-r from-msu-main-color to-msu-deep-ocean hover:from-msu-deep-ocean hover:to-msu-main-color text-white font-bold py-3 px-6 sm:py-4 sm:px-10 rounded-full transition-all duration-500 inline-flex items-center justify-center hover:shadow-2xl hover:-translate-y-2 transform hover:scale-105 text-sm sm:text-base"
 
 						>
 
-							<span class="relative z-10">Explore Programs</span>
+							<span class="relative z-10">Faculty & Academic Programs</span>
 
 							<svg class="w-5 h-5 sm:w-6 sm:h-6 ml-2 sm:ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 
@@ -335,24 +376,6 @@ try {
 							</svg>
 
 							<div class="absolute inset-0 bg-white/20 rounded-full blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-						</a>
-
-						<a 
-
-							href="#facultySpotlight" 
-
-							class="group bg-white/10 hover:bg-white/20 border-2 border-white/40 text-white font-bold py-3 px-6 sm:py-4 sm:px-10 rounded-full transition-all duration-500 inline-flex items-center justify-center hover:shadow-2xl hover:-translate-y-2 transform hover:scale-105 backdrop-blur-sm text-sm sm:text-base"
-
-						>
-
-							<span class="relative z-10">Faculty Spotlight</span>
-
-							<svg class="w-5 h-5 sm:w-6 sm:h-6 ml-2 sm:ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-9 9-4-4-6 6"></path>
-
-							</svg>
 
 						</a>
 
@@ -413,6 +436,42 @@ try {
 			</div>
 
 		</section>
+
+		<div
+			id="departmentProgramsModal"
+			class="fixed inset-0 z-50 hidden items-center justify-center px-4 py-8 sm:px-6 lg:px-8"
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="departmentProgramsModalTitle"
+		>
+			<div class="absolute inset-0 bg-black/70 backdrop-blur-sm department-modal-overlay" aria-hidden="true"></div>
+			<div class="relative w-full max-w-4xl bg-white text-gray-900 rounded-3xl shadow-2xl overflow-hidden">
+				<div class="flex items-center justify-between px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-msu-main-color/10 to-msu-deep-ocean/10">
+					<div class="space-y-2">
+						<span class="text-xs uppercase tracking-[0.28em] text-msu-deep-ocean/70">Academic Programs</span>
+						<h2 id="departmentProgramsModalTitle" class="text-2xl font-bold text-msu-deep-ocean">Department Academic Programs</h2>
+						<!-- <div
+							id="departmentProgramsModalSubtitle"
+							class="inline-flex items-center gap-2 rounded-full border border-[#61063B]/20 bg-[#61063B]/10 px-3 py-1 text-sm font-semibold text-[#61063B] shadow-sm transition-opacity duration-200 hidden"
+							role="status"
+							aria-live="polite"
+						></div> -->
+					</div>
+					<button
+						type="button"
+						class="department-modal-close p-2 rounded-full text-gray-600 hover:text-white hover:bg-msu-deep-ocean transition-colors"
+						aria-label="Close modal"
+					>
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+						</svg>
+					</button>
+				</div>
+				<div id="departmentProgramsModalBody" class="px-6 py-6 space-y-6 max-h-[70vh] overflow-y-auto">
+					<!-- Dynamic department content -->
+				</div>
+			</div>
+		</div>
 
 
 
@@ -1098,7 +1157,7 @@ try {
 
 
 <!-- Programs Section with Cards -->
-
+<!-- 
 <section id="programs" class="py-20 bg-white">
 
     <div class="container mx-auto px-6">
@@ -1117,10 +1176,9 @@ try {
 
 
 
-        <!-- Search and Filter Controls -->
         <div class="mb-8">
             <div class="flex flex-col lg:flex-row gap-4 items-center justify-between">
-                <!-- Global Search -->
+         
                 <div class="relative w-full lg:w-96">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1135,7 +1193,7 @@ try {
                     >
                 </div>
 
-                <!-- Filter Controls -->
+          
                 <div class="flex flex-wrap gap-3">
                     <select id="degreeFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-msu-main-color focus:border-msu-main-color transition-all duration-300">
                         <option value="">All Degrees</option>
@@ -1158,7 +1216,7 @@ try {
             </div>
         </div>
 
-        <!-- Programs Table - Desktop View -->
+
         <div class="hidden lg:block bg-white rounded-xl shadow-lg overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200">
@@ -1200,18 +1258,18 @@ try {
                         </tr>
                     </thead>
                     <tbody id="programsTableBody" class="bg-white divide-y divide-gray-200">
-                        <!-- Programs will be populated by JavaScript -->
+                   
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- Mobile Cards View -->
+   
         <div class="lg:hidden space-y-4" id="mobileProgramsContainer">
-            <!-- Mobile cards will be populated by JavaScript -->
+       
         </div>
 
-        <!-- No Results Message -->
+    
         <div id="noResults" class="hidden text-center py-12">
             <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.29-1.009-5.824-2.5M15 6.5a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -1220,7 +1278,7 @@ try {
             <p class="mt-1 text-sm text-gray-500">Try adjusting your search or filter criteria.</p>
         </div>
 
-        <!-- Results Summary -->
+ 
         <div class="mt-4 flex justify-between items-center text-sm text-gray-600">
             <div id="resultsCount">Showing all programs</div>
             <div class="flex items-center space-x-2">
@@ -1234,29 +1292,313 @@ try {
             </div>
         </div>
 
-        <!-- Pagination -->
+  
         <div id="pagination" class="mt-6 flex justify-center">
-            <!-- Pagination will be generated by JavaScript -->
+           
         </div>
 
     </div> 
 
-</section>
+</section> -->
 
-<script define:vars={{ programsData }}>
+<script define:vars={{ programsData, departmentProgramsMap }}>
     // Pass Sanity data to client-side JavaScript
     console.log('=== SETTING SANITY DATA ===');
     window.serverProgramsData = JSON.stringify(programsData);
     console.log('Sanity data set to window.serverProgramsData:', window.serverProgramsData);
+    window.departmentProgramsMap = JSON.stringify(departmentProgramsMap);
+    console.log('Department programs data set to window.departmentProgramsMap:', window.departmentProgramsMap);
 </script>
 
 <script>
+
+const htmlEscapeMap = {
+	'&': '&amp;',
+	'<': '&lt;',
+	'>': '&gt;',
+	'"': '&quot;',
+	'\'': '&#39;'
+};
+
+function escapeHtml(value: unknown): string {
+	return (value == null ? '' : String(value)).replace(/[&<>"']/g, (char) => htmlEscapeMap[char as keyof typeof htmlEscapeMap] || char);
+}
 
 document.addEventListener('DOMContentLoaded', function() {
 
     const viewAllBtn = document.getElementById('viewAllBtn');
 
     const hiddenPrograms = document.querySelectorAll('.program-card.hidden');
+
+    const departmentProgramsModal = document.getElementById('departmentProgramsModal');
+    const departmentProgramsModalBody = document.getElementById('departmentProgramsModalBody');
+    const departmentProgramsModalSubtitle = document.getElementById('departmentProgramsModalSubtitle');
+    const departmentProgramsModalTitle = document.getElementById('departmentProgramsModalTitle');
+    const departmentModalCloseButtons = Array.from(document.querySelectorAll('.department-modal-close')) as HTMLButtonElement[];
+    const departmentModalOverlay = departmentProgramsModal?.querySelector('.department-modal-overlay') as HTMLElement | null;
+
+    const departmentProgramsData = (() => {
+        const rawMap = (window as any).departmentProgramsMap;
+        if (!rawMap) return {};
+        try {
+            const parsed = JSON.parse(rawMap);
+            return parsed && typeof parsed === 'object' ? parsed : {};
+        } catch (error) {
+            console.error('Error parsing department programs map:', error);
+            return {};
+        }
+    })();
+
+    const fallbackProgramsData = (() => {
+        const raw = (window as any).serverProgramsData;
+        if (!raw) return [];
+        try {
+            const parsed = JSON.parse(raw);
+            return Array.isArray(parsed) ? parsed : [];
+        } catch (error) {
+            console.error('Error parsing fallback programs data:', error);
+            return [];
+        }
+    })();
+
+    function normalizeDepartmentValue(value: string) {
+        return (value || '')
+            .toLowerCase()
+            .replace(/&/g, 'and')
+            .replace(/\s+/g, ' ')
+            .trim();
+    }
+
+    const departmentDisplayLookup: Record<string, string> = {
+        [normalizeDepartmentValue('Department of Early Childhood and Elementary Education')]: 'Department of Early Childhood and Elementary Education',
+        [normalizeDepartmentValue('Department of Educational Leadership and Professional Services')]: 'Department of Educational Leadership and Professional Services',
+        [normalizeDepartmentValue('Department of Language Education')]: 'Department of Language Education',
+        [normalizeDepartmentValue('Department of Science and Mathematics Education')]: 'Department of Science and Mathematics Education',
+        [normalizeDepartmentValue('Department of Physical Education')]: 'Department of Physical Education',
+        [normalizeDepartmentValue('College of Education')]: 'College of Education'
+    };
+
+    const resolveDepartmentPrograms = (department: string) => {
+        const rawSearchLower = (department || '').toLowerCase();
+        const normalizedInput = normalizeDepartmentValue(department);
+        const entries = Object.entries(departmentProgramsData);
+
+        let matchedEntry = entries.find(([key]) => {
+            const normalizedKey = normalizeDepartmentValue(key);
+            return normalizedKey === normalizedInput ||
+                normalizedKey.includes(normalizedInput) ||
+                normalizedInput.includes(normalizedKey);
+        });
+
+        if (!matchedEntry && normalizedInput) {
+            matchedEntry = entries.find(([, programs]) =>
+                Array.isArray(programs) &&
+                programs.some((program: any) => {
+                    const normalizedProgramDepartment = normalizeDepartmentValue(program?.department || '');
+                    return normalizedProgramDepartment === normalizedInput ||
+                        normalizedProgramDepartment.includes(normalizedInput) ||
+                        normalizedInput.includes(normalizedProgramDepartment);
+                })
+            );
+        }
+
+        if (matchedEntry) {
+            const [label, programList] = matchedEntry;
+            const programs = Array.isArray(programList) ? programList : [];
+            if (programs.length) {
+                return { label, programs };
+            }
+        }
+
+        const fallbackMatches = fallbackProgramsData.filter((program: any) => {
+            if (!program) return false;
+            const candidates = [
+                program.department,
+                program.department?.department,
+                program.program,
+                program.name,
+                program.title,
+                program.degree,
+                program.degree?.degree,
+                program.level,
+                program.level?.level,
+                program.description
+            ];
+            return candidates.some((value) => {
+                if (!value) return false;
+                const text = typeof value === 'string'
+                    ? value
+                    : (value && typeof value === 'object' && 'toString' in value)
+                        ? String(value)
+                        : '';
+                return text.toLowerCase().includes(rawSearchLower);
+            });
+        });
+
+        if (fallbackMatches.length) {
+            const fallbackLabel = fallbackMatches[0]?.department?.department ||
+                fallbackMatches[0]?.department ||
+                fallbackMatches[0]?.program ||
+                fallbackMatches[0]?.name ||
+                department;
+            return {
+                label: fallbackLabel || department,
+                programs: fallbackMatches
+            };
+        }
+
+        return {
+            label: department,
+            programs: []
+        };
+    };
+
+    const renderDepartmentPrograms = (department: string) => {
+        if (!departmentProgramsModalBody) return department;
+        const { label, programs } = resolveDepartmentPrograms(department);
+
+        if (!programs.length) {
+            departmentProgramsModalBody.innerHTML = `
+                <div class="text-center py-12">
+                    <p class="text-gray-600 text-sm md:text-base">
+                        No academic program descriptions available for <span class="font-semibold">${escapeHtml(label)}</span> at the moment.
+                    </p>
+                </div>
+            `;
+            return label;
+        }
+
+        const rowsMarkup = programs.map((program: any) => {
+            const safeProgramName = escapeHtml(program?.program || program?.name || '');
+            const safeDegree = program?.degree ? escapeHtml(program.degree) : 'N/A';
+            const safeLevel = program?.level ? escapeHtml(program.level) : 'N/A';
+            const safeDuration = program?.duration ? escapeHtml(program.duration) : 'N/A';
+            const safeAccreditation = program?.accreditation ? escapeHtml(program.accreditation) : '';
+            const safeFileUrl = program?.fileUrl ? escapeHtml(program.fileUrl) : '';
+            const safeDisplayName = escapeHtml(program?.name || program?.program || '');
+            const safeDescription = program?.description
+                ? `<p class="mt-2 text-xs md:text-sm text-gray-600 leading-relaxed">${escapeHtml(program.description)}</p>`
+                : '';
+            const accreditationMarkup = safeAccreditation
+                ? `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full border border-emerald-200 bg-emerald-50 text-emerald-700 text-xs font-medium">${safeAccreditation}</span>`
+                : `<span class="text-gray-400 text-xs">TBA</span>`;
+            const actionMarkup = safeFileUrl
+                ? `<button type="button" onclick="openPDFViewer('${safeFileUrl}', '${safeDisplayName}')" class="inline-flex items-center gap-2 rounded-full border border-[#61063B]/20 bg-[#61063B]/10 px-4 py-2 text-xs font-semibold text-[#61063B] transition-colors duration-200 hover:bg-[#61063B]/20">
+                        View Details
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+                        </svg>
+                    </button>`
+                : `<span class="text-gray-400 text-xs">No file</span>`;
+
+            return `
+                <tr class="hover:bg-white/60 transition-colors duration-200">
+                    <td class="px-5 py-4 align-top">
+                        <div class="font-semibold text-sm md:text-base text-[#61063B]">${safeProgramName}</div>
+                        ${safeDescription}
+                    </td>
+                    <td class="px-5 py-4 align-top text-sm text-gray-700">${safeDegree}</td>
+                    <td class="px-5 py-4 align-top text-sm text-gray-700">${safeLevel}</td>
+                    <td class="px-5 py-4 align-top text-sm text-gray-700">${safeDuration}</td>
+                    <td class="px-5 py-4 align-top">${accreditationMarkup}</td>
+                    <td class="px-5 py-4 align-top text-right">${actionMarkup}</td>
+                </tr>
+            `;
+        }).join('');
+
+        departmentProgramsModalBody.innerHTML = `
+            <div class="space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                    <p class="text-sm text-gray-600">Showing <span class="font-semibold text-[#61063B]">${programs.length}</span> academic program${programs.length === 1 ? '' : 's'}</p>
+                </div>
+                <div class="overflow-x-auto rounded-2xl border border-gray-200 bg-white/80 backdrop-blur">
+                    <table class="min-w-full divide-y divide-gray-200 text-sm text-gray-700">
+                        <thead class="bg-[#61063B]/90 text-white text-xs uppercase tracking-wide">
+                            <tr>
+                                <th scope="col" class="px-5 py-3 text-left font-semibold">Program Name</th>
+                                <th scope="col" class="px-5 py-3 text-left font-semibold">Degree Type</th>
+                                <th scope="col" class="px-5 py-3 text-left font-semibold">Level</th>
+                                <th scope="col" class="px-5 py-3 text-left font-semibold">Duration</th>
+                                <th scope="col" class="px-5 py-3 text-left font-semibold">Accreditation</th>
+                                <th scope="col" class="px-5 py-3 text-right font-semibold">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 bg-white">
+                            ${rowsMarkup}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        `;
+
+        return label;
+    };
+
+    const openDepartmentProgramsModal = (department: string) => {
+        if (!departmentProgramsModal) return;
+        const matchedLabel = renderDepartmentPrograms(department);
+        const trimmedRequest = (department || '').trim();
+        const normalizedRequest = normalizeDepartmentValue(trimmedRequest);
+        const trimmedMatched = (matchedLabel || '').trim();
+        const normalizedMatched = normalizeDepartmentValue(trimmedMatched);
+
+        const manualRequestLabel = normalizedRequest ? departmentDisplayLookup[normalizedRequest] : undefined;
+        const manualMatchedLabel = normalizedMatched ? departmentDisplayLookup[normalizedMatched] : undefined;
+
+        let resolvedLabel = manualMatchedLabel || manualRequestLabel || trimmedMatched || trimmedRequest;
+
+        if (normalizedRequest && normalizedMatched) {
+            const labelsMismatch =
+                normalizedMatched !== normalizedRequest &&
+                !normalizedMatched.includes(normalizedRequest) &&
+                !normalizedRequest.includes(normalizedMatched);
+            if (labelsMismatch && !manualMatchedLabel && manualRequestLabel) {
+                resolvedLabel = manualRequestLabel;
+            }
+        }
+
+        if (departmentProgramsModalSubtitle) {
+            if (resolvedLabel) {
+                departmentProgramsModalSubtitle.textContent = resolvedLabel;
+                departmentProgramsModalSubtitle.classList.remove('hidden');
+                departmentProgramsModalSubtitle.setAttribute('data-department-label', resolvedLabel);
+            } else {
+                departmentProgramsModalSubtitle.textContent = '';
+                departmentProgramsModalSubtitle.classList.add('hidden');
+                departmentProgramsModalSubtitle.removeAttribute('data-department-label');
+            }
+        }
+        if (departmentProgramsModalTitle) {
+            departmentProgramsModalTitle.textContent = resolvedLabel || 'Department Academic Programs';
+        }
+        departmentProgramsModal.classList.remove('hidden');
+        departmentProgramsModal.classList.add('flex');
+        document.body.classList.add('overflow-hidden');
+    };
+
+    const closeDepartmentProgramsModal = () => {
+        if (!departmentProgramsModal) return;
+        departmentProgramsModal.classList.add('hidden');
+        departmentProgramsModal.classList.remove('flex');
+        document.body.classList.remove('overflow-hidden');
+    };
+
+    (window as any).openDepartmentProgramsModal = openDepartmentProgramsModal;
+    (window as any).closeDepartmentProgramsModal = closeDepartmentProgramsModal;
+
+    departmentModalCloseButtons.forEach((button) => {
+        button.addEventListener('click', closeDepartmentProgramsModal);
+    });
+
+    if (departmentModalOverlay) {
+        departmentModalOverlay.addEventListener('click', closeDepartmentProgramsModal);
+    }
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && departmentProgramsModal && !departmentProgramsModal.classList.contains('hidden')) {
+            closeDepartmentProgramsModal();
+        }
+    });
 
     
 
@@ -1386,7 +1728,7 @@ function openFacultyModal(facultyId) {
 				"Successful signing of Collective Negotiation Agreement (CNA)",
 				"Active participation in university-level decision-making bodies"
 			],
-			description: "Dr. Alhisan U. Jemsy is a Professor V and the current Dean of the College of Education at Mindanao State University – Tawi-Tawi College of Technology and Oceanography (MSU-TCTO). He also serves as Faculty Regent of the MSU System Board of Regents. Dr. Jemsy holds a Ph.D. in Education, major in Research and Evaluation, from the University of San Carlos. His research interests include educational research, assessment, and teacher education. A recognized academic leader and active member of the National Research Council of the Philippines, he has conducted numerous training programs and delivered lectures on educational research, assessment, and school leadership across Mindanao."
+			description: "Dr. Alhisan U. Jemsy is a Professor V and the current Dean of the College of Education at Mindanao State University – Tawi-Tawi College of Technology and Oceanography (MSU-TCTO). He also served as Faculty Regent of the MSU System Board of Regents. Dr. Jemsy holds a Ph.D. in Education, major in Research and Evaluation, from the University of San Carlos. His research interests include educational research, assessment, and teacher education. A recognized academic leader and active member of the National Research Council of the Philippines, he has conducted numerous training programs and delivered lectures on educational research, assessment, and school leadership across Mindanao."
 		},
 		budlong: {
 		name: "Assoc. Prof. Cherry T. Budlong-Alih",
@@ -1594,7 +1936,7 @@ function openFacultyModal(facultyId) {
 			name: "Asst. Prof. Shielamar J. Judan",
 			position: "Faculty",
 			rank: "Assistant Professor IV",
-			image: "/images/coed/Profile/msufaculty.png",
+			image: "/images/coed/Profile/Judan.png",
 			education: [
 				"Master of Arts in Education, Major in Administration and Supervision - Mindanao State University - Tawi-Tawi College of Technology and Oceanography"
 			],
@@ -4008,14 +4350,45 @@ document.addEventListener('DOMContentLoaded', function() {
 	const facultyResultsList = document.getElementById('facultyResultsList');
 	const showMoreBtn = document.getElementById('showMoreBtn');
 	const facultyGrid = document.getElementById('facultyGrid');
-	const departmentButtons = Array.from(document.querySelectorAll('.show-department-faculty')) as HTMLButtonElement[];
+	const departmentFacultyButtons = Array.from(document.querySelectorAll('.department-faculty-toggle')) as HTMLButtonElement[];
+	const departmentProgramButtons = Array.from(document.querySelectorAll('.department-program-toggle')) as HTMLButtonElement[];
 	const facultyDepartmentNotice = document.getElementById('facultyDepartmentNotice');
+	const openDepartmentProgramsModalFn = (window as any).openDepartmentProgramsModal as ((department: string) => void) | undefined;
+	const closeDepartmentProgramsModalFn = (window as any).closeDepartmentProgramsModal as (() => void) | undefined;
+	const bannerProgramsData = (() => {
+		const rawData = (window as any).serverProgramsData;
+		if (!rawData) return [];
+		try {
+			const parsed = JSON.parse(rawData);
+			return Array.isArray(parsed) ? parsed : [];
+		} catch (error) {
+			console.error('Error parsing academic programs data for faculty banners:', error);
+			return [];
+		}
+	})();
 	
 	if (!facultySearchInput || !facultyGrid) return;
 
 	let activeDepartmentFilter: string | null = null;
 	let activeHighlightCard = null;
 	let activeHighlightTimeout = null;
+
+	function normalizeDepartmentName(value: string) {
+		return (value || '')
+			.toLowerCase()
+			.replace(/&/g, 'and')
+			.replace(/\s+/g, ' ')
+			.trim();
+	}
+
+	function programsMatchDepartment(programDepartment: string, targetDepartment: string) {
+		if (!programDepartment || !targetDepartment) return false;
+		const normalizedProgram = normalizeDepartmentName(programDepartment);
+		const normalizedTarget = normalizeDepartmentName(targetDepartment);
+		return normalizedProgram === normalizedTarget ||
+			normalizedProgram.includes(normalizedTarget) ||
+			normalizedTarget.includes(normalizedProgram);
+	}
 
 	function hideDepartmentNotice() {
 		if (!facultyDepartmentNotice) return;
@@ -4030,8 +4403,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 	function updateDepartmentButtonsState() {
-		if (!departmentButtons.length) return;
-		departmentButtons.forEach((button) => {
+		if (!departmentFacultyButtons.length) return;
+		departmentFacultyButtons.forEach((button) => {
 			const department = button.dataset.department || '';
 			const isActive = department === activeDepartmentFilter;
 			button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
@@ -4041,10 +4414,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			button.classList.toggle('bg-white/10', !isActive);
 			button.classList.toggle('text-white', !isActive);
 			button.classList.toggle('border-white/40', !isActive);
-			const label = button.querySelector('.department-button-label');
-			if (label) {
-				label.textContent = isActive ? 'Hide Faculty' : 'Show Faculty';
-			}
 			const icon = button.querySelector('.department-button-icon') as SVGElement | null;
 			if (icon) {
 				icon.style.transition = 'transform 0.2s ease-in-out';
@@ -4073,6 +4442,145 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 	}
 
+	function renderProgramsForDepartment(department: string, container: HTMLElement | null) {
+		if (!container) return;
+		const defaultDisplay = container.dataset.defaultDisplay || 'block';
+		if (!container.dataset.defaultDisplay) {
+			container.dataset.defaultDisplay = defaultDisplay;
+		}
+
+		container.innerHTML = '';
+
+		if (!bannerProgramsData.length) {
+			container.innerHTML = `
+				<div class="bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white/80 text-sm">
+					Academic programs data is currently unavailable. Please try again later.
+				</div>
+			`;
+		} else {
+			const programs = bannerProgramsData.filter((program: any) =>
+				programsMatchDepartment(program?.department, department)
+			);
+
+			if (!programs.length) {
+				container.innerHTML = `
+					<div class="bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white/80 text-sm">
+						No academic programs found for <span class="font-semibold">${escapeHtml(department)}</span>.
+					</div>
+				`;
+			} else {
+				const safeDepartment = escapeHtml(department);
+				const programCountLabel = programs.length === 1 ? 'program' : 'programs';
+				const rowsMarkup = programs.map((program: any) => {
+					const safeProgramName = escapeHtml(program?.program || '');
+					const safeDescription = program?.description
+						? `<p class="text-white/70 text-xs md:text-sm mt-2 leading-relaxed">${escapeHtml(program.description)}</p>`
+						: '';
+					const safeDegree = program?.degree ? escapeHtml(program.degree) : 'N/A';
+					const safeLevel = program?.level ? escapeHtml(program.level) : 'N/A';
+					const safeDuration = program?.duration ? escapeHtml(program.duration) : 'N/A';
+					const safeAccreditation = program?.accreditation ? escapeHtml(program.accreditation) : '';
+					const safeFileUrl = program?.fileUrl ? escapeHtml(program.fileUrl) : '';
+					const safeNameForViewer = escapeHtml(program?.name || program?.program || '');
+					const accreditationMarkup = safeAccreditation
+						? `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full border border-white/30 bg-emerald-300/20 text-emerald-100 text-xs font-medium">${safeAccreditation}</span>`
+						: `<span class="text-white/60 text-xs">TBA</span>`;
+					const actionMarkup = program?.fileUrl
+						? `<button type="button" onclick="openPDFViewer('${safeFileUrl}', '${safeNameForViewer}')" class="inline-flex items-center gap-1 rounded-full border border-white/30 bg-white/10 px-3 py-1.5 text-xs font-medium text-white transition-colors duration-200 hover:bg-white/20">
+								View Details
+								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+								</svg>
+							</button>`
+						: `<span class="text-white/60 text-xs">No file</span>`;
+
+					return `
+						<tr class="hover:bg-white/10 transition-colors duration-200">
+							<td class="px-5 py-4 align-top">
+								<div class="font-semibold">${safeProgramName}</div>
+								${safeDescription}
+							</td>
+							<td class="px-5 py-4 align-top text-sm">${safeDegree}</td>
+							<td class="px-5 py-4 align-top text-sm">${safeLevel}</td>
+							<td class="px-5 py-4 align-top text-sm">${safeDuration}</td>
+							<td class="px-5 py-4 align-top">
+								${accreditationMarkup}
+							</td>
+							<td class="px-5 py-4 align-top text-right">
+								${actionMarkup}
+							</td>
+						</tr>
+					`;
+				}).join('');
+
+				container.innerHTML = `
+					<div class="bg-white/5 border border-white/20 rounded-2xl overflow-hidden backdrop-blur-xl shadow-lg">
+						<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-5 py-4 border-b border-white/15">
+							<div>
+								<p class="uppercase tracking-[0.35em] text-[0.65rem] text-white/70">Academic Programs</p>
+								<h4 class="text-lg font-semibold text-white mt-1">${safeDepartment}</h4>
+							</div>
+							<span class="text-sm text-white/80">${programs.length} ${programCountLabel}</span>
+						</div>
+						<div class="overflow-x-auto">
+							<table class="min-w-full divide-y divide-white/10 text-left text-sm text-white">
+								<thead class="bg-white/10 text-xs uppercase tracking-wider text-white/80">
+									<tr>
+										<th scope="col" class="px-5 py-3 font-semibold">Program</th>
+										<th scope="col" class="px-5 py-3 font-semibold">Degree</th>
+										<th scope="col" class="px-5 py-3 font-semibold">Level</th>
+										<th scope="col" class="px-5 py-3 font-semibold">Duration</th>
+										<th scope="col" class="px-5 py-3 font-semibold">Accreditation</th>
+										<th scope="col" class="px-5 py-3 font-semibold text-right">Action</th>
+									</tr>
+								</thead>
+								<tbody class="divide-y divide-white/10">
+									${rowsMarkup}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				`;
+			}
+		}
+
+		container.classList.remove('hidden');
+		container.style.display = defaultDisplay;
+	}
+
+	function resetProgramsDisplay() {
+		const banners = document.querySelectorAll('.faculty-banner-programs');
+		banners.forEach((container) => {
+			const element = container as HTMLElement;
+			element.innerHTML = '';
+			element.classList.add('hidden');
+			element.style.display = 'none';
+		});
+	}
+
+	function updateProgramsDisplay() {
+		const banners = document.querySelectorAll('.faculty-department-banner');
+		banners.forEach((banner) => {
+			const department = banner.getAttribute('data-department') || '';
+			const programsContainer = banner.querySelector('.faculty-banner-programs') as HTMLElement | null;
+			if (!programsContainer) return;
+
+			const defaultDisplay = programsContainer.dataset.defaultDisplay || (programsContainer.classList.contains('grid') ? 'grid' : 'block');
+			if (!programsContainer.dataset.defaultDisplay) {
+				programsContainer.dataset.defaultDisplay = defaultDisplay;
+			}
+
+			if (!activeDepartmentFilter || department !== activeDepartmentFilter) {
+				programsContainer.innerHTML = '';
+				programsContainer.classList.add('hidden');
+				programsContainer.style.display = 'none';
+				return;
+			}
+
+			renderProgramsForDepartment(department, programsContainer);
+		});
+	}
+
 	function applyDepartmentFilter() {
 		const departmentCards = [] as HTMLElement[];
 		if (!activeDepartmentFilter) {
@@ -4084,6 +4592,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			});
 			hideAdditionalFacultyCards();
 			updateBannerContent([]);
+			resetProgramsDisplay();
 			return;
 		}
 
@@ -4131,6 +4640,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		showDepartmentNotice(activeDepartmentFilter, visibleCount);
 		updateBannerContent(departmentCards);
+		updateProgramsDisplay();
 
 		const firstVisibleCard = Array.from(facultyGrid.querySelectorAll<HTMLElement>('[data-faculty-id]')).find((card) => card.dataset.department === activeDepartmentFilter);
 		if (firstVisibleCard) {
@@ -4140,9 +4650,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	updateDepartmentButtonsState();
 	hideDepartmentNotice();
+	updateProgramsDisplay();
 
-	if (departmentButtons.length) {
-		departmentButtons.forEach((button) => {
+	if (departmentFacultyButtons.length) {
+		departmentFacultyButtons.forEach((button) => {
 			button.addEventListener('click', (event) => {
 				event.preventDefault();
 				const department = button.dataset.department;
@@ -4155,6 +4666,25 @@ document.addEventListener('DOMContentLoaded', function() {
 				filterFaculty('');
 				applyDepartmentFilter();
 				updateDepartmentButtonsState();
+				resetProgramsDisplay();
+				if (typeof closeDepartmentProgramsModalFn === 'function') {
+					closeDepartmentProgramsModalFn();
+				}
+			});
+		});
+	}
+
+	if (departmentProgramButtons.length) {
+		departmentProgramButtons.forEach((button) => {
+			button.addEventListener('click', (event) => {
+				event.preventDefault();
+				const rawDepartment = button.dataset.department || '';
+				const searchTerm = button.dataset.departmentSearch || rawDepartment || button.textContent || '';
+				const department = searchTerm.trim();
+				if (!department) return;
+				if (typeof openDepartmentProgramsModalFn === 'function') {
+					openDepartmentProgramsModalFn(department);
+				}
 			});
 		});
 	}
@@ -4230,18 +4760,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		});
 	}
 
-	const htmlEscapeMap = {
-		'&': '&amp;',
-		'<': '&lt;',
-		'>': '&gt;',
-		'"': '&quot;',
-		"'": '&#39;'
-	};
-
-	function escapeHtml(value) {
-		return (value == null ? '' : String(value)).replace(/[&<>"']/g, (char) => htmlEscapeMap[char] || char);
-	}
-	
 	// Faculty data for search (matching modal data structure)
 	const facultySearchData = {
 		'jemsy': { name: 'Prof. Alhisan U. Jemsy, PhD', position: 'Dean, College of Education', department: 'Department of Educational Leadership and Professional Services', specialization: ['Educational Research', 'Educational Evaluation and Assessment', 'Professional Education'] },
@@ -4918,10 +5436,11 @@ function initProgramsTable() {
 
         filteredData = programsData.filter(program => {
             const matchesSearch = !searchTerm || 
-                program.program.toLowerCase().includes(searchTerm) ||
-                program.description.toLowerCase().includes(searchTerm) ||
-                program.degree.toLowerCase().includes(searchTerm) ||
-                program.level.toLowerCase().includes(searchTerm);
+                [program.program, program.description, program.degree, program.level, program.department]
+                    .some((value) => {
+                        if (!value) return false;
+                        return value.toString().toLowerCase().includes(searchTerm);
+                    });
 
             const matchesDegree = !degreeFilterValue || program.degree === degreeFilterValue;
             const matchesLevel = !levelFilterValue || program.level === levelFilterValue;
@@ -5050,6 +5569,25 @@ function initProgramsTable() {
         (levelFilter as HTMLSelectElement).value = '';
         filterData();
     });
+
+    (window as any).filterProgramsByDepartment = function(department: string) {
+        if (globalSearch) {
+            (globalSearch as HTMLInputElement).value = department || '';
+        }
+        if (degreeFilter) {
+            (degreeFilter as HTMLSelectElement).value = '';
+        }
+        if (levelFilter) {
+            (levelFilter as HTMLSelectElement).value = '';
+        }
+        filterData();
+        if (department) {
+            const programsSection = document.getElementById('programs');
+            if (programsSection) {
+                programsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+    };
 
     // Sort event listeners
     document.querySelectorAll('[data-sort]').forEach(header => {
@@ -5846,21 +6384,41 @@ document.addEventListener('DOMContentLoaded', function() {
 									<p class="mt-4 text-sm md:text-base text-white/90">
 										Celebrating educators who cultivate inclusive, child-centered learning experiences from early childhood through the elementary years.
 									</p>
-									<div class="mt-6">
+									<div class="mt-6 flex flex-wrap gap-3">
 										<button
 											type="button"
-											class="show-department-faculty inline-flex items-center gap-3 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white font-semibold uppercase tracking-wide text-xs md:text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
 											data-department="Department of Early Childhood and Elementary Education"
 											aria-pressed="false"
 										>
-											<span class="department-button-label">Show Faculty</span>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-white/80">Show</span>
+												<span class="block text-sm md:text-base font-semibold">Faculty</span>
+											</div>
 											<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
 											</svg>
 										</button>
+										<button
+											type="button"
+											class="department-program-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white text-[#61063B] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of Early Childhood and Elementary Education"
+											data-department-search="Early"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-[#61063B]/80">View</span>
+												<span class="block text-sm md:text-base font-semibold">Academic Programs</span>
+											</div>
+											<svg class="w-5 h-5 text-[#61063B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+											</svg>
+										</button>
 									</div>
 								</div>
-								<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base faculty-banner-content hidden"></div>
+								<div class="flex-1 w-full space-y-4 md:space-y-6">
+									<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base faculty-banner-content hidden"></div>
+									<div class="space-y-3 text-sm md:text-base faculty-banner-programs hidden"></div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -5895,7 +6453,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
 							<div class="h-90 overflow-hidden relative">
-								<img src="/images/coed/Profile/msufaculty.png" alt="Shielamar J. Judan" class="w-full h-full object-cover lazy-image" loading="lazy">
+								<img src="/images/coed/Profile/Judan.png" alt="Shielamar J. Judan" class="w-full h-full object-cover lazy-image" loading="lazy">
 								<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
 									<h3 class="text-white font-bold text-xl">Asst. Prof. Shielamar J. Judan</h3>
 									<p class="text-gray-300 text-sm"></p>
@@ -6252,21 +6810,41 @@ document.addEventListener('DOMContentLoaded', function() {
 								<p class="mt-4 text-sm md:text-base text-white/90">
 									Recognizing academic leaders who drive policy, quality assurance, and professional growth for educators across MSU-TCTO.
 								</p>
-								<div class="mt-6">
-									<button
-										type="button"
-										class="show-department-faculty inline-flex items-center gap-3 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white font-semibold uppercase tracking-wide text-xs md:text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
-										data-department="Department of Educational Leadership and Professional Services"
-										aria-pressed="false"
-									>
-										<span class="department-button-label">Show Faculty</span>
-										<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-										</svg>
-									</button>
-								</div>
+							<div class="mt-6 flex flex-wrap gap-3">
+								<button
+									type="button"
+									class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+									data-department="Department of Educational Leadership and Professional Services"
+									aria-pressed="false"
+								>
+									<div class="text-left leading-tight">
+										<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-white/80">Show</span>
+										<span class="block text-sm md:text-base font-semibold">Faculty</span>
+									</div>
+									<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+									</svg>
+								</button>
+								<button
+									type="button"
+									class="department-program-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white text-[#61063B] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+									data-department="Department of Educational Leadership and Professional Services"
+									data-department-search="Leadership"
+								>
+									<div class="text-left leading-tight">
+										<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-[#61063B]/80">View</span>
+										<span class="block text-sm md:text-base font-semibold">Academic Programs</span>
+									</div>
+									<svg class="w-5 h-5 text-[#61063B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+									</svg>
+								</button>
 							</div>
-							<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base font-semibold faculty-banner-content hidden"></div>
+							</div>
+							<div class="flex-1 w-full space-y-4 md:space-y-6">
+								<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base font-semibold faculty-banner-content hidden"></div>
+								<div class="space-y-3 text-sm md:text-base faculty-banner-programs hidden"></div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -6575,21 +7153,41 @@ document.addEventListener('DOMContentLoaded', function() {
 									<p class="mt-4 text-sm md:text-base text-white/90">
 										Spotlighting language scholars who champion Filipino and multilingual literacy, cultural programs, and student success across MSU-TCTO.
 									</p>
-									<div class="mt-6">
+									<div class="mt-6 flex flex-wrap gap-3">
 										<button
 											type="button"
-											class="show-department-faculty inline-flex items-center gap-3 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white font-semibold uppercase tracking-wide text-xs md:text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
 											data-department="Department of Language Education"
 											aria-pressed="false"
 										>
-											<span class="department-button-label">Show Faculty</span>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-white/80">Show</span>
+												<span class="block text-sm md:text-base font-semibold">Faculty</span>
+											</div>
 											<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
 											</svg>
 										</button>
+										<button
+											type="button"
+											class="department-program-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white text-[#61063B] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of Language Education"
+											data-department-search="Language"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-[#61063B]/80">View</span>
+												<span class="block text-sm md:text-base font-semibold">Academic Programs</span>
+											</div>
+											<svg class="w-5 h-5 text-[#61063B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+											</svg>
+										</button>
 									</div>
 								</div>
-								<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 text-sm md:text-base font-semibold faculty-banner-content hidden"></div>
+								<div class="flex-1 w-full space-y-4 md:space-y-6">
+									<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 text-sm md:text-base font-semibold faculty-banner-content hidden"></div>
+									<div class="space-y-3 text-sm md:text-base faculty-banner-programs hidden"></div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -6762,21 +7360,41 @@ document.addEventListener('DOMContentLoaded', function() {
 									<p class="mt-4 text-sm md:text-base text-white/90">
 										Highlighting scholars who drive excellence in mathematics, science, and research-driven instruction across MSU-TCTO.
 									</p>
-									<div class="mt-6">
+									<div class="mt-6 flex flex-wrap gap-3">
 										<button
 											type="button"
-											class="show-department-faculty inline-flex items-center gap-3 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white font-semibold uppercase tracking-wide text-xs md:text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
 											data-department="Department of Science and Mathematics Education"
 											aria-pressed="false"
 										>
-											<span class="department-button-label">Show Faculty</span>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-white/80">Show</span>
+												<span class="block text-sm md:text-base font-semibold">Faculty</span>
+											</div>
 											<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
 											</svg>
 										</button>
+										<button
+											type="button"
+											class="department-program-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white text-[#61063B] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of Science and Mathematics Education"
+											data-department-search="Science"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-[#61063B]/80">View</span>
+												<span class="block text-sm md:text-base font-semibold">Academic Programs</span>
+											</div>
+											<svg class="w-5 h-5 text-[#61063B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+											</svg>
+										</button>
 									</div>
 								</div>
-								<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 text-sm md:text-base font-semibold faculty-banner-content hidden"></div>
+								<div class="flex-1 w-full space-y-4 md:space-y-6">
+									<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 text-sm md:text-base font-semibold faculty-banner-content hidden"></div>
+									<div class="space-y-3 text-sm md:text-base faculty-banner-programs hidden"></div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -6983,21 +7601,41 @@ document.addEventListener('DOMContentLoaded', function() {
 									<p class="mt-4 text-sm md:text-base text-white/90">
 										Celebrating dynamic educators who lead MSU-TCTO's physical education, sports, dance, health, and wellness initiatives.
 									</p>
-									<div class="mt-6">
+									<div class="mt-6 flex flex-wrap gap-3">
 										<button
 											type="button"
-											class="show-department-faculty inline-flex items-center gap-3 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white font-semibold uppercase tracking-wide text-xs md:text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
 											data-department="Department of Physical Education"
 											aria-pressed="false"
 										>
-											<span class="department-button-label">Show Faculty</span>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-white/80">Show</span>
+												<span class="block text-sm md:text-base font-semibold">Faculty</span>
+											</div>
 											<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
 											</svg>
 										</button>
+										<button
+											type="button"
+											class="department-program-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white text-[#61063B] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of Physical Education"
+											data-department-search="Physical"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-[#61063B]/80">View</span>
+												<span class="block text-sm md:text-base font-semibold">Academic Programs</span>
+											</div>
+											<svg class="w-5 h-5 text-[#61063B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+											</svg>
+										</button>
 									</div>
 								</div>
-								<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 text-sm md:text-base font-semibold faculty-banner-content hidden"></div>
+								<div class="flex-1 w-full space-y-4 md:space-y-6">
+									<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 text-sm md:text-base font-semibold faculty-banner-content hidden"></div>
+									<div class="space-y-3 text-sm md:text-base faculty-banner-programs hidden"></div>
+								</div>
 							</div>
 						</div>
 					</div>
