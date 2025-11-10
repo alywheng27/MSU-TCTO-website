@@ -1343,7 +1343,7 @@ function openFacultyModal(facultyId) {
 			name: "Prof. Alhisan U. Jemsy, PhD",
 			position: "Dean, College of Education",
 			rank: "Professor V",
-			image: "/images/coed/Profile/JEMSY.png", // To control the image height, set a fixed height in the <img> tag using a class (e.g., class="h-64") or inline style (e.g., style="height: 16rem; object-fit: cover;")
+			image: "/images/coed/Profile/JEMSYDEAN.png", // To control the image height, set a fixed height in the <img> tag using a class (e.g., class="h-64") or inline style (e.g., style="height: 16rem; object-fit: cover;")
 			education: [
 				"Doctor of Philosophy (Ph.D.) in Education (Research and Evaluation)",
 				"University of San Carlos",
@@ -3985,8 +3985,19 @@ function toggleFacultyView() {
 	}
 }
 
+function hideAdditionalFacultyCards() {
+	const additionalFacultyElements = document.querySelectorAll('.additional-faculty');
+	additionalFacultyElements.forEach((faculty) => {
+		const element = faculty as HTMLElement;
+		element.classList.add('hidden');
+		element.style.opacity = '';
+		element.style.transform = '';
+	});
+}
+
 // Make function globally accessible
 (window as any).toggleFacultyView = toggleFacultyView;
+(window as any).hideAdditionalFacultyCards = hideAdditionalFacultyCards;
 
 // Faculty Search Functionality
 document.addEventListener('DOMContentLoaded', function() {
@@ -3997,11 +4008,156 @@ document.addEventListener('DOMContentLoaded', function() {
 	const facultyResultsList = document.getElementById('facultyResultsList');
 	const showMoreBtn = document.getElementById('showMoreBtn');
 	const facultyGrid = document.getElementById('facultyGrid');
+	const departmentButtons = Array.from(document.querySelectorAll('.show-department-faculty')) as HTMLButtonElement[];
+	const facultyDepartmentNotice = document.getElementById('facultyDepartmentNotice');
 	
 	if (!facultySearchInput || !facultyGrid) return;
 
+	let activeDepartmentFilter: string | null = null;
 	let activeHighlightCard = null;
 	let activeHighlightTimeout = null;
+
+	function hideDepartmentNotice() {
+		if (!facultyDepartmentNotice) return;
+		facultyDepartmentNotice.classList.add('hidden');
+		facultyDepartmentNotice.innerHTML = '';
+	}
+
+	function showDepartmentNotice(department: string, count: number) {
+		if (!facultyDepartmentNotice) return;
+		facultyDepartmentNotice.innerHTML = `Showing <span class="font-semibold">${count}</span> faculty members from <span class="font-semibold">${escapeHtml(department)}</span>`;
+		facultyDepartmentNotice.classList.remove('hidden');
+	}
+
+	function updateDepartmentButtonsState() {
+		if (!departmentButtons.length) return;
+		departmentButtons.forEach((button) => {
+			const department = button.dataset.department || '';
+			const isActive = department === activeDepartmentFilter;
+			button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+			button.classList.toggle('bg-white', isActive);
+			button.classList.toggle('text-[#61063B]', isActive);
+			button.classList.toggle('border-white', isActive);
+			button.classList.toggle('bg-white/10', !isActive);
+			button.classList.toggle('text-white', !isActive);
+			button.classList.toggle('border-white/40', !isActive);
+			const label = button.querySelector('.department-button-label');
+			if (label) {
+				label.textContent = isActive ? 'Hide Faculty' : 'Show Faculty';
+			}
+			const icon = button.querySelector('.department-button-icon') as SVGElement | null;
+			if (icon) {
+				icon.style.transition = 'transform 0.2s ease-in-out';
+				icon.style.transform = isActive ? 'rotate(180deg)' : '';
+			}
+			button.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+			const banner = button.closest('.faculty-department-banner');
+			const bannerContent = banner?.querySelector('.faculty-banner-content') as HTMLElement | null;
+			if (bannerContent) {
+				const defaultDisplay = bannerContent.dataset.defaultDisplay || (bannerContent.classList.contains('grid') ? 'grid' : 'block');
+				if (!bannerContent.dataset.defaultDisplay) {
+					bannerContent.dataset.defaultDisplay = defaultDisplay;
+				}
+				if (isActive) {
+					bannerContent.classList.remove('hidden');
+					bannerContent.style.display = defaultDisplay;
+				} else {
+					bannerContent.classList.add('hidden');
+					bannerContent.style.display = 'none';
+				}
+			}
+		});
+
+		if (!activeDepartmentFilter) {
+			hideAdditionalFacultyCards();
+		}
+	}
+
+	function applyDepartmentFilter() {
+		const departmentCards = [] as HTMLElement[];
+		if (!activeDepartmentFilter) {
+			hideDepartmentNotice();
+			facultyCardMap.forEach((card) => {
+				const element = card as HTMLElement;
+				element.classList.remove('hidden');
+				element.style.display = '';
+			});
+			hideAdditionalFacultyCards();
+			updateBannerContent([]);
+			return;
+		}
+
+		clearActiveHighlight();
+
+		let visibleCount = 0;
+		facultyCardMap.forEach((card) => {
+			const cardElement = card as HTMLElement;
+			const department = cardElement.dataset.department || '';
+			const matchesDepartment = department === activeDepartmentFilter;
+			if (matchesDepartment) {
+				cardElement.classList.remove('hidden');
+				cardElement.style.display = '';
+				visibleCount += 1;
+				departmentCards.push(cardElement);
+			} else {
+				cardElement.classList.add('hidden');
+				cardElement.style.display = 'none';
+			}
+		});
+
+		if (showMoreBtn) {
+			showMoreBtn.classList.add('hidden');
+		}
+		if (facultySearchResults) {
+			facultySearchResults.classList.add('hidden');
+		}
+		if (facultyResultsCount) {
+			facultyResultsCount.innerHTML = '';
+		}
+		if (facultyResultsList) {
+			facultyResultsList.innerHTML = '';
+		}
+		if (clearFacultySearchBtn) {
+			clearFacultySearchBtn.classList.add('hidden');
+		}
+
+		if (visibleCount === 0) {
+			if (facultyDepartmentNotice) {
+				facultyDepartmentNotice.innerHTML = `No faculty members found for <span class="font-semibold">${escapeHtml(activeDepartmentFilter)}</span>`;
+				facultyDepartmentNotice.classList.remove('hidden');
+			}
+			return;
+		}
+
+		showDepartmentNotice(activeDepartmentFilter, visibleCount);
+		updateBannerContent(departmentCards);
+
+		const firstVisibleCard = Array.from(facultyGrid.querySelectorAll<HTMLElement>('[data-faculty-id]')).find((card) => card.dataset.department === activeDepartmentFilter);
+		if (firstVisibleCard) {
+			firstVisibleCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		}
+	}
+
+	updateDepartmentButtonsState();
+	hideDepartmentNotice();
+
+	if (departmentButtons.length) {
+		departmentButtons.forEach((button) => {
+			button.addEventListener('click', (event) => {
+				event.preventDefault();
+				const department = button.dataset.department;
+				if (!department) return;
+				const isActive = activeDepartmentFilter === department;
+				activeDepartmentFilter = isActive ? null : department;
+				if (facultySearchInput) {
+					(facultySearchInput as HTMLInputElement).value = '';
+				}
+				filterFaculty('');
+				applyDepartmentFilter();
+				updateDepartmentButtonsState();
+			});
+		});
+	}
 
 	function clearActiveHighlight() {
 		if (activeHighlightTimeout) {
@@ -4034,6 +4190,46 @@ document.addEventListener('DOMContentLoaded', function() {
 		}, 5000);
 	}
 
+	function updateBannerContent(cards: HTMLElement[]) {
+		const banners = document.querySelectorAll('.faculty-department-banner');
+		banners.forEach((banner) => {
+			const department = banner.getAttribute('data-department') || '';
+			const contentContainer = banner.querySelector('.faculty-banner-content') as HTMLElement | null;
+			if (!contentContainer) return;
+			if (!activeDepartmentFilter || department !== activeDepartmentFilter) {
+				contentContainer.innerHTML = '';
+				contentContainer.classList.add('hidden');
+				contentContainer.style.display = 'none';
+				return;
+			}
+			const fragment = document.createDocumentFragment();
+			cards.forEach((card) => {
+				const name = card.querySelector('h3')?.textContent?.trim() || '';
+				const designation = card.querySelector('p.text-gray-300')?.textContent?.trim() || '';
+				const wrapper = document.createElement('div');
+				wrapper.className = 'flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm';
+				wrapper.innerHTML = `
+					<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+					</svg>
+					<div class="leading-tight">
+						<p class="font-semibold">${escapeHtml(name)}</p>
+						${designation ? `<p class="text-white/80 text-sm font-normal">${escapeHtml(designation)}</p>` : ''}
+					</div>
+				`;
+				fragment.appendChild(wrapper);
+			});
+			contentContainer.innerHTML = '';
+			contentContainer.appendChild(fragment);
+			const defaultDisplay = contentContainer.dataset.defaultDisplay || (contentContainer.classList.contains('grid') ? 'grid' : 'block');
+			if (!contentContainer.dataset.defaultDisplay) {
+				contentContainer.dataset.defaultDisplay = defaultDisplay;
+			}
+			contentContainer.classList.remove('hidden');
+			contentContainer.style.display = defaultDisplay;
+		});
+	}
+
 	const htmlEscapeMap = {
 		'&': '&amp;',
 		'<': '&lt;',
@@ -4048,7 +4244,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	
 	// Faculty data for search (matching modal data structure)
 	const facultySearchData = {
-		'jemsy': { name: 'Prof. Alhisan U. Jemsy, PhD', position: 'Dean, College of Education', department: 'College Leadership', specialization: ['Educational Research', 'Educational Evaluation and Assessment', 'Professional Education'] },
+		'jemsy': { name: 'Prof. Alhisan U. Jemsy, PhD', position: 'Dean, College of Education', department: 'Department of Educational Leadership and Professional Services', specialization: ['Educational Research', 'Educational Evaluation and Assessment', 'Professional Education'] },
 		'budlong': { name: 'Assoc. Prof. Cherry T. Budlong-Alih', position: 'Faculty', rank: 'Associate Professor V', department: 'Department of Language Education', specialization: ['Filipino'] },
 		'colicol': { name: 'Assoc. Prof. Fernigil L. Colicol, PhD', position: 'Chairperson, Department of Educational Leadership and Professional Services (DELPS)', rank: 'Associate Professor V', department: 'Department of Educational Leadership and Professional Services', specialization: ['Educational Research'] },
 		'bagalanon': { name: 'Asst. Prof. Joselito J. Bagalanon', position: 'Faculty', rank: 'Assistant Professor IV', department: 'Department of Early Childhood and Elementary Education', specialization: ['Educational Administration'] },
@@ -4068,7 +4264,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		'aripin': { name: 'Abdurizal S. Aripin', position: 'Faculty', rank: 'Professor I', department: 'Department of Educational Leadership and Professional Services', specialization: ['Educational Management'] },
 		'matolo': { name: 'Prof. Mona-Allea L. Matolo', position: 'Faculty', rank: 'Professor VI', department: 'Department of Educational Leadership and Professional Services', specialization: ['Educational Administration'] },
 			'castulo': { name: 'Nilo J. Castulo, PhD', position: 'Faculty', rank: 'Professor I', department: 'Department of Educational Leadership and Professional Services', specialization: ['Comparative Education', 'Educational Leadership', 'Policy', 'Higher Education', 'Internationalization', 'Migration Studies'] },
-		'hailava': { name: 'Prof. Wilham M. Hailaya, PhD', position: 'Vice Chancellor for Academic Affairs', department: 'College Leadership', specialization: ['Teacher Assessment Literacy/Educational Assessment'] },
+		'hailava': { name: 'Prof. Wilham M. Hailaya, PhD', position: 'Vice Chancellor for Academic Affairs', department: 'Department of Educational Leadership and Professional Services', specialization: ['Teacher Assessment Literacy/Educational Assessment'] },
 		'alang': { name: 'Asst. Prof. Sitti-Rasham S. Alang', position: 'Faculty', rank: 'Assistant Professor IV', department: 'Department of Language Education', specialization: ['Filipino', 'Administration and Supervision'] },
 		'hajan': { name: 'Assoc. Prof. Bonjovi H. Hajan', position: 'Director of SAMA Studies Center and Sentro ng Wika at Kultura', rank: 'Associate Professor V', department: 'Department of Language Education', specialization: ['English Language Teaching'] },
 		'wagas': { name: 'Asst. Prof. Ronaliza M. Wagas', position: 'College Secretary, College of Education', rank: 'Associate Professor V', department: 'Department of Language Education', specialization: ['English', 'Administration and Supervision'] },
@@ -4088,7 +4284,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	'blanche': { name: 'Blanche B. Matolo', position: 'Acting Director of OSAR', rank: 'Instructor I', department: 'Department of Physical Education', specialization: ['Dance', 'Sports', 'Physical Education'] },
 	'mohammad': { name: 'Al-Shadat A. Mohammad', position: 'Director of OCAD', rank: 'Instructor I', department: 'Department of Physical Education', specialization: ['Dance', 'Martial Arts', 'Sports', 'Physical Education'] },
 	'salasain': { name: 'Rubina Salasain', position: 'Faculty', rank: 'Instructor I', department: 'Department of Physical Education', specialization: ['School Fitness', 'Sports', 'Physical Education'] },
-	'abdulwahab': { name: 'Assoc. Prof. Rubia A. Abulwahab', position: 'Faculty', rank: 'Associate Professor V', department: 'Department of Educational Leadership and Professional Services', specialization: ['Administration and Supervision', 'Psychology', 'Counseling'] }
+	'abdulwahab': { name: 'Assoc. Prof. Rubia A. Abulwahab', position: 'Faculty', rank: 'Associate Professor V', department: 'Department of Early Childhood and Elementary Education', specialization: ['Administration and Supervision', 'Psychology', 'Counseling'] }
 	};
 	
 	// Get all faculty cards
@@ -4111,33 +4307,6 @@ document.addEventListener('DOMContentLoaded', function() {
 					cardElement.dataset.department = info.department;
 				}
 			}
-		}
-	});
-
-	const featuredFacultyIds = ['tahir', 'nurhusin', 'sali'];
-	const featuredFacultySet = new Set(featuredFacultyIds);
-	const featuredAnchor = document.getElementById('facultyFeaturedAnchor');
-
-	if (featuredAnchor && featuredAnchor.parentElement) {
-		const parent = featuredAnchor.parentElement;
-		const referenceNode = featuredAnchor.nextSibling;
-		featuredFacultyIds.forEach(facultyId => {
-			const cardElement = facultyCardMap.get(facultyId) as HTMLElement | undefined;
-			if (cardElement) {
-				parent.insertBefore(cardElement, referenceNode);
-			}
-		});
-		featuredAnchor.remove();
-	}
-
-	facultyCardMap.forEach((card, facultyId) => {
-		const cardElement = card as HTMLElement;
-		if (featuredFacultySet.has(facultyId)) {
-			cardElement.classList.remove('hidden');
-			cardElement.classList.remove('additional-faculty');
-		} else {
-			cardElement.classList.add('additional-faculty');
-			cardElement.classList.add('hidden');
 		}
 	});
 
@@ -4194,6 +4363,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	
 	function filterFaculty(searchTerm) {
 		searchTerm = searchTerm.toLowerCase().trim();
+		if (searchTerm && activeDepartmentFilter) {
+			activeDepartmentFilter = null;
+			updateDepartmentButtonsState();
+			hideDepartmentNotice();
+		}
 		clearActiveHighlight();
 
 		let visibleCount = 0;
@@ -4201,6 +4375,9 @@ document.addEventListener('DOMContentLoaded', function() {
 		
 		// If search is empty, show all cards in default state
 		if (!searchTerm) {
+			if (!activeDepartmentFilter) {
+				hideDepartmentNotice();
+			}
 			// Reset to default view
 			allFacultyCards.forEach((card, index) => {
 				const cardElement = card as HTMLElement;
@@ -4363,6 +4540,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	
 	// Event listener for search input
 	facultySearchInput.addEventListener('input', function(e) {
+		if (activeDepartmentFilter) {
+			activeDepartmentFilter = null;
+			updateDepartmentButtonsState();
+			hideDepartmentNotice();
+		}
 		filterFaculty((e.target as HTMLInputElement).value);
 	});
 	
@@ -4370,6 +4552,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	if (clearFacultySearchBtn) {
 		clearFacultySearchBtn.addEventListener('click', function() {
 			(facultySearchInput as HTMLInputElement).value = '';
+			if (activeDepartmentFilter) {
+				activeDepartmentFilter = null;
+				updateDepartmentButtonsState();
+			}
+			hideDepartmentNotice();
 			filterFaculty('');
 			facultySearchInput.focus();
 		});
@@ -5546,6 +5733,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						<p id="facultyResultsCount" class="text-center"></p>
 						<div id="facultyResultsList" class="mt-3 space-y-3"></div>
 					</div>
+					<div id="facultyDepartmentNotice" class="hidden mt-4 text-center text-msu-main-color dark:text-yellow-300 font-semibold"></div>
 				</div>
 
 				
@@ -5648,7 +5836,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				
 
 
-					<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner">
+					<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Department of Early Childhood and Elementary Education">
 						<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#61063B] via-[#8C1F5A] to-[#2F1A45] text-white p-8 md:p-10 shadow-2xl">
 							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
 							<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
@@ -5658,134 +5846,26 @@ document.addEventListener('DOMContentLoaded', function() {
 									<p class="mt-4 text-sm md:text-base text-white/90">
 										Celebrating educators who cultivate inclusive, child-centered learning experiences from early childhood through the elementary years.
 									</p>
-								</div>
-								<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base">
-									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<div class="leading-tight">
-											<p class="font-semibold">Asst. Prof. Kartini R. Tahir</p>
-											<p class="text-white/80 text-sm font-normal">Director, OIL • Assistant Professor IV</p>
-										</div>
-									</div>
-									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<div class="leading-tight">
-											<p class="font-semibold">Asst. Prof. Harimas M. Sulanting</p>
-											<p class="text-white/80 text-sm font-normal">Faculty • Assistant Professor IV</p>
-										</div>
-									</div>
-									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<div class="leading-tight">
-											<p class="font-semibold">Assoc. Prof. Almira A. Hadji</p>
-											<p class="text-white/80 text-sm font-normal">Director, GAD • Associate Professor V</p>
-										</div>
-									</div>
-									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<div class="leading-tight">
-											<p class="font-semibold">Asst. Prof. Shielamar J. Judan</p>
-											<p class="text-white/80 text-sm font-normal">Faculty • Assistant Professor IV</p>
-										</div>
-									</div>
-									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<div class="leading-tight">
-											<p class="font-semibold">Asst. Prof. Julasmin S. Kassim</p>
-											<p class="text-white/80 text-sm font-normal">Special Assistant to OVCAA • Assistant Professor IV</p>
-										</div>
-									</div>
-									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<div class="leading-tight">
-											<p class="font-semibold">Asst. Prof. Sharmini I. Nurhusin</p>
-											<p class="text-white/80 text-sm font-normal">Faculty • Assistant Professor IV</p>
-										</div>
-									</div>
-									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<div class="leading-tight">
-											<p class="font-semibold">Asst. Prof. Fatima Zahra V. Sali</p>
-											<p class="text-white/80 text-sm font-normal">Faculty • Assistant Professor IV</p>
-										</div>
-									</div>
-									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<div class="leading-tight">
-											<p class="font-semibold">Asst. Prof. Joselito J. Bagalanon</p>
-											<p class="text-white/80 text-sm font-normal">Faculty • Assistant Professor IV</p>
-										</div>
-									</div>
-									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<div class="leading-tight">
-											<p class="font-semibold">Jencen T. Rabor</p>
-											<p class="text-white/80 text-sm font-normal">Faculty • Instructor I</p>
-										</div>
-									</div>
-									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<div class="leading-tight">
-											<p class="font-semibold">Asst. Prof. Luz J. Bation</p>
-											<p class="text-white/80 text-sm font-normal">Faculty • Assistant Professor IV</p>
-										</div>
-									</div>
-									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<div class="leading-tight">
-											<p class="font-semibold">Nasri A. Juhuri</p>
-											<p class="text-white/80 text-sm font-normal">Faculty • Instructor I</p>
-										</div>
-									</div>
-									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<div class="leading-tight">
-											<p class="font-semibold">Assoc. Prof. Rubia A. Abulwahab</p>
-											<p class="text-white/80 text-sm font-normal">Faculty • Associate Professor V</p>
-										</div>
-									</div>
-									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<div class="leading-tight">
-											<p class="font-semibold">Prof. Clarissa A. Derramas, EdD</p>
-											<p class="text-white/80 text-sm font-normal">Special Assistant to OVCAA (Curriculum) • Professor VI</p>
-										</div>
+									<div class="mt-6">
+										<button
+											type="button"
+											class="show-department-faculty inline-flex items-center gap-3 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white font-semibold uppercase tracking-wide text-xs md:text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of Early Childhood and Elementary Education"
+											aria-pressed="false"
+										>
+											<span class="department-button-label">Show Faculty</span>
+											<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+											</svg>
+										</button>
 									</div>
 								</div>
+								<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base faculty-banner-content hidden"></div>
 							</div>
 						</div>
 					</div>
-					<div id="facultyFeaturedAnchor" class="hidden"></div>
-
 					<!-- kartini -->
 
-					
 					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
 						<div class="h-90 overflow-hidden relative">
 							<img src="/images/coed/Profile/TAHIR, KARTINI.png" alt="Asst. Prof. Kartini R. Tahir" class="w-full h-full object-cover lazy-image" loading="lazy">
@@ -5813,7 +5893,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							</div>
 						</div>
 
-						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
 							<div class="h-90 overflow-hidden relative">
 								<img src="/images/coed/Profile/msufaculty.png" alt="Shielamar J. Judan" class="w-full h-full object-cover lazy-image" loading="lazy">
 								<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -5869,7 +5949,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 						<!-- bation -->
 
-						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
 							<div class="h-90 overflow-hidden relative">
 								<img src="/images/coed/Profile/Bation.png" alt="Asst. Prof Luz J. Bation" class="w-full h-full object-cover lazy-image" loading="lazy">
 								<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -5896,7 +5976,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							</div>
 						</div>
 
-						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
 							<div class="h-90 overflow-hidden relative">
 								<img src="/images/coed/Profile/Derramas.png" alt="Clarissa A. Derramas" class="w-full h-full object-cover lazy-image" loading="lazy">
 								<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -5951,7 +6031,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						</div>
 
 						<!-- kassim -->
-						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
 							<div class="h-90 overflow-hidden relative">
 								<img src="/images/coed/Profile/Julasmin S. Kassim.png" alt="Julasmin Kassim" class="w-full h-full object-cover lazy-image" loading="lazy">
 						<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -6008,7 +6088,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						</div>
 
 
-						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
 							<div class="h-90 overflow-hidden relative">
 								<img src="/images/coed/Profile/Nasri Juhuri.png" alt="Nasri A. Juhuri" class="w-full h-full object-cover lazy-image" loading="lazy">
 								<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -6036,7 +6116,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						</div>
 
 						<!-- hadji -->
-						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
 							<div class="h-90 overflow-hidden relative">
 								<img src="/images/coed/Profile/Hadji, Almira.png" alt="Almira A. Hadji" class="w-full h-full object-cover lazy-image" loading="lazy">
 				<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -6064,7 +6144,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						</div>
 
 
-						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
 							<div class="h-90 overflow-hidden relative">
 								<img src="/images/coed/Profile/Nurhusin, Sharmini.png" alt="Sharmini I. Nurhusin" class="w-full h-full object-cover lazy-image" loading="lazy">
 						<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -6093,7 +6173,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 						<!--  Rabors -->
 
-						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
 							<div class="h-90 overflow-hidden relative">
 								<img src="/images/coed/Profile/RABOR, Jencen T.png" alt="Jencen T. Rabor" class="w-full h-full object-cover lazy-image" loading="lazy">
 								<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -6149,7 +6229,7 @@ document.addEventListener('DOMContentLoaded', function() {
 										</div>
 									
 						
-						
+						 
 
 
 						
@@ -6162,7 +6242,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 					
 
-				<div class="md:col-span-2 lg:col-span-3 hidden additional-faculty">
+				<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Department of Educational Leadership and Professional Services">
 					<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#61063B] via-[#8C1F5A] to-[#2F1A45] text-white p-8 md:p-10 shadow-2xl">
 						<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
 						<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
@@ -6172,69 +6252,21 @@ document.addEventListener('DOMContentLoaded', function() {
 								<p class="mt-4 text-sm md:text-base text-white/90">
 									Recognizing academic leaders who drive policy, quality assurance, and professional growth for educators across MSU-TCTO.
 								</p>
-							</div>
-							<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base font-semibold">
-								<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-									<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-									</svg>
-									<span>Prof. Wilham M. Hailaya, PhD • VCAA</span>
-								</div>
-								<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-									<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-									</svg>
-									<span>Prof. Alhisan U. Jemsy, PhD • Dean, College of Education</span>
-								</div>
-								<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-									<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-									</svg>
-									<span>Asst. Prof. Jocelyn A. Pajiji, EdD • Chairperson DELPS • Associate Professor V</span>
-								</div>
-								<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-									<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-									</svg>
-									<span>Prof. Al-Rashiff H. Mastul, EdD • Chairperson, DELPS</span>
-								</div>
-								<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-									<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-									</svg>
-									<span>Prof. Mona-Allea L. Matolo • Faculty • Professor VI</span>
-								</div>
-								<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-									<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-									</svg>
-									<span>Assoc. Prof. Fernigil L. Colicol, PhD • Chairperson, DELPS</span>
-								</div>
-								<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-									<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-									</svg>
-									<span>Prof. Nilo J. Castulo, PhD • Faculty • PROFESSOR I</span>
-								</div>
-								<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-									<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-									</svg>
-									<span>Prof. Abdurizal S. Aripin • Faculty • PROFESSOR I</span>
-								</div>
-								<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-									<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-									</svg>
-									<span>Assoc. Prof. Alcyn R. Bakkang • VCSA</span>
-								</div>
-								<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-									<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-									</svg>
-									<span>Assoc. Prof. Charmine Z. Puig • Associate Professor V</span>
+								<div class="mt-6">
+									<button
+										type="button"
+										class="show-department-faculty inline-flex items-center gap-3 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white font-semibold uppercase tracking-wide text-xs md:text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+										data-department="Department of Educational Leadership and Professional Services"
+										aria-pressed="false"
+									>
+										<span class="department-button-label">Show Faculty</span>
+										<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+										</svg>
+									</button>
 								</div>
 							</div>
+							<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base font-semibold faculty-banner-content hidden"></div>
 						</div>
 					</div>
 				</div>
@@ -6242,10 +6274,10 @@ document.addEventListener('DOMContentLoaded', function() {
 				
 				<!-- input  -->
 
-				<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+				<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
 
 					<div class="h-90 overflow-hidden relative">
-						<img src="/images/coed/Profile/JEMSY.png" alt="Prof. Alhisan U. Jemsy" class="w-full h-full object-cover lazy-image" loading="lazy">
+						<img src="/images/coed/Profile/JEMSYDEAN.png" alt="Prof. Alhisan U. Jemsy" class="w-full h-full object-cover lazy-image" loading="lazy">
 						<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
 
 							<h3 class="text-white font-bold text-xl">Prof. Alhisan U. Jemsy, PhD</h3>
@@ -6282,8 +6314,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					</div>
 
 				</div>
-
-				<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+				<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
 					<div class="h-90 overflow-hidden relative">
 						<img src="/images/coed/Profile/Mastul, Al-Rashiff  H.png" alt="Al-Rashiff H. Mastul" class="w-full h-full object-cover lazy-image" loading="lazy">
 					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -6312,7 +6343,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-				<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 delps-feature">
+				<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
 					<div class="h-90 overflow-hidden relative">
 						<img src="/images/coed/Profile/Pajiji.png" alt="Asst. Prof. Jocelyn A. Pajiji, EdD" class="w-full h-full object-cover lazy-image" loading="lazy">
 						<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -6340,7 +6371,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				</div>
 				
 
-				<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+				<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
 					<div class="h-90 overflow-hidden relative">
 						<img src="/images/coed/Profile/Hailaya.png" alt="Prof. Wilham M. Hailaya, PhD" class="w-full h-full object-cover lazy-image" loading="lazy">
 				<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -6368,7 +6399,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				</div>
 
 				<!-- fernigil -->
-				<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+				<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
 					<div class="h-90 overflow-hidden relative">
 						<img src="/images/coed/Profile/colicol.png" alt="Assoc. Prof. Fernigil L. Colicol, PhD" class="w-full h-full object-cover lazy-image" loading="lazy">
 						<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -6397,8 +6428,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 					<!-- nilo -->
 
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
-					<div class="h-90 overflow-hidden relative">
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
+						<div class="h-90 overflow-hidden relative">
 						<img src="/images/coed/Profile/Nilo Castulo.png" alt="Prof. Nilo J. Castulo, PhD" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
 							<h3 class="text-white font-bold text-xl">Prof. Nilo J. Castulo, PhD</h3>
@@ -6426,8 +6457,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 				
 
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
-						<div class="h-90 overflow-hidden relative">
+							<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
+							<div class="h-90 overflow-hidden relative">
 							<img src="/images/coed/Profile/msufaculty.png" alt="Assoc. Prof. Alcyn R. Bakkang" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
 								<h3 class="text-white font-bold text-xl">Assoc. Prof. Alcyn R. Bakkang</h3>
@@ -6453,8 +6484,8 @@ document.addEventListener('DOMContentLoaded', function() {
 						</div>
 					</div>
 
-				<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
-					<div class="h-90 overflow-hidden relative">
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
+						<div class="h-90 overflow-hidden relative">
 						<img src="/images/coed/Profile/msufaculty.png" alt="Prof. Abdurizal S. Aripin" class="w-full h-full object-cover lazy-image" loading="lazy">
 						<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
 							<h3 class="text-white font-bold text-xl">Prof. Abdurizal S. Aripin</h3>
@@ -6480,8 +6511,8 @@ document.addEventListener('DOMContentLoaded', function() {
 						</div>
 					</div>
 
-			<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
-					<div class="h-90 overflow-hidden relative">
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
+						<div class="h-90 overflow-hidden relative">
 						<img src="/images/coed/Profile/Matolo.png" alt="Prof. Mona-Allea L. Matolo" class="w-full h-full object-cover lazy-image" loading="lazy">
 						<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
 							<h3 class="text-white font-bold text-xl">Prof. Mona-Allea L. Matolo</h3>
@@ -6507,8 +6538,8 @@ document.addEventListener('DOMContentLoaded', function() {
 						</div>
 					</div>
 
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
-					<div class="h-90 overflow-hidden relative">
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
+						<div class="h-90 overflow-hidden relative">
 						<img src="/images/coed/Profile/Puig.png" alt="Assoc. Prof. Charmine Z. Puig" class="w-full h-full object-cover lazy-image" loading="lazy">
 						<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
 							<h3 class="text-white font-bold text-xl">Assoc. Prof. Charmine Z. Puig</h3>
@@ -6534,7 +6565,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						</div>
 					</div>
 
-					<div class="md:col-span-2 lg:col-span-3 hidden additional-faculty">
+					<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Department of Language Education">
 						<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#61063B] via-[#8C1F5A] to-[#2F1A45] text-white p-8 md:p-10 shadow-2xl">
 							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
 							<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
@@ -6544,39 +6575,21 @@ document.addEventListener('DOMContentLoaded', function() {
 									<p class="mt-4 text-sm md:text-base text-white/90">
 										Spotlighting language scholars who champion Filipino and multilingual literacy, cultural programs, and student success across MSU-TCTO.
 									</p>
-								</div>
-								<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 text-sm md:text-base font-semibold">
-									<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<span>Assoc. Prof. Bonjovi H. Hajan • Director, SAMA Studies Center & Sentro ng Wika at Kultura • Associate Professor V</span>
-									</div>
-									<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<span>Asst. Prof. Ronaliza M. Wagas • College Secretary • Associate Professor V</span>
-									</div>
-									<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<span>Prof. Surma J. Werble, PhD • Faculty • Professor VI</span>
-									</div>
-									<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<span>Assoc. Prof. Cherry T. Budlong-Alih • Faculty • Associate Professor V</span>
-									</div>
-									<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<span>Asst. Prof. Sitti-Rasham S. Alang • Faculty • Assistant Professor IV</span>
+									<div class="mt-6">
+										<button
+											type="button"
+											class="show-department-faculty inline-flex items-center gap-3 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white font-semibold uppercase tracking-wide text-xs md:text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of Language Education"
+											aria-pressed="false"
+										>
+											<span class="department-button-label">Show Faculty</span>
+											<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+											</svg>
+										</button>
 									</div>
 								</div>
+								<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 text-sm md:text-base font-semibold faculty-banner-content hidden"></div>
 							</div>
 						</div>
 					</div>
@@ -6695,7 +6708,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					<!-- la -->
 
 					
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
 
 						<div class="h-90 overflow-hidden relative">
 							<img src="/images/coed/Profile/cherry.png" alt="Prof. Cherry T. Budlong-Alih" class="w-full h-full object-cover lazy-image" loading="lazy">
@@ -6739,7 +6752,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	
 
-					<div class="md:col-span-2 lg:col-span-3 hidden additional-faculty">
+					<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Department of Science and Mathematics Education">
 						<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#61063B] via-[#8C1F5A] to-[#2F1A45] text-white p-8 md:p-10 shadow-2xl">
 							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
 							<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
@@ -6749,57 +6762,27 @@ document.addEventListener('DOMContentLoaded', function() {
 									<p class="mt-4 text-sm md:text-base text-white/90">
 										Highlighting scholars who drive excellence in mathematics, science, and research-driven instruction across MSU-TCTO.
 									</p>
-								</div>
-								<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 text-sm md:text-base font-semibold">
-									<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<span>Asst. Prof. Efren Tangon, PhD</span>
-									</div>
-									<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<span>Asst. Prof. Aljemedin S. Jaudinez</span>
-									</div>
-									<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<span>Assoc. Prof. Potchong M. Jackaria</span>
-									</div>
-									<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<span>Asst. Prof. Nurul-Ainie S. Eldani</span>
-									</div>
-									<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<span>Rehina U. Sala</span>
-									</div>
-									<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<span>Mulyadi S. Sapal, PhD</span>
-									</div>
-									<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<span>Assoc. Prof. Fauzia K. Sali-Latif</span>
+									<div class="mt-6">
+										<button
+											type="button"
+											class="show-department-faculty inline-flex items-center gap-3 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white font-semibold uppercase tracking-wide text-xs md:text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of Science and Mathematics Education"
+											aria-pressed="false"
+										>
+											<span class="department-button-label">Show Faculty</span>
+											<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+											</svg>
+										</button>
 									</div>
 								</div>
+								<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 text-sm md:text-base font-semibold faculty-banner-content hidden"></div>
 							</div>
 						</div>
 					</div>
 
 					<!-- Science and Mathematics Faculty -->
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
 						<div class="h-90 overflow-hidden relative">
 							<img src="/images/coed/Profile/Dr. Efren Tangon, Phd.png" alt="Asst. Prof. Efren Tangon, PhD" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -6990,7 +6973,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-					<div class="md:col-span-2 lg:col-span-3 hidden additional-faculty">
+					<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Department of Physical Education">
 						<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#61063B] via-[#8C1F5A] to-[#2F1A45] text-white p-8 md:p-10 shadow-2xl">
 							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
 							<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
@@ -7000,45 +6983,21 @@ document.addEventListener('DOMContentLoaded', function() {
 									<p class="mt-4 text-sm md:text-base text-white/90">
 										Celebrating dynamic educators who lead MSU-TCTO's physical education, sports, dance, health, and wellness initiatives.
 									</p>
-								</div>
-								<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 text-sm md:text-base font-semibold">
-									<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<span>Prof. Shamira C. Dais, PhD</span>
-									</div>
-									<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<span>Shajila C. Ali</span>
-									</div>
-									<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<span>Sharmina D. Santos</span>
-									</div>
-									<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<span>Blanche B. Matolo</span>
-									</div>
-									<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<span>Al-Shadat A. Mohammad</span>
-									</div>
-									<div class="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm">
-										<svg class="w-5 h-5 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-										</svg>
-										<span>Rubina Salasain</span>
+									<div class="mt-6">
+										<button
+											type="button"
+											class="show-department-faculty inline-flex items-center gap-3 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white font-semibold uppercase tracking-wide text-xs md:text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of Physical Education"
+											aria-pressed="false"
+										>
+											<span class="department-button-label">Show Faculty</span>
+											<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+											</svg>
+										</button>
 									</div>
 								</div>
+								<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 text-sm md:text-base font-semibold faculty-banner-content hidden"></div>
 							</div>
 						</div>
 					</div>
@@ -7179,7 +7138,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					</div>
 
 					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
-		<div class="h-90 overflow-hidden relative">
+						<div class="h-90 overflow-hidden relative">
 			<img src="/images/coed/Profile/Rubina J. Salasain.png" alt="Rubina Salasain" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
 					<h3 class="text-white font-bold text-xl">Rubina Salasain</h3>
@@ -7255,7 +7214,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					<!-- Prof. Alhisan U. Jemsy, PhD - Dean -->
 					<div class="text-center w-full sm:w-auto cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('jemsy_dean')">
 						<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
-							<img src="/images/coed/Profile/JEMSY.png" alt="Prof. Alhisan U. Jemsy" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
+							<img src="/images/coed/Profile/JEMSYDEAN.png" alt="Prof. Alhisan U. Jemsy" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
 						</div>
 						<h3 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Prof. Alhisan U. Jemsy, PhD</h3>
 						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Dean, College of Education</p>
@@ -7643,7 +7602,7 @@ document.addEventListener('DOMContentLoaded', function() {
 									<div class="flex flex-col md:flex-row items-center md:items-start gap-6">
 										<div class="flex-shrink-0">
 											<div class="relative">
-												<img src="/images/coed/Profile/JEMSY.png" alt="Prof. Alhisan U. Jemsy" class="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-4 border-white shadow-lg lazy-image" loading="lazy">
+												<img src="/images/coed/Profile/JEMSYDEAN.png" alt="Prof. Alhisan U. Jemsy" class="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-4 border-white shadow-lg lazy-image" loading="lazy">
 												<div class="absolute -top-2 -right-2 w-8 h-8 bg-msu-deep-ocean rounded-full flex items-center justify-center shadow-lg">
 													<svg class="w-4 h-4 text-msu-bgc-color" fill="currentColor" viewBox="0 0 20 20">
 														<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
