@@ -439,14 +439,14 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 		<div
 			id="departmentProgramsModal"
-			class="fixed inset-0 z-50 hidden items-center justify-center px-4 py-8 sm:px-6 lg:px-8"
+			class="fixed inset-0 z-50 hidden items-start justify-center sm:items-center px-3 py-6 sm:px-6 lg:px-8 overflow-y-auto"
 			role="dialog"
 			aria-modal="true"
 			aria-labelledby="departmentProgramsModalTitle"
 		>
 			<div class="absolute inset-0 bg-black/70 backdrop-blur-sm department-modal-overlay" aria-hidden="true"></div>
-			<div class="relative w-full max-w-4xl bg-white text-gray-900 rounded-3xl shadow-2xl overflow-hidden">
-				<div class="flex items-center justify-between px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-msu-main-color/10 to-msu-deep-ocean/10">
+			<div class="relative w-full max-w-4xl mx-auto flex max-h-[calc(100vh-3rem)] flex-col bg-white text-gray-900 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden">
+				<div class="flex items-center justify-between px-5 sm:px-6 py-4 sm:py-5 border-b border-gray-200 bg-gradient-to-r from-msu-main-color/10 to-msu-deep-ocean/10">
 					<div class="space-y-2">
 						<span class="text-xs uppercase tracking-[0.28em] text-msu-deep-ocean/70">Academic Programs</span>
 						<h2 id="departmentProgramsModalTitle" class="text-2xl font-bold text-msu-deep-ocean">Department Academic Programs</h2>
@@ -467,7 +467,7 @@ console.log('Department programs map created for departments:', Object.keys(depa
 						</svg>
 					</button>
 				</div>
-				<div id="departmentProgramsModalBody" class="px-6 py-6 space-y-6 max-h-[70vh] overflow-y-auto">
+				<div id="departmentProgramsModalBody" class="flex-1 px-5 sm:px-6 py-5 sm:py-6 space-y-6 overflow-y-auto max-h-[calc(100vh-7rem)] sm:max-h-[75vh]">
 					<!-- Dynamic department content -->
 				</div>
 			</div>
@@ -937,7 +937,7 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 		<!-- Enhanced Stats Section with Animated Counters -->
 
-		<section class="py-20 bg-gradient-to-r from-msu-main-color via-msu-deep-ocean to-msu-main-color text-white relative overflow-hidden">
+		<section class="py-16 sm:py-20 bg-gradient-to-r from-msu-main-color via-msu-deep-ocean to-msu-main-color text-white relative overflow-hidden">
 
 			<!-- Animated background elements -->
 
@@ -955,13 +955,13 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 			
 
-			<div class="container mx-auto px-6 relative z-10">
+			<div class="container mx-auto px-4 sm:px-6 relative z-10">
 
-				<div class="text-center mb-16">
+				<div class="text-center mb-12 sm:mb-16">
 
-					<h2 class="text-4xl font-bold mb-4">Our Impact in Numbers</h2>
+					<h2 class="text-3xl sm:text-4xl font-bold mb-4">Our Impact in Numbers</h2>
 
-					<p class="text-xl text-gray-300 max-w-2xl mx-auto">
+					<p class="text-base sm:text-xl text-gray-200 sm:text-gray-300 max-w-2xl mx-auto">
 
 						Discover the scale of our academic excellence and community impact
 
@@ -971,15 +971,15 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 				
 
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-9xl mx-auto">
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 lg:gap-12 max-w-6xl lg:max-w-7xl mx-auto">
 
-					<div class="group p-12 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
+					<div class="group p-6 sm:p-8 lg:p-12 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
 
 						<div class="text-center">
 
 							<div class="relative mb-6">
 
-								<svg class="w-24 h-24 mx-auto text-msu-bgc-color mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<svg class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto text-msu-bgc-color mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 
 									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
 								</svg>
@@ -988,11 +988,11 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 							</div>
 
-							<div class="text-8xl font-bold mb-4 counter" data-target="779">0</div>
+							<div class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 counter" data-target="779">0</div>
 
-							<div class="text-3xl font-semibold mb-3">Students Enrolled</div>
+							<div class="text-2xl sm:text-3xl font-semibold mb-3">Students Enrolled</div>
 
-							<div class="text-xl text-gray-300 mt-2">Active learners across all programs</div>
+							<div class="text-sm sm:text-base lg:text-lg text-gray-200 sm:text-gray-300 mt-2">Active learners across all programs</div>
 
 						</div>
 
@@ -1000,13 +1000,13 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 					
 
-					<div class="group p-12 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
+					<div class="group p-6 sm:p-8 lg:p-12 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
 
 						<div class="text-center">
 
 							<div class="relative mb-6">
 
-								<svg class="w-24 h-24 mx-auto text-msu-bgc-color mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<svg class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto text-msu-bgc-color mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 
 									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
 
@@ -1016,11 +1016,11 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 							</div>
 
-							<div class="text-8xl font-bold mb-4 counter" data-target="41">0</div>
+							<div class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 counter" data-target="41">0</div>
 
-							<div class="text-3xl font-semibold mb-3">Faculty Members</div>
+							<div class="text-2xl sm:text-3xl font-semibold mb-3">Faculty Members</div>
 
-							<div class="text-xl text-gray-300 mt-2">Expert educators and researchers</div>
+							<div class="text-sm sm:text-base lg:text-lg text-gray-200 sm:text-gray-300 mt-2">Expert educators and researchers</div>
 
 						</div>
 
@@ -1028,13 +1028,13 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 					
 
-					<div class="group p-12 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
+					<div class="group p-6 sm:p-8 lg:p-12 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-500 hover:scale-105">
 
 						<div class="text-center">
 
 							<div class="relative mb-6">
 
-								<svg class="w-24 h-24 mx-auto text-msu-bgc-color mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<svg class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 mx-auto text-msu-bgc-color mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 
 									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
 
@@ -1044,11 +1044,11 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 							</div>
 
-							<div class="text-8xl font-bold mb-4 counter" data-target="8">0</div>
+							<div class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 counter" data-target="8">0</div>
 
-							<div class="text-3xl font-semibold mb-3">Academic Programs</div>
+							<div class="text-2xl sm:text-3xl font-semibold mb-3">Academic Programs</div>
 
-							<div class="text-xl text-gray-300 mt-2">Diverse fields of study</div>
+							<div class="text-sm sm:text-base lg:text-lg text-gray-200 sm:text-gray-300 mt-2">Diverse fields of study</div>
 
 						</div>
 
@@ -1468,7 +1468,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return label;
         }
 
-        const rowsMarkup = programs.map((program: any) => {
+        const preparedProgramMarkup = programs.map((program: any) => {
             const safeProgramName = escapeHtml(program?.program || program?.name || '');
             const safeDegree = program?.degree ? escapeHtml(program.degree) : 'N/A';
             const safeLevel = program?.level ? escapeHtml(program.level) : 'N/A';
@@ -1490,28 +1490,73 @@ document.addEventListener('DOMContentLoaded', function() {
                         </svg>
                     </button>`
                 : `<span class="text-gray-400 text-xs">No file</span>`;
+            const mobileAccreditationBadge = safeAccreditation
+                ? `<span class="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">${safeAccreditation}</span>`
+                : `<span class="inline-flex items-center rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-xs font-semibold text-gray-500">TBA</span>`;
+            const mobileActionMarkup = safeFileUrl
+                ? `<button type="button" onclick="openPDFViewer('${safeFileUrl}', '${safeDisplayName}')" class="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#61063B] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-[#61063B]/90">
+                        View Details
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+                        </svg>
+                    </button>`
+                : `<span class="mt-4 block text-center text-xs text-gray-400">No file</span>`;
 
-            return `
-                <tr class="hover:bg-white/60 transition-colors duration-200">
-                    <td class="px-5 py-4 align-top">
-                        <div class="font-semibold text-sm md:text-base text-[#61063B]">${safeProgramName}</div>
-                        ${safeDescription}
-                    </td>
-                    <td class="px-5 py-4 align-top text-sm text-gray-700">${safeDegree}</td>
-                    <td class="px-5 py-4 align-top text-sm text-gray-700">${safeLevel}</td>
-                    <td class="px-5 py-4 align-top text-sm text-gray-700">${safeDuration}</td>
-                    <td class="px-5 py-4 align-top">${accreditationMarkup}</td>
-                    <td class="px-5 py-4 align-top text-right">${actionMarkup}</td>
-                </tr>
-            `;
-        }).join('');
+            return {
+                tableRow: `
+                    <tr class="hover:bg-white/60 transition-colors duration-200">
+                        <td class="px-5 py-4 align-top">
+                            <div class="font-semibold text-sm md:text-base text-[#61063B]">${safeProgramName}</div>
+                            ${safeDescription}
+                        </td>
+                        <td class="px-5 py-4 align-top text-sm text-gray-700">${safeDegree}</td>
+                        <td class="px-5 py-4 align-top text-sm text-gray-700">${safeLevel}</td>
+                        <td class="px-5 py-4 align-top text-sm text-gray-700">${safeDuration}</td>
+                        <td class="px-5 py-4 align-top">${accreditationMarkup}</td>
+                        <td class="px-5 py-4 align-top text-right">${actionMarkup}</td>
+                    </tr>
+                `,
+                mobileCard: `
+                    <article class="rounded-2xl border border-gray-200 bg-white/90 p-4 shadow-sm transition-shadow duration-200 hover:shadow-md">
+                        <div class="space-y-4">
+                            <div>
+                                <h3 class="text-base font-semibold text-[#61063B]">${safeProgramName}</h3>
+                                ${safeDescription}
+                            </div>
+                            <dl class="space-y-2 text-sm text-gray-600">
+                                <div class="flex items-start justify-between gap-4">
+                                    <dt class="font-medium text-gray-500">Degree</dt>
+                                    <dd class="text-right text-gray-700">${safeDegree}</dd>
+                                </div>
+                                <div class="flex items-start justify-between gap-4">
+                                    <dt class="font-medium text-gray-500">Level</dt>
+                                    <dd class="text-right text-gray-700">${safeLevel}</dd>
+                                </div>
+                                <div class="flex items-start justify-between gap-4">
+                                    <dt class="font-medium text-gray-500">Duration</dt>
+                                    <dd class="text-right text-gray-700">${safeDuration}</dd>
+                                </div>
+                                <div class="flex items-start justify-between gap-4">
+                                    <dt class="font-medium text-gray-500">Accreditation</dt>
+                                    <dd class="text-right">${mobileAccreditationBadge}</dd>
+                                </div>
+                            </dl>
+                            ${mobileActionMarkup}
+                        </div>
+                    </article>
+                `
+            };
+        });
+
+        const tableRowsMarkup = preparedProgramMarkup.map((entry) => entry.tableRow).join('');
+        const mobileCardsMarkup = preparedProgramMarkup.map((entry) => entry.mobileCard).join('');
 
         departmentProgramsModalBody.innerHTML = `
-            <div class="space-y-4">
+            <div class="space-y-5">
                 <div class="flex flex-wrap items-center justify-between gap-3">
                     <p class="text-sm text-gray-600">Showing <span class="font-semibold text-[#61063B]">${programs.length}</span> academic program${programs.length === 1 ? '' : 's'}</p>
                 </div>
-                <div class="overflow-x-auto rounded-2xl border border-gray-200 bg-white/80 backdrop-blur">
+                <div class="hidden sm:block overflow-x-auto rounded-2xl border border-gray-200 bg-white/80 backdrop-blur">
                     <table class="min-w-full divide-y divide-gray-200 text-sm text-gray-700">
                         <thead class="bg-[#61063B]/90 text-white text-xs uppercase tracking-wide">
                             <tr>
@@ -1524,9 +1569,12 @@ document.addEventListener('DOMContentLoaded', function() {
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200 bg-white">
-                            ${rowsMarkup}
+                            ${tableRowsMarkup}
                         </tbody>
                     </table>
+                </div>
+                <div class="sm:hidden space-y-4">
+                    ${mobileCardsMarkup}
                 </div>
             </div>
         `;
@@ -4348,6 +4396,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	const facultySearchResults = document.getElementById('facultySearchResults');
 	const facultyResultsCount = document.getElementById('facultyResultsCount');
 	const facultyResultsList = document.getElementById('facultyResultsList');
+	const facultySearchMatches = document.getElementById('facultySearchMatches');
+	const facultySearchMatchesGrid = document.getElementById('facultySearchMatchesGrid');
 	const showMoreBtn = document.getElementById('showMoreBtn');
 	const facultyGrid = document.getElementById('facultyGrid');
 	const departmentFacultyButtons = Array.from(document.querySelectorAll('.department-faculty-toggle')) as HTMLButtonElement[];
@@ -4921,6 +4971,8 @@ document.addEventListener('DOMContentLoaded', function() {
 			if (facultySearchResults) facultySearchResults.classList.add('hidden');
 			if (facultyResultsCount) facultyResultsCount.textContent = '';
 			if (facultyResultsList) facultyResultsList.innerHTML = '';
+			if (facultySearchMatchesGrid) facultySearchMatchesGrid.innerHTML = '';
+			if (facultySearchMatches) facultySearchMatches.classList.add('hidden');
 			if (clearFacultySearchBtn) clearFacultySearchBtn.classList.add('hidden');
 			return;
 		}
@@ -4971,8 +5023,8 @@ document.addEventListener('DOMContentLoaded', function() {
 			}
 
 			if (matches) {
-				cardElement.classList.remove('hidden');
-				cardElement.style.display = '';
+				cardElement.classList.add('hidden');
+				cardElement.style.display = 'none';
 				visibleCount += 1;
 				matchedEntries.push({
 					id: facultyId,
@@ -4992,15 +5044,19 @@ document.addEventListener('DOMContentLoaded', function() {
 		if (facultyResultsList) {
 			facultyResultsList.innerHTML = '';
 		}
+		if (facultySearchMatchesGrid) {
+			facultySearchMatchesGrid.innerHTML = '';
+		}
+		if (facultySearchMatches) {
+			facultySearchMatches.classList.add('hidden');
+		}
 
 		if (facultySearchResults && facultyResultsCount) {
 			if (visibleCount === 0) {
 				facultyResultsCount.innerHTML = '<span class="text-red-500">No faculty members found</span>';
 				facultySearchResults.classList.remove('hidden');
-			} else if (visibleCount === allFacultyCards.length) {
-				facultySearchResults.classList.add('hidden');
 			} else {
-				facultyResultsCount.innerHTML = `Showing <span class="font-semibold text-msu-main-color dark:text-yellow-400">${visibleCount}</span> of <span class="font-semibold">${allFacultyCards.length}</span> faculty members`;
+				facultyResultsCount.innerHTML = `Showing <span class="font-semibold text-msu-main-color dark:text-yellow-400">${visibleCount}</span> faculty member${visibleCount === 1 ? '' : 's'}`;
 				facultySearchResults.classList.remove('hidden');
 			}
 		}
@@ -5039,6 +5095,54 @@ document.addEventListener('DOMContentLoaded', function() {
 			});
 
 			facultyResultsList.innerHTML = resultsHtml;
+		}
+
+		// Render matching cards below the search area
+		if (facultySearchMatches && facultySearchMatchesGrid) {
+			if (visibleCount > 0) {
+				facultySearchMatchesGrid.innerHTML = '';
+				matchedEntries.forEach(entry => {
+					const clone = entry.card.cloneNode(true) as HTMLElement;
+					clone.classList.remove('hidden');
+					clone.style.display = '';
+					clone.removeAttribute('id');
+					facultySearchMatchesGrid.appendChild(clone);
+				});
+
+				const matchImages = facultySearchMatchesGrid.querySelectorAll<HTMLImageElement>('.lazy-image');
+				if ('IntersectionObserver' in window) {
+					const observer = new IntersectionObserver((entries, observerInstance) => {
+						entries.forEach(entry => {
+							if (entry.isIntersecting) {
+								const img = entry.target as HTMLImageElement;
+								img.classList.add('loaded');
+								(img as HTMLElement).style.opacity = '1';
+								observerInstance.unobserve(img);
+							}
+						});
+					}, {
+						rootMargin: '50px 0px',
+						threshold: 0.01
+					});
+
+					matchImages.forEach(img => {
+						if (!img.classList.contains('loaded')) {
+							(img as HTMLElement).style.opacity = '0';
+							observer.observe(img);
+						}
+					});
+				} else {
+					matchImages.forEach(img => {
+						img.classList.add('loaded');
+						(img as HTMLElement).style.opacity = '1';
+					});
+				}
+
+				facultySearchMatches.classList.remove('hidden');
+			}	else {
+				facultySearchMatchesGrid.innerHTML = '';
+				facultySearchMatches.classList.add('hidden');
+			}
 		}
 		
 		// Hide "Show More" button when searching
@@ -5836,207 +5940,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							</div>
 						</div>
 
-						<!-- Research Leaders by Area -->
-						<div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-							<!-- Educational Leadership & Administration Research Leaders -->
-							<div class="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-xl p-5 sm:p-6">
-								<div class="flex items-center mb-4">
-									<svg class="w-6 h-6 sm:w-8 sm:h-8 text-msu-deep-ocean dark:text-yellow-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-									</svg>
-									<h4 class="text-lg sm:text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Educational Leadership & Administration</h4>
-								</div>
-								<ul class="space-y-2 text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">•</span>
-										<span>
-											<strong>Prof. Alhisan U. Jemsy, PhD</strong> - Dean, College of Education
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Educational Research • Educational Evaluation and Assessment • Professional Education</span>
-										</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">•</span>
-										<span>
-											<strong>Prof. Al-Rashiff H. Mastul, EdD</strong> - Professor I, Chairperson
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Educational Leadership • Educational Administration • Educational Management</span>
-										</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">•</span>
-										<span>
-											<strong>Assoc. Prof. Fernigil L. Colicol, PhD</strong> - Chairperson, DELPS
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specialization: Educational Research</span>
-										</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">•</span>
-										<span>
-											<strong>Associate Prof. Jocelyn A. Pajiji, EdD</strong> - Chairperson DELPS • Associate Professor V
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Educational Management • General Science</span>
-										</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">•</span>
-										<span>
-											<strong>Assoc. Prof. Alcyn R. Bakkang</strong> - VCSA • Associate Professor V
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Educational Assessment • Measurement • Evaluation</span>
-										</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">•</span>
-										<span>
-											<strong>Prof. Abdurizal S. Aripin</strong> - Professor I
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specialization: Educational Management</span>
-										</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">•</span>
-										<span>
-											<strong>Prof. Wilham M. Hailaya, PhD</strong> - Vice Chancellor for Academic Affairs
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specialization: Teacher Assessment Literacy/Educational Assessment</span>
-										</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">•</span>
-										<span>
-											<strong>Asst. Prof. Joselito J. Bagalanon</strong> - Assistant Professor IV
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specialization: Educational Administration</span>
-										</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">•</span>
-										<span>
-											<strong>Asst. Prof. Luz J. Bation</strong> - Assistant Professor IV
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specialization: Administration and Supervision</span>
-										</span>
-									</li>
-								</ul>
-							</div>
-
-							<!-- Language Teaching Research Leaders -->
-							<div class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-gray-800 dark:to-gray-700 rounded-xl p-5 sm:p-6">
-								<div class="flex items-center mb-4">
-									<svg class="w-6 h-6 sm:w-8 sm:h-8 text-msu-deep-ocean dark:text-yellow-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
-									</svg>
-									<h4 class="text-lg sm:text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Language Teaching & Pedagogy</h4>
-								</div>
-								<ul class="space-y-2 text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">•</span>
-										<span>
-											<strong>Prof. Cherry T. Budlong-Alih</strong> - Faculty • Associate Professor V
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specialization: Filipino</span>
-										</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">•</span>
-										<span>
-											<strong>Surma J. Werble, PhD</strong> - Permanent Faculty (Full-time)
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specialization: English Language Teaching</span>
-										</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">•</span>
-										<span>
-											<strong>Assoc. Prof. Bonjovi H. Hajan</strong> - Director, SAMA Studies Center • Associate Professor V
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specialization: English Language Teaching</span>
-										</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">•</span>
-										<span>
-											<strong>Asst. Prof. Sitti-Rasham S. Alang</strong> - Assistant Professor IV
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Filipino • Administration and Supervision</span>
-										</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">•</span>
-										<span>
-											<strong>Asst. Prof. Ronaliza M. Wagas</strong> - Associate Professor V
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: English • Administration and Supervision</span>
-										</span>
-									</li>
-								</ul>
-							</div>
-
-							<!-- Science & Mathematics Education Research Leaders -->
-							<div class="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-800 dark:to-gray-700 rounded-xl p-5 sm:p-6">
-								<div class="flex items-center mb-4">
-									<svg class="w-6 h-6 sm:w-8 sm:h-8 text-msu-deep-ocean dark:text-yellow-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-									</svg>
-									<h4 class="text-lg sm:text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Science & Mathematics Education</h4>
-								</div>
-								<ul class="space-y-2 text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">•</span>
-										<span>
-											<strong>Asst. Prof. Efren Tangon, PhD</strong> - Assist. Prof. IV, Chairperson DSME
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specialization: Chemistry Education</span>
-										</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">•</span>
-										<span>
-											<strong>Asst. Prof. Aljemedin S. Jaudinez</strong> - Associate Professor V
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specialization: Mathematics and Statistics Education</span>
-										</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">•</span>
-										<span>
-											<strong>Mulyadi S. Sapal, PhD</strong> - Master Teacher II
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specialization: Mathematics Education</span>
-										</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">•</span>
-										<span>
-											<strong>Rehina U. Sala</strong> - Master Teacher II
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specialization: Biology Education</span>
-										</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">•</span>
-										<span>
-											<strong>Assoc. Prof. Fauzia K. Sali-Latif</strong> - Associate Professor V
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Science Education • Sciences</span>
-										</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">•</span>
-										<span>
-											<strong>Asst. Prof. Nurul-Ainie S. Eldani</strong> - Assist. Prof. IV
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Physics Education • Physical Science</span>
-										</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">•</span>
-										<span>
-											<strong>Assoc. Prof. Potchong M. Jackaria</strong> - Associate Professor III
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specialization: Mathematics Education</span>
-										</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">•</span>
-										<span>
-											<strong>Assoc. Prof. Charmine Z. Puig</strong> - Associate Professor V
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Professional Education • Science Education</span>
-										</span>
-									</li>
-								</ul>
-							</div>
-						</div>
-
-						<!-- Call to Action -->
-						<div class="mt-6 sm:mt-8 text-center">
-							<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color mb-4">
-								Explore our <a href="#facultySpotlight" class="text-msu-deep-ocean font-semibold hover:underline">Faculty Spotlight</a> section to learn more about our research leaders and their specializations.
-							</p>
-						</div>
-					</div>
-				</div>
+					
 
 				
 
@@ -6233,48 +6137,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 				<div class="text-center mb-16">
 
-					<h2 class="text-3xl font-bold mb-4 text-[#61063B] dark:text-msu-bgc-color" >Faculty Spotlight</h2>
+					<h2 class="text-3xl font-bold mb-4 text-[#61063B] dark:text-msu-bgc-color" >Department</h2>
 
 					<p class="text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto">
 
-						Our distinguished faculty members who are experts in education and academic leadership
+						Explore our academic departments and their areas of expertise in education and leadership.
 					</p>
 
 				</div>
-
-				<!-- Faculty Search Bar -->
-				<div class="mb-8 max-w-2xl mx-auto">
-					<div class="relative">
-						<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-							<svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-							</svg>
-						</div>
-						<input 
-							type="text" 
-							id="facultySearch" 
-							placeholder="Search faculty by name, position, or specialization..." 
-							class="block w-full pl-12 pr-12 py-4 text-base border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-msu-main-color dark:focus:ring-yellow-400 focus:border-msu-main-color dark:focus:border-yellow-400 transition-all duration-300 shadow-sm hover:shadow-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
-						>
-						<button 
-							id="clearFacultySearch" 
-							class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200 hidden"
-							title="Clear search"
-						>
-							<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-							</svg>
-						</button>
-					</div>
-					<!-- Search Results Counter -->
-					<div id="facultySearchResults" class="mt-3 text-sm text-gray-600 dark:text-gray-400 hidden">
-						<p id="facultyResultsCount" class="text-center"></p>
-						<div id="facultyResultsList" class="mt-3 space-y-3"></div>
-					</div>
-					<div id="facultyDepartmentNotice" class="hidden mt-4 text-center text-msu-main-color dark:text-yellow-300 font-semibold"></div>
-				</div>
-
-				
 
 				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="facultyGrid">
 					<!-- First 3 faculty members (always visible) -->
@@ -6379,7 +6249,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
 							<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
 								<div class="max-w-xl">
-									<p class="uppercase tracking-[0.35em] text-xs md:text-sm text-white/80 mb-3">Faculty Spotlight</p>
+									<!-- <p class="uppercase tracking-[0.35em] text-xs md:text-sm text-white/80 mb-3">Faculty Spotlight</p> -->
 									<h3 class="text-2xl md:text-3xl font-bold leading-snug">Department of Early Childhood and Elementary Education</h3>
 									<p class="mt-4 text-sm md:text-base text-white/90">
 										Celebrating educators who cultivate inclusive, child-centered learning experiences from early childhood through the elementary years.
@@ -6805,7 +6675,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
 						<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
 							<div class="max-w-xl">
-								<p class="uppercase tracking-[0.35em] text-xs md:text-sm text-white/80 mb-3">Faculty Spotlight</p>
+								<!-- <p class="uppercase tracking-[0.35em] text-xs md:text-sm text-white/80 mb-3">Faculty Spotlight</p> -->
 								<h3 class="text-2xl md:text-3xl font-bold leading-snug">Department of Educational Leadership and Professional Services</h3>
 								<p class="mt-4 text-sm md:text-base text-white/90">
 									Recognizing academic leaders who drive policy, quality assurance, and professional growth for educators across MSU-TCTO.
@@ -7148,7 +7018,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
 							<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
 								<div class="max-w-xl">
-									<p class="uppercase tracking-[0.35em] text-xs md:text-sm text-white/80 mb-3">Faculty Spotlight</p>
+									<!-- <p class="uppercase tracking-[0.35em] text-xs md:text-sm text-white/80 mb-3">Faculty Spotlight</p> -->
 									<h3 class="text-2xl md:text-3xl font-bold leading-snug">Department of Language Education</h3>
 									<p class="mt-4 text-sm md:text-base text-white/90">
 										Spotlighting language scholars who champion Filipino and multilingual literacy, cultural programs, and student success across MSU-TCTO.
@@ -7355,7 +7225,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
 							<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
 								<div class="max-w-xl">
-									<p class="uppercase tracking-[0.35em] text-xs md:text-sm text-white/80 mb-3">Faculty Spotlight</p>
+									<!-- <p class="uppercase tracking-[0.35em] text-xs md:text-sm text-white/80 mb-3">Faculty Spotlight</p> -->
 									<h3 class="text-2xl md:text-3xl font-bold leading-snug">Department of Science and Mathematics Education</h3>
 									<p class="mt-4 text-sm md:text-base text-white/90">
 										Highlighting scholars who drive excellence in mathematics, science, and research-driven instruction across MSU-TCTO.
@@ -7596,7 +7466,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
 							<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
 								<div class="max-w-xl">
-									<p class="uppercase tracking-[0.35em] text-xs md:text-sm text-white/80 mb-3">Faculty Spotlight</p>
+									<!-- <p class="uppercase tracking-[0.35em] text-xs md:text-sm text-white/80 mb-3">Faculty Spotlight</p> -->
 									<h3 class="text-2xl md:text-3xl font-bold leading-snug">Department of Physical Education</h3>
 									<p class="mt-4 text-sm md:text-base text-white/90">
 										Celebrating dynamic educators who lead MSU-TCTO's physical education, sports, dance, health, and wellness initiatives.
@@ -7805,14 +7675,14 @@ document.addEventListener('DOMContentLoaded', function() {
 				
 				
 				<!-- Show More Button -->
-				<div class="mt-12 md:col-span-2 lg:col-span-3 flex justify-center">
+				<!-- <div class="mt-12 md:col-span-2 lg:col-span-3 flex justify-center">
 					<button onclick="toggleFacultyView()" id="showMoreBtn" class="inline-flex items-center px-8 py-4 border border-msu-deep-ocean text-base font-medium rounded-full shadow-sm text-msu-bgc-color bg-[#61063B] hover:bg-msu-deep-ocean-dark hover:shadow-md transition-all duration-300 transform hover:scale-105 text-center">
 						<span id="showMoreText">Show More Faculty</span>
 						<svg id="showMoreIcon" class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
 						</svg>
 					</button>
-				</div>
+				</div> -->
 
 				
 
@@ -8003,6 +7873,51 @@ document.addEventListener('DOMContentLoaded', function() {
 						<p class="text-xs text-gray-500 italic px-2">Admin. Aide I</p>
 					</div>
 
+				</div>
+
+				<!-- Faculty Search Header -->
+				<div class="mt-12 mb-4 text-center">
+					<h2 class="text-2xl sm:text-3xl font-bold text-msu-main-color dark:text-yellow-300">Faculty Search</h2>
+					<p class="text-sm sm:text-base text-gray-700 dark:text-gray-300 mt-1">
+						Find faculty members by name, position, or area of specialization.
+					</p>
+				</div>
+				<!-- Faculty Search Bar -->
+				<div class="mt-12 sm:mt-16">
+					<div class="max-w-2xl mx-auto">
+						<div class="relative">
+							<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+								<svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+								</svg>
+							</div>
+							<input 
+								type="text" 
+								id="facultySearch" 
+								placeholder="Search faculty by name, position, or specialization..." 
+								class="block w-full pl-12 pr-12 py-4 text-base border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-msu-main-color dark:focus:ring-yellow-400 focus:border-msu-main-color dark:focus:border-yellow-400 transition-all duration-300 shadow-sm hover:shadow-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+							>
+							<button 
+								id="clearFacultySearch" 
+								class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200 hidden"
+								title="Clear search"
+							>
+								<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+								</svg>
+							</button>
+						</div>
+						<!-- Search Results Counter -->
+						<div id="facultySearchResults" class="mt-3 text-sm text-gray-600 dark:text-gray-400 hidden">
+							<p id="facultyResultsCount" class="text-center"></p>
+							<div id="facultyResultsList" class="mt-3 space-y-3"></div>
+						</div>
+						<div id="facultyDepartmentNotice" class="hidden mt-4 text-center text-msu-main-color dark:text-yellow-300 font-semibold"></div>
+						<div id="facultySearchMatches" class="mt-8 hidden">
+							<h3 class="text-lg font-semibold text-msu-main-color dark:text-yellow-300 text-center mb-4">Matching Faculty Members</h3>
+							<div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3" id="facultySearchMatchesGrid"></div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>
