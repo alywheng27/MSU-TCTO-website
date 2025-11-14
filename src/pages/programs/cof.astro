@@ -16,7 +16,7 @@ import '../../styles/css/globalanimate.css';
 
 import '../../styles/css/pdf-viewer.css';
 
-import { getCOEDPrograms } from '../../api/api.jsx';
+import { getCOFPrograms } from '../../api/api.jsx';
 
 
 
@@ -24,7 +24,7 @@ import { getCOEDPrograms } from '../../api/api.jsx';
 
 const currentPath = Astro.url.pathname;
 
-// Fetch COED programs data from Sanity
+// Fetch COF programs data from Sanity
 type ProgramDataItem = {
   _id: string;
   program: string;
@@ -63,7 +63,7 @@ function extractTextFromBlocks(blocks: any[]): string {
 }
 
 try {
-  const rawProgramsData = await getCOEDPrograms();
+  const rawProgramsData = await getCOFPrograms();
   
   // Transform Sanity data to match frontend expectations
   programsData = rawProgramsData.map(program => ({
@@ -95,13 +95,13 @@ try {
   filterOptions.levels = Array.from(levelSet);
   filterOptions.departments = Array.from(departmentSet);
   
-  console.log('COED Programs loaded:', programsData.length);
+  console.log('COF Programs loaded:', programsData.length);
   console.log('Filter options:', filterOptions);
   console.log('Sample program:', programsData[0]);
   console.log('Sample program description:', programsData[0]?.description);
   console.log('Raw description data:', rawProgramsData[0]?.description);
 } catch (error) {
-  console.error('Error fetching COED programs data:', error);
+  console.error('Error fetching COF programs data:', error);
   // Fallback to empty array if fetch fails
   programsData = [];
 }
@@ -458,7 +458,7 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 						>
 
-							<span class="relative z-10">Faculty & Academic Programs</span>
+							<span class="relative z-10">Explore Faculty & Academic Programs</span>
 
 							<svg class="w-5 h-5 sm:w-6 sm:h-6 ml-2 sm:ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 
@@ -943,7 +943,7 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 							</div>
 
-							<div class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 counter" data-target="779">0</div>
+							<div class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 counter" data-target="309">0</div>
 
 							<div class="text-2xl sm:text-3xl font-semibold mb-3">Students Enrolled</div>
 
@@ -999,7 +999,7 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 							</div>
 
-							<div class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 counter" data-target="8">0</div>
+							<div class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 counter" data-target="5">0</div>
 
 							<div class="text-2xl sm:text-3xl font-semibold mb-3">Academic Programs</div>
 
@@ -1111,19 +1111,19 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 
 
-<!-- Programs Section with Cards -->
-<!-- 
-<section id="programs" class="py-20 bg-white">
+<!-- Programs Section with Cards - Mobile Optimized -->
 
-    <div class="container mx-auto px-6">
+<section id="programs" class="py-12 sm:py-16 md:py-20 bg-white">
 
-        <div class="text-center mb-16">
+    <div class="container mx-auto px-4 sm:px-6">
 
-            <h2 class="text-3xl font-bold mb-4 text-[#61063B] dark:text-msu-bgc-color" >Academic Programs</h2>
+        <div class="text-center mb-8 sm:mb-12 md:mb-16">
 
-            <p class="text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-3 sm:mb-4 px-4">Academic Programs</h2>
 
-                Innovative teacher education programs preparing future educators and leaders
+            <p class="text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto px-4">
+
+                Comprehensive fisheries education programs preparing future fisheries professionals and marine resource managers
 
             </p>
 
@@ -1131,10 +1131,11 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 
 
-        <div class="mb-8">
-            <div class="flex flex-col lg:flex-row gap-4 items-center justify-between">
-         
-                <div class="relative w-full lg:w-96">
+        <!-- Search and Filter Controls - Mobile Optimized -->
+        <div class="mb-6 sm:mb-8">
+            <div class="flex flex-col gap-3 sm:gap-4">
+                <!-- Global Search -->
+                <div class="relative w-full">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -1143,35 +1144,35 @@ console.log('Department programs map created for departments:', Object.keys(depa
                     <input 
                         type="text" 
                         id="globalSearch" 
-                        placeholder="Search programs, degrees, or specializations..." 
-                        class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-msu-main-color focus:border-msu-main-color transition-all duration-300"
+                        placeholder="Search programs..." 
+                        class="block w-full pl-10 pr-3 py-3 sm:py-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-msu-main-color focus:border-msu-main-color transition-all duration-300 text-sm sm:text-base min-h-[48px] touch-manipulation"
                     >
                 </div>
 
-          
-                <div class="flex flex-wrap gap-3">
-                    <select id="degreeFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-msu-main-color focus:border-msu-main-color transition-all duration-300">
+                <!-- Filter Controls - Mobile Stacked -->
+                <div class="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                    <select id="degreeFilter" class="flex-1 px-4 py-3 sm:py-3.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-msu-main-color focus:border-msu-main-color transition-all duration-300 text-sm sm:text-base min-h-[48px] touch-manipulation">
                         <option value="">All Degrees</option>
                         {filterOptions.degrees.map(degree => (
                             <option value={degree}>{degree}</option>
                         ))}
                     </select>
 
-                    <select id="levelFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-msu-main-color focus:border-msu-main-color transition-all duration-300">
+                    <select id="levelFilter" class="flex-1 px-4 py-3 sm:py-3.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-msu-main-color focus:border-msu-main-color transition-all duration-300 text-sm sm:text-base min-h-[48px] touch-manipulation">
                         <option value="">All Levels</option>
                         {filterOptions.levels.map(level => (
                             <option value={level}>{level}</option>
                         ))}
                     </select>
 
-                    <button id="clearFilters" class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-all duration-300">
+                    <button id="clearFilters" class="px-4 py-3 sm:py-3.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 active:bg-gray-300 transition-all duration-300 text-sm sm:text-base font-medium min-h-[48px] touch-manipulation active:scale-95">
                         Clear Filters
                     </button>
                 </div>
             </div>
         </div>
 
-
+        <!-- Programs Table - Desktop View -->
         <div class="hidden lg:block bg-white rounded-xl shadow-lg overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200">
@@ -1213,18 +1214,18 @@ console.log('Department programs map created for departments:', Object.keys(depa
                         </tr>
                     </thead>
                     <tbody id="programsTableBody" class="bg-white divide-y divide-gray-200">
-                   
+                        <!-- Programs will be populated by JavaScript -->
                     </tbody>
                 </table>
             </div>
         </div>
 
-   
+        <!-- Mobile Cards View -->
         <div class="lg:hidden space-y-4" id="mobileProgramsContainer">
-       
+            <!-- Mobile cards will be populated by JavaScript -->
         </div>
 
-    
+        <!-- No Results Message -->
         <div id="noResults" class="hidden text-center py-12">
             <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.29-1.009-5.824-2.5M15 6.5a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -1233,12 +1234,12 @@ console.log('Department programs map created for departments:', Object.keys(depa
             <p class="mt-1 text-sm text-gray-500">Try adjusting your search or filter criteria.</p>
         </div>
 
- 
-        <div class="mt-4 flex justify-between items-center text-sm text-gray-600">
-            <div id="resultsCount">Showing all programs</div>
+        <!-- Results Summary - Mobile Optimized -->
+        <div class="mt-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4 text-xs sm:text-sm text-gray-600 px-2">
+            <div id="resultsCount" class="font-medium">Showing all programs</div>
             <div class="flex items-center space-x-2">
-                <span>Rows per page:</span>
-                <select id="rowsPerPage" class="px-2 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-msu-main-color focus:border-msu-main-color">
+                <span class="text-xs sm:text-sm">Rows:</span>
+                <select id="rowsPerPage" class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-msu-main-color focus:border-msu-main-color text-sm min-h-[44px] touch-manipulation">
                     <option value="10">10</option>
                     <option value="25" selected>25</option>
                     <option value="50">50</option>
@@ -1247,14 +1248,14 @@ console.log('Department programs map created for departments:', Object.keys(depa
             </div>
         </div>
 
-  
-        <div id="pagination" class="mt-6 flex justify-center">
-           
+        <!-- Pagination - Mobile Optimized -->
+        <div id="pagination" class="mt-4 sm:mt-6 flex justify-center overflow-x-auto pb-2">
+            <!-- Pagination will be generated by JavaScript -->
         </div>
 
     </div> 
 
-</section> -->
+</section>
 
 <script define:vars={{ programsData, departmentProgramsMap }}>
     // Pass Sanity data to client-side JavaScript
@@ -6733,6 +6734,352 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<script>
+// Programs Table Functionality
+// Data will be populated from server-side
+let programsData = [];
+
+let currentPage = 1;
+let rowsPerPage = 25;
+let currentSort = { column: 'program', direction: 'asc' };
+let filteredData = [];
+
+// Function to initialize programs data (data is already loaded server-side)
+function initializeProgramsData() {
+    try {
+        console.log('=== CLIENT-SIDE INITIALIZATION ===');
+        console.log('Initializing programs data...');
+        console.log('window.serverProgramsData exists:', !!(window as any).serverProgramsData);
+        console.log('window.serverProgramsData value:', (window as any).serverProgramsData);
+        
+        // Get data from window variable injected by Astro
+        if ((window as any).serverProgramsData) {
+            console.log('Parsing server data...');
+            programsData = JSON.parse((window as any).serverProgramsData);
+            console.log('Loaded server-side programsData:', programsData);
+            console.log('ProgramsData length:', programsData.length);
+            console.log('ProgramsData type:', typeof programsData);
+            console.log('First program:', programsData[0]);
+        } else {
+            console.log('No server-side data found, using empty array');
+            programsData = [];
+        }
+        
+        // If no data is found, show empty state
+        if (programsData.length === 0) {
+            console.log('No programs data found - will show empty state');
+        }
+        
+        // Data is now available
+        filteredData = [...programsData];
+        console.log('Filtered data initialized:', filteredData);
+        return true;
+    } catch (error) {
+        console.error('Error initializing programs data:', error);
+        programsData = [];
+        filteredData = [];
+        return false;
+    }
+}
+
+function initProgramsTable() {
+    const tableBody = document.getElementById('programsTableBody');
+    const mobileContainer = document.getElementById('mobileProgramsContainer');
+    const globalSearch = document.getElementById('globalSearch');
+    const degreeFilter = document.getElementById('degreeFilter');
+    const levelFilter = document.getElementById('levelFilter');
+    const clearFilters = document.getElementById('clearFilters');
+    const rowsPerPageSelect = document.getElementById('rowsPerPage');
+    const resultsCount = document.getElementById('resultsCount');
+    const noResults = document.getElementById('noResults');
+
+    // Render table (Desktop)
+    function renderTable() {
+        const startIndex = (currentPage - 1) * rowsPerPage;
+        const endIndex = startIndex + rowsPerPage;
+        const pageData = filteredData.slice(startIndex, endIndex);
+
+        if (pageData.length === 0) {
+            tableBody.innerHTML = '';
+            mobileContainer.innerHTML = '';
+            noResults.classList.remove('hidden');
+            return;
+        }
+
+        noResults.classList.add('hidden');
+        
+        // Desktop table view
+        tableBody.innerHTML = pageData.map(program => `
+            <tr class="hover:bg-gray-50 transition-colors duration-200">
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <div class="text-sm font-medium text-gray-900">${program.program}</div>
+                    <div class="text-sm text-gray-500">${program.description}</div>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-msu-main-color/10 text-msu-main-color">
+                        ${program.degree}
+                    </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${program.level}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${program.duration}</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                        ${program.accreditation}
+                    </span>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                    ${program.fileUrl ? 
+                        `<button onclick="openPDFViewer('${program.fileUrl}', '${program.name}')" class="text-msu-main-color hover:text-msu-deep-ocean transition-colors duration-200 cursor-pointer">
+                            View Details
+                        </button>` : 
+                        `<span class="text-gray-400">No file available</span>`
+                    }
+                </td>
+            </tr>
+        `).join('');
+
+        // Mobile card view
+        mobileContainer.innerHTML = pageData.map(program => `
+            <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <div class="p-6">
+                    <!-- Program Header -->
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-lg font-bold text-msu-main-color leading-tight">${program.program}</h3>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-msu-main-color/10 text-msu-main-color ml-2 flex-shrink-0">
+                            ${program.degree}
+                        </span>
+                    </div>
+                    
+                    <!-- Description -->
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed">${program.description}</p>
+                    
+                    <!-- Program Details Grid -->
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div class="bg-gray-50 rounded-lg p-3">
+                            <div class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-1">Level</div>
+                            <div class="text-sm font-semibold text-gray-900">${program.level}</div>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-3">
+                            <div class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-1">Duration</div>
+                            <div class="text-sm font-semibold text-gray-900">${program.duration}</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Accreditation -->
+                    <div class="mb-4">
+                        <div class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                            <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            ${program.accreditation}
+                        </div>
+                    </div>
+                    
+                    <!-- Action Button -->
+                    <div class="flex justify-end">
+                        ${program.fileUrl ? 
+                            `<button onclick="openPDFViewer('${program.fileUrl}', '${program.name}')" class="inline-flex items-center px-4 py-2 bg-msu-main-color text-white text-sm font-medium rounded-lg hover:bg-msu-deep-ocean transition-colors duration-200 shadow-sm hover:shadow-md cursor-pointer">
+                                View Details
+                                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                </svg>
+                            </button>` : 
+                            `<span class="inline-flex items-center px-4 py-2 bg-gray-300 text-gray-500 text-sm font-medium rounded-lg cursor-not-allowed">
+                                No file available
+                            </span>`
+                        }
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
+        // Update results count
+        resultsCount.textContent = `Showing ${startIndex + 1}-${Math.min(endIndex, filteredData.length)} of ${filteredData.length} programs`;
+    }
+
+    // Filter and search
+    function filterData() {
+        const searchTerm = (globalSearch as HTMLInputElement).value.toLowerCase();
+        const degreeFilterValue = (degreeFilter as HTMLSelectElement).value;
+        const levelFilterValue = (levelFilter as HTMLSelectElement).value;
+
+        filteredData = programsData.filter(program => {
+            const matchesSearch = !searchTerm || 
+                program.program.toLowerCase().includes(searchTerm) ||
+                program.description.toLowerCase().includes(searchTerm) ||
+                program.degree.toLowerCase().includes(searchTerm) ||
+                program.level.toLowerCase().includes(searchTerm);
+
+            const matchesDegree = !degreeFilterValue || program.degree === degreeFilterValue;
+            const matchesLevel = !levelFilterValue || program.level === levelFilterValue;
+
+            return matchesSearch && matchesDegree && matchesLevel;
+        });
+
+        currentPage = 1;
+        renderTable();
+        renderPagination();
+    }
+
+    // Sort data
+    function sortData(column) {
+        if (currentSort.column === column) {
+            currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+        } else {
+            currentSort.column = column;
+            currentSort.direction = 'asc';
+        }
+
+        filteredData.sort((a, b) => {
+            let aVal = a[column];
+            let bVal = b[column];
+
+            if (typeof aVal === 'string') {
+                aVal = aVal.toLowerCase();
+                bVal = bVal.toLowerCase();
+            }
+
+            if (currentSort.direction === 'asc') {
+                return aVal > bVal ? 1 : -1;
+            } else {
+                return aVal < bVal ? 1 : -1;
+            }
+        });
+
+        renderTable();
+    }
+
+    // Render pagination - Mobile Optimized
+    function renderPagination() {
+        const totalPages = Math.ceil(filteredData.length / rowsPerPage);
+        const pagination = document.getElementById('pagination');
+
+        if (totalPages <= 1) {
+            pagination.innerHTML = '';
+            return;
+        }
+
+        let paginationHTML = '<nav class="flex items-center space-x-1 sm:space-x-2">';
+        
+        // Previous button - Mobile Optimized
+        paginationHTML += `
+            <button onclick="changePage(${currentPage - 1})" 
+                    ${currentPage === 1 ? 'disabled' : ''} 
+                    class="px-2 sm:px-3 py-2 sm:py-2.5 text-xs sm:text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px] touch-manipulation active:scale-95 transition-all">
+                <span class="hidden sm:inline">Previous</span>
+                <span class="sm:hidden">←</span>
+            </button>
+        `;
+
+        // Page numbers
+        const startPage = Math.max(1, currentPage - 2);
+        const endPage = Math.min(totalPages, currentPage + 2);
+
+        if (startPage > 1) {
+            paginationHTML += `<button onclick="changePage(1)" class="px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium text-gray-500 bg-white border border-gray-300 hover:bg-gray-50 min-h-[44px] min-w-[44px] touch-manipulation active:scale-95 transition-all">1</button>`;
+            if (startPage > 2) {
+                paginationHTML += '<span class="px-1 sm:px-2 py-2 text-xs sm:text-sm font-medium text-gray-500">...</span>';
+            }
+        }
+
+        for (let i = startPage; i <= endPage; i++) {
+            paginationHTML += `
+                <button onclick="changePage(${i})" 
+                        class="px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium ${i === currentPage ? 'text-white bg-msu-main-color border-msu-main-color' : 'text-gray-500 bg-white border-gray-300 hover:bg-gray-50'} border min-h-[44px] min-w-[44px] touch-manipulation active:scale-95 transition-all">
+                    ${i}
+                </button>
+            `;
+        }
+
+        if (endPage < totalPages) {
+            if (endPage < totalPages - 1) {
+                paginationHTML += '<span class="px-1 sm:px-2 py-2 text-xs sm:text-sm font-medium text-gray-500">...</span>';
+            }
+            paginationHTML += `<button onclick="changePage(${totalPages})" class="px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium text-gray-500 bg-white border border-gray-300 hover:bg-gray-50 min-h-[44px] min-w-[44px] touch-manipulation active:scale-95 transition-all">${totalPages}</button>`;
+        }
+
+        // Next button - Mobile Optimized
+        paginationHTML += `
+            <button onclick="changePage(${currentPage + 1})" 
+                    ${currentPage === totalPages ? 'disabled' : ''} 
+                    class="px-2 sm:px-3 py-2 sm:py-2.5 text-xs sm:text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px] touch-manipulation active:scale-95 transition-all">
+                <span class="hidden sm:inline">Next</span>
+                <span class="sm:hidden">→</span>
+            </button>
+        `;
+
+        paginationHTML += '</nav>';
+        pagination.innerHTML = paginationHTML;
+    }
+
+    // Change page
+    (window as any).changePage = function(page: number) {
+        const totalPages = Math.ceil(filteredData.length / rowsPerPage);
+        if (page >= 1 && page <= totalPages) {
+            currentPage = page;
+            renderTable();
+            renderPagination();
+        }
+    };
+
+    // Event listeners
+    globalSearch.addEventListener('input', filterData);
+    degreeFilter.addEventListener('change', filterData);
+    levelFilter.addEventListener('change', filterData);
+    rowsPerPageSelect.addEventListener('change', (e) => {
+        rowsPerPage = parseInt((e.target as HTMLSelectElement).value);
+        currentPage = 1;
+        renderTable();
+        renderPagination();
+    });
+
+    clearFilters.addEventListener('click', () => {
+        (globalSearch as HTMLInputElement).value = '';
+        (degreeFilter as HTMLSelectElement).value = '';
+        (levelFilter as HTMLSelectElement).value = '';
+        filterData();
+    });
+
+    // Sort event listeners
+    document.querySelectorAll('[data-sort]').forEach(header => {
+        header.addEventListener('click', () => {
+            sortData((header as HTMLElement).dataset.sort);
+        });
+    });
+
+    // Initial render
+    renderTable();
+    renderPagination();
+}
+
+// Initialize programs table when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    const success = initializeProgramsData();
+    if (success) {
+        initProgramsTable();
+    } else {
+        console.error('Failed to load programs data');
+        // Show error message to user
+        const tableBody = document.getElementById('programsTableBody');
+        const mobileContainer = document.getElementById('mobileProgramsContainer');
+        const noResults = document.getElementById('noResults');
+        
+        if (tableBody) tableBody.innerHTML = '';
+        if (mobileContainer) mobileContainer.innerHTML = '';
+        if (noResults) {
+            noResults.classList.remove('hidden');
+            noResults.innerHTML = `
+                <svg class="mx-auto h-12 w-12 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                </svg>
+                <h3 class="mt-2 text-sm font-medium text-gray-900">Failed to load programs</h3>
+                <p class="mt-1 text-sm text-gray-500">Please refresh the page to try again.</p>
+            `;
+        }
+    }
+});
+</script>
+
 
 	
 
@@ -7250,11 +7597,22 @@ document.addEventListener('DOMContentLoaded', function() {
 							<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
 								<div class="max-w-xl">
 									<!-- <p class="uppercase tracking-[0.35em] text-xs md:text-sm text-white/80 mb-3">Faculty Spotlight</p> -->
-									<h3 class="text-2xl md:text-3xl font-bold leading-snug">Post-Harvest Fisheries Department</h3>
-									<p class="mt-4 text-sm md:text-base text-white/90">
-										Championing sustainable post-harvest innovations that protect the value of marine resources and support resilient coastal communities.
-									</p>
-									<div class="mt-6 flex flex-wrap gap-3">
+								<h3 class="text-2xl md:text-3xl font-bold leading-snug">Post-Harvest Fisheries Department</h3>
+								<p class="mt-4 text-sm md:text-base text-white/90">
+									Championing sustainable post-harvest innovations that protect the value of marine resources and support resilient coastal communities.
+								</p>
+								<div class="mt-4 flex items-center gap-4">
+									<img src="/images/coed/Profile/msufaculty.png" alt="Asst. Prof. Merilyn Q. Amlani" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
+									<div>
+										<p class="text-sm md:text-base text-white/95 font-medium">
+											<strong>Chairperson:</strong> Asst. Prof. Merilyn Q. Amlani, M.Sc.
+										</p>
+										<p class="text-xs md:text-sm text-white/80 mt-1">
+											Post-Harvest Fisheries Department (PHFD)
+										</p>
+									</div>
+								</div>
+								<div class="mt-6 flex flex-wrap gap-3">
 										<button
 											type="button"
 											class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
@@ -7344,11 +7702,22 @@ document.addEventListener('DOMContentLoaded', function() {
 						<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
 							<div class="max-w-xl">
 								<!-- <p class="uppercase tracking-[0.35em] text-xs md:text-sm text-white/80 mb-3">Faculty Spotlight</p> -->
-								<h3 class="text-2xl md:text-3xl font-bold leading-snug">Food Science and Technology Department</h3>
-								<p class="mt-4 text-sm md:text-base text-white/90">
-									Driving fisheries-based food innovation, quality assurance, and value-added processing that uplift the region’s blue economy.
-								</p>
-							<div class="mt-6 flex flex-wrap gap-3">
+							<h3 class="text-2xl md:text-3xl font-bold leading-snug">Food Science and Technology Department</h3>
+							<p class="mt-4 text-sm md:text-base text-white/90">
+								Driving fisheries-based food innovation, quality assurance, and value-added processing that uplift the region's blue economy.
+							</p>
+							<div class="mt-4 flex items-center gap-4">
+								<img src="/images/coed/Profile/msufaculty.png" alt="Asst. Prof. Merilyn Q. Amlani" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
+								<div>
+									<p class="text-sm md:text-base text-white/95 font-medium">
+										<strong>Chairperson:</strong> Asst. Prof. Merilyn Q. Amlani, M.Sc.
+									</p>
+									<p class="text-xs md:text-sm text-white/80 mt-1">
+										Food Science and Technology Department (FSTD)
+									</p>
+								</div>
+							</div>
+						<div class="mt-6 flex flex-wrap gap-3">
 								<button
 									type="button"
 									class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
@@ -7441,11 +7810,22 @@ document.addEventListener('DOMContentLoaded', function() {
 						<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3C/svg%3E')] bg-cover bg-center"></div>
 						<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
 							<div class="max-w-xl">
-								<h3 class="text-2xl md:text-3xl font-bold leading-snug">Capture Fisheries Department</h3>
-								<p class="mt-4 text-sm md:text-base text-white/90">
-									Advancing sustainable capture fisheries, marine biodiversity protection, and resilient coastal livelihoods across the archipelago.
-								</p>
-								<div class="mt-6 flex flex-wrap gap-3">
+							<h3 class="text-2xl md:text-3xl font-bold leading-snug">Capture Fisheries Department</h3>
+							<p class="mt-4 text-sm md:text-base text-white/90">
+								Advancing sustainable capture fisheries, marine biodiversity protection, and resilient coastal livelihoods across the archipelago.
+							</p>
+							<div class="mt-4 flex items-center gap-4">
+								<img src="/images/coed/Profile/msufaculty.png" alt="Asst. Prof. Jurmin H. Sarri" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
+								<div>
+									<p class="text-sm md:text-base text-white/95 font-medium">
+										<strong>Chairperson:</strong> Asst. Prof. Jurmin H. Sarri, M.Sc.
+									</p>
+									<p class="text-xs md:text-sm text-white/80 mt-1">
+										Capture Fisheries Department (CFD)
+									</p>
+								</div>
+							</div>
+							<div class="mt-6 flex flex-wrap gap-3">
 									<button
 										type="button"
 										class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
@@ -7553,11 +7933,22 @@ document.addEventListener('DOMContentLoaded', function() {
 						<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3C/svg%3E')] bg-cover bg-center"></div>
 						<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
 							<div class="max-w-xl">
-								<h3 class="text-2xl md:text-3xl font-bold leading-snug">Aquaculture Department</h3>
-								<p class="mt-4 text-sm md:text-base text-white/90">
-									Strengthening aquaculture innovation, fish health management, and community-based production systems for sustainable blue growth.
-								</p>
-								<div class="mt-6 flex flex-wrap gap-3">
+							<h3 class="text-2xl md:text-3xl font-bold leading-snug">Aquaculture Department</h3>
+							<p class="mt-4 text-sm md:text-base text-white/90">
+								Strengthening aquaculture innovation, fish health management, and community-based production systems for sustainable blue growth.
+							</p>
+							<div class="mt-4 flex items-center gap-4">
+								<img src="/images/coed/Profile/msufaculty.png" alt="Asst. Prof. Albaris B. Tahiluddin" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
+								<div>
+									<p class="text-sm md:text-base text-white/95 font-medium">
+										<strong>Chairperson:</strong> Asst. Prof. Albaris B. Tahiluddin, Ph.D.
+									</p>
+									<p class="text-xs md:text-sm text-white/80 mt-1">
+										Aquaculture Department (AQD)
+									</p>
+								</div>
+							</div>
+							<div class="mt-6 flex flex-wrap gap-3">
 									<button
 										type="button"
 										class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"

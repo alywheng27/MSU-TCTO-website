@@ -320,13 +320,13 @@ try {
 
 						<a 
 
-							href="#programs" 
+							href="#departments" 
 
 							class="group bg-gradient-to-r from-msu-main-color to-msu-deep-ocean hover:from-msu-deep-ocean hover:to-msu-main-color text-white font-bold py-3 px-6 sm:py-4 sm:px-10 rounded-full transition-all duration-500 inline-flex items-center justify-center hover:shadow-2xl hover:-translate-y-2 transform hover:scale-105 text-sm sm:text-base"
 
 						>
 
-							<span class="relative z-10">Explore Programs</span>
+							<span class="relative z-10">Explore Faculty & Academic Programs</span>
 
 							<svg class="w-5 h-5 sm:w-6 sm:h-6 ml-2 sm:ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 
@@ -338,15 +338,15 @@ try {
 
 						</a>
 
-						<a 
+						<!-- <a 
 
-							href="#facultySpotlight" 
+							href="#departments" 
 
 							class="group bg-white/10 hover:bg-white/20 border-2 border-white/40 text-white font-bold py-3 px-6 sm:py-4 sm:px-10 rounded-full transition-all duration-500 inline-flex items-center justify-center hover:shadow-2xl hover:-translate-y-2 transform hover:scale-105 backdrop-blur-sm text-sm sm:text-base"
 
 						>
 
-							<span class="relative z-10">Faculty Spotlight</span>
+							<span class="relative z-10">Departments</span>
 
 							<svg class="w-5 h-5 sm:w-6 sm:h-6 ml-2 sm:ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 
@@ -355,14 +355,14 @@ try {
 							</svg>
 
 						</a>
-
+-->
 						<a 
 
 							href="#contact" 
 
 							class="group bg-transparent border-2 border-white hover:border-msu-deep-ocean text-white font-bold py-3 px-6 sm:py-4 sm:px-10 rounded-full transition-all duration-500 inline-flex items-center justify-center hover:shadow-2xl hover:-translate-y-2 transform hover:scale-105 backdrop-blur-sm text-sm sm:text-base"
 
-						>
+						> 
 
 							<span class="relative z-10">Contact Us</span>
 
@@ -413,6 +413,37 @@ try {
 			</div>
 
 		</section>
+
+		<!-- Department Programs Modal -->
+		<div
+			id="departmentProgramsModal"
+			class="fixed inset-0 z-50 hidden items-start justify-center sm:items-center px-3 py-6 sm:px-6 lg:px-8 overflow-y-auto"
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="departmentProgramsModalTitle"
+		>
+			<div class="absolute inset-0 bg-black/70 backdrop-blur-sm department-modal-overlay" aria-hidden="true"></div>
+			<div class="relative w-full max-w-4xl mx-auto flex max-h-[calc(100vh-3rem)] flex-col bg-white text-gray-900 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden">
+				<div class="flex items-center justify-between px-5 sm:px-6 py-4 sm:py-5 border-b border-gray-200 bg-gradient-to-r from-msu-main-color/10 to-msu-deep-ocean/10">
+					<div class="space-y-2">
+						<span class="text-xs uppercase tracking-[0.28em] text-msu-deep-ocean/70">Academic Programs</span>
+						<h2 id="departmentProgramsModalTitle" class="text-2xl font-bold text-msu-deep-ocean">Department Academic Programs</h2>
+					</div>
+					<button
+						type="button"
+						class="department-modal-close p-2 rounded-full text-gray-600 hover:text-white hover:bg-msu-deep-ocean transition-colors"
+						aria-label="Close modal"
+					>
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+						</svg>
+					</button>
+				</div>
+				<div id="departmentProgramsModalBody" class="flex-1 px-5 sm:px-6 py-5 sm:py-6 space-y-6 overflow-y-auto max-h-[calc(100vh-7rem)] sm:max-h-[75vh]">
+					<!-- Dynamic department content -->
+				</div>
+			</div>
+		</div>
 
 
 
@@ -986,7 +1017,7 @@ try {
 
 
 <!-- Programs Section with Cards -->
-
+<!-- 
 <section id="programs" class="py-20 bg-white">
 
     <div class="container mx-auto px-6">
@@ -1005,10 +1036,10 @@ try {
 
 
 
-        <!-- Search and Filter Controls -->
+      
         <div class="mb-8">
             <div class="flex flex-col lg:flex-row gap-4 items-center justify-between">
-                <!-- Global Search -->
+              
                 <div class="relative w-full lg:w-96">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1023,7 +1054,7 @@ try {
                     >
                 </div>
 
-                <!-- Filter Controls -->
+      
                 <div class="flex flex-wrap gap-3">
                     <select id="degreeFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-msu-main-color focus:border-msu-main-color transition-all duration-300">
                         <option value="">All Degrees</option>
@@ -1046,7 +1077,7 @@ try {
             </div>
         </div>
 
-        <!-- Programs Table - Desktop View -->
+
         <div class="hidden lg:block bg-white rounded-xl shadow-lg overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200">
@@ -1088,18 +1119,17 @@ try {
                         </tr>
                     </thead>
                     <tbody id="programsTableBody" class="bg-white divide-y divide-gray-200">
-                        <!-- Programs will be populated by JavaScript -->
+     
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- Mobile Cards View -->
+
         <div class="lg:hidden space-y-4" id="mobileProgramsContainer">
-            <!-- Mobile cards will be populated by JavaScript -->
+      
         </div>
 
-        <!-- No Results Message -->
         <div id="noResults" class="hidden text-center py-12">
             <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.29-1.009-5.824-2.5M15 6.5a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -1108,7 +1138,7 @@ try {
             <p class="mt-1 text-sm text-gray-500">Try adjusting your search or filter criteria.</p>
         </div>
 
-        <!-- Results Summary -->
+
         <div class="mt-4 flex justify-between items-center text-sm text-gray-600">
             <div id="resultsCount">Showing all programs</div>
             <div class="flex items-center space-x-2">
@@ -1122,14 +1152,13 @@ try {
             </div>
         </div>
 
-        <!-- Pagination -->
         <div id="pagination" class="mt-6 flex justify-center">
-            <!-- Pagination will be generated by JavaScript -->
+
         </div>
 
     </div> 
 
-</section>
+</section> -->
 
 <script define:vars={{ programsData }}>
     // Pass Sanity data to client-side JavaScript
@@ -2431,10 +2460,19 @@ function toggleFacultyView() {
 
 // Faculty Search Functionality
 document.addEventListener('DOMContentLoaded', function() {
-	const facultySearchInput = document.getElementById('facultySearch');
+	// Get the visible search input (in Personnel Spotlight section, not the hidden one)
+	const allSearchInputs = document.querySelectorAll('#facultySearch');
+	const facultySearchInput = Array.from(allSearchInputs).find(input => {
+		const section = (input as HTMLElement).closest('section');
+		return section && !section.classList.contains('hidden');
+	}) as HTMLInputElement | null || document.getElementById('facultySearch') as HTMLInputElement | null;
+	
 	const clearFacultySearchBtn = document.getElementById('clearFacultySearch');
 	const facultySearchResults = document.getElementById('facultySearchResults');
 	const facultyResultsCount = document.getElementById('facultyResultsCount');
+	const facultyResultsList = document.getElementById('facultyResultsList');
+	const facultySearchMatches = document.getElementById('facultySearchMatches');
+	const facultySearchMatchesGrid = document.getElementById('facultySearchMatchesGrid');
 	const showMoreBtn = document.getElementById('showMoreBtn');
 	const facultyGrid = document.getElementById('facultyGrid');
 	
@@ -2456,8 +2494,13 @@ document.addEventListener('DOMContentLoaded', function() {
 		'julambri': { name: 'Dayang Farha L. Julambri', position: 'Faculty Member', specialization: ['Database Systems', 'Multimedia', 'Computer Programming', 'Graphic Design'] }
 	};
 	
-	// Get all faculty cards
-	const allFacultyCards = facultyGrid.querySelectorAll('.bg-white.rounded-xl.shadow-lg');
+	// Get all faculty cards - query from document to ensure we find them even if grid is in hidden section
+	const allFacultyCards = facultyGrid ? Array.from(facultyGrid.querySelectorAll('.bg-white.rounded-xl.shadow-lg')) : Array.from(document.querySelectorAll('#facultyGrid .bg-white.rounded-xl.shadow-lg'));
+	
+	if (allFacultyCards.length === 0) {
+		console.warn('No faculty cards found. Make sure facultyGrid exists and contains cards.');
+		return;
+	}
 	
 	// Create a map of faculty cards by their modal ID
 	const facultyCardMap = new Map();
@@ -2467,19 +2510,33 @@ document.addEventListener('DOMContentLoaded', function() {
 			const onclickAttr = button.getAttribute('onclick');
 			const match = onclickAttr.match(/openFacultyModal\('([^']+)'\)/);
 			if (match && match[1]) {
-				facultyCardMap.set(match[1], card);
+				const facultyId = match[1];
+				const cardElement = card as HTMLElement;
+				facultyCardMap.set(facultyId, card);
+				cardElement.dataset.facultyId = facultyId;
 			}
 		}
 	});
 	
+	function escapeHtml(text: string): string {
+		const div = document.createElement('div');
+		div.textContent = text;
+		return div.innerHTML;
+	}
+
 	function filterFaculty(searchTerm) {
 		searchTerm = searchTerm.toLowerCase().trim();
 		
 		let visibleCount = 0;
-		let matchedCards = [];
+		const matchedEntries = [];
 		
 		// If search is empty, show all cards in default state
 		if (!searchTerm) {
+			// Show the original faculty grid
+			if (facultyGrid) {
+				facultyGrid.classList.remove('hidden');
+			}
+			
 			// Reset to default view
 			allFacultyCards.forEach((card, index) => {
 				card.classList.remove('hidden');
@@ -2502,43 +2559,181 @@ document.addEventListener('DOMContentLoaded', function() {
 			
 			// Hide search results
 			if (facultySearchResults) facultySearchResults.classList.add('hidden');
+			if (facultyResultsCount) facultyResultsCount.textContent = '';
+			if (facultyResultsList) facultyResultsList.innerHTML = '';
+			if (facultySearchMatchesGrid) facultySearchMatchesGrid.innerHTML = '';
+			if (facultySearchMatches) facultySearchMatches.classList.add('hidden');
 			if (clearFacultySearchBtn) clearFacultySearchBtn.classList.add('hidden');
 			
 			return;
 		}
 		
+		// Hide the original faculty grid when searching
+		if (facultyGrid) {
+			facultyGrid.classList.add('hidden');
+		}
+
 		// Filter faculty based on search term
 		facultyCardMap.forEach((card, facultyId) => {
+			const cardElement = card as HTMLElement;
 			const facultyData = facultySearchData[facultyId];
-			if (!facultyData) return;
-			
-			const searchableText = [
-				facultyData.name,
-				facultyData.position,
-				...facultyData.specialization
-			].join(' ').toLowerCase();
-			
-			if (searchableText.includes(searchTerm)) {
-				card.classList.remove('hidden');
-				(card as HTMLElement).style.display = '';
-				matchedCards.push(card);
-				visibleCount++;
+			let matches = false;
+			let entryData = facultyData;
+
+			if (facultyData) {
+				const searchableText = [
+					facultyData.name,
+					facultyData.position,
+					...(facultyData.specialization || [])
+				].join(' ').toLowerCase();
+				matches = searchableText.includes(searchTerm);
+			}
+
+			if (!matches) {
+				const cardName = cardElement.querySelector('h3')?.textContent || '';
+				const cardPosition = cardElement.querySelector('.text-gray-300.text-sm')?.textContent || '';
+				const cardSpecialization = cardElement.querySelector('.flex.items-center.mb-4 span')?.textContent || '';
+				const cardDescription = cardElement.querySelector('.text-msu-main-color.dark\\:text-msu-bgc-color.mb-4')?.textContent || '';
+				
+				const searchableText = [
+					cardName,
+					cardPosition,
+					cardSpecialization,
+					cardDescription
+				].join(' ').toLowerCase();
+				
+				if (searchableText.includes(searchTerm)) {
+					matches = true;
+					entryData = {
+						name: cardName.trim(),
+						position: cardPosition.trim(),
+						department: cardElement.dataset.department || 'CCS',
+						specialization: cardSpecialization ? [cardSpecialization.trim()] : []
+					};
+				}
+			}
+
+			if (matches) {
+				cardElement.classList.add('hidden');
+				cardElement.style.display = 'none';
+				visibleCount += 1;
+				matchedEntries.push({
+					id: facultyId,
+					card: cardElement,
+					data: entryData
+				});
 			} else {
-				card.classList.add('hidden');
-				(card as HTMLElement).style.display = 'none';
+				cardElement.classList.add('hidden');
+				cardElement.style.display = 'none';
 			}
 		});
 		
 		// Update results counter
+		if (facultyResultsCount) {
+			facultyResultsCount.innerHTML = '';
+		}
+		if (facultyResultsList) {
+			facultyResultsList.innerHTML = '';
+		}
+		if (facultySearchMatchesGrid) {
+			facultySearchMatchesGrid.innerHTML = '';
+		}
+		if (facultySearchMatches) {
+			facultySearchMatches.classList.add('hidden');
+		}
+
 		if (facultySearchResults && facultyResultsCount) {
 			if (visibleCount === 0) {
 				facultyResultsCount.innerHTML = '<span class="text-red-500">No faculty members found</span>';
 				facultySearchResults.classList.remove('hidden');
-			} else if (visibleCount === allFacultyCards.length) {
-				facultySearchResults.classList.add('hidden');
 			} else {
-				facultyResultsCount.innerHTML = `Showing <span class="font-semibold text-msu-main-color">${visibleCount}</span> of <span class="font-semibold">${allFacultyCards.length}</span> faculty members`;
+				facultyResultsCount.innerHTML = `Showing <span class="font-semibold text-msu-main-color dark:text-yellow-400">${visibleCount}</span> faculty member${visibleCount === 1 ? '' : 's'}`;
 				facultySearchResults.classList.remove('hidden');
+			}
+		}
+
+		// Build grouped results list
+		if (facultyResultsList && matchedEntries.length && visibleCount !== allFacultyCards.length) {
+			const groupedEntries = new Map();
+
+			matchedEntries.forEach(entry => {
+				const department = (entry.data && entry.data.department) || entry.card.dataset.department || 'CCS';
+				if (!groupedEntries.has(department)) {
+					groupedEntries.set(department, []);
+				}
+				groupedEntries.get(department)?.push(entry);
+			});
+
+			let resultsHtml = '';
+			groupedEntries.forEach((entries, department) => {
+				const sortedEntries = entries.slice().sort((a, b) => {
+					const nameA = ((a.data && a.data.name) || a.card.querySelector('h3')?.textContent || '').toLowerCase();
+					const nameB = ((b.data && b.data.name) || b.card.querySelector('h3')?.textContent || '').toLowerCase();
+					return nameA.localeCompare(nameB);
+				});
+
+				const chipsHtml = sortedEntries.map(entry => {
+					const name = escapeHtml((entry.data && entry.data.name) || entry.card.querySelector('h3')?.textContent || 'Faculty Member');
+					const position = escapeHtml((entry.data && entry.data.position) || entry.card.querySelector('.text-gray-300.text-sm')?.textContent || '');
+					const positionHtml = position ? `<span class="text-xs text-gray-500 dark:text-gray-400 sm:ml-1">${position}</span>` : '';
+					return `<button type="button" class="inline-flex flex-col sm:flex-row sm:items-center sm:gap-1 px-3 py-1.5 rounded-full border border-gray-300 dark:border-gray-600 text-sm text-msu-deep-ocean dark:text-yellow-300 bg-white dark:bg-gray-800 hover:bg-msu-deep-ocean hover:text-white transition-colors duration-200" data-faculty-id="${entry.id}"><span class="font-semibold">${name}</span>${positionHtml}</button>`;
+				}).join('');
+
+				resultsHtml += `<div class="bg-white dark:bg-gray-900/70 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 shadow-sm">
+					<p class="text-xs font-semibold uppercase tracking-wide text-msu-deep-ocean dark:text-yellow-300">${escapeHtml(department)}</p>
+					<div class="mt-2 flex flex-wrap gap-2">${chipsHtml}</div>
+				</div>`;
+			});
+
+			facultyResultsList.innerHTML = resultsHtml;
+		}
+
+		// Render matching cards below the search area
+		if (facultySearchMatches && facultySearchMatchesGrid) {
+			if (visibleCount > 0) {
+				facultySearchMatchesGrid.innerHTML = '';
+				matchedEntries.forEach(entry => {
+					const clone = entry.card.cloneNode(true) as HTMLElement;
+					clone.classList.remove('hidden');
+					clone.style.display = '';
+					clone.removeAttribute('id');
+					clone.setAttribute('data-faculty-id', entry.id);
+					facultySearchMatchesGrid.appendChild(clone);
+				});
+
+				const matchImages = facultySearchMatchesGrid.querySelectorAll<HTMLImageElement>('.lazy-image');
+				if ('IntersectionObserver' in window) {
+					const observer = new IntersectionObserver((entries, observerInstance) => {
+						entries.forEach(entry => {
+							if (entry.isIntersecting) {
+								const img = entry.target as HTMLImageElement;
+								img.classList.add('loaded');
+								(img as HTMLElement).style.opacity = '1';
+								observerInstance.unobserve(img);
+							}
+						});
+					}, {
+						rootMargin: '50px 0px',
+						threshold: 0.01
+					});
+
+					matchImages.forEach(img => {
+						if (!img.classList.contains('loaded')) {
+							(img as HTMLElement).style.opacity = '0';
+							observer.observe(img);
+						}
+					});
+				} else {
+					matchImages.forEach(img => {
+						img.classList.add('loaded');
+						(img as HTMLElement).style.opacity = '1';
+					});
+				}
+
+				facultySearchMatches.classList.remove('hidden');
+			} else {
+				facultySearchMatchesGrid.innerHTML = '';
+				facultySearchMatches.classList.add('hidden');
 			}
 		}
 		
@@ -2581,6 +2776,25 @@ document.addEventListener('DOMContentLoaded', function() {
 			}
 		}
 	});
+
+	// Event listener for clicking on faculty results list items
+	if (facultyResultsList) {
+		facultyResultsList.addEventListener('click', function(event) {
+			const target = (event.target as HTMLElement).closest('button[data-faculty-id]');
+			if (!target) return;
+			event.preventDefault();
+			const facultyId = target.getAttribute('data-faculty-id');
+			if (!facultyId) return;
+			const card = facultyCardMap.get(facultyId);
+			if (!card) return;
+			const cardElement = card as HTMLElement;
+			// Scroll to the matching card in the search results grid
+			const matchingCard = facultySearchMatchesGrid?.querySelector(`[data-faculty-id="${facultyId}"], button[onclick*="openFacultyModal('${facultyId}')"]`)?.closest('.bg-white.rounded-xl.shadow-lg');
+			if (matchingCard) {
+				(matchingCard as HTMLElement).scrollIntoView({ behavior: 'smooth', block: 'center' });
+			}
+		});
+	}
 
 	// Department Banner Functionality
 	const departmentFacultyButtons = Array.from(document.querySelectorAll('.department-faculty-toggle')) as HTMLButtonElement[];
@@ -2828,13 +3042,377 @@ document.addEventListener('DOMContentLoaded', function() {
 		});
 	}
 
+	// Department Programs Modal Functionality
+	const departmentProgramsModal = document.getElementById('departmentProgramsModal');
+	const departmentProgramsModalBody = document.getElementById('departmentProgramsModalBody');
+	const departmentProgramsModalTitle = document.getElementById('departmentProgramsModalTitle');
+	const departmentModalCloseButtons = Array.from(document.querySelectorAll('.department-modal-close')) as HTMLButtonElement[];
+	const departmentModalOverlay = departmentProgramsModal?.querySelector('.department-modal-overlay') as HTMLElement | null;
+
+	const htmlEscapeMap: Record<string, string> = {
+		'&': '&amp;',
+		'<': '&lt;',
+		'>': '&gt;',
+		'"': '&quot;',
+		'\'': '&#39;'
+	};
+
+	function escapeHtml(value: unknown): string {
+		return (value == null ? '' : String(value)).replace(/[&<>"']/g, (char) => htmlEscapeMap[char as keyof typeof htmlEscapeMap] || char);
+	}
+
+	const departmentProgramsData = (() => {
+		const rawMap = (window as any).departmentProgramsMap;
+		if (!rawMap) return {};
+		try {
+			const parsed = JSON.parse(rawMap);
+			return parsed && typeof parsed === 'object' ? parsed : {};
+		} catch (error) {
+			console.error('Error parsing department programs map:', error);
+			return {};
+		}
+	})();
+
+	const fallbackProgramsData = (() => {
+		const raw = (window as any).serverProgramsData;
+		if (!raw) return [];
+		try {
+			const parsed = JSON.parse(raw);
+			return Array.isArray(parsed) ? parsed : [];
+		} catch (error) {
+			console.error('Error parsing fallback programs data:', error);
+			return [];
+		}
+	})();
+
+	function normalizeDepartmentValue(value: string) {
+		return (value || '')
+			.toLowerCase()
+			.replace(/&/g, 'and')
+			.replace(/\s+/g, ' ')
+			.trim();
+	}
+
+	const departmentDisplayLookup: Record<string, string> = {
+		[normalizeDepartmentValue('IT Department')]: 'IT Department',
+		[normalizeDepartmentValue('Information Technology Department')]: 'IT Department',
+		[normalizeDepartmentValue('CA Department')]: 'CA Department',
+		[normalizeDepartmentValue('Computer Applications Department')]: 'CA Department',
+		[normalizeDepartmentValue('College of Computer Studies')]: 'College of Computer Studies'
+	};
+
+	const resolveDepartmentPrograms = (department: string) => {
+		const normalizedInput = normalizeDepartmentValue(department);
+		const rawSearchLower = (department || '').toLowerCase();
+		
+		// Check if this is IT Department or CA Department
+		const isITDepartment = normalizedInput.includes('it department') || normalizedInput.includes('information technology');
+		const isCADepartment = normalizedInput.includes('ca department') || normalizedInput.includes('computer applications');
+		
+		// First, try to find programs from departmentProgramsData
+		const entries = Object.entries(departmentProgramsData);
+
+		let matchedEntry = entries.find(([key]) => {
+			const normalizedKey = normalizeDepartmentValue(key);
+			return normalizedKey === normalizedInput ||
+				normalizedKey.includes(normalizedInput) ||
+				normalizedInput.includes(normalizedKey);
+		});
+
+		if (!matchedEntry && normalizedInput) {
+			matchedEntry = entries.find(([, programs]) =>
+				Array.isArray(programs) &&
+				programs.some((program: any) => {
+					const normalizedProgramDepartment = normalizeDepartmentValue(program?.department || '');
+					return normalizedProgramDepartment === normalizedInput ||
+						normalizedProgramDepartment.includes(normalizedInput) ||
+						normalizedInput.includes(normalizedProgramDepartment);
+				})
+			);
+		}
+
+		if (matchedEntry) {
+			const [label, programList] = matchedEntry;
+			const programs = Array.isArray(programList) ? programList : [];
+			if (programs.length) {
+				return { label, programs };
+			}
+		}
+
+		// Filter programs from fallbackProgramsData (Sanity CMS data)
+		const fallbackMatches = fallbackProgramsData.filter((program: any) => {
+			if (!program) return false;
+			
+			// Get the program's department
+			const programDepartment = program.department || program.department?.department || '';
+			const normalizedProgramDepartment = normalizeDepartmentValue(programDepartment);
+			
+			// Get program name/title for keyword matching
+			const programName = (program.program || program.name || program.title || '').toLowerCase();
+			
+			// For IT Department or CA Department, match by department name AND program keywords
+			if (isITDepartment || isCADepartment) {
+				// Match IT Department programs
+				if (isITDepartment) {
+					const matchesDepartment = normalizedProgramDepartment.includes('it') || 
+						normalizedProgramDepartment.includes('information technology') ||
+						normalizedProgramDepartment === normalizedInput;
+					
+					// Also match programs with IT-related keywords in their names
+					const itKeywords = ['network', 'database', 'information technology', 'it', 'networking', 'systems'];
+					const matchesKeywords = itKeywords.some(keyword => programName.includes(keyword));
+					
+					return matchesDepartment || matchesKeywords;
+				}
+				// Match CA Department programs
+				if (isCADepartment) {
+					const matchesDepartment = normalizedProgramDepartment.includes('ca') || 
+						normalizedProgramDepartment.includes('computer applications') ||
+						normalizedProgramDepartment === normalizedInput;
+					
+					// Also match programs with CA-related keywords in their names
+					const caKeywords = ['embedded', 'computer applications', 'ca', 'iot', 'internet of things', 'applications'];
+					const matchesKeywords = caKeywords.some(keyword => programName.includes(keyword));
+					
+					return matchesDepartment || matchesKeywords;
+				}
+			}
+			
+			// For other departments, use the original matching logic
+			const candidates = [
+				program.department,
+				program.department?.department,
+				program.program,
+				program.name,
+				program.title,
+				program.degree,
+				program.degree?.degree,
+				program.level,
+				program.level?.level,
+				program.description
+			];
+			return candidates.some((value) => {
+				if (!value) return false;
+				const text = typeof value === 'string'
+					? value
+					: (value && typeof value === 'object' && 'toString' in value)
+						? String(value)
+						: '';
+				return text.toLowerCase().includes(rawSearchLower) || 
+					normalizedInput.includes(normalizeDepartmentValue(text)) ||
+					normalizeDepartmentValue(text).includes(normalizedInput);
+			});
+		});
+
+		if (fallbackMatches.length) {
+			const fallbackLabel = fallbackMatches[0]?.department?.department ||
+				fallbackMatches[0]?.department ||
+				fallbackMatches[0]?.program ||
+				fallbackMatches[0]?.name ||
+				department;
+			return {
+				label: fallbackLabel || department,
+				programs: fallbackMatches
+			};
+		}
+
+		return {
+			label: department,
+			programs: []
+		};
+	};
+
+	const renderDepartmentPrograms = (department: string) => {
+		if (!departmentProgramsModalBody) return department;
+		const { label, programs } = resolveDepartmentPrograms(department);
+
+		if (!programs.length) {
+			departmentProgramsModalBody.innerHTML = `
+				<div class="text-center py-12">
+					<p class="text-gray-600 text-sm md:text-base">
+						No academic program descriptions available for <span class="font-semibold">${escapeHtml(label)}</span> at the moment.
+					</p>
+				</div>
+			`;
+			return label;
+		}
+
+		const preparedProgramMarkup = programs.map((program: any) => {
+			const safeProgramName = escapeHtml(program?.program || program?.name || '');
+			const safeDegree = program?.degree ? escapeHtml(program.degree) : 'N/A';
+			const safeLevel = program?.level ? escapeHtml(program.level) : 'N/A';
+			const safeDuration = program?.duration ? escapeHtml(program.duration) : 'N/A';
+			const safeAccreditation = program?.accreditation ? escapeHtml(program.accreditation) : '';
+			const safeFileUrl = program?.fileUrl ? escapeHtml(program.fileUrl) : '';
+			const safeDisplayName = escapeHtml(program?.name || program?.program || '');
+			const safeDescription = program?.description
+				? `<p class="mt-2 text-xs md:text-sm text-gray-600 leading-relaxed">${escapeHtml(program.description)}</p>`
+				: '';
+			const accreditationMarkup = safeAccreditation
+				? `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full border border-emerald-200 bg-emerald-50 text-emerald-700 text-xs font-medium">${safeAccreditation}</span>`
+				: `<span class="text-gray-400 text-xs">TBA</span>`;
+			const actionMarkup = safeFileUrl
+				? `<button type="button" onclick="openPDFViewer('${safeFileUrl}', '${safeDisplayName}')" class="inline-flex items-center gap-2 rounded-full border border-[#61063B]/20 bg-[#61063B]/10 px-4 py-2 text-xs font-semibold text-[#61063B] transition-colors duration-200 hover:bg-[#61063B]/20">
+						View Details
+						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+						</svg>
+					</button>`
+				: `<span class="text-gray-400 text-xs">No file</span>`;
+			const mobileAccreditationBadge = safeAccreditation
+				? `<span class="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">${safeAccreditation}</span>`
+				: `<span class="inline-flex items-center rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-xs font-semibold text-gray-500">TBA</span>`;
+			const mobileActionMarkup = safeFileUrl
+				? `<button type="button" onclick="openPDFViewer('${safeFileUrl}', '${safeDisplayName}')" class="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#61063B] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-[#61063B]/90">
+						View Details
+						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+						</svg>
+					</button>`
+				: `<span class="mt-4 block text-center text-xs text-gray-400">No file</span>`;
+
+			return {
+				tableRow: `
+					<tr class="hover:bg-white/60 transition-colors duration-200">
+						<td class="px-5 py-4 align-top">
+							<div class="font-semibold text-sm md:text-base text-[#61063B]">${safeProgramName}</div>
+							${safeDescription}
+						</td>
+						<td class="px-5 py-4 align-top text-sm text-gray-700">${safeDegree}</td>
+						<td class="px-5 py-4 align-top text-sm text-gray-700">${safeLevel}</td>
+						<td class="px-5 py-4 align-top text-sm text-gray-700">${safeDuration}</td>
+						<td class="px-5 py-4 align-top">${accreditationMarkup}</td>
+						<td class="px-5 py-4 align-top text-right">${actionMarkup}</td>
+					</tr>
+				`,
+				mobileCard: `
+					<article class="rounded-2xl border border-gray-200 bg-white/90 p-4 shadow-sm transition-shadow duration-200 hover:shadow-md">
+						<div class="space-y-4">
+							<div>
+								<h3 class="text-base font-semibold text-[#61063B]">${safeProgramName}</h3>
+								${safeDescription}
+							</div>
+							<dl class="space-y-2 text-sm text-gray-600">
+								<div class="flex items-start justify-between gap-4">
+									<dt class="font-medium text-gray-500">Degree</dt>
+									<dd class="text-right text-gray-700">${safeDegree}</dd>
+								</div>
+								<div class="flex items-start justify-between gap-4">
+									<dt class="font-medium text-gray-500">Level</dt>
+									<dd class="text-right text-gray-700">${safeLevel}</dd>
+								</div>
+								<div class="flex items-start justify-between gap-4">
+									<dt class="font-medium text-gray-500">Duration</dt>
+									<dd class="text-right text-gray-700">${safeDuration}</dd>
+								</div>
+								<div class="flex items-start justify-between gap-4">
+									<dt class="font-medium text-gray-500">Accreditation</dt>
+									<dd class="text-right">${mobileAccreditationBadge}</dd>
+								</div>
+							</dl>
+							${mobileActionMarkup}
+						</div>
+					</article>
+				`
+			};
+		});
+
+		const tableRowsMarkup = preparedProgramMarkup.map((entry) => entry.tableRow).join('');
+		const mobileCardsMarkup = preparedProgramMarkup.map((entry) => entry.mobileCard).join('');
+
+		departmentProgramsModalBody.innerHTML = `
+			<div class="space-y-5">
+				<div class="flex flex-wrap items-center justify-between gap-3">
+					<p class="text-sm text-gray-600">Showing <span class="font-semibold text-[#61063B]">${programs.length}</span> academic program${programs.length === 1 ? '' : 's'}</p>
+				</div>
+				<div class="hidden sm:block overflow-x-auto rounded-2xl border border-gray-200 bg-white/80 backdrop-blur">
+					<table class="min-w-full divide-y divide-gray-200 text-sm text-gray-700">
+						<thead class="bg-[#61063B]/90 text-white text-xs uppercase tracking-wide">
+							<tr>
+								<th scope="col" class="px-5 py-3 text-left font-semibold">Program Name</th>
+								<th scope="col" class="px-5 py-3 text-left font-semibold">Degree Type</th>
+								<th scope="col" class="px-5 py-3 text-left font-semibold">Level</th>
+								<th scope="col" class="px-5 py-3 text-left font-semibold">Duration</th>
+								<th scope="col" class="px-5 py-3 text-left font-semibold">Accreditation</th>
+								<th scope="col" class="px-5 py-3 text-right font-semibold">Actions</th>
+							</tr>
+						</thead>
+						<tbody class="divide-y divide-gray-200 bg-white">
+							${tableRowsMarkup}
+						</tbody>
+					</table>
+				</div>
+				<div class="sm:hidden space-y-4">
+					${mobileCardsMarkup}
+				</div>
+			</div>
+		`;
+
+		return label;
+	};
+
+	const openDepartmentProgramsModal = (department: string) => {
+		if (!departmentProgramsModal) return;
+		const matchedLabel = renderDepartmentPrograms(department);
+		const trimmedRequest = (department || '').trim();
+		const normalizedRequest = normalizeDepartmentValue(trimmedRequest);
+		const trimmedMatched = (matchedLabel || '').trim();
+		const normalizedMatched = normalizeDepartmentValue(trimmedMatched);
+
+		const manualRequestLabel = normalizedRequest ? departmentDisplayLookup[normalizedRequest] : undefined;
+		const manualMatchedLabel = normalizedMatched ? departmentDisplayLookup[normalizedMatched] : undefined;
+
+		let resolvedLabel = manualMatchedLabel || manualRequestLabel || trimmedMatched || trimmedRequest;
+
+		if (normalizedRequest && normalizedMatched) {
+			const labelsMismatch =
+				normalizedMatched !== normalizedRequest &&
+				!normalizedMatched.includes(normalizedRequest) &&
+				!normalizedRequest.includes(normalizedMatched);
+			if (labelsMismatch && !manualMatchedLabel && manualRequestLabel) {
+				resolvedLabel = manualRequestLabel;
+			}
+		}
+
+		if (departmentProgramsModalTitle) {
+			departmentProgramsModalTitle.textContent = resolvedLabel || 'Department Academic Programs';
+		}
+		departmentProgramsModal.classList.remove('hidden');
+		departmentProgramsModal.classList.add('flex');
+		document.body.classList.add('overflow-hidden');
+	};
+
+	const closeDepartmentProgramsModal = () => {
+		if (!departmentProgramsModal) return;
+		departmentProgramsModal.classList.add('hidden');
+		departmentProgramsModal.classList.remove('flex');
+		document.body.classList.remove('overflow-hidden');
+	};
+
+	(window as any).openDepartmentProgramsModal = openDepartmentProgramsModal;
+	(window as any).closeDepartmentProgramsModal = closeDepartmentProgramsModal;
+
+	departmentModalCloseButtons.forEach((button) => {
+		button.addEventListener('click', closeDepartmentProgramsModal);
+	});
+
+	if (departmentModalOverlay) {
+		departmentModalOverlay.addEventListener('click', closeDepartmentProgramsModal);
+	}
+
+	document.addEventListener('keydown', (event) => {
+		if (event.key === 'Escape' && departmentProgramsModal && !departmentProgramsModal.classList.contains('hidden')) {
+			closeDepartmentProgramsModal();
+		}
+	});
+
 	// Event listeners for department program toggle buttons
 	if (departmentProgramButtons.length) {
 		departmentProgramButtons.forEach((button) => {
 			button.addEventListener('click', (event) => {
 				event.preventDefault();
-				// Program modal functionality can be added here if needed
-				console.log('View programs for:', button.dataset.department);
+				const department = button.dataset.department || '';
+				openDepartmentProgramsModal(department);
 			});
 		});
 	}
@@ -3474,145 +4052,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							</div>
 						</div>
 
-						<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 sm:gap-8">
-							<div class="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-xl p-5 sm:p-6">
-								<div class="flex items-center mb-4">
-									<svg class="w-6 h-6 sm:w-8 sm:h-8 text-msu-deep-ocean dark:text-yellow-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-									</svg>
-									<h4 class="text-lg sm:text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Software Engineering & Intelligent Systems</h4>
-								</div>
-								<ul class="space-y-2 text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">&bull;</span>
-										<span>
-											<strong>Associate Prof. Nerico L. Mingoc, MSIT</strong> - Dean, CCS | Chairperson BSIT
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Human-Computer Interaction • Gamification • IT Project Management</span>
-										</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">&bull;</span>
-										<span>
-											<strong>Al-Kadra A. Antao</strong> - Instructor I
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Multimedia • Artificial Intelligence • Computer Vision</span>
-										</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">&bull;</span>
-										<span>
-											<strong>Ramat B. Hailaya</strong> - Instructor II
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Database Systems • Software Development • Internet of Things</span>
-										</span>
-									</li>
-								</ul>
-							</div>
-
-							<div class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-gray-800 dark:to-gray-700 rounded-xl p-5 sm:p-6">
-								<div class="flex items-center mb-4">
-									<svg class="w-6 h-6 sm:w-8 sm:h-8 text-msu-deep-ocean dark:text-yellow-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
-									</svg>
-									<h4 class="text-lg sm:text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Cybersecurity & Network Systems</h4>
-								</div>
-								<ul class="space-y-2 text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">&bull;</span>
-										<span>
-											<strong>Romeo L. Pañares Jr.</strong> - Chairperson, BSCA
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Cybersecurity • Wireless Networking • Embedded Systems</span>
-										</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">&bull;</span>
-										<span>
-											<strong>Abdul-Aziz J. Tiblan</strong> - Instructor I
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Networking • Network Security • IoT</span>
-										</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">&bull;</span>
-										<span>
-											<strong>Engr. Irene A. Bakili</strong> - University Registrar
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Wireless Networking • Embedded Systems • Digital Logic Design</span>
-										</span>
-									</li>
-								</ul>
-							</div>
-
-							<div class="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-800 dark:to-gray-700 rounded-xl p-5 sm:p-6">
-								<div class="flex items-center mb-4">
-									<svg class="w-6 h-6 sm:w-8 sm:h-8 text-msu-deep-ocean dark:text-yellow-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 11h16M4 15h16M4 19h16"></path>
-									</svg>
-									<h4 class="text-lg sm:text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Digital Transformation & ICT Leadership</h4>
-								</div>
-								<ul class="space-y-2 text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">&bull;</span>
-										<span>
-											<strong>Associate Prof. Charisa F. Llema-Abalie, MSIT</strong> - Director, ICTO
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Mobile Programming • Internet of Things • Cloud Computing</span>
-										</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">&bull;</span>
-										<span>
-											<strong>Associate Prof. Joseph V. Andas</strong> - Director for Administration
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Educational Technology • ICT Integration • Basic IT</span>
-										</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">&bull;</span>
-										<span>
-											<strong>Engr. Jul-Habir U. Kali</strong> - College Secretary
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Electronics • Automation • Machine Learning • Networking</span>
-										</span>
-									</li>
-								</ul>
-							</div>
-
-							<div class="bg-gradient-to-br from-orange-50 to-red-50 dark:from-gray-800 dark:to-gray-700 rounded-xl p-5 sm:p-6">
-								<div class="flex items-center mb-4">
-									<svg class="w-6 h-6 sm:w-8 sm:h-8 text-msu-deep-ocean dark:text-yellow-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-									</svg>
-									<h4 class="text-lg sm:text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Human-Centered Computing & Data Experience</h4>
-								</div>
-								<ul class="space-y-2 text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">&bull;</span>
-										<span>
-											<strong>Fadzlorrahiem H. Uddin</strong> - Instructor I
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Human-Computer Interaction • UX Design • Information Systems</span>
-										</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">&bull;</span>
-										<span>
-											<strong>Dayang Farha L. Julambri</strong> - Faculty Member
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Database Systems • Multimedia • Graphic Design</span>
-										</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean dark:text-yellow-400 mr-2 mt-1">&bull;</span>
-										<span>
-											<strong>Estelita Cheng G. Lim</strong> - Faculty Member
-											<span class="block text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">Specializations: Database Management • Computer Programming • Computer Ethics</span>
-										</span>
-									</li>
-								</ul>
-							</div>
-						</div>
-					
-
-						<!-- Call to Action -->
-						<div class="mt-6 sm:mt-8 text-center">
-							<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color mb-4">
-								Explore our <a href="#facultySpotlight" class="text-msu-deep-ocean font-semibold hover:underline">Faculty Spotlight</a> section to learn more about our research leaders and their specializations.
-							</p>
-						</div>
-					</div>
-				</div>
+						
 
 
 		</section>
@@ -3638,6 +4078,17 @@ document.addEventListener('DOMContentLoaded', function() {
 									<p class="mt-4 text-sm md:text-base text-white/90">
 										Leading innovation in information technology through cutting-edge research, advanced teaching methodologies, and industry partnerships that shape the future of digital transformation.
 									</p>
+									<div class="mt-4 flex items-center gap-4">
+										<img src="/images/iict/Profile/NERICO L. MINGOC.jpg" alt="Assoc. Prof. Nerico L. Mingoc, MSIT" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
+										<div>
+											<p class="text-sm md:text-base text-white/95 font-medium">
+												<strong>Chairperson:</strong> Assoc. Prof. Nerico L. Mingoc, MSIT
+											</p>
+											<p class="text-xs md:text-sm text-white/80 mt-1">
+												IT Department
+											</p>
+										</div>
+									</div>
 									<div class="mt-6 flex flex-wrap gap-3">
 										<button
 											type="button"
@@ -3773,6 +4224,17 @@ document.addEventListener('DOMContentLoaded', function() {
 									<p class="mt-4 text-sm md:text-base text-white/90">
 										Advancing computer applications through innovative teaching, practical skills development, and industry-aligned curriculum that prepares students for successful careers in technology.
 									</p>
+									<div class="mt-4 flex items-center gap-4">
+										<img src="/images/iict/Profile/ROMEO L. PAÑARES.jpg" alt="Romeo L. Pañares Jr." class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
+										<div>
+											<p class="text-sm md:text-base text-white/95 font-medium">
+												<strong>Chairperson:</strong> Romeo L. Pañares Jr.
+											</p>
+											<p class="text-xs md:text-sm text-white/80 mt-1">
+												CA Department
+											</p>
+										</div>
+									</div>
 									<div class="mt-6 flex flex-wrap gap-3">
 										<button
 											type="button"
@@ -3846,6 +4308,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				</div>
 			</div>
 		</section>
+
 
 		<!-- Student Life Section - Professional Slider -->
 
@@ -4013,7 +4476,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		<!-- Faculty Spotlight -->
 
-		<section class="py-20 bg-gray-50">
+		<section class="py-20 bg-gray-50 hidden">
 
 			<div class="container mx-auto px-6">
 
@@ -4645,6 +5108,51 @@ document.addEventListener('DOMContentLoaded', function() {
 						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Administrative Aide</p>
 					</div>
 
+				</div>
+
+				<!-- Faculty Search Header -->
+				<div class="mt-12 mb-4 text-center">
+					<h2 class="text-2xl sm:text-3xl font-bold text-msu-main-color dark:text-yellow-300">Faculty Search</h2>
+					<p class="text-sm sm:text-base text-gray-700 dark:text-gray-300 mt-1">
+						Find faculty members by name, position, or area of specialization.
+					</p>
+				</div>
+				<!-- Faculty Search Bar -->
+				<div class="mt-12 sm:mt-16">
+					<div class="max-w-2xl mx-auto">
+						<div class="relative">
+							<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+								<svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+								</svg>
+							</div>
+							<input 
+								type="text" 
+								id="facultySearch" 
+								placeholder="Search faculty by name, position, or specialization..." 
+								class="block w-full pl-12 pr-12 py-4 text-base border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-msu-main-color dark:focus:ring-yellow-400 focus:border-msu-main-color dark:focus:border-yellow-400 transition-all duration-300 shadow-sm hover:shadow-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+							>
+							<button 
+								id="clearFacultySearch" 
+								class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200 hidden"
+								title="Clear search"
+							>
+								<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+								</svg>
+							</button>
+						</div>
+						<!-- Search Results Counter -->
+						<div id="facultySearchResults" class="mt-3 text-sm text-gray-600 dark:text-gray-400 hidden">
+							<p id="facultyResultsCount" class="text-center"></p>
+							<div id="facultyResultsList" class="mt-3 space-y-3"></div>
+						</div>
+						<div id="facultyDepartmentNotice" class="hidden mt-4 text-center text-msu-main-color dark:text-yellow-300 font-semibold"></div>
+						<div id="facultySearchMatches" class="mt-8 hidden">
+							<h3 class="text-lg font-semibold text-msu-main-color dark:text-yellow-300 text-center mb-4">Matching Faculty Members</h3>
+							<div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3" id="facultySearchMatchesGrid"></div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -6412,11 +6920,11 @@ document.head.appendChild(style);
 			<div class="container mx-auto px-6 text-center space-y-6">
 				<h2 class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">Discover the Minds Behind CCS Innovation</h2>
 				<p class="text-sm sm:text-base md:text-lg max-w-3xl mx-auto text-white/80">
-					Explore our Faculty Spotlight section to learn more about our research leaders and their specializations. Dive into their publications, projects, and collaborations that empower the College of Computer Studies.
+					Explore our departments to learn more about our research leaders and their specializations. Dive into their publications, projects, and collaborations that empower the College of Computer Studies.
 				</p>
 				<div>
-					<a href="#facultySpotlight" class="inline-flex items-center gap-2 bg-white text-msu-deep-ocean font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-						Meet Our Faculty
+					<a href="#departments" class="inline-flex items-center gap-2 bg-white text-msu-deep-ocean font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+						View Departments
 						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
 						</svg>
