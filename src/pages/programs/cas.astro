@@ -355,7 +355,7 @@ try {
 
 						>
 
-							<span class="relative z-10">Faculty Spotlight</span>
+							<span class="relative z-10">Departments</span>
 
 							<svg class="w-5 h-5 sm:w-6 sm:h-6 ml-2 sm:ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 
@@ -473,6 +473,43 @@ try {
 			</div>
 
 		</section>
+
+		<!-- Department Programs Modal -->
+		<div
+			id="departmentProgramsModal"
+			class="fixed inset-0 z-50 hidden items-start justify-center sm:items-center px-3 py-6 sm:px-6 lg:px-8 overflow-y-auto"
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="departmentProgramsModalTitle"
+		>
+			<div class="absolute inset-0 bg-black/70 backdrop-blur-sm department-modal-overlay" aria-hidden="true"></div>
+			<div class="relative w-full max-w-4xl mx-auto flex max-h-[calc(100vh-3rem)] flex-col bg-white text-gray-900 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden">
+				<div class="flex items-center justify-between px-5 sm:px-6 py-4 sm:py-5 border-b border-gray-200 bg-gradient-to-r from-msu-main-color/10 to-msu-deep-ocean/10">
+					<div class="space-y-2">
+						<span class="text-xs uppercase tracking-[0.28em] text-msu-deep-ocean/70">Academic Programs</span>
+						<h2 id="departmentProgramsModalTitle" class="text-2xl font-bold text-msu-deep-ocean">College of Arts and Sciences</h2>
+						<div
+							id="departmentProgramsModalSubtitle"
+							class="inline-flex items-center gap-2 rounded-full border border-[#61063B]/20 bg-[#61063B]/10 px-3 py-1 text-sm font-semibold text-[#61063B] shadow-sm transition-opacity duration-200 hidden"
+							role="status"
+							aria-live="polite"
+						></div>
+					</div>
+					<button
+						type="button"
+						class="department-modal-close p-2 rounded-full text-gray-600 hover:text-white hover:bg-msu-deep-ocean transition-colors"
+						aria-label="Close modal"
+					>
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+						</svg>
+					</button>
+				</div>
+				<div id="departmentProgramsModalBody" class="flex-1 px-5 sm:px-6 py-5 sm:py-6 space-y-6 overflow-y-auto max-h-[calc(100vh-7rem)] sm:max-h-[75vh]">
+					<!-- Dynamic department content -->
+				</div>
+			</div>
+		</div>
 
 
 
@@ -743,12 +780,6 @@ try {
 											<svg class="w-4 h-4 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
 											</svg>
-											<span><strong>Department of Office Administration:</strong> administrative systems, professional competencies, workplace readiness</span>
-										</div>
-										<div class="flex items-start">
-											<svg class="w-4 h-4 text-blue-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-											</svg>
 											<span><strong>Department of Management:</strong> organizational strategy, entrepreneurship, innovation</span>
 										</div>
 									</div>
@@ -1008,11 +1039,10 @@ try {
 
 							</div>
 
-							<div class="text-8xl font-bold mb-4 counter" data-target="236">0</div>
+							<div class="text-8xl font-bold mb-4 counter" data-target="1605">0</div>
 
 							<div class="text-3xl font-semibold mb-3">Students Enrolled</div>
-
-							<div class="text-xl text-gray-300 mt-2">Active learners across all programs</div>
+							<div class="text-xl text-gray-300 mt-2">Overall learners who enrolled in these programs</div>
 
 						</div>
 
@@ -1177,7 +1207,7 @@ try {
 
 
 <!-- Programs Section with Cards -->
-
+<!-- 
 <section id="programs" class="py-20 bg-white">
 
     <div class="container mx-auto px-6">
@@ -1196,10 +1226,9 @@ try {
 
 
 
-        <!-- Search and Filter Controls -->
         <div class="mb-8">
             <div class="flex flex-col lg:flex-row gap-4 items-center justify-between">
-                <!-- Global Search -->
+      
                 <div class="relative w-full lg:w-96">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1214,7 +1243,7 @@ try {
                     >
                 </div>
 
-                <!-- Filter Controls -->
+      
                 <div class="flex flex-wrap gap-3">
                     <select id="degreeFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-msu-main-color focus:border-msu-main-color transition-all duration-300">
                         <option value="">All Degrees</option>
@@ -1237,7 +1266,6 @@ try {
             </div>
         </div>
 
-        <!-- Programs Table - Desktop View -->
         <div class="hidden lg:block bg-white rounded-xl shadow-lg overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200">
@@ -1279,18 +1307,18 @@ try {
                         </tr>
                     </thead>
                     <tbody id="programsTableBody" class="bg-white divide-y divide-gray-200">
-                        <!-- Programs will be populated by JavaScript -->
+    
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- Mobile Cards View -->
+   
         <div class="lg:hidden space-y-4" id="mobileProgramsContainer">
-            <!-- Mobile cards will be populated by JavaScript -->
+    
         </div>
 
-        <!-- No Results Message -->
+
         <div id="noResults" class="hidden text-center py-12">
             <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.29-1.009-5.824-2.5M15 6.5a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -1299,7 +1327,7 @@ try {
             <p class="mt-1 text-sm text-gray-500">Try adjusting your search or filter criteria.</p>
         </div>
 
-        <!-- Results Summary -->
+
         <div class="mt-4 flex justify-between items-center text-sm text-gray-600">
             <div id="resultsCount">Showing all programs</div>
             <div class="flex items-center space-x-2">
@@ -1313,17 +1341,16 @@ try {
             </div>
         </div>
 
-        <!-- Pagination -->
         <div id="pagination" class="mt-6 flex justify-center">
-            <!-- Pagination will be generated by JavaScript -->
+       
         </div>
 
     </div> 
 
-</section>
+</section> -->
 
 <!-- Static Programs Overview Section -->
-<section class="py-12 sm:py-16 md:py-20 bg-gray-50 dark:bg-gray-800">
+<!-- <section class="py-12 sm:py-16 md:py-20 bg-gray-50 dark:bg-gray-800">
     <div class="container mx-auto px-4 sm:px-6">
         <div class="text-center mb-12">
             <h2 class="text-3xl font-bold mb-4 text-[#61063B] dark:text-msu-bgc-color">CAS Academic Programs Overview</h2>
@@ -1333,7 +1360,7 @@ try {
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <!-- Graduate Programs -->
+
             <div class="bg-white dark:bg-gray-700 rounded-xl shadow-lg p-6">
                 <div class="flex items-center mb-6">
                     <div class="bg-gradient-to-r from-msu-main-color to-msu-deep-ocean p-3 rounded-lg mr-4">
@@ -1361,7 +1388,6 @@ try {
                 </div>
             </div>
 
-            <!-- Undergraduate Programs -->
             <div class="bg-white dark:bg-gray-700 rounded-xl shadow-lg p-6">
                 <div class="flex items-center mb-6">
                     <div class="bg-gradient-to-r from-msu-deep-ocean to-msu-bgc-color p-3 rounded-lg mr-4">
@@ -1410,7 +1436,7 @@ try {
             </div>
         </div>
 
-        <!-- Diploma Program -->
+
         <div class="mt-8">
             <div class="bg-gradient-to-r from-msu-main-color to-msu-deep-ocean rounded-xl shadow-lg p-6 text-white">
                 <div class="flex items-center mb-4">
@@ -1431,7 +1457,7 @@ try {
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 <script define:vars={{ programsData }}>
     // Pass Sanity data to client-side JavaScript
@@ -2477,6 +2503,22 @@ function openFacultyModal(facultyId) {
 			accomplishments: [],
 			description: "Associate Prof. Abdulhamid A. Eldani is an Associate Professor I specializing in History. He holds BSEd Major In Mathematics, Minor in English, Master of Arts in Islamic Studies , and Doctor of Philosophy in Philippine Studies."
 		},
+		bation: {
+			name: "Mr. Abel Gumera Bation",
+			position: "Faculty",
+			rank: "Instructor I",
+			image: "/images/cas/Profile/BATION.png",
+			education: [
+				"Bachelor of Arts in History",
+				"Master in History (Ongoing)"
+			],
+			specialization: [
+				"History"
+			],
+			publications: [],
+			accomplishments: [],
+			description: "Mr. Abel Gumera Bation is an Instructor I specializing in History. He holds a Bachelor of Arts in History and is currently pursuing Master in History."
+		},
 		tambihasan: {
 			name: "Assistant Prof. Ajilma Majid Tambihasan",
 			position: "Faculty",
@@ -3290,7 +3332,7 @@ function openPersonnelModal(personnelId) {
 		ibnosali: {
 			name: "Annahar Hadjiula Ibnosali",
 			position: "Staff",
-			rank: "Agricultural Technician I",
+			rank: "Aquacultural Technician I",
 			image: "/images/cas/Staff/IBNOSALI.png",
 			education: [
 				"Bachelor of Science in Biology"
@@ -3299,7 +3341,7 @@ function openPersonnelModal(personnelId) {
 				"Biology"
 			],
 			awards: [],
-			description: "Annahar Hadjiula Ibnosali is an Agricultural Technician I with a Bachelor of Science in Biology. She specializes in Biology and supports agricultural and technical operations within the college."
+			description: "Annahar Hadjiula Ibnosali is an Aquacultural Technician I with a Bachelor of Science in Biology. She specializes in Biology and supports aquacultural and technical operations within the college."
 		},
 		abdul_staff: {
 			name: "Saidata Bakil Abdul",
@@ -4232,10 +4274,16 @@ document.addEventListener('DOMContentLoaded', function() {
 	const clearFacultySearchBtn = document.getElementById('clearFacultySearch');
 	const facultySearchResults = document.getElementById('facultySearchResults');
 	const facultyResultsCount = document.getElementById('facultyResultsCount');
+	const facultyResultsList = document.getElementById('facultyResultsList');
+	const facultySearchMatches = document.getElementById('facultySearchMatches');
+	const facultySearchMatchesGrid = document.getElementById('facultySearchMatchesGrid');
 	const showMoreBtn = document.getElementById('showMoreBtn');
 	const facultyGrid = document.getElementById('facultyGrid');
+	const departmentFacultyButtons = Array.from(document.querySelectorAll('.department-faculty-toggle')) as HTMLButtonElement[];
 	
-	if (!facultySearchInput) return;
+	if (!facultySearchInput || !facultyGrid) return;
+	
+	let activeDepartmentFilter: string | null = null;
 	
 	// Faculty data for search (matching modal data structure)
 	const facultySearchData = {
@@ -4295,6 +4343,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		'celerian': { name: 'Ma. Angelica Esguerra Celerian', position: 'Assistant Professor IV', specialization: ['History'] },
 		'talal': { name: 'Nasiff Saro Talal', position: 'Associate Professor III', specialization: ['History'] },
 		'eldani': { name: 'Abdulhamid A. Eldani', position: 'Associate Professor I', specialization: ['History'] },
+		'bation': { name: 'Abel Gumera Bation', position: 'Instructor I', specialization: ['History'] },
 		'tambihasan': { name: 'Ajilma Majid Tambihasan', position: 'Assistant Professor IV', specialization: ['Public Administration', 'Social Science'] },
 		'leematolo': { name: 'Al-Haniff Lee Matolo', position: 'Associate Professor V', specialization: ['Public Administration'] },
 		'majinji': { name: 'Alzie Abdulgaful Majinji', position: 'Associate Professor V', specialization: ['Public Policy', 'Public Administration'] },
@@ -4341,18 +4390,19 @@ document.addEventListener('DOMContentLoaded', function() {
 		searchTerm = searchTerm.toLowerCase().trim();
 		
 		let visibleCount = 0;
-		let matchedCards = [];
+		const matchedEntries = [];
 		
 		// If search is empty, show all cards in default state
 		if (!searchTerm) {
 			// Reset to default view
 			allFacultyCards.forEach((card, index) => {
-				card.classList.remove('hidden');
-				(card as HTMLElement).style.display = '';
+				const cardElement = card as HTMLElement;
+				cardElement.classList.remove('hidden');
+				cardElement.style.display = '';
 				
 				// Hide additional faculty cards by default
-				if (card.classList.contains('additional-faculty')) {
-					card.classList.add('hidden');
+				if (cardElement.classList.contains('additional-faculty')) {
+					cardElement.classList.add('hidden');
 				}
 			});
 			
@@ -4367,43 +4417,179 @@ document.addEventListener('DOMContentLoaded', function() {
 			
 			// Hide search results
 			if (facultySearchResults) facultySearchResults.classList.add('hidden');
+			if (facultyResultsCount) facultyResultsCount.textContent = '';
+			if (facultyResultsList) facultyResultsList.innerHTML = '';
+			if (facultySearchMatchesGrid) facultySearchMatchesGrid.innerHTML = '';
+			if (facultySearchMatches) facultySearchMatches.classList.add('hidden');
 			if (clearFacultySearchBtn) clearFacultySearchBtn.classList.add('hidden');
-			
 			return;
 		}
-		
+
 		// Filter faculty based on search term
 		facultyCardMap.forEach((card, facultyId) => {
+			const cardElement = card as HTMLElement;
 			const facultyData = facultySearchData[facultyId];
-			if (!facultyData) return;
-			
-			const searchableText = [
-				facultyData.name,
-				facultyData.position,
-				...facultyData.specialization
-			].join(' ').toLowerCase();
-			
-			if (searchableText.includes(searchTerm)) {
-				card.classList.remove('hidden');
-				(card as HTMLElement).style.display = '';
-				matchedCards.push(card);
-				visibleCount++;
+			let matches = false;
+			let entryData = facultyData;
+
+			if (facultyData) {
+				const searchableText = [
+					facultyData.name,
+					facultyData.position,
+					facultyData.department || '',
+					...(facultyData.specialization || [])
+				]
+					.join(' ')
+					.toLowerCase();
+				matches = searchableText.includes(searchTerm);
+			}
+
+			if (!matches) {
+				const cardName = cardElement.querySelector('h3')?.textContent || '';
+				const cardPosition = cardElement.querySelector('.text-gray-300.text-sm')?.textContent || '';
+				const cardSpecialization = cardElement.querySelector('.flex.items-center.mb-4 span')?.textContent || '';
+				const cardDescription = cardElement.querySelector('.text-msu-main-color.dark\\:text-msu-bgc-color.mb-4')?.textContent || '';
+				
+				const searchableText = [
+					cardName,
+					cardPosition,
+					cardSpecialization,
+					cardDescription
+				]
+					.join(' ')
+					.toLowerCase();
+				
+				if (searchableText.includes(searchTerm)) {
+					matches = true;
+					entryData = {
+						name: cardName.trim(),
+						position: cardPosition.trim(),
+						department: cardElement.dataset.department || 'College of Arts and Sciences',
+						specialization: cardSpecialization ? [cardSpecialization.trim()] : []
+					};
+				}
+			}
+
+			if (matches) {
+				cardElement.classList.add('hidden');
+				cardElement.style.display = 'none';
+				visibleCount += 1;
+				matchedEntries.push({
+					id: facultyId,
+					card: cardElement,
+					data: entryData
+				});
 			} else {
-				card.classList.add('hidden');
-				(card as HTMLElement).style.display = 'none';
+				cardElement.classList.add('hidden');
+				cardElement.style.display = 'none';
 			}
 		});
-		
+			
 		// Update results counter
+		if (facultyResultsCount) {
+			facultyResultsCount.innerHTML = '';
+		}
+		if (facultyResultsList) {
+			facultyResultsList.innerHTML = '';
+		}
+		if (facultySearchMatchesGrid) {
+			facultySearchMatchesGrid.innerHTML = '';
+		}
+		if (facultySearchMatches) {
+			facultySearchMatches.classList.add('hidden');
+		}
+
 		if (facultySearchResults && facultyResultsCount) {
 			if (visibleCount === 0) {
 				facultyResultsCount.innerHTML = '<span class="text-red-500">No faculty members found</span>';
 				facultySearchResults.classList.remove('hidden');
-			} else if (visibleCount === allFacultyCards.length) {
-				facultySearchResults.classList.add('hidden');
 			} else {
-				facultyResultsCount.innerHTML = `Showing <span class="font-semibold text-msu-main-color">${visibleCount}</span> of <span class="font-semibold">${allFacultyCards.length}</span> faculty members`;
+				facultyResultsCount.innerHTML = `Showing <span class="font-semibold text-msu-main-color dark:text-yellow-400">${visibleCount}</span> faculty member${visibleCount === 1 ? '' : 's'}`;
 				facultySearchResults.classList.remove('hidden');
+			}
+		}
+
+		// Build grouped results list
+		if (facultyResultsList && matchedEntries.length && visibleCount !== allFacultyCards.length) {
+			const groupedEntries = new Map();
+
+			matchedEntries.forEach(entry => {
+				const department = (entry.data && entry.data.department) || entry.card.dataset.department || 'College of Arts and Sciences';
+				if (!groupedEntries.has(department)) {
+					groupedEntries.set(department, []);
+				}
+				groupedEntries.get(department)?.push(entry);
+			});
+
+			let resultsHtml = '';
+			groupedEntries.forEach((entries, department) => {
+				const sortedEntries = entries.slice().sort((a, b) => {
+					const nameA = ((a.data && a.data.name) || a.card.querySelector('h3')?.textContent || '').toLowerCase();
+					const nameB = ((b.data && b.data.name) || b.card.querySelector('h3')?.textContent || '').toLowerCase();
+					return nameA.localeCompare(nameB);
+				});
+
+				const chipsHtml = sortedEntries.map(entry => {
+					const name = escapeHtml((entry.data && entry.data.name) || entry.card.querySelector('h3')?.textContent || 'Faculty Member');
+					const position = escapeHtml((entry.data && entry.data.position) || entry.card.querySelector('.text-gray-300.text-sm')?.textContent || '');
+					const positionHtml = position ? `<span class="text-xs text-gray-500 dark:text-gray-400 sm:ml-1">${position}</span>` : '';
+					return `<button type="button" class="inline-flex flex-col sm:flex-row sm:items-center sm:gap-1 px-3 py-1.5 rounded-full border border-gray-300 dark:border-gray-600 text-sm text-msu-deep-ocean dark:text-yellow-300 bg-white dark:bg-gray-800 hover:bg-msu-deep-ocean hover:text-white transition-colors duration-200" data-faculty-id="${entry.id}"><span class="font-semibold">${name}</span>${positionHtml}</button>`;
+				}).join('');
+
+				resultsHtml += `<div class="bg-white dark:bg-gray-900/70 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 shadow-sm">
+					<p class="text-xs font-semibold uppercase tracking-wide text-msu-deep-ocean dark:text-yellow-300">${escapeHtml(department)}</p>
+					<div class="mt-2 flex flex-wrap gap-2">${chipsHtml}</div>
+				</div>`;
+			});
+
+			facultyResultsList.innerHTML = resultsHtml;
+		}
+
+		// Render matching cards below the search area
+		if (facultySearchMatches && facultySearchMatchesGrid) {
+			if (visibleCount > 0) {
+				facultySearchMatchesGrid.innerHTML = '';
+				matchedEntries.forEach(entry => {
+					const clone = entry.card.cloneNode(true) as HTMLElement;
+					clone.classList.remove('hidden');
+					clone.style.display = '';
+					clone.removeAttribute('id');
+					facultySearchMatchesGrid.appendChild(clone);
+				});
+
+				const matchImages = facultySearchMatchesGrid.querySelectorAll<HTMLImageElement>('.lazy-image');
+				if ('IntersectionObserver' in window) {
+					const observer = new IntersectionObserver((entries, observerInstance) => {
+						entries.forEach(entry => {
+							if (entry.isIntersecting) {
+								const img = entry.target as HTMLImageElement;
+								img.classList.add('loaded');
+								(img as HTMLElement).style.opacity = '1';
+								observerInstance.unobserve(img);
+							}
+						});
+					}, {
+						rootMargin: '50px 0px',
+						threshold: 0.01
+					});
+
+					matchImages.forEach(img => {
+						if (!img.classList.contains('loaded')) {
+							(img as HTMLElement).style.opacity = '0';
+							observer.observe(img);
+						}
+					});
+				} else {
+					matchImages.forEach(img => {
+						img.classList.add('loaded');
+						(img as HTMLElement).style.opacity = '1';
+					});
+				}
+
+				facultySearchMatches.classList.remove('hidden');
+			}	else {
+				facultySearchMatchesGrid.innerHTML = '';
+				facultySearchMatches.classList.add('hidden');
 			}
 		}
 		
@@ -4424,6 +4610,12 @@ document.addEventListener('DOMContentLoaded', function() {
 	
 	// Event listener for search input
 	facultySearchInput.addEventListener('input', function(e) {
+		if (activeDepartmentFilter) {
+			activeDepartmentFilter = null;
+			if (typeof updateDepartmentButtonsState === 'function') {
+				updateDepartmentButtonsState();
+			}
+		}
 		filterFaculty((e.target as HTMLInputElement).value);
 	});
 	
@@ -4431,6 +4623,12 @@ document.addEventListener('DOMContentLoaded', function() {
 	if (clearFacultySearchBtn) {
 		clearFacultySearchBtn.addEventListener('click', function() {
 			(facultySearchInput as HTMLInputElement).value = '';
+			if (activeDepartmentFilter) {
+				activeDepartmentFilter = null;
+				if (typeof updateDepartmentButtonsState === 'function') {
+					updateDepartmentButtonsState();
+				}
+			}
 			filterFaculty('');
 			facultySearchInput.focus();
 		});
@@ -4446,6 +4644,798 @@ document.addEventListener('DOMContentLoaded', function() {
 			}
 		}
 	});
+
+	// Department Faculty Toggle Functionality
+	const departmentProgramButtons = Array.from(document.querySelectorAll('.department-program-toggle')) as HTMLButtonElement[];
+	let activeProgramDepartment: string | null = null;
+
+	// Department Programs Modal Elements
+	const departmentProgramsModal = document.getElementById('departmentProgramsModal');
+	const departmentProgramsModalBody = document.getElementById('departmentProgramsModalBody');
+	const departmentProgramsModalSubtitle = document.getElementById('departmentProgramsModalSubtitle');
+	const departmentProgramsModalTitle = document.getElementById('departmentProgramsModalTitle');
+	const departmentModalCloseButtons = Array.from(document.querySelectorAll('.department-modal-close')) as HTMLButtonElement[];
+	const departmentModalOverlay = departmentProgramsModal?.querySelector('.department-modal-overlay') as HTMLElement | null;
+
+	// Get academic programs data
+	const bannerProgramsData = (() => {
+		const rawData = (window as any).serverProgramsData;
+		if (!rawData) return [];
+		try {
+			const parsed = JSON.parse(rawData);
+			return Array.isArray(parsed) ? parsed : [];
+		} catch (error) {
+			console.error('Error parsing academic programs data for faculty banners:', error);
+			return [];
+		}
+	})();
+
+	// Department Programs Modal Functions
+	function normalizeDepartmentValue(value: string) {
+		return (value || '')
+			.toLowerCase()
+			.replace(/&/g, 'and')
+			.replace(/\s+/g, ' ')
+			.trim();
+	}
+
+	const departmentDisplayLookup: Record<string, string> = {
+		[normalizeDepartmentValue('Department of Literary and Cultural Studies')]: 'Department of Literary and Cultural Studies',
+		[normalizeDepartmentValue('Department of Languages')]: 'Department of Languages',
+		[normalizeDepartmentValue('Department of Mathematics')]: 'Department of Mathematics',
+		[normalizeDepartmentValue('Department of Statistics')]: 'Department of Statistics',
+		[normalizeDepartmentValue('Department of History')]: 'Department of History',
+		[normalizeDepartmentValue('Department of Public Administration')]: 'Department of Public Administration',
+		[normalizeDepartmentValue('Department of Political Science')]: 'Department of Political Science',
+		[normalizeDepartmentValue('Department of Management')]: 'Department of Management',
+		[normalizeDepartmentValue('College of Arts and Sciences')]: 'College of Arts and Sciences'
+	};
+
+	function resolveDepartmentPrograms(department: string) {
+		const rawSearchLower = (department || '').toLowerCase();
+		const normalizedInput = normalizeDepartmentValue(department);
+
+		const programs = bannerProgramsData.filter((program: any) => {
+			if (!program) return false;
+			const candidates = [
+				program.department,
+				program.department?.department,
+				program.program,
+				program.name,
+				program.title
+			];
+			return candidates.some((value) => {
+				if (!value) return false;
+				const text = typeof value === 'string'
+					? value
+					: (value && typeof value === 'object' && 'toString' in value)
+						? String(value)
+						: '';
+				const normalizedValue = normalizeDepartmentValue(text);
+				return normalizedValue === normalizedInput ||
+					normalizedValue.includes(normalizedInput) ||
+					normalizedInput.includes(normalizedValue) ||
+					text.toLowerCase().includes(rawSearchLower);
+			});
+		});
+
+		return {
+			label: department,
+			programs: programs
+		};
+	}
+
+	function renderDepartmentPrograms(department: string) {
+		if (!departmentProgramsModalBody) return department;
+		const { label, programs } = resolveDepartmentPrograms(department);
+
+		if (!programs.length) {
+			departmentProgramsModalBody.innerHTML = `
+				<div class="text-center py-12">
+					<p class="text-gray-600 text-sm md:text-base">
+						No academic program descriptions available for <span class="font-semibold">${escapeHtml(label)}</span> at the moment.
+					</p>
+				</div>
+			`;
+			return label;
+		}
+
+		const preparedProgramMarkup = programs.map((program: any) => {
+			const safeProgramName = escapeHtml(program?.program || program?.name || '');
+			const safeDegree = program?.degree ? escapeHtml(program.degree) : 'N/A';
+			const safeLevel = program?.level ? escapeHtml(program.level) : 'N/A';
+			const safeDuration = program?.duration ? escapeHtml(program.duration) : 'N/A';
+			const safeAccreditation = program?.accreditation ? escapeHtml(program.accreditation) : '';
+			const safeFileUrl = program?.fileUrl ? escapeHtml(program.fileUrl) : '';
+			const safeDisplayName = escapeHtml(program?.name || program?.program || '');
+			const safeDescription = program?.description
+				? `<p class="mt-2 text-xs md:text-sm text-gray-600 leading-relaxed">${escapeHtml(program.description)}</p>`
+				: '';
+			const accreditationMarkup = safeAccreditation
+				? `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full border border-emerald-200 bg-emerald-50 text-emerald-700 text-xs font-medium">${safeAccreditation}</span>`
+				: `<span class="text-gray-400 text-xs">TBA</span>`;
+			const actionMarkup = safeFileUrl
+				? `<button type="button" onclick="openPDFViewer('${safeFileUrl}', '${safeDisplayName}')" class="inline-flex items-center gap-2 rounded-full border border-[#61063B]/20 bg-[#61063B]/10 px-4 py-2 text-xs font-semibold text-[#61063B] transition-colors duration-200 hover:bg-[#61063B]/20">
+						View Details
+						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+						</svg>
+					</button>`
+				: `<span class="text-gray-400 text-xs">No file</span>`;
+			const mobileAccreditationBadge = safeAccreditation
+				? `<span class="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">${safeAccreditation}</span>`
+				: `<span class="inline-flex items-center rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-xs font-semibold text-gray-500">TBA</span>`;
+			const mobileActionMarkup = safeFileUrl
+				? `<button type="button" onclick="openPDFViewer('${safeFileUrl}', '${safeDisplayName}')" class="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#61063B] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-[#61063B]/90">
+						View Details
+						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+						</svg>
+					</button>`
+				: `<span class="mt-4 block text-center text-xs text-gray-400">No file</span>`;
+
+			return {
+				tableRow: `
+					<tr class="hover:bg-white/60 transition-colors duration-200">
+						<td class="px-5 py-4 align-top">
+							<div class="font-semibold text-sm md:text-base text-[#61063B]">${safeProgramName}</div>
+							${safeDescription}
+						</td>
+						<td class="px-5 py-4 align-top text-sm text-gray-700">${safeDegree}</td>
+						<td class="px-5 py-4 align-top text-sm text-gray-700">${safeLevel}</td>
+						<td class="px-5 py-4 align-top text-sm text-gray-700">${safeDuration}</td>
+						<td class="px-5 py-4 align-top">${accreditationMarkup}</td>
+						<td class="px-5 py-4 align-top text-right">${actionMarkup}</td>
+					</tr>
+				`,
+				mobileCard: `
+					<article class="rounded-2xl border border-gray-200 bg-white/90 p-4 shadow-sm transition-shadow duration-200 hover:shadow-md">
+						<div class="space-y-4">
+							<div>
+								<h3 class="text-base font-semibold text-[#61063B]">${safeProgramName}</h3>
+								${safeDescription}
+							</div>
+							<dl class="space-y-2 text-sm text-gray-600">
+								<div class="flex items-start justify-between gap-4">
+									<dt class="font-medium text-gray-500">Degree</dt>
+									<dd class="text-right text-gray-700">${safeDegree}</dd>
+								</div>
+								<div class="flex items-start justify-between gap-4">
+									<dt class="font-medium text-gray-500">Level</dt>
+									<dd class="text-right text-gray-700">${safeLevel}</dd>
+								</div>
+								<div class="flex items-start justify-between gap-4">
+									<dt class="font-medium text-gray-500">Duration</dt>
+									<dd class="text-right text-gray-700">${safeDuration}</dd>
+								</div>
+								<div class="flex items-start justify-between gap-4">
+									<dt class="font-medium text-gray-500">Accreditation</dt>
+									<dd class="text-right">${mobileAccreditationBadge}</dd>
+								</div>
+							</dl>
+							${mobileActionMarkup}
+						</div>
+					</article>
+				`
+			};
+		});
+
+		const tableRowsMarkup = preparedProgramMarkup.map((entry) => entry.tableRow).join('');
+		const mobileCardsMarkup = preparedProgramMarkup.map((entry) => entry.mobileCard).join('');
+
+		departmentProgramsModalBody.innerHTML = `
+			<div class="space-y-5">
+				<div class="flex flex-wrap items-center justify-between gap-3">
+					<p class="text-sm text-gray-600">Showing <span class="font-semibold text-[#61063B]">${programs.length}</span> academic program${programs.length === 1 ? '' : 's'}</p>
+				</div>
+				<div class="hidden sm:block overflow-x-auto rounded-2xl border border-gray-200 bg-white/80 backdrop-blur">
+					<table class="min-w-full divide-y divide-gray-200 text-sm text-gray-700">
+						<thead class="bg-[#61063B]/90 text-white text-xs uppercase tracking-wide">
+							<tr>
+								<th scope="col" class="px-5 py-3 text-left font-semibold">Program Name</th>
+								<th scope="col" class="px-5 py-3 text-left font-semibold">Degree Type</th>
+								<th scope="col" class="px-5 py-3 text-left font-semibold">Level</th>
+								<th scope="col" class="px-5 py-3 text-left font-semibold">Duration</th>
+								<th scope="col" class="px-5 py-3 text-left font-semibold">Accreditation</th>
+								<th scope="col" class="px-5 py-3 text-right font-semibold">Actions</th>
+							</tr>
+						</thead>
+						<tbody class="divide-y divide-gray-200 bg-white">
+							${tableRowsMarkup}
+						</tbody>
+					</table>
+				</div>
+				<div class="sm:hidden space-y-4">
+					${mobileCardsMarkup}
+				</div>
+			</div>
+		`;
+
+		return label;
+	}
+
+	function openDepartmentProgramsModal(department: string) {
+		if (!departmentProgramsModal) return;
+		const matchedLabel = renderDepartmentPrograms(department);
+		const trimmedRequest = (department || '').trim();
+		const normalizedRequest = normalizeDepartmentValue(trimmedRequest);
+		const trimmedMatched = (matchedLabel || '').trim();
+		const normalizedMatched = normalizeDepartmentValue(trimmedMatched);
+
+		const manualRequestLabel = normalizedRequest ? departmentDisplayLookup[normalizedRequest] : undefined;
+		const manualMatchedLabel = normalizedMatched ? departmentDisplayLookup[normalizedMatched] : undefined;
+
+		let resolvedLabel = manualMatchedLabel || manualRequestLabel || trimmedMatched || trimmedRequest;
+
+		if (normalizedRequest && normalizedMatched) {
+			const labelsMismatch =
+				normalizedMatched !== normalizedRequest &&
+				!normalizedMatched.includes(normalizedRequest) &&
+				!normalizedRequest.includes(normalizedMatched);
+			if (labelsMismatch && !manualMatchedLabel && manualRequestLabel) {
+				resolvedLabel = manualRequestLabel;
+			}
+		}
+
+		// Always set title to "College of Arts and Sciences"
+		if (departmentProgramsModalTitle) {
+			departmentProgramsModalTitle.textContent = 'College of Arts and Sciences';
+		}
+		
+		// Hide department name subtitle/banner
+		if (departmentProgramsModalSubtitle) {
+			departmentProgramsModalSubtitle.classList.add('hidden');
+		}
+		departmentProgramsModal.classList.remove('hidden');
+		departmentProgramsModal.classList.add('flex');
+		document.body.classList.add('overflow-hidden');
+	}
+
+	function closeDepartmentProgramsModal() {
+		if (!departmentProgramsModal) return;
+		departmentProgramsModal.classList.add('hidden');
+		departmentProgramsModal.classList.remove('flex');
+		document.body.classList.remove('overflow-hidden');
+	}
+
+	// Make functions available globally
+	(window as any).openDepartmentProgramsModal = openDepartmentProgramsModal;
+	(window as any).closeDepartmentProgramsModal = closeDepartmentProgramsModal;
+
+	// Add event listeners for modal close buttons
+	departmentModalCloseButtons.forEach((button) => {
+		button.addEventListener('click', closeDepartmentProgramsModal);
+	});
+
+	if (departmentModalOverlay) {
+		departmentModalOverlay.addEventListener('click', closeDepartmentProgramsModal);
+	}
+
+	document.addEventListener('keydown', (event) => {
+		if (event.key === 'Escape' && departmentProgramsModal && !departmentProgramsModal.classList.contains('hidden')) {
+			closeDepartmentProgramsModal();
+		}
+	});
+
+	// Map faculty IDs to departments
+	const facultyDepartmentMap: Record<string, string> = {
+		// Department of Literary and Cultural Studies
+		'abdella': 'Department of Literary and Cultural Studies',
+		'abdul': 'Department of Literary and Cultural Studies',
+		'bakun': 'Department of Literary and Cultural Studies',
+		'dino': 'Department of Literary and Cultural Studies',
+		'esmael': 'Department of Literary and Cultural Studies',
+		'hashim': 'Department of Literary and Cultural Studies',
+		'jalil': 'Department of Literary and Cultural Studies',
+		'jumsali': 'Department of Literary and Cultural Studies',
+		'mama': 'Department of Literary and Cultural Studies',
+		'olmodo': 'Department of Literary and Cultural Studies',
+		// Department of Languages
+		'kamlian': 'Department of Languages',
+		'laja': 'Department of Languages',
+		'langoh': 'Department of Languages',
+		'larida': 'Department of Languages',
+		'miguel2': 'Department of Languages',
+		'olaer': 'Department of Languages',
+		'rajik': 'Department of Languages',
+		'salapuddin': 'Department of Languages',
+		'samaniego': 'Department of Languages',
+		'wellms': 'Department of Languages',
+		// Department of Mathematics
+		'AmiruddinRajik': 'Department of Mathematics',
+		'artes': 'Department of Mathematics',
+		'fabillar': 'Department of Mathematics',
+		'hamja': 'Department of Mathematics',
+		'hassan': 'Department of Mathematics',
+		'jal-usman': 'Department of Mathematics',
+		'kamdon': 'Department of Mathematics',
+		'laja2': 'Department of Mathematics',
+		'laja3': 'Department of Mathematics',
+		'langamin2': 'Department of Mathematics',
+		'mohammad': 'Department of Mathematics',
+		// Department of Statistics
+		'langamin': 'Department of Statistics',
+		'nads': 'Department of Statistics',
+		'pon': 'Department of Statistics',
+		'rasid': 'Department of Statistics',
+		'sallil': 'Department of Statistics',
+		// Department of History
+		'bernado': 'Department of History',
+		'abdulhamiid': 'Department of History',
+		'bation': 'Department of History',
+		'romero': 'Department of History',
+		'celerian': 'Department of History',
+		'talal': 'Department of History',
+		'eldani': 'Department of History',
+		// Department of Public Administration
+		'tambihasan': 'Department of Public Administration',
+		'matolo': 'Department of Public Administration',
+		'majinji': 'Department of Public Administration',
+		'sabal': 'Department of Public Administration',
+		'talipan': 'Department of Public Administration',
+		'ondo': 'Department of Public Administration',
+		'adaro': 'Department of Public Administration',
+		'miguel_ibrahim': 'Department of Public Administration',
+		'matolo_mylene': 'Department of Public Administration',
+		'halun': 'Department of Public Administration',
+		// Department of Political Science
+		'sabdul': 'Department of Political Science',
+		'bacol': 'Department of Political Science',
+		'talandig': 'Department of Political Science',
+		'muyong': 'Department of Political Science',
+		'asis_omar': 'Department of Political Science',
+		'turmindig': 'Department of Political Science',
+		'eldani_hamida': 'Department of Political Science',
+		'abraham': 'Department of Political Science',
+		// Department of Management
+		'chua': 'Department of Management',
+		'muharam': 'Department of Management',
+		'caliat': 'Department of Management',
+		'ishmael_ticzon': 'Department of Management',
+		'ahmad': 'Department of Management',
+		'castro': 'Department of Management'
+	};
+
+	// Assign data-department attributes to faculty cards
+	allFacultyCards.forEach(card => {
+		const button = card.querySelector('button[onclick*="openFacultyModal"]');
+		if (button) {
+			const onclickAttr = button.getAttribute('onclick');
+			const match = onclickAttr.match(/openFacultyModal\('([^']+)'\)/);
+			if (match && match[1]) {
+				const facultyId = match[1];
+				const department = facultyDepartmentMap[facultyId];
+				if (department) {
+					(card as HTMLElement).setAttribute('data-department', department);
+					(card as HTMLElement).setAttribute('data-faculty-card', 'true');
+					(card as HTMLElement).setAttribute('data-faculty-id', facultyId);
+				}
+			}
+		}
+	});
+
+	function updateDepartmentButtonsState() {
+		if (!departmentFacultyButtons.length) return;
+		departmentFacultyButtons.forEach((button) => {
+			const department = button.dataset.department || '';
+			const isActive = department === activeDepartmentFilter;
+			button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+			button.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+			const icon = button.querySelector('.department-button-icon') as SVGElement | null;
+			if (icon) {
+				icon.style.transition = 'transform 0.2s ease-in-out';
+				icon.style.transform = isActive ? 'rotate(180deg)' : '';
+			}
+			const banner = button.closest('.faculty-department-banner');
+			const bannerContent = banner?.querySelector('.faculty-banner-content') as HTMLElement | null;
+			if (bannerContent) {
+				const defaultDisplay = bannerContent.dataset.defaultDisplay || (bannerContent.classList.contains('grid') ? 'grid' : 'block');
+				if (!bannerContent.dataset.defaultDisplay) {
+					bannerContent.dataset.defaultDisplay = defaultDisplay;
+				}
+				if (isActive) {
+					bannerContent.classList.remove('hidden');
+					bannerContent.style.display = defaultDisplay;
+				} else {
+					bannerContent.classList.add('hidden');
+					bannerContent.style.display = 'none';
+				}
+			}
+		});
+	}
+
+	function escapeHtml(text: string): string {
+		const div = document.createElement('div');
+		div.textContent = text;
+		return div.innerHTML;
+	}
+
+	function normalizeDepartmentName(value: string) {
+		return (value || '')
+			.toLowerCase()
+			.replace(/&/g, 'and')
+			.replace(/\s+/g, ' ')
+			.trim();
+	}
+
+	function programsMatchDepartment(programDepartment: string, targetDepartment: string) {
+		if (!programDepartment || !targetDepartment) return false;
+		const normalizedProgram = normalizeDepartmentName(programDepartment);
+		const normalizedTarget = normalizeDepartmentName(targetDepartment);
+		return normalizedProgram === normalizedTarget ||
+			normalizedProgram.includes(normalizedTarget) ||
+			normalizedTarget.includes(normalizedProgram);
+	}
+
+	function renderProgramsForDepartment(department: string, container: HTMLElement | null) {
+		if (!container) return;
+		const defaultDisplay = container.dataset.defaultDisplay || 'block';
+		if (!container.dataset.defaultDisplay) {
+			container.dataset.defaultDisplay = defaultDisplay;
+		}
+
+		container.innerHTML = '';
+
+		if (!bannerProgramsData.length) {
+			container.innerHTML = `
+				<div class="bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white/80 text-sm">
+					Academic programs data is currently unavailable. Please try again later.
+				</div>
+			`;
+		} else {
+			const programs = bannerProgramsData.filter((program: any) =>
+				programsMatchDepartment(program?.department, department)
+			);
+
+			if (!programs.length) {
+				container.innerHTML = `
+					<div class="bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white/80 text-sm">
+						No academic programs found for <span class="font-semibold">${escapeHtml(department)}</span>.
+					</div>
+				`;
+			} else {
+				const safeDepartment = escapeHtml(department);
+				const programCountLabel = programs.length === 1 ? 'program' : 'programs';
+				const rowsMarkup = programs.map((program: any) => {
+					const safeProgramName = escapeHtml(program?.program || '');
+					const safeDescription = program?.description
+						? `<p class="text-white/70 text-xs md:text-sm mt-2 leading-relaxed">${escapeHtml(program.description)}</p>`
+						: '';
+					const safeDegree = program?.degree ? escapeHtml(program.degree) : 'N/A';
+					const safeLevel = program?.level ? escapeHtml(program.level) : 'N/A';
+					const safeDuration = program?.duration ? escapeHtml(program.duration) : 'N/A';
+					const safeAccreditation = program?.accreditation ? escapeHtml(program.accreditation) : '';
+					const safeFileUrl = program?.fileUrl ? escapeHtml(program.fileUrl) : '';
+					const safeNameForViewer = escapeHtml(program?.name || program?.program || '');
+					const accreditationMarkup = safeAccreditation
+						? `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full border border-white/30 bg-emerald-300/20 text-emerald-100 text-xs font-medium">${safeAccreditation}</span>`
+						: `<span class="text-white/60 text-xs">TBA</span>`;
+					const actionMarkup = program?.fileUrl
+						? `<button type="button" onclick="openPDFViewer('${safeFileUrl}', '${safeNameForViewer}')" class="inline-flex items-center gap-1 rounded-full border border-white/30 bg-white/10 px-3 py-1.5 text-xs font-medium text-white transition-colors duration-200 hover:bg-white/20">
+								View Details
+								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+								</svg>
+							</button>`
+						: `<span class="text-white/60 text-xs">No file</span>`;
+
+					return `
+						<tr class="hover:bg-white/10 transition-colors duration-200">
+							<td class="px-5 py-4 align-top">
+								<div class="font-semibold">${safeProgramName}</div>
+								${safeDescription}
+							</td>
+							<td class="px-5 py-4 align-top text-sm">${safeDegree}</td>
+							<td class="px-5 py-4 align-top text-sm">${safeLevel}</td>
+							<td class="px-5 py-4 align-top text-sm">${safeDuration}</td>
+							<td class="px-5 py-4 align-top">
+								${accreditationMarkup}
+							</td>
+							<td class="px-5 py-4 align-top text-right">
+								${actionMarkup}
+							</td>
+						</tr>
+					`;
+				}).join('');
+
+				container.innerHTML = `
+					<div class="bg-white/5 border border-white/20 rounded-2xl overflow-hidden backdrop-blur-xl shadow-lg">
+						<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-5 py-4 border-b border-white/15">
+							<div>
+								<p class="uppercase tracking-[0.35em] text-[0.65rem] text-white/70">Academic Programs</p>
+								<h4 class="text-lg font-semibold text-white mt-1">${safeDepartment}</h4>
+							</div>
+							<span class="text-sm text-white/80">${programs.length} ${programCountLabel}</span>
+						</div>
+						<div class="overflow-x-auto">
+							<table class="min-w-full divide-y divide-white/10 text-left text-sm text-white">
+								<thead class="bg-white/10 text-xs uppercase tracking-wider text-white/80">
+									<tr>
+										<th scope="col" class="px-5 py-3 font-semibold">Program</th>
+										<th scope="col" class="px-5 py-3 font-semibold">Degree</th>
+										<th scope="col" class="px-5 py-3 font-semibold">Level</th>
+										<th scope="col" class="px-5 py-3 font-semibold">Duration</th>
+										<th scope="col" class="px-5 py-3 font-semibold">Accreditation</th>
+										<th scope="col" class="px-5 py-3 font-semibold text-right">Action</th>
+									</tr>
+								</thead>
+								<tbody class="divide-y divide-white/10">
+									${rowsMarkup}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				`;
+			}
+		}
+
+		container.classList.remove('hidden');
+		container.style.display = defaultDisplay;
+	}
+
+	function resetProgramsDisplay() {
+		const banners = document.querySelectorAll('.faculty-banner-programs');
+		banners.forEach((container) => {
+			const element = container as HTMLElement;
+			element.innerHTML = '';
+			element.classList.add('hidden');
+			element.style.display = 'none';
+		});
+	}
+
+	function updateProgramsDisplay() {
+		const banners = document.querySelectorAll('.faculty-department-banner');
+		banners.forEach((banner) => {
+			const department = banner.getAttribute('data-department') || '';
+			const programsContainer = banner.querySelector('.faculty-banner-programs') as HTMLElement | null;
+			if (!programsContainer) return;
+
+			const defaultDisplay = programsContainer.dataset.defaultDisplay || (programsContainer.classList.contains('grid') ? 'grid' : 'block');
+			if (!programsContainer.dataset.defaultDisplay) {
+				programsContainer.dataset.defaultDisplay = defaultDisplay;
+			}
+
+			if (!activeProgramDepartment || department !== activeProgramDepartment) {
+				programsContainer.innerHTML = '';
+				programsContainer.classList.add('hidden');
+				programsContainer.style.display = 'none';
+				return;
+			}
+
+			renderProgramsForDepartment(department, programsContainer);
+		});
+	}
+
+	function updateBannerContent(cards: HTMLElement[]) {
+		const banners = document.querySelectorAll('.faculty-department-banner');
+		banners.forEach((banner) => {
+			const department = banner.getAttribute('data-department') || '';
+			const contentContainer = banner.querySelector('.faculty-banner-content') as HTMLElement | null;
+			if (!contentContainer) return;
+			const defaultDisplay = contentContainer.dataset.defaultDisplay || (contentContainer.classList.contains('grid') ? 'grid' : 'block');
+			if (!contentContainer.dataset.defaultDisplay) {
+				contentContainer.dataset.defaultDisplay = defaultDisplay;
+			}
+			const isStaticContent = contentContainer.dataset.staticContent === 'true';
+			if (isStaticContent) {
+				if (!activeDepartmentFilter || department !== activeDepartmentFilter) {
+					contentContainer.classList.add('hidden');
+					contentContainer.style.display = 'none';
+				} else {
+					contentContainer.classList.remove('hidden');
+					contentContainer.style.display = defaultDisplay;
+				}
+				return;
+			}
+			if (!activeDepartmentFilter || department !== activeDepartmentFilter) {
+				contentContainer.innerHTML = '';
+				contentContainer.classList.add('hidden');
+				contentContainer.style.display = 'none';
+				return;
+			}
+			const fragment = document.createDocumentFragment();
+			cards.forEach((card) => {
+				const name = card.querySelector('h3')?.textContent?.trim() || '';
+				const designation = card.querySelector('p.text-gray-300')?.textContent?.trim() || '';
+				const wrapper = document.createElement('div');
+				wrapper.className = 'flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm';
+				wrapper.innerHTML = `
+					<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+					</svg>
+					<div class="leading-tight">
+						<p class="font-semibold">${escapeHtml(name)}</p>
+						${designation ? `<p class="text-white/80 text-sm font-normal">${escapeHtml(designation)}</p>` : ''}
+					</div>
+				`;
+				fragment.appendChild(wrapper);
+			});
+			contentContainer.innerHTML = '';
+			contentContainer.appendChild(fragment);
+			contentContainer.classList.remove('hidden');
+			contentContainer.style.display = defaultDisplay;
+		});
+	}
+
+	function renderFacultyCardsInBanner(department: string, cards: HTMLElement[]) {
+		// Hide all banner card containers first
+		const allBannerContainers = document.querySelectorAll('.faculty-banner-cards-container');
+		allBannerContainers.forEach((container) => {
+			const containerElement = container as HTMLElement;
+			containerElement.classList.add('hidden');
+			const grid = containerElement.querySelector('.grid');
+			if (grid) {
+				grid.innerHTML = '';
+			}
+		});
+
+		// Find the container for this department
+		const bannerContainer = Array.from(allBannerContainers).find((container) => {
+			return container.getAttribute('data-department') === department;
+		}) as HTMLElement | null;
+
+		if (!bannerContainer) return;
+
+		const grid = bannerContainer.querySelector('.grid');
+		if (!grid) return;
+
+		// Clear existing content
+		grid.innerHTML = '';
+
+		// Clone and append faculty cards
+		cards.forEach((card) => {
+			const clone = card.cloneNode(true) as HTMLElement;
+			clone.classList.remove('hidden');
+			clone.style.display = '';
+			clone.removeAttribute('id');
+			grid.appendChild(clone);
+		});
+
+		// Show the container
+		bannerContainer.classList.remove('hidden');
+
+		// Initialize lazy loading for images in the banner
+		const bannerImages = bannerContainer.querySelectorAll<HTMLImageElement>('.lazy-image');
+		if ('IntersectionObserver' in window) {
+			const observer = new IntersectionObserver((entries, observerInstance) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						const img = entry.target as HTMLImageElement;
+						img.classList.add('loaded');
+						(img as HTMLElement).style.opacity = '1';
+						observerInstance.unobserve(img);
+					}
+				});
+			}, {
+				rootMargin: '50px 0px',
+				threshold: 0.01
+			});
+
+			bannerImages.forEach(img => {
+				if (!img.classList.contains('loaded')) {
+					(img as HTMLElement).style.opacity = '0';
+					observer.observe(img);
+				}
+			});
+		} else {
+			bannerImages.forEach(img => {
+				img.classList.add('loaded');
+				(img as HTMLElement).style.opacity = '1';
+			});
+		}
+
+		// Scroll to the banner container smoothly
+		bannerContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+	}
+
+	function applyDepartmentFilter() {
+		const facultyGrid = document.getElementById('facultyGrid');
+		
+		if (!activeDepartmentFilter) {
+			// Hide all faculty cards when no department is selected
+			if (facultyGrid) {
+				facultyGrid.classList.add('hidden');
+			}
+			allFacultyCards.forEach((card) => {
+				card.classList.add('hidden');
+				(card as HTMLElement).style.display = 'none';
+			});
+			if (showMoreBtn) {
+				showMoreBtn.classList.add('hidden');
+			}
+			updateBannerContent([]);
+			
+			// Hide all banner card containers
+			const allBannerContainers = document.querySelectorAll('.faculty-banner-cards-container');
+			allBannerContainers.forEach((container) => {
+				(container as HTMLElement).classList.add('hidden');
+				const grid = container.querySelector('.grid');
+				if (grid) {
+					grid.innerHTML = '';
+				}
+			});
+			return;
+		}
+
+		// Keep faculty grid hidden when showing cards in banners
+		if (facultyGrid) {
+			facultyGrid.classList.add('hidden');
+		}
+
+		let visibleCount = 0;
+		const departmentCards: HTMLElement[] = [];
+		allFacultyCards.forEach((card) => {
+			const department = (card as HTMLElement).dataset.department || '';
+			const matchesDepartment = department === activeDepartmentFilter;
+			if (matchesDepartment) {
+				card.classList.add('hidden');
+				(card as HTMLElement).style.display = 'none';
+				visibleCount++;
+				departmentCards.push(card as HTMLElement);
+			} else {
+				card.classList.add('hidden');
+				(card as HTMLElement).style.display = 'none';
+			}
+		});
+
+		// Update banner content with visible faculty cards (summary)
+		updateBannerContent(departmentCards);
+
+		// Render full faculty cards in the banner container
+		renderFacultyCardsInBanner(activeDepartmentFilter, departmentCards);
+
+		// Hide "Show More" button when filtering by department
+		if (showMoreBtn) {
+			showMoreBtn.classList.add('hidden');
+		}
+
+		// Clear search when filtering by department
+		if (facultySearchInput) {
+			(facultySearchInput as HTMLInputElement).value = '';
+		}
+		if (facultySearchResults) {
+			facultySearchResults.classList.add('hidden');
+		}
+		if (clearFacultySearchBtn) {
+			clearFacultySearchBtn.classList.add('hidden');
+		}
+	}
+
+	// Add event listeners to department buttons
+	if (departmentFacultyButtons.length) {
+		departmentFacultyButtons.forEach((button) => {
+			button.addEventListener('click', (event) => {
+				event.preventDefault();
+				const department = button.dataset.department;
+				if (!department) return;
+				const isActive = activeDepartmentFilter === department;
+				activeDepartmentFilter = isActive ? null : department;
+				applyDepartmentFilter();
+				updateDepartmentButtonsState();
+				// Hide programs when showing faculty
+				if (activeDepartmentFilter) {
+					activeProgramDepartment = null;
+					resetProgramsDisplay();
+				}
+			});
+		});
+	}
+
+	// Add event listeners to program buttons - open modal instead
+	if (departmentProgramButtons.length) {
+		departmentProgramButtons.forEach((button) => {
+			button.addEventListener('click', (event) => {
+				event.preventDefault();
+				const rawDepartment = button.dataset.department || '';
+				const searchTerm = button.dataset.departmentSearch || rawDepartment || button.textContent || '';
+				const department = searchTerm.trim();
+				if (!department) return;
+				openDepartmentProgramsModal(department);
+			});
+		});
+	}
+
+	updateDepartmentButtonsState();
 });
 
 // Alumni Carousel Functionality
@@ -5080,112 +6070,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							</div>
 						</div>
 
-						<!-- Research Leaders by Area -->
-						<div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-							<!-- Mathematics & Statistics Research Leaders -->
-							<div class="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-xl p-5 sm:p-6">
-								<div class="flex items-center mb-4">
-									<svg class="w-6 h-6 sm:w-8 sm:h-8 text-msu-deep-ocean mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-									</svg>
-									<h4 class="text-lg sm:text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Mathematics & Statistics</h4>
-								</div>
-								<ul class="space-y-2 text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean mr-2 mt-1">•</span>
-										<span><strong>Prof. Javier Abdurajan Hassan</strong> - Chairperson, Professor II</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean mr-2 mt-1">•</span>
-										<span><strong>Prof. Ladznar Sahali Laja, Ph.D.</strong> - Chief, Admissions and Scholarships</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean mr-2 mt-1">•</span>
-										<span><strong>Associate Prof. Danilo Galvez Langamin</strong> - Chairperson, Department of Statistics</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean mr-2 mt-1">•</span>
-										<span><strong>Prof. Jamil Julhijiri Hamja</strong> - Professor I</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean mr-2 mt-1">•</span>
-										<span><strong>Prof. Regimar Adan Rasid, Ph.D.</strong> - Director, Student Services</span>
-									</li>
-								</ul>
-							</div>
-
-							<!-- Language & Cultural Studies Research Leaders -->
-							<div class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-gray-800 dark:to-gray-700 rounded-xl p-5 sm:p-6">
-								<div class="flex items-center mb-4">
-									<svg class="w-6 h-6 sm:w-8 sm:h-8 text-msu-deep-ocean mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-									</svg>
-									<h4 class="text-lg sm:text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Language & Cultural Studies</h4>
-								</div>
-								<ul class="space-y-2 text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean mr-2 mt-1">•</span>
-										<span><strong>Prof. Mona Froida Matolo Langoh, Ph.D.</strong> - Dean, Professor VI</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean mr-2 mt-1">•</span>
-										<span><strong>Associate Prof. Jeffrey Alih Rajik</strong> - Chairperson, Associate Professor V</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean mr-2 mt-1">•</span>
-										<span><strong>Prof. Anabel Alagasi Wellms, Ph.D.</strong> - Professor VI</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean mr-2 mt-1">•</span>
-										<span><strong>Assistant Prof. Nelson Singson Dino</strong> - Director, Office of Creative Works, Assistant Professor IV</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean mr-2 mt-1">•</span>
-										<span><strong>Associate Prof. Glenda Orozco Abdul</strong> - Chairperson, Associate Professor I</span>
-									</li>
-								</ul>
-							</div>
-
-							<!-- Social Sciences & Public Administration Research Leaders -->
-							<div class="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-800 dark:to-gray-700 rounded-xl p-5 sm:p-6">
-								<div class="flex items-center mb-4">
-									<svg class="w-6 h-6 sm:w-8 sm:h-8 text-msu-deep-ocean mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-									</svg>
-									<h4 class="text-lg sm:text-xl font-bold text-msu-main-color dark:text-msu-bgc-color">Social Sciences & Public Admin</h4>
-								</div>
-								<ul class="space-y-2 text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean mr-2 mt-1">•</span>
-										<span><strong>Associate Prof. Alshadat Bayo Sabal</strong> - Associate Professor V, Political Science & Public Administration</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean mr-2 mt-1">•</span>
-										<span><strong>Associate Prof. Al-Haniff Lee Matolo</strong> - Associate Professor V, Public Administration</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean mr-2 mt-1">•</span>
-										<span><strong>Associate Prof. Astridin Aspani Bernado</strong> - Chairperson, Department of History, Associate Professor II</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean mr-2 mt-1">•</span>
-										<span><strong>Associate Prof. Alzie Abdulgaful Majinji</strong> - Associate Professor V, Public Policy & Public Administration</span>
-									</li>
-									<li class="flex items-start">
-										<span class="text-msu-deep-ocean mr-2 mt-1">•</span>
-										<span><strong>Associate Prof. Nasiff Saro Talal</strong> - Associate Professor III, History</span>
-									</li>
-								</ul>
-							</div>
-						</div>
-
-						<!-- Call to Action -->
-						<div class="mt-6 sm:mt-8 text-center">
-							<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color mb-4">
-								Explore our <a href="#facultySpotlight" class="text-msu-deep-ocean font-semibold hover:underline">Faculty Spotlight</a> section to learn more about our research leaders and their specializations.
-							</p>
-						</div>
-					</div>
+					
 				</div>
 
 		</section>
@@ -5355,7 +6240,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		</section> -->
 
-		<!-- Faculty Spotlight -->
+		<!-- Departments -->
 
 		<section id="facultySpotlight" class="py-20 bg-gray-50">
 
@@ -5363,48 +6248,1062 @@ document.addEventListener('DOMContentLoaded', function() {
 
 				<div class="text-center mb-16">
 
-					<h2 class="text-3xl font-bold mb-4 text-[#61063B] dark:text-msu-bgc-color" >Faculty Spotlight</h2>
+					<h2 class="text-3xl font-bold mb-4 text-[#61063B] dark:text-msu-bgc-color" >Departments</h2>
 
 					<p class="text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto">
 
-						Our distinguished faculty members who are experts in English language, literature, linguistics, and development communication
+						Explore our academic departments and their distinguished faculty members across languages, literature, mathematics, statistics, social sciences, and management.
 					</p>
 
 				</div>
 
-				<!-- Faculty Search Bar -->
-				<div class="mb-8 max-w-2xl mx-auto">
-					<div class="relative">
-						<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-							<svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-							</svg>
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+					<!-- Department of Literary and Cultural Studies -->
+					<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Department of Literary and Cultural Studies">
+						<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#61063B] via-[#8C1F5A] to-[#2F1A45] text-white p-8 md:p-10 shadow-2xl">
+							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
+							<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+								<div class="max-w-xl">
+									<h3 class="text-2xl md:text-3xl font-bold leading-snug">Department of Literary and Cultural Studies</h3>
+									<p class="mt-2 text-sm md:text-base text-white/80">Chairperson: Associate Professor Glenda O. Abdul, PhD</p>
+									<p class="mt-4 text-sm md:text-base text-white/90">
+										Critical inquiry into literature, culture, and creative expression that enriches understanding of human experience and cultural heritage.
+									</p>
+									<div class="mt-6 flex flex-wrap gap-3">
+										<button
+											type="button"
+											class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of Literary and Cultural Studies"
+											aria-pressed="false"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-white/80">Show</span>
+												<span class="block text-sm md:text-base font-semibold">Faculty</span>
+											</div>
+											<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+											</svg>
+										</button>
+										<button
+											type="button"
+											class="department-program-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white text-[#61063B] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of Literary and Cultural Studies"
+											data-department-search="Literary"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-[#61063B]/80">View</span>
+												<span class="block text-sm md:text-base font-semibold">Academic Programs</span>
+											</div>
+											<svg class="w-5 h-5 text-[#61063B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+											</svg>
+										</button>
+									</div>
+								</div>
+								<div class="flex-1 w-full space-y-4 md:space-y-6">
+									<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base faculty-banner-content hidden" data-static-content="true" data-member-count="10">
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Assistant Prof. Roben Suwarani Abdella</p>
+												<p class="text-white/80 text-sm font-normal">Assistant Professor IV • College Secretary</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Glenda O. Abdul, PhD</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor I • Chairperson, Department of Literary and Cultural Studies</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Clarisse Joy Daham Bakun</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Assistant Prof. Nelson Singson Dino</p>
+												<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Director, Office of Creative Works</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Mirra Edora Asaad Esmael</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I • Adviser, KAWASA Student Publication</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Charity Joy Bayle Hashim</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Ruhil Malinao Jalil</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Myrnahil Hasim Jumsali</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Aly Lagunda Mama</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Chamberlain Dablo Olmedo</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I • Faculty</p>
+											</div>
+										</div>
+									</div>
+									<div class="space-y-3 text-sm md:text-base faculty-banner-programs hidden"></div>
+								</div>
+							</div>
 						</div>
-						<input 
-							type="text" 
-							id="facultySearch" 
-							placeholder="Search faculty by name, position, or specialization..." 
-							class="block w-full pl-12 pr-12 py-4 text-base border border-gray-300 rounded-xl focus:ring-2 focus:ring-msu-main-color focus:border-msu-main-color transition-all duration-300 shadow-sm hover:shadow-md"
-						>
-						<button 
-							id="clearFacultySearch" 
-							class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 transition-colors duration-200 hidden"
-							title="Clear search"
-						>
-							<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-							</svg>
-						</button>
 					</div>
-					<!-- Search Results Counter -->
-					<div id="facultySearchResults" class="mt-3 text-center text-sm text-gray-600 dark:text-gray-400 hidden">
-						<span id="facultyResultsCount"></span>
+					<!-- Faculty Cards Container for Department of Literary and Cultural Studies -->
+					<div class="faculty-banner-cards-container hidden mt-6 md:col-span-2 lg:col-span-3" data-department="Department of Literary and Cultural Studies">
+						<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3"></div>
 					</div>
+
+					<!-- Department of Languages -->
+					<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Department of Languages">
+						<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#61063B] via-[#8C1F5A] to-[#2F1A45] text-white p-8 md:p-10 shadow-2xl">
+							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
+							<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+								<div class="max-w-xl">
+									<h3 class="text-2xl md:text-3xl font-bold leading-snug">Department of Languages</h3>
+									<p class="mt-2 text-sm md:text-base text-white/80">Chairperson: Associate Professor Jeffrey A. Rajik, PhD</p>
+									<p class="mt-4 text-sm md:text-base text-white/90">
+										Multilingual communication, linguistic competence, and cultural literacy for global engagement and understanding.
+									</p>
+									<div class="mt-6 flex flex-wrap gap-3">
+										<button
+											type="button"
+											class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of Languages"
+											aria-pressed="false"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-white/80">Show</span>
+												<span class="block text-sm md:text-base font-semibold">Faculty</span>
+											</div>
+											<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+											</svg>
+										</button>
+										<button
+											type="button"
+											class="department-program-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white text-[#61063B] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of Languages"
+											data-department-search="language"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-[#61063B]/80">View</span>
+												<span class="block text-sm md:text-base font-semibold">Academic Programs</span>
+											</div>
+											<svg class="w-5 h-5 text-[#61063B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+											</svg>
+										</button>
+									</div>
+								</div>
+								<div class="flex-1 w-full space-y-4 md:space-y-6">
+									<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base faculty-banner-content hidden" data-static-content="true" data-member-count="10">
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Dayang Talib Kamlian</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Nurbarain Sugala Laja</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Prof. Mona Froida M. Langoh, PhD</p>
+												<p class="text-white/80 text-sm font-normal">Professor VI • Dean, College of Arts and Sciences</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Jonalyn Shaid Larida</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Assistant Prof. Tarhata S. Miguel</p>
+												<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Assistant Prof. Jo-an Salaveria Olaer</p>
+												<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Jeffrey A. Rajik, PhD</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Chairperson, Department of Languages</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Assistant Prof. Conrad Jainuddin Salapuddin</p>
+												<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Rachel Alawi Samaniego</p>
+												<p class="text-white/80 text-sm font-normal">Instructor III • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Prof. Anabel Alagasi Wellms, PhD</p>
+												<p class="text-white/80 text-sm font-normal">Professor VI • Director, American Corner</p>
+											</div>
+										</div>
+									</div>
+									<div class="space-y-3 text-sm md:text-base faculty-banner-programs hidden"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Faculty Cards Container for Department of Languages -->
+					<div class="faculty-banner-cards-container hidden mt-6 md:col-span-2 lg:col-span-3" data-department="Department of Languages">
+						<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3"></div>
+					</div>
+
+					<!-- Department of Mathematics -->
+					<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Department of Mathematics">
+						<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#61063B] via-[#8C1F5A] to-[#2F1A45] text-white p-8 md:p-10 shadow-2xl">
+							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
+							<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+								<div class="max-w-xl">
+									<h3 class="text-2xl md:text-3xl font-bold leading-snug">Department of Mathematics</h3>
+									<p class="mt-2 text-sm md:text-base text-white/80">Chairperson: Professor Javier A. Hassan, PhD</p>
+									<p class="mt-4 text-sm md:text-base text-white/90">
+										Mathematical reasoning, modeling, and problem-solving across disciplines for innovation and analytical excellence.
+									</p>
+									<div class="mt-6 flex flex-wrap gap-3">
+										<button
+											type="button"
+											class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of Mathematics"
+											aria-pressed="false"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-white/80">Show</span>
+												<span class="block text-sm md:text-base font-semibold">Faculty</span>
+											</div>
+											<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+											</svg>
+										</button>
+										<button
+											type="button"
+											class="department-program-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white text-[#61063B] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of Mathematics"
+											data-department-search="Mathematics"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-[#61063B]/80">View</span>
+												<span class="block text-sm md:text-base font-semibold">Academic Programs</span>
+											</div>
+											<svg class="w-5 h-5 text-[#61063B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+											</svg>
+										</button>
+									</div>
+								</div>
+								<div class="flex-1 w-full space-y-4 md:space-y-6">
+									<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base faculty-banner-content hidden" data-static-content="true" data-member-count="11">
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Bayah Jaujali Amiruddin-Rajik</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Rosalio Gaid Artes, Jr.</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Edwin Bello Fabillar</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Prof. Jamil Julhijiri Hamja</p>
+												<p class="text-white/80 text-sm font-normal">Professor I • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Prof. Javier A. Hassan, PhD</p>
+												<p class="text-white/80 text-sm font-normal">Professor II • Chairperson, Department of Mathematics</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Sisteta Uy Kamdon</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Amy Anqui Laja</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Prof. Ladznar Sahali Laja, PhD</p>
+												<p class="text-white/80 text-sm font-normal">Professor VI • Chief, Admissions and Scholarships</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Mercedita Aglosolos Langamin</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Nurijam Hanna Mohammad Mohammad</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Jeffrey Imer Coronado Salim</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Faculty</p>
+											</div>
+										</div>
+									</div>
+									<div class="space-y-3 text-sm md:text-base faculty-banner-programs hidden"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Faculty Cards Container for Department of Mathematics -->
+					<div class="faculty-banner-cards-container hidden mt-6 md:col-span-2 lg:col-span-3" data-department="Department of Mathematics">
+						<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3"></div>
+					</div>
+
+					<!-- Department of Statistics -->
+					<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Department of Statistics">
+						<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#61063B] via-[#8C1F5A] to-[#2F1A45] text-white p-8 md:p-10 shadow-2xl">
+							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
+							<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+								<div class="max-w-xl">
+									<h3 class="text-2xl md:text-3xl font-bold leading-snug">Department of Statistics</h3>
+									<p class="mt-2 text-sm md:text-base text-white/80">Chairperson: Associate Professor Danilo G. Langamin</p>
+									<p class="mt-4 text-sm md:text-base text-white/90">
+										Data literacy, analytics, and evidence-based decision-making for informed policy and research.
+									</p>
+									<div class="mt-6 flex flex-wrap gap-3">
+										<button
+											type="button"
+											class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of Statistics"
+											aria-pressed="false"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-white/80">Show</span>
+												<span class="block text-sm md:text-base font-semibold">Faculty</span>
+											</div>
+											<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+											</svg>
+										</button>
+										<button
+											type="button"
+											class="department-program-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white text-[#61063B] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of Statistics"
+											data-department-search="Statistics"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-[#61063B]/80">View</span>
+												<span class="block text-sm md:text-base font-semibold">Academic Programs</span>
+											</div>
+											<svg class="w-5 h-5 text-[#61063B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+											</svg>
+										</button>
+									</div>
+								</div>
+								<div class="flex-1 w-full space-y-4 md:space-y-6">
+									<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base faculty-banner-content hidden" data-static-content="true" data-member-count="6">
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Ebni Atiulla Jal-Usman</p>
+												<p class="text-white/80 text-sm font-normal">Instructor II • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Danilo G. Langamin</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Chairperson, Department of Statistics</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Assistant Prof. Azman Akuk Nads</p>
+												<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Keith Einstein Remonde Pon</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Prof. Regimar Adan Rasid</p>
+												<p class="text-white/80 text-sm font-normal">Professor VI • Director, Student Services</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Ummar Asani Sallil</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Faculty</p>
+											</div>
+										</div>
+									</div>
+									<div class="space-y-3 text-sm md:text-base faculty-banner-programs hidden"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Faculty Cards Container for Department of Statistics -->
+					<div class="faculty-banner-cards-container hidden mt-6 md:col-span-2 lg:col-span-3" data-department="Department of Statistics">
+						<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3"></div>
+					</div>
+
+					<!-- Department of History -->
+					<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Department of History">
+						<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#61063B] via-[#8C1F5A] to-[#2F1A45] text-white p-8 md:p-10 shadow-2xl">
+							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
+							<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+								<div class="max-w-xl">
+									<h3 class="text-2xl md:text-3xl font-bold leading-snug">Department of History</h3>
+									<p class="mt-2 text-sm md:text-base text-white/80">Chairperson: Associate Professor Astridin A. Bernado</p>
+									<p class="mt-4 text-sm md:text-base text-white/90">
+										Historical method, heritage preservation, and nation-building perspectives for understanding the past and shaping the future.
+									</p>
+									<div class="mt-6 flex flex-wrap gap-3">
+										<button
+											type="button"
+											class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of History"
+											aria-pressed="false"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-white/80">Show</span>
+												<span class="block text-sm md:text-base font-semibold">Faculty</span>
+											</div>
+											<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+											</svg>
+										</button>
+										<button
+											type="button"
+											class="department-program-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white text-[#61063B] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of History"
+											data-department-search="History"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-[#61063B]/80">View</span>
+												<span class="block text-sm md:text-base font-semibold">Academic Programs</span>
+											</div>
+											<svg class="w-5 h-5 text-[#61063B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+											</svg>
+										</button>
+									</div>
+								</div>
+								<div class="flex-1 w-full space-y-4 md:space-y-6">
+									<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base faculty-banner-content hidden" data-static-content="true" data-member-count="8">
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Astridin A. Bernado</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor II • Chairperson, Department of History</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Nurshima Janang Abdulhamiid</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Mr. Abel Gumera Bation</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Assistant Prof. Rafael Carin Romero</p>
+												<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Assistant Prof. Ma. Angelica Esguerra Celerian</p>
+												<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Nasiff Saro Talal</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor III • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Abdulhamid A. Eldani</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor I • Faculty</p>
+											</div>
+										</div>
+									</div>
+									<div class="space-y-3 text-sm md:text-base faculty-banner-programs hidden"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Faculty Cards Container for Department of History -->
+					<div class="faculty-banner-cards-container hidden mt-6 md:col-span-2 lg:col-span-3" data-department="Department of History">
+						<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3"></div>
+					</div>
+
+					<!-- Department of Public Administration -->
+					<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Department of Public Administration">
+						<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#61063B] via-[#8C1F5A] to-[#2F1A45] text-white p-8 md:p-10 shadow-2xl">
+							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
+							<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+								<div class="max-w-xl">
+									<h3 class="text-2xl md:text-3xl font-bold leading-snug">Department of Public Administration</h3>
+									<p class="mt-2 text-sm md:text-base text-white/80">Chairperson: Professor Zulfikarl B. Halun, DPA</p>
+									<p class="mt-4 text-sm md:text-base text-white/90">
+										Public service leadership, development planning, and institutional management for effective governance.
+									</p>
+									<div class="mt-6 flex flex-wrap gap-3">
+										<button
+											type="button"
+											class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of Public Administration"
+											aria-pressed="false"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-white/80">Show</span>
+												<span class="block text-sm md:text-base font-semibold">Faculty</span>
+											</div>
+											<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+											</svg>
+										</button>
+										<button
+											type="button"
+											class="department-program-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white text-[#61063B] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of Public Administration"
+											data-department-search="Public Administration"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-[#61063B]/80">View</span>
+												<span class="block text-sm md:text-base font-semibold">Academic Programs</span>
+											</div>
+											<svg class="w-5 h-5 text-[#61063B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+											</svg>
+										</button>
+									</div>
+								</div>
+								<div class="flex-1 w-full space-y-4 md:space-y-6">
+									<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base faculty-banner-content hidden" data-static-content="true" data-member-count="10">
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Assistant Prof. Ajilma Majid Tambihasan</p>
+												<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Al-Haniff Lee Matolo</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Alzie Abdulgaful Majinji</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Alshadat Bayo Sabal</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Carolyn Nur Talipan</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Assistant Prof. Darwisa Sali Ondo</p>
+												<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Diolindo Orong Adaro</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Ibrahim Sahidjun Miguel</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Mylene Capuno Matolo</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Prof. Zulfikarl B. Halun, DPA</p>
+												<p class="text-white/80 text-sm font-normal">Professor VI • Chairperson, Department of Public Administration</p>
+											</div>
+										</div>
+									</div>
+									<div class="space-y-3 text-sm md:text-base faculty-banner-programs hidden"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Faculty Cards Container for Department of Public Administration -->
+					<div class="faculty-banner-cards-container hidden mt-6 md:col-span-2 lg:col-span-3" data-department="Department of Public Administration">
+						<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3"></div>
+					</div>
+
+					<!-- Department of Political Science -->
+					<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Department of Political Science">
+						<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#61063B] via-[#8C1F5A] to-[#2F1A45] text-white p-8 md:p-10 shadow-2xl">
+							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
+							<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+								<div class="max-w-xl">
+									<h3 class="text-2xl md:text-3xl font-bold leading-snug">Department of Political Science</h3>
+									<p class="mt-2 text-sm md:text-base text-white/80">Chairperson: Assistant Professor Madzween Joy K. De Asis-Omar</p>
+									<p class="mt-4 text-sm md:text-base text-white/90">
+										Governance, policy analysis, and public affairs rooted in democratic and peace-oriented values.
+									</p>
+									<div class="mt-6 flex flex-wrap gap-3">
+										<button
+											type="button"
+											class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of Political Science"
+											aria-pressed="false"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-white/80">Show</span>
+												<span class="block text-sm md:text-base font-semibold">Faculty</span>
+											</div>
+											<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+											</svg>
+										</button>
+										<button
+											type="button"
+											class="department-program-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white text-[#61063B] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of Political Science"
+											data-department-search="Political Science"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-[#61063B]/80">View</span>
+												<span class="block text-sm md:text-base font-semibold">Academic Programs</span>
+											</div>
+											<svg class="w-5 h-5 text-[#61063B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+											</svg>
+										</button>
+									</div>
+								</div>
+								<div class="flex-1 w-full space-y-4 md:space-y-6">
+									<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base faculty-banner-content hidden" data-static-content="true" data-member-count="8">
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Alsadjaik Ytang Sabdul</p>
+												<p class="text-white/80 text-sm font-normal">Instructor III • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Ariel Pajela Bacol</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Assistant Prof. Datu Moden C. Talandig</p>
+												<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Kaisher Bangali Muyong</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Assistant Prof. Madzween Joy K. De Asis-Omar</p>
+												<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Chairperson, Department of Political Science / Director, IPDM</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Morshed Kunakon Tumindig</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Assistant Prof. Mur-Hamida Sapaih Eldani</p>
+												<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Shiernalyn Sabandal Abraham</p>
+												<p class="text-white/80 text-sm font-normal">Teacher I • Faculty</p>
+											</div>
+										</div>
+									</div>
+									<div class="space-y-3 text-sm md:text-base faculty-banner-programs hidden"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Faculty Cards Container for Department of Political Science -->
+					<div class="faculty-banner-cards-container hidden mt-6 md:col-span-2 lg:col-span-3" data-department="Department of Political Science">
+						<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3"></div>
+					</div>
+
+					<!-- Department of Management -->
+					<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Department of Management">
+						<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#61063B] via-[#8C1F5A] to-[#2F1A45] text-white p-8 md:p-10 shadow-2xl">
+							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
+							<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+								<div class="max-w-xl">
+									<h3 class="text-2xl md:text-3xl font-bold leading-snug">Department of Management</h3>
+									<p class="mt-2 text-sm md:text-base text-white/80">Chairperson: Associate Professor Calvin J. Caliat</p>
+									<p class="mt-4 text-sm md:text-base text-white/90">
+										Organizational strategy, entrepreneurship, and innovation for business excellence and sustainable growth.
+									</p>
+									<div class="mt-6 flex flex-wrap gap-3">
+										<button
+											type="button"
+											class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of Management"
+											aria-pressed="false"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-white/80">Show</span>
+												<span class="block text-sm md:text-base font-semibold">Faculty</span>
+											</div>
+											<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+											</svg>
+										</button>
+										<button
+											type="button"
+											class="department-program-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white text-[#61063B] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of Management"
+											data-department-search="Management"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-[#61063B]/80">View</span>
+												<span class="block text-sm md:text-base font-semibold">Academic Programs</span>
+											</div>
+											<svg class="w-5 h-5 text-[#61063B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+											</svg>
+										</button>
+									</div>
+								</div>
+								<div class="flex-1 w-full space-y-4 md:space-y-6">
+									<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base faculty-banner-content hidden" data-static-content="true" data-member-count="5">
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Nikko Devinasflores Chua</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Assistant Prof. Rushaida Abdulbaki Muham</p>
+												<p class="text-white/80 text-sm font-normal">Assistant Professor III • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Calvin J. Caliat</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Chairperson, Department of Management</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Kathleen Montemayor Ishmael-Ticzon</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I • Faculty</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Julhajiri Kasim Ahmad</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I • Faculty</p>
+											</div>
+										</div>
+									</div>
+									<div class="space-y-3 text-sm md:text-base faculty-banner-programs hidden"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Faculty Cards Container for Department of Management -->
+					<div class="faculty-banner-cards-container hidden mt-6 md:col-span-2 lg:col-span-3" data-department="Department of Management">
+						<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3"></div>
+					</div>
+
 				</div>
 
-				
-
-				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="facultyGrid">
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 hidden" id="facultyGrid">
 					<!-- Faculty member -->
 					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
 						<div class="h-90 overflow-hidden relative">
@@ -6518,8 +8417,36 @@ document.addEventListener('DOMContentLoaded', function() {
 						</div>
 					</div>
 
-					<!-- Rafael Carin Romero -->
+					<!-- Abel Gumera Bation -->
 					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty37">
+						<div class="h-90 overflow-hidden relative">
+							<img src="/images/cas/Profile/BATION.png" alt="Abel Gumera Bation" class="w-full h-full object-cover lazy-image" loading="lazy">
+							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+								<h3 class="text-white font-bold text-xl">Mr. Abel Gumera Bation</h3>
+								<p class="text-gray-300 text-sm">Instructor I</p>
+							</div>
+						</div>
+						<div class="p-6">
+							<div class="flex items-center mb-4">
+								<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+								</svg>
+								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">History</span>
+							</div>
+							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+								Instructor I specializing in History. Holds a Bachelor of Arts in History and is currently pursuing Master in History.
+							</p>
+							<button onclick="openFacultyModal('bation')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
+								View Profile
+								<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+								</svg>
+							</button>
+						</div>
+					</div>
+
+					<!-- Rafael Carin Romero -->
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty38">
 						<div class="h-90 overflow-hidden relative">
 							<img src="/images/cas/Profile/ROMERO.png" alt="Assistant Prof. Rafael Carin Romero" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -6548,7 +8475,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 					<!-- Ma. Angelica Esguerra Celerian -->
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty38">
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty39">
 						<div class="h-90 overflow-hidden relative">
 							<img src="/images/cas/Profile/CELERIAN.png" alt="Assistant Prof. Ma. Angelica Esguerra Celerian" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -6576,7 +8503,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					</div>
 
 					<!-- Nasiff Saro Talal -->
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty39">
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty40">
 						<div class="h-90 overflow-hidden relative">
 							<img src="/images/cas/Profile/TALAL.png" alt="Nasiff Saro Talal" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -6604,7 +8531,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					</div>
 
 					<!-- Abdulhamid A. Eldani -->
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty40">
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty41">
 						<div class="h-90 overflow-hidden relative">
 							<img src="/images/cas/Profile/ELDANI.png" alt="Abdulhamid A. Eldani" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -6632,7 +8559,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					</div>
 
 					<!-- Ajilma Majid Tambihasan -->
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty41">
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty42">
 						<div class="h-90 overflow-hidden relative">
 							<img src="/images/cas/Profile/TAMBIHASAN.png" alt="Assistant Prof. Ajilma Majid Tambihasan" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -7305,14 +9232,14 @@ document.addEventListener('DOMContentLoaded', function() {
 				</div>
 				
 				<!-- Show More Button -->
-				<div class="text-center mt-12">
+				<!-- <div class="text-center mt-12">
 					<button onclick="toggleFacultyView()" id="showMoreBtn" class="inline-flex items-center px-8 py-4 border border-msu-deep-ocean text-base font-medium rounded-full shadow-sm text-msu-bgc-color bg-[#61063B] hover:bg-msu-deep-ocean-dark hover:shadow-md transition-all duration-300 transform hover:scale-105">
 						<span id="showMoreText">Show More Faculty</span>
 						<svg id="showMoreIcon" class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
 						</svg>
 					</button>
-				</div>
+				</div> -->
 
 				
 
@@ -7482,6 +9409,41 @@ document.addEventListener('DOMContentLoaded', function() {
 						<p class="text-xs text-gray-500 italic px-2">Administrative Aide I</p>
 					</div>
 
+				</div>
+
+				<!-- Faculty Search Bar -->
+				<div class="mt-12 mb-8 max-w-2xl mx-auto">
+					<div class="relative">
+						<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+							<svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+							</svg>
+						</div>
+						<input 
+							type="text" 
+							id="facultySearch" 
+							placeholder="Search faculty by name, position, or specialization..." 
+							class="block w-full pl-12 pr-12 py-4 text-base border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-msu-main-color dark:focus:ring-yellow-400 focus:border-msu-main-color dark:focus:border-yellow-400 transition-all duration-300 shadow-sm hover:shadow-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+						>
+						<button 
+							id="clearFacultySearch" 
+							class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200 hidden"
+							title="Clear search"
+						>
+							<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+							</svg>
+						</button>
+					</div>
+					<!-- Search Results Counter -->
+					<div id="facultySearchResults" class="mt-3 text-sm text-gray-600 dark:text-gray-400 hidden">
+						<p id="facultyResultsCount" class="text-center"></p>
+						<div id="facultyResultsList" class="mt-3 space-y-3"></div>
+					</div>
+					<div id="facultySearchMatches" class="mt-8 hidden">
+						<h3 class="text-lg font-semibold text-msu-main-color dark:text-yellow-300 text-center mb-4">Matching Faculty Members</h3>
+						<div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3" id="facultySearchMatchesGrid"></div>
+					</div>
 				</div>
 			</div>
 		</section>

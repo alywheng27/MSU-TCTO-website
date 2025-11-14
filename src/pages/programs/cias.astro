@@ -669,7 +669,7 @@ try {
 					<div class="tab-content hidden" id="objectives-content">
 						<div class="space-y-6 text-msu-main-color dark:text-msu-bgc-color">
 							<div class="bg-gradient-to-r from-msu-deep-ocean/10 to-transparent p-6 rounded-lg border-l-4 border-msu-deep-ocean">
-								<h4 class="font-bold text-msu-deep-ocean dark:text-msu-bgc-color mb-4 text-xl">CIAS Objectives (ABIS - Shari'ah)</h4>
+								<h4 class="font-bold text-msu-deep-ocean dark:text-msu-bgc-color mb-4 text-xl">CIAS Objectives</h4>
 							<div class="space-y-4">
 								<div class="flex items-start">
 										<span class="text-msu-deep-ocean font-bold mr-3 mt-1 text-lg">1.</span>
@@ -1023,7 +1023,7 @@ try {
 
 							<div class="text-3xl font-semibold mb-3">Students Enrolled</div>
 
-							<div class="text-xl text-gray-300 mt-2">Active learners across all programs</div>
+							<div class="text-xl text-gray-300 mt-2">Overall learners who enrolled in these programs</div>
 
 						</div>
 
@@ -1379,6 +1379,19 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+// Helper functions
+const htmlEscapeMap = {
+	'&': '&amp;',
+	'<': '&lt;',
+	'>': '&gt;',
+	'"': '&quot;',
+	'\'': '&#39;'
+};
+
+function escapeHtml(value: unknown): string {
+	return (value == null ? '' : String(value)).replace(/[&<>"']/g, (char) => htmlEscapeMap[char as keyof typeof htmlEscapeMap] || char);
+}
+
 // Faculty Modal System
 function openFacultyModal(facultyId) {
 	console.log('Opening modal for:', facultyId); // Debug log
@@ -1411,18 +1424,44 @@ function openFacultyModal(facultyId) {
         ],
 	        achievements: [
 	            "Acting Dean of CIAS since March 1, 2025 leading COPC compliance with CHED",
+	            "2 Years Chairperson of the MSU-TCTO's Committee on Research Ethics",
 	            "Seven-year Chairperson, Islamic Studies Department",
 	            "Former College Secretary",
-	            "Best Faculty for Student's Grade Evaluation awardee"
-	        ],
+	            "Best Presenter: International Conference on Zakat, Awqaf, and Tax at Miri, Sarawak Malaysia Dec. 28, 2022",
+	            "Best Extension Service Presenter, Inhouse Review, MSU-TCTO, 2024",
+	            "Best Faculty For instruction, CIAS, MSU-TCTO, 2022",
+	            "Best Faculty for Instruciton, CIAS, MSU-TCTO, 2023",
+	            "Best Faculty for Instruciton, CIAS, MSU-TCTO, 2024",
+	            "Best Faculty for Instruciton, CIAS, MSU-TCTO, 2025",
+	            "Best Faculty for Students Grades Evaluation, CIAS, MSU-TCTO, 2025",
+	            "Best Faculty for Consultation, CIAS, MSU-TCTO, 2025"
+        ],
         publications: [
+            "A bibliometric visualization of trends in Philippine sharks studies published in Scopus-indexed journals over the past five decades",
+            "Islamic Finance in the Scientific Literature: A Bibliometric Analysis and Beyond",
+            "THE EFFECT OF ECONOMIC GROWTH ON ISLAMIC BANKING PROFITABILITY IN THE PHILIPPINES",
+            "TEACHING EFFICIENCY IN THE LAST 112 YEARS: A BIBLIOMETRIC ANALYSIS",
+            "Analysis of Democracy and Islam Research: Evidence from Scopus-indexed Journals",
+            "ISLAMIC BANKING PROFITABILITY AND THE ROLE PLAYED BY THE PHILIPPINE ECONOMY: A VECTOR AUTOREGRESSION (VAR) MODEL APPROACH",
+            "INSTITUTIONALIZATION OF HAJJ SAVINGS PLAN FOR THE MUSLIM EMPLOYEES OF THE MINDANAO STATE UNIVERSITY–TAWI-TAWI COLLEGE OF TECHNOLOGY AND OCEANOGRAPHY: A NEED-ASSESSMENT SURVEY",
+            "Islamic Banking in the Philippines: Financial Performance During the Covid-19 Pandemic",
+            "The Impact of Covid-19 Pandemic on the Financial Performance of Islamic Banks in the Philippines",
+            "Socioeconomic Aspects of Muslim Child Laborer Involved in Informal Public Transport in Bangladesh",
+            "Why Islam Entices Increasing Human Procreation? A Vector Error Correction Model (VECM) Analysis on Population and Economic Growth: The Case of the Philippines",
+            "Islamic Banking in the Philippines: Its Modern Economic History (2002 - 2020)",
+            "Proposed Federal State for the Bangsamoro: Level of Acceptance among the Bangsamoro Mujahidin",
+            "Cigarette Smoking: The Perceptions of Islamic Religious Leaders in the Province of Tawi-Tawi, Philippines",
+            "Effects of Early Marriage among Muslims in Tawi-Tawi, Philippienes: An Islamic Civilizational Assessment on its Core Unit",
+            "Afghanistan: Rich Poor Country in the World",
+            "Extent of awareness on halal food among Muslim students consumers of the University of Southern Mindanao",
+            "Political Participation of Women in Egypt",
             "Sway of Demographics on Teaching efficiency of the Islamic Studies and Arabic Language Teachers: Sequential Equation Modeling Approach"
         ],
 	        description: "Associate Prof. Sali guides CIAS through its COPC pursuit by fusing his cum laude foundation from MSU-TCTO, graduate work at UP, and PhD with academic distinction from IIUM specializing in Islamic Banking Econometrics. A seasoned administrator and award-winning mentor, he elevates Islamic scholarship while strengthening institutional governance and student achievement."
     },
 	    abdulwahid: {
 	        name: "Associate Prof. Kasmil S. Abdulwahid, Ph.D.",
-        position: "Chairperson, Islamic Education Department (MAISED)",
+        position: "Chairperson, Graduate Islamic Education Department",
         rank: "Associate Professor V",
 	        image: "/images/cias/Faculty/msufaculty.png",
         education: [
@@ -2834,29 +2873,68 @@ document.addEventListener('DOMContentLoaded', function() {
 	const clearFacultySearchBtn = document.getElementById('clearFacultySearch');
 	const facultySearchResults = document.getElementById('facultySearchResults');
 	const facultyResultsCount = document.getElementById('facultyResultsCount');
+	const facultyResultsList = document.getElementById('facultyResultsList');
+	const facultySearchMatches = document.getElementById('facultySearchMatches');
+	const facultySearchMatchesGrid = document.getElementById('facultySearchMatchesGrid');
 	const showMoreBtn = document.getElementById('showMoreBtn');
 	const facultyGrid = document.getElementById('facultyGrid');
+	const departmentFacultyButtons = Array.from(document.querySelectorAll('.department-faculty-toggle')) as HTMLButtonElement[];
 	
-	if (!facultySearchInput) return;
+	if (!facultySearchInput || !facultyGrid) return;
+	
+	let activeDepartmentFilter: string | null = null;
+	let activeHighlightCard = null;
+	let activeHighlightTimeout = null;
+	
+	function clearActiveHighlight() {
+		if (activeHighlightTimeout) {
+			window.clearTimeout(activeHighlightTimeout);
+			activeHighlightTimeout = null;
+		}
+		if (activeHighlightCard) {
+			activeHighlightCard.classList.remove('faculty-search-highlight');
+			activeHighlightCard.style.removeProperty('box-shadow');
+			activeHighlightCard.style.boxShadow = '';
+			activeHighlightCard = null;
+		}
+	}
+	
+	function highlightFacultyCard(card) {
+		if (!card) return;
+		clearActiveHighlight();
+		activeHighlightCard = card;
+		card.classList.add('faculty-search-highlight');
+		card.style.boxShadow = '0 0 0 4px rgba(97, 6, 59, 0.35)';
+		card.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+		activeHighlightTimeout = window.setTimeout(() => {
+			if (activeHighlightCard === card) {
+				card.classList.remove('faculty-search-highlight');
+				card.style.removeProperty('box-shadow');
+				card.style.boxShadow = '';
+				activeHighlightCard = null;
+			}
+			activeHighlightTimeout = null;
+		}, 5000);
+	}
 	
 	// Faculty data for search (matching modal data structure)
 	const facultySearchData = {
-    'sali': { name: 'Assoc. Prof. Najeeb Razul A. Sali, Ph.D.', position: 'Acting Dean, CIAS', specialization: ['Islamic Banking Econometrics', 'Islamic Studies', 'Educational Leadership'] },
-    'abdulwahid': { name: 'Assoc. Prof. Kasmil S. Abdulwahid, Ph.D.', position: 'Chairman, MAISED', specialization: ['Islamic Education', 'Arabic Language Teaching', 'Educational Psychology'] },
-    'bud': { name: 'Prof. Aisa U. Bud, Ph.D.', position: 'Director, Guidance and Counseling Office', specialization: ['Language Studies', 'Guidance and Counseling', 'Islamic Education'] },
-    'astarani': { name: 'Assoc. Prof. Haidit A. Astarani', position: 'College Secretary', specialization: ['Shari\'ah Law', 'Legal Outreach', 'Community Programs'] },
-    'pagaruan': { name: 'Instructor Sulaiman A. Pagaruan', position: 'Chairman, BSTA', specialization: ['Islamic Education', 'Community Engagement', 'Peace Advocacy'] },
-    'utoeglis': { name: 'Asst. Prof. Eliriza S. Utoeglis', position: 'Chairperson, ABIS Department', specialization: ['Shari\'ah', 'Halal Governance', 'Islamic Insurance'] },
-    'baguio': { name: 'Asst. Prof. Estefanio Jr. B. Baguio', position: 'Faculty', specialization: ['Islamic Education', 'Values Transformation', 'Peace Advocacy'] },
-    'arabani': { name: 'Instructor Benhar T. Arabani', position: 'Faculty', specialization: ['Arabic Studies', 'Islamic Education'] },
-    'eldani': { name: 'Assoc. Prof. Abdulhamid A. Eldani, Ph.D.', position: 'Faculty', specialization: ['Islamic Studies', 'Philippine History'] },
-    'ibnohajad': { name: 'Instructor Al-Ameen M. Ibnohajad', position: 'Faculty', specialization: ['Islamic Jurisprudence', 'Arabic Language'] },
-    'jalhani': { name: 'Instructor Ahmad B. Jalhani', position: 'Faculty', specialization: ['Islamic Law', 'Arabic Language Education'] },
-    'alaldaya': { name: 'Instructor Rudyn A. Alaldaya', position: 'Faculty', specialization: ['Community Broadcasting', 'Islamic Studies', 'Peace Advocacy'] }
+    'sali': { name: 'Assoc. Prof. Najeeb Razul A. Sali, Ph.D.', position: 'Acting Dean, CIAS', department: 'Islamic Studies Department', specialization: ['Islamic Banking Econometrics', 'Islamic Studies', 'Educational Leadership'] },
+    'abdulwahid': { name: 'Assoc. Prof. Kasmil S. Abdulwahid, Ph.D.', position: 'Chairperson, Graduate Islamic Education Department', department: 'Graduate Islamic Education Department', specialization: ['Islamic Education', 'Arabic Language Teaching', 'Educational Psychology'] },
+    'bud': { name: 'Prof. Aisa U. Bud, Ph.D.', position: 'Director, Guidance and Counseling Office', department: 'Teaching Arabic Department', specialization: ['Language Studies', 'Guidance and Counseling', 'Islamic Education'] },
+    'astarani': { name: 'Assoc. Prof. Haidit A. Astarani', position: 'College Secretary', department: 'Islamic Studies Department', specialization: ['Shari\'ah Law', 'Legal Outreach', 'Community Programs'] },
+    'pagaruan': { name: 'Instructor Sulaiman A. Pagaruan', position: 'Chairperson, Teaching Arabic Department', department: 'Teaching Arabic Department', specialization: ['Islamic Education', 'Community Engagement', 'Peace Advocacy'] },
+    'utoeglis': { name: 'Asst. Prof. Eliriza S. Utoeglis', position: 'Chairperson, Islamic Studies Department', department: 'Islamic Studies Department', specialization: ['Shari\'ah', 'Halal Governance', 'Islamic Insurance'] },
+    'baguio': { name: 'Asst. Prof. Estefanio Jr. B. Baguio', position: 'Faculty', department: 'Teaching Arabic Department', specialization: ['Islamic Education', 'Values Transformation', 'Peace Advocacy'] },
+    'arabani': { name: 'Instructor Benhar T. Arabani', position: 'Faculty', department: 'Teaching Arabic Department', specialization: ['Arabic Studies', 'Islamic Education'] },
+    'eldani': { name: 'Assoc. Prof. Abdulhamid A. Eldani, Ph.D.', position: 'Faculty', department: 'Islamic Studies Department', specialization: ['Islamic Studies', 'Philippine History'] },
+    'ibnohajad': { name: 'Instructor Al-Ameen M. Ibnohajad', position: 'Faculty', department: 'Islamic Studies Department', specialization: ['Islamic Jurisprudence', 'Arabic Language'] },
+    'jalhani': { name: 'Instructor Ahmad B. Jalhani', position: 'Faculty', department: 'Islamic Studies Department', specialization: ['Islamic Law', 'Arabic Language Education'] },
+    'alaldaya': { name: 'Instructor Rudyn A. Alaldaya', position: 'Faculty', department: 'Islamic Studies Department', specialization: ['Community Broadcasting', 'Islamic Studies', 'Peace Advocacy'] }
 };
 	
-	// Get all faculty cards
-	const allFacultyCards = facultyGrid.querySelectorAll('.bg-white.rounded-xl.shadow-lg');
+	// Get all faculty cards (including department faculty cards)
+	const allFacultyCards = Array.from(facultyGrid.querySelectorAll('.bg-white.rounded-xl.shadow-lg[data-faculty-card], .bg-white.rounded-xl.shadow-lg')) as HTMLElement[];
 	
 	// Create a map of faculty cards by their modal ID
 	const facultyCardMap = new Map();
@@ -2866,27 +2944,47 @@ document.addEventListener('DOMContentLoaded', function() {
 			const onclickAttr = button.getAttribute('onclick');
 			const match = onclickAttr.match(/openFacultyModal\('([^']+)'\)/);
 			if (match && match[1]) {
-				facultyCardMap.set(match[1], card);
+				const facultyId = match[1];
+				const cardElement = card as HTMLElement;
+				// Use a unique key that includes department to allow multiple cards per faculty member
+				const department = cardElement.dataset.department || '';
+				const uniqueKey = department ? `${facultyId}-${department}` : facultyId;
+				facultyCardMap.set(uniqueKey, card);
+				cardElement.dataset.facultyId = facultyId;
+				const info = facultySearchData[facultyId];
+				if (info) {
+					if (info.department) {
+						if (!cardElement.dataset.department) {
+							cardElement.dataset.department = info.department;
+						}
+					}
+				}
 			}
 		}
 	});
 	
 	function filterFaculty(searchTerm) {
 		searchTerm = searchTerm.toLowerCase().trim();
-		
+		if (searchTerm && activeDepartmentFilter) {
+			activeDepartmentFilter = null;
+			// Update department buttons state if needed
+		}
+		clearActiveHighlight();
+
 		let visibleCount = 0;
-		let matchedCards = [];
+		const matchedEntries = [];
 		
 		// If search is empty, show all cards in default state
 		if (!searchTerm) {
 			// Reset to default view
 			allFacultyCards.forEach((card, index) => {
-				card.classList.remove('hidden');
-				(card as HTMLElement).style.display = '';
+				const cardElement = card as HTMLElement;
+				cardElement.classList.remove('hidden');
+				cardElement.style.display = '';
 				
 				// Hide additional faculty cards by default
-				if (card.classList.contains('additional-faculty')) {
-					card.classList.add('hidden');
+				if (cardElement.classList.contains('additional-faculty')) {
+					cardElement.classList.add('hidden');
 				}
 			});
 			
@@ -2901,43 +2999,198 @@ document.addEventListener('DOMContentLoaded', function() {
 			
 			// Hide search results
 			if (facultySearchResults) facultySearchResults.classList.add('hidden');
+			if (facultyResultsCount) facultyResultsCount.textContent = '';
+			if (facultyResultsList) facultyResultsList.innerHTML = '';
+			if (facultySearchMatchesGrid) facultySearchMatchesGrid.innerHTML = '';
+			if (facultySearchMatches) facultySearchMatches.classList.add('hidden');
 			if (clearFacultySearchBtn) clearFacultySearchBtn.classList.add('hidden');
 			
 			return;
 		}
-		
+
 		// Filter faculty based on search term
 		facultyCardMap.forEach((card, facultyId) => {
-			const facultyData = facultySearchData[facultyId];
-			if (!facultyData) return;
-			
-			const searchableText = [
-				facultyData.name,
-				facultyData.position,
-				...facultyData.specialization
-			].join(' ').toLowerCase();
-			
-			if (searchableText.includes(searchTerm)) {
-				card.classList.remove('hidden');
-				(card as HTMLElement).style.display = '';
-				matchedCards.push(card);
-				visibleCount++;
+			const cardElement = card as HTMLElement;
+			const baseFacultyId = facultyId.split('-')[0]; // Extract base ID if it includes department
+			const facultyData = facultySearchData[baseFacultyId];
+			let matches = false;
+			let entryData = facultyData;
+
+			if (facultyData) {
+				const searchableText = [
+					facultyData.name,
+					facultyData.position,
+					facultyData.department || '',
+					...(facultyData.specialization || [])
+				]
+					.join(' ')
+					.toLowerCase();
+				matches = searchableText.includes(searchTerm);
+			}
+
+			if (!matches) {
+				const cardName = cardElement.querySelector('h3')?.textContent || '';
+				const cardPosition = cardElement.querySelector('.text-gray-300.text-sm')?.textContent || '';
+				const cardSpecialization = cardElement.querySelector('.flex.items-center.mb-4 span')?.textContent || '';
+				const cardDescription = cardElement.querySelector('.text-msu-main-color.dark\\:text-msu-bgc-color.mb-4')?.textContent || '';
+				
+				const searchableText = [
+					cardName,
+					cardPosition,
+					cardSpecialization,
+					cardDescription
+				]
+					.join(' ')
+					.toLowerCase();
+				
+				if (searchableText.includes(searchTerm)) {
+					matches = true;
+					entryData = {
+						name: cardName.trim(),
+						position: cardPosition.trim(),
+						department: cardElement.dataset.department || 'College of Islamic and Arabic Studies',
+						specialization: cardSpecialization ? [cardSpecialization.trim()] : []
+					};
+				}
+			}
+
+			if (matches) {
+				cardElement.classList.remove('hidden');
+				cardElement.style.display = '';
+				visibleCount += 1;
+				matchedEntries.push({
+					id: baseFacultyId,
+					card: cardElement,
+					data: entryData
+				});
+				
+				// If this card is in a department faculty cards container, show the container
+				const departmentContainer = cardElement.closest('.department-faculty-cards');
+				if (departmentContainer) {
+					departmentContainer.classList.remove('hidden');
+					(departmentContainer as HTMLElement).style.display = 'grid';
+				}
 			} else {
-				card.classList.add('hidden');
-				(card as HTMLElement).style.display = 'none';
+				cardElement.classList.add('hidden');
+				cardElement.style.display = 'none';
 			}
 		});
 		
+		// Hide department containers that have no visible cards
+		const departmentContainers = facultyGrid.querySelectorAll('.department-faculty-cards');
+		departmentContainers.forEach((container) => {
+			const visibleCards = container.querySelectorAll('.bg-white.rounded-xl.shadow-lg:not(.hidden)');
+			if (visibleCards.length === 0) {
+				container.classList.add('hidden');
+				(container as HTMLElement).style.display = 'none';
+			}
+		});
+			
 		// Update results counter
+		if (facultyResultsCount) {
+			facultyResultsCount.innerHTML = '';
+		}
+		if (facultyResultsList) {
+			facultyResultsList.innerHTML = '';
+		}
+		if (facultySearchMatchesGrid) {
+			facultySearchMatchesGrid.innerHTML = '';
+		}
+		if (facultySearchMatches) {
+			facultySearchMatches.classList.add('hidden');
+		}
+
 		if (facultySearchResults && facultyResultsCount) {
 			if (visibleCount === 0) {
 				facultyResultsCount.innerHTML = '<span class="text-red-500">No faculty members found</span>';
 				facultySearchResults.classList.remove('hidden');
-			} else if (visibleCount === allFacultyCards.length) {
-				facultySearchResults.classList.add('hidden');
 			} else {
-				facultyResultsCount.innerHTML = `Showing <span class="font-semibold text-msu-main-color">${visibleCount}</span> of <span class="font-semibold">${allFacultyCards.length}</span> faculty members`;
+				facultyResultsCount.innerHTML = `Showing <span class="font-semibold text-msu-main-color dark:text-msu-bgc-color">${visibleCount}</span> faculty member${visibleCount === 1 ? '' : 's'}`;
 				facultySearchResults.classList.remove('hidden');
+			}
+		}
+
+		// Build grouped results list
+		if (facultyResultsList && matchedEntries.length && visibleCount !== allFacultyCards.length) {
+			const groupedEntries = new Map();
+
+			matchedEntries.forEach(entry => {
+				const department = (entry.data && entry.data.department) || entry.card.dataset.department || 'College of Islamic and Arabic Studies';
+				if (!groupedEntries.has(department)) {
+					groupedEntries.set(department, []);
+				}
+				groupedEntries.get(department)?.push(entry);
+			});
+
+			let resultsHtml = '';
+			groupedEntries.forEach((entries, department) => {
+				const sortedEntries = entries.slice().sort((a, b) => {
+					const nameA = ((a.data && a.data.name) || a.card.querySelector('h3')?.textContent || '').toLowerCase();
+					const nameB = ((b.data && b.data.name) || b.card.querySelector('h3')?.textContent || '').toLowerCase();
+					return nameA.localeCompare(nameB);
+				});
+
+				const chipsHtml = sortedEntries.map(entry => {
+					const name = escapeHtml((entry.data && entry.data.name) || entry.card.querySelector('h3')?.textContent || 'Faculty Member');
+					const position = escapeHtml((entry.data && entry.data.position) || entry.card.querySelector('.text-gray-300.text-sm')?.textContent || '');
+					const positionHtml = position ? `<span class="text-xs text-gray-500 dark:text-gray-400 sm:ml-1">${position}</span>` : '';
+					return `<button type="button" class="inline-flex flex-col sm:flex-row sm:items-center sm:gap-1 px-3 py-1.5 rounded-full border border-gray-300 dark:border-gray-600 text-sm text-msu-deep-ocean dark:text-msu-bgc-color bg-white dark:bg-gray-800 hover:bg-msu-deep-ocean hover:text-white transition-colors duration-200" data-faculty-id="${entry.id}"><span class="font-semibold">${name}</span>${positionHtml}</button>`;
+				}).join('');
+
+				resultsHtml += `<div class="bg-white dark:bg-gray-900/70 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 shadow-sm">
+					<p class="text-xs font-semibold uppercase tracking-wide text-msu-deep-ocean dark:text-msu-bgc-color">${escapeHtml(department)}</p>
+					<div class="mt-2 flex flex-wrap gap-2">${chipsHtml}</div>
+				</div>`;
+			});
+
+			facultyResultsList.innerHTML = resultsHtml;
+		}
+
+		// Render matching cards below the search area
+		if (facultySearchMatches && facultySearchMatchesGrid) {
+			if (visibleCount > 0) {
+				facultySearchMatchesGrid.innerHTML = '';
+				matchedEntries.forEach(entry => {
+					const clone = entry.card.cloneNode(true) as HTMLElement;
+					clone.classList.remove('hidden');
+					clone.style.display = '';
+					clone.removeAttribute('id');
+					facultySearchMatchesGrid.appendChild(clone);
+				});
+
+				const matchImages = facultySearchMatchesGrid.querySelectorAll<HTMLImageElement>('.lazy-image');
+				if ('IntersectionObserver' in window) {
+					const observer = new IntersectionObserver((entries, observerInstance) => {
+						entries.forEach(entry => {
+							if (entry.isIntersecting) {
+								const img = entry.target as HTMLImageElement;
+								img.classList.add('loaded');
+								(img as HTMLElement).style.opacity = '1';
+								observerInstance.unobserve(img);
+							}
+						});
+					}, {
+						rootMargin: '50px 0px',
+						threshold: 0.01
+					});
+
+					matchImages.forEach(img => {
+						if (!img.classList.contains('loaded')) {
+							(img as HTMLElement).style.opacity = '0';
+							observer.observe(img);
+						}
+					});
+				} else {
+					matchImages.forEach(img => {
+						img.classList.add('loaded');
+						(img as HTMLElement).style.opacity = '1';
+					});
+				}
+
+				facultySearchMatches.classList.remove('hidden');
+			}	else {
+				facultySearchMatchesGrid.innerHTML = '';
+				facultySearchMatches.classList.add('hidden');
 			}
 		}
 		
@@ -2958,6 +3211,9 @@ document.addEventListener('DOMContentLoaded', function() {
 	
 	// Event listener for search input
 	facultySearchInput.addEventListener('input', function(e) {
+		if (activeDepartmentFilter) {
+			activeDepartmentFilter = null;
+		}
 		filterFaculty((e.target as HTMLInputElement).value);
 	});
 	
@@ -2965,6 +3221,9 @@ document.addEventListener('DOMContentLoaded', function() {
 	if (clearFacultySearchBtn) {
 		clearFacultySearchBtn.addEventListener('click', function() {
 			(facultySearchInput as HTMLInputElement).value = '';
+			if (activeDepartmentFilter) {
+				activeDepartmentFilter = null;
+			}
 			filterFaculty('');
 			facultySearchInput.focus();
 		});
@@ -2979,6 +3238,132 @@ document.addEventListener('DOMContentLoaded', function() {
 				clearFacultySearchBtn.classList.add('hidden');
 			}
 		}
+	});
+	
+	// Click handler for faculty results list chips
+	if (facultyResultsList) {
+		facultyResultsList.addEventListener('click', function(event) {
+			const target = (event.target as HTMLElement).closest('button[data-faculty-id]');
+			if (!target) return;
+			event.preventDefault();
+			const facultyId = target.getAttribute('data-faculty-id');
+			if (!facultyId) return;
+			// Find the first matching card for this faculty ID
+			let card = null;
+			facultyCardMap.forEach((c, key) => {
+				if (key.startsWith(facultyId) && !card) {
+					card = c;
+				}
+			});
+			if (!card) return;
+			const cardElement = card as HTMLElement;
+			cardElement.classList.remove('hidden');
+			cardElement.style.display = '';
+			highlightFacultyCard(cardElement);
+		});
+	}
+});
+
+// Department Toggle Functionality
+document.addEventListener('DOMContentLoaded', function() {
+	const departmentFacultyButtons = Array.from(document.querySelectorAll('.department-faculty-toggle')) as HTMLButtonElement[];
+	const facultyGrid = document.getElementById('facultyGrid');
+	
+	// Ensure all department faculty cards are hidden by default on page load
+	if (facultyGrid) {
+		const allDepartmentCards = facultyGrid.querySelectorAll('.department-faculty-cards') as NodeListOf<HTMLElement>;
+		allDepartmentCards.forEach((container) => {
+			container.classList.add('hidden');
+			container.style.display = 'none';
+		});
+	}
+	
+	departmentFacultyButtons.forEach((button) => {
+		button.addEventListener('click', function() {
+			const department = button.dataset.department || '';
+			const isActive = button.getAttribute('aria-pressed') === 'true';
+			const newIsActive = !isActive;
+			
+			button.setAttribute('aria-pressed', newIsActive ? 'true' : 'false');
+			
+			// Update button text
+			const buttonText = button.querySelector('.text-left');
+			if (buttonText) {
+				const showText = buttonText.querySelector('span:first-child');
+				if (showText) {
+					showText.textContent = newIsActive ? 'Hide' : 'Show';
+				}
+			}
+			
+			const icon = button.querySelector('.department-button-icon') as SVGElement | null;
+			if (icon) {
+				icon.style.transition = 'transform 0.2s ease-in-out';
+				icon.style.transform = newIsActive ? 'rotate(180deg)' : '';
+			}
+			
+			const banner = button.closest('.faculty-department-banner');
+			const bannerContent = banner?.querySelector('.faculty-banner-content') as HTMLElement | null;
+			if (bannerContent) {
+				const defaultDisplay = bannerContent.dataset.defaultDisplay || (bannerContent.classList.contains('grid') ? 'grid' : 'block');
+				if (!bannerContent.dataset.defaultDisplay) {
+					bannerContent.dataset.defaultDisplay = defaultDisplay;
+				}
+				if (newIsActive) {
+					bannerContent.classList.remove('hidden');
+					bannerContent.style.display = defaultDisplay;
+				} else {
+					bannerContent.classList.add('hidden');
+					bannerContent.style.display = 'none';
+				}
+			}
+			
+			// Toggle faculty cards below the banner - only for the specific department
+			if (facultyGrid) {
+				// Hide all other department faculty cards first (optional - comment out if you want multiple departments visible)
+				const allDepartmentCards = facultyGrid.querySelectorAll('.department-faculty-cards') as NodeListOf<HTMLElement>;
+				allDepartmentCards.forEach((container) => {
+					const containerDepartment = container.getAttribute('data-department');
+					if (containerDepartment && containerDepartment !== department) {
+						container.classList.add('hidden');
+						container.style.display = 'none';
+						// Also reset the button state for other departments
+						const otherButton = Array.from(departmentFacultyButtons).find(btn => btn.dataset.department === containerDepartment);
+						if (otherButton && otherButton.getAttribute('aria-pressed') === 'true') {
+							otherButton.setAttribute('aria-pressed', 'false');
+							const otherButtonText = otherButton.querySelector('.text-left');
+							if (otherButtonText) {
+								const otherShowText = otherButtonText.querySelector('span:first-child');
+								if (otherShowText) {
+									otherShowText.textContent = 'Show';
+								}
+							}
+							const otherIcon = otherButton.querySelector('.department-button-icon') as SVGElement | null;
+							if (otherIcon) {
+								otherIcon.style.transform = '';
+							}
+							const otherBanner = otherButton.closest('.faculty-department-banner');
+							const otherBannerContent = otherBanner?.querySelector('.faculty-banner-content') as HTMLElement | null;
+							if (otherBannerContent) {
+								otherBannerContent.classList.add('hidden');
+								otherBannerContent.style.display = 'none';
+							}
+						}
+					}
+				});
+				
+				// Show/hide the specific department's faculty cards
+				const facultyCards = facultyGrid.querySelectorAll(`.department-faculty-cards[data-department="${department}"]`) as NodeListOf<HTMLElement>;
+				facultyCards.forEach((cardsContainer) => {
+					if (newIsActive) {
+						cardsContainer.classList.remove('hidden');
+						cardsContainer.style.display = 'grid';
+					} else {
+						cardsContainer.classList.add('hidden');
+						cardsContainer.style.display = 'none';
+					}
+				});
+			}
+		});
 	});
 });
 
@@ -3939,11 +4324,11 @@ document.addEventListener('DOMContentLoaded', function() {
 						<ul class="space-y-2 text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">
 							<li class="flex items-start">
 								<span class="text-msu-deep-ocean mr-2 mt-1">•</span>
-								<span><strong>Associate Prof. Kasmil S. Abdulwahid, Ph.D.</strong> &mdash; MAISED Chair researching Islamic pedagogy and teacher well-being</span>
+								<span><strong>Associate Prof. Kasmil S. Abdulwahid, Ph.D.</strong> &mdash; Graduate Islamic Education Department Chair researching Islamic pedagogy and teacher well-being</span>
 							</li>
 							<li class="flex items-start">
 								<span class="text-msu-deep-ocean mr-2 mt-1">•</span>
-								<span><strong>Instructor Sulaiman A. Pagaruan</strong> &mdash; BSTA Chair leading Arabic teacher development and peace advocacy</span>
+								<span><strong>Instructor Sulaiman A. Pagaruan</strong> &mdash; Teaching Arabic Department Chair leading Arabic teacher development and peace advocacy</span>
 							</li>
 							<li class="flex items-start">
 								<span class="text-msu-deep-ocean mr-2 mt-1">•</span>
@@ -3996,375 +4381,644 @@ document.addEventListener('DOMContentLoaded', function() {
         <section id="facultySpotlight" class="py-20 bg-gray-50">
 			<div class="container mx-auto px-6">
 				<div class="text-center mb-16">
-					<h2 class="text-3xl font-bold mb-4 text-[#61063B] dark:text-msu-bgc-color">Faculty Spotlight</h2>
+					<h2 class="text-3xl font-bold mb-4 text-[#61063B] dark:text-msu-bgc-color">Departments</h2>
 					<p class="text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto">
-						Meet the scholar-leaders of the College of Islamic and Arabic Studies who champion Islamic scholarship, community leadership, and student success.
+						Explore the academic departments of the College of Islamic and Arabic Studies, each dedicated to excellence in Islamic scholarship, Arabic language education, and community leadership.
 					</p>
 				</div>
 
-				<div class="mb-8 max-w-2xl mx-auto">
-					<div class="relative">
-						<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-							<svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-							</svg>
-						</div>
-						<input
-							type="text"
-							id="facultySearch"
-							placeholder="Search faculty by name, position, or specialization..."
-							class="block w-full pl-12 pr-12 py-4 text-base border border-gray-300 rounded-xl focus:ring-2 focus:ring-msu-main-color focus:border-msu-main-color transition-all duration-300 shadow-sm hover:shadow-md"
-						>
-						<button
-							id="clearFacultySearch"
-							class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 transition-colors duration-200 hidden"
-							title="Clear search"
-						>
-							<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-							</svg>
-						</button>
-					</div>
-					<div id="facultySearchResults" class="mt-3 text-center text-sm text-gray-600 dark:text-gray-400 hidden">
-						<span id="facultyResultsCount"></span>
-					</div>
-				</div>
-
-				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="facultyGrid">
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
-						<div class="h-90 overflow-hidden relative">
-							<img src="/images/cias/Faculty/msufaculty.png" alt="Associate Prof. Najeeb Razul A. Sali, Ph.D." class="w-full h-full object-cover lazy-image" loading="lazy">
-							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-								<h3 class="text-white font-bold text-xl">Associate Prof. Najeeb Razul A. Sali, Ph.D.</h3>
-								<p class="text-gray-300 text-sm">Acting Dean, CIAS</p>
+				<div class="grid md:grid-cols-1 lg:grid-cols-1 gap-8" id="facultyGrid">
+					<!-- Teaching Arabic Department -->
+					<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Teaching Arabic Department">
+						<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#61063B] via-[#8C1F5A] to-[#2F1A45] text-white p-8 md:p-10 shadow-2xl">
+							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
+							<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+								<div class="max-w-xl">
+									<h3 class="text-2xl md:text-3xl font-bold leading-snug">Teaching Arabic Department</h3>
+									<p class="mt-4 text-sm md:text-base text-white/90">
+										Chairperson: Inst. Sulaiman A. Pagaruan, MAED
+									</p>
+									<p class="mt-2 text-sm md:text-base text-white/90">
+										Dedicated to excellence in Arabic language education, preparing future educators and scholars through comprehensive Arabic language instruction and Islamic pedagogical methods.
+									</p>
+									<div class="mt-6 flex flex-wrap gap-3">
+										<button
+											type="button"
+											class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Teaching Arabic Department"
+											aria-pressed="false"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-white/80">Show</span>
+												<span class="block text-sm md:text-base font-semibold">Faculty</span>
+											</div>
+											<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+											</svg>
+										</button>
+									</div>
+								</div>
+								<div class="flex-1 w-full space-y-4 md:space-y-6">
+									<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base faculty-banner-content hidden" data-static-content="true" data-member-count="5">
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Estefanio Jr. B. Baguio</p>
+												<p class="text-white/80 text-sm font-normal">Assistant Professor IV</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Kasmil S. Abdulwahid</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Chairperson of Graduate Islamic Education Department</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Benhar T. Arabani</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Aisa U. Bud</p>
+												<p class="text-white/80 text-sm font-normal">Professor VI • Director of Guidance and Counselling</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Sulaiman A. Pagaruan</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I • Chairperson of Teaching Arabic Department</p>
+											</div>
+										</div>
+									</div>
+									<div class="space-y-3 text-sm md:text-base faculty-banner-programs hidden"></div>
+								</div>
 							</div>
-						</div>
-						<div class="p-6">
-							<div class="flex items-center mb-4">
-								<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
-								</svg>
-								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Islamic Studies & Islamic Banking Econometrics</span>
-							</div>
-							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-								Acting Dean steering CIAS toward COPC compliance while linking Islamic history, economics, and leadership excellence.
-							</p>
-							<button onclick="openFacultyModal('sali')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
-								View Profile
-								<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-								</svg>
-							</button>
-						</div>
-					</div>
-
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
-						<div class="h-90 overflow-hidden relative">
-							<img src="/images/cias/Faculty/msufaculty.png" alt="Associate Prof. Kasmil S. Abdulwahid, Ph.D." class="w-full h-full object-cover lazy-image" loading="lazy">
-							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-								<h3 class="text-white font-bold text-xl">Associate Prof. Kasmil S. Abdulwahid, Ph.D.</h3>
-								<p class="text-gray-300 text-sm">Chairman, MAISED</p>
-							</div>
-						</div>
-						<div class="p-6">
-							<div class="flex items-center mb-4">
-								<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H15"></path>
-								</svg>
-								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Islamic Education & Pedagogy</span>
-							</div>
-							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-								Doctor of Islamic Education driving MAISED innovation through scholarship on pedagogy, psychology, and Arabic language leadership.
-							</p>
-							<button onclick="openFacultyModal('abdulwahid')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
-								View Profile
-								<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-								</svg>
-							</button>
-						</div>
-					</div>
-
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
-						<div class="h-90 overflow-hidden relative">
-							<img src="/images/cias/Faculty/msufaculty.png" alt="Prof. Aisa U. Bud, Ph.D." class="w-full h-full object-cover lazy-image" loading="lazy">
-							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-								<h3 class="text-white font-bold text-xl">Prof. Aisa U. Bud, Ph.D.</h3>
-								<p class="text-gray-300 text-sm">Director, Guidance and Counseling Office</p>
-							</div>
-						</div>
-						<div class="p-6">
-							<div class="flex items-center mb-4">
-								<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-								</svg>
-								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Language Studies & Guidance</span>
-							</div>
-							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-								Professor VI championing CIAS counseling services while advancing language studies and Islamic education research.
-							</p>
-							<button onclick="openFacultyModal('bud')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
-								View Profile
-								<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-								</svg>
-							</button>
 						</div>
 					</div>
 
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
-						<div class="h-90 overflow-hidden relative">
-							<img src="/images/cias/Faculty/msufaculty.png" alt="Associate Prof. Haidit A. Astarani" class="w-full h-full object-cover lazy-image" loading="lazy">
-							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-								<h3 class="text-white font-bold text-xl">Associate Prof. Haidit A. Astarani</h3>
-								<p class="text-gray-300 text-sm">College Secretary</p>
+					<!-- Teaching Arabic Department Faculty Cards -->
+					<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 department-faculty-cards hidden" data-department="Teaching Arabic Department">
+						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2" data-faculty-card data-department="Teaching Arabic Department">
+							<div class="h-90 overflow-hidden relative">
+								<img src="/images/cias/Faculty/msufaculty.png" alt="Assistant Prof. Estefanio Jr. B. Baguio" class="w-full h-full object-cover lazy-image" loading="lazy">
+								<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+									<h3 class="text-white font-bold text-xl">Assistant Prof. Estefanio Jr. B. Baguio</h3>
+									<p class="text-gray-300 text-sm">Assistant Professor IV</p>
+								</div>
+							</div>
+							<div class="p-6">
+								<div class="flex items-center mb-4">
+									<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+									</svg>
+									<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Islamic Education & Youth Formation</span>
+								</div>
+								<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+									Peace advocate and Best Thesis awardee shaping transformative Islamic education and community leadership.
+								</p>
+								<button onclick="openFacultyModal('baguio')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
+									View Profile
+									<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+									</svg>
+								</button>
 							</div>
 						</div>
-						<div class="p-6">
-							<div class="flex items-center mb-4">
-								<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
-								</svg>
-								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Philippine Law & Shari'ah Practice</span>
+
+						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2" data-faculty-card data-department="Teaching Arabic Department">
+							<div class="h-90 overflow-hidden relative">
+								<img src="/images/cias/Faculty/msufaculty.png" alt="Associate Prof. Kasmil S. Abdulwahid, Ph.D." class="w-full h-full object-cover lazy-image" loading="lazy">
+								<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+									<h3 class="text-white font-bold text-xl">Associate Prof. Kasmil S. Abdulwahid, Ph.D.</h3>
+									<p class="text-gray-300 text-sm">Associate Professor V • Chairperson of Graduate Islamic Education Department</p>
+								</div>
 							</div>
-							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-								College Secretary blending Philippine law and Shari'ah expertise with award-winning community extension leadership.
-							</p>
-							<button onclick="openFacultyModal('astarani')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
-								View Profile
-								<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-								</svg>
-							</button>
+							<div class="p-6">
+								<div class="flex items-center mb-4">
+									<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H15"></path>
+									</svg>
+									<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Islamic Education & Pedagogy</span>
+								</div>
+								<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+									Doctor of Islamic Education driving Graduate Islamic Education Department innovation through scholarship on pedagogy, psychology, and Arabic language leadership.
+								</p>
+								<button onclick="openFacultyModal('abdulwahid')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
+									View Profile
+									<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+									</svg>
+								</button>
+							</div>
+						</div>
+
+						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2" data-faculty-card data-department="Teaching Arabic Department">
+							<div class="h-90 overflow-hidden relative">
+								<img src="/images/cias/Faculty/msufaculty.png" alt="Instructor Benhar T. Arabani" class="w-full h-full object-cover lazy-image" loading="lazy">
+								<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+									<h3 class="text-white font-bold text-xl">Instructor Benhar T. Arabani</h3>
+									<p class="text-gray-300 text-sm">Instructor I</p>
+								</div>
+							</div>
+							<div class="p-6">
+								<div class="flex items-center mb-4">
+									<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"></path>
+									</svg>
+									<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Arabic Studies & Instruction</span>
+								</div>
+								<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+									Instructor I nurturing Arabic language proficiency and faith-centered scholarship in CIAS classrooms.
+								</p>
+								<button onclick="openFacultyModal('arabani')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
+									View Profile
+									<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+									</svg>
+								</button>
+							</div>
+						</div>
+
+						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2" data-faculty-card data-department="Teaching Arabic Department">
+							<div class="h-90 overflow-hidden relative">
+								<img src="/images/cias/Faculty/msufaculty.png" alt="Prof. Aisa U. Bud, Ph.D." class="w-full h-full object-cover lazy-image" loading="lazy">
+								<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+									<h3 class="text-white font-bold text-xl">Prof. Aisa U. Bud, Ph.D.</h3>
+									<p class="text-gray-300 text-sm">Professor VI • Director of Guidance and Counselling</p>
+								</div>
+							</div>
+							<div class="p-6">
+								<div class="flex items-center mb-4">
+									<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+									</svg>
+									<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Language Studies & Guidance</span>
+								</div>
+								<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+									Professor VI championing CIAS counseling services while advancing language studies and Islamic education research.
+								</p>
+								<button onclick="openFacultyModal('bud')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
+									View Profile
+									<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+									</svg>
+								</button>
+							</div>
+						</div>
+
+						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2" data-faculty-card data-department="Teaching Arabic Department">
+							<div class="h-90 overflow-hidden relative">
+								<img src="/images/cias/Faculty/msufaculty.png" alt="Instructor Sulaiman A. Pagaruan" class="w-full h-full object-cover lazy-image" loading="lazy">
+								<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+									<h3 class="text-white font-bold text-xl">Instructor Sulaiman A. Pagaruan</h3>
+									<p class="text-gray-300 text-sm">Instructor I • Chairperson of Teaching Arabic Department</p>
+								</div>
+							</div>
+							<div class="p-6">
+								<div class="flex items-center mb-4">
+									<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+									</svg>
+									<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Islamic Education & Peace Advocacy</span>
+								</div>
+								<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+									Award-winning Teaching Arabic Department chairperson weaving Arabic teacher development with region-wide peace and outreach initiatives.
+								</p>
+								<button onclick="openFacultyModal('pagaruan')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
+									View Profile
+									<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+									</svg>
+								</button>
+							</div>
 						</div>
 					</div>
 
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
-						<div class="h-90 overflow-hidden relative">
-							<img src="/images/cias/Faculty/msufaculty.png" alt="Instructor Sulaiman A. Pagaruan" class="w-full h-full object-cover lazy-image" loading="lazy">
-							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-								<h3 class="text-white font-bold text-xl">Instructor Sulaiman A. Pagaruan</h3>
-								<p class="text-gray-300 text-sm">Chairman, BSTA</p>
+					<!-- Islamic Studies Department -->
+					<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Islamic Studies Department">
+						<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#61063B] via-[#8C1F5A] to-[#2F1A45] text-white p-8 md:p-10 shadow-2xl">
+							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
+							<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+								<div class="max-w-xl">
+									<h3 class="text-2xl md:text-3xl font-bold leading-snug">Islamic Studies Department</h3>
+									<p class="mt-4 text-sm md:text-base text-white/90">
+										Chairperson: Asst. Prof. Eliriza S. Utoeglis, MAIS
+									</p>
+									<p class="mt-2 text-sm md:text-base text-white/90">
+										Advancing Islamic scholarship through comprehensive studies in Shari'ah, Islamic jurisprudence, halal governance, and Islamic law, preparing graduates for leadership roles in Islamic communities.
+									</p>
+									<div class="mt-6 flex flex-wrap gap-3">
+										<button
+											type="button"
+											class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Islamic Studies Department"
+											aria-pressed="false"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-white/80">Show</span>
+												<span class="block text-sm md:text-base font-semibold">Faculty</span>
+											</div>
+											<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+											</svg>
+										</button>
+									</div>
+								</div>
+								<div class="flex-1 w-full space-y-4 md:space-y-6">
+									<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base faculty-banner-content hidden" data-static-content="true" data-member-count="5">
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Eliriza S. Utoeglis</p>
+												<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Chairperson of Islamic Studies Department</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Najeeb Razul A. Sali</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Dean, College of Islamic Arts and Sciences</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Haidit A. Astarani</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • College Secretary</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Rudyn S. Alaldaya</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Ahamad B. Jalhani</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I</p>
+											</div>
+										</div>
+									</div>
+									<div class="space-y-3 text-sm md:text-base faculty-banner-programs hidden"></div>
+								</div>
 							</div>
-						</div>
-						<div class="p-6">
-							<div class="flex items-center mb-4">
-								<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-								</svg>
-								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Islamic Education & Peace Advocacy</span>
-							</div>
-							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-								Award-winning BSTA chairperson weaving Arabic teacher development with region-wide peace and outreach initiatives.
-							</p>
-							<button onclick="openFacultyModal('pagaruan')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
-								View Profile
-								<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-								</svg>
-							</button>
 						</div>
 					</div>
 
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
-						<div class="h-90 overflow-hidden relative">
-							<img src="/images/cias/Faculty/msufaculty.png" alt="Assistant Prof. Eliriza S. Utoeglis" class="w-full h-full object-cover lazy-image" loading="lazy">
-							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-								<h3 class="text-white font-bold text-xl">Assistant Prof. Eliriza S. Utoeglis</h3>
-								<p class="text-gray-300 text-sm">Chairperson, ABIS Department</p>
+					<!-- Islamic Studies Department Faculty Cards -->
+					<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 department-faculty-cards hidden" data-department="Islamic Studies Department">
+						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2" data-faculty-card data-department="Islamic Studies Department">
+							<div class="h-90 overflow-hidden relative">
+								<img src="/images/cias/Faculty/msufaculty.png" alt="Assistant Prof. Eliriza S. Utoeglis" class="w-full h-full object-cover lazy-image" loading="lazy">
+								<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+									<h3 class="text-white font-bold text-xl">Assistant Prof. Eliriza S. Utoeglis</h3>
+									<p class="text-gray-300 text-sm">Assistant Professor IV • Chairperson of Islamic Studies Department</p>
+								</div>
+							</div>
+							<div class="p-6">
+								<div class="flex items-center mb-4">
+									<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2h4a1 1 0 110 2h-1v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6H3a1 1 0 110-2h4zM9 6v10a1 1 0 102 0V6a1 1 0 10-2 0zm4 0v10a1 1 0 102 0V6a1 1 0 10-2 0z"></path>
+									</svg>
+									<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Shari'ah & Halal Governance</span>
+								</div>
+								<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+									Assistant professor guiding Islamic Studies majors through award-winning Shari'ah practice and halal leadership.
+								</p>
+								<button onclick="openFacultyModal('utoeglis')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
+									View Profile
+									<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+									</svg>
+								</button>
 							</div>
 						</div>
-						<div class="p-6">
-							<div class="flex items-center mb-4">
-								<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2h4a1 1 0 110 2h-1v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6H3a1 1 0 110-2h4zM9 6v10a1 1 0 102 0V6a1 1 0 10-2 0zm4 0v10a1 1 0 102 0V6a1 1 0 10-2 0z"></path>
-								</svg>
-								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Shari'ah & Halal Governance</span>
+
+						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2" data-faculty-card data-department="Islamic Studies Department">
+							<div class="h-90 overflow-hidden relative">
+								<img src="/images/cias/Faculty/msufaculty.png" alt="Associate Prof. Najeeb Razul A. Sali, Ph.D." class="w-full h-full object-cover lazy-image" loading="lazy">
+								<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+									<h3 class="text-white font-bold text-xl">Associate Prof. Najeeb Razul A. Sali, Ph.D.</h3>
+									<p class="text-gray-300 text-sm">Associate Professor V • Dean, College of Islamic Arts and Sciences</p>
+								</div>
 							</div>
-							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-								Assistant professor guiding Islamic Studies majors through award-winning Shari'ah practice and halal leadership.
-							</p>
-							<button onclick="openFacultyModal('utoeglis')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
-								View Profile
-								<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-								</svg>
-							</button>
+							<div class="p-6">
+								<div class="flex items-center mb-4">
+									<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+									</svg>
+									<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Islamic Studies & Islamic Banking Econometrics</span>
+								</div>
+								<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+									Acting Dean steering CIAS toward COPC compliance while linking Islamic history, economics, and leadership excellence.
+								</p>
+								<button onclick="openFacultyModal('sali')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
+									View Profile
+									<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+									</svg>
+								</button>
+							</div>
+						</div>
+
+						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2" data-faculty-card data-department="Islamic Studies Department">
+							<div class="h-90 overflow-hidden relative">
+								<img src="/images/cias/Faculty/msufaculty.png" alt="Associate Prof. Haidit A. Astarani" class="w-full h-full object-cover lazy-image" loading="lazy">
+								<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+									<h3 class="text-white font-bold text-xl">Associate Prof. Haidit A. Astarani</h3>
+									<p class="text-gray-300 text-sm">Associate Professor V • College Secretary</p>
+								</div>
+							</div>
+							<div class="p-6">
+								<div class="flex items-center mb-4">
+									<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+									</svg>
+									<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Philippine Law & Shari'ah Practice</span>
+								</div>
+								<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+									College Secretary blending Philippine law and Shari'ah expertise with award-winning community extension leadership.
+								</p>
+								<button onclick="openFacultyModal('astarani')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
+									View Profile
+									<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+									</svg>
+								</button>
+							</div>
+						</div>
+
+						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2" data-faculty-card data-department="Islamic Studies Department">
+							<div class="h-90 overflow-hidden relative">
+								<img src="/images/cias/Faculty/msufaculty.png" alt="Instructor Rudyn A. Alaldaya" class="w-full h-full object-cover lazy-image" loading="lazy">
+								<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+									<h3 class="text-white font-bold text-xl">Instructor Rudyn A. Alaldaya</h3>
+									<p class="text-gray-300 text-sm">Instructor I</p>
+								</div>
+							</div>
+							<div class="p-6">
+								<div class="flex items-center mb-4">
+									<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2z"></path>
+									</svg>
+									<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Islamic Studies & Community Broadcasting</span>
+								</div>
+								<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+									CIAS Hour anchor and peace advocate translating Islamic scholarship into regional outreach and civic action.
+								</p>
+								<button onclick="openFacultyModal('alaldaya')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
+									View Profile
+									<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+									</svg>
+								</button>
+							</div>
+						</div>
+
+						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2" data-faculty-card data-department="Islamic Studies Department">
+							<div class="h-90 overflow-hidden relative">
+								<img src="/images/cias/Faculty/msufaculty.png" alt="Instructor Ahmad B. Jalhani" class="w-full h-full object-cover lazy-image" loading="lazy">
+								<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+									<h3 class="text-white font-bold text-xl">Instructor Ahmad B. Jalhani</h3>
+									<p class="text-gray-300 text-sm">Instructor I</p>
+								</div>
+							</div>
+							<div class="p-6">
+								<div class="flex items-center mb-4">
+									<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
+									</svg>
+									<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Islamic Law & Program Development</span>
+								</div>
+								<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+									Madinah-trained instructor advancing Shari'ah instruction, curriculum innovation, and research-driven mentoring.
+								</p>
+								<button onclick="openFacultyModal('jalhani')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
+									View Profile
+									<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+									</svg>
+								</button>
+							</div>
 						</div>
 					</div>
 
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
-						<div class="h-90 overflow-hidden relative">
-							<img src="/images/cias/Faculty/msufaculty.png" alt="Assistant Prof. Estefanio Jr. B. Baguio" class="w-full h-full object-cover lazy-image" loading="lazy">
-							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-								<h3 class="text-white font-bold text-xl">Assistant Prof. Estefanio Jr. B. Baguio</h3>
-								<p class="text-gray-300 text-sm">Faculty</p>
+					<!-- Graduate Islamic Education Department -->
+					<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Graduate Islamic Education Department">
+						<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#61063B] via-[#8C1F5A] to-[#2F1A45] text-white p-8 md:p-10 shadow-2xl">
+							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
+							<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+								<div class="max-w-xl">
+									<h3 class="text-2xl md:text-3xl font-bold leading-snug">Graduate Islamic Education Department</h3>
+									<p class="mt-4 text-sm md:text-base text-white/90">
+										Chairperson: Assoc. Prof. Kasmil S. Abdulwahid, Ph.D.
+									</p>
+									<p class="mt-2 text-sm md:text-base text-white/90">
+										Fostering advanced scholarship in Islamic education, pedagogy, and educational leadership through graduate programs that prepare educators and administrators for excellence in Islamic educational institutions.
+									</p>
+									<div class="mt-6 flex flex-wrap gap-3">
+										<button
+											type="button"
+											class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Graduate Islamic Education Department"
+											aria-pressed="false"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-white/80">Show</span>
+												<span class="block text-sm md:text-base font-semibold">Faculty</span>
+											</div>
+											<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+											</svg>
+										</button>
+									</div>
+								</div>
+								<div class="flex-1 w-full space-y-4 md:space-y-6">
+									<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base faculty-banner-content hidden" data-static-content="true" data-member-count="4">
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Kasmil S. Abdulwahid</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Graduate Islamic Education Department</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Prof. Aisa U. Bud, Ph.D.</p>
+												<p class="text-white/80 text-sm font-normal">Professor VI • Director of Guidance and Counselling</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Najeeb Razul A. Sali</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Dean, College of Islamic Arts and Sciences</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Haidit A. Astarani</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • College Secretary</p>
+											</div>
+										</div>
+									</div>
+									<div class="space-y-3 text-sm md:text-base faculty-banner-programs hidden"></div>
+								</div>
 							</div>
-						</div>
-						<div class="p-6">
-							<div class="flex items-center mb-4">
-								<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-								</svg>
-								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Islamic Education & Youth Formation</span>
-							</div>
-							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-								Peace advocate and Best Thesis awardee shaping transformative Islamic education and community leadership.
-							</p>
-							<button onclick="openFacultyModal('baguio')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
-								View Profile
-								<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-								</svg>
-							</button>
 						</div>
 					</div>
 
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
-						<div class="h-90 overflow-hidden relative">
-							<img src="/images/cias/Faculty/msufaculty.png" alt="Instructor Benhar T. Arabani" class="w-full h-full object-cover lazy-image" loading="lazy">
-							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-								<h3 class="text-white font-bold text-xl">Instructor Benhar T. Arabani</h3>
-								<p class="text-gray-300 text-sm">Faculty</p>
+					<!-- Graduate Islamic Education Department Faculty Cards -->
+					<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 department-faculty-cards hidden" data-department="Graduate Islamic Education Department">
+						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2" data-faculty-card data-department="Graduate Islamic Education Department">
+							<div class="h-90 overflow-hidden relative">
+								<img src="/images/cias/Faculty/msufaculty.png" alt="Associate Prof. Kasmil S. Abdulwahid, Ph.D." class="w-full h-full object-cover lazy-image" loading="lazy">
+								<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+									<h3 class="text-white font-bold text-xl">Associate Prof. Kasmil S. Abdulwahid, Ph.D.</h3>
+									<p class="text-gray-300 text-sm">Associate Professor V • Graduate Islamic Education Department</p>
+								</div>
+							</div>
+							<div class="p-6">
+								<div class="flex items-center mb-4">
+									<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H15"></path>
+									</svg>
+									<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Islamic Education & Pedagogy</span>
+								</div>
+								<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+									Doctor of Islamic Education driving Graduate Islamic Education Department innovation through scholarship on pedagogy, psychology, and Arabic language leadership.
+								</p>
+								<button onclick="openFacultyModal('abdulwahid')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
+									View Profile
+									<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+									</svg>
+								</button>
 							</div>
 						</div>
-						<div class="p-6">
-							<div class="flex items-center mb-4">
-								<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"></path>
-								</svg>
-								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Arabic Studies & Instruction</span>
+
+						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2" data-faculty-card data-department="Graduate Islamic Education Department">
+							<div class="h-90 overflow-hidden relative">
+								<img src="/images/cias/Faculty/msufaculty.png" alt="Prof. Aisa U. Bud, Ph.D." class="w-full h-full object-cover lazy-image" loading="lazy">
+								<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+									<h3 class="text-white font-bold text-xl">Prof. Aisa U. Bud, Ph.D.</h3>
+									<p class="text-gray-300 text-sm">Professor VI • Director of Guidance and Counselling</p>
+								</div>
 							</div>
-							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-								Instructor I nurturing Arabic language proficiency and faith-centered scholarship in CIAS classrooms.
-							</p>
-							<button onclick="openFacultyModal('arabani')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
-								View Profile
-								<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-								</svg>
-							</button>
+							<div class="p-6">
+								<div class="flex items-center mb-4">
+									<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+									</svg>
+									<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Language Studies & Guidance</span>
+								</div>
+								<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+									Professor VI championing CIAS counseling services while advancing language studies and Islamic education research.
+								</p>
+								<button onclick="openFacultyModal('bud')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
+									View Profile
+									<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+									</svg>
+								</button>
+							</div>
+						</div>
+
+						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2" data-faculty-card data-department="Graduate Islamic Education Department">
+							<div class="h-90 overflow-hidden relative">
+								<img src="/images/cias/Faculty/msufaculty.png" alt="Associate Prof. Najeeb Razul A. Sali, Ph.D." class="w-full h-full object-cover lazy-image" loading="lazy">
+								<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+									<h3 class="text-white font-bold text-xl">Associate Prof. Najeeb Razul A. Sali, Ph.D.</h3>
+									<p class="text-gray-300 text-sm">Associate Professor V • Dean, College of Islamic Arts and Sciences</p>
+								</div>
+							</div>
+							<div class="p-6">
+								<div class="flex items-center mb-4">
+									<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
+									</svg>
+									<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Islamic Studies & Islamic Banking Econometrics</span>
+								</div>
+								<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+									Acting Dean steering CIAS toward COPC compliance while linking Islamic history, economics, and leadership excellence.
+								</p>
+								<button onclick="openFacultyModal('sali')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
+									View Profile
+									<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+									</svg>
+								</button>
+							</div>
+						</div>
+
+						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2" data-faculty-card data-department="Graduate Islamic Education Department">
+							<div class="h-90 overflow-hidden relative">
+								<img src="/images/cias/Faculty/msufaculty.png" alt="Associate Prof. Haidit A. Astarani" class="w-full h-full object-cover lazy-image" loading="lazy">
+								<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+									<h3 class="text-white font-bold text-xl">Associate Prof. Haidit A. Astarani</h3>
+									<p class="text-gray-300 text-sm">Associate Professor V • College Secretary</p>
+								</div>
+							</div>
+							<div class="p-6">
+								<div class="flex items-center mb-4">
+									<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+									</svg>
+									<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Philippine Law & Shari'ah Practice</span>
+								</div>
+								<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+									College Secretary blending Philippine law and Shari'ah expertise with award-winning community extension leadership.
+								</p>
+								<button onclick="openFacultyModal('astarani')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
+									View Profile
+									<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+									</svg>
+								</button>
+							</div>
 						</div>
 					</div>
-
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
-						<div class="h-90 overflow-hidden relative">
-							<img src="/images/cias/Faculty/msufaculty.png" alt="Associate Prof. Abdulhamid A. Eldani, Ph.D." class="w-full h-full object-cover lazy-image" loading="lazy">
-							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-								<h3 class="text-white font-bold text-xl">Associate Prof. Abdulhamid A. Eldani, Ph.D.</h3>
-								<p class="text-gray-300 text-sm">Faculty</p>
-							</div>
-						</div>
-						<div class="p-6">
-							<div class="flex items-center mb-4">
-								<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-								</svg>
-								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Islamic Studies & Regional History</span>
-							</div>
-							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-								Historian advancing Islamic and Philippine studies recognized as CIAS Most Promising Faculty of the Year.
-							</p>
-							<button onclick="openFacultyModal('eldani')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
-								View Profile
-								<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-								</svg>
-							</button>
-						</div>
-					</div>
-
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
-						<div class="h-90 overflow-hidden relative">
-							<img src="/images/cias/Faculty/msufaculty.png" alt="Instructor Al-Ameen M. Ibnohajad" class="w-full h-full object-cover lazy-image" loading="lazy">
-							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-								<h3 class="text-white font-bold text-xl">Instructor Al-Ameen M. Ibnohajad</h3>
-								<p class="text-gray-300 text-sm">Faculty</p>
-							</div>
-						</div>
-						<div class="p-6">
-							<div class="flex items-center mb-4">
-								<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7-4-7 4v6a2 2 0 001 1.732l6 3.464 6-3.464A2 2 0 0020 15V9z"></path>
-								</svg>
-								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Islamic Jurisprudence & Qur'an Studies</span>
-							</div>
-							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-								Instructor I guiding students through Shari'ah foundations and Qur'anic literacy inside and beyond the classroom.
-							</p>
-							<button onclick="openFacultyModal('ibnohajad')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
-								View Profile
-								<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-								</svg>
-							</button>
-						</div>
-					</div>
-
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
-						<div class="h-90 overflow-hidden relative">
-							<img src="/images/cias/Faculty/msufaculty.png" alt="Instructor Ahmad B. Jalhani" class="w-full h-full object-cover lazy-image" loading="lazy">
-							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-								<h3 class="text-white font-bold text-xl">Instructor Ahmad B. Jalhani</h3>
-								<p class="text-gray-300 text-sm">Faculty</p>
-							</div>
-						</div>
-						<div class="p-6">
-							<div class="flex items-center mb-4">
-								<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
-								</svg>
-								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Islamic Law & Program Development</span>
-							</div>
-							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-								Madinah-trained instructor advancing Shari'ah instruction, curriculum innovation, and research-driven mentoring.
-							</p>
-						<button onclick="openFacultyModal('jalhani')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
-								View Profile
-								<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-								</svg>
-							</button>
-						</div>
-					</div>
-
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
-						<div class="h-90 overflow-hidden relative">
-							<img src="/images/cias/Faculty/msufaculty.png" alt="Instructor Rudyn A. Alaldaya" class="w-full h-full object-cover lazy-image" loading="lazy">
-							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-								<h3 class="text-white font-bold text-xl">Instructor Rudyn A. Alaldaya</h3>
-								<p class="text-gray-300 text-sm">Faculty</p>
-							</div>
-						</div>
-						<div class="p-6">
-							<div class="flex items-center mb-4">
-								<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2z"></path>
-								</svg>
-								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Islamic Studies & Community Broadcasting</span>
-							</div>
-							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-								CIAS Hour anchor and peace advocate translating Islamic scholarship into regional outreach and civic action.
-							</p>
-							<button onclick="openFacultyModal('alaldaya')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
-								View Profile
-								<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-								</svg>
-							</button>
-						</div>
-					</div>
-
-				</div>
-
-				<div class="text-center mt-12">
-					<button onclick="toggleFacultyView()" id="showMoreBtn" class="inline-flex items-center px-8 py-4 border border-msu-deep-ocean text-base font-medium rounded-full shadow-sm text-msu-bgc-color bg-[#61063B] hover:bg-msu-deep-ocean-dark hover:shadow-md transition-all duration-300 transform hover:scale-105">
-						<span id="showMoreText">Show More Faculty</span>
-						<svg id="showMoreIcon" class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-						</svg>
-					</button>
 				</div>
 			</div>
 		</section>
@@ -4453,6 +5107,55 @@ document.addEventListener('DOMContentLoaded', function() {
 					<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Pekkeong H. Akmad</h3>
 					<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Staff</p>
 					<p class="text-xs text-gray-500 italic px-2">Administrative Aide I</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Faculty Search Section -->
+	<section class="py-12 sm:py-16 md:py-20 bg-gray-50 dark:bg-gray-900">
+		<div class="container mx-auto px-4 sm:px-6">
+			<!-- Faculty Search Header -->
+			<div class="mt-12 mb-4 text-center">
+				<h2 class="text-2xl sm:text-3xl font-bold text-msu-main-color dark:text-msu-bgc-color">Faculty Search</h2>
+				<p class="text-sm sm:text-base text-gray-700 dark:text-gray-300 mt-1">
+					Find faculty members by name, position, or area of specialization.
+				</p>
+			</div>
+			<!-- Faculty Search Bar -->
+			<div class="mt-12 sm:mt-16">
+				<div class="max-w-2xl mx-auto">
+					<div class="relative">
+						<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+							<svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+							</svg>
+						</div>
+						<input 
+							type="text" 
+							id="facultySearch" 
+							placeholder="Search faculty by name, position, or specialization..." 
+							class="block w-full pl-12 pr-12 py-4 text-base border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-msu-main-color dark:focus:ring-msu-bgc-color focus:border-msu-main-color dark:focus:border-msu-bgc-color transition-all duration-300 shadow-sm hover:shadow-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+						>
+						<button 
+							id="clearFacultySearch" 
+							class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200 hidden"
+							title="Clear search"
+						>
+							<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+							</svg>
+						</button>
+					</div>
+					<!-- Search Results Counter -->
+					<div id="facultySearchResults" class="mt-3 text-sm text-gray-600 dark:text-gray-400 hidden">
+						<p id="facultyResultsCount" class="text-center"></p>
+						<div id="facultyResultsList" class="mt-3 space-y-3"></div>
+					</div>
+					<div id="facultySearchMatches" class="mt-8 hidden">
+						<h3 class="text-lg font-semibold text-msu-main-color dark:text-msu-bgc-color text-center mb-4">Matching Faculty Members</h3>
+						<div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3" id="facultySearchMatchesGrid"></div>
+					</div>
 				</div>
 			</div>
 		</div>
