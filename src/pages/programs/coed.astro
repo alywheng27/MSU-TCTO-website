@@ -988,11 +988,12 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 							</div>
 
-							<div class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 counter" data-target="779">0</div>
+							<div class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 counter" data-target="876">0</div>
 
 							<div class="text-2xl sm:text-3xl font-semibold mb-3">Students Enrolled</div>
 
-							<div class="text-sm sm:text-base lg:text-lg text-gray-200 sm:text-gray-300 mt-2">Active learners across all programs</div>
+							<div class="text-sm sm:text-base lg:text-lg text-gray-200 sm:text-gray-300 mt-2">Overall learners who enrolled in these programs</div>
+	
 
 						</div>
 
@@ -4897,9 +4898,10 @@ document.addEventListener('DOMContentLoaded', function() {
 		}) || expandAbbreviatedPrefix(nameEl ? nameEl.textContent?.trim() || '' : '');
 		if (nameEl && displayName) {
 			nameEl.textContent = displayName;
+			nameEl.classList.add('text-left');
 		}
 		if (designationEl) {
-			designationEl.classList.add('text-sm', 'mt-1');
+			designationEl.classList.add('text-sm', 'mt-1', 'text-left');
 			const parts: string[] = [];
 			const addParts = (value) => {
 				if (!value) return;
@@ -4914,7 +4916,6 @@ document.addEventListener('DOMContentLoaded', function() {
 					});
 			};
 			addParts(searchInfo.position);
-			addParts(searchInfo.rank);
 			addParts(existingDesignation);
 			const designationText = parts.join(' • ');
 			designationEl.textContent = designationText || existingDesignation;
