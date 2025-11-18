@@ -2518,10 +2518,16 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 	});
 	
-	function escapeHtml(text: string): string {
-		const div = document.createElement('div');
-		div.textContent = text;
-		return div.innerHTML;
+	const htmlEscapeMap: Record<string, string> = {
+		'&': '&amp;',
+		'<': '&lt;',
+		'>': '&gt;',
+		'"': '&quot;',
+		'\'': '&#39;'
+	};
+
+	function escapeHtml(value: unknown): string {
+		return (value == null ? '' : String(value)).replace(/[&<>"']/g, (char) => htmlEscapeMap[char as keyof typeof htmlEscapeMap] || char);
 	}
 
 	function filterFaculty(searchTerm) {
@@ -3048,18 +3054,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	const departmentProgramsModalTitle = document.getElementById('departmentProgramsModalTitle');
 	const departmentModalCloseButtons = Array.from(document.querySelectorAll('.department-modal-close')) as HTMLButtonElement[];
 	const departmentModalOverlay = departmentProgramsModal?.querySelector('.department-modal-overlay') as HTMLElement | null;
-
-	const htmlEscapeMap: Record<string, string> = {
-		'&': '&amp;',
-		'<': '&lt;',
-		'>': '&gt;',
-		'"': '&quot;',
-		'\'': '&#39;'
-	};
-
-	function escapeHtml(value: unknown): string {
-		return (value == null ? '' : String(value)).replace(/[&<>"']/g, (char) => htmlEscapeMap[char as keyof typeof htmlEscapeMap] || char);
-	}
 
 	const departmentProgramsData = (() => {
 		const rawMap = (window as any).departmentProgramsMap;
@@ -5063,34 +5057,34 @@ document.addEventListener('DOMContentLoaded', function() {
 						<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
 							<img src="/images/iict/Profile/NERICO L. MINGOC.jpg" alt="Nerico L. Mingoc" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg lazy-image" loading="lazy">
 						</div>
-						<h3 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Nerico L. Mingoc, MSIT</h3>
+						<h3 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Assoc. Prof. Nerico L. Mingoc, MSIT</h3>
 						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Dean, CCS</p>
 					</div>
 				</div>
 
-				<!-- Chairpersons Section -->
-				<div class="mb-8 sm:mb-10 md:mb-12">
-					<h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-6 sm:mb-8 text-center px-4">The Chairpersons</h3>
-					<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
-						<!-- Assoc. Prof. Nerico L. Mingoc, MSIT - BSIT (Already listed as Dean) -->
-						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openFacultyModal('mingoc')">
-							<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
-								<img src="/images/iict/Profile/NERICO L. MINGOC.jpg" alt="Assoc. Prof. Nerico L. Mingoc, MSIT" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
-							</div>
-							<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Assoc. Prof. Nerico L. Mingoc, MSIT</h4>
-							<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color px-2">Chairperson, BSIT</p>
+			<!-- Chairpersons Section -->
+			<div class="mb-8 sm:mb-10 md:mb-12">
+				<h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-6 sm:mb-8 md:mb-10 text-center px-4">The Chairpersons</h3>
+				<div class="flex flex-col sm:flex-row justify-center items-center gap-8 sm:gap-10 md:gap-12 lg:gap-16 max-w-4xl mx-auto px-4">
+					<!-- Assoc. Prof. Nerico L. Mingoc, MSIT - BSIT -->
+					<div class="text-center w-full sm:w-auto cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openFacultyModal('mingoc')">
+						<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
+							<img src="/images/iict/Profile/NERICO L. MINGOC.jpg" alt="Assoc. Prof. Nerico L. Mingoc, MSIT" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
 						</div>
+						<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Assoc. Prof. Nerico L. Mingoc, MSIT</h4>
+						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color px-2">Chairperson, BSIT</p>
+					</div>
 
-						<!-- Romeo L. Pañares Jr. - BSCA -->
-						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openFacultyModal('panares')">
-							<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
-								<img src="/images/iict/Profile/ROMEO L. PAÑARES.jpg" alt="Romeo L. Pañares Jr." class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
-							</div>
-							<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Romeo L. Pañares Jr.</h4>
-							<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color px-2">Chairperson, BSCA</p>
+					<!-- Romeo L. Pañares Jr. - BSCA -->
+					<div class="text-center w-full sm:w-auto cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openFacultyModal('panares')">
+						<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
+							<img src="/images/iict/Profile/ROMEO L. PAÑARES.jpg" alt="Romeo L. Pañares Jr." class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
 						</div>
+						<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Romeo L. Pañares Jr.</h4>
+						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color px-2">Chairperson, BSCA</p>
 					</div>
 				</div>
+			</div>
 
 				<!-- Staff Personnel Grid - 4 Column Layout -->
 				<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12 justify-items-center">
@@ -6940,7 +6934,7 @@ document.head.appendChild(style);
 		</section> -->
 
 		<!-- CCS Faculty CTA -->
-		<section class="py-14 sm:py-16 bg-gradient-to-br from-msu-main-color via-msu-deep-ocean to-msu-main-color text-white">
+		<!-- <section class="py-14 sm:py-16 bg-gradient-to-br from-msu-main-color via-msu-deep-ocean to-msu-main-color text-white">
 			<div class="container mx-auto px-6 text-center space-y-6">
 				<h2 class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">Discover the Minds Behind CCS Innovation</h2>
 				<p class="text-sm sm:text-base md:text-lg max-w-3xl mx-auto text-white/80">
@@ -6955,7 +6949,7 @@ document.head.appendChild(style);
 					</a>
 				</div>
 			</div>
-		</section>
+		</section> -->
 
 	</main>
 

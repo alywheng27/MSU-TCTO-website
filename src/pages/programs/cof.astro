@@ -1775,12 +1775,49 @@ const formatDisplayName = ({ name, rank, position }) => {
 	return expanded || name;
 };
 
+// Helper function to get faculty image path
+const getFacultyImagePath = (name) => {
+	if (!name) return '/images/cof/Faculty/msufaculty.png';
+	// Extract the name part (remove titles)
+	const coreName = stripLeadingTitles(name).trim();
+	// Map to image filename - handle special cases
+	const nameMap = {
+		'Jaro O. Ajik': 'Jaro O. Ajik.png',
+		'Wahaymin M. Jamil': 'Wahaymin M. Jamil.png',
+		'Merilyn Q. Amlani': 'Merilyn Q. Amlani.png',
+		'Albaris B. Tahiluddin': 'Albaris B. Tahiluddin.png',
+		'Jurmin H. Sarri': 'Jurmin H. Sarri.png',
+		'Maria Liza B. Toring-Farquerabao': 'Maria Liza B. Toring-Farquerabao.png',
+		'Ainulyakin H. Imlani': 'Ainulyakin H. Imlani.png',
+		'Yashier U. Jumah': 'Yashier U. Jumah.png',
+		'Rosalinda P. Shariff': 'Rosalinda P. Shariff.png',
+		'Kingpu O. Ajik': 'Kingpu O. Ajik.png',
+		'Iannie P. Maribao': 'Iannie P. Maribao.png',
+		'Normina A. Abubakar': 'Normina A. Abubakar.png',
+		'Marhamin H. Jumsali': 'MARHAMIN H. JUMSALI.png',
+		'Angelica B. Bermil': 'Angelica B. Bermil.png',
+		'Melodina D. Hairol': 'Melodina D. Hairol.png',
+		'Hadjiran A. Illud': 'Hadjiran A. Illud.png',
+		'Cherry T. Nian': 'Cherry T. Nian.png',
+		'Gerly-Ayn J. Tupas': 'Gerly-Ayn J. Tupas.png',
+		'Rizal Jhunn F. Robles': 'Rizal jhunn F. Robles.png',
+		'Rizal jhunn F. Robles': 'Rizal jhunn F. Robles.png'
+	};
+	
+	if (nameMap[coreName]) {
+		return `/images/cof/Faculty/${nameMap[coreName]}`;
+	}
+	
+	// Fallback: try to construct filename from name
+	return `/images/cof/Faculty/${coreName}.png`;
+};
+
 const featuredFacultyEntries = [
 	{
 		name: 'Prof.Jaro O. Ajik',
 		id: 'jaroAjik',
 		departments: ['Capture Fisheries Department'],
-		image: '/images/coed/Profile/msufaculty.png',
+		image: getFacultyImagePath('Jaro O. Ajik'),
 		subtitle: 'Dean, College of Fisheries',
 		highlight: 'Capture Fisheries • Fisheries Management',
 		summary: 'Fisheries dean driving research and extension partnerships that strengthen navigation, ocean stewardship, and community resilience.'
@@ -1789,7 +1826,7 @@ const featuredFacultyEntries = [
 		name: 'Asst. Prof. Wahaymin M. Jamil',
 		id: 'wahayminJamil',
 		departments: ['Aquaculture Department'],
-		image: '/images/coed/Profile/msufaculty.png',
+		image: getFacultyImagePath('Asst. Prof. Wahaymin M. Jamil'),
 		subtitle: 'College Secretary, College of Fisheries',
 		highlight: 'Aquaculture • Feed Management',
 		summary: 'Aquaculture scholar and College Secretary focused on optimized feeding systems, faculty support, and community-engaged fisheries research.'
@@ -1798,7 +1835,7 @@ const featuredFacultyEntries = [
 		name: 'Asst. Prof. Merilyn Q. Amlani',
 		id: 'merilynAmlani',
 		departments: ['Post-Harvest Fisheries Department', 'Food Science and Technology Department'],
-		image: '/images/coed/Profile/msufaculty.png',
+		image: getFacultyImagePath('Asst. Prof. Merilyn Q. Amlani'),
 		subtitle: 'Chairperson, Fish Processing & Food Technology',
 		highlight: 'Food Engineering • Post-Harvest Innovation',
 		summary: 'Internationally trained food engineer leading the SFPIC, advancing value-added seaweed products and collaborative fisheries research.'
@@ -1807,7 +1844,7 @@ const featuredFacultyEntries = [
 		name: 'Assistant Prof. Albaris B. Tahiluddin',
 		id: 'albarisTahiluddin',
 		departments: ['Aquaculture Department', 'Capture Fisheries Department'],
-		image: '/images/coed/Profile/msufaculty.png',
+		image: getFacultyImagePath('Assistant Prof. Albaris B. Tahiluddin'),
 		subtitle: 'Chairperson, Aquaculture Department',
 		highlight: 'Seaweed Farming • Aquaculture Health',
 		summary: 'Ph.D. aquaculture scientist publishing on nutrient enrichment and seaweed disease management to strengthen regional blue economies.'
@@ -1816,7 +1853,7 @@ const featuredFacultyEntries = [
 		name: 'Asst. Prof. Jurmin H. Sarri',
 		id: 'jurminSarri',
 		departments: ['Capture Fisheries Department','Capture Fisheries Department','Aquaculture Department'],
-		image: '/images/coed/Profile/msufaculty.png',
+		image: getFacultyImagePath('Asst. Prof. Jurmin H. Sarri'),
 		subtitle: 'Chairperson, Marine Fisheries Department',
 		highlight: 'Aquaculture • Fish Nutrition • Algal Biotechnology',
 		summary: 'Marine fisheries scholar guiding department research on algal biotechnology, capture fisheries trends, and community livelihoods in the Sulu Archipelago.'
@@ -1825,7 +1862,7 @@ const featuredFacultyEntries = [
 		name: 'Maria Liza B. Toring-Farquerabao',
 		id: 'mariaLizaToringFarquerabao',
 		departments: ['Capture Fisheries Department'],
-		image: '/images/coed/Profile/msufaculty.png',
+		image: getFacultyImagePath('Maria Liza B. Toring-Farquerabao'),
 		subtitle: 'Faculty, Marine Fisheries Department',
 		highlight: 'Capture Fisheries • Fisheries Biology',
 		summary: 'Registered fisheries professional documenting coastal ecosystems and fisheries markets while mentoring future capture fisheries specialists.'
@@ -1834,7 +1871,7 @@ const featuredFacultyEntries = [
 		name: 'Prof. Ainulyakin H. Imlani',
 		id: 'ainulyakinImlani',
 		departments: ['Aquaculture Department'],
-		image: '/images/coed/Profile/msufaculty.png',
+		image: getFacultyImagePath('Prof. Ainulyakin H. Imlani'),
 		subtitle: 'Director, Fisheries Training & Aquaculture Production',
 		highlight: 'Aquaculture • Fish Nutrition • Fish Health',
 		summary: 'Professor VI and MSU-TCTO connectivity ambassador leading fish nutrition research and international partnerships in aquaculture innovation.'
@@ -1843,7 +1880,7 @@ const featuredFacultyEntries = [
 		name: 'Prof. Yashier U. Jumah',
 		id: 'yashierJumah',
 		departments: ['Aquaculture Department'],
-		image: '/images/coed/Profile/msufaculty.png',
+		image: getFacultyImagePath('Prof. Yashier U. Jumah'),
 		subtitle: 'Aquaculture Department, Professor VI',
 		highlight: 'Aquaculture • Fish Immunology • Nutrition',
 		summary: 'Top-ranked fisheries technologist exploring fish physiology and immunology to strengthen resilient aquaculture systems across BARMM.'
@@ -1852,7 +1889,7 @@ const featuredFacultyEntries = [
 		name: 'Assoc. Prof. Rosalinda P. Shariff',
 		id: 'rosalindaShariff',
 		departments: ['Aquaculture Department'],
-		image: '/images/coed/Profile/msufaculty.png',
+		image: getFacultyImagePath('Assoc. Prof. Rosalinda P. Shariff'),
 		subtitle: 'Special Assistant to the OVCAA',
 		highlight: 'Aquatic Ecology • Marine Biodiversity',
 		summary: 'Long-time aquatic ecologist and academic leader championing curriculum development, biodiversity conservation, and faculty advancement.'
@@ -1861,7 +1898,7 @@ const featuredFacultyEntries = [
 		name: 'Assoc. Prof. Kingpu O. Ajik',
 		id: 'kingpuAjik',
 		departments: ['Post-Harvest Fisheries Department','Food Science and Technology Department'],
-		image: '/images/coed/Profile/msufaculty.png',
+		image: getFacultyImagePath('Assoc. Prof. Kingpu O. Ajik'),
 		subtitle: 'Fish Processing Technology Department',
 		highlight: 'Aquaculture • Analytical Chemistry',
 		summary: 'Associate professor bridging aquaculture and chemistry through heavy metal profiling and food safety research in fisheries products.'
@@ -1870,7 +1907,7 @@ const featuredFacultyEntries = [
 		name: 'Asst. Prof. Iannie P. Maribao',
 		id: 'iannieMaribao',
 		departments: ['Post-Harvest Fisheries Department','Food Science and Technology Department'],
-		image: '/images/coed/Profile/msufaculty.png',
+		image: getFacultyImagePath('Asst. Prof. Iannie P. Maribao'),
 		subtitle: 'Food Technology & Fish Processing Faculty',
 		highlight: 'Food Engineering • Protein Systems',
 		summary: 'Food engineer applying non-thermal technologies to improve fisheries products and mentoring students in innovative processing techniques.'
@@ -1879,7 +1916,7 @@ const featuredFacultyEntries = [
 		name: 'Ms. Normina A. Abubakar',
 		id: 'norminaAbubakar',
 		departments: ['Post-Harvest Fisheries Department','Food Science and Technology Department'],
-		image: '/images/coed/Profile/msufaculty.png',
+		image: getFacultyImagePath('Normina A. Abubakar'),
 		subtitle: 'Instructor I, Fish Processing Technology',
 		highlight: 'Post-Harvest Fisheries • Food Technology',
 		summary: 'Fish processing specialist and APDP scholar focused on value-added seafood, food safety, and empowering future fisheries professionals.'
@@ -1888,7 +1925,7 @@ const featuredFacultyEntries = [
 		name: 'Mr. Marhamin H. Jumsali',
 		id: 'marhaminJumsali',
 		departments: ['Post-Harvest Fisheries Department','Food Science and Technology Department'],
-		image: '/images/coed/Profile/msufaculty.png',
+		image: getFacultyImagePath('Marhamin H. Jumsali'),
 		subtitle: 'Instructor I, Fish Processing Technology',
 		highlight: 'Aquaculture • Food Microbiology',
 		summary: 'BIGAST scholar advancing seaweed-based products, microalgae research, and science-driven community extension in food microbiology.'
@@ -1897,7 +1934,7 @@ const featuredFacultyEntries = [
 		name: 'Angelica B. Bermil',
 		id: 'angelicaBermil',
 		departments: ['Capture Fisheries Department'],
-		image: '/images/coed/Profile/msufaculty.png',
+		image: getFacultyImagePath('Angelica B. Bermil'),
 		subtitle: 'Instructor I, Capture Fisheries Department',
 		highlight: 'Capture Fisheries • Marine Biodiversity',
 		summary: 'PhilDOST-TUMSAT scholar applying marine biodiversity and environmental DNA tools to strengthen capture fisheries research and community livelihoods.'
@@ -1906,7 +1943,7 @@ const featuredFacultyEntries = [
 		name: 'Assoc. Prof. Melodina D. Hairol',
 		id: 'melodinaHairol',
 		departments: ['Aquaculture Department'],
-		image: '/images/coed/Profile/msufaculty.png',
+		image: getFacultyImagePath('Assoc. Prof. Melodina D. Hairol'),
 		subtitle: 'Extension Project Staff, Aquaculture Department',
 		highlight: 'Fish Nutrition • Seaweed Farming',
 		summary: 'Associate professor and former BFAR aquaculturist leveraging indigenous resources for fish nutrition, seaweed farming, and extension services.'
@@ -1915,7 +1952,7 @@ const featuredFacultyEntries = [
 		name: 'Associate Prof. Hadjiran A. Illud',
 		id: 'hadjiranIllud',
 		departments: ['Capture Fisheries Department'],
-		image: '/images/coed/Profile/msufaculty.png',
+		image: getFacultyImagePath('Associate Prof. Hadjiran A. Illud'),
 		subtitle: 'Marine Fisheries Department',
 		highlight: 'Aquaculture • Marine Fisheries Management',
 		summary: 'Doctor of Fisheries Technology leading marine fisheries management, aquaculture research, and faculty mentoring at MSU-TCTO.'
@@ -1924,7 +1961,7 @@ const featuredFacultyEntries = [
 		name: 'Associate Prof. Cherry T. Nian',
 		id: 'cherryNian',
 		departments: ['Aquaculture Department'],
-		image: '/images/coed/Profile/msufaculty.png',
+		image: getFacultyImagePath('Associate Prof. Cherry T. Nian'),
 		subtitle: 'Associate Professor V, Aquaculture Department',
 		highlight: 'Fish Nutrition • Hatchery Management',
 		summary: 'Aquaculture leader overseeing hatchery innovation, faculty development, and community trainings that sustain coastal livelihoods.'
@@ -1933,7 +1970,7 @@ const featuredFacultyEntries = [
 		name: 'Gerly-Ayn J. Tupas',
 		id: 'gerlyAynTupas',
 		departments: ['Aquaculture Department'],
-		image: '/images/coed/Profile/msufaculty.png',
+		image: getFacultyImagePath('Gerly-Ayn J. Tupas'),
 		subtitle: 'Assistant Professor IV, Aquaculture Department',
 		highlight: 'Aquaculture • Fish Immunology • Genetics',
 		summary: 'Assistant professor blending international aquaculture experience with local research on fish nutrition, genetics, and smart farming systems.'
@@ -1942,7 +1979,7 @@ const featuredFacultyEntries = [
 		name: 'Rizal Jhunn F. Robles',
 		id: 'rizalRobles',
 		departments: ['Aquaculture Department', 'Capture Fisheries Department'],
-		image: '/images/coed/Profile/msufaculty.png',
+		image: getFacultyImagePath('Rizal Jhunn F. Robles'),
 		subtitle: 'Assistant Professor IV',
 		highlight: 'Seaweed Science • Carrageenan Rheology',
 		summary: 'Aquaculture faculty specializing in seaweed processing and carrageenan characterization to support sustainable coastal industries.'
@@ -1970,7 +2007,7 @@ function renderFeaturedFacultyCards() {
 			);
 			if (existingCard) return;
 
-			const imageSrc = entry.image || '/images/coed/Profile/msufaculty.png';
+			const imageSrc = entry.image || getFacultyImagePath(entry.name) || '/images/cof/Faculty/msufaculty.png';
 			const subtitle = entry.subtitle || '';
 			const displayName = entry.name || entry.id;
 			const cardMarkup = [
@@ -2050,7 +2087,7 @@ function openFacultyModal(facultyId) {
 			name: "Prof. Jaro O. Ajik",
 			position: "Dean, College of Fisheries",
 			rank: "Professor VI",
-			image: "/images/coed/Profile/msufaculty.png",
+			image: getFacultyImagePath("Jaro O. Ajik"),
 			department: "Capture Fisheries Department",
 			education: [
 				"Doctor in Fisheries Technology (2021) – Iloilo State University of Fisheries Science and Technology, Iloilo City, Philippines",
@@ -2078,7 +2115,7 @@ function openFacultyModal(facultyId) {
 			name: "Asst. Prof. Wahaymin M. Jamil",
 			position: "College Secretary, Office of the Dean, College of Fisheries",
 			rank: "Assistant Professor IV",
-			image: "/images/coed/Profile/msufaculty.png",
+			image: getFacultyImagePath("Asst. Prof. Wahaymin M. Jamil"),
 			department: "Aquaculture Department",
 			education: [
 				"Master of Science in Aquaculture (2024) – Mindanao State University – Tawi-Tawi College of Technology and Oceanography",
@@ -2103,7 +2140,7 @@ function openFacultyModal(facultyId) {
 			name: "Asst. Prof. Merilyn Q. Amlani",
 			position: "Chairperson, Fish Processing Department & Food Technology Department, College of Fisheries",
 			rank: "Assistant Professor IV",
-			image: "/images/coed/Profile/msufaculty.png",
+			image: getFacultyImagePath("Asst. Prof. Merilyn Q. Amlani"),
 			department: "Food Science and Technology Department",
 			education: [
 				"Master of Science in Food Engineering (2023) – Kastamonu University, Türkiye",
@@ -2131,7 +2168,7 @@ function openFacultyModal(facultyId) {
 			name: "Assistant Prof. Albaris B. Tahiluddin",
 			position: "Chairperson, Aquaculture Department, College of Fisheries",
 			rank: "Assistant Professor IV",
-			image: "/images/coed/Profile/msufaculty.png",
+			image: getFacultyImagePath("Assistant Prof. Albaris B. Tahiluddin"),
 			department: "Aquaculture Department",
 			education: [
 				"Ph.D. in Aquaculture – Kastamonu University, Türkiye",
@@ -2159,7 +2196,7 @@ function openFacultyModal(facultyId) {
 			name: "Asst. Prof. Jurmin H. Sarri",
 			position: "Chairperson, Marine Fisheries Department, College of Fisheries",
 			rank: "Assistant Professor IV",
-			image: "/images/coed/Profile/msufaculty.png",
+			image: getFacultyImagePath("Asst. Prof. Jurmin H. Sarri"),
 			department: "Capture Fisheries Department",
 			education: [
 				"Master of Science in Aquaculture (2023) – Kastamonu University, Türkiye",
@@ -2191,7 +2228,7 @@ function openFacultyModal(facultyId) {
 			name: "Maria Liza B. Toring-Farquerabao",
 			position: "Faculty, Marine Fisheries Department, College of Fisheries",
 			rank: "Instructor II",
-			image: "/images/coed/Profile/msufaculty.png",
+			image: getFacultyImagePath("Maria Liza B. Toring-Farquerabao"),
 			department: "Capture Fisheries Department",
 			education: [
 				"Master of Science in Fisheries major in Fisheries Biology (CAR) – University of the Philippines Visayas",
@@ -2220,7 +2257,7 @@ function openFacultyModal(facultyId) {
 			name: "Prof. Ainulyakin H. Imlani",
 			position: "Director, Fisheries Training and Aquaculture Production; Ambassador for Connectivity to IPB",
 			rank: "Professor VI",
-			image: "/images/coed/Profile/msufaculty.png",
+			image: getFacultyImagePath("Prof. Ainulyakin H. Imlani"),
 			department: "Aquaculture Department",
 			education: [
 				"Doctor of Philosophy in Aquaculture (2024) – Institut Pertanian Bogor, Indonesia",
@@ -2249,7 +2286,7 @@ function openFacultyModal(facultyId) {
 			name: "Prof. Yashier U. Jumah",
 			position: "Faculty, Aquaculture Department, College of Fisheries",
 			rank: "Professor VI",
-			image: "/images/coed/Profile/msufaculty.png",
+			image: getFacultyImagePath("Prof. Yashier U. Jumah"),
 			department: "Aquaculture Department",
 			education: [
 				"Doctor of Philosophy in Fisheries, major in Aquaculture – University of the Philippines Visayas",
@@ -2279,7 +2316,7 @@ function openFacultyModal(facultyId) {
 			name: "Assoc. Prof. Rosalinda P. Shariff",
 			position: "Special Assistant to the Office of the Vice Chancellor for Academic Affairs",
 			rank: "Associate Professor V",
-			image: "/images/coed/Profile/msufaculty.png",
+			image: getFacultyImagePath("Assoc. Prof. Rosalinda P. Shariff"),
 			department: "Aquaculture Department",
 			education: [
 				"Master of Science in Marine Biology (2015) – University of San Carlos, Cebu City",
@@ -2305,7 +2342,7 @@ function openFacultyModal(facultyId) {
 			name: "Assoc. Prof. Kingpu O. Ajik",
 			position: "Faculty, Fish Processing Technology Department",
 			rank: "Associate Professor IV",
-			image: "/images/coed/Profile/msufaculty.png",
+			image: getFacultyImagePath("Assoc. Prof. Kingpu O. Ajik"),
 			department: "Post-Harvest Fisheries Department",
 			education: [
 				"Master of Science in Aquaculture (2024) – Mindanao State University – Tawi-Tawi College of Technology and Oceanography",
@@ -2332,7 +2369,7 @@ function openFacultyModal(facultyId) {
 			name: "Asst. Prof. Iannie P. Maribao",
 			position: "Faculty, Food Technology and Fish Processing Technology Departments",
 			rank: "Assistant Professor IV",
-			image: "/images/coed/Profile/msufaculty.png",
+			image: getFacultyImagePath("Asst. Prof. Iannie P. Maribao"),
 			department: "Post-Harvest Fisheries Department",
 			education: [
 				"Master of Science in Food Engineering (2023) – Kastamonu University, Türkiye",
@@ -2358,7 +2395,7 @@ function openFacultyModal(facultyId) {
 			name: "Ms. Normina A. Abubakar",
 			position: "Instructor I, Fish Processing Technology Department",
 			rank: "Instructor I",
-			image: "/images/coed/Profile/msufaculty.png",
+			image: getFacultyImagePath("Normina A. Abubakar"),
 			department: "Post-Harvest Fisheries Department",
 			education: [
 				"Master of Science in Food Technology (on study leave) – Universiti Tun Hussein Onn Malaysia",
@@ -2383,7 +2420,7 @@ function openFacultyModal(facultyId) {
 			name: "Mr. Marhamin H. Jumsali",
 			position: "Instructor I, Fish Processing Technology Department",
 			rank: "Instructor I",
-			image: "/images/coed/Profile/msufaculty.png",
+			image: getFacultyImagePath("Marhamin H. Jumsali"),
 			department: "Post-Harvest Fisheries Department",
 			education: [
 				"Master of Science in Food Microbiology (2025–present) – Universiti Tun Hussein Onn Malaysia",
@@ -2412,7 +2449,7 @@ function openFacultyModal(facultyId) {
 			name: "Angelica B. Bermil",
 			position: "Instructor I, Capture Fisheries Department",
 			rank: "Instructor I",
-			image: "/images/coed/Profile/msufaculty.png",
+			image: getFacultyImagePath("Angelica B. Bermil"),
 			department: "Capture Fisheries Department",
 			education: [
 				"Master’s course in Marine Resources and Environment (on-going) – Tokyo University of Marine Science and Technology",
@@ -2438,7 +2475,7 @@ function openFacultyModal(facultyId) {
 			name: "Assoc. Prof. Melodina D. Hairol",
 			position: "Extension Project Staff, Aquaculture Department",
 			rank: "Associate Professor V",
-			image: "/images/coed/Profile/msufaculty.png",
+			image: getFacultyImagePath("Assoc. Prof. Melodina D. Hairol"),
 			department: "Aquaculture Department",
 			education: [
 				"Master of Science in Aquaculture (2020) – Mindanao State University – Tawi-Tawi College of Technology and Oceanography",
@@ -2467,7 +2504,7 @@ function openFacultyModal(facultyId) {
 			name: "Associate Prof. Hadjiran A. Illud",
 			position: "Faculty, Marine Fisheries Department",
 			rank: "Associate Professor V",
-			image: "/images/coed/Profile/msufaculty.png",
+			image: getFacultyImagePath("Associate Prof. Hadjiran A. Illud"),
 			department: "Capture Fisheries Department",
 			education: [
 				"Doctor of Fisheries Technology (2025) – Iloilo State University of Fisheries Science and Technology",
@@ -2495,7 +2532,7 @@ function openFacultyModal(facultyId) {
 			name: "Associate Prof. Cherry T. Nian",
 			position: "Associate Professor V, Aquaculture Department",
 			rank: "Associate Professor V",
-			image: "/images/coed/Profile/msufaculty.png",
+			image: getFacultyImagePath("Associate Prof. Cherry T. Nian"),
 			department: "Aquaculture Department",
 			education: [
 				"Doctor in Fisheries Technology major in Aquaculture (on study grant) – Iloilo State University of Fisheries Science and Technology",
@@ -2520,7 +2557,7 @@ function openFacultyModal(facultyId) {
 			name: "Gerly-Ayn J. Tupas",
 			position: "Assistant Professor IV, Aquaculture Department",
 			rank: "Assistant Professor IV",
-			image: "/images/coed/Profile/msufaculty.png",
+			image: getFacultyImagePath("Gerly-Ayn J. Tupas"),
 			department: "Aquaculture Department",
 			education: [
 				"Master of Science in Aquaculture (2022) – Kastamonu University, Türkiye",
@@ -2547,7 +2584,7 @@ function openFacultyModal(facultyId) {
 			name: "Rizal Jhunn F. Robles",
 			position: "Assistant Professor IV, Aquaculture Department",
 			rank: "Assistant Professor IV",
-			image: "/images/coed/Profile/msufaculty.png",
+			image: getFacultyImagePath("Rizal Jhunn F. Robles"),
 			department: "Aquaculture Department",
 			education: [
 				"Master of Science in Aquaculture (2021) – Mindanao State University – Tawi-Tawi College of Technology and Oceanography",
@@ -4596,7 +4633,7 @@ function openPersonnelModal(personnelId) {
 			name: "Prof. Jaro O. Ajik",
 			position: "Dean, College of Fisheries",
 			rank: "Professor VI",
-			image: "/images/cof/personnel/jaro_ajik.png",
+			image: "/images/cof/Faculty/Jaro O. Ajik.png",
 			education: [
 				"Doctor in Fisheries Technology (2021) – Iloilo State University of Fisheries Science and Technology, Iloilo City, Philippines",
 				"Master of Science in Marine Management (2008) – Zamboanga State College of Marine Science and Technology, Zamboanga City, Philippines",
@@ -4629,7 +4666,7 @@ function openPersonnelModal(personnelId) {
 			name: "Suhana A. Abduraup",
 			position: "Aquacultural Technician I",
 			rank: "",
-			image: "/images/cof/personnel/abduraup.png",
+			image: "/images/cof/personnel/SUHANA A. ABDURAUP.png",
 			education: [
 				"Bachelor of Science in Fisheries (2022)",
 				"College of Fisheries, MSU-TCTO"
@@ -4657,7 +4694,7 @@ function openPersonnelModal(personnelId) {
 			name: "Mohammad-Norodom H. Ajik",
 			position: "Aquacultural Technician II",
 			rank: "",
-			image: "/images/cof/personnel/ajik_mn.png",
+			image: "/images/cof/personnel/MOHAMMAD-NORODOM H. AJIK.png",
 			education: [
 				"Master of Marine Affairs (CAR)",
 				"University of the Philippines – Visayas, Miagao, Ilolio City, Philippines",
@@ -4683,7 +4720,7 @@ function openPersonnelModal(personnelId) {
 			name: "Abdel-Azeem M. Alsim",
 			position: "Science Research Assistant",
 			rank: "",
-			image: "/images/cof/personnel/alsim.png",
+			image: "/images/cof/personnel/ABDEL-AZEEM M. ALSIM.png",
 			education: [
 				"Master of Science in Fisheries Biotechnology (On Study Grant)",
 				"Universiti Malaysia Terengganu, Malaysia",
@@ -4710,7 +4747,7 @@ function openPersonnelModal(personnelId) {
 			name: "Aisa Mae B. Camsain",
 			position: "Aquacultural Technician I",
 			rank: "",
-			image: "/images/cof/personnel/camsain.png",
+			image: "/images/cof/personnel/AISA MAE B. CAMSAIN.png",
 			education: [
 				"Bachelor of Science in Fisheries (2022)",
 				"College of Fisheries, MSU-TCTO"
@@ -4736,7 +4773,7 @@ function openPersonnelModal(personnelId) {
 			name: "Mujaiyon R. Esmola",
 			position: "Aquacultural Technician I",
 			rank: "",
-			image: "/images/cof/personnel/esmola.png",
+			image: "/images/cof/personnel/MUJAIYON R. ESMOLA.png",
 			education: [
 				"Bachelor of Science in Fisheries (1995)",
 				"College of Fisheries, MSU-TCTO, Sanga-Sanga, Bongao, Tawi-Tawi, Philippines"
@@ -4757,7 +4794,7 @@ function openPersonnelModal(personnelId) {
 			name: "Adzmon J. Garamon",
 			position: "Laboratory Technician I",
 			rank: "",
-			image: "/images/cof/personnel/garamon.png",
+			image: "/images/cof/personnel/ADZMON J. GARAMON.png",
 			education: [
 				"Bachelor of Science in Fisheries (2018)",
 				"College of Fisheries, MSU-TCTO",
@@ -4784,7 +4821,7 @@ function openPersonnelModal(personnelId) {
 			name: "Noriam L. Jalaidi",
 			position: "Aquacultural Technician I",
 			rank: "",
-			image: "/images/cof/personnel/jalaidi.png",
+			image: "/images/cof/personnel/NORIAM L. JALAIDI.png",
 			education: [
 				"Bachelor of Science in Fisheries (2019)",
 				"College of Fisheries, MSU-TCTO"
@@ -4812,7 +4849,7 @@ function openPersonnelModal(personnelId) {
 			name: "Ariel J. Ricablangca",
 			position: "Science Research Assistant",
 			rank: "",
-			image: "/images/cof/personnel/ricablangca.png",
+			image: "/images/cof/personnel/ARIEL J. RICABLANGCA.png",
 			education: [
 				"Master of Science in Marine and Lacustrine Science and Management (Ocean & Lakes) - On Study Grant",
 				"An interuniversity program offered jointly by Vrije Universiteit Brussel, University of Antwerp, and Ghent University in Belgium",
@@ -4839,7 +4876,7 @@ function openPersonnelModal(personnelId) {
 			name: "Belen I. Sansawi",
 			position: "Aquacultural Technician I",
 			rank: "",
-			image: "/images/cof/personnel/sansawi.png",
+			image: "/images/cof/personnel/BELEN I. SANSAWI.png",
 			education: [
 				"Master of Science in Aquaculture (2023)",
 				"College of Fisheries, MSU-TCTO, Sanga-Sanga, Bongao, Tawi-Tawi, Philippines",
@@ -4863,7 +4900,7 @@ function openPersonnelModal(personnelId) {
 			name: "Emely M. Talaid",
 			position: "Aquacultural Technician I",
 			rank: "",
-			image: "/images/cof/personnel/talaid.png",
+			image: "/images/cof/personnel/EMELY M. TALAID.png",
 			education: [
 				"Bachelor of Science in Fisheries (2019)",
 				"College of Fisheries, MSU-TCTO"
@@ -4890,7 +4927,7 @@ function openPersonnelModal(personnelId) {
 			name: "Romar A. Ujing",
 			position: "Aquacultural Technician I",
 			rank: "",
-			image: "/images/cof/personnel/ujing.png",
+			image: "/images/cof/personnel/ROMAR A. UJING.png",
 			education: [
 				"Master of Science in Aquaculture (2024)",
 				"COF, MSU-TCTO, Sanga-Sanga, Bongao, Tawi-Tawi, Philippines",
@@ -4915,7 +4952,7 @@ function openPersonnelModal(personnelId) {
 			name: "Nour Aley T. Yangson",
 			position: "Aquacultural Technician I",
 			rank: "",
-			image: "/images/cof/personnel/yangson.png",
+			image: "/images/cof/personnel/NOUR ALEY TAN YANGSON.png",
 			education: [
 				"Master of Science in Aquaculture (CAR)",
 				"Aquaculture Department, College of Fisheries, Mindanao State University – Tawi-Tawi College of Technology and Oceanography, Sanga-Sanga, Bongao, Tawi-Tawi",
@@ -4958,7 +4995,7 @@ function openPersonnelModal(personnelId) {
 			<div class="relative bg-gradient-to-r from-msu-deep-ocean to-msu-bgc-color rounded-t-2xl">
 				<div class="flex flex-col items-center justify-center py-8 px-4 md:px-8">
 					<div class="w-40 h-40 md:w-56 md:h-56 rounded-full overflow-hidden border-4 border-white shadow-lg bg-white mb-6">
-						<img src="${personnel.image}" alt="${personnel.name}" class="w-full h-full object-contain" />
+						<img src="${personnel.image}" alt="${personnel.name}" class="w-full h-full object-contain" onerror="this.src='/images/cof/personnel/${personnelId}.png'" />
 					</div>
 					<h1 class="text-3xl md:text-4xl font-bold text-white mb-2 text-center">${personnel.name}</h1>
 					<p class="text-xl text-gray-200 text-center">${personnel.position}</p>
@@ -7600,7 +7637,7 @@ document.addEventListener('DOMContentLoaded', function() {
 									Championing sustainable post-harvest innovations that protect the value of marine resources and support resilient coastal communities.
 								</p>
 								<div class="mt-4 flex items-center gap-4">
-									<img src="/images/coed/Profile/msufaculty.png" alt="Asst. Prof. Merilyn Q. Amlani" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
+									<img src="/images/cof/Faculty/Merilyn Q. Amlani.png" alt="Asst. Prof. Merilyn Q. Amlani" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
 									<div>
 										<p class="text-sm md:text-base text-white/95 font-medium">
 											<strong>Chairperson:</strong> Asst. Prof. Merilyn Q. Amlani, M.Sc.
@@ -7705,7 +7742,7 @@ document.addEventListener('DOMContentLoaded', function() {
 								Driving fisheries-based food innovation, quality assurance, and value-added processing that uplift the region's blue economy.
 							</p>
 							<div class="mt-4 flex items-center gap-4">
-								<img src="/images/coed/Profile/msufaculty.png" alt="Asst. Prof. Merilyn Q. Amlani" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
+								<img src="/images/cof/Faculty/Merilyn Q. Amlani.png" alt="Asst. Prof. Merilyn Q. Amlani" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
 								<div>
 									<p class="text-sm md:text-base text-white/95 font-medium">
 										<strong>Chairperson:</strong> Asst. Prof. Merilyn Q. Amlani, M.Sc.
@@ -7813,7 +7850,7 @@ document.addEventListener('DOMContentLoaded', function() {
 								Advancing sustainable capture fisheries, marine biodiversity protection, and resilient coastal livelihoods across the archipelago.
 							</p>
 							<div class="mt-4 flex items-center gap-4">
-								<img src="/images/coed/Profile/msufaculty.png" alt="Asst. Prof. Jurmin H. Sarri" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
+								<img src="/images/cof/Faculty/Jurmin H. Sarri.png" alt="Asst. Prof. Jurmin H. Sarri" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
 								<div>
 									<p class="text-sm md:text-base text-white/95 font-medium">
 										<strong>Chairperson:</strong> Asst. Prof. Jurmin H. Sarri, M.Sc.
@@ -7936,7 +7973,7 @@ document.addEventListener('DOMContentLoaded', function() {
 								Strengthening aquaculture innovation, fish health management, and community-based production systems for sustainable blue growth.
 							</p>
 							<div class="mt-4 flex items-center gap-4">
-								<img src="/images/coed/Profile/msufaculty.png" alt="Asst. Prof. Albaris B. Tahiluddin" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
+								<img src="/images/cof/Faculty/Albaris B. Tahiluddin.png" alt="Asst. Prof. Albaris B. Tahiluddin" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
 								<div>
 									<p class="text-sm md:text-base text-white/95 font-medium">
 										<strong>Chairperson:</strong> Asst. Prof. Albaris B. Tahiluddin, Ph.D.
@@ -8767,7 +8804,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					<!-- Prof. Jaro O. Ajik - Dean -->
 					<div class="text-center w-full sm:w-auto cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('jaro_ajik_dean')">
 						<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
-							<img src="/images/cof/personnel/jaro_ajik.png" alt="Prof. Jaro O. Ajik" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy" onerror="this.src='/images/coed/Profile/msufaculty.png'">
+							<img src="/images/cof/Faculty/Jaro O. Ajik.png" alt="Prof. Jaro O. Ajik" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy" onerror="this.src='/images/cof/Faculty/Jaro O. Ajik.png'">
 						</div>
 						<h3 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Prof. Jaro O. Ajik</h3>
 						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Dean, College of Fisheries</p>
@@ -8782,7 +8819,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						<!-- Asst. Prof. Merilyn Q. Amlani - Fish Processing & Food Technology -->
 						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openFacultyModal('merilynAmlani')">
 							<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
-								<img src="/images/coed/Profile/msufaculty.png" alt="Asst. Prof. Merilyn Q. Amlani" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
+								<img src="/images/cof/Faculty/Merilyn Q. Amlani.png" alt="Asst. Prof. Merilyn Q. Amlani" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
 							</div>
 							<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Asst. Prof. Merilyn Q. Amlani</h4>
 							<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color px-2">Chairperson, Fish Processing & Food Technology Departments</p>
@@ -8791,7 +8828,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						<!-- Assistant Prof. Albaris B. Tahiluddin - Aquaculture Department -->
 						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openFacultyModal('albarisTahiluddin')">
 							<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
-								<img src="/images/coed/Profile/msufaculty.png" alt="Assistant Prof. Albaris B. Tahiluddin" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
+								<img src="/images/cof/Faculty/Albaris B. Tahiluddin.png" alt="Assistant Prof. Albaris B. Tahiluddin" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
 							</div>
 							<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Assistant Prof. Albaris B. Tahiluddin</h4>
 							<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color px-2">Chairperson, Aquaculture Department</p>
@@ -8800,7 +8837,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						<!-- Asst. Prof. Jurmin H. Sarri - Marine Fisheries Department -->
 						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openFacultyModal('jurminSarri')">
 							<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
-								<img src="/images/coed/Profile/msufaculty.png" alt="Asst. Prof. Jurmin H. Sarri" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
+								<img src="/images/cof/Faculty/Jurmin H. Sarri.png" alt="Asst. Prof. Jurmin H. Sarri" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
 							</div>
 							<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Asst. Prof. Jurmin H. Sarri</h4>
 							<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color px-2">Chairperson, Marine Fisheries Department</p>
@@ -8814,7 +8851,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					<!-- SUHANA A. ABDURAUP -->
 					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('abduraup')">
 						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-							<img src="/images/cof/personnel/abduraup.png" alt="Suhana A. Abduraup" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/coed/Profile/msufaculty.png'">
+							<img src="/images/cof/personnel/SUHANA A. ABDURAUP.png" alt="Suhana A. Abduraup" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/cof/personnel/abduraup.png'">
 						</div>
 						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Suhana A. Abduraup</h3>
 						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Aquacultural Technician I</p>
@@ -8824,7 +8861,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					<!-- MOHAMMAD-NORODOM H. AJIK -->
 					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('ajik_mn')">
 						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-							<img src="/images/cof/personnel/ajik_mn.png" alt="Mohammad-Norodom H. Ajik" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/coed/Profile/msufaculty.png'">
+							<img src="/images/cof/personnel/MOHAMMAD-NORODOM H. AJIK.png" alt="Mohammad-Norodom H. Ajik" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/cof/personnel/ajik_mn.png'">
 						</div>
 						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Mohammad-Norodom H. Ajik</h3>
 						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Aquacultural Technician II</p>
@@ -8834,7 +8871,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					<!-- ABDEL-AZEEM M. ALSIM -->
 					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('alsim')">
 						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-							<img src="/images/cof/personnel/alsim.png" alt="Abdel-Azeem M. Alsim" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/coed/Profile/msufaculty.png'">
+							<img src="/images/cof/personnel/ABDEL-AZEEM M. ALSIM.png" alt="Abdel-Azeem M. Alsim" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/cof/personnel/alsim.png'">
 						</div>
 						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Abdel-Azeem M. Alsim</h3>
 						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Science Research Assistant</p>
@@ -8844,7 +8881,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					<!-- AISA MAE B. CAMSAIN -->
 					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('camsain')">
 						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-							<img src="/images/cof/personnel/camsain.png" alt="Aisa Mae B. Camsain" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/coed/Profile/msufaculty.png'">
+							<img src="/images/cof/personnel/AISA MAE B. CAMSAIN.png" alt="Aisa Mae B. Camsain" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/cof/personnel/camsain.png'">
 						</div>
 						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Aisa Mae B. Camsain</h3>
 						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Aquacultural Technician I</p>
@@ -8854,7 +8891,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					<!-- MUJAIYON R. ESMOLA -->
 					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('esmola')">
 						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-							<img src="/images/cof/personnel/esmola.png" alt="Mujaiyon R. Esmola" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/coed/Profile/msufaculty.png'">
+							<img src="/images/cof/personnel/MUJAIYON R. ESMOLA.png" alt="Mujaiyon R. Esmola" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/cof/personnel/esmola.png'">
 						</div>
 						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Mujaiyon R. Esmola</h3>
 						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Aquacultural Technician I</p>
@@ -8864,7 +8901,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					<!-- ADZMON J. GARAMON -->
 					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('garamon')">
 						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-							<img src="/images/cof/personnel/garamon.png" alt="Adzmon J. Garamon" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/coed/Profile/msufaculty.png'">
+							<img src="/images/cof/personnel/ADZMON J. GARAMON.png" alt="Adzmon J. Garamon" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/cof/personnel/garamon.png'">
 						</div>
 						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Adzmon J. Garamon</h3>
 						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Laboratory Technician I</p>
@@ -8874,7 +8911,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					<!-- NORIAM L. JALAIDI -->
 					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('jalaidi')">
 						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-							<img src="/images/cof/personnel/jalaidi.png" alt="Noriam L. Jalaidi" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/coed/Profile/msufaculty.png'">
+							<img src="/images/cof/personnel/NORIAM L. JALAIDI.png" alt="Noriam L. Jalaidi" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/cof/personnel/jalaidi.png'">
 						</div>
 						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Noriam L. Jalaidi</h3>
 						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Aquacultural Technician I</p>
@@ -8884,7 +8921,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					<!-- ARIEL J. RICABLANGCA -->
 					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('ricablangca')">
 						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-							<img src="/images/cof/personnel/ricablangca.png" alt="Ariel J. Ricablangca" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/coed/Profile/msufaculty.png'">
+							<img src="/images/cof/personnel/ARIEL J. RICABLANGCA.png" alt="Ariel J. Ricablangca" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/cof/personnel/ricablangca.png'">
 						</div>
 						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Ariel J. Ricablangca</h3>
 						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Science Research Assistant</p>
@@ -8894,7 +8931,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					<!-- BELEN I. SANSAWI -->
 					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('sansawi')">
 						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-							<img src="/images/cof/personnel/sansawi.png" alt="Belen I. Sansawi" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/coed/Profile/msufaculty.png'">
+							<img src="/images/cof/personnel/BELEN I. SANSAWI.png" alt="Belen I. Sansawi" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/cof/personnel/sansawi.png'">
 						</div>
 						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Belen I. Sansawi</h3>
 						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Aquacultural Technician I</p>
@@ -8904,7 +8941,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					<!-- EMELY M. TALAID -->
 					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('talaid')">
 						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-							<img src="/images/cof/personnel/talaid.png" alt="Emely M. Talaid" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/coed/Profile/msufaculty.png'">
+							<img src="/images/cof/personnel/EMELY M. TALAID.png" alt="Emely M. Talaid" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/cof/personnel/talaid.png'">
 						</div>
 						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Emely M. Talaid</h3>
 						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Aquacultural Technician I</p>
@@ -8914,7 +8951,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					<!-- ROMAR A. UJING -->
 					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('ujing')">
 						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-							<img src="/images/cof/personnel/ujing.png" alt="Romar A. Ujing" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/coed/Profile/msufaculty.png'">
+							<img src="/images/cof/personnel/ROMAR A. UJING.png" alt="Romar A. Ujing" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/cof/personnel/ujing.png'">
 						</div>
 						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Romar A. Ujing</h3>
 						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Aquacultural Technician I</p>
@@ -8924,7 +8961,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					<!-- NOUR ALEY TAN YANGSON -->
 					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('yangson')">
 						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
-							<img src="/images/cof/personnel/yangson.png" alt="Nour Aley Tan Yangson" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/coed/Profile/msufaculty.png'">
+							<img src="/images/cof/personnel/NOUR ALEY TAN YANGSON.png" alt="Nour Aley Tan Yangson" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/cof/personnel/yangson.png'">
 						</div>
 						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Nour Aley T. Yangson</h3>
 						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Aquacultural Technician I</p>
