@@ -82,16 +82,41 @@ try {
   filterOptions.levels = Array.from(levelSet);
   filterOptions.departments = Array.from(departmentSet);
   
-  console.log('COED Programs loaded:', programsData.length);
+  console.log('IOES Programs loaded:', programsData.length);
   console.log('Filter options:', filterOptions);
   console.log('Sample program:', programsData[0]);
   console.log('Sample program description:', programsData[0]?.description);
   console.log('Raw description data:', rawProgramsData[0]?.description);
 } catch (error) {
-  console.error('Error fetching COED programs data:', error);
+  console.error('Error fetching IOES programs data:', error);
   // Fallback to empty array if fetch fails
   programsData = [];
 }
+
+const targetDepartments = [
+  'Department of Marine Biology',
+  'Department of Environmental Science'
+];
+
+const normalizeDepartmentName = (value: string) =>
+  (value || '')
+    .toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+const departmentProgramsMap = targetDepartments.reduce<Record<string, typeof programsData>>((acc, department) => {
+  const normalizedTarget = normalizeDepartmentName(department);
+  acc[department] = programsData.filter((program) => {
+    const normalizedProgramDepartment = normalizeDepartmentName(program.department);
+    return normalizedProgramDepartment === normalizedTarget ||
+      normalizedProgramDepartment.includes(normalizedTarget) ||
+      normalizedTarget.includes(normalizedProgramDepartment);
+  });
+  return acc;
+}, {});
+
+console.log('Department programs map created for departments:', Object.keys(departmentProgramsMap));
 
 ---
 
@@ -323,7 +348,7 @@ try {
 
 						>
 
-							<span class="relative z-10">Explore Programs</span>
+							<span class="relative z-10">Explore Faculty & Academic Programs</span>
 
 							<svg class="w-5 h-5 sm:w-6 sm:h-6 ml-2 sm:ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 
@@ -929,6 +954,26 @@ try {
 
 				}
 
+				.faculty-search-highlight {
+					border: 2px solid #61063B !important;
+					box-shadow: 0 0 0 3px rgba(97, 6, 59, 0.2) !important;
+					animation: highlightPulse 2s ease-in-out;
+				}
+
+				.dark .faculty-search-highlight {
+					border: 2px solid #fbbf24 !important;
+					box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.2) !important;
+				}
+
+				@keyframes highlightPulse {
+					0%, 100% {
+						transform: scale(1);
+					}
+					50% {
+						transform: scale(1.02);
+					}
+				}
+
 			</style>
 
 		</section>
@@ -988,7 +1033,7 @@ try {
 
 							</div>
 
-							<div class="text-8xl font-bold mb-4 counter" data-target="135">0</div>
+							<div class="text-8xl font-bold mb-4 counter" data-target="154">0</div>
 
 							<div class="text-3xl font-semibold mb-3">Students Enrolled</div>
 							<div class="text-xl text-gray-300 mt-2">Empowering Future Ocean and Environmental Stewards</div>
@@ -1157,7 +1202,7 @@ try {
 
 <!-- Programs Section with Cards -->
 
-<section id="programs" class="py-20 bg-white">
+<!-- <section id="programs" class="py-20 bg-white">
 
     <div class="container mx-auto px-6">
 
@@ -1175,10 +1220,10 @@ try {
 
 
 
-        <!-- Search and Filter Controls -->
+  
         <div class="mb-8">
             <div class="flex flex-col lg:flex-row gap-4 items-center justify-between">
-                <!-- Global Search -->
+   
                 <div class="relative w-full lg:w-96">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1193,7 +1238,7 @@ try {
                     >
                 </div>
 
-                <!-- Filter Controls -->
+ 
                 <div class="flex flex-wrap gap-3">
                     <select id="degreeFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-msu-main-color focus:border-msu-main-color transition-all duration-300">
                         <option value="">All Degrees</option>
@@ -1216,7 +1261,7 @@ try {
             </div>
         </div>
 
-        <!-- Programs Table - Desktop View -->
+
         <div class="hidden lg:block bg-white rounded-xl shadow-lg overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200">
@@ -1258,18 +1303,18 @@ try {
                         </tr>
                     </thead>
                     <tbody id="programsTableBody" class="bg-white divide-y divide-gray-200">
-                        <!-- Programs will be populated by JavaScript -->
+          
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- Mobile Cards View -->
+
         <div class="lg:hidden space-y-4" id="mobileProgramsContainer">
-            <!-- Mobile cards will be populated by JavaScript -->
+
         </div>
 
-        <!-- No Results Message -->
+
         <div id="noResults" class="hidden text-center py-12">
             <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.29-1.009-5.824-2.5M15 6.5a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -1278,7 +1323,6 @@ try {
             <p class="mt-1 text-sm text-gray-500">Try adjusting your search or filter criteria.</p>
         </div>
 
-        <!-- Results Summary -->
         <div class="mt-4 flex justify-between items-center text-sm text-gray-600">
             <div id="resultsCount">Showing all programs</div>
             <div class="flex items-center space-x-2">
@@ -1292,20 +1336,22 @@ try {
             </div>
         </div>
 
-        <!-- Pagination -->
+  
         <div id="pagination" class="mt-6 flex justify-center">
-            <!-- Pagination will be generated by JavaScript -->
+           
         </div>
 
     </div> 
 
-</section>
+</section> -->
 
-<script define:vars={{ programsData }}>
+<script define:vars={{ programsData, departmentProgramsMap }}>
     // Pass Sanity data to client-side JavaScript
     console.log('=== SETTING SANITY DATA ===');
     window.serverProgramsData = JSON.stringify(programsData);
+    window.departmentProgramsMap = JSON.stringify(departmentProgramsMap);
     console.log('Sanity data set to window.serverProgramsData:', window.serverProgramsData);
+    console.log('Department programs map set to window.departmentProgramsMap:', window.departmentProgramsMap);
 </script>
 
 <script>
@@ -1316,33 +1362,360 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const hiddenPrograms = document.querySelectorAll('.program-card.hidden');
 
-    
+    const departmentProgramsModal = document.getElementById('departmentProgramsModal');
+    const departmentProgramsModalBody = document.getElementById('departmentProgramsModalBody');
+    const departmentProgramsModalSubtitle = document.getElementById('departmentProgramsModalSubtitle');
+    const departmentProgramsModalTitle = document.getElementById('departmentProgramsModalTitle');
+    const departmentModalCloseButtons = Array.from(document.querySelectorAll('.department-modal-close')) as HTMLButtonElement[];
+    const departmentModalOverlay = departmentProgramsModal?.querySelector('.department-modal-overlay') as HTMLElement | null;
+    const departmentProgramButtons = Array.from(document.querySelectorAll('.department-program-toggle')) as HTMLButtonElement[];
 
-    viewAllBtn.addEventListener('click', function() {
+    const departmentProgramsData = (() => {
+        const rawMap = (window as any).departmentProgramsMap;
+        if (!rawMap) return {};
+        try {
+            const parsed = JSON.parse(rawMap);
+            return parsed && typeof parsed === 'object' ? parsed : {};
+        } catch (error) {
+            console.error('Error parsing department programs map:', error);
+            return {};
+        }
+    })();
 
-        // Toggle all hidden programs
+    const fallbackProgramsData = (() => {
+        const raw = (window as any).serverProgramsData;
+        if (!raw) return [];
+        try {
+            const parsed = JSON.parse(raw);
+            return Array.isArray(parsed) ? parsed : [];
+        } catch (error) {
+            console.error('Error parsing fallback programs data:', error);
+            return [];
+        }
+    })();
 
-        hiddenPrograms.forEach(program => {
+    function normalizeDepartmentValue(value: string) {
+        return (value || '')
+            .toLowerCase()
+            .replace(/&/g, 'and')
+            .replace(/\s+/g, ' ')
+            .trim();
+    }
 
-            program.classList.toggle('hidden');
+    function escapeHtml(text: string): string {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
 
+    const departmentDisplayLookup: Record<string, string> = {
+        [normalizeDepartmentValue('Department of Marine Biology')]: 'Department of Marine Biology',
+        [normalizeDepartmentValue('Department of Environmental Science')]: 'Department of Environmental Science',
+        [normalizeDepartmentValue('Institute of Oceanography and Environmental Science')]: 'Institute of Oceanography and Environmental Science'
+    };
+
+    const resolveDepartmentPrograms = (department: string) => {
+        const rawSearchLower = (department || '').toLowerCase();
+        const normalizedInput = normalizeDepartmentValue(department);
+        const entries = Object.entries(departmentProgramsData);
+
+        let matchedEntry = entries.find(([key]) => {
+            const normalizedKey = normalizeDepartmentValue(key);
+            return normalizedKey === normalizedInput ||
+                normalizedKey.includes(normalizedInput) ||
+                normalizedInput.includes(normalizedKey);
         });
+
+        if (!matchedEntry && normalizedInput) {
+            matchedEntry = entries.find(([, programs]) =>
+                Array.isArray(programs) &&
+                programs.some((program: any) => {
+                    const normalizedProgramDepartment = normalizeDepartmentValue(program?.department || '');
+                    return normalizedProgramDepartment === normalizedInput ||
+                        normalizedProgramDepartment.includes(normalizedInput) ||
+                        normalizedInput.includes(normalizedProgramDepartment);
+                })
+            );
+        }
+
+        if (matchedEntry) {
+            const [label, programList] = matchedEntry;
+            const programs = Array.isArray(programList) ? programList : [];
+            if (programs.length) {
+                return { label, programs };
+            }
+        }
+
+        const fallbackMatches = fallbackProgramsData.filter((program: any) => {
+            if (!program) return false;
+            const candidates = [
+                program.department,
+                program.department?.department,
+                program.program,
+                program.name,
+                program.title,
+                program.degree,
+                program.degree?.degree,
+                program.level,
+                program.level?.level,
+                program.description
+            ];
+            return candidates.some((value) => {
+                if (!value) return false;
+                const text = typeof value === 'string'
+                    ? value
+                    : (value && typeof value === 'object' && 'toString' in value)
+                        ? String(value)
+                        : '';
+                return text.toLowerCase().includes(rawSearchLower);
+            });
+        });
+
+        if (fallbackMatches.length) {
+            const fallbackLabel = fallbackMatches[0]?.department?.department ||
+                fallbackMatches[0]?.department ||
+                fallbackMatches[0]?.program ||
+                fallbackMatches[0]?.name ||
+                department;
+            return {
+                label: fallbackLabel || department,
+                programs: fallbackMatches
+            };
+        }
+
+        return {
+            label: department,
+            programs: []
+        };
+    };
+
+    const renderDepartmentPrograms = (department: string) => {
+        if (!departmentProgramsModalBody) return department;
+        const { label, programs } = resolveDepartmentPrograms(department);
+
+        if (!programs.length) {
+            departmentProgramsModalBody.innerHTML = `
+                <div class="text-center py-12">
+                    <p class="text-gray-600 text-sm md:text-base">
+                        No academic program descriptions available for <span class="font-semibold">${escapeHtml(label)}</span> at the moment.
+                    </p>
+                </div>
+            `;
+            return label;
+        }
+
+        const preparedProgramMarkup = programs.map((program: any) => {
+            const safeProgramName = escapeHtml(program?.program || program?.name || '');
+            const safeDegree = program?.degree ? escapeHtml(program.degree) : 'N/A';
+            const safeLevel = program?.level ? escapeHtml(program.level) : 'N/A';
+            const safeDuration = program?.duration ? escapeHtml(program.duration) : 'N/A';
+            const safeAccreditation = program?.accreditation ? escapeHtml(program.accreditation) : '';
+            const safeFileUrl = program?.fileUrl ? escapeHtml(program.fileUrl) : '';
+            const safeDisplayName = escapeHtml(program?.name || program?.program || '');
+            const safeDescription = program?.description
+                ? `<p class="mt-2 text-xs md:text-sm text-gray-600 leading-relaxed">${escapeHtml(program.description)}</p>`
+                : '';
+            const accreditationMarkup = safeAccreditation
+                ? `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full border border-emerald-200 bg-emerald-50 text-emerald-700 text-xs font-medium">${safeAccreditation}</span>`
+                : `<span class="text-gray-400 text-xs">TBA</span>`;
+            const actionMarkup = safeFileUrl
+                ? `<button type="button" onclick="openPDFViewer('${safeFileUrl}', '${safeDisplayName}')" class="inline-flex items-center gap-2 rounded-full border border-[#61063B]/20 bg-[#61063B]/10 px-4 py-2 text-xs font-semibold text-[#61063B] transition-colors duration-200 hover:bg-[#61063B]/20">
+                        View Details
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+                        </svg>
+                    </button>`
+                : `<span class="text-gray-400 text-xs">No file</span>`;
+            const mobileAccreditationBadge = safeAccreditation
+                ? `<span class="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">${safeAccreditation}</span>`
+                : `<span class="inline-flex items-center rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-xs font-semibold text-gray-500">TBA</span>`;
+            const mobileActionMarkup = safeFileUrl
+                ? `<button type="button" onclick="openPDFViewer('${safeFileUrl}', '${safeDisplayName}')" class="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#61063B] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-[#61063B]/90">
+                        View Details
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+                        </svg>
+                    </button>`
+                : `<span class="mt-4 block text-center text-xs text-gray-400">No file</span>`;
+
+            return {
+                tableRow: `
+                    <tr class="hover:bg-white/60 transition-colors duration-200">
+                        <td class="px-5 py-4 align-top">
+                            <div class="font-semibold text-sm md:text-base text-[#61063B]">${safeProgramName}</div>
+                            ${safeDescription}
+                        </td>
+                        <td class="px-5 py-4 align-top text-sm text-gray-700">${safeDegree}</td>
+                        <td class="px-5 py-4 align-top text-sm text-gray-700">${safeLevel}</td>
+                        <td class="px-5 py-4 align-top text-sm text-gray-700">${safeDuration}</td>
+                        <td class="px-5 py-4 align-top">${accreditationMarkup}</td>
+                        <td class="px-5 py-4 align-top text-right">${actionMarkup}</td>
+                    </tr>
+                `,
+                mobileCard: `
+                    <article class="rounded-2xl border border-gray-200 bg-white/90 p-4 shadow-sm transition-shadow duration-200 hover:shadow-md">
+                        <div class="space-y-4">
+                            <div>
+                                <h3 class="text-base font-semibold text-[#61063B]">${safeProgramName}</h3>
+                                ${safeDescription}
+                            </div>
+                            <dl class="space-y-2 text-sm text-gray-600">
+                                <div class="flex items-start justify-between gap-4">
+                                    <dt class="font-medium text-gray-500">Degree</dt>
+                                    <dd class="text-right text-gray-700">${safeDegree}</dd>
+                                </div>
+                                <div class="flex items-start justify-between gap-4">
+                                    <dt class="font-medium text-gray-500">Level</dt>
+                                    <dd class="text-right text-gray-700">${safeLevel}</dd>
+                                </div>
+                                <div class="flex items-start justify-between gap-4">
+                                    <dt class="font-medium text-gray-500">Duration</dt>
+                                    <dd class="text-right text-gray-700">${safeDuration}</dd>
+                                </div>
+                                <div class="flex items-start justify-between gap-4">
+                                    <dt class="font-medium text-gray-500">Accreditation</dt>
+                                    <dd class="text-right">${mobileAccreditationBadge}</dd>
+                                </div>
+                            </dl>
+                            ${mobileActionMarkup}
+                        </div>
+                    </article>
+                `
+            };
+        });
+
+        const tableRowsMarkup = preparedProgramMarkup.map((entry) => entry.tableRow).join('');
+        const mobileCardsMarkup = preparedProgramMarkup.map((entry) => entry.mobileCard).join('');
+
+        departmentProgramsModalBody.innerHTML = `
+            <div class="space-y-5">
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                    <p class="text-sm text-gray-600">Showing <span class="font-semibold text-[#61063B]">${programs.length}</span> academic program${programs.length === 1 ? '' : 's'}</p>
+                </div>
+                <div class="hidden sm:block overflow-x-auto rounded-2xl border border-gray-200 bg-white/80 backdrop-blur">
+                    <table class="min-w-full divide-y divide-gray-200 text-sm text-gray-700">
+                        <thead class="bg-[#61063B]/90 text-white text-xs uppercase tracking-wide">
+                            <tr>
+                                <th scope="col" class="px-5 py-3 text-left font-semibold">Program Name</th>
+                                <th scope="col" class="px-5 py-3 text-left font-semibold">Degree Type</th>
+                                <th scope="col" class="px-5 py-3 text-left font-semibold">Level</th>
+                                <th scope="col" class="px-5 py-3 text-left font-semibold">Duration</th>
+                                <th scope="col" class="px-5 py-3 text-left font-semibold">Accreditation</th>
+                                <th scope="col" class="px-5 py-3 text-right font-semibold">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200 bg-white">
+                            ${tableRowsMarkup}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="sm:hidden space-y-4">
+                    ${mobileCardsMarkup}
+                </div>
+            </div>
+        `;
+
+        return label;
+    };
+
+    const openDepartmentProgramsModal = (department: string) => {
+        if (!departmentProgramsModal) return;
+        const matchedLabel = renderDepartmentPrograms(department);
+        const trimmedRequest = (department || '').trim();
+        const normalizedRequest = normalizeDepartmentValue(trimmedRequest);
+        const trimmedMatched = (matchedLabel || '').trim();
+        const normalizedMatched = normalizeDepartmentValue(trimmedMatched);
+
+        const manualRequestLabel = normalizedRequest ? departmentDisplayLookup[normalizedRequest] : undefined;
+        const manualMatchedLabel = normalizedMatched ? departmentDisplayLookup[normalizedMatched] : undefined;
+
+        let resolvedLabel = manualMatchedLabel || manualRequestLabel || trimmedMatched || trimmedRequest;
+
+        if (normalizedRequest && normalizedMatched) {
+            const labelsMismatch =
+                normalizedMatched !== normalizedRequest &&
+                !normalizedMatched.includes(normalizedRequest) &&
+                !normalizedRequest.includes(normalizedMatched);
+            if (labelsMismatch && !manualMatchedLabel && manualRequestLabel) {
+                resolvedLabel = manualRequestLabel;
+            }
+        }
+
+        // Hide subtitle as it's redundant
+        if (departmentProgramsModalSubtitle) {
+            departmentProgramsModalSubtitle.textContent = '';
+            departmentProgramsModalSubtitle.classList.add('hidden');
+            departmentProgramsModalSubtitle.removeAttribute('data-department-label');
+        }
+        // Always set title to "Institute of Oceanography and Environmental Science"
+        if (departmentProgramsModalTitle) {
+            departmentProgramsModalTitle.textContent = 'Institute of Oceanography and Environmental Science';
+        }
+        departmentProgramsModal.classList.remove('hidden');
+        departmentProgramsModal.classList.add('flex');
+        document.body.classList.add('overflow-hidden');
+    };
+
+    const closeDepartmentProgramsModal = () => {
+        if (!departmentProgramsModal) return;
+        departmentProgramsModal.classList.add('hidden');
+        departmentProgramsModal.classList.remove('flex');
+        document.body.classList.remove('overflow-hidden');
+    };
+
+    (window as any).openDepartmentProgramsModal = openDepartmentProgramsModal;
+    (window as any).closeDepartmentProgramsModal = closeDepartmentProgramsModal;
+
+    departmentModalCloseButtons.forEach((button) => {
+        button.addEventListener('click', closeDepartmentProgramsModal);
+    });
+
+    if (departmentModalOverlay) {
+        departmentModalOverlay.addEventListener('click', closeDepartmentProgramsModal);
+    }
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && departmentProgramsModal && !departmentProgramsModal.classList.contains('hidden')) {
+            closeDepartmentProgramsModal();
+        }
+    });
+
+    departmentProgramButtons.forEach((button) => {
+        button.addEventListener('click', function() {
+            const department = button.dataset.department || '';
+            if (department) {
+                openDepartmentProgramsModal(department);
+            }
+        });
+    });
+
+    if (viewAllBtn) {
+        viewAllBtn.addEventListener('click', function() {
+
+            // Toggle all hidden programs
+
+            hiddenPrograms.forEach(program => {
+
+                program.classList.toggle('hidden');
+
+            });
 
         
 
-        // Change button text based on state
+            // Change button text based on state
 
-        if (viewAllBtn.textContent.includes('View All')) {
+            if (viewAllBtn.textContent && viewAllBtn.textContent.includes('View All')) {
 
-            viewAllBtn.innerHTML = 'Show Less <svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"></path></svg>';
+                viewAllBtn.innerHTML = 'Show Less <svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"></path></svg>';
 
-        } else {
+            } else {
 
-            viewAllBtn.innerHTML = 'View All Academic Programs <svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>';
+                viewAllBtn.innerHTML = 'View All Academic Programs <svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>';
 
-        }
+            }
 
-    });
+        });
+    }
 
 });
 
@@ -1479,27 +1852,35 @@ function openFacultyModal(facultyId) {
 			name: "Anina Haslee A. Julkanain-Ong",
 			position: "",
 			academicRank: "Instructor II",
-			image: "/images/ioes/Faculty/Atty. Pumbaya.jpg",
+			image: "/images/ioes/Faculty/ANINA HASLEE A. JULKANAIN-ONG.jpg",
 			education: [
-				"Master of Science in Chemical Oceanography (on-going)",
-				"Bachelor of Science in Marine Biology"
+				"Master's Degree (on-going) - Universiti Malaysia Terengganu (DOST-SEI Scholarship)",
+				"Bachelor of Science in Marine Biology (Magna Cum Laude, Class Marshal, 2018) - MSU-TCTO"
 			],
-			achievements: [],
+			achievements: [
+				"Magna Cum Laude - Bachelor of Science in Marine Biology (2018)",
+				"College Leadership Award",
+				"Class Marshal",
+				"DOST-SEI Foreign Graduate Scholarship Program Recipient"
+			],
 			publications: [],
-			description: "Anina Haslee A. Julkanain-Ong is an Instructor II at the Institute of Oceanography and Environmental Science, currently pursuing her Master of Science in Chemical Oceanography."
+			description: "Anina Haslee A. Julkanain-Ong earned her Bachelor of Science in Marine Biology from the Mindanao State University – Tawi-Tawi College of Technology and Oceanography (MSU-TCTO), graduating Magna Cum Laude in 2018. She was also recognized with the College Leadership Award and served as the Class Marshal. She is currently pursuing a Master's degree in Oceanography at Universiti Malaysia Terengganu (UMT) under the Department of Science and Technology – Science Education Institute (DOST-SEI) Foreign Graduate Scholarship Program. Her research focuses on nutrient dynamics and their relationship with ocean productivity, particularly within tropical marine systems. Her work reflects a strong commitment to advancing marine science research and fostering sustainable coastal management in the Sulu Archipelago and broader Southeast Asian region."
 		},
 		burias: {
 			name: "Dahlia P. Burias",
 			position: "",
 			academicRank: "Instructor I",
-			image: "/images/ioes/Faculty/Atty. Pumbaya.jpg",
+			image: "/images/ioes/Faculty/DAHLIA P. BURIAS.jpg",
 			education: [
-				"Master of Science in Environmental Science (on-going)",
-				"Bachelor of Science in Marine Biology"
+				"Master's Degree (on-going) - University of the Philippines - Diliman (APDP Grant)",
+				"Bachelor of Science in Environmental Science (Cum Laude, 2017) - MSU-TCTO"
 			],
-			achievements: [],
+			achievements: [
+				"Cum Laude - Bachelor of Science in Environmental Science (2017)",
+				"APDP Grant Recipient"
+			],
 			publications: [],
-			description: "Dahlia P. Burias is an Instructor I at the Institute of Oceanography and Environmental Science, currently pursuing her Master of Science in Environmental Science."
+			description: "Dahlia Burias is an instructor at the Mindanao State University Tawi-Tawi College of Technology and Oceanography, specializing in coastal ecosystem assessment. She holds a Bachelor degree in Environmental Science and is currently pursuing her Master's degree in Environmental Science at the University of the Philippines Diliman, Quezon City, Philippines. Her research work focuses on the assessment and monitoring of key coastal habitats, including mangrove forests, seagrass beds, and coral reefs, with additional involvement in studies on carbon stock assessment and plastics pollution. She has participated in various research projects that support coastal resource management and environmental conservation initiatives in the Philippines."
 		},
 		abdulmajid: {
 			name: "Assist. Prof. Nur-Aisa S. Abdulmajid-Basiri",
@@ -1556,7 +1937,9 @@ function openFacultyModal(facultyId) {
 				"Master of Public Administration - Western Mindanao State University",
 				"Bachelor of Science in Chemistry - Western Mindanao State University"
 			],
-			achievements: [],
+			achievements: [
+				"AUS AID Scholar - Master in Education, University of Western Australia (2009)"
+			],
 			publications: [],
 			description: "Faricia M. Abdulwahid was born and raised in the island of Sibutu in the Province of Tawi-Tawi where she finished her elementary and secondary education. She is a holder of Bachelor of Science in Chemistry which she obtained from the Western Mindanao State University (WMSU) in Zamboanga City. It is from the same university she also obtained her Master in Public Administration. Being a registered chemist she was employed at WMSU to teach Chemistry. After ten years at WMSU, she transferred to MSU-TCTO and was assigned at the College of Arts and Sciences (CAS) to teach Chemistry and just recently she is reassigned to the Institute of Oceanography and Environmental Science (IOES). While at MSU-TCTO she got the opportunity to study and obtained her Master in Education at the University of Western Australia in Perth, Western Australia in 2009 as an AUS-AID scholar. At present aside from being a Faculty member of the IOES she is also serving as the Chief of the Integrated Science Laboratory (ISL)."
 		},
@@ -1576,7 +1959,7 @@ function openFacultyModal(facultyId) {
 		rasul: {
 			name: "Zharifa G. Rasul, MSc",
 			position: "Special Assistant, Secondary Education",
-			academicRank: "Teacher I",
+			academicRank: "Instructor I",
 			image: "/images/ioes/Faculty/ZHARIFA G. RASUL.jpg",
 			education: [
 				"Master of Science in Biology",
@@ -1589,7 +1972,7 @@ function openFacultyModal(facultyId) {
 		pon: {
 			name: "Monica Mae R. Pon",
 			position: "",
-			academicRank: "Teacher I",
+			academicRank: "Instructor I",
 			image: "/images/ioes/Faculty/MONICA MAE R. PON.jpg",
 			education: [
 				"Master of Science in Genetics (pursuing) - University of the Philippines Los Baños",
@@ -1605,8 +1988,8 @@ function openFacultyModal(facultyId) {
 		// Personnel/Staff Data
 		hadjirul: {
 			name: "Angeline B. Hadjirul",
-			position: "Aquaculture Technologist",
-			academicRank: "Aquaculture Technologist",
+			position: "Aquacultural Technologist & Guest Lecturer",
+			academicRank: "Aquacultural Technologist & Guest Lecturer",
 			image: "/images/ioes/Faculty/ANGELINE B. HADJIRUL.jpg",
 			education: [
 				"Master of Science in Aquaculture",
@@ -2899,148 +3282,615 @@ document.addEventListener('DOMContentLoaded', function() {
 (window as any).clearGuestLecturerSearch = clearGuestLecturerSearch;
 
 // Faculty Search Functionality
-function searchFaculty() {
-	const searchInput = document.getElementById('facultySearch') as HTMLInputElement;
-	const clearButton = document.getElementById('clearFacultySearch') as HTMLElement;
-	const resultsDiv = document.getElementById('facultySearchResults') as HTMLElement;
-	const searchTerm = searchInput.value.toLowerCase().trim();
+document.addEventListener('DOMContentLoaded', function() {
+	const facultySearchInput = document.getElementById('facultySearch');
+	const clearFacultySearchBtn = document.getElementById('clearFacultySearch');
+	const facultySearchResults = document.getElementById('facultySearchResults');
+	const facultyResultsCount = document.getElementById('facultyResultsCount');
+	const facultyResultsList = document.getElementById('facultyResultsList');
+	const facultySearchMatches = document.getElementById('facultySearchMatches');
+	const facultySearchMatchesGrid = document.getElementById('facultySearchMatchesGrid');
+	const facultyGrid = document.getElementById('facultyGrid');
+	const showMoreBtn = document.getElementById('showMoreBtn');
 	
-	// Show/hide clear button
-	if (searchTerm.length > 0) {
-		clearButton.style.display = 'flex';
-	} else {
-		clearButton.style.display = 'none';
-		resultsDiv.style.display = 'none';
+	if (!facultySearchInput || !facultyGrid) return;
+
+	let activeHighlightCard: HTMLElement | null = null;
+	let activeHighlightTimeout: ReturnType<typeof setTimeout> | null = null;
+
+	// Helper function to escape HTML
+	function escapeHtml(text: string): string {
+		const div = document.createElement('div');
+		div.textContent = text;
+		return div.innerHTML;
 	}
-	
-	// Get all faculty cards (both visible and hidden)
-	const allCards = document.querySelectorAll('#facultyGrid .bg-white.rounded-xl.shadow-lg');
-	let visibleCount = 0;
-	let totalCount = allCards.length;
-	
-	allCards.forEach((card: Element) => {
-		const cardElement = card as HTMLElement;
-		const nameElement = cardElement.querySelector('h3');
-		const positionElement = cardElement.querySelector('.text-gray-300.text-sm');
-		const specializationElement = cardElement.querySelector('.flex.items-center.mb-4 span');
-		const descriptionElement = cardElement.querySelector('.text-msu-main-color.dark\\:text-msu-bgc-color.mb-4');
-		
-		let isMatch = false;
-		
-		if (searchTerm === '') {
-			// Show all cards if no search term
-			isMatch = true;
-		} else {
-			// Check if any text content matches the search term
-			const nameText = nameElement?.textContent?.toLowerCase() || '';
-			const positionText = positionElement?.textContent?.toLowerCase() || '';
-			const specializationText = specializationElement?.textContent?.toLowerCase() || '';
-			const descriptionText = descriptionElement?.textContent?.toLowerCase() || '';
-			
-			isMatch = nameText.includes(searchTerm) || 
-					 positionText.includes(searchTerm) || 
-					 specializationText.includes(searchTerm) || 
-					 descriptionText.includes(searchTerm);
+
+	function clearActiveHighlight() {
+		if (activeHighlightCard) {
+			activeHighlightCard.classList.remove('faculty-search-highlight');
+			activeHighlightCard = null;
 		}
-		
-		if (isMatch) {
-			// Show matching cards, but respect the additional card's collapsed state when search is cleared
-			if (searchTerm !== '') {
-				cardElement.style.display = 'block';
-				cardElement.classList.remove('hidden');
-			} else {
-				// If search is cleared, only show non-additional cards or additional cards if they were previously shown
-				const isAdditionalCard = cardElement.id && cardElement.id.startsWith('additionalFaculty');
-				const showMoreText = document.getElementById('showMoreText') as HTMLElement;
-				const isExpanded = showMoreText?.textContent === 'Show Less Faculty';
-				
-				if (!isAdditionalCard || isExpanded) {
-					cardElement.style.display = 'block';
-					cardElement.classList.remove('hidden');
-				} else {
-					cardElement.style.display = '';
-					cardElement.classList.add('hidden');
+		if (activeHighlightTimeout) {
+			clearTimeout(activeHighlightTimeout);
+			activeHighlightTimeout = null;
+		}
+	}
+
+	function highlightFacultyCard(card: HTMLElement) {
+		clearActiveHighlight();
+		card.classList.add('faculty-search-highlight');
+		activeHighlightCard = card;
+		card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+		activeHighlightTimeout = setTimeout(() => {
+			card.classList.remove('faculty-search-highlight');
+			activeHighlightCard = null;
+		}, 3000);
+	}
+
+	// Faculty data for search (matching modal data structure)
+	const facultySearchData: Record<string, { name: string; position: string; rank?: string; department?: string; departments?: string[]; specialization?: string[] }> = {
+		'andas': { name: 'Dr. Sheriffa T. Andas', position: 'Dean, Oceanography and Environmental Science', rank: 'Professor VI', department: 'Department of Marine Biology', departments: ['Department of Marine Biology', 'Department of Environmental Science'], specialization: ['Biology', 'Environmental Science'] },
+		'muallil': { name: 'Dr. Richard N. Muallil', position: 'Vice Chancellor for Research, Innovation, Development and Extension (VCRIDE)', rank: 'Professor VI', department: 'Department of Marine Biology', departments: ['Department of Marine Biology', 'Department of Environmental Science'], specialization: ['Marine Science', 'Marine Biology', 'Fisheries Management'] },
+		'halun': { name: 'Dr. Sitti Zayda B. Halun', position: 'Director, Seaweed Research and Development Center (SeaRDeC)', rank: 'Professor VI', department: 'Department of Marine Biology', departments: ['Department of Marine Biology', 'Department of Environmental Science'], specialization: ['Marine Ecology', 'Seaweed Research'] },
+		'diansuy': { name: 'Assoc. Prof. Araniza M. Diansuy', position: 'Director of the Office of Continuing Education and Extension Services (OCEANeS)', rank: 'Associate Professor V', department: 'Department of Marine Biology', departments: ['Department of Marine Biology', 'Department of Environmental Science'], specialization: ['Marine Biology', 'Seaweed Cultivation'] },
+		'jammang': { name: 'Assoc. Prof. Nurhima H. Jammang', position: 'College Secretary, Oceanography and Environmental Science', rank: 'Associate Professor V', department: 'Department of Environmental Science', departments: ['Department of Marine Biology', 'Department of Environmental Science'], specialization: ['Disaster Risk Reduction', 'Environmental Science'] },
+		'serag': { name: 'Assoc. Prof. Karen Joy B. Serag-Endonila', position: 'Special Assistant to the Office of the Vice Chancellor for Research and Extension', rank: 'Associate Professor V', department: 'Department of Environmental Science', specialization: ['Marine Ecology', 'Marine Biodiversity'] },
+		'regino': { name: 'Sitti Amina M. Regino', position: 'Chairperson, BS Marine Science Program', rank: 'Instructor III', department: 'Department of Marine Biology', specialization: ['Marine Biology', 'Aquaculture'] },
+		'julkanain': { name: 'Anina Haslee A. Julkanain-Ong', position: '', rank: 'Instructor II', department: 'Department of Marine Biology', specialization: ['Marine Biology', 'Oceanography'] },
+		'burias': { name: 'Dahlia P. Burias', position: '', rank: 'Instructor I', department: 'Department of Environmental Science', specialization: ['Environmental Science', 'Coastal Ecosystem Assessment'] },
+		'abdulmajid': { name: 'Assist. Prof. Nur-Aisa S. Abdulmajid-Basiri', position: 'Chairperson, BS Environmental Science Program', rank: 'Assistant Professor IV', department: 'Department of Environmental Science', departments: ['Department of Marine Biology', 'Department of Environmental Science'], specialization: ['Environmental Science', 'Microbiology'] },
+		'tambihasan': { name: 'Ahalnida M. Tambihasan', position: 'Special Research Assistant to the Office of the Vice Chancellor for Research and Extension', rank: 'Instructor I', department: 'Department of Marine Biology', departments: ['Department of Marine Biology', 'Department of Environmental Science'], specialization: ['Marine Biology', 'Coastal Resource Assessment'] },
+		'lintasan': { name: 'Assoc. Prof. Abdurajan B. Lintasan', position: '', rank: 'Associate Professor V', department: 'Department of Marine Biology', departments: ['Department of Marine Biology', 'Department of Environmental Science'], specialization: ['Physics'] },
+		'abdulwahid': { name: 'Asst. Prof. Faricia M. Abdulwahid', position: 'Chief, Integrated Science Laboratory (ISL)', rank: 'Assistant Professor IV', department: 'Department of Marine Biology', departments: ['Department of Marine Biology', 'Department of Environmental Science'], specialization: ['Chemistry'] },
+		'mohammad': { name: 'Asst. Prof. Kimtang Joy H. Mohammad', position: '', rank: 'Assistant Professor IV', department: 'Department of Marine Biology', specialization: ['Marine Biology', 'Seaweed Research'] },
+		'rasul': { name: 'Zharifa G. Rasul, MSc', position: 'Special Assistant, Secondary Education', rank: 'Instructor I', department: 'Department of Environmental Science', specialization: ['Biodiversity'] },
+		'pon': { name: 'Monica Mae R. Pon', position: '', rank: 'Instructor I', department: 'Department of Marine Biology', departments: ['Department of Marine Biology', 'Department of Environmental Science'], specialization: ['Biology', 'Genetics'] }
+	};
+
+	// Get all faculty cards
+	const allFacultyCards = facultyGrid.querySelectorAll('[data-faculty-card], .bg-white.rounded-xl.shadow-lg');
+	
+	// Create a map of faculty cards by their modal ID
+	const facultyCardMap = new Map<string, HTMLElement>();
+	allFacultyCards.forEach(card => {
+		const cardElement = card as HTMLElement;
+		const facultyId = cardElement.getAttribute('data-faculty-id') || '';
+		if (facultyId) {
+			const department = cardElement.dataset.department || '';
+			const uniqueKey = department ? `${facultyId}-${department}` : facultyId;
+			facultyCardMap.set(uniqueKey, cardElement);
+			const info = facultySearchData[facultyId];
+			if (info) {
+				if (info.departments && Array.isArray(info.departments)) {
+					cardElement.dataset.departments = info.departments.join(',');
+				}
+				if (info.department && !cardElement.dataset.department) {
+					cardElement.dataset.department = info.department;
 				}
 			}
-			visibleCount++;
-			
-			// Add highlight effect for search term
-			if (searchTerm !== '') {
-				cardElement.style.border = '2px solid #1e40af'; // blue-800
-				cardElement.style.boxShadow = '0 0 0 3px rgba(30, 64, 175, 0.1)';
-			} else {
-				cardElement.style.border = '';
-				cardElement.style.boxShadow = '';
-			}
-		} else {
-			cardElement.style.display = 'none';
-			cardElement.classList.add('hidden');
 		}
 	});
-	
-	// Update search results display
-	if (searchTerm !== '') {
-		resultsDiv.style.display = 'block';
-		resultsDiv.innerHTML = `Found ${visibleCount} of ${totalCount} faculty members matching "${searchTerm}"`;
-	} else {
-		resultsDiv.style.display = 'none';
-	}
-}
 
-function clearFacultySearch() {
-	const searchInput = document.getElementById('facultySearch') as HTMLInputElement;
-	const clearButton = document.getElementById('clearFacultySearch') as HTMLElement;
-	const resultsDiv = document.getElementById('facultySearchResults') as HTMLElement;
-	
-	searchInput.value = '';
-	clearButton.style.display = 'none';
-	resultsDiv.style.display = 'none';
-	
-	// Show all cards and remove highlights, respecting the show more/less state
-	const allCards = document.querySelectorAll('#facultyGrid .bg-white.rounded-xl.shadow-lg');
-	const showMoreText = document.getElementById('showMoreText') as HTMLElement;
-	const isExpanded = showMoreText?.textContent === 'Show Less Faculty';
-	
-	allCards.forEach((card: Element) => {
-		const cardElement = card as HTMLElement;
-		const isAdditionalCard = cardElement.id && cardElement.id.startsWith('additionalFaculty');
+	function filterFaculty(searchTerm: string) {
+		searchTerm = searchTerm.toLowerCase().trim();
+		clearActiveHighlight();
+
+		let visibleCount = 0;
+		const matchedEntries: Array<{ id: string; card: HTMLElement; data: any }> = [];
 		
-		cardElement.style.border = '';
-		cardElement.style.boxShadow = '';
+		// Faculty IDs that should NEVER show in main grid - only in banner cards
+		const bannerOnlyFaculty = ['andas', 'muallil', 'halun'];
 		
-		// Only show non-additional cards or additional cards if expanded
-		if (!isAdditionalCard || isExpanded) {
-			cardElement.style.display = 'block';
-			cardElement.classList.remove('hidden');
-		} else {
-			cardElement.style.display = '';
-			cardElement.classList.add('hidden');
+		// If search is empty, show all cards in default state
+		if (!searchTerm) {
+			allFacultyCards.forEach((card) => {
+				const cardElement = card as HTMLElement;
+				const facultyId = cardElement.getAttribute('data-faculty-id') || '';
+				const isBannerOnly = bannerOnlyFaculty.includes(facultyId);
+				
+				if (isBannerOnly) {
+					cardElement.classList.add('hidden');
+					cardElement.style.display = 'none';
+					return;
+				}
+				
+				cardElement.classList.remove('hidden');
+				cardElement.style.display = '';
+				
+				// Hide additional faculty cards by default
+				if (cardElement.id && cardElement.id.startsWith('additionalFaculty')) {
+					cardElement.classList.add('hidden');
+					cardElement.style.display = '';
+				}
+			});
+			
+			// Show/update button
+			if (showMoreBtn) {
+				showMoreBtn.classList.remove('hidden');
+			}
+			
+			// Hide search results
+			if (facultySearchResults) facultySearchResults.classList.add('hidden');
+			if (facultyResultsCount) facultyResultsCount.textContent = '';
+			if (facultyResultsList) facultyResultsList.innerHTML = '';
+			if (facultySearchMatchesGrid) facultySearchMatchesGrid.innerHTML = '';
+			if (facultySearchMatches) facultySearchMatches.classList.add('hidden');
+			if (clearFacultySearchBtn) clearFacultySearchBtn.classList.add('hidden');
+			return;
+		}
+
+		// Filter faculty based on search term
+		facultyCardMap.forEach((card, facultyId) => {
+			const cardElement = card as HTMLElement;
+			const id = cardElement.getAttribute('data-faculty-id') || '';
+			const isBannerOnly = bannerOnlyFaculty.includes(id);
+			
+			if (isBannerOnly) {
+				cardElement.classList.add('hidden');
+				cardElement.style.display = 'none';
+				return;
+			}
+			
+			const facultyData = facultySearchData[id];
+			let matches = false;
+			let entryData = facultyData;
+
+			if (facultyData) {
+				const searchableText = [
+					facultyData.name,
+					facultyData.position,
+					facultyData.department || '',
+					...(facultyData.specialization || [])
+				]
+					.join(' ')
+					.toLowerCase();
+				matches = searchableText.includes(searchTerm);
+			}
+
+			if (!matches) {
+				const cardName = cardElement.querySelector('h3')?.textContent || '';
+				const cardPosition = cardElement.querySelector('.text-gray-300.text-sm')?.textContent || '';
+				const cardSpecialization = cardElement.querySelector('.flex.items-center.mb-4 span')?.textContent || '';
+				const cardDescription = cardElement.querySelector('.text-msu-main-color.dark\\:text-msu-bgc-color.mb-4')?.textContent || '';
+				
+				const searchableText = [
+					cardName,
+					cardPosition,
+					cardSpecialization,
+					cardDescription
+				]
+					.join(' ')
+					.toLowerCase();
+				
+				if (searchableText.includes(searchTerm)) {
+					matches = true;
+					entryData = {
+						name: cardName.trim(),
+						position: cardPosition.trim(),
+						department: cardElement.dataset.department || 'Institute of Oceanography and Environmental Science',
+						specialization: cardSpecialization ? [cardSpecialization.trim()] : []
+					};
+				}
+			}
+
+			if (matches) {
+				cardElement.classList.add('hidden');
+				cardElement.style.display = 'none';
+				visibleCount += 1;
+				matchedEntries.push({
+					id: id,
+					card: cardElement,
+					data: entryData
+				});
+			} else {
+				cardElement.classList.add('hidden');
+				cardElement.style.display = 'none';
+			}
+		});
+			
+		// Update results counter
+		if (facultyResultsCount) {
+			facultyResultsCount.innerHTML = '';
+		}
+		if (facultyResultsList) {
+			facultyResultsList.innerHTML = '';
+		}
+		if (facultySearchMatchesGrid) {
+			facultySearchMatchesGrid.innerHTML = '';
+		}
+		if (facultySearchMatches) {
+			facultySearchMatches.classList.add('hidden');
+		}
+
+		if (facultySearchResults && facultyResultsCount) {
+			if (visibleCount === 0) {
+				facultyResultsCount.innerHTML = '<span class="text-red-500">No faculty members found</span>';
+				facultySearchResults.classList.remove('hidden');
+			} else {
+				facultyResultsCount.innerHTML = `Showing <span class="font-semibold text-[#61063B] dark:text-yellow-400">${visibleCount}</span> faculty member${visibleCount === 1 ? '' : 's'}`;
+				facultySearchResults.classList.remove('hidden');
+			}
+		}
+
+		// Build grouped results list
+		if (facultyResultsList && matchedEntries.length && visibleCount !== allFacultyCards.length) {
+			const groupedEntries = new Map<string, typeof matchedEntries>();
+
+			matchedEntries.forEach(entry => {
+				const department = (entry.data && entry.data.department) || entry.card.dataset.department || 'Institute of Oceanography and Environmental Science';
+				if (!groupedEntries.has(department)) {
+					groupedEntries.set(department, []);
+				}
+				groupedEntries.get(department)?.push(entry);
+			});
+
+			let resultsHtml = '';
+			groupedEntries.forEach((entries, department) => {
+				const sortedEntries = entries.slice().sort((a, b) => {
+					const nameA = ((a.data && a.data.name) || a.card.querySelector('h3')?.textContent || '').toLowerCase();
+					const nameB = ((b.data && b.data.name) || b.card.querySelector('h3')?.textContent || '').toLowerCase();
+					return nameA.localeCompare(nameB);
+				});
+
+				const chipsHtml = sortedEntries.map(entry => {
+					const name = escapeHtml((entry.data && entry.data.name) || entry.card.querySelector('h3')?.textContent || 'Faculty Member');
+					const position = escapeHtml((entry.data && entry.data.position) || entry.card.querySelector('.text-gray-300.text-sm')?.textContent || '');
+					const positionHtml = position ? `<span class="text-xs text-gray-500 dark:text-gray-400 sm:ml-1">${position}</span>` : '';
+					return `<button type="button" class="inline-flex flex-col sm:flex-row sm:items-center sm:gap-1 px-3 py-1.5 rounded-full border border-gray-300 dark:border-gray-600 text-sm text-[#61063B] dark:text-yellow-300 bg-white dark:bg-gray-800 hover:bg-[#61063B] hover:text-white transition-colors duration-200" data-faculty-id="${entry.id}"><span class="font-semibold">${name}</span>${positionHtml}</button>`;
+				}).join('');
+
+				resultsHtml += `<div class="bg-white dark:bg-gray-900/70 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 shadow-sm">
+					<p class="text-xs font-semibold uppercase tracking-wide text-[#61063B] dark:text-yellow-300">${escapeHtml(department)}</p>
+					<div class="mt-2 flex flex-wrap gap-2">${chipsHtml}</div>
+				</div>`;
+			});
+
+			facultyResultsList.innerHTML = resultsHtml;
+		}
+
+		// Render matching cards below the search area
+		if (facultySearchMatches && facultySearchMatchesGrid) {
+			if (visibleCount > 0) {
+				facultySearchMatchesGrid.innerHTML = '';
+				matchedEntries.forEach(entry => {
+					const clone = entry.card.cloneNode(true) as HTMLElement;
+					clone.classList.remove('hidden');
+					clone.style.display = '';
+					clone.removeAttribute('id');
+					facultySearchMatchesGrid.appendChild(clone);
+				});
+
+				const matchImages = facultySearchMatchesGrid.querySelectorAll<HTMLImageElement>('.lazy-image');
+				if ('IntersectionObserver' in window) {
+					const observer = new IntersectionObserver((entries, observerInstance) => {
+						entries.forEach(entry => {
+							if (entry.isIntersecting) {
+								const img = entry.target as HTMLImageElement;
+								img.classList.add('loaded');
+								(img as HTMLElement).style.opacity = '1';
+								observerInstance.unobserve(img);
+							}
+						});
+					}, {
+						rootMargin: '50px 0px',
+						threshold: 0.01
+					});
+
+					matchImages.forEach(img => {
+						if (!img.classList.contains('loaded')) {
+							(img as HTMLElement).style.opacity = '0';
+							observer.observe(img);
+						}
+					});
+				} else {
+					matchImages.forEach(img => {
+						img.classList.add('loaded');
+						(img as HTMLElement).style.opacity = '1';
+					});
+				}
+
+				facultySearchMatches.classList.remove('hidden');
+			}	else {
+				facultySearchMatchesGrid.innerHTML = '';
+				facultySearchMatches.classList.add('hidden');
+			}
+		}
+		
+		// Hide "Show More" button when searching
+		if (showMoreBtn) {
+			if (searchTerm) {
+				showMoreBtn.classList.add('hidden');
+			} else {
+				showMoreBtn.classList.remove('hidden');
+			}
+		}
+		
+		// Show clear button
+		if (clearFacultySearchBtn) {
+			clearFacultySearchBtn.classList.remove('hidden');
+		}
+	}
+	
+	// Event listener for search input
+	facultySearchInput.addEventListener('input', function(e) {
+		filterFaculty((e.target as HTMLInputElement).value);
+	});
+	
+	// Event listener for clear button
+	if (clearFacultySearchBtn) {
+		clearFacultySearchBtn.addEventListener('click', function() {
+			(facultySearchInput as HTMLInputElement).value = '';
+			filterFaculty('');
+			facultySearchInput.focus();
+		});
+	}
+	
+	// Show clear button when there's text in search
+	facultySearchInput.addEventListener('input', function() {
+		if (clearFacultySearchBtn) {
+			if ((this as HTMLInputElement).value.trim()) {
+				clearFacultySearchBtn.classList.remove('hidden');
+			} else {
+				clearFacultySearchBtn.classList.add('hidden');
+			}
 		}
 	});
+
+	if (facultyResultsList) {
+		facultyResultsList.addEventListener('click', function(event) {
+			const target = (event.target as HTMLElement).closest('button[data-faculty-id]');
+			if (!target) return;
+			event.preventDefault();
+			const facultyId = target.getAttribute('data-faculty-id');
+			if (!facultyId) return;
+			const card = Array.from(facultyCardMap.values()).find(c => c.getAttribute('data-faculty-id') === facultyId);
+			if (!card) return;
+			const cardElement = card as HTMLElement;
+			cardElement.classList.remove('hidden');
+			cardElement.style.display = '';
+			highlightFacultyCard(cardElement);
+		});
+	}
+});
+
+// Department Faculty Cards Mapping
+const departmentFacultyMap: Record<string, string[]> = {
+	'Department of Marine Biology': ['andas', 'regino', 'muallil', 'halun', 'diansuy', 'abdulwahid', 'abdulmajid', 'jammang', 'tambihasan', 'lintasan', 'pon', 'mohammad', 'julkanain'],
+	'Department of Environmental Science': ['andas', 'abdulmajid', 'muallil', 'halun', 'diansuy', 'abdulwahid', 'jammang', 'serag', 'tambihasan', 'lintasan', 'rasul', 'pon', 'julkanain', 'burias']
+};
+
+// Faculty card data mapping
+const facultyCardData: Record<string, { image: string; name: string; subtitle: string; highlight: string; summary: string }> = {
+	'andas': { image: '/images/ioes/Faculty/SHERIFFA T. ANDAS.jpg', name: 'Dr. Sheriffa T. Andas', subtitle: 'Professor VI • Dean', highlight: 'Academic Leadership', summary: 'Leading the Institute of Oceanography and Environmental Science with extensive expertise in biology and environmental science.' },
+	'regino': { image: '/images/ioes/Faculty/SITTI AMINA M. REGINO.jpg', name: 'Sitti Amina M. Regino', subtitle: 'Instructor III • Chairperson', highlight: 'Marine Biology', summary: 'Chairperson of the Department of Marine Biology, specializing in marine science education and aquaculture.' },
+	'muallil': { image: '/images/ioes/Faculty/RICHARD N. MUALLIL.jpg', name: 'Dr. Richard N. Muallil', subtitle: 'Professor VI • VC for Research and Extension', highlight: 'Marine Research', summary: 'Distinguished marine scientist with groundbreaking research in marine conservation and fisheries management.' },
+	'halun': { image: '/images/ioes/Faculty/SITTI ZAYDA B. HALUN.jpg', name: 'Dr. Sitti Zayda B. Halun', subtitle: 'Professor VI • Director for SeaRDeC', highlight: 'Marine Ecology', summary: 'Expert in marine ecology and seaweed research, leading innovative studies in blue-carbon ecosystems.' },
+	'diansuy': { image: '/images/ioes/Faculty/ARANIZA M. DIANSUY.jpg', name: 'Araniza M. Diansuy', subtitle: 'Associate Professor V • Director for ICEES', highlight: 'Extension Services', summary: 'Leading extension services and community engagement in marine science education and coastal resource management.' },
+	'abdulwahid': { image: '/images/ioes/Faculty/FARICIA M. ABDULWAHID.jpg', name: 'Faricia M. Abdulwahid', subtitle: 'Assistant Professor IV • Chief, Integrated Science Laboratory', highlight: 'Chemistry', summary: 'Chief of the Integrated Science Laboratory, specializing in chemistry and science education.' },
+	'abdulmajid': { image: '/images/ioes/Faculty/NUR-AISA S. ABDULMAJID.jpg', name: 'Nur-Aisa S. Abdulmajid', subtitle: 'Associate Professor V • Chairperson', highlight: 'Environmental Science', summary: 'Chairperson of the Department of Environmental Science, specializing in microbiology and environmental management.' },
+	'jammang': { image: '/images/ioes/Faculty/NURHIMA H. JAMMANG.jpg', name: 'Nurhima H. Jammang', subtitle: 'Assistant Professor IV • College Secretary', highlight: 'Disaster Risk Reduction', summary: 'College Secretary specializing in Disaster Risk Reduction Management and environmental science education.' },
+	'tambihasan': { image: '/images/ioes/Faculty/AHALNIDA TAMBIHASAN.jpg', name: 'Ahalnida M. Tambihasan', subtitle: 'Instructor I • Special Assistant, OVCRE', highlight: 'Marine Biology', summary: 'Special Research Assistant specializing in marine biology, coastal resource assessment, and population genetics.' },
+	'lintasan': { image: '/images/ioes/Faculty/ABDURAJAN B. LINTASAN.jpg', name: 'Abdurajan B. Lintasan', subtitle: 'Associate Professor V', highlight: 'Physics', summary: 'Associate Professor specializing in Physics and contributing to interdisciplinary marine science research.' },
+	'pon': { image: '/images/ioes/Faculty/MONICA MAE R. PON.jpg', name: 'Monica Mae R. Pon', subtitle: 'Instructor I • On Study Leave', highlight: 'Biology', summary: 'Dedicated science educator specializing in biology, chemistry, and environmental education.' },
+	'mohammad': { image: '/images/ioes/Faculty/KIMTANG JOY H. MOHAMMAD.jpg', name: 'Kimtang Joy H. Mohammad', subtitle: 'Assistant Professor IV', highlight: 'Marine Biology', summary: 'Assistant Professor specializing in marine biology, seaweed research, and coral reef assessment.' },
+	'julkanain': { image: '/images/ioes/Faculty/ANINA HASLEE A. JULKANAIN-ONG.jpg', name: 'Anina Haslee A. Julkanain-Ong', subtitle: 'Instructor II • On Study Leave', highlight: 'Marine Biology', summary: 'Pursuing advanced studies in oceanography, focusing on nutrient dynamics and ocean productivity.' },
+	'serag': { image: '/images/ioes/Faculty/KAREN JOY B. SERAG-ENDONILA.jpg', name: 'Karen Joy S. Endonila', subtitle: 'Associate Professor V • Special Assistant, OVCRE', highlight: 'Marine Ecology', summary: 'Associate Professor specializing in marine biodiversity conservation, sea turtles, and seaweed tissue culture.' },
+	'rasul': { image: '/images/ioes/Faculty/ZHARIFA G. RASUL.jpg', name: 'Zharifa G. Rasul', subtitle: 'Instructor I • Special Assistant, SED', highlight: 'Biodiversity', summary: 'Specializing in biodiversity research, particularly species diversity and distribution of Odonata.' },
+	'burias': { image: '/images/ioes/Faculty/DAHLIA P. BURIAS.jpg', name: 'Dahlia P. Burias', subtitle: 'Instructor I • On Study Leave', highlight: 'Environmental Science', summary: 'Specializing in coastal ecosystem assessment, including mangroves, seagrasses, and coral reefs.' }
+};
+
+function renderFacultyCardsInBanner(department: string) {
+	const facultyGrid = document.getElementById('facultyGrid');
+	if (!facultyGrid) return;
+
+	const departmentBanner = document.querySelector(`.faculty-department-banner[data-department="${department}"]`) as HTMLElement | null;
+	if (!departmentBanner) return;
+
+	// Remove existing cards container for this department
+	const existingContainer = departmentBanner.nextElementSibling as HTMLElement | null;
+	if (existingContainer && existingContainer.classList.contains('faculty-banner-cards-container')) {
+		existingContainer.remove();
+	}
+
+	// Get faculty IDs for this department
+	const facultyIds = departmentFacultyMap[department] || [];
+	if (facultyIds.length === 0) return;
+
+	// Create container for cards below the banner
+	const container = document.createElement('div');
+	container.className = 'faculty-banner-cards-container md:col-span-2 lg:col-span-3 mt-8';
+	container.setAttribute('data-department', department);
+	container.innerHTML = '<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>';
+
+	const grid = container.querySelector('.grid') as HTMLElement;
+	if (!grid) return;
+
+	// Create cards for each faculty member in this department
+	facultyIds.forEach((facultyId) => {
+		const facultyData = facultyCardData[facultyId];
+		if (!facultyData) return;
+
+		// Create card matching Faculty Spotlight style (matching coed.astro structure)
+		const card = document.createElement('div');
+		card.className = 'bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2';
+		card.setAttribute('data-faculty-id', facultyId);
+		card.setAttribute('data-department', department);
+		card.setAttribute('data-faculty-card', '');
+		card.innerHTML = `
+			<div class="h-90 overflow-hidden relative">
+				<img src="${facultyData.image}" alt="${facultyData.name}" class="w-full h-full object-cover lazy-image" loading="lazy">
+				<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+					<h3 class="text-white font-bold text-xl">${facultyData.name}</h3>
+					<p class="text-gray-300 text-sm">${facultyData.subtitle}</p>
+				</div>
+			</div>
+			<div class="p-6">
+				<div class="flex items-center mb-4">
+					<svg class="w-5 h-5 text-msu-deep-ocean dark:text-msu-bgc-color mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+					</svg>
+					<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">${facultyData.highlight}</span>
+				</div>
+				<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+					${facultyData.summary}
+				</p>
+				<button onclick="openFacultyModal('${facultyId}')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
+					View Profile
+					<svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+					</svg>
+				</button>
+			</div>
+		`;
+		grid.appendChild(card);
+	});
+
+	// Insert container after banner
+	departmentBanner.insertAdjacentElement('afterend', container);
 }
 
 // Initialize faculty search functionality when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-	const searchInput = document.getElementById('facultySearch') as HTMLInputElement;
-	const clearButton = document.getElementById('clearFacultySearch') as HTMLElement;
-	
-	if (searchInput) {
-		searchInput.addEventListener('input', searchFaculty);
-		searchInput.addEventListener('keyup', function(e) {
-			if (e.key === 'Escape') {
-				clearFacultySearch();
+
+	// Initialize: Hide banner-only faculty cards on page load
+	const bannerOnlyFaculty = ['andas', 'muallil', 'halun'];
+	const allInitialCards = document.querySelectorAll('[data-faculty-card]') as NodeListOf<HTMLElement>;
+	allInitialCards.forEach((card: HTMLElement) => {
+		const facultyId = card.getAttribute('data-faculty-id') || '';
+		if (bannerOnlyFaculty.includes(facultyId)) {
+			card.classList.add('hidden');
+			card.style.display = 'none';
+		}
+	});
+
+	// Handle department faculty toggle buttons
+	const departmentFacultyButtons = Array.from(document.querySelectorAll('.department-faculty-toggle')) as HTMLButtonElement[];
+	let activeDepartmentFilter: string | null = null;
+
+	departmentFacultyButtons.forEach((button) => {
+		button.addEventListener('click', function() {
+			const department = button.dataset.department || '';
+			const isActive = department === activeDepartmentFilter;
+
+			// Toggle active state
+			if (isActive) {
+				activeDepartmentFilter = null;
+			} else {
+				activeDepartmentFilter = department;
+			}
+
+			// Update all buttons
+			departmentFacultyButtons.forEach((btn) => {
+				const btnDepartment = btn.dataset.department || '';
+				const btnIsActive = btnDepartment === activeDepartmentFilter;
+				btn.setAttribute('aria-pressed', btnIsActive ? 'true' : 'false');
+				btn.classList.toggle('bg-white', btnIsActive);
+				btn.classList.toggle('text-[#61063B]', btnIsActive);
+				btn.classList.toggle('border-white', btnIsActive);
+				btn.classList.toggle('bg-white/10', !btnIsActive);
+				btn.classList.toggle('text-white', !btnIsActive);
+				btn.classList.toggle('border-white/40', !btnIsActive);
+				
+				const icon = btn.querySelector('.department-button-icon') as SVGElement | null;
+				if (icon) {
+					icon.style.transition = 'transform 0.2s ease-in-out';
+					icon.style.transform = btnIsActive ? 'rotate(180deg)' : '';
+				}
+				btn.setAttribute('aria-expanded', btnIsActive ? 'true' : 'false');
+			});
+
+			// Show/hide banner content
+			const banners = document.querySelectorAll('.faculty-department-banner');
+			banners.forEach((banner) => {
+				const bannerDepartment = banner.getAttribute('data-department') || '';
+				const bannerContent = banner.querySelector('.faculty-banner-content') as HTMLElement | null;
+				if (bannerContent) {
+					const defaultDisplay = bannerContent.dataset.defaultDisplay || (bannerContent.classList.contains('grid') ? 'grid' : 'block');
+					if (!bannerContent.dataset.defaultDisplay) {
+						bannerContent.dataset.defaultDisplay = defaultDisplay;
+					}
+					if (bannerDepartment === activeDepartmentFilter) {
+						bannerContent.classList.remove('hidden');
+						bannerContent.style.display = defaultDisplay;
+					} else {
+						bannerContent.classList.add('hidden');
+						bannerContent.style.display = 'none';
+					}
+				}
+			});
+
+			// Show/hide Faculty Spotlight cards based on banner state
+			const allFacultyCards = document.querySelectorAll('[data-faculty-card]') as NodeListOf<HTMLElement>;
+			// Faculty IDs that should NEVER show in main grid - only in banner cards
+			const bannerOnlyFaculty = ['andas', 'muallil', 'halun'];
+			
+			allFacultyCards.forEach((card: HTMLElement) => {
+				const isAdditionalCard = card.id && card.id.startsWith('additionalFaculty');
+				const facultyId = card.getAttribute('data-faculty-id') || '';
+				const isBannerOnly = bannerOnlyFaculty.includes(facultyId);
+				
+				if (activeDepartmentFilter) {
+					// Hide ALL Faculty Spotlight cards when banner is active - cards shown below banner instead
+					card.classList.add('hidden');
+					card.style.display = 'none';
+					card.style.opacity = '';
+					card.style.transform = '';
+				} else {
+					// When no banner is active, hide banner-only faculty and additional cards
+					if (isBannerOnly || isAdditionalCard) {
+						// Always hide banner-only faculty and additional cards in main grid
+						card.classList.add('hidden');
+						card.style.display = 'none';
+					} else {
+						// Show only non-banner-only main faculty cards
+						card.classList.remove('hidden');
+						card.style.display = '';
+					}
+				}
+			});
+
+			// Hide all additional faculty cards when banner is clicked
+			const additionalFacultyCards = document.querySelectorAll('#additionalFaculty1, #additionalFaculty2, #additionalFaculty3, #additionalFaculty4, #additionalFaculty5, #additionalFaculty6, #additionalFaculty7, #additionalFaculty8, #additionalFaculty9, #additionalFaculty10, #additionalFaculty11') as NodeListOf<HTMLElement>;
+			additionalFacultyCards.forEach((card: HTMLElement) => {
+				card.classList.add('hidden');
+				card.style.opacity = '';
+				card.style.transform = '';
+			});
+
+			// Reset "Show More Faculty" button state
+			const showMoreText = document.getElementById('showMoreText') as HTMLElement;
+			const showMoreIcon = document.getElementById('showMoreIcon') as HTMLElement;
+			const showMoreBtn = document.getElementById('showMoreBtn') as HTMLElement;
+			if (showMoreText) {
+				showMoreText.textContent = 'Show More Faculty';
+			}
+			if (showMoreIcon) {
+				showMoreIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>';
+			}
+			if (showMoreBtn) {
+				showMoreBtn.classList.remove('bg-gray-600', 'hover:bg-gray-700');
+				showMoreBtn.classList.add('bg-[#61063B]', 'hover:bg-msu-deep-ocean-dark');
+			}
+
+			// Hide all banner card containers first
+			const allCardContainers = document.querySelectorAll('.faculty-banner-cards-container');
+			allCardContainers.forEach((container) => {
+				const containerElement = container as HTMLElement;
+				containerElement.classList.add('hidden');
+			});
+
+			// Show/hide faculty cards below banner and render cards for active department
+			if (activeDepartmentFilter) {
+				renderFacultyCardsInBanner(activeDepartmentFilter);
+				const container = document.querySelector(`.faculty-banner-cards-container[data-department="${activeDepartmentFilter}"]`) as HTMLElement | null;
+				if (container) {
+					container.classList.remove('hidden');
+				}
 			}
 		});
-	}
-	
-	if (clearButton) {
-		clearButton.addEventListener('click', clearFacultySearch);
-	}
+	});
 });
 
-// Expose search functions to global scope
-(window as any).searchFaculty = searchFaculty;
-(window as any).clearFacultySearch = clearFacultySearch;
 
 // Personnel Search Functionality
 function searchPersonnel() {
@@ -3780,19 +4630,41 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Faculty Show More/Less functionality
 function toggleFacultyView() {
-	const additionalFacultyCards = document.querySelectorAll('#additionalFaculty1, #additionalFaculty2, #additionalFaculty3, #additionalFaculty4, #additionalFaculty5, #additionalFaculty6, #additionalFaculty7, #additionalFaculty8, #additionalFaculty9, #additionalFaculty10, #additionalFaculty11') as NodeListOf<HTMLElement>;
+	// Check if a banner is active - only allow toggle when a banner is shown
+	// Check for visible card container (banner cards are shown)
+	const activeCardContainer = document.querySelector('.faculty-banner-cards-container:not(.hidden)') as HTMLElement | null;
+	
+	if (!activeCardContainer) {
+		// No banner is active, don't allow toggling
+		return;
+	}
+
+	// Get the active department from the card container
+	const activeDepartment = activeCardContainer.getAttribute('data-department') || '';
+
+	const allAdditionalFacultyCards = document.querySelectorAll('#additionalFaculty1, #additionalFaculty2, #additionalFaculty3, #additionalFaculty4, #additionalFaculty5, #additionalFaculty6, #additionalFaculty7, #additionalFaculty8, #additionalFaculty9, #additionalFaculty10, #additionalFaculty11') as NodeListOf<HTMLElement>;
 	const showMoreText = document.getElementById('showMoreText') as HTMLElement;
 	const showMoreIcon = document.getElementById('showMoreIcon') as HTMLElement;
 	const showMoreBtn = document.getElementById('showMoreBtn') as HTMLElement;
 	
-	if (!additionalFacultyCards.length || !showMoreText || !showMoreIcon) {
+	if (!allAdditionalFacultyCards.length || !showMoreText || !showMoreIcon) {
 		console.error('Faculty toggle elements not found');
+		return;
+	}
+	
+	// Filter additional cards that belong to the active department
+	const additionalFacultyCards = Array.from(allAdditionalFacultyCards).filter((card: HTMLElement) => {
+		const cardDepartments = card.getAttribute('data-department') || '';
+		return cardDepartments.split(',').some(dept => dept.trim() === activeDepartment);
+	}) as HTMLElement[];
+	
+	if (additionalFacultyCards.length === 0) {
 		return;
 	}
 	
 	// Check if additional faculty is currently hidden (check first card)
 	if (additionalFacultyCards[0].classList.contains('hidden')) {
-		// Show additional faculty with smooth animation
+		// Show additional faculty with smooth animation (only for active department)
 		additionalFacultyCards.forEach((card: HTMLElement) => {
 			card.classList.remove('hidden');
 			card.style.opacity = '0';
@@ -4407,158 +5279,89 @@ document.addEventListener('DOMContentLoaded', function() {
 		<!-- Research & Innovation Section -->
 
 		<section class="py-20 bg-gray-50">
-
 			<div class="container mx-auto px-6">
-
-				<div class="text-center mb-8 md:mb-12 lg:mb-16">
-					<div class="flex justify-center mb-6">
-						<div class="bg-gradient-to-br from-msu-deep-ocean to-msu-bgc-color p-4 rounded-full shadow-lg">
-							<svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-							</svg>
-						</div>
-					</div>
-					<h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-[#61063B] dark:text-msu-bgc-color">Research & Innovation</h2>
-					<p class="text-lg sm:text-xl text-msu-main-color dark:text-msu-bgc-color max-w-3xl mx-auto px-4">
-						Pioneering marine and environmental research initiatives addressing critical challenges in oceanography, biodiversity conservation, and sustainable resource management in the Sulu Archipelago
+				<div class="text-center mb-16">
+					<h2 class="text-3xl font-bold mb-4 text-[#61063B] dark:text-msu-bgc-color">Research & Innovation</h2>
+					<p class="text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto">
+						Pioneering marine and environmental research addressing biodiversity protection, climate resilience, and sustainable
+						ocean resource management across the Sulu Archipelago.
 					</p>
 				</div>
 
-			
-
-			<div class="grid md:grid-cols-3 gap-8 mb-12">
-
-				<div class="bg-white p-8 rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
-
-					<div class="flex justify-center mb-6">
-						<div class="bg-gradient-to-br from-msu-deep-ocean to-msu-bgc-color p-4 rounded-full shadow-lg">
-							<svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+					<div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+						<div class="text-msu-bgc-color mb-4">
+							<svg class="w-10 h-10 text-msu-deep-ocean dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
 							</svg>
 						</div>
+						<h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-3">Marine Biodiversity Conservation</h3>
+						<p class="text-msu-main-color dark:text-msu-bgc-color">
+							Comprehensive coral reef assessments, seagrass and mangrove rehabilitation, and fisheries stock analyses guide evidence-based policies for sustaining marine life and local livelihoods.
+						</p>
 					</div>
 
-					<h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-4 text-center">Marine Biodiversity Conservation</h3>
-					
-					<div class="space-y-3 mb-6">
-						<div class="flex items-start">
-							<svg class="w-5 h-5 text-msu-deep-ocean mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-							</svg>
-							<p class="text-msu-main-color dark:text-msu-bgc-color text-sm">Coral reef ecosystem assessment and monitoring</p>
-						</div>
-						<div class="flex items-start">
-							<svg class="w-5 h-5 text-msu-deep-ocean mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-							</svg>
-							<p class="text-msu-main-color dark:text-msu-bgc-color text-sm">Fisheries management and stock assessment</p>
-						</div>
-						<div class="flex items-start">
-							<svg class="w-5 h-5 text-msu-deep-ocean mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-							</svg>
-							<p class="text-msu-main-color dark:text-msu-bgc-color text-sm">Seagrass and mangrove conservation studies</p>
-						</div>
-						<div class="flex items-start">
-							<svg class="w-5 h-5 text-msu-deep-ocean mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-							</svg>
-							<p class="text-msu-main-color dark:text-msu-bgc-color text-sm">Marine species diversity and distribution</p>
-						</div>
-					</div>
-
-				</div>
-
-				
-
-				<div class="bg-white p-8 rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
-
-					<div class="flex justify-center mb-6">
-						<div class="bg-gradient-to-br from-msu-deep-ocean to-msu-bgc-color p-4 rounded-full shadow-lg">
-							<svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+					<div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+						<div class="text-msu-bgc-color mb-4">
+							<svg class="w-10 h-10 text-msu-deep-ocean dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
 							</svg>
 						</div>
+						<h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-3">Climate Change & Sustainability</h3>
+						<p class="text-msu-main-color dark:text-msu-bgc-color">
+							Research on blue-carbon ecosystems, climate vulnerability mapping, and adaptive coastal management empowers communities to respond to rising sea levels and extreme weather.
+						</p>
 					</div>
 
-					<h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-4 text-center">Climate Change & Sustainability</h3>
-					
-					<div class="space-y-3 mb-6">
-						<div class="flex items-start">
-							<svg class="w-5 h-5 text-msu-deep-ocean mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+						<div class="text-msu-bgc-color mb-4">
+							<svg class="w-10 h-10 text-msu-deep-ocean dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
 							</svg>
-							<p class="text-msu-main-color dark:text-msu-bgc-color text-sm">Climate change impacts on marine ecosystems</p>
 						</div>
-						<div class="flex items-start">
-							<svg class="w-5 h-5 text-msu-deep-ocean mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-							</svg>
-							<p class="text-msu-main-color dark:text-msu-bgc-color text-sm">Blue-carbon research and assessment</p>
-						</div>
-						<div class="flex items-start">
-							<svg class="w-5 h-5 text-msu-deep-ocean mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-							</svg>
-							<p class="text-msu-main-color dark:text-msu-bgc-color text-sm">Seaweed cultivation and innovation</p>
-						</div>
-						<div class="flex items-start">
-							<svg class="w-5 h-5 text-msu-deep-ocean mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-							</svg>
-							<p class="text-msu-main-color dark:text-msu-bgc-color text-sm">Sustainable coastal resource management</p>
-						</div>
+						<h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-3">Coastal Community Resilience</h3>
+						<p class="text-msu-main-color dark:text-msu-bgc-color">
+							Integration of disaster risk reduction, participatory resource planning, and sustainable livelihood programs strengthens island communities facing environmental pressures.
+						</p>
 					</div>
 
-				</div>
-
-				
-
-				<div class="bg-white p-8 rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
-
-					<div class="flex justify-center mb-6">
-						<div class="bg-gradient-to-br from-msu-deep-ocean to-msu-bgc-color p-4 rounded-full shadow-lg">
-							<svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+					<div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+						<div class="text-msu-bgc-color mb-4">
+							<svg class="w-10 h-10 text-msu-deep-ocean dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
 							</svg>
 						</div>
+						<h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-3">Oceanographic Technology</h3>
+						<p class="text-msu-main-color dark:text-msu-bgc-color">
+							Development of marine observation systems, remote sensing applications, and data-driven forecasting tools to monitor ocean health and inform navigation and fisheries.
+						</p>
 					</div>
 
-					<h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-4 text-center">Oceanographic Technology Development</h3>
-					
-					<div class="space-y-3 mb-6">
-						<div class="flex items-start">
-							<svg class="w-5 h-5 text-msu-deep-ocean mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+					<div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+						<div class="text-msu-bgc-color mb-4">
+							<svg class="w-10 h-10 text-msu-deep-ocean dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
 							</svg>
-							<p class="text-msu-main-color dark:text-msu-bgc-color text-sm">Science-based technology for marine resources</p>
 						</div>
-						<div class="flex items-start">
-							<svg class="w-5 h-5 text-msu-deep-ocean mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-							</svg>
-							<p class="text-msu-main-color dark:text-msu-bgc-color text-sm">Aquaculture innovation and development</p>
-						</div>
-						<div class="flex items-start">
-							<svg class="w-5 h-5 text-msu-deep-ocean mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-							</svg>
-							<p class="text-msu-main-color dark:text-msu-bgc-color text-sm">Environmental monitoring systems</p>
-						</div>
-						<div class="flex items-start">
-							<svg class="w-5 h-5 text-msu-deep-ocean mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-							</svg>
-							<p class="text-msu-main-color dark:text-msu-bgc-color text-sm">Coastal community development programs</p>
-						</div>
+						<h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-3">Seaweed Science & Biotechnology</h3>
+						<p class="text-msu-main-color dark:text-msu-bgc-color">
+							Breakthrough studies in seaweed tissue culture, mass propagation, and value-added marine bioproducts elevate coastal economies and promote climate-smart aquaculture.
+						</p>
 					</div>
 
+					<div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+						<div class="text-msu-bgc-color mb-4">
+							<svg class="w-10 h-10 text-msu-deep-ocean dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+							</svg>
+						</div>
+						<h3 class="text-xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-3">Environmental Monitoring & Data Science</h3>
+						<p class="text-msu-main-color dark:text-msu-bgc-color">
+							Interdisciplinary teams deploy laboratory analytics, GIS, and sensor networks to track water quality, pollution dynamics, and ecosystem health in real time.
+						</p>
+					</div>
 				</div>
-
 			</div>
-
-			</div>
-
 		</section>
 
 
@@ -4727,131 +5530,449 @@ document.addEventListener('DOMContentLoaded', function() {
 		</section> -->
 
 
-		<!-- Personnel Spotlight - Mobile Optimized -->
-		<section class="py-12 sm:py-16 md:py-20 bg-white">
-			<div class="container mx-auto px-4 sm:px-6">
-				<div class="text-center mb-8 sm:mb-12 md:mb-16">
-					<h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#61063B] dark:text-msu-bgc-color mb-3 sm:mb-4 px-4">Personnel Spotlight</h2>
-					<p class="text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto px-4">
-						Meet our dedicated support staff who are committed to advancing marine and environmental science research and education
+
+
+		<!-- Faculty Research Connection -->
+		<section class="py-20 bg-gray-50 dark:bg-gray-900">
+			<div class="container mx-auto px-6">
+				<div class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg p-6 sm:p-8 max-w-6xl mx-auto">
+					<h3 class="text-xl sm:text-2xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-4 sm:mb-6 text-center">
+						Meet Our Research Leaders
+					</h3>
+					<p class="text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-6 sm:mb-8 text-center">
+						Our IOES faculty across Marine Biology and Environmental Science departments drive marine science innovation—from blue carbon ecosystems and seaweed biotechnology to coastal resilience, environmental monitoring, climate change adaptation, and environmental stewardship across the Sulu Archipelago.
 					</p>
-				</div>
 
-				<!-- Leadership Section - Dean -->
-				<div class="flex flex-col sm:flex-row justify-center items-center gap-8 sm:gap-10 md:gap-12 mb-8 sm:mb-10 md:mb-12">
-					<!-- Dr. Sheriffa T. Andas - Dean -->
-					<div class="text-center w-full sm:w-auto">
-						<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
-							<img src="/images/ioes/Faculty/SHERIFFA T. ANDAS.jpg" alt="Dr. Sheriffa T. Andas" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg lazy-image" loading="lazy">
+					<!-- Research Statistics -->
+					<div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-10">
+						<div class="text-center">
+							<div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+								<svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+								</svg>
+							</div>
+							<h4 class="font-bold text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">12+ Publications</h4>
+							<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Peer-reviewed marine science papers</p>
 						</div>
-						<h3 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Dr. Sheriffa T. Andas</h3>
-						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Dean, Institute of Oceanography and Environmental Science</p>
-					</div>
-				</div>
-
-				<!-- Staff Personnel Grid - 5 Column Layout -->
-				<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 sm:gap-8 mb-8 sm:mb-12 justify-items-center">
-
-					<!-- Angeline B. Hadjirul -->
-					<div class="text-center cursor-pointer hover:scale-105 transition-transform duration-200" onclick="openFacultyModal('hadjirul')">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
-							<img src="/images/ioes/Faculty/ANGELINE B. HADJIRUL.jpg" alt="Angeline B. Hadjirul" class="w-full h-full object-cover lazy-image" loading="lazy">
+						<div class="text-center">
+							<div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+								<svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2h4a1 1 0 110 2h-1v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6H3a1 1 0 110-2h4zM9 6v10a1 1 0 102 0V6a1 1 0 10-2 0zm4 0v10a1 1 0 102 0V6a1 1 0 10-2 0z"></path>
+								</svg>
+							</div>
+							<h4 class="font-bold text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">9+ Field Missions</h4>
+							<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Annual coastal & ocean expeditions</p>
 						</div>
-						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Angeline B. Hadjirul</h3>
-						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Aquaculture Technologist</p>
-					</div>
-
-					<!-- Sharifa K. Kalimuddin -->
-					<div class="text-center cursor-pointer hover:scale-105 transition-transform duration-200" onclick="openFacultyModal('kalimuddin')">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
-							<img src="/images/ioes/Faculty/SHARIFA KALIMUDDIN.jpg" alt="Sharifa K. Kalimuddin" class="w-full h-full object-cover lazy-image" loading="lazy">
+						<div class="text-center">
+							<div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+								<svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+								</svg>
+							</div>
+							<h4 class="font-bold text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">7+ Flagship Projects</h4>
+							<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Marine conservation & sustainability</p>
 						</div>
-						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Sharifa K. Kalimuddin</h3>
-						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Administrative Aide IV</p>
-					</div>
-
-					<!-- Bibing A. Hussin -->
-					<div class="text-center cursor-pointer hover:scale-105 transition-transform duration-200" onclick="openFacultyModal('hussin')">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
-							<img src="/images/ioes/Faculty/BIBING A. HUSSIN.jpg" alt="Bibing A. Hussin" class="w-full h-full object-cover lazy-image" loading="lazy">
+						<div class="text-center">
+							<div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+								<svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+								</svg>
+							</div>
+							<h4 class="font-bold text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">5+ Global Alliances</h4>
+							<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">International research collaborations</p>
 						</div>
-						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Bibing A. Hussin</h3>
-						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Research Assistant & Guest Lecturer</p>
 					</div>
 
-					<!-- Adzlan D. Gunong -->
-					<div class="text-center cursor-pointer hover:scale-105 transition-transform duration-200" onclick="openFacultyModal('gunong')">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
-							<img src="/images/ioes/Faculty/Adzlan gunong.png" alt="Adzlan D. Gunong" class="w-full h-full object-cover lazy-image" loading="lazy">
-						</div>
-						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Adzlan D. Gunong</h3>
-						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Science Research Assistant</p>
-					</div>
-
-					<!-- Kilin R. Salabi -->
-					<div class="text-center cursor-pointer hover:scale-105 transition-transform duration-200" onclick="openFacultyModal('salabi')">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
-							<img src="/images/ioes/Faculty/KILIN R. SALABI.jpg" alt="Kilin R. Salabi" class="w-full h-full object-cover lazy-image" loading="lazy">
-						</div>
-						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Kilin R. Salabi</h3>
-						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Research Assistant & Guest Lecturer</p>
-					</div>
-
-				</div>
-
-			</div>
+					
 		</section>
-
 
 
 		<!-- Faculty Spotlight -->
 
-		<section class="py-20 bg-gray-50">
+		<section id="facultySpotlight" class="py-20 bg-gray-50">
 
 			<div class="container mx-auto px-6">
 
-			<div class="text-center mb-8">
+				<div class="text-center mb-16">
 
-				<h2 class="text-3xl font-bold mb-4 text-[#61063B] dark:text-msu-bgc-color" >Faculty Spotlight</h2>
+					<h2 class="text-3xl font-bold mb-4 text-[#61063B] dark:text-msu-bgc-color" >Departments</h2>
 
-				<p class="text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto mb-6">
-					Our distinguished faculty members who are experts in oceanography, environmental science, marine biology, and sustainable resource management
-				</p>
+					<p class="text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto">
+						Explore our academic departments and their areas of expertise in oceanography, environmental science, and marine biology.
+					</p>
 
-				<!-- Search Bar -->
-				<div class="max-w-2xl mx-auto mb-6">
-					<div class="relative">
-						<input 
-							type="text" 
-							id="facultySearch" 
-							placeholder="Search faculty by name, position, or expertise..." 
-							class="w-full px-4 py-3 pl-12 pr-4 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-msu-deep-ocean focus:border-transparent transition-all duration-300"
-						>
-						<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-							<svg class="h-5 w-5 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-							</svg>
-						</div>
-						<button 
-							id="clearFacultySearch" 
-							class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition-colors duration-200"
-							style="display: none;"
-						>
-							<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-							</svg>
-						</button>
-					</div>
-					<div id="facultySearchResults" class="mt-2 text-sm text-gray-600 dark:text-gray-400" style="display: none;"></div>
 				</div>
 
-			</div>
-
-				
-
 				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="facultyGrid">
-					<!-- First 3 faculty members (always visible) -->
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+					<!-- DEPARTMENT OF MARINE BIOLOGY -->
+					<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Department of Marine Biology">
+						<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#61063B] via-[#8C1F5A] to-[#2F1A45] text-white p-8 md:p-10 shadow-2xl">
+							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
+							<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+								<div class="max-w-xl">
+									<h3 class="text-2xl md:text-3xl font-bold leading-snug">Department of Marine Biology</h3>
+									<p class="mt-4 text-sm md:text-base text-white/90">
+										Advancing marine science education and research to understand and protect marine ecosystems and biodiversity.
+									</p>
+									<div class="mt-4 flex items-center gap-4">
+										<img src="/images/ioes/Faculty/SITTI AMINA M. REGINO.jpg" alt="Sitti Amina M. Regino" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
+										<div>
+											<p class="text-sm md:text-base text-white/95 font-medium">
+												<strong>Chairperson:</strong> Sitti Amina M. Regino
+											</p>
+											<p class="text-xs md:text-sm text-white/80 mt-1">
+												Instructor III • Chairperson, Department of Marine Biology
+											</p>
+										</div>
+									</div>
+									<div class="mt-6 flex flex-wrap gap-3">
+										<button
+											type="button"
+											class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of Marine Biology"
+											aria-pressed="false"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-white/80">Show</span>
+												<span class="block text-sm md:text-base font-semibold">Faculty</span>
+											</div>
+											<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+											</svg>
+										</button>
+										<button
+											type="button"
+											class="department-program-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white text-[#61063B] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of Marine Biology"
+											data-department-search="Marine Biology"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-[#61063B]/80">View</span>
+												<span class="block text-sm md:text-base font-semibold">Academic Programs</span>
+											</div>
+											<svg class="w-5 h-5 text-[#61063B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+											</svg>
+										</button>
+									</div>
+								</div>
+								<div class="flex-1 w-full space-y-4 md:space-y-6">
+									<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base faculty-banner-content hidden" data-static-content="true" data-member-count="13">
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Dr. Sheriffa T. Andas</p>
+												<p class="text-white/80 text-sm font-normal">Professor VI • Dean</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Sitti Amina M. Regino</p>
+												<p class="text-white/80 text-sm font-normal">Instructor III • Chairperson</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Dr. Richard N. Muallil</p>
+												<p class="text-white/80 text-sm font-normal">Professor VI • VC for Research and Extension</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Dr. Sitti Zayda B. Halun</p>
+												<p class="text-white/80 text-sm font-normal">Professor VI • Director for SeaRDeC</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Araniza M. Diansuy</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Director for ICEES</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Faricia M. Abdulwahid</p>
+												<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Chief, Integrated Science Laboratory</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Nur-Aisa S. Abdulmajid</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Nurhima H. Jammang</p>
+												<p class="text-white/80 text-sm font-normal">Assistant Professor IV • College Secretary</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Ahalnida M. Tambihasan</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I • Special Assistant, OVCRE</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Abdurajan B. Lintasan</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Monica Mae R. Pon</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I • On Study Leave</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Kimtang Joy H. Mohammad</p>
+												<p class="text-white/80 text-sm font-normal">Assistant Professor IV</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Anina Haslee A. Julkanain-Ong</p>
+												<p class="text-white/80 text-sm font-normal">Instructor II • On Study Leave</p>
+											</div>
+										</div>
+									</div>
+									<div class="space-y-3 text-sm md:text-base faculty-banner-programs hidden"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- DEPARTMENT OF ENVIRONMENTAL SCIENCE -->
+					<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Department of Environmental Science">
+						<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#61063B] via-[#8C1F5A] to-[#2F1A45] text-white p-8 md:p-10 shadow-2xl">
+							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
+							<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+								<div class="max-w-xl">
+									<h3 class="text-2xl md:text-3xl font-bold leading-snug">Department of Environmental Science</h3>
+									<p class="mt-4 text-sm md:text-base text-white/90">
+										Promoting sustainable environmental management and conservation through innovative research and education.
+									</p>
+									<div class="mt-4 flex items-center gap-4">
+										<img src="/images/ioes/Faculty/NUR-AISA S. ABDULMAJID.jpg" alt="Nur-Aisa S. Abdulmajid" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
+										<div>
+											<p class="text-sm md:text-base text-white/95 font-medium">
+												<strong>Chairperson:</strong> Nur-Aisa S. Abdulmajid
+											</p>
+											<p class="text-xs md:text-sm text-white/80 mt-1">
+												Associate Professor V • Chairperson, Department of Environmental Science
+											</p>
+										</div>
+									</div>
+									<div class="mt-6 flex flex-wrap gap-3">
+										<button
+											type="button"
+											class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of Environmental Science"
+											aria-pressed="false"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-white/80">Show</span>
+												<span class="block text-sm md:text-base font-semibold">Faculty</span>
+											</div>
+											<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+											</svg>
+										</button>
+										<button
+											type="button"
+											class="department-program-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white text-[#61063B] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="Department of Environmental Science"
+											data-department-search="Environmental Science"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-[#61063B]/80">View</span>
+												<span class="block text-sm md:text-base font-semibold">Academic Programs</span>
+											</div>
+											<svg class="w-5 h-5 text-[#61063B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+											</svg>
+										</button>
+									</div>
+								</div>
+								<div class="flex-1 w-full space-y-4 md:space-y-6">
+									<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base faculty-banner-content hidden" data-static-content="true" data-member-count="14">
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Dr. Sheriffa T. Andas</p>
+												<p class="text-white/80 text-sm font-normal">Professor VI • Dean</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Nur-Aisa S. Abdulmajid</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Chairperson</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Dr. Richard N. Muallil</p>
+												<p class="text-white/80 text-sm font-normal">Professor VI • VC for Research and Extension</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Dr. Sitti Zayda B. Halun</p>
+												<p class="text-white/80 text-sm font-normal">Professor VI • Director for SeaRDeC</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Araniza M. Diansuy</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Director for ICEES</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Faricia M. Abdulwahid</p>
+												<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Chief, Integrated Science Laboratory</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Nurhima H. Jammang</p>
+												<p class="text-white/80 text-sm font-normal">Assistant Professor IV • College Secretary</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Karen Joy S. Endonila</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V • Special Assistant, OVCRE</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Ahalnida M. Tambihasan</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I • Special Assistant, OVCRE</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Abdurajan B. Lintasan</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor V</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Zharifa G. Rasul</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I • Special Assistant, SED</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Monica Mae R. Pon</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I • On Study Leave</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Anina Haslee A. Julkanain-Ong</p>
+												<p class="text-white/80 text-sm font-normal">Instructor II • On Study Leave</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Dahlia P. Burias</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I • On Study Leave</p>
+											</div>
+										</div>
+									</div>
+									<div class="space-y-3 text-sm md:text-base faculty-banner-programs hidden"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Department Notice -->
+					<div id="facultyDepartmentNotice" class="md:col-span-2 lg:col-span-3 text-center py-4 px-6 bg-blue-50 dark:bg-gray-800 rounded-lg mb-4 hidden"></div>
+
+					<!-- First 3 faculty members (hidden initially, shown when banner is clicked) -->
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" data-faculty-id="andas" data-faculty-card data-department="Department of Marine Biology,Department of Environmental Science">
 						<div class="h-90 overflow-hidden relative">
 							<img src="/images/ioes/Faculty/SHERIFFA T. ANDAS.jpg" alt="Dr. Sheriffa T. Andas" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -4878,7 +5999,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						</div>
 					</div>
 
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" data-faculty-id="muallil" data-faculty-card data-department="Department of Marine Biology,Department of Environmental Science">
 						<div class="h-90 overflow-hidden relative">
 							<img src="/images/ioes/Faculty/RICHARD N. MUALLIL.jpg" alt="Dr. Richard N. Muallil" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -4905,7 +6026,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						</div>
 					</div>
 
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2">
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" data-faculty-id="halun" data-faculty-card data-department="Department of Marine Biology,Department of Environmental Science">
 						<div class="h-90 overflow-hidden relative">
 							<img src="/images/ioes/Faculty/SITTI ZAYDA B. HALUN.jpg" alt="Dr. Sitti Zayda B. Halun" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -4933,7 +6054,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					</div>
 
 					<!-- Additional faculty members (hidden initially) -->
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty1">
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty1" data-faculty-id="diansuy" data-faculty-card data-department="Department of Marine Biology,Department of Environmental Science">
 						<div class="h-90 overflow-hidden relative">
 							<img src="/images/ioes/Faculty/ARANIZA M. DIANSUY.jpg" alt="Assoc. Prof. Araniza M. Diansuy" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -4960,7 +6081,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						</div>
 					</div>
 
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty2">
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty2" data-faculty-id="jammang" data-faculty-card data-department="Department of Marine Biology,Department of Environmental Science">
 						<div class="h-90 overflow-hidden relative">
 							<img src="/images/ioes/Faculty/NURHIMA H. JAMMANG.jpg" alt="Assoc. Prof. Nurhima H. Jammang" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -4987,7 +6108,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						</div>
 					</div>
 
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty3">
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty3" data-faculty-id="serag" data-faculty-card data-department="Department of Environmental Science">
 						<div class="h-90 overflow-hidden relative">
 							<img src="/images/ioes/Faculty/KAREN JOY B. SERAG-ENDONILA.jpg" alt="Assoc. Prof. Karen Joy B. Serag-Endonila" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -5015,7 +6136,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					</div>
 
 					<!-- More faculty members (hidden initially) -->
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty4">
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty4" data-faculty-id="regino" data-faculty-card data-department="Department of Marine Biology">
 						<div class="h-90 overflow-hidden relative">
 							<img src="/images/ioes/Faculty/SITTI AMINA M. REGINO.jpg" alt="Sitti Amina M. Regino" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -5042,7 +6163,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						</div>
 					</div>
 
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty5">
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty5" data-faculty-id="abdulmajid" data-faculty-card data-department="Department of Marine Biology,Department of Environmental Science">
 						<div class="h-90 overflow-hidden relative">
 							<img src="/images/ioes/Faculty/NUR-AISA S. ABDULMAJID.jpg" alt="Assist. Prof. Nur-Aisa S. Abdulmajid-Basiri" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -5069,7 +6190,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						</div>
 					</div>
 
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty6">
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty6" data-faculty-id="tambihasan" data-faculty-card data-department="Department of Marine Biology,Department of Environmental Science">
 						<div class="h-90 overflow-hidden relative">
 							<img src="/images/ioes/Faculty/AHALNIDA TAMBIHASAN.jpg" alt="Ahalnida M. Tambihasan" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -5096,7 +6217,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						</div>
 					</div>
 
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty7">
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty7" data-faculty-id="lintasan" data-faculty-card data-department="Department of Marine Biology,Department of Environmental Science">
 						<div class="h-90 overflow-hidden relative">
 							<img src="/images/ioes/Faculty/ABDURAJAN B. LINTASAN.jpg" alt="Assoc. Prof. Abdurajan B. Lintasan" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -5123,7 +6244,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						</div>
 					</div>
 
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty8">
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty8" data-faculty-id="abdulwahid" data-faculty-card data-department="Department of Marine Biology,Department of Environmental Science">
 						<div class="h-90 overflow-hidden relative">
 							<img src="/images/ioes/Faculty/FARICIA M. ABDULWAHID.jpg" alt="Asst. Prof. Faricia M. Abdulwahid" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -5150,7 +6271,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						</div>
 					</div>
 
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty9">
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty9" data-faculty-id="mohammad" data-faculty-card data-department="Department of Marine Biology">
 						<div class="h-90 overflow-hidden relative">
 							<img src="/images/ioes/Faculty/KIMTANG JOY H. MOHAMMAD.jpg" alt="Asst. Prof. Kimtang Joy H. Mohammad" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -5177,7 +6298,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						</div>
 					</div>
 
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty10">
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty10" data-faculty-id="rasul" data-faculty-card data-department="Department of Environmental Science">
 						<div class="h-90 overflow-hidden relative">
 							<img src="/images/ioes/Faculty/ZHARIFA G. RASUL.jpg" alt="Zharifa G. Rasul" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
@@ -5204,12 +6325,12 @@ document.addEventListener('DOMContentLoaded', function() {
 						</div>
 					</div>
 
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty11">
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty11" data-faculty-id="pon" data-faculty-card data-department="Department of Marine Biology,Department of Environmental Science">
 						<div class="h-90 overflow-hidden relative">
 							<img src="/images/ioes/Faculty/MONICA MAE R. PON.jpg" alt="Monica Mae R. Pon" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
 								<h3 class="text-white font-bold text-xl">Monica Mae R. Pon</h3>
-								<p class="text-gray-300 text-sm">Teacher I</p>
+								<p class="text-gray-300 text-sm">Instructor I</p>
 							</div>
 						</div>
 						<div class="p-6">
@@ -5233,14 +6354,14 @@ document.addEventListener('DOMContentLoaded', function() {
 				</div>
 				
 				<!-- Show More Button -->
-				<div class="text-center mt-12">
+				<!-- <div class="text-center mt-12">
 					<button onclick="toggleFacultyView()" id="showMoreBtn" class="inline-flex items-center px-8 py-4 border border-msu-deep-ocean text-base font-medium rounded-full shadow-sm text-msu-bgc-color bg-[#61063B] hover:bg-msu-deep-ocean-dark hover:shadow-md transition-all duration-300 transform hover:scale-105">
 						<span id="showMoreText">Show More Faculty</span>
 						<svg id="showMoreIcon" class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
 						</svg>
 					</button>
-				</div>
+				</div> -->
 
 				
 
@@ -5299,6 +6420,37 @@ document.addEventListener('DOMContentLoaded', function() {
 					<div id="guestModalBody" class="p-0">
 						<!-- Content will be dynamically loaded here -->
 					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Department Programs Modal -->
+		<div
+			id="departmentProgramsModal"
+			class="fixed inset-0 z-50 hidden items-start justify-center sm:items-center px-3 py-6 sm:px-6 lg:px-8 overflow-y-auto"
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="departmentProgramsModalTitle"
+		>
+			<div class="absolute inset-0 bg-black/70 backdrop-blur-sm department-modal-overlay" aria-hidden="true"></div>
+			<div class="relative w-full max-w-4xl mx-auto flex max-h-[calc(100vh-3rem)] flex-col bg-white text-gray-900 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden">
+				<div class="flex items-center justify-between px-5 sm:px-6 py-4 sm:py-5 border-b border-gray-200 bg-gradient-to-r from-msu-main-color/10 to-msu-deep-ocean/10">
+					<div class="space-y-2">
+						<span class="text-xs uppercase tracking-[0.28em] text-msu-deep-ocean/70">Academic Programs</span>
+						<h2 id="departmentProgramsModalTitle" class="text-2xl font-bold text-msu-deep-ocean">Institute of Oceanography and Environmental Science</h2>
+					</div>
+					<button
+						type="button"
+						class="department-modal-close p-2 rounded-full text-gray-600 hover:text-white hover:bg-msu-deep-ocean transition-colors"
+						aria-label="Close modal"
+					>
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+						</svg>
+					</button>
+				</div>
+				<div id="departmentProgramsModalBody" class="flex-1 px-5 sm:px-6 py-5 sm:py-6 space-y-6 overflow-y-auto max-h-[calc(100vh-7rem)] sm:max-h-[75vh]">
+					<!-- Dynamic department content -->
 				</div>
 			</div>
 		</div>
@@ -5461,6 +6613,151 @@ document.addEventListener('DOMContentLoaded', function() {
 		</div>
 
 
+
+		<!-- Personnel Spotlight - Mobile Optimized -->
+		<section class="py-12 sm:py-16 md:py-20 bg-white">
+			<div class="container mx-auto px-4 sm:px-6">
+				<div class="text-center mb-8 sm:mb-12 md:mb-16">
+					<h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#61063B] dark:text-msu-bgc-color mb-3 sm:mb-4 px-4">Personnel Spotlight</h2>
+					<p class="text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto px-4">
+						Meet our dedicated support staff who are committed to advancing marine and environmental science research and education
+					</p>
+				</div>
+
+				<!-- Leadership Section - Dean -->
+				<div class="flex flex-col sm:flex-row justify-center items-center gap-8 sm:gap-10 md:gap-12 mb-8 sm:mb-10 md:mb-12">
+					<!-- Dr. Sheriffa T. Andas - Dean -->
+					<div class="text-center w-full sm:w-auto">
+						<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
+							<img src="/images/ioes/Faculty/SHERIFFA T. ANDAS.jpg" alt="Dr. Sheriffa T. Andas" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg lazy-image" loading="lazy">
+						</div>
+						<h3 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Dr. Sheriffa T. Andas</h3>
+						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Dean, Institute of Oceanography and Environmental Science</p>
+					</div>
+				</div>
+
+				<!-- Chairpersons Section -->
+				<div class="mb-8 sm:mb-10 md:mb-12">
+					<h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-[#61063B] dark:text-msu-bgc-color mb-6 sm:mb-8 text-center px-4">The Chairpersons</h3>
+					<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
+						<!-- Sitti Amina M. Regino - Chairperson, BS Marine Science Program -->
+						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openFacultyModal('regino')">
+							<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
+								<img src="/images/ioes/Faculty/SITTI AMINA M. REGINO.jpg" alt="Sitti Amina M. Regino" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
+							</div>
+							<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Sitti Amina M. Regino</h4>
+							<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color px-2">Chairperson, BS Marine Science Program</p>
+							<p class="text-xs text-gray-600 dark:text-gray-400 px-2">Instructor III</p>
+						</div>
+
+						<!-- Assist. Prof. Nur-Aisa S. Abdulmajid-Basiri - Chairperson, BS Environmental Science Program -->
+						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openFacultyModal('abdulmajid')">
+							<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
+								<img src="/images/ioes/Faculty/NUR-AISA S. ABDULMAJID.jpg" alt="Assist. Prof. Nur-Aisa S. Abdulmajid-Basiri" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
+							</div>
+							<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Assist. Prof. Nur-Aisa S. Abdulmajid-Basiri</h4>
+							<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color px-2">Chairperson, BS Environmental Science Program</p>
+							<p class="text-xs text-gray-600 dark:text-gray-400 px-2">Assistant Professor IV</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- Staff Personnel Grid - 5 Column Layout -->
+				<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 sm:gap-8 mb-8 sm:mb-12 justify-items-center">
+
+					<!-- Angeline B. Hadjirul -->
+					<div class="text-center cursor-pointer hover:scale-105 transition-transform duration-200" onclick="openFacultyModal('hadjirul')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
+							<img src="/images/ioes/Faculty/ANGELINE B. HADJIRUL.jpg" alt="Angeline B. Hadjirul" class="w-full h-full object-cover lazy-image" loading="lazy">
+						</div>
+						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Angeline B. Hadjirul</h3>
+						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Aquacultural Technologist & Guest Lecturer</p>
+					</div>
+
+					<!-- Sharifa K. Kalimuddin -->
+					<div class="text-center cursor-pointer hover:scale-105 transition-transform duration-200" onclick="openFacultyModal('kalimuddin')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
+							<img src="/images/ioes/Faculty/SHARIFA KALIMUDDIN.jpg" alt="Sharifa K. Kalimuddin" class="w-full h-full object-cover lazy-image" loading="lazy">
+						</div>
+						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Sharifa K. Kalimuddin</h3>
+						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Administrative Aide IV</p>
+					</div>
+
+					<!-- Bibing A. Hussin -->
+					<div class="text-center cursor-pointer hover:scale-105 transition-transform duration-200" onclick="openFacultyModal('hussin')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
+							<img src="/images/ioes/Faculty/BIBING A. HUSSIN.jpg" alt="Bibing A. Hussin" class="w-full h-full object-cover lazy-image" loading="lazy">
+						</div>
+						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Bibing A. Hussin</h3>
+						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Research Assistant & Guest Lecturer</p>
+					</div>
+
+					<!-- Adzlan D. Gunong -->
+					<div class="text-center cursor-pointer hover:scale-105 transition-transform duration-200" onclick="openFacultyModal('gunong')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
+							<img src="/images/ioes/Faculty/Adzlan gunong.png" alt="Adzlan D. Gunong" class="w-full h-full object-cover lazy-image" loading="lazy">
+						</div>
+						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Adzlan D. Gunong</h3>
+						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Science Research Assistant</p>
+					</div>
+
+					<!-- Kilin R. Salabi -->
+					<div class="text-center cursor-pointer hover:scale-105 transition-transform duration-200" onclick="openFacultyModal('salabi')">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
+							<img src="/images/ioes/Faculty/KILIN R. SALABI.jpg" alt="Kilin R. Salabi" class="w-full h-full object-cover lazy-image" loading="lazy">
+						</div>
+						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Kilin R. Salabi</h3>
+						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Research Assistant & Guest Lecturer</p>
+					</div>
+
+				</div>
+
+				<!-- Faculty Search Header -->
+				<div class="mt-12 mb-4 text-center">
+					<h2 class="text-2xl sm:text-3xl font-bold text-[#61063B] dark:text-msu-bgc-color">Faculty Search</h2>
+					<p class="text-sm sm:text-base text-gray-700 dark:text-gray-300 mt-1">
+						Find faculty members by name, position, or area of specialization.
+					</p>
+				</div>
+				<!-- Faculty Search Bar -->
+				<div class="mt-12 sm:mt-16">
+					<div class="max-w-2xl mx-auto">
+						<div class="relative">
+							<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+								<svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+								</svg>
+							</div>
+							<input 
+								type="text" 
+								id="facultySearch" 
+								placeholder="Search faculty by name, position, or specialization..." 
+								class="block w-full pl-12 pr-12 py-4 text-base border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-[#61063B] dark:focus:ring-yellow-400 focus:border-[#61063B] dark:focus:border-yellow-400 transition-all duration-300 shadow-sm hover:shadow-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+							>
+							<button 
+								id="clearFacultySearch" 
+								class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200 hidden"
+								title="Clear search"
+							>
+								<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+								</svg>
+							</button>
+						</div>
+						<!-- Search Results Counter -->
+						<div id="facultySearchResults" class="mt-3 text-sm text-gray-600 dark:text-gray-400 hidden">
+							<p id="facultyResultsCount" class="text-center"></p>
+							<div id="facultyResultsList" class="mt-3 space-y-3"></div>
+						</div>
+						<div id="facultySearchMatches" class="mt-8 hidden">
+							<h3 class="text-lg font-semibold text-[#61063B] dark:text-yellow-300 text-center mb-4">Matching Faculty Members</h3>
+							<div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3" id="facultySearchMatchesGrid"></div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</section>
 
 
 

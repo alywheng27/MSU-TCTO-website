@@ -320,13 +320,13 @@ try {
 
 						<a 
 
-							href="#programs" 
+							href="#departments" 
 
 							class="group bg-gradient-to-r from-msu-main-color to-msu-deep-ocean hover:from-msu-deep-ocean hover:to-msu-main-color text-white font-bold py-3 px-6 sm:py-4 sm:px-10 rounded-full transition-all duration-500 inline-flex items-center justify-center hover:shadow-2xl hover:-translate-y-2 transform hover:scale-105 text-sm sm:text-base"
 
 						>
 
-							<span class="relative z-10">Explore Programs</span>
+							<span class="relative z-10">Explore Faculty & Academic Programs</span>
 
 							<svg class="w-5 h-5 sm:w-6 sm:h-6 ml-2 sm:ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 
@@ -338,13 +338,31 @@ try {
 
 						</a>
 
+						<!-- <a 
+
+							href="#departments" 
+
+							class="group bg-white/10 hover:bg-white/20 border-2 border-white/40 text-white font-bold py-3 px-6 sm:py-4 sm:px-10 rounded-full transition-all duration-500 inline-flex items-center justify-center hover:shadow-2xl hover:-translate-y-2 transform hover:scale-105 backdrop-blur-sm text-sm sm:text-base"
+
+						>
+
+							<span class="relative z-10">Departments</span>
+
+							<svg class="w-5 h-5 sm:w-6 sm:h-6 ml-2 sm:ml-3 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-9 9-4-4-6 6"></path>
+
+							</svg>
+
+						</a>
+-->
 						<a 
 
 							href="#contact" 
 
 							class="group bg-transparent border-2 border-white hover:border-msu-deep-ocean text-white font-bold py-3 px-6 sm:py-4 sm:px-10 rounded-full transition-all duration-500 inline-flex items-center justify-center hover:shadow-2xl hover:-translate-y-2 transform hover:scale-105 backdrop-blur-sm text-sm sm:text-base"
 
-						>
+						> 
 
 							<span class="relative z-10">Contact Us</span>
 
@@ -395,6 +413,37 @@ try {
 			</div>
 
 		</section>
+
+		<!-- Department Programs Modal -->
+		<div
+			id="departmentProgramsModal"
+			class="fixed inset-0 z-50 hidden items-start justify-center sm:items-center px-3 py-6 sm:px-6 lg:px-8 overflow-y-auto"
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="departmentProgramsModalTitle"
+		>
+			<div class="absolute inset-0 bg-black/70 backdrop-blur-sm department-modal-overlay" aria-hidden="true"></div>
+			<div class="relative w-full max-w-4xl mx-auto flex max-h-[calc(100vh-3rem)] flex-col bg-white text-gray-900 rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden">
+				<div class="flex items-center justify-between px-5 sm:px-6 py-4 sm:py-5 border-b border-gray-200 bg-gradient-to-r from-msu-main-color/10 to-msu-deep-ocean/10">
+					<div class="space-y-2">
+						<span class="text-xs uppercase tracking-[0.28em] text-msu-deep-ocean/70">Academic Programs</span>
+						<h2 id="departmentProgramsModalTitle" class="text-2xl font-bold text-msu-deep-ocean">Department Academic Programs</h2>
+					</div>
+					<button
+						type="button"
+						class="department-modal-close p-2 rounded-full text-gray-600 hover:text-white hover:bg-msu-deep-ocean transition-colors"
+						aria-label="Close modal"
+					>
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+						</svg>
+					</button>
+				</div>
+				<div id="departmentProgramsModalBody" class="flex-1 px-5 sm:px-6 py-5 sm:py-6 space-y-6 overflow-y-auto max-h-[calc(100vh-7rem)] sm:max-h-[75vh]">
+					<!-- Dynamic department content -->
+				</div>
+			</div>
+		</div>
 
 
 
@@ -799,11 +848,11 @@ try {
 
 							</div>
 
-							<div class="text-8xl font-bold mb-4 counter" data-target="258">0</div>
+							<div class="text-8xl font-bold mb-4 counter" data-target="259">0</div>
 
 							<div class="text-3xl font-semibold mb-3">Students Enrolled</div>
 
-							<div class="text-xl text-gray-300 mt-2">Active learners across all programs</div>
+							<div class="text-xl text-gray-300 mt-2">Overall learners who enrolled in these programs</div>
 
 						</div>
 
@@ -968,7 +1017,7 @@ try {
 
 
 <!-- Programs Section with Cards -->
-
+<!-- 
 <section id="programs" class="py-20 bg-white">
 
     <div class="container mx-auto px-6">
@@ -987,10 +1036,10 @@ try {
 
 
 
-        <!-- Search and Filter Controls -->
+      
         <div class="mb-8">
             <div class="flex flex-col lg:flex-row gap-4 items-center justify-between">
-                <!-- Global Search -->
+              
                 <div class="relative w-full lg:w-96">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1005,7 +1054,7 @@ try {
                     >
                 </div>
 
-                <!-- Filter Controls -->
+      
                 <div class="flex flex-wrap gap-3">
                     <select id="degreeFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-msu-main-color focus:border-msu-main-color transition-all duration-300">
                         <option value="">All Degrees</option>
@@ -1028,7 +1077,7 @@ try {
             </div>
         </div>
 
-        <!-- Programs Table - Desktop View -->
+
         <div class="hidden lg:block bg-white rounded-xl shadow-lg overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200">
@@ -1070,18 +1119,17 @@ try {
                         </tr>
                     </thead>
                     <tbody id="programsTableBody" class="bg-white divide-y divide-gray-200">
-                        <!-- Programs will be populated by JavaScript -->
+     
                     </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- Mobile Cards View -->
+
         <div class="lg:hidden space-y-4" id="mobileProgramsContainer">
-            <!-- Mobile cards will be populated by JavaScript -->
+      
         </div>
 
-        <!-- No Results Message -->
         <div id="noResults" class="hidden text-center py-12">
             <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.29-1.009-5.824-2.5M15 6.5a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -1090,7 +1138,7 @@ try {
             <p class="mt-1 text-sm text-gray-500">Try adjusting your search or filter criteria.</p>
         </div>
 
-        <!-- Results Summary -->
+
         <div class="mt-4 flex justify-between items-center text-sm text-gray-600">
             <div id="resultsCount">Showing all programs</div>
             <div class="flex items-center space-x-2">
@@ -1104,14 +1152,13 @@ try {
             </div>
         </div>
 
-        <!-- Pagination -->
         <div id="pagination" class="mt-6 flex justify-center">
-            <!-- Pagination will be generated by JavaScript -->
+
         </div>
 
     </div> 
 
-</section>
+</section> -->
 
 <script define:vars={{ programsData }}>
     // Pass Sanity data to client-side JavaScript
@@ -1175,12 +1222,12 @@ function openFacultyModal(facultyId) {
 	const facultyData = {
 		mingoc: {
 			name: "Associate Prof. Nerico L. Mingoc, MSIT",
-			position: "Dean, CCS | Chairperson BSIT",
+			position: "Dean / Chairperson of IT Dep't",
 			rank: "Associate Professor V",
 			image: "/images/iict/Profile/NERICO L. MINGOC.jpg",
 			education: [
-				"Master of Science in Information Technology - MSU IIT, Iligan City",
-				"Bachelor of Science in Information Technology - Ateneo de Zamboanga, Zamboanga City"
+				"Master of Science in Information Technology-MSU IIT, Iligan City",
+				"Bachelor of Science in Information Technology-Ateneo de Zamboanga, Zamboanga City"
 			],
 			specialization: [
 				"Human Computer Interaction",
@@ -1217,7 +1264,7 @@ function openFacultyModal(facultyId) {
 					beneficiaries: "MSU-TCTO"
 				}
 			],
-			description: "Associate Professor Nerico L. Mingoc, currently serving as the Acting Dean and Concurrent Chairperson of the Department of Information Technology, specialize in Multimedia and Programming. His research areas encompass computer programming, human-computer interaction, and gamification. Motivated by these research interests, he is dedicated to developing applications that foster automation and enhance accessibility within organizations."
+			description: "Associate Professor Nerico L. Mingoc, currently serving as the Acting Dean and Concurrent Chairperson of the Department of Information Technology, specialize in Multimedia and Programming. His research areas encompass computer programming, human-computer interaction, and gamification. Motivated by these research interests, He is dedicated to developing applications that foster automation and enhance accessibility within organizations."
 		},
 		llema: {
 			name: "Associate Prof. Charisa F. Llema-Abalie, MSIT",
@@ -1251,9 +1298,9 @@ function openFacultyModal(facultyId) {
 			rank: "Instructor I",
 			image: "/images/iict/Profile/IRENE A. BAKILI.jpg",
 			education: [
-				"Master of Science in Computer Science (CAR) - Ateneo de Zamboanga, Zamboanga City",
-				"Master of Arts in Public Administration - University of San Carlos, Cebu City",
-				"Bachelor's Degree - Mindanao State University - Tawi-Tawi College of Technology and Oceanography"
+				"Master of Science in Computer Science (CAR) - Ateneo de Zamboanga University, Zamboanga City",
+				"Bachelor of Science in Computer Engineering-University of San Carlos, Cebu City",
+				"Master of Arts in Public Administration-Mindanao State University - Tawi-Tawi College of Technology and Oceanography"
 			],
 			specialization: [
 				"Wireless Networking",
@@ -1353,15 +1400,15 @@ function openFacultyModal(facultyId) {
 			rank: "Instructor I",
 			image: "/images/iict/Profile/ROMEO L. PAÑARES.jpg",
 			education: [
-				"Master of Science in Computer Applications (CAR) - MSU IIT, Iligan City",
-				"Bachelor of Science in Computer Science - MSU TCTO, Tawi-Tawi"
+				"Master of Science in Computer Applications (CAR)-MSU IIT, Iligan City",
+				"Bachelor of Science in Computer Science-MSU TCTO, Tawi-Tawi"
 			],
 			specialization: [
 				"Wireless Networking",
 				"Internet of Things (IoT)",
 				"Software Development",
-				"Cybersecurity",
-				"Computer Programming"
+				"Computer Programming",
+				"Computer Vision"
 			],
 			description: "Romeo L. Panares Jr. is a dedicated faculty member at Mindanao State University – Tawi-Tawi College of Technology and Oceanography (MSU-TCTO), where he served for nearly a decade. He currently holds the position of Chairperson of the Computer Applications Department under the College of Computer Studies (CCS). Mr. Panares has completed the academic requirements for his Master of Science in Computer Applications at MSU-Iligan Institute of Technology (MSU-IIT) and is working on his final project. His academic and research interests focus on the Internet of Things (IoT) and Embedded Systems, particularly their applications for sustainability and technological innovation."
 		},
@@ -1371,8 +1418,8 @@ function openFacultyModal(facultyId) {
 			rank: "Instructor I",
 			image: "/images/iict/Profile/AL-KADRA A. ANTAO.jpg",
 			education: [
-				"Master of Informatics (On study leave - ongoing) - Telkom University, Indonesia",
-				"Bachelor of Science in New Media and Computer Animation - Ateneo de Zamboanga, Zamboanga City"
+				"Master of Informatics (On study leave - on going) - Telkom University, Indonesia",
+				"Bachelor of Science in New Media and Computer Animation - Ateneo de Zamboanga University, Zamboanga City"
 			],
 			specialization: [
 				"Multimedia",
@@ -1384,7 +1431,7 @@ function openFacultyModal(facultyId) {
 			publications: [
 				"Design and Development of MASTR: A classroom Mobile Assistance Supervision Tool and Reporting for Teachers (2024) - Procedia Computer Science"
 			],
-			description: "Mr. Antao is a faculty member of CCS, with an initial specialization in multimedia, and is currently pursuing a master's degree in Informatics at Telkom University in Bandung, Indonesia. He is expanding his expertise in Social Computing, Image processing and Computer Vision, with a research focus on deep learning techniques for crop disease recognition. While still gaining experience in AI and image analysis, he is deeply committed to lifelong learning and leveraging technology to create meaningful impact in agriculture and society."
+			description: "Mr. Antao is a faculty member of IICT, with an initial specialization in multimedia, and is currently pursuing a master's degree in Informatics at Telkom University in Bandung, Indonesia. He is expanding his expertise in Social Computing, Image processing and Computer Vision, with a research focus on deep learning techniques for crop disease recognition. While still gaining experience in AI and image analysis, he is deeply committed to lifelong learning and leveraging technology to create meaningful impact in agriculture and society."
 		},
 		uddin: {
 			name: "Fadzlorrahiem H. Uddin",
@@ -2413,10 +2460,19 @@ function toggleFacultyView() {
 
 // Faculty Search Functionality
 document.addEventListener('DOMContentLoaded', function() {
-	const facultySearchInput = document.getElementById('facultySearch');
+	// Get the visible search input (in Personnel Spotlight section, not the hidden one)
+	const allSearchInputs = document.querySelectorAll('#facultySearch');
+	const facultySearchInput = Array.from(allSearchInputs).find(input => {
+		const section = (input as HTMLElement).closest('section');
+		return section && !section.classList.contains('hidden');
+	}) as HTMLInputElement | null || document.getElementById('facultySearch') as HTMLInputElement | null;
+	
 	const clearFacultySearchBtn = document.getElementById('clearFacultySearch');
 	const facultySearchResults = document.getElementById('facultySearchResults');
 	const facultyResultsCount = document.getElementById('facultyResultsCount');
+	const facultyResultsList = document.getElementById('facultyResultsList');
+	const facultySearchMatches = document.getElementById('facultySearchMatches');
+	const facultySearchMatchesGrid = document.getElementById('facultySearchMatchesGrid');
 	const showMoreBtn = document.getElementById('showMoreBtn');
 	const facultyGrid = document.getElementById('facultyGrid');
 	
@@ -2424,12 +2480,12 @@ document.addEventListener('DOMContentLoaded', function() {
 	
 	// Faculty data for search (matching modal data structure)
 	const facultySearchData = {
-		'mingoc': { name: 'Nerico L. Mingoc, MSIT', position: 'Dean, CCS', specialization: ['Multimedia', 'Programming', 'Human Computer Interaction', 'Gamification', 'IT Projects Management'] },
+		'mingoc': { name: 'Nerico L. Mingoc, MSIT', position: 'Dean / Chairperson of IT Dep\'t', specialization: ['Multimedia', 'Programming', 'Human Computer Interaction', 'Gamification', 'IT Projects Management'] },
 		'llema': { name: 'Charisa F. Llema-Abalie, MSIT', position: 'Director, ICTO', specialization: ['Mobile Programming', 'IoT', 'Cloud Computing', 'Human Computer Interaction'] },
-		'bakili': { name: 'Engr. Irene A. Bakili', position: 'University Registrar', specialization: ['Wireless Networking', 'Image Classification', 'Mobile Programming', 'Hardware', 'Embedded Systems'] },
+		'bakili': { name: 'Engr. Irene A. Bakili', position: 'University Registrar', specialization: ['Wireless Networking', 'Image Classification', 'Mobile Programming', 'Computer Organization and Architecture', 'Software and Hardware Development', 'Digital Logic Design'] },
 		'andas': { name: 'Joseph V. Andas', position: 'Director for Admin', specialization: ['Educational Technology', 'ICT Integration', 'Basic IT'] },
-		'panares': { name: 'Romeo L. Pañares Jr.', position: 'Chairperson BSCA', specialization: ['IoT', 'Wireless Networking', 'Software Development', 'Cybersecurity', 'Embedded Systems'] },
-		'antao': { name: 'Al-Kadra A. Antao', position: 'Faculty Member', specialization: ['Multimedia', 'AI', 'Machine Learning', 'Computer Vision', 'Social Computing'] },
+		'panares': { name: 'Romeo L. Pañares Jr.', position: 'Chairperson BSCA', specialization: ['Wireless Networking', 'Internet of Things (IoT)', 'Software Development', 'Computer Programming', 'Computer Vision'] },
+		'antao': { name: 'Al-Kadra A. Antao', position: 'Faculty Member', specialization: ['Multimedia', 'Computer Network', 'Social Computing', 'Machine Learning', 'Computer Vision'] },
 		'uddin': { name: 'Fadzlorrahiem H. Uddin', position: 'Faculty Member', specialization: ['HCI', 'UX Design', 'Information Systems', 'Cybersecurity', 'Design Science Research'] },
 		'hailaya': { name: 'Ramat B. Hailaya', position: 'Faculty Member', specialization: ['Database Systems', 'IoT', 'Computer Programming', 'Software Development', 'Graphic Design'] },
 		'tiblan': { name: 'Abdul-Aziz J. Tiblan', position: 'Faculty Member', specialization: ['Networking', 'Network Security', 'IoT', 'Cybersecurity', 'Computer Programming'] },
@@ -2438,8 +2494,13 @@ document.addEventListener('DOMContentLoaded', function() {
 		'julambri': { name: 'Dayang Farha L. Julambri', position: 'Faculty Member', specialization: ['Database Systems', 'Multimedia', 'Computer Programming', 'Graphic Design'] }
 	};
 	
-	// Get all faculty cards
-	const allFacultyCards = facultyGrid.querySelectorAll('.bg-white.rounded-xl.shadow-lg');
+	// Get all faculty cards - query from document to ensure we find them even if grid is in hidden section
+	const allFacultyCards = facultyGrid ? Array.from(facultyGrid.querySelectorAll('.bg-white.rounded-xl.shadow-lg')) : Array.from(document.querySelectorAll('#facultyGrid .bg-white.rounded-xl.shadow-lg'));
+	
+	if (allFacultyCards.length === 0) {
+		console.warn('No faculty cards found. Make sure facultyGrid exists and contains cards.');
+		return;
+	}
 	
 	// Create a map of faculty cards by their modal ID
 	const facultyCardMap = new Map();
@@ -2449,19 +2510,39 @@ document.addEventListener('DOMContentLoaded', function() {
 			const onclickAttr = button.getAttribute('onclick');
 			const match = onclickAttr.match(/openFacultyModal\('([^']+)'\)/);
 			if (match && match[1]) {
-				facultyCardMap.set(match[1], card);
+				const facultyId = match[1];
+				const cardElement = card as HTMLElement;
+				facultyCardMap.set(facultyId, card);
+				cardElement.dataset.facultyId = facultyId;
 			}
 		}
 	});
 	
+	const htmlEscapeMap: Record<string, string> = {
+		'&': '&amp;',
+		'<': '&lt;',
+		'>': '&gt;',
+		'"': '&quot;',
+		'\'': '&#39;'
+	};
+
+	function escapeHtml(value: unknown): string {
+		return (value == null ? '' : String(value)).replace(/[&<>"']/g, (char) => htmlEscapeMap[char as keyof typeof htmlEscapeMap] || char);
+	}
+
 	function filterFaculty(searchTerm) {
 		searchTerm = searchTerm.toLowerCase().trim();
 		
 		let visibleCount = 0;
-		let matchedCards = [];
+		const matchedEntries = [];
 		
 		// If search is empty, show all cards in default state
 		if (!searchTerm) {
+			// Show the original faculty grid
+			if (facultyGrid) {
+				facultyGrid.classList.remove('hidden');
+			}
+			
 			// Reset to default view
 			allFacultyCards.forEach((card, index) => {
 				card.classList.remove('hidden');
@@ -2484,43 +2565,181 @@ document.addEventListener('DOMContentLoaded', function() {
 			
 			// Hide search results
 			if (facultySearchResults) facultySearchResults.classList.add('hidden');
+			if (facultyResultsCount) facultyResultsCount.textContent = '';
+			if (facultyResultsList) facultyResultsList.innerHTML = '';
+			if (facultySearchMatchesGrid) facultySearchMatchesGrid.innerHTML = '';
+			if (facultySearchMatches) facultySearchMatches.classList.add('hidden');
 			if (clearFacultySearchBtn) clearFacultySearchBtn.classList.add('hidden');
 			
 			return;
 		}
 		
+		// Hide the original faculty grid when searching
+		if (facultyGrid) {
+			facultyGrid.classList.add('hidden');
+		}
+
 		// Filter faculty based on search term
 		facultyCardMap.forEach((card, facultyId) => {
+			const cardElement = card as HTMLElement;
 			const facultyData = facultySearchData[facultyId];
-			if (!facultyData) return;
-			
-			const searchableText = [
-				facultyData.name,
-				facultyData.position,
-				...facultyData.specialization
-			].join(' ').toLowerCase();
-			
-			if (searchableText.includes(searchTerm)) {
-				card.classList.remove('hidden');
-				(card as HTMLElement).style.display = '';
-				matchedCards.push(card);
-				visibleCount++;
+			let matches = false;
+			let entryData = facultyData;
+
+			if (facultyData) {
+				const searchableText = [
+					facultyData.name,
+					facultyData.position,
+					...(facultyData.specialization || [])
+				].join(' ').toLowerCase();
+				matches = searchableText.includes(searchTerm);
+			}
+
+			if (!matches) {
+				const cardName = cardElement.querySelector('h3')?.textContent || '';
+				const cardPosition = cardElement.querySelector('.text-gray-300.text-sm')?.textContent || '';
+				const cardSpecialization = cardElement.querySelector('.flex.items-center.mb-4 span')?.textContent || '';
+				const cardDescription = cardElement.querySelector('.text-msu-main-color.dark\\:text-msu-bgc-color.mb-4')?.textContent || '';
+				
+				const searchableText = [
+					cardName,
+					cardPosition,
+					cardSpecialization,
+					cardDescription
+				].join(' ').toLowerCase();
+				
+				if (searchableText.includes(searchTerm)) {
+					matches = true;
+					entryData = {
+						name: cardName.trim(),
+						position: cardPosition.trim(),
+						department: cardElement.dataset.department || 'CCS',
+						specialization: cardSpecialization ? [cardSpecialization.trim()] : []
+					};
+				}
+			}
+
+			if (matches) {
+				cardElement.classList.add('hidden');
+				cardElement.style.display = 'none';
+				visibleCount += 1;
+				matchedEntries.push({
+					id: facultyId,
+					card: cardElement,
+					data: entryData
+				});
 			} else {
-				card.classList.add('hidden');
-				(card as HTMLElement).style.display = 'none';
+				cardElement.classList.add('hidden');
+				cardElement.style.display = 'none';
 			}
 		});
 		
 		// Update results counter
+		if (facultyResultsCount) {
+			facultyResultsCount.innerHTML = '';
+		}
+		if (facultyResultsList) {
+			facultyResultsList.innerHTML = '';
+		}
+		if (facultySearchMatchesGrid) {
+			facultySearchMatchesGrid.innerHTML = '';
+		}
+		if (facultySearchMatches) {
+			facultySearchMatches.classList.add('hidden');
+		}
+
 		if (facultySearchResults && facultyResultsCount) {
 			if (visibleCount === 0) {
 				facultyResultsCount.innerHTML = '<span class="text-red-500">No faculty members found</span>';
 				facultySearchResults.classList.remove('hidden');
-			} else if (visibleCount === allFacultyCards.length) {
-				facultySearchResults.classList.add('hidden');
 			} else {
-				facultyResultsCount.innerHTML = `Showing <span class="font-semibold text-msu-main-color">${visibleCount}</span> of <span class="font-semibold">${allFacultyCards.length}</span> faculty members`;
+				facultyResultsCount.innerHTML = `Showing <span class="font-semibold text-msu-main-color dark:text-yellow-400">${visibleCount}</span> faculty member${visibleCount === 1 ? '' : 's'}`;
 				facultySearchResults.classList.remove('hidden');
+			}
+		}
+
+		// Build grouped results list
+		if (facultyResultsList && matchedEntries.length && visibleCount !== allFacultyCards.length) {
+			const groupedEntries = new Map();
+
+			matchedEntries.forEach(entry => {
+				const department = (entry.data && entry.data.department) || entry.card.dataset.department || 'CCS';
+				if (!groupedEntries.has(department)) {
+					groupedEntries.set(department, []);
+				}
+				groupedEntries.get(department)?.push(entry);
+			});
+
+			let resultsHtml = '';
+			groupedEntries.forEach((entries, department) => {
+				const sortedEntries = entries.slice().sort((a, b) => {
+					const nameA = ((a.data && a.data.name) || a.card.querySelector('h3')?.textContent || '').toLowerCase();
+					const nameB = ((b.data && b.data.name) || b.card.querySelector('h3')?.textContent || '').toLowerCase();
+					return nameA.localeCompare(nameB);
+				});
+
+				const chipsHtml = sortedEntries.map(entry => {
+					const name = escapeHtml((entry.data && entry.data.name) || entry.card.querySelector('h3')?.textContent || 'Faculty Member');
+					const position = escapeHtml((entry.data && entry.data.position) || entry.card.querySelector('.text-gray-300.text-sm')?.textContent || '');
+					const positionHtml = position ? `<span class="text-xs text-gray-500 dark:text-gray-400 sm:ml-1">${position}</span>` : '';
+					return `<button type="button" class="inline-flex flex-col sm:flex-row sm:items-center sm:gap-1 px-3 py-1.5 rounded-full border border-gray-300 dark:border-gray-600 text-sm text-msu-deep-ocean dark:text-yellow-300 bg-white dark:bg-gray-800 hover:bg-msu-deep-ocean hover:text-white transition-colors duration-200" data-faculty-id="${entry.id}"><span class="font-semibold">${name}</span>${positionHtml}</button>`;
+				}).join('');
+
+				resultsHtml += `<div class="bg-white dark:bg-gray-900/70 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 shadow-sm">
+					<p class="text-xs font-semibold uppercase tracking-wide text-msu-deep-ocean dark:text-yellow-300">${escapeHtml(department)}</p>
+					<div class="mt-2 flex flex-wrap gap-2">${chipsHtml}</div>
+				</div>`;
+			});
+
+			facultyResultsList.innerHTML = resultsHtml;
+		}
+
+		// Render matching cards below the search area
+		if (facultySearchMatches && facultySearchMatchesGrid) {
+			if (visibleCount > 0) {
+				facultySearchMatchesGrid.innerHTML = '';
+				matchedEntries.forEach(entry => {
+					const clone = entry.card.cloneNode(true) as HTMLElement;
+					clone.classList.remove('hidden');
+					clone.style.display = '';
+					clone.removeAttribute('id');
+					clone.setAttribute('data-faculty-id', entry.id);
+					facultySearchMatchesGrid.appendChild(clone);
+				});
+
+				const matchImages = facultySearchMatchesGrid.querySelectorAll<HTMLImageElement>('.lazy-image');
+				if ('IntersectionObserver' in window) {
+					const observer = new IntersectionObserver((entries, observerInstance) => {
+						entries.forEach(entry => {
+							if (entry.isIntersecting) {
+								const img = entry.target as HTMLImageElement;
+								img.classList.add('loaded');
+								(img as HTMLElement).style.opacity = '1';
+								observerInstance.unobserve(img);
+							}
+						});
+					}, {
+						rootMargin: '50px 0px',
+						threshold: 0.01
+					});
+
+					matchImages.forEach(img => {
+						if (!img.classList.contains('loaded')) {
+							(img as HTMLElement).style.opacity = '0';
+							observer.observe(img);
+						}
+					});
+				} else {
+					matchImages.forEach(img => {
+						img.classList.add('loaded');
+						(img as HTMLElement).style.opacity = '1';
+					});
+				}
+
+				facultySearchMatches.classList.remove('hidden');
+			} else {
+				facultySearchMatchesGrid.innerHTML = '';
+				facultySearchMatches.classList.add('hidden');
 			}
 		}
 		
@@ -2563,6 +2782,634 @@ document.addEventListener('DOMContentLoaded', function() {
 			}
 		}
 	});
+
+	// Event listener for clicking on faculty results list items
+	if (facultyResultsList) {
+		facultyResultsList.addEventListener('click', function(event) {
+			const target = (event.target as HTMLElement).closest('button[data-faculty-id]');
+			if (!target) return;
+			event.preventDefault();
+			const facultyId = target.getAttribute('data-faculty-id');
+			if (!facultyId) return;
+			const card = facultyCardMap.get(facultyId);
+			if (!card) return;
+			const cardElement = card as HTMLElement;
+			// Scroll to the matching card in the search results grid
+			const matchingCard = facultySearchMatchesGrid?.querySelector(`[data-faculty-id="${facultyId}"], button[onclick*="openFacultyModal('${facultyId}')"]`)?.closest('.bg-white.rounded-xl.shadow-lg');
+			if (matchingCard) {
+				(matchingCard as HTMLElement).scrollIntoView({ behavior: 'smooth', block: 'center' });
+			}
+		});
+	}
+
+	// Department Banner Functionality
+	const departmentFacultyButtons = Array.from(document.querySelectorAll('.department-faculty-toggle')) as HTMLButtonElement[];
+	const departmentProgramButtons = Array.from(document.querySelectorAll('.department-program-toggle')) as HTMLButtonElement[];
+	
+	if (!facultyGrid) return;
+	
+	let activeDepartmentFilter: string | null = null;
+	
+	function normalizeDepartmentName(value: string) {
+		return (value || '')
+			.toLowerCase()
+			.replace(/&/g, 'and')
+			.replace(/\s+/g, ' ')
+			.trim();
+	}
+	
+	function renderFacultyCardsInBanner(department: string, cards: HTMLElement[]) {
+		// Hide all banner card containers first
+		const allBannerContainers = document.querySelectorAll('.faculty-banner-cards-container');
+		allBannerContainers.forEach((container) => {
+			const containerElement = container as HTMLElement;
+			containerElement.classList.add('hidden');
+			const grid = containerElement.querySelector('.grid');
+			if (grid) {
+				grid.innerHTML = '';
+			}
+		});
+
+		// Find the container for this department
+		const bannerContainer = Array.from(allBannerContainers).find((container) => {
+			return container.getAttribute('data-department') === department;
+		}) as HTMLElement | null;
+
+		if (!bannerContainer) return;
+
+		const grid = bannerContainer.querySelector('.grid');
+		if (!grid) return;
+
+		// Clear existing content
+		grid.innerHTML = '';
+
+		// Clone and append faculty cards
+		cards.forEach((card) => {
+			const clone = card.cloneNode(true) as HTMLElement;
+			clone.classList.remove('hidden');
+			clone.style.display = '';
+			clone.removeAttribute('id');
+			grid.appendChild(clone);
+		});
+
+		// Show the container
+		bannerContainer.classList.remove('hidden');
+
+		// Initialize lazy loading for images in the banner
+		const bannerImages = bannerContainer.querySelectorAll<HTMLImageElement>('.lazy-image');
+		if ('IntersectionObserver' in window) {
+			const observer = new IntersectionObserver((entries, observerInstance) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						const img = entry.target as HTMLImageElement;
+						img.classList.add('loaded');
+						(img as HTMLElement).style.opacity = '1';
+						observerInstance.unobserve(img);
+					}
+				});
+			}, {
+				rootMargin: '50px 0px',
+				threshold: 0.01
+			});
+
+			bannerImages.forEach(img => {
+				if (!img.classList.contains('loaded')) {
+					(img as HTMLElement).style.opacity = '0';
+					observer.observe(img);
+				}
+			});
+		} else {
+			bannerImages.forEach(img => {
+				(img as HTMLElement).style.opacity = '1';
+			});
+		}
+
+		// Scroll to the banner container smoothly
+		bannerContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+	}
+
+	function updateBannerContent(cards: HTMLElement[]) {
+		// This function can be used to update banner summary if needed
+		// For now, we'll use the static content in the banner
+	}
+
+	function applyDepartmentFilter() {
+		if (!activeDepartmentFilter) {
+			// Hide all faculty cards when no department is selected
+			if (facultyGrid) {
+				facultyGrid.classList.remove('hidden');
+			}
+			const allCards = facultyGrid.querySelectorAll('[data-faculty-card], .bg-white.rounded-xl.shadow-lg') as NodeListOf<HTMLElement>;
+			allCards.forEach((card) => {
+				card.classList.remove('hidden');
+				card.style.display = '';
+			});
+			
+			// Hide all banner card containers
+			const allBannerContainers = document.querySelectorAll('.faculty-banner-cards-container');
+			allBannerContainers.forEach((container) => {
+				(container as HTMLElement).classList.add('hidden');
+				const grid = container.querySelector('.grid');
+				if (grid) {
+					grid.innerHTML = '';
+				}
+			});
+			
+			// Hide banner content
+			const allBannerContents = document.querySelectorAll('.faculty-banner-content');
+			allBannerContents.forEach((content) => {
+				(content as HTMLElement).classList.add('hidden');
+			});
+			
+			return;
+		}
+
+		// Hide faculty grid when showing cards in banners
+		if (facultyGrid) {
+			facultyGrid.classList.add('hidden');
+		}
+
+		let visibleCount = 0;
+		const departmentCards: HTMLElement[] = [];
+		const allCards = facultyGrid.querySelectorAll('[data-faculty-card], .bg-white.rounded-xl.shadow-lg') as NodeListOf<HTMLElement>;
+		
+		allCards.forEach((card) => {
+			const department = (card as HTMLElement).dataset.department || '';
+			const cardDepartment = normalizeDepartmentName(department);
+			const filterDepartment = normalizeDepartmentName(activeDepartmentFilter || '');
+			
+			// Match department names
+			const matchesDepartment = cardDepartment === filterDepartment || 
+				cardDepartment.includes(filterDepartment) || 
+				filterDepartment.includes(cardDepartment);
+			
+			if (matchesDepartment) {
+				card.classList.add('hidden');
+				(card as HTMLElement).style.display = 'none';
+				visibleCount++;
+				departmentCards.push(card as HTMLElement);
+			} else {
+				card.classList.add('hidden');
+				(card as HTMLElement).style.display = 'none';
+			}
+		});
+
+		// Update banner content with visible faculty cards
+		updateBannerContent(departmentCards);
+
+		// Render full faculty cards in the banner container
+		renderFacultyCardsInBanner(activeDepartmentFilter || '', departmentCards);
+		
+		// Show banner content for the active department
+		const activeBanner = document.querySelector(`.faculty-department-banner[data-department="${activeDepartmentFilter}"]`);
+		if (activeBanner) {
+			const bannerContent = activeBanner.querySelector('.faculty-banner-content');
+			if (bannerContent) {
+				bannerContent.classList.remove('hidden');
+			}
+		}
+	}
+
+	function updateDepartmentButtonsState() {
+		departmentFacultyButtons.forEach((button) => {
+			const department = button.dataset.department || '';
+			const isActive = activeDepartmentFilter === department;
+			const icon = button.querySelector('.department-button-icon') as HTMLElement;
+			
+			if (isActive) {
+				button.setAttribute('aria-pressed', 'true');
+				button.classList.add('bg-white', 'text-[#61063B]');
+				button.classList.remove('bg-white/10', 'text-white');
+				if (icon) {
+					icon.style.transform = 'rotate(180deg)';
+				}
+			} else {
+				button.setAttribute('aria-pressed', 'false');
+				button.classList.remove('bg-white', 'text-[#61063B]');
+				button.classList.add('bg-white/10', 'text-white');
+				if (icon) {
+					icon.style.transform = 'rotate(0deg)';
+				}
+			}
+		});
+	}
+
+	// Add department data to faculty cards based on faculty IDs
+	const facultyDepartmentMap: Record<string, string> = {
+		'mingoc': 'IT Department',
+		'llema': 'IT Department',
+		'andas': 'IT Department',
+		'hailaya': 'IT Department',
+		'julambri': 'IT Department',
+		'lim': 'IT Department',
+		'tiblan': 'IT Department',
+		'antao': 'IT Department',
+		'uddin': 'IT Department',
+		'panares': 'CA Department',
+		'bakili': 'CA Department',
+		'kali': 'CA Department'
+	};
+
+	// Assign department data attributes to faculty cards
+	allFacultyCards.forEach((card) => {
+		const button = card.querySelector('button[onclick*="openFacultyModal"]');
+		if (button) {
+			const onclickAttr = button.getAttribute('onclick');
+			const match = onclickAttr?.match(/openFacultyModal\('([^']+)'\)/);
+			if (match && match[1]) {
+				const facultyId = match[1];
+				const department = facultyDepartmentMap[facultyId];
+				if (department) {
+					(card as HTMLElement).dataset.department = department;
+					(card as HTMLElement).setAttribute('data-faculty-card', 'true');
+				}
+			}
+		}
+	});
+
+	// Event listeners for department faculty toggle buttons
+	if (departmentFacultyButtons.length) {
+		departmentFacultyButtons.forEach((button) => {
+			button.addEventListener('click', (event) => {
+				event.preventDefault();
+				const department = button.dataset.department || '';
+				
+				if (activeDepartmentFilter === department) {
+					// Toggle off
+					activeDepartmentFilter = null;
+				} else {
+					// Toggle on
+					activeDepartmentFilter = department;
+				}
+				
+				applyDepartmentFilter();
+				updateDepartmentButtonsState();
+			});
+		});
+	}
+
+	// Department Programs Modal Functionality
+	const departmentProgramsModal = document.getElementById('departmentProgramsModal');
+	const departmentProgramsModalBody = document.getElementById('departmentProgramsModalBody');
+	const departmentProgramsModalTitle = document.getElementById('departmentProgramsModalTitle');
+	const departmentModalCloseButtons = Array.from(document.querySelectorAll('.department-modal-close')) as HTMLButtonElement[];
+	const departmentModalOverlay = departmentProgramsModal?.querySelector('.department-modal-overlay') as HTMLElement | null;
+
+	const departmentProgramsData = (() => {
+		const rawMap = (window as any).departmentProgramsMap;
+		if (!rawMap) return {};
+		try {
+			const parsed = JSON.parse(rawMap);
+			return parsed && typeof parsed === 'object' ? parsed : {};
+		} catch (error) {
+			console.error('Error parsing department programs map:', error);
+			return {};
+		}
+	})();
+
+	const fallbackProgramsData = (() => {
+		const raw = (window as any).serverProgramsData;
+		if (!raw) return [];
+		try {
+			const parsed = JSON.parse(raw);
+			return Array.isArray(parsed) ? parsed : [];
+		} catch (error) {
+			console.error('Error parsing fallback programs data:', error);
+			return [];
+		}
+	})();
+
+	function normalizeDepartmentValue(value: string) {
+		return (value || '')
+			.toLowerCase()
+			.replace(/&/g, 'and')
+			.replace(/\s+/g, ' ')
+			.trim();
+	}
+
+	const departmentDisplayLookup: Record<string, string> = {
+		[normalizeDepartmentValue('IT Department')]: 'IT Department',
+		[normalizeDepartmentValue('Information Technology Department')]: 'IT Department',
+		[normalizeDepartmentValue('CA Department')]: 'CA Department',
+		[normalizeDepartmentValue('Computer Applications Department')]: 'CA Department',
+		[normalizeDepartmentValue('College of Computer Studies')]: 'College of Computer Studies'
+	};
+
+	const resolveDepartmentPrograms = (department: string) => {
+		const normalizedInput = normalizeDepartmentValue(department);
+		const rawSearchLower = (department || '').toLowerCase();
+		
+		// Check if this is IT Department or CA Department
+		const isITDepartment = normalizedInput.includes('it department') || normalizedInput.includes('information technology');
+		const isCADepartment = normalizedInput.includes('ca department') || normalizedInput.includes('computer applications');
+		
+		// First, try to find programs from departmentProgramsData
+		const entries = Object.entries(departmentProgramsData);
+
+		let matchedEntry = entries.find(([key]) => {
+			const normalizedKey = normalizeDepartmentValue(key);
+			return normalizedKey === normalizedInput ||
+				normalizedKey.includes(normalizedInput) ||
+				normalizedInput.includes(normalizedKey);
+		});
+
+		if (!matchedEntry && normalizedInput) {
+			matchedEntry = entries.find(([, programs]) =>
+				Array.isArray(programs) &&
+				programs.some((program: any) => {
+					const normalizedProgramDepartment = normalizeDepartmentValue(program?.department || '');
+					return normalizedProgramDepartment === normalizedInput ||
+						normalizedProgramDepartment.includes(normalizedInput) ||
+						normalizedInput.includes(normalizedProgramDepartment);
+				})
+			);
+		}
+
+		if (matchedEntry) {
+			const [label, programList] = matchedEntry;
+			const programs = Array.isArray(programList) ? programList : [];
+			if (programs.length) {
+				return { label, programs };
+			}
+		}
+
+		// Filter programs from fallbackProgramsData (Sanity CMS data)
+		const fallbackMatches = fallbackProgramsData.filter((program: any) => {
+			if (!program) return false;
+			
+			// Get the program's department
+			const programDepartment = program.department || program.department?.department || '';
+			const normalizedProgramDepartment = normalizeDepartmentValue(programDepartment);
+			
+			// Get program name/title for keyword matching
+			const programName = (program.program || program.name || program.title || '').toLowerCase();
+			
+			// For IT Department or CA Department, match by department name AND program keywords
+			if (isITDepartment || isCADepartment) {
+				// Match IT Department programs
+				if (isITDepartment) {
+					const matchesDepartment = normalizedProgramDepartment.includes('it') || 
+						normalizedProgramDepartment.includes('information technology') ||
+						normalizedProgramDepartment === normalizedInput;
+					
+					// Also match programs with IT-related keywords in their names
+					const itKeywords = ['network', 'database', 'information technology', 'it', 'networking', 'systems'];
+					const matchesKeywords = itKeywords.some(keyword => programName.includes(keyword));
+					
+					return matchesDepartment || matchesKeywords;
+				}
+				// Match CA Department programs
+				if (isCADepartment) {
+					const matchesDepartment = normalizedProgramDepartment.includes('ca') || 
+						normalizedProgramDepartment.includes('computer applications') ||
+						normalizedProgramDepartment === normalizedInput;
+					
+					// Also match programs with CA-related keywords in their names
+					const caKeywords = ['embedded', 'computer applications', 'ca', 'iot', 'internet of things', 'applications'];
+					const matchesKeywords = caKeywords.some(keyword => programName.includes(keyword));
+					
+					return matchesDepartment || matchesKeywords;
+				}
+			}
+			
+			// For other departments, use the original matching logic
+			const candidates = [
+				program.department,
+				program.department?.department,
+				program.program,
+				program.name,
+				program.title,
+				program.degree,
+				program.degree?.degree,
+				program.level,
+				program.level?.level,
+				program.description
+			];
+			return candidates.some((value) => {
+				if (!value) return false;
+				const text = typeof value === 'string'
+					? value
+					: (value && typeof value === 'object' && 'toString' in value)
+						? String(value)
+						: '';
+				return text.toLowerCase().includes(rawSearchLower) || 
+					normalizedInput.includes(normalizeDepartmentValue(text)) ||
+					normalizeDepartmentValue(text).includes(normalizedInput);
+			});
+		});
+
+		if (fallbackMatches.length) {
+			const fallbackLabel = fallbackMatches[0]?.department?.department ||
+				fallbackMatches[0]?.department ||
+				fallbackMatches[0]?.program ||
+				fallbackMatches[0]?.name ||
+				department;
+			return {
+				label: fallbackLabel || department,
+				programs: fallbackMatches
+			};
+		}
+
+		return {
+			label: department,
+			programs: []
+		};
+	};
+
+	const renderDepartmentPrograms = (department: string) => {
+		if (!departmentProgramsModalBody) return department;
+		const { label, programs } = resolveDepartmentPrograms(department);
+
+		if (!programs.length) {
+			departmentProgramsModalBody.innerHTML = `
+				<div class="text-center py-12">
+					<p class="text-gray-600 text-sm md:text-base">
+						No academic program descriptions available for <span class="font-semibold">${escapeHtml(label)}</span> at the moment.
+					</p>
+				</div>
+			`;
+			return label;
+		}
+
+		const preparedProgramMarkup = programs.map((program: any) => {
+			const safeProgramName = escapeHtml(program?.program || program?.name || '');
+			const safeDegree = program?.degree ? escapeHtml(program.degree) : 'N/A';
+			const safeLevel = program?.level ? escapeHtml(program.level) : 'N/A';
+			const safeDuration = program?.duration ? escapeHtml(program.duration) : 'N/A';
+			const safeAccreditation = program?.accreditation ? escapeHtml(program.accreditation) : '';
+			const safeFileUrl = program?.fileUrl ? escapeHtml(program.fileUrl) : '';
+			const safeDisplayName = escapeHtml(program?.name || program?.program || '');
+			const safeDescription = program?.description
+				? `<p class="mt-2 text-xs md:text-sm text-gray-600 leading-relaxed">${escapeHtml(program.description)}</p>`
+				: '';
+			const accreditationMarkup = safeAccreditation
+				? `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full border border-emerald-200 bg-emerald-50 text-emerald-700 text-xs font-medium">${safeAccreditation}</span>`
+				: `<span class="text-gray-400 text-xs">TBA</span>`;
+			const actionMarkup = safeFileUrl
+				? `<button type="button" onclick="openPDFViewer('${safeFileUrl}', '${safeDisplayName}')" class="inline-flex items-center gap-2 rounded-full border border-[#61063B]/20 bg-[#61063B]/10 px-4 py-2 text-xs font-semibold text-[#61063B] transition-colors duration-200 hover:bg-[#61063B]/20">
+						View Details
+						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+						</svg>
+					</button>`
+				: `<span class="text-gray-400 text-xs">No file</span>`;
+			const mobileAccreditationBadge = safeAccreditation
+				? `<span class="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">${safeAccreditation}</span>`
+				: `<span class="inline-flex items-center rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-xs font-semibold text-gray-500">TBA</span>`;
+			const mobileActionMarkup = safeFileUrl
+				? `<button type="button" onclick="openPDFViewer('${safeFileUrl}', '${safeDisplayName}')" class="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#61063B] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-[#61063B]/90">
+						View Details
+						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+						</svg>
+					</button>`
+				: `<span class="mt-4 block text-center text-xs text-gray-400">No file</span>`;
+
+			return {
+				tableRow: `
+					<tr class="hover:bg-white/60 transition-colors duration-200">
+						<td class="px-5 py-4 align-top">
+							<div class="font-semibold text-sm md:text-base text-[#61063B]">${safeProgramName}</div>
+							${safeDescription}
+						</td>
+						<td class="px-5 py-4 align-top text-sm text-gray-700">${safeDegree}</td>
+						<td class="px-5 py-4 align-top text-sm text-gray-700">${safeLevel}</td>
+						<td class="px-5 py-4 align-top text-sm text-gray-700">${safeDuration}</td>
+						<td class="px-5 py-4 align-top">${accreditationMarkup}</td>
+						<td class="px-5 py-4 align-top text-right">${actionMarkup}</td>
+					</tr>
+				`,
+				mobileCard: `
+					<article class="rounded-2xl border border-gray-200 bg-white/90 p-4 shadow-sm transition-shadow duration-200 hover:shadow-md">
+						<div class="space-y-4">
+							<div>
+								<h3 class="text-base font-semibold text-[#61063B]">${safeProgramName}</h3>
+								${safeDescription}
+							</div>
+							<dl class="space-y-2 text-sm text-gray-600">
+								<div class="flex items-start justify-between gap-4">
+									<dt class="font-medium text-gray-500">Degree</dt>
+									<dd class="text-right text-gray-700">${safeDegree}</dd>
+								</div>
+								<div class="flex items-start justify-between gap-4">
+									<dt class="font-medium text-gray-500">Level</dt>
+									<dd class="text-right text-gray-700">${safeLevel}</dd>
+								</div>
+								<div class="flex items-start justify-between gap-4">
+									<dt class="font-medium text-gray-500">Duration</dt>
+									<dd class="text-right text-gray-700">${safeDuration}</dd>
+								</div>
+								<div class="flex items-start justify-between gap-4">
+									<dt class="font-medium text-gray-500">Accreditation</dt>
+									<dd class="text-right">${mobileAccreditationBadge}</dd>
+								</div>
+							</dl>
+							${mobileActionMarkup}
+						</div>
+					</article>
+				`
+			};
+		});
+
+		const tableRowsMarkup = preparedProgramMarkup.map((entry) => entry.tableRow).join('');
+		const mobileCardsMarkup = preparedProgramMarkup.map((entry) => entry.mobileCard).join('');
+
+		departmentProgramsModalBody.innerHTML = `
+			<div class="space-y-5">
+				<div class="flex flex-wrap items-center justify-between gap-3">
+					<p class="text-sm text-gray-600">Showing <span class="font-semibold text-[#61063B]">${programs.length}</span> academic program${programs.length === 1 ? '' : 's'}</p>
+				</div>
+				<div class="hidden sm:block overflow-x-auto rounded-2xl border border-gray-200 bg-white/80 backdrop-blur">
+					<table class="min-w-full divide-y divide-gray-200 text-sm text-gray-700">
+						<thead class="bg-[#61063B]/90 text-white text-xs uppercase tracking-wide">
+							<tr>
+								<th scope="col" class="px-5 py-3 text-left font-semibold">Program Name</th>
+								<th scope="col" class="px-5 py-3 text-left font-semibold">Degree Type</th>
+								<th scope="col" class="px-5 py-3 text-left font-semibold">Level</th>
+								<th scope="col" class="px-5 py-3 text-left font-semibold">Duration</th>
+								<th scope="col" class="px-5 py-3 text-left font-semibold">Accreditation</th>
+								<th scope="col" class="px-5 py-3 text-right font-semibold">Actions</th>
+							</tr>
+						</thead>
+						<tbody class="divide-y divide-gray-200 bg-white">
+							${tableRowsMarkup}
+						</tbody>
+					</table>
+				</div>
+				<div class="sm:hidden space-y-4">
+					${mobileCardsMarkup}
+				</div>
+			</div>
+		`;
+
+		return label;
+	};
+
+	const openDepartmentProgramsModal = (department: string) => {
+		if (!departmentProgramsModal) return;
+		const matchedLabel = renderDepartmentPrograms(department);
+		const trimmedRequest = (department || '').trim();
+		const normalizedRequest = normalizeDepartmentValue(trimmedRequest);
+		const trimmedMatched = (matchedLabel || '').trim();
+		const normalizedMatched = normalizeDepartmentValue(trimmedMatched);
+
+		const manualRequestLabel = normalizedRequest ? departmentDisplayLookup[normalizedRequest] : undefined;
+		const manualMatchedLabel = normalizedMatched ? departmentDisplayLookup[normalizedMatched] : undefined;
+
+		let resolvedLabel = manualMatchedLabel || manualRequestLabel || trimmedMatched || trimmedRequest;
+
+		if (normalizedRequest && normalizedMatched) {
+			const labelsMismatch =
+				normalizedMatched !== normalizedRequest &&
+				!normalizedMatched.includes(normalizedRequest) &&
+				!normalizedRequest.includes(normalizedMatched);
+			if (labelsMismatch && !manualMatchedLabel && manualRequestLabel) {
+				resolvedLabel = manualRequestLabel;
+			}
+		}
+
+		if (departmentProgramsModalTitle) {
+			departmentProgramsModalTitle.textContent = resolvedLabel || 'Department Academic Programs';
+		}
+		departmentProgramsModal.classList.remove('hidden');
+		departmentProgramsModal.classList.add('flex');
+		document.body.classList.add('overflow-hidden');
+	};
+
+	const closeDepartmentProgramsModal = () => {
+		if (!departmentProgramsModal) return;
+		departmentProgramsModal.classList.add('hidden');
+		departmentProgramsModal.classList.remove('flex');
+		document.body.classList.remove('overflow-hidden');
+	};
+
+	(window as any).openDepartmentProgramsModal = openDepartmentProgramsModal;
+	(window as any).closeDepartmentProgramsModal = closeDepartmentProgramsModal;
+
+	departmentModalCloseButtons.forEach((button) => {
+		button.addEventListener('click', closeDepartmentProgramsModal);
+	});
+
+	if (departmentModalOverlay) {
+		departmentModalOverlay.addEventListener('click', closeDepartmentProgramsModal);
+	}
+
+	document.addEventListener('keydown', (event) => {
+		if (event.key === 'Escape' && departmentProgramsModal && !departmentProgramsModal.classList.contains('hidden')) {
+			closeDepartmentProgramsModal();
+		}
+	});
+
+	// Event listeners for department program toggle buttons
+	if (departmentProgramButtons.length) {
+		departmentProgramButtons.forEach((button) => {
+			button.addEventListener('click', (event) => {
+				event.preventDefault();
+				const department = button.dataset.department || '';
+				openDepartmentProgramsModal(department);
+			});
+		});
+	}
 });
 
 // Alumni Carousel Functionality
@@ -3072,7 +3919,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		<!-- Research & Innovation Section -->
 
-		<section class="py-20 bg-gray-50">
+		<section id="facultySpotlight" class="py-20 bg-gray-50">
 
 			<div class="container mx-auto px-6">
 
@@ -3152,57 +3999,309 @@ document.addEventListener('DOMContentLoaded', function() {
 				</div>
 
 				<!-- Faculty Research Connection -->
-				<div class="mt-16 text-center">
-					<div class="bg-white rounded-2xl shadow-lg p-8 max-w-4xl mx-auto">
-						<h3 class="text-2xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-6">
+				<div class="mt-16">
+					<div class="bg-white dark:bg-gray-700 rounded-2xl shadow-lg p-6 sm:p-8 lg:p-10 max-w-6xl mx-auto">
+						<h3 class="text-xl sm:text-2xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-4 sm:mb-6 text-center">
 							Meet Our Research Leaders
 						</h3>
-						<p class="text-msu-main-color dark:text-msu-bgc-color mb-8 text-lg">
-							Our faculty members are actively engaged in cutting-edge research and have published papers in international conferences and journals, with multiple funded projects addressing real-world challenges. Click on any faculty member above to explore their specific research contributions, publications, presentations, and funded projects.
+						<p class="text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-6 sm:mb-8 text-center">
+							The College of Computer Studies drives innovation through collaborative research across Information Technology and Computer Applications departments. Our faculty lead cutting-edge research in software development, mobile applications, artificial intelligence, machine learning, cybersecurity, network systems, and emerging technologies. They publish in international venues, present at global conferences, and co-develop solutions with industry and government partners.
 						</p>
-						<div class="grid md:grid-cols-4 gap-6">
+						<div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-10">
 							<div class="text-center">
-								<div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-4">
-									<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+									<svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-						</svg>
+									</svg>
 								</div>
-								<h4 class="font-bold text-msu-main-color dark:text-msu-bgc-color">6 Publications</h4>
-								<p class="text-sm text-gray-600 dark:text-gray-400">International journals and conferences</p>
+								<h4 class="font-bold text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">12+ Publications</h4>
+								<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Peer-reviewed outputs</p>
 							</div>
 							<div class="text-center">
-								<div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
-									<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+									<svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2h4a1 1 0 110 2h-1v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6H3a1 1 0 110-2h4zM9 6v10a1 1 0 102 0V6a1 1 0 10-2 0zm4 0v10a1 1 0 102 0V6a1 1 0 10-2 0z"></path>
 									</svg>
 								</div>
-								<h4 class="font-bold text-msu-main-color dark:text-msu-bgc-color">6 Presentations</h4>
-								<p class="text-sm text-gray-600 dark:text-gray-400">National and international conferences</p>
+								<h4 class="font-bold text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">9+ Presentations</h4>
+								<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Global and national stages</p>
 							</div>
 							<div class="text-center">
-								<div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
-									<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+									<svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
 									</svg>
 								</div>
-								<h4 class="font-bold text-msu-main-color dark:text-msu-bgc-color">4 Funded Projects</h4>
-								<p class="text-sm text-gray-600 dark:text-gray-400">Total budget: ₱1.03M</p>
+								<h4 class="font-bold text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">5 Funded Projects</h4>
+								<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Technology-driven solutions</p>
 							</div>
 							<div class="text-center">
-								<div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
-									<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+									<svg class="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
 									</svg>
 								</div>
-								<h4 class="font-bold text-msu-main-color dark:text-msu-bgc-color">3 Faculty Leaders</h4>
-								<p class="text-sm text-gray-600 dark:text-gray-400">Leading research initiatives</p>
+								<h4 class="font-bold text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">12 Core Researchers</h4>
+								<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Leading CCS initiatives</p>
 							</div>
 						</div>
-					</div>
-				</div>
+
+						
+
 
 		</section>
 
+		<!-- Departments Section -->
+		<section id="departments" class="py-20 bg-gray-50">
+			<div class="container mx-auto px-6">
+				<div class="text-center mb-16">
+					<h2 class="text-3xl font-bold mb-4 text-[#61063B] dark:text-msu-bgc-color">Departments</h2>
+					<p class="text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto">
+						Explore our academic departments and their distinguished faculty members across information technology and computer applications.
+					</p>
+				</div>
+
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+					<!-- IT Department -->
+					<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="IT Department">
+						<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#61063B] via-[#8C1F5A] to-[#2F1A45] text-white p-8 md:p-10 shadow-2xl">
+							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
+							<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+								<div class="max-w-xl">
+									<h3 class="text-2xl md:text-3xl font-bold leading-snug">IT Department</h3>
+									<p class="mt-4 text-sm md:text-base text-white/90">
+										Leading innovation in information technology through cutting-edge research, advanced teaching methodologies, and industry partnerships that shape the future of digital transformation.
+									</p>
+									<div class="mt-4 flex items-center gap-4">
+										<img src="/images/iict/Profile/NERICO L. MINGOC.jpg" alt="Nerico L. Mingoc, MSIT" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
+										<div>
+											<p class="text-sm md:text-base text-white/95 font-medium">
+												<strong>Chairperson:</strong> Associate Prof. Nerico L. Mingoc, MSIT
+											</p>
+											<p class="text-xs md:text-sm text-white/80 mt-1">
+												IT Department
+											</p>
+										</div>
+									</div>
+									<div class="mt-6 flex flex-wrap gap-3">
+										<button
+											type="button"
+											class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="IT Department"
+											aria-pressed="false"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-white/80">Show</span>
+												<span class="block text-sm md:text-base font-semibold">Faculty</span>
+											</div>
+											<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+											</svg>
+										</button>
+										<button
+											type="button"
+											class="department-program-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white text-[#61063B] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="IT Department"
+											data-department-search="IT"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-[#61063B]/80">View</span>
+												<span class="block text-sm md:text-base font-semibold">Academic Programs</span>
+											</div>
+											<svg class="w-5 h-5 text-[#61063B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+											</svg>
+										</button>
+									</div>
+								</div>
+								<div class="flex-1 w-full space-y-4 md:space-y-6">
+									<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base faculty-banner-content hidden" data-static-content="true" data-member-count="9">
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Nerico L. Mingoc, MSIT</p>
+												<p class="text-white/80 text-sm font-normal">Dean / Chairperson of IT Dep't • Associate Professor V</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Charisa F. Llema-Abalie, MSIT</p>
+												<p class="text-white/80 text-sm font-normal">Director, ICTO • Associate Professor V</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Associate Prof. Joseph V. Andas</p>
+												<p class="text-white/80 text-sm font-normal">Director, Administrative Office • Associate Professor V</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Ramat B. Hailaya</p>
+												<p class="text-white/80 text-sm font-normal">Instructor II</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Dayang Farha L. Julambri</p>
+												<p class="text-white/80 text-sm font-normal">Instructor II</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Estelita Cheng G. Lim</p>
+												<p class="text-white/80 text-sm font-normal">Instructor II</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Abdul-Aziz J. Tiblan</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Al-Kadra A. Antao</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Fadz Lorrahiem U. Uddin</p>
+												<p class="text-white/80 text-sm font-normal">Instructor I</p>
+											</div>
+										</div>
+									</div>
+									<div class="space-y-3 text-sm md:text-base faculty-banner-programs hidden"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Faculty Cards Container for IT Department -->
+					<div class="faculty-banner-cards-container hidden mt-6 md:col-span-2 lg:col-span-3" data-department="IT Department">
+						<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3"></div>
+					</div>
+
+					<!-- CA Department -->
+					<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="CA Department">
+						<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#61063B] via-[#8C1F5A] to-[#2F1A45] text-white p-8 md:p-10 shadow-2xl">
+							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
+							<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+								<div class="max-w-xl">
+									<h3 class="text-2xl md:text-3xl font-bold leading-snug">CA Department</h3>
+									<p class="mt-4 text-sm md:text-base text-white/90">
+										Advancing computer applications through innovative teaching, practical skills development, and industry-aligned curriculum that prepares students for successful careers in technology.
+									</p>
+									<div class="mt-4 flex items-center gap-4">
+										<img src="/images/iict/Profile/ROMEO L. PAÑARES.jpg" alt="Romeo L. Pañares Jr." class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
+										<div>
+											<p class="text-sm md:text-base text-white/95 font-medium">
+												<strong>Chairperson:</strong> Romeo L. Pañares Jr.
+											</p>
+											<p class="text-xs md:text-sm text-white/80 mt-1">
+												CA Department
+											</p>
+										</div>
+									</div>
+									<div class="mt-6 flex flex-wrap gap-3">
+										<button
+											type="button"
+											class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="CA Department"
+											aria-pressed="false"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-white/80">Show</span>
+												<span class="block text-sm md:text-base font-semibold">Faculty</span>
+											</div>
+											<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+											</svg>
+										</button>
+										<button
+											type="button"
+											class="department-program-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white text-[#61063B] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
+											data-department="CA Department"
+											data-department-search="CA"
+										>
+											<div class="text-left leading-tight">
+												<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-[#61063B]/80">View</span>
+												<span class="block text-sm md:text-base font-semibold">Academic Programs</span>
+											</div>
+											<svg class="w-5 h-5 text-[#61063B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path>
+											</svg>
+										</button>
+									</div>
+								</div>
+								<div class="flex-1 w-full space-y-4 md:space-y-6">
+									<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base faculty-banner-content hidden" data-static-content="true" data-member-count="3">
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Romeo L. Pañares Jr.</p>
+												<p class="text-white/80 text-sm font-normal">Chairperson of CA Dep't • Instructor I</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Irene A. Bakili</p>
+												<p class="text-white/80 text-sm font-normal">University Registrar • Instructor I</p>
+											</div>
+										</div>
+										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+											<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+											</svg>
+											<div class="leading-tight">
+												<p class="font-semibold">Jul-Habir U. Kali</p>
+												<p class="text-white/80 text-sm font-normal">College Secretary • Instructor I</p>
+											</div>
+										</div>
+									</div>
+									<div class="space-y-3 text-sm md:text-base faculty-banner-programs hidden"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Faculty Cards Container for CA Department -->
+					<div class="faculty-banner-cards-container hidden mt-6 md:col-span-2 lg:col-span-3" data-department="CA Department">
+						<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3"></div>
+					</div>
+				</div>
+			</div>
+		</section>
 
 
 		<!-- Student Life Section - Professional Slider -->
@@ -3369,76 +4468,9 @@ document.addEventListener('DOMContentLoaded', function() {
 		</section> -->
 
 
-		<!-- Personnel Spotlight - Mobile Optimized -->
-		<section class="py-12 sm:py-16 md:py-20 bg-white">
-			<div class="container mx-auto px-4 sm:px-6">
-				<div class="text-center mb-8 sm:mb-12 md:mb-16">
-					<h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-3 sm:mb-4 px-4">Personnel Spotlight</h2>
-					<p class="text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto px-4">
-						Meet the dedicated support staff who keep our institute running smoothly
-					</p>
-				</div>
-
-				<!-- Leadership Section - Dean -->
-				<div class="flex flex-col sm:flex-row justify-center items-center gap-8 sm:gap-10 md:gap-12 mb-8 sm:mb-10 md:mb-12">
-					<!-- Nerico L. Mingoc - Dean -->
-					<div class="text-center w-full sm:w-auto">
-						<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
-							<img src="/images/iict/Profile/NERICO L. MINGOC.jpg" alt="Nerico L. Mingoc" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg lazy-image" loading="lazy">
-						</div>
-						<h3 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Nerico L. Mingoc, MSIT</h3>
-						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Dean, CCS</p>
-					</div>
-				</div>
-
-				<!-- Staff Personnel Grid - 4 Column Layout -->
-				<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12 justify-items-center">
-					
-					<!-- Muktar J. Sariol -->
-					<div class="text-center">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
-							<img src="/images/iict/Profile/MUKTAR B. SARIOL.jpg" alt="Muktar J. Sariol" class="w-full h-full object-cover lazy-image" loading="lazy">
-						</div>
-						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Muktar J. Sariol</h3>
-						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Computer Technician</p>
-					</div>
-
-					<!-- Auriza M. Lee -->
-					<div class="text-center">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
-							<img src="/images/iict/Profile/AURIZA M. LEE.jpg" alt="Auriza M. Lee" class="w-full h-full object-cover lazy-image" loading="lazy">
-						</div>
-						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Auriza M. Lee</h3>
-						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Administrative Aide</p>
-					</div>
-
-					<!-- Alsherif Yusuf T. Andas (Sir Ken) -->
-					<div class="text-center">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
-							<img src="/images/iict/Profile/ALSHERIF T. ANDAS.jpg" alt="Alsherif Yusuf T. Andas" class="w-full h-full object-cover lazy-image" loading="lazy">
-						</div>
-						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Alsherif Yusuf T. Andas</h3>
-						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Administrative Aide</p>
-						<p class="text-xs text-gray-500 italic px-2">(Sir Ken)</p>
-					</div>
-
-					<!-- Joel M. Juripae -->
-					<div class="text-center">
-						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
-							<img src="/images/iict/Profile/JOEL M. JURIPAE.jpg" alt="Joel M. Juripae" class="w-full h-full object-cover lazy-image" loading="lazy">
-						</div>
-						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Joel M. Juripae</h3>
-						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Administrative Aide</p>
-					</div>
-
-				</div>
-			</div>
-		</section>
-
-
 		<!-- Faculty Spotlight -->
 
-		<section class="py-20 bg-gray-50">
+		<section class="py-20 bg-gray-50 hidden">
 
 			<div class="container mx-auto px-6">
 
@@ -3494,7 +4526,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
 
 								<h3 class="text-white font-bold text-xl">Associate Prof. Nerico L. Mingoc, MSIT</h3>
-								<p class="text-gray-300 text-sm">Dean, CCS</p>
+								<p class="text-gray-300 text-sm">Dean / Chairperson of IT Dep't</p>
 							</div>
 
 						</div>
@@ -3510,9 +4542,19 @@ document.addEventListener('DOMContentLoaded', function() {
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Multimedia & Programming</span>
 							</div>
 
-							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+							<div class="mb-4">
+								<span class="text-xs font-semibold uppercase tracking-wide text-msu-deep-ocean dark:text-yellow-400">Specializations</span>
+								<div class="flex flex-wrap gap-2 mt-2">
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Human-Computer Interaction</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Gamification</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Multimedia Design</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">IT Project Management</span>
+								</div>
+							</div>
 
-								Associate Professor specializing in Human-Computer Interaction, Gamification, and IT Project Management.
+							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4 text-sm sm:text-base">
+
+								Research leader focusing on learner-centered applications, serious games, and technology-driven classroom innovation.
 							</p>
 
 							<button onclick="openFacultyModal('mingoc')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
@@ -3554,9 +4596,19 @@ document.addEventListener('DOMContentLoaded', function() {
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Mobile & IoT</span>
 							</div>
 
-							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+							<div class="mb-4">
+								<span class="text-xs font-semibold uppercase tracking-wide text-msu-deep-ocean dark:text-yellow-400">Specializations</span>
+								<div class="flex flex-wrap gap-2 mt-2">
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Mobile Programming</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Internet of Things</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Cloud Computing</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">IT Project Management</span>
+								</div>
+							</div>
 
-								Associate Professor with expertise in Mobile Programming, IoT, Cloud Computing.
+							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4 text-sm sm:text-base">
+
+								Technology strategist leading campus-wide digital transformation and championing agile development for student services.
 							</p>
 
 							<button onclick="openFacultyModal('llema')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
@@ -3598,9 +4650,19 @@ document.addEventListener('DOMContentLoaded', function() {
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Hardware & Networking</span>
 							</div>
 
-							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
+							<div class="mb-4">
+								<span class="text-xs font-semibold uppercase tracking-wide text-msu-deep-ocean dark:text-yellow-400">Specializations</span>
+								<div class="flex flex-wrap gap-2 mt-2">
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Wireless Networking</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Embedded Systems</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Image Classification</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Digital Logic Design</span>
+								</div>
+							</div>
 
-								Expert in Wireless Networking, Image Classification, and Embedded Systems with 18 years of teaching experience.
+							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4 text-sm sm:text-base">
+
+								Veteran engineer guiding capstone teams on secure architectures and data-driven decision systems for the public sector.
 							</p>
 
 							<button onclick="openFacultyModal('bakili')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
@@ -3634,8 +4696,16 @@ document.addEventListener('DOMContentLoaded', function() {
 								</svg>
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Educational Technology</span>
 							</div>
-							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-								Associate Professor with expertise in ICT integration in education and former CCS Dean.
+							<div class="mb-4">
+								<span class="text-xs font-semibold uppercase tracking-wide text-msu-deep-ocean dark:text-yellow-400">Specializations</span>
+								<div class="flex flex-wrap gap-2 mt-2">
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Educational Technology</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">ICT Integration</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Instructional Design</span>
+								</div>
+							</div>
+							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4 text-sm sm:text-base">
+								Spearheads faculty development initiatives and digital pedagogy frameworks for technology-enabled classrooms.
 							</p>
 							<button onclick="openFacultyModal('andas')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
 								View Profile
@@ -3661,8 +4731,17 @@ document.addEventListener('DOMContentLoaded', function() {
 								</svg>
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">IoT & Embedded Systems</span>
 							</div>
-							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-								Faculty member specializing in Internet of Things, Wireless Networking, and Cybersecurity.
+							<div class="mb-4">
+								<span class="text-xs font-semibold uppercase tracking-wide text-msu-deep-ocean dark:text-yellow-400">Specializations</span>
+								<div class="flex flex-wrap gap-2 mt-2">
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Internet of Things</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Wireless Networking</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Cybersecurity</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Embedded Systems</span>
+								</div>
+							</div>
+							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4 text-sm sm:text-base">
+								Leads applied research that safeguards maritime communication networks and smart campus deployments.
 							</p>
 							<button onclick="openFacultyModal('panares')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
 								View Profile
@@ -3688,8 +4767,17 @@ document.addEventListener('DOMContentLoaded', function() {
 								</svg>
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Multimedia & AI</span>
 							</div>
-							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-								Pursuing Master's in Informatics with focus on Social Computing and Computer Vision.
+							<div class="mb-4">
+								<span class="text-xs font-semibold uppercase tracking-wide text-msu-deep-ocean dark:text-yellow-400">Specializations</span>
+								<div class="flex flex-wrap gap-2 mt-2">
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Artificial Intelligence</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Machine Learning</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Computer Vision</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Multimedia Systems</span>
+								</div>
+							</div>
+							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4 text-sm sm:text-base">
+								Drives AI-assisted learning experiences and immersive storytelling for community heritage preservation.
 							</p>
 							<button onclick="openFacultyModal('antao')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
 								View Profile
@@ -3715,8 +4803,17 @@ document.addEventListener('DOMContentLoaded', function() {
 								</svg>
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">HCI & UX Design</span>
 							</div>
-							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-								Faculty member pursuing MSIT with expertise in Information Systems and User-Centered Design.
+							<div class="mb-4">
+								<span class="text-xs font-semibold uppercase tracking-wide text-msu-deep-ocean dark:text-yellow-400">Specializations</span>
+								<div class="flex flex-wrap gap-2 mt-2">
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Human-Computer Interaction</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">UX Design</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Information Systems</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Cybersecurity</span>
+								</div>
+							</div>
+							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4 text-sm sm:text-base">
+								Explores inclusive interface design and policy-aware digital services for local government partners.
 							</p>
 							<button onclick="openFacultyModal('uddin')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
 								View Profile
@@ -3742,8 +4839,17 @@ document.addEventListener('DOMContentLoaded', function() {
 								</svg>
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Database & IoT</span>
 							</div>
-							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-								Magna Cum Laude graduate specializing in Database Systems and IoT.
+							<div class="mb-4">
+								<span class="text-xs font-semibold uppercase tracking-wide text-msu-deep-ocean dark:text-yellow-400">Specializations</span>
+								<div class="flex flex-wrap gap-2 mt-2">
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Database Systems</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Software Development</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Internet of Things</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Visual Communication</span>
+								</div>
+							</div>
+							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4 text-sm sm:text-base">
+								Guides student startups on data-driven product design and smart device prototyping.
 							</p>
 							<button onclick="openFacultyModal('hailaya')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
 								View Profile
@@ -3769,8 +4875,17 @@ document.addEventListener('DOMContentLoaded', function() {
 								</svg>
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Networking & Security</span>
 							</div>
-							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-								Specialist in computer programming and networking with focus on network security.
+							<div class="mb-4">
+								<span class="text-xs font-semibold uppercase tracking-wide text-msu-deep-ocean dark:text-yellow-400">Specializations</span>
+								<div class="flex flex-wrap gap-2 mt-2">
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Computer Networking</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Network Security</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Internet of Things</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Programming</span>
+								</div>
+							</div>
+							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4 text-sm sm:text-base">
+								Develops lab-based certification pathways and cybersecurity drills for CCS students.
 							</p>
 							<button onclick="openFacultyModal('tiblan')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
 								View Profile
@@ -3796,8 +4911,17 @@ document.addEventListener('DOMContentLoaded', function() {
 								</svg>
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Database & Ethics</span>
 							</div>
-							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-								Magna Cum Laude graduate with expertise in Database Systems and Computer Ethics.
+							<div class="mb-4">
+								<span class="text-xs font-semibold uppercase tracking-wide text-msu-deep-ocean dark:text-yellow-400">Specializations</span>
+								<div class="flex flex-wrap gap-2 mt-2">
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Database Systems</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Computer Programming</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Computer Ethics</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Systems Analysis</span>
+								</div>
+							</div>
+							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4 text-sm sm:text-base">
+								Champions responsible data stewardship and mentors student researchers in analytics and governance.
 							</p>
 							<button onclick="openFacultyModal('lim')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
 								View Profile
@@ -3823,8 +4947,18 @@ document.addEventListener('DOMContentLoaded', function() {
 								</svg>
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Electronics & Automation</span>
 							</div>
-							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-								Registered Electronics Engineer specializing in Automation and Control Systems.
+							<div class="mb-4">
+								<span class="text-xs font-semibold uppercase tracking-wide text-msu-deep-ocean dark:text-yellow-400">Specializations</span>
+								<div class="flex flex-wrap gap-2 mt-2">
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Electronics Engineering</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Automation</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Control Systems</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Machine Learning</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Networking</span>
+								</div>
+							</div>
+							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4 text-sm sm:text-base">
+								Integrates robotics and intelligent controls into community extension projects and undergraduate theses.
 							</p>
 							<button onclick="openFacultyModal('kali')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
 								View Profile
@@ -3850,8 +4984,17 @@ document.addEventListener('DOMContentLoaded', function() {
 								</svg>
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Information Technology, Database Systems</span>
 							</div>
-							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-								Magna Cum Laude graduate specializing in Information Technology and Database management systems.
+							<div class="mb-4">
+								<span class="text-xs font-semibold uppercase tracking-wide text-msu-deep-ocean dark:text-yellow-400">Specializations</span>
+								<div class="flex flex-wrap gap-2 mt-2">
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Database Management</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Software Development</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Graphic Design</span>
+									<span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-xs font-medium text-msu-main-color dark:text-msu-bgc-color">Instructional Media</span>
+								</div>
+							</div>
+							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4 text-sm sm:text-base">
+								Leads creative computing initiatives and co-advises multidisciplinary analytics teams.
 							</p>
 							<button onclick="openFacultyModal('julambri')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
 								View Profile
@@ -3873,6 +5016,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					</button>
 				</div>
 
+				<!-- Section CTA -->
 				
 
 				<!-- <div class="text-center mt-12">
@@ -3893,6 +5037,142 @@ document.addEventListener('DOMContentLoaded', function() {
 
 			</div> -->
 
+		</section>
+
+
+		<!-- Personnel Spotlight - Mobile Optimized -->
+		<section class="py-12 sm:py-16 md:py-20 bg-white">
+			<div class="container mx-auto px-4 sm:px-6">
+				<div class="text-center mb-8 sm:mb-12 md:mb-16">
+					<h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-3 sm:mb-4 px-4">Personnel Spotlight</h2>
+					<p class="text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto px-4">
+						Meet the dedicated support staff who keep our institute running smoothly
+					</p>
+				</div>
+
+				<!-- Leadership Section - Dean -->
+				<div class="flex flex-col sm:flex-row justify-center items-center gap-8 sm:gap-10 md:gap-12 mb-8 sm:mb-10 md:mb-12">
+					<!-- Nerico L. Mingoc - Dean -->
+					<div class="text-center w-full sm:w-auto">
+						<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
+							<img src="/images/iict/Profile/NERICO L. MINGOC.jpg" alt="Nerico L. Mingoc" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg lazy-image" loading="lazy">
+						</div>
+						<h3 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Associate Prof. Nerico L. Mingoc, MSIT</h3>
+						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Dean / Chairperson of IT Dep't</p>
+					</div>
+				</div>
+
+			<!-- Chairpersons Section -->
+			<div class="mb-8 sm:mb-10 md:mb-12">
+				<h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-6 sm:mb-8 md:mb-10 text-center px-4">The Chairpersons</h3>
+				<div class="flex flex-col sm:flex-row justify-center items-center gap-8 sm:gap-10 md:gap-12 lg:gap-16 max-w-4xl mx-auto px-4">
+					<!-- Nerico L. Mingoc, MSIT - BSIT -->
+					<div class="text-center w-full sm:w-auto cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openFacultyModal('mingoc')">
+						<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
+							<img src="/images/iict/Profile/NERICO L. MINGOC.jpg" alt="Nerico L. Mingoc, MSIT" class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
+						</div>
+						<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Associate Prof. Nerico L. Mingoc, MSIT</h4>
+						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color px-2">Dean / Chairperson of IT Dep't</p>
+					</div>
+
+					<!-- Romeo L. Pañares Jr. - BSCA -->
+					<div class="text-center w-full sm:w-auto cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openFacultyModal('panares')">
+						<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
+							<img src="/images/iict/Profile/ROMEO L. PAÑARES.jpg" alt="Romeo L. Pañares Jr." class="w-full h-full object-cover rounded-full border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
+						</div>
+						<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Romeo L. Pañares Jr.</h4>
+						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color px-2">Chairperson, BSCA</p>
+					</div>
+				</div>
+			</div>
+
+				<!-- Staff Personnel Grid - 4 Column Layout -->
+				<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12 justify-items-center">
+					
+					<!-- Muktar J. Sariol -->
+					<div class="text-center">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
+							<img src="/images/iict/Profile/MUKTAR B. SARIOL.jpg" alt="Muktar J. Sariol" class="w-full h-full object-cover lazy-image" loading="lazy">
+						</div>
+						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Muktar J. Sariol</h3>
+						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Computer Technician</p>
+					</div>
+
+					<!-- Auriza M. Lee -->
+					<div class="text-center">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
+							<img src="/images/iict/Profile/AURIZA M. LEE.jpg" alt="Auriza M. Lee" class="w-full h-full object-cover lazy-image" loading="lazy">
+						</div>
+						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Auriza M. Lee</h3>
+						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Administrative Aide</p>
+					</div>
+
+					<!-- Alsherif Yusuf T. Andas (Sir Ken) -->
+					<div class="text-center">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
+							<img src="/images/iict/Profile/ALSHERIF T. ANDAS.jpg" alt="Alsherif Yusuf T. Andas" class="w-full h-full object-cover lazy-image" loading="lazy">
+						</div>
+						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Alsherif Yusuf T. Andas</h3>
+						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Administrative Aide</p>
+						<p class="text-xs text-gray-500 italic px-2">(Sir Ken)</p>
+					</div>
+
+					<!-- Joel M. Juripae -->
+					<div class="text-center">
+						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg">
+							<img src="/images/iict/Profile/JOEL M. JURIPAE.jpg" alt="Joel M. Juripae" class="w-full h-full object-cover lazy-image" loading="lazy">
+						</div>
+						<h3 class="font-bold text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Joel M. Juripae</h3>
+						<p class="text-xs sm:text-sm text-msu-main-color dark:text-msu-bgc-color px-2">Administrative Aide</p>
+					</div>
+
+				</div>
+
+				<!-- Faculty Search Header -->
+				<div class="mt-12 mb-4 text-center">
+					<h2 class="text-2xl sm:text-3xl font-bold text-msu-main-color dark:text-yellow-300">Faculty Search</h2>
+					<p class="text-sm sm:text-base text-gray-700 dark:text-gray-300 mt-1">
+						Find faculty members by name, position, or area of specialization.
+					</p>
+				</div>
+				<!-- Faculty Search Bar -->
+				<div class="mt-12 sm:mt-16">
+					<div class="max-w-2xl mx-auto">
+						<div class="relative">
+							<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+								<svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+								</svg>
+							</div>
+							<input 
+								type="text" 
+								id="facultySearch" 
+								placeholder="Search faculty by name, position, or specialization..." 
+								class="block w-full pl-12 pr-12 py-4 text-base border border-gray-300 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-msu-main-color dark:focus:ring-yellow-400 focus:border-msu-main-color dark:focus:border-yellow-400 transition-all duration-300 shadow-sm hover:shadow-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+							>
+							<button 
+								id="clearFacultySearch" 
+								class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200 hidden"
+								title="Clear search"
+							>
+								<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+								</svg>
+							</button>
+						</div>
+						<!-- Search Results Counter -->
+						<div id="facultySearchResults" class="mt-3 text-sm text-gray-600 dark:text-gray-400 hidden">
+							<p id="facultyResultsCount" class="text-center"></p>
+							<div id="facultyResultsList" class="mt-3 space-y-3"></div>
+						</div>
+						<div id="facultyDepartmentNotice" class="hidden mt-4 text-center text-msu-main-color dark:text-yellow-300 font-semibold"></div>
+						<div id="facultySearchMatches" class="mt-8 hidden">
+							<h3 class="text-lg font-semibold text-msu-main-color dark:text-yellow-300 text-center mb-4">Matching Faculty Members</h3>
+							<div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3" id="facultySearchMatchesGrid"></div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</section>
 
 
@@ -5651,6 +6931,24 @@ document.head.appendChild(style);
 
 			</div>
 
+		</section> -->
+
+		<!-- CCS Faculty CTA -->
+		<!-- <section class="py-14 sm:py-16 bg-gradient-to-br from-msu-main-color via-msu-deep-ocean to-msu-main-color text-white">
+			<div class="container mx-auto px-6 text-center space-y-6">
+				<h2 class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight">Discover the Minds Behind CCS Innovation</h2>
+				<p class="text-sm sm:text-base md:text-lg max-w-3xl mx-auto text-white/80">
+					Explore our departments to learn more about our research leaders and their specializations. Dive into their publications, projects, and collaborations that empower the College of Computer Studies.
+				</p>
+				<div>
+					<a href="#departments" class="inline-flex items-center gap-2 bg-white text-msu-deep-ocean font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+						View Departments
+						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+						</svg>
+					</a>
+				</div>
+			</div>
 		</section> -->
 
 	</main>

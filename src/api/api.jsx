@@ -1565,6 +1565,110 @@ export async function getCOEDPrograms() {
   }
 }
 
+export async function searchCOEDFacultyByDepartment(departmentName) {
+  try {
+    const normalizedDepartment =
+      typeof departmentName === 'string' ? departmentName.trim() : '';
+
+    if (!normalizedDepartment) {
+      console.warn('searchCOEDFacultyByDepartment: departmentName is required');
+      return [];
+    }
+
+    const departmentNameLower = normalizedDepartment.toLowerCase();
+    const sanitizedPatternValue = departmentNameLower.replace(
+      /[\*\[\]\{\}\(\)\?\+\^\$\|\\]/g,
+      ''
+    );
+    const descriptionPattern = sanitizedPatternValue
+      ? `*${sanitizedPatternValue}*`
+      : `*${departmentNameLower}*`;
+
+    const query = groq`*[
+      _type == "facultyAndStaff" &&
+      college._ref in *[_type == "college" && college == "College of Education"]._id &&
+      (
+        lower(coalesce(department->department, "")) == $departmentNameLower ||
+        lower(coalesce(pt::text(descriptions), pt::text(description), string(descriptions), string(description), "")) match $descriptionPattern
+      )
+    ] | order(name asc) {
+      _id,
+      name,
+      position,
+      rank,
+      teachingLevel,
+      advisory,
+      educations[]->{title},
+      yearStarted,
+      image{
+        asset->{
+          url,
+          originalFilename
+        }
+      },
+      college->{college},
+      department->{department},
+      descriptions,
+      description,
+      specialization,
+      expertise,
+      awards,
+      achievements,
+      publications,
+      researchLink,
+      email,
+      contactNumber
+    }`;
+
+    const faculty = await useSanityClient().fetch(query, {
+      departmentNameLower,
+      descriptionPattern
+    });
+
+    console.log('=== DEBUG: searchCOEDFacultyByDepartment ===');
+    console.log('Department searched:', normalizedDepartment);
+    console.log('Total faculty records found:', faculty?.length);
+
+    return faculty || [];
+  } catch (error) {
+    console.error('Error in searchCOEDFacultyByDepartment:', error);
+    return [];
+  }
+}
+
+
+
+export async function getCOFPrograms() {
+  try {
+    const query = groq`*[_type == "program" && department->department == "College of Fisheries"]{ 
+      _id,
+      title,
+      description,
+      accreditation,
+      file {
+        asset->{
+          url,
+          originalFilename
+        }
+      },
+      department->{department},
+      degree->{degree},
+      level->{level},
+      duration->{duration}
+    }`;
+    
+    const programs = await useSanityClient().fetch(query);
+    console.log('=== DEBUG: getCOFPrograms ===');
+    console.log('Total COF programs found:', programs?.length);
+    
+    return programs || [];
+  } catch (error) {
+    console.error('Error in getCOFPrograms:', error);
+    return [];
+  }
+}
+
+
 
 
 export async function getCOLPrograms() {
@@ -1721,6 +1825,41 @@ export async function getCASPrograms() {
     return programs || [];
   } catch (error) {
     console.error('Error in getCASPrograms:', error);
+    return [];
+  }
+}
+
+export async function getCOEDAndECEEDepartmentPrograms() {
+  try {
+    const query = groq`*[_type == "program" && 
+      (
+        department->department == "College of Education" || 
+        description match "Early Childhood and Elementary"
+      )
+    ]{ 
+      _id,
+      title,
+      description,
+      accreditation,
+      file {
+        asset->{
+          url,
+          originalFilename
+        }
+      },
+      department->{department},
+      degree->{degree},
+      level->{level},
+      duration->{duration}
+    }`;
+
+    const programs = await useSanityClient().fetch(query);
+    console.log('=== DEBUG: getCOEDAndECEEDepartmentPrograms ===');
+    console.log('Total COED/ECEE programs found:', programs?.length);
+
+    return programs || [];
+  } catch (error) {
+    console.error('Error in getCOEDAndECEEDepartmentPrograms:', error);
     return [];
   }
 }
