@@ -5301,8 +5301,23 @@ document.addEventListener('DOMContentLoaded', function() {
 		// Clear existing content
 		grid.innerHTML = '';
 
-		// Clone and append faculty cards
+		// Filter cards to ensure they belong to this specific department and ensure uniqueness by faculty ID
+		const seenFacultyIds = new Set<string>();
+		const uniqueCards: HTMLElement[] = [];
+
 		cards.forEach((card) => {
+			const cardDepartment = (card as HTMLElement).dataset.department || '';
+			const facultyId = (card as HTMLElement).dataset.facultyId || '';
+			
+			// Only include cards that match this exact department and haven't been seen before
+			if (cardDepartment === department && facultyId && !seenFacultyIds.has(facultyId)) {
+				seenFacultyIds.add(facultyId);
+				uniqueCards.push(card);
+			}
+		});
+
+		// Clone and append unique faculty cards
+		uniqueCards.forEach((card) => {
 			const clone = card.cloneNode(true) as HTMLElement;
 			clone.classList.remove('hidden');
 			clone.style.display = '';
@@ -5383,14 +5398,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		let visibleCount = 0;
 		const departmentCards: HTMLElement[] = [];
+		const seenFacultyIds = new Set<string>();
+		
 		allFacultyCards.forEach((card) => {
 			const department = (card as HTMLElement).dataset.department || '';
+			const facultyId = (card as HTMLElement).dataset.facultyId || '';
 			const matchesDepartment = department === activeDepartmentFilter;
+			
 			if (matchesDepartment) {
-				card.classList.add('hidden');
-				(card as HTMLElement).style.display = 'none';
-				visibleCount++;
-				departmentCards.push(card as HTMLElement);
+				// Ensure uniqueness by faculty ID - only add if we haven't seen this faculty member yet
+				if (facultyId && !seenFacultyIds.has(facultyId)) {
+					seenFacultyIds.add(facultyId);
+					card.classList.add('hidden');
+					(card as HTMLElement).style.display = 'none';
+					visibleCount++;
+					departmentCards.push(card as HTMLElement);
+				} else {
+					// Hide duplicate cards
+					card.classList.add('hidden');
+					(card as HTMLElement).style.display = 'none';
+				}
 			} else {
 				card.classList.add('hidden');
 				(card as HTMLElement).style.display = 'none';
