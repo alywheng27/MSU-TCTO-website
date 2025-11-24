@@ -1712,30 +1712,120 @@ const currentPath = Astro.url.pathname;
 						<div class="w-24 h-1 bg-gradient-to-r from-[#0077B6] to-[#61063B] mx-auto mb-8"></div>
 								</div>
 								
-					<div class="text-center bg-[#FFFFFF] dark:bg-gray-800 rounded-xl p-12 shadow-lg border border-[#0077B6]/20 dark:border-[#0077B6]/30">
-						<svg class="w-20 h-20 text-[#0077B6] dark:text-[#0077B6] mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
-						</svg>
-						<h3 class="text-3xl font-bold text-[#61063B] dark:text-white mb-4">Coming Soon</h3>
-						<p class="text-xl text-[#0077B6] dark:text-[#0077B6] mb-8">
-							The detailed conference program will be announced soon. Stay tuned for updates!
-						</p>
-						<p class="text-[#61063B] dark:text-white mb-8">
-							In the meantime, get in touch with us via our official Facebook page.
-						</p>
-						<a 
-							href="https://www.facebook.com/profile.php?id=61579337044655" 
-							target="_blank"
-							class="group bg-[#0077B6] hover:bg-[#005a8a] text-white font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl inline-flex items-center"
-						>
-							<svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24">
-								<path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-							</svg>
-							<span>Follow Us on Facebook</span>
-							<svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-							</svg>
-						</a>
+					<!-- Professional PDF Viewer Container -->
+					<div class="bg-gradient-to-br from-[#FFFFFF] via-[#F8FAFC] to-[#E2E8F0] dark:from-gray-800 dark:via-gray-900 dark:to-gray-700 rounded-2xl shadow-2xl border-2 border-[#0077B6]/30 dark:border-[#0077B6]/50 overflow-hidden">
+						<!-- Header Section -->
+						<div class="bg-gradient-to-r from-[#0077B6] via-[#61063B] to-[#0077B6] p-6 sm:p-8">
+							<div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+							<div class="flex items-center gap-4">
+								<!-- PASUC Logo Image -->
+								<div class="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 group">
+									<!-- Animated Gradient Border Glow -->
+									<div class="absolute inset-0 rounded-xl bg-gradient-to-r from-[#0077B6] via-[#61063B] to-[#0077B6] opacity-60 animate-gradient-border blur-sm group-hover:opacity-80 transition-opacity duration-300"></div>
+									
+									<!-- Inner Container with Backdrop -->
+									<div class="relative w-full h-full rounded-xl bg-gradient-to-br from-white/95 via-white/90 to-white/95 dark:from-gray-800/95 dark:via-gray-800/90 dark:to-gray-800/95 backdrop-blur-md border-2 border-white/30 dark:border-white/10 shadow-xl group-hover:shadow-2xl transition-all duration-300 flex items-center justify-center p-2 sm:p-2.5 md:p-3 overflow-hidden">
+										<!-- Subtle Inner Glow -->
+										<div class="absolute inset-0 rounded-xl bg-gradient-to-br from-[#0077B6]/10 via-[#61063B]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+										
+										<!-- Logo Image -->
+										<img 
+											src="/images/PASUCimg.png"
+											alt="PASUC Logo" 
+											class="relative z-10 w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
+											loading="eager"
+											style="display: block; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));"
+										/>
+									</div>
+									
+									<!-- Shine Effect on Hover -->
+									<div class="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+										<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 animate-shine"></div>
+									</div>
+								</div>
+									<div>
+										<h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-1">PASUC Endorsement</h3>
+										<p class="text-white/90 text-sm sm:text-base">Official Endorsement Document</p>
+									</div>
+								</div>
+								<div class="flex items-center gap-3">
+									<a 
+										href="/ICIIE2025 PASUC Endorsement.pdf" 
+										target="_blank"
+										class="group bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white font-semibold py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-2 shadow-lg"
+										title="Open in New Tab"
+									>
+										<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+										</svg>
+										<span class="hidden sm:inline">Open</span>
+									</a>
+									<a 
+										href="/ICIIE2025 PASUC Endorsement.pdf" 
+										download="ICIIE2025_PASUC_Endorsement.pdf"
+										class="group bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white font-semibold py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-2 shadow-lg"
+										title="Download PDF"
+									>
+										<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+										</svg>
+										<span class="hidden sm:inline">Download</span>
+									</a>
+								</div>
+							</div>
+						</div>
+
+				<!-- PASUC Image Display Container -->
+				<div class="relative bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-3 sm:p-4 md:p-6 lg:p-8 xl:p-10">
+					<!-- Decorative Elements -->
+					<div class="absolute top-0 left-0 w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 bg-[#0077B6]/10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+					<div class="absolute bottom-0 right-0 w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 bg-[#61063B]/10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+					
+					<!-- PASUC Image Frame -->
+					<div class="relative bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl shadow-2xl border-2 sm:border-4 border-[#0077B6]/20 dark:border-[#0077B6]/30 overflow-hidden">
+						<div class="relative flex items-center justify-center p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 min-h-[400px] sm:min-h-[550px] md:min-h-[650px] lg:min-h-[750px] xl:min-h-[850px]">
+							<!-- Loading Spinner -->
+							<div id="pasucImageLoader" class="absolute inset-0 bg-white dark:bg-gray-800 flex items-center justify-center z-20 transition-opacity duration-500">
+								<div class="text-center px-4">
+									<!-- Dual Ring Spinner -->
+									<div class="relative mb-4 sm:mb-6">
+										<div class="animate-spin rounded-full h-16 w-16 sm:h-20 sm:w-20 md:h-24 md:w-24 border-4 border-[#0077B6]/20 border-t-[#0077B6] mx-auto"></div>
+										<div class="absolute inset-2 sm:inset-2 md:inset-3 rounded-full h-12 w-12 sm:h-16 sm:w-16 md:h-20 md:w-20 border-4 border-transparent border-t-[#61063B] animate-spin mx-auto" style="animation-duration: 1.5s; animation-direction: reverse;"></div>
+										<div class="absolute inset-4 sm:inset-4 md:inset-5 rounded-full h-8 w-8 sm:h-12 sm:w-12 md:h-16 md:w-16 border-4 border-transparent border-r-[#0077B6]/40 animate-spin mx-auto" style="animation-duration: 2s;"></div>
+									</div>
+									<p class="text-[#0077B6] dark:text-[#0077B6] font-semibold text-base sm:text-lg md:text-xl animate-pulse">Loading PASUC Endorsement...</p>
+								</div>
+							</div>
+							
+							<!-- Image Container with Glow Effect -->
+							<div class="relative group w-full max-w-full sm:max-w-5xl md:max-w-6xl lg:max-w-7xl xl:max-w-8xl">
+								<!-- Animated Glow Effect -->
+								<div class="absolute inset-0 bg-gradient-to-r from-[#0077B6]/20 via-[#61063B]/20 to-[#0077B6]/20 rounded-xl sm:rounded-2xl blur-2xl opacity-50 group-hover:opacity-70 transition-opacity duration-300 animate-pulse"></div>
+								
+								<!-- Image Container -->
+								<div class="relative bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8 xl:p-10 shadow-xl border-2 border-[#0077B6]/20 dark:border-[#0077B6]/30 transform transition-all duration-500 group-hover:scale-[1.01] sm:group-hover:scale-[1.02] group-hover:shadow-2xl">
+									<!-- Image with Lazy Loading - Enhanced Responsive Sizing -->
+									<img 
+										id="pasucImage"
+										src="/images/PASUC.jpg" 
+										alt="PASUC - Philippine Association of State Universities and Colleges Official Endorsement" 
+										class="w-full h-auto max-h-[400px] sm:max-h-[550px] md:max-h-[650px] lg:max-h-[750px] xl:max-h-[850px] 2xl:max-h-[950px] object-contain mx-auto lazy-image opacity-0 transition-opacity duration-700"
+										loading="lazy"
+										style="width: 100%; height: auto; display: block;"
+										onload="this.classList.add('loaded'); this.style.opacity='1'; document.getElementById('pasucImageLoader').style.opacity='0'; setTimeout(() => document.getElementById('pasucImageLoader').style.display='none', 500);"
+									/>
+								</div>
+							</div>
+						</div>
+					</div>
+
+						<!-- Additional Information -->
+						<div class="mt-6 text-center">
+							<p class="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+								<span class="font-semibold text-[#0077B6] dark:text-[#0077B6]">Official Endorsement</span> from the Philippine Association of State Universities and Colleges (PASUC)
+							</p>
+						</div>
+					</div>
 					</div>
 				</div>
 			</div>
@@ -1926,7 +2016,7 @@ const currentPath = Astro.url.pathname;
 						<div>
 							<h3 class="text-2xl font-bold text-[#61063B] dark:text-white mb-6">Mindanao State University – Tawi-Tawi College of Technology and Oceanography</h3>
 							<p class="text-lg text-[#0077B6] dark:text-[#0077B6] mb-6 leading-relaxed">
-								The 1st ICIIE will be held at Mindanao State University – Tawi-Tawi College of Technology and Oceanography, located at Sanga-Sanga, Bongao, Tawi-Tawi, BARMM, Philippines.
+								The 1st ICIIE will be held at Mindanao State University – Tawi-Tawi College of Technology and Oceanography, located at Sanga-Sanga, Bongao, Tawi-Tawi, BARMM, Philippines. Conference participants will gather at Bihing Tahik Resort, Brgy. Pahut, Bongao, Tawi-Tawi, and the MSU-TCTO campus.
 							</p>
 							<p class="text-lg text-[#0077B6] dark:text-[#0077B6] mb-6 leading-relaxed">
 								Mindanao State University – Tawi-Tawi College of Technology and Oceanography (MSU-TCTO) is an autonomous campus of the MSU System located in Bongao, Tawi-Tawi. Established in 1964 and granted autonomy in 1982, it has evolved into a leading state university in fisheries, marine sciences, oceanography, and education in the Sulu Archipelago.
@@ -1955,22 +2045,98 @@ const currentPath = Astro.url.pathname;
 							</div>
 							</div>
 							
-					<!-- Venue Information -->
-					<div class="grid md:grid-cols-2 gap-8">
-						<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-[#0077B6]/20 dark:border-[#0077B6]/30">
-							<h4 class="text-xl font-bold text-[#61063B] dark:text-white mb-6 flex items-center">
+				<!-- Venue Information -->
+				<div class="grid md:grid-cols-2 gap-6 lg:gap-8 mb-8">
+					<!-- MSU-TCTO Campus Map -->
+					<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl shadow-lg border border-[#0077B6]/20 dark:border-[#0077B6]/30 overflow-hidden">
+						<div class="p-6 sm:p-8">
+							<h4 class="text-xl font-bold text-[#61063B] dark:text-white mb-4 flex items-center">
 								<svg class="w-6 h-6 text-[#0077B6] dark:text-[#0077B6] mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
 								</svg>
-								Navigating the Venue
+								MSU-TCTO Campus
 							</h4>
-							<p class="text-[#0077B6] dark:text-[#0077B6] mb-4">
-								The conference will be held at the Maas Kamlon Hall of MSU-TCTO.
+							<p class="text-[#0077B6] dark:text-[#0077B6] mb-4 text-sm sm:text-base">
+								Conference participants will gather at the MSU-TCTO campus for the main conference activities.
 							</p>
-							<p class="text-[#0077B6] dark:text-[#0077B6]">
-								Navigation map to be provided soon.
+							<p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
+								<strong>Address:</strong> Mindanao State University - Tawi-Tawi College of Technology and Oceanography, Bongao, Tawi-Tawi
 							</p>
+						</div>
+						<!-- Google Map Embed -->
+						<div class="relative w-full h-64 sm:h-80 md:h-72 lg:h-80 bg-gray-200 dark:bg-gray-700 rounded-b-xl overflow-hidden">
+							<iframe 
+								src="https://www.google.com/maps?q=Mindanao+State+University+Tawi-Tawi+College+of+Technology+and+Oceanography+Sanga-Sanga+Bongao+Tawi-Tawi&output=embed"
+								class="absolute inset-0 w-full h-full border-0"
+								style="filter: grayscale(0%) contrast(1.1);"
+								allowfullscreen=""
+								loading="lazy"
+								referrerpolicy="no-referrer-when-downgrade"
+								title="MSU-TCTO Campus Location"
+							></iframe>
+							<!-- Fallback Link -->
+							<div class="absolute bottom-2 right-2 z-10">
+								<a 
+									href="https://www.google.com/maps/search/MSU-TCTO+Sanga-Sanga+Bongao+Tawi-Tawi" 
+									target="_blank" 
+									rel="noopener noreferrer"
+									class="bg-white dark:bg-gray-800 text-[#0077B6] dark:text-[#0077B6] px-3 py-1.5 rounded-lg text-xs font-semibold shadow-lg hover:shadow-xl transition-shadow flex items-center gap-1.5"
+								>
+									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+									</svg>
+									Open in Maps
+								</a>
 							</div>
+						</div>
+					</div>
+
+					<!-- Bihing Tahik Resort Map -->
+					<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl shadow-lg border border-[#61063B]/20 dark:border-[#61063B]/30 overflow-hidden">
+						<div class="p-6 sm:p-8">
+							<h4 class="text-xl font-bold text-[#61063B] dark:text-white mb-4 flex items-center">
+								<svg class="w-6 h-6 text-[#61063B] dark:text-[#61063B] mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+								</svg>
+								Bihing Tahik Resort
+							</h4>
+							<p class="text-[#0077B6] dark:text-[#0077B6] mb-4 text-sm sm:text-base">
+								Conference participants will gather at Bihing Tahik Resort for accommodation and related activities.
+							</p>
+							<p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
+								<strong>Address:</strong> Brgy. Pahut, Bongao, Tawi-Tawi<br>
+								<strong>Contact:</strong> 0953-322-5742
+							</p>
+						</div>
+						<!-- Google Map Embed -->
+						<div class="relative w-full h-64 sm:h-80 md:h-72 lg:h-80 bg-gray-200 dark:bg-gray-700 rounded-b-xl overflow-hidden">
+							<iframe 
+								src="https://www.google.com/maps?q=Bihing+Tahik+Resort+Brgy+Pahut+Bongao+Tawi-Tawi&output=embed"
+								class="absolute inset-0 w-full h-full border-0"
+								style="filter: grayscale(0%) contrast(1.1);"
+								allowfullscreen=""
+								loading="lazy"
+								referrerpolicy="no-referrer-when-downgrade"
+								title="Bihing Tahik Resort Location"
+							></iframe>
+							<!-- Fallback Link -->
+							<div class="absolute bottom-2 right-2 z-10">
+								<a 
+									href="https://www.google.com/maps/search/Bihing+Tahik+Resort+Brgy+Pahut+Bongao+Tawi-Tawi" 
+									target="_blank" 
+									rel="noopener noreferrer"
+									class="bg-white dark:bg-gray-800 text-[#61063B] dark:text-[#61063B] px-3 py-1.5 rounded-lg text-xs font-semibold shadow-lg hover:shadow-xl transition-shadow flex items-center gap-1.5"
+								>
+									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+									</svg>
+									Open in Maps
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
 
 						<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-[#61063B]/20 dark:border-[#61063B]/30">
 							<h4 class="text-xl font-bold text-[#61063B] dark:text-white mb-6 flex items-center">
@@ -2402,6 +2568,113 @@ const currentPath = Astro.url.pathname;
 			.flex-wrap > * {
 				width: 100%;
 			}
+		}
+
+		/* PASUC Image Display Styles */
+		.lazy-image {
+			transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
+		}
+
+		.lazy-image[loading="lazy"] {
+			opacity: 0;
+			transform: scale(0.95);
+		}
+
+		.lazy-image.loaded {
+			opacity: 1;
+			transform: scale(1);
+		}
+
+		/* Image fade-in animation */
+		@keyframes imageFadeIn {
+			from {
+				opacity: 0;
+				transform: scale(0.95);
+			}
+			to {
+				opacity: 1;
+				transform: scale(1);
+			}
+		}
+
+		section#endorsement img.lazy-image {
+			animation: imageFadeIn 0.8s ease-out;
+		}
+
+		/* PASUC Image Loader Styles */
+		#pasucImageLoader {
+			backdrop-filter: blur(2px);
+		}
+
+		#pasucImage {
+			will-change: opacity, transform;
+			max-width: 100%;
+			height: auto;
+		}
+
+		/* Enhanced Responsive Image Display */
+		@media (max-width: 640px) {
+			#pasucImage {
+				max-height: 400px !important;
+			}
+		}
+
+		@media (min-width: 640px) and (max-width: 768px) {
+			#pasucImage {
+				max-height: 550px !important;
+			}
+		}
+
+		@media (min-width: 768px) and (max-width: 1024px) {
+			#pasucImage {
+				max-height: 650px !important;
+			}
+		}
+
+		@media (min-width: 1024px) and (max-width: 1280px) {
+			#pasucImage {
+				max-height: 750px !important;
+			}
+		}
+
+		@media (min-width: 1280px) {
+			#pasucImage {
+				max-height: 850px !important;
+			}
+		}
+
+		@media (min-width: 1536px) {
+			#pasucImage {
+				max-height: 950px !important;
+			}
+		}
+
+		/* PASUC Logo Professional Styling */
+		@keyframes gradient-border {
+			0%, 100% {
+				background-position: 0% 50%;
+			}
+			50% {
+				background-position: 100% 50%;
+			}
+		}
+
+		.animate-gradient-border {
+			background-size: 200% 200%;
+			animation: gradient-border 3s ease-in-out infinite;
+		}
+
+		@keyframes shine {
+			0% {
+				transform: translateX(-100%) translateY(-100%) rotate(45deg);
+			}
+			100% {
+				transform: translateX(100%) translateY(100%) rotate(45deg);
+			}
+		}
+
+		.animate-shine {
+			animation: shine 1.5s ease-in-out;
 		}
 	</style>
 
