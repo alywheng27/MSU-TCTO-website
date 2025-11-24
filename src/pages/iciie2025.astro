@@ -2045,22 +2045,98 @@ const currentPath = Astro.url.pathname;
 							</div>
 							</div>
 							
-					<!-- Venue Information -->
-					<div class="grid md:grid-cols-2 gap-8">
-						<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-[#0077B6]/20 dark:border-[#0077B6]/30">
-							<h4 class="text-xl font-bold text-[#61063B] dark:text-white mb-6 flex items-center">
+				<!-- Venue Information -->
+				<div class="grid md:grid-cols-2 gap-6 lg:gap-8 mb-8">
+					<!-- MSU-TCTO Campus Map -->
+					<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl shadow-lg border border-[#0077B6]/20 dark:border-[#0077B6]/30 overflow-hidden">
+						<div class="p-6 sm:p-8">
+							<h4 class="text-xl font-bold text-[#61063B] dark:text-white mb-4 flex items-center">
 								<svg class="w-6 h-6 text-[#0077B6] dark:text-[#0077B6] mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
 								</svg>
-								Navigating the Venue
+								MSU-TCTO Campus
 							</h4>
-							<p class="text-[#0077B6] dark:text-[#0077B6] mb-4">
-								The conference will be held at the Maas Kamlon Hall of MSU-TCTO.
+							<p class="text-[#0077B6] dark:text-[#0077B6] mb-4 text-sm sm:text-base">
+								The conference will be held at MSU-TCTO.
 							</p>
-							<p class="text-[#0077B6] dark:text-[#0077B6]">
-								Navigation map to be provided soon.
+							<p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
+								<strong>Address:</strong> Mindanao State University - Tawi-Tawi College of Technology and Oceanography, Bongao, Tawi-Tawi
 							</p>
+						</div>
+						<!-- Google Map Embed -->
+						<div class="relative w-full h-64 sm:h-80 md:h-72 lg:h-80 bg-gray-200 dark:bg-gray-700 rounded-b-xl overflow-hidden">
+							<iframe 
+								src="https://www.google.com/maps?q=Mindanao+State+University+Tawi-Tawi+College+of+Technology+and+Oceanography+Sanga-Sanga+Bongao+Tawi-Tawi&output=embed"
+								class="absolute inset-0 w-full h-full border-0"
+								style="filter: grayscale(0%) contrast(1.1);"
+								allowfullscreen=""
+								loading="lazy"
+								referrerpolicy="no-referrer-when-downgrade"
+								title="MSU-TCTO Campus Location"
+							></iframe>
+							<!-- Fallback Link -->
+							<div class="absolute bottom-2 right-2 z-10">
+								<a 
+									href="https://www.google.com/maps/search/MSU-TCTO+Sanga-Sanga+Bongao+Tawi-Tawi" 
+									target="_blank" 
+									rel="noopener noreferrer"
+									class="bg-white dark:bg-gray-800 text-[#0077B6] dark:text-[#0077B6] px-3 py-1.5 rounded-lg text-xs font-semibold shadow-lg hover:shadow-xl transition-shadow flex items-center gap-1.5"
+								>
+									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+									</svg>
+									Open in Maps
+								</a>
 							</div>
+						</div>
+					</div>
+
+					<!-- Bihing Tahik Resort Map -->
+					<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl shadow-lg border border-[#61063B]/20 dark:border-[#61063B]/30 overflow-hidden">
+						<div class="p-6 sm:p-8">
+							<h4 class="text-xl font-bold text-[#61063B] dark:text-white mb-4 flex items-center">
+								<svg class="w-6 h-6 text-[#61063B] dark:text-[#61063B] mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+								</svg>
+								Bihing Tahik Resort
+							</h4>
+							<p class="text-[#0077B6] dark:text-[#0077B6] mb-4 text-sm sm:text-base">
+								Recommended accommodation for conference attendees.
+							</p>
+							<p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
+								<strong>Address:</strong> Brgy. Pahut, Bongao, Tawi-Tawi<br>
+								<strong>Contact:</strong> 0953-322-5742
+							</p>
+						</div>
+						<!-- Google Map Embed -->
+						<div class="relative w-full h-64 sm:h-80 md:h-72 lg:h-80 bg-gray-200 dark:bg-gray-700 rounded-b-xl overflow-hidden">
+							<iframe 
+								src="https://www.google.com/maps?q=Bihing+Tahik+Resort+Brgy+Pahut+Bongao+Tawi-Tawi&output=embed"
+								class="absolute inset-0 w-full h-full border-0"
+								style="filter: grayscale(0%) contrast(1.1);"
+								allowfullscreen=""
+								loading="lazy"
+								referrerpolicy="no-referrer-when-downgrade"
+								title="Bihing Tahik Resort Location"
+							></iframe>
+							<!-- Fallback Link -->
+							<div class="absolute bottom-2 right-2 z-10">
+								<a 
+									href="https://www.google.com/maps/search/Bihing+Tahik+Resort+Brgy+Pahut+Bongao+Tawi-Tawi" 
+									target="_blank" 
+									rel="noopener noreferrer"
+									class="bg-white dark:bg-gray-800 text-[#61063B] dark:text-[#61063B] px-3 py-1.5 rounded-lg text-xs font-semibold shadow-lg hover:shadow-xl transition-shadow flex items-center gap-1.5"
+								>
+									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+									</svg>
+									Open in Maps
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
 
 						<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-[#61063B]/20 dark:border-[#61063B]/30">
 							<h4 class="text-xl font-bold text-[#61063B] dark:text-white mb-6 flex items-center">
