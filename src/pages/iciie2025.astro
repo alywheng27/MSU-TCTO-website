@@ -12,7 +12,7 @@ const currentPath = Astro.url.pathname;
 <Layout title="ICIIE 2025 - 1st International Conference on Inclusive and Indigenous Education | MSU-TCTO">
 	<main class="font-sans dark:bg-gray-900 transition-colors duration-300">
 		<!-- Banner Image Section -->
-		<section class="relative w-full aspect-[4.5/1] overflow-hidden">
+		<section class="relative w-full aspect-[4.5/1] sm:aspect-[4.5/1] md:aspect-[4.5/1] lg:aspect-[4.5/1] xl:aspect-[3.5/1] overflow-hidden nest-hub-banner">
 			<img 
 				src="/images/samplebanner.jpg" 
 				alt="ICIIE 2025 Banner"
@@ -34,76 +34,76 @@ const currentPath = Astro.url.pathname;
 					loading="lazy"
 				/>
 			</div>	
-			<div class="container mx-auto px-4 sm:px-6 relative z-10">
+			<div class="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10 relative z-10">
 				<div class="max-w-6xl mx-auto text-center">
 					<!-- Conference Badge -->
-					<div class="inline-flex items-center bg-[#0077B6]/20 backdrop-blur-md border border-[#0077B6]/30 rounded-full px-4 sm:px-6 py-2 sm:py-3 mb-6 sm:mb-8 shadow-lg shadow-[#0077B6]/20">
-						<div class="w-2 h-2 sm:w-3 sm:h-3 bg-[#0077B6] rounded-full mr-2 sm:mr-3"></div>
-						<span class="text-[#0077B6] dark:text-white font-medium tracking-wide text-sm sm:text-base">November 26-28, 2025</span>
+					<div class="inline-flex items-center bg-[#0077B6]/20 backdrop-blur-md border border-[#0077B6]/30 rounded-full px-3 xs:px-4 sm:px-6 md:px-8 py-2 sm:py-3 mb-4 xs:mb-6 sm:mb-8 shadow-lg shadow-[#0077B6]/20">
+						<div class="w-2 h-2 xs:w-2.5 xs:h-2.5 sm:w-3 sm:h-3 bg-[#0077B6] rounded-full mr-2 xs:mr-2.5 sm:mr-3"></div>
+						<span class="text-[#0077B6] dark:text-white font-medium tracking-wide text-xs xs:text-sm sm:text-base md:text-lg">November 26-28, 2025</span>
 					</div>
 
 					<!-- Welcome Message -->
-					<h2 class="text-lg sm:text-xl md:text-2xl mb-3 sm:mb-4" style="font-family: 'BebasNeue-Book', Arial, sans-serif; color: #0077B6;">Welcome to the</h2>
+					<h2 class="text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl mb-2 xs:mb-3 sm:mb-4 px-2" style="font-family: 'BebasNeue-Book', Arial, sans-serif; color: #0077B6;">Welcome to the</h2>
 					
 					<!-- Main Title (Styled to match provided image exactly) -->
-					<h1 class="mb-4 sm:mb-6 leading-tight text-center" style="font-family: 'BebasNeue-Book', Arial, sans-serif;">
+					<h1 class="mb-3 xs:mb-4 sm:mb-6 leading-tight text-center px-2" style="font-family: 'BebasNeue-Book', Arial, sans-serif;">
 						<!-- First line: "1ST INTERNATIONAL CONFERENCE" in maroon -->
-						<span class="block text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-normal tracking-tight text-[#61063B] dark:text-white" style="font-family: 'Bebas Neue', Arial, sans-serif;">
-							1<sup class="align-super text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl 1xl:text-1xl font-normal" style="font-family: 'Bebas Neue', Arial, sans-serif;">ST</sup>
-							<span class="ml-1 text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-normal" style="font-family: 'Bebas Neue', Arial, sans-serif;">INTERNATIONAL CONFERENCE</span>
+						<span class="block text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-normal tracking-tight text-[#61063B] dark:text-white" style="font-family: 'Bebas Neue', Arial, sans-serif;">
+							1<sup class="align-super text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-normal" style="font-family: 'Bebas Neue', Arial, sans-serif;">ST</sup>
+							<span class="ml-0.5 xs:ml-1 text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-normal" style="font-family: 'Bebas Neue', Arial, sans-serif;">INTERNATIONAL CONFERENCE</span>
 						</span>
 						<!-- Second line: "ON INCLUSIVE AND" in blue -->
-						<span class="block mt-1 text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-bold tracking-wider text-[#0077B6] dark:text-[#0077B6]" style="font-family: 'BebasNeue-Book', Arial, sans-serif;">
+						<span class="block mt-0.5 xs:mt-1 text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold tracking-wider text-[#0077B6] dark:text-[#0077B6]" style="font-family: 'BebasNeue-Book', Arial, sans-serif;">
 							<span style="font-family: 'Bebas Neue Thin Regular', Arial, sans-serif; font-weight: 400;">ON</span> <span class="font-bold" style="font-family: 'BebasNeue-Book', Arial, sans-serif;">INCLUSIVE</span> <span style="font-family: 'Bebas Neue Thin Regular', Arial, sans-serif; font-weight: 400;">AND</span>
 						</span>
 						<!-- Third line: "INDIGENOUS EDUCATION" in blue (largest) -->
-						<span class="block text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-bold tracking-wider text-[#0077B6] dark:text-[#0077B6]" style="font-family: 'BebasNeue-Book', Arial, sans-serif;">
+						<span class="block text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold tracking-wider text-[#0077B6] dark:text-[#0077B6]" style="font-family: 'BebasNeue-Book', Arial, sans-serif;">
 							INDIGENOUS EDUCATION
 						</span>
 					</h1>
 
 					<!-- Theme -->
-					<div class="mb-8 sm:mb-12">
-						<p class="text-lg sm:text-xl md:text-2xl text-[#0077B6] dark:text-[#0077B6] font-semibold mb-2" style="font-family: 'BebasNeue-Bold', Bebas Neue, Arial, sans-serif;">Theme:</p>
-						<p class="text-base sm:text-lg md:text-xl text-[#0077B6] dark:text-gray-300 max-w-4xl mx-auto leading-relaxed italic px-4" style="font-family: 'BebasNeue-Bold', Bebas Neue, Arial, sans-serif;">
+					<div class="mb-6 xs:mb-8 sm:mb-12">
+						<p class="text-base xs:text-lg sm:text-xl md:text-2xl lg:text-3xl text-[#0077B6] dark:text-[#0077B6] font-semibold mb-1 xs:mb-2 px-2" style="font-family: 'BebasNeue-Bold', Bebas Neue, Arial, sans-serif;">Theme:</p>
+						<p class="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl text-[#0077B6] dark:text-gray-300 max-w-4xl mx-auto leading-relaxed italic px-3 xs:px-4 sm:px-6" style="font-family: 'BebasNeue-Bold', Bebas Neue, Arial, sans-serif;">
 							"Reimagining Education Leadership and Policy for Equity and Social Inclusion"
 						</p>
 					</div>
 
 					<!-- Location -->
-					<div class="mb-8 sm:mb-12">
-						<p class="text-sm sm:text-base md:text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto text-center leading-relaxed px-4">
-							<span class="font-semibold block text-[#61063B] dark:text-[#61063B]">Mindanao State University Tawi-Tawi College of Technology and Oceanography</span>
+					<div class="mb-6 xs:mb-8 sm:mb-12">
+						<p class="text-xs xs:text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto text-center leading-relaxed px-3 xs:px-4 sm:px-6">
+							<span class="font-semibold block text-[#61063B] dark:text-[#61063B] mb-1">Mindanao State University Tawi-Tawi College of Technology and Oceanography</span>
 							<span class="block text-[#61063B]">Sanga-Sanga, Bongao, Tawi-Tawi 7500, Philippines</span>
 						</p>
 					</div>
 
 					<!-- Call to Action Buttons -->
-					<div class="flex flex-col sm:flex-row flex-wrap justify-center gap-4 sm:gap-6 mb-12 sm:mb-16 px-4">
+					<div class="flex flex-col sm:flex-row flex-wrap justify-center gap-3 xs:gap-4 sm:gap-6 mb-8 xs:mb-12 sm:mb-16 px-3 xs:px-4 sm:px-6">
 						<a 
 							href="#registration"
-							class="group bg-[#0077B6] hover:from-[#61063B] hover:to-[#61063B] hover:text-[#61063B] text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center justify-center border border-[#0077B6]/20 w-full sm:w-auto"
+							class="group bg-[#0077B6] hover:from-[#61063B] hover:to-[#61063B] hover:text-[#61063B] text-white font-bold py-2.5 xs:py-3 sm:py-4 px-5 xs:px-6 sm:px-8 md:px-10 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center justify-center border border-[#0077B6]/20 w-full sm:w-auto min-h-[44px] text-xs xs:text-sm sm:text-base"
 						>
-							<span class="text-sm sm:text-base">Register Now</span>
-							<svg class="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<span>Register Now</span>
+							<svg class="w-4 h-4 xs:w-4 xs:h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
 							</svg>
 						</a>
 						<a 
 							href="#call-for-abstracts"
-							class="group bg-transparent border-2 border-[#0077B6] hover:bg-gradient-to-r hover:from-[#0077B6] hover:to-[#61063B] hover:text-white text-[#0077B6] dark:text-[#90cdf4] font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-full transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center backdrop-blur-sm w-full sm:w-auto"
+							class="group bg-transparent border-2 border-[#0077B6] hover:bg-gradient-to-r hover:from-[#0077B6] hover:to-[#61063B] hover:text-white text-[#0077B6] dark:text-[#90cdf4] font-bold py-2.5 xs:py-3 sm:py-4 px-5 xs:px-6 sm:px-8 md:px-10 rounded-full transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center backdrop-blur-sm w-full sm:w-auto min-h-[44px] text-xs xs:text-sm sm:text-base"
 						>
-							<svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<svg class="w-4 h-4 xs:w-4 xs:h-4 sm:w-5 sm:h-5 mr-2 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
 							</svg>
-							<span class="text-sm sm:text-base">Submit Abstract</span>
+							<span>Submit Abstract</span>
 						</a>
 						<a 
 							href="#speakers"
-							class="group bg-[#0077B6] hover:from-[#4a0a2e] hover:to-[#005a8a] text-white hover:text-[#61063B] font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center justify-center border border-[#61063B]/20 w-full sm:w-auto"
+							class="group bg-[#0077B6] hover:from-[#4a0a2e] hover:to-[#005a8a] text-white hover:text-[#61063B] font-bold py-2.5 xs:py-3 sm:py-4 px-5 xs:px-6 sm:px-8 md:px-10 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center justify-center border border-[#61063B]/20 w-full sm:w-auto min-h-[44px] text-xs xs:text-sm sm:text-base"
 						>
-							<span class="text-sm sm:text-base">Speakers</span>
-							<svg class="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<span>Speakers</span>
+							<svg class="w-4 h-4 xs:w-4 xs:h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
 							</svg>
 						</a>
@@ -122,21 +122,21 @@ const currentPath = Astro.url.pathname;
 		</section>
 
 		<!-- About ICIIE Section -->
-		<section id="about" class="py-12 sm:py-16 md:py-20 bg-gradient-to-br from-[#F8FAFC] via-[#FFFFFF] to-[#E2E8F0] dark:bg-gradient-to-br dark:from-gray-800 dark:via-gray-900 dark:to-gray-700">
-			<div class="container mx-auto px-4 sm:px-6">
+		<section id="about" class="py-8 xs:py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-br from-[#F8FAFC] via-[#FFFFFF] to-[#E2E8F0] dark:bg-gradient-to-br dark:from-gray-800 dark:via-gray-900 dark:to-gray-700">
+			<div class="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10">
 				<div class="max-w-6xl mx-auto">
-					<div class="text-center mb-12 sm:mb-16">
-						<div class="inline-flex items-center bg-gradient-to-r from-[#0077B6]/20 to-[#61063B]/20 dark:from-[#0077B6]/30 dark:to-[#61063B]/30 backdrop-blur-md border border-[#0077B6]/30 dark:border-[#0077B6]/50 rounded-full px-4 sm:px-6 py-2 sm:py-3 mb-4 sm:mb-6 shadow-lg shadow-[#0077B6]/20">
-							<svg class="w-4 h-4 sm:w-5 sm:h-5 text-[#0077B6] dark:text-[#90cdf4] mr-2 sm:mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<div class="text-center mb-8 xs:mb-12 sm:mb-16">
+						<div class="inline-flex items-center bg-gradient-to-r from-[#0077B6]/20 to-[#61063B]/20 dark:from-[#0077B6]/30 dark:to-[#61063B]/30 backdrop-blur-md border border-[#0077B6]/30 dark:border-[#0077B6]/50 rounded-full px-3 xs:px-4 sm:px-6 md:px-8 py-2 xs:py-2.5 sm:py-3 mb-3 xs:mb-4 sm:mb-6 shadow-lg shadow-[#0077B6]/20">
+							<svg class="w-3.5 h-3.5 xs:w-4 xs:h-4 sm:w-5 sm:h-5 text-[#0077B6] dark:text-[#90cdf4] mr-1.5 xs:mr-2 sm:mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
 								</svg>
-							<span class="text-[#0077B6] dark:text-[#90cdf4] font-bold uppercase tracking-wide text-sm sm:text-base">About the Conference</span>
+							<span class="text-[#0077B6] dark:text-[#90cdf4] font-bold uppercase tracking-wide text-xs xs:text-sm sm:text-base md:text-lg">About the Conference</span>
 							</div>
-						<h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-[#61063B] dark:text-white mb-4 sm:mb-6">About ICIIE</h2>
-						<div class="w-16 sm:w-24 h-1 bg-gradient-to-r from-[#0077B6] to-[#61063B] mx-auto mb-6 sm:mb-8"></div>
+						<h2 class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-[#61063B] dark:text-white mb-3 xs:mb-4 sm:mb-6 px-2">About ICIIE</h2>
+						<div class="w-12 xs:w-16 sm:w-24 md:w-32 h-0.5 xs:h-1 bg-gradient-to-r from-[#0077B6] to-[#61063B] mx-auto mb-4 xs:mb-6 sm:mb-8"></div>
 						</div>
 
-					<div class="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center mb-12 sm:mb-16">
+					<div class="grid lg:grid-cols-2 gap-6 xs:gap-8 sm:gap-12 items-center mb-8 xs:mb-12 sm:mb-16">
 						<div>
 							<p class="text-base sm:text-lg text-[#0077B6] dark:text-white mb-4 sm:mb-6 leading-relaxed">
 								The International Conference on Inclusive and Indigenous Education (ICIIE) provides a global space for dialogue on educational practices that embrace diversity and cultural identity. It highlights the role of indigenous knowledge and inclusive approaches in shaping just and equitable learning communities.
@@ -238,95 +238,95 @@ const currentPath = Astro.url.pathname;
 			</div>
 
 					<!-- Conference Strands -->
-					<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-12 sm:mb-16">
-						<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl p-4 sm:p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-[#61063B]/20 dark:border-[#61063B]/30">
-							<div class="flex items-center mb-3 sm:mb-4">
-								<div class="w-6 h-6 sm:w-8 sm:h-8 bg-[#61063B] text-white rounded-full flex items-center justify-center font-bold text-xs sm:text-sm mr-2 sm:mr-3">1</div>
-								<h3 class="font-bold text-[#61063B] dark:text-white text-sm sm:text-base">Decolonizing Education Policy</h3>
+					<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 xs:gap-4 sm:gap-6 mb-8 xs:mb-12 sm:mb-16">
+						<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl p-3 xs:p-4 sm:p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-[#61063B]/20 dark:border-[#61063B]/30">
+							<div class="flex items-center mb-2 xs:mb-3 sm:mb-4">
+								<div class="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 bg-[#61063B] text-white rounded-full flex items-center justify-center font-bold text-xs xs:text-sm sm:text-sm mr-2 xs:mr-2.5 sm:mr-3 flex-shrink-0">1</div>
+								<h3 class="font-bold text-[#61063B] dark:text-white text-xs xs:text-sm sm:text-base md:text-lg leading-tight">Decolonizing Education Policy</h3>
 								</div>
 								</div>
-						<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-[#0077B6]/20 dark:border-[#0077B6]/30">
-							<div class="flex items-center mb-4">
-								<div class="w-8 h-8 bg-[#0077B6] text-white rounded-full flex items-center justify-center font-bold text-sm mr-3">2</div>
-								<h3 class="font-bold text-[#0077B6] dark:text-[#0077B6]">Inclusive Leadership in Diverse Contexts</h3>
+						<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl p-3 xs:p-4 sm:p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-[#0077B6]/20 dark:border-[#0077B6]/30">
+							<div class="flex items-center mb-2 xs:mb-3 sm:mb-4">
+								<div class="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 bg-[#0077B6] text-white rounded-full flex items-center justify-center font-bold text-xs xs:text-sm sm:text-sm mr-2 xs:mr-2.5 sm:mr-3 flex-shrink-0">2</div>
+								<h3 class="font-bold text-[#0077B6] dark:text-[#0077B6] text-xs xs:text-sm sm:text-base md:text-lg leading-tight">Inclusive Leadership in Diverse Contexts</h3>
 							</div>
 						</div>
-						<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-[#61063B]/20 dark:border-[#61063B]/30">
-							<div class="flex items-center mb-4">
-								<div class="w-8 h-8 bg-[#61063B] text-white rounded-full flex items-center justify-center font-bold text-sm mr-3">3</div>
-								<h3 class="font-bold text-[#61063B] dark:text-white">Indigenous Knowledge Systems and Pedagogies</h3>
+						<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl p-3 xs:p-4 sm:p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-[#61063B]/20 dark:border-[#61063B]/30">
+							<div class="flex items-center mb-2 xs:mb-3 sm:mb-4">
+								<div class="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 bg-[#61063B] text-white rounded-full flex items-center justify-center font-bold text-xs xs:text-sm sm:text-sm mr-2 xs:mr-2.5 sm:mr-3 flex-shrink-0">3</div>
+								<h3 class="font-bold text-[#61063B] dark:text-white text-xs xs:text-sm sm:text-base md:text-lg leading-tight">Indigenous Knowledge Systems and Pedagogies</h3>
 					</div>
 							</div>
-						<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-[#0077B6]/20 dark:border-[#0077B6]/30">
-							<div class="flex items-center mb-4">
-								<div class="w-8 h-8 bg-[#0077B6] text-white rounded-full flex items-center justify-center font-bold text-sm mr-3">4</div>
-								<h3 class="font-bold text-[#0077B6] dark:text-[#0077B6]">Equity in Access, Participation, and Outcomes</h3>
+						<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl p-3 xs:p-4 sm:p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-[#0077B6]/20 dark:border-[#0077B6]/30">
+							<div class="flex items-center mb-2 xs:mb-3 sm:mb-4">
+								<div class="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 bg-[#0077B6] text-white rounded-full flex items-center justify-center font-bold text-xs xs:text-sm sm:text-sm mr-2 xs:mr-2.5 sm:mr-3 flex-shrink-0">4</div>
+								<h3 class="font-bold text-[#0077B6] dark:text-[#0077B6] text-xs xs:text-sm sm:text-base md:text-lg leading-tight">Equity in Access, Participation, and Outcomes</h3>
 						</div>
 					</div>
-						<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-[#61063B]/20 dark:border-[#61063B]/30">
-							<div class="flex items-center mb-4">
-								<div class="w-8 h-8 bg-[#61063B] text-white rounded-full flex items-center justify-center font-bold text-sm mr-3">5</div>
-								<h3 class="font-bold text-[#61063B] dark:text-white">Teacher Education and Professional Development</h3>
+						<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl p-3 xs:p-4 sm:p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-[#61063B]/20 dark:border-[#61063B]/30">
+							<div class="flex items-center mb-2 xs:mb-3 sm:mb-4">
+								<div class="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 bg-[#61063B] text-white rounded-full flex items-center justify-center font-bold text-xs xs:text-sm sm:text-sm mr-2 xs:mr-2.5 sm:mr-3 flex-shrink-0">5</div>
+								<h3 class="font-bold text-[#61063B] dark:text-white text-xs xs:text-sm sm:text-base md:text-lg leading-tight">Teacher Education and Professional Development</h3>
 					</div>
 				</div>
-						<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-[#0077B6]/20 dark:border-[#0077B6]/30">
-							<div class="flex items-center mb-4">
-								<div class="w-8 h-8 bg-[#0077B6] text-white rounded-full flex items-center justify-center font-bold text-sm mr-3">6</div>
-								<h3 class="font-bold text-[#0077B6] dark:text-[#0077B6]">Language Policy and Multilingual Education</h3>
+						<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl p-3 xs:p-4 sm:p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-[#0077B6]/20 dark:border-[#0077B6]/30">
+							<div class="flex items-center mb-2 xs:mb-3 sm:mb-4">
+								<div class="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 bg-[#0077B6] text-white rounded-full flex items-center justify-center font-bold text-xs xs:text-sm sm:text-sm mr-2 xs:mr-2.5 sm:mr-3 flex-shrink-0">6</div>
+								<h3 class="font-bold text-[#0077B6] dark:text-[#0077B6] text-xs xs:text-sm sm:text-base md:text-lg leading-tight">Language Policy and Multilingual Education</h3>
 									</div>
 								</div>
-						<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-[#61063B]/20 dark:border-[#61063B]/30">
-							<div class="flex items-center mb-4">
-								<div class="w-8 h-8 bg-[#61063B] text-white rounded-full flex items-center justify-center font-bold text-sm mr-3">7</div>
-								<h3 class="font-bold text-[#61063B] dark:text-white">Community Engagement and Partnerships</h3>
+						<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl p-3 xs:p-4 sm:p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-[#61063B]/20 dark:border-[#61063B]/30">
+							<div class="flex items-center mb-2 xs:mb-3 sm:mb-4">
+								<div class="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 bg-[#61063B] text-white rounded-full flex items-center justify-center font-bold text-xs xs:text-sm sm:text-sm mr-2 xs:mr-2.5 sm:mr-3 flex-shrink-0">7</div>
+								<h3 class="font-bold text-[#61063B] dark:text-white text-xs xs:text-sm sm:text-base md:text-lg leading-tight">Community Engagement and Partnerships</h3>
 								</div>
 							</div>
-						<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-[#0077B6]/20 dark:border-[#0077B6]/30">
-							<div class="flex items-center mb-4">
-								<div class="w-8 h-8 bg-[#0077B6] text-white rounded-full flex items-center justify-center font-bold text-sm mr-3">8</div>
-								<h3 class="font-bold text-[#0077B6] dark:text-[#0077B6]">Technology for Inclusive and Indigenous Education</h3>
+						<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl p-3 xs:p-4 sm:p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-[#0077B6]/20 dark:border-[#0077B6]/30">
+							<div class="flex items-center mb-2 xs:mb-3 sm:mb-4">
+								<div class="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 bg-[#0077B6] text-white rounded-full flex items-center justify-center font-bold text-xs xs:text-sm sm:text-sm mr-2 xs:mr-2.5 sm:mr-3 flex-shrink-0">8</div>
+								<h3 class="font-bold text-[#0077B6] dark:text-[#0077B6] text-xs xs:text-sm sm:text-base md:text-lg leading-tight">Technology for Inclusive and Indigenous Education</h3>
 								</div>
 									</div>
-						<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-[#61063B]/20 dark:border-[#61063B]/30">
-							<div class="flex items-center mb-4">
-								<div class="w-8 h-8 bg-[#61063B] text-white rounded-full flex items-center justify-center font-bold text-sm mr-3">9</div>
-								<h3 class="font-bold text-[#61063B] dark:text-white">Education Financing and Resource Mobilization</h3>
+						<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl p-3 xs:p-4 sm:p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-[#61063B]/20 dark:border-[#61063B]/30">
+							<div class="flex items-center mb-2 xs:mb-3 sm:mb-4">
+								<div class="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 bg-[#61063B] text-white rounded-full flex items-center justify-center font-bold text-xs xs:text-sm sm:text-sm mr-2 xs:mr-2.5 sm:mr-3 flex-shrink-0">9</div>
+								<h3 class="font-bold text-[#61063B] dark:text-white text-xs xs:text-sm sm:text-base md:text-lg leading-tight">Education Financing and Resource Mobilization</h3>
 								</div>
 									</div>
-						<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-[#0077B6]/20 dark:border-[#0077B6]/30">
-							<div class="flex items-center mb-4">
-								<div class="w-8 h-8 bg-[#0077B6] text-white rounded-full flex items-center justify-center font-bold text-sm mr-3">10</div>
-								<h3 class="font-bold text-[#0077B6] dark:text-[#0077B6]">Monitoring, Evaluation, and Policy Impact</h3>
+						<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl p-3 xs:p-4 sm:p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-[#0077B6]/20 dark:border-[#0077B6]/30">
+							<div class="flex items-center mb-2 xs:mb-3 sm:mb-4">
+								<div class="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 bg-[#0077B6] text-white rounded-full flex items-center justify-center font-bold text-xs xs:text-sm sm:text-sm mr-2 xs:mr-2.5 sm:mr-3 flex-shrink-0">10</div>
+								<h3 class="font-bold text-[#0077B6] dark:text-[#0077B6] text-xs xs:text-sm sm:text-base md:text-lg leading-tight">Monitoring, Evaluation, and Policy Impact</h3>
 							</div>
 						</div>
 					</div>
 
 					<!-- Submission Information -->
-					<div class="grid lg:grid-cols-2 gap-12 mb-16">
+					<div class="grid md:grid-cols-2 gap-6 xs:gap-8 sm:gap-10 md:gap-12 mb-8 xs:mb-12 sm:mb-16">
 						<!-- Submission Policies -->
-						<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl p-8 shadow-lg border border-[#0077B6]/20 dark:border-[#0077B6]/30">
-							<h3 class="text-2xl font-bold text-[#61063B] dark:text-white mb-6">Submission Policies</h3>
-							<ul class="space-y-4 text-[#0077B6] dark:text-[#0077B6]">
+						<div class="bg-[#FFFFFF] dark:bg-gray-800 rounded-xl p-4 xs:p-6 sm:p-8 shadow-lg border border-[#0077B6]/20 dark:border-[#0077B6]/30">
+							<h3 class="text-lg xs:text-xl sm:text-2xl md:text-3xl font-bold text-[#61063B] dark:text-white mb-4 xs:mb-5 sm:mb-6">Submission Policies</h3>
+							<ul class="space-y-3 xs:space-y-4 text-[#0077B6] dark:text-[#0077B6] text-sm xs:text-base">
 								<li class="flex items-start">
-									<svg class="w-5 h-5 text-[#0077B6] dark:text-[#0077B6] mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<svg class="w-4 h-4 xs:w-5 xs:h-5 text-[#0077B6] dark:text-[#0077B6] mr-2 xs:mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
 									</svg>
 									<span>Only abstracts are required for submission. Individuals may submit a maximum of one (1) abstract as primary author and one (1) abstract as non-primary author.</span>
 								</li>
 								<li class="flex items-start">
-									<svg class="w-5 h-5 text-[#0077B6] dark:text-[#0077B6] mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<svg class="w-4 h-4 xs:w-5 xs:h-5 text-[#0077B6] dark:text-[#0077B6] mr-2 xs:mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
 									</svg>
 									<span>Abstracts must not exceed 250 words (excluding titles, authors' information, and keywords).</span>
 								</li>
 								<li class="flex items-start">
-									<svg class="w-5 h-5 text-[#0077B6] dark:text-[#0077B6] mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<svg class="w-4 h-4 xs:w-5 xs:h-5 text-[#0077B6] dark:text-[#0077B6] mr-2 xs:mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
 									</svg>
 									<span>Submissions must clearly state the purpose, methodology, findings/expected results, and implications.</span>
 								</li>
 								<li class="flex items-start">
-									<svg class="w-5 h-5 text-[#0077B6] dark:text-[#0077B6] mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<svg class="w-4 h-4 xs:w-5 xs:h-5 text-[#0077B6] dark:text-[#0077B6] mr-2 xs:mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
 									</svg>
 									<span>Each submission must align with one of the conference strands.</span>
@@ -335,20 +335,20 @@ const currentPath = Astro.url.pathname;
 								</div>
 								
 						<!-- Important Dates -->
-						<div class="bg-gradient-to-br from-[#61063B] to-[#0077B6] rounded-xl p-8 text-white">
-							<h3 class="text-2xl font-bold mb-6">Important Dates</h3>
-							<div class="space-y-4">
-								<div class="bg-white/20 rounded-lg p-4">
-									<div class="font-semibold">Submission Deadline</div>
-									<div class="text-white/90">September 30, 2025</div>
+						<div class="bg-gradient-to-br from-[#61063B] to-[#0077B6] rounded-xl p-4 xs:p-6 sm:p-8 text-white">
+							<h3 class="text-lg xs:text-xl sm:text-2xl md:text-3xl font-bold mb-4 xs:mb-5 sm:mb-6">Important Dates</h3>
+							<div class="space-y-3 xs:space-y-4">
+								<div class="bg-white/20 rounded-lg p-3 xs:p-4">
+									<div class="font-semibold text-sm xs:text-base mb-1">Submission Deadline</div>
+									<div class="text-white/90 text-xs xs:text-sm">September 30, 2025</div>
 								</div>
-								<div class="bg-white/20 rounded-lg p-4">
-									<div class="font-semibold">Notification of Acceptance</div>
-									<div class="text-white/90">October 15, 2025</div>
+								<div class="bg-white/20 rounded-lg p-3 xs:p-4">
+									<div class="font-semibold text-sm xs:text-base mb-1">Notification of Acceptance</div>
+									<div class="text-white/90 text-xs xs:text-sm">October 15, 2025</div>
 							</div>
-								<div class="bg-white/20 rounded-lg p-4">
-									<div class="font-semibold">Conference Dates</div>
-									<div class="text-white/90">November 26-28, 2025</div>
+								<div class="bg-white/20 rounded-lg p-3 xs:p-4">
+									<div class="font-semibold text-sm xs:text-base mb-1">Conference Dates</div>
+									<div class="text-white/90 text-xs xs:text-sm">November 26-28, 2025</div>
 								</div>
 									</div>
 								</div>
@@ -356,25 +356,25 @@ const currentPath = Astro.url.pathname;
 									
 					<!-- Submission CTA -->
 					<div class="text-center">
-						<h3 class="text-2xl font-bold text-[#61063B] dark:text-white mb-6">Ready to Submit?</h3>
-						<div class="flex flex-wrap justify-center gap-6">
+						<h3 class="text-xl xs:text-2xl sm:text-3xl font-bold text-[#61063B] dark:text-white mb-4 xs:mb-5 sm:mb-6 px-2">Ready to Submit?</h3>
+						<div class="flex flex-col sm:flex-row flex-wrap justify-center gap-3 xs:gap-4 sm:gap-6 px-2">
 							<a 
 								href="https://tinyurl.com/iciie2025" 
 								target="_blank"
-								class="group bg-[#0077B6] hover:bg-[#005a8a] text-white font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center"
+								class="group bg-[#0077B6] hover:bg-[#005a8a] text-white font-bold py-2.5 xs:py-3 sm:py-4 px-5 xs:px-6 sm:px-8 md:px-10 rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center justify-center min-h-[44px] text-xs xs:text-sm sm:text-base"
 							>
 								<span>Submit Abstract</span>
-								<svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<svg class="w-4 h-4 xs:w-5 xs:h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
 										</svg>
 							</a>
 							<a 
 								href="https://tinyurl.com/abstracticiie2025" 
 								target="_blank"
-								class="group bg-transparent border-2 border-[#61063B] dark:border-[#61063B] hover:bg-[#61063B] hover:text-white text-[#61063B] dark:text-[#61063B] font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:-translate-y-1 flex items-center"
+								class="group bg-transparent border-2 border-[#61063B] dark:border-[#61063B] hover:bg-[#61063B] hover:text-white text-[#61063B] dark:text-[#61063B] font-bold py-2.5 xs:py-3 sm:py-4 px-5 xs:px-6 sm:px-8 md:px-10 rounded-full transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center min-h-[44px] text-xs xs:text-sm sm:text-base"
 							>
 								<span>Sample Abstract & Template</span>
-								<svg class="w-5 h-5 ml-2 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<svg class="w-4 h-4 xs:w-5 xs:h-5 ml-2 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
 								</svg>
 							</a>
@@ -385,36 +385,36 @@ const currentPath = Astro.url.pathname;
 		</section>
 
 		<!-- Invited Speakers Section -->
-		<section id="speakers" class="py-20 bg-gradient-to-br from-[#E2E8F0] via-[#F8FAFC] to-[#FFFFFF] dark:bg-gradient-to-br dark:from-gray-700 dark:via-gray-800 dark:to-gray-900">
-			<div class="container mx-auto px-6">
+		<section id="speakers" class="py-8 xs:py-12 sm:py-16 md:py-20 lg:py-24 bg-gradient-to-br from-[#E2E8F0] via-[#F8FAFC] to-[#FFFFFF] dark:bg-gradient-to-br dark:from-gray-700 dark:via-gray-800 dark:to-gray-900">
+			<div class="container mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-10">
 				<div class="max-w-6xl mx-auto">
-					<div class="text-center mb-16">
-						<div class="inline-flex items-center bg-[#0077B6]/10 dark:bg-[#0077B6]/20 rounded-full px-6 py-3 mb-6">
-							<svg class="w-5 h-5 text-[#0077B6] dark:text-[#0077B6] mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<div class="text-center mb-8 xs:mb-12 sm:mb-16">
+						<div class="inline-flex items-center bg-[#0077B6]/10 dark:bg-[#0077B6]/20 rounded-full px-3 xs:px-4 sm:px-6 md:px-8 py-2 xs:py-2.5 sm:py-3 mb-4 xs:mb-5 sm:mb-6">
+							<svg class="w-4 h-4 xs:w-4.5 xs:h-4.5 sm:w-5 sm:h-5 text-[#0077B6] dark:text-[#0077B6] mr-2 xs:mr-2.5 sm:mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V4a2 2 0 10-4 0v1.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
 							</svg>
-							<span class="text-[#0077B6] dark:text-[#0077B6] font-bold uppercase tracking-wide text-xs sm:text-base">Distinguished Speakers</span>
+							<span class="text-[#0077B6] dark:text-[#0077B6] font-bold uppercase tracking-wide text-xs xs:text-sm sm:text-base md:text-lg">Distinguished Speakers</span>
 						</div>
-						<h2 class="text-4xl md:text-5xl font-black text-[#61063B] dark:text-white mb-6">Speakers</h2>
-						<div class="w-24 h-1 bg-gradient-to-r from-[#0077B6] to-[#61063B] mx-auto mb-8"></div>
+						<h2 class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-[#61063B] dark:text-white mb-4 xs:mb-5 sm:mb-6 px-2">Speakers</h2>
+						<div class="w-12 xs:w-16 sm:w-24 md:w-32 h-0.5 xs:h-1 bg-gradient-to-r from-[#0077B6] to-[#61063B] mx-auto mb-4 xs:mb-6 sm:mb-8"></div>
 					</div>
 
 					<!-- Keynote Speakers -->
-					<div class="mb-8 sm:mb-12">
-						<h3 class="text-2xl xs:text-3xl sm:text-4xl font-extrabold mb-6 sm:mb-10 flex items-center justify-center text-[#61063B] dark:text-white">
-							<svg class="w-8 h-8 xs:w-10 xs:h-10 sm:w-10 sm:h-10 mr-3 text-[#0077B6] dark:text-[#0077B6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<div class="mb-6 xs:mb-8 sm:mb-12">
+						<h3 class="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold mb-4 xs:mb-6 sm:mb-10 flex flex-col xs:flex-row items-center justify-center gap-2 xs:gap-3 text-[#61063B] dark:text-white px-2">
+							<svg class="w-6 h-6 xs:w-7 xs:h-7 sm:w-8 sm:h-8 md:w-10 md:h-10 mr-0 xs:mr-3 text-[#0077B6] dark:text-[#0077B6]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
 							</svg>
-							Keynote Speakers
+							<span>Keynote Speakers</span>
 						</h3>
 						<div 
-							class="rounded-xl sm:rounded-3xl p-4 xs:p-6 sm:p-10 md:p-16 text-white mb-6 sm:mb-12 shadow-2xl relative overflow-hidden"
+							class="rounded-xl sm:rounded-2xl md:rounded-3xl p-3 xs:p-4 sm:p-6 md:p-10 lg:p-16 text-white mb-4 xs:mb-6 sm:mb-12 shadow-2xl relative overflow-hidden"
 							style="background-image: url('/SPEAKERS ICIIE/logo/Nipa_texture_colored.png'); background-size: cover; background-position: center;"
 						>
-							<div class="absolute -top-10 -left-10 xs:-top-16 xs:-left-16 w-32 xs:w-48 h-32 xs:h-48 bg-[#61063B]/20 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
-							<div class="absolute -bottom-12 -right-12 xs:-bottom-20 xs:-right-20 w-44 xs:w-72 h-44 xs:h-72 bg-[#0077B6]/20 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+							<div class="absolute -top-8 -left-8 xs:-top-10 xs:-left-10 sm:-top-16 sm:-left-16 w-24 xs:w-32 sm:w-48 h-24 xs:h-32 sm:h-48 bg-[#61063B]/20 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
+							<div class="absolute -bottom-8 -right-8 xs:-bottom-12 xs:-right-12 sm:-bottom-20 sm:-right-20 w-32 xs:w-44 sm:w-72 h-32 xs:h-44 sm:h-72 bg-[#0077B6]/20 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
 							
-							<div class="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2">
+							<div class="grid grid-cols-1 gap-4 xs:gap-6 sm:gap-8 md:grid-cols-2">
 								<!-- Dr. Greg William Misiaszek -->
 								<div class="relative group bg-[#61063B] backdrop-blur-2xl rounded-2xl p-4 xs:p-6 sm:p-8 border border-white/30 shadow-2xl hover:scale-105 hover:shadow-2xl transition-all duration-300">
 									<div class="flex flex-col items-center text-center">
@@ -483,11 +483,11 @@ const currentPath = Astro.url.pathname;
 							<div class="absolute -top-10 -left-10 xs:-top-16 xs:-left-16 w-32 xs:w-48 h-32 xs:h-48 bg-[#0077B6]/20 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
 							<div class="absolute -bottom-12 -right-12 xs:-bottom-20 xs:-right-20 w-44 xs:w-72 h-44 xs:h-72 bg-[#61063B]/20 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
 							
-							<div class="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-3">
+							<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 xs:gap-6 sm:gap-8">
 								<!-- Dr. Arlyne C. Marasigan -->
-								<div class="relative group bg-[#61063B] backdrop-blur-2xl rounded-2xl p-6 xs:p-8 border border-white/30 shadow-2xl hover:scale-105 hover:shadow-2xl transition-all duration-300">
+								<div class="relative group bg-[#61063B] backdrop-blur-2xl rounded-xl xs:rounded-2xl p-4 xs:p-6 sm:p-8 border border-white/30 shadow-2xl hover:scale-105 hover:shadow-2xl transition-all duration-300">
 									<div class="flex flex-col items-center text-center">
-										<div class="relative w-24 h-24 xs:w-28 xs:h-28 sm:w-32 sm:h-32 mb-4 xs:mb-6">
+										<div class="relative w-20 h-20 xs:w-24 xs:h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mb-3 xs:mb-4 sm:mb-6">
 											<div class="absolute inset-0 rounded-full opacity-70 blur-lg scale-110"></div>
 											<img 
 												src="/SPEAKERS ICIIE/Marasigan.png" 
@@ -577,9 +577,9 @@ const currentPath = Astro.url.pathname;
 							<div class="absolute -top-10 -left-10 xs:-top-16 xs:-left-16 w-32 xs:w-48 h-32 xs:h-48 bg-[#61063B]/20 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
 							<div class="absolute -bottom-12 -right-12 xs:-bottom-20 xs:-right-20 w-44 xs:w-72 h-44 xs:h-72 bg-[#0077B6]/20 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
 							
-							<div class="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-3 lg:grid-cols-4 max-w-7xl mx-auto">
+							<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 xs:gap-6 sm:gap-8 max-w-7xl mx-auto">
 								<!-- Greg William Misiaszek - Panel Discussant -->
-								<div class="relative group bg-[#61063B] backdrop-blur-2xl rounded-2xl p-4 xs:p-6 border border-white/30 shadow-2xl hover:scale-105 hover:shadow-2xl transition-all duration-300">
+								<div class="relative group bg-[#61063B] backdrop-blur-2xl rounded-xl xs:rounded-2xl p-3 xs:p-4 sm:p-6 border border-white/30 shadow-2xl hover:scale-105 hover:shadow-2xl transition-all duration-300">
 									<div class="absolute top-2 right-2 bg-white/20 backdrop-blur-sm px-2 py-1 rounded-full">
 										<span class="text-white text-xs font-bold">PANEL</span>
 									</div>
@@ -753,18 +753,19 @@ const currentPath = Astro.url.pathname;
 		</section>
 
 		<!-- Modal for Dr. Bert J. Tuga -->
-		<div id="tugaModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4 overflow-y-auto">
-			<div class="bg-white dark:bg-gray-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative my-8">
+		<div id="tugaModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden items-center justify-center p-2 xs:p-3 sm:p-4 overflow-y-auto">
+			<div class="bg-white dark:bg-gray-800 rounded-lg xs:rounded-xl sm:rounded-2xl max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative my-2 xs:my-3 sm:my-4 md:my-8">
 				<button 
-					class="absolute top-4 right-4 bg-[#61063B] hover:bg-[#0077B6] text-white rounded-full w-10 h-10 flex items-center justify-center transition-all duration-300 z-10"
+					class="absolute top-2 right-2 xs:top-3 xs:right-3 sm:top-4 sm:right-4 bg-[#61063B] hover:bg-[#0077B6] text-white rounded-full w-9 h-9 xs:w-10 xs:h-10 flex items-center justify-center transition-all duration-300 z-10 min-w-[44px] min-h-[44px]"
 					onclick="closeModal('tugaModal')"
+					aria-label="Close modal"
 				>
-					<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<svg class="w-5 h-5 xs:w-6 xs:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
 					</svg>
 				</button>
 				
-				<div class="p-6 sm:p-8 md:p-10">
+				<div class="p-4 xs:p-5 sm:p-6 md:p-8 lg:p-10">
 					<!-- Header -->
 					<div class="flex flex-col sm:flex-row items-center gap-6 mb-8 pb-8 border-b border-gray-200 dark:border-gray-700">
 						<div class="relative w-32 h-32 sm:w-40 sm:h-40 flex-shrink-0">
@@ -810,18 +811,19 @@ const currentPath = Astro.url.pathname;
 		</div>
 
 		<!-- Modal for Dr. Greg William Misiaszek -->
-		<div id="misiaszekModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4 overflow-y-auto">
-			<div class="bg-white dark:bg-gray-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative my-8">
+		<div id="misiaszekModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden items-center justify-center p-2 xs:p-3 sm:p-4 overflow-y-auto">
+			<div class="bg-white dark:bg-gray-800 rounded-lg xs:rounded-xl sm:rounded-2xl max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative my-2 xs:my-3 sm:my-4 md:my-8">
 				<button 
-					class="absolute top-4 right-4 bg-[#61063B] hover:bg-[#0077B6] text-white rounded-full w-10 h-10 flex items-center justify-center transition-all duration-300 z-10"
+					class="absolute top-2 right-2 xs:top-3 xs:right-3 sm:top-4 sm:right-4 bg-[#61063B] hover:bg-[#0077B6] text-white rounded-full w-9 h-9 xs:w-10 xs:h-10 flex items-center justify-center transition-all duration-300 z-10 min-w-[44px] min-h-[44px]"
 					onclick="closeModal('misiaszekModal')"
+					aria-label="Close modal"
 				>
-					<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<svg class="w-5 h-5 xs:w-6 xs:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
 					</svg>
 				</button>
 				
-				<div class="p-6 sm:p-8 md:p-10">
+				<div class="p-4 xs:p-5 sm:p-6 md:p-8 lg:p-10">
 					<!-- Header -->
 					<div class="flex flex-col sm:flex-row items-center gap-6 mb-8 pb-8 border-b border-gray-200 dark:border-gray-700">
 						<div class="relative w-32 h-32 sm:w-40 sm:h-40 flex-shrink-0">
@@ -861,18 +863,19 @@ const currentPath = Astro.url.pathname;
 		</div>
 
 		<!-- Modal for Dr. Arlyne C. Marasigan -->
-		<div id="marasiganModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4 overflow-y-auto">
-			<div class="bg-white dark:bg-gray-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative my-8">
+		<div id="marasiganModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden items-center justify-center p-2 xs:p-3 sm:p-4 overflow-y-auto">
+			<div class="bg-white dark:bg-gray-800 rounded-lg xs:rounded-xl sm:rounded-2xl max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative my-2 xs:my-3 sm:my-4 md:my-8">
 				<button 
-					class="absolute top-4 right-4 bg-[#61063B] hover:bg-[#0077B6] text-white rounded-full w-10 h-10 flex items-center justify-center transition-all duration-300 z-10"
+					class="absolute top-2 right-2 xs:top-3 xs:right-3 sm:top-4 sm:right-4 bg-[#61063B] hover:bg-[#0077B6] text-white rounded-full w-9 h-9 xs:w-10 xs:h-10 flex items-center justify-center transition-all duration-300 z-10 min-w-[44px] min-h-[44px]"
 					onclick="closeModal('marasiganModal')"
+					aria-label="Close modal"
 				>
-					<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<svg class="w-5 h-5 xs:w-6 xs:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
 					</svg>
 				</button>
 				
-				<div class="p-6 sm:p-8 md:p-10">
+				<div class="p-4 xs:p-5 sm:p-6 md:p-8 lg:p-10">
 					<!-- Header -->
 					<div class="flex flex-col sm:flex-row items-center gap-6 mb-8 pb-8 border-b border-gray-200 dark:border-gray-700">
 						<div class="relative w-32 h-32 sm:w-40 sm:h-40 flex-shrink-0">
@@ -919,18 +922,19 @@ const currentPath = Astro.url.pathname;
 		</div>
 
 		<!-- Modal for Jovito Anito Jr. -->
-		<div id="anitoModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4 overflow-y-auto">
-			<div class="bg-white dark:bg-gray-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative my-8">
+		<div id="anitoModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden items-center justify-center p-2 xs:p-3 sm:p-4 overflow-y-auto">
+			<div class="bg-white dark:bg-gray-800 rounded-lg xs:rounded-xl sm:rounded-2xl max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative my-2 xs:my-3 sm:my-4 md:my-8">
 				<button 
-					class="absolute top-4 right-4 bg-[#61063B] hover:bg-[#0077B6] text-white rounded-full w-10 h-10 flex items-center justify-center transition-all duration-300 z-10"
+					class="absolute top-2 right-2 xs:top-3 xs:right-3 sm:top-4 sm:right-4 bg-[#61063B] hover:bg-[#0077B6] text-white rounded-full w-9 h-9 xs:w-10 xs:h-10 flex items-center justify-center transition-all duration-300 z-10 min-w-[44px] min-h-[44px]"
 					onclick="closeModal('anitoModal')"
+					aria-label="Close modal"
 				>
-					<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<svg class="w-5 h-5 xs:w-6 xs:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
 					</svg>
 				</button>
 				
-				<div class="p-6 sm:p-8 md:p-10">
+				<div class="p-4 xs:p-5 sm:p-6 md:p-8 lg:p-10">
 					<!-- Header -->
 					<div class="flex flex-col sm:flex-row items-center gap-6 mb-8 pb-8 border-b border-gray-200 dark:border-gray-700">
 						<div class="relative w-32 h-32 sm:w-40 sm:h-40 flex-shrink-0">
@@ -992,18 +996,19 @@ const currentPath = Astro.url.pathname;
 		</div>
 
 		<!-- Modal for Dr. Mark Anthony M. Velasco -->
-		<div id="velascoModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4 overflow-y-auto">
-			<div class="bg-white dark:bg-gray-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative my-8">
+		<div id="velascoModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden items-center justify-center p-2 xs:p-3 sm:p-4 overflow-y-auto">
+			<div class="bg-white dark:bg-gray-800 rounded-lg xs:rounded-xl sm:rounded-2xl max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative my-2 xs:my-3 sm:my-4 md:my-8">
 				<button 
-					class="absolute top-4 right-4 bg-[#61063B] hover:bg-[#0077B6] text-white rounded-full w-10 h-10 flex items-center justify-center transition-all duration-300 z-10"
+					class="absolute top-2 right-2 xs:top-3 xs:right-3 sm:top-4 sm:right-4 bg-[#61063B] hover:bg-[#0077B6] text-white rounded-full w-9 h-9 xs:w-10 xs:h-10 flex items-center justify-center transition-all duration-300 z-10 min-w-[44px] min-h-[44px]"
 					onclick="closeModal('velascoModal')"
+					aria-label="Close modal"
 				>
-					<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<svg class="w-5 h-5 xs:w-6 xs:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
 					</svg>
 				</button>
 				
-				<div class="p-6 sm:p-8 md:p-10">
+				<div class="p-4 xs:p-5 sm:p-6 md:p-8 lg:p-10">
 					<!-- Header -->
 					<div class="flex flex-col sm:flex-row items-center gap-6 mb-8 pb-8 border-b border-gray-200 dark:border-gray-700">
 						<div class="relative w-32 h-32 sm:w-40 sm:h-40 flex-shrink-0">
@@ -1041,18 +1046,19 @@ const currentPath = Astro.url.pathname;
 		</div>
 
 		<!-- Modal for Dr. Fernigil L. Colicol -->
-		<div id="colicolModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4 overflow-y-auto">
-			<div class="bg-white dark:bg-gray-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative my-8">
+		<div id="colicolModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden items-center justify-center p-2 xs:p-3 sm:p-4 overflow-y-auto">
+			<div class="bg-white dark:bg-gray-800 rounded-lg xs:rounded-xl sm:rounded-2xl max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative my-2 xs:my-3 sm:my-4 md:my-8">
 				<button 
-					class="absolute top-4 right-4 bg-[#61063B] hover:bg-[#0077B6] text-white rounded-full w-10 h-10 flex items-center justify-center transition-all duration-300 z-10"
+					class="absolute top-2 right-2 xs:top-3 xs:right-3 sm:top-4 sm:right-4 bg-[#61063B] hover:bg-[#0077B6] text-white rounded-full w-9 h-9 xs:w-10 xs:h-10 flex items-center justify-center transition-all duration-300 z-10 min-w-[44px] min-h-[44px]"
 					onclick="closeModal('colicolModal')"
+					aria-label="Close modal"
 				>
-					<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<svg class="w-5 h-5 xs:w-6 xs:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
 					</svg>
 				</button>
 				
-				<div class="p-6 sm:p-8 md:p-10">
+				<div class="p-4 xs:p-5 sm:p-6 md:p-8 lg:p-10">
 					<!-- Header -->
 					<div class="flex flex-col sm:flex-row items-center gap-6 mb-8 pb-8 border-b border-gray-200 dark:border-gray-700">
 						<div class="relative w-32 h-32 sm:w-40 sm:h-40 flex-shrink-0">
@@ -1093,18 +1099,19 @@ const currentPath = Astro.url.pathname;
 		</div>
 
 		<!-- Modal for Dr. Nilo Jayoma Castulo -->
-		<div id="castuloModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4 overflow-y-auto">
-			<div class="bg-white dark:bg-gray-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative my-8">
+		<div id="castuloModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden items-center justify-center p-2 xs:p-3 sm:p-4 overflow-y-auto">
+			<div class="bg-white dark:bg-gray-800 rounded-lg xs:rounded-xl sm:rounded-2xl max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative my-2 xs:my-3 sm:my-4 md:my-8">
 				<button 
-					class="absolute top-4 right-4 bg-[#61063B] hover:bg-[#0077B6] text-white rounded-full w-10 h-10 flex items-center justify-center transition-all duration-300 z-10"
+					class="absolute top-2 right-2 xs:top-3 xs:right-3 sm:top-4 sm:right-4 bg-[#61063B] hover:bg-[#0077B6] text-white rounded-full w-9 h-9 xs:w-10 xs:h-10 flex items-center justify-center transition-all duration-300 z-10 min-w-[44px] min-h-[44px]"
 					onclick="closeModal('castuloModal')"
+					aria-label="Close modal"
 				>
-					<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<svg class="w-5 h-5 xs:w-6 xs:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
 					</svg>
 				</button>
 				
-				<div class="p-6 sm:p-8 md:p-10">
+				<div class="p-4 xs:p-5 sm:p-6 md:p-8 lg:p-10">
 					<!-- Header -->
 					<div class="flex flex-col sm:flex-row items-center gap-6 mb-8 pb-8 border-b border-gray-200 dark:border-gray-700">
 						<div class="relative w-32 h-32 sm:w-40 sm:h-40 flex-shrink-0">
@@ -2226,9 +2233,9 @@ const currentPath = Astro.url.pathname;
 		</section>
 
 		<!-- Enhanced Scroll to Top Button -->
-		<button id="scrollToTop" class="fixed bottom-8 left-8 z-50 bg-gradient-to-r from-[#0077B6] to-[#61063B] hover:from-[#61063B] hover:to-[#0077B6] text-white p-4 rounded-full shadow-2xl transition-all duration-300 opacity-0 invisible hover:scale-110 hover:shadow-3xl" aria-label="Scroll to top">
-			<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+		<button id="scrollToTop" aria-label="Scroll to top" type="button">
+			<svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18" />
 			</svg>
 		</button>
 
@@ -2390,6 +2397,68 @@ const currentPath = Astro.url.pathname;
 	</script>
 
 	<style>
+		/* Custom breakpoint for extra small devices (xs) - 375px */
+		@media (min-width: 375px) {
+			.xs\:px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+			.xs\:px-4 { padding-left: 1rem; padding-right: 1rem; }
+			.xs\:px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+			.xs\:px-8 { padding-left: 2rem; padding-right: 2rem; }
+			.xs\:py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+			.xs\:py-2\.5 { padding-top: 0.625rem; padding-bottom: 0.625rem; }
+			.xs\:py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+			.xs\:py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+			.xs\:mb-2 { margin-bottom: 0.5rem; }
+			.xs\:mb-3 { margin-bottom: 0.75rem; }
+			.xs\:mb-4 { margin-bottom: 1rem; }
+			.xs\:mb-5 { margin-bottom: 1.25rem; }
+			.xs\:mb-6 { margin-bottom: 1.5rem; }
+			.xs\:mb-8 { margin-bottom: 2rem; }
+			.xs\:mb-12 { margin-bottom: 3rem; }
+			.xs\:mr-2 { margin-right: 0.5rem; }
+			.xs\:mr-2\.5 { margin-right: 0.625rem; }
+			.xs\:mr-3 { margin-right: 0.75rem; }
+			.xs\:gap-2 { gap: 0.5rem; }
+			.xs\:gap-3 { gap: 0.75rem; }
+			.xs\:gap-4 { gap: 1rem; }
+			.xs\:gap-6 { gap: 1.5rem; }
+			.xs\:text-xs { font-size: 0.75rem; line-height: 1rem; }
+			.xs\:text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+			.xs\:text-base { font-size: 1rem; line-height: 1.5rem; }
+			.xs\:text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+			.xs\:text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+			.xs\:text-2xl { font-size: 1.5rem; line-height: 2rem; }
+			.xs\:text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+			.xs\:w-2\.5 { width: 0.625rem; }
+			.xs\:h-2\.5 { height: 0.625rem; }
+			.xs\:w-4\.5 { width: 1.125rem; }
+			.xs\:h-4\.5 { height: 1.125rem; }
+			.xs\:w-7 { width: 1.75rem; }
+			.xs\:h-7 { height: 1.75rem; }
+			.xs\:w-24 { width: 6rem; }
+			.xs\:h-24 { height: 6rem; }
+			.xs\:w-28 { width: 7rem; }
+			.xs\:h-28 { height: 7rem; }
+			.xs\:w-32 { width: 8rem; }
+			.xs\:h-32 { height: 8rem; }
+			.xs\:w-44 { width: 11rem; }
+			.xs\:h-44 { height: 11rem; }
+			.xs\:w-48 { width: 12rem; }
+			.xs\:h-48 { height: 12rem; }
+			.xs\:w-72 { width: 18rem; }
+			.xs\:h-72 { height: 18rem; }
+			.xs\:-top-16 { top: -4rem; }
+			.xs\:-left-16 { left: -4rem; }
+			.xs\:-bottom-20 { bottom: -5rem; }
+			.xs\:-right-20 { right: -5rem; }
+			.xs\:rounded-xl { border-radius: 0.75rem; }
+			.xs\:rounded-2xl { border-radius: 1rem; }
+			.xs\:flex-row { flex-direction: row; }
+			.xs\:mt-1 { margin-top: 0.25rem; }
+			.xs\:ml-0\.5 { margin-left: 0.125rem; }
+			.xs\:ml-1 { margin-left: 0.25rem; }
+			.xs\:mt-0\.5 { margin-top: 0.125rem; }
+		}
+
 		/* Custom animations */
 		@keyframes float {
 			0%, 100% { transform: translateY(0px); }
@@ -2408,38 +2477,224 @@ const currentPath = Astro.url.pathname;
 			animation-delay: 4s;
 		}
 
-		/* Enhanced scroll to top button */
+		/* Enhanced scroll to top button - Base Styles */
 		#scrollToTop {
-			position: fixed;
-			bottom: 2rem;
-			left: 2rem;
-			z-index: 50;
-			background: linear-gradient(135deg, #0077B6, #61063B);
-			color: white;
-			padding: 1rem;
-			border-radius: 50%;
-			box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-			transition: all 0.3s ease;
+			position: fixed !important;
+			z-index: 50 !important;
+			background: linear-gradient(135deg, #0077B6, #61063B) !important;
+			color: white !important;
+			border: none !important;
+			border-radius: 50% !important;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 8px 24px rgba(0, 0, 0, 0.1) !important;
+			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 			opacity: 0;
 			visibility: hidden;
+			display: flex !important;
+			align-items: center !important;
+			justify-content: center !important;
+			cursor: pointer !important;
+			outline: none !important;
+			-webkit-tap-highlight-color: transparent !important;
+		}
+
+		/* Mobile (default) - 320px to 374px */
+		#scrollToTop {
+			bottom: 1rem !important;
+			left: 1rem !important;
+			width: 44px !important;
+			height: 44px !important;
+			padding: 0.75rem !important;
+			min-width: 44px !important;
+			min-height: 44px !important;
+		}
+
+		#scrollToTop svg {
+			width: 20px !important;
+			height: 20px !important;
 		}
 
 		#scrollToTop:hover {
-			background: linear-gradient(135deg, #61063B, #0077B6);
-			transform: scale(1.1);
-			box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+			background: linear-gradient(135deg, #61063B, #0077B6) !important;
+			transform: scale(1.1) translateY(-2px) !important;
+			box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2), 0 12px 32px rgba(0, 0, 0, 0.15) !important;
+		}
+
+		#scrollToTop:active {
+			transform: scale(0.95) translateY(0) !important;
 		}
 
 		#scrollToTop.visible {
-			opacity: 1;
-			visibility: visible;
+			opacity: 1 !important;
+			visibility: visible !important;
 		}
 
-		@media (max-width: 768px) {
+		/* Extra small devices (375px+) */
+		@media (min-width: 375px) {
 			#scrollToTop {
-				bottom: 1rem;
-				left: 1rem;
-				padding: 0.75rem;
+				bottom: 1.25rem !important;
+				left: 1.25rem !important;
+				width: 46px !important;
+				height: 46px !important;
+				padding: 0.875rem !important;
+				min-width: 46px !important;
+				min-height: 46px !important;
+			}
+			#scrollToTop svg {
+				width: 22px !important;
+				height: 22px !important;
+			}
+		}
+
+		/* Small devices (640px+) */
+		@media (min-width: 640px) {
+			#scrollToTop {
+				bottom: 1.5rem !important;
+				left: 1.5rem !important;
+				width: 50px !important;
+				height: 50px !important;
+				padding: 1rem !important;
+				min-width: 50px !important;
+				min-height: 50px !important;
+			}
+			#scrollToTop svg {
+				width: 24px !important;
+				height: 24px !important;
+			}
+		}
+
+		/* iPad Mini Portrait (768px - 1024px, portrait) */
+		@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+			#scrollToTop {
+				bottom: 2rem !important;
+				left: 2rem !important;
+				width: 60px !important;
+				height: 60px !important;
+				padding: 1.25rem !important;
+				min-width: 60px !important;
+				min-height: 60px !important;
+			}
+			#scrollToTop svg {
+				width: 28px !important;
+				height: 28px !important;
+			}
+		}
+
+		/* iPad Mini Landscape (768px - 1024px, landscape) */
+		@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+			#scrollToTop {
+				bottom: 1.5rem !important;
+				left: 1.5rem !important;
+				width: 56px !important;
+				height: 56px !important;
+				padding: 1.125rem !important;
+				min-width: 56px !important;
+				min-height: 56px !important;
+			}
+			#scrollToTop svg {
+				width: 26px !important;
+				height: 26px !important;
+			}
+		}
+
+		/* iPad Mini fallback (768px - 1024px) - if orientation not supported */
+		@media (min-width: 768px) and (max-width: 1024px) {
+			#scrollToTop {
+				bottom: 2rem !important;
+				left: 2rem !important;
+				width: 58px !important;
+				height: 58px !important;
+				padding: 1.125rem !important;
+				min-width: 58px !important;
+				min-height: 58px !important;
+			}
+			#scrollToTop svg {
+				width: 27px !important;
+				height: 27px !important;
+			}
+		}
+
+		/* Large devices (1024px+) */
+		@media (min-width: 1024px) {
+			#scrollToTop {
+				bottom: 2rem !important;
+				left: 2rem !important;
+				width: 56px !important;
+				height: 56px !important;
+				padding: 1.25rem !important;
+				min-width: 56px !important;
+				min-height: 56px !important;
+			}
+			#scrollToTop svg {
+				width: 28px !important;
+				height: 28px !important;
+			}
+		}
+
+		/* Extra large devices (1280px+) */
+		@media (min-width: 1280px) {
+			#scrollToTop {
+				bottom: 2.5rem !important;
+				left: 2.5rem !important;
+				width: 60px !important;
+				height: 60px !important;
+				padding: 1.375rem !important;
+				min-width: 60px !important;
+				min-height: 60px !important;
+			}
+			#scrollToTop svg {
+				width: 30px !important;
+				height: 30px !important;
+			}
+		}
+
+		/* Wordmark Logo Responsive Styles */
+		.wordmark-logo {
+			height: auto;
+			max-height: 2.5rem; /* 40px default */
+			width: auto;
+			object-fit: contain;
+			transition: all 0.3s ease;
+		}
+
+		/* Large screens (1024px+) - lg breakpoint */
+		@media (min-width: 1024px) {
+			.wordmark-logo {
+				max-height: 3rem; /* 48px */
+			}
+		}
+
+		/* Extra large screens (1280px+) - xl breakpoint */
+		@media (min-width: 1280px) {
+			.wordmark-logo {
+				max-height: 3.5rem; /* 56px */
+			}
+		}
+
+		/* 2XL screens (1536px+) - 2xl breakpoint */
+		@media (min-width: 1536px) {
+			.wordmark-logo {
+				max-height: 4rem; /* 64px */
+			}
+		}
+
+		/* iPad Mini specific (768px - 1024px) */
+		@media (min-width: 768px) and (max-width: 1024px) {
+			.wordmark-logo {
+				max-height: 2.75rem; /* 44px for iPad Mini */
+			}
+		}
+
+		/* iPad Mini Portrait (768px - 1024px, portrait) */
+		@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+			.wordmark-logo {
+				max-height: 3rem; /* 48px for iPad Mini portrait */
+			}
+		}
+
+		/* iPad Mini Landscape (768px - 1024px, landscape) */
+		@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+			.wordmark-logo {
+				max-height: 2.5rem; /* 40px for iPad Mini landscape */
 			}
 		}
 
@@ -2570,6 +2825,488 @@ const currentPath = Astro.url.pathname;
 			}
 		}
 
+		/* iPad Mini (768px) and iPad Air (820px) specific styles */
+		@media (min-width: 768px) and (max-width: 1024px) {
+			/* Optimize spacing for tablet */
+			.container {
+				padding-left: 2rem;
+				padding-right: 2rem;
+			}
+			
+			/* Better grid layouts for tablets */
+			.grid {
+				gap: 1.5rem;
+			}
+			
+			/* Improve card padding */
+			.rounded-xl {
+				padding: 1.5rem;
+			}
+			
+			/* Better text sizing for tablets */
+			.text-2xl {
+				font-size: 1.75rem;
+			}
+			
+			.text-3xl {
+				font-size: 2rem;
+			}
+			
+			.text-4xl {
+				font-size: 2.5rem;
+			}
+		}
+
+		/* iPad Pro (1024px - 1366px) specific styles */
+		@media (min-width: 1024px) and (max-width: 1366px) {
+			.container {
+				padding-left: 3rem;
+				padding-right: 3rem;
+			}
+			
+			/* Optimize grid gaps */
+			.grid {
+				gap: 2rem;
+			}
+		}
+
+		/* Google Nest Hub (1024x600) - Landscape smart display */
+		@media (min-width: 1024px) and (max-width: 1024px) and (max-height: 600px) {
+			/* Navigation Menu Optimization for Nest Hub */
+			nav {
+				padding-top: 0.5rem !important;
+				padding-bottom: 0.5rem !important;
+			}
+
+			/* Navbar container height */
+			nav > div > div.flex,
+			.nest-hub-nav-inner {
+				height: 3.5rem !important; /* Reduced from h-24 (6rem) to 3.5rem (56px) */
+				min-height: 3.5rem !important;
+			}
+
+			/* Navbar container padding */
+			.nest-hub-nav-container {
+				padding-left: 1rem !important;
+				padding-right: 1rem !important;
+			}
+
+			/* Logo container - ICIIE logo */
+			nav .flex-shrink-0 .relative {
+				width: 3rem !important; /* 48px */
+				height: 3rem !important;
+			}
+
+			nav .flex-shrink-0 .relative > div {
+				width: 3rem !important;
+				height: 3rem !important;
+				padding: 0.375rem !important;
+			}
+
+			nav .flex-shrink-0 img[alt*="ICIIE 2025 Logo"] {
+				max-width: 100% !important;
+				max-height: 100% !important;
+			}
+
+			/* Wordmark logo */
+			nav .wordmark-logo,
+			nav img[alt*="Logo Text"] {
+				max-height: 2rem !important; /* 32px */
+				height: auto !important;
+			}
+
+			/* Navigation items container */
+			nav .hidden.lg\\:block,
+			.nest-hub-nav-menu {
+				display: flex !important;
+			}
+
+			nav .hidden.lg\\:block > div,
+			.nest-hub-nav-items {
+				margin-left: 0.5rem !important;
+				gap: 0.25rem !important;
+			}
+
+			/* Navigation buttons */
+			nav button[class*="px-4"][class*="py-3"],
+			nav .hidden.lg\\:block button,
+			.nest-hub-nav-button {
+				padding-left: 0.5rem !important;
+				padding-right: 0.5rem !important;
+				padding-top: 0.5rem !important;
+				padding-bottom: 0.5rem !important;
+				font-size: 0.75rem !important; /* text-xs */
+				line-height: 1rem !important;
+				min-height: 2rem !important;
+				white-space: nowrap !important;
+			}
+
+			.nest-hub-nav-text {
+				font-size: 0.75rem !important;
+				line-height: 1rem !important;
+			}
+
+			/* Navigation items spacing */
+			nav .space-x-2 > * + *,
+			nav .flex.items-center.space-x-2 > * + *,
+			.nest-hub-nav-items > * + * {
+				margin-left: 0.25rem !important;
+			}
+
+			/* Ensure navigation doesn't wrap */
+			.nest-hub-nav-items {
+				flex-wrap: nowrap !important;
+				overflow-x: auto !important;
+				scrollbar-width: none !important; /* Firefox */
+				-ms-overflow-style: none !important; /* IE/Edge */
+				max-width: calc(100vw - 12rem) !important; /* Account for logo and buttons */
+			}
+
+			.nest-hub-nav-items::-webkit-scrollbar {
+				display: none !important; /* Chrome/Safari */
+			}
+
+			/* Navigation item wrapper */
+			.nest-hub-nav-item {
+				flex-shrink: 0 !important;
+			}
+
+			/* Right side controls container */
+			nav .flex.items-center.space-x-3,
+			.nest-hub-nav-controls {
+				gap: 0.5rem !important;
+				flex-shrink: 0 !important;
+			}
+
+			/* Logo and brand container */
+			nav .flex.items-center.group {
+				flex-shrink: 0 !important;
+				min-width: fit-content !important;
+			}
+
+			/* Dark mode toggle and control buttons */
+			nav button[aria-label],
+			nav button[title] {
+				padding: 0.5rem !important;
+				min-width: 2rem !important;
+				min-height: 2rem !important;
+			}
+
+			nav button[aria-label] svg,
+			nav button[title] svg {
+				width: 1rem !important; /* 16px */
+				height: 1rem !important;
+			}
+
+			/* Container padding */
+			nav .max-w-7xl,
+			nav .container {
+				padding-left: 1rem !important;
+				padding-right: 1rem !important;
+			}
+
+			/* Logo and brand spacing */
+			nav .flex.items-center.space-x-2,
+			nav .flex.items-center.space-x-3,
+			nav .flex.items-center.space-x-4 {
+				gap: 0.5rem !important;
+			}
+
+			/* Active indicator dot */
+			nav .absolute.-bottom-2 {
+				bottom: -0.25rem !important;
+			}
+
+			nav .absolute.-bottom-2 .w-3 {
+				width: 0.5rem !important;
+				height: 0.5rem !important;
+			}
+			/* Reduce vertical spacing for shorter screens */
+			section {
+				padding-top: 2rem !important;
+				padding-bottom: 2rem !important;
+			}
+
+			/* Hero section optimization */
+			section.min-h-screen {
+				min-height: 100vh !important;
+				padding-top: 1rem !important;
+				padding-bottom: 1rem !important;
+			}
+
+			/* Reduce heading sizes */
+			h1 {
+				margin-bottom: 1rem !important;
+			}
+
+			h2 {
+				margin-bottom: 0.75rem !important;
+			}
+
+			/* Optimize container padding */
+			.container {
+				padding-left: 2rem !important;
+				padding-right: 2rem !important;
+			}
+
+			/* Reduce card padding */
+			.rounded-xl, .rounded-2xl, .rounded-3xl {
+				padding: 1rem !important;
+			}
+
+			/* Optimize button sizes */
+			button, a[class*="py-"] {
+				padding-top: 0.5rem !important;
+				padding-bottom: 0.5rem !important;
+			}
+
+			/* Reduce grid gaps */
+			.grid {
+				gap: 1rem !important;
+			}
+
+			/* Optimize text sizes */
+			.text-4xl {
+				font-size: 2rem !important;
+			}
+
+			.text-5xl {
+				font-size: 2.5rem !important;
+			}
+
+			.text-6xl {
+				font-size: 3rem !important;
+			}
+
+			/* Scroll to top button */
+			#scrollToTop {
+				bottom: 1rem !important;
+				left: 1rem !important;
+				width: 48px !important;
+				height: 48px !important;
+				padding: 0.875rem !important;
+			}
+
+			#scrollToTop svg {
+				width: 22px !important;
+				height: 22px !important;
+			}
+
+			/* Wordmark logo */
+			.wordmark-logo {
+				max-height: 2.5rem !important;
+			}
+
+			/* Reduce spacing in sections */
+			.mb-12, .mb-16 {
+				margin-bottom: 1.5rem !important;
+			}
+
+			.mb-8 {
+				margin-bottom: 1rem !important;
+			}
+		}
+
+		/* Google Nest Hub Max (1280x800) - Larger smart display */
+		@media (min-width: 1280px) and (max-width: 1280px) and (max-height: 800px) {
+			/* Optimize vertical spacing */
+			section {
+				padding-top: 2.5rem !important;
+				padding-bottom: 2.5rem !important;
+			}
+
+			/* Hero section */
+			section.min-h-screen {
+				min-height: 100vh !important;
+				padding-top: 1.5rem !important;
+				padding-bottom: 1.5rem !important;
+			}
+
+			/* Container padding */
+			.container {
+				padding-left: 2.5rem !important;
+				padding-right: 2.5rem !important;
+			}
+
+			/* Card padding */
+			.rounded-xl, .rounded-2xl {
+				padding: 1.25rem !important;
+			}
+
+			/* Grid gaps */
+			.grid {
+				gap: 1.5rem !important;
+			}
+
+			/* Text sizes */
+			.text-4xl {
+				font-size: 2.25rem !important;
+			}
+
+			.text-5xl {
+				font-size: 2.75rem !important;
+			}
+
+			.text-6xl {
+				font-size: 3.25rem !important;
+			}
+
+			/* Scroll to top button */
+			#scrollToTop {
+				bottom: 1.5rem !important;
+				left: 1.5rem !important;
+				width: 52px !important;
+				height: 52px !important;
+				padding: 1rem !important;
+			}
+
+			#scrollToTop svg {
+				width: 24px !important;
+				height: 24px !important;
+			}
+
+			/* Wordmark logo */
+			.wordmark-logo {
+				max-height: 3rem !important;
+			}
+
+			/* Section spacing */
+			.mb-12 {
+				margin-bottom: 2rem !important;
+			}
+
+			.mb-16 {
+				margin-bottom: 2.5rem !important;
+			}
+		}
+
+		/* General smart display optimization (landscape, shorter height) */
+		@media (min-width: 1024px) and (max-height: 800px) and (orientation: landscape) {
+			/* Reduce hero section height */
+			section.min-h-screen {
+				min-height: auto !important;
+				padding-top: 2rem !important;
+				padding-bottom: 2rem !important;
+			}
+
+			/* Optimize banner aspect ratio */
+			section.aspect-\\[4\\.5\\/1\\] {
+				aspect-ratio: 3.5/1 !important;
+			}
+
+			/* Reduce section padding */
+			section.py-20, section.py-24 {
+				padding-top: 2rem !important;
+				padding-bottom: 2rem !important;
+			}
+
+			section.py-16 {
+				padding-top: 1.5rem !important;
+				padding-bottom: 1.5rem !important;
+			}
+
+			section.py-12 {
+				padding-top: 1rem !important;
+				padding-bottom: 1rem !important;
+			}
+
+			/* Optimize modal sizes */
+			[id$="Modal"] .bg-white {
+				max-height: 85vh !important;
+			}
+
+			/* Reduce spacing in cards */
+			.p-8, .p-10, .p-12 {
+				padding: 1.25rem !important;
+			}
+
+			/* Optimize grid layouts */
+			.grid-cols-3 {
+				grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+			}
+
+			.grid-cols-4 {
+				grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+			}
+		}
+
+		/* Large desktop (1920px+) */
+		@media (min-width: 1920px) {
+			.container {
+				max-width: 1400px;
+			}
+		}
+
+		/* Modal responsive improvements */
+		@media (max-width: 768px) {
+			[id$="Modal"] {
+				padding: 1rem;
+			}
+			
+			[id$="Modal"] .bg-white {
+				max-height: 95vh;
+				margin: 0.5rem;
+			}
+		}
+
+		/* Table responsive improvements */
+		@media (max-width: 1024px) {
+			table {
+				font-size: 0.875rem;
+			}
+			
+			table th,
+			table td {
+				padding: 0.5rem;
+			}
+		}
+
+		@media (max-width: 768px) {
+			table {
+				font-size: 0.75rem;
+			}
+			
+			table th,
+			table td {
+				padding: 0.375rem;
+			}
+			
+			/* Make tables horizontally scrollable on mobile */
+			.overflow-x-auto {
+				-webkit-overflow-scrolling: touch;
+			}
+		}
+
+		/* Banner responsive */
+		@media (max-width: 640px) {
+			section.aspect-\\[4\\.5\\/1\\] {
+				aspect-ratio: 2.5/1;
+			}
+		}
+
+		/* Nest Hub banner optimization */
+		@media (min-width: 1024px) and (max-height: 800px) {
+			section.aspect-\\[4\\.5\\/1\\],
+			.nest-hub-banner {
+				aspect-ratio: 3/1 !important;
+			}
+		}
+
+		/* Nest Hub specific banner (1024x600) */
+		@media (min-width: 1024px) and (max-width: 1024px) and (max-height: 600px) {
+			.nest-hub-banner {
+				aspect-ratio: 2.5/1 !important;
+			}
+		}
+
+		/* Speaker cards responsive */
+		@media (min-width: 768px) and (max-width: 1024px) {
+			/* iPad: 2 columns for keynote speakers */
+			.grid.md\\:grid-cols-2 {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+		}
+
 		/* PASUC Image Display Styles */
 		.lazy-image {
 			transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
@@ -2679,43 +3416,43 @@ const currentPath = Astro.url.pathname;
 	</style>
 
 	<!-- Hotel Information Modal -->
-	<div id="hotelModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
-		<div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden">
+	<div id="hotelModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-2 xs:p-3 sm:p-4 md:p-6">
+		<div class="bg-white dark:bg-gray-800 rounded-lg xs:rounded-xl shadow-2xl max-w-6xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-hidden m-2 xs:m-3 sm:m-4">
 			<!-- Modal Header -->
-			<div class="bg-gradient-to-r from-[#0077B6] to-[#61063B] text-white p-6 flex justify-between items-center">
-				<h3 class="text-2xl font-bold">Hotel Information - ICIIE 2025</h3>
-				<button id="closeHotelModal" class="text-white hover:text-gray-200 transition-colors">
-					<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+			<div class="bg-gradient-to-r from-[#0077B6] to-[#61063B] text-white p-3 xs:p-4 sm:p-6 flex justify-between items-center">
+				<h3 class="text-base xs:text-lg sm:text-xl md:text-2xl font-bold pr-2">Hotel Information - ICIIE 2025</h3>
+				<button id="closeHotelModal" class="text-white hover:text-gray-200 transition-colors flex-shrink-0 min-w-[44px] min-h-[44px] flex items-center justify-center">
+					<svg class="w-5 h-5 xs:w-6 xs:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
 					</svg>
 				</button>
 			</div>
 			
 			<!-- Modal Content -->
-			<div class="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
-				<div class="overflow-x-auto">
-					<table class="w-full border-collapse border border-gray-300 dark:border-gray-600">
+			<div class="p-2 xs:p-3 sm:p-4 md:p-6 overflow-y-auto max-h-[calc(95vh-100px)] sm:max-h-[calc(90vh-120px)]">
+				<div class="overflow-x-auto -mx-2 xs:-mx-3 sm:-mx-4 md:-mx-6 px-2 xs:px-3 sm:px-4 md:px-6">
+					<table class="w-full border-collapse border border-gray-300 dark:border-gray-600 text-xs xs:text-sm sm:text-base">
 						<thead>
 							<tr class="bg-[#0077B6] text-white">
-								<th class="border border-gray-300 dark:border-gray-600 p-3 text-left">Hotel Name</th>
-								<th class="border border-gray-300 dark:border-gray-600 p-3 text-left">Address</th>
-								<th class="border border-gray-300 dark:border-gray-600 p-3 text-left">Contact Number</th>
-								<th class="border border-gray-300 dark:border-gray-600 p-3 text-left">Room Types</th>
-								<th class="border border-gray-300 dark:border-gray-600 p-3 text-left">Capacity</th>
-								<th class="border border-gray-300 dark:border-gray-600 p-3 text-left">Rate per Night</th>
-								<th class="border border-gray-300 dark:border-gray-600 p-3 text-left">Website/Contact</th>
+								<th class="border border-gray-300 dark:border-gray-600 p-1.5 xs:p-2 sm:p-3 text-left text-[10px] xs:text-xs sm:text-sm">Hotel Name</th>
+								<th class="border border-gray-300 dark:border-gray-600 p-1.5 xs:p-2 sm:p-3 text-left text-[10px] xs:text-xs sm:text-sm">Address</th>
+								<th class="border border-gray-300 dark:border-gray-600 p-1.5 xs:p-2 sm:p-3 text-left text-[10px] xs:text-xs sm:text-sm">Contact Number</th>
+								<th class="border border-gray-300 dark:border-gray-600 p-1.5 xs:p-2 sm:p-3 text-left text-[10px] xs:text-xs sm:text-sm">Room Types</th>
+								<th class="border border-gray-300 dark:border-gray-600 p-1.5 xs:p-2 sm:p-3 text-left text-[10px] xs:text-xs sm:text-sm">Capacity</th>
+								<th class="border border-gray-300 dark:border-gray-600 p-1.5 xs:p-2 sm:p-3 text-left text-[10px] xs:text-xs sm:text-sm">Rate per Night</th>
+								<th class="border border-gray-300 dark:border-gray-600 p-1.5 xs:p-2 sm:p-3 text-left text-[10px] xs:text-xs sm:text-sm">Website/Contact</th>
 							</tr>
 						</thead>
-						<tbody class="text-sm text-black dark:text-white">
+						<tbody class="text-xs xs:text-sm text-black dark:text-white">
 							<!-- Mayan Hotel -->
 							<tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
-								<td class="border border-gray-300 dark:border-gray-600 p-3 font-semibold" rowspan="6">Mayan Hotel</td>
-								<td class="border border-gray-300 dark:border-gray-600 p-3" rowspan="6">Lomboy, Brgy. Nalil Bongao, Tawi-Tawi</td>
-								<td class="border border-gray-300 dark:border-gray-600 p-3" rowspan="6">0953-5839-849<br>0963-2411-363</td>
-								<td class="border border-gray-300 dark:border-gray-600 p-3">Standard (one matrimonial)</td>
-								<td class="border border-gray-300 dark:border-gray-600 p-3">-</td>
-								<td class="border border-gray-300 dark:border-gray-600 p-3">₱1,700</td>
-								<td class="border border-gray-300 dark:border-gray-600 p-3" rowspan="6">2024mayanhotelier@gmail.com</td>
+								<td class="border border-gray-300 dark:border-gray-600 p-1.5 xs:p-2 sm:p-3 font-semibold text-[10px] xs:text-xs sm:text-sm" rowspan="6">Mayan Hotel</td>
+								<td class="border border-gray-300 dark:border-gray-600 p-1.5 xs:p-2 sm:p-3 text-[10px] xs:text-xs sm:text-sm" rowspan="6">Lomboy, Brgy. Nalil Bongao, Tawi-Tawi</td>
+								<td class="border border-gray-300 dark:border-gray-600 p-1.5 xs:p-2 sm:p-3 text-[10px] xs:text-xs sm:text-sm" rowspan="6">0953-5839-849<br>0963-2411-363</td>
+								<td class="border border-gray-300 dark:border-gray-600 p-1.5 xs:p-2 sm:p-3 text-[10px] xs:text-xs sm:text-sm">Standard (one matrimonial)</td>
+								<td class="border border-gray-300 dark:border-gray-600 p-1.5 xs:p-2 sm:p-3 text-[10px] xs:text-xs sm:text-sm">-</td>
+								<td class="border border-gray-300 dark:border-gray-600 p-1.5 xs:p-2 sm:p-3 text-[10px] xs:text-xs sm:text-sm">₱1,700</td>
+								<td class="border border-gray-300 dark:border-gray-600 p-1.5 xs:p-2 sm:p-3 text-[10px] xs:text-xs sm:text-sm break-all" rowspan="6">2024mayanhotelier@gmail.com</td>
 							</tr>
 							<tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
 								<td class="border border-gray-300 dark:border-gray-600 p-3 pl-6">One single bed</td>
