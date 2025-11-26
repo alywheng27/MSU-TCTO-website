@@ -105,7 +105,15 @@ export const navigationConfig = {
       { label: "ICIIE 2025", href: "/iciie2025" },
       // { label: "TEPO Journal", href: "https://thetepojournal.org/ojs/index.php/TEPO/index" },
     ]
-  }
+  },
+
+    // Conference section - appears in navbar only
+    journal: {
+      title: "Journal",
+      links: [
+      { label: "The TEPO Journal", href: "https://thetepojournal.org/ojs/index.php/TEPO/index" },
+      ]
+    }
 };
 
 // Helper function to get navbar items (for Navbar.jsx)
@@ -120,6 +128,7 @@ export function getNavbarItems() {
     navigationConfig.careers,
     navigationConfig.graduation,
     navigationConfig.conference,
+    navigationConfig.journal,
   ];
 }
 
