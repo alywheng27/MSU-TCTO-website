@@ -25,7 +25,7 @@ const CoedNavbar = ({ path }) => {
           setIsScrolled(window.scrollY > 30);
 
           // Update active section based on scroll position
-          const sections = ['about', 'call-for-abstracts', 'speakers', 'program', 'registration', 'endorsement', 'venue', 'contact'];
+          const sections = ['about', 'call-for-abstracts', 'speakers', 'program', 'tepo-journal', 'registration', 'endorsement', 'venue', 'contact'];
           const currentSection = sections.find(section => {
             const element = document.getElementById(section);
             if (element) {
@@ -51,6 +51,51 @@ const CoedNavbar = ({ path }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Add custom scrollbar styles
+  useEffect(() => {
+    const styleId = 'coed-navbar-scrollbar-styles';
+    if (!document.getElementById(styleId)) {
+      const style = document.createElement('style');
+      style.id = styleId;
+      style.textContent = `
+        .mobile-menu-scroll::-webkit-scrollbar {
+          width: 8px;
+        }
+        .mobile-menu-scroll::-webkit-scrollbar-track {
+          background: ${darkMode ? '#181A20' : '#FFFFFF'};
+          border-radius: 10px;
+        }
+        .mobile-menu-scroll::-webkit-scrollbar-thumb {
+          background: ${darkMode ? '#0077B6' : '#0077B6'};
+          border-radius: 10px;
+        }
+        .mobile-menu-scroll::-webkit-scrollbar-thumb:hover {
+          background: ${darkMode ? '#005a8a' : '#005a8a'};
+        }
+      `;
+      document.head.appendChild(style);
+    } else {
+      // Update existing styles when dark mode changes
+      const style = document.getElementById(styleId);
+      style.textContent = `
+        .mobile-menu-scroll::-webkit-scrollbar {
+          width: 8px;
+        }
+        .mobile-menu-scroll::-webkit-scrollbar-track {
+          background: ${darkMode ? '#181A20' : '#FFFFFF'};
+          border-radius: 10px;
+        }
+        .mobile-menu-scroll::-webkit-scrollbar-thumb {
+          background: ${darkMode ? '#0077B6' : '#0077B6'};
+          border-radius: 10px;
+        }
+        .mobile-menu-scroll::-webkit-scrollbar-thumb:hover {
+          background: ${darkMode ? '#005a8a' : '#005a8a'};
+        }
+      `;
+    }
+  }, [darkMode]);
+
   const toggleDarkMode = () => {
     const newDarkMode = !darkMode;
     setDarkMode(newDarkMode);
@@ -69,6 +114,7 @@ const CoedNavbar = ({ path }) => {
     { name: 'Call for Abstracts', href: '#call-for-abstracts', id: 'call-for-abstracts', current: activeSection === 'call-for-abstracts' },
     { name: 'Speakers', href: '#speakers', id: 'speakers', current: activeSection === 'speakers' },
     { name: 'Program', href: '#program', id: 'program', current: activeSection === 'program' },
+    { name: 'The TEPO Journal', href: '#tepo-journal', id: 'tepo-journal', current: activeSection === 'tepo-journal' },
     { name: 'Registration', href: '#registration', id: 'registration', current: activeSection === 'registration' },
     { name: 'Endorsement', href: '#endorsement', id: 'endorsement', current: activeSection === 'endorsement' },
     { name: 'The Venue', href: '#venue', id: 'venue', current: activeSection === 'venue' },
@@ -132,7 +178,8 @@ const CoedNavbar = ({ path }) => {
                 className="wordmark-logo h-10 lg:h-12 xl:h-14 2xl:h-16 object-contain transition-all duration-300"
                 loading="lazy"
               />
-              {/* Close the div for the logo text */}
+              {/* Conference Dates */}
+         
             </div>
           </div>
           {/* Enhanced Desktop Navigation */}
@@ -233,7 +280,7 @@ const CoedNavbar = ({ path }) => {
         {/* Enhanced Mobile Navigation Menu */}
         {isOpen && (
           <div className="lg:hidden">
-            <div className={`px-4 pt-4 pb-6 space-y-3 rounded-b-2xl ${mobileMenuBg}`}>
+            <div className={`px-4 pt-4 pb-6 space-y-3 rounded-b-2xl ${mobileMenuBg} max-h-[calc(100vh-120px)] overflow-y-auto overflow-x-hidden mobile-menu-scroll`} style={{ scrollbarWidth: 'thin', scrollbarColor: darkMode ? '#0077B6 #181A20' : '#0077B6 #FFFFFF' }}>
               {navigation.map((item, index) => (
                 <button
                   key={item.name}
@@ -265,8 +312,8 @@ const CoedNavbar = ({ path }) => {
               {/* Back to Home Button for Mobile */}
               <button
                 onClick={() => window.location.href = '/'}
-                className={`group relative block w-full text-left px-4 py-3 rounded-xl text-base font-semibold transition-all duration-300 transform hover:scale-105 bg-[#61063B] text-white hover:bg-[#61063B]/90 hover:shadow-lg hover:shadow-[#61063B]/20`}
-                style={{ animationDelay: `${navigation.length * 50}ms` }}
+                className={`group relative block w-full text-left px-4 py-3 rounded-xl text-base font-semibold transition-all duration-300 transform hover:scale-105 bg-[#0077B6] text-white hover:bg-[#0077B6]/90 hover:shadow-lg hover:shadow-[#0077B6]/20`}
+                style={{ animationDelay: `${(navigation.length + 1) * 50}ms` }}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
@@ -279,14 +326,17 @@ const CoedNavbar = ({ path }) => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </div>
-                <div className="absolute inset-0 bg-[#61063B]/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-[#0077B6]/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </button>
 
               {/* Enhanced Mobile Brand */}
               <div className={`pt-6 border-t ${darkMode ? 'border-[#22242c]/50' : 'border-[#0077B6]/50'} mt-6`}>
                 <div className={`px-4 py-4 ${darkMode ? 'bg-[#22242c]/30 border border-[#22242c]/20' : 'bg-[#0077B6]/10 border border-[#0077B6]/20'} rounded-xl`}>
-                  <div className={`text-xl font-black ${darkMode ? 'text-[#90cdf4]' : 'text-[#0077B6]'} mb-3`}>
+                  <div className={`text-xl font-black ${darkMode ? 'text-[#90cdf4]' : 'text-[#0077B6]'} mb-2`}>
                     ICIIE 2025
+                  </div>
+                  <div className={`text-xs ${darkMode ? 'text-[#90cdf4]' : 'text-[#0077B6]'} font-bold mb-3`}>
+                    November 26-28, 2025
                   </div>
                   <div className={`text-sm ${darkMode ? 'text-[#90cdf4]' : 'text-[#0077B6]'} font-semibold leading-tight mb-2`}>
                     1st International Conference on Inclusive and Indigenous Education

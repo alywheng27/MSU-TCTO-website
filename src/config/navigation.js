@@ -103,7 +103,7 @@ export const navigationConfig = {
     title: "Conference",
     links: [
       { label: "ICIIE 2025", href: "/iciie2025" },
-      { label: "TEPO Journal", href: "https://thetepojournal.org/ojs/index.php/TEPO/index" },
+      // { label: "TEPO Journal", href: "https://thetepojournal.org/ojs/index.php/TEPO/index" },
     ]
   }
 };
