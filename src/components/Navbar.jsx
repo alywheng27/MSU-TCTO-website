@@ -15,7 +15,8 @@ import {
   FaBars,
   FaMoon,
   FaSun,
-  FaUsers
+  FaUsers,
+  FaBookOpen
 } from 'react-icons/fa';
 import { FiChevronRight } from 'react-icons/fi';
 import { getNavbarItems } from '../config/navigation.js';
@@ -193,6 +194,7 @@ const Navbar = ({ path }) => {
     "Careers": <FaBriefcase className="text-lg" />,
     "Graduation": <FaGraduationCap className="text-lg" />,
     "Conference": <FaUsers className="text-lg" />,
+    "Journal": <FaBookOpen className="text-lg" />,
   };
 
   // Transform config to navbar format
