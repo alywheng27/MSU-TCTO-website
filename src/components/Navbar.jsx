@@ -52,17 +52,21 @@ const Dropdown = ({ title, items, icon, activeDropdown, setActiveDropdown, index
         <ul 
           className={`overflow-hidden transition-all duration-300 ${isActive ? 'max-h-screen opacity-100 visible' : 'max-h-0 opacity-0 invisible'}`}
         >
-          {items.map((item, idx) => (
-            <li key={idx}>
-              <a 
-                href={item.link} 
-                className="block px-4 py-3 text-white dark:text-gray-200 hover:bg-msu-main-color dark:hover:bg-gray-700 hover:bg-opacity-20 transition-colors duration-200 text-sm border-b border-gray-200 dark:border-gray-600 border-opacity-20"
-                onClick={() => closeMobileMenu()}
-              >
-                {item.label}
-              </a>
-            </li>
-          ))}
+          {items.map((item, idx) => {
+            const isExternal = item.link && (item.link.startsWith('http://') || item.link.startsWith('https://'));
+            return (
+              <li key={idx}>
+                <a 
+                  href={item.link} 
+                  className="block px-4 py-3 text-white dark:text-gray-200 hover:bg-msu-main-color dark:hover:bg-gray-700 hover:bg-opacity-20 transition-colors duration-200 text-sm border-b border-gray-200 dark:border-gray-600 border-opacity-20"
+                  onClick={() => closeMobileMenu()}
+                  {...(isExternal && { target: '_blank', rel: 'noopener noreferrer' })}
+                >
+                  {item.label}
+                </a>
+              </li>
+            );
+          })}
         </ul>
       )}
     </li>

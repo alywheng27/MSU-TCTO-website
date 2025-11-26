@@ -108,8 +108,8 @@ const CoedNavbar = ({ path }) => {
     <nav
       className={`sticky top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out ${navBg}`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-24 lg:h-28">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 nest-hub-nav-container">
+        <div className="flex justify-between items-center h-24 lg:h-28 nest-hub-nav-inner">
           {/* Enhanced Logo and Brand */}
           <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-4 group">
             <div className="flex-shrink-0 relative">
@@ -125,26 +125,26 @@ const CoedNavbar = ({ path }) => {
               </div>
             </div>
             {/* Desktop only - Conference title text */}
-            <div className=" lg:block">
+            <div className="hidden lg:block">
               <img
                 src="/SPEAKERS ICIIE/logo/wordmark.png"
                 alt="ICIIE 2025 Logo Text"
-                className="h-15 xl:h-15 3xl:h-17 object-contain"
+                className="wordmark-logo h-10 lg:h-12 xl:h-14 2xl:h-16 object-contain transition-all duration-300"
                 loading="lazy"
               />
               {/* Close the div for the logo text */}
             </div>
           </div>
           {/* Enhanced Desktop Navigation */}
-          <div className="hidden lg:block">
-            <div className="ml-10 flex items-center space-x-2">
+          <div className="hidden lg:block nest-hub-nav-menu">
+            <div className="ml-10 flex items-center space-x-2 nest-hub-nav-items">
               {navigation.map((item, index) => (
-                <div key={item.name} className="relative">
+                <div key={item.name} className="relative nest-hub-nav-item">
                   <button
                     onClick={() => handleNavClick(item.href, item.id)}
                     onMouseEnter={() => setHoveredItem(index)}
                     onMouseLeave={() => setHoveredItem(null)}
-                    className={`relative px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300 ease-out transform hover:scale-105 ${
+                    className={`relative px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300 ease-out transform hover:scale-105 nest-hub-nav-button ${
                       item.current
                         ? 'bg-[#0077B6] text-white shadow-lg shadow-[#0077B6]/30 border border-[#0077B6]/20'
                         : darkMode
@@ -152,7 +152,7 @@ const CoedNavbar = ({ path }) => {
                           : 'text-[#0077B6] hover:bg-[#0077B6]/10 hover:text-[#0077B6] hover:shadow-lg hover:shadow-[#0077B6]/20'
                     }`}
                   >
-                    <span className="relative z-10">{item.name}</span>
+                    <span className="relative z-10 nest-hub-nav-text">{item.name}</span>
                     {hoveredItem === index && !item.current && (
                       <div className="absolute inset-0 bg-[#0077B6]/10 rounded-xl backdrop-blur-sm border border-[#0077B6]/20 animate-pulse"></div>
                     )}
@@ -172,7 +172,7 @@ const CoedNavbar = ({ path }) => {
           </div>
 
           {/* Enhanced Right Side Controls */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-3 nest-hub-nav-controls">
             {/* Enhanced Dark Mode Toggle */}
             <div className="relative">
               <button
