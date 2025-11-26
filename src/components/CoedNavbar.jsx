@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 const CoedNavbar = ({ path }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [hoveredItem, setHoveredItem] = useState(null);
@@ -96,6 +97,25 @@ const CoedNavbar = ({ path }) => {
     }
   }, [darkMode]);
 
+  // Cleanup body overflow on unmount
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
+
+  // Handle ESC key to close sidebar
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === 'Escape' && isSidebarOpen) {
+        setIsSidebarOpen(false);
+        document.body.style.overflow = 'auto';
+      }
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [isSidebarOpen]);
+
   const toggleDarkMode = () => {
     const newDarkMode = !darkMode;
     setDarkMode(newDarkMode);
@@ -122,23 +142,56 @@ const CoedNavbar = ({ path }) => {
   ];
 
   const handleNavClick = (href, sectionId) => {
-    if (href === '#') {
-      // Scroll to top for Home link
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      setActiveSection('home');
-    } else if (href.startsWith('#')) {
-      // Smooth scroll to section and immediately update active state
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-        setActiveSection(sectionId);
-      }
-    } else {
-      // Navigate to page
-      window.location.href = href;
-      setActiveSection('home');
-    }
+    // Close menus and restore body scroll first
     setIsOpen(false);
+    setIsSidebarOpen(false);
+    document.body.style.overflow = 'auto';
+    
+    // Small delay to ensure menus are closed before scrolling
+    setTimeout(() => {
+      if (href === '#') {
+        // Scroll to top for Home link
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setActiveSection('home');
+      } else if (href.startsWith('#')) {
+        // Smooth scroll to section and immediately update active state
+        const element = document.querySelector(href);
+        if (element) {
+          // Calculate offset for sticky navbar
+          const navbarHeight = 120; // Approximate navbar height
+          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+          const offsetPosition = elementPosition - navbarHeight;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+          setActiveSection(sectionId);
+        }
+      } else {
+        // Navigate to page
+        window.location.href = href;
+        setActiveSection('home');
+      }
+    }, 100);
+  };
+
+  const toggleSidebar = () => {
+    const newState = !isSidebarOpen;
+    setIsSidebarOpen(newState);
+    if (newState) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  };
+
+  const closeSidebar = () => {
+    setIsSidebarOpen(false);
+    // Ensure body scroll is restored
+    setTimeout(() => {
+      document.body.style.overflow = 'auto';
+    }, 50);
   };
 
   // Set background color based on dark mode
@@ -182,44 +235,24 @@ const CoedNavbar = ({ path }) => {
          
             </div>
           </div>
-          {/* Enhanced Desktop Navigation */}
-          <div className="hidden lg:block nest-hub-nav-menu">
-            <div className="ml-10 flex items-center space-x-2 nest-hub-nav-items">
-              {navigation.map((item, index) => (
-                <div key={item.name} className="relative nest-hub-nav-item">
-                  <button
-                    onClick={() => handleNavClick(item.href, item.id)}
-                    onMouseEnter={() => setHoveredItem(index)}
-                    onMouseLeave={() => setHoveredItem(null)}
-                    className={`relative px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300 ease-out transform hover:scale-105 nest-hub-nav-button ${
-                      item.current
-                        ? 'bg-[#0077B6] text-white shadow-lg shadow-[#0077B6]/30 border border-[#0077B6]/20'
-                        : darkMode
-                          ? 'text-[#90cdf4] hover:bg-[#0077B6]/10 hover:text-[#90cdf4] hover:shadow-lg hover:shadow-[#0077B6]/20'
-                          : 'text-[#0077B6] hover:bg-[#0077B6]/10 hover:text-[#0077B6] hover:shadow-lg hover:shadow-[#0077B6]/20'
-                    }`}
-                  >
-                    <span className="relative z-10 nest-hub-nav-text">{item.name}</span>
-                    {hoveredItem === index && !item.current && (
-                      <div className="absolute inset-0 bg-[#0077B6]/10 rounded-xl backdrop-blur-sm border border-[#0077B6]/20 animate-pulse"></div>
-                    )}
-                    {item.current && (
-                      <div className="absolute inset-0 bg-[#0077B6]/20 rounded-xl animate-pulse"></div>
-                    )}
-                  </button>
-                  {item.current && (
-                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
-                      <div className="w-3 h-3 bg-[#0077B6] rounded-full animate-bounce"></div>
-                      <div className="absolute inset-0 w-3 h-3 bg-[#0077B6] rounded-full animate-ping opacity-30"></div>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
 
           {/* Enhanced Right Side Controls */}
           <div className="flex items-center space-x-3 nest-hub-nav-controls">
+            {/* Desktop Sidebar Toggle Button */}
+            <div className="relative hidden lg:block">
+              <button
+                onClick={toggleSidebar}
+                className={`group relative p-3 rounded-xl transition-all duration-300 transform hover:scale-110 ${darkMode ? 'text-[#90cdf4]' : 'text-[#0077B6]'} hover:bg-[#0077B6]/10 hover:shadow-lg`}
+                aria-label="Toggle sidebar menu"
+                title="Menu"
+              >
+                <div className="absolute inset-0 bg-[#0077B6]/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <svg className="w-5 h-5 relative z-10 transform group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+            </div>
+
             {/* Enhanced Dark Mode Toggle */}
             <div className="relative">
               <button
@@ -257,7 +290,15 @@ const CoedNavbar = ({ path }) => {
 
             {/* Enhanced Mobile menu button */}
             <button
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={() => {
+                const newState = !isOpen;
+                setIsOpen(newState);
+                if (newState) {
+                  document.body.style.overflow = 'hidden';
+                } else {
+                  document.body.style.overflow = 'auto';
+                }
+              }}
               className={`lg:hidden group relative p-3 rounded-xl transition-all duration-300 transform hover:scale-110 ${darkMode ? 'text-[#90cdf4]' : 'text-[#0077B6]'} hover:bg-[#0077B6]/10 hover:shadow-lg`}
               aria-label="Toggle mobile menu"
             >
@@ -282,31 +323,35 @@ const CoedNavbar = ({ path }) => {
           <div className="lg:hidden">
             <div className={`px-4 pt-4 pb-6 space-y-3 rounded-b-2xl ${mobileMenuBg} max-h-[calc(100vh-120px)] overflow-y-auto overflow-x-hidden mobile-menu-scroll`} style={{ scrollbarWidth: 'thin', scrollbarColor: darkMode ? '#0077B6 #181A20' : '#0077B6 #FFFFFF' }}>
               {navigation.map((item, index) => (
-                <button
-                  key={item.name}
-                  onClick={() => handleNavClick(item.href, item.id)}
-                  className={`group relative block w-full text-left px-4 py-3 rounded-xl text-base font-semibold transition-all duration-300 transform hover:scale-105 ${
-                    item.current
-                      ? 'bg-[#0077B6] text-white shadow-lg shadow-[#0077B6]/30 border border-[#0077B6]/20'
-                      : darkMode
-                        ? 'text-[#90cdf4] hover:bg-[#0077B6]/10 hover:text-[#90cdf4] hover:shadow-lg hover:shadow-[#0077B6]/20'
-                        : 'text-[#0077B6] hover:bg-[#0077B6]/10 hover:text-[#0077B6] hover:shadow-lg hover:shadow-[#0077B6]/20'
-                  }`}
-                  style={{ animationDelay: `${index * 50}ms` }}
-                >
-                  <div className="flex items-center justify-between">
+                <div key={item.name} className="relative">
+                  <button
+                    onClick={() => handleNavClick(item.href, item.id)}
+                    onMouseEnter={() => setHoveredItem(index)}
+                    onMouseLeave={() => setHoveredItem(null)}
+                    className={`relative w-full text-left px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300 ease-out transform hover:scale-105 ${
+                      item.current
+                        ? 'bg-[#0077B6] text-white shadow-lg shadow-[#0077B6]/30 border border-[#0077B6]/20'
+                        : darkMode
+                          ? 'text-[#90cdf4] hover:bg-[#0077B6]/10 hover:text-[#90cdf4] hover:shadow-lg hover:shadow-[#0077B6]/20'
+                          : 'text-[#0077B6] hover:bg-[#0077B6]/10 hover:text-[#0077B6] hover:shadow-lg hover:shadow-[#0077B6]/20'
+                    }`}
+                    style={{ animationDelay: `${index * 50}ms` }}
+                  >
                     <span className="relative z-10">{item.name}</span>
-                    <svg className={`w-4 h-4 transform transition-transform duration-300 ${item.current ? 'text-white rotate-90' : darkMode ? 'text-[#90cdf4] group-hover:text-[#90cdf4] group-hover:translate-x-1' : 'text-gray-400 group-hover:text-[#0077B6] group-hover:translate-x-1'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </div>
-                  {!item.current && (
-                    <div className="absolute inset-0 bg-[#0077B6]/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  )}
+                    {hoveredItem === index && !item.current && (
+                      <div className="absolute inset-0 bg-[#0077B6]/10 rounded-xl backdrop-blur-sm border border-[#0077B6]/20 animate-pulse"></div>
+                    )}
+                    {item.current && (
+                      <div className="absolute inset-0 bg-[#0077B6]/20 rounded-xl animate-pulse"></div>
+                    )}
+                  </button>
                   {item.current && (
-                    <div className="absolute inset-0 bg-[#0077B6]/20 rounded-xl animate-pulse"></div>
+                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
+                      <div className="w-3 h-3 bg-[#0077B6] rounded-full animate-bounce"></div>
+                      <div className="absolute inset-0 w-3 h-3 bg-[#0077B6] rounded-full animate-ping opacity-30"></div>
+                    </div>
                   )}
-                </button>
+                </div>
               ))}
 
               {/* Back to Home Button for Mobile */}
@@ -350,6 +395,100 @@ const CoedNavbar = ({ path }) => {
           </div>
         )}
       </div>
+
+      {/* Desktop Right Sidebar Menu */}
+      {isSidebarOpen && (
+        <>
+          {/* Overlay */}
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 lg:block hidden"
+            onClick={closeSidebar}
+          ></div>
+          
+          {/* Sidebar */}
+          <div 
+            className={`fixed top-0 right-0 h-full w-80 ${mobileMenuBg} shadow-2xl transform transition-transform duration-300 ease-in-out z-50 lg:block hidden ${
+              isSidebarOpen ? 'translate-x-0' : 'translate-x-full'
+            }`}
+          >
+            <div className="h-full flex flex-col">
+              {/* Sidebar Header */}
+              <div className="flex items-center justify-between p-6 border-b border-[#0077B6]/30 dark:border-[#22242c]/50 flex-shrink-0">
+                <div className="flex items-center">
+                  <img 
+                    src="/images/iciie.png" 
+                    alt="ICIIE 2025 Logo" 
+                    className="h-10 mr-3" 
+                  />
+                  <div>
+                    <h3 className={`font-bold text-lg ${darkMode ? 'text-[#90cdf4]' : 'text-[#0077B6]'}`}>ICIIE 2025</h3>
+                    <p className={`text-xs ${darkMode ? 'text-[#90cdf4]/70' : 'text-[#0077B6]/70'}`}>Navigation Menu</p>
+                  </div>
+                </div>
+                <button 
+                  onClick={closeSidebar}
+                  className={`p-2 rounded-xl transition-all duration-300 ${darkMode ? 'text-[#90cdf4] hover:bg-[#0077B6]/10' : 'text-[#0077B6] hover:bg-[#0077B6]/10'}`}
+                  aria-label="Close sidebar"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Sidebar Navigation - Scrollable Content */}
+              <div className="flex-1 overflow-y-auto overflow-x-hidden mobile-menu-scroll px-4 py-6 space-y-2" style={{ scrollbarWidth: 'thin', scrollbarColor: darkMode ? '#0077B6 #181A20' : '#0077B6 #FFFFFF' }}>
+                {navigation.map((item, index) => (
+                  <div key={item.name} className="relative">
+                    <button
+                      onClick={() => handleNavClick(item.href, item.id)}
+                      onMouseEnter={() => setHoveredItem(index)}
+                      onMouseLeave={() => setHoveredItem(null)}
+                      className={`relative w-full text-left px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300 ease-out transform hover:scale-105 ${
+                        item.current
+                          ? 'bg-[#0077B6] text-white shadow-lg shadow-[#0077B6]/30 border border-[#0077B6]/20'
+                          : darkMode
+                            ? 'text-[#90cdf4] hover:bg-[#0077B6]/10 hover:text-[#90cdf4] hover:shadow-lg hover:shadow-[#0077B6]/20'
+                            : 'text-[#0077B6] hover:bg-[#0077B6]/10 hover:text-[#0077B6] hover:shadow-lg hover:shadow-[#0077B6]/20'
+                      }`}
+                    >
+                      <span className="relative z-10">{item.name}</span>
+                      {hoveredItem === index && !item.current && (
+                        <div className="absolute inset-0 bg-[#0077B6]/10 rounded-xl backdrop-blur-sm border border-[#0077B6]/20 animate-pulse"></div>
+                      )}
+                      {item.current && (
+                        <div className="absolute inset-0 bg-[#0077B6]/20 rounded-xl animate-pulse"></div>
+                      )}
+                    </button>
+                    {item.current && (
+                      <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2">
+                        <div className="w-3 h-3 bg-[#0077B6] rounded-full animate-bounce"></div>
+                        <div className="absolute inset-0 w-3 h-3 bg-[#0077B6] rounded-full animate-ping opacity-30"></div>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {/* Sidebar Footer */}
+              <div className={`p-6 border-t ${darkMode ? 'border-[#22242c]/50' : 'border-[#0077B6]/50'} flex-shrink-0`}>
+                <button
+                  onClick={() => window.location.href = '/'}
+                  className={`group relative w-full text-left px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300 transform hover:scale-105 bg-[#0077B6] text-white hover:bg-[#0077B6]/90 hover:shadow-lg hover:shadow-[#0077B6]/20`}
+                >
+                  <div className="flex items-center">
+                    <svg className="w-4 h-4 mr-3 transform group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    <span className="relative z-10">Back to Home Page</span>
+                  </div>
+                  <div className="absolute inset-0 bg-[#0077B6]/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </nav>
   );
 };
