@@ -72,7 +72,7 @@ export const navigationConfig = {
   publications: {
     title: "Publications",
     links: [
-      { label: "Offices & Resources", href: "/publications/offices" },
+      // { label: "Offices & Resources", href: "/publications/offices" },
       { label: "Articles", href: "/publications/articles" },
       { label: "Sulimbang", href: "/publications/sulimbang" },
       { label: "Gazettes", href: "/publications/gazette" },
