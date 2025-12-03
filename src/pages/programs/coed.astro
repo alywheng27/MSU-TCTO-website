@@ -4563,6 +4563,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		if (!activeDepartmentFilter) {
 			hideAdditionalFacultyCards();
+			// Hide all banner contents when no department is active
+			const allBanners = document.querySelectorAll('.faculty-department-banner');
+			allBanners.forEach((banner) => {
+				const bannerContent = banner.querySelector('.faculty-banner-content') as HTMLElement | null;
+				const programsContainer = banner.querySelector('.faculty-banner-programs') as HTMLElement | null;
+				if (bannerContent) {
+					bannerContent.classList.add('hidden');
+					bannerContent.style.display = 'none';
+					bannerContent.innerHTML = '';
+				}
+				if (programsContainer) {
+					programsContainer.classList.add('hidden');
+					programsContainer.style.display = 'none';
+					programsContainer.innerHTML = '';
+				}
+			});
 		}
 	}
 
@@ -4874,10 +4890,11 @@ document.addEventListener('DOMContentLoaded', function() {
 		updateBannerContent(departmentCards);
 		updateProgramsDisplay();
 
-		const firstVisibleCard = Array.from(facultyGrid.querySelectorAll<HTMLElement>('[data-faculty-id]')).find((card) => card.dataset.department === activeDepartmentFilter);
-		if (firstVisibleCard) {
-			firstVisibleCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-		}
+		// Removed automatic scrolling to keep user at the banner they clicked
+		// const firstVisibleCard = Array.from(facultyGrid.querySelectorAll<HTMLElement>('[data-faculty-id]')).find((card) => card.dataset.department === activeDepartmentFilter);
+		// if (firstVisibleCard) {
+		// 	firstVisibleCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		// }
 	}
 
 	// Initialize: Ensure all banners are hidden on page load
@@ -4906,10 +4923,31 @@ document.addEventListener('DOMContentLoaded', function() {
 		departmentFacultyButtons.forEach((button) => {
 			button.addEventListener('click', (event) => {
 				event.preventDefault();
+				event.stopPropagation();
 				const department = button.dataset.department;
 				if (!department) return;
 				const isActive = activeDepartmentFilter === department;
+				
+				// First, hide ALL banner contents before changing the active filter
+				const allBanners = document.querySelectorAll('.faculty-department-banner');
+				allBanners.forEach((banner) => {
+					const bannerContent = banner.querySelector('.faculty-banner-content') as HTMLElement | null;
+					const programsContainer = banner.querySelector('.faculty-banner-programs') as HTMLElement | null;
+					if (bannerContent) {
+						bannerContent.classList.add('hidden');
+						bannerContent.style.display = 'none';
+						bannerContent.innerHTML = '';
+					}
+					if (programsContainer) {
+						programsContainer.classList.add('hidden');
+						programsContainer.style.display = 'none';
+						programsContainer.innerHTML = '';
+					}
+				});
+				
+				// Then set the active filter (toggle off if already active, or set to clicked department)
 				activeDepartmentFilter = isActive ? null : department;
+				
 				if (facultySearchInput) {
 					(facultySearchInput as HTMLInputElement).value = '';
 				}
@@ -4920,6 +4958,9 @@ document.addEventListener('DOMContentLoaded', function() {
 				if (typeof closeDepartmentProgramsModalFn === 'function') {
 					closeDepartmentProgramsModalFn();
 				}
+				
+				// Keep focus on the clicked banner - don't scroll away
+				// The banner content will show in place without scrolling
 			});
 		});
 	}
@@ -4970,6 +5011,23 @@ document.addEventListener('DOMContentLoaded', function() {
 		}, 5000);
 	}
 
+	// Manual banner names configuration - Add names here to include them in banner lists even without cards
+	const manualBannerNames: Record<string, Array<{name: string, designation: string}>> = {
+		'Department of Early Childhood and Elementary Education': [
+			{ name: 'Prof. Dr. Clarissa Ayangco-Derramas', designation: 'Faculty' }
+			// Add more names here that should appear in this department's banner
+		],
+		'Department of Educational Leadership and Professional Services': [
+	 		{ name: 'Prof. Al-Rashiff H. Mastul, EdD', designation:'Chairperson, Department of Early Childhood and Elementary Education (DECEE)'}
+		],
+		'Department of Language Education': [
+			// Add names here that should appear in this department's banner
+		],
+		'Department of Science and Mathematics Education': [
+			// Add names here that should appear in this department's banner
+		],
+	};
+
 	function updateBannerContent(cards: HTMLElement[]) {
 		const banners = document.querySelectorAll('.faculty-department-banner');
 		banners.forEach((banner) => {
@@ -4993,23 +5051,33 @@ document.addEventListener('DOMContentLoaded', function() {
 				return cardDepartment === activeDepartmentFilter;
 			});
 			
-			// Track unique faculty names to prevent duplicates
+			// Track unique faculty names to prevent duplicates within this department
 			const seenNames = new Set<string>();
-			const uniqueFacultyEntries: Array<{name: string, designation: string}> = [];
+			const facultyEntries: Array<{name: string, designation: string}> = [];
 			
+			// First, add names from cards
 			departmentCards.forEach((card) => {
 				const name = card.querySelector('h3')?.textContent?.trim() || '';
 				const designation = card.querySelector('p.text-gray-300')?.textContent?.trim() || '';
 				
-				// Only add if we haven't seen this name before
+				// Only add if we haven't seen this name before (prevent duplicates)
 				if (name && !seenNames.has(name)) {
 					seenNames.add(name);
-					uniqueFacultyEntries.push({ name, designation });
+					facultyEntries.push({ name, designation });
+				}
+			});
+			
+			// Then, add manual names from configuration (if not already added from cards)
+			const manualNames = manualBannerNames[activeDepartmentFilter] || [];
+			manualNames.forEach((entry) => {
+				if (entry.name && !seenNames.has(entry.name)) {
+					seenNames.add(entry.name);
+					facultyEntries.push({ name: entry.name, designation: entry.designation || '' });
 				}
 			});
 			
 			const fragment = document.createDocumentFragment();
-			uniqueFacultyEntries.forEach((entry) => {
+			facultyEntries.forEach((entry) => {
 				const wrapper = document.createElement('div');
 				wrapper.className = 'flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm';
 				wrapper.innerHTML = `
@@ -8446,7 +8514,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					</div>
 
 					<!-- Albar J. Datuhatta -->
-					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('datuhatta')">
+					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105 hidden" onclick="openPersonnelModal('datuhatta')">
 						<div class="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-deep-ocean shadow-lg hover:shadow-xl transition-shadow">
 							<img src="/images/coed/Staff/Datuhatta.png" alt="Albar J. Datuhatta" class="w-full h-full object-cover lazy-image" loading="lazy">
 						</div>
