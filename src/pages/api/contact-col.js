@@ -69,8 +69,12 @@ export async function POST({ request }) {
                 await transporter.verify();
                 console.log('✅ SMTP connection verified successfully');
 
-                // Email configuration
-                const recipientEmail = 'law@msutcto.edu.ph';
+                // Email configuration - Multiple recipients
+                const recipientEmails = [
+                    'law.tawitawicampus@msumain.edu.ph','mikeemaruhom@msutcto.edu.ph'
+                    // Add more email addresses here if needed
+                    // 'second.email@example.com',
+                ];
                 const emailSubject = `Contact Form: ${subject} - ${name}`;
                 
                 // Create email content
@@ -91,14 +95,14 @@ Reply to: ${email}
                 // Email options
                 const mailOptions = {
                     from: gmailUser,
-                    to: recipientEmail,
+                    to: recipientEmails, // Can be array or comma-separated string
                     replyTo: email,
                     subject: emailSubject,
                     text: emailContent,
                     html: `
                         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
                             <h2 style="color: #2c5aa0;">New Contact Form Submission</h2>
-                            <p><strong>From:</strong> MSU-TCTO Website Contact Form</p>
+                            <p><strong>From:</strong>College of Law Website Contact Form</p>
                             
                             <div style="background-color: #f5f5f5; padding: 20px; border-radius: 5px; margin: 20px 0;">
                                 <p><strong>Name:</strong> ${name}</p>
@@ -124,7 +128,7 @@ Reply to: ${email}
                 const result = await transporter.sendMail(mailOptions);
                 console.log('✅ Email sent successfully!');
                 console.log('Message ID:', result.messageId);
-                console.log('Recipient:', recipientEmail);
+                console.log('Recipients:', recipientEmails.join(', '));
                 
             } catch (emailError) {
                 console.error('❌ Email sending failed:', emailError);
