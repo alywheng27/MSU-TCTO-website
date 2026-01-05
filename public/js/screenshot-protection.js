@@ -553,47 +553,19 @@
   }
 
   /**
-   * Proactive full-screen protection for mobile devices
-   * Since hardware buttons (Volume + Power) cannot be detected, we use aggressive full-screen blackout
-   * This makes it very likely that a screenshot will capture a black/blurred screen
+   * Proactive full-screen protection DISABLED for mobile usability
+   * Hardware buttons (Volume + Power) cannot be detected directly
+   * We rely on detection methods (visibility changes, blur events, touch gestures) instead
+   * The aggressive blur was making the mobile page unusable, so it's been removed
    */
   function proactiveFullScreenProtection() {
-    const isMobile = isMobileDevice();
-    
-    // Only enable on mobile devices where hardware buttons are a threat
-    if (!isMobile || !config.enableFullScreenProtection) return;
-    
-    // Very aggressive frequency for mobile hardware button screenshots
-    // Check every 40ms (25 times per second) with 50% chance of blackout
-    const interval = 40; // 40ms intervals
-    const blackoutDuration = 25; // 25ms blackout (invisible to human eye but catches screenshots)
-    const chance = 0.5; // 50% chance each interval
-    
-    setInterval(() => {
-      // Randomly trigger full-screen protection to catch hardware button screenshots
-      if (Math.random() < chance) {
-        // Apply blur to entire body briefly
-        const originalBodyFilter = document.body.style.filter || '';
-        document.body.style.setProperty('filter', `blur(${config.blurIntensity})`, 'important');
-        document.body.style.setProperty('transition', 'filter 0s ease', 'important');
-        
-        // Also show overlay briefly
-        if (protectionOverlay) {
-          protectionOverlay.style.setProperty('opacity', '0.3', 'important');
-          protectionOverlay.style.setProperty('transition', 'opacity 0s ease', 'important');
-        }
-        
-        // Restore immediately - invisible to human but catches screenshots
-        setTimeout(() => {
-          document.body.style.setProperty('filter', originalBodyFilter, 'important');
-          document.body.style.setProperty('transition', 'filter 0.1s ease', 'important');
-          if (protectionOverlay) {
-            protectionOverlay.style.setProperty('opacity', '0', 'important');
-            protectionOverlay.style.setProperty('transition', 'opacity 0.1s ease', 'important');
-          }
-        }, blackoutDuration);
-      }
-    }, interval);
+    // DISABLED - Was causing mobile page to be unusable due to constant blurring
+    // Protection is still active through:
+    // 1. Logo protection (proactiveLogoProtection)
+    // 2. Visibility change detection (monitorVisibility)
+    // 3. Touch gesture detection (monitorMobileTouchEvents)
+    // 4. Orientation change detection
+    return;
   }
 
   /**
@@ -930,11 +902,11 @@
 
     // Proactive protection ENABLED - CRITICAL for mobile hardware screenshots
     // High-frequency blackout on mobile to catch volume+power button screenshots
+    // Only logo is protected proactively, full-screen blur disabled for usability
     proactiveLogoProtection();
     
-    // Proactive full-screen protection for mobile hardware button screenshots (Volume + Power)
-    // Since hardware buttons cannot be detected, we use aggressive periodic blackout
-    proactiveFullScreenProtection();
+    // Note: proactiveFullScreenProtection disabled - was making mobile page unusable
+    // Protection still active via detection methods (visibility, blur, touch, orientation)
 
     // Create protection overlay for full screen protection
     if (config.enableFullScreenProtection) {
