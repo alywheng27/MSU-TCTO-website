@@ -29,7 +29,7 @@ const currentUrl = `${siteUrl}${currentPath}`;
 // Ensure absolute URL for social media with optimized dimensions and quality
 const baseFeaturedImageUrl = singleLatestArticle 
   ? urlForImage(singleLatestArticle.mainImage.asset.url).width(1200).height(630).fit('crop').quality(85).format('jpg').url() 
-  : '/images/MSU Seal New (Official).png';
+  : '/images/Official MSU-TCTO logo-01.png';
 const featuredImageUrl = baseFeaturedImageUrl.startsWith('http') ? baseFeaturedImageUrl : `${siteUrl}${baseFeaturedImageUrl.startsWith('/') ? '' : '/'}${baseFeaturedImageUrl}`;
 
 ---

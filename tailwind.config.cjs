@@ -36,20 +36,21 @@ module.exports = {
 			colors: {
 				/* Primary */
 				'msu-maroon': {
-					DEFAULT: '#800000', // Default maroon
-					100: '#FFE5E5', // Lightest shade
-					200: '#FFB2B2',
-					300: '#FF8080',
-					400: '#FF4D4D',
-					500: '#800000', // Default
-					600: '#660000',
-					700: '#4D0000',
-					800: '#330000',
-					900: '#1A0000', // Darkest shade
+					DEFAULT: '#61063B', // Default maroon
+					100: '#F5E5ED', // Lightest shade
+					200: '#E5B8D1',
+					300: '#D58BB5',
+					400: '#C55E99',
+					500: '#61063B', // Default
+					600: '#4D052F',
+					700: '#3A0423',
+					800: '#260317',
+					900: '#13020B', // Darkest shade
 				  },
 				'msu-deep-ocean': '#61063B',
-				'msu-main-color': '#03045e',
+				'msu-main-color': '#61063B',
 				'msu-text-color': '#000749',
+				'msu-blue-text': '#ffffff',
 				'msu-bgc-color': '#ffffff',
 				'msu-gold': '#F7D93C',
 				'msu-pink': '#ac228a',

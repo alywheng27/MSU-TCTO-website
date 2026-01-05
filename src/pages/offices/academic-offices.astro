@@ -21,7 +21,7 @@ const academicOffices = [
     shortName: "CAS",
     description: "Fostering excellence in liberal arts, sciences, and humanities education",
     icon: "🎓",
-    link: "/404.astro",
+    link: "/programs/cas",
     color: "from-blue-100 to-blue-200"
   },
   {
@@ -29,7 +29,7 @@ const academicOffices = [
     shortName: "CIAS",
     description: "Advancing Islamic education and Arabic language studies",
     icon: "🕌",
-    link: "/404.astro",
+    link: "/programs/cias",
     color: "from-green-100 to-green-200"
   },
   {
@@ -37,7 +37,7 @@ const academicOffices = [
     shortName: "COED",
     description: "Shaping future educators and educational leaders",
     icon: "📚",
-    link: "/404.astro",
+    link: "/programs/coed",
     color: "from-purple-100 to-purple-200"
   },
   {
@@ -45,15 +45,15 @@ const academicOffices = [
     shortName: "COF",
     description: "Leading marine science and fisheries technology education",
     icon: "🐟",
-    link: "/404.astro",
+    link: "/programs/cof",
     color: "from-cyan-100 to-cyan-200"
   },
   {
-    name: "INSTITUTE OF INFORMATION & COMMUNICATIONS TECHNOLOGY",
-    shortName: "IICT",
+    name: "College of Computer Studies",
+    shortName: "CCS",
     description: "Driving innovation in technology and digital transformation",
     icon: "💻",
-    link: "/404.astro",
+    link: "/programs/ccs",
     color: "from-indigo-100 to-indigo-200"
   },
   {
@@ -61,7 +61,7 @@ const academicOffices = [
     shortName: "IOES",
     description: "Exploring ocean sciences and environmental sustainability",
     icon: "🌊",
-    link: "/404.astro",
+    link: "/programs/ioes",
     color: "from-teal-100 to-teal-200"
   },
   {
@@ -69,18 +69,18 @@ const academicOffices = [
     shortName: "COL",
     description: "Advancing legal education and fostering justice and advocacy",
     icon: "⚖️",
-    link: "/404.astro",
+    link: "/programs/col",
     color: "from-amber-100 to-amber-200"
   },
 ];
 ---
 
 <Layout title="MSUTCTO | Academic Offices">
- <main class="font-sans antialiased text-gray-800 dark:bg-gray-900">
+ <main class="font-sans antialiased text-gray-800 dark:bg-gray-900 bg-msu-bgc-color">
 		<Navbar path={currentPath} client:visible />
 
 		<!-- Hero Section -->
-		<div class="relative bg-msu-deep-ocean from-msu-main-color via-indigo-50 to-purple-50 py-20 overflow-hidden">
+		<div class="relative bg-msu-deep-ocean py-20 overflow-hidden">
 			<!-- Background Pattern -->
 			<div class="absolute inset-0 opacity-20">
 				<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiM2NjY2NjYiIGZpbGwtb3BhY2l0eT0iMC4xIj48Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIyIi8+PC9nPjwvZz48L3N2Zz4=')] bg-repeat"></div>
@@ -100,21 +100,21 @@ const academicOffices = [
 		</div>
 
 		<!-- Academic Offices Grid -->
-		<div class="py-16 bg-gray-50 dark:bg-gray-800">
+		<div class="py-16 bg-msu-bgc-color dark:bg-gray-800">
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 					{academicOffices.map((office) => (
 						<div class="group">
 							<a href={office.link} class="block">
-								<div class="office-card bg-white dark:bg-gray-700 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 dark:border-gray-600 overflow-hidden">
+								<div class="office-card bg-msu-bgc-color dark:bg-gray-700 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 dark:border-gray-600 overflow-hidden">
 									<!-- Header with gradient -->
-									<div class={`bg-gradient-to-r ${office.color} dark:from-gray-600 dark:to-gray-700 p-6 text-gray-800 dark:text-gray-200 relative overflow-hidden`}>
+									<div class={`bg-gradient-to-r from-msu-deep-ocean/20 to-msu-deep-ocean/10 dark:from-gray-600 dark:to-gray-700 p-6 text-gray-800 dark:text-gray-200 relative overflow-hidden`}>
 										<div class="absolute top-0 right-0 opacity-10">
 											<span class="text-6xl">{office.icon}</span>
 										</div>
 										<div class="relative z-10">
 											<div class="text-3xl mb-2">{office.icon}</div>
-											<h3 class="text-lg font-bold mb-1">{office.shortName}</h3>
+											<h3 class="text-lg font-bold mb-1 text-msu-deep-ocean dark:text-gray-200">{office.shortName}</h3>
 											<p class="text-sm text-gray-700 dark:text-gray-300">{office.name}</p>
 										</div>
 									</div>
@@ -128,8 +128,8 @@ const academicOffices = [
 										<!-- Learn More Button -->
 										<div class="flex items-center justify-between">
 											<span class="text-sm font-medium text-gray-500 dark:text-gray-400">Learn More</span>
-											<div class="w-8 h-8 bg-gray-100 dark:bg-gray-600 rounded-full flex items-center justify-center group-hover:bg-blue-100 dark:group-hover:bg-blue-600 transition-colors duration-300">
-												<svg class="w-4 h-4 text-gray-400 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<div class="w-8 h-8 bg-gray-100 dark:bg-gray-600 rounded-full flex items-center justify-center group-hover:bg-msu-deep-ocean/20 dark:group-hover:bg-msu-deep-ocean/30 transition-colors duration-300">
+												<svg class="w-4 h-4 text-gray-400 dark:text-gray-300 group-hover:text-msu-deep-ocean dark:group-hover:text-white transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 													<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
 												</svg>
 											</div>
@@ -144,19 +144,19 @@ const academicOffices = [
 		</div>
 
 		<!-- Call to Action Section -->
-		<div class="bg-gradient-to-r from-blue-50 dark:from-gray-800 to-indigo-50 dark:to-gray-700 py-16">
+		<div class="bg-gradient-to-r from-msu-bgc-color dark:from-gray-800 to-msu-bgc-color dark:to-gray-700 py-16">
 			<div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-				<h2 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+				<h2 class="text-3xl md:text-4xl font-bold text-msu-deep-ocean dark:text-gray-100 mb-6">
 					Ready to Start Your Academic Journey?
 				</h2>
 				<p class="text-xl text-gray-600 dark:text-gray-300 mb-8">
 					Explore our programs and discover the perfect path for your future
 				</p>
 				<div class="flex flex-col sm:flex-row gap-4 justify-center">
-					<a href="/admissions/admissions" class="bg-blue-600 dark:bg-blue-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors duration-300">
+					<a href="/admissions/admissions" class="bg-msu-deep-ocean dark:bg-msu-deep-ocean text-white px-8 py-3 rounded-lg font-semibold hover:bg-msu-deep-ocean dark:hover:bg-msu-deep-ocean transition-colors duration-300">
 						Apply Now
 					</a>
-					<a href="/404" class="border-2 border-blue-600 dark:border-blue-500 text-blue-600 dark:text-blue-400 px-8 py-3 rounded-lg font-semibold hover:bg-blue-600 dark:hover:bg-blue-500 hover:text-white dark:hover:text-white transition-colors duration-300">
+					<a href="/404" class="border-2 border-msu-deep-ocean dark:border-msu-deep-ocean text-msu-deep-ocean dark:text-msu-deep-ocean px-8 py-3 rounded-lg font-semibold hover:bg-msu-deep-ocean dark:hover:bg-msu-deep-ocean hover:text-white dark:hover:text-white transition-colors duration-300">
 						View Programs
 					</a>
 				</div>

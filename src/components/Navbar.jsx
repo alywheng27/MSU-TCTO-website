@@ -252,17 +252,30 @@ const Navbar = ({ path }) => {
             {/* Logo */}
             <a href="/" className="flex items-center">
               <img 
-                src="/images/MSU Seal New (Official).png" 
-                alt="MSU Seal" 
-                className={`transition-all duration-300 ${scrolled ? 'h-10 sm:h-12' : 'h-12 sm:h-16'} mr-3 sm:mr-4`} 
+                src="/images/Official MSU-TCTO logo-01.png" 
+                alt="MSU-TCTO Logo" 
+                className={`transition-all duration-300 ${scrolled ? 'h-10 sm:h-12' : 'h-12 sm:h-16'} mr-3 sm:mr-4`}
+                data-protected-image="true"
+                draggable="false"
+                style={{ 
+                  userSelect: 'none', 
+                  WebkitUserSelect: 'none', 
+                  WebkitTouchCallout: 'none',
+                  WebkitUserDrag: 'none'
+                }}
               />
-              <div className='hidden sm:block'>
-                <img
-                  src="/images/TAWI-TAWI COLLEGE OF TECHNOLOGY AND OCEANOGRAPHY.png"
-                  alt="MSU Logo"
-                  className={`transition-all duration-300 ${scrolled ? 'h-9 sm:h-10' : 'h-10 sm:h-12'}`}
-                />
-              </div>
+              <img 
+                src="/images/TCTO Header - White.png" 
+                alt="MSU-TCTO Wordmark" 
+                className={`hidden sm:block transition-all duration-300 ${scrolled ? 'max-h-16 sm:max-h-20 md:max-h-24 lg:max-h-28' : 'max-h-20 sm:max-h-24 md:max-h-28 lg:max-h-32'} max-w-[400px] sm:max-w-[500px] md:max-w-[600px] lg:max-w-[700px] xl:max-w-[800px] w-auto h-auto object-contain`}
+                draggable="false"
+                style={{ 
+                  userSelect: 'none', 
+                  WebkitUserSelect: 'none', 
+                  WebkitTouchCallout: 'none',
+                  WebkitUserDrag: 'none'
+                }}
+              />
             </a>
 
             {/* Action Buttons */}
@@ -410,9 +423,12 @@ const Navbar = ({ path }) => {
         <div className="flex items-center justify-between p-6 border-b border-msu-main-color dark:border-gray-700 border-opacity-30 flex-shrink-0">
           <div className="flex items-center">
             <img 
-              src="/images/MSU Seal New (Official).png" 
-              alt="MSU Seal" 
-              className="h-10 mr-3" 
+              src="/images/Official MSU-TCTO logo-01.png" 
+              alt="MSU-TCTO Logo" 
+              className="h-10 mr-3"
+              data-protected-image="true"
+              draggable="false"
+              style={{ userSelect: 'none', WebkitUserSelect: 'none', WebkitTouchCallout: 'none' }}
             />
             <div>
               <h3 className="font-bold text-lg">MSU-TCTO</h3>

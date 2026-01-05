@@ -324,21 +324,15 @@ const threeLatestArticles = await get3LatestArticle();
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <!-- Column 1: University Identity -->
             <div class="flex flex-col items-center text-center">
-                <!-- University Seal -->
-                <div class="relative mb-6 group">
+                <!-- University Logo -->
+                <div class="relative mb-6 group" data-protected-logo="true">
                     <div class="absolute inset-0 bg-[#61063B] rounded-full opacity-0 group-hover:opacity-20 blur-md transition-opacity duration-300"></div>
-                    <img src="/images/MSU Seal New (Official).png" alt="MSU Seal" 
-                         class="h-40 transform group-hover:scale-105 transition-transform duration-300">
+                    <img src="/images/Official MSU-TCTO logo-01.png" alt="MSU-TCTO Logo" 
+                         class="h-40 transform group-hover:scale-105 transition-transform duration-300"
+                         data-protected-image="true"
+                         draggable="false"
+                         style="user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;">
                 </div>
-                
-                <!-- University Name -->
-<div class="p-2 sm:p-4">
-  <img
-    src="/images/TAWI-TAWI COLLEGE OF TECHNOLOGY AND OCEANOGRAPHY.png"
-    alt="MSU Logo"
-    class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl h-auto mx-auto"
-  />
-</div>
 <br>
 
                 

@@ -148,12 +148,12 @@ const officeData = {
 
 <Layout title="University Offices | MSU Tawi-Tawi College of Technology and Oceanography" 
        description="Comprehensive directory of all university offices and administrative clusters at MSU TCTO">
-  <main class="bg-white text-gray-900 font-sans antialiased overflow-hidden dark:bg-gray-900 dark:text-white">
+  <main class="bg-msu-bgc-color text-gray-900 font-sans antialiased overflow-hidden dark:bg-gray-900 dark:text-white">
     <!-- Premium Navigation -->
     <Navbar path={currentPath} client:visible />
     
     <!-- Breadcrumb Navigation -->
-    <div class='bg-gradient-to-r from-msu-deep-ocean to-msu-main-color h-[50px] xl:px-[12.5%] xs:px-[5%]'>
+    <div class='bg-gradient-to-r from-msu-deep-ocean to-msu-deep-ocean h-[50px] xl:px-[12.5%] xs:px-[5%]'>
       <nav class="paragraph p2 py-[15px] text-titanium flex items-center overflow-x-auto whitespace-nowrap scrollbar-hide">
         <a href="/home" class="hover:text-white-pure transition-all duration-300 hover:scale-105 transform flex items-center group">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -169,7 +169,7 @@ const officeData = {
     </div>
 
     <!-- Hero Section -->
-    <section class="relative bg-gradient-to-br from-msu-main-color via-msu-deep-ocean to-msu-dark-ocean py-32 overflow-hidden">
+    <section class="relative bg-gradient-to-br from-msu-deep-ocean via-msu-deep-ocean to-msu-deep-ocean py-32 overflow-hidden">
       <!-- Animated Background Elements -->
       <div class="absolute inset-0 overflow-hidden">
         <div class="absolute -top-40 -right-40 w-80 h-80 bg-msu-gold/10 rounded-full blur-3xl animate-pulse"></div>
@@ -194,19 +194,19 @@ const officeData = {
     </section>
 
     <!-- Quick Navigation -->
-    <section class="py-12 bg-gray-50 dark:bg-gray-800">
+    <section class="py-12 bg-msu-bgc-color dark:bg-gray-800">
       <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="text-center mb-12">
-                     <h2 class="text-3xl font-bold text-msu-dark-ocean dark:text-yellow-400">Quick Navigation</h2>
+                     <h2 class="text-3xl font-bold text-msu-deep-ocean dark:text-yellow-400">Quick Navigation</h2>
            <p class="mt-4 text-gray-600 dark:text-yellow-300">Jump to any office cluster</p>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {Object.entries(officeData).map(([key, cluster]) => (
             <a href={`#${key}`} 
-               class="group bg-white p-4 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105 border border-gray-100 dark:bg-gray-700 dark:border-gray-600">
+               class="group bg-msu-bgc-color p-4 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105 border border-gray-100 dark:bg-gray-700 dark:border-gray-600">
               <div class="text-center">
                 <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">{cluster.icon}</div>
-                                 <h3 class="text-sm font-semibold text-gray-800 group-hover:text-msu-main-color transition-colors leading-tight dark:text-yellow-400">
+                                 <h3 class="text-sm font-semibold text-gray-800 group-hover:text-msu-deep-ocean transition-colors leading-tight dark:text-yellow-400">
                    {cluster.title.replace('Office of the ', '').replace('Cluster', '')}
                  </h3>
               </div>
@@ -224,10 +224,10 @@ const officeData = {
             <div id={key} class="animate-fade-in-up" style={`animation-delay: ${index * 0.1}s`}>
               <!-- Cluster Header -->
               <div class="text-center mb-16">
-                <div class={`inline-flex items-center justify-center w-20 h-20 bg-${cluster.color} rounded-full mb-6 shadow-lg`}>
+                <div class={`inline-flex items-center justify-center w-20 h-20 bg-msu-deep-ocean rounded-full mb-6 shadow-lg`}>
                   <span class="text-4xl">{cluster.icon}</span>
                 </div>
-                                 <h2 class="text-4xl font-bold text-msu-dark-ocean mb-4 dark:text-white">{cluster.title}</h2>
+                                 <h2 class="text-4xl font-bold text-msu-deep-ocean mb-4 dark:text-white">{cluster.title}</h2>
                  <div class="w-24 h-1 bg-gradient-to-r from-msu-gold to-msu-golden-fog mx-auto mb-6 rounded-full"></div>
                  <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed dark:text-yellow-300">{cluster.description}</p>
               </div>
@@ -235,20 +235,20 @@ const officeData = {
               <!-- Office Cards Grid -->
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {cluster.offices.map((office, officeIndex) => (
-                  <div class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 overflow-hidden hover:scale-105 dark:bg-gray-800 dark:border-gray-700">
+                  <div class="group bg-msu-bgc-color rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 overflow-hidden hover:scale-105 dark:bg-gray-800 dark:border-gray-700">
                     <!-- Card Header -->
-                    <div class={`h-2 bg-gradient-to-r from-${cluster.color} to-${cluster.color}/80`}></div>
+                    <div class={`h-2 bg-gradient-to-r from-msu-deep-ocean to-msu-deep-ocean/80`}></div>
                     
                     <!-- Card Content -->
                     <div class="p-8">
                       <div class="flex items-start space-x-4">
-                        <div class={`flex-shrink-0 w-12 h-12 bg-${cluster.color}/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform`}>
-                          <svg class={`w-6 h-6 text-${cluster.color}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <div class={`flex-shrink-0 w-12 h-12 bg-msu-deep-ocean/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                          <svg class={`w-6 h-6 text-msu-deep-ocean`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-6m-8 0H3m2 0h6M9 7h6m-6 4h6m-6 4h6" />
                           </svg>
                         </div>
                         <div class="flex-1">
-                                                     <h3 class="text-lg font-semibold text-gray-900 group-hover:text-msu-main-color transition-colors leading-tight dark:text-yellow-400">
+                                                     <h3 class="text-lg font-semibold text-gray-900 group-hover:text-msu-deep-ocean transition-colors leading-tight dark:text-yellow-400">
                              {office}
                            </h3>
                            <div class="mt-4 flex items-center text-sm text-gray-500 dark:text-yellow-300">
@@ -263,7 +263,7 @@ const officeData = {
                       
                       <!-- Hover Action -->
                       <div class="mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                 <div class="flex items-center text-sm text-msu-main-color font-medium dark:text-yellow-400">
+                                                 <div class="flex items-center text-sm text-msu-deep-ocean font-medium dark:text-yellow-400">
                            Learn more
                            <svg class="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -281,7 +281,7 @@ const officeData = {
     </section>
 
     <!-- Contact Information -->
-    <section class="py-20 bg-gradient-to-br from-msu-main-color to-msu-deep-ocean">
+    <section class="py-20 bg-gradient-to-br from-msu-deep-ocean to-msu-deep-ocean">
       <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center">
         <h2 class="text-4xl font-bold text-white mb-8">Need Assistance?</h2>
         <p class="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
@@ -324,7 +324,7 @@ const officeData = {
     </section>
 
     <!-- Scroll to Top Button -->
-    <button class="scroll-to-top fixed bottom-8 right-8 bg-msu-main-color hover:bg-msu-dark-ocean text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-50" aria-label="Scroll to top">
+    <button class="scroll-to-top fixed bottom-8 right-8 bg-msu-deep-ocean hover:bg-msu-deep-ocean text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-50" aria-label="Scroll to top">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
       </svg>
