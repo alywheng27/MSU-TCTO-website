@@ -476,47 +476,52 @@
    */
   /**
    * Proactive protection - periodically make logos black to catch screenshots
-   * This helps catch Print Screen which happens too fast to detect
-   * ENABLED: This is critical for catching Print Screen which is too fast to detect
+   * CRITICAL for mobile devices - hardware screenshots cannot be detected, so we use high-frequency blackout
    */
   function proactiveLogoProtection() {
-    // Make logos black briefly every few milliseconds
-    // This increases the chance that Print Screen will capture black logos
+    const isMobile = isMobileDevice();
+    
+    // On mobile, use much higher frequency to catch hardware button screenshots
+    const interval = isMobile ? 50 : 150; // 50ms on mobile (20 times per second), 150ms on desktop
+    const blackoutDuration = isMobile ? 25 : 30; // Slightly longer on mobile
+    const chance = isMobile ? 0.6 : 0.4; // 60% chance on mobile (higher frequency)
+    
     setInterval(() => {
-      const logos = document.querySelectorAll(
-        'img[src*="Official MSU-TCTO logo-01"], ' +
-        'img[data-protected-image="true"], ' +
-        '[data-protected-logo="true"] img'
-      );
+      const logos = document.querySelectorAll('img[src*="Official MSU-TCTO logo-01.png"]');
       
       if (logos.length === 0) return;
       
-      // Make logos black for very brief moments (higher frequency for better protection)
-      // This is invisible to users but catches screenshots
-      if (Math.random() < 0.4) { // 40% chance every interval - increased from 30%
+      // Make logos black for very brief moments
+      // On mobile: Higher frequency increases chance of catching hardware button screenshots
+      if (Math.random() < chance) {
         logos.forEach(logo => {
-          // Only apply if not already black
+          // Only apply if not already black from a detected screenshot
           if (!logo.classList.contains('screenshot-protected-black')) {
             const originalFilter = logo.style.filter || '';
+            
+            // Apply black filter instantly
             logo.style.setProperty('filter', 'brightness(0) contrast(0)', 'important');
             logo.style.setProperty('-webkit-filter', 'brightness(0) contrast(0)', 'important');
+            logo.style.setProperty('-moz-filter', 'brightness(0) contrast(0)', 'important');
             logo.style.setProperty('transition', 'filter 0s ease', 'important');
             
-            // Force reflow
+            // Force reflow for immediate application
             void logo.offsetWidth;
+            void logo.offsetHeight;
             
-            // Restore almost immediately (30ms) - too fast for human eye but catches screenshots
+            // Restore almost immediately - invisible to human eye but catches screenshots
             setTimeout(() => {
               if (!logo.classList.contains('screenshot-protected-black')) {
                 logo.style.setProperty('filter', originalFilter, 'important');
                 logo.style.setProperty('-webkit-filter', originalFilter, 'important');
-                logo.style.setProperty('transition', 'filter 0.05s ease', 'important');
+                logo.style.setProperty('-moz-filter', originalFilter, 'important');
+                logo.style.setProperty('transition', 'filter 0.02s ease', 'important');
               }
-            }, 30); // Reduced from 50ms for faster protection
+            }, blackoutDuration);
           }
         });
       }
-    }, 150); // Check every 150ms (faster than 200ms for better protection)
+    }, interval);
   }
 
   /**
@@ -640,18 +645,25 @@
         display: block !important;
       }
       
-      /* Logo appears normal by default - no filters applied until screenshot is detected */
+      /* Logo appears normal by default - proactive protection uses very brief blackouts */
       img[src*="Official MSU-TCTO logo-01.png"] {
         position: relative;
         will-change: filter;
         pointer-events: auto;
         -webkit-tap-highlight-color: transparent;
         touch-action: manipulation;
-        /* No default filter - logo appears completely normal */
+        /* Proactive protection applies brief blackouts (invisible to users) */
       }
       
-      /* Mobile-specific optimizations */
+      /* Mobile-specific optimizations for better performance */
       @media (max-width: 768px) {
+        img[src*="Official MSU-TCTO logo-01.png"] {
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+          transform: translateZ(0);
+          -webkit-transform: translateZ(0);
+        }
+        
         img[src*="Official MSU-TCTO logo-01.png"].screenshot-protected-black {
           -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
@@ -815,8 +827,9 @@
     // Apply CSS for logo blackout
     applyLogoBlackoutCSS();
 
-    // Proactive protection DISABLED - no blinking, only trigger on screenshot attempts
-    // proactiveLogoProtection();
+    // Proactive protection ENABLED - CRITICAL for mobile hardware screenshots
+    // High-frequency blackout on mobile to catch volume+power button screenshots
+    proactiveLogoProtection();
 
     // Protection overlay disabled - only logo protection is active
     // createProtectionOverlay();
