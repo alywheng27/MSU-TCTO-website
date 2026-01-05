@@ -461,20 +461,20 @@
   }
 
   /**
-   * Make logos black when screenshot is detected
-   * This function applies CSS filters to turn logos black when canvas-based screenshots are taken
+   * Make logos blurred when screenshot is detected
+   * This function applies CSS filters to blur logos when screenshots are taken
    */
   function makeLogosBlack(duration = 10000) {
     // Find ONLY the Official MSU-TCTO logo-01.png - specific protection only
     const logos = document.querySelectorAll('img[src*="Official MSU-TCTO logo-01.png"]');
     
     logos.forEach(logo => {
-      // Apply filter to make logo black IMMEDIATELY (no transition delay)
+      // Apply blur filter to make logo unreadable when screenshot is detected
       // Use multiple methods to ensure it works
-      logo.style.setProperty('filter', 'brightness(0) contrast(0)', 'important');
-      logo.style.setProperty('-webkit-filter', 'brightness(0) contrast(0)', 'important');
-      logo.style.setProperty('-moz-filter', 'brightness(0) contrast(0)', 'important');
-      logo.style.setProperty('transition', 'filter 0s ease', 'important');
+      logo.style.setProperty('filter', 'blur(15px)', 'important');
+      logo.style.setProperty('-webkit-filter', 'blur(15px)', 'important');
+      logo.style.setProperty('-moz-filter', 'blur(15px)', 'important');
+      logo.style.setProperty('transition', 'filter 0.2s ease', 'important');
       logo.style.setProperty('will-change', 'filter', 'important');
       logo.style.setProperty('opacity', '1', 'important');
       
@@ -498,54 +498,59 @@
     
     // Log for debugging
     if (config.enableConsoleWarnings && logos.length > 0) {
-      console.log(`🛡️ Logo protection: ${logos.length} logo(s) turned black`);
+      console.log(`🛡️ Logo protection: ${logos.length} logo(s) blurred`);
     }
   }
 
   /**
-   * Proactive protection - periodically make logos black to catch screenshots
-   * CRITICAL for mobile devices - hardware screenshots cannot be detected, so we use high-frequency blackout
+   * Proactive protection - reduced frequency to minimize blinking
+   * Logo protection with lower frequency to catch hardware button screenshots on mobile
    */
   function proactiveLogoProtection() {
     const isMobile = isMobileDevice();
     
-    // On mobile, use much higher frequency to catch hardware button screenshots
-    const interval = isMobile ? 30 : 150; // 30ms on mobile (33 times per second), 150ms on desktop
-    const blackoutDuration = isMobile ? 20 : 30; // Brief blackout on mobile
-    const chance = isMobile ? 0.7 : 0.4; // 70% chance on mobile (higher frequency for hardware buttons)
+    // Only enable on mobile where hardware buttons are a threat
+    // Use much lower frequency to minimize blinking
+    if (!isMobile) return;
+    
+    // Reduced frequency: every 200ms (5 times per second) with 15% chance
+    // This is much less aggressive than before (was 30ms with 70% chance)
+    const interval = 200; // 200ms intervals - much less frequent
+    const blurDuration = 30; // 30ms blur (very brief, barely noticeable)
+    const chance = 0.15; // Only 15% chance - much lower than before
     
     setInterval(() => {
       const logos = document.querySelectorAll('img[src*="Official MSU-TCTO logo-01.png"]');
       
       if (logos.length === 0) return;
       
-      // Make logos black for very brief moments
-      // On mobile: Higher frequency increases chance of catching hardware button screenshots (Volume + Power)
+      // Only apply blur occasionally to catch hardware button screenshots
+      // Low frequency and chance minimize visible blinking
       if (Math.random() < chance) {
         logos.forEach(logo => {
-          // Only apply if not already black from a detected screenshot
+          // Only apply if not already blurred from a detected screenshot
           if (!logo.classList.contains('screenshot-protected-black')) {
             const originalFilter = logo.style.filter || '';
             
-            // Apply black filter instantly
-            logo.style.setProperty('filter', 'brightness(0) contrast(0)', 'important');
-            logo.style.setProperty('-webkit-filter', 'brightness(0) contrast(0)', 'important');
-            logo.style.setProperty('-moz-filter', 'brightness(0) contrast(0)', 'important');
-            logo.style.setProperty('transition', 'filter 0s ease', 'important');
+            // Apply blur filter briefly
+            logo.style.setProperty('filter', 'blur(15px)', 'important');
+            logo.style.setProperty('-webkit-filter', 'blur(15px)', 'important');
+            logo.style.setProperty('-moz-filter', 'blur(15px)', 'important');
+            logo.style.setProperty('transition', 'filter 0.1s ease', 'important');
             
             // Force reflow for immediate application
             void logo.offsetWidth;
             void logo.offsetHeight;
             
-            // Restore almost immediately - invisible to human eye but catches screenshots
+            // Restore quickly - very brief blur to catch screenshots
             setTimeout(() => {
               if (!logo.classList.contains('screenshot-protected-black')) {
                 logo.style.setProperty('filter', originalFilter, 'important');
                 logo.style.setProperty('-webkit-filter', originalFilter, 'important');
                 logo.style.setProperty('-moz-filter', originalFilter, 'important');
-                logo.style.setProperty('transition', 'filter 0.02s ease', 'important');
+                logo.style.setProperty('transition', 'filter 0.2s ease', 'important');
               }
-            }, blackoutDuration);
+            }, blurDuration);
           }
         });
       }
@@ -715,12 +720,12 @@
     style.textContent = `
       /* Make ONLY Official MSU-TCTO logo-01.png black when screenshot is detected - INSTANT BLACKOUT */
       img[src*="Official MSU-TCTO logo-01.png"].screenshot-protected-black {
-        filter: brightness(0) contrast(0) !important;
-        -webkit-filter: brightness(0) contrast(0) !important;
-        -moz-filter: brightness(0) contrast(0) !important;
-        -ms-filter: brightness(0) contrast(0) !important;
-        transition: filter 0s ease !important;
-        -webkit-transition: filter 0s ease !important;
+        filter: blur(15px) !important;
+        -webkit-filter: blur(15px) !important;
+        -moz-filter: blur(15px) !important;
+        -ms-filter: blur(15px) !important;
+        transition: filter 0.2s ease !important;
+        -webkit-transition: filter 0.2s ease !important;
         opacity: 1 !important;
         display: block !important;
       }
