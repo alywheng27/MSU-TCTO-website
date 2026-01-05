@@ -503,29 +503,28 @@
   }
 
   /**
-   * Proactive protection - reduced frequency to minimize blinking
-   * Logo protection with lower frequency to catch hardware button screenshots on mobile
+   * Proactive protection - increased frequency to better catch hardware button screenshots
+   * Logo protection with higher frequency to catch Volume + Power button screenshots on mobile
    */
   function proactiveLogoProtection() {
     const isMobile = isMobileDevice();
     
     // Only enable on mobile where hardware buttons are a threat
-    // Use much lower frequency to minimize blinking
     if (!isMobile) return;
     
-    // Reduced frequency: every 200ms (5 times per second) with 15% chance
-    // This is much less aggressive than before (was 30ms with 70% chance)
-    const interval = 200; // 200ms intervals - much less frequent
-    const blurDuration = 30; // 30ms blur (very brief, barely noticeable)
-    const chance = 0.15; // Only 15% chance - much lower than before
+    // Increased frequency: every 80ms (12.5 times per second) with 40% chance
+    // Faster to better catch hardware button screenshots while still being usable
+    const interval = 80; // 80ms intervals - faster frequency
+    const blurDuration = 25; // 25ms blur (very brief, barely noticeable)
+    const chance = 0.4; // 40% chance - increased for better coverage
     
     setInterval(() => {
       const logos = document.querySelectorAll('img[src*="Official MSU-TCTO logo-01.png"]');
       
       if (logos.length === 0) return;
       
-      // Only apply blur occasionally to catch hardware button screenshots
-      // Low frequency and chance minimize visible blinking
+      // Apply blur frequently to catch hardware button screenshots (Volume + Power)
+      // Higher frequency and chance improve coverage while blur keeps it subtle
       if (Math.random() < chance) {
         logos.forEach(logo => {
           // Only apply if not already blurred from a detected screenshot
@@ -536,7 +535,7 @@
             logo.style.setProperty('filter', 'blur(15px)', 'important');
             logo.style.setProperty('-webkit-filter', 'blur(15px)', 'important');
             logo.style.setProperty('-moz-filter', 'blur(15px)', 'important');
-            logo.style.setProperty('transition', 'filter 0.1s ease', 'important');
+            logo.style.setProperty('transition', 'filter 0.05s ease', 'important');
             
             // Force reflow for immediate application
             void logo.offsetWidth;
@@ -548,7 +547,7 @@
                 logo.style.setProperty('filter', originalFilter, 'important');
                 logo.style.setProperty('-webkit-filter', originalFilter, 'important');
                 logo.style.setProperty('-moz-filter', originalFilter, 'important');
-                logo.style.setProperty('transition', 'filter 0.2s ease', 'important');
+                logo.style.setProperty('transition', 'filter 0.1s ease', 'important');
               }
             }, blurDuration);
           }
