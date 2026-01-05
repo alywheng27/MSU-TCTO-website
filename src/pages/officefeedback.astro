@@ -37,20 +37,20 @@ const currentPath = Astro.url.pathname;
         <section id="service" class="bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 py-16 md:py-24">
           <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
             <div class="text-center mb-16">
-              <span class="inline-block px-4 py-2 bg-msu-main-color/10 dark:bg-[#61063B]/20 text-msu-main-color dark:bg-gradient-to-r dark:from-[#61063B] dark:to-white dark:bg-clip-text dark:text-transparent text-sm font-semibold rounded-full mb-4">
+              <span class="inline-block px-4 py-2 bg-msu-main-color/10 dark:bg-[#61063B]/20 text-msu-main-color dark:text-msu-deep-ocean text-sm font-semibold rounded-full mb-4">
                 Service Feedback
               </span>
               <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-                Office Service <span class="text-msu-main-color dark:bg-gradient-to-r dark:from-[#61063B] dark:to-white dark:bg-clip-text dark:text-transparent">Evaluation</span>
+                Office Service <span class="text-msu-main-color dark:text-msu-deep-ocean">Evaluation</span>
               </h2>
-              <div class="w-24 h-1.5 bg-gradient-to-r from-msu-gold to-msu-maroon dark:from-[#61063B] dark:to-white mx-auto rounded-full"></div>
+              <div class="w-24 h-1.5 bg-msu-deep-ocean mx-auto rounded-full"></div>
               <p class="text-lg text-gray-600 dark:text-gray-300 mt-6 max-w-2xl mx-auto">
                 Your feedback helps us maintain excellence in university services
               </p>
             </div>
 
             <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700">
-              <div class="bg-gradient-to-r from-msu-main-color to-msu-maroon px-8 py-6">
+              <div class="bg-msu-deep-ocean px-8 py-6">
                 <div class="flex items-center">
                   <div class="bg-white/20 p-2 rounded-lg mr-4">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -69,7 +69,7 @@ const currentPath = Astro.url.pathname;
                   
                   <div class="space-y-8">
                     <div class="flex items-start">
-                      <div class="hidden sm:flex flex-shrink-0 items-center justify-center h-12 w-12 rounded-lg bg-msu-main-color/10 dark:bg-yellow-400/20 text-msu-main-color dark:text-yellow-400 mr-6">
+                      <div class="hidden sm:flex flex-shrink-0 items-center justify-center h-12 w-12 rounded-lg bg-msu-main-color/10 dark:bg-msu-blue-text/20 text-msu-main-color dark:text-msu-blue-text mr-6">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                         </svg>
@@ -90,7 +90,7 @@ const currentPath = Astro.url.pathname;
                             <input
                               type="text"
                               id="globalSearch"
-                              class="block w-full pl-10 pr-12 py-3 border text-gray-700 dark:text-gray-200 dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-msu-main-color/50 dark:focus:ring-yellow-400/50 focus:border-msu-main-color dark:focus:border-yellow-400 transition-all"
+                              class="block w-full pl-10 pr-12 py-3 border text-gray-700 dark:text-gray-200 dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-msu-main-color/50 dark:focus:ring-msu-blue-text/50 focus:border-msu-main-color dark:focus:border-msu-blue-text transition-all"
                               placeholder="Search all offices and services..."
                               autocomplete="off"
                             />
@@ -111,7 +111,7 @@ const currentPath = Astro.url.pathname;
                                 id="office" 
                                 name="entry.1924231474" 
                                 required
-                                class="office-select block w-full pl-4 pr-10 py-3 text-gray-700 dark:text-gray-200 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-msu-main-color/50 dark:focus:ring-yellow-400/50 focus:border-msu-main-color dark:focus:border-yellow-400 transition-all hover:border-gray-400 dark:hover:border-gray-500"
+                                class="office-select block w-full pl-4 pr-10 py-3 text-gray-700 dark:text-gray-200 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-msu-main-color/50 dark:focus:ring-msu-blue-text/50 focus:border-msu-main-color dark:focus:border-msu-blue-text transition-all hover:border-gray-400 dark:hover:border-gray-500"
                               >
                                 <option value="" disabled selected>Select an office</option>
                                 <optgroup label="Administrative Offices" class="text-gray-900">
@@ -253,7 +253,7 @@ const currentPath = Astro.url.pathname;
                                 id="status" 
                                 name="entry.724584061" 
                                 required
-                                class="block w-full pl-4 pr-10 py-3 text-gray-700 dark:text-gray-200 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-msu-main-color/50 dark:focus:ring-yellow-400/50 focus:border-msu-main-color dark:focus:border-yellow-400 transition-all hover:border-gray-400 dark:hover:border-gray-500"
+                                class="block w-full pl-4 pr-10 py-3 text-gray-700 dark:text-gray-200 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-msu-main-color/50 dark:focus:ring-msu-blue-text/50 focus:border-msu-main-color dark:focus:border-msu-blue-text transition-all hover:border-gray-400 dark:hover:border-gray-500"
                               >
                                 <option value="" disabled selected>Select your status</option>
                                 <option value="Permanent">Permanent</option>
@@ -280,7 +280,7 @@ const currentPath = Astro.url.pathname;
 
                   <div class="space-y-8">
                     <div class="flex items-start">
-                      <div class="hidden sm:flex flex-shrink-0 items-center justify-center h-12 w-12 rounded-lg bg-msu-main-color/10 dark:bg-yellow-400/20 text-msu-main-color dark:text-yellow-400 mr-6">
+                      <div class="hidden sm:flex flex-shrink-0 items-center justify-center h-12 w-12 rounded-lg bg-msu-main-color/10 dark:bg-msu-blue-text/20 text-msu-main-color dark:text-msu-blue-text mr-6">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                         </svg>
@@ -342,7 +342,7 @@ const currentPath = Astro.url.pathname;
                                         name={item.field}
                                         value={rating}
                                         required
-                                        class="h-5 w-5 text-msu-main-color dark:text-yellow-400 focus:ring-msu-main-color dark:focus:ring-yellow-400 border-gray-300 dark:border-gray-600 dark:bg-gray-700"
+                                        class="h-5 w-5 text-msu-main-color dark:text-msu-blue-text focus:ring-msu-main-color dark:focus:ring-msu-blue-text border-gray-300 dark:border-gray-600 dark:bg-gray-700"
                                       />
                                       <label for={`${item.id}${rating}`} class="mt-2 text-xs font-medium text-gray-500 dark:text-gray-400">
                                         {
@@ -366,7 +366,7 @@ const currentPath = Astro.url.pathname;
 
                   <div class="space-y-8">
                     <div class="flex items-start">
-                      <div class="hidden sm:flex flex-shrink-0 items-center justify-center h-12 w-12 rounded-lg bg-msu-main-color/10 dark:bg-yellow-400/20 text-msu-main-color dark:text-yellow-400 mr-6">
+                      <div class="hidden sm:flex flex-shrink-0 items-center justify-center h-12 w-12 rounded-lg bg-msu-main-color/10 dark:bg-msu-blue-text/20 text-msu-main-color dark:text-msu-blue-text mr-6">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                         </svg>
@@ -384,7 +384,7 @@ const currentPath = Astro.url.pathname;
                             name="entry.1589457788" 
                             rows="4"
                             placeholder="Please share any specific experiences or suggestions that could help us improve... (This field is optional)"
-                            class="block w-full px-4 py-3 text-gray-700 dark:text-gray-200 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-msu-main-color/50 dark:focus:ring-yellow-400/50 focus:border-msu-main-color dark:focus:border-yellow-400 transition-all hover:border-gray-400 dark:hover:border-gray-500"
+                            class="block w-full px-4 py-3 text-gray-700 dark:text-gray-200 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-msu-main-color/50 dark:focus:ring-msu-blue-text/50 focus:border-msu-main-color dark:focus:border-msu-blue-text transition-all hover:border-gray-400 dark:hover:border-gray-500"
                           ></textarea>
                         </div>
                       </div>
@@ -399,7 +399,7 @@ const currentPath = Astro.url.pathname;
                       <button
                         type="submit"
                         id="submitBtn"
-                        class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-msu-main-color to-msu-maroon dark:bg-[#61063B] hover:from-msu-main-color-dark hover:to-msu-maroon-dark dark:hover:bg-[#61063B] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-msu-main-color dark:focus:ring-[#61063B] transition-all transform hover:-translate-y-0.5 hover:shadow-md disabled:opacity-70 disabled:cursor-not-allowed"
+                        class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-msu-deep-ocean dark:bg-[#61063B] hover:bg-msu-dark-pink dark:hover:bg-[#49052c] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-msu-main-color dark:focus:ring-[#61063B] transition-all transform hover:-translate-y-0.5 hover:shadow-md disabled:opacity-70 disabled:cursor-not-allowed"
                       >
                         <span id="submitText">Submit Evaluation</span>
                         <svg id="submitSpinner" class="hidden h-5 w-5 ml-2 animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -471,7 +471,7 @@ const currentPath = Astro.url.pathname;
     .tab-btn {
       transition: all 0.3s ease;
       background-color: #f3f4f6;
-      color: #1e3a8a;
+      color: #61063B;
       border: 1px solid #d1d5db;
       position: relative;
     }
@@ -481,9 +481,9 @@ const currentPath = Astro.url.pathname;
       border-color: #4b5563;
     }
     .tab-btn.active {
-      background-color: #1e3a8a;
+      background-color: #61063B;
       color: white;
-      border-color: #1e3a8a;
+      border-color: #61063B;
     }
     .dark .tab-btn.active {
       background-color: #61063B;
@@ -497,7 +497,7 @@ const currentPath = Astro.url.pathname;
       left: 0;
       right: 0;
       height: 3px;
-      background-color: #1e3a8a;
+      background-color: #61063B;
     }
     .dark .tab-btn.active::after {
       background-color: #61063B;
@@ -518,7 +518,7 @@ const currentPath = Astro.url.pathname;
     }
     
     .service-card:hover {
-      border-color: #1e3a8a;
+      border-color: #61063B;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
       transform: translateY(-2px);
     }
@@ -528,8 +528,8 @@ const currentPath = Astro.url.pathname;
     }
     
     .service-card.selected {
-      border-color: #1e3a8a;
-      background-color: #f0f4ff;
+      border-color: #61063B;
+      background-color: rgba(97, 6, 59, 0.1);
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     }
     .dark .service-card.selected {
@@ -559,8 +559,8 @@ const currentPath = Astro.url.pathname;
       align-items: center;
       justify-content: center;
       margin-right: 1rem;
-      background-color: #1e3a8a10;
-      color: #1e3a8a;
+      background-color: rgba(97, 6, 59, 0.1);
+      color: #61063B;
       transition: all 0.3s ease;
     }
     .dark .service-card-icon {
@@ -569,12 +569,12 @@ const currentPath = Astro.url.pathname;
     }
     
     .service-card.selected .service-card-icon {
-      background-color: #1e3a8a;
+      background-color: #61063B;
       color: white;
     }
     .dark .service-card.selected .service-card-icon {
-      background-color: #eab308;
-      color: #111827;
+      background-color: #61063B;
+      color: white;
     }
     
     .service-card-title {
@@ -741,12 +741,12 @@ const currentPath = Astro.url.pathname;
       padding: 1.5rem;
       display: flex;
       align-items: center;
-      background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+      background: #61063B;
       color: white;
     }
     .dark .modal-header {
-      background: linear-gradient(135deg, #eab308, #f59e0b);
-      color: #111827;
+      background: #61063B;
+      color: white;
     }
     
     .modal-icon {
@@ -794,20 +794,20 @@ const currentPath = Astro.url.pathname;
     }
     
     .modal-button-primary {
-      background-color: #1e3a8a;
+      background-color: #61063B;
       color: white;
       border: none;
     }
     .dark .modal-button-primary {
-      background-color: #eab308;
-      color: #111827;
+      background-color: #61063B;
+      color: white;
     }
     
     .modal-button-primary:hover {
-      background-color: #1e40af;
+      background-color: #49052c;
     }
     .dark .modal-button-primary:hover {
-      background-color: #f59e0b;
+      background-color: #49052c;
     }
     
     /* Success/Error Specific Styles */
@@ -871,7 +871,7 @@ const currentPath = Astro.url.pathname;
     
     .progress-fill {
       fill: none;
-      stroke: #1e3a8a;
+      stroke: #61063B;
       stroke-width: 4;
       stroke-linecap: round;
       transform-origin: center;
@@ -886,7 +886,7 @@ const currentPath = Astro.url.pathname;
       transform: translate(-50%, -50%);
       font-size: 0.75rem;
       font-weight: bold;
-      color: #1e3a8a;
+      color: #61063B;
     }
 
     /* Animations */
@@ -930,10 +930,10 @@ const currentPath = Astro.url.pathname;
     }
     
     .loader {
-      border-top-color: #1a4b8c;
-      border-right-color: #1a4b8c;
-      border-bottom-color: #8b1a1a;
-      border-left-color: #d4af37;
+      border-top-color: #61063B;
+      border-right-color: #61063B;
+      border-bottom-color: #61063B;
+      border-left-color: #61063B;
       animation-timing-function: cubic-bezier(0.53, 0.21, 0.29, 0.67);
     }
     
@@ -943,7 +943,7 @@ const currentPath = Astro.url.pathname;
     
     .progress-bar {
       transition: width 0.8s ease;
-      background: linear-gradient(90deg, #1a4b8c 0%, #8b1a1a 50%, #d4af37 100%);
+      background: #61063B;
     }
     
     .loader-logo {
@@ -1163,7 +1163,7 @@ const currentPath = Astro.url.pathname;
                         </div>
                         <h3 class="text-xl font-semibold text-gray-900 mb-2">Success!</h3>
                         <p class="text-gray-600 mb-6">Your evaluation has been submitted successfully. Thank you for your valuable feedback!</p>
-                        <button onclick="this.closest('.office-eval-success-modal').remove()" class="w-full px-4 py-2 bg-msu-main-color text-white rounded-lg hover:bg-msu-maroon transition-colors">
+                        <button onclick="this.closest('.office-eval-success-modal').remove()" class="w-full px-4 py-2 bg-msu-deep-ocean text-white rounded-lg hover:bg-msu-dark-pink transition-colors">
                             Close
                         </button>
                     </div>
@@ -1297,7 +1297,7 @@ const currentPath = Astro.url.pathname;
                     <div class="loader-container bg-white p-8 rounded-xl shadow-2xl flex flex-col items-center max-w-md mx-4">
                         <!-- MSU Logo Animation -->
                         <div class="loader-logo mb-6">
-                            <div class="w-16 h-16 bg-gradient-to-br from-msu-main-color to-msu-maroon rounded-full flex items-center justify-center">
+                            <div class="w-16 h-16 bg-msu-deep-ocean rounded-full flex items-center justify-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                                 </svg>

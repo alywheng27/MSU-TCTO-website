@@ -15,7 +15,7 @@ const currentPath = Astro.url.pathname;
 
 
           <!-- Hero Section -->
-    <section class="relative bg-gradient-to-br from-msu-main-color to-msu-rusty-red/90 text-white py-40 overflow-hidden pt-[200px]">
+    <section class="relative bg-msu-deep-ocean text-white py-40 overflow-hidden pt-[200px]">
         <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1567359781514-3c964c02b32a?q=80&w=1932&auto=format&fit=crop')] bg-cover bg-center opacity-30"></div>
         <div class="container mx-auto px-6 relative z-10 text-center">
           <h1 class="headings text-5xl md:text-5xl font-bold mb-6 animate-fade-in-up">
@@ -37,7 +37,7 @@ const currentPath = Astro.url.pathname;
           <!-- Enhanced Audio Player with Progress Bar -->
           <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 mb-12">
             <div class="flex items-center justify-between mb-3">
-              <h3 class="text-lg font-semibold text-msu-main-color dark:text-yellow-400 flex items-center">
+              <h3 class="text-lg font-semibold text-msu-deep-ocean dark:text-msu-deep-ocean flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
                 </svg>
@@ -51,13 +51,13 @@ const currentPath = Astro.url.pathname;
               <source src="/audio/himno_tcto.mp3" type="audio/mpeg">
             </audio>
             <div id="progress-bar" class="h-1 bg-gray-200 dark:bg-gray-600 mt-2 rounded-full overflow-hidden">
-              <div id="progress" class="h-full bg-msu-main-color dark:bg-yellow-400" style="width: 0%"></div>
+              <div id="progress" class="h-full bg-msu-deep-ocean dark:bg-msu-deep-ocean" style="width: 0%"></div>
             </div>
           </div>
   
           <!-- Lyrics Container with Perfect Sync -->
           <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
-            <div class="bg-gradient-to-r from-msu-main-color to-msu-dark-maroon text-white py-5 px-8">
+            <div class="bg-msu-deep-ocean text-white py-5 px-8">
               <h2 class="text-2xl font-bold flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
@@ -113,7 +113,7 @@ const currentPath = Astro.url.pathname;
                 <!-- Final Verse (Highlighted throughout) -->
                 <div data-start="96" data-end="109" class="lyric-verse transition-all duration-300">
                   <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-2">Dakilang paaralan</p>
-                  <p class="text-xl md:text-2xl text-msu-maroon dark:text-yellow-400 font-bold">Pamantasang Mindanao.</p>
+                  <p class="text-xl md:text-2xl text-msu-deep-ocean dark:text-msu-deep-ocean font-bold">Pamantasang Mindanao.</p>
                 </div>
               </div>
             </div>
@@ -121,10 +121,10 @@ const currentPath = Astro.url.pathname;
   
           <!-- University Seal -->
           <div class="mt-16 text-center">
-            <div class="inline-flex items-center justify-center p-4 bg-white dark:bg-white rounded-full shadow-lg border-4 border-msu-maroon/20 dark:border-yellow-400/30">
-              <img src="/images/MSU Seal New (Official).png" alt="MSU Seal" class="h-20 w-20" loading="lazy">
+            <div class="inline-flex items-center justify-center p-4 bg-white dark:bg-white rounded-full shadow-lg border-4 border-msu-deep-ocean/20 dark:border-msu-deep-ocean/30">
+              <img src="/images/Official MSU-TCTO logo-01.png" alt="MSU-TCTO Logo" class="h-20 w-20" loading="lazy" data-protected-image="true" draggable="false" style="user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;">
             </div>
-            <h3 class="mt-6 text-2xl font-bold text-msu-maroon dark:text-yellow-400">Mindanao State University</h3>
+            <h3 class="mt-6 text-2xl font-bold text-msu-deep-ocean dark:text-msu-deep-ocean">Mindanao State University</h3>
             <p class="text-lg text-gray-600 dark:text-gray-300 mt-2">Tawi-Tawi College of Technology and Oceanography</p>
           </div>
         </div>
@@ -207,9 +207,9 @@ const currentPath = Astro.url.pathname;
               
               if (currentTime >= start && currentTime <= end) {
                 // Highlight current verse
-                verse.classList.add('active-verse', 'bg-msu-maroon/5', 'dark:bg-yellow-400/5', 'border-l-4', 'border-msu-maroon', 'dark:border-yellow-400', 'pl-4');
+                verse.classList.add('active-verse', 'bg-msu-deep-ocean/5', 'dark:bg-msu-deep-ocean/5', 'border-l-4', 'border-msu-deep-ocean', 'dark:border-msu-deep-ocean', 'pl-4');
                 verse.querySelectorAll('p').forEach(p => {
-                  p.classList.add('text-msu-maroon', 'dark:text-yellow-400', 'font-medium');
+                  p.classList.add('text-msu-deep-ocean', 'dark:text-msu-deep-ocean', 'font-medium');
                   p.classList.remove('text-gray-700', 'dark:text-gray-300');
                 });
                 
@@ -220,9 +220,9 @@ const currentPath = Astro.url.pathname;
                 }
               } else {
                 // Reset other verses
-                verse.classList.remove('active-verse', 'bg-msu-maroon/5', 'dark:bg-yellow-400/5', 'border-l-4', 'border-msu-maroon', 'dark:border-yellow-400', 'pl-4');
+                verse.classList.remove('active-verse', 'bg-msu-deep-ocean/5', 'dark:bg-msu-deep-ocean/5', 'border-l-4', 'border-msu-deep-ocean', 'dark:border-msu-deep-ocean', 'pl-4');
                 verse.querySelectorAll('p').forEach(p => {
-                  p.classList.remove('text-msu-maroon', 'dark:text-yellow-400', 'font-medium');
+                  p.classList.remove('text-msu-deep-ocean', 'dark:text-msu-deep-ocean', 'font-medium');
                   p.classList.add('text-gray-700', 'dark:text-gray-300');
                 });
                 verse.scrollIntoViewOnActive = false;
@@ -285,11 +285,11 @@ const currentPath = Astro.url.pathname;
     }
     
     .lyric-verse:hover {
-      background-color: rgba(115, 38, 67, 0.05) !important;
+      background-color: rgba(97, 6, 59, 0.05) !important;
     }
     
     .dark .lyric-verse:hover {
-      background-color: rgba(251, 191, 36, 0.05) !important;
+      background-color: rgba(97, 6, 59, 0.05) !important;
     }
     
     /* Active Verse Styling */

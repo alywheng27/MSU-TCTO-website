@@ -94,6 +94,14 @@ export async function getArticle() {
       asset->,
       crop,
       hotspot,
+      caption,
+    },
+    gallery[]{
+      asset->,
+      crop,
+      hotspot,
+      caption,
+      alt,
     },
     college->{college},
     articleSubject->{subject},
@@ -489,6 +497,35 @@ export async function get4UpcomingEvents() {
     return fourUpcomingEvents || [];
   } catch (error) {
     console.error('Error in get4UpcomingEvents:', error);
+    return [];
+  }
+}
+
+export async function get5UpcomingEvents() {
+  try {
+    console.log('=== DEBUG: get5UpcomingEvents ===');
+    
+    // Get all calendar events without date filtering
+    const query = groq`*[_type == "calendar"] | order(date desc)[0..4] {
+      title,
+      date,
+      body[]{
+        children[]{
+          text
+        },
+        asset->{url},
+      },
+      semester->{semester},
+      holiday->{holiday},
+    }`;
+    
+    const fiveUpcomingEvents = await useSanityClient().fetch(query);
+    console.log('All calendar events (first 5):', fiveUpcomingEvents);
+    console.log('Total events found:', fiveUpcomingEvents?.length);
+    
+    return fiveUpcomingEvents || [];
+  } catch (error) {
+    console.error('Error in get5UpcomingEvents:', error);
     return [];
   }
 }

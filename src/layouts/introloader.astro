@@ -12,7 +12,9 @@ const { title } = Astro.props;
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="generator" content={Astro.generator} />
-  <link rel="icon" type="image/svg+xml" href="/images/MSU Seal New (Official).png" />
+  <link rel="icon" type="image/svg+xml" href="/images/Official MSU-TCTO logo-01.png" />
+  <script src="/js/screenshot-protection.js" defer></script>
+  <script src="/js/logo-protection.js" defer></script>
   
   <!-- Facebook Domain Verification -->
   <meta name="facebook-domain-verification" content="63d47sat4plmhjgb73ob4sbrleldy4" />
@@ -74,24 +76,28 @@ const { title } = Astro.props;
       color: #f9fafb;
     }
     
-    /* Loading container */
+    /* Top progress bar */
     #loading-container {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      bottom: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 50;
-      background-color: #61063B;
-      transition: background-color 0.3s ease;
+      height: 6px;
+      z-index: 60;
+      pointer-events: none;
+      background: rgba(0, 0, 0, 0.04);
+      backdrop-filter: blur(4px);
+    }
+    #loading-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ffffff 0%, #EE4C7C 100%);
+      box-shadow: 0 0 12px rgba(238, 76, 124, 0.4);
+      transition: width 0.3s ease, opacity 0.2s ease;
     }
     
     .dark #loading-container {
-      background-color: #111827;
+      background: rgba(17, 24, 39, 0.08);
     }
     
     /* Logo container */
@@ -103,6 +109,7 @@ const { title } = Astro.props;
       display: flex;
       align-items: center;
       justify-content: center;
+      pointer-events: auto;
     }
     
     /* Interactive elements */
@@ -111,6 +118,7 @@ const { title } = Astro.props;
       transition: all 0.3s ease;
       will-change: transform;
       z-index: 10;
+      pointer-events: auto;
     }
     #logo-container:hover {
       transform: scale(1.05);
@@ -370,362 +378,53 @@ const { title } = Astro.props;
   </style>
 </head>
 <body>
-  <!-- Loading Container -->
+  <!-- Top progress bar only -->
   <div id="loading-container">
-    <!-- Clean Logo -->
-    <div id="logo-wrapper">
-      <!-- Interactive Logo -->
-      <div id="logo-container">
-        <img src="/images/MSU Seal New (Official).png" alt="University Logo" 
-             id="logo" class="w-32 h-32 heartbeat pulse-glow" />
-        <div class="tooltip">Click for surprise!</div>
-      </div>
-    </div>
-    
-    <!-- Loading Information -->
-    <div class="text-center max-w-md px-4">
-      <h2 class="text-gradient text-4xl font-bold mb-4 tracking-tight">{title}</h2>
-      <p id="loading-status" class="mt-4 text-white/80 font-medium text-lg">
-        Starting verification process<span class="dot-flashing ml-1"></span>
-      </p>
-      
-      <!-- Verification Steps -->
-      <div id="verification-steps" class="mt-6 space-y-3 text-sm">
-        <!-- Dynamically populated -->
-      </div>
-      
-      <!-- System Info -->
-      <div id="system-info" class="mt-6 text-sm text-white/60 grid grid-cols-2 gap-y-1 gap-x-4 hidden">
-        <div class="text-left">System:</div>
-        <div id="system-name" class="text-right font-medium">Dolphin CMS</div>
-        <div class="text-left">Version:</div>
-        <div id="system-version" class="text-right font-medium">3.2.1</div>
-        <div class="text-left">Environment:</div>
-        <div id="system-env" class="text-right font-medium">Production</div>
-        <div class="text-left">Load Time:</div>
-        <div id="load-time" class="text-right font-medium">0.00s</div>
-      </div>
-    </div>
-    
-    <!-- Progress Bar -->
-    <div class="w-80 mt-8">
-      <div class="progress-track">
-        <div id="progress-bar" class="progress-thumb" style="width: 0%"></div>
-      </div>
-      <div class="flex justify-between mt-1 text-xs text-white/60">
-        <span>Booting</span>
-        <span id="progress-detail">Initializing</span>
-        <span>Ready</span>
-      </div>
-    </div>
-    
-    <!-- Easter Egg Panel (hidden by default) -->
-    <div id="easter-egg" class="easter-egg hidden">
-      <h3 class="font-bold text-white mb-2">System Diagnostics</h3>
-      <div class="text-sm space-y-2">
-        <div class="flex justify-between">
-          <span class="text-white/70">CPU Load:</span>
-          <span id="cpu-load" class="font-mono text-white">0.2%</span>
-        </div>
-        <div class="flex justify-between">
-          <span class="text-white/70">Memory Usage:</span>
-          <span id="memory-usage" class="font-mono text-white">124MB / 2GB</span>
-        </div>
-        <div class="flex justify-between">
-          <span class="text-white/70">DB Connections:</span>
-          <span id="db-connections" class="font-mono text-white">3 active</span>
-        </div>
-        <div class="flex justify-between">
-          <span class="text-white/70">Cache Efficiency:</span>
-          <span id="cache-efficiency" class="font-mono text-white">92%</span>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Security Badge -->
-    <div id="security-badge" class="absolute bottom-8 right-8 bg-gradient-to-r from-green-500 to-green-600 text-white px-4 py-1 rounded-full text-sm font-semibold shadow-lg opacity-0 transform translate-y-4 transition-all duration-300 flex items-center">
-      <svg id="badge-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="mr-1 hidden">
-        <path d="M20 6L9 17l-5-5" class="verification-check"/>
-      </svg>
-      <span id="badge-text">Verified Secure</span>
-    </div>
+    <div id="loading-bar"></div>
   </div>
 
   <!-- Main Content -->
-  <div id="content" class="hidden min-h-screen">
+  <div id="content" class="min-h-screen">
     <slot />
   </div>
 
   <script is:inline>
     document.addEventListener('DOMContentLoaded', () => {
       const loadingContainer = document.getElementById('loading-container');
-      const percentageDisplay = document.getElementById('loading-percentage');
-      const loadingStatus = document.getElementById('loading-status');
       const content = document.getElementById('content');
-      // Removed progress circle reference since we removed the ring
-      const progressBar = document.getElementById('progress-bar');
-      const progressDetail = document.getElementById('progress-detail');
-      const securityBadge = document.getElementById('security-badge');
-      const badgeIcon = document.getElementById('badge-icon');
-      const systemInfo = document.getElementById('system-info');
-      const loadTimeDisplay = document.getElementById('load-time');
-      const logo = document.getElementById('logo');
-      const logoContainer = document.getElementById('logo-container');
-      const easterEgg = document.getElementById('easter-egg');
-      const verificationSteps = document.getElementById('verification-steps');
-      const circumference = 283;
-      
-      // Create verification steps dynamically
-      const steps = [
-        { id: 'auth', label: 'Authentication', timeElement: 'auth-time' },
-        { id: 'security', label: 'Security Scan', timeElement: 'security-time' },
-        { id: 'data', label: 'Data Integrity', timeElement: 'data-time' },
-        { id: 'modules', label: 'Core Modules', timeElement: 'modules-time' },
-        { id: 'ui', label: 'UI Framework', timeElement: 'ui-time' }
-      ];
-      
-      steps.forEach(step => {
-        const stepElement = document.createElement('div');
-        stepElement.className = 'flex items-center justify-between';
-        stepElement.innerHTML = `
-          <div class="flex items-center space-x-3">
-            <div id="${step.id}-check" class="status-indicator pending">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="hidden">
-                <path d="M20 6L9 17l-5-5" class="verification-check"/>
-              </svg>
-            </div>
-            <span>${step.label}</span>
-          </div>
-          <span id="${step.timeElement}" class="text-white/50 text-xs">...</span>
-        `;
-        verificationSteps.appendChild(stepElement);
-      });
-      
-      // Set initial state (progress circle removed)
-      
-      // Status messages
-      const statusMessages = [
-        { msg: "Booting system kernel", progress: 0, detail: "Initializing core services" },
-        { msg: "Loading CMS modules", progress: 15, detail: "Loading authentication layer" },
-        { msg: "Verifying credentials", progress: 30, detail: "Checking admin permissions" },
-        { msg: "Establishing connection", progress: 45, detail: "Database handshake" },
-        { msg: "Scanning integrity", progress: 60, detail: "Validating core files" },
-        { msg: "Loading content cache", progress: 75, detail: "Warming up cache" },
-        { msg: "Finalizing checks", progress: 85, detail: "Security verification" },
-        { msg: "Optimizing performance", progress: 92, detail: "Compiling templates" },
-        { msg: "System ready", progress: 98, detail: "All checks passed" }
-      ];
-      
-      // System modules to load (simulated)
-      const systemModules = [
-        "AuthService", "DatabaseLayer", "ContentAPI", 
-        "AssetManager", "CacheEngine", "SecurityMonitor",
-        "TemplateRenderer", "PluginManager", "UIFramework"
-      ];
-      
+      const progressBar = document.getElementById('loading-bar');
+
+
+      // Show page content immediately while loader animates
+      content.style.display = 'block';
+
+      // Minimal top progress animation
       let progress = 0;
-      let verificationState = {
-        authenticated: false,
-        securityVerified: false,
-        dataValidated: false,
-        modulesLoaded: false,
-        uiLoaded: false,
-        startTime: performance.now(),
-        clickCount: 0
-      };
-      
-      // Logo interaction handler
-      logoContainer.addEventListener('click', () => {
-        verificationState.clickCount++;
-        
-        // Accelerate heartbeat on click
-        logo.classList.remove('heartbeat');
-        void logo.offsetWidth; // Trigger reflow
-        logo.classList.add('heartbeat-fast');
-        
-        // Add pulse glow effect
-        logo.classList.add('pulse-glow');
-        setTimeout(() => logo.classList.remove('pulse-glow'), 1000);
-        
-        // Show easter egg after 3 clicks
-        if (verificationState.clickCount >= 3 && easterEgg.classList.contains('hidden')) {
-          easterEgg.classList.remove('hidden');
-          easterEgg.classList.add('animate-fadeIn');
-        }
-        
-        // Return to normal heartbeat after 1 second
-        setTimeout(() => {
-          logo.classList.remove('heartbeat-fast');
-          logo.classList.add('heartbeat');
-        }, 1000);
-      });
-      
-      // Simulate module loading
-      function simulateModuleLoading() {
-        const loadedModules = Math.min(systemModules.length, Math.floor(progress / (100 / systemModules.length)));
-        if (loadedModules > 0) {
-          return systemModules.slice(0, loadedModules).join(", ");
-        }
-        return "Initializing core services";
-      }
-      
-      // Update system diagnostics
-      function updateDiagnostics() {
-        const cpuLoad = (5 + Math.random() * 10 + progress / 4).toFixed(1);
-        const memoryUsage = Math.floor(100 + progress * 8 + Math.random() * 20);
-        const dbConnections = Math.floor(1 + progress / 25);
-        const cacheEfficiency = Math.floor(70 + progress / 3 + Math.random() * 10);
-        
-        document.getElementById('cpu-load').textContent = `${cpuLoad}%`;
-        document.getElementById('memory-usage').textContent = `${memoryUsage}MB / 2GB`;
-        document.getElementById('db-connections').textContent = `${dbConnections} active`;
-        document.getElementById('cache-efficiency').textContent = `${Math.min(100, cacheEfficiency)}%`;
-      }
-      
+      const startTime = performance.now();
       const loadingInterval = setInterval(() => {
-        // Update diagnostics if easter egg is visible
-        if (!easterEgg.classList.contains('hidden')) {
-          updateDiagnostics();
-        }
-        
-        // Simulate verification steps
-        if (progress >= 20 && !verificationState.authenticated) {
-          verificationState.authenticated = true;
-          const check = document.getElementById('auth-check');
-          check.classList.remove('pending');
-          check.classList.add('success');
-          check.querySelector('svg').classList.remove('hidden');
-          document.getElementById('auth-time').textContent = `${(Math.random() * 300 + 200).toFixed(0)}ms`;
-          
-          // Show system info
-          systemInfo.classList.remove('hidden');
-          systemInfo.classList.add('animate-fadeIn');
-        }
-        
-        if (progress >= 40 && !verificationState.securityVerified) {
-          verificationState.securityVerified = true;
-          const check = document.getElementById('security-check');
-          check.classList.remove('pending');
-          check.classList.add('success');
-          check.querySelector('svg').classList.remove('hidden');
-          document.getElementById('security-time').textContent = `${(Math.random() * 500 + 300).toFixed(0)}ms`;
-          
-          // Show security badge
-          securityBadge.style.opacity = '1';
-          securityBadge.style.transform = 'translateY(0)';
-          badgeIcon.classList.remove('hidden');
-        }
-        
-        if (progress >= 60 && !verificationState.dataValidated) {
-          verificationState.dataValidated = true;
-          const check = document.getElementById('data-check');
-          check.classList.remove('pending');
-          check.classList.add('success');
-          check.querySelector('svg').classList.remove('hidden');
-          document.getElementById('data-time').textContent = `${(Math.random() * 800 + 500).toFixed(0)}ms`;
-        }
-        
-        if (progress >= 75 && !verificationState.modulesLoaded) {
-          verificationState.modulesLoaded = true;
-          const check = document.getElementById('modules-check');
-          check.classList.remove('pending');
-          check.classList.add('success');
-          check.querySelector('svg').classList.remove('hidden');
-          document.getElementById('modules-time').textContent = `${(Math.random() * 400 + 200).toFixed(0)}ms`;
-        }
-        
-        if (progress >= 90 && !verificationState.uiLoaded) {
-          verificationState.uiLoaded = true;
-          const check = document.getElementById('ui-check');
-          check.classList.remove('pending');
-          check.classList.add('success');
-          check.querySelector('svg').classList.remove('hidden');
-          document.getElementById('ui-time').textContent = `${(Math.random() * 600 + 300).toFixed(0)}ms`;
-        }
-        
-        // Calculate progress
-        let progressIncrement = 0.3 + Math.random() * 0.7;
-        if (verificationState.authenticated) progressIncrement *= 1.3;
-        if (verificationState.securityVerified) progressIncrement *= 1.5;
-        if (verificationState.dataValidated) progressIncrement *= 1.8;
-        if (verificationState.modulesLoaded) progressIncrement *= 2;
-        
-        progress = Math.min(progress + progressIncrement, 100);
-        
-        // Update displays
-        const displayProgress = Math.floor(progress);
-        // Percentage display removed
+        progress = Math.min(progress + 1 + Math.random() * 4, 100);
         progressBar.style.width = `${progress}%`;
-        // Progress circle removed - no longer needed
-        
-        // Update status message
-        const currentStatus = statusMessages.reduce((prev, curr) => 
-          progress >= curr.progress ? curr : prev
-        );
-        loadingStatus.innerHTML = currentStatus.msg + `<span class="dot-flashing ml-1"></span>`;
-        progressDetail.textContent = simulateModuleLoading();
-        
-        // Update load time
-        const currentTime = performance.now();
-        const loadTime = (currentTime - verificationState.startTime) / 1000;
-        loadTimeDisplay.textContent = `${loadTime.toFixed(2)}s`;
-        
-        // Complete loading when ready
-        if (progress >= 100 && verificationState.authenticated && 
-            verificationState.securityVerified && verificationState.dataValidated) {
+
+        if (progress >= 100) {
           clearInterval(loadingInterval);
-          
+          const finalLoadTime = (performance.now() - startTime) / 1000;
+
           setTimeout(() => {
-            loadingStatus.innerHTML = "System ready <span class='text-green-300'>✓</span>";
-            // Percentage display removed
-            progressDetail.textContent = "All systems operational";
-            
+            loadingContainer.style.opacity = '0';
             setTimeout(() => {
-              loadingContainer.style.opacity = '0';
-              loadingContainer.style.pointerEvents = 'none';
-              
-              setTimeout(() => {
-                loadingContainer.style.display = 'none';
-                content.style.display = 'block';
-                content.classList.add('animate-fadeIn');
-                
-                // Dispatch loaded event
-                const finalLoadTime = (performance.now() - verificationState.startTime) / 1000;
-                document.dispatchEvent(new CustomEvent('systemLoaded', {
-                  detail: {
-                    loadTime: finalLoadTime.toFixed(2),
-                    modulesLoaded: systemModules.length,
-                    timestamp: new Date().toISOString()
-                  }
-                }));
-              }, 600);
-            }, 800);
-          }, 500);
+              loadingContainer.style.display = 'none';
+              // Dispatch loaded event for any listeners
+              document.dispatchEvent(new CustomEvent('systemLoaded', {
+                detail: {
+                  loadTime: finalLoadTime.toFixed(2),
+                  modulesLoaded: 0,
+                  timestamp: new Date().toISOString()
+                }
+              }));
+            }, 200);
+          }, 150);
         }
       }, 40);
-      
-      // Simulate potential issues (20% chance)
-      if (Math.random() > 0.8) {
-        setTimeout(() => {
-          if (progress < 30) {
-            // Simulate failed authentication
-            const authCheck = document.getElementById('auth-check');
-            authCheck.classList.remove('pending');
-            authCheck.classList.add('failed');
-            authCheck.innerHTML = '✗';
-            loadingStatus.innerHTML = "Authentication failed <span class='text-red-300'>✗</span>";
-            progress = Math.max(0, progress - 10);
-            
-            // Retry after delay
-            setTimeout(() => {
-              authCheck.classList.remove('failed');
-              authCheck.classList.add('pending');
-              loadingStatus.innerHTML = "Retrying authentication<span class='dot-flashing ml-1'></span>";
-              progress += 5;
-            }, 1500);
-          }
-        }, 2000 + Math.random() * 2000);
-      }
     });
   </script>
 </body>

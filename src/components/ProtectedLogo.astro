@@ -1,0 +1,133 @@
+---
+interface Props {
+  src: string;
+  alt?: string;
+  class?: string;
+  size?: 'small' | 'default' | 'medium' | 'large' | 'xl' | 'auto';
+}
+
+const { src, alt = "MSU-TCTO Logo", class: className = "", size = "default" } = Astro.props;
+
+const sizeClasses = {
+  small: 'h-8 w-8',
+  default: 'h-12 w-12',
+  medium: 'h-16 w-16',
+  large: 'h-24 w-24',
+  xl: 'h-32 w-32',
+  auto: 'h-auto w-auto'
+};
+
+const sizeClass = sizeClasses[size] || sizeClasses.default;
+---
+
+<div 
+  class={`protected-logo-container inline-block relative ${className}`}
+  data-protected-logo="true"
+  style="user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-touch-callout: none;"
+>
+  <img
+    src={src}
+    alt={alt}
+    class={`${sizeClass} ${className}`}
+    draggable="false"
+    style="user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -webkit-touch-callout: none; pointer-events: auto;"
+    data-protected-image="true"
+  />
+  <!-- Invisible overlay to catch right-clicks -->
+  <div 
+    class="absolute inset-0 pointer-events-auto"
+    style="z-index: 10; cursor: default;"
+    aria-hidden="true"
+  ></div>
+</div>
+
+<script>
+  // Protection script for Astro components
+  (function() {
+    const initProtection = () => {
+      const containers = document.querySelectorAll('[data-protected-logo="true"]');
+      
+      containers.forEach(container => {
+        const img = container.querySelector('img[data-protected-image="true"]');
+        if (!img) return;
+
+        // Prevent right-click context menu
+        const handleContextMenu = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        };
+
+        // Prevent drag and drop
+        const handleDragStart = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        };
+
+        // Prevent image selection
+        const handleSelectStart = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        };
+
+        // Prevent copy
+        const handleCopy = (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+        };
+
+        // Add event listeners
+        img.addEventListener('contextmenu', handleContextMenu, true);
+        img.addEventListener('dragstart', handleDragStart, true);
+        img.addEventListener('selectstart', handleSelectStart, true);
+        img.addEventListener('copy', handleCopy, true);
+        container.addEventListener('contextmenu', handleContextMenu, true);
+        container.addEventListener('dragstart', handleDragStart, true);
+        container.addEventListener('selectstart', handleSelectStart, true);
+        container.addEventListener('copy', handleCopy, true);
+
+        // Set draggable attribute
+        img.setAttribute('draggable', 'false');
+      });
+    };
+
+    // Initialize on DOM ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initProtection);
+    } else {
+      initProtection();
+    }
+
+    // Re-initialize for dynamically loaded content
+    const observer = new MutationObserver(() => {
+      initProtection();
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  })();
+</script>
+
+<style>
+  .protected-logo-container img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+  }
+  
+  .protected-logo-container::selection {
+    background: transparent;
+  }
+  
+  .protected-logo-container img::selection {
+    background: transparent;
+  }
+</style>
+

@@ -21,6 +21,7 @@ import { getDay } from '../js/date';
 import { get3LatestArticle } from '../api/api';
 import { getLatestFeaturedArticle } from '../api/api';
 import { get4UpcomingEvents } from '../api/api';
+import { get5UpcomingEvents } from '../api/api';
 import { get3LatestGazette } from '../api/api';
 import { get3LatestAnnualReport } from '../api/api';
 import { sulimbanglatestshown } from '../api/api';
@@ -30,6 +31,7 @@ import { getAllCalendarEvents } from '../api/api';
 const threeLatestArticles = await get3LatestArticle();
 const latestFeaturedArticle = await getLatestFeaturedArticle();
 const fourUpcomingEvents = await get4UpcomingEvents();
+const fiveUpcomingEvents = await get5UpcomingEvents();
 const threeLatestGazette = await get3LatestGazette();
 const latestsulimbang = await sulimbanglatestshown();
 const threeLatestAnnualReport = await get3LatestAnnualReport();
@@ -84,28 +86,30 @@ if (testCalendar && testCalendar.length > 0) {
 			
 			  <!-- Content Container with Responsive Adjustments -->
     <div class="container mx-auto px-4 sm:px-6 z-10 relative">
-        <div class="max-w-4xl mx-auto text-center px-4">
-            <!-- University Seal with Responsive Sizing -->
-            <div class="mb-6 md:mb-8 animate-fadeIn">
+        <div class="max-w-2xl mx-auto text-center px-4">
+
+            
+            <!-- University Wordmark Logo -->
+            <div class="mb-4 sm:mb-6 animate-fadeInUp">
                 <img 
-                    src="/images/MSU Seal New (Official).png" 
-                    alt="MSU Official Seal" 
-                    class="h-20 sm:h-24 md:h-32 mx-auto transition-all duration-500 hover:scale-105"
+                    src="/images/msutcto_wordmark.png" 
+                    alt="MSU-TCTO Wordmark" 
+                    class="h-auto w-full max-w-6xl mx-auto transition-all duration-500 hover:scale-105"
                     loading="eager"
                 >
             </div>
-            
-            <!-- Responsive Typography with Perfect Scaling -->
-        <h1 class="font-philosopher text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight tracking-tight animate-fadeInUp">
-            <span class="block text-shadow-md">Mindanao State University</span>
-            <span class="block font-bold mt-2 sm:mt-3 text-shadow">Tawi-Tawi College of Technology and Oceanography</span>
-        </h1>
 
             
-            <!-- Responsive Subheading -->
-            <p class="font-philosopher text-lg sm:text-xl md:text-2xl text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto animate-fadeInUp delay-100 leading-relaxed">
-                Creating Opportunities • Transforming Lives
-            </p>
+            <!-- Slogan Image -->
+            <!-- Size options: max-w-xs (very small), max-w-sm (small), max-w-md (medium), max-w-lg (large), max-w-xl (x-large), max-w-2xl (2x large), max-w-3xl (3x large) -->
+            <div class="mb-5 sm:mb-8 max-w-xs sm:max-w-sm md:max-w-md mx-auto animate-fadeInUp delay-100">
+                <img 
+                    src="/images/Creating Opportunities Transforming Lives.png" 
+                    alt="Creating Opportunities Transforming Lives" 
+                    class="h-auto w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto transition-all duration-500 hover:scale-105"
+                    loading="eager"
+                >
+            </div>
         
             <!-- Responsive Call-to-Action Buttons -->
             <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 animate-fadeInUp delay-200">
@@ -699,10 +703,10 @@ if (testCalendar && testCalendar.length > 0) {
                     </div>
                 </div>
                 
-                <!-- Initial 4 Events Display -->
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-                    {(fourUpcomingEvents && fourUpcomingEvents.length > 0) || (testCalendar && testCalendar.length > 0) ? (
-                        (fourUpcomingEvents && fourUpcomingEvents.length > 0 ? fourUpcomingEvents : testCalendar).slice(0, 4).map((calendar) => {
+                <!-- Initial 5 Events Display -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 mb-12">
+                    {(fiveUpcomingEvents && fiveUpcomingEvents.length > 0) || (fourUpcomingEvents && fourUpcomingEvents.length > 0) || (testCalendar && testCalendar.length > 0) ? (
+                        (fiveUpcomingEvents && fiveUpcomingEvents.length > 0 ? fiveUpcomingEvents : (fourUpcomingEvents && fourUpcomingEvents.length > 0 ? fourUpcomingEvents : testCalendar)).slice(0, 5).map((calendar) => {
                             console.log('Processing calendar event:', calendar);
                             
                             let displayDate = calendar.date;
@@ -710,30 +714,26 @@ if (testCalendar && testCalendar.length > 0) {
                                 displayDate = calendar.date.utc;
                             }
                             
-                            const bgColor = calendar?.holiday?.holiday === 'Academic Holiday' 
-                                ? 'bg-gradient-to-br from-msu-shallow-ocean to-msu-deep-ocean' 
-                                : 'bg-gradient-to-br from-msu-maroon to-msu-dark-pink';
-                            
                             return (
-                                <div class={`${bgColor} rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl group`}>
+                                <div class="bg-msu-deep-ocean rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl group">
                                     <div class="p-8 relative">
                                         <div class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-12 -mt-12"></div>
                                         <!-- Featured Badge -->
                                         <div class="absolute top-2 left-4">
-                                            <span class="bg-gradient-to-r from-msu-gold to-yellow-400 text-white text-xs px-3 py-1 rounded-full font-semibold shadow-lg">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                            <span class="bg-msu-bgc-color text-msu-deep-ocean text-xs px-3 py-1 rounded-full font-semibold shadow-lg">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 inline mr-1 text-msu-deep-ocean" fill="currentColor" viewBox="0 0 20 20">
                                                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                                 </svg>
                                                 Featured
                                             </span>
                                         </div>
                                         <div class="mb-6 border-b border-white/20 pb-4">
-                                            <p class="text-lg uppercase tracking-wider text-msu-gold font-medium">{getWordMonth(displayDate)}</p>
+                                            <p class="text-lg uppercase tracking-wider text-msu-blue-text font-medium">{getWordMonth(displayDate)}</p>
                                             <p class="text-5xl font-bold text-white mt-1">{getDay(displayDate)}</p>
                                             <p class="text-sm text-white/80 mt-1">{getYear(displayDate)}</p>
                                         </div>
                                         <div>
-                                            <h4 class="text-2xl font-bold text-white mb-3 group-hover:text-msu-gold transition-colors">
+                                            <h4 class="text-2xl font-bold text-white mb-3 group-hover:text-msu-blue-text transition-colors">
                                                 {calendar.title}
                                             </h4>
                                             <p class="text-gray-200/90 line-clamp-3 text-sm leading-relaxed">
@@ -741,8 +741,8 @@ if (testCalendar && testCalendar.length > 0) {
                                             </p>
                                         </div>
                                         <div class="absolute bottom-4 right-4">
-                                            <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-msu-gold transition-colors">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-msu-blue-text transition-colors">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-msu-deep-ocean" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                                 </svg>
                                             </div>
@@ -752,7 +752,7 @@ if (testCalendar && testCalendar.length > 0) {
                             );
                         })
                     ) : (
-                        <div class="col-span-4 text-center py-12 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm rounded-2xl shadow-lg">
+                        <div class="col-span-full text-center py-12 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm rounded-2xl shadow-lg">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-gray-400 dark:text-gray-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
@@ -763,7 +763,7 @@ if (testCalendar && testCalendar.length > 0) {
                 </div>
                 
                 <!-- Stunning Dropdown for All Events -->
-                {(allCalendarEvents && allCalendarEvents.length > 4) ? (
+                {(allCalendarEvents && allCalendarEvents.length > 5) ? (
                     <div class="text-center">
                         <!-- Backdrop Overlay -->
                         <div id="eventsBackdrop" class="fixed inset-0 bg-black/50 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 z-[9998]"></div>
@@ -818,21 +818,35 @@ if (testCalendar && testCalendar.length > 0) {
                                                 displayDate = calendar.date.utc;
                                             }
                                             
-                                            const bgColor = calendar?.holiday?.holiday === 'Academic Holiday' 
-                                                ? 'bg-gradient-to-br from-msu-shallow-ocean to-msu-deep-ocean' 
-                                                : 'bg-gradient-to-br from-msu-maroon to-msu-dark-pink';
+                                            // Check if this event is in the featured events list
+                                            const isFeatured = fiveUpcomingEvents && fiveUpcomingEvents.length > 0 
+                                                ? fiveUpcomingEvents.some(featured => {
+                                                    // Compare titles
+                                                    if (featured.title !== calendar.title) return false;
+                                                    
+                                                    // Compare dates - handle both object and string formats
+                                                    const featuredDate = typeof featured.date === 'object' && featured.date._type === 'datetime' 
+                                                        ? featured.date.utc 
+                                                        : featured.date;
+                                                    const calendarDate = typeof calendar.date === 'object' && calendar.date._type === 'datetime' 
+                                                        ? calendar.date.utc 
+                                                        : calendar.date;
+                                                    
+                                                    return featuredDate === calendarDate;
+                                                })
+                                                : index < 5;
                                             
                                             return (
-                                                <div class={`${bgColor} rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl group ${index < 4 ? 'ring-2 ring-msu-gold/50' : ''}`}>
+                                                <div class={`bg-msu-deep-ocean rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl group ${isFeatured ? 'ring-2 ring-msu-blue-text/50' : ''}`}>
                                                     <div class="p-6 relative">
                                                         <div class="absolute top-0 right-0 w-16 h-16 bg-white/10 rounded-full -mr-8 -mt-8"></div>
                                                         
                                                         <!-- Enhanced Date Display -->
                                                         <div class="mb-4 border-b border-white/20 pb-4">
                                                             <div class="flex items-center justify-between mb-2">
-                                                                <p class="text-sm uppercase tracking-wider text-msu-gold font-semibold">{getWordMonth(displayDate)}</p>
+                                                                <p class="text-sm uppercase tracking-wider text-msu-blue-text font-semibold">{getWordMonth(displayDate)}</p>
                                                                 <div class="flex items-center gap-1">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-msu-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-msu-blue-text" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                                                     </svg>
                                                                     <span class="text-xs text-white/80 font-medium">Event</span>
@@ -844,7 +858,7 @@ if (testCalendar && testCalendar.length > 0) {
                                                         
                                                         <!-- Enhanced Content -->
                                                         <div>
-                                                            <h4 class="text-lg font-bold text-white mb-3 group-hover:text-msu-gold transition-colors line-clamp-2 leading-tight">
+                                                            <h4 class="text-lg font-bold text-white mb-3 group-hover:text-msu-blue-text transition-colors line-clamp-2 leading-tight">
                                                                 {calendar.title}
                                                             </h4>
                                                             <p class="text-gray-200/90 line-clamp-3 text-sm leading-relaxed">
@@ -853,10 +867,10 @@ if (testCalendar && testCalendar.length > 0) {
                                                         </div>
                                                         
                                                         <!-- Enhanced Featured Badge -->
-                                                        {index < 4 && (
-                                                            <div class="absolute top-0  left-3">
-                                                                <span class="bg-gradient-to-r from-msu-gold to-yellow-400 text-white text-xs px-3 py-1 rounded-full font-semibold shadow-lg">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                        {isFeatured && (
+                                                            <div class="absolute top-2 left-3 z-10">
+                                                                <span class="bg-msu-bgc-color text-msu-deep-ocean text-xs px-3 py-1 rounded-full font-semibold shadow-lg flex items-center gap-1">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-msu-deep-ocean" fill="currentColor" viewBox="0 0 20 20">
                                                                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                                                     </svg>
                                                                     Featured
@@ -866,8 +880,8 @@ if (testCalendar && testCalendar.length > 0) {
                                                         
                                                         <!-- Event Type Indicator -->
                                                         <div class="absolute bottom-3 right-3">
-                                                            <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-msu-gold transition-colors">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-msu-blue-text transition-colors">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-msu-deep-ocean" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                                                 </svg>
                                                             </div>

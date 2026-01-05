@@ -41,9 +41,12 @@ const NavbarProgressLoader = ({
           {/* Logo */}
           <div className="flex items-center">
             <img 
-              src="/images/MSU Seal New (Official).png" 
-              alt="MSU TCTO Logo" 
+              src="/images/Official MSU-TCTO logo-01.png" 
+              alt="MSU-TCTO Logo" 
               className="h-8 w-8 mr-3"
+              data-protected-image="true"
+              draggable="false"
+              style={{ userSelect: 'none', WebkitUserSelect: 'none', WebkitTouchCallout: 'none' }}
             />
             <span className="text-lg font-semibold text-gray-900 dark:text-white">
               MSU-TCTO

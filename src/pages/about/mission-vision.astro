@@ -15,7 +15,7 @@ const currentPath = Astro.url.pathname;
     <Navbar path={currentPath} client:visible />
     
     <!-- Hero Section -->
-    <section class="relative bg-gradient-to-br from-msu-main-color to-msu-rusty-red/90 text-white py-40 overflow-hidden">
+    <section class="relative bg-msu-deep-ocean text-white py-40 overflow-hidden">
       <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1567359781514-3c964c02b32a?q=80&w=1932&auto=format&fit=crop')] bg-cover bg-center opacity-30"></div>
       <div class="container mx-auto px-6 relative z-10 text-center">
         <h1 class="headings text-5xl md:text-6xl font-bold mb-6 animate-fade-in-up pt-[100px]">
@@ -32,14 +32,14 @@ const currentPath = Astro.url.pathname;
     <section class="py-20 bg-white dark:bg-gray-900">
       <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto text-center">
-          <span class="inline-block bg-msu-rusty-red/10 dark:bg-yellow-400/20 text-msu-rusty-red dark:text-yellow-400 px-4 py-2 rounded-full text-sm font-semibold mb-6 animate-fade-in">
+          <span class="inline-block bg-msu-deep-ocean/10 dark:bg-msu-deep-ocean/20 text-msu-deep-ocean dark:text-msu-deep-ocean px-4 py-2 rounded-full text-sm font-semibold mb-6 animate-fade-in">
             OUR VISION
           </span>
-          <h2 class="headings text-3xl md:text-4xl font-bold text-msu-maroon dark:text-gray-100 mb-8 animate-fade-in-up">
+          <h2 class="headings text-3xl md:text-4xl font-bold text-msu-deep-ocean dark:text-gray-100 mb-8 animate-fade-in-up">
             A university in the Sulu Archipelago renowned for Fisheries, Marine and Environmental Science, and other disciplines.
           </h2>
           <div class="relative">
-            <div class="absolute -inset-4 bg-msu-rusty-red/10 dark:bg-yellow-400/10 rounded-xl blur-sm opacity-75 animate-pulse-slow"></div>
+            <div class="absolute -inset-4 bg-msu-deep-ocean/10 dark:bg-msu-deep-ocean/10 rounded-xl blur-sm opacity-75 animate-pulse-slow"></div>
             <p class="paragraph text-lg md:text-xl text-gray-700 dark:text-gray-300 relative z-10 leading-relaxed animate-fade-in-up delay-100">
               We envision MSU-TCTO as a beacon of excellence in marine sciences, environmental studies, and related disciplines, serving as a catalyst for sustainable development in the Sulu Archipelago region.
             </p>
@@ -53,10 +53,10 @@ const currentPath = Astro.url.pathname;
       <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto">
           <div class="text-center mb-16">
-            <span class="inline-block bg-msu-rusty-red/10 dark:bg-yellow-400/20 text-msu-rusty-red dark:text-yellow-400 px-4 py-2 rounded-full text-sm font-semibold animate-fade-in">
+            <span class="inline-block bg-msu-deep-ocean/10 dark:bg-msu-deep-ocean/20 text-msu-deep-ocean dark:text-msu-deep-ocean px-4 py-2 rounded-full text-sm font-semibold animate-fade-in">
               OUR MISSION
             </span>
-            <h2 class="headings text-3xl md:text-4xl font-bold text-msu-maroon dark:text-gray-100 mt-4 mb-6 animate-fade-in-up">
+            <h2 class="headings text-3xl md:text-4xl font-bold text-msu-deep-ocean dark:text-gray-100 mt-4 mb-6 animate-fade-in-up">
               Commitment to Excellence and Service
             </h2>
           </div>
@@ -64,8 +64,8 @@ const currentPath = Astro.url.pathname;
           <!-- Mission Items Grid -->
           <div class="grid md:grid-cols-2 gap-8">
             <!-- Item 1 -->
-            <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-msu-maroon dark:border-yellow-400 animate-fade-in-up delay-100">
-              <div class="text-msu-maroon dark:text-yellow-400 text-4xl mb-4">01</div>
+            <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-msu-deep-ocean dark:border-msu-deep-ocean animate-fade-in-up delay-100">
+              <div class="text-msu-deep-ocean dark:text-msu-deep-ocean text-4xl mb-4">01</div>
               <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">Quality Education</h3>
               <p class="text-gray-600 dark:text-gray-300">
                 Provide relevant quality education especially to Muslims and other indigenous groups
@@ -73,8 +73,8 @@ const currentPath = Astro.url.pathname;
             </div>
 
             <!-- Item 2 -->
-            <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-msu-maroon dark:border-yellow-400 animate-fade-in-up delay-200">
-              <div class="text-msu-maroon dark:text-yellow-400 text-4xl mb-4">02</div>
+            <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-msu-deep-ocean dark:border-msu-deep-ocean animate-fade-in-up delay-200">
+              <div class="text-msu-deep-ocean dark:text-msu-deep-ocean text-4xl mb-4">02</div>
               <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">Environmental Stewardship</h3>
               <p class="text-gray-600 dark:text-gray-300">
                 Promote environmental conservation and sustainable utilization of fisheries and marine resources
@@ -82,8 +82,8 @@ const currentPath = Astro.url.pathname;
             </div>
 
             <!-- Item 3 -->
-            <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-msu-maroon dark:border-yellow-400 animate-fade-in-up delay-300">
-              <div class="text-msu-maroon dark:text-yellow-400 text-4xl mb-4">03</div>
+            <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-msu-deep-ocean dark:border-msu-deep-ocean animate-fade-in-up delay-300">
+              <div class="text-msu-deep-ocean dark:text-msu-deep-ocean text-4xl mb-4">03</div>
               <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">Knowledge Transfer</h3>
               <p class="text-gray-600 dark:text-gray-300">
                 Develop and transfer new knowledge and innovative technology to the community
@@ -91,8 +91,8 @@ const currentPath = Astro.url.pathname;
             </div>
 
             <!-- Item 4 -->
-            <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-msu-maroon dark:border-yellow-400 animate-fade-in-up delay-400">
-              <div class="text-msu-maroon dark:text-yellow-400 text-4xl mb-4">04</div>
+            <div class="bg-white dark:bg-gray-700 p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border-l-4 border-msu-deep-ocean dark:border-msu-deep-ocean animate-fade-in-up delay-400">
+              <div class="text-msu-deep-ocean dark:text-msu-deep-ocean text-4xl mb-4">04</div>
               <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">Community Engagement</h3>
               <p class="text-gray-600 dark:text-gray-300">
                 Engage stakeholders in peace and socio-economic development endeavors

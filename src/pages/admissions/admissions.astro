@@ -42,30 +42,38 @@ const currentPath = Astro.url.pathname;
     <div class="container mx-auto px-4 sm:px-6 z-10 relative">
         <div class="max-w-4xl mx-auto text-center px-4">
             <!-- University Seal with Responsive Sizing -->
-            <div class="mb-6 md:mb-8 animate-fadeIn">
-                <img 
-                    src="/images/MSU Seal New (Official).png" 
-                    alt="MSU Official Seal" 
-                    class="h-20 sm:h-24 md:h-32 mx-auto transition-all duration-500 hover:scale-105"
-                    loading="eager"
-                >
-            </div>
-            
-                        <!-- Responsive Typography with Perfect Scaling -->
-        <h1 class="font-philosopher text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight tracking-tight animate-fadeInUp">
-            <span class="block text-shadow-md">Creating Opportunities, Transforming Lives</span>
+             
+            <!-- University Wordmark Logo -->
+            <div class="mb-4 sm:mb-6 animate-fadeInUp">
+              <img 
+                  src="/images/msutcto_wordmark.png" 
+                  alt="MSU-TCTO Wordmark" 
+                  class="h-auto w-full max-w-6xl mx-auto transition-all duration-500 hover:scale-105"
+                  loading="eager"
+              >
+          </div>
 
-        </h1>
+          
+          <!-- Slogan Image -->
+          <!-- Size options: max-w-xs (very small), max-w-sm (small), max-w-md (medium), max-w-lg (large), max-w-xl (x-large), max-w-2xl (2x large), max-w-3xl (3x large) -->
+          <div class="mb-5 sm:mb-8 max-w-xs sm:max-w-sm md:max-w-md mx-auto animate-fadeInUp delay-100">
+              <img 
+                  src="/images/Creating Opportunities Transforming Lives.png" 
+                  alt="Creating Opportunities Transforming Lives" 
+                  class="h-auto w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto transition-all duration-500 hover:scale-105"
+                  loading="eager"
+              >
+          </div>
    <!-- Responsive Subheading -->
             <p class="font-philosopher text-lg sm:text-xl md:text-2xl text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto animate-fadeInUp delay-100 leading-relaxed">
                  MSU-TCTO welcomes adept and curious students who wish to excel in academics, arts, research, technology, and community extension. Inclusion and diversity are the core of our operations.
             </p>
 
         <div class="flex flex-col sm:flex-row justify-center gap-4">
-          <a href="#admission" class="bg-msu-maroon hover:bg-msu-rusty-red text-white px-8 py-4 rounded-lg font-medium transition duration-300 transform hover:scale-105">
+          <a href="#admission" class="bg-msu-main-color hover:bg-msu-deep-ocean text-white px-8 py-4 rounded-lg font-medium transition duration-300 transform hover:scale-105">
            Admission Procedures
           </a>
-          <a href="/404.astro" class="bg-transparent border-2 border-white hover:bg-white hover:text-msu-deep-ocean text-white px-8 py-4 rounded-lg font-medium transition duration-300">
+          <a href="/404.astro" class="bg-transparent border-2 border-white hover:bg-white/20 text-white px-8 py-4 rounded-lg font-medium transition duration-300">
             Explore Programs
           </a>
         </div>
@@ -111,23 +119,17 @@ const currentPath = Astro.url.pathname;
             margin: 0 3rem;
             min-width: 180px;
         }
-        .gradient-text {
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
     </style>
 
      <section class="bg-white dark:bg-gray-900 py-20 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Header -->
             <div class="text-center mb-16">
-                <span class="inline-block mb-4 px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full">
+                <span class="inline-block mb-4 px-4 py-2 text-sm font-semibold text-white bg-gradient-to-r from-msu-main-color to-msu-deep-ocean rounded-full">
                     OUR PARTNERS
                 </span>
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-                    <span class="gradient-text">Trusted Worldwide</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-msu-deep-ocean dark:text-white mb-4">
+                    Trusted Worldwide
                 </h2>
                 <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
                     Collaborating with leading institutions across the globe

@@ -10,10 +10,6 @@ export const navigationConfig = {
       { label: "History", href: "/about/campus" },
       { label: "Mission / Vision", href: "/about/mission-vision" },
       { label: "University Hymn", href: "/about/university-hymn" },
-      { label: "Articles", href: "/publications/articles" },
-      { label: "Gazette", href: "/publications/gazette" },
-      { label: "Events", href: "/academic-calendar" },
-      { label: "Annual Report", href: "/publications/annual-reports" },
     ]
   },
 
@@ -73,6 +69,7 @@ export const navigationConfig = {
     title: "Publications",
     links: [
       // { label: "Offices & Resources", href: "/publications/offices" },
+      // { label: "Articles", href: "404.astro" },
       { label: "Articles", href: "/publications/articles" },
       { label: "Sulimbang", href: "/publications/sulimbang" },
       { label: "Gazettes", href: "/publications/gazette" },

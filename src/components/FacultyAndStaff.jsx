@@ -159,9 +159,12 @@ const FacultyAndStaff = () => {
       <div className="text-center animate-pulse">
         <div className="relative w-24 h-24 mb-6 mx-auto">
           <img 
-            src="/images/MSU Seal New (Official).png" 
-            alt="University Seal" 
+            src="/images/Official MSU-TCTO logo-01.png" 
+            alt="MSU-TCTO Logo" 
             className="w-full h-full object-contain opacity-90"
+            data-protected-image="true"
+            draggable="false"
+            style={{ userSelect: 'none', WebkitUserSelect: 'none', WebkitTouchCallout: 'none' }}
           />
           <div className="absolute inset-0 border-4 border-transparent border-t-blue-500 border-r-blue-500 rounded-full animate-spin"></div>
         </div>
