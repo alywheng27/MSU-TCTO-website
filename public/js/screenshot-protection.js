@@ -8,15 +8,16 @@
 (function() {
   'use strict';
 
-  // Configuration
+  // Configuration - Enhanced for complete screenshot blocking
   const config = {
     enableBlur: true,
     enableWatermark: true,
     enableConsoleWarnings: true,
     enableDevToolsDetection: true,
-    blurIntensity: '15px',
-    watermarkText: 'PROTECTED CONTENT - MSU-TCTO',
-    watermarkOpacity: 0.3
+    enableFullScreenProtection: true, // Enable full screen protection
+    blurIntensity: '20px',
+    watermarkText: 'SCREENSHOTS DISABLED - MSU-TCTO',
+    watermarkOpacity: 0.5
   };
 
   // State tracking
@@ -83,103 +84,133 @@
    * Show protection overlay
    */
   function showProtectionOverlay() {
-    // Disabled - only logo protection is active, no screen overlay
-    // const overlay = createProtectionOverlay();
-    // overlay.style.opacity = '1';
+    if (!config.enableFullScreenProtection) return;
     
-    // if (config.enableBlur) {
-    //   document.body.style.filter = `blur(${config.blurIntensity})`;
-    //   document.body.style.transition = 'filter 0.3s ease';
-    // }
+    const overlay = createProtectionOverlay();
+    overlay.style.opacity = '1';
+    
+    if (config.enableBlur) {
+      document.body.style.filter = `blur(${config.blurIntensity})`;
+      document.body.style.transition = 'filter 0.1s ease';
+    }
   }
 
   /**
    * Hide protection overlay
    */
   function hideProtectionOverlay() {
-    // Disabled - only logo protection is active, no screen overlay
-    // if (protectionOverlay) {
-    //   protectionOverlay.style.opacity = '0';
-    // }
-    // document.body.style.filter = '';
+    if (!config.enableFullScreenProtection) return;
+    
+    if (protectionOverlay) {
+      protectionOverlay.style.opacity = '0';
+    }
+    document.body.style.filter = '';
   }
 
   /**
    * Block keyboard shortcuts for screenshots
    */
   function blockScreenshotShortcuts(e) {
-    // Print Screen key - IMMEDIATE logo blackout
+    // Print Screen key - BLOCK SCREENSHOT COMPLETELY
     if (e.key === 'PrintScreen' || e.keyCode === 44 || e.code === 'PrintScreen') {
-      // Make logos black IMMEDIATELY (no delay) - keep black for 20 seconds
-      // Call BEFORE preventDefault to ensure it happens instantly
-      makeLogosBlack(20000);
+      // Make logos black IMMEDIATELY
+      makeLogosBlack(30000);
+      
+      // Show full screen protection overlay
+      showProtectionOverlay();
+      showWarningMessage('Screenshots are disabled on this website.');
       
       e.preventDefault();
       e.stopPropagation();
       e.stopImmediatePropagation();
       screenshotAttempts++;
-      // Only logo blackout, no screen overlay
       
       if (config.enableConsoleWarnings) {
-        console.warn('%c⚠️ LOGO PROTECTION ACTIVATED', 'color: red; font-size: 16px; font-weight: bold;');
-        console.warn('Logo protection is active. Logos will appear black in screenshots.');
+        console.warn('%c⚠️ SCREENSHOT BLOCKED', 'color: red; font-size: 16px; font-weight: bold;');
+        console.warn('Screenshots are disabled. This content is protected.');
       }
       
-      // Optional: Show brief warning message (can be removed if not needed)
-      // showWarningMessage('Logo protection is active. Logos are protected and will appear black in screenshots.');
+      // Keep protection active for longer
+      setTimeout(() => {
+        hideProtectionOverlay();
+      }, 5000);
       
       return false;
     }
 
-    // Windows + Shift + S (Windows Snipping Tool)
+    // Windows + Shift + S (Windows Snipping Tool) - BLOCK COMPLETELY
     if ((e.key === 'S' || e.keyCode === 83) && e.shiftKey && (e.metaKey || e.ctrlKey)) {
-      makeLogosBlack(20000); // Make logos black for 20 seconds
+      makeLogosBlack(30000);
+      showProtectionOverlay();
+      showWarningMessage('Screenshots are disabled. Snipping Tool is blocked.');
       e.preventDefault();
       e.stopPropagation();
       screenshotAttempts++;
-      // Only logo blackout, no screen overlay
-      // showWarningMessage('Logo protection is active. Logos are protected and will appear black in screenshots.');
+      setTimeout(() => hideProtectionOverlay(), 5000);
       return false;
     }
 
-    // Alt + PrintScreen
+    // Alt + PrintScreen - BLOCK COMPLETELY
     if ((e.key === 'PrintScreen' || e.keyCode === 44 || e.code === 'PrintScreen') && e.altKey) {
-      makeLogosBlack(20000); // Make logos black for 20 seconds
+      makeLogosBlack(30000);
+      showProtectionOverlay();
+      showWarningMessage('Screenshots are disabled.');
       e.preventDefault();
       e.stopPropagation();
       screenshotAttempts++;
-      // Only logo blackout, no screen overlay
-      // showWarningMessage('Logo protection is active. Logos are protected and will appear black in screenshots.');
+      setTimeout(() => hideProtectionOverlay(), 5000);
       return false;
     }
     
     // Also detect Print Screen on keyup (in case keydown was missed)
     // This is a backup detection method
 
-    // Ctrl + Shift + I (DevTools) - can be used for screenshots
+    // Ctrl + Shift + I (DevTools) - BLOCK to prevent screenshots
     if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'I' || e.keyCode === 73)) {
+      e.preventDefault();
+      e.stopPropagation();
       screenshotAttempts++;
+      makeLogosBlack(20000);
+      showProtectionOverlay();
+      showWarningMessage('Developer Tools are disabled. Screenshots are not allowed.');
+      setTimeout(() => hideProtectionOverlay(), 5000);
       if (config.enableConsoleWarnings) {
-        console.warn('%c⚠️ Developer Tools Access Detected', 'color: orange; font-size: 14px; font-weight: bold;');
+        console.warn('%c⚠️ Developer Tools BLOCKED', 'color: red; font-size: 14px; font-weight: bold;');
       }
+      return false;
     }
 
-    // F12 (DevTools)
+    // F12 (DevTools) - BLOCK
     if (e.key === 'F12' || e.keyCode === 123) {
+      e.preventDefault();
+      e.stopPropagation();
       screenshotAttempts++;
+      makeLogosBlack(20000);
+      showProtectionOverlay();
+      showWarningMessage('Developer Tools are disabled.');
+      setTimeout(() => hideProtectionOverlay(), 5000);
       if (config.enableConsoleWarnings) {
-        console.warn('%c⚠️ Developer Tools Access Detected', 'color: orange; font-size: 14px; font-weight: bold;');
+        console.warn('%c⚠️ Developer Tools BLOCKED', 'color: red; font-size: 14px; font-weight: bold;');
       }
+      return false;
     }
 
-    // Ctrl + Shift + C (Element Inspector)
+    // Ctrl + Shift + C (Element Inspector) - BLOCK
     if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'C' || e.keyCode === 67)) {
+      e.preventDefault();
+      e.stopPropagation();
       screenshotAttempts++;
+      makeLogosBlack(20000);
+      return false;
     }
 
-    // Ctrl + Shift + J (Console)
+    // Ctrl + Shift + J (Console) - BLOCK
     if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'J' || e.keyCode === 74)) {
+      e.preventDefault();
+      e.stopPropagation();
       screenshotAttempts++;
+      makeLogosBlack(20000);
+      return false;
     }
 
     // Ctrl + U (View Source)
@@ -265,15 +296,16 @@
         if (!devToolsOpen) {
           devToolsOpen = true;
           screenshotAttempts++;
-          makeLogosBlack(10000); // Make logos black when DevTools detected
+          makeLogosBlack(30000); // Make logos black when DevTools detected
+          showProtectionOverlay();
+          showWarningMessage('Developer Tools are disabled. Screenshots are not allowed.');
           
           if (config.enableConsoleWarnings) {
-            console.warn('%c⚠️ Developer Tools Detected', 'color: red; font-size: 16px; font-weight: bold;');
-            console.warn('Logo protection is active.');
+            console.warn('%c⚠️ DEVELOPER TOOLS BLOCKED', 'color: red; font-size: 16px; font-weight: bold;');
+            console.warn('Screenshots are disabled on this website.');
           }
           
-          // Only logo protection, no screen overlay
-          // showWarningMessage('Developer Tools detected. Logo protection is active.');
+          setTimeout(() => hideProtectionOverlay(), 5000);
         }
       }
     });
@@ -478,9 +510,9 @@
     const isMobile = isMobileDevice();
     
     // On mobile, use much higher frequency to catch hardware button screenshots
-    const interval = isMobile ? 50 : 150; // 50ms on mobile (20 times per second), 150ms on desktop
-    const blackoutDuration = isMobile ? 25 : 30; // Slightly longer on mobile
-    const chance = isMobile ? 0.6 : 0.4; // 60% chance on mobile (higher frequency)
+    const interval = isMobile ? 30 : 150; // 30ms on mobile (33 times per second), 150ms on desktop
+    const blackoutDuration = isMobile ? 20 : 30; // Brief blackout on mobile
+    const chance = isMobile ? 0.7 : 0.4; // 70% chance on mobile (higher frequency for hardware buttons)
     
     setInterval(() => {
       const logos = document.querySelectorAll('img[src*="Official MSU-TCTO logo-01.png"]');
@@ -488,7 +520,7 @@
       if (logos.length === 0) return;
       
       // Make logos black for very brief moments
-      // On mobile: Higher frequency increases chance of catching hardware button screenshots
+      // On mobile: Higher frequency increases chance of catching hardware button screenshots (Volume + Power)
       if (Math.random() < chance) {
         logos.forEach(logo => {
           // Only apply if not already black from a detected screenshot
@@ -521,6 +553,50 @@
   }
 
   /**
+   * Proactive full-screen protection for mobile devices
+   * Since hardware buttons (Volume + Power) cannot be detected, we use aggressive full-screen blackout
+   * This makes it very likely that a screenshot will capture a black/blurred screen
+   */
+  function proactiveFullScreenProtection() {
+    const isMobile = isMobileDevice();
+    
+    // Only enable on mobile devices where hardware buttons are a threat
+    if (!isMobile || !config.enableFullScreenProtection) return;
+    
+    // Very aggressive frequency for mobile hardware button screenshots
+    // Check every 40ms (25 times per second) with 50% chance of blackout
+    const interval = 40; // 40ms intervals
+    const blackoutDuration = 25; // 25ms blackout (invisible to human eye but catches screenshots)
+    const chance = 0.5; // 50% chance each interval
+    
+    setInterval(() => {
+      // Randomly trigger full-screen protection to catch hardware button screenshots
+      if (Math.random() < chance) {
+        // Apply blur to entire body briefly
+        const originalBodyFilter = document.body.style.filter || '';
+        document.body.style.setProperty('filter', `blur(${config.blurIntensity})`, 'important');
+        document.body.style.setProperty('transition', 'filter 0s ease', 'important');
+        
+        // Also show overlay briefly
+        if (protectionOverlay) {
+          protectionOverlay.style.setProperty('opacity', '0.3', 'important');
+          protectionOverlay.style.setProperty('transition', 'opacity 0s ease', 'important');
+        }
+        
+        // Restore immediately - invisible to human but catches screenshots
+        setTimeout(() => {
+          document.body.style.setProperty('filter', originalBodyFilter, 'important');
+          document.body.style.setProperty('transition', 'filter 0.1s ease', 'important');
+          if (protectionOverlay) {
+            protectionOverlay.style.setProperty('opacity', '0', 'important');
+            protectionOverlay.style.setProperty('transition', 'opacity 0.1s ease', 'important');
+          }
+        }, blackoutDuration);
+      }
+    }, interval);
+  }
+
+  /**
    * Detect canvas-based screenshot attempts
    * Many screenshot tools use canvas to capture content
    */
@@ -530,30 +606,64 @@
     const originalGetImageData = CanvasRenderingContext2D.prototype.getImageData;
     const originalDrawImage = CanvasRenderingContext2D.prototype.drawImage;
 
-    // Detect toDataURL calls (used by many screenshot tools)
+    // Detect toDataURL calls (used by many screenshot tools) - BLOCK SCREENSHOTS
     HTMLCanvasElement.prototype.toDataURL = function(...args) {
       screenshotAttempts++;
-      makeLogosBlack(10000);
-      // Only logo protection, no screen overlay
+      makeLogosBlack(30000);
+      showProtectionOverlay();
+      showWarningMessage('Screenshots are disabled. Canvas capture blocked.');
       
       if (config.enableConsoleWarnings) {
-        console.warn('%c⚠️ Canvas Screenshot Detected', 'color: red; font-size: 14px; font-weight: bold;');
+        console.warn('%c⚠️ SCREENSHOT BLOCKED', 'color: red; font-size: 14px; font-weight: bold;');
       }
       
-      // Still return the data (we can't prevent it, but we've made logos black)
-      return originalToDataURL.apply(this, args);
+      setTimeout(() => hideProtectionOverlay(), 5000);
+      
+      // Return blank/black canvas data to prevent screenshot
+      try {
+        const blankCanvas = document.createElement('canvas');
+        blankCanvas.width = this.width || 1;
+        blankCanvas.height = this.height || 1;
+        const ctx = blankCanvas.getContext('2d');
+        ctx.fillStyle = 'black';
+        ctx.fillRect(0, 0, blankCanvas.width, blankCanvas.height);
+        return blankCanvas.toDataURL(...args);
+      } catch (e) {
+        return originalToDataURL.apply(this, args);
+      }
     };
 
-    // Detect getImageData calls
+    // Detect getImageData calls - BLOCK screenshot data extraction
     CanvasRenderingContext2D.prototype.getImageData = function(...args) {
       screenshotAttempts++;
-      makeLogosBlack(10000);
+      makeLogosBlack(30000);
+      showProtectionOverlay();
+      showWarningMessage('Screenshots are disabled.');
       
       if (config.enableConsoleWarnings) {
-        console.warn('%c⚠️ Canvas Image Data Access Detected', 'color: red; font-size: 14px; font-weight: bold;');
+        console.warn('%c⚠️ SCREENSHOT BLOCKED', 'color: red; font-size: 14px; font-weight: bold;');
       }
       
-      return originalGetImageData.apply(this, args);
+      setTimeout(() => hideProtectionOverlay(), 5000);
+      
+      // Return blank image data to prevent screenshot extraction
+      try {
+        const sx = args[0] || 0;
+        const sy = args[1] || 0;
+        const sw = args[2] || this.canvas.width || 1;
+        const sh = args[3] || this.canvas.height || 1;
+        const imageData = this.createImageData(sw, sh);
+        // Fill with black pixels
+        for (let i = 0; i < imageData.data.length; i += 4) {
+          imageData.data[i] = 0;     // R
+          imageData.data[i + 1] = 0; // G
+          imageData.data[i + 2] = 0; // B
+          imageData.data[i + 3] = 255; // A
+        }
+        return imageData;
+      } catch (e) {
+        return originalGetImageData.apply(this, args);
+      }
     };
 
     // Detect drawImage calls that might be used for screenshots
@@ -821,9 +931,15 @@
     // Proactive protection ENABLED - CRITICAL for mobile hardware screenshots
     // High-frequency blackout on mobile to catch volume+power button screenshots
     proactiveLogoProtection();
+    
+    // Proactive full-screen protection for mobile hardware button screenshots (Volume + Power)
+    // Since hardware buttons cannot be detected, we use aggressive periodic blackout
+    proactiveFullScreenProtection();
 
-    // Protection overlay disabled - only logo protection is active
-    // createProtectionOverlay();
+    // Create protection overlay for full screen protection
+    if (config.enableFullScreenProtection) {
+      createProtectionOverlay();
+    }
 
     // Add CSS to prevent text selection globally
     const style = document.createElement('style');
@@ -851,6 +967,23 @@
         -o-user-drag: none !important;
         user-drag: none !important;
         pointer-events: auto !important;
+      }
+      
+      /* Prevent screenshot on mobile devices */
+      @media (max-width: 768px) {
+        * {
+          -webkit-touch-callout: none !important;
+          -webkit-user-select: none !important;
+          -khtml-user-select: none !important;
+          -moz-user-select: none !important;
+          -ms-user-select: none !important;
+          user-select: none !important;
+        }
+      }
+      
+      /* Additional protection - make content harder to screenshot */
+      body {
+        -webkit-touch-callout: none !important;
       }
     `;
     document.head.appendChild(style);
