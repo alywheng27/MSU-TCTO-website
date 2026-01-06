@@ -590,17 +590,17 @@
   }
   
   /**
-   * Restore logo - Mobile: 50% blur, Desktop: 100% opacity
+   * Restore logo - Mobile: 25% blur (shows details), Desktop: 100% opacity
    */
   function restoreLogo(logo) {
     // Restore based on device type
     const isMobile = isMobileDevice();
     if (isMobile) {
-      // Mobile: Return to 50% blur (permanent mobile protection)
-      logo.style.setProperty('filter', 'blur(12px)', 'important');
-      logo.style.setProperty('-webkit-filter', 'blur(12px)', 'important');
-      logo.style.setProperty('-moz-filter', 'blur(12px)', 'important');
-      logo.style.setProperty('opacity', '0.5', 'important'); // 50% opacity
+      // Mobile: Return to 25% blur (permanent mobile protection - shows details with blur effect)
+      logo.style.setProperty('filter', 'blur(6px)', 'important');
+      logo.style.setProperty('-webkit-filter', 'blur(6px)', 'important');
+      logo.style.setProperty('-moz-filter', 'blur(6px)', 'important');
+      logo.style.setProperty('opacity', '0.75', 'important'); // 75% opacity - shows more details
     } else {
       // Desktop: Return to normal (100% opacity, no blur)
       logo.style.setProperty('filter', '', 'important');
@@ -615,7 +615,7 @@
   
   /**
    * Initialize logo with reduced visibility (less prominent)
-   * Mobile devices: Apply 50% blur for additional security
+   * Mobile devices: Apply 25% blur for additional security (shows details with blur effect)
    */
   function initializeLogoVisibility() {
     const logos = document.querySelectorAll('img[src*="Official MSU-TCTO logo-01.png"]');
@@ -625,11 +625,11 @@
       // Desktop: Make logo less visible by default (15% opacity)
       // Mobile: Apply 50% blur for additional security
       if (isMobile) {
-        // Mobile: Apply 50% blur permanently for security
-        logo.style.setProperty('filter', 'blur(12px)', 'important'); // 50% blur (half of 25px)
-        logo.style.setProperty('-webkit-filter', 'blur(12px)', 'important');
-        logo.style.setProperty('-moz-filter', 'blur(12px)', 'important');
-        logo.style.setProperty('opacity', '0.5', 'important'); // 50% opacity
+        // Mobile: Apply 25% blur permanently for security (shows logo details with blur effect)
+        logo.style.setProperty('filter', 'blur(6px)', 'important'); // 25% blur (6px of 25px)
+        logo.style.setProperty('-webkit-filter', 'blur(6px)', 'important');
+        logo.style.setProperty('-moz-filter', 'blur(6px)', 'important');
+        logo.style.setProperty('opacity', '0.75', 'important'); // 75% opacity - shows more details
         logo.style.setProperty('transition', 'opacity 0.3s ease, filter 0.3s ease', 'important');
         logo.style.setProperty('will-change', 'opacity, filter', 'important');
         logo.classList.add('mobile-protected'); // Add class for CSS targeting
@@ -853,13 +853,13 @@
         opacity: 0.25 !important;
       }
       
-      /* Mobile-specific: Permanent 50% blur for security */
+      /* Mobile-specific: Permanent 25% blur for security (shows logo details with blur effect) */
       @media (max-width: 768px) {
         img[src*="Official MSU-TCTO logo-01.png"] {
-          filter: blur(12px) !important; /* 50% blur for mobile security */
-          -webkit-filter: blur(12px) !important;
-          -moz-filter: blur(12px) !important;
-          opacity: 0.5 !important; /* 50% opacity */
+          filter: blur(6px) !important; /* 25% blur for mobile security - shows details */
+          -webkit-filter: blur(6px) !important;
+          -moz-filter: blur(6px) !important;
+          opacity: 0.75 !important; /* 75% opacity - shows more logo details */
           -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
           transform: translateZ(0);
@@ -886,13 +886,13 @@
         }
       }
       
-      /* Tablet-specific: Also apply 50% blur */
+      /* Tablet-specific: Also apply 25% blur */
       @media (min-width: 769px) and (max-width: 1024px) {
         img[src*="Official MSU-TCTO logo-01.png"] {
-          filter: blur(12px) !important; /* 50% blur for tablet security */
-          -webkit-filter: blur(12px) !important;
-          -moz-filter: blur(12px) !important;
-          opacity: 0.5 !important; /* 50% opacity */
+          filter: blur(6px) !important; /* 25% blur for tablet security - shows details */
+          -webkit-filter: blur(6px) !important;
+          -moz-filter: blur(6px) !important;
+          opacity: 0.75 !important; /* 75% opacity - shows more logo details */
         }
       }
       
@@ -1185,7 +1185,7 @@
       console.log('%c🛡️ Professional Screenshot Protection Active', 'color: #10b981; font-size: 14px; font-weight: bold;');
       console.log('%cLogo visibility reduced. Auto-disable enabled on detection.', 'color: #6b7280; font-size: 12px;');
       if (isMobile) {
-        console.log('%c📱 Mobile device detected - Logo permanently blurred at 50% for security', 'color: #f59e0b; font-size: 12px;');
+        console.log('%c📱 Mobile device detected - Logo permanently blurred at 25% for security (details visible)', 'color: #f59e0b; font-size: 12px;');
       }
     }
   }
