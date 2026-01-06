@@ -14,6 +14,12 @@ export async function GET({ request }) {
     const origin = request.headers.get('origin') || '';
     const url = new URL(request.url);
     
+    // Check if this is a favicon request (favicons often don't have referer headers)
+    const isFaviconRequest = url.pathname.includes('favicon') || 
+                             referer === '' || 
+                             userAgent.includes('favicon') ||
+                             request.headers.get('accept')?.includes('image');
+    
     // Additional validation: Check if request has proper headers (browser request)
     const isBrowserRequest = !!userAgent && 
       !userAgent.includes('curl') && 
@@ -32,9 +38,9 @@ export async function GET({ request }) {
       referer.includes('localhost') ||
       url.hostname.includes('localhost');
     
-    // Allow if: valid token, development mode, or browser request
-    // This allows same-site requests even without referer/origin headers
-    const allowRequest = validToken || isDevelopment || isBrowserRequest;
+    // Allow if: valid token, development mode, browser request, OR favicon request
+    // Favicon requests are always allowed since they often lack referer headers
+    const allowRequest = validToken || isDevelopment || isBrowserRequest || isFaviconRequest;
     
     if (!allowRequest) {
       return new Response('Access Denied: Logo is protected. Please access through the website.', {
