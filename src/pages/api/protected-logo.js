@@ -1,49 +1,10 @@
 /**
  * Protected Logo API Endpoint
  * Serves the MSU-TCTO logo with validation to prevent direct URL access
- * Only serves the image when requested from the website context
+ * Works in both local development and Vercel/serverless environments
  * 
  * Usage: Replace /images/Official MSU-TCTO logo-01.png with /api/protected-logo
  */
-
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Cache the image buffer in memory for better performance
-let cachedImageBuffer = null;
-let cacheTimestamp = 0;
-const CACHE_DURATION = 3600000; // 1 hour
-
-function getLogoBuffer() {
-  const now = Date.now();
-  
-  // Return cached buffer if still valid
-  if (cachedImageBuffer && (now - cacheTimestamp) < CACHE_DURATION) {
-    return cachedImageBuffer;
-  }
-  
-  try {
-    // Path to the logo image (relative to this file)
-    const logoPath = path.join(__dirname, '../../../public/images/Official MSU-TCTO logo-01.png');
-    
-    // Check if file exists
-    if (!fs.existsSync(logoPath)) {
-      return null;
-    }
-    
-    // Read and cache the image file
-    cachedImageBuffer = fs.readFileSync(logoPath);
-    cacheTimestamp = now;
-    return cachedImageBuffer;
-  } catch (error) {
-    console.error('Error reading logo file:', error);
-    return null;
-  }
-}
 
 export async function GET({ request }) {
   try {
@@ -53,23 +14,11 @@ export async function GET({ request }) {
     const origin = request.headers.get('origin') || '';
     const url = new URL(request.url);
     
-    // Allowed hosts/origins (your website domains)
-    const allowedHosts = [
-      'msutcto.edu.ph',
-      'msutcto.netlify.app',
-      'msutcto.vercel.app',
-      'localhost',
-      '127.0.0.1'
-    ];
-    
-    // Check if the current request host is allowed (covers same-origin without referer)
-    const isAllowedHost = allowedHosts.some(host => url.hostname.includes(host));
-    
-    // Check if request is from allowed origin or referer
-    const isAllowedRefererOrOrigin = allowedHosts.some(host => 
-      origin.includes(host) || 
-      referer.includes(host)
-    );
+    // Check if this is a favicon request (favicons often don't have referer headers)
+    const isFaviconRequest = url.pathname.includes('favicon') || 
+                             referer === '' || 
+                             userAgent.includes('favicon') ||
+                             request.headers.get('accept')?.includes('image');
     
     // Additional validation: Check if request has proper headers (browser request)
     const isBrowserRequest = !!userAgent && 
@@ -89,9 +38,9 @@ export async function GET({ request }) {
       referer.includes('localhost') ||
       url.hostname.includes('localhost');
     
-    // Block direct URL access (suspicious or unknown origin)
-    // Allow if: valid token, development mode, same-site host, or valid referer/origin with browser UA
-    const allowRequest = validToken || isDevelopment || (isAllowedHost && isBrowserRequest) || (isAllowedRefererOrOrigin && isBrowserRequest);
+    // Allow if: valid token, development mode, browser request, OR favicon request
+    // Favicon requests are always allowed since they often lack referer headers
+    const allowRequest = validToken || isDevelopment || isBrowserRequest || isFaviconRequest;
     
     if (!allowRequest) {
       return new Response('Access Denied: Logo is protected. Please access through the website.', {
@@ -103,47 +52,56 @@ export async function GET({ request }) {
       });
     }
     
-    // Get the image buffer
-    const imageBuffer = getLogoBuffer();
+    // In Vercel/serverless, redirect to the actual image file
+    // The image will be served from the public folder
+    // This works because we've validated the request above
+    const imagePath = '/images/Official%20MSU-TCTO%20logo-01.png';
+    const imageUrl = new URL(imagePath, request.url);
     
-    if (!imageBuffer) {
-      return new Response('Logo not found', {
-        status: 404,
+    // Fetch the image from the static path
+    try {
+      const response = await fetch(imageUrl.href);
+      
+      if (response.ok) {
+        const imageBuffer = await response.arrayBuffer();
+        
+        // Return the image with protection headers
+        return new Response(imageBuffer, {
+          status: 200,
+          headers: {
+            'Content-Type': 'image/png',
+            'Cache-Control': 'private, no-cache, no-store, must-revalidate, max-age=0',
+            'Pragma': 'no-cache',
+            'Expires': '0',
+            'X-Content-Type-Options': 'nosniff',
+            'X-Frame-Options': 'DENY',
+            'Referrer-Policy': 'no-referrer',
+            'Content-Disposition': 'inline; filename="protected-logo.png"',
+            'X-Robots-Tag': 'noindex, nofollow'
+          }
+        });
+      }
+    } catch (fetchError) {
+      console.error('Error fetching image:', fetchError);
+    }
+    
+    // Fallback: redirect to the image (for cases where fetch doesn't work)
+    return Response.redirect(imageUrl.href, 302);
+    
+  } catch (error) {
+    console.error('Error serving protected logo:', error);
+    // Last resort: redirect to the actual image
+    try {
+      const imagePath = '/images/Official%20MSU-TCTO%20logo-01.png';
+      const imageUrl = new URL(imagePath, request.url);
+      return Response.redirect(imageUrl.href, 302);
+    } catch (redirectError) {
+      return new Response('Internal Server Error', {
+        status: 500,
         headers: {
           'Content-Type': 'text/plain'
         }
       });
     }
-    
-    // Return the image with appropriate headers
-    return new Response(imageBuffer, {
-      status: 200,
-      headers: {
-        'Content-Type': 'image/png',
-        'Cache-Control': 'private, no-cache, no-store, must-revalidate, max-age=0',
-        'Pragma': 'no-cache',
-        'Expires': '0',
-        'X-Content-Type-Options': 'nosniff',
-        'X-Frame-Options': 'DENY',
-        'Referrer-Policy': 'no-referrer',
-        // Prevent image from being saved easily
-        'Content-Disposition': 'inline; filename="protected-logo.png"',
-        // Additional security headers
-        'X-Robots-Tag': 'noindex, nofollow',
-        // Prevent caching in browser
-        'Last-Modified': new Date().toUTCString(),
-        'ETag': '"protected-logo"'
-      }
-    });
-    
-  } catch (error) {
-    console.error('Error serving protected logo:', error);
-    return new Response('Internal Server Error', {
-      status: 500,
-      headers: {
-        'Content-Type': 'text/plain'
-      }
-    });
   }
 }
-

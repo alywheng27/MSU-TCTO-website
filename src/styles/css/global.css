@@ -4,6 +4,9 @@
  * The @tailwind and @apply directives are valid Tailwind CSS syntax
  */
 
+/* Normalize.css - makes browsers render all elements more consistently and in line with modern standards */
+@import 'normalize.css/normalize.css';
+
 @import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Dirtylane&display=swap');
 

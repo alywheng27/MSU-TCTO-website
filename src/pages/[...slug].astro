@@ -1219,6 +1219,49 @@ body.forEach((block: any) => {
     }
   }
 
+  /* Tablet portrait/landscape (Android & iOS) */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .ai-summary-panel {
+      width: 420px !important;
+      max-width: 85vw !important;
+      height: 100vh !important;
+      height: 100dvh !important;
+    }
+
+    .ai-summary-fab {
+      right: 1.25rem !important;
+      top: 45% !important;
+      transform: translateY(-45%) !important;
+    }
+
+    /* Slightly larger readable copy for tablets */
+    .prose {
+      font-size: 1.05rem;
+      line-height: 1.75;
+    }
+
+    .prose p {
+      margin-bottom: 1.5em;
+    }
+
+    .headings.h3,
+    .headings.h4 {
+      margin-top: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Keep gallery within viewport on tablets */
+    #gallery-main-image {
+      max-height: 82vh;
+      max-height: 82dvh;
+    }
+
+    #gallery-counter,
+    #gallery-caption {
+      bottom: 1.25rem;
+    }
+  }
+
   /* Tablet and up (768px and up) - Keep desktop behavior */
   @media (min-width: 769px) {
     .ai-summary-fab {

@@ -254,7 +254,7 @@ const Navbar = ({ path }) => {
               <img 
                 src="/api/protected-logo" 
                 alt="MSU-TCTO Logo" 
-                className={`transition-all duration-300 ${scrolled ? 'h-10 sm:h-12' : 'h-12 sm:h-16'} mr-3 sm:mr-4 screenshot-protected-black`}
+                className={`transition-all duration-300 ${scrolled ? 'h-10 sm:h-12' : 'h-12 sm:h-16'} mr-3 sm:mr-4`}
                 data-protected-image="true"
                 draggable="false"
                 style={{ 
