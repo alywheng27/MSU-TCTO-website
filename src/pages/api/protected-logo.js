@@ -1,10 +1,18 @@
 /**
  * Protected Logo API Endpoint
  * Serves the MSU-TCTO logo with validation to prevent direct URL access
+ * Returns blank/placeholder when accessed via DevTools or direct URL
  * Works in both local development and Vercel/serverless environments
  * 
  * Usage: Replace /images/Official MSU-TCTO logo-01.png with /api/protected-logo
  */
+
+// Create a 1x1 transparent PNG (blank image)
+function createBlankImage() {
+  // Base64 encoded 1x1 transparent PNG
+  const blankPNG = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
+  return Buffer.from(blankPNG, 'base64');
+}
 
 export async function GET({ request }) {
   try {
@@ -14,19 +22,18 @@ export async function GET({ request }) {
     const origin = request.headers.get('origin') || '';
     const url = new URL(request.url);
     
-    // Check if this is a favicon request (favicons often don't have referer headers)
-    const isFaviconRequest = url.pathname.includes('favicon') || 
-                             referer === '' || 
-                             userAgent.includes('favicon') ||
-                             request.headers.get('accept')?.includes('image');
+    // Detect DevTools or direct URL access
+    // DevTools often has no referer, or referer is the same as the request URL
+    const isDirectAccess = !referer || 
+                          referer === url.href || 
+                          referer.includes('chrome-devtools://') ||
+                          referer.includes('devtools://') ||
+                          url.searchParams.has('devtools') ||
+                          url.searchParams.has('inspect');
     
-    // Additional validation: Check if request has proper headers (browser request)
-    const isBrowserRequest = !!userAgent && 
-      !userAgent.includes('curl') && 
-      !userAgent.includes('wget') && 
-      !userAgent.includes('python') &&
-      !userAgent.includes('Postman') &&
-      !userAgent.includes('Insomnia');
+    // Check if this is a favicon request
+    const isFaviconRequest = url.pathname.includes('favicon') || 
+                             userAgent.includes('favicon');
     
     // Check for secret token in query parameter (for internal use)
     const secretToken = url.searchParams.get('token');
@@ -38,23 +45,53 @@ export async function GET({ request }) {
       referer.includes('localhost') ||
       url.hostname.includes('localhost');
     
-    // Allow if: valid token, development mode, browser request, OR favicon request
-    // Favicon requests are always allowed since they often lack referer headers
-    const allowRequest = validToken || isDevelopment || isBrowserRequest || isFaviconRequest;
-    
-    if (!allowRequest) {
-      return new Response('Access Denied: Logo is protected. Please access through the website.', {
-        status: 403,
+    // If direct access (DevTools or direct URL), return blank image
+    if (isDirectAccess && !validToken && !isDevelopment && !isFaviconRequest) {
+      return new Response(createBlankImage(), {
+        status: 200,
         headers: {
-          'Content-Type': 'text/plain',
+          'Content-Type': 'image/png',
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0',
           'X-Robots-Tag': 'noindex, nofollow'
         }
       });
     }
     
-    // In Vercel/serverless, redirect to the actual image file
-    // The image will be served from the public folder
-    // This works because we've validated the request above
+    // Additional validation: Check if request has proper headers (browser request)
+    const isBrowserRequest = !!userAgent && 
+      !userAgent.includes('curl') && 
+      !userAgent.includes('wget') && 
+      !userAgent.includes('python') &&
+      !userAgent.includes('Postman') &&
+      !userAgent.includes('Insomnia');
+    
+    // Allow if: valid token, development mode, or browser request with proper referer
+    // Must have referer from the same domain for normal page loads
+    const hasValidReferer = referer && 
+                           (referer.includes(url.hostname) || 
+                            referer.includes('msutcto.edu.ph') ||
+                            referer.includes('vercel.app') ||
+                            referer.includes('netlify.app'));
+    
+    const allowRequest = validToken || isDevelopment || (isBrowserRequest && hasValidReferer) || isFaviconRequest;
+    
+    if (!allowRequest) {
+      // Return blank image instead of error message
+      return new Response(createBlankImage(), {
+        status: 200,
+        headers: {
+          'Content-Type': 'image/png',
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0',
+          'X-Robots-Tag': 'noindex, nofollow'
+        }
+      });
+    }
+    
+    // Get the actual image from static path
     const imagePath = '/images/Official%20MSU-TCTO%20logo-01.png';
     const imageUrl = new URL(imagePath, request.url);
     
@@ -75,7 +112,7 @@ export async function GET({ request }) {
             'Expires': '0',
             'X-Content-Type-Options': 'nosniff',
             'X-Frame-Options': 'DENY',
-            'Referrer-Policy': 'no-referrer',
+            'Referrer-Policy': 'strict-origin-when-cross-origin',
             'Content-Disposition': 'inline; filename="protected-logo.png"',
             'X-Robots-Tag': 'noindex, nofollow'
           }
@@ -85,23 +122,28 @@ export async function GET({ request }) {
       console.error('Error fetching image:', fetchError);
     }
     
-    // Fallback: redirect to the image (for cases where fetch doesn't work)
-    return Response.redirect(imageUrl.href, 302);
+    // Fallback: return blank image if fetch fails
+    return new Response(createBlankImage(), {
+      status: 200,
+      headers: {
+        'Content-Type': 'image/png',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
+      }
+    });
     
   } catch (error) {
     console.error('Error serving protected logo:', error);
-    // Last resort: redirect to the actual image
-    try {
-      const imagePath = '/images/Official%20MSU-TCTO%20logo-01.png';
-      const imageUrl = new URL(imagePath, request.url);
-      return Response.redirect(imageUrl.href, 302);
-    } catch (redirectError) {
-      return new Response('Internal Server Error', {
-        status: 500,
-        headers: {
-          'Content-Type': 'text/plain'
-        }
-      });
-    }
+    // Return blank image on error
+    return new Response(createBlankImage(), {
+      status: 200,
+      headers: {
+        'Content-Type': 'image/png',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
+      }
+    });
   }
 }

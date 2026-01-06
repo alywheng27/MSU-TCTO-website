@@ -813,46 +813,130 @@
   }
   
   /**
+   * Securely load logo via fetch to hide from DevTools
+   * Converts to data URL so DevTools can't see the actual source
+   */
+  async function loadLogoSecurely(logo) {
+    try {
+      // Check if DevTools is open
+      let devToolsOpen = false;
+      const element = new Image();
+      Object.defineProperty(element, 'id', {
+        get: function() {
+          devToolsOpen = true;
+        }
+      });
+      console.log(element);
+      console.clear();
+      
+      // If DevTools detected, don't load the logo
+      if (devToolsOpen) {
+        logo.style.display = 'none';
+        return;
+      }
+      
+      // Fetch the logo with proper referer
+      const response = await fetch('/api/protected-logo', {
+        method: 'GET',
+        headers: {
+          'Referer': window.location.href,
+          'Accept': 'image/png,image/*;q=0.8'
+        },
+        credentials: 'same-origin'
+      });
+      
+      if (response.ok) {
+        const blob = await response.blob();
+        const reader = new FileReader();
+        
+        reader.onloadend = function() {
+          // Convert to data URL - this hides the actual source from DevTools
+          const dataUrl = reader.result;
+          logo.src = dataUrl;
+          logo.setAttribute('data-secure-loaded', 'true');
+          
+          // Apply device-specific styling
+          const isMobile = isMobileDevice();
+          if (isMobile) {
+            logo.style.setProperty('filter', 'blur(0.75px)', 'important');
+            logo.style.setProperty('-webkit-filter', 'blur(0.75px)', 'important');
+            logo.style.setProperty('-moz-filter', 'blur(0.75px)', 'important');
+            logo.style.setProperty('opacity', '0.95', 'important');
+          } else {
+            logo.style.setProperty('opacity', '1', 'important');
+            logo.style.setProperty('filter', 'none', 'important');
+          }
+        };
+        
+        reader.readAsDataURL(blob);
+      }
+    } catch (error) {
+      console.error('Error loading logo securely:', error);
+      // Fallback to direct source if secure load fails
+      logo.src = '/api/protected-logo';
+    }
+  }
+
+  /**
    * Initialize logo with visibility based on device type
    * Desktop: Fully clear (100% opacity, no blur)
    * Mobile/Tablet: 3% blur for security (95% opacity)
    * Blur will increase when screenshot is detected
+   * Uses secure loading to hide from DevTools
    */
   function initializeLogoVisibility() {
     const logos = document.querySelectorAll('img[src*="Official MSU-TCTO logo-01.png"], img[src*="/api/protected-logo"]');
     const isMobile = isMobileDevice();
     
     logos.forEach(logo => {
-      if (isMobile) {
-        // Mobile/Tablet: Apply 3% blur for security (shows logo details with minimal blur effect)
-        logo.style.setProperty('filter', 'blur(0.75px)', 'important'); // 3% blur (0.75px of 25px)
-        logo.style.setProperty('-webkit-filter', 'blur(0.75px)', 'important');
-        logo.style.setProperty('-moz-filter', 'blur(0.75px)', 'important');
-        logo.style.setProperty('opacity', '0.95', 'important'); // 95% opacity - shows logo details clearly
-        logo.style.setProperty('transition', 'opacity 0.3s ease, filter 0.3s ease', 'important');
-        logo.style.setProperty('will-change', 'opacity, filter', 'important');
-        logo.classList.add('mobile-protected'); // Add class for CSS targeting
+      // Check if already securely loaded
+      if (logo.getAttribute('data-secure-loaded') === 'true') {
+        return;
+      }
+      
+      // For protected logo endpoint, load securely
+      if (logo.src.includes('/api/protected-logo')) {
+        // Set a placeholder first
+        logo.style.opacity = '0';
+        logo.style.transition = 'opacity 0.3s ease';
         
-        // Mobile optimizations
-        logo.style.setProperty('-webkit-backface-visibility', 'hidden', 'important');
-        logo.style.setProperty('backface-visibility', 'hidden', 'important');
-        logo.style.setProperty('transform', 'translateZ(0)', 'important');
-        logo.style.setProperty('-webkit-transform', 'translateZ(0)', 'important');
+        // Load securely
+        loadLogoSecurely(logo).then(() => {
+          logo.style.opacity = '1';
+        });
       } else {
-        // Desktop: Logo is fully visible by default (no blur, 100% opacity)
-        // Blur will only be applied when screenshot is detected
-        logo.style.setProperty('opacity', '1', 'important'); // 100% opacity - fully visible
-        logo.style.setProperty('filter', 'none', 'important'); // No blur by default
-        logo.style.setProperty('-webkit-filter', 'none', 'important');
-        logo.style.setProperty('-moz-filter', 'none', 'important');
-        logo.style.setProperty('transition', 'opacity 0.3s ease, filter 0.3s ease', 'important');
-        logo.style.setProperty('will-change', 'opacity, filter', 'important');
-        
-        // Performance optimizations
-        logo.style.setProperty('-webkit-backface-visibility', 'hidden', 'important');
-        logo.style.setProperty('backface-visibility', 'hidden', 'important');
-        logo.style.setProperty('transform', 'translateZ(0)', 'important');
-        logo.style.setProperty('-webkit-transform', 'translateZ(0)', 'important');
+        // For direct image paths, apply styling normally
+        if (isMobile) {
+          // Mobile/Tablet: Apply 3% blur for security (shows logo details with minimal blur effect)
+          logo.style.setProperty('filter', 'blur(0.75px)', 'important'); // 3% blur (0.75px of 25px)
+          logo.style.setProperty('-webkit-filter', 'blur(0.75px)', 'important');
+          logo.style.setProperty('-moz-filter', 'blur(0.75px)', 'important');
+          logo.style.setProperty('opacity', '0.95', 'important'); // 95% opacity - shows logo details clearly
+          logo.style.setProperty('transition', 'opacity 0.3s ease, filter 0.3s ease', 'important');
+          logo.style.setProperty('will-change', 'opacity, filter', 'important');
+          logo.classList.add('mobile-protected'); // Add class for CSS targeting
+          
+          // Mobile optimizations
+          logo.style.setProperty('-webkit-backface-visibility', 'hidden', 'important');
+          logo.style.setProperty('backface-visibility', 'hidden', 'important');
+          logo.style.setProperty('transform', 'translateZ(0)', 'important');
+          logo.style.setProperty('-webkit-transform', 'translateZ(0)', 'important');
+        } else {
+          // Desktop: Logo is fully visible by default (no blur, 100% opacity)
+          // Blur will only be applied when screenshot is detected
+          logo.style.setProperty('opacity', '1', 'important'); // 100% opacity - fully visible
+          logo.style.setProperty('filter', 'none', 'important'); // No blur by default
+          logo.style.setProperty('-webkit-filter', 'none', 'important');
+          logo.style.setProperty('-moz-filter', 'none', 'important');
+          logo.style.setProperty('transition', 'opacity 0.3s ease, filter 0.3s ease', 'important');
+          logo.style.setProperty('will-change', 'opacity, filter', 'important');
+          
+          // Performance optimizations
+          logo.style.setProperty('-webkit-backface-visibility', 'hidden', 'important');
+          logo.style.setProperty('backface-visibility', 'hidden', 'important');
+          logo.style.setProperty('transform', 'translateZ(0)', 'important');
+          logo.style.setProperty('-webkit-transform', 'translateZ(0)', 'important');
+        }
       }
     });
   }
@@ -1089,6 +1173,16 @@
         filter: blur(${config.logoBlurOnDetection}) !important;
         -webkit-filter: blur(${config.logoBlurOnDetection}) !important;
         opacity: 0.25 !important;
+      }
+      
+      /* Watermark overlay for protected logos */
+      .logo-watermark-overlay {
+        position: absolute !important;
+        inset: 0 !important;
+        background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.16) 0px, rgba(255,255,255,0.16) 16px, transparent 16px, transparent 32px) !important;
+        mix-blend-mode: multiply !important;
+        opacity: 0.65 !important;
+        pointer-events: none !important;
       }
       
       /* Mobile-specific: 3% blur for security (shows logo details with minimal blur effect) */

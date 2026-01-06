@@ -250,6 +250,17 @@ const footerSections = getFooterSections();
             <div class="flex flex-col items-center text-center">
                 <!-- University Logo -->
                 <div class="relative mb-6 group" data-protected-logo="true">
+                    <div aria-hidden="true"
+                         class="logo-watermark-overlay pointer-events-none"
+                         style="
+                           position: absolute;
+                           inset: 0;
+                           background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.16) 0px, rgba(255,255,255,0.16) 16px, transparent 16px, transparent 32px);
+                           mix-blend-mode: multiply;
+                           opacity: 0.65;
+                           pointer-events: none;
+                         ">
+                    </div>
                     <div class="absolute inset-0 bg-msu-main-color rounded-full opacity-0 group-hover:opacity-20 blur-md transition-opacity duration-300"></div>
                     <img src="/api/protected-logo" alt="MSU-TCTO Logo" 
                          class="h-40 transform group-hover:scale-105 transition-transform duration-300"
