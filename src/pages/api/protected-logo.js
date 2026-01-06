@@ -53,24 +53,6 @@ export async function GET({ request }) {
     const origin = request.headers.get('origin') || '';
     const url = new URL(request.url);
     
-    // Allowed hosts/origins (your website domains)
-    const allowedHosts = [
-      'msutcto.edu.ph',
-      'msutcto.netlify.app',
-      'msutcto.vercel.app',
-      'localhost',
-      '127.0.0.1'
-    ];
-    
-    // Check if the current request host is allowed (covers same-origin without referer)
-    const isAllowedHost = allowedHosts.some(host => url.hostname.includes(host));
-    
-    // Check if request is from allowed origin or referer
-    const isAllowedRefererOrOrigin = allowedHosts.some(host => 
-      origin.includes(host) || 
-      referer.includes(host)
-    );
-    
     // Additional validation: Check if request has proper headers (browser request)
     const isBrowserRequest = !!userAgent && 
       !userAgent.includes('curl') && 
@@ -89,9 +71,9 @@ export async function GET({ request }) {
       referer.includes('localhost') ||
       url.hostname.includes('localhost');
     
-    // Block direct URL access (suspicious or unknown origin)
-    // Allow if: valid token, development mode, same-site host, or valid referer/origin with browser UA
-    const allowRequest = validToken || isDevelopment || (isAllowedHost && isBrowserRequest) || (isAllowedRefererOrOrigin && isBrowserRequest);
+    // Allow if: valid token, development mode, or browser request (same-site image loads fall here)
+    // This intentionally allows same-site requests even without referer/origin headers to avoid broken images.
+    const allowRequest = validToken || isDevelopment || isBrowserRequest;
     
     if (!allowRequest) {
       return new Response('Access Denied: Logo is protected. Please access through the website.', {
