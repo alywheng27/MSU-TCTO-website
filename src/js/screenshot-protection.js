@@ -235,8 +235,88 @@
     if ((e.ctrlKey || e.metaKey) && e.key === 'u') {
       e.preventDefault();
       e.stopPropagation();
-      showWarningMessage('View source is disabled.');
+      screenshotAttempts++;
+      makeLogosBlack(config.autoDisableDuration, true);
+      showWarningMessage('View source is disabled. Protection auto-enabled.');
       return false;
+    }
+
+    // Ctrl + S (Save Page) - BLOCK
+    if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+      e.preventDefault();
+      e.stopPropagation();
+      screenshotAttempts++;
+      makeLogosBlack(config.autoDisableDuration, true);
+      showWarningMessage('Saving is disabled. Protection auto-enabled.');
+      return false;
+    }
+
+    // Ctrl + P (Print) - BLOCK
+    if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+      e.preventDefault();
+      e.stopPropagation();
+      screenshotAttempts++;
+      makeLogosBlack(config.autoDisableDuration, true);
+      showWarningMessage('Printing is disabled. Protection auto-enabled.');
+      return false;
+    }
+
+    // Ctrl + Shift + P (Command Palette in DevTools) - BLOCK
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'P') {
+      e.preventDefault();
+      e.stopPropagation();
+      screenshotAttempts++;
+      makeLogosBlack(config.autoDisableDuration, true);
+      showWarningMessage('Developer Tools command palette blocked. Protection auto-enabled.');
+      return false;
+    }
+
+    // Ctrl + Shift + D (Toggle Dock in DevTools) - BLOCK
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'D') {
+      e.preventDefault();
+      e.stopPropagation();
+      screenshotAttempts++;
+      makeLogosBlack(config.autoDisableDuration, true);
+      return false;
+    }
+
+    // Ctrl + Shift + M (Toggle Device Toolbar) - BLOCK
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'M') {
+      e.preventDefault();
+      e.stopPropagation();
+      screenshotAttempts++;
+      makeLogosBlack(config.autoDisableDuration, true);
+      return false;
+    }
+
+    // Ctrl + Shift + K (Console in Firefox) - BLOCK
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'K') {
+      e.preventDefault();
+      e.stopPropagation();
+      screenshotAttempts++;
+      makeLogosBlack(config.autoDisableDuration, true);
+      showWarningMessage('Developer Tools blocked. Protection auto-enabled.');
+      return false;
+    }
+
+    // Ctrl + Shift + E (Network in Firefox) - BLOCK
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'E') {
+      e.preventDefault();
+      e.stopPropagation();
+      screenshotAttempts++;
+      makeLogosBlack(config.autoDisableDuration, true);
+      return false;
+    }
+
+    // Escape key (often used to close DevTools) - Monitor
+    if (e.key === 'Escape' || e.keyCode === 27) {
+      // Check if DevTools might be closing
+      setTimeout(() => {
+        if (screenshotsDisabled && Date.now() < disableUntil) {
+          // Still in protection period, keep blurred
+          makeLogosBlack(2000, false);
+        }
+      }, 500);
     }
   }
 
@@ -306,39 +386,139 @@
   }
 
   /**
-   * Detect DevTools opening
+   * Enhanced DevTools detection with multiple methods
    */
   function detectDevTools() {
     if (!config.enableDevToolsDetection) return;
 
-    let devToolsThreshold = 160;
-    const element = new Image();
     let devToolsOpen = false;
+    let lastWindowWidth = window.innerWidth;
+    let lastWindowHeight = window.innerHeight;
+    let devToolsDetected = false;
 
+    // Method 1: Console object detection
+    const element = new Image();
     Object.defineProperty(element, 'id', {
       get: function() {
-        if (!devToolsOpen) {
+        if (!devToolsOpen && !devToolsDetected) {
           devToolsOpen = true;
-          screenshotAttempts++;
-          makeLogosBlack(config.autoDisableDuration, true); // Auto-disable when DevTools detected
-          showProtectionOverlay();
-          showWarningMessage('Developer Tools detected. Protection auto-enabled.');
-          
-          if (config.enableConsoleWarnings) {
-            console.warn('%c🛡️ DEVELOPER TOOLS DETECTED', 'color: #dc2626; font-size: 14px; font-weight: bold;');
-            console.warn('Screenshots auto-disabled. This content is protected.');
-          }
-          
-          setTimeout(() => hideProtectionOverlay(), 4000);
+          devToolsDetected = true;
+          triggerDevToolsProtection();
         }
       }
     });
 
+    // Method 2: Window size detection (DevTools changes window dimensions)
+    function checkWindowSize() {
+      const currentWidth = window.innerWidth;
+      const currentHeight = window.innerHeight;
+      const widthDiff = Math.abs(currentWidth - lastWindowWidth);
+      const heightDiff = Math.abs(currentHeight - lastWindowHeight);
+      
+      // Detect significant window size changes (DevTools opening/closing)
+      if ((widthDiff > 200 || heightDiff > 200) && !devToolsDetected) {
+        devToolsDetected = true;
+        triggerDevToolsProtection();
+      }
+      
+      lastWindowWidth = currentWidth;
+      lastWindowHeight = currentHeight;
+    }
+
+    // Method 3: Console object property detection
+    function checkConsoleObject() {
+      try {
+        const start = performance.now();
+        console.log('%c', 'color: transparent');
+        const end = performance.now();
+        
+        // If console is open, logging takes longer
+        if (end - start > 100 && !devToolsDetected) {
+          devToolsDetected = true;
+          triggerDevToolsProtection();
+        }
+      } catch (e) {
+        // Silent fail
+      }
+    }
+
+    // Method 4: Debugger detection
+    function checkDebugger() {
+      try {
+        const start = performance.now();
+        debugger; // This will pause if DevTools is open
+        const end = performance.now();
+        
+        if (end - start > 100 && !devToolsDetected) {
+          devToolsDetected = true;
+          triggerDevToolsProtection();
+        }
+      } catch (e) {
+        // Silent fail
+      }
+    }
+
+    // Method 5: Function toString detection
+    function checkFunctionToString() {
+      try {
+        const devtools = {
+          toString: function() {
+            if (!devToolsDetected) {
+              devToolsDetected = true;
+              triggerDevToolsProtection();
+            }
+            return '';
+          }
+        };
+        console.log('%c', devtools);
+      } catch (e) {
+        // Silent fail
+      }
+    }
+
+    // Trigger protection when DevTools detected
+    function triggerDevToolsProtection() {
+      screenshotAttempts++;
+      screenshotsDisabled = true;
+      disableUntil = Date.now() + config.autoDisableDuration;
+      makeLogosBlack(config.autoDisableDuration, true);
+      showProtectionOverlay();
+      showWarningMessage('Developer Tools detected. Protection auto-enabled. Screenshots disabled.');
+      
+      if (config.enableConsoleWarnings) {
+        console.warn('%c🛡️ DEVELOPER TOOLS DETECTED - ACCESS BLOCKED', 'color: #dc2626; font-size: 16px; font-weight: bold;');
+        console.warn('%c⚠️ Screenshots are now disabled for your protection.', 'color: #f59e0b; font-size: 14px;');
+        console.warn('%c🔒 This content is protected. Please close Developer Tools.', 'color: #dc2626; font-size: 12px;');
+      }
+      
+      setTimeout(() => hideProtectionOverlay(), 5000);
+      
+      // Continuously check and re-trigger if DevTools remains open
+      const continuousCheck = setInterval(() => {
+        if (devToolsDetected) {
+          screenshotsDisabled = true;
+          disableUntil = Date.now() + config.autoDisableDuration;
+          makeLogosBlack(config.autoDisableDuration, true);
+        } else {
+          clearInterval(continuousCheck);
+        }
+      }, 2000);
+    }
+
+    // Continuous monitoring
     setInterval(() => {
       devToolsOpen = false;
       console.log(element);
       console.clear();
-    }, 1000);
+      checkWindowSize();
+      checkConsoleObject();
+      checkFunctionToString();
+    }, 500); // Check every 500ms for faster detection
+
+    // Debugger check (runs less frequently to avoid performance issues)
+    setInterval(() => {
+      checkDebugger();
+    }, 2000);
   }
 
   /**
@@ -474,26 +654,41 @@
   }
 
   /**
-   * Prevent context menu globally
+   * Prevent context menu globally - Enhanced blocking
    */
   function preventContextMenu(e) {
     e.preventDefault();
     e.stopPropagation();
     e.stopImmediatePropagation();
-    showWarningMessage('Right-click is disabled.');
+    screenshotAttempts++;
+    makeLogosBlack(config.autoDisableDuration, true);
+    showWarningMessage('Right-click is disabled. Protection auto-enabled.');
     return false;
   }
 
   /**
-   * Prevent text selection
+   * Prevent text selection and copying - Enhanced blocking
    */
   function preventSelection(e) {
     if (e.ctrlKey || e.metaKey) {
-      // Allow Ctrl+A for accessibility, but prevent Ctrl+C
-      if (e.key === 'c' || e.key === 'C') {
+      // Allow Ctrl+A for accessibility, but prevent Ctrl+C, Ctrl+X, Ctrl+V
+      if (e.key === 'c' || e.key === 'C' || e.key === 'x' || e.key === 'X' || e.key === 'v' || e.key === 'V') {
         e.preventDefault();
         e.stopPropagation();
-        showWarningMessage('Copying is disabled.');
+        screenshotAttempts++;
+        makeLogosBlack(config.autoDisableDuration, true);
+        showWarningMessage('Copying/Cutting/Pasting is disabled. Protection auto-enabled.');
+        return false;
+      }
+    }
+    
+    // Prevent text selection with mouse
+    if (e.type === 'selectstart' || e.type === 'mousedown') {
+      const selection = window.getSelection();
+      if (selection && selection.toString().length > 0) {
+        e.preventDefault();
+        e.stopPropagation();
+        selection.removeAllRanges();
         return false;
       }
     }
@@ -826,6 +1021,23 @@
     const style = document.createElement('style');
     style.id = 'logo-blackout-styles';
     style.textContent = `
+      /* Global text selection disabled for enhanced protection */
+      * {
+        -webkit-user-select: none !important;
+        -moz-user-select: none !important;
+        -ms-user-select: none !important;
+        user-select: none !important;
+        -webkit-touch-callout: none !important;
+      }
+      
+      /* Allow text selection for input fields and textareas */
+      input, textarea, [contenteditable="true"] {
+        -webkit-user-select: text !important;
+        -moz-user-select: text !important;
+        -ms-user-select: text !important;
+        user-select: text !important;
+      }
+      
       /* Logo is less visible by default (subtle protection) */
       img[src*="Official MSU-TCTO logo-01.png"] {
         position: relative;
@@ -1086,18 +1298,52 @@
     // Touch event monitoring (mobile)
     monitorMobileTouchEvents();
 
-    // Copy/Cut blocking
+    // Copy/Cut/Paste blocking - Enhanced
     document.addEventListener('copy', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      showWarningMessage('Copying is disabled.');
+      e.stopImmediatePropagation();
+      screenshotAttempts++;
+      makeLogosBlack(config.autoDisableDuration, true);
+      showWarningMessage('Copying is disabled. Protection auto-enabled.');
       return false;
     }, true);
 
     document.addEventListener('cut', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      showWarningMessage('Cutting is disabled.');
+      e.stopImmediatePropagation();
+      screenshotAttempts++;
+      makeLogosBlack(config.autoDisableDuration, true);
+      showWarningMessage('Cutting is disabled. Protection auto-enabled.');
+      return false;
+    }, true);
+
+    document.addEventListener('paste', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      showWarningMessage('Pasting is disabled.');
+      return false;
+    }, true);
+
+    // Prevent text selection globally
+    document.addEventListener('selectstart', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }, true);
+
+    // Prevent drag and drop
+    document.addEventListener('dragstart', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }, true);
+
+    document.addEventListener('drag', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
       return false;
     }, true);
 
