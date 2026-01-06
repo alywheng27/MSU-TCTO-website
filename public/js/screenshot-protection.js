@@ -342,10 +342,16 @@
   }
 
   /**
-   * Detect if device is mobile
+   * Detect if device is mobile or tablet (iOS, Android, etc.)
    */
   function isMobileDevice() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(userAgent);
+    const isTablet = /iPad|Android/i.test(userAgent) && !window.MSStream;
+    const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const isSmallScreen = window.innerWidth <= 1024;
+    
+    return isMobileUA || isTablet || (hasTouch && isSmallScreen) ||
            (typeof window.orientation !== 'undefined') ||
            (navigator.maxTouchPoints && navigator.maxTouchPoints > 2 && /MacIntel/.test(navigator.platform));
   }
@@ -532,9 +538,12 @@
     logos.forEach(logo => {
       // Apply strong blur filter IMMEDIATELY - no transition delay for maximum protection
       // This ensures logo is blurred before screenshot can be captured
-      logo.style.setProperty('filter', `blur(${blurAmount})`, 'important');
-      logo.style.setProperty('-webkit-filter', `blur(${blurAmount})`, 'important');
-      logo.style.setProperty('-moz-filter', `blur(${blurAmount})`, 'important');
+      // On mobile: Increase from 50% blur to full blur when detected
+      // On desktop: Apply full blur
+      const detectionBlur = isMobile ? config.logoBlurOnDetection : blurAmount;
+      logo.style.setProperty('filter', `blur(${detectionBlur})`, 'important');
+      logo.style.setProperty('-webkit-filter', `blur(${detectionBlur})`, 'important');
+      logo.style.setProperty('-moz-filter', `blur(${detectionBlur})`, 'important');
       logo.style.setProperty('transition', 'none', 'important'); // No transition for instant blur
       logo.style.setProperty('will-change', 'filter', 'important');
       logo.style.setProperty('opacity', '0.2', 'important'); // Further reduce visibility
@@ -581,13 +590,24 @@
   }
   
   /**
-   * Restore logo to full visibility (100% opacity)
+   * Restore logo - Mobile: 50% blur, Desktop: 100% opacity
    */
   function restoreLogo(logo) {
-    logo.style.setProperty('filter', '', 'important');
-    logo.style.setProperty('-webkit-filter', '', 'important');
-    logo.style.setProperty('-moz-filter', '', 'important');
-    logo.style.setProperty('opacity', '1', 'important'); // Return to 100% opacity
+    // Restore based on device type
+    const isMobile = isMobileDevice();
+    if (isMobile) {
+      // Mobile: Return to 50% blur (permanent mobile protection)
+      logo.style.setProperty('filter', 'blur(12px)', 'important');
+      logo.style.setProperty('-webkit-filter', 'blur(12px)', 'important');
+      logo.style.setProperty('-moz-filter', 'blur(12px)', 'important');
+      logo.style.setProperty('opacity', '0.5', 'important'); // 50% opacity
+    } else {
+      // Desktop: Return to normal (100% opacity, no blur)
+      logo.style.setProperty('filter', '', 'important');
+      logo.style.setProperty('-webkit-filter', '', 'important');
+      logo.style.setProperty('-moz-filter', '', 'important');
+      logo.style.setProperty('opacity', '1', 'important'); // Return to 100% opacity
+    }
     logo.style.setProperty('transition', 'filter 0.5s ease, opacity 0.5s ease', 'important');
     logo.classList.remove('screenshot-protected-black');
     logo.classList.remove('screenshot-detected');
@@ -595,23 +615,35 @@
   
   /**
    * Initialize logo with reduced visibility (less prominent)
+   * Mobile devices: Apply 50% blur for additional security
    */
   function initializeLogoVisibility() {
     const logos = document.querySelectorAll('img[src*="Official MSU-TCTO logo-01.png"]');
     const isMobile = isMobileDevice();
     
     logos.forEach(logo => {
-      // Make logo less visible by default
-      logo.style.setProperty('opacity', config.logoOpacity.toString(), 'important');
-      logo.style.setProperty('transition', 'opacity 0.3s ease, filter 0.3s ease', 'important');
-      logo.style.setProperty('will-change', 'opacity, filter', 'important');
-      
-      // Mobile optimizations
+      // Desktop: Make logo less visible by default (15% opacity)
+      // Mobile: Apply 50% blur for additional security
       if (isMobile) {
+        // Mobile: Apply 50% blur permanently for security
+        logo.style.setProperty('filter', 'blur(12px)', 'important'); // 50% blur (half of 25px)
+        logo.style.setProperty('-webkit-filter', 'blur(12px)', 'important');
+        logo.style.setProperty('-moz-filter', 'blur(12px)', 'important');
+        logo.style.setProperty('opacity', '0.5', 'important'); // 50% opacity
+        logo.style.setProperty('transition', 'opacity 0.3s ease, filter 0.3s ease', 'important');
+        logo.style.setProperty('will-change', 'opacity, filter', 'important');
+        logo.classList.add('mobile-protected'); // Add class for CSS targeting
+        
+        // Mobile optimizations
         logo.style.setProperty('-webkit-backface-visibility', 'hidden', 'important');
         logo.style.setProperty('backface-visibility', 'hidden', 'important');
         logo.style.setProperty('transform', 'translateZ(0)', 'important');
         logo.style.setProperty('-webkit-transform', 'translateZ(0)', 'important');
+      } else {
+        // Desktop: Normal reduced visibility
+        logo.style.setProperty('opacity', config.logoOpacity.toString(), 'important');
+        logo.style.setProperty('transition', 'opacity 0.3s ease, filter 0.3s ease', 'important');
+        logo.style.setProperty('will-change', 'opacity, filter', 'important');
       }
     });
   }
@@ -821,9 +853,13 @@
         opacity: 0.25 !important;
       }
       
-      /* Mobile-specific optimizations for better performance */
+      /* Mobile-specific: Permanent 50% blur for security */
       @media (max-width: 768px) {
         img[src*="Official MSU-TCTO logo-01.png"] {
+          filter: blur(12px) !important; /* 50% blur for mobile security */
+          -webkit-filter: blur(12px) !important;
+          -moz-filter: blur(12px) !important;
+          opacity: 0.5 !important; /* 50% opacity */
           -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
           transform: translateZ(0);
@@ -831,9 +867,12 @@
           will-change: filter, opacity;
         }
         
+        /* When screenshot is detected on mobile, increase blur */
         img[src*="Official MSU-TCTO logo-01.png"].screenshot-protected-black {
-          filter: blur(${config.mobileBlurIntensity}) !important;
-          -webkit-filter: blur(${config.mobileBlurIntensity}) !important;
+          filter: blur(${config.logoBlurOnDetection}) !important; /* Full blur on detection */
+          -webkit-filter: blur(${config.logoBlurOnDetection}) !important;
+          -moz-filter: blur(${config.logoBlurOnDetection}) !important;
+          opacity: 0.2 !important; /* Further reduce on detection */
           -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
           transform: translateZ(0);
@@ -841,8 +880,19 @@
         }
         
         img[src*="Official MSU-TCTO logo-01.png"].screenshot-detected {
-          filter: blur(${config.mobileBlurIntensity}) !important;
-          -webkit-filter: blur(${config.mobileBlurIntensity}) !important;
+          filter: blur(${config.logoBlurOnDetection}) !important; /* Full blur on detection */
+          -webkit-filter: blur(${config.logoBlurOnDetection}) !important;
+          opacity: 0.2 !important;
+        }
+      }
+      
+      /* Tablet-specific: Also apply 50% blur */
+      @media (min-width: 769px) and (max-width: 1024px) {
+        img[src*="Official MSU-TCTO logo-01.png"] {
+          filter: blur(12px) !important; /* 50% blur for tablet security */
+          -webkit-filter: blur(12px) !important;
+          -moz-filter: blur(12px) !important;
+          opacity: 0.5 !important; /* 50% opacity */
         }
       }
       
@@ -1134,6 +1184,9 @@
     if (config.enableConsoleWarnings) {
       console.log('%c🛡️ Professional Screenshot Protection Active', 'color: #10b981; font-size: 14px; font-weight: bold;');
       console.log('%cLogo visibility reduced. Auto-disable enabled on detection.', 'color: #6b7280; font-size: 12px;');
+      if (isMobile) {
+        console.log('%c📱 Mobile device detected - Logo permanently blurred at 50% for security', 'color: #f59e0b; font-size: 12px;');
+      }
     }
   }
 
