@@ -786,42 +786,74 @@
   }
   
   /**
-   * Restore logo - Returns to full visibility (100% opacity, no blur)
-   * Logo is clear by default, blur only happens when screenshot is detected
+   * Restore logo - Returns to default visibility based on device type
+   * Desktop: 100% opacity, no blur
+   * Mobile/Tablet: 95% opacity, 3% blur
    */
   function restoreLogo(logo) {
-    // Both desktop and mobile: Return to full visibility (no blur, 100% opacity)
-    logo.style.setProperty('opacity', '1', 'important'); // 100% opacity - fully visible
-    logo.style.setProperty('filter', 'none', 'important'); // No blur - fully clear
-    logo.style.setProperty('-webkit-filter', 'none', 'important');
-    logo.style.setProperty('-moz-filter', 'none', 'important');
+    const isMobile = isMobileDevice();
+    
+    if (isMobile) {
+      // Mobile/Tablet: Return to 3% blur (permanent mobile protection)
+      logo.style.setProperty('filter', 'blur(0.75px)', 'important');
+      logo.style.setProperty('-webkit-filter', 'blur(0.75px)', 'important');
+      logo.style.setProperty('-moz-filter', 'blur(0.75px)', 'important');
+      logo.style.setProperty('opacity', '0.95', 'important'); // 95% opacity
+    } else {
+      // Desktop: Return to full visibility (no blur, 100% opacity)
+      logo.style.setProperty('opacity', '1', 'important'); // 100% opacity - fully visible
+      logo.style.setProperty('filter', 'none', 'important'); // No blur - fully clear
+      logo.style.setProperty('-webkit-filter', 'none', 'important');
+      logo.style.setProperty('-moz-filter', 'none', 'important');
+    }
+    
     logo.style.setProperty('transition', 'filter 0.5s ease, opacity 0.5s ease', 'important');
     logo.classList.remove('screenshot-protected-black');
     logo.classList.remove('screenshot-detected');
   }
   
   /**
-   * Initialize logo with full visibility (clear by default)
-   * Logo will only blur when screenshot is detected
+   * Initialize logo with visibility based on device type
+   * Desktop: Fully clear (100% opacity, no blur)
+   * Mobile/Tablet: 3% blur for security (95% opacity)
+   * Blur will increase when screenshot is detected
    */
   function initializeLogoVisibility() {
     const logos = document.querySelectorAll('img[src*="Official MSU-TCTO logo-01.png"], img[src*="/api/protected-logo"]');
+    const isMobile = isMobileDevice();
     
     logos.forEach(logo => {
-      // Both desktop and mobile: Logo is fully visible by default (no blur, 100% opacity)
-      // Blur will only be applied when screenshot is detected
-      logo.style.setProperty('opacity', '1', 'important'); // 100% opacity - fully visible
-      logo.style.setProperty('filter', 'none', 'important'); // No blur by default
-      logo.style.setProperty('-webkit-filter', 'none', 'important');
-      logo.style.setProperty('-moz-filter', 'none', 'important');
-      logo.style.setProperty('transition', 'opacity 0.3s ease, filter 0.3s ease', 'important');
-      logo.style.setProperty('will-change', 'opacity, filter', 'important');
-      
-      // Performance optimizations
-      logo.style.setProperty('-webkit-backface-visibility', 'hidden', 'important');
-      logo.style.setProperty('backface-visibility', 'hidden', 'important');
-      logo.style.setProperty('transform', 'translateZ(0)', 'important');
-      logo.style.setProperty('-webkit-transform', 'translateZ(0)', 'important');
+      if (isMobile) {
+        // Mobile/Tablet: Apply 3% blur for security (shows logo details with minimal blur effect)
+        logo.style.setProperty('filter', 'blur(0.75px)', 'important'); // 3% blur (0.75px of 25px)
+        logo.style.setProperty('-webkit-filter', 'blur(0.75px)', 'important');
+        logo.style.setProperty('-moz-filter', 'blur(0.75px)', 'important');
+        logo.style.setProperty('opacity', '0.95', 'important'); // 95% opacity - shows logo details clearly
+        logo.style.setProperty('transition', 'opacity 0.3s ease, filter 0.3s ease', 'important');
+        logo.style.setProperty('will-change', 'opacity, filter', 'important');
+        logo.classList.add('mobile-protected'); // Add class for CSS targeting
+        
+        // Mobile optimizations
+        logo.style.setProperty('-webkit-backface-visibility', 'hidden', 'important');
+        logo.style.setProperty('backface-visibility', 'hidden', 'important');
+        logo.style.setProperty('transform', 'translateZ(0)', 'important');
+        logo.style.setProperty('-webkit-transform', 'translateZ(0)', 'important');
+      } else {
+        // Desktop: Logo is fully visible by default (no blur, 100% opacity)
+        // Blur will only be applied when screenshot is detected
+        logo.style.setProperty('opacity', '1', 'important'); // 100% opacity - fully visible
+        logo.style.setProperty('filter', 'none', 'important'); // No blur by default
+        logo.style.setProperty('-webkit-filter', 'none', 'important');
+        logo.style.setProperty('-moz-filter', 'none', 'important');
+        logo.style.setProperty('transition', 'opacity 0.3s ease, filter 0.3s ease', 'important');
+        logo.style.setProperty('will-change', 'opacity, filter', 'important');
+        
+        // Performance optimizations
+        logo.style.setProperty('-webkit-backface-visibility', 'hidden', 'important');
+        logo.style.setProperty('backface-visibility', 'hidden', 'important');
+        logo.style.setProperty('transform', 'translateZ(0)', 'important');
+        logo.style.setProperty('-webkit-transform', 'translateZ(0)', 'important');
+      }
     });
   }
 
@@ -1037,8 +1069,10 @@
                     opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
       }
       
-      /* Strong blur when screenshot is detected */
-      img[src*="Official MSU-TCTO logo-01.png"].screenshot-protected-black {
+      /* Strong blur ONLY when screenshot is detected (class added dynamically) */
+      /* By default, logo has no blur - this only applies when class is added */
+      img[src*="Official MSU-TCTO logo-01.png"].screenshot-protected-black,
+      img[src*="/api/protected-logo"].screenshot-protected-black {
         filter: blur(${config.logoBlurOnDetection}) !important;
         -webkit-filter: blur(${config.logoBlurOnDetection}) !important;
         -moz-filter: blur(${config.logoBlurOnDetection}) !important;
@@ -1050,21 +1084,22 @@
       }
       
       /* When screenshot is detected, keep it blurred */
-      img[src*="Official MSU-TCTO logo-01.png"].screenshot-detected {
+      img[src*="Official MSU-TCTO logo-01.png"].screenshot-detected,
+      img[src*="/api/protected-logo"].screenshot-detected {
         filter: blur(${config.logoBlurOnDetection}) !important;
         -webkit-filter: blur(${config.logoBlurOnDetection}) !important;
         opacity: 0.25 !important;
       }
       
-      /* Mobile-specific: Logo is fully visible by default (no blur) */
-      /* Blur will only be applied when screenshot is detected */
+      /* Mobile-specific: 3% blur for security (shows logo details with minimal blur effect) */
+      /* Blur will increase to full blur when screenshot is detected */
       @media (max-width: 768px) {
         img[src*="Official MSU-TCTO logo-01.png"],
         img[src*="/api/protected-logo"] {
-          filter: none !important; /* No blur by default - fully clear */
-          -webkit-filter: none !important;
-          -moz-filter: none !important;
-          opacity: 1 !important; /* 100% opacity - fully visible */
+          filter: blur(0.75px) !important; /* 3% blur for mobile security - shows details clearly */
+          -webkit-filter: blur(0.75px) !important;
+          -moz-filter: blur(0.75px) !important;
+          opacity: 0.95 !important; /* 95% opacity - shows logo details clearly */
           -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
           transform: translateZ(0);
@@ -1073,7 +1108,8 @@
         }
         
         /* When screenshot is detected on mobile, increase blur */
-        img[src*="Official MSU-TCTO logo-01.png"].screenshot-protected-black {
+        img[src*="Official MSU-TCTO logo-01.png"].screenshot-protected-black,
+        img[src*="/api/protected-logo"].screenshot-protected-black {
           filter: blur(${config.logoBlurOnDetection}) !important; /* Full blur on detection */
           -webkit-filter: blur(${config.logoBlurOnDetection}) !important;
           -moz-filter: blur(${config.logoBlurOnDetection}) !important;
@@ -1084,22 +1120,23 @@
           -webkit-transform: translateZ(0);
         }
         
-        img[src*="Official MSU-TCTO logo-01.png"].screenshot-detected {
+        img[src*="Official MSU-TCTO logo-01.png"].screenshot-detected,
+        img[src*="/api/protected-logo"].screenshot-detected {
           filter: blur(${config.logoBlurOnDetection}) !important; /* Full blur on detection */
           -webkit-filter: blur(${config.logoBlurOnDetection}) !important;
           opacity: 0.2 !important;
         }
       }
       
-      /* Tablet-specific: Logo is fully visible by default (no blur) */
-      /* Blur will only be applied when screenshot is detected */
+      /* Tablet-specific: 3% blur for security (shows logo details with minimal blur effect) */
+      /* Blur will increase to full blur when screenshot is detected */
       @media (min-width: 769px) and (max-width: 1024px) {
         img[src*="Official MSU-TCTO logo-01.png"],
         img[src*="/api/protected-logo"] {
-          filter: none !important; /* No blur by default - fully clear */
-          -webkit-filter: none !important;
-          -moz-filter: none !important;
-          opacity: 1 !important; /* 100% opacity - fully visible */
+          filter: blur(0.75px) !important; /* 3% blur for tablet security - shows details clearly */
+          -webkit-filter: blur(0.75px) !important;
+          -moz-filter: blur(0.75px) !important;
+          opacity: 0.95 !important; /* 95% opacity - shows logo details clearly */
         }
       }
       
@@ -1427,7 +1464,7 @@
       console.log('%c🛡️ Professional Screenshot Protection Active', 'color: #10b981; font-size: 14px; font-weight: bold;');
       console.log('%cLogo visibility reduced. Auto-disable enabled on detection.', 'color: #6b7280; font-size: 12px;');
       if (isMobile) {
-        console.log('%c📱 Mobile device detected - Logo is fully visible by default (blur only on screenshot detection)', 'color: #f59e0b; font-size: 12px;');
+        console.log('%c📱 Mobile device detected - Logo has 3% blur for security (blur increases on screenshot detection)', 'color: #f59e0b; font-size: 12px;');
       }
     }
   }
