@@ -189,64 +189,65 @@ body.forEach((block: any) => {
     <!-- AI Summary Floating Button & Drawer -->
     <button 
       id="ai-summary-button" 
-      class="ai-summary-fab fixed z-[9900] right-4 xl:right-8 top-1/2 -translate-y-1/2 bg-gradient-to-b from-msu-main-color to-msu-deep-ocean text-white-pure shadow-2xl hover:shadow-[0_10px_30px_rgba(0,0,0,0.25)] hover:-translate-y-[55%] transition-all duration-300 rounded-full px-4 py-3 flex items-center gap-2 font-semibold text-sm tracking-tight"
+      class="ai-summary-fab fixed z-[9900] right-4 xl:right-8 top-1/2 -translate-y-1/2 md:top-1/2 md:-translate-y-1/2 sm:bottom-20 sm:top-auto sm:translate-y-0 xs:bottom-20 xs:top-auto xs:translate-y-0 bg-gradient-to-b from-msu-main-color to-msu-deep-ocean text-white-pure shadow-2xl hover:shadow-[0_10px_30px_rgba(0,0,0,0.25)] hover:-translate-y-[55%] md:hover:-translate-y-[55%] sm:hover:translate-y-0 sm:hover:scale-105 xs:hover:translate-y-0 xs:hover:scale-105 transition-all duration-300 rounded-full px-3 py-3 sm:px-4 sm:py-3.5 xs:px-4 xs:py-3.5 flex items-center gap-2 font-semibold text-xs sm:text-sm tracking-tight touch-manipulation min-w-[48px] min-h-[48px] sm:min-w-[52px] sm:min-h-[52px]"
       aria-label="Open AI summary"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 sm:w-5 sm:h-5 xs:w-5 xs:h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7H7m6 4H7m6 4H7m6-8h1a2 2 0 012 2v6a2 2 0 01-2 2h-1l-4 3v-3H9a2 2 0 01-2-2V9a2 2 0 012-2h4z" />
       </svg>
-      <span class="hidden sm:inline">AI Summary</span>
+      <span class="hidden sm:inline xs:hidden">AI Summary</span>
     </button>
 
     <div 
       id="ai-summary-panel" 
-      class="ai-summary-panel fixed z-[9950] right-0 top-0 h-full w-full sm:w-[380px] bg-white dark:bg-gray-900 shadow-2xl transform translate-x-full opacity-0 transition-all duration-300 border-l border-gray-200 dark:border-gray-800 flex flex-col"
+      class="ai-summary-panel fixed z-[9950] right-0 top-0 h-full w-full sm:w-[380px] bg-white dark:bg-gray-900 shadow-2xl transform translate-x-full opacity-0 transition-all duration-300 border-l border-gray-200 dark:border-gray-800 flex flex-col safe-area-inset"
       aria-hidden="true"
     >
-      <div class="flex items-center justify-between px-5 py-4 border-b border-gray-200 dark:border-gray-800">
+      <div class="flex items-center justify-between px-4 py-3 sm:px-5 sm:py-4 border-b border-gray-200 dark:border-gray-800 safe-area-top">
         <div class="flex items-center gap-2">
-          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-msu-main-color to-msu-deep-ocean flex items-center justify-center shadow-md">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white-pure" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-br from-msu-main-color to-msu-deep-ocean flex items-center justify-center shadow-md flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 text-white-pure" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7H7m6 4H7m6 4H7m6-8h1a2 2 0 012 2v6a2 2 0 01-2 2h-1l-4 3v-3H9a2 2 0 01-2-2V9a2 2 0 012-2h4z" />
             </svg>
           </div>
-          <div>
-            <p class="text-sm font-semibold text-gray-900 dark:text-gray-100">AI Summary</p>
-            <p class="text-xs text-gray-500 dark:text-gray-400">Quick takeaways for this article</p>
+          <div class="min-w-0 flex-1">
+            <p class="text-xs sm:text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">AI Summary</p>
+            <p class="text-[0.625rem] sm:text-xs text-gray-500 dark:text-gray-400 truncate">Quick takeaways</p>
           </div>
         </div>
-        <button id="ai-summary-close" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition" aria-label="Close AI summary">
+        <button id="ai-summary-close" class="p-2 sm:p-2.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 active:bg-gray-200 dark:active:bg-gray-700 transition touch-manipulation min-w-[44px] min-h-[44px] flex items-center justify-center flex-shrink-0" aria-label="Close AI summary">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600 dark:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
-      <div class="flex-1 overflow-y-auto px-5 py-4">
-        <div class="bg-gray-50 dark:bg-gray-800/70 border border-gray-200 dark:border-gray-700 rounded-2xl p-4 shadow-inner">
-          <p id="ai-summary-text" class="text-sm leading-6 text-gray-800 dark:text-gray-200"></p>
+      <div class="flex-1 overflow-y-auto px-4 py-3 sm:px-5 sm:py-4 overscroll-contain">
+        <div class="bg-gray-50 dark:bg-gray-800/70 border border-gray-200 dark:border-gray-700 rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-inner">
+          <p id="ai-summary-text" class="text-xs sm:text-sm leading-5 sm:leading-6 text-gray-800 dark:text-gray-200"></p>
         </div>
-        <div class="mt-4 space-y-2">
-          <div class="flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400">
+        <div class="mt-3 sm:mt-4 space-y-1.5 sm:space-y-2">
+          <div class="flex items-center gap-2 sm:gap-3 text-[0.625rem] sm:text-xs text-gray-500 dark:text-gray-400 flex-wrap">
             <span class="inline-flex items-center gap-1">
-              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-500"></span>
               AI-assisted
             </span>
-            <span>Drafted on-page for quick reading.</span>
+            <span class="hidden sm:inline">Drafted on-page for quick reading.</span>
+            <span class="sm:hidden">Quick reading</span>
           </div>
-          <p class="text-[0.625rem] text-gray-400 dark:text-gray-500 italic leading-relaxed">
+          <p class="text-[0.5625rem] sm:text-[0.625rem] text-gray-400 dark:text-gray-500 italic leading-relaxed">
             Disclaimer: This summary is AI-generated and may contain inaccuracies. Please refer to the full article for complete and accurate information.
           </p>
         </div>
       </div>
-      <div class="px-5 py-4 border-t border-gray-200 dark:border-gray-800 flex gap-3">
-        <button id="ai-summary-copy" class="flex-1 inline-flex items-center justify-center gap-2 bg-msu-main-color text-white-pure rounded-xl px-4 py-3 font-semibold shadow-lg hover:shadow-xl transition">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <div class="px-4 py-3 sm:px-5 sm:py-4 border-t border-gray-200 dark:border-gray-800 flex gap-2 sm:gap-3 safe-area-bottom">
+        <button id="ai-summary-copy" class="flex-1 inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-msu-main-color text-white-pure rounded-lg sm:rounded-xl px-3 py-2.5 sm:px-4 sm:py-3 text-xs sm:text-sm font-semibold shadow-lg hover:shadow-xl active:shadow-md active:scale-95 transition touch-manipulation min-h-[44px]">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16h8m-8-4h8m-8-4h8M5 8h-.01M5 12h-.01M5 16h-.01M19 5H9a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2z" />
           </svg>
-          <span id="ai-summary-copy-label">Copy summary</span>
+          <span id="ai-summary-copy-label" class="truncate">Copy summary</span>
         </button>
-        <button id="ai-summary-minimize" class="px-3 py-3 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition" aria-label="Hide AI summary">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <button id="ai-summary-minimize" class="px-3 py-2.5 sm:px-3 sm:py-3 rounded-lg sm:rounded-xl border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 active:bg-gray-200 dark:active:bg-gray-700 active:scale-95 transition touch-manipulation min-w-[44px] min-h-[44px] flex items-center justify-center flex-shrink-0" aria-label="Hide AI summary">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
           </svg>
         </button>
@@ -1118,6 +1119,14 @@ body.forEach((block: any) => {
   .ai-summary-fab {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    /* Ensure button is always clickable */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0.2);
+    /* Prevent text selection on mobile */
+    -webkit-user-select: none;
+    user-select: none;
+    /* Better touch feedback */
+    cursor: pointer;
   }
 
   .ai-summary-panel {
@@ -1125,6 +1134,8 @@ body.forEach((block: any) => {
     -webkit-backdrop-filter: blur(6px);
     transform: translateX(100%);
     opacity: 0;
+    /* Smooth transitions */
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
   }
 
   .ai-summary-panel.open {
@@ -1132,16 +1143,217 @@ body.forEach((block: any) => {
     opacity: 1;
   }
 
-  @media (max-width: 768px) {
+  /* Safe area insets for notched devices */
+  .safe-area-inset {
+    padding-top: env(safe-area-inset-top, 0);
+    padding-bottom: env(safe-area-inset-bottom, 0);
+    padding-left: env(safe-area-inset-left, 0);
+    padding-right: env(safe-area-inset-right, 0);
+  }
+
+  .safe-area-top {
+    padding-top: max(0.75rem, env(safe-area-inset-top, 0.75rem));
+  }
+
+  .safe-area-bottom {
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 0.75rem));
+  }
+
+  /* Mobile First - Small devices (phones, 320px and up) */
+  @media (max-width: 640px) {
     .ai-summary-fab {
-      top: auto;
-      bottom: 1.25rem;
-      right: 1rem;
-      transform: translateY(0);
+      top: auto !important;
+      bottom: max(1rem, env(safe-area-inset-bottom, 1rem)) !important;
+      right: max(1rem, env(safe-area-inset-right, 1rem)) !important;
+      left: auto !important;
+      transform: translateY(0) !important;
+      /* Ensure proper size for touch */
+      min-width: 48px !important;
+      min-height: 48px !important;
+      padding: 0.75rem !important;
+      /* Better shadow for visibility */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+    }
+
+    .ai-summary-fab:hover {
+      transform: translateY(0) scale(1.05) !important;
+    }
+
+    .ai-summary-fab:active {
+      transform: translateY(0) scale(0.95) !important;
     }
 
     .ai-summary-panel {
       width: 100% !important;
+      max-width: 100vw !important;
+      /* Full height on mobile */
+      height: 100vh !important;
+      height: 100dvh !important;
+      /* Ensure panel is above everything */
+      z-index: 9999 !important;
+    }
+
+    .ai-summary-panel.open {
+      transform: translateX(0) !important;
+    }
+  }
+
+  /* Small devices (landscape phones, 640px and up) */
+  @media (min-width: 641px) and (max-width: 768px) {
+    .ai-summary-fab {
+      top: auto !important;
+      bottom: max(1.25rem, env(safe-area-inset-bottom, 1.25rem)) !important;
+      right: max(1rem, env(safe-area-inset-right, 1rem)) !important;
+      transform: translateY(0) !important;
+      min-width: 52px !important;
+      min-height: 52px !important;
+    }
+
+    .ai-summary-fab:hover {
+      transform: translateY(0) scale(1.05) !important;
+    }
+
+    .ai-summary-panel {
+      width: 100% !important;
+      max-width: 100vw !important;
+    }
+  }
+
+  /* Tablet and up (768px and up) - Keep desktop behavior */
+  @media (min-width: 769px) {
+    .ai-summary-fab {
+      /* Desktop: center-right */
+      top: 50% !important;
+      transform: translateY(-50%) !important;
+      right: 2rem !important;
+      bottom: auto !important;
+    }
+
+    .ai-summary-fab:hover {
+      transform: translateY(-55%) !important;
+    }
+  }
+
+  /* Landscape orientation on mobile */
+  @media (max-width: 768px) and (orientation: landscape) {
+    .ai-summary-fab {
+      bottom: max(0.75rem, env(safe-area-inset-bottom, 0.75rem)) !important;
+      right: max(0.75rem, env(safe-area-inset-right, 0.75rem)) !important;
+      min-width: 44px !important;
+      min-height: 44px !important;
+      padding: 0.625rem !important;
+    }
+
+    .ai-summary-panel {
+      /* In landscape, panel can be slightly narrower */
+      max-width: 100vw !important;
+    }
+  }
+
+  /* iOS Safari specific fixes */
+  @supports (-webkit-touch-callout: none) {
+    .ai-summary-fab {
+      /* Better rendering on iOS */
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      /* Prevent iOS bounce effect */
+      -webkit-touch-callout: none;
+    }
+
+    .ai-summary-panel {
+      /* Fix for iOS Safari viewport */
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 100vh;
+      height: -webkit-fill-available;
+    }
+  }
+
+  /* Android Chrome specific optimizations */
+  @media screen and (-webkit-min-device-pixel-ratio: 0) {
+    .ai-summary-panel {
+      /* Handle Android Chrome address bar */
+      min-height: -webkit-fill-available;
+      height: 100vh;
+      height: 100dvh;
+    }
+  }
+
+  /* High DPI displays (Retina, etc.) */
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .ai-summary-fab {
+      /* Better shadow on high DPI */
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  /* Touch device optimizations */
+  @media (pointer: coarse) {
+    .ai-summary-fab {
+      /* Larger touch target */
+      min-width: 48px;
+      min-height: 48px;
+      /* Better touch feedback */
+      -webkit-tap-highlight-color: rgba(255, 255, 255, 0.3);
+      tap-highlight-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .ai-summary-panel button {
+      /* Ensure all buttons are touch-friendly */
+      min-width: 44px;
+      min-height: 44px;
+      touch-action: manipulation;
+    }
+  }
+
+  /* Very small screens (iPhone SE, small Android) */
+  @media (max-width: 375px) {
+    .ai-summary-fab {
+      bottom: max(0.75rem, env(safe-area-inset-bottom, 0.75rem)) !important;
+      right: max(0.75rem, env(safe-area-inset-right, 0.75rem)) !important;
+      min-width: 44px !important;
+      min-height: 44px !important;
+      padding: 0.625rem !important;
+    }
+
+    .ai-summary-fab svg {
+      width: 1.125rem !important;
+      height: 1.125rem !important;
+    }
+  }
+
+  /* Galaxy S9+ and similar tall screens */
+  @media (min-width: 360px) and (max-width: 400px) and (min-height: 700px) {
+    .ai-summary-fab {
+      bottom: max(1.5rem, env(safe-area-inset-bottom, 1.5rem)) !important;
+    }
+  }
+
+  /* Prevent pull-to-refresh interference */
+  .ai-summary-fab,
+  .ai-summary-panel {
+    overscroll-behavior: contain;
+    overscroll-behavior-y: contain;
+  }
+
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    .ai-summary-fab {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  /* Animation improvements for mobile */
+  @media (max-width: 768px) {
+    .ai-summary-panel {
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+    }
+
+    .ai-summary-fab {
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
     }
   }
 
