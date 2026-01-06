@@ -252,9 +252,9 @@ const Navbar = ({ path }) => {
             {/* Logo */}
             <a href="/" className="flex items-center">
               <img 
-                src="/images/Official MSU-TCTO logo-01.png" 
+                src="/api/protected-logo" 
                 alt="MSU-TCTO Logo" 
-                className={`transition-all duration-300 ${scrolled ? 'h-10 sm:h-12' : 'h-12 sm:h-16'} mr-3 sm:mr-4`}
+                className={`transition-all duration-300 ${scrolled ? 'h-10 sm:h-12' : 'h-12 sm:h-16'} mr-3 sm:mr-4 screenshot-protected-black`}
                 data-protected-image="true"
                 draggable="false"
                 style={{ 

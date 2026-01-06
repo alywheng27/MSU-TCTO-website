@@ -713,7 +713,8 @@
    */
   function makeLogosBlack(duration = 10000, autoDisable = true) {
     // Find ONLY the Official MSU-TCTO logo-01.png - specific protection only
-    const logos = document.querySelectorAll('img[src*="Official MSU-TCTO logo-01.png"]');
+    // Also check for protected logo endpoint
+    const logos = document.querySelectorAll('img[src*="Official MSU-TCTO logo-01.png"], img[src*="/api/protected-logo"]');
     
     const isMobile = isMobileDevice();
     const blurAmount = isMobile ? config.mobileBlurIntensity : config.logoBlurOnDetection;
@@ -813,7 +814,7 @@
    * Mobile devices: Apply 3% blur for additional security (shows details with minimal blur effect)
    */
   function initializeLogoVisibility() {
-    const logos = document.querySelectorAll('img[src*="Official MSU-TCTO logo-01.png"]');
+    const logos = document.querySelectorAll('img[src*="Official MSU-TCTO logo-01.png"], img[src*="/api/protected-logo"]');
     const isMobile = isMobileDevice();
     
     logos.forEach(logo => {
@@ -1039,7 +1040,8 @@
       }
       
       /* Logo is less visible by default (subtle protection) */
-      img[src*="Official MSU-TCTO logo-01.png"] {
+      img[src*="Official MSU-TCTO logo-01.png"],
+      img[src*="/api/protected-logo"] {
         position: relative;
         opacity: ${config.logoOpacity} !important;
         will-change: filter, opacity;
@@ -1071,7 +1073,8 @@
       
       /* Mobile-specific: Permanent 3% blur for security (shows logo details with minimal blur effect) */
       @media (max-width: 768px) {
-        img[src*="Official MSU-TCTO logo-01.png"] {
+        img[src*="Official MSU-TCTO logo-01.png"],
+      img[src*="/api/protected-logo"] {
           filter: blur(0.75px) !important; /* 3% blur for mobile security - shows details very clearly */
           -webkit-filter: blur(0.75px) !important;
           -moz-filter: blur(0.75px) !important;
@@ -1104,7 +1107,8 @@
       
       /* Tablet-specific: Also apply 3% blur */
       @media (min-width: 769px) and (max-width: 1024px) {
-        img[src*="Official MSU-TCTO logo-01.png"] {
+        img[src*="Official MSU-TCTO logo-01.png"],
+      img[src*="/api/protected-logo"] {
           filter: blur(0.75px) !important; /* 3% blur for tablet security - shows details very clearly */
           -webkit-filter: blur(0.75px) !important;
           -moz-filter: blur(0.75px) !important;
@@ -1114,7 +1118,8 @@
       
       /* Performance optimization - use GPU acceleration */
       @supports (transform: translateZ(0)) {
-        img[src*="Official MSU-TCTO logo-01.png"] {
+        img[src*="Official MSU-TCTO logo-01.png"],
+      img[src*="/api/protected-logo"] {
           transform: translateZ(0);
           -webkit-transform: translateZ(0);
         }
