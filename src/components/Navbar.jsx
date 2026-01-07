@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+﻿import React, { useState, useCallback, useEffect } from 'react';
 import { 
   FaHome, 
   FaInfoCircle, 
@@ -222,8 +222,8 @@ const Navbar = ({ path }) => {
               </div>
               <div className="flex items-center">
                 <FaEnvelope className="text-white dark:text-gray-300 mr-2 text-sm" />
-                <a href="mailto:admissions@msutawi-tawi.edu.ph" className="text-xs sm:text-sm hover:text-msu-gold dark:hover:text-yellow-400 transition-colors duration-200">
-                  admissions@msutawi-tawi.edu.ph
+                <a href="mailto:admissions@msutcto.edu.ph" className="text-xs sm:text-sm hover:text-msu-gold dark:hover:text-yellow-400 transition-colors duration-200">
+                  admissions@msutcto.edu.ph
                 </a>
               </div>
             </div>
@@ -507,3 +507,5 @@ const Navbar = ({ path }) => {
 };
 
 export default React.memo(Navbar);
+
+

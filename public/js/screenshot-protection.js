@@ -124,7 +124,14 @@
     }
     
     // Print Screen key - BLOCK SCREENSHOT COMPLETELY
+    // Blur logo IMMEDIATELY before screenshot can be captured
     if (e.key === 'PrintScreen' || e.keyCode === 44 || e.code === 'PrintScreen') {
+      // Immediately blur logo before screenshot
+      makeLogosBlack(config.autoDisableDuration, true);
+      showProtectionOverlay();
+      showWarningMessage('Screenshot detected. Logo auto-blurred.');
+      screenshotAttempts++;
+      setTimeout(() => hideProtectionOverlay(), 4000);
       // Make logos black IMMEDIATELY and auto-disable
       makeLogosBlack(config.autoDisableDuration, true);
       
@@ -182,7 +189,7 @@
       setTimeout(() => hideProtectionOverlay(), 4000);
       return false;
     }
-    
+
     // Ctrl + Shift + I (DevTools) - BLOCK to prevent screenshots
     if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'I' || e.keyCode === 73)) {
       e.preventDefault();
@@ -249,7 +256,7 @@
       makeLogosBlack(config.autoDisableDuration, true);
       showWarningMessage('Saving is disabled. Protection auto-enabled.');
       return false;
-    }
+  }
 
     // Ctrl + P (Print) - BLOCK
     if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
@@ -478,20 +485,20 @@
 
     // Trigger protection when DevTools detected
     function triggerDevToolsProtection() {
-      screenshotAttempts++;
+          screenshotAttempts++;
       screenshotsDisabled = true;
       disableUntil = Date.now() + config.autoDisableDuration;
       makeLogosBlack(config.autoDisableDuration, true);
-      showProtectionOverlay();
+          showProtectionOverlay();
       showWarningMessage('Developer Tools detected. Protection auto-enabled. Screenshots disabled.');
-      
-      if (config.enableConsoleWarnings) {
+          
+          if (config.enableConsoleWarnings) {
         console.warn('%c🛡️ DEVELOPER TOOLS DETECTED - ACCESS BLOCKED', 'color: #dc2626; font-size: 16px; font-weight: bold;');
         console.warn('%c⚠️ Screenshots are now disabled for your protection.', 'color: #f59e0b; font-size: 14px;');
         console.warn('%c🔒 This content is protected. Please close Developer Tools.', 'color: #dc2626; font-size: 12px;');
-      }
-      
-      setTimeout(() => hideProtectionOverlay(), 5000);
+          }
+          
+          setTimeout(() => hideProtectionOverlay(), 5000);
       
       // Continuously check and re-trigger if DevTools remains open
       const continuousCheck = setInterval(() => {
@@ -501,7 +508,7 @@
           makeLogosBlack(config.autoDisableDuration, true);
         } else {
           clearInterval(continuousCheck);
-        }
+      }
       }, 2000);
     }
 
@@ -713,8 +720,8 @@
    */
   function makeLogosBlack(duration = 10000, autoDisable = true) {
     // Find ONLY the Official MSU-TCTO logo-01.png - specific protection only
-    // Also check for protected logo endpoint
-    const logos = document.querySelectorAll('img[src*="Official MSU-TCTO logo-01.png"], img[src*="/api/protected-logo"]');
+    // Also check for protected logo endpoint and canvas elements (secure loaded)
+    const logos = document.querySelectorAll('img[src*="Official MSU-TCTO logo-01.png"], img[src*="/api/protected-logo"], canvas[data-protected-image="true"], canvas[data-secure-loaded="true"]');
     
     const isMobile = isMobileDevice();
     const blurAmount = isMobile ? config.mobileBlurIntensity : config.logoBlurOnDetection;
@@ -784,11 +791,12 @@
       console.log(`🛡️ Logo protection: ${logos.length} logo(s) protected - Blurred immediately`);
     }
   }
-  
+
   /**
    * Restore logo - Returns to default visibility based on device type
    * Desktop: 100% opacity, no blur
    * Mobile/Tablet: 95% opacity, 3% blur
+   * Works with both img and canvas elements
    */
   function restoreLogo(logo) {
     const isMobile = isMobileDevice();
@@ -810,11 +818,40 @@
     logo.style.setProperty('transition', 'filter 0.5s ease, opacity 0.5s ease', 'important');
     logo.classList.remove('screenshot-protected-black');
     logo.classList.remove('screenshot-detected');
+    
+    // For canvas elements, re-render with clear image if needed
+    if (logo.tagName === 'CANVAS' && logo.getAttribute('data-secure-loaded') === 'true') {
+      // Canvas is already rendered, just update styles
+      // The canvas content remains the same, only styling changes
+    }
   }
   
   /**
-   * Securely load logo via fetch to hide from DevTools
-   * Converts to data URL so DevTools can't see the actual source
+   * Generate authentication token for API request
+   * 🔐 Auth-protected API endpoint
+   */
+  function generateAuthToken() {
+    const timestamp = Math.floor(Date.now() / (1000 * 60 * 5)); // 5-minute window
+    const hostname = window.location.hostname;
+    const secret = 'msu-tcto-logo-secret-2024'; // Should match server secret
+    
+    // Simple hash function
+    const hashInput = `${timestamp}-${hostname}-${secret}`;
+    let hash = 0;
+    for (let i = 0; i < hashInput.length; i++) {
+      const char = hashInput.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash;
+    }
+    
+    return Math.abs(hash).toString(36);
+  }
+
+  /**
+   * Securely load logo via canvas to completely hide from DevTools
+   * 🧠 Load via JS Blob
+   * 📉 Compressed version served
+   * Replaces img element with canvas to prevent source URL exposure
    */
   async function loadLogoSecurely(logo) {
     try {
@@ -829,51 +866,120 @@
       console.log(element);
       console.clear();
       
-      // If DevTools detected, don't load the logo
+      // If DevTools detected, hide the logo
       if (devToolsOpen) {
         logo.style.display = 'none';
+        logo.style.visibility = 'hidden';
         return;
       }
       
-      // Fetch the logo with proper referer
-      const response = await fetch('/api/protected-logo', {
+      // 🔐 Generate auth token
+      const authToken = generateAuthToken();
+      
+      // 🧠 Fetch the logo via JS Blob with auth token
+      const response = await fetch(`/api/protected-logo?auth=${authToken}`, {
         method: 'GET',
         headers: {
           'Referer': window.location.href,
-          'Accept': 'image/png,image/*;q=0.8'
+          'Accept': 'image/png,image/*;q=0.8',
+          'X-Requested-With': 'XMLHttpRequest',
+          'X-Logo-Auth': authToken
         },
-        credentials: 'same-origin'
+        credentials: 'same-origin',
+        cache: 'no-store'
       });
       
       if (response.ok) {
+        // 🧠 Load as Blob
         const blob = await response.blob();
-        const reader = new FileReader();
         
-        reader.onloadend = function() {
-          // Convert to data URL - this hides the actual source from DevTools
-          const dataUrl = reader.result;
-          logo.src = dataUrl;
-          logo.setAttribute('data-secure-loaded', 'true');
+        // Create image from blob
+        const img = new Image();
+        const objectUrl = URL.createObjectURL(blob);
+        
+        img.onload = function() {
+          // Create canvas to render the logo (completely hides source URL)
+          const canvas = document.createElement('canvas');
+          
+          // 📉 Compress: Reduce canvas size for compression (quality vs size tradeoff)
+          const maxDimension = 800; // Max width or height
+          let canvasWidth = img.width;
+          let canvasHeight = img.height;
+          
+          if (canvasWidth > maxDimension || canvasHeight > maxDimension) {
+            const ratio = Math.min(maxDimension / canvasWidth, maxDimension / canvasHeight);
+            canvasWidth = Math.floor(canvasWidth * ratio);
+            canvasHeight = Math.floor(canvasHeight * ratio);
+          }
+          
+          canvas.width = canvasWidth;
+          canvas.height = canvasHeight;
+          canvas.className = logo.className;
+          canvas.setAttribute('data-protected-image', 'true');
+          canvas.setAttribute('data-secure-loaded', 'true');
+          canvas.setAttribute('draggable', 'false');
+          canvas.setAttribute('alt', logo.alt || 'MSU-TCTO Logo');
+          
+          // Copy all data attributes and styles
+          Array.from(logo.attributes).forEach(attr => {
+            if (attr.name.startsWith('data-') || attr.name === 'alt') {
+              canvas.setAttribute(attr.name, attr.value);
+            }
+          });
+          
+          // Copy computed styles
+          const computedStyle = window.getComputedStyle(logo);
+          canvas.style.cssText = logo.style.cssText;
+          canvas.style.width = computedStyle.width || logo.width + 'px';
+          canvas.style.height = computedStyle.height || logo.height + 'px';
+          
+          const ctx = canvas.getContext('2d');
+          
+          // 📉 Compress: Use lower quality rendering for compression
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = 'medium'; // Balance between quality and size
+          
+          // Draw the logo image
+          ctx.drawImage(img, 0, 0, canvasWidth, canvasHeight);
           
           // Apply device-specific styling
           const isMobile = isMobileDevice();
           if (isMobile) {
-            logo.style.setProperty('filter', 'blur(0.75px)', 'important');
-            logo.style.setProperty('-webkit-filter', 'blur(0.75px)', 'important');
-            logo.style.setProperty('-moz-filter', 'blur(0.75px)', 'important');
-            logo.style.setProperty('opacity', '0.95', 'important');
+            canvas.style.setProperty('filter', 'blur(0.75px)', 'important');
+            canvas.style.setProperty('-webkit-filter', 'blur(0.75px)', 'important');
+            canvas.style.setProperty('-moz-filter', 'blur(0.75px)', 'important');
+            canvas.style.setProperty('opacity', '0.95', 'important');
           } else {
-            logo.style.setProperty('opacity', '1', 'important');
-            logo.style.setProperty('filter', 'none', 'important');
+            canvas.style.setProperty('opacity', '1', 'important');
+            canvas.style.setProperty('filter', 'none', 'important');
           }
+          
+          // Replace img with canvas (source URL is now completely hidden)
+          logo.parentNode.replaceChild(canvas, logo);
+          
+          // Clean up object URL
+          URL.revokeObjectURL(objectUrl);
         };
         
-        reader.readAsDataURL(blob);
+        img.onerror = function() {
+          // If loading fails, hide the logo
+          logo.style.display = 'none';
+          URL.revokeObjectURL(objectUrl);
+        };
+        
+        img.src = objectUrl;
+      } else {
+        // If fetch fails, hide the logo
+        logo.style.display = 'none';
       }
     } catch (error) {
-      console.error('Error loading logo securely:', error);
-      // Fallback to direct source if secure load fails
-      logo.src = '/api/protected-logo';
+      // Silent fail - hide logo on error
+      try {
+        logo.style.display = 'none';
+        logo.style.visibility = 'hidden';
+      } catch (e) {
+        // Ignore
+      }
     }
   }
 
@@ -889,21 +995,24 @@
     const isMobile = isMobileDevice();
     
     logos.forEach(logo => {
+      // Skip if already a canvas (secure loaded)
+      if (logo.tagName === 'CANVAS') {
+        return;
+      }
+      
       // Check if already securely loaded
       if (logo.getAttribute('data-secure-loaded') === 'true') {
         return;
       }
       
-      // For protected logo endpoint, load securely
-      if (logo.src.includes('/api/protected-logo')) {
+      // For protected logo endpoint, always load securely via canvas
+      if (logo.src.includes('/api/protected-logo') || logo.getAttribute('src') === '/api/protected-logo') {
         // Set a placeholder first
         logo.style.opacity = '0';
         logo.style.transition = 'opacity 0.3s ease';
         
-        // Load securely
-        loadLogoSecurely(logo).then(() => {
-          logo.style.opacity = '1';
-        });
+        // Load securely via canvas (completely hides source URL)
+        loadLogoSecurely(logo);
       } else {
         // For direct image paths, apply styling normally
         if (isMobile) {
@@ -937,9 +1046,9 @@
           logo.style.setProperty('transform', 'translateZ(0)', 'important');
           logo.style.setProperty('-webkit-transform', 'translateZ(0)', 'important');
         }
+          }
+        });
       }
-    });
-  }
 
   /**
    * Proactive protection - periodically make logos black to catch screenshots
@@ -1138,8 +1247,11 @@
       
       /* Logo is fully visible by default (no blur, clear) */
       /* Blur will only be applied when screenshot is detected */
+      /* Supports both img and canvas elements (secure loaded) */
       img[src*="Official MSU-TCTO logo-01.png"],
-      img[src*="/api/protected-logo"] {
+      img[src*="/api/protected-logo"],
+      canvas[data-protected-image="true"],
+      canvas[data-secure-loaded="true"] {
         position: relative;
         opacity: 1 !important; /* 100% opacity - fully visible */
         filter: none !important; /* No blur by default */
@@ -1156,7 +1268,9 @@
       /* Strong blur ONLY when screenshot is detected (class added dynamically) */
       /* By default, logo has no blur - this only applies when class is added */
       img[src*="Official MSU-TCTO logo-01.png"].screenshot-protected-black,
-      img[src*="/api/protected-logo"].screenshot-protected-black {
+      img[src*="/api/protected-logo"].screenshot-protected-black,
+      canvas[data-protected-image="true"].screenshot-protected-black,
+      canvas[data-secure-loaded="true"].screenshot-protected-black {
         filter: blur(${config.logoBlurOnDetection}) !important;
         -webkit-filter: blur(${config.logoBlurOnDetection}) !important;
         -moz-filter: blur(${config.logoBlurOnDetection}) !important;
@@ -1169,7 +1283,9 @@
       
       /* When screenshot is detected, keep it blurred */
       img[src*="Official MSU-TCTO logo-01.png"].screenshot-detected,
-      img[src*="/api/protected-logo"].screenshot-detected {
+      img[src*="/api/protected-logo"].screenshot-detected,
+      canvas[data-protected-image="true"].screenshot-detected,
+      canvas[data-secure-loaded="true"].screenshot-detected {
         filter: blur(${config.logoBlurOnDetection}) !important;
         -webkit-filter: blur(${config.logoBlurOnDetection}) !important;
         opacity: 0.25 !important;
@@ -1189,7 +1305,9 @@
       /* Blur will increase to full blur when screenshot is detected */
       @media (max-width: 768px) {
         img[src*="Official MSU-TCTO logo-01.png"],
-        img[src*="/api/protected-logo"] {
+        img[src*="/api/protected-logo"],
+        canvas[data-protected-image="true"],
+        canvas[data-secure-loaded="true"] {
           filter: blur(0.75px) !important; /* 3% blur for mobile security - shows details clearly */
           -webkit-filter: blur(0.75px) !important;
           -moz-filter: blur(0.75px) !important;
@@ -1203,7 +1321,9 @@
         
         /* When screenshot is detected on mobile, increase blur */
         img[src*="Official MSU-TCTO logo-01.png"].screenshot-protected-black,
-        img[src*="/api/protected-logo"].screenshot-protected-black {
+        img[src*="/api/protected-logo"].screenshot-protected-black,
+        canvas[data-protected-image="true"].screenshot-protected-black,
+        canvas[data-secure-loaded="true"].screenshot-protected-black {
           filter: blur(${config.logoBlurOnDetection}) !important; /* Full blur on detection */
           -webkit-filter: blur(${config.logoBlurOnDetection}) !important;
           -moz-filter: blur(${config.logoBlurOnDetection}) !important;
@@ -1215,7 +1335,9 @@
         }
         
         img[src*="Official MSU-TCTO logo-01.png"].screenshot-detected,
-        img[src*="/api/protected-logo"].screenshot-detected {
+        img[src*="/api/protected-logo"].screenshot-detected,
+        canvas[data-protected-image="true"].screenshot-detected,
+        canvas[data-secure-loaded="true"].screenshot-detected {
           filter: blur(${config.logoBlurOnDetection}) !important; /* Full blur on detection */
           -webkit-filter: blur(${config.logoBlurOnDetection}) !important;
           opacity: 0.2 !important;
@@ -1226,7 +1348,9 @@
       /* Blur will increase to full blur when screenshot is detected */
       @media (min-width: 769px) and (max-width: 1024px) {
         img[src*="Official MSU-TCTO logo-01.png"],
-        img[src*="/api/protected-logo"] {
+        img[src*="/api/protected-logo"],
+        canvas[data-protected-image="true"],
+        canvas[data-secure-loaded="true"] {
           filter: blur(0.75px) !important; /* 3% blur for tablet security - shows details clearly */
           -webkit-filter: blur(0.75px) !important;
           -moz-filter: blur(0.75px) !important;
@@ -1492,7 +1616,7 @@
 
     // Apply CSS for logo blackout
     applyLogoBlackoutCSS();
-    
+
     // Initialize logo with reduced visibility (make it less prominent)
     initializeLogoVisibility();
 
