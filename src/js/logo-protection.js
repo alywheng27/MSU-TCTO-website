@@ -20,6 +20,12 @@
     ];
 
     elementsToProtect.forEach(element => {
+      // Skip protection for elements inside PDF generation containers
+      // This allows academic calendar PDF download to work without protection interference
+      const pdfContainer = element.closest('[data-pdf-generation="true"]');
+      if (pdfContainer) {
+        return; // Skip this element - it's in a PDF generation container
+      }
       // Prevent right-click context menu
       const handleContextMenu = (e) => {
         e.preventDefault();
@@ -111,11 +117,12 @@
   }
 
   // Add CSS protection via style injection
+  // Exclude PDF generation containers to allow academic calendar PDF download
   const style = document.createElement('style');
   style.textContent = `
-    img[src*="Official MSU-TCTO logo-01"],
-    [data-protected-logo="true"] img,
-    img[data-protected-image="true"] {
+    img[src*="Official MSU-TCTO logo-01"]:not([data-pdf-generation="true"] img),
+    [data-protected-logo="true"]:not([data-pdf-generation="true"] [data-protected-logo="true"]) img,
+    img[data-protected-image="true"]:not([data-pdf-generation="true"] img) {
       -webkit-user-drag: none !important;
       -khtml-user-drag: none !important;
       -moz-user-drag: none !important;
@@ -129,15 +136,26 @@
       pointer-events: auto !important;
     }
     
-    img[src*="Official MSU-TCTO logo-01"]::selection,
-    [data-protected-logo="true"] img::selection,
-    img[data-protected-image="true"]::selection {
+    /* Exclude PDF generation containers from protection */
+    [data-pdf-generation="true"] img {
+      -webkit-user-drag: auto !important;
+      user-drag: auto !important;
+      user-select: auto !important;
+      -webkit-user-select: auto !important;
+      -moz-user-select: auto !important;
+      -ms-user-select: auto !important;
+      -webkit-touch-callout: default !important;
+    }
+    
+    img[src*="Official MSU-TCTO logo-01"]:not([data-pdf-generation="true"] img)::selection,
+    [data-protected-logo="true"]:not([data-pdf-generation="true"] [data-protected-logo="true"]) img::selection,
+    img[data-protected-image="true"]:not([data-pdf-generation="true"] img)::selection {
       background: transparent !important;
     }
     
-    img[src*="Official MSU-TCTO logo-01"]::-moz-selection,
-    [data-protected-logo="true"] img::-moz-selection,
-    img[data-protected-image="true"]::-moz-selection {
+    img[src*="Official MSU-TCTO logo-01"]:not([data-pdf-generation="true"] img)::-moz-selection,
+    [data-protected-logo="true"]:not([data-pdf-generation="true"] [data-protected-logo="true"]) img::-moz-selection,
+    img[data-protected-image="true"]:not([data-pdf-generation="true"] img)::-moz-selection {
       background: transparent !important;
     }
   `;

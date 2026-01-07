@@ -975,7 +975,8 @@ if (testCalendar && testCalendar.length > 0) {
                     <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 mb-4 sm:mb-6">
                         <button 
                             id="downloadCalendarBtn"
-                            class="inline-flex items-center justify-center px-4 py-2.5 sm:px-6 sm:py-3 bg-[#61063B] hover:bg-[#7a0a4f] text-white rounded-lg text-sm sm:text-base font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg gap-2 w-full sm:w-auto"
+                            disabled
+                            class="inline-flex items-center justify-center px-4 py-2.5 sm:px-6 sm:py-3 bg-gray-400 text-white rounded-lg text-sm sm:text-base font-semibold cursor-not-allowed opacity-60 gap-2 w-full sm:w-auto"
                         >
                             <svg class="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -2030,10 +2031,14 @@ document.addEventListener('DOMContentLoaded', function() {
         // Download Calendar as PDF
         if (downloadCalendarBtn) {
             downloadCalendarBtn.addEventListener('click', async function() {
+                const btn = downloadCalendarBtn as HTMLButtonElement;
+                // Check if button is disabled
+                if (btn.disabled) {
+                    return;
+                }
+                
                 const calendarContent = document.getElementById('academicCalendarContent');
                 if (!calendarContent) return;
-                
-                const btn = downloadCalendarBtn as HTMLButtonElement;
                 let tempContainer: HTMLElement | null = null;
                 
                 // Show loading state
@@ -2042,118 +2047,375 @@ document.addEventListener('DOMContentLoaded', function() {
                 btn.innerHTML = '<svg class="animate-spin h-5 w-5 inline-block mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Generating PDF...';
                 
                 try {
-                    // Create a temporary container with the calendar content for PDF generation
+                    // Hardcoded Academic Calendar Data - Directly embedded for PDF generation
+                    const sectionsData: Array<{title: string, tableData: string[][]}> = [
+                        {
+                            title: "First Semester (August – December 2025)",
+                            tableData: [
+                                ["No.", "Academic Activity", "Date"],
+                                ["1", "First Day of Service of Faculty Members", "Monday, July 28, 2025"],
+                                ["2a", "Enrollment – New Students", "July 28 – August 1, 2025"],
+                                ["2b", "Enrollment – Transferees / 2nd Degree", "July 28 – August 1, 2025"],
+                                ["2c", "Enrollment – Old Students", "July 28 – August 1, 2025"],
+                                ["3", "MSU-TCTO Foundation Day", "Sunday, August 4, 2025"],
+                                ["4", "Last Day for Changing Academic Status", "Monday, August 11, 2025"],
+                                ["5a", "Submission of Completion Grades (1st Sem 2023–2024 & Summer 2024)", "Monday, August 11, 2025"],
+                                ["6", "Start of Classes", "Monday, August 11, 2025"],
+                                ["7", "Late Registration with Fines", "August 11 – August 15, 2025"],
+                                ["8", "Change/Add Matriculation & Validation", "August 11 – August 15, 2025"],
+                                ["9", "General Convocation & College Orientation", "Monday, August 18, 2025"],
+                                ["10", "First Preliminary Examination", "September 17 – September 19, 2025"],
+                                ["11", "Pre-Council Meeting", "Friday, September 19, 2025"],
+                                ["12", "Period of Dropping Subjects", "September 15 – October 9, 2025"],
+                                ["13", "Campus Academic Council Meeting", "Monday, October 6, 2025"],
+                                ["14", "MSU System Council Meeting", "Tentative"],
+                                ["15", "Second Preliminary Examination", "October 22 – October 24, 2025"],
+                                ["16", "Last Day for Filing Leave of Absence", "—"],
+                                ["17", "Graduation / Submission of Other Grad Requirements", "Friday, November 28, 2025"],
+                                ["18", "End of Classes", "Friday, November 28, 2025"],
+                                ["19", "Integration Period", "December 1 – December 5, 2025"],
+                                ["20", "Final Examinations", "December 8 – December 12, 2025"],
+                                ["21", "Last Day of Submission of Grades (Graduating)", "Tuesday, December 23, 2025"],
+                                ["21", "Last Day of Submission of Grades (Non-Graduating)", "Wednesday, December 24, 2025"],
+                                ["23", "Christmas Vacation / Break", "December 22, 2025 – January 2, 2026"]
+                            ]
+                        },
+                        {
+                            title: "Second Semester (January – May 2026)",
+                            tableData: [
+                                ["No.", "Academic Activity", "Date"],
+                                ["1", "First Day of Service of Faculty Members", "Monday, January 5, 2026"],
+                                ["2a", "Enrollment – New Students", "January 5 – January 9, 2026"],
+                                ["2b", "Enrollment – Transferees / 2nd Degree", "January 5 – January 9, 2026"],
+                                ["2c", "Enrollment – Old Students", "January 5 – January 9, 2026"],
+                                ["4", "Last Day for Changing Academic Status", "Friday, January 16, 2026"],
+                                ["5b", "Submission of Completion Grades (2nd Sem 2023–2024)", "Friday, January 16, 2026"],
+                                ["6", "Start of Classes", "Monday, January 12, 2026"],
+                                ["7", "Late Registration with Fines", "January 12 – January 16, 2026"],
+                                ["8", "Change/Add Matriculation & Validation", "January 12 – January 16, 2026"],
+                                ["10", "First Preliminary Examination", "February 18 – February 20, 2026"],
+                                ["11", "Pre-Council Meeting", "Friday, February 17, 2026"],
+                                ["12", "Period of Dropping Subjects", "February 6 – March 6, 2026"],
+                                ["13", "Campus Academic Council Meeting", "Thursday, March 12, 2026"],
+                                ["14", "MSU System Council Meeting", "Tentative"],
+                                ["15", "Second Preliminary Examination", "April 8 – April 10, 2026"],
+                                ["16", "Last Day for Filing Leave of Absence", "Monday, April 13, 2026"],
+                                ["17", "Graduation / Submission of Other Grad Requirements", "Friday, May 8, 2026"],
+                                ["18", "End of Classes", "Friday, May 15, 2026"],
+                                ["19", "Integration Period", "May 11 – May 15, 2026"],
+                                ["20", "Final Examinations", "May 18 – May 22, 2026"],
+                                ["21", "Last Day of Submission of Grades (Graduating)", "Monday, May 25, 2026"],
+                                ["21", "Last Day of Submission of Grades (Non-Graduating)", "Friday, May 29, 2026"]
+                            ]
+                        },
+                        {
+                            title: "Summer Term 2026 (June – July)",
+                            tableData: [
+                                ["Academic Activity", "Date"],
+                                ["Enrollment (Old Students)", "June 3 – June 5, 2026"],
+                                ["Start of Classes", "Monday, June 8, 2026"],
+                                ["Late Registration with Fines", "Friday, June 12, 2026"],
+                                ["End of Classes", "Friday, July 24, 2026"],
+                                ["Final Examinations", "July 27 – July 28, 2026"]
+                            ]
+                        }
+                    ];
+                    
+                    console.log('Using hardcoded calendar data with', sectionsData.length, 'sections');
+                    
+                    // Build complete HTML directly with all data embedded
+                    const buildTableHTML = (tableData: string[][]) => {
+                        if (tableData.length === 0) return '';
+                        
+                        let html = '<table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; display: table !important; visibility: visible !important; opacity: 1 !important;"><thead><tr>';
+                        // First row is header
+                        if (tableData.length > 0) {
+                            tableData[0].forEach(cell => {
+                                html += `<th style="background-color: #61063B; color: white; padding: 12px; text-align: left; border: 1px solid #333; font-weight: bold; font-size: 10pt;">${cell || ''}</th>`;
+                            });
+                        }
+                        html += '</tr></thead><tbody>';
+                        
+                        // Rest are data rows
+                        for (let i = 1; i < tableData.length; i++) {
+                            const bgColor = i % 2 === 0 ? '#f5f5f5' : 'white';
+                            html += `<tr style="background-color: ${bgColor}; display: table-row !important; visibility: visible !important;">`;
+                            tableData[i].forEach(cell => {
+                                html += `<td style="padding: 10px; border: 1px solid #333; color: #333; font-size: 9pt; display: table-cell !important; visibility: visible !important;">${cell || ''}</td>`;
+                            });
+                            html += '</tr>';
+                        }
+                        
+                        html += '</tbody></table>';
+                        return html;
+                    };
+                    
+                    // Build sections HTML
+                    let sectionsHTML = '';
+                    sectionsData.forEach(section => {
+                        sectionsHTML += `
+                            <div class="section" style="margin-bottom: 40px; display: block !important; visibility: visible !important;">
+                                <div class="section-title" style="background-color: #61063B; color: white; padding: 15px; font-size: 18pt; font-weight: bold; margin-bottom: 15px; border-radius: 4px; display: block !important; visibility: visible !important;">${section.title}</div>
+                                ${buildTableHTML(section.tableData)}
+                            </div>
+                        `;
+                    });
+                    
+                    console.log('Sections HTML length:', sectionsHTML.length);
+                    console.log('Total sections:', sectionsData.length);
+                    console.log('First section title:', sectionsData[0]?.title);
+                    console.log('First section rows:', sectionsData[0]?.tableData?.length);
+                    
+                    // Create complete HTML structure directly in the container
                     tempContainer = document.createElement('div');
+                    const containerHTML = `
+                        <div class="header" style="text-align: center; margin-bottom: 30px; border-bottom: 3px solid #61063B; padding-bottom: 20px; display: block !important; visibility: visible !important;">
+                            <h1 style="color: #61063B; font-size: 28pt; margin: 10px 0; font-weight: bold;">MSU–TCTO Academic Calendar</h1>
+                            <h2 style="color: #333; font-size: 20pt; margin: 5px 0; font-weight: 600;">Academic Year 2025–2026</h2>
+                        </div>
+                        ${sectionsHTML}
+                        <div class="footer" style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 2px solid #61063B; font-size: 10pt; color: #666; display: block !important; visibility: visible !important;">
+                            <p>MSU-Tawi-Tawi College of Technology and Oceanography</p>
+                            <p>Generated on ${new Date().toLocaleDateString()}</p>
+                        </div>
+                    `;
+                    
+                    console.log('Container HTML length:', containerHTML.length);
+                    console.log('Container HTML preview (first 500 chars):', containerHTML.substring(0, 500));
+                    
+                    tempContainer.innerHTML = containerHTML;
+                    
+                    // Add comprehensive styles
+                    const styleElement = document.createElement('style');
+                    styleElement.textContent = `
+                        * {
+                            margin: 0;
+                            padding: 0;
+                            box-sizing: border-box;
+                        }
+                        body {
+                            font-family: Arial, sans-serif;
+                            background: white;
+                            color: #333;
+                        }
+                        .header {
+                            text-align: center;
+                            margin-bottom: 30px;
+                            border-bottom: 3px solid #61063B;
+                            padding-bottom: 20px;
+                            display: block !important;
+                            visibility: visible !important;
+                        }
+                        .header h1 {
+                            color: #61063B;
+                            font-size: 28pt;
+                            margin: 10px 0;
+                            font-weight: bold;
+                            display: block !important;
+                            visibility: visible !important;
+                        }
+                        .header h2 {
+                            color: #333;
+                            font-size: 20pt;
+                            margin: 5px 0;
+                            font-weight: 600;
+                            display: block !important;
+                            visibility: visible !important;
+                        }
+                        .section {
+                            margin-bottom: 40px;
+                            page-break-inside: avoid;
+                            display: block !important;
+                            visibility: visible !important;
+                        }
+                        .section-title {
+                            background-color: #61063B;
+                            color: white;
+                            padding: 15px;
+                            font-size: 18pt;
+                            font-weight: bold;
+                            margin-bottom: 15px;
+                            border-radius: 4px;
+                            display: block !important;
+                            visibility: visible !important;
+                        }
+                        table {
+                            width: 100%;
+                            border-collapse: collapse;
+                            margin-bottom: 20px;
+                            font-size: 10pt;
+                            background: white;
+                            display: table !important;
+                            visibility: visible !important;
+                            opacity: 1 !important;
+                            table-layout: auto !important;
+                        }
+                        thead {
+                            display: table-header-group !important;
+                            visibility: visible !important;
+                        }
+                        tbody {
+                            display: table-row-group !important;
+                            visibility: visible !important;
+                        }
+                        tr {
+                            display: table-row !important;
+                            visibility: visible !important;
+                        }
+                        th {
+                            background-color: #61063B;
+                            color: white;
+                            padding: 12px;
+                            text-align: left;
+                            border: 1px solid #333;
+                            font-weight: bold;
+                            font-size: 10pt;
+                            display: table-cell !important;
+                            visibility: visible !important;
+                        }
+                        td {
+                            padding: 10px;
+                            border: 1px solid #333;
+                            font-size: 9pt;
+                            color: #333;
+                            display: table-cell !important;
+                            visibility: visible !important;
+                        }
+                        tbody tr:nth-child(even) {
+                            background-color: #f5f5f5;
+                        }
+                        tbody tr:nth-child(odd) {
+                            background-color: white;
+                        }
+                        .footer {
+                            text-align: center;
+                            margin-top: 30px;
+                            padding-top: 20px;
+                            border-top: 2px solid #61063B;
+                            font-size: 10pt;
+                            color: #666;
+                            display: block !important;
+                            visibility: visible !important;
+                        }
+                    `;
+                    tempContainer.insertBefore(styleElement, tempContainer.firstChild);
+                    
+                    // Set container styles for PDF generation
                     tempContainer.style.position = 'fixed';
                     tempContainer.style.top = '0';
                     tempContainer.style.left = '0';
-                    tempContainer.style.width = '210mm';
-                    tempContainer.style.maxWidth = '210mm';
-                    tempContainer.style.padding = '20mm';
+                    tempContainer.style.width = '794px';
+                    tempContainer.style.maxWidth = '794px';
+                    tempContainer.style.padding = '20px';
                     tempContainer.style.backgroundColor = 'white';
                     tempContainer.style.fontFamily = 'Arial, sans-serif';
                     tempContainer.style.color = '#333';
-                    tempContainer.style.zIndex = '9999';
-                    tempContainer.style.opacity = '0';
+                    tempContainer.style.zIndex = '99999';
+                    tempContainer.style.opacity = '1';
+                    tempContainer.style.visibility = 'visible';
                     tempContainer.style.pointerEvents = 'none';
+                    tempContainer.style.overflow = 'visible';
+                    tempContainer.style.boxSizing = 'border-box';
+                    tempContainer.style.transform = 'translateX(-9999px)';
                     
-                    // Create header
-                    const header = document.createElement('div');
-                    header.style.textAlign = 'center';
-                    header.style.marginBottom = '30px';
-                    header.style.borderBottom = '3px solid #61063B';
-                    header.style.paddingBottom = '20px';
-                    header.innerHTML = `
-                        <h1 style="color: #61063B; font-size: 28px; margin: 10px 0; font-weight: bold;">MSU–TCTO Academic Calendar</h1>
-                        <h2 style="color: #333; font-size: 20px; margin: 5px 0; font-weight: 600;">Academic Year 2025–2026</h2>
-                    `;
+                    // Mark container as PDF generation container
+                    tempContainer.setAttribute('data-pdf-generation', 'true');
+                    tempContainer.setAttribute('data-allow-capture', 'true');
                     
-                    // Clone the calendar content with deep clone to preserve all elements
-                    const contentClone = calendarContent.cloneNode(true) as HTMLElement;
-                    
-                    // Ensure tables have proper styling
-                    const tables = contentClone.querySelectorAll('table');
-                    tables.forEach(table => {
-                        (table as HTMLElement).style.width = '100%';
-                        (table as HTMLElement).style.borderCollapse = 'collapse';
-                        (table as HTMLElement).style.marginBottom = '20px';
-                    });
-                    
-                    // Ensure table headers have proper styling
-                    const thElements = contentClone.querySelectorAll('th');
-                    thElements.forEach(th => {
-                        (th as HTMLElement).style.backgroundColor = '#61063B';
-                        (th as HTMLElement).style.color = 'white';
-                        (th as HTMLElement).style.padding = '12px';
-                        (th as HTMLElement).style.textAlign = 'left';
-                        (th as HTMLElement).style.border = '1px solid #333';
-                        (th as HTMLElement).style.fontWeight = 'bold';
-                    });
-                    
-                    // Ensure table cells have proper styling
-                    const tdElements = contentClone.querySelectorAll('td');
-                    tdElements.forEach(td => {
-                        (td as HTMLElement).style.padding = '10px';
-                        (td as HTMLElement).style.border = '1px solid #333';
-                    });
-                    
-                    // Ensure section titles have proper styling
-                    const sectionTitles = contentClone.querySelectorAll('h4');
-                    sectionTitles.forEach(h4 => {
-                        (h4 as HTMLElement).style.color = '#61063B';
-                        (h4 as HTMLElement).style.fontSize = '20px';
-                        (h4 as HTMLElement).style.fontWeight = 'bold';
-                        (h4 as HTMLElement).style.marginBottom = '15px';
-                        (h4 as HTMLElement).style.padding = '15px';
-                        (h4 as HTMLElement).style.backgroundColor = '#61063B';
-                        (h4 as HTMLElement).style.color = 'white';
-                    });
-                    
-                    // Create footer
-                    const footer = document.createElement('div');
-                    footer.style.textAlign = 'center';
-                    footer.style.marginTop = '30px';
-                    footer.style.paddingTop = '20px';
-                    footer.style.borderTop = '2px solid #61063B';
-                    footer.style.fontSize = '12px';
-                    footer.style.color = '#666';
-                    footer.innerHTML = `
-                        <p>MSU-Tawi-Tawi College of Technology and Oceanography</p>
-                        <p>Generated on ${new Date().toLocaleDateString()}</p>
-                    `;
-                    
-                    // Assemble the PDF content
-                    tempContainer.appendChild(header);
-                    tempContainer.appendChild(contentClone);
-                    tempContainer.appendChild(footer);
+                    // Append to DOM first
                     document.body.appendChild(tempContainer);
                     
-                    // Force a reflow to ensure styles are applied
+                    // Wait for rendering
+                    await new Promise(resolve => setTimeout(resolve, 500));
                     void tempContainer.offsetHeight;
                     
+                    // Verify content exists
+                    const header = tempContainer.querySelector('.header');
+                    const pdfSections = tempContainer.querySelectorAll('.section');
+                    const tables = tempContainer.querySelectorAll('table');
+                    const totalRows = tempContainer.querySelectorAll('tbody tr').length;
+                    
+                    console.log('PDF Container Verification:');
+                    console.log('- Header exists:', !!header);
+                    console.log('- Sections found:', pdfSections.length);
+                    console.log('- Tables found:', tables.length);
+                    console.log('- Total rows:', totalRows);
+                    console.log('- Container HTML length:', tempContainer.innerHTML.length);
+                    
+                    if (!header) {
+                        throw new Error('Header not found in PDF content.');
+                    }
+                    
+                    if (pdfSections.length === 0) {
+                        throw new Error('No sections found. Please ensure the calendar is fully loaded.');
+                    }
+                    
+                    if (tables.length === 0) {
+                        throw new Error('No tables found. Please ensure the calendar is fully loaded.');
+                    }
+                    
+                    if (totalRows === 0) {
+                        throw new Error('No table data found. Please ensure the calendar is fully loaded.');
+                    }
+                    
+                    // Make sure all tables are visible
+                    tables.forEach((table, index) => {
+                        const tableEl = table as HTMLElement;
+                        tableEl.style.display = 'table';
+                        tableEl.style.visibility = 'visible';
+                        tableEl.style.opacity = '1';
+                        console.log(`Table ${index + 1} rows:`, tableEl.querySelectorAll('tbody tr').length);
+                    });
+                    
+                    // Wait for html2pdf library to be available
+                    let html2pdfLib = (window as any).html2pdf;
+                    if (typeof html2pdfLib === 'undefined') {
+                        // Wait a bit more for library to load
+                        await new Promise(resolve => setTimeout(resolve, 500));
+                        html2pdfLib = (window as any).html2pdf;
+                    }
+                    
+                    if (typeof html2pdfLib === 'undefined') {
+                        throw new Error('PDF library not loaded. Please refresh the page and try again.');
+                    }
+                    
                     // Configure html2pdf options
+                    const isMobile = window.innerWidth < 768;
                     const opt = {
                         margin: [10, 10, 10, 10],
                         filename: 'MSU-TCTO-Academic-Calendar-AY-2025-2026.pdf',
                         image: { type: 'jpeg', quality: 0.98 },
                         html2canvas: { 
-                            scale: 2,
+                            scale: isMobile ? 1.5 : 2,
                             useCORS: true,
-                            letterRendering: true
+                            letterRendering: true,
+                            logging: false,
+                            windowWidth: 794,
+                            windowHeight: 1123,
+                            backgroundColor: '#ffffff',
+                            allowTaint: true
                         },
                         jsPDF: { 
                             unit: 'mm', 
                             format: 'a4', 
                             orientation: 'portrait' 
-                        }
+                        },
+                        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
                     };
                     
+                    console.log('Starting PDF generation...');
+                    console.log('Tables found:', tables.length);
+                    console.log('Rows found:', totalRows);
+                    console.log('HTML2PDF library:', typeof html2pdfLib);
+                    
                     // Generate and download PDF
-                    const html2pdfLib = (window as any).html2pdf;
-                    if (typeof html2pdfLib !== 'undefined') {
-                        await html2pdfLib().set(opt).from(tempContainer).save();
-                    } else {
-                        throw new Error('PDF library not loaded. Please refresh the page and try again.');
+                    try {
+                        const pdfPromise = html2pdfLib().set(opt).from(tempContainer).save();
+                        await pdfPromise;
+                        console.log('PDF generated successfully');
+                    } catch (pdfError) {
+                        console.error('PDF generation error:', pdfError);
+                        throw new Error('Failed to generate PDF: ' + (pdfError instanceof Error ? pdfError.message : String(pdfError)));
                     }
                     
                     // Clean up
@@ -2166,7 +2428,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     btn.innerHTML = originalText;
                 } catch (error) {
                     console.error('Error generating PDF:', error);
-                    alert('Failed to generate PDF. Please try again or use the Print option.');
+                    alert('Failed to generate PDF: ' + (error instanceof Error ? error.message : 'Unknown error') + '. Please try again or use the Print option.');
                     
                     // Clean up temp container if it exists
                     if (tempContainer && tempContainer.parentNode) {
