@@ -1595,6 +1595,9 @@ if (testCalendar && testCalendar.length > 0) {
           </button> -->
         </div>
 
+<!-- html2pdf.js library for PDF generation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
 <script>
 window.addEventListener('load', function() {
   const adOverlay = document.getElementById('adOverlay');
@@ -2026,108 +2029,154 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Download Calendar as PDF
         if (downloadCalendarBtn) {
-            downloadCalendarBtn.addEventListener('click', function() {
+            downloadCalendarBtn.addEventListener('click', async function() {
                 const calendarContent = document.getElementById('academicCalendarContent');
                 if (!calendarContent) return;
                 
-                // Create a new window for printing
-                const printWindow = window.open('', '_blank');
-                if (!printWindow) {
-                    alert('Please allow pop-ups to download the calendar');
-                    return;
-                }
+                const btn = downloadCalendarBtn as HTMLButtonElement;
+                let tempContainer: HTMLElement | null = null;
                 
-                printWindow.document.write(`
-                    <!DOCTYPE html>
-                    <html>
-                    <head>
-                        <title>MSU-TCTO Academic Calendar AY 2025-2026</title>
-                        <style>
-                            @media print {
-                                @page {
-                                    margin: 1cm;
-                                    size: A4;
-                                }
-                            }
-                            body {
-                                font-family: Arial, sans-serif;
-                                margin: 20px;
-                                color: #333;
-                            }
-                            .header {
-                                text-align: center;
-                                margin-bottom: 30px;
-                                border-bottom: 3px solid #61063B;
-                                padding-bottom: 20px;
-                            }
-                            .header h1 {
-                                color: #61063B;
-                                font-size: 28px;
-                                margin: 10px 0;
-                            }
-                            .header h2 {
-                                color: #333;
-                                font-size: 20px;
-                                margin: 5px 0;
-                            }
-                            .semester-section {
-                                margin-bottom: 40px;
-                                page-break-inside: avoid;
-                            }
-                            .semester-title {
-                                background-color: #61063B;
-                                color: white;
-                                padding: 15px;
-                                font-size: 20px;
-                                font-weight: bold;
-                                margin-bottom: 15px;
-                            }
-                            table {
-                                width: 100%;
-                                border-collapse: collapse;
-                                margin-bottom: 20px;
-                            }
-                            th {
-                                background-color: #61063B;
-                                color: white;
-                                padding: 12px;
-                                text-align: left;
-                                border: 1px solid #333;
-                                font-weight: bold;
-                            }
-                            td {
-                                padding: 10px;
-                                border: 1px solid #333;
-                            }
-                            tr:nth-child(even) {
-                                background-color: #f5f5f5;
-                            }
-                            .footer {
-                                text-align: center;
-                                margin-top: 30px;
-                                padding-top: 20px;
-                                border-top: 2px solid #61063B;
-                                font-size: 12px;
-                                color: #666;
-                            }
-                        </style>
-                    </head>
-                    <body>
-                        <div class="header">
-                            <h1>MSU–TCTO Academic Calendar</h1>
-                            <h2>Academic Year 2025–2026</h2>
-                        </div>
-                        ${calendarContent.innerHTML}
-                        <div class="footer">
-                            <p>MSU-Tawi-Tawi College of Technology and Oceanography</p>
-                            <p>Generated on ${new Date().toLocaleDateString()}</p>
-                        </div>
-                    </body>
-                    </html>
-                `);
-                printWindow.document.close();
-                printWindow.focus();
-                printWindow.print();
+                // Show loading state
+                const originalText = btn.innerHTML;
+                btn.disabled = true;
+                btn.innerHTML = '<svg class="animate-spin h-5 w-5 inline-block mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Generating PDF...';
+                
+                try {
+                    // Create a temporary container with the calendar content for PDF generation
+                    tempContainer = document.createElement('div');
+                    tempContainer.style.position = 'fixed';
+                    tempContainer.style.top = '0';
+                    tempContainer.style.left = '0';
+                    tempContainer.style.width = '210mm';
+                    tempContainer.style.maxWidth = '210mm';
+                    tempContainer.style.padding = '20mm';
+                    tempContainer.style.backgroundColor = 'white';
+                    tempContainer.style.fontFamily = 'Arial, sans-serif';
+                    tempContainer.style.color = '#333';
+                    tempContainer.style.zIndex = '9999';
+                    tempContainer.style.opacity = '0';
+                    tempContainer.style.pointerEvents = 'none';
+                    
+                    // Create header
+                    const header = document.createElement('div');
+                    header.style.textAlign = 'center';
+                    header.style.marginBottom = '30px';
+                    header.style.borderBottom = '3px solid #61063B';
+                    header.style.paddingBottom = '20px';
+                    header.innerHTML = `
+                        <h1 style="color: #61063B; font-size: 28px; margin: 10px 0; font-weight: bold;">MSU–TCTO Academic Calendar</h1>
+                        <h2 style="color: #333; font-size: 20px; margin: 5px 0; font-weight: 600;">Academic Year 2025–2026</h2>
+                    `;
+                    
+                    // Clone the calendar content with deep clone to preserve all elements
+                    const contentClone = calendarContent.cloneNode(true) as HTMLElement;
+                    
+                    // Ensure tables have proper styling
+                    const tables = contentClone.querySelectorAll('table');
+                    tables.forEach(table => {
+                        (table as HTMLElement).style.width = '100%';
+                        (table as HTMLElement).style.borderCollapse = 'collapse';
+                        (table as HTMLElement).style.marginBottom = '20px';
+                    });
+                    
+                    // Ensure table headers have proper styling
+                    const thElements = contentClone.querySelectorAll('th');
+                    thElements.forEach(th => {
+                        (th as HTMLElement).style.backgroundColor = '#61063B';
+                        (th as HTMLElement).style.color = 'white';
+                        (th as HTMLElement).style.padding = '12px';
+                        (th as HTMLElement).style.textAlign = 'left';
+                        (th as HTMLElement).style.border = '1px solid #333';
+                        (th as HTMLElement).style.fontWeight = 'bold';
+                    });
+                    
+                    // Ensure table cells have proper styling
+                    const tdElements = contentClone.querySelectorAll('td');
+                    tdElements.forEach(td => {
+                        (td as HTMLElement).style.padding = '10px';
+                        (td as HTMLElement).style.border = '1px solid #333';
+                    });
+                    
+                    // Ensure section titles have proper styling
+                    const sectionTitles = contentClone.querySelectorAll('h4');
+                    sectionTitles.forEach(h4 => {
+                        (h4 as HTMLElement).style.color = '#61063B';
+                        (h4 as HTMLElement).style.fontSize = '20px';
+                        (h4 as HTMLElement).style.fontWeight = 'bold';
+                        (h4 as HTMLElement).style.marginBottom = '15px';
+                        (h4 as HTMLElement).style.padding = '15px';
+                        (h4 as HTMLElement).style.backgroundColor = '#61063B';
+                        (h4 as HTMLElement).style.color = 'white';
+                    });
+                    
+                    // Create footer
+                    const footer = document.createElement('div');
+                    footer.style.textAlign = 'center';
+                    footer.style.marginTop = '30px';
+                    footer.style.paddingTop = '20px';
+                    footer.style.borderTop = '2px solid #61063B';
+                    footer.style.fontSize = '12px';
+                    footer.style.color = '#666';
+                    footer.innerHTML = `
+                        <p>MSU-Tawi-Tawi College of Technology and Oceanography</p>
+                        <p>Generated on ${new Date().toLocaleDateString()}</p>
+                    `;
+                    
+                    // Assemble the PDF content
+                    tempContainer.appendChild(header);
+                    tempContainer.appendChild(contentClone);
+                    tempContainer.appendChild(footer);
+                    document.body.appendChild(tempContainer);
+                    
+                    // Force a reflow to ensure styles are applied
+                    void tempContainer.offsetHeight;
+                    
+                    // Configure html2pdf options
+                    const opt = {
+                        margin: [10, 10, 10, 10],
+                        filename: 'MSU-TCTO-Academic-Calendar-AY-2025-2026.pdf',
+                        image: { type: 'jpeg', quality: 0.98 },
+                        html2canvas: { 
+                            scale: 2,
+                            useCORS: true,
+                            letterRendering: true
+                        },
+                        jsPDF: { 
+                            unit: 'mm', 
+                            format: 'a4', 
+                            orientation: 'portrait' 
+                        }
+                    };
+                    
+                    // Generate and download PDF
+                    const html2pdfLib = (window as any).html2pdf;
+                    if (typeof html2pdfLib !== 'undefined') {
+                        await html2pdfLib().set(opt).from(tempContainer).save();
+                    } else {
+                        throw new Error('PDF library not loaded. Please refresh the page and try again.');
+                    }
+                    
+                    // Clean up
+                    if (tempContainer && tempContainer.parentNode) {
+                        tempContainer.parentNode.removeChild(tempContainer);
+                    }
+                    
+                    // Restore button state
+                    btn.disabled = false;
+                    btn.innerHTML = originalText;
+                } catch (error) {
+                    console.error('Error generating PDF:', error);
+                    alert('Failed to generate PDF. Please try again or use the Print option.');
+                    
+                    // Clean up temp container if it exists
+                    if (tempContainer && tempContainer.parentNode) {
+                        tempContainer.parentNode.removeChild(tempContainer);
+                    }
+                    
+                    // Restore button state
+                    btn.disabled = false;
+                    btn.innerHTML = originalText;
+                }
             });
         }
         
