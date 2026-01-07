@@ -11,6 +11,12 @@
 
 import sharp from 'sharp';
 
+/**
+ * The official MSU-TCTO logo image path
+ * @constant {string}
+ */
+const LOGO_IMAGE_PATH = '/images/Official MSU-TCTO logo-01.png';
+
 // Create a 1x1 transparent PNG (blank image)
 function createBlankImage() {
   // Base64 encoded 1x1 transparent PNG
@@ -207,7 +213,7 @@ export async function GET({ request }) {
     
     // Get the actual image from static path
     // In production, this should be in a protected assets folder
-    const imagePath = '/images/Official%20MSU-TCTO%20logo-01.png';
+    const imagePath = LOGO_IMAGE_PATH.replace(/ /g, '%20'); // URL encode spaces
     const imageUrl = new URL(imagePath, request.url);
     
     // Fetch the image from the static path

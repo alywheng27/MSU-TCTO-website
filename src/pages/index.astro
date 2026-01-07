@@ -321,8 +321,6 @@ if (testCalendar && testCalendar.length > 0) {
                     </div>
                 </div>
             </div>
-        </section>
-
 
         <!-- Enhanced Interactive Enrollment Process Section -->
         <!-- <section class="bg-gradient-to-br from-gray-50 via-white to-blue-50 py-24 overflow-hidden">
@@ -706,51 +704,53 @@ if (testCalendar && testCalendar.length > 0) {
                 <!-- Initial 5 Events Display -->
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 mb-12">
                     {(fiveUpcomingEvents && fiveUpcomingEvents.length > 0) || (fourUpcomingEvents && fourUpcomingEvents.length > 0) || (testCalendar && testCalendar.length > 0) ? (
-                        (fiveUpcomingEvents && fiveUpcomingEvents.length > 0 ? fiveUpcomingEvents : (fourUpcomingEvents && fourUpcomingEvents.length > 0 ? fourUpcomingEvents : testCalendar)).slice(0, 5).map((calendar) => {
-                            console.log('Processing calendar event:', calendar);
-                            
-                            let displayDate = calendar.date;
-                            if (typeof calendar.date === 'object' && calendar.date._type === 'datetime') {
-                                displayDate = calendar.date.utc;
-                            }
-                            
-                            return (
-                                <div class="bg-msu-deep-ocean rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl group">
-                                    <div class="p-8 relative">
-                                        <div class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-12 -mt-12"></div>
-                                        <!-- Featured Badge -->
-                                        <div class="absolute top-2 left-4">
-                                            <span class="bg-msu-bgc-color text-msu-deep-ocean text-xs px-3 py-1 rounded-full font-semibold shadow-lg">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 inline mr-1 text-msu-deep-ocean" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                                </svg>
-                                                Featured
-                                            </span>
-                                        </div>
-                                        <div class="mb-6 border-b border-white/20 pb-4">
-                                            <p class="text-lg uppercase tracking-wider text-msu-blue-text font-medium">{getWordMonth(displayDate)}</p>
-                                            <p class="text-5xl font-bold text-white mt-1">{getDay(displayDate)}</p>
-                                            <p class="text-sm text-white/80 mt-1">{getYear(displayDate)}</p>
-                                        </div>
-                                        <div>
-                                            <h4 class="text-2xl font-bold text-white mb-3 group-hover:text-msu-blue-text transition-colors">
-                                                {calendar.title}
-                                            </h4>
-                                            <p class="text-gray-200/90 line-clamp-3 text-sm leading-relaxed">
-                                                {calendar.body?.[0]?.children?.[0]?.text || 'No description available'}
-                                            </p>
-                                        </div>
-                                        <div class="absolute bottom-4 right-4">
-                                            <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-msu-blue-text transition-colors">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-msu-deep-ocean" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                                </svg>
+                        (fiveUpcomingEvents && fiveUpcomingEvents.length > 0 ? fiveUpcomingEvents : (fourUpcomingEvents && fourUpcomingEvents.length > 0 ? fourUpcomingEvents : testCalendar))
+                            .slice(0, 5)
+                            .map((calendar) => {
+                                console.log('Processing calendar event:', calendar);
+                                
+                                let displayDate = calendar.date;
+                                if (typeof calendar.date === 'object' && calendar.date._type === 'datetime') {
+                                    displayDate = calendar.date.utc;
+                                }
+                                
+                                return (
+                                    <div class="bg-msu-deep-ocean rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl group">
+                                        <div class="p-8 relative">
+                                            <div class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-12 -mt-12"></div>
+                                            <!-- Featured Badge -->
+                                            <div class="absolute top-2 left-4">
+                                                <span class="bg-msu-bgc-color text-msu-deep-ocean text-xs px-3 py-1 rounded-full font-semibold shadow-lg">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 inline mr-1 text-msu-deep-ocean" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                                    </svg>
+                                                    Featured
+                                                </span>
+                                            </div>
+                                            <div class="mb-6 border-b border-white/20 pb-4">
+                                                <p class="text-lg uppercase tracking-wider text-msu-blue-text font-medium">{getWordMonth(displayDate)}</p>
+                                                <p class="text-5xl font-bold text-white mt-1">{getDay(displayDate)}</p>
+                                                <p class="text-sm text-white/80 mt-1">{getYear(displayDate)}</p>
+                                            </div>
+                                            <div>
+                                                <h4 class="text-2xl font-bold text-white mb-3 group-hover:text-msu-blue-text transition-colors">
+                                                    {calendar.title}
+                                                </h4>
+                                                <p class="text-gray-200/90 line-clamp-3 text-sm leading-relaxed">
+                                                    {calendar.body?.[0]?.children?.[0]?.text || 'No description available'}
+                                                </p>
+                                            </div>
+                                            <div class="absolute bottom-4 right-4">
+                                                <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-msu-blue-text transition-colors">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-msu-deep-ocean" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            );
-                        })
+                                );
+                            })
                     ) : (
                         <div class="col-span-full text-center py-12 bg-white/50 dark:bg-gray-700/50 backdrop-blur-sm rounded-2xl shadow-lg">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-gray-400 dark:text-gray-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -768,17 +768,32 @@ if (testCalendar && testCalendar.length > 0) {
                         <!-- Backdrop Overlay -->
                         <div id="eventsBackdrop" class="fixed inset-0 bg-black/50 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 z-[9998]"></div>
                         
-                        <div class="relative inline-block">
+                        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                            <div class="relative inline-block">
+                                <button 
+                                    id="eventsDropdownBtn"
+                                    class="group relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-msu-deep-ocean to-msu-deep-ocean dark:from-[#61063B] dark:to-[#61063B] dark:btn-outline text-white rounded-full font-semibold hover:from-msu-main-color hover:to-msu-deep-ocean dark:hover:from-[#61063B] dark:hover:to-[#03045e] transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg gap-3 overflow-hidden"
+                                >
+                                    <span class="relative z-10">View Complete Calendar</span>
+                                    <svg id="dropdownArrow" class="relative z-10 h-5 w-5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                    <div class="absolute inset-0 bg-gradient-to-r from-msu-main-color to-msu-deep-ocean opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                </button>
+                            </div>
+                            
+                            <!-- Academic Calendar Button -->
                             <button 
-                                id="eventsDropdownBtn"
-                                class="group relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-msu-deep-ocean to-msu-deep-ocean dark:from-[#61063B] dark:to-[#61063B] dark:btn-outline text-white rounded-full font-semibold hover:from-msu-main-color hover:to-msu-deep-ocean dark:hover:from-[#61063B] dark:hover:to-[#03045e] transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg gap-3 overflow-hidden"
+                                id="academicCalendarBtn"
+                                class="group relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#61063B] to-[#61063B] dark:from-[#61063B] dark:to-[#61063B] dark:btn-outline text-white rounded-full font-semibold hover:from-[#7a0a4f] hover:to-[#61063B] dark:hover:from-[#61063B] dark:hover:to-[#03045e] transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg gap-3 overflow-hidden"
                             >
-                                <span class="relative z-10">View Complete Calendar</span>
-                                <svg id="dropdownArrow" class="relative z-10 h-5 w-5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                <svg class="relative z-10 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                 </svg>
-                                <div class="absolute inset-0 bg-gradient-to-r from-msu-main-color to-msu-deep-ocean opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                <span class="relative z-10">Academic Calendar AY 2025-2026</span>
+                                <div class="absolute inset-0 bg-gradient-to-r from-[#7a0a4f] to-[#61063B] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </button>
+                        </div>
                             
                             <!-- Dropdown Content -->
                             <div 
@@ -819,22 +834,22 @@ if (testCalendar && testCalendar.length > 0) {
                                             }
                                             
                                             // Check if this event is in the featured events list
-                                            const isFeatured = fiveUpcomingEvents && fiveUpcomingEvents.length > 0 
-                                                ? fiveUpcomingEvents.some(featured => {
-                                                    // Compare titles
+                                            let isFeatured = false;
+                                            if (fiveUpcomingEvents && fiveUpcomingEvents.length > 0) {
+                                                const checkFeatured = (featured) => {
                                                     if (featured.title !== calendar.title) return false;
-                                                    
-                                                    // Compare dates - handle both object and string formats
                                                     const featuredDate = typeof featured.date === 'object' && featured.date._type === 'datetime' 
                                                         ? featured.date.utc 
                                                         : featured.date;
                                                     const calendarDate = typeof calendar.date === 'object' && calendar.date._type === 'datetime' 
                                                         ? calendar.date.utc 
                                                         : calendar.date;
-                                                    
                                                     return featuredDate === calendarDate;
-                                                })
-                                                : index < 5;
+                                                };
+                                                isFeatured = fiveUpcomingEvents.some(checkFeatured);
+                                            } else {
+                                                isFeatured = index < 5;
+                                            }
                                             
                                             return (
                                                 <div class={`bg-msu-deep-ocean rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl group ${isFeatured ? 'ring-2 ring-msu-blue-text/50' : ''}`}>
@@ -867,7 +882,7 @@ if (testCalendar && testCalendar.length > 0) {
                                                         </div>
                                                         
                                                         <!-- Enhanced Featured Badge -->
-                                                        {isFeatured && (
+                                                        {isFeatured ? (
                                                             <div class="absolute top-2 left-3 z-10">
                                                                 <span class="bg-msu-bgc-color text-msu-deep-ocean text-xs px-3 py-1 rounded-full font-semibold shadow-lg flex items-center gap-1">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-msu-deep-ocean" fill="currentColor" viewBox="0 0 20 20">
@@ -876,7 +891,7 @@ if (testCalendar && testCalendar.length > 0) {
                                                                     Featured
                                                                 </span>
                                                             </div>
-                                                        )}
+                                                        ) : ''}
                                                         
                                                         <!-- Event Type Indicator -->
                                                         <div class="absolute bottom-3 right-3">
@@ -893,23 +908,517 @@ if (testCalendar && testCalendar.length > 0) {
                                     </div>
                                 </div>
                             </div>
+                    </div>
+                    ) : (
+                        <div class="text-center">
+                            <a
+                                href="/events"
+                                class="inline-flex items-center px-8 py-4 bg-msu-deep-ocean dark:bg-[#61063B] dark:btn-outline text-white rounded-full font-semibold hover:bg-msu-maroon dark:hover:bg-[#03045e] transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg gap-2"
+                            >
+                                View All Events
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </a>
                         </div>
-                    </div>
-                ) : (
-                    <div class="text-center">
-                        <a
-                            href="/events"
-                            class="inline-flex items-center px-8 py-4 bg-msu-deep-ocean dark:bg-[#61063B] dark:btn-outline text-white rounded-full font-semibold hover:bg-msu-maroon dark:hover:bg-[#03045e] transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg gap-2"
+                    )}
+                </div>
+                
+                <!-- Academic Calendar Button (when no events dropdown) -->
+                {(!allCalendarEvents || allCalendarEvents.length <= 5) ? (
+                    <div class="text-center mt-6">
+                        <button 
+                            id="academicCalendarBtn"
+                            class="group relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#61063B] to-[#61063B] dark:from-[#61063B] dark:to-[#61063B] dark:btn-outline text-white rounded-full font-semibold hover:from-[#7a0a4f] hover:to-[#61063B] dark:hover:from-[#61063B] dark:hover:to-[#03045e] transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg gap-3 overflow-hidden"
                         >
-                            View All Events
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            <svg class="relative z-10 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                             </svg>
-                        </a>
+                            <span class="relative z-10">Academic Calendar AY 2025-2026</span>
+                            <div class="absolute inset-0 bg-gradient-to-r from-[#7a0a4f] to-[#61063B] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </button>
                     </div>
-                )}
+                ) : ''}
             </div>
         </section>
+        
+        <!-- Academic Calendar Modal -->
+        <div id="academicCalendarModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[10000] hidden items-center justify-center p-0 sm:p-2 md:p-4 overflow-y-auto">
+            <div class="bg-white dark:bg-gray-800 rounded-none sm:rounded-lg md:rounded-2xl max-w-7xl w-full h-full sm:h-auto sm:max-h-[95vh] overflow-y-auto shadow-2xl relative my-0 sm:my-4 md:my-8">
+                <button 
+                    id="closeAcademicCalendarModal"
+                    class="fixed sm:absolute top-2 right-2 sm:top-4 sm:right-4 z-10 group bg-[#61063B] hover:bg-[#7a0a4f] text-white rounded-full w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center transition-all duration-200 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#61063B]/50"
+                    aria-label="Close academic calendar"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                
+                <div class="p-3 sm:p-6 md:p-8 lg:p-10 pt-12 sm:pt-6">
+                    <!-- Header -->
+                    <div class="text-center mb-4 sm:mb-6 md:mb-8">
+                        <div class="flex items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-[#61063B] hidden sm:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            <h3 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-[#61063B] dark:text-white px-2">MSU–TCTO Academic Calendar</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-[#61063B] hidden sm:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <div class="w-24 sm:w-32 h-1 sm:h-1.5 bg-gradient-to-r from-[#61063B] via-msu-maroon to-[#61063B] mx-auto rounded-full mb-3 sm:mb-4"></div>
+                        <p class="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-gray-700 dark:text-gray-300">Academic Year 2025–2026</p>
+                    </div>
+                    
+                    <!-- Download and Print Buttons -->
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+                        <button 
+                            id="downloadCalendarBtn"
+                            class="inline-flex items-center justify-center px-4 py-2.5 sm:px-6 sm:py-3 bg-[#61063B] hover:bg-[#7a0a4f] text-white rounded-lg text-sm sm:text-base font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg gap-2 w-full sm:w-auto"
+                        >
+                            <svg class="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                            <span class="whitespace-nowrap">Download as PDF</span>
+                        </button>
+                        <button 
+                            id="printCalendarBtn"
+                            class="inline-flex items-center justify-center px-4 py-2.5 sm:px-6 sm:py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-lg text-sm sm:text-base font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg gap-2 w-full sm:w-auto"
+                        >
+                            <svg class="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                            </svg>
+                            <span class="whitespace-nowrap">Print Calendar</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Calendar Content -->
+                    <div id="academicCalendarContent" class="space-y-4 sm:space-y-6 md:space-y-8">
+                        <!-- First Semester -->
+                        <div class="bg-gradient-to-br from-gray-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 shadow-lg">
+                            <h4 class="text-lg sm:text-xl md:text-2xl font-bold text-[#61063B] dark:text-white mb-3 sm:mb-4 md:mb-6 pb-2 sm:pb-3 border-b-2 border-[#61063B]">First Semester (August – December 2025)</h4>
+                            <div class="overflow-x-auto -mx-3 sm:mx-0">
+                                <div class="inline-block min-w-full align-middle">
+                                    <div class="overflow-hidden">
+                                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700 border-collapse">
+                                            <thead class="bg-[#61063B]">
+                                                <tr>
+                                                    <th class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-left text-xs sm:text-sm font-semibold text-white whitespace-nowrap">No.</th>
+                                                    <th class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-left text-xs sm:text-sm font-semibold text-white">Academic Activity</th>
+                                                    <th class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-left text-xs sm:text-sm font-semibold text-white whitespace-nowrap">Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">1</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">First Day of Service of Faculty Members</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Monday, July 28, 2025</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">2a</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Enrollment – New Students</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">July 28 – August 1, 2025</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">2b</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Enrollment – Transferees / 2nd Degree</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">July 28 – August 1, 2025</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">2c</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Enrollment – Old Students</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">July 28 – August 1, 2025</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">3</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">MSU-TCTO Foundation Day</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Sunday, August 4, 2025</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">4</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Last Day for Changing Academic Status</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Monday, August 11, 2025</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">5a</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Submission of Completion Grades (1st Sem 2023–2024 & Summer 2024)</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Monday, August 11, 2025</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">6</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Start of Classes</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Monday, August 11, 2025</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">7</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Late Registration with Fines</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">August 11 – August 15, 2025</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">8</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Change/Add Matriculation & Validation</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">August 11 – August 15, 2025</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">9</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">General Convocation & College Orientation</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Monday, August 18, 2025</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">10</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">First Preliminary Examination</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">September 17 – September 19, 2025</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">11</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Pre-Council Meeting</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Friday, September 19, 2025</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">12</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Period of Dropping Subjects</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">September 15 – October 9, 2025</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">13</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Campus Academic Council Meeting</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Monday, October 6, 2025</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">14</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">MSU System Council Meeting</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Tentative</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">15</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Second Preliminary Examination</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">October 22 – October 24, 2025</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">16</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Last Day for Filing Leave of Absence</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">—</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">17</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Graduation / Submission of Other Grad Requirements</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Friday, November 28, 2025</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">18</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">End of Classes</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Friday, November 28, 2025</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">19</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Integration Period</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">December 1 – December 5, 2025</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">20</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Final Examinations</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">December 8 – December 12, 2025</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">21</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Last Day of Submission of Grades (Graduating)</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Tuesday, December 23, 2025</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">21</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Last Day of Submission of Grades (Non-Graduating)</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Wednesday, December 24, 2025</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">23</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Christmas Vacation / Break</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">December 22, 2025 – January 2, 2026</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Second Semester -->
+                        <div class="bg-gradient-to-br from-gray-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 shadow-lg">
+                            <h4 class="text-lg sm:text-xl md:text-2xl font-bold text-[#61063B] dark:text-white mb-3 sm:mb-4 md:mb-6 pb-2 sm:pb-3 border-b-2 border-[#61063B]">Second Semester (January – May 2026)</h4>
+                            <div class="overflow-x-auto -mx-3 sm:mx-0">
+                                <div class="inline-block min-w-full align-middle">
+                                    <div class="overflow-hidden">
+                                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700 border-collapse">
+                                            <thead class="bg-[#61063B]">
+                                                <tr>
+                                                    <th class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-left text-xs sm:text-sm font-semibold text-white whitespace-nowrap">No.</th>
+                                                    <th class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-left text-xs sm:text-sm font-semibold text-white">Academic Activity</th>
+                                                    <th class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-left text-xs sm:text-sm font-semibold text-white whitespace-nowrap">Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">1</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">First Day of Service of Faculty Members</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Monday, January 5, 2026</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">2a</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Enrollment – New Students</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">January 5 – January 9, 2026</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">2b</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Enrollment – Transferees / 2nd Degree</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">January 5 – January 9, 2026</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">2c</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Enrollment – Old Students</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">January 5 – January 9, 2026</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">4</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Last Day for Changing Academic Status</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Friday, January 16, 2026</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">5b</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Submission of Completion Grades (2nd Sem 2023–2024)</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Friday, January 16, 2026</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">6</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Start of Classes</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Monday, January 12, 2026</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">7</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Late Registration with Fines</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">January 12 – January 16, 2026</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">8</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Change/Add Matriculation & Validation</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">January 12 – January 16, 2026</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">10</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">First Preliminary Examination</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">February 18 – February 20, 2026</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">11</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Pre-Council Meeting</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Friday, February 17, 2026</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">12</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Period of Dropping Subjects</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">February 6 – March 6, 2026</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">13</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Campus Academic Council Meeting</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Thursday, March 12, 2026</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">14</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">MSU System Council Meeting</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Tentative</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">15</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Second Preliminary Examination</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">April 8 – April 10, 2026</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">16</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Last Day for Filing Leave of Absence</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Monday, April 13, 2026</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">17</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Graduation / Submission of Other Grad Requirements</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Friday, May 8, 2026</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">18</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">End of Classes</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Friday, May 15, 2026</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">19</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Integration Period</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">May 11 – May 15, 2026</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">20</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Final Examinations</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">May 18 – May 22, 2026</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">21</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Last Day of Submission of Grades (Graduating)</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Monday, May 25, 2026</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">21</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Last Day of Submission of Grades (Non-Graduating)</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Friday, May 29, 2026</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Summer Term -->
+                        <div class="bg-gradient-to-br from-gray-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 shadow-lg">
+                            <h4 class="text-lg sm:text-xl md:text-2xl font-bold text-[#61063B] dark:text-white mb-3 sm:mb-4 md:mb-6 pb-2 sm:pb-3 border-b-2 border-[#61063B]">Summer Term 2026 (June – July)</h4>
+                            <div class="overflow-x-auto -mx-3 sm:mx-0">
+                                <div class="inline-block min-w-full align-middle">
+                                    <div class="overflow-hidden">
+                                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700 border-collapse">
+                                            <thead class="bg-[#61063B]">
+                                                <tr>
+                                                    <th class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-left text-xs sm:text-sm font-semibold text-white">Academic Activity</th>
+                                                    <th class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-left text-xs sm:text-sm font-semibold text-white whitespace-nowrap">Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Enrollment (Old Students)</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">June 3 – June 5, 2026</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Start of Classes</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Monday, June 8, 2026</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Late Registration with Fines</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Friday, June 12, 2026</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">End of Classes</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Friday, July 24, 2026</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Final Examinations</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">July 27 – July 28, 2026</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Graduation (Tentative)</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">June or July 2026</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Holidays 2026 -->
+                        <div class="bg-gradient-to-br from-gray-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 shadow-lg">
+                            <h4 class="text-lg sm:text-xl md:text-2xl font-bold text-[#61063B] dark:text-white mb-3 sm:mb-4 md:mb-6 pb-2 sm:pb-3 border-b-2 border-[#61063B]">Holidays – 2026</h4>
+                            <div class="overflow-x-auto -mx-3 sm:mx-0">
+                                <div class="inline-block min-w-full align-middle">
+                                    <div class="overflow-hidden">
+                                        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700 border-collapse">
+                                            <thead class="bg-[#61063B]">
+                                                <tr>
+                                                    <th class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-left text-xs sm:text-sm font-semibold text-white whitespace-nowrap">Date</th>
+                                                    <th class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-left text-xs sm:text-sm font-semibold text-white whitespace-nowrap">Day</th>
+                                                    <th class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-left text-xs sm:text-sm font-semibold text-white">Holiday / Observance</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">January 1, 2026</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Thursday</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">New Year's Day</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">January 29, 2026</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Thursday</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Chinese New Year (Tentative)</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">February 25, 2026</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Wednesday</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">EDSA Revolution Anniversary</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">March 1, 2026</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Sunday</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Bud Bongao Anniversary</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">March 22, 2026</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Sunday</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Isra Wal Mi'raj (Tentative)</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">April 2, 2026</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Thursday</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Eidul-Fitr (Tentative)</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">April 2, 2026</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Thursday</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Maundy Thursday</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">April 3, 2026</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Friday</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Good Friday</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">May 1, 2026</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Friday</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Labor Day</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">June 12, 2026</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Friday</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Independence Day</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">June 17, 2026</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Wednesday</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Amunjadid (Tentative)</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">June 30, 2026</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Tuesday</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Eidul-Adha (Tentative)</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">July 1, 2026</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Wednesday</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Bongao Day</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">July 30, 2026</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Thursday</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Assura (Tentative)</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">August 26, 2026</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Wednesday</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Mauluddin Nabi (Tentative)</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Campus Life Section -->
         <section class="relative bg-gray-50 dark:bg-gray-800 py-20 overflow-hidden">
@@ -1049,348 +1558,8 @@ if (testCalendar && testCalendar.length > 0) {
 			</div>
 		  </section>
 
-        <!-- Office Service Evaluation with Global Search -->
-        <!-- <section id="service" class="bg-gradient-to-b from-gray-50 to-white py-16 md:py-24">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl"> -->
-                <!-- Section Header -->
-                <!-- <div class="text-center mb-16">
-                    <span class="inline-block px-4 py-2 bg-msu-main-color/10 text-msu-main-color text-sm font-semibold rounded-full mb-4">
-                        Service Feedback
-                    </span>
-                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                        Office Service <span class="text-msu-main-color">Evaluation</span>
-                    </h2>
-                    <div class="w-24 h-1.5 bg-gradient-to-r from-msu-gold to-msu-maroon mx-auto rounded-full"></div>
-                    <p class="text-lg text-gray-600 mt-6 max-w-2xl mx-auto">
-                        Your feedback helps us maintain excellence in university services
-                    </p>
-                </div> -->
+        <!-- Office Service Evaluation block removed -->
 
-                <!-- Evaluation Card -->
-                <!-- <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
-                    <!-- Card Header -->
-                    <!-- <div class="bg-gradient-to-r from-msu-main-color to-msu-main-color px-8 py-6">
-                        <div class="flex items-center">
-                            <div class="bg-white/20 p-2 rounded-lg mr-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                                </svg>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-semibold text-white">Service Quality Assessment</h3>
-                                <p class="text-white">Please complete all required fields</p>
-                            </div>
-                        </div>
-                    </div> -->
-
-                    <!-- Form Content -->
-                    <!-- <div class="p-6 sm:p-8 md:p-10">
-                        <form 
-                            action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSfXYmBoB1ZQ9VLVOWq11YODOTFQQfiZGanv7Fvv2EcpO8qq9g/formResponse" 
-                            method="POST" 
-                            target="hiddenFrame"
-                            id="evaluationForm" 
-                            class="space-y-10"
-                            novalidate
-                        > -->
-                            <!-- Hidden iframe for form submission -->
-                            <!-- <iframe name="hiddenFrame" class="hidden"></iframe> -->
-                            
-                            <!-- Office Information Section with Global Search -->
-                            <!-- <div class="space-y-8">
-                                <div class="flex items-start">
-                                    <div class="hidden sm:flex flex-shrink-0 items-center justify-center h-12 w-12 rounded-lg bg-msu-main-color/10 text-msu-main-color mr-6">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                                        </svg>
-                                    </div>
-                                    <div class="flex-1">
-                                        <h4 class="text-lg font-semibold text-gray-900 mb-6 border-b pb-2">Office Information</h4> -->
-                                        
-                                        <!-- Global Search Component -->
-                                        <!-- <div class="mb-8">
-                                            <label for="globalSearch" class="block text-sm font-medium text-gray-700 mb-2">
-                                                Find Office or Service
-                                            </label>
-                                            <div class="relative rounded-lg shadow-sm">
-                                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                                    <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                                    </svg>
-                                                </div>
-                                                <input
-                                                    type="text"
-                                                    id="globalSearch"
-                                                    class="block w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-msu-main-color/50 focus:border-msu-main-color transition-all"
-                                                    placeholder="Search all offices and services..."
-                                                    autocomplete="off"
-                                                />
-                                                <div class="absolute inset-y-0 right-0 flex items-center pr-3">
-                                                    <span class="text-gray-500 text-sm hidden sm:inline">Press ⌘K</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="grid md:grid-cols-2 gap-6"> -->
-                                            <!-- Office Selection -->
-                                            <!-- <div class="form-group">
-                                                <label for="office" class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-                                                    Office to Evaluate
-                                                    <span class="text-msu-maroon ml-1">*</span>
-                                                </label>
-                                                <div class="mt-1 relative">
-                                                    <select 
-                                                        id="office" 
-                                                        name="entry.1924231474" 
-                                                        required
-                                                        class="office-select block w-full pl-4 pr-10 py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-msu-main-color/50 focus:border-msu-main-color transition-all hover:border-gray-400"
-                                                    >
-                                                        <option value="" disabled selected>Select an office</option> -->
-                                                        <!-- Administrative Offices -->
-                                                        <!-- <optgroup label="Administrative Offices" class="text-gray-900">
-                                                            <option value="BUDGET OFFICE" class="py-2">Budget Office</option>
-                                                            <option value="INTERNAL CONTROL AND AUDIT UNIT">Internal Control and Audit Unit</option>
-                                                            <option value="ACCOUNTING OFFICE">Accounting Office</option>
-                                                            <option value="CASHIERING OFFICE">Cashiering Office</option>
-                                                            <option value="OFFICE OF THE CHANCELLOR">Office of the Chancellor</option>
-                                                            <option value="GENERAL SERVICES OFFICE">General Services Office</option>
-                                                            <option value="OFFICE OF MEDICAL AND WELLNESS SERVICES">Office of Medical and Wellness Services</option>
-                                                            <option value="MANILA INFORMATION AND LIAISON OFFICE">Manila Information and Liaison Office</option>
-                                                            <option value="OFFICE OF THE FINANCE DIR">Office of the Finance Director</option>
-                                                            <option value="OFFICE OF THE VICE CHANCELLOR FOR ADMINISTRATION AND FINANCE">Vice Chancellor for Administration and Finance</option>
-                                                            <option value="HUMAN RESOURCE DEVELOPMENT OFFICE">Human Resource Development Office</option>
-                                                            <option value="PHYSICAL PLANT OFFICE">Physical Plant Office</option>
-                                                            <option value="PROCUREMENT OFFICE">Procurement Office</option>
-                                                            <option value="SECURITY FORCE">Security Force</option>
-                                                            <option value="SUPPLY AND PROPERTY OFFICE">Supply and Property Office</option>
-                                                        </optgroup> -->
-                                                        
-                                                        <!-- Academic Offices -->
-                                                        <!-- <optgroup label="Academic Offices">
-                                                            <option value="ADMISSION OFFICE">Admission Office</option>
-                                                            <option value="ALUMNI AND CAREER CENTER OFFICE">Alumni and Career Center Office</option>
-                                                            <option value="COLLEGE LIBRARY">College Library</option>
-                                                            <option value="COLLEGE OF EDUCATION">College of Education</option>
-                                                            <option value="INSTITUTE OF INFORMATION AND COMMUNICATIONS TECHNOLOGY">Institute of ICT</option>
-                                                            <option value="GRADUATE SCHOOL">Graduate School</option>
-                                                            <option value="COLLEGE OF FISHERIES">College of Fisheries</option>
-                                                            <option value="COLLEGE OF ISLAMIC AND ARABIC STUDIES">College of Islamic and Arabic Studies</option>
-                                                            <option value="OFFICE OF THE REGISTRAR">Office of the Registrar</option>
-                                                        </optgroup>
-                                                         -->
-                                                        <!-- Extension & Research -->
-                                                        <!-- <optgroup label="Extension & Research">
-                                                            <option value="EXTENSION SERVICES">Extension Services</option>
-                                                            <option value="RESEARCH SERVICES">Research Services</option>
-                                                            <option value="CENTER FOR OCEAN STUDIES">Center for Ocean Studies</option>
-                                                            <option value="OCEANOGRAPHY AND FISH TECHNOLOGY CENTER">Oceanography and Fish Technology Center</option>
-                                                            <option value="OFFICE OF THE VICE CHANCELLOR FOR RESEARCH INNOVATION DEVELOPMENT AND EXTENSION">Vice Chancellor for Research, Innovation, Development and Extension</option>
-                                                        </optgroup>
-                                                         -->
-                                                        <!-- Other Units -->
-                                                        <!-- <optgroup label="Other Units">
-                                                            <option value="CAFETERIA">Cafeteria</option>
-                                                            <option value="GUIDANCE AND COUNSELING OFFICE">Guidance and Counseling Office</option>
-                                                            <option value="QUALITY ASSURANCE & ACCREDITATION OFFICE">Quality Assurance & Accreditation Office</option>
-                                                        </optgroup>
-                                                    </select>
-                                                    <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                                                        <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                                                        </svg>
-                                                    </div>
-                                                </div>
-                                                <p class="mt-1 text-sm text-red-600 hidden" id="office-error">Please select an office</p>
-                                            </div>
-                                             -->
-                                            <!-- Status Selection -->
-                                            <!-- <div class="form-group">
-                                                <label for="status" class="block text-sm font-medium text-gray-700 mb-2 flex items-center">
-                                                    Your Status
-                                                    <span class="text-msu-maroon ml-1">*</span>
-                                                </label>
-                                                <div class="mt-1 relative">
-                                                    <select 
-                                                        id="status" 
-                                                        name="entry.724584061" 
-                                                        required
-                                                        class="block w-full pl-4 pr-10 py-3 text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-msu-main-color/50 focus:border-msu-main-color transition-all hover:border-gray-400"
-                                                    >
-                                                        <option value="" disabled selected>Select your status</option>
-                                                        <option value="Permanent">Permanent</option>
-                                                        <option value="Temporary">Temporary</option>
-                                                        <option value="Contractual">Contractual</option>
-                                                        <option value="Contract of Service">Contract of Service</option>
-                                                        <option value="Casual">Casual</option>
-                                                        <option value="Regular">Regular</option>
-                                                        <option value="Provisional">Provisional</option>
-                                                        <option value="Othes">Other</option>
-                                                    </select>
-                                                    <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                                                        <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                                                        </svg>
-                                                    </div>
-                                                </div>
-                                                <p class="mt-1 text-sm text-red-600 hidden" id="status-error">Please select your status</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
-
-                            <!-- Performance Evaluation Section -->
-                            <!-- <div class="space-y-8">
-                                <div class="flex items-start">
-                                    <div class="hidden sm:flex flex-shrink-0 items-center justify-center h-12 w-12 rounded-lg bg-msu-main-color/10 text-msu-main-color mr-6">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-                                        </svg>
-                                    </div>
-                                    <div class="flex-1">
-                                        <h4 class="text-lg font-semibold text-gray-900 mb-6 border-b pb-2">Service Ratings</h4>
-                                        
-                                        <div class="space-y-8">
-                                            <!-- Rating Items -->
-                                            <!-- {[
-                                                {
-                                                    id: 'job_knowledge',
-                                                    title: 'Job Knowledge',
-                                                    description: 'Understanding and application of job requirements',
-                                                    field: 'entry.1195783547'
-                                                },
-                                                {
-                                                    id: 'work_quality',
-                                                    title: 'Service Quality',
-                                                    description: 'Accuracy and effectiveness of service provided',
-                                                    field: 'entry.229158245'
-                                                },
-                                                {
-                                                    id: 'responsiveness',
-                                                    title: 'Responsiveness',
-                                                    description: 'Timeliness in addressing requests and concerns',
-                                                    field: 'entry.1473816641'
-                                                },
-                                                {
-                                                    id: 'courtesy',
-                                                    title: 'Courtesy',
-                                                    description: 'Professionalism and politeness of staff',
-                                                    field: 'entry.2058011824'
-                                                },
-                                                {
-                                                    id: 'overall',
-                                                    title: 'Overall Satisfaction',
-                                                    description: 'Your overall experience with this office',
-                                                    field: 'entry.28013097'
-                                                }
-                                            ].map((item) => (
-                                                <div class="form-group">
-                                                    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-3">
-                                                        <label class="text-sm font-medium text-gray-700 flex items-center">
-                                                            {item.title}
-                                                            <span class="text-msu-maroon ml-1">*</span>
-                                                        </label>
-                                                        <span class="text-xs text-gray-500 mt-1 sm:mt-0">
-                                                            {item.description}
-                                                        </span>
-                                                    </div>
-                                                    
-                                                    <div class="mt-4">
-                                                        <div class="flex items-center justify-between">
-                                                            {[1, 2, 3, 4, 5].map((rating) => (
-                                                                <div class="flex flex-col items-center">
-                                                                    <input
-                                                                        type="radio" 
-                                                                        id={`${item.id}${rating}`}
-                                                                        name={item.field}
-                                                                        value={rating}
-                                                                        required
-                                                                        class="h-5 w-5 text-msu-main-color focus:ring-msu-main-color border-gray-300"
-                                                                    />
-                                                                    <label for={`${item.id}${rating}`} class="mt-2 text-xs font-medium text-gray-500">
-                                                                        {
-                                                                        rating === 1 ? 'Very Poor' : 
-                                                                        rating === 2 ? 'Poor' : 
-                                                                        rating === 3 ? 'Neutral' : 
-                                                                        rating === 4 ? 'Good' : 
-                                                                        rating === 5 ? 'Great' : ''}
-                                                                    </label>
-                                                                </div>
-                                                            ))}
-                                                        </div>
-                                                        <p class="mt-1 text-sm text-red-600 hidden" id={`${item.id}-error`}>Please select a rating</p>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --> 
-
-                            <!-- Comments Section -->
-                            <!-- <div class="space-y-8">
-                                <div class="flex items-start">
-                                    <div class="hidden sm:flex flex-shrink-0 items-center justify-center h-12 w-12 rounded-lg bg-msu-main-color/10 text-msu-main-color mr-6">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                                        </svg>
-                                    </div>
-                                    <div class="flex-1">
-                                        <h4 class="text-lg font-semibold text-gray-900 mb-6 border-b pb-2">Additional Feedback</h4>
-                                        
-                                        <div class="form-group">
-                                            <label for="comments" class="block text-sm font-medium text-gray-700 mb-2">
-                                                Specific feedback or suggestions for improvement
-                                            </label>
-                                            <textarea 
-                                                id="comments" 
-                                                name="entry.1589457788" 
-                                                rows="4"
-                                                placeholder="Please share any specific experiences or suggestions that could help us improve..."
-                                                class="block w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-msu-main-color/50 focus:border-msu-main-color transition-all hover:border-gray-400"
-                                            ></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
-
-                            <!-- Form Footer -->
-                            <!-- <div class="pt-6">
-                                <div class="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
-                                    <p class="text-sm text-gray-500">
-                                        All responses are confidential and will be used for service improvement.
-                                    </p>
-                                    <button
-                                        type="submit"
-                                        id="submitBtn"
-                                        class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-msu-main-color to-msu-deep-ocean hover:from-msu-main-color-dark hover:to-msu-maroon-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-msu-main-color transition-all transform hover:-translate-y-0.5 hover:shadow-md disabled:opacity-70 disabled:cursor-not-allowed"
-                                    >
-                                        <span id="submitText">Submit Evaluation</span>
-                                        <svg id="submitSpinner" class="hidden h-5 w-5 ml-2 animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                        </svg>
-                                        <svg id="submitArrow" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 -mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div> -->
-
-
-
-               
-
-        </section>
-
-
-        
-           
-   
         <!-- Scroll to Top Button -->
         <button class="scroll-to-top" aria-label="Scroll to top">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -1514,11 +1683,6 @@ window.addEventListener('load', function() {
         
 
     </main>
-</Layout>
-
-<script src="../js/animate.js" ></script>
-<script src="../js/loadinganim.js" ></script>
-<script src="../js/smoothscroll.js" ></script>
 
 <!-- Enhanced Enrollment Process Interactive Animations -->
 <script>
@@ -1801,8 +1965,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Close dropdown when clicking outside
         document.addEventListener('click', function(e) {
-            const target = e.target as Node;
-            if (!dropdownBtn.contains(target) && !dropdown.contains(target) && !backdrop.contains(target)) {
+            const target = e.target as Node | null;
+            if (target && !dropdownBtn.contains(target) && !dropdown.contains(target) && !backdrop.contains(target)) {
                 if (isOpen) {
                     closeModal();
                 }
@@ -1816,11 +1980,313 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+    
+    // Academic Calendar Modal
+    const academicCalendarBtn = document.getElementById('academicCalendarBtn');
+    const academicCalendarModal = document.getElementById('academicCalendarModal');
+    const closeAcademicCalendarModal = document.getElementById('closeAcademicCalendarModal');
+    const downloadCalendarBtn = document.getElementById('downloadCalendarBtn');
+    const printCalendarBtn = document.getElementById('printCalendarBtn');
+    
+    if (academicCalendarBtn && academicCalendarModal && closeAcademicCalendarModal) {
+        function openAcademicCalendarModal() {
+            academicCalendarModal.classList.remove('hidden');
+            academicCalendarModal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeAcademicCalendarModalFunc() {
+            academicCalendarModal.classList.add('hidden');
+            academicCalendarModal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+        
+        academicCalendarBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            openAcademicCalendarModal();
+        });
+        
+        closeAcademicCalendarModal.addEventListener('click', function() {
+            closeAcademicCalendarModalFunc();
+        });
+        
+        // Close modal when clicking outside
+        academicCalendarModal.addEventListener('click', function(e) {
+            if (e.target === academicCalendarModal) {
+                closeAcademicCalendarModalFunc();
+            }
+        });
+        
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !academicCalendarModal.classList.contains('hidden')) {
+                closeAcademicCalendarModalFunc();
+            }
+        });
+        
+        // Download Calendar as PDF
+        if (downloadCalendarBtn) {
+            downloadCalendarBtn.addEventListener('click', function() {
+                const calendarContent = document.getElementById('academicCalendarContent');
+                if (!calendarContent) return;
+                
+                // Create a new window for printing
+                const printWindow = window.open('', '_blank');
+                if (!printWindow) {
+                    alert('Please allow pop-ups to download the calendar');
+                    return;
+                }
+                
+                printWindow.document.write(`
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>MSU-TCTO Academic Calendar AY 2025-2026</title>
+                        <style>
+                            @media print {
+                                @page {
+                                    margin: 1cm;
+                                    size: A4;
+                                }
+                            }
+                            body {
+                                font-family: Arial, sans-serif;
+                                margin: 20px;
+                                color: #333;
+                            }
+                            .header {
+                                text-align: center;
+                                margin-bottom: 30px;
+                                border-bottom: 3px solid #61063B;
+                                padding-bottom: 20px;
+                            }
+                            .header h1 {
+                                color: #61063B;
+                                font-size: 28px;
+                                margin: 10px 0;
+                            }
+                            .header h2 {
+                                color: #333;
+                                font-size: 20px;
+                                margin: 5px 0;
+                            }
+                            .semester-section {
+                                margin-bottom: 40px;
+                                page-break-inside: avoid;
+                            }
+                            .semester-title {
+                                background-color: #61063B;
+                                color: white;
+                                padding: 15px;
+                                font-size: 20px;
+                                font-weight: bold;
+                                margin-bottom: 15px;
+                            }
+                            table {
+                                width: 100%;
+                                border-collapse: collapse;
+                                margin-bottom: 20px;
+                            }
+                            th {
+                                background-color: #61063B;
+                                color: white;
+                                padding: 12px;
+                                text-align: left;
+                                border: 1px solid #333;
+                                font-weight: bold;
+                            }
+                            td {
+                                padding: 10px;
+                                border: 1px solid #333;
+                            }
+                            tr:nth-child(even) {
+                                background-color: #f5f5f5;
+                            }
+                            .footer {
+                                text-align: center;
+                                margin-top: 30px;
+                                padding-top: 20px;
+                                border-top: 2px solid #61063B;
+                                font-size: 12px;
+                                color: #666;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="header">
+                            <h1>MSU–TCTO Academic Calendar</h1>
+                            <h2>Academic Year 2025–2026</h2>
+                        </div>
+                        ${calendarContent.innerHTML}
+                        <div class="footer">
+                            <p>MSU-Tawi-Tawi College of Technology and Oceanography</p>
+                            <p>Generated on ${new Date().toLocaleDateString()}</p>
+                        </div>
+                    </body>
+                    </html>
+                `);
+                printWindow.document.close();
+                printWindow.focus();
+                printWindow.print();
+            });
+        }
+        
+        // Print Calendar
+        if (printCalendarBtn) {
+            printCalendarBtn.addEventListener('click', function() {
+                const calendarContent = document.getElementById('academicCalendarContent');
+                if (!calendarContent) return;
+                
+                // Create a new window for printing
+                const printWindow = window.open('', '_blank');
+                if (!printWindow) {
+                    alert('Please allow pop-ups to print the calendar');
+                    return;
+                }
+                
+                printWindow.document.write(`
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>MSU-TCTO Academic Calendar AY 2025-2026</title>
+                        <style>
+                            @media print {
+                                @page {
+                                    margin: 1cm;
+                                    size: A4;
+                                }
+                            }
+                            body {
+                                font-family: Arial, sans-serif;
+                                margin: 20px;
+                                color: #333;
+                            }
+                            .header {
+                                text-align: center;
+                                margin-bottom: 30px;
+                                border-bottom: 3px solid #61063B;
+                                padding-bottom: 20px;
+                            }
+                            .header h1 {
+                                color: #61063B;
+                                font-size: 28px;
+                                margin: 10px 0;
+                            }
+                            .header h2 {
+                                color: #333;
+                                font-size: 20px;
+                                margin: 5px 0;
+                            }
+                            .semester-section {
+                                margin-bottom: 40px;
+                                page-break-inside: avoid;
+                            }
+                            .semester-title {
+                                background-color: #61063B;
+                                color: white;
+                                padding: 15px;
+                                font-size: 20px;
+                                font-weight: bold;
+                                margin-bottom: 15px;
+                            }
+                            table {
+                                width: 100%;
+                                border-collapse: collapse;
+                                margin-bottom: 20px;
+                            }
+                            th {
+                                background-color: #61063B;
+                                color: white;
+                                padding: 12px;
+                                text-align: left;
+                                border: 1px solid #333;
+                                font-weight: bold;
+                            }
+                            td {
+                                padding: 10px;
+                                border: 1px solid #333;
+                            }
+                            tr:nth-child(even) {
+                                background-color: #f5f5f5;
+                            }
+                            .footer {
+                                text-align: center;
+                                margin-top: 30px;
+                                padding-top: 20px;
+                                border-top: 2px solid #61063B;
+                                font-size: 12px;
+                                color: #666;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="header">
+                            <h1>MSU–TCTO Academic Calendar</h1>
+                            <h2>Academic Year 2025–2026</h2>
+                        </div>
+                        ${calendarContent.innerHTML}
+                        <div class="footer">
+                            <p>MSU-Tawi-Tawi College of Technology and Oceanography</p>
+                            <p>Generated on ${new Date().toLocaleDateString()}</p>
+                        </div>
+                    </body>
+                    </html>
+                `);
+                printWindow.document.close();
+                printWindow.focus();
+                printWindow.print();
+            });
+        }
+    }
 });
 </script>
 
 <!-- Custom Scrollbar Styles -->
 <style>
+/* iOS Safari viewport fix for modal */
+@supports (-webkit-touch-callout: none) {
+    #academicCalendarModal {
+        position: fixed;
+        height: 100vh;
+        height: -webkit-fill-available;
+    }
+    
+    #academicCalendarModal > div {
+        max-height: 100vh;
+        max-height: -webkit-fill-available;
+    }
+}
+
+/* Mobile responsive improvements for academic calendar modal */
+@media (max-width: 640px) {
+    #academicCalendarModal {
+        padding: 0;
+    }
+    
+    #academicCalendarModal > div {
+        border-radius: 0;
+        margin: 0;
+        height: 100vh;
+        max-height: 100vh;
+    }
+    
+    /* Better touch targets on mobile */
+    #closeAcademicCalendarModal {
+        top: 8px;
+        right: 8px;
+        width: 36px;
+        height: 36px;
+    }
+    
+    /* Prevent text size adjustment on iOS */
+    #academicCalendarModal input,
+    #academicCalendarModal select,
+    #academicCalendarModal textarea,
+    #academicCalendarModal button {
+        font-size: 16px !important;
+    }
+}
+
 /* Dark mode text styling */
 .dark .text-outline {
     color: white !important;
@@ -2221,3 +2687,4 @@ svg:hover ellipse[fill*="tubeGradient"] {
 }
 </style>
 
+</Layout>
