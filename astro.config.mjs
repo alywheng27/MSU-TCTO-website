@@ -22,25 +22,30 @@ export default defineConfig({
   adapter: adapter,
   vite: {
     build: {
-      // Disable source maps in production to hide file structure completely
-      sourcemap: process.env.NODE_ENV === 'production' ? false : 'hidden',
-      // Minify code to make it harder to read and reverse engineer
+      // Completely disable source maps to hide file structure
+      sourcemap: false,
+      // Minify code aggressively to make it harder to read
       minify: 'esbuild',
+      // Increase compression
+      cssMinify: true,
       rollupOptions: {
         output: {
-          // Exclude source content from source maps (only line mappings)
-          sourcemapExcludeSources: true,
-          // Obfuscate API paths in source maps when they do appear
-          sourcemapPathTransform: (relativeSourcePath) => {
-            // Hide API folder structure - replace with generic obfuscated path
-            if (relativeSourcePath && (relativeSourcePath.includes('/api/') || relativeSourcePath.includes('\\api\\'))) {
-              // Return obfuscated path instead of actual API path
-              const fileName = relativeSourcePath.split('/').pop() || relativeSourcePath.split('\\').pop();
-              return `internal://[hidden]/${fileName}`;
-            }
-            return relativeSourcePath;
-          }
+          // Don't include source maps at all
+          sourcemap: false,
+          // Obfuscate file names in output
+          entryFileNames: 'assets/[hash].js',
+          chunkFileNames: 'assets/[hash].js',
+          assetFileNames: 'assets/[hash].[ext]'
         }
+      }
+    },
+    // Disable source maps in dev server too
+    server: {
+      sourcemapIgnoreList: (sourcePath) => {
+        // Hide all API routes from source maps
+        return sourcePath.includes('/api/') || 
+               sourcePath.includes('\\api\\') ||
+               sourcePath.includes('pages/api');
       }
     }
   }
