@@ -10,6 +10,8 @@
  */
 
 import sharp from 'sharp';
+import { readFile } from 'fs/promises';
+import { join } from 'path';
 
 /**
  * The official MSU-TCTO logo image path
@@ -132,9 +134,9 @@ export async function GET({ request }) {
     // Enhanced DevTools detection:
     // 1. No referer (direct navigation from DevTools)
     // 2. Referer is the same as request URL (DevTools inspection)
-    // 3. Missing X-Requested-With header (normal page loads include it via fetch)
-    // 4. Accept header is just image/* (DevTools image inspection)
-    // 5. Direct URL access patterns
+    // 3. Accept header is just image/* (DevTools image inspection)
+    // 4. Direct URL access patterns
+    // Note: Regular <img> tags don't send X-Requested-With, so we don't require it
     const hasRequestedWith = request.headers.get('x-requested-with') === 'XMLHttpRequest';
     const isImageOnlyRequest = accept.includes('image/') && !accept.includes('text/html');
     const isDirectNavigation = !referer || 
@@ -144,9 +146,12 @@ export async function GET({ request }) {
                               url.searchParams.has('devtools') ||
                               url.searchParams.has('inspect');
     
-    // DevTools inspection: missing X-Requested-With AND (no referer OR image-only request)
+    // DevTools inspection: direct navigation with suspicious patterns
+    // Regular <img> tags are allowed (they have referer but no X-Requested-With)
     const isDevToolsInspection = isDirectNavigation && 
-                                 (!hasRequestedWith || isImageOnlyRequest);
+                                 (isImageOnlyRequest || 
+                                  referer.includes('chrome-devtools://') ||
+                                  referer.includes('devtools://'));
     
     // Check if this is a favicon request
     const isFaviconRequest = url.pathname.includes('favicon') || 
@@ -185,17 +190,23 @@ export async function GET({ request }) {
       !userAgent.includes('Postman') &&
       !userAgent.includes('Insomnia');
     
-    // Allow if: valid auth token, valid token, development mode, or browser request with proper referer AND X-Requested-With
+    // Allow if: valid auth token, valid token, development mode, or browser request with proper referer
     // Must have referer from the same domain for normal page loads
-    // Must have X-Requested-With header (set by our secure fetch)
+    // Note: Regular <img> tags don't send X-Requested-With, so we allow requests with valid referer
     const hasValidReferer = referer && 
                            (referer.includes(url.hostname) || 
                             referer.includes('msutcto.edu.ph') ||
                             referer.includes('vercel.app') ||
-                            referer.includes('netlify.app'));
+                            referer.includes('netlify.app') ||
+                            referer.includes('localhost'));
     
-    // 🔐 AUTH-PROTECTED: Require auth token OR valid session
-    const allowRequest = validAuthToken || validToken || isDevelopment || (isBrowserRequest && hasValidReferer && hasRequestedWith) || isFaviconRequest;
+    // 🔐 AUTH-PROTECTED: Require auth token OR valid session OR browser request with valid referer
+    // Allow regular <img> tag requests (they have referer but no X-Requested-With)
+    const allowRequest = validAuthToken || 
+                        validToken || 
+                        isDevelopment || 
+                        (isBrowserRequest && hasValidReferer) || 
+                        isFaviconRequest;
     
     if (!allowRequest) {
       // Return blank image instead of error message
@@ -212,19 +223,81 @@ export async function GET({ request }) {
     }
     
     // Get the actual image from static path
-    // In production, this should be in a protected assets folder
-    const imagePath = LOGO_IMAGE_PATH.replace(/ /g, '%20'); // URL encode spaces
-    const imageUrl = new URL(imagePath, request.url);
+    // Try multiple methods to load the image for compatibility with both Netlify and Vercel
+    let imageBuffer = null;
     
-    // Fetch the image from the static path
     try {
-      const response = await fetch(imageUrl.href);
-      
-      if (response.ok) {
-        const imageBuffer = await response.arrayBuffer();
+      // Method 1: Try file system access (works in some serverless environments)
+      // In Astro with Netlify adapter, static files are copied to dist during build
+      try {
+        // Try multiple possible paths for the image
+        const possiblePaths = [
+          join(process.cwd(), 'public', LOGO_IMAGE_PATH),
+          join(process.cwd(), 'dist', LOGO_IMAGE_PATH),
+          join(process.cwd(), '.netlify', 'functions-internal', 'public', LOGO_IMAGE_PATH),
+        ];
         
+        for (const publicPath of possiblePaths) {
+          try {
+            imageBuffer = await readFile(publicPath);
+            break; // Success, exit loop
+          } catch (pathError) {
+            // Try next path
+            continue;
+          }
+        }
+        
+        if (!imageBuffer) {
+          throw new Error('File system access failed for all paths');
+        }
+      } catch (fsError) {
+        // Method 2: Try fetch from static path using the site URL
+        // This works better in serverless environments like Netlify
+        const imagePath = LOGO_IMAGE_PATH.replace(/ /g, '%20'); // URL encode spaces
+        
+        // Use site URL from environment or construct from request
+        // Avoid fetching from same origin to prevent loops
+        const siteUrl = process.env.SITE_URL || 
+                       process.env.URL || 
+                       process.env.DEPLOY_PRIME_URL ||
+                       'https://msutcto.edu.ph';
+        
+        const imageUrl = `${siteUrl}${imagePath}`;
+        
+        // Fetch the image from the static path
+        try {
+          const response = await fetch(imageUrl, {
+            headers: {
+              'User-Agent': userAgent || 'MSU-TCTO-Logo-API/1.0',
+              'Accept': 'image/png,image/*,*/*'
+            }
+          });
+          
+          if (response.ok) {
+            imageBuffer = Buffer.from(await response.arrayBuffer());
+          } else {
+            throw new Error(`Failed to fetch image: ${response.status} ${response.statusText}`);
+          }
+        } catch (fetchErr) {
+          // If site URL fetch fails, try with request origin as last resort
+          // But only if it's different from the API endpoint
+          if (!url.pathname.includes('/api/protected-logo')) {
+            const originUrl = `${url.origin}${imagePath}`;
+            const originResponse = await fetch(originUrl);
+            if (originResponse.ok) {
+              imageBuffer = Buffer.from(await originResponse.arrayBuffer());
+            } else {
+              throw fetchErr;
+            }
+          } else {
+            throw fetchErr;
+          }
+        }
+      }
+      
+      if (imageBuffer) {
         // 📉 COMPRESS: Process image with compression (no watermark)
-        const processedImage = await processImage(Buffer.from(imageBuffer));
+        const processedImage = await processImage(imageBuffer);
         
         // Return the processed image with protection headers
         return new Response(processedImage, {
@@ -243,7 +316,11 @@ export async function GET({ request }) {
         });
       }
     } catch (fetchError) {
-      console.error('Error fetching image:', fetchError);
+      console.error('Error loading image:', fetchError);
+      // Log more details for debugging
+      console.error('Request URL:', request.url);
+      console.error('Image path:', LOGO_IMAGE_PATH);
+      console.error('Site URL:', process.env.SITE_URL || process.env.URL || 'not set');
     }
     
     // Fallback: return blank image if fetch fails
