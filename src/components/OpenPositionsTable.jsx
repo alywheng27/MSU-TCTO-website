@@ -173,10 +173,10 @@ const OpenPositionsTable = () => {
           </p>
           <p className="text-gray-700 dark:text-white underline">
                          <a
-               href="mailto:hrdo@msutawi-tawi.edu.ph?subject=Application%20Letter"
+               href="mailto:hrdo@msutcto.edu.ph?subject=Application%20Letter"
                className="text-[#61063B] dark:text-yellow-500 underline hover:text-[#4a052e] dark:hover:text-yellow-400"
              >
-              hrdo@msutawi-tawi.edu.ph
+              hrdo@msutcto.edu.ph
             </a>
           </p>
         </div>

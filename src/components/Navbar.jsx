@@ -222,8 +222,8 @@ const Navbar = ({ path }) => {
               </div>
               <div className="flex items-center">
                 <FaEnvelope className="text-white dark:text-gray-300 mr-2 text-sm" />
-                <a href="mailto:admissions@msutawi-tawi.edu.ph" className="text-xs sm:text-sm hover:text-msu-gold dark:hover:text-yellow-400 transition-colors duration-200">
-                  admissions@msutawi-tawi.edu.ph
+                <a href="mailto:admissions@msutcto.edu.ph" className="text-xs sm:text-sm hover:text-msu-gold dark:hover:text-yellow-400 transition-colors duration-200">
+                  admissions@msutcto.edu.ph
                 </a>
               </div>
             </div>
@@ -250,7 +250,19 @@ const Navbar = ({ path }) => {
         <div className={`w-full bg-msu-deep-ocean dark:bg-gray-900 text-white dark:text-gray-100 transition-all duration-300 ${scrolled ? 'py-2' : 'py-4'} border-b border-msu-main-color dark:border-gray-700 border-opacity-30`}>
           <div className="container mx-auto px-4 xl:px-6 flex justify-between items-center">
             {/* Logo */}
-            <a href="/" className="flex items-center">
+            <a href="/" className="flex items-center relative">
+              <div
+                aria-hidden="true"
+                className="logo-watermark-overlay pointer-events-none"
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  backgroundImage: 'repeating-linear-gradient(135deg, rgba(255,255,255,0.16) 0px, rgba(255,255,255,0.16) 16px, transparent 16px, transparent 32px)',
+                  mixBlendMode: 'multiply',
+                  opacity: 0.65,
+                  pointerEvents: 'none'
+                }}
+              />
               <img 
                 src="/api/protected-logo" 
                 alt="MSU-TCTO Logo" 

@@ -8,6 +8,12 @@
  */
 
 /**
+ * The official MSU-TCTO logo image path
+ * @constant {string}
+ */
+export const LOGO_IMAGE_PATH = '/images/Official MSU-TCTO logo-01.png';
+
+/**
  * Get the protected logo URL
  * This endpoint validates requests and prevents direct URL access
  * 

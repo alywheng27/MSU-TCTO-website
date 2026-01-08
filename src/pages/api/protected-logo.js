@@ -1,10 +1,120 @@
 /**
  * Protected Logo API Endpoint
- * Serves the MSU-TCTO logo with validation to prevent direct URL access
+ * 🔐 Auth-protected API endpoint with token validation
+ * 📉 Serve compressed version
+ * 🚫 No public direct access
+ * 
  * Works in both local development and Vercel/serverless environments
  * 
  * Usage: Replace /images/Official MSU-TCTO logo-01.png with /api/protected-logo
  */
+
+import sharp from 'sharp';
+
+/**
+ * The official MSU-TCTO logo image path
+ * @constant {string}
+ */
+const LOGO_IMAGE_PATH = '/images/Official MSU-TCTO logo-01.png';
+
+// Create a 1x1 transparent PNG (blank image)
+function createBlankImage() {
+  // Base64 encoded 1x1 transparent PNG
+  const blankPNG = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
+  return Buffer.from(blankPNG, 'base64');
+}
+
+// Generate authentication token based on session/timestamp
+function generateAuthToken(request) {
+  const url = new URL(request.url);
+  const timestamp = Math.floor(Date.now() / (1000 * 60 * 5)); // 5-minute window
+  const referer = request.headers.get('referer') || '';
+  const hostname = url.hostname;
+  
+  // Create a simple hash from timestamp + hostname + referer
+  const secret = process.env.LOGO_SECRET_TOKEN || 'msu-tcto-logo-secret-2024';
+  const hashInput = `${timestamp}-${hostname}-${secret}`;
+  
+  // Simple hash function (in production, use crypto)
+  let hash = 0;
+  for (let i = 0; i < hashInput.length; i++) {
+    const char = hashInput.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash; // Convert to 32-bit integer
+  }
+  
+  return Math.abs(hash).toString(36);
+}
+
+// Validate authentication token
+function validateAuthToken(request, providedToken) {
+  if (!providedToken) return false;
+  
+  const url = new URL(request.url);
+  const timestamp = Math.floor(Date.now() / (1000 * 60 * 5)); // Current 5-minute window
+  const referer = request.headers.get('referer') || '';
+  const hostname = url.hostname;
+  const secret = process.env.LOGO_SECRET_TOKEN || 'msu-tcto-logo-secret-2024';
+  
+  // Check current window
+  const hashInput = `${timestamp}-${hostname}-${secret}`;
+  let hash = 0;
+  for (let i = 0; i < hashInput.length; i++) {
+    const char = hashInput.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash;
+  }
+  const currentToken = Math.abs(hash).toString(36);
+  
+  if (providedToken === currentToken) return true;
+  
+  // Check previous window (for clock skew)
+  const prevHashInput = `${timestamp - 1}-${hostname}-${secret}`;
+  hash = 0;
+  for (let i = 0; i < prevHashInput.length; i++) {
+    const char = prevHashInput.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash;
+  }
+  const prevToken = Math.abs(hash).toString(36);
+  
+  return providedToken === prevToken;
+}
+
+// Process image with compression (no watermark)
+async function processImage(imageBuffer) {
+  try {
+    let image = sharp(imageBuffer);
+    
+    // Get image dimensions
+    const metadata = await image.metadata();
+    const imageWidth = metadata.width || 800;
+    const imageHeight = metadata.height || 800;
+    
+    // Resize if too large (optional compression)
+    const maxDimension = 1200;
+    if (imageWidth > maxDimension || imageHeight > maxDimension) {
+      image = image.resize(maxDimension, maxDimension, {
+        fit: 'inside',
+        withoutEnlargement: true
+      });
+    }
+    
+    // 📉 COMPRESS: Reduce quality for compression
+    const processedImage = await image
+      .png({ 
+        quality: 70, // 70% quality for compression
+        compressionLevel: 9 // Maximum compression
+      })
+      .toBuffer();
+    
+    return processedImage;
+  } catch (error) {
+    console.error('Error processing image:', error);
+    // Return original if processing fails
+    return imageBuffer;
+  }
+}
 
 export async function GET({ request }) {
   try {
@@ -12,21 +122,35 @@ export async function GET({ request }) {
     const referer = request.headers.get('referer') || '';
     const userAgent = request.headers.get('user-agent') || '';
     const origin = request.headers.get('origin') || '';
+    const accept = request.headers.get('accept') || '';
     const url = new URL(request.url);
     
-    // Check if this is a favicon request (favicons often don't have referer headers)
-    const isFaviconRequest = url.pathname.includes('favicon') || 
-                             referer === '' || 
-                             userAgent.includes('favicon') ||
-                             request.headers.get('accept')?.includes('image');
+    // 🔐 AUTH-PROTECTED: Check for authentication token
+    const authToken = url.searchParams.get('auth') || request.headers.get('x-logo-auth');
+    const validAuthToken = validateAuthToken(request, authToken);
     
-    // Additional validation: Check if request has proper headers (browser request)
-    const isBrowserRequest = !!userAgent && 
-      !userAgent.includes('curl') && 
-      !userAgent.includes('wget') && 
-      !userAgent.includes('python') &&
-      !userAgent.includes('Postman') &&
-      !userAgent.includes('Insomnia');
+    // Enhanced DevTools detection:
+    // 1. No referer (direct navigation from DevTools)
+    // 2. Referer is the same as request URL (DevTools inspection)
+    // 3. Missing X-Requested-With header (normal page loads include it via fetch)
+    // 4. Accept header is just image/* (DevTools image inspection)
+    // 5. Direct URL access patterns
+    const hasRequestedWith = request.headers.get('x-requested-with') === 'XMLHttpRequest';
+    const isImageOnlyRequest = accept.includes('image/') && !accept.includes('text/html');
+    const isDirectNavigation = !referer || 
+                              referer === url.href || 
+                              referer.includes('chrome-devtools://') ||
+                              referer.includes('devtools://') ||
+                              url.searchParams.has('devtools') ||
+                              url.searchParams.has('inspect');
+    
+    // DevTools inspection: missing X-Requested-With AND (no referer OR image-only request)
+    const isDevToolsInspection = isDirectNavigation && 
+                                 (!hasRequestedWith || isImageOnlyRequest);
+    
+    // Check if this is a favicon request
+    const isFaviconRequest = url.pathname.includes('favicon') || 
+                             userAgent.includes('favicon');
     
     // Check for secret token in query parameter (for internal use)
     const secretToken = url.searchParams.get('token');
@@ -38,24 +162,58 @@ export async function GET({ request }) {
       referer.includes('localhost') ||
       url.hostname.includes('localhost');
     
-    // Allow if: valid token, development mode, browser request, OR favicon request
-    // Favicon requests are always allowed since they often lack referer headers
-    const allowRequest = validToken || isDevelopment || isBrowserRequest || isFaviconRequest;
-    
-    if (!allowRequest) {
-      return new Response('Access Denied: Logo is protected. Please access through the website.', {
-        status: 403,
+    // 🔐 AUTH-PROTECTED: Require valid auth token OR valid session token OR development mode
+    // If DevTools inspection detected, ALWAYS return blank image
+    if (isDevToolsInspection && !validAuthToken && !validToken && !isDevelopment && !isFaviconRequest) {
+      return new Response(createBlankImage(), {
+        status: 200,
         headers: {
-          'Content-Type': 'text/plain',
+          'Content-Type': 'image/png',
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0',
           'X-Robots-Tag': 'noindex, nofollow'
         }
       });
     }
     
-    // In Vercel/serverless, redirect to the actual image file
-    // The image will be served from the public folder
-    // This works because we've validated the request above
-    const imagePath = '/images/Official%20MSU-TCTO%20logo-01.png';
+    // Additional validation: Check if request has proper headers (browser request)
+    const isBrowserRequest = !!userAgent && 
+      !userAgent.includes('curl') && 
+      !userAgent.includes('wget') && 
+      !userAgent.includes('python') &&
+      !userAgent.includes('Postman') &&
+      !userAgent.includes('Insomnia');
+    
+    // Allow if: valid auth token, valid token, development mode, or browser request with proper referer AND X-Requested-With
+    // Must have referer from the same domain for normal page loads
+    // Must have X-Requested-With header (set by our secure fetch)
+    const hasValidReferer = referer && 
+                           (referer.includes(url.hostname) || 
+                            referer.includes('msutcto.edu.ph') ||
+                            referer.includes('vercel.app') ||
+                            referer.includes('netlify.app'));
+    
+    // 🔐 AUTH-PROTECTED: Require auth token OR valid session
+    const allowRequest = validAuthToken || validToken || isDevelopment || (isBrowserRequest && hasValidReferer && hasRequestedWith) || isFaviconRequest;
+    
+    if (!allowRequest) {
+      // Return blank image instead of error message
+      return new Response(createBlankImage(), {
+        status: 200,
+        headers: {
+          'Content-Type': 'image/png',
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache',
+          'Expires': '0',
+          'X-Robots-Tag': 'noindex, nofollow'
+        }
+      });
+    }
+    
+    // Get the actual image from static path
+    // In production, this should be in a protected assets folder
+    const imagePath = LOGO_IMAGE_PATH.replace(/ /g, '%20'); // URL encode spaces
     const imageUrl = new URL(imagePath, request.url);
     
     // Fetch the image from the static path
@@ -65,8 +223,11 @@ export async function GET({ request }) {
       if (response.ok) {
         const imageBuffer = await response.arrayBuffer();
         
-        // Return the image with protection headers
-        return new Response(imageBuffer, {
+        // 📉 COMPRESS: Process image with compression (no watermark)
+        const processedImage = await processImage(Buffer.from(imageBuffer));
+        
+        // Return the processed image with protection headers
+        return new Response(processedImage, {
           status: 200,
           headers: {
             'Content-Type': 'image/png',
@@ -75,7 +236,7 @@ export async function GET({ request }) {
             'Expires': '0',
             'X-Content-Type-Options': 'nosniff',
             'X-Frame-Options': 'DENY',
-            'Referrer-Policy': 'no-referrer',
+            'Referrer-Policy': 'strict-origin-when-cross-origin',
             'Content-Disposition': 'inline; filename="protected-logo.png"',
             'X-Robots-Tag': 'noindex, nofollow'
           }
@@ -85,23 +246,28 @@ export async function GET({ request }) {
       console.error('Error fetching image:', fetchError);
     }
     
-    // Fallback: redirect to the image (for cases where fetch doesn't work)
-    return Response.redirect(imageUrl.href, 302);
+    // Fallback: return blank image if fetch fails
+    return new Response(createBlankImage(), {
+      status: 200,
+      headers: {
+        'Content-Type': 'image/png',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
+      }
+    });
     
   } catch (error) {
     console.error('Error serving protected logo:', error);
-    // Last resort: redirect to the actual image
-    try {
-      const imagePath = '/images/Official%20MSU-TCTO%20logo-01.png';
-      const imageUrl = new URL(imagePath, request.url);
-      return Response.redirect(imageUrl.href, 302);
-    } catch (redirectError) {
-      return new Response('Internal Server Error', {
-        status: 500,
-        headers: {
-          'Content-Type': 'text/plain'
-        }
-      });
-    }
+    // Return blank image on error
+    return new Response(createBlankImage(), {
+      status: 200,
+      headers: {
+        'Content-Type': 'image/png',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
+      }
+    });
   }
 }

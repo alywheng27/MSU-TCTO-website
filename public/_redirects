@@ -1,1 +1,6 @@
+# Redirect old domain
 https://msutawi-tawi.edu.ph/*  https://msutcto.edu.ph/:splat  301!
+
+# 🚫 Block direct access to logo file - redirect to protected API
+/images/Official%20MSU-TCTO%20logo-01.png /api/protected-logo 307!
+/images/Official MSU-TCTO logo-01.png /api/protected-logo 307!
