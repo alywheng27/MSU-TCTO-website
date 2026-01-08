@@ -12,7 +12,7 @@ const footerSections = getFooterSections();
 
 
 
-<div class="bg-msu-deep-ocean dark:bg-gray-900 text-white-pure dark:text-gray-100">
+<div class="w-full bg-msu-deep-ocean dark:bg-gray-900 text-white-pure dark:text-gray-100 overflow-x-hidden">
     <!-- Latest Articles Section -->
     <div class="bg-gradient-to-r from-msu-deep-ocean to-msu-deep-ocean dark:from-gray-800 dark:to-gray-800 py-16">
         <div class="container mx-auto px-4 xl:px-[12.5%]">
@@ -62,7 +62,7 @@ const footerSections = getFooterSections();
             <!-- partners removed -->
 
     <!-- Quick Links Section -->
-    <div class="bg-msu-deep-ocean dark:bg-gray-800 py-16">
+    <div class="w-full bg-msu-deep-ocean dark:bg-gray-800 py-16">
         <div class="container mx-auto px-4 xl:px-[12.5%]">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <!-- University Column -->
@@ -241,7 +241,7 @@ const footerSections = getFooterSections();
 
 
 <!-- University Footer Section -->
-<div class="bg-gradient-to-b from-msu-deep-ocean to-msu-dark-blue dark:from-gray-800 dark:to-gray-900 text-white-pure dark:text-gray-100">
+<div class="w-full bg-gradient-to-b from-msu-deep-ocean to-msu-dark-blue dark:from-gray-800 dark:to-gray-900 text-white-pure dark:text-gray-100">
     <!-- University Identity & Contact Section -->
     <div class="container mx-auto px-4 xl:px-[12.5%] py-16">
           <!-- Grid Layout -->
@@ -513,7 +513,7 @@ const footerSections = getFooterSections();
     </div>
 
     <!-- Copyright Section -->
-    <div class="bg-msu-dark-blue/80 dark:bg-gray-900/90 py-6 sm:py-8 border-t border-msu-main-color/20 dark:border-gray-700/20">
+    <div class="w-full bg-msu-dark-blue/80 dark:bg-gray-900/90 py-6 sm:py-8 border-t border-msu-main-color/20 dark:border-gray-700/20">
         <div class="container mx-auto px-4 xl:px-[12.5%]">
             <div class="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
                 <p class="text-titanium dark:text-gray-300 text-center justify-center text-sm sm:text-base">
@@ -545,7 +545,14 @@ const footerSections = getFooterSections();
     </div>
 </div>
 
-
+<style>
+    /* Ensure footer extends to full width and prevents white space */
+    footer,
+    [class*="footer"] {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
+</style>
 
 <script>
     // Set current year in copyright
