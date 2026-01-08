@@ -161,65 +161,78 @@ export async function GET({ request }) {
     const secretToken = url.searchParams.get('token');
     const validToken = secretToken === process.env.LOGO_SECRET_TOKEN || secretToken === 'dev-token-2024';
     
-    // For development, allow all requests
-    const isDevelopment = process.env.NODE_ENV !== 'production' || 
-      origin.includes('localhost') || 
-      referer.includes('localhost') ||
-      url.hostname.includes('localhost');
+    // For development, allow all requests - Enhanced localhost detection
+    const isLocalhost = url.hostname === 'localhost' || 
+                        url.hostname === '127.0.0.1' ||
+                        url.hostname === '0.0.0.0' ||
+                        url.hostname.includes('localhost') ||
+                        url.hostname.includes('127.0.0.1') ||
+                        origin.includes('localhost') || 
+                        origin.includes('127.0.0.1') ||
+                        referer.includes('localhost') ||
+                        referer.includes('127.0.0.1');
     
-    // 🔐 AUTH-PROTECTED: Require valid auth token OR valid session token OR development mode
-    // If DevTools inspection detected, ALWAYS return blank image
-    if (isDevToolsInspection && !validAuthToken && !validToken && !isDevelopment && !isFaviconRequest) {
-      return new Response(createBlankImage(), {
-        status: 200,
-        headers: {
-          'Content-Type': 'image/png',
-          'Cache-Control': 'no-cache, no-store, must-revalidate',
-          'Pragma': 'no-cache',
-          'Expires': '0',
-          'X-Robots-Tag': 'noindex, nofollow'
-        }
-      });
-    }
+    const isDevelopment = process.env.NODE_ENV !== 'production' || isLocalhost;
     
-    // Additional validation: Check if request has proper headers (browser request)
-    const isBrowserRequest = !!userAgent && 
-      !userAgent.includes('curl') && 
-      !userAgent.includes('wget') && 
-      !userAgent.includes('python') &&
-      !userAgent.includes('Postman') &&
-      !userAgent.includes('Insomnia');
-    
-    // Allow if: valid auth token, valid token, development mode, or browser request with proper referer
-    // Must have referer from the same domain for normal page loads
-    // Note: Regular <img> tags don't send X-Requested-With, so we allow requests with valid referer
-    const hasValidReferer = referer && 
-                           (referer.includes(url.hostname) || 
-                            referer.includes('msutcto.edu.ph') ||
-                            referer.includes('vercel.app') ||
-                            referer.includes('netlify.app') ||
-                            referer.includes('localhost'));
-    
-    // 🔐 AUTH-PROTECTED: Require auth token OR valid session OR browser request with valid referer
-    // Allow regular <img> tag requests (they have referer but no X-Requested-With)
-    const allowRequest = validAuthToken || 
-                        validToken || 
-                        isDevelopment || 
-                        (isBrowserRequest && hasValidReferer) || 
-                        isFaviconRequest;
-    
-    if (!allowRequest) {
-      // Return blank image instead of error message
-      return new Response(createBlankImage(), {
-        status: 200,
-        headers: {
-          'Content-Type': 'image/png',
-          'Cache-Control': 'no-cache, no-store, must-revalidate',
-          'Pragma': 'no-cache',
-          'Expires': '0',
-          'X-Robots-Tag': 'noindex, nofollow'
-        }
-      });
+    // FOR LOCALHOST: Always allow and skip all validation
+    if (isLocalhost) {
+      console.log('[Logo API] Localhost request - allowing without validation');
+      // Skip to image serving directly
+    } else {
+      // Production validation logic
+      // 🔐 AUTH-PROTECTED: Require valid auth token OR valid session token OR development mode
+      // If DevTools inspection detected, ALWAYS return blank image
+      if (isDevToolsInspection && !validAuthToken && !validToken && !isDevelopment && !isFaviconRequest) {
+        return new Response(createBlankImage(), {
+          status: 200,
+          headers: {
+            'Content-Type': 'image/png',
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+            'Expires': '0',
+            'X-Robots-Tag': 'noindex, nofollow'
+          }
+        });
+      }
+      
+      // Additional validation: Check if request has proper headers (browser request)
+      const isBrowserRequest = !!userAgent && 
+        !userAgent.includes('curl') && 
+        !userAgent.includes('wget') && 
+        !userAgent.includes('python') &&
+        !userAgent.includes('Postman') &&
+        !userAgent.includes('Insomnia');
+      
+      // Allow if: valid auth token, valid token, development mode, or browser request with proper referer
+      // Must have referer from the same domain for normal page loads
+      // Note: Regular <img> tags don't send X-Requested-With, so we allow requests with valid referer
+      const hasValidReferer = referer && 
+                             (referer.includes(url.hostname) || 
+                              referer.includes('msutcto.edu.ph') ||
+                              referer.includes('vercel.app') ||
+                              referer.includes('netlify.app'));
+      
+      // 🔐 AUTH-PROTECTED: Require auth token OR valid session OR browser request with valid referer
+      // Allow regular <img> tag requests (they have referer but no X-Requested-With)
+      const allowRequest = validAuthToken || 
+                          validToken || 
+                          isDevelopment || 
+                          (isBrowserRequest && hasValidReferer) || 
+                          isFaviconRequest;
+      
+      if (!allowRequest) {
+        // Return blank image instead of error message
+        return new Response(createBlankImage(), {
+          status: 200,
+          headers: {
+            'Content-Type': 'image/png',
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+            'Expires': '0',
+            'X-Robots-Tag': 'noindex, nofollow'
+          }
+        });
+      }
     }
     
     // Get the actual image from static path
@@ -231,38 +244,75 @@ export async function GET({ request }) {
       // In Astro with Netlify adapter, static files are copied to dist during build
       try {
         // Try multiple possible paths for the image
-        const possiblePaths = [
-          join(process.cwd(), 'public', LOGO_IMAGE_PATH),
-          join(process.cwd(), 'dist', LOGO_IMAGE_PATH),
-          join(process.cwd(), '.netlify', 'functions-internal', 'public', LOGO_IMAGE_PATH),
-        ];
+        // For localhost, prioritize public folder
+        const possiblePaths = isLocalhost 
+          ? [
+              join(process.cwd(), 'public', LOGO_IMAGE_PATH),
+              join(process.cwd(), 'dist', LOGO_IMAGE_PATH),
+              join(process.cwd(), '.netlify', 'functions-internal', 'public', LOGO_IMAGE_PATH),
+            ]
+          : [
+              join(process.cwd(), 'public', LOGO_IMAGE_PATH),
+              join(process.cwd(), 'dist', LOGO_IMAGE_PATH),
+              join(process.cwd(), '.netlify', 'functions-internal', 'public', LOGO_IMAGE_PATH),
+            ];
         
         for (const publicPath of possiblePaths) {
           try {
             imageBuffer = await readFile(publicPath);
+            if (isLocalhost) {
+              console.log('[Logo API] Successfully read image from file system:', publicPath);
+            }
             break; // Success, exit loop
           } catch (pathError) {
+            if (isLocalhost) {
+              console.log('[Logo API] Failed to read from:', publicPath, pathError.message);
+            }
             // Try next path
             continue;
           }
         }
         
         if (!imageBuffer) {
+          if (isLocalhost) {
+            console.log('[Logo API] File system access failed, trying fetch method...');
+          }
           throw new Error('File system access failed for all paths');
         }
       } catch (fsError) {
+        if (isLocalhost) {
+          console.log('[Logo API] File system error:', fsError.message);
+        }
         // Method 2: Try fetch from static path using the site URL
         // This works better in serverless environments like Netlify
-        const imagePath = LOGO_IMAGE_PATH.replace(/ /g, '%20'); // URL encode spaces
-        
         // Use site URL from environment or construct from request
         // Avoid fetching from same origin to prevent loops
-        const siteUrl = process.env.SITE_URL || 
-                       process.env.URL || 
-                       process.env.DEPLOY_PRIME_URL ||
-                       'https://msutcto.edu.ph';
+        // Prefer localhost during local dev
+        const siteUrl = (() => {
+          // Local dev - use request origin or construct from URL
+          if (isLocalhost) {
+            // Try origin first
+            if (origin) {
+              console.log('[Logo API] Using origin for fetch:', origin);
+              return origin;
+            }
+            // Construct from URL - use the actual request URL's origin
+            const protocol = url.protocol || 'http:';
+            const host = url.host || `${url.hostname}${url.port ? ':' + url.port : ''}`;
+            const constructedUrl = `${protocol}//${host}`;
+            console.log('[Logo API] Constructed URL for fetch:', constructedUrl);
+            return constructedUrl;
+          }
+          // Production
+          return process.env.SITE_URL || 
+                 process.env.URL || 
+                 process.env.DEPLOY_PRIME_URL ||
+                 'https://msutcto.edu.ph';
+        })();
         
+        const imagePath = LOGO_IMAGE_PATH.replace(/ /g, '%20'); // URL encode spaces
         const imageUrl = `${siteUrl}${imagePath}`;
+        console.log('[Logo API] Fetching image from:', imageUrl);
         
         // Fetch the image from the static path
         try {
@@ -275,18 +325,28 @@ export async function GET({ request }) {
           
           if (response.ok) {
             imageBuffer = Buffer.from(await response.arrayBuffer());
+            console.log('[Logo API] Successfully fetched image, size:', imageBuffer.length);
           } else {
+            console.error('[Logo API] Fetch failed:', response.status, response.statusText);
             throw new Error(`Failed to fetch image: ${response.status} ${response.statusText}`);
           }
         } catch (fetchErr) {
+          console.error('[Logo API] Fetch error:', fetchErr.message);
           // If site URL fetch fails, try with request origin as last resort
           // But only if it's different from the API endpoint
-          if (!url.pathname.includes('/api/protected-logo')) {
+          if (isLocalhost && url.origin) {
             const originUrl = `${url.origin}${imagePath}`;
-            const originResponse = await fetch(originUrl);
-            if (originResponse.ok) {
-              imageBuffer = Buffer.from(await originResponse.arrayBuffer());
-            } else {
+            console.log('[Logo API] Trying fallback URL:', originUrl);
+            try {
+              const originResponse = await fetch(originUrl);
+              if (originResponse.ok) {
+                imageBuffer = Buffer.from(await originResponse.arrayBuffer());
+                console.log('[Logo API] Fallback fetch successful');
+              } else {
+                throw fetchErr;
+              }
+            } catch (fallbackErr) {
+              console.error('[Logo API] Fallback also failed:', fallbackErr.message);
               throw fetchErr;
             }
           } else {
@@ -300,13 +360,25 @@ export async function GET({ request }) {
         const processedImage = await processImage(imageBuffer);
         
         // Return the processed image with protection headers
+        // For localhost, add cache-busting to prevent blank image caching
+        const cacheHeaders = isLocalhost 
+          ? {
+              'Cache-Control': 'no-cache, no-store, must-revalidate, max-age=0',
+              'Pragma': 'no-cache',
+              'Expires': '0',
+              'ETag': `"logo-${Date.now()}"`, // Cache-busting ETag for localhost
+            }
+          : {
+              'Cache-Control': 'private, no-cache, no-store, must-revalidate, max-age=0',
+              'Pragma': 'no-cache',
+              'Expires': '0',
+            };
+        
         return new Response(processedImage, {
           status: 200,
           headers: {
             'Content-Type': 'image/png',
-            'Cache-Control': 'private, no-cache, no-store, must-revalidate, max-age=0',
-            'Pragma': 'no-cache',
-            'Expires': '0',
+            ...cacheHeaders,
             'X-Content-Type-Options': 'nosniff',
             'X-Frame-Options': 'DENY',
             'Referrer-Policy': 'strict-origin-when-cross-origin',

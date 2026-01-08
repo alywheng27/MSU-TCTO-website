@@ -121,12 +121,22 @@ exports.handler = async (event, context) => {
     const secretToken = url.searchParams.get('token');
     const validToken = secretToken === process.env.LOGO_SECRET_TOKEN || secretToken === 'dev-token-2024';
 
-    // Development mode check
-    const isDevelopment = process.env.NODE_ENV !== 'production' || 
-      origin.includes('localhost') || 
-      referer.includes('localhost') ||
-      url.hostname.includes('localhost') ||
-      url.hostname.includes('127.0.0.1');
+    // Development mode check - Enhanced localhost detection
+    const isLocalhost = url.hostname === 'localhost' || 
+                        url.hostname === '127.0.0.1' ||
+                        url.hostname === '0.0.0.0' ||
+                        url.hostname.includes('localhost') ||
+                        url.hostname.includes('127.0.0.1') ||
+                        origin.includes('localhost') || 
+                        origin.includes('127.0.0.1') ||
+                        referer.includes('localhost') ||
+                        referer.includes('127.0.0.1') ||
+                        (request.headers.host && (
+                          request.headers.host.includes('localhost') ||
+                          request.headers.host.includes('127.0.0.1')
+                        ));
+    
+    const isDevelopment = process.env.NODE_ENV !== 'production' || isLocalhost;
 
     // 🔐 AUTH-PROTECTED: Require valid auth token OR valid session token OR development mode
     if (isDevToolsInspection && !validAuthToken && !validToken && !isDevelopment && !isFaviconRequest) {
@@ -157,11 +167,16 @@ exports.handler = async (event, context) => {
                             referer.includes('msutcto.edu.ph') ||
                             referer.includes('netlify.app') ||
                             referer.includes('vercel.app') ||
-                            referer.includes('localhost'));
+                            referer.includes('localhost') ||
+                            referer.includes('127.0.0.1'));
+    
+    // For localhost, always allow even without referer (common in dev)
+    const isLocalhostRequest = isLocalhost;
 
     const allowRequest = validAuthToken || 
                         validToken || 
                         isDevelopment || 
+                        isLocalhostRequest || // Always allow localhost
                         (isBrowserRequest && hasValidReferer) || 
                         isFaviconRequest;
 
@@ -184,10 +199,16 @@ exports.handler = async (event, context) => {
     // In Netlify, static files are served from the publish directory
     // Prefer localhost during local dev to avoid external fetch failures
     const siteUrl = (() => {
-      // Local dev (netlify dev / npm run dev)
-      if (request.headers.host && (request.headers.host.includes('localhost') || request.headers.host.includes('127.0.0.1'))) {
-        const protocol = request.headers['x-forwarded-proto'] || 'http';
-        return `${protocol}://${request.headers.host}`;
+      // Local dev (netlify dev / npm run dev / astro dev)
+      if (isLocalhost && request.headers.host) {
+        const protocol = request.headers['x-forwarded-proto'] || 
+                        (request.headers['x-forwarded-ssl'] === 'on' ? 'https' : 'http');
+        const host = request.headers.host;
+        return `${protocol}://${host}`;
+      }
+      // Also check origin for localhost
+      if (isLocalhost && origin) {
+        return origin;
       }
       // Deploy previews / production
       return process.env.URL || process.env.DEPLOY_PRIME_URL || 'https://msutcto.edu.ph';

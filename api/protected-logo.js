@@ -83,7 +83,13 @@ export default async function handler(req, res) {
       query: req.query
     };
 
-    const url = new URL(req.url, `https://${req.headers.host}`);
+    // Construct URL properly for localhost
+    const protocol = req.headers['x-forwarded-proto'] || 
+                    (req.headers.host && req.headers.host.includes('localhost') ? 'http' : 'https');
+    const host = req.headers.host || 'localhost:3000';
+    const baseUrl = `${protocol}://${host}`;
+    const url = new URL(req.url, baseUrl);
+    
     const referer = req.headers.referer || req.headers.Referer || '';
     const userAgent = req.headers['user-agent'] || req.headers['User-Agent'] || '';
     const origin = req.headers.origin || req.headers.Origin || '';
@@ -113,13 +119,22 @@ export default async function handler(req, res) {
     const secretToken = req.query.token;
     const validToken = secretToken === process.env.LOGO_SECRET_TOKEN || secretToken === 'dev-token-2024';
 
-    // Development mode check
-    const isDevelopment = process.env.NODE_ENV !== 'production' || 
-      origin.includes('localhost') || 
-      referer.includes('localhost') ||
-      url.hostname.includes('localhost') ||
-      url.hostname.includes('127.0.0.1') ||
-      url.hostname.includes('vercel.app');
+    // Development mode check - Enhanced localhost detection
+    const isLocalhost = url.hostname === 'localhost' || 
+                        url.hostname === '127.0.0.1' ||
+                        url.hostname === '0.0.0.0' ||
+                        url.hostname.includes('localhost') ||
+                        url.hostname.includes('127.0.0.1') ||
+                        origin.includes('localhost') || 
+                        origin.includes('127.0.0.1') ||
+                        referer.includes('localhost') ||
+                        referer.includes('127.0.0.1') ||
+                        (host && (
+                          host.includes('localhost') ||
+                          host.includes('127.0.0.1')
+                        ));
+    
+    const isDevelopment = process.env.NODE_ENV !== 'production' || isLocalhost;
 
     // 🔐 AUTH-PROTECTED: Require valid auth token OR valid session token OR development mode
     if (isDevToolsInspection && !validAuthToken && !validToken && !isDevelopment && !isFaviconRequest) {
@@ -145,11 +160,16 @@ export default async function handler(req, res) {
                             referer.includes('msutcto.edu.ph') ||
                             referer.includes('netlify.app') ||
                             referer.includes('vercel.app') ||
-                            referer.includes('localhost'));
+                            referer.includes('localhost') ||
+                            referer.includes('127.0.0.1'));
+    
+    // For localhost, always allow even without referer (common in dev)
+    const isLocalhostRequest = isLocalhost;
 
     const allowRequest = validAuthToken || 
                         validToken || 
                         isDevelopment || 
+                        isLocalhostRequest || // Always allow localhost
                         (isBrowserRequest && hasValidReferer) || 
                         isFaviconRequest;
 
@@ -165,9 +185,25 @@ export default async function handler(req, res) {
 
     // Get the logo image from static assets
     // In Vercel, static files are served from the public directory
-    const siteUrl = process.env.VERCEL_URL 
-      ? `https://${process.env.VERCEL_URL}`
-      : process.env.NEXT_PUBLIC_SITE_URL || 'https://msutcto.edu.ph';
+    // Prefer localhost during local dev to avoid external fetch failures
+    const siteUrl = (() => {
+      // Local dev (vercel dev / npm run dev / astro dev)
+      if (isLocalhost) {
+        // Use the request origin or construct from headers
+        if (origin) {
+          return origin;
+        }
+        // Fallback to constructing from host
+        const localProtocol = protocol || 'http';
+        return `${localProtocol}://${host}`;
+      }
+      // Vercel deployment
+      if (process.env.VERCEL_URL) {
+        return `https://${process.env.VERCEL_URL}`;
+      }
+      // Production fallback
+      return process.env.NEXT_PUBLIC_SITE_URL || 'https://msutcto.edu.ph';
+    })();
     
     const imagePath = '/images/Official MSU-TCTO logo-01.png';
     const imageUrl = `${siteUrl}${imagePath}`;
