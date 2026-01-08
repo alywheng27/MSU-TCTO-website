@@ -1,4 +1,4 @@
-﻿import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { 
   FaHome, 
   FaInfoCircle, 
@@ -507,5 +507,3 @@ const Navbar = ({ path }) => {
 };
 
 export default React.memo(Navbar);
-
-

@@ -115,6 +115,19 @@
    * Professional keyboard shortcut blocking with auto-disable
    */
   function blockScreenshotShortcuts(e) {
+    // Allow typing in input fields, textareas, and contenteditable elements
+    const target = e.target || e.srcElement;
+    if (target && (
+      target.tagName === 'INPUT' || 
+      target.tagName === 'TEXTAREA' || 
+      target.contentEditable === 'true' ||
+      target.isContentEditable ||
+      (target.closest && (target.closest('input') || target.closest('textarea') || target.closest('[contenteditable="true"]')))
+    )) {
+      // Allow normal typing in input fields - don't block
+      return;
+    }
+    
     // Check if screenshots are auto-disabled
     if (screenshotsDisabled && Date.now() < disableUntil) {
       e.preventDefault();
@@ -677,6 +690,19 @@
    * Prevent text selection and copying - Enhanced blocking
    */
   function preventSelection(e) {
+    // Allow typing in input fields, textareas, and contenteditable elements
+    const target = e.target || e.srcElement;
+    if (target && (
+      target.tagName === 'INPUT' || 
+      target.tagName === 'TEXTAREA' || 
+      target.contentEditable === 'true' ||
+      target.isContentEditable ||
+      (target.closest && (target.closest('input') || target.closest('textarea') || target.closest('[contenteditable="true"]')))
+    )) {
+      // Allow normal typing and copy/paste in input fields
+      return;
+    }
+    
     if (e.ctrlKey || e.metaKey) {
       // Allow Ctrl+A for accessibility, but prevent Ctrl+C, Ctrl+X, Ctrl+V
       if (e.key === 'c' || e.key === 'C' || e.key === 'x' || e.key === 'X' || e.key === 'v' || e.key === 'V') {
@@ -689,8 +715,19 @@
       }
     }
     
-    // Prevent text selection with mouse
+    // Prevent text selection with mouse (except in input fields)
     if (e.type === 'selectstart' || e.type === 'mousedown') {
+      // Allow selection in input fields, textareas, and contenteditable elements
+      if (target && (
+        target.tagName === 'INPUT' || 
+        target.tagName === 'TEXTAREA' || 
+        target.contentEditable === 'true' ||
+        target.isContentEditable ||
+        (target.closest && (target.closest('input') || target.closest('textarea') || target.closest('[contenteditable="true"]')))
+      )) {
+        // Allow selection in input fields
+        return;
+      }
       const selection = window.getSelection();
       if (selection && selection.toString().length > 0) {
         e.preventDefault();
@@ -1545,8 +1582,20 @@
     // Touch event monitoring (mobile)
     monitorMobileTouchEvents();
 
-    // Copy/Cut/Paste blocking - Enhanced
+    // Copy/Cut/Paste blocking - Enhanced (allow in input fields)
     document.addEventListener('copy', (e) => {
+      // Allow copy in input fields, textareas, and contenteditable elements
+      const target = e.target || e.srcElement;
+      if (target && (
+        target.tagName === 'INPUT' || 
+        target.tagName === 'TEXTAREA' || 
+        target.contentEditable === 'true' ||
+        target.isContentEditable ||
+        (target.closest && (target.closest('input') || target.closest('textarea') || target.closest('[contenteditable="true"]')))
+      )) {
+        // Allow copy in input fields
+        return;
+      }
       e.preventDefault();
       e.stopPropagation();
       e.stopImmediatePropagation();
@@ -1557,6 +1606,18 @@
     }, true);
 
     document.addEventListener('cut', (e) => {
+      // Allow cut in input fields, textareas, and contenteditable elements
+      const target = e.target || e.srcElement;
+      if (target && (
+        target.tagName === 'INPUT' || 
+        target.tagName === 'TEXTAREA' || 
+        target.contentEditable === 'true' ||
+        target.isContentEditable ||
+        (target.closest && (target.closest('input') || target.closest('textarea') || target.closest('[contenteditable="true"]')))
+      )) {
+        // Allow cut in input fields
+        return;
+      }
       e.preventDefault();
       e.stopPropagation();
       e.stopImmediatePropagation();
@@ -1567,6 +1628,18 @@
     }, true);
 
     document.addEventListener('paste', (e) => {
+      // Allow paste in input fields, textareas, and contenteditable elements
+      const target = e.target || e.srcElement;
+      if (target && (
+        target.tagName === 'INPUT' || 
+        target.tagName === 'TEXTAREA' || 
+        target.contentEditable === 'true' ||
+        target.isContentEditable ||
+        (target.closest && (target.closest('input') || target.closest('textarea') || target.closest('[contenteditable="true"]')))
+      )) {
+        // Allow paste in input fields
+        return;
+      }
       e.preventDefault();
       e.stopPropagation();
       e.stopImmediatePropagation();
@@ -1574,8 +1647,20 @@
       return false;
     }, true);
 
-    // Prevent text selection globally
+    // Prevent text selection globally (except in input fields)
     document.addEventListener('selectstart', (e) => {
+      // Allow selection in input fields, textareas, and contenteditable elements
+      const target = e.target || e.srcElement;
+      if (target && (
+        target.tagName === 'INPUT' || 
+        target.tagName === 'TEXTAREA' || 
+        target.contentEditable === 'true' ||
+        target.isContentEditable ||
+        (target.closest && (target.closest('input') || target.closest('textarea') || target.closest('[contenteditable="true"]')))
+      )) {
+        // Allow selection in input fields
+        return;
+      }
       e.preventDefault();
       e.stopPropagation();
       return false;
