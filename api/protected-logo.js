@@ -197,7 +197,12 @@ export default async function handler(req, res) {
         const localProtocol = protocol || 'http';
         return `${localProtocol}://${host}`;
       }
-      // Vercel deployment
+      // Vercel production - use the actual request hostname
+      // This ensures we use the correct domain (msutcto.edu.ph or vercel.app domain)
+      if (url.hostname && !url.hostname.includes('localhost')) {
+        return `${protocol}://${url.hostname}`;
+      }
+      // Fallback to VERCEL_URL if available
       if (process.env.VERCEL_URL) {
         return `https://${process.env.VERCEL_URL}`;
       }
@@ -205,8 +210,10 @@ export default async function handler(req, res) {
       return process.env.NEXT_PUBLIC_SITE_URL || 'https://msutcto.edu.ph';
     })();
     
-    const imagePath = '/images/Official MSU-TCTO logo-01.png';
+    const imagePath = '/images/Official%20MSU-TCTO%20logo-01.png'; // URL encode spaces
     const imageUrl = `${siteUrl}${imagePath}`;
+    
+    console.log('[Vercel Logo API] Fetching from:', imageUrl, 'Site URL:', siteUrl);
 
     try {
       // Fetch the image from the static path
@@ -220,6 +227,8 @@ export default async function handler(req, res) {
       if (response.ok) {
         const imageBuffer = await response.arrayBuffer();
         const buffer = Buffer.from(imageBuffer);
+        
+        console.log('[Vercel Logo API] Successfully fetched image, size:', buffer.length);
 
         return res.status(200)
           .setHeader('Content-Type', 'image/png')
@@ -233,10 +242,18 @@ export default async function handler(req, res) {
           .setHeader('X-Robots-Tag', 'noindex, nofollow')
           .send(buffer);
       } else {
-        throw new Error(`Failed to fetch image: ${response.status}`);
+        console.error('[Vercel Logo API] Fetch failed:', response.status, response.statusText);
+        throw new Error(`Failed to fetch image: ${response.status} ${response.statusText}`);
       }
     } catch (fetchError) {
-      console.error('Error loading image:', fetchError);
+      console.error('[Vercel Logo API] Error loading image:', fetchError.message);
+      console.error('[Vercel Logo API] Image URL attempted:', imageUrl);
+      console.error('[Vercel Logo API] Request details:', {
+        hostname: url.hostname,
+        origin,
+        referer,
+        protocol
+      });
       
       // Fallback: return blank image
       return res.status(200)

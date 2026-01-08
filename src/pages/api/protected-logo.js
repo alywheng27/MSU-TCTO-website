@@ -303,10 +303,17 @@ export async function GET({ request }) {
             console.log('[Logo API] Constructed URL for fetch:', constructedUrl);
             return constructedUrl;
           }
-          // Production
+          // Production - use the actual request URL's origin
+          // This ensures we use the correct domain (msutcto.edu.ph or vercel.app domain)
+          if (url.hostname && !url.hostname.includes('localhost')) {
+            const prodProtocol = url.protocol || 'https:';
+            return `${prodProtocol}//${url.hostname}`;
+          }
+          // Fallback to environment variables
           return process.env.SITE_URL || 
                  process.env.URL || 
                  process.env.DEPLOY_PRIME_URL ||
+                 process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` :
                  'https://msutcto.edu.ph';
         })();
         
