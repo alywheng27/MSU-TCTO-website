@@ -4,13 +4,6 @@
   functions = "netlify/functions"
   publish = "dist"
 
-# Redirect API calls to use serverless function for better protection
-[[redirects]]
-  from = "/api/protected-logo"
-  to = "/.netlify/functions/protected-logo"
-  status = 200
-  force = false
-
   ## Uncomment to use this redirect for Single Page Applications like create-react-app.
   ## Not needed for static site generators.
   #[[redirects]]
