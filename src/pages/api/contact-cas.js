@@ -40,7 +40,7 @@ export async function POST({ request }) {
 
         if (!gmailUser || !gmailPassword) {
             console.log('⚠️ Gmail credentials not configured');
-            console.log('📧 Would send to: michorobledo@msutawi-tawi.edu.ph');
+            console.log('📧 Would send to: michorobledo@msutcto.edu.ph');
             console.log('📝 Subject:', `Contact Form: ${subject} - ${name}`);
             console.log('👤 From:', email);
             console.log('💬 Message:', message);
@@ -49,7 +49,7 @@ export async function POST({ request }) {
         } else {
             // Send actual email using Gmail SMTP
             console.log('📧 SENDING ACTUAL EMAIL...');
-            console.log('To: michorobledo@msutawi-tawi.edu.ph');
+            console.log('To: michorobledo@msutcto.edu.ph');
             console.log('From:', email);
             console.log('Subject:', `Contact Form: ${subject} - ${name}`);
             

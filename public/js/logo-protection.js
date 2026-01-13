@@ -82,8 +82,7 @@
       if (e.key === 'PrintScreen') {
         const logos = document.querySelectorAll('img[src*="Official MSU-TCTO logo-01"]');
         if (logos.length > 0) {
-          // Can't fully prevent, but can show warning
-          console.warn('Screenshot protection: Logo images are protected');
+          // Silent protection - no visible warnings
         }
       }
     };
@@ -143,6 +142,7 @@
   `;
   document.head.appendChild(style);
 })();
+
 
 
 

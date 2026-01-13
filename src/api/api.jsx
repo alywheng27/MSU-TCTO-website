@@ -78,42 +78,63 @@ export function urlForPDF(source) {
 }
 
 export async function getArticle() {
-  const query = groq`*[_type == "article"] | order(publishedAt desc){
-    title,
-    slug{
-      current
-    },
-    author->{name},
-    body[]{
-      children[]{
-        text
+  try {
+    const query = groq`*[_type == "article"] | order(publishedAt desc){
+      title,
+      slug{
+        current
       },
-      asset->{url},
-    },
-    mainImage{
-      asset->,
-      crop,
-      hotspot,
-      caption,
-    },
-    gallery[]{
-      asset->,
-      crop,
-      hotspot,
-      caption,
-      alt,
-    },
-    college->{college},
-    articleSubject->{subject},
-    topic->{topic},
-    category->{category},
-    publishedAt,
-    featured,
-    _createdAt,
-  }`;
+      author->{name},
+      body[]{
+        _type,
+        _key,
+        children[]{
+          text
+        },
+        asset->{
+          _id,
+          url,
+          metadata {
+            dimensions {
+              width,
+              height,
+              aspectRatio
+            }
+          }
+        },
+        caption,
+        alt,
+        crop,
+        hotspot,
+      },
+      mainImage{
+        asset->,
+        crop,
+        hotspot,
+        caption,
+      },
+      gallery[]{
+        asset->,
+        crop,
+        hotspot,
+        caption,
+        alt,
+      },
+      college->{college},
+      articleSubject->{subject},
+      topic->{topic},
+      category->{category},
+      publishedAt,
+      featured,
+      _createdAt,
+    }`;
 
-  const articles = await useSanityClient().fetch(query);
-  return articles;
+    const articles = await useSanityClient().fetch(query);
+    return Array.isArray(articles) ? articles : [];
+  } catch (error) {
+    console.error('Error fetching articles:', error);
+    return [];
+  }
 }
 
 export async function getSearchArticleCount(search, category) {
@@ -145,10 +166,26 @@ export async function getSearchArticle(search, category, page) {
     },
     author->{name},
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     mainImage{
       asset->,
@@ -177,10 +214,26 @@ export async function getSingleLatestArticle() {
     },
     author->{name},
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     mainImage{
       asset->,
@@ -211,10 +264,26 @@ export async function getSingleOldestArticle() {
     },
     author->{name},
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     mainImage{
       asset->,
@@ -243,10 +312,26 @@ export async function get4LatestArticles() {
     },
     author->{name},
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     mainImage{
       asset->,
@@ -274,10 +359,26 @@ export async function get3LatestArticle() {
     },
     author->{name},
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     mainImage{
       asset->,
@@ -305,10 +406,26 @@ export async function get5LatestArticle() {
     },
     author->{name},
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     mainImage{
       asset->,
@@ -336,10 +453,26 @@ export async function get3_5LatestArticle() {
     },
     author->{name},
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     mainImage{
       asset->,
@@ -367,10 +500,26 @@ export async function get3LatestNews() {
     },
     author->{name},
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     mainImage{
       asset->,
@@ -400,10 +549,26 @@ export async function getLatestFeaturedArticle() {
     },
     author->{name},
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     mainImage{
       asset->,
@@ -431,10 +596,26 @@ export async function get3LatestFeaturedArticle() {
     },
     author->{name},
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     mainImage{
       asset->,
@@ -459,10 +640,26 @@ export async function get3UpcomingEvents() {
     title,
     date,
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     semester->{semester},
     holiday->{holiday},
@@ -535,10 +732,26 @@ export async function get8UpcomingEvents() {
     title,
     date,
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     semester->{semester},
     holiday->{holiday},
@@ -553,10 +766,26 @@ export async function get16UpcomingEvents() {
     title,
     date,
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     semester->{semester},
     holiday->{holiday},
@@ -571,10 +800,26 @@ export async function get16FirstSemesterUpcomingEvents() {
     title,
     date,
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     semester->{semester},
     holiday->{holiday},
@@ -589,10 +834,26 @@ export async function get16SecondSemesterUpcomingEvents() {
     title,
     date,
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     semester->{semester},
     holiday->{holiday},
@@ -607,10 +868,26 @@ export async function get16SummerUpcomingEvents() {
     title,
     date,
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     semester->{semester},
     holiday->{holiday},
@@ -625,10 +902,26 @@ export async function get16SecondSummerUpcomingEvents() {
     title,
     date,
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     semester->{semester},
     holiday->{holiday},
@@ -643,10 +936,26 @@ export async function get6FirstSemesterUpcomingEvents() {
     title,
     date,
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     semester->{semester},
     holiday->{holiday},
@@ -661,10 +970,26 @@ export async function get6SecondSemesterUpcomingEvents() {
     title,
     date,
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     semester->{semester},
     holiday->{holiday},
@@ -679,10 +1004,26 @@ export async function get6SummerUpcomingEvents() {
     title,
     date,
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     semester->{semester},
     holiday->{holiday},
@@ -697,10 +1038,26 @@ export async function get6SecondSummerUpcomingEvents() {
     title,
     date,
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     semester->{semester},
     holiday->{holiday},
@@ -715,10 +1072,26 @@ export async function getLatestGazette() {
   const query = groq`*[_type == "gazette"] | order(publishedAt desc)[0] {
     title,
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     mainImage{
       asset->,
@@ -736,10 +1109,26 @@ export async function getAllGazette() {
   const query = groq`*[_type == "gazette"] | order(publishedAt desc) {
     title,
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     mainImage{
       asset->,
@@ -780,10 +1169,26 @@ export async function getLatestSulimbang() {
  const query = groq`*[_type == "sulimbang"] | order(publishedAt desc)[0] {
     title,
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     mainImage{
       asset->,
@@ -802,10 +1207,26 @@ export async function sulimbanglatestshown() {
  const query = groq`*[_type == "sulimbang"] | order(publishedAt desc)[0..2] {
     title,
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     mainImage{
       asset->,
@@ -836,10 +1257,26 @@ export async function get3LatestGazette() {
   const query = groq`*[_type == "gazette"] | order(publishedAt desc)[0..2] {
     title,
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     mainImage{
       asset->,
@@ -909,10 +1346,26 @@ export async function getLatestAnnualReport() {
   const query = groq`*[_type == "annualReport"] | order(publishedAt desc)[0] {
     title,
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     mainImage{
       asset->,
@@ -929,10 +1382,26 @@ export async function get3LatestAnnualReport() {
   const query = groq`*[_type == "annualReport"] | order(publishedAt desc)[0..2] {
     title,
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     mainImage{
       asset->,
@@ -949,10 +1418,26 @@ export async function get1_3LatestAnnualReport() {
   const query = groq`*[_type == "annualReport"] | order(publishedAt desc)[1..3] {
     title,
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     mainImage{
       asset->,
@@ -969,10 +1454,26 @@ export async function get1_4LatestAnnualReport() {
   const query = groq`*[_type == "annualReport"] | order(publishedAt desc)[1..4] {
     title,
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     mainImage{
       asset->,
@@ -989,10 +1490,26 @@ export async function get1_6LatestAnnualReport() {
   const query = groq`*[_type == "annualReport"] | order(publishedAt desc)[1..6] {
     title,
     body[]{
+      _type,
+      _key,
       children[]{
         text
       },
-      asset->{url},
+      asset->{
+        _id,
+        url,
+        metadata {
+          dimensions {
+            width,
+            height,
+            aspectRatio
+          }
+        }
+      },
+      caption,
+      alt,
+      crop,
+      hotspot,
     },
     mainImage{
       asset->,
@@ -1062,28 +1579,34 @@ export async function getRelatedArticles(currentArticleId, subjectId, limit = 3)
     return [];
   }
 
-  const query = `
-    *[_type == "article" && 
-     _id != $currentArticleId && 
-     references($subjectId)] | 
-    order(publishedAt desc)[0...$limit] {
-      _id,
-      title,
-      slug,
-      publishedAt,
-      mainImage,
-      body,
-      "articleSubject": articleSubject->subject
-    }
-  `;
-  
-  const params = { 
-    currentArticleId, 
-    subjectId, 
-    limit 
-  };
-  
-  return await client.fetch(query, params);
+  try {
+    const query = `
+      *[_type == "article" && 
+       _id != $currentArticleId && 
+       references($subjectId)] | 
+      order(publishedAt desc)[0...$limit] {
+        _id,
+        title,
+        slug,
+        publishedAt,
+        mainImage,
+        body,
+        "articleSubject": articleSubject->subject
+      }
+    `;
+    
+    const params = { 
+      currentArticleId, 
+      subjectId, 
+      limit 
+    };
+    
+    const result = await client.fetch(query, params);
+    return Array.isArray(result) ? result : [];
+  } catch (error) {
+    console.error('Error fetching related articles:', error);
+    return [];
+  }
 }
 
 export async function getCommencementPhotos(name, birthDate) {
