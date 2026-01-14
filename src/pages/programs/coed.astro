@@ -153,9 +153,9 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 			<div class="absolute inset-0 z-0 overflow-hidden">
 
-				<video autoplay muted loop class="w-full h-full object-cover transform scale-110" id="heroVideo">
+				<video id="hero-video" autoplay muted class="video-pan">
 
-					<source src="/video/msucamp.mp4" type="video/mp4">
+					<source src="/video/2026video.mp4" type="video/mp4">
 
 					<!-- Fallback image -->
 
@@ -311,33 +311,19 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 				<div class="max-w-5xl mx-auto text-center">
 
-					<!-- Enhanced Logo with glow effect -->
-
-					<div class="mb-4 animate-fadeInUp">
-
-						<div class="relative inline-block">
-
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-32 w-32 mx-auto mb-3 text-white">
-
-								<path fill="currentColor" d="M12 3L1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82Z"/>
-
-							</svg>
-
-							<div class="absolute inset-0 bg-msu-deep-ocean/20 blur-xl rounded-full animate-ping"></div>
-
-						</div>
-
+					<!-- University Wordmark Logo -->
+					<div class="mb-4 sm:mb-6 md:mb-8 animate-fadeInUp">
+						<img 
+							src="/images/msutcto_wordmark.png" 
+							alt="MSU-TCTO Wordmark" 
+							class="h-auto w-full max-w-[180px] sm:max-w-[220px] md:max-w-[280px] lg:max-w-[340px] xl:max-w-[400px] 2xl:max-w-[460px] mx-auto transition-all duration-500 hover:scale-105"
+							loading="eager"
+						>
 					</div>
 
-					<!-- Enhanced Typography with gradient text using Poppins font - Mobile Optimized -->
-
-					<h1 class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold mb-4 sm:mb-6 md:mb-8 leading-tight animate-fadeInUp px-4" style="font-family: 'Poppins', Arial, sans-serif; font-weight: 400;">
-
-						<span class="bg-gradient-to-r from-msu-bgc-color via-msu-deep-ocean via-msu-deep-ocean to-msu-bgc-color bg-clip-text text-transparent">
-
-							College of Education
-						</span>
-
+					<!-- Enhanced Typography with white text using Poppins font - Mobile Optimized -->
+					<h1 class="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-bold mb-4 sm:mb-6 md:mb-8 leading-tight animate-fadeInUp px-4 text-white" style="font-family: 'Poppins', Arial, sans-serif; font-weight: 400;">
+						College of Education
 					</h1>
 
 					<!-- Enhanced subtitle with animated underline - Mobile Optimized -->
@@ -13220,5 +13206,74 @@ document.head.appendChild(style);
 			});
 		});
 	</script>
+
+<style>
+    /* Video panning animation - smooth movement for 1920x1080 video */
+    @keyframes videoPan {
+        0% {
+            transform: translate(-50%, -50%) scale(1.5) translate(0%, 0%);
+        }
+        25% {
+            transform: translate(-50%, -50%) scale(1.5) translate(-5%, -3%);
+        }
+        50% {
+            transform: translate(-50%, -50%) scale(1.5) translate(-8%, -5%);
+        }
+        75% {
+            transform: translate(-50%, -50%) scale(1.5) translate(-5%, -3%);
+        }
+        100% {
+            transform: translate(-50%, -50%) scale(1.5) translate(0%, 0%);
+        }
+    }
+    
+    .video-pan {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 120vw;
+        height: 120vh;
+        min-width: 120%;
+        min-height: 120%;
+        object-fit: cover;
+        transform-origin: center center;
+        animation: videoPan 20s ease-in-out infinite;
+        will-change: transform;
+    }
+    
+    /* Ensure video container covers full viewport */
+    section.relative.bg-msu-main-color {
+        overflow: hidden;
+    }
+    
+    .absolute.inset-0.z-0 {
+        overflow: hidden;
+    }
+</style>
+
+<script>
+// Video starts at 0:00:00 and loops at 0:01:14 (74 seconds)
+document.addEventListener('DOMContentLoaded', function() {
+  const heroVideo = document.getElementById('hero-video');
+  if (heroVideo) {
+    // Ensure video starts at 0:00:00
+    heroVideo.currentTime = 0;
+    
+    // Listen for time updates to loop at 0:01:14
+    heroVideo.addEventListener('timeupdate', function() {
+      // If video reaches 74 seconds (0:01:14), loop back to start
+      if (heroVideo.currentTime >= 74) {
+        heroVideo.currentTime = 0;
+      }
+    });
+    
+    // Also handle when video ends (fallback)
+    heroVideo.addEventListener('ended', function() {
+      heroVideo.currentTime = 0;
+      heroVideo.play();
+    });
+  }
+});
+</script>
 
 </Layout>
