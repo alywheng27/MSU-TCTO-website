@@ -112,9 +112,9 @@ try {
 
 			<div class="absolute inset-0 z-0 overflow-hidden">
 
-				<video autoplay muted loop class="w-full h-full object-cover transform scale-110" id="heroVideo">
+				<video id="hero-video" autoplay muted class="video-pan">
 
-					<source src="/video/msucamp.mp4" type="video/mp4">
+					<source src="/video/2026video.mp4" type="video/mp4">
 
 					<!-- Fallback image -->
 
@@ -269,44 +269,19 @@ try {
 
 				<div class="max-w-5xl mx-auto text-center">
 
-					<!-- Enhanced Logo with glow effect -->
-
-					<div class="mb-4 animate-fadeInUp">
-
-						<div class="relative inline-block">
-
-
-
-							<svg xmlns="http://www.w3.org/2000/svg" width="8em" height="8em" viewBox="0 0 48 48" aria-hidden="true" role="img" class="h-32 w-32 mx-auto mb-3" preserveAspectRatio="xMidYMid meet">
-								<title>arts-and-crafts</title>
-								<g id="Layer_2" data-name="Layer 2">
-									<g id="invisible_box" data-name="invisible box">
-										<rect width="48" height="48" fill="none"/>
-									</g>
-									<g id="icons_Q2" data-name="icons Q2">
-										<path fill="white" d="M44.4,11.4,36.6,3.6a1.9,1.9,0,0,0-2.8,0L21.4,16l-2.8,2.8-2.8,2.8L13,24.4,3.6,33.8A2,2,0,0,0,3,35.2V43a2,2,0,0,0,2,2h7.8a2,2,0,0,0,1.4-.6L24.4,34.1l2.9-2.8,1-1,2.8-2.8L44.4,14.2A1.9,1.9,0,0,0,44.4,11.4ZM11.9,41H7V36.1L29.4,13.7l4.9,4.9ZM37.1,15.8l-4.9-4.9,3-3.1,5,5Z"/>
-										<g>
-											<path fill="white" d="M9,3A7,7,0,0,0,4.5,15.3l7.1,6.2,2.8-2.9L7.1,12.3A2.8,2.8,0,0,1,6,10.1a3.1,3.1,0,0,1,.9-2.2A2.9,2.9,0,0,1,9,7h.2a2.8,2.8,0,0,1,2.1,1l6.4,7.4,2.9-2.9-6.2-7A7.2,7.2,0,0,0,9.3,3Z"/>
-											<path fill="white" d="M37.3,34.9a1.7,1.7,0,0,1,1.4.5c.4.4.5,1.1.4,2.7a14.6,14.6,0,0,0,.2,2.9A8.7,8.7,0,0,1,35,39.7,4,4,0,0,1,34,37v-.4l.5-.4.4-.5.9-.7h1.4M34,28.7l-6.2,6.1L30,36.9a7.8,7.8,0,0,0,2.3,5.8c2.3,1.9,5.8,2.3,8.6,2.3s3.8-.3,4.2-.3.9-.6.9-.8-2.3-1.3-2.8-3.6.7-5.5-1.8-7.8a5.7,5.7,0,0,0-4.1-1.6H36.1L34,28.7Z"/>
-										</g>
-									</g>
-								</g>
-							</svg>
-
-							<div class="absolute inset-0 bg-msu-deep-ocean/20 blur-xl rounded-full animate-ping"></div>
-
-						</div>
-
+					<!-- University Wordmark Logo -->
+					<div class="mb-4 sm:mb-6 md:mb-8 animate-fadeInUp">
+						<img 
+							src="/images/msutcto_wordmark.png" 
+							alt="MSU-TCTO Wordmark" 
+							class="h-auto w-full max-w-[180px] sm:max-w-[220px] md:max-w-[280px] lg:max-w-[340px] xl:max-w-[400px] 2xl:max-w-[460px] mx-auto transition-all duration-500 hover:scale-105"
+							loading="eager"
+						>
 					</div>
 
-					<!-- Enhanced Typography with gradient text using Poppins font - Mobile Optimized -->
-
-					<h1 class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold mb-4 sm:mb-6 md:mb-8 leading-tight animate-fadeInUp px-4" style="font-family: 'Poppins', Arial, sans-serif; font-weight: 400;">
-
-						<span class="bg-gradient-to-r from-msu-bgc-color via-msu-deep-ocean via-msu-deep-ocean to-msu-bgc-color bg-clip-text text-transparent">
-							College of Arts and Sciences
-						</span>
-
+					<!-- Enhanced Typography with white text using Poppins font - Mobile Optimized -->
+					<h1 class="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-bold mb-4 sm:mb-6 md:mb-8 leading-tight animate-fadeInUp px-4 text-white" style="font-family: 'Poppins', Arial, sans-serif; font-weight: 400;">
+						College of Arts and Sciences
 					</h1>
 
 					<!-- Enhanced subtitle with animated underline - Mobile Optimized -->
@@ -14778,6 +14753,75 @@ document.head.appendChild(style);
 			});
 		});
 	</script>
+
+<style>
+    /* Video panning animation - smooth movement for 1920x1080 video */
+    @keyframes videoPan {
+        0% {
+            transform: translate(-50%, -50%) scale(1.5) translate(0%, 0%);
+        }
+        25% {
+            transform: translate(-50%, -50%) scale(1.5) translate(-5%, -3%);
+        }
+        50% {
+            transform: translate(-50%, -50%) scale(1.5) translate(-8%, -5%);
+        }
+        75% {
+            transform: translate(-50%, -50%) scale(1.5) translate(-5%, -3%);
+        }
+        100% {
+            transform: translate(-50%, -50%) scale(1.5) translate(0%, 0%);
+        }
+    }
+    
+    .video-pan {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 120vw;
+        height: 120vh;
+        min-width: 120%;
+        min-height: 120%;
+        object-fit: cover;
+        transform-origin: center center;
+        animation: videoPan 20s ease-in-out infinite;
+        will-change: transform;
+    }
+    
+    /* Ensure video container covers full viewport */
+    section.relative.bg-msu-main-color {
+        overflow: hidden;
+    }
+    
+    .absolute.inset-0.z-0 {
+        overflow: hidden;
+    }
+</style>
+
+<script>
+// Video starts at 0:00:00 and loops at 0:01:14 (74 seconds)
+document.addEventListener('DOMContentLoaded', function() {
+  const heroVideo = document.querySelector('video#hero-video') as HTMLVideoElement;
+  if (heroVideo) {
+    // Ensure video starts at 0:00:00
+    heroVideo.currentTime = 0;
+    
+    // Listen for time updates to loop at 0:01:14
+    heroVideo.addEventListener('timeupdate', function() {
+      // If video reaches 74 seconds (0:01:14), loop back to start
+      if (heroVideo.currentTime >= 74) {
+        heroVideo.currentTime = 0;
+      }
+    });
+    
+    // Also handle when video ends (fallback)
+    heroVideo.addEventListener('ended', function() {
+      heroVideo.currentTime = 0;
+      heroVideo.play();
+    });
+  }
+});
+</script>
 
 	<!-- Addendum for Doctorate Degree -->
 	<!-- <section class="py-12 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">

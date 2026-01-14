@@ -11,7 +11,7 @@
   const config = {
     enableBlur: true,
     enableWatermark: true,
-    enableConsoleWarnings: true,
+    enableConsoleWarnings: false, // Disabled - no visible error checking
     enableDevToolsDetection: true,
     enableFullScreenProtection: true,
     blurIntensity: '8px', // Reduced for mobile performance
@@ -132,7 +132,7 @@
     if (screenshotsDisabled && Date.now() < disableUntil) {
       e.preventDefault();
       e.stopPropagation();
-      showWarningMessage('Screenshots are temporarily disabled due to detection.');
+      // Silent protection - no visible warnings
       return false;
     }
     
@@ -142,7 +142,7 @@
       // Immediately blur logo before screenshot
       makeLogosBlack(config.autoDisableDuration, true);
       showProtectionOverlay();
-      showWarningMessage('Screenshot detected. Logo auto-blurred.');
+      // Silent protection - no visible warnings
       screenshotAttempts++;
       setTimeout(() => hideProtectionOverlay(), 4000);
       // Make logos black IMMEDIATELY and auto-disable
@@ -150,17 +150,14 @@
       
       // Show professional protection overlay
       showProtectionOverlay();
-      showWarningMessage('Screenshot detected. Protection auto-enabled.');
+      // Silent protection - no visible warnings
       
       e.preventDefault();
       e.stopPropagation();
       e.stopImmediatePropagation();
       screenshotAttempts++;
       
-      if (config.enableConsoleWarnings) {
-        console.warn('%c🛡️ SCREENSHOT BLOCKED', 'color: #dc2626; font-size: 14px; font-weight: bold;');
-        console.warn('Screenshots auto-disabled. This content is protected.');
-      }
+      // Silent protection - no console warnings
       
       // Keep protection active
       setTimeout(() => {
@@ -176,7 +173,7 @@
       // Blur logo IMMEDIATELY before the screenshot can be taken
       makeLogosBlack(config.autoDisableDuration, true);
       showProtectionOverlay();
-      showWarningMessage('Screenshot tool detected. Logo auto-blurred.');
+      // Silent protection - no visible warnings
       e.preventDefault();
       e.stopPropagation();
       e.stopImmediatePropagation();
@@ -195,7 +192,7 @@
     if ((e.key === 'PrintScreen' || e.keyCode === 44 || e.code === 'PrintScreen') && e.altKey) {
       makeLogosBlack(config.autoDisableDuration, true);
       showProtectionOverlay();
-      showWarningMessage('Screenshot detected. Protection auto-enabled.');
+      // Silent protection - no visible warnings
       e.preventDefault();
       e.stopPropagation();
       screenshotAttempts++;
@@ -210,11 +207,9 @@
       screenshotAttempts++;
       makeLogosBlack(config.autoDisableDuration, true);
       showProtectionOverlay();
-      showWarningMessage('Developer Tools detected. Protection auto-enabled.');
+      // Silent protection - no visible warnings
       setTimeout(() => hideProtectionOverlay(), 4000);
-      if (config.enableConsoleWarnings) {
-        console.warn('%c🛡️ Developer Tools BLOCKED', 'color: #dc2626; font-size: 13px; font-weight: bold;');
-      }
+      // Silent protection - no console warnings
       return false;
     }
 
@@ -225,11 +220,9 @@
       screenshotAttempts++;
       makeLogosBlack(config.autoDisableDuration, true);
       showProtectionOverlay();
-      showWarningMessage('Developer Tools detected. Protection auto-enabled.');
+      // Silent protection - no visible warnings
       setTimeout(() => hideProtectionOverlay(), 4000);
-      if (config.enableConsoleWarnings) {
-        console.warn('%c🛡️ Developer Tools BLOCKED', 'color: #dc2626; font-size: 13px; font-weight: bold;');
-      }
+      // Silent protection - no console warnings
       return false;
     }
 
@@ -257,7 +250,7 @@
       e.stopPropagation();
       screenshotAttempts++;
       makeLogosBlack(config.autoDisableDuration, true);
-      showWarningMessage('View source is disabled. Protection auto-enabled.');
+      // Silent protection - no visible warnings
       return false;
     }
 
@@ -267,7 +260,7 @@
       e.stopPropagation();
       screenshotAttempts++;
       makeLogosBlack(config.autoDisableDuration, true);
-      showWarningMessage('Saving is disabled. Protection auto-enabled.');
+      // Silent protection - no visible warnings
       return false;
   }
 
@@ -277,7 +270,7 @@
       e.stopPropagation();
       screenshotAttempts++;
       makeLogosBlack(config.autoDisableDuration, true);
-      showWarningMessage('Printing is disabled. Protection auto-enabled.');
+      // Silent protection - no visible warnings
       return false;
     }
 
@@ -287,7 +280,7 @@
       e.stopPropagation();
       screenshotAttempts++;
       makeLogosBlack(config.autoDisableDuration, true);
-      showWarningMessage('Developer Tools command palette blocked. Protection auto-enabled.');
+      // Silent protection - no visible warnings
       return false;
     }
 
@@ -315,7 +308,7 @@
       e.stopPropagation();
       screenshotAttempts++;
       makeLogosBlack(config.autoDisableDuration, true);
-      showWarningMessage('Developer Tools blocked. Protection auto-enabled.');
+      // Silent protection - no visible warnings
       return false;
     }
 
@@ -342,67 +335,12 @@
 
   /**
    * Professional warning message with modern design
+   * Silent mode - no visible warnings to users
    */
   function showWarningMessage(message) {
-    // Remove existing warning if any
-    const existingWarning = document.getElementById('screenshot-warning');
-    if (existingWarning) {
-      existingWarning.remove();
-    }
-
-    const warning = document.createElement('div');
-    warning.id = 'screenshot-warning';
-    warning.style.cssText = `
-      position: fixed;
-      top: clamp(16px, 4vh, 24px);
-      left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(135deg, rgba(220, 38, 38, 0.98), rgba(185, 28, 28, 0.98));
-      color: white;
-      padding: 14px 20px;
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-      z-index: 1000000;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      font-size: clamp(12px, 2.5vw, 14px);
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      pointer-events: none;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      max-width: 90%;
-      text-align: center;
-    `;
-    warning.textContent = message;
-
-    // Add professional animation
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes slideDown {
-        from {
-          opacity: 0;
-          transform: translateX(-50%) translateY(-30px) scale(0.95);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(-50%) translateY(0) scale(1);
-        }
-      }
-    `;
-    if (!document.getElementById('screenshot-warning-style')) {
-      style.id = 'screenshot-warning-style';
-      document.head.appendChild(style);
-    }
-
-    document.body.appendChild(warning);
-
-    setTimeout(() => {
-      warning.style.opacity = '0';
-      warning.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-      warning.style.transform = 'translateX(-50%) translateY(-20px) scale(0.95)';
-      setTimeout(() => warning.remove(), 400);
-    }, 3500);
+    // Silent protection - no visible warnings displayed
+    // Function kept for compatibility but does nothing visible
+    return;
   }
 
   /**
@@ -502,16 +440,10 @@
       screenshotsDisabled = true;
       disableUntil = Date.now() + config.autoDisableDuration;
       makeLogosBlack(config.autoDisableDuration, true);
-          showProtectionOverlay();
-      showWarningMessage('Developer Tools detected. Protection auto-enabled. Screenshots disabled.');
-          
-          if (config.enableConsoleWarnings) {
-        console.warn('%c🛡️ DEVELOPER TOOLS DETECTED - ACCESS BLOCKED', 'color: #dc2626; font-size: 16px; font-weight: bold;');
-        console.warn('%c⚠️ Screenshots are now disabled for your protection.', 'color: #f59e0b; font-size: 14px;');
-        console.warn('%c🔒 This content is protected. Please close Developer Tools.', 'color: #dc2626; font-size: 12px;');
-          }
-          
-          setTimeout(() => hideProtectionOverlay(), 5000);
+      showProtectionOverlay();
+      // Silent protection - no visible warnings
+      // Silent protection - no console warnings
+      setTimeout(() => hideProtectionOverlay(), 5000);
       
       // Continuously check and re-trigger if DevTools remains open
       const continuousCheck = setInterval(() => {
@@ -570,9 +502,7 @@
         // Auto-disable when detected
         makeLogosBlack(isMobile ? config.autoDisableDuration : config.autoDisableDuration, true);
         showProtectionOverlay();
-        if (config.enableConsoleWarnings) {
-          console.warn('%c🛡️ SCREENSHOT ATTEMPT DETECTED', 'color: #dc2626; font-size: 13px; font-weight: bold;');
-        }
+        // Silent protection - no console warnings
         setTimeout(() => hideProtectionOverlay(), 3000);
       } else {
         // Page is visible again - check if still in auto-disable period
@@ -594,10 +524,8 @@
       // Snipping tool often causes window to lose focus
       makeLogosBlack(config.autoDisableDuration, true);
       showProtectionOverlay();
-      showWarningMessage('Window focus lost. Logo auto-blurred for protection.');
-      if (config.enableConsoleWarnings) {
-        console.warn('%c🛡️ SCREENSHOT ATTEMPT DETECTED - Window Blur', 'color: #dc2626; font-size: 13px; font-weight: bold;');
-      }
+      // Silent protection - no visible warnings
+      // Silent protection - no console warnings
       setTimeout(() => hideProtectionOverlay(), 3000);
     });
     
@@ -620,10 +548,8 @@
         // Orientation change might indicate screenshot attempt
         makeLogosBlack(config.autoDisableDuration, true); // Auto-disable on orientation change
         showProtectionOverlay();
-        showWarningMessage('Orientation change detected. Protection auto-enabled.');
-        if (config.enableConsoleWarnings) {
-          console.warn('%c🛡️ SCREENSHOT ATTEMPT DETECTED', 'color: #dc2626; font-size: 13px; font-weight: bold;');
-        }
+        // Silent protection - no visible warnings
+        // Silent protection - no console warnings
         setTimeout(() => hideProtectionOverlay(), 3000);
         lastOrientation = window.orientation;
       });
@@ -661,9 +587,7 @@
           if (check()) {
             screenshotAttempts++;
             makeLogosBlack(10000);
-            if (config.enableConsoleWarnings) {
-              console.warn('%c⚠️ Screenshot Extension Detected', 'color: red; font-size: 14px; font-weight: bold;');
-            }
+            // Silent protection - no console warnings
             // Only logo protection, no screen overlay
           }
         } catch (e) {
@@ -682,7 +606,7 @@
     e.stopImmediatePropagation();
     screenshotAttempts++;
     makeLogosBlack(config.autoDisableDuration, true);
-    showWarningMessage('Right-click is disabled. Protection auto-enabled.');
+    // Silent protection - no visible warnings
     return false;
   }
 
@@ -710,7 +634,7 @@
         e.stopPropagation();
         screenshotAttempts++;
         makeLogosBlack(config.autoDisableDuration, true);
-        showWarningMessage('Copying/Cutting/Pasting is disabled. Protection auto-enabled.');
+        // Silent protection - no visible warnings
         return false;
       }
     }
@@ -1137,12 +1061,8 @@
       screenshotAttempts++;
       makeLogosBlack(config.autoDisableDuration, true); // Auto-disable on canvas capture
       showProtectionOverlay();
-      showWarningMessage('Canvas capture detected. Protection auto-enabled.');
-      
-      if (config.enableConsoleWarnings) {
-        console.warn('%c🛡️ SCREENSHOT BLOCKED', 'color: #dc2626; font-size: 14px; font-weight: bold;');
-      }
-      
+      // Silent protection - no visible warnings
+      // Silent protection - no console warnings
       setTimeout(() => hideProtectionOverlay(), 4000);
       
       // Return blank/black canvas data to prevent screenshot
@@ -1164,12 +1084,8 @@
       screenshotAttempts++;
       makeLogosBlack(config.autoDisableDuration, true); // Auto-disable on image data extraction
       showProtectionOverlay();
-      showWarningMessage('Image capture detected. Protection auto-enabled.');
-      
-      if (config.enableConsoleWarnings) {
-        console.warn('%c🛡️ SCREENSHOT BLOCKED', 'color: #dc2626; font-size: 14px; font-weight: bold;');
-      }
-      
+      // Silent protection - no visible warnings
+      // Silent protection - no console warnings
       setTimeout(() => hideProtectionOverlay(), 4000);
       
       // Return blank image data to prevent screenshot extraction
@@ -1237,10 +1153,7 @@
               screenshotAttempts++;
               makeLogosBlack(10000);
               // Only logo protection, no screen overlay
-              
-              if (config.enableConsoleWarnings) {
-                console.warn('%c⚠️ Screenshot Tool Detected', 'color: red; font-size: 14px; font-weight: bold;');
-              }
+              // Silent protection - no console warnings
             }
           }
         });
@@ -1427,10 +1340,7 @@
             // Hidden canvas detected - might be a screenshot tool
             screenshotAttempts++;
             makeLogosBlack(10000);
-            
-            if (config.enableConsoleWarnings) {
-              console.warn('%c⚠️ Hidden Canvas Detected', 'color: orange; font-size: 14px;');
-            }
+            // Silent protection - no console warnings
           }
         });
       }
@@ -1471,7 +1381,7 @@
         screenshotAttempts++;
         makeLogosBlack(config.autoDisableDuration, true); // Auto-disable on multi-touch
         showProtectionOverlay();
-        showWarningMessage('Screenshot gesture detected. Protection auto-enabled.');
+        // Silent protection - no visible warnings
         setTimeout(() => hideProtectionOverlay(), 3000);
       }
     }, { passive: true });
@@ -1601,7 +1511,7 @@
       e.stopImmediatePropagation();
       screenshotAttempts++;
       makeLogosBlack(config.autoDisableDuration, true);
-      showWarningMessage('Copying is disabled. Protection auto-enabled.');
+      // Silent protection - no visible warnings
       return false;
     }, true);
 
@@ -1623,7 +1533,7 @@
       e.stopImmediatePropagation();
       screenshotAttempts++;
       makeLogosBlack(config.autoDisableDuration, true);
-      showWarningMessage('Cutting is disabled. Protection auto-enabled.');
+      // Silent protection - no visible warnings
       return false;
     }, true);
 
@@ -1643,7 +1553,7 @@
       e.preventDefault();
       e.stopPropagation();
       e.stopImmediatePropagation();
-      showWarningMessage('Pasting is disabled.');
+      // Silent protection - no visible warnings
       return false;
     }, true);
 

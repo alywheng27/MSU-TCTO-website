@@ -139,9 +139,9 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 			<div class="absolute inset-0 z-0 overflow-hidden">
 
-				<video autoplay muted loop class="w-full h-full object-cover transform scale-110" id="heroVideo">
+				<video id="hero-video" autoplay muted class="video-pan">
 
-					<source src="/video/msucamp.mp4" type="video/mp4">
+					<source src="/video/2026video.mp4" type="video/mp4">
 
 					<!-- Fallback image -->
 
@@ -297,31 +297,19 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 				<div class="max-w-5xl mx-auto text-center">
 
-					<!-- Enhanced Logo with glow effect -->
-
-					<div class="mb-4 animate-fadeInUp">
-
-						<div class="relative inline-block">
-
-							<svg class="h-32 w-32 mx-auto mb-3 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-								<path d="M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0ZM22,12a9.938,9.938,0,0,1-1.662,5.508l-1.192-1.193A.5.5,0,0,1,19,15.962V15a3,3,0,0,0-3-3H13a1,1,0,0,1-1-1v-.5a.5.5,0,0,1,.5-.5A2.5,2.5,0,0,0,15,7.5v-1a.5.5,0,0,1,.5-.5h1.379a2.516,2.516,0,0,0,1.767-.732l.377-.377A9.969,9.969,0,0,1,22,12Zm-19.951.963,3.158,3.158A2.978,2.978,0,0,0,7.329,17H10a1,1,0,0,1,1,1v3.949A10.016,10.016,0,0,1,2.049,12.963ZM13,21.949V18a3,3,0,0,0-3-3H7.329a1,1,0,0,1-.708-.293L2.163,10.249A9.978,9.978,0,0,1,17.456,3.63l-.224.224A.507.507,0,0,1,16.879,4H15.5A2.5,2.5,0,0,0,13,6.5v1a.5.5,0,0,1-.5.5A2.5,2.5,0,0,0,10,10.5V11a3,3,0,0,0,3,3h3a1,1,0,0,1,1,1v.962a2.516,2.516,0,0,0,.732,1.767l1.337,1.337A9.971,9.971,0,0,1,13,21.949Z"/>
-							</svg>
-
-							<div class="absolute inset-0 bg-msu-deep-ocean/20 blur-xl rounded-full animate-ping"></div>
-
-						</div>
-
+					<!-- University Wordmark Logo -->
+					<div class="mb-4 sm:mb-6 md:mb-8 animate-fadeInUp">
+						<img 
+							src="/images/msutcto_wordmark.png" 
+							alt="MSU-TCTO Wordmark" 
+							class="h-auto w-full max-w-[180px] sm:max-w-[220px] md:max-w-[280px] lg:max-w-[340px] xl:max-w-[400px] 2xl:max-w-[460px] mx-auto transition-all duration-500 hover:scale-105"
+							loading="eager"
+						>
 					</div>
 
-					<!-- Enhanced Typography with gradient text using Poppins font - Mobile Optimized -->
-
-					<h1 class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold mb-4 sm:mb-6 md:mb-8 leading-tight animate-fadeInUp px-4" style="font-family: 'Poppins', Arial, sans-serif; font-weight: 400;">
-
-						<span class="bg-gradient-to-r from-msu-bgc-color via-msu-deep-ocean via-msu-deep-ocean to-msu-bgc-color bg-clip-text text-transparent">
-
-							Institute of Oceanography and Environmental Science
-						</span>
-
+					<!-- Enhanced Typography with white text using Poppins font - Mobile Optimized -->
+					<h1 class="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-bold mb-4 sm:mb-6 md:mb-8 leading-tight animate-fadeInUp px-4 text-white" style="font-family: 'Poppins', Arial, sans-serif; font-weight: 400;">
+						Institute of Oceanography and Environmental Science
 					</h1>
 
 					<!-- Enhanced subtitle with animated underline -->
@@ -10853,5 +10841,74 @@ document.head.appendChild(style);
 			});
 		});
 	</script>
+
+<style>
+    /* Video panning animation - smooth movement for 1920x1080 video */
+    @keyframes videoPan {
+        0% {
+            transform: translate(-50%, -50%) scale(1.5) translate(0%, 0%);
+        }
+        25% {
+            transform: translate(-50%, -50%) scale(1.5) translate(-5%, -3%);
+        }
+        50% {
+            transform: translate(-50%, -50%) scale(1.5) translate(-8%, -5%);
+        }
+        75% {
+            transform: translate(-50%, -50%) scale(1.5) translate(-5%, -3%);
+        }
+        100% {
+            transform: translate(-50%, -50%) scale(1.5) translate(0%, 0%);
+        }
+    }
+    
+    .video-pan {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 120vw;
+        height: 120vh;
+        min-width: 120%;
+        min-height: 120%;
+        object-fit: cover;
+        transform-origin: center center;
+        animation: videoPan 20s ease-in-out infinite;
+        will-change: transform;
+    }
+    
+    /* Ensure video container covers full viewport */
+    section.relative.bg-msu-main-color {
+        overflow: hidden;
+    }
+    
+    .absolute.inset-0.z-0 {
+        overflow: hidden;
+    }
+</style>
+
+<script>
+// Video starts at 0:00:00 and loops at 0:01:14 (74 seconds)
+document.addEventListener('DOMContentLoaded', function() {
+  const heroVideo = document.getElementById('hero-video');
+  if (heroVideo) {
+    // Ensure video starts at 0:00:00
+    heroVideo.currentTime = 0;
+    
+    // Listen for time updates to loop at 0:01:14
+    heroVideo.addEventListener('timeupdate', function() {
+      // If video reaches 74 seconds (0:01:14), loop back to start
+      if (heroVideo.currentTime >= 74) {
+        heroVideo.currentTime = 0;
+      }
+    });
+    
+    // Also handle when video ends (fallback)
+    heroVideo.addEventListener('ended', function() {
+      heroVideo.currentTime = 0;
+      heroVideo.play();
+    });
+  }
+});
+</script>
 
 </Layout>

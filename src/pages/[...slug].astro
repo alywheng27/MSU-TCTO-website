@@ -15,13 +15,59 @@ import { getDay } from '../js/date';
 
 import { isURL } from '../js/regEx';
 
+// Helper function to extract YouTube video ID from URL
+const getYouTubeVideoId = (url: string): string | null => {
+  try {
+    const urlObj = new URL(url);
+    
+    // Handle youtube.com/watch?v=VIDEO_ID
+    if (urlObj.hostname.includes('youtube.com') && urlObj.pathname === '/watch') {
+      return urlObj.searchParams.get('v');
+    }
+    
+    // Handle youtu.be/VIDEO_ID
+    if (urlObj.hostname === 'youtu.be') {
+      return urlObj.pathname.slice(1);
+    }
+    
+    // Handle youtube.com/embed/VIDEO_ID
+    if (urlObj.hostname.includes('youtube.com') && urlObj.pathname.startsWith('/embed/')) {
+      return urlObj.pathname.split('/')[2];
+    }
+    
+    // Handle youtube.com/v/VIDEO_ID
+    if (urlObj.hostname.includes('youtube.com') && urlObj.pathname.startsWith('/v/')) {
+      return urlObj.pathname.split('/')[2];
+    }
+    
+    return null;
+  } catch {
+    return null;
+  }
+};
+
+// Helper function to check if URL is a YouTube link
+const isYouTubeURL = (url: string): boolean => {
+  return getYouTubeVideoId(url) !== null;
+};
+
 import { getArticle, getRelatedArticles } from '../api/api';
 const articles = await getArticle();
 
 const { slug } = Astro.params;
-const article = articles.find((article) => article.slug.current === slug);
+if (!articles || !Array.isArray(articles) || articles.length === 0) {
+  return Astro.redirect("/404");
+}
+
+const article = articles.find((article) => article?.slug?.current === slug);
 if (!article) return Astro.redirect("/404");
 const { title, author, publishedAt, articleSubject, mainImage, body, gallery } = article;
+
+// Ensure body and gallery are always arrays (handle null/undefined cases)
+// Note: Gallery is required with min(1) in Sanity schema, but we still check for safety
+// Filter out null/undefined values from arrays
+const safeBody = (body && Array.isArray(body)) ? body.filter((b: any) => b != null) : [];
+const safeGallery = (gallery && Array.isArray(gallery)) ? gallery.filter((g: any) => g != null) : [];
 
 // Now we can safely use the title since it's been initialized
 const siteUrl = Astro.site ? new URL(Astro.site).origin : 'https://msutcto.edu.ph';
@@ -29,29 +75,63 @@ const currentUrl = new URL(currentPath, siteUrl).href;
 const shareTitle = `${title} | MSU TCTO`;
 
 // Social media meta data
-const articleDescription = body[0]?.children[0]?.text || `Read ${title} - Latest news and stories from MSU Tawi-Tawi College of Technology and Oceanography`;
+// Safely extract description from first text block in body
+let articleDescription = `Read ${title} - Latest news and stories from MSU Tawi-Tawi College of Technology and Oceanography`;
+if (safeBody && safeBody.length > 0) {
+  const firstBlock = safeBody[0];
+  if (firstBlock && firstBlock.children && Array.isArray(firstBlock.children)) {
+    // Filter out null children and find first valid child with text
+    const validChildren = firstBlock.children.filter((c: any) => c != null && c.text != null);
+    if (validChildren.length > 0) {
+      const firstChild = validChildren[0];
+      if (firstChild && firstChild.text && typeof firstChild.text === 'string') {
+        articleDescription = firstChild.text;
+      }
+    }
+  }
+}
 
 // Lightweight extractive summary for the AI summary drawer
 function generateSummary(bodyContent: any[], maxSentences = 3, maxChars = 420) {
-  if (!Array.isArray(bodyContent)) return 'Summary not available.';
+  if (!Array.isArray(bodyContent) || bodyContent.length === 0) return 'Summary not available.';
 
   const paragraphs = bodyContent
     .map((block: any) => {
-      if (!block?.children) return '';
-      const text = block.children
-        .map((child: any) => (typeof child?.text === 'string' ? child.text : ''))
+      if (!block || !block.children || !Array.isArray(block.children) || block.children.length === 0) return '';
+      // Filter out null children first
+      const validChildren = block.children.filter((c: any) => c != null);
+      if (validChildren.length === 0) return '';
+      
+      const text = validChildren
+        .map((child: any) => {
+          if (!child || !child.text || typeof child.text !== 'string') return '';
+          return child.text;
+        })
+        .filter((t: string) => t && typeof t === 'string' && t.length > 0)
         .join(' ')
         .replace(/\s+/g, ' ')
         .trim();
       return text;
     })
-    .filter((p: string) => p.length > 0);
+    .filter((p: string) => p && typeof p === 'string' && p.length > 0);
+
+  if (!Array.isArray(paragraphs) || paragraphs.length === 0) return 'Summary not available.';
 
   const combined = paragraphs.join(' ');
-  if (!combined) return 'Summary not available.';
+  if (!combined || combined.trim().length === 0) return 'Summary not available.';
 
-  const sentences = combined.split(/(?<=[.!?])\s+/).filter((s) => s.length > 0);
-  const draft = (sentences.length > 0 ? sentences.slice(0, maxSentences) : paragraphs.slice(0, 2)).join(' ');
+  const sentences = combined.split(/(?<=[.!?])\s+/).filter((s) => s && s.length > 0);
+  if (!Array.isArray(sentences) || sentences.length === 0) {
+    // Fallback to paragraphs if no sentences found
+    if (paragraphs.length > 0) {
+      const draft = paragraphs.slice(0, 2).join(' ');
+      return draft.length <= maxChars ? draft : `${draft.slice(0, maxChars)}...`;
+    }
+    return 'Summary not available.';
+  }
+
+  const draft = (sentences.length > 0 ? sentences.slice(0, maxSentences) : (paragraphs.length > 0 ? paragraphs.slice(0, 2) : [])).join(' ');
+  if (!draft || draft.length === 0) return 'Summary not available.';
 
   if (draft.length <= maxChars) return draft;
 
@@ -60,13 +140,13 @@ function generateSummary(bodyContent: any[], maxSentences = 3, maxChars = 420) {
   return `${truncated.slice(0, lastSpace > 50 ? lastSpace : maxChars)}...`;
 }
 
-const aiSummary = generateSummary(body);
+const aiSummary = generateSummary(safeBody);
 
 // Force the use of the article's main image for social media sharing
 let socialMediaImageUrl;
-if (mainImage?.asset?.url) {
+if (mainImage?.asset) {
   // Create a high-quality social media optimized version
-  socialMediaImageUrl = urlForImage(mainImage?.asset?.url)
+  socialMediaImageUrl = urlForImage(mainImage.asset)
     .width(1200)
     .height(630)
     .fit('crop')
@@ -105,59 +185,89 @@ console.log('Social Media Image Debug:', {
   siteUrl
 });
 
-const relatedArticles = await getRelatedArticles(article._id, articleSubject._id, 3);
+const relatedArticles = (article?._id && articleSubject && articleSubject._id) 
+  ? (await getRelatedArticles(article._id, articleSubject._id, 3)) || []
+  : [];
 
 // Extract all images for gallery (mainImage + gallery array + images from body)
-const galleryImages: Array<{url: string, caption?: string, alt?: string}> = [];
+const galleryImages: Array<{url: string, thumbnailUrl: string, caption?: string, alt?: string}> = [];
 const seenImageUrls = new Set<string>();
 
 // Add main image first
-if (mainImage?.asset?.url) {
-  const mainImageUrl = urlForImage(mainImage?.asset?.url).width(1600).quality(90).url();
-  if (!seenImageUrls.has(mainImageUrl)) {
-    seenImageUrls.add(mainImageUrl);
-    galleryImages.push({
-      url: mainImageUrl,
-      caption: mainImage?.caption || title,
-      alt: title
-    });
+if (mainImage?.asset) {
+  try {
+    const fullUrl = urlForImage(mainImage.asset).width(1600).quality(90).url();
+    if (fullUrl && !seenImageUrls.has(fullUrl)) {
+      seenImageUrls.add(fullUrl);
+      const thumbUrl = urlForImage(mainImage.asset).width(400).height(400).fit('crop').quality(85).url();
+      if (thumbUrl) {
+        galleryImages.push({
+          url: fullUrl,
+          thumbnailUrl: thumbUrl,
+          caption: mainImage?.caption || title,
+          alt: title
+        });
+      }
+    }
+  } catch (error) {
+    console.warn('Error processing main image for gallery:', error);
   }
 }
 
 // Add gallery images (if gallery field exists and has images)
-if (gallery && Array.isArray(gallery) && gallery.length > 0) {
-  gallery.forEach((galleryImage: any) => {
-    if (galleryImage?.asset?.url) {
-      const imageUrl = urlForImage(galleryImage?.asset?.url).width(1600).quality(90).url();
-      // Avoid duplicates
-      if (!seenImageUrls.has(imageUrl)) {
-        seenImageUrls.add(imageUrl);
-        galleryImages.push({
-          url: imageUrl,
-          caption: galleryImage.caption || '',
-          alt: galleryImage.alt || title
-        });
+if (safeGallery && safeGallery.length > 0) {
+  safeGallery.forEach((galleryImage: any) => {
+    if (galleryImage?.asset) {
+      try {
+        const fullUrl = urlForImage(galleryImage.asset).width(1600).quality(90).url();
+        if (fullUrl && !seenImageUrls.has(fullUrl)) {
+          seenImageUrls.add(fullUrl);
+          const thumbUrl = urlForImage(galleryImage.asset).width(400).height(400).fit('crop').quality(85).url();
+          if (thumbUrl) {
+            galleryImages.push({
+              url: fullUrl,
+              thumbnailUrl: thumbUrl,
+              caption: galleryImage.caption || '',
+              alt: galleryImage.alt || title
+            });
+          }
+        }
+      } catch (error) {
+        console.warn('Error processing gallery image:', error);
       }
     }
   });
 }
 
 // Extract images from body content blocks (optional - if you want to include body images)
-body.forEach((block: any) => {
-  // Check if this block has an image asset (handles both text blocks with images and image blocks)
-  if (block?.asset?.url) {
-    const imageUrl = urlForImage(block?.asset?.url).width(1600).quality(90).url();
-    // Avoid duplicates
-    if (!seenImageUrls.has(imageUrl)) {
-      seenImageUrls.add(imageUrl);
-      galleryImages.push({
-        url: imageUrl,
-        caption: block.caption || '',
-        alt: title
-      });
+if (safeBody && safeBody.length > 0) {
+  safeBody.forEach((block: any) => {
+    // Skip null blocks
+    if (!block) return;
+    
+    // Check if this block has an image asset (handles both text blocks with images and image blocks)
+    if (block?.asset) {
+      try {
+        const fullUrl = urlForImage(block.asset).width(1600).quality(90).url();
+        if (fullUrl && !seenImageUrls.has(fullUrl)) {
+          seenImageUrls.add(fullUrl);
+          const thumbUrl = urlForImage(block.asset).width(400).height(400).fit('crop').quality(85).url();
+          if (thumbUrl) {
+            galleryImages.push({
+              url: fullUrl,
+              thumbnailUrl: thumbUrl,
+              caption: block.caption || '',
+              alt: title
+            });
+          }
+        }
+      } catch (error) {
+        console.warn('Error processing body image for gallery:', error);
+      }
     }
-  }
-});
+  });
+}
+
 ---
 
 <Layout2 
@@ -277,7 +387,7 @@ body.forEach((block: any) => {
       <!-- Parallax Background with Blur Effect -->
       <div 
         class="absolute inset-0 bg-cover bg-center bg-no-repeat transform translate-y-0 scale-105"
-        style={`background-image: url(${mainImage?.asset?.url ? urlForImage(mainImage?.asset?.url).width(1600).url() : ''});`}
+        style={`background-image: url(${mainImage?.asset ? urlForImage(mainImage.asset).width(1600).url() : ''});`}
         aria-hidden="true"
       ></div>
       
@@ -336,7 +446,7 @@ body.forEach((block: any) => {
             <svg xmlns="http://www.w3.org/2000/svg" class="xl:h-4 xl:w-4 lg:h-3.5 lg:w-3.5 md:h-3 md:w-3 sm:h-3 sm:w-3 xs:h-3 xs:w-3 h-3 w-3 xl:mr-2 lg:mr-1.5 md:mr-1 sm:mr-1 xs:mr-1 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
             </svg>
-            <span class="truncate max-w-[120px] sm:max-w-[100px] xs:max-w-[80px] max-w-[100px] text-[0.75rem]">{articleSubject.subject}</span>
+            <span class="truncate max-w-[120px] sm:max-w-[100px] xs:max-w-[80px] max-w-[100px] text-[0.75rem]">{articleSubject?.subject || 'General'}</span>
           </span>
       
         </div>
@@ -344,63 +454,23 @@ body.forEach((block: any) => {
     </div>
 
     <!-- Premium Article Content Section -->
-    <div class="bg-white-pure dark:bg-gray-800 xl:px-[15%] lg:px-[10%] md:px-[8%] sm:px-[6%] xs:px-[5%] xl:py-16 lg:py-12 md:py-10 sm:py-8 xs:py-6 transition-colors duration-300">
-      <!-- Premium Featured Image with Floating Effect and Caption -->
-      <div class="xl:mb-16 lg:mb-12 md:mb-10 sm:mb-8 xs:mb-6 relative group">
-        <div class="xl:rounded-3xl lg:rounded-2xl md:rounded-2xl sm:rounded-xl xs:rounded-xl overflow-hidden shadow-2xl transform group-hover:shadow-3xl transition-all duration-500 group-hover:-translate-y-1 cursor-pointer" data-gallery-image="0">
+    <div class="bg-white-pure dark:bg-gray-800 xl:px-[18%] lg:px-[12%] md:px-[8%] sm:px-[6%] xs:px-[4%] xl:py-10 lg:py-8 md:py-6 sm:py-5 xs:py-4 transition-colors duration-300 max-w-5xl mx-auto">
+      <!-- Featured Image - Clean and Simple -->
+      {mainImage?.asset && (
+        <div class="xl:mb-10 lg:mb-8 md:mb-6 sm:mb-5 xs:mb-4">
+          <figure class="cursor-pointer" data-gallery-image="0">
             <img 
-            src={mainImage?.asset?.url ? urlForImage(mainImage?.asset?.url).quality(90).url() : ''}
-            alt={title}
-            class="w-full h-auto max-w-full"
-            style="max-width: 100%; max-height: 90vh; object-fit: contain;"
-            loading="lazy"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none"></div>
-          {galleryImages.length > 1 && (
-            <div class="absolute top-4 right-4 bg-black/70 text-white-pure xl:px-4 xl:py-2 lg:px-3 lg:py-1.5 md:px-3 md:py-1.5 sm:px-2 sm:py-1 xs:px-2 xs:py-1 rounded-full backdrop-blur-sm flex items-center gap-2 pointer-events-auto">
-              <svg xmlns="http://www.w3.org/2000/svg" class="xl:h-5 xl:w-5 lg:h-4 lg:w-4 md:h-4 md:w-4 sm:h-3 sm:w-3 xs:h-3 xs:w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              <span class="xl:text-sm lg:text-xs md:text-xs sm:text-xs xs:text-xs text-[0.75rem] font-semibold leading-[1.4]">{galleryImages.length} Photos</span>
-            </div>
-          )}
-        </div>
-        {mainImage?.caption && (
-          <p class="text-center xl:text-sm lg:text-xs md:text-xs sm:text-xs xs:text-xs text-[0.75rem] text-gray-500 dark:text-gray-400 xl:mt-3 lg:mt-2.5 md:mt-2 sm:mt-2 xs:mt-2 mt-2 italic leading-[1.5]">{mainImage.caption}</p>
-        )}
-      </div>
-
-      <!-- Photo Gallery Grid (if more than 1 image) -->
-      {galleryImages.length > 1 && (
-        <div class="xl:mb-16 lg:mb-12 md:mb-10 sm:mb-8 xs:mb-6">
-          <h3 class="headings h3 text-charcoal dark:text-gray-100 xl:text-2xl lg:text-xl md:text-lg sm:text-base xs:text-base text-[1.25rem] xl:mb-6 lg:mb-5 md:mb-4 sm:mb-3 xs:mb-3 mb-3 leading-[1.3]">Photo Gallery</h3>
-          <div class={`grid gap-3 ${galleryImages.length === 2 ? 'grid-cols-2' : galleryImages.length === 3 ? 'grid-cols-3' : galleryImages.length === 4 ? 'grid-cols-2' : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4'}`}>
-            {galleryImages.map((img, index) => (
-              <div 
-                class="relative group cursor-pointer overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-                data-gallery-image={index}
-              >
-                <div class="aspect-square overflow-hidden bg-gray-100 dark:bg-gray-800">
-                  <img 
-                    src={urlForImage(img.url).width(400).height(400).fit('crop').quality(85).url()}
-                    alt={img.caption || img.alt || `Gallery image ${index + 1}`}
-                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                </div>
-                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white-pure opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                  </svg>
-                </div>
-                {img.caption && (
-                  <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <p class="text-white-pure text-xs line-clamp-2">{img.caption}</p>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+              src={urlForImage(mainImage.asset).quality(90).url()}
+              alt={title}
+              class="w-full h-auto"
+              loading="lazy"
+            />
+            {mainImage?.caption && (
+              <figcaption class="mt-3 text-left text-base xl:text-base lg:text-base md:text-sm sm:text-sm xs:text-sm text-gray-600 dark:text-gray-400 italic leading-relaxed">
+                {mainImage.caption}
+              </figcaption>
+            )}
+          </figure>
         </div>
       )}
       
@@ -426,35 +496,355 @@ body.forEach((block: any) => {
         </div>
       </div>
 
-      <!-- Premium Article Body with Enhanced Typography -->
-      <article class="prose xl:prose-xl lg:prose-lg md:prose-base sm:prose-sm xs:prose-sm max-w-none mx-auto text-gray-800 dark:text-gray-200 transition-colors duration-300 text-[0.9375rem] leading-[1.7]" style="font-family: 'Inter', sans-serif;">
+      <!-- Enhanced Professional Article Body -->
+      <article class="article-content prose prose-lg max-w-none mx-auto transition-colors duration-300">
         {
-          body.filter((con) => {
-            if (con.children == null || con.children == undefined) {
-              return false;
-            } else {
-              return true;
+          (safeBody && safeBody.length > 0) ? safeBody.map((block: any, blockIndex: number) => {
+            // Skip null/undefined blocks
+            if (!block) return null;
+            
+            // Handle image blocks with enhanced styling
+            const isImageBlock = block._type === 'image' || 
+              (block.asset && block.asset.url && (!block.children || (Array.isArray(block.children) && block.children.length === 0)));
+            
+            if (isImageBlock) {
+              if (!block.asset) return null;
+              
+              const imageUrl = urlForImage(block.asset)
+                .width(1200)
+                .quality(90)
+                .format('jpg')
+                .url();
+              
+              return (
+                <figure class="article-image my-8 xl:my-10 lg:my-8 md:my-6 sm:my-5 group">
+                  <div class="overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 bg-gray-100 dark:bg-gray-800">
+                    <img 
+                      src={imageUrl}
+                      alt={block.alt || block.caption || title}
+                      class="w-full h-auto transform hover:scale-105 transition-transform duration-700"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  {(block.caption || block.alt) && (
+                    <figcaption class="mt-4 text-center text-sm xl:text-base lg:text-sm md:text-sm sm:text-xs text-gray-600 dark:text-gray-400 italic leading-relaxed px-4">
+                      <span class="inline-flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" />
+                        </svg>
+                        {block.caption || block.alt}
+                      </span>
+                    </figcaption>
+                  )}
+                </figure>
+              );
             }
-          })
-          .map((con) => (
-            <>{ con.children.map((child: {
-              text: unknown;
-            }) => (
-              <>
-                {
-                  (isURL(child.text)) ? 
-                  <a href={`${child.text}`} target="_blank" class="text-msu-crimson-ground underline hover:text-msu-deep-ocean transition-colors duration-300 font-medium break-words text-[0.9375rem] leading-[1.6]">
-                    {child.text}
-                  </a> : 
-                  <p class="text-gray-800 dark:text-gray-200 xl:leading-relaxed lg:leading-relaxed md:leading-normal sm:leading-normal xs:leading-normal leading-[1.6] xl:mb-8 lg:mb-6 md:mb-5 sm:mb-4 xs:mb-4 mb-4 text-justify text-[0.9375rem]">
-                    {child.text}
-                  </p>
-                }
-              </>
-            )) }</>
-          ))
+            
+            // Handle headings (h2, h3, h4, h5, h6)
+            if (block.style && block.style.match(/^h[2-6]$/)) {
+              const HeadingTag = block.style;
+              const headingText = block.children?.map((c: any) => c?.text).join('') || '';
+              
+              const headingClasses = {
+                h2: 'text-3xl xl:text-4xl lg:text-3xl md:text-2xl font-bold mt-12 mb-6 text-charcoal dark:text-white border-l-4 border-msu-main-color pl-6',
+                h3: 'text-2xl xl:text-3xl lg:text-2xl md:text-xl font-semibold mt-10 mb-5 text-charcoal dark:text-white',
+                h4: 'text-xl xl:text-2xl lg:text-xl md:text-lg font-semibold mt-8 mb-4 text-gray-800 dark:text-gray-200',
+                h5: 'text-lg xl:text-xl lg:text-lg md:text-base font-medium mt-6 mb-3 text-gray-800 dark:text-gray-200',
+                h6: 'text-base xl:text-lg lg:text-base md:text-sm font-medium mt-6 mb-3 text-gray-700 dark:text-gray-300 uppercase tracking-wide'
+              };
+              
+              return (
+                <HeadingTag class={headingClasses[block.style as keyof typeof headingClasses]}>
+                  {headingText}
+                </HeadingTag>
+              );
+            }
+            
+            // Handle blockquotes
+            if (block.style === 'blockquote') {
+              const quoteText = block.children?.map((c: any) => c?.text).join('') || '';
+              return (
+                <blockquote class="border-l-4 border-msu-main-color bg-gray-50 dark:bg-gray-800/50 pl-6 pr-6 py-5 my-8 italic text-lg xl:text-xl text-gray-700 dark:text-gray-300 rounded-r-lg shadow-sm">
+                  <svg class="w-8 h-8 text-msu-main-color/30 mb-2" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                  </svg>
+                  <p class="text-lg xl:text-xl leading-relaxed">{quoteText}</p>
+                </blockquote>
+              );
+            }
+            
+            // Handle lists (bullet and numbered)
+            if (block.listItem === 'bullet' || block.listItem === 'number') {
+              const listText = block.children?.map((c: any) => c?.text).join('') || '';
+              const ListTag = block.listItem === 'bullet' ? 'ul' : 'ol';
+              
+              return (
+                <ListTag class={block.listItem === 'bullet' ? 
+                  'list-disc list-inside space-y-2 my-6 ml-6 text-gray-800 dark:text-gray-200' : 
+                  'list-decimal list-inside space-y-2 my-6 ml-6 text-gray-800 dark:text-gray-200'
+                }>
+                  <li class="text-base xl:text-lg leading-relaxed pl-2">
+                    {listText}
+                  </li>
+                </ListTag>
+              );
+            }
+            
+            // Handle text blocks (paragraphs)
+            if (block.children && Array.isArray(block.children) && block.children.length > 0) {
+              const validChildren = block.children.filter((c: any) => c != null);
+              if (validChildren.length === 0) return null;
+              
+              return (
+                <>
+                  {validChildren.map((child: any, childIndex: number) => {
+                    if (!child) return null;
+                    const childText = (child.text !== null && child.text !== undefined) ? String(child.text) : '';
+                    if (!childText) return null;
+                    
+                    // Check if this is a YouTube URL
+                    if (isURL(childText) && isYouTubeURL(childText)) {
+                      const videoId = getYouTubeVideoId(childText);
+                      if (videoId) {
+                        return (
+                          <div class="youtube-embed-wrapper my-8 xl:my-10 lg:my-8 md:my-6">
+                            <div class="relative w-full rounded-xl overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-500 bg-gray-900">
+                              <div class="aspect-video">
+                                <iframe
+                                  src={`https://www.youtube.com/embed/${videoId}`}
+                                  title="YouTube video player"
+                                  frameborder="0"
+                                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                  allowfullscreen
+                                  class="absolute inset-0 w-full h-full"
+                                  loading="lazy"
+                                ></iframe>
+                              </div>
+                            </div>
+                            <div class="mt-3 flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+                              <svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                              </svg>
+                              <span class="font-medium">YouTube Video</span>
+                            </div>
+                          </div>
+                        );
+                      }
+                    }
+                    
+                    // Check if this is a regular URL
+                    if (isURL(childText)) {
+                      return (
+                        <a 
+                          href={`${childText}`} 
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="inline-flex items-center gap-1 text-msu-main-color dark:text-blue-400 underline hover:text-[#61063B] dark:hover:text-blue-300 transition-colors duration-300 font-medium break-words"
+                        >
+                          {childText}
+                          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                          </svg>
+                        </a>
+                      );
+                    }
+                    
+                    // Regular paragraph with enhanced styling
+                    const isFirstParagraph = blockIndex === 0 && childIndex === 0;
+                    
+                    return (
+                      <p class={`
+                        article-paragraph
+                        text-gray-800 dark:text-gray-200 
+                        leading-relaxed xl:leading-loose lg:leading-relaxed md:leading-relaxed
+                        mb-6 xl:mb-7 lg:mb-6 md:mb-5 sm:mb-4
+                        text-base xl:text-lg lg:text-base md:text-base sm:text-sm
+                        ${isFirstParagraph ? 'first-paragraph text-lg xl:text-xl font-normal' : ''}
+                      `}>
+                        {isFirstParagraph && (
+                          <span class="first-letter:text-5xl first-letter:font-bold first-letter:text-msu-main-color first-letter:mr-2 first-letter:float-left first-letter:leading-none first-letter:mt-1"></span>
+                        )}
+                        {childText}
+                      </p>
+                    );
+                  })}
+                </>
+              );
+            }
+            
+            return null;
+          }) : (
+            <div class="text-center py-16">
+              <svg class="w-16 h-16 mx-auto mb-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              <p class="text-gray-500 dark:text-gray-400 italic text-lg">
+                No content available for this article.
+              </p>
+            </div>
+          )
         }
       </article>
+
+      <!-- Facebook-Style Photo Gallery Section -->
+      {galleryImages.length > 0 && (
+        <div class="xl:mt-16 lg:mt-14 md:mt-12 sm:mt-10 xs:mt-8 xl:mb-12 lg:mb-10 md:mb-8 sm:mb-6 xs:mb-5">
+          <!-- Simple Header -->
+          <h3 class="headings h3 text-charcoal dark:text-white xl:text-2xl lg:text-xl md:text-xl sm:text-lg xs:text-base font-semibold mb-4 xl:mb-5 lg:mb-4 md:mb-4 sm:mb-3">
+            Photos
+          </h3>
+
+          <!-- Facebook-Style Grid -->
+          <div class="grid gap-1 xl:gap-2 lg:gap-1.5 md:gap-1 sm:gap-1 xs:gap-0.5">
+            {/* Single Image Layout */}
+            {galleryImages.length === 1 && (
+              <figure 
+                class="gallery-item group cursor-pointer relative overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800"
+                data-gallery-image={0}
+              >
+                <img 
+                  src={galleryImages[0].url}
+                  alt={galleryImages[0].caption || galleryImages[0].alt || 'Gallery image'}
+                  class="w-full h-auto max-h-[600px] object-contain transition-opacity duration-200 group-hover:opacity-95"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-200"></div>
+              </figure>
+            )}
+
+            {/* Two Images Layout */}
+            {galleryImages.length === 2 && (
+              <div class="grid grid-cols-2 gap-1 xl:gap-2">
+                {galleryImages.map((img, index) => (
+                  <figure 
+                    class="gallery-item group cursor-pointer relative overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800 aspect-square"
+                    data-gallery-image={index}
+                  >
+                    <img 
+                      src={img.thumbnailUrl || img.url}
+                      alt={img.caption || img.alt || `Gallery image ${index + 1}`}
+                      class="w-full h-full object-cover transition-opacity duration-200 group-hover:opacity-95"
+                      loading="lazy"
+                    />
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-200"></div>
+                  </figure>
+                ))}
+              </div>
+            )}
+
+            {/* Three Images Layout */}
+            {galleryImages.length === 3 && (
+              <div class="grid grid-cols-2 gap-1 xl:gap-2">
+                <figure 
+                  class="gallery-item group cursor-pointer relative overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800 row-span-2 aspect-[4/5]"
+                  data-gallery-image={0}
+                >
+                  <img 
+                    src={galleryImages[0].thumbnailUrl || galleryImages[0].url}
+                    alt={galleryImages[0].caption || galleryImages[0].alt || 'Gallery image 1'}
+                    class="w-full h-full object-cover transition-opacity duration-200 group-hover:opacity-95"
+                    loading="lazy"
+                  />
+                  <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-200"></div>
+                </figure>
+                {galleryImages.slice(1).map((img, index) => (
+                  <figure 
+                    class="gallery-item group cursor-pointer relative overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800 aspect-square"
+                    data-gallery-image={index + 1}
+                  >
+                    <img 
+                      src={img.thumbnailUrl || img.url}
+                      alt={img.caption || img.alt || `Gallery image ${index + 2}`}
+                      class="w-full h-full object-cover transition-opacity duration-200 group-hover:opacity-95"
+                      loading="lazy"
+                    />
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-200"></div>
+                  </figure>
+                ))}
+              </div>
+            )}
+
+            {/* Four Images Layout */}
+            {galleryImages.length === 4 && (
+              <div class="grid grid-cols-2 gap-1 xl:gap-2">
+                {galleryImages.map((img, index) => (
+                  <figure 
+                    class="gallery-item group cursor-pointer relative overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800 aspect-square"
+                    data-gallery-image={index}
+                  >
+                    <img 
+                      src={img.thumbnailUrl || img.url}
+                      alt={img.caption || img.alt || `Gallery image ${index + 1}`}
+                      class="w-full h-full object-cover transition-opacity duration-200 group-hover:opacity-95"
+                      loading="lazy"
+                    />
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-200"></div>
+                  </figure>
+                ))}
+              </div>
+            )}
+
+            {/* Five or More Images Layout */}
+            {galleryImages.length >= 5 && (
+              <div class="grid grid-cols-3 gap-1 xl:gap-2">
+                {/* First image spans 2 columns */}
+                <figure 
+                  class="gallery-item group cursor-pointer relative overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800 col-span-2 row-span-2 aspect-[4/3]"
+                  data-gallery-image={0}
+                >
+                  <img 
+                    src={galleryImages[0].thumbnailUrl || galleryImages[0].url}
+                    alt={galleryImages[0].caption || galleryImages[0].alt || 'Gallery image 1'}
+                    class="w-full h-full object-cover transition-opacity duration-200 group-hover:opacity-95"
+                    loading="lazy"
+                  />
+                  <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-200"></div>
+                </figure>
+
+                {/* Next 4 images in right column */}
+                {galleryImages.slice(1, 5).map((img, index) => (
+                  <figure 
+                    class={`gallery-item group cursor-pointer relative overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800 aspect-square ${
+                      index === 3 && galleryImages.length > 5 ? 'relative' : ''
+                    }`}
+                    data-gallery-image={index + 1}
+                  >
+                    <img 
+                      src={img.thumbnailUrl || img.url}
+                      alt={img.caption || img.alt || `Gallery image ${index + 2}`}
+                      class="w-full h-full object-cover transition-opacity duration-200 group-hover:opacity-95"
+                      loading="lazy"
+                    />
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-200"></div>
+                    
+                    {/* "+X more" overlay for 5+ images */}
+                    {index === 3 && galleryImages.length > 5 && (
+                      <div class="absolute inset-0 bg-black/75 flex items-center justify-center">
+                        <span class="text-white text-3xl xl:text-4xl font-bold">
+                          +{galleryImages.length - 5}
+                        </span>
+                      </div>
+                    )}
+                  </figure>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* View All Link */}
+          {galleryImages.length > 1 && (
+            <div class="mt-3 xl:mt-4 text-center">
+              <button 
+                class="text-msu-main-color dark:text-[#61063B] hover:underline text-sm xl:text-base font-medium"
+                data-gallery-image={0}
+              >
+                View all {galleryImages.length} photos
+              </button>
+            </div>
+          )}
+        </div>
+      )}
 
       <!-- Premium Social Sharing with Floating Icons -->
       <div class="xl:mt-20 lg:mt-16 md:mt-12 sm:mt-10 xs:mt-8 xl:pt-12 lg:pt-10 md:pt-8 sm:pt-6 xs:pt-6 border-t border-gray-100 dark:border-gray-700 transition-colors duration-300">
@@ -543,7 +933,7 @@ body.forEach((block: any) => {
                 <div class="bg-white dark:bg-gray-800 xl:rounded-xl lg:rounded-xl md:rounded-lg sm:rounded-lg xs:rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-gray-700 hover:border-msu-main-color/30 dark:hover:border-yellow-500/30">
                   <div class="relative overflow-hidden xl:h-48 lg:h-44 md:h-40 sm:h-36 xs:h-36">
                     <img 
-                      src={relatedArticle.mainImage?.asset?.url ? urlForImage(relatedArticle.mainImage?.asset?.url).width(600).url() : ''} 
+                      src={relatedArticle.mainImage?.asset ? urlForImage(relatedArticle.mainImage.asset).width(600).url() : ''} 
                       alt={relatedArticle.title}
                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
@@ -551,7 +941,7 @@ body.forEach((block: any) => {
                     <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
                     <div class="absolute bottom-0 left-0 right-0 xl:p-4 lg:p-3 md:p-3 sm:p-2.5 xs:p-2.5">
                       <span class="inline-block xl:px-3 xl:py-1 lg:px-2.5 lg:py-1 md:px-2 md:py-0.5 sm:px-2 sm:py-0.5 xs:px-2 xs:py-0.5 xl:text-xs lg:text-xs md:text-xs sm:text-xs xs:text-xs font-semibold text-white bg-msu-main-color rounded-full">
-                        {relatedArticle.articleSubject.subject}
+                        {relatedArticle.articleSubject?.subject || 'General'}
                       </span>
                     </div>
                   </div>
@@ -560,7 +950,7 @@ body.forEach((block: any) => {
                       {relatedArticle.title}
                     </h4>
                     <p class="paragraph p3 text-gray-500 dark:text-gray-400 xl:mb-4 lg:mb-3 md:mb-2.5 sm:mb-2 xs:mb-2 line-clamp-2 xl:text-base lg:text-sm md:text-sm sm:text-xs xs:text-xs text-[0.75rem] leading-[1.5]">
-                      {relatedArticle.body[0]?.children[0]?.text || ''}
+                      {(relatedArticle.body && Array.isArray(relatedArticle.body) && relatedArticle.body.length > 0 && relatedArticle.body[0] && relatedArticle.body[0].children && Array.isArray(relatedArticle.body[0].children) && relatedArticle.body[0].children.length > 0 && relatedArticle.body[0].children[0]?.text) || ''}
                     </p>
                     <div class="flex items-center xl:text-sm lg:text-xs md:text-xs sm:text-xs xs:text-xs text-[0.6875rem] text-gray-400 dark:text-gray-500">
                       <svg xmlns="http://www.w3.org/2000/svg" class="xl:h-4 xl:w-4 lg:h-3.5 lg:w-3.5 md:h-3 md:w-3 sm:h-3 sm:w-3 xs:h-3 xs:w-3 xl:mr-1 lg:mr-1 md:mr-0.5 sm:mr-0.5 xs:mr-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -591,63 +981,71 @@ body.forEach((block: any) => {
     <Footer />
   </main>
 
-  <!-- Photo Gallery Modal (Facebook-style) - Fully Responsive -->
-  <div id="gallery-modal" class="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-sm hidden items-center justify-center" role="dialog" aria-modal="true" aria-label="Photo Gallery" style="touch-action: pan-y pinch-zoom;">
-    <!-- Close Button with Prominent X Mark - Mobile Optimized -->
+  <!-- Photo Gallery Modal - Elegant Modern Design -->
+  <div id="gallery-modal" class="fixed inset-0 z-[9999] hidden items-center justify-center overflow-hidden" role="dialog" aria-modal="true" aria-label="Photo Gallery">
+    <!-- Sophisticated Backdrop (lighter, more transparent) -->
+    <div class="absolute inset-0 bg-black/35 backdrop-blur-lg transition-opacity duration-700 ease-out"></div>
+    <div class="absolute inset-0 bg-gradient-to-br from-black/20 via-transparent to-black/15 pointer-events-none"></div>
+    
+    <!-- Minimalist Close Button -->
     <button 
       id="gallery-close"
-      class="absolute top-2 right-2 xs:top-3 xs:right-3 sm:top-4 sm:right-4 md:top-4 md:right-4 lg:top-6 lg:right-6 xl:top-6 xl:right-6 z-[10000] text-white-pure hover:text-red-400 active:text-red-500 transition-all duration-200 bg-black/80 hover:bg-red-600/90 active:bg-red-700 rounded-full xl:p-3 lg:p-3 md:p-3 sm:p-3 xs:p-3 hover:scale-110 active:scale-95 shadow-xl hover:shadow-2xl border-2 border-white/40 hover:border-white/80 touch-manipulation min-w-[44px] min-h-[44px] flex items-center justify-center pointer-events-auto"
+      class="absolute top-6 right-6 xs:top-4 xs:right-4 sm:top-5 sm:right-5 md:top-6 md:right-6 z-[10000] w-11 h-11 xs:w-10 xs:h-10 flex items-center justify-center text-white/80 hover:text-white transition-all duration-300 hover:scale-110 active:scale-95 group"
       aria-label="Close gallery"
       title="Close (ESC)"
-      style="z-index: 10000 !important; position: absolute !important;"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" class="xl:h-7 xl:w-7 lg:h-6 lg:w-6 md:h-6 md:w-6 sm:h-6 sm:w-6 xs:h-5 xs:w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+      <div class="absolute inset-0 bg-white/5 hover:bg-white/10 rounded-full backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300"></div>
+      <svg xmlns="http://www.w3.org/2000/svg" class="relative z-10 w-5 h-5 xs:w-4 xs:h-4 transition-transform duration-300 group-hover:rotate-90" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
 
-    <!-- Previous Button - Mobile Optimized -->
+    <!-- Navigation Buttons - Minimalist -->
     <button 
       id="gallery-prev"
-      class="absolute left-2 xs:left-3 sm:left-4 md:left-4 lg:left-6 xl:left-6 top-1/2 -translate-y-1/2 z-[10000] text-white-pure hover:text-white-pure active:text-gray-200 transition-all duration-200 bg-black/70 hover:bg-black/90 active:bg-black rounded-full xl:p-4 lg:p-3.5 md:p-3 sm:p-3 xs:p-3 hover:bg-black/80 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed touch-manipulation min-w-[48px] min-h-[48px] xs:min-w-[44px] xs:min-h-[44px] flex items-center justify-center pointer-events-auto"
+      class="absolute left-6 xs:left-4 sm:left-5 md:left-6 lg:left-8 xl:left-10 top-1/2 -translate-y-1/2 z-[10000] w-12 h-12 xs:w-10 xs:h-10 flex items-center justify-center text-white/70 hover:text-white transition-all duration-300 hover:scale-110 active:scale-95 disabled:opacity-20 disabled:cursor-not-allowed disabled:hover:scale-100 group"
       aria-label="Previous image"
-      style="z-index: 10000 !important; position: absolute !important; box-sizing: border-box;"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" class="xl:h-8 xl:w-8 lg:h-7 lg:w-7 md:h-6 md:w-6 sm:h-6 sm:w-6 xs:h-5 xs:w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+      <div class="absolute inset-0 bg-white/5 hover:bg-white/10 rounded-full backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300"></div>
+      <svg xmlns="http://www.w3.org/2000/svg" class="relative z-10 w-6 h-6 xs:w-5 xs:h-5 transition-transform duration-300 group-hover:-translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
       </svg>
     </button>
 
-    <!-- Next Button - Mobile Optimized -->
     <button 
       id="gallery-next"
-      class="absolute right-2 xs:right-3 sm:right-4 md:right-4 lg:right-6 xl:right-6 top-1/2 -translate-y-1/2 z-[10000] text-white-pure hover:text-white-pure active:text-gray-200 transition-all duration-200 bg-black/70 hover:bg-black/90 active:bg-black rounded-full xl:p-4 lg:p-3.5 md:p-3 sm:p-3 xs:p-3 hover:bg-black/80 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed touch-manipulation min-w-[48px] min-h-[48px] xs:min-w-[44px] xs:min-h-[44px] flex items-center justify-center pointer-events-auto"
+      class="absolute right-6 xs:right-4 sm:right-5 md:right-6 lg:right-8 xl:right-10 top-1/2 -translate-y-1/2 z-[10000] w-12 h-12 xs:w-10 xs:h-10 flex items-center justify-center text-white/70 hover:text-white transition-all duration-300 hover:scale-110 active:scale-95 disabled:opacity-20 disabled:cursor-not-allowed disabled:hover:scale-100 group"
       aria-label="Next image"
-      style="z-index: 10000 !important; position: absolute !important; box-sizing: border-box;"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" class="xl:h-8 xl:w-8 lg:h-7 lg:w-7 md:h-6 md:w-6 sm:h-6 sm:w-6 xs:h-5 xs:w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+      <div class="absolute inset-0 bg-white/5 hover:bg-white/10 rounded-full backdrop-blur-sm border border-white/10 hover:border-white/20 transition-all duration-300"></div>
+      <svg xmlns="http://www.w3.org/2000/svg" class="relative z-10 w-6 h-6 xs:w-5 xs:h-5 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
       </svg>
     </button>
 
-    <!-- Image Container - Mobile Responsive -->
-    <div class="relative w-full h-full flex items-center justify-center xl:p-8 lg:p-6 md:p-4 sm:p-2 xs:p-1 px-2">
-      <div class="relative max-w-7xl max-h-full w-full h-full flex flex-col items-center justify-center">
-        <!-- Main Image - Responsive Sizing -->
-        <div class="relative w-full h-full flex items-center justify-center px-2 xs:px-3 sm:px-4 md:px-6 lg:px-8">
+    <!-- Image Container - Clean & Elegant -->
+    <div class="relative w-full h-full flex items-center justify-center p-6 xs:p-4 sm:p-5 md:p-6 lg:p-8 xl:p-10">
+      <div class="relative w-full max-w-6xl max-h-full flex flex-col items-center justify-center">
+        <!-- Elegant Loading Indicator -->
+        <div id="gallery-loading" class="absolute inset-0 flex items-center justify-center z-10 hidden">
+          <div class="w-14 h-14 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+        </div>
+        
+        <!-- Main Image Display -->
+        <div class="relative w-full flex items-center justify-center min-h-[60vh]">
           <img 
             id="gallery-main-image"
             src=""
             alt=""
-            class="max-w-full w-auto h-auto object-contain rounded-lg xl:max-h-[85vh] lg:max-h-[85vh] md:max-h-[80vh] sm:max-h-[75vh] xs:max-h-[70vh]"
-            style="max-width: 100%; height: auto;"
+            class="block mx-auto max-w-[92vw] max-h-[92vh] w-auto h-auto object-contain transition-all duration-700 ease-out"
+            style="max-width: 92vw; max-height: 92vh; height: auto;"
           />
         </div>
         
-        <!-- Image Counter & Caption - Mobile Optimized -->
-        <div class="absolute bottom-2 xs:bottom-3 sm:bottom-4 md:bottom-6 lg:bottom-8 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-md rounded-full xl:px-6 xl:py-3 lg:px-5 lg:py-2.5 md:px-4 md:py-2 sm:px-3 sm:py-2 xs:px-3 xs:py-1.5 text-white-pure text-center shadow-2xl border border-white/20 max-w-[90%] xs:max-w-[85%] sm:max-w-[80%] md:max-w-[70%] lg:max-w-[60%]">
-          <p id="gallery-counter" class="xl:text-base lg:text-sm md:text-sm sm:text-xs xs:text-xs font-semibold mb-0.5 xs:mb-1"></p>
-          <p id="gallery-caption" class="xl:text-sm lg:text-xs md:text-xs sm:text-xs xs:text-[10px] opacity-90 line-clamp-2 leading-tight"></p>
+        <!-- Minimalist Info Panel -->
+        <div class="absolute bottom-6 xs:bottom-4 sm:bottom-5 md:bottom-6 lg:bottom-8 xl:bottom-10 left-1/2 -translate-x-1/2 bg-black/60 backdrop-blur-xl rounded-xl px-6 py-3 xs:px-4 xs:py-2 sm:px-5 sm:py-2.5 text-white text-center border border-white/10 max-w-[85%] xs:max-w-[90%] sm:max-w-[80%] md:max-w-[70%] transition-all duration-500">
+          <p id="gallery-counter" class="text-xs xs:text-[10px] sm:text-xs font-medium mb-1.5 text-white/70 tracking-wider uppercase"></p>
+          <p id="gallery-caption" class="text-sm xs:text-xs sm:text-sm text-white/90 leading-relaxed line-clamp-2"></p>
         </div>
       </div>
     </div>
@@ -656,10 +1054,10 @@ body.forEach((block: any) => {
 
 <script define:vars={{ galleryImagesData: galleryImages, aiSummaryText: aiSummary }}>
   // Gallery images data
-  const galleryImages = galleryImagesData.map((img, index) => ({
-    url: img.url,
-    caption: img.caption || '',
-    alt: img.alt || `Gallery image ${index + 1}`
+  const galleryImages = (Array.isArray(galleryImagesData) ? galleryImagesData : []).map((img, index) => ({
+    url: img?.url || '',
+    caption: img?.caption || '',
+    alt: img?.alt || `Gallery image ${index + 1}`
   }));
 
   // Gallery state
@@ -703,10 +1101,10 @@ body.forEach((block: any) => {
     }
   }
 
-  // Open gallery modal
+  // Open gallery modal with smooth animation
   function openGallery(index) {
     if (galleryImages.length === 0) return;
-    currentImageIndex = index;
+    currentImageIndex = index >= 0 && index < galleryImages.length ? index : 0;
     
     // Remove any duplicate close buttons before opening
     if (modal) {
@@ -719,16 +1117,40 @@ body.forEach((block: any) => {
       }
     }
     
-    updateGalleryImage();
     if (modal) {
       modal.classList.remove('hidden');
       modal.classList.add('flex');
-      // Force display for mobile devices
+      modal.setAttribute('aria-hidden', 'false');
       modal.style.display = 'flex';
-      modal.style.visibility = 'visible';
-      modal.style.opacity = '1';
+      modal.style.opacity = '0';
+      
+      // Elegant fade-in animation
+      requestAnimationFrame(() => {
+        modal.style.transition = 'opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+        modal.style.opacity = '1';
+      });
     }
+    
     lockBodyScroll();
+    // Initialize image with elegant fade-in
+    if (mainImage && galleryImages[currentImageIndex]) {
+      const currentImage = galleryImages[currentImageIndex];
+      mainImage.src = currentImage.url || '';
+      mainImage.alt = currentImage.alt || `Gallery image ${currentImageIndex + 1}`;
+      mainImage.style.opacity = '0';
+      mainImage.style.transition = 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+      mainImage.style.visibility = 'visible';
+      mainImage.style.display = 'block';
+      
+      // Elegant fade-in after modal opens
+      setTimeout(() => {
+        mainImage.style.opacity = '1';
+      }, 300);
+    }
+    // Update counter and caption
+    setTimeout(() => {
+      updateGalleryImage();
+    }, 100);
   }
 
   // Close gallery modal
@@ -740,15 +1162,17 @@ body.forEach((block: any) => {
     }
     
     if (modal) {
-      // Force close with multiple methods
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-      // Reset inline styles
-      modal.style.display = 'none';
-      modal.style.visibility = 'hidden';
+      // Smooth fade-out animation
+      modal.style.transition = 'opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
       modal.style.opacity = '0';
-      // Also set aria-hidden for accessibility
-      modal.setAttribute('aria-hidden', 'true');
+      
+      // Close after animation
+      setTimeout(() => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+      }, 400);
     }
     unlockBodyScroll();
     
@@ -756,27 +1180,73 @@ body.forEach((block: any) => {
     return false;
   }
 
-  // Update gallery image display
+  // Update gallery image display with smooth transitions
   function updateGalleryImage() {
     if (!mainImage || !counter || !caption || galleryImages.length === 0) return;
     
     const currentImage = galleryImages[currentImageIndex];
-    if (!currentImage) return;
+    if (!currentImage || !currentImage.url) return;
 
-    // Update image source
-    mainImage.src = currentImage.url;
-    mainImage.alt = currentImage.alt || `Gallery image ${currentImageIndex + 1}`;
+    // Elegant fade transition
+    mainImage.style.opacity = '0';
+    mainImage.style.transition = 'opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
     
-    // Ensure image is visible
-    mainImage.style.display = 'block';
-    mainImage.style.visibility = 'visible';
-    mainImage.style.opacity = '1';
+    // Show loading
+    const loadingEl = document.getElementById('gallery-loading');
+    if (loadingEl) {
+      loadingEl.classList.remove('hidden');
+    }
     
-    // Update counter
-    counter.textContent = `${currentImageIndex + 1} of ${galleryImages.length}`;
+    // Preload image for smooth transition
+    const img = new Image();
+    img.onload = () => {
+      // Update image source
+      mainImage.src = currentImage.url;
+      mainImage.alt = currentImage.alt || `Gallery image ${currentImageIndex + 1}`;
+      
+      // Hide loading and fade in new image
+      if (loadingEl) {
+        loadingEl.classList.add('hidden');
+      }
+      
+      // Smooth fade in
+      setTimeout(() => {
+        mainImage.style.opacity = '1';
+        mainImage.style.visibility = 'visible';
+        mainImage.style.display = 'block';
+      }, 150);
+    };
     
-    // Update caption
-    caption.textContent = currentImage.caption || '';
+    img.onerror = () => {
+      if (loadingEl) {
+        loadingEl.classList.add('hidden');
+      }
+      mainImage.style.opacity = '1';
+      mainImage.style.visibility = 'visible';
+      mainImage.style.display = 'block';
+    };
+    
+    img.src = currentImage.url;
+    
+    // Update counter with smooth transition
+    if (counter) {
+      counter.style.opacity = '0';
+      counter.style.transition = 'opacity 0.2s ease-in-out';
+      setTimeout(() => {
+        counter.textContent = `${currentImageIndex + 1} of ${galleryImages.length}`;
+        counter.style.opacity = '1';
+      }, 150);
+    }
+    
+    // Update caption with smooth transition
+    if (caption) {
+      caption.style.opacity = '0';
+      caption.style.transition = 'opacity 0.2s ease-in-out';
+      setTimeout(() => {
+        caption.textContent = currentImage.caption || '';
+        caption.style.opacity = '1';
+      }, 150);
+    }
     
     // Update button states
     if (prevBtn) {
@@ -873,55 +1343,23 @@ body.forEach((block: any) => {
       }
     }
     
-    // Re-get close button after cleanup
-    const closeBtn = document.getElementById('gallery-close');
-    if (closeBtn) {
-      // Ensure button is clickable
-      closeBtn.style.pointerEvents = 'auto';
-      closeBtn.style.cursor = 'pointer';
-      closeBtn.setAttribute('tabindex', '0');
-    }
-    
-    // Add click handlers to gallery images
+    // Gallery image click handlers
     document.querySelectorAll('[data-gallery-image]').forEach((element) => {
-      element.addEventListener('click', () => {
+      element.addEventListener('click', (e) => {
         const imageIndex = parseInt(element.getAttribute('data-gallery-image') || '0');
         openGallery(imageIndex);
       });
     });
 
-    // Modal controls - Use event delegation to ensure buttons work
-    // Re-get close button to ensure we have the correct reference
-    const closeBtnElement = document.getElementById('gallery-close');
-    
-    if (closeBtnElement) {
-      // Ensure button is interactive
-      closeBtnElement.style.pointerEvents = 'auto';
-      closeBtnElement.style.cursor = 'pointer';
-      closeBtnElement.setAttribute('tabindex', '0');
-      
-      // Add click event with multiple methods for reliability
-      const handleClose = (e) => {
+    // Modal controls - simplified event handling
+    if (closeBtn) {
+      closeBtn.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
         closeGallery(e);
-        return false;
-      };
+      });
       
-      closeBtnElement.onclick = handleClose;
-      closeBtnElement.addEventListener('click', handleClose, { capture: true });
-      closeBtnElement.addEventListener('click', handleClose, { capture: false });
-      
-      // Also add touch event for mobile
-      closeBtnElement.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        closeGallery(e);
-        return false;
-      }, { passive: false });
-      
-      // Add Enter key support for accessibility
-      closeBtnElement.addEventListener('keydown', (e) => {
+      closeBtn.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           closeGallery(e);
@@ -930,48 +1368,26 @@ body.forEach((block: any) => {
     }
     
     if (prevBtn) {
-      prevBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        prevImage();
-      });
+      prevBtn.addEventListener('click', prevImage);
     }
     
     if (nextBtn) {
-      nextBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        nextImage();
-      });
+      nextBtn.addEventListener('click', nextImage);
     }
     
-    // Also use event delegation on modal for close button
+    // Close on backdrop click
     if (modal) {
       modal.addEventListener('click', (e) => {
-        // Check if click is on close button or its children
-        const closeButton = e.target.closest('#gallery-close');
-        if (closeButton) {
-          e.preventDefault();
-          e.stopPropagation();
-          closeGallery(e);
-          return false;
-        }
-        
-        // Close on background click (but not on image or buttons)
-        if (e.target === modal || e.target.id === 'gallery-modal') {
-          // Don't close if clicking on image, buttons, or counter
+        if (e.target === modal || e.target.classList.contains('gallery-backdrop')) {
           if (!e.target.closest('#gallery-main-image') && 
               !e.target.closest('#gallery-prev') && 
               !e.target.closest('#gallery-next') &&
-              !e.target.closest('#gallery-counter') &&
-              !e.target.closest('#gallery-caption')) {
+              !e.target.closest('#gallery-close')) {
             closeGallery(e);
           }
         }
-      }, true);
+      });
     }
-
-    // Background click handler is now above with event delegation
 
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
@@ -986,70 +1402,26 @@ body.forEach((block: any) => {
       }
     });
 
-    // Enhanced touch/swipe support for mobile (iPhone, Android, etc.)
+    // Touch/swipe support
     let touchStartX = 0;
     let touchEndX = 0;
-    let touchStartY = 0;
-    let touchEndY = 0;
-    let touchStartTime = 0;
 
     if (modal) {
-      // Prevent default touch behaviors that interfere with gallery
       modal.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-        touchStartY = e.changedTouches[0].screenY;
-        touchStartTime = Date.now();
-      }, { passive: true });
-
-      modal.addEventListener('touchmove', (e) => {
-        // Allow vertical scrolling if needed, but prevent horizontal scroll
-        const touch = e.changedTouches[0];
-        const diffX = Math.abs(touch.screenX - touchStartX);
-        const diffY = Math.abs(touch.screenY - touchStartY);
-        
-        // If horizontal swipe is more dominant, prevent default
-        if (diffX > diffY && diffX > 10) {
-          e.preventDefault();
+        if (e.changedTouches?.[0]) {
+          touchStartX = e.changedTouches[0].screenX;
         }
-      }, { passive: false });
+      }, { passive: true });
 
       modal.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        touchEndY = e.changedTouches[0].screenY;
-        const touchDuration = Date.now() - touchStartTime;
-        handleSwipe(touchDuration);
-      }, { passive: true });
-
-      // Prevent double-tap zoom on images
-      let lastTap = 0;
-      mainImage?.addEventListener('touchend', (e) => {
-        const currentTime = new Date().getTime();
-        const tapLength = currentTime - lastTap;
-        if (tapLength < 300 && tapLength > 0) {
-          e.preventDefault();
-        }
-        lastTap = currentTime;
-      }, { passive: false });
-    }
-
-    function handleSwipe(duration) {
-      const swipeThreshold = 50; // Minimum distance for swipe
-      const swipeSpeed = 0.3; // Maximum duration for fast swipe (seconds)
+        if (e.changedTouches?.[0]) {
+          touchEndX = e.changedTouches[0].screenX;
       const diffX = touchStartX - touchEndX;
-      const diffY = Math.abs(touchStartY - touchEndY);
-      const isHorizontalSwipe = Math.abs(diffX) > diffY;
-      const isFastSwipe = duration < swipeSpeed * 1000;
-      
-      // Only trigger if it's a horizontal swipe and not too slow
-      if (isHorizontalSwipe && Math.abs(diffX) > swipeThreshold && isFastSwipe) {
-        if (diffX > 0) {
-          // Swipe left - next image
-          nextImage();
-        } else {
-          // Swipe right - previous image
-          prevImage();
+          if (Math.abs(diffX) > 50) {
+            diffX > 0 ? nextImage() : prevImage();
+          }
         }
-      }
+      }, { passive: true });
     }
 
     // Handle orientation change on mobile
@@ -1239,16 +1611,6 @@ body.forEach((block: any) => {
       margin-bottom: 0.75rem;
     }
 
-    /* Keep gallery within viewport on tablets */
-    #gallery-main-image {
-      max-height: 82vh;
-      max-height: 82dvh;
-    }
-
-    #gallery-counter,
-    #gallery-caption {
-      bottom: 1.25rem;
-    }
   }
 
   /* Tablet and up (768px and up) - Keep desktop behavior */
@@ -1454,6 +1816,309 @@ body.forEach((block: any) => {
     }
   }
 
+  /* Professional Gallery Styles */
+  .gallery-item {
+    position: relative;
+    will-change: transform, box-shadow;
+  }
+
+  .gallery-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(135deg, transparent 0%, rgba(97, 6, 59, 0.1) 50%, transparent 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+
+  .gallery-item:hover::before {
+    opacity: 1;
+  }
+
+  /* Smooth image loading */
+  .gallery-item img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+
+  /* Loading state shimmer */
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  /* Enhanced Article Content Styles */
+  .article-content {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: #1a1a1a;
+    line-height: 1.8;
+  }
+
+  .dark .article-content {
+    color: #e5e7eb;
+  }
+
+  /* Drop cap for first paragraph */
+  .article-content .first-paragraph::first-letter {
+    font-size: 4.5rem;
+    line-height: 0.85;
+    font-weight: 700;
+    float: left;
+    margin-right: 0.75rem;
+    margin-top: 0.15rem;
+    color: var(--msu-main-color, #03045e);
+  }
+
+  @media (max-width: 768px) {
+    .article-content .first-paragraph::first-letter {
+      font-size: 3.5rem;
+      margin-right: 0.5rem;
+    }
+  }
+
+  /* Article Paragraphs */
+  .article-paragraph {
+    text-align: justify;
+    hyphens: auto;
+    word-spacing: 0.05em;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Enhanced Headings */
+  .article-content h2 {
+    position: relative;
+    padding-bottom: 0.5rem;
+  }
+
+  .article-content h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(to right, var(--msu-main-color, #03045e), transparent);
+    border-radius: 2px;
+  }
+
+  .article-content h3 {
+    position: relative;
+    padding-left: 1rem;
+  }
+
+  .article-content h3::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 70%;
+    background: var(--msu-main-color, #03045e);
+    border-radius: 2px;
+  }
+
+  /* Enhanced Links */
+  .article-content a {
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .article-content a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+
+  .article-content a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  /* Enhanced Blockquotes */
+  .article-content blockquote {
+    position: relative;
+  }
+
+  .article-content blockquote::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, var(--msu-main-color, #03045e), rgba(97, 6, 59, 0.5));
+    border-radius: 2px;
+  }
+
+  /* Enhanced Images */
+  .article-image {
+    position: relative;
+  }
+
+  .article-image::before {
+    content: '';
+    position: absolute;
+    inset: -10px;
+    background: radial-gradient(circle at center, rgba(97, 6, 59, 0.05), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .article-image:hover::before {
+    opacity: 1;
+  }
+
+  /* Enhanced Lists */
+  .article-content ul li,
+  .article-content ol li {
+    position: relative;
+    padding-left: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .article-content ul li::marker {
+    color: var(--msu-main-color, #03045e);
+    font-size: 1.2em;
+  }
+
+  .article-content ol li::marker {
+    color: var(--msu-main-color, #03045e);
+    font-weight: 600;
+  }
+
+  /* Selection styling */
+  .article-content ::selection {
+    background: rgba(97, 6, 59, 0.2);
+    color: inherit;
+  }
+
+  .article-content ::-moz-selection {
+    background: rgba(97, 6, 59, 0.2);
+    color: inherit;
+  }
+
+  /* Reading experience enhancements */
+  @media (min-width: 768px) {
+    .article-content {
+      font-size: 1.125rem;
+    }
+  }
+
+  /* Print styles */
+  @media print {
+    .article-content {
+      font-size: 12pt;
+      line-height: 1.6;
+      color: #000;
+    }
+    
+    .article-content .first-paragraph::first-letter {
+      font-size: 3rem;
+    }
+  }
+
+  /* YouTube Embed Styles */
+  .youtube-embed-wrapper {
+    position: relative;
+    margin: 2rem 0;
+  }
+
+  .youtube-embed-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: -15px;
+    background: radial-gradient(circle at center, rgba(255, 0, 0, 0.05), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    z-index: -1;
+    border-radius: 1rem;
+  }
+
+  .youtube-embed-wrapper:hover::before {
+    opacity: 1;
+  }
+
+  .youtube-embed-wrapper iframe {
+    border: none;
+    border-radius: 0.75rem;
+  }
+
+  /* Aspect ratio container for responsive video */
+  .aspect-video {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+  }
+
+  .aspect-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* YouTube embed loading state */
+  @keyframes youtubeShimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  .youtube-embed-wrapper .aspect-video::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #1a1a1a 0%, #2a2a2a 20%, #1a1a1a 40%, #1a1a1a 100%);
+    background-size: 2000px 100%;
+    animation: youtubeShimmer 2s infinite linear;
+    z-index: -1;
+  }
+
+  /* Responsive adjustments for YouTube embeds */
+  @media (max-width: 768px) {
+    .youtube-embed-wrapper {
+      margin: 1.5rem -1rem;
+    }
+    
+    .youtube-embed-wrapper > div {
+      border-radius: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .youtube-embed-wrapper {
+      margin: 1rem -0.5rem;
+    }
+  }
+
   /* Premium Typography Enhancements */
   .prose {
     font-size: 1.125rem;
@@ -1645,979 +2310,10 @@ body.forEach((block: any) => {
     -webkit-text-fill-color: transparent;
   }
 
-  /* Gallery Modal Styles - Mobile First */
-  #gallery-modal {
-    animation: fadeIn 0.3s ease-out;
-    /* Ensure modal takes full viewport on mobile */
-    width: 100vw !important;
-    height: 100vh !important;
-    height: 100dvh !important; /* Dynamic viewport height for mobile browsers */
-    max-width: 100vw !important;
-    max-height: 100vh !important;
-    max-height: 100dvh !important;
-    /* Prevent content overflow */
-    overflow: hidden;
-    /* Smooth scrolling for iOS */
-    -webkit-overflow-scrolling: touch;
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    z-index: 9999 !important;
-    background-color: rgba(0, 0, 0, 0.95) !important;
-  }
-  
-  /* Ensure modal displays when opened */
-  #gallery-modal:not(.hidden) {
-    display: flex !important;
-  }
+</script>
 
-  #gallery-modal img {
-    animation: zoomIn 0.3s ease-out;
-    /* Prevent image from being too large on mobile */
-    max-width: calc(100vw - 2rem);
-    max-height: calc(100vh - 8rem);
-    max-height: calc(100dvh - 8rem);
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    z-index: 1 !important;
-    position: relative !important;
-    /* Ensure no overlays or patterns appear on image */
-    background: none !important;
-    background-image: none !important;
-    /* Prevent any pseudo-elements */
-    isolation: isolate;
-  }
-  
-  /* Remove any potential overlays from image container */
-  #gallery-modal > div:first-of-type > div:first-of-type::before,
-  #gallery-modal > div:first-of-type > div:first-of-type::after,
-  #gallery-modal > div:first-of-type::before,
-  #gallery-modal > div:first-of-type::after {
-    display: none !important;
-    content: none !important;
-  }
-  
-  /* Remove any X patterns or overlays from the modal itself */
-  #gallery-modal::before,
-  #gallery-modal::after {
-    display: none !important;
-    content: none !important;
-    background: none !important;
-    background-image: none !important;
-  }
-  
-  /* Ensure no background patterns create X shapes */
-  #gallery-modal {
-    background-image: none !important;
-    background: rgba(0, 0, 0, 0.95) !important;
-  }
-  
-  /* Remove any overlay patterns from image */
-  #gallery-main-image::before,
-  #gallery-main-image::after {
-    display: none !important;
-    content: none !important;
-    background: none !important;
-    background-image: none !important;
-  }
-  
-  /* Ensure image container is properly displayed */
-  #gallery-modal > div:first-of-type {
-    display: flex !important;
-    width: 100% !important;
-    height: 100% !important;
-    align-items: center !important;
-    justify-content: center !important;
-    z-index: 1 !important;
-    position: relative !important;
-    /* Prevent any overlays from appearing on image */
-    isolation: isolate;
-  }
-  
-  /* Ensure image wrapper doesn't interfere with buttons */
-  #gallery-modal > div:first-of-type > div:first-of-type {
-    z-index: 1 !important;
-    position: relative !important;
-  }
-  
-  /* Prevent any pseudo-elements or overlays on image */
-  #gallery-main-image::before,
-  #gallery-main-image::after {
-    display: none !important;
-    content: none !important;
-  }
-  
-  /* Ensure buttons are always on top layer */
-  #gallery-close,
-  #gallery-prev,
-  #gallery-next {
-    z-index: 10000 !important;
-    position: absolute !important;
-    pointer-events: auto !important;
-    isolation: isolate !important;
-    box-sizing: border-box !important;
-  }
-  
-  /* Prevent buttons from being too large on mobile */
-  #gallery-prev,
-  #gallery-next {
-    max-width: 48px !important;
-    max-height: 48px !important;
-  }
-  
-  /* Galaxy S9+ specific button size constraints */
-  @media (min-width: 320px) and (max-width: 400px) {
-    #gallery-prev,
-    #gallery-next {
-      max-width: 40px !important;
-      max-height: 40px !important;
-      width: 40px !important;
-      height: 40px !important;
-      padding: 0.625rem !important;
-    }
-    
-    #gallery-prev svg,
-    #gallery-next svg {
-      width: 1.25rem !important;
-      height: 1.25rem !important;
-    }
-  }
-
-  @keyframes zoomIn {
-    from {
-      opacity: 0;
-      transform: scale(0.9);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  /* Gallery Image Hover Effects */
-  [data-gallery-image] {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  [data-gallery-image]:hover {
-    transform: translateY(-4px);
-  }
-
-  /* Modal Button Hover Effects */
-  #gallery-modal button:not(:disabled):hover {
-    transform: scale(1.1);
-  }
-
-  /* Enhanced Close Button Styling */
-  #gallery-close {
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 10000 !important;
-    position: absolute !important;
-    top: 0.5rem !important;
-    right: 0.5rem !important;
-    pointer-events: auto !important;
-    cursor: pointer !important;
-    /* Ensure button doesn't interfere with image */
-    isolation: isolate;
-    /* Remove any pseudo-elements that could create duplicate X */
-    /* Ensure button is always clickable */
-    -webkit-tap-highlight-color: rgba(255, 255, 255, 0.3);
-    tap-highlight-color: rgba(255, 255, 255, 0.3);
-  }
-  
-  /* Ensure close button is always interactive */
-  #gallery-close,
-  #gallery-close * {
-    pointer-events: auto !important;
-    touch-action: manipulation !important;
-    -webkit-tap-highlight-color: rgba(255, 255, 255, 0.3) !important;
-  }
-  
-  #gallery-close svg {
-    pointer-events: none !important;
-  }
-  
-  /* Override modal touch-none for buttons */
-  #gallery-modal #gallery-close,
-  #gallery-modal #gallery-prev,
-  #gallery-modal #gallery-next {
-    touch-action: manipulation !important;
-    pointer-events: auto !important;
-    -webkit-touch-callout: none !important;
-    -webkit-user-select: none !important;
-    user-select: none !important;
-  }
-  
-  /* Remove any pseudo-elements from close button that might create duplicate X icons */
-  #gallery-close::before,
-  #gallery-close::after {
-    display: none !important;
-    content: none !important;
-    background: none !important;
-    background-image: none !important;
-  }
-  
-  /* Ensure only one close button exists */
-  #gallery-modal > button:not(#gallery-prev):not(#gallery-next) {
-    /* Only allow the close button */
-  }
-  
-  /* Prevent any duplicate close buttons */
-  #gallery-modal button[id="gallery-close"]:not(:first-of-type) {
-    display: none !important;
-    visibility: hidden !important;
-  }
-
-  #gallery-close:hover {
-    transform: scale(1.15) rotate(90deg);
-    box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
-  }
-
-  #gallery-close:active {
-    transform: scale(0.95);
-  }
-
-  /* Ensure close button is always visible and doesn't overlay image */
-  #gallery-close svg {
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
-    pointer-events: none !important;
-    display: block !important;
-    /* Prevent SVG from creating overlays */
-    position: relative;
-    z-index: 1;
-    /* Ensure only one SVG path exists */
-  }
-  
-  /* Remove any duplicate SVG paths or pseudo-elements */
-  #gallery-close svg::before,
-  #gallery-close svg::after,
-  #gallery-close svg path::before,
-  #gallery-close svg path::after {
-    display: none !important;
-    content: none !important;
-  }
-  
-  /* Ensure SVG path is only rendered once */
-  #gallery-close svg path:not(:first-of-type) {
-    display: none !important;
-  }
-  
-  /* Ensure image container is below buttons */
-  #gallery-modal > div:first-of-type {
-    z-index: 1 !important;
-    position: relative;
-  }
-  
-  /* Ensure main image is below buttons */
-  #gallery-main-image {
-    z-index: 1 !important;
-    position: relative;
-    pointer-events: auto;
-  }
-
-  /* Smooth transitions for modal content */
-  #gallery-main-image {
-    transition: opacity 0.3s ease;
-  }
-
-  /* Mobile optimizations - iPhone, Android, etc. */
-  
-  /* Prevent text selection on mobile */
-  #gallery-modal {
-    -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
-    user-select: none;
-    -webkit-user-select: none;
-  }
-
-  /* Touch-friendly button sizes (minimum 44x44px for iOS) */
-  #gallery-modal button {
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  /* Small mobile devices (iPhone SE, small Android) */
-  @media (max-width: 375px) {
-    #gallery-modal {
-      padding: 0;
-    }
-    
-    #gallery-close {
-      top: 0.5rem;
-      right: 0.5rem;
-      padding: 0.75rem;
-      min-width: 40px;
-      min-height: 40px;
-    }
-    
-    #gallery-prev,
-    #gallery-next {
-      left: 0.5rem;
-      right: 0.5rem;
-      padding: 0.75rem;
-      min-width: 40px;
-      min-height: 40px;
-    }
-    
-    #gallery-main-image {
-      max-height: 65vh;
-      padding: 0.25rem;
-    }
-    
-    #gallery-counter,
-    #gallery-caption {
-      font-size: 0.625rem;
-      padding: 0.5rem 0.75rem;
-    }
-  }
-
-  /* Standard mobile devices (iPhone 12/13/14, most Android) */
-  @media (min-width: 376px) and (max-width: 640px) {
-    #gallery-modal {
-      padding: 0.5rem;
-    }
-    
-    #gallery-close {
-      top: 0.75rem;
-      right: 0.75rem;
-      padding: 0.875rem;
-      min-width: 44px;
-      min-height: 44px;
-    }
-    
-    #gallery-prev,
-    #gallery-next {
-      padding: 0.875rem;
-      min-width: 44px;
-      min-height: 44px;
-    }
-    
-    #gallery-main-image {
-      max-height: 70vh;
-      padding: 0.5rem;
-    }
-    
-    #gallery-counter {
-      font-size: 0.75rem;
-      margin-bottom: 0.25rem;
-    }
-    
-    #gallery-caption {
-      font-size: 0.625rem;
-      line-height: 1.3;
-    }
-  }
-
-  /* Tablet portrait and larger phones */
-  @media (min-width: 641px) and (max-width: 768px) {
-    #gallery-modal {
-      padding: 1rem;
-    }
-    
-    #gallery-main-image {
-      max-height: 75vh;
-      padding: 1rem;
-    }
-    
-    #gallery-close {
-      padding: 1rem;
-    }
-    
-    #gallery-prev,
-    #gallery-next {
-      padding: 1rem;
-    }
-  }
-
-  /* Landscape orientation on mobile */
-  @media (max-height: 500px) and (orientation: landscape) {
-    #gallery-main-image {
-      max-height: 90vh;
-    }
-    
-    #gallery-close {
-      top: 0.5rem;
-      right: 0.5rem;
-      padding: 0.5rem;
-    }
-    
-    #gallery-prev,
-    #gallery-next {
-      padding: 0.75rem;
-    }
-    
-    #gallery-counter,
-    #gallery-caption {
-      bottom: 0.5rem;
-      padding: 0.5rem 1rem;
-      font-size: 0.75rem;
-    }
-  }
-
-  /* Prevent zoom on double tap (iOS Safari) */
-  @media (pointer: coarse) {
-    #gallery-modal img {
-      touch-action: pan-x pan-y;
-    }
-    
-    #gallery-modal button {
-      touch-action: manipulation;
-    }
-  }
-
-  /* High DPI displays (Retina, etc.) */
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    #gallery-modal button svg {
-      shape-rendering: geometricPrecision;
-    }
-  }
-
-  /* Dark mode support for modal */
-  @media (prefers-color-scheme: dark) {
-    #gallery-modal {
-      background-color: rgba(0, 0, 0, 0.98);
-    }
-    
-    #gallery-close,
-    #gallery-prev,
-    #gallery-next {
-      background-color: rgba(0, 0, 0, 0.85);
-    }
-  }
-
-  /* Safe area insets for notched devices (iPhone X and newer) */
-  @supports (padding: max(0px)) {
-    #gallery-close {
-      top: max(0.75rem, env(safe-area-inset-top));
-      right: max(0.75rem, env(safe-area-inset-right));
-    }
-    
-    #gallery-prev {
-      left: max(0.75rem, env(safe-area-inset-left));
-    }
-    
-    #gallery-next {
-      right: max(0.75rem, env(safe-area-inset-right));
-    }
-    
-    #gallery-counter {
-      bottom: max(1rem, env(safe-area-inset-bottom));
-    }
-  }
-
-  /* iOS Safari specific fixes */
-  @supports (-webkit-touch-callout: none) {
-    #gallery-modal {
-      /* Fix for iOS Safari viewport issues */
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-    }
-    
-    #gallery-main-image {
-      /* Better image rendering on iOS */
-      -webkit-transform: translateZ(0);
-      transform: translateZ(0);
-    }
-  }
-
-  /* Android Chrome specific optimizations */
-  @media screen and (-webkit-min-device-pixel-ratio: 0) {
-    #gallery-modal {
-      /* Prevent address bar from affecting layout */
-      min-height: -webkit-fill-available;
-    }
-  }
-
-  /* Very small screens (iPhone SE, etc.) */
-  @media (max-width: 320px) {
-    #gallery-close {
-      top: 0.25rem;
-      right: 0.25rem;
-      padding: 0.5rem;
-      min-width: 36px;
-      min-height: 36px;
-    }
-    
-    #gallery-prev,
-    #gallery-next {
-      padding: 0.5rem;
-      min-width: 36px;
-      min-height: 36px;
-    }
-    
-    #gallery-main-image {
-      max-height: 60vh;
-    }
-    
-    #gallery-counter,
-    #gallery-caption {
-      font-size: 0.5rem;
-      padding: 0.375rem 0.5rem;
-      max-width: 95%;
-    }
-  }
-
-  /* Large phones and small tablets in portrait */
-  @media (min-width: 481px) and (max-width: 768px) {
-    #gallery-main-image {
-      max-height: 80vh;
-    }
-  }
-
-  /* Prevent pull-to-refresh on mobile when modal is open */
-  #gallery-modal {
-    overscroll-behavior: contain;
-    overscroll-behavior-y: contain;
-  }
-
-  /* Galaxy S9+ Specific Optimizations */
-  /* Galaxy S9+ has: 1440x2960px, ~360px CSS width, ~740px CSS height, 4x DPI, 18.5:9 aspect ratio */
-  /* Also handles smaller viewports like 320px width (browser dev tools) */
-  
-  /* Galaxy S9+ Portrait Mode (320px-400px width, 600px-800px height) */
-  @media (min-width: 320px) and (max-width: 400px) and (min-height: 600px) and (max-height: 800px) {
-    /* Ensure modal is visible and properly displayed */
-    #gallery-modal {
-      display: flex !important; /* Force flex when modal is open */
-      padding: 0.5rem;
-      position: fixed !important;
-      top: 0 !important;
-      left: 0 !important;
-      right: 0 !important;
-      bottom: 0 !important;
-      z-index: 9999 !important;
-      width: 100vw !important;
-      height: 100vh !important;
-      height: 100dvh !important;
-      background-color: rgba(0, 0, 0, 0.95) !important;
-    }
-    
-    #gallery-modal.hidden {
-      display: none !important;
-    }
-    
-    #gallery-close {
-      top: 0.75rem !important;
-      right: 0.75rem !important;
-      padding: 0.875rem !important;
-      min-width: 44px !important;
-      min-height: 44px !important;
-      background-color: rgba(0, 0, 0, 0.85) !important;
-      z-index: 10000 !important;
-      position: absolute !important;
-      display: flex !important;
-      visibility: visible !important;
-      pointer-events: auto !important;
-      /* Ensure button stays in top right, not over image */
-      isolation: isolate !important;
-      /* Remove any duplicates */
-    }
-    
-    /* Remove duplicate close buttons on Galaxy S9+ */
-    #gallery-modal > button[id="gallery-close"]:not(:first-of-type) {
-      display: none !important;
-      visibility: hidden !important;
-      opacity: 0 !important;
-    }
-    
-    #gallery-close::before,
-    #gallery-close::after {
-      display: none !important;
-      content: none !important;
-    }
-    
-    #gallery-close svg {
-      pointer-events: none !important;
-      position: relative !important;
-      z-index: 1 !important;
-      display: block !important;
-    }
-    
-    #gallery-close svg::before,
-    #gallery-close svg::after {
-      display: none !important;
-      content: none !important;
-    }
-    
-    /* Ensure only one SVG path is visible */
-    #gallery-close svg path:not(:first-of-type) {
-      display: none !important;
-    }
-    
-    /* Remove any X patterns from image or modal */
-    #gallery-main-image::before,
-    #gallery-main-image::after,
-    #gallery-modal::before,
-    #gallery-modal::after {
-      display: none !important;
-      content: none !important;
-      background: none !important;
-      background-image: none !important;
-    }
-    
-    #gallery-prev,
-    #gallery-next {
-      padding: 0.625rem !important;
-      min-width: 40px !important;
-      max-width: 40px !important;
-      min-height: 40px !important;
-      max-height: 40px !important;
-      width: 40px !important;
-      height: 40px !important;
-      background-color: rgba(0, 0, 0, 0.75) !important;
-      z-index: 10000 !important;
-      position: absolute !important;
-      display: flex !important;
-      visibility: visible !important;
-      left: 0.5rem !important;
-      right: 0.5rem !important;
-    }
-    
-    #gallery-prev {
-      left: 0.5rem !important;
-      right: auto !important;
-    }
-    
-    #gallery-next {
-      right: 0.5rem !important;
-      left: auto !important;
-    }
-    
-    #gallery-prev svg,
-    #gallery-next svg {
-      width: 1.25rem !important;
-      height: 1.25rem !important;
-      max-width: 1.25rem !important;
-      max-height: 1.25rem !important;
-    }
-    
-    #gallery-main-image {
-      max-height: 70vh !important;
-      max-height: calc(100dvh - 10rem) !important;
-      max-width: calc(100vw - 2rem) !important;
-      width: auto !important;
-      height: auto !important;
-      object-fit: contain !important;
-      display: block !important;
-      visibility: visible !important;
-      opacity: 1 !important;
-    }
-    
-    #gallery-counter {
-      font-size: 0.8125rem !important;
-      margin-bottom: 0.25rem !important;
-      font-weight: 600 !important;
-      display: block !important;
-      visibility: visible !important;
-    }
-    
-    #gallery-caption {
-      font-size: 0.6875rem !important;
-      line-height: 1.4 !important;
-      max-width: 90% !important;
-      display: block !important;
-      visibility: visible !important;
-    }
-    
-    /* Better spacing for tall screen */
-    #gallery-counter,
-    #gallery-caption {
-      bottom: 1rem !important;
-      padding: 0.625rem 1rem !important;
-    }
-    
-    /* Image container */
-    #gallery-modal > div:first-of-type {
-      display: flex !important;
-      width: 100% !important;
-      height: 100% !important;
-      align-items: center !important;
-      justify-content: center !important;
-    }
-  }
-  
-  /* Galaxy S9+ Standard Portrait (360px-400px width, 700px-800px height) - More specific */
-  @media (min-width: 360px) and (max-width: 400px) and (min-height: 700px) and (max-height: 800px) {
-    #gallery-modal {
-      padding: 0.75rem;
-    }
-    
-    #gallery-close {
-      top: 1rem !important;
-      right: 1rem !important;
-      padding: 1rem !important;
-      min-width: 48px !important;
-      min-height: 48px !important;
-      z-index: 10000 !important;
-      position: absolute !important;
-      pointer-events: auto !important;
-      isolation: isolate !important;
-    }
-    
-    /* Remove duplicate close buttons */
-    #gallery-modal > button[id="gallery-close"]:not(:first-of-type) {
-      display: none !important;
-      visibility: hidden !important;
-      opacity: 0 !important;
-    }
-    
-    #gallery-close::before,
-    #gallery-close::after {
-      display: none !important;
-      content: none !important;
-    }
-    
-    #gallery-close svg {
-      pointer-events: none !important;
-      display: block !important;
-    }
-    
-    #gallery-close svg::before,
-    #gallery-close svg::after {
-      display: none !important;
-      content: none !important;
-    }
-    
-    #gallery-close svg path:not(:first-of-type) {
-      display: none !important;
-    }
-    
-    #gallery-prev,
-    #gallery-next {
-      padding: 0.625rem !important;
-      min-width: 40px !important;
-      max-width: 40px !important;
-      min-height: 40px !important;
-      max-height: 40px !important;
-      width: 40px !important;
-      height: 40px !important;
-      position: absolute !important;
-      left: 0.5rem !important;
-      right: 0.5rem !important;
-    }
-    
-    #gallery-prev {
-      left: 0.5rem !important;
-      right: auto !important;
-    }
-    
-    #gallery-next {
-      right: 0.5rem !important;
-      left: auto !important;
-    }
-    
-    #gallery-prev svg,
-    #gallery-next svg {
-      width: 1.25rem !important;
-      height: 1.25rem !important;
-      max-width: 1.25rem !important;
-      max-height: 1.25rem !important;
-    }
-    
-    #gallery-main-image {
-      max-height: 75vh;
-      max-width: calc(100vw - 3rem);
-      padding: 0.5rem;
-    }
-    
-    #gallery-counter {
-      font-size: 0.875rem;
-      margin-bottom: 0.375rem;
-    }
-    
-    #gallery-caption {
-      font-size: 0.75rem;
-      max-width: 85%;
-    }
-    
-    #gallery-counter,
-    #gallery-caption {
-      bottom: 1.5rem;
-      padding: 0.75rem 1.25rem;
-    }
-  }
-
-  /* Galaxy S9+ Landscape Mode (740px width, ~360px height) */
-  @media (min-width: 700px) and (max-width: 800px) and (min-height: 350px) and (max-height: 400px) and (orientation: landscape) {
-    #gallery-modal {
-      padding: 0.5rem;
-    }
-    
-    #gallery-close {
-      top: 0.75rem;
-      right: 0.75rem;
-      padding: 0.75rem;
-      min-width: 44px;
-      min-height: 44px;
-    }
-    
-    #gallery-prev,
-    #gallery-next {
-      padding: 0.5rem !important;
-      min-width: 36px !important;
-      max-width: 36px !important;
-      min-height: 36px !important;
-      max-height: 36px !important;
-      width: 36px !important;
-      height: 36px !important;
-      position: absolute !important;
-    }
-    
-    #gallery-prev {
-      left: 0.5rem !important;
-      right: auto !important;
-    }
-    
-    #gallery-next {
-      right: 0.5rem !important;
-      left: auto !important;
-    }
-    
-    #gallery-prev svg,
-    #gallery-next svg {
-      width: 1rem !important;
-      height: 1rem !important;
-      max-width: 1rem !important;
-      max-height: 1rem !important;
-    }
-    
-    #gallery-main-image {
-      max-height: 85vh;
-      max-width: calc(100vw - 8rem);
-    }
-    
-    #gallery-counter,
-    #gallery-caption {
-      bottom: 0.75rem;
-      padding: 0.5rem 1rem;
-      font-size: 0.75rem;
-    }
-  }
-
-  /* High DPI displays - Galaxy S9+ has 4x pixel ratio */
-  @media (-webkit-min-device-pixel-ratio: 3.5), (min-resolution: 350dpi) {
-    #gallery-modal button svg {
-      shape-rendering: geometricPrecision;
-      /* Crisp rendering on high DPI */
-      image-rendering: -webkit-optimize-contrast;
-      image-rendering: crisp-edges;
-    }
-    
-    #gallery-main-image {
-      /* Better image quality on high DPI */
-      image-rendering: -webkit-optimize-contrast;
-      image-rendering: auto;
-    }
-  }
-
-  /* Android Chrome specific - Galaxy S9+ optimizations */
-  @media screen and (-webkit-min-device-pixel-ratio: 0) and (min-width: 360px) and (max-width: 400px) {
-    #gallery-modal {
-      /* Handle Android Chrome address bar */
-      min-height: -webkit-fill-available;
-      height: 100vh;
-      height: 100dvh;
-      /* Prevent address bar from affecting layout */
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-    }
-    
-    /* Optimize for Android Chrome's rendering */
-    #gallery-main-image {
-      will-change: transform;
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
-    }
-  }
-
-  /* Tall aspect ratio devices (18.5:9 like Galaxy S9+) */
-  @media (min-aspect-ratio: 18/9) and (max-aspect-ratio: 19/9) {
-    #gallery-modal {
-      /* Optimize for tall screens */
-      padding-top: env(safe-area-inset-top, 0);
-      padding-bottom: env(safe-area-inset-bottom, 0);
-    }
-    
-    #gallery-main-image {
-      max-height: 78vh;
-      max-height: calc(100dvh - 12rem);
-    }
-    
-    #gallery-counter,
-    #gallery-caption {
-      bottom: max(1.5rem, env(safe-area-inset-bottom, 1.5rem));
-    }
-    
-    /* Better button positioning for tall screens */
-    #gallery-close {
-      top: max(1rem, env(safe-area-inset-top, 1rem));
-    }
-  }
-
-  /* Galaxy S9+ specific touch optimizations */
-  @media (pointer: coarse) and (min-width: 360px) and (max-width: 400px) {
-    #gallery-modal button {
-      /* Larger touch targets for Galaxy S9+ */
-      min-width: 48px;
-      min-height: 48px;
-      /* Better touch feedback */
-      -webkit-tap-highlight-color: rgba(255, 255, 255, 0.2);
-      tap-highlight-color: rgba(255, 255, 255, 0.2);
-    }
-    
-    /* Optimize swipe gestures for tall screen */
-    #gallery-modal {
-      touch-action: pan-y pinch-zoom;
-    }
-    
-    #gallery-main-image {
-      touch-action: pan-x pan-y;
-    }
-  }
-
-  /* Galaxy S9+ performance optimizations */
-  @media (min-width: 360px) and (max-width: 400px) {
-    /* Hardware acceleration for smooth animations */
-    #gallery-modal {
-      transform: translateZ(0);
-      -webkit-transform: translateZ(0);
-      will-change: opacity;
-    }
-    
-    #gallery-main-image {
-      transform: translateZ(0);
-      -webkit-transform: translateZ(0);
-      will-change: transform, opacity;
-    }
-    
-    /* Smooth transitions on Galaxy S9+ */
-    #gallery-modal button {
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-      -webkit-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-  }
-
-  /* Galaxy S9+ specific font rendering */
-  @media (min-width: 360px) and (max-width: 400px) {
-    #gallery-counter,
-    #gallery-caption {
-      /* Better text rendering on AMOLED */
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-rendering: optimizeLegibility;
-    }
-  }
+<style is:global>
+  /* Gallery CSS removed */
 
   /* Galaxy S9+ Typography Responsive Fixes */
   /* Galaxy S9+ Portrait: 360px width, ~740px height */
@@ -2763,18 +2459,364 @@ body.forEach((block: any) => {
       margin: 0.25rem 0 !important; /* Added margin */
     }
 
-    /* Gallery Counter in Modal */
-    #gallery-counter {
-      font-size: 0.875rem !important; /* 14px */
-      line-height: 1.4 !important;
-      margin-bottom: 0.25rem !important; /* Added margin */
+
+    /* Scroll Indicator Text */
+    p.text-white-pure.opacity-80 {
+      font-size: 0.75rem !important;
+      line-height: 1.5 !important;
+      margin: 0.5rem 0 !important; /* Added margin */
     }
 
-    #gallery-caption {
+    /* Related Article Date */
+    .flex.items-center.text-gray-400 {
+      font-size: 0.6875rem !important; /* 11px */
+      line-height: 1.5 !important;
+      margin: 0.25rem 0 !important; /* Added margin */
+    }
+
+    /* Category Badge in Related Articles */
+    .inline-block.rounded-full span {
+      font-size: 0.6875rem !important; /* 11px */
+      line-height: 1.4 !important;
+      margin: 0.125rem 0 !important; /* Added margin */
+    }
+
+    /* Featured Image Section */
+    .xl\:mb-16.lg\:mb-12,
+    .relative.group {
+      margin-bottom: 1.5rem !important; /* Added margin */
+    }
+
+    /* Social Share Buttons Container */
+    .flex.xl\:gap-6 {
+      margin-top: 1rem !important; /* Added margin */
+      margin-bottom: 1rem !important; /* Added margin */
+    }
+
+    /* Section Spacing */
+    .xl\:mt-20.lg\:mt-16 {
+      margin-top: 2rem !important; /* Added margin for social share section */
+    }
+
+    /* Related Articles Container */
+    .xl\:mt-24.lg\:mt-20 {
+      margin-top: 2.5rem !important; /* Added margin */
+    }
+  }
+
+  /* Galaxy S9+ Landscape Typography */
+  @media (min-width: 700px) and (max-width: 800px) and (min-height: 350px) and (max-height: 400px) and (orientation: landscape) {
+    /* Hero Title - Landscape */
+    .font-philosopher.h1 {
+      font-size: 2.25rem !important; /* 36px */
+      line-height: 1.2 !important;
+      margin-bottom: 1rem !important; /* Added margin */
+      margin-top: 0.5rem !important; /* Added margin */
+    }
+
+    /* Category Badges */
+    .absolute.bottom-0 span {
+      font-size: 0.6875rem !important; /* 11px */
+      padding: 0.375rem 0.875rem !important;
+      margin: 0.25rem 0.25rem !important; /* Added margin */
+    }
+
+    /* Article Body */
+    .prose {
+      font-size: 1rem !important; /* 16px */
+      margin-top: 0.75rem !important; /* Added margin */
+      margin-bottom: 0.75rem !important; /* Added margin */
+    }
+
+    .prose p {
+      margin-bottom: 1.25rem !important; /* Added margin */
+      margin-top: 0.5rem !important; /* Added margin */
+    }
+
+    /* Gallery Title */
+    .headings.h3 {
+      font-size: 1.375rem !important; /* 22px */
+      margin-top: 1.25rem !important; /* Added margin */
+      margin-bottom: 0.75rem !important; /* Added margin */
+    }
+
+    /* Section headings */
+    h3, .h3 {
+      margin-top: 1.25rem !important; /* Added margin */
+      margin-bottom: 0.75rem !important; /* Added margin */
+    }
+
+    h4, .h4 {
+      margin-top: 0.75rem !important; /* Added margin */
+      margin-bottom: 0.5rem !important; /* Added margin */
+    }
+
+    /* Paragraphs */
+    p, .paragraph {
+      margin-bottom: 1rem !important; /* Added margin */
+      margin-top: 0.5rem !important; /* Added margin */
+    }
+  }
+
+  /* Galaxy S9+ Specific Text Scaling for Better Readability */
+  @media (min-width: 360px) and (max-width: 400px) {
+    /* Hero Title - Responsive scaling */
+    h1.font-philosopher,
+    .font-philosopher.h1 {
+      font-size: clamp(1.75rem, 5vw, 2rem) !important; /* 28px - 32px */
+      line-height: 1.2 !important;
+      margin-bottom: 1.5rem !important; /* Added margin */
+      margin-top: 0.5rem !important; /* Added margin */
+    }
+
+    /* Section Headings */
+    h3.headings,
+    .headings.h3 {
+      font-size: clamp(1.125rem, 3.5vw, 1.5rem) !important; /* 18px - 24px */
+      line-height: 1.3 !important;
+      margin-top: 1.5rem !important; /* Added margin */
+      margin-bottom: 1rem !important; /* Added margin */
+    }
+
+    h4.headings,
+    .headings.h4 {
+      font-size: clamp(0.875rem, 3vw, 1.125rem) !important; /* 14px - 18px */
+      line-height: 1.4 !important;
+      margin-top: 1rem !important; /* Added margin */
+      margin-bottom: 0.75rem !important; /* Added margin */
+    }
+
+    /* Paragraph text scaling */
+    p.paragraph,
+    .paragraph,
+    article.prose p {
+      font-size: clamp(0.875rem, 2.5vw, 1rem) !important; /* 14px - 16px */
+      line-height: 1.7 !important;
+      margin-bottom: 1.5rem !important; /* Added margin */
+      margin-top: 0.5rem !important; /* Added margin */
+    }
+
+    /* Small text scaling */
+    .text-xs,
+    .text-sm,
+    span.text-xs,
+    p.text-xs {
+      font-size: clamp(0.6875rem, 2vw, 0.875rem) !important; /* 11px - 14px */
+      line-height: 1.5 !important;
+      margin: 0.25rem 0 !important; /* Added margin */
+    }
+
+    /* Breadcrumb and navigation text */
+    nav.paragraph,
+    nav a,
+    nav span {
+      font-size: clamp(0.75rem, 2.2vw, 0.875rem) !important; /* 12px - 14px */
+      margin: 0.25rem 0 !important; /* Added margin */
+    }
+
+    /* Badge and category text */
+    .rounded-full span,
+    .bg-white\/15 span,
+    .bg-black\/70 span {
+      font-size: clamp(0.6875rem, 2vw, 0.875rem) !important; /* 11px - 14px */
+      margin: 0.25rem 0.375rem !important; /* Added margin */
+    }
+
+    /* Better line heights for readability on Galaxy S9+ */
+    h1, .h1 {
+      line-height: 1.2 !important;
+      margin-bottom: 1.5rem !important; /* Added margin */
+    }
+
+    h3, .h3 {
+      line-height: 1.3 !important;
+      margin-top: 1.5rem !important; /* Added margin */
+      margin-bottom: 1rem !important; /* Added margin */
+    }
+
+    h4, .h4 {
+      line-height: 1.4 !important;
+      margin-top: 1rem !important; /* Added margin */
+      margin-bottom: 0.75rem !important; /* Added margin */
+    }
+
+    p, .paragraph {
+      line-height: 1.6 !important;
+      margin-bottom: 1.25rem !important; /* Added margin */
+    }
+
+    /* Article body specific */
+    article.prose {
+      font-size: clamp(0.875rem, 2.5vw, 1rem) !important;
+      line-height: 1.7 !important;
+      margin-top: 1rem !important; /* Added margin */
+      margin-bottom: 1rem !important; /* Added margin */
+    }
+
+    /* Additional spacing for better readability */
+    article.prose p {
+      margin-bottom: 1.5rem !important; /* Increased paragraph spacing */
+    }
+
+    /* Section containers */
+    .xl\:mb-16,
+    .lg\:mb-12,
+    .md\:mb-10 {
+      margin-bottom: 1.5rem !important; /* Consistent section spacing */
+    }
+
+    .xl\:mt-20,
+    .lg\:mt-16,
+    .md\:mt-12 {
+      margin-top: 2rem !important; /* Consistent top spacing */
+    }
+  }
+
+
+  /* Galaxy S9+ Typography Responsive Fixes */
+  /* Galaxy S9+ Portrait: 360px width, ~740px height */
+  @media (min-width: 360px) and (max-width: 400px) and (min-height: 700px) {
+    /* Hero Title - Galaxy S9+ */
+    h1.font-philosopher,
+    .font-philosopher.h1 {
+      font-size: 1.875rem !important; /* 30px - better for 360px width */
+      line-height: 1.2 !important;
+      font-weight: 700 !important;
+      margin-bottom: 1.5rem !important; /* Added margin */
+      margin-top: 0.5rem !important; /* Added margin */
+    }
+
+    /* Breadcrumb Text */
+    nav.paragraph.p2,
+    nav.paragraph.p2 a,
+    nav.paragraph.p2 span {
+      font-size: 0.8125rem !important; /* 13px */
+      line-height: 1.5 !important;
+      margin: 0.25rem 0 !important; /* Added margin */
+    }
+
+    /* Category Badges in Hero */
+    .absolute.bottom-0 span,
+    .absolute.bottom-0 .rounded-full {
+      font-size: 0.75rem !important; /* 12px */
+      padding: 0.5rem 1rem !important;
+      line-height: 1.4 !important;
+      margin: 0.25rem 0.375rem !important; /* Added margin */
+    }
+
+    /* Author & Date Cards (if visible on desktop) */
+    .bg-white\/20 p.paragraph,
+    .bg-white\/20 .paragraph {
+      font-size: 0.8125rem !important; /* 13px */
+      line-height: 1.5 !important;
+      margin: 0.5rem 0 !important; /* Added margin */
+    }
+
+    /* Main Image Caption */
+    .text-center.text-gray-500.italic,
+    p.text-center.text-gray-500 {
+      font-size: 0.75rem !important; /* 12px */
+      line-height: 1.5 !important;
+      margin-top: 0.75rem !important; /* Added margin */
+      margin-bottom: 0.5rem !important; /* Added margin */
+    }
+
+    /* Photo Gallery Title */
+    h3.headings.h3,
+    .headings.h3 {
+      font-size: 1.25rem !important; /* 20px */
+      line-height: 1.3 !important;
+      font-weight: 600 !important;
+      margin-top: 1.5rem !important; /* Added margin */
+      margin-bottom: 1rem !important; /* Added margin */
+    }
+
+    /* Author & Date Mobile Section */
+    .paragraph.text-charcoal,
+    p.paragraph.text-charcoal {
+      font-size: 0.8125rem !important; /* 13px */
+      line-height: 1.6 !important;
+      margin: 0.5rem 0 !important; /* Added margin */
+    }
+
+    /* Article Body Text - Prose */
+    article.prose,
+    .prose {
+      font-size: 0.9375rem !important; /* 15px */
+      line-height: 1.7 !important;
+      margin-top: 1rem !important; /* Added margin */
+      margin-bottom: 1rem !important; /* Added margin */
+    }
+
+    article.prose p,
+    .prose p {
+      font-size: 0.9375rem !important;
+      line-height: 1.7 !important;
+      margin-bottom: 1.5rem !important; /* Increased margin */
+      margin-top: 0.5rem !important; /* Added margin */
+    }
+
+    article.prose a,
+    .prose a {
+      font-size: 0.9375rem !important;
+      line-height: 1.7 !important;
+      margin: 0.25rem 0 !important; /* Added margin */
+    }
+
+    /* Social Share Section */
+    h4.headings.h4.text-charcoal,
+    .headings.h4.text-charcoal {
+      font-size: 0.75rem !important; /* 12px */
+      letter-spacing: 0.05em !important;
+      line-height: 1.4 !important;
+      margin-top: 1.5rem !important; /* Added margin */
+      margin-bottom: 1rem !important; /* Added margin */
+    }
+
+    /* Related Articles Section */
+    h3.headings.h3.text-charcoal,
+    .headings.h3.text-charcoal {
+      font-size: 1.5rem !important; /* 24px */
+      line-height: 1.3 !important;
+      font-weight: 600 !important;
+      margin-top: 2rem !important; /* Added margin */
+      margin-bottom: 1rem !important; /* Added margin */
+    }
+
+    .paragraph.p2.text-gray-500,
+    p.paragraph.p2 {
+      font-size: 0.8125rem !important; /* 13px */
+      line-height: 1.6 !important;
+      margin-top: 0.5rem !important; /* Added margin */
+      margin-bottom: 1rem !important; /* Added margin */
+    }
+
+    /* Related Article Cards */
+    h4.headings.h4.text-charcoal.line-clamp-2,
+    .headings.h4.text-charcoal {
+      font-size: 1rem !important; /* 16px */
+      line-height: 1.4 !important;
+      font-weight: 600 !important;
+      margin-top: 0.75rem !important; /* Added margin */
+      margin-bottom: 0.5rem !important; /* Added margin */
+    }
+
+    .paragraph.p3.text-gray-500,
+    p.paragraph.p3 {
+      font-size: 0.75rem !important; /* 12px */
+      line-height: 1.5 !important;
+      margin-top: 0.5rem !important; /* Added margin */
+      margin-bottom: 0.75rem !important; /* Added margin */
+    }
+
+    /* Photo Count Badge */
+    .bg-black\/70 span.font-semibold,
+    span.font-semibold {
       font-size: 0.75rem !important; /* 12px */
       line-height: 1.4 !important;
-      margin-top: 0.25rem !important; /* Added margin */
+      margin: 0.25rem 0 !important; /* Added margin */
     }
+
 
     /* Scroll Indicator Text */
     p.text-white-pure.opacity-80 {

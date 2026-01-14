@@ -1,0 +1,735 @@
+---
+// Advertisement Modal Component
+// This modal displays an advertisement with a countdown timer and auto-close functionality
+// The advertisement will automatically stop showing after the specified end date
+---
+
+<!-- Advertisement Overlay -->
+<div id="advertisement-overlay" class="ad-overlay">
+    <div class="ad-container">
+        <button id="ad-skip-btn" class="ad-skip-btn" aria-label="Skip advertisement">Skip</button>
+        <div class="ad-countdown-container">
+            <div id="ad-countdown" class="ad-countdown">5</div>
+        </div>
+        <div class="ad-content-wrapper">
+            <div class="ad-image-wrapper">
+                <img src="/atty.jpg" alt="Advertisement" class="ad-image" loading="lazy" />
+                <div class="ad-gradient-overlay"></div>
+                <div class="ad-button-overlay">
+                    <a 
+                        href="https://www.facebook.com/msutcto/posts/pfbid02Rc8Vsi12dFHAVXnzayMPpbyu15Z8EaTfVCgHB891UzwwMF1iAja1rpcBiERwKeol" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        class="ad-facebook-button"
+                        aria-label="View Facebook Story">
+                        <svg class="ad-facebook-button-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                        <span class="ad-facebook-button-text">View Our Facebook Story</span>
+                        <svg class="ad-facebook-button-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+                <!-- Professional Disclaimer -->
+                <div class="ad-disclaimer">
+                    <div class="ad-disclaimer-content">
+                        <svg class="ad-disclaimer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                        <span class="ad-disclaimer-text">
+                            This advertisement will end on <strong>February 1, 2026 at 7:30 AM</strong>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Advertisement Overlay Styles */
+.ad-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #61063B;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: fadeIn 0.5s ease-in-out;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.ad-overlay.hiding {
+    animation: fadeOut 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.95);
+        visibility: hidden;
+    }
+}
+
+.ad-container {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    height: 85vh;
+    max-height: 800px;
+    min-height: 500px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                0 0 100px rgba(59, 130, 246, 0.3);
+    animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.ad-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    gap: 0;
+}
+
+.ad-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.ad-button-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.ad-button-overlay > * {
+    pointer-events: all;
+}
+
+.ad-facebook-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 18px 40px;
+    background: linear-gradient(135deg, rgba(24, 119, 242, 0.95) 0%, rgba(13, 95, 204, 0.95) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: 0.5px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+                0 4px 16px rgba(24, 119, 242, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    min-width: 280px;
+}
+
+.ad-facebook-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.ad-facebook-button:hover::before {
+    left: 100%;
+}
+
+.ad-facebook-button:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5),
+                0 6px 20px rgba(24, 119, 242, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    background: linear-gradient(135deg, rgba(26, 127, 245, 0.98) 0%, rgba(14, 98, 208, 0.98) 100%);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.ad-facebook-button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(24, 119, 242, 0.4),
+                0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.ad-facebook-button-icon {
+    width: 28px;
+    height: 28px;
+    fill: #ffffff;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.ad-facebook-button-text {
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.ad-facebook-button-arrow {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    stroke-width: 2.5;
+    transition: transform 0.3s ease;
+}
+
+.ad-facebook-button:hover .ad-facebook-button-arrow {
+    transform: translateX(4px);
+}
+
+.ad-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    animation: zoomIn 5s ease-in-out;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.05);
+    }
+}
+
+.ad-gradient-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 50%, transparent 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Professional Disclaimer Styles */
+.ad-disclaimer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 16px 20px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.6) 100%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 15;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: none; /* Hidden but functionality remains active */
+}
+
+.ad-disclaimer-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    max-width: 100%;
+}
+
+.ad-disclaimer-icon {
+    width: 20px;
+    height: 20px;
+    color: #fbbf24;
+    flex-shrink: 0;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.ad-disclaimer-text {
+    font-size: 13px;
+    font-weight: 500;
+    color: #ffffff;
+    text-align: center;
+    line-height: 1.4;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.ad-disclaimer-text strong {
+    color: #fbbf24;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.ad-countdown-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 70px;
+    height: 70px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 20px rgba(59, 130, 246, 0.5);
+    animation: pulse 1s ease-in-out infinite;
+    z-index: 20;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+                    0 0 20px rgba(59, 130, 246, 0.5);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+                    0 0 30px rgba(59, 130, 246, 0.8);
+    }
+}
+
+.ad-countdown {
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(59, 130, 246, 0.8);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    animation: countdownPop 0.3s ease-out;
+}
+
+@keyframes countdownPop {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.ad-skip-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 20;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.ad-skip-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.ad-skip-btn:active {
+    transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .ad-container {
+        width: 90%;
+        max-width: 700px;
+        height: 70vh;
+        max-height: 550px;
+    }
+    
+    .ad-button-overlay {
+        padding: 25px 18px;
+    }
+    
+    .ad-facebook-button {
+        padding: 16px 35px;
+        font-size: 15px;
+        min-width: 260px;
+    }
+    
+    .ad-facebook-button-icon {
+        width: 26px;
+        height: 26px;
+    }
+    
+    .ad-facebook-button-arrow {
+        width: 18px;
+        height: 18px;
+    }
+
+    .ad-disclaimer {
+        padding: 14px 18px;
+    }
+
+    .ad-disclaimer-text {
+        font-size: 12px;
+    }
+
+    .ad-disclaimer-icon {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    .ad-container {
+        width: 92%;
+        max-width: 600px;
+        height: 65vh;
+        max-height: 500px;
+        min-height: 350px;
+        border-radius: 16px;
+    }
+    
+    .ad-button-overlay {
+        padding: 20px 15px;
+    }
+    
+    .ad-facebook-button {
+        padding: 14px 30px;
+        font-size: 14px;
+        min-width: 240px;
+    }
+    
+    .ad-facebook-button-icon {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .ad-facebook-button-text {
+        font-size: 14px;
+    }
+    
+    .ad-facebook-button-arrow {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .ad-countdown-container {
+        width: 60px;
+        height: 60px;
+        top: 15px;
+        right: 15px;
+    }
+    
+    .ad-countdown {
+        font-size: 24px;
+    }
+    
+    .ad-skip-btn {
+        top: 15px;
+        left: 15px;
+        padding: 10px 20px;
+        font-size: 12px;
+    }
+
+    .ad-disclaimer {
+        padding: 12px 15px;
+    }
+
+    .ad-disclaimer-text {
+        font-size: 11px;
+    }
+
+    .ad-disclaimer-icon {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ad-container {
+        width: 95%;
+        max-width: none;
+        height: 60vh;
+        max-height: 450px;
+        min-height: 300px;
+        border-radius: 12px;
+    }
+    
+    .ad-button-overlay {
+        padding: 15px 12px;
+    }
+    
+    .ad-facebook-button {
+        padding: 12px 25px;
+        font-size: 13px;
+        min-width: 220px;
+        gap: 10px;
+    }
+    
+    .ad-facebook-button-icon {
+        width: 22px;
+        height: 22px;
+    }
+    
+    .ad-facebook-button-text {
+        font-size: 13px;
+    }
+    
+    .ad-facebook-button-arrow {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .ad-countdown-container {
+        width: 50px;
+        height: 50px;
+        top: 10px;
+        right: 10px;
+    }
+    
+    .ad-countdown {
+        font-size: 20px;
+    }
+    
+    .ad-skip-btn {
+        top: 10px;
+        left: 10px;
+        padding: 8px 16px;
+        font-size: 11px;
+    }
+
+    .ad-disclaimer {
+        padding: 10px 12px;
+    }
+
+    .ad-disclaimer-content {
+        gap: 8px;
+    }
+
+    .ad-disclaimer-text {
+        font-size: 10px;
+        line-height: 1.3;
+    }
+
+    .ad-disclaimer-icon {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+@media (max-width: 360px) {
+    .ad-container {
+        width: 98%;
+        height: 55vh;
+        max-height: 400px;
+        min-height: 280px;
+        border-radius: 10px;
+    }
+    
+    .ad-button-overlay {
+        padding: 12px 10px;
+    }
+    
+    .ad-facebook-button {
+        padding: 10px 20px;
+        font-size: 12px;
+        min-width: 200px;
+        gap: 8px;
+    }
+    
+    .ad-facebook-button-icon {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .ad-facebook-button-text {
+        font-size: 12px;
+    }
+    
+    .ad-facebook-button-arrow {
+        width: 14px;
+        height: 14px;
+    }
+    
+    .ad-countdown-container {
+        width: 45px;
+        height: 45px;
+        top: 8px;
+        right: 8px;
+    }
+    
+    .ad-countdown {
+        font-size: 18px;
+    }
+    
+    .ad-skip-btn {
+        top: 8px;
+        left: 8px;
+        padding: 6px 14px;
+        font-size: 10px;
+    }
+
+    .ad-disclaimer {
+        padding: 8px 10px;
+    }
+
+    .ad-disclaimer-text {
+        font-size: 9px;
+    }
+
+    .ad-disclaimer-icon {
+        width: 12px;
+        height: 12px;
+    }
+}
+</style>
+
+<script>
+    // Advertisement Overlay Countdown and Auto-Close
+    document.addEventListener('DOMContentLoaded', function() {
+        const overlay = document.getElementById('advertisement-overlay');
+        const countdownEl = document.getElementById('ad-countdown');
+        const skipBtn = document.getElementById('ad-skip-btn');
+        
+        // Check if advertisement should be hidden (February 1, 2026 at 7:30 AM)
+        // Using ISO 8601 format: YYYY-MM-DDTHH:mm:ss
+        const hideDate = new Date('2026-02-01T07:30:00');
+        const currentDate = new Date();
+        
+        // If current date is on or after the hide date, don't show the advertisement
+        if (currentDate >= hideDate) {
+            if (overlay) {
+                overlay.style.display = 'none';
+                // Remove from DOM
+                setTimeout(() => {
+                    if (overlay.parentNode) {
+                        overlay.parentNode.removeChild(overlay);
+                    }
+                }, 100);
+            }
+            return;
+        }
+        
+        if (!overlay || !countdownEl) return;
+        
+        let countdown = 5;
+        let remainingTime = 5000; // 5 seconds in milliseconds
+        
+        // Function to update countdown display
+        function updateCountdown() {
+            countdownEl.textContent = countdown.toString();
+            countdownEl.style.animation = 'none';
+            // Trigger reflow to restart animation
+            void countdownEl.offsetWidth;
+            countdownEl.style.animation = 'countdownPop 0.3s ease-out';
+        }
+        
+        // Function to close the advertisement
+        function closeAdvertisement() {
+            overlay.classList.add('hiding');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                // Remove from DOM after animation
+                setTimeout(() => {
+                    if (overlay.parentNode) {
+                        overlay.parentNode.removeChild(overlay);
+                    }
+                }, 500);
+            }, 500);
+        }
+        
+        // Initial countdown display
+        updateCountdown();
+        
+        // Countdown timer
+        const countdownInterval = setInterval(() => {
+            countdown--;
+            if (countdown > 0) {
+                updateCountdown();
+            } else {
+                clearInterval(countdownInterval);
+                closeAdvertisement();
+            }
+        }, 1000);
+        
+        // Skip button functionality
+        if (skipBtn) {
+            skipBtn.addEventListener('click', () => {
+                clearInterval(countdownInterval);
+                closeAdvertisement();
+            });
+        }
+        
+        // Auto-close after exactly 5 seconds as backup
+        setTimeout(() => {
+            clearInterval(countdownInterval);
+            if (overlay.style.display !== 'none') {
+                closeAdvertisement();
+            }
+        }, remainingTime);
+    });
+</script>
+

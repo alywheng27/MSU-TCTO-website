@@ -7,6 +7,7 @@ import FooterNav from "../components/FooterNav.astro";
 import Footer from "../components/Footer.astro";
 import CarouselMain from "../components/CarouselMain";
 import heromain from "../components/HeroMainHeading";
+import AdvertisementModal from "../components/AdvertisementModal.astro";
 
 import '../styles/css/global.css';
 import '../styles/css/globalanimate.css';
@@ -64,6 +65,10 @@ if (testCalendar && testCalendar.length > 0) {
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
     
             <main class="font-sans antialiased text-gray-800 dark:text-white dark:bg-gray-900 leading-normal">
+        
+        <!-- Advertisement Modal Component -->
+        <AdvertisementModal />
+
         <!-- Enhanced Navbar -->
         <Navbar path={currentPath} client:visible />
 
@@ -73,8 +78,8 @@ if (testCalendar && testCalendar.length > 0) {
 		<section class="relative bg-msu-main-color h-screen min-h-[700px] flex items-center overflow-hidden pt-[80px]">
 			<!-- Video Background -->
 			<div class="absolute inset-0 z-0 overflow-hidden">
-				<video autoplay muted loop class="w-full h-full object-cover">
-					<source src="/video/msucamp.mp4" type="video/mp4">
+				<video id="hero-video" autoplay muted class="video-pan">
+					<source src="/video/2026video.mp4" type="video/mp4">
 					<!-- Fallback image -->
 					<img src="/images/development.png" alt="MSUTCTO" class="w-full h-full object-cover">
 				</video>
@@ -180,6 +185,48 @@ if (testCalendar && testCalendar.length > 0) {
             }
         }
         
+        /* Video panning animation - smooth movement for 1920x1080 video */
+        @keyframes videoPan {
+            0% {
+                transform: translate(-50%, -50%) scale(1.5) translate(0%, 0%);
+            }
+            25% {
+                transform: translate(-50%, -50%) scale(1.5) translate(-5%, -3%);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.5) translate(-8%, -5%);
+            }
+            75% {
+                transform: translate(-50%, -50%) scale(1.5) translate(-5%, -3%);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.5) translate(0%, 0%);
+            }
+        }
+        
+        .video-pan {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120vw;
+            height: 120vh;
+            min-width: 120%;
+            min-height: 120%;
+            object-fit: cover;
+            transform-origin: center center;
+            animation: videoPan 20s ease-in-out infinite;
+            will-change: transform;
+        }
+        
+        /* Ensure video container covers full viewport */
+        section.relative.bg-msu-main-color {
+            overflow: hidden;
+        }
+        
+        .absolute.inset-0.z-0 {
+            overflow: hidden;
+        }
+        
         /* Smooth animations */
         @keyframes fadeInUp {
             from {
@@ -264,52 +311,56 @@ if (testCalendar && testCalendar.length > 0) {
             <div class="container mx-auto px-4 xl:px-32">
                 <div class="flex flex-col lg:flex-row gap-8">
                     <!-- Featured Article -->
+                    {latestFeaturedArticle && (
                     <div class="lg:w-2/3 relative group">
                         <div class="overflow-hidden rounded-lg shadow-lg">
                             <img 
-                                src={urlForImage(latestFeaturedArticle.mainImage.asset.url).url()} 
-                                alt={latestFeaturedArticle.title} 
+                                src={latestFeaturedArticle.mainImage?.asset?.url ? urlForImage(latestFeaturedArticle.mainImage.asset.url).url() : '/images/default-thumbnail.jpg'} 
+                                alt={latestFeaturedArticle.title || 'Featured Article'} 
                                 class="w-full h-[500px] object-cover object-center transition-transform duration-500 group-hover:scale-105"
                             />
                             <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-8">
                                 <div class="max-w-2xl">
-                                    <a href={`/${latestFeaturedArticle.slug.current}`}>
+                                    <a href={`/${latestFeaturedArticle.slug?.current || '#'}`}>
                                         <h3 class="text-2xl md:text-3xl font-bold text-white mb-2 hover:text-[#61063B] transition-colors">
-                                            {latestFeaturedArticle.title}
+                                            {latestFeaturedArticle.title || 'Featured Article'}
                                         </h3>
                                     </a>
                                     <p class="text-gray-200 line-clamp-3">
-                                        {latestFeaturedArticle.body[0].children[0].text}
+                                        {(latestFeaturedArticle.body && Array.isArray(latestFeaturedArticle.body) && latestFeaturedArticle.body.length > 0 && latestFeaturedArticle.body[0] && latestFeaturedArticle.body[0].children && Array.isArray(latestFeaturedArticle.body[0].children) && latestFeaturedArticle.body[0].children.length > 0 && latestFeaturedArticle.body[0].children[0] && latestFeaturedArticle.body[0].children[0].text) || ''}
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    )}
                     
                     <!-- Latest Articles -->
                     <div class="lg:w-1/3 space-y-6">
                         <h4 class="text-xl font-semibold border-b pb-2 text-msu-main-color dark:text-white dark:text-outline">Latest News</h4>
-                        {threeLatestArticles.map((article) => (
+                        {(threeLatestArticles && Array.isArray(threeLatestArticles) && threeLatestArticles.length > 0) ? threeLatestArticles.map((article) => (
                             <div class="flex gap-4 group">
                                 <div class="flex-shrink-0 w-24 h-24 overflow-hidden rounded">
-                                    <img 
-                                        src={urlForImage(article.mainImage.asset.url).url()} 
-                                        alt={article.title}
+                                        <img 
+                                        src={article.mainImage?.asset?.url ? urlForImage(article.mainImage.asset.url).url() : '/images/default-thumbnail.jpg'} 
+                                        alt={article.title || 'Article'}
                                         class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                                     />
                                 </div>
                                 <div>
-                                    <a href={`/${article.slug.current}`}>
+                                    <a href={`/${article.slug?.current || '#'}`}>
                                         <h5 class="font-medium text-gray-900 dark:text-gray-100 group-hover:text-msu-maroon dark:group-hover:text-[#61063B] transition-colors line-clamp-2">
                                             {article.title}
                                         </h5>
                                     </a>
                                     <p class="text-sm text-gray-600 dark:text-gray-300 mt-1 line-clamp-3">
-                                        {article.body[0].children[0].text}
+                                        {(article.body && Array.isArray(article.body) && article.body.length > 0 && article.body[0] && article.body[0].children && Array.isArray(article.body[0].children) && article.body[0].children.length > 0 && article.body[0].children[0] && article.body[0].children[0].text) || ''}
                                     </p>
                                 </div>
                             </div>
-                        ))}
+                        )) : (
+                            <p class="text-gray-500 dark:text-gray-400 text-sm">No articles available.</p>
+                        )}
                         <div class="pt-4">
                             <a href="/publications/articles" class="text-msu-maroon dark:text-white font-medium hover:underline flex items-center">
                                 View all news
@@ -971,7 +1022,7 @@ if (testCalendar && testCalendar.length > 0) {
                         <p class="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-gray-700 dark:text-gray-300">Academic Year 2025–2026</p>
                     </div>
                     
-                    <!-- Download and Print Buttons -->
+                    <!-- Download, Print, and Share Buttons -->
                     <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 mb-4 sm:mb-6">
                         <button 
                             id="printCalendarBtn"
@@ -981,6 +1032,15 @@ if (testCalendar && testCalendar.length > 0) {
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
                             </svg>
                             <span class="whitespace-nowrap">Print or Download PDF Calendar</span>
+                        </button>
+                        <button 
+                            id="shareCalendarBtn"
+                            class="inline-flex items-center justify-center px-4 py-2.5 sm:px-6 sm:py-3 bg-gradient-to-r from-[#61063B] to-[#7a0a4f] hover:from-[#7a0a4f] hover:to-[#61063B] text-white rounded-lg text-sm sm:text-base font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg gap-2 w-full sm:w-auto"
+                        >
+                            <svg class="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                            </svg>
+                            <span class="whitespace-nowrap">Share Calendar</span>
                         </button>
                     </div>
                     
@@ -1616,6 +1676,29 @@ if (testCalendar && testCalendar.length > 0) {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <script>
+// Video starts at 0:00:00 and loops at 0:01:14 (74 seconds)
+document.addEventListener('DOMContentLoaded', function() {
+  const heroVideo = document.querySelector('video#hero-video') as HTMLVideoElement;
+  if (heroVideo) {
+    // Ensure video starts at 0:00:00
+    heroVideo.currentTime = 0;
+    
+    // Listen for time updates to loop at 0:01:14
+    heroVideo.addEventListener('timeupdate', function() {
+      // If video reaches 74 seconds (0:01:14), loop back to start
+      if (heroVideo.currentTime >= 74) {
+        heroVideo.currentTime = 0;
+      }
+    });
+    
+    // Also handle when video ends (fallback)
+    heroVideo.addEventListener('ended', function() {
+      heroVideo.currentTime = 0;
+      heroVideo.play();
+    });
+  }
+});
+
 window.addEventListener('load', function() {
   const adOverlay = document.getElementById('adOverlay');
   const showAdButton = document.getElementById('showAdButton');
@@ -2000,6 +2083,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeAcademicCalendarModal = document.getElementById('closeAcademicCalendarModal');
     const downloadCalendarBtn = document.getElementById('downloadCalendarBtn');
     const printCalendarBtn = document.getElementById('printCalendarBtn');
+    const shareCalendarBtn = document.getElementById('shareCalendarBtn');
     
     if (academicCalendarBtn && academicCalendarModal && closeAcademicCalendarModal) {
         function openAcademicCalendarModal() {
@@ -2558,6 +2642,88 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
         
+        // Share Calendar Functionality
+        if (shareCalendarBtn) {
+            shareCalendarBtn.addEventListener('click', async function() {
+                // Create share URL with calendar parameter
+                const currentUrl = new URL(window.location.href);
+                currentUrl.searchParams.set('calendar', 'open');
+                const shareUrl = currentUrl.toString();
+                
+                const shareData = {
+                    title: 'MSU–TCTO Academic Calendar AY 2025-2026',
+                    text: 'Check out the MSU–Tawi-Tawi College of Technology and Oceanography Academic Calendar for Academic Year 2025-2026',
+                    url: shareUrl
+                };
+                
+                try {
+                    // Check if Web Share API is supported
+                    if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+                        await navigator.share(shareData);
+                    } else {
+                        // Fallback: Copy link to clipboard
+                        await navigator.clipboard.writeText(shareUrl);
+                        
+                        // Show success message
+                        const originalText = shareCalendarBtn.innerHTML;
+                        shareCalendarBtn.innerHTML = `
+                            <svg class="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span class="whitespace-nowrap">Link Copied!</span>
+                        `;
+                        shareCalendarBtn.classList.remove('bg-gradient-to-r', 'from-[#61063B]', 'to-[#7a0a4f]');
+                        shareCalendarBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+                        
+                        setTimeout(() => {
+                            shareCalendarBtn.innerHTML = originalText;
+                            shareCalendarBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
+                            shareCalendarBtn.classList.add('bg-gradient-to-r', 'from-[#61063B]', 'to-[#7a0a4f]');
+                        }, 2000);
+                    }
+                } catch (error) {
+                    // If user cancels sharing, do nothing
+                    if ((error as Error).name !== 'AbortError') {
+                        // Fallback: Copy link to clipboard if share fails
+                        try {
+                            await navigator.clipboard.writeText(shareUrl);
+                            const originalText = shareCalendarBtn.innerHTML;
+                            shareCalendarBtn.innerHTML = `
+                                <svg class="h-4 w-4 sm:h-5 sm:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span class="whitespace-nowrap">Link Copied!</span>
+                            `;
+                            shareCalendarBtn.classList.remove('bg-gradient-to-r', 'from-[#61063B]', 'to-[#7a0a4f]');
+                            shareCalendarBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+                            
+                            setTimeout(() => {
+                                shareCalendarBtn.innerHTML = originalText;
+                                shareCalendarBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
+                                shareCalendarBtn.classList.add('bg-gradient-to-r', 'from-[#61063B]', 'to-[#7a0a4f]');
+                            }, 2000);
+                        } catch (clipboardError) {
+                            // If clipboard also fails, show alert
+                            alert('Link: ' + shareUrl + '\n\nPlease copy this link manually.');
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Auto-open calendar modal if URL parameter is present
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('calendar') === 'open') {
+            // Small delay to ensure page is fully loaded
+            setTimeout(() => {
+                openAcademicCalendarModal();
+                // Clean up URL parameter without page reload
+                const newUrl = new URL(window.location.href);
+                newUrl.searchParams.delete('calendar');
+                window.history.replaceState({}, '', newUrl.toString());
+            }, 300);
+        }
+        
         // Global Search Functionality
         const calendarSearchInput = document.getElementById('calendarSearchInput') as HTMLInputElement;
         const clearSearchBtn = document.getElementById('clearSearchBtn') as HTMLButtonElement;
@@ -2733,6 +2899,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- Custom Scrollbar Styles -->
 <style>
+
 /* iOS Safari viewport fix for modal */
 @supports (-webkit-touch-callout: none) {
     #academicCalendarModal {
@@ -3176,6 +3343,7 @@ svg:hover ellipse[fill*="tubeGradient"] {
     }
 }
 </style>
+
 
 </Layout>
 

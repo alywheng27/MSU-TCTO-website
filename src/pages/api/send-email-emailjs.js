@@ -29,7 +29,7 @@ export async function POST({ request }) {
             subject: subject,
             message: message,
             department: department || 'COF',
-            to_email: 'msutctocoed@msutawi-tawi.edu.ph'
+            to_email: 'msutctocoed@msutcto.edu.ph'
         };
 
         // Send email using EmailJS

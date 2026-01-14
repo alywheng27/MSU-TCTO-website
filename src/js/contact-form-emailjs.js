@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     subject: subject,
                     message: message,
                     department: department,
-                    to_email: 'msutctocoed@msutawi-tawi.edu.ph',
+                    to_email: 'msutctocoed@msutcto.edu.ph',
                     reply_to: email
                 };
 

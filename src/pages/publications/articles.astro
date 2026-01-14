@@ -27,8 +27,8 @@ const pageDescription = "Discover the latest news, research, and stories from MS
 const siteUrl = Astro.url.origin;
 const currentUrl = `${siteUrl}${currentPath}`;
 // Ensure absolute URL for social media with optimized dimensions and quality
-const baseFeaturedImageUrl = singleLatestArticle 
-  ? urlForImage(singleLatestArticle.mainImage.asset.url).width(1200).height(630).fit('crop').quality(85).format('jpg').url() 
+const baseFeaturedImageUrl = (singleLatestArticle && singleLatestArticle.mainImage?.asset)
+  ? urlForImage(singleLatestArticle.mainImage.asset).width(1200).height(630).fit('crop').quality(85).format('jpg').url() 
   : '/images/Official MSU-TCTO logo-01.png';
 const featuredImageUrl = baseFeaturedImageUrl.startsWith('http') ? baseFeaturedImageUrl : `${siteUrl}${baseFeaturedImageUrl.startsWith('/') ? '' : '/'}${baseFeaturedImageUrl}`;
 
@@ -56,7 +56,7 @@ const featuredImageUrl = baseFeaturedImageUrl.startsWith('http') ? baseFeaturedI
                 <div class="group relative bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition-all duration-500 hover:shadow-xl hover:-translate-y-1 w-full max-w-5xl mx-auto">
                     <!-- Image with Gradient Overlay -->
                     <div class="relative w-full overflow-hidden h-100">
-                        <img src={urlForImage(singleLatestArticle.mainImage.asset.url).url()} 
+                        <img src={singleLatestArticle.mainImage?.asset ? urlForImage(singleLatestArticle.mainImage.asset).url() : ''} 
                              alt={singleLatestArticle.title} 
                              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                         <div class="absolute inset-0 bg-gradient-to-t from-msu-main-color/80 to-transparent"></div>
@@ -77,7 +77,7 @@ const featuredImageUrl = baseFeaturedImageUrl.startsWith('http') ? baseFeaturedI
                         </a>
 
                         <p class="mt-4 text-lg text-gray-600 dark:text-gray-300 leading-relaxed max-w-3xl mx-auto line-clamp-2">
-                            {singleLatestArticle.body[0].children[0].text}
+                            {(singleLatestArticle.body && Array.isArray(singleLatestArticle.body) && singleLatestArticle.body.length > 0 && singleLatestArticle.body[0]?.children && Array.isArray(singleLatestArticle.body[0].children) && singleLatestArticle.body[0].children.length > 0 && singleLatestArticle.body[0].children[0]?.text) || ''}
                         </p>
 
                         <div class="mt-8">
@@ -125,7 +125,7 @@ const featuredImageUrl = baseFeaturedImageUrl.startsWith('http') ? baseFeaturedI
                         <div class="group relative bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md transition-all duration-300 hover:shadow-lg hover:-translate-y-1 article-item"
                              data-index={index}>
                             <div class="relative h-64 overflow-hidden">
-                                <img src={urlForImage(article.mainImage.asset.url).url()} 
+                                <img src={article.mainImage?.asset ? urlForImage(article.mainImage.asset).url() : ''} 
                                      alt={article.title}
                                      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
@@ -144,7 +144,7 @@ const featuredImageUrl = baseFeaturedImageUrl.startsWith('http') ? baseFeaturedI
                                     </h3>
                                 </a>
                                 <p class="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
-                                    {article.body[0].children[0].text}
+                                    {(article.body && Array.isArray(article.body) && article.body.length > 0 && article.body[0]?.children && Array.isArray(article.body[0].children) && article.body[0].children.length > 0 && article.body[0].children[0]?.text) || ''}
                                 </p>
                                 <a href={`/${article.slug.current}`} class="inline-flex items-center text-sm font-medium leading-snug text-gray-900 dark:text-gray-100 group-hover:text-msu-main-color dark:group-hover:text-yellow-500 transition-colors duration-300 mb-3 hover:no-underline">
                                     Read more

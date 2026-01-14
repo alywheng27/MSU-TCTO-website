@@ -14,7 +14,7 @@ export async function POST({ request }) {
         }
 
         // Email configuration
-        const recipientEmail = 'msutctocoed@msutawi-tawi.edu.ph';
+        const recipientEmail = 'msutctocoed@msutcto.edu.ph';
         const emailSubject = `Contact Form: ${subject} - ${name}`;
         
         // Create email content

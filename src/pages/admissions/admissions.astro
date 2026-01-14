@@ -27,8 +27,8 @@ const currentPath = Astro.url.pathname;
 		<section class="relative bg-msu-main-color h-screen min-h-[700px] flex items-center overflow-hidden pt-[80px]">
 			<!-- Video Background -->
 			<div class="absolute inset-0 z-0 overflow-hidden">
-				<video autoplay muted loop class="w-full h-full object-cover">
-					<source src="/video/msucamp.mp4" type="video/mp4">
+				<video id="hero-video" autoplay muted class="video-pan">
+					<source src="/video/2026video.mp4" type="video/mp4">
 					<!-- Fallback image -->
 					<img src="/images/development.png" alt="MSUTCTO" class="w-full h-full object-cover">
 				</video>
@@ -289,6 +289,75 @@ const currentPath = Astro.url.pathname;
     <Footer />
 
 
+<style>
+    /* Video panning animation - smooth movement for 1920x1080 video */
+    @keyframes videoPan {
+        0% {
+            transform: translate(-50%, -50%) scale(1.5) translate(0%, 0%);
+        }
+        25% {
+            transform: translate(-50%, -50%) scale(1.5) translate(-5%, -3%);
+        }
+        50% {
+            transform: translate(-50%, -50%) scale(1.5) translate(-8%, -5%);
+        }
+        75% {
+            transform: translate(-50%, -50%) scale(1.5) translate(-5%, -3%);
+        }
+        100% {
+            transform: translate(-50%, -50%) scale(1.5) translate(0%, 0%);
+        }
+    }
+    
+    .video-pan {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 120vw;
+        height: 120vh;
+        min-width: 120%;
+        min-height: 120%;
+        object-fit: cover;
+        transform-origin: center center;
+        animation: videoPan 20s ease-in-out infinite;
+        will-change: transform;
+    }
+    
+    /* Ensure video container covers full viewport */
+    section.relative.bg-msu-main-color {
+        overflow: hidden;
+    }
+    
+    .absolute.inset-0.z-0 {
+        overflow: hidden;
+    }
+</style>
+
         <script src="../../js/animate.js" ></script>
         <script src="../../js/loadinganim.js" ></script>
         <script src="../../js/smoothscroll.js" ></script>
+
+<script>
+// Video starts at 0:00:00 and loops at 0:01:14 (74 seconds)
+document.addEventListener('DOMContentLoaded', function() {
+  const heroVideo = document.getElementById('hero-video');
+  if (heroVideo) {
+    // Ensure video starts at 0:00:00
+    heroVideo.currentTime = 0;
+    
+    // Listen for time updates to loop at 0:01:14
+    heroVideo.addEventListener('timeupdate', function() {
+      // If video reaches 74 seconds (0:01:14), loop back to start
+      if (heroVideo.currentTime >= 74) {
+        heroVideo.currentTime = 0;
+      }
+    });
+    
+    // Also handle when video ends (fallback)
+    heroVideo.addEventListener('ended', function() {
+      heroVideo.currentTime = 0;
+      heroVideo.play();
+    });
+  }
+});
+</script>
