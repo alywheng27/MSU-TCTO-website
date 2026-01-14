@@ -2,9 +2,41 @@
 import 'normalize.css/normalize.css';
 export interface Props {
   title: string;
+  description?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  ogUrl?: string;
+  twitterTitle?: string;
+  twitterDescription?: string;
+  twitterImage?: string;
 }
 
-const { title } = Astro.props;
+const { 
+  title, 
+  description,
+  ogTitle, 
+  ogDescription, 
+  ogImage, 
+  ogUrl,
+  twitterTitle,
+  twitterDescription,
+  twitterImage
+} = Astro.props;
+
+// Get site URL for absolute image URLs
+const siteUrl = Astro.url.origin;
+const currentUrl = ogUrl || `${siteUrl}${Astro.url.pathname}`;
+
+// Ensure absolute URL for ogImage
+const absoluteOgImage = ogImage 
+  ? (ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage.startsWith('/') ? '' : '/'}${ogImage}`)
+  : undefined;
+
+// Ensure absolute URL for twitterImage
+const absoluteTwitterImage = twitterImage 
+  ? (twitterImage.startsWith('http') ? twitterImage : `${siteUrl}${twitterImage.startsWith('/') ? '' : '/'}${twitterImage}`)
+  : absoluteOgImage;
 ---
 
 <!DOCTYPE html>
@@ -21,6 +53,26 @@ const { title } = Astro.props;
   <meta name="facebook-domain-verification" content="63d47sat4plmhjgb73ob4sbrleldy4" />
   
   <title>{title}</title>
+  
+  <!-- Meta Description -->
+  {description && <meta name="description" content={description} />}
+  
+  <!-- Open Graph Meta Tags -->
+  {ogTitle && <meta property="og:title" content={ogTitle} />}
+  {ogDescription && <meta property="og:description" content={ogDescription} />}
+  {ogDescription && !ogTitle && <meta property="og:title" content={title} />}
+  {absoluteOgImage && <meta property="og:image" content={absoluteOgImage} />}
+  <meta property="og:url" content={currentUrl} />
+  <meta property="og:type" content="website" />
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  {twitterTitle && <meta name="twitter:title" content={twitterTitle} />}
+  {twitterTitle && !ogTitle && <meta property="og:title" content={twitterTitle} />}
+  {twitterDescription && <meta name="twitter:description" content={twitterDescription} />}
+  {twitterDescription && !ogDescription && <meta property="og:description" content={twitterDescription} />}
+  {absoluteTwitterImage && <meta name="twitter:image" content={absoluteTwitterImage} />}
+  {absoluteTwitterImage && !absoluteOgImage && <meta property="og:image" content={absoluteTwitterImage} />}
   <style>
     /* Modern animation keyframes */
     @keyframes heartbeat {

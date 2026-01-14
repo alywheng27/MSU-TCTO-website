@@ -60,9 +60,34 @@ if (testCalendar && testCalendar.length > 0) {
   console.log('Test calendar first event date:', testCalendar[0]?.date);
   console.log('Test calendar first event title:', testCalendar[0]?.title);
 }
+
+// Check if calendar parameter is present for social sharing
+const urlParams = Astro.url.searchParams;
+const isCalendarShare = urlParams.get('calendar') === 'open';
+const siteUrl = Astro.url.origin;
+const currentUrl = `${siteUrl}${Astro.url.pathname}${Astro.url.search}`;
+
+// Set meta tags for calendar sharing
+const pageTitle = isCalendarShare 
+  ? 'MSU–TCTO Academic Calendar AY 2025-2026'
+  : 'MSU | Tawi-Tawi College of Technology and Oceanography';
+const pageDescription = isCalendarShare
+  ? 'Check out the MSU–Tawi-Tawi College of Technology and Oceanography Academic Calendar for Academic Year 2025-2026'
+  : undefined;
+const wordmarkImage = '/images/msutcto_wordmark_magenta_.png';
 ---
 
-<Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
+<Layout 
+  title={pageTitle}
+  description={pageDescription}
+  ogTitle={isCalendarShare ? pageTitle : undefined}
+  ogDescription={isCalendarShare ? pageDescription : undefined}
+  ogImage={isCalendarShare ? wordmarkImage : undefined}
+  ogUrl={isCalendarShare ? currentUrl : undefined}
+  twitterTitle={isCalendarShare ? pageTitle : undefined}
+  twitterDescription={isCalendarShare ? pageDescription : undefined}
+  twitterImage={isCalendarShare ? wordmarkImage : undefined}
+>
     
             <main class="font-sans antialiased text-gray-800 dark:text-white dark:bg-gray-900 leading-normal">
         
