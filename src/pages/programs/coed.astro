@@ -23,6 +23,31 @@ import { getCOEDPrograms } from '../../api/api.jsx';
 
 
 const currentPath = Astro.url.pathname;
+const site = 'https://msutcto.edu.ph';
+const FACULTY_SHARE_MAP: Record<string, { name: string; image: string }> = {
+	jemsy: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/JEMSYDEAN.png' },
+	budlong: { name: 'Assoc. Prof. Cherry T. Budlong-Alih', image: '/images/coed/Profile/cherry.png' },
+	colicol: { name: 'Assoc. Prof. Fernigil L. Colicol, PhD', image: '/images/coed/Profile/colicol.png' },
+	bagalanon: { name: 'Asst. Prof. Joselito J. Bagalanon', image: '/images/coed/Profile/Bagalanon, J.png' },
+	bation: { name: 'Asst. Prof. Luz A. Jovera-Bation', image: '/images/coed/Profile/Bation.png' },
+	derramas: { name: 'Prof. Dr. Clarissa Ayangco-Derramas', image: '/images/coed/Profile/Derramas.png' },
+	hadji: { name: 'Assoc. Prof. Almira A. Amilbangsa-Hadji', image: '/images/coed/Profile/Hadji, Almira.png' },
+	kassim: { name: 'Asst. Prof. Julasmin S. Kassim', image: '/images/coed/Profile/Julasmin S. Kassim.png' },
+	mastul: { name: 'Prof. Al-Rashiff H. Mastul, EdD', image: '/images/coed/Profile/Mastul, Al-Rashiff  H.png' },
+	nurhusin: { name: 'Asst. Prof. Sharmini I. Nurhusin', image: '/images/coed/Profile/Nurhusin, Sharmini.png' },
+	judan: { name: 'Asst. Prof. Shielamar J. Judan', image: '/images/coed/Profile/Judan.png' },
+	rabor: { name: 'Jencen T. Rabor', image: '/images/coed/Profile/RABOR, Jencen T.png' },
+	sali: { name: 'Asst. Prof. Fatima Zahra V. Sali', image: '/images/coed/Profile/SALI, FATIMA ZAHRA V.png' },
+	sulanting: { name: 'Asst. Prof. Harimas M. Sulanting', image: '/images/coed/Profile/SULANTING.png' },
+	tahir: { name: 'Assoc. Prof. Kartini R. Tahir, PhD', image: '/images/coed/Profile/TAHIR, KARTINI.png' },
+	pajiji: { name: 'Asst. Prof. Jocelyn A. Pajiji, EdD', image: '/images/coed/Profile/Pajiji.png' }
+};
+const profileId = Astro.url.searchParams.get('profile');
+const facultyShare = profileId && FACULTY_SHARE_MAP[profileId] ? FACULTY_SHARE_MAP[profileId] : null;
+const ogImage = facultyShare ? site + facultyShare.image : undefined;
+const ogTitle = facultyShare ? `${facultyShare.name} - MSU-TCTO College of Education` : undefined;
+const ogDescription = facultyShare ? `View ${facultyShare.name}'s profile at MSU-TCTO COED.` : undefined;
+const ogUrl = profileId ? `${site}/programs/coed?profile=${profileId}` : undefined;
 
 // Fetch COED programs data from Sanity
 type ProgramDataItem = {
@@ -138,7 +163,13 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 
 
-<Layout title="College of Education | MSU-TCTO">
+<Layout
+	title="College of Education | MSU-TCTO"
+	ogImage={ogImage}
+	ogTitle={ogTitle}
+	ogDescription={ogDescription}
+	ogUrl={ogUrl}
+>
 	<main class="font-sans">
 
 		<Navbar path={currentPath} client:visible />
@@ -1703,6 +1734,30 @@ const formatDisplayName = ({ name, rank, position }) => {
 	return expanded || name;
 };
 
+// Share faculty profile
+const SHARE_COLLEGE_NAME = 'College of Education';
+function shareFacultyProfile(facultyId) {
+	// Use ?profile=id so Messenger/Facebook/Twitter crawlers get og:image (faculty photo)
+	const url = typeof window !== 'undefined' ? `${window.location.origin}${window.location.pathname}?profile=${facultyId}` : '';
+	const title = `Faculty Profile - MSU-TCTO ${SHARE_COLLEGE_NAME}`;
+	const text = 'View this faculty profile at MSU-TCTO.';
+	if (typeof navigator !== 'undefined' && navigator.share) {
+		navigator.share({ title, text, url }).catch(() => copyShareLink(url));
+	} else {
+		copyShareLink(url);
+	}
+}
+function copyShareLink(url) {
+	if (typeof navigator === 'undefined' || !navigator.clipboard) return;
+	navigator.clipboard.writeText(url).then(() => {
+		const toast = document.createElement('div');
+		toast.className = 'fixed bottom-4 left-1/2 -translate-x-1/2 bg-msu-maroon text-white px-4 py-2 rounded-lg shadow-lg text-sm font-medium z-[9999] animate-fade-in';
+		toast.textContent = 'Link copied! Share it with anyone.';
+		document.body.appendChild(toast);
+		setTimeout(() => toast.remove(), 2500);
+	});
+}
+
 function openFacultyModal(facultyId) {
 	console.log('Opening modal for:', facultyId); // Debug log
 	const modal = document.getElementById('facultyModal');
@@ -3004,6 +3059,10 @@ function openFacultyModal(facultyId) {
 							${faculty.rank ? `<p class="text-xs md:text-sm text-gray-300 uppercase tracking-wide">${faculty.rank}</p>` : ''}
 						</div>
 					` : ''}
+					<button type="button" onclick="event.stopPropagation(); shareFacultyProfile('${facultyId}')" class="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/20 hover:bg-white/30 text-white text-sm font-medium transition-colors" title="Share profile">
+						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684L6 12m2.684-1.316a3 3 0 105.367 2.684L6 12l2.051-2.051m0 0L6 12l2.684-2.684m0 0a3 3 0 105.367-2.684L6 12"></path></svg>
+						Share profile
+					</button>
 				</div>
 			</div>
 			<!-- Content Section -->
@@ -3257,6 +3316,41 @@ function closeFacultyModal() {
 }
 
 // Close modal when clicking outside
+// Open faculty modal from URL hash (#faculty-id) or query (?profile=id)
+function openFacultyFromHash() {
+	if (typeof window === 'undefined') return;
+	const hashMatch = window.location.hash.match(/^#faculty-(.+)$/);
+	const queryMatch = typeof URLSearchParams !== 'undefined' && new URLSearchParams(window.location.search).get('profile');
+	const facultyId = hashMatch?.[1] || queryMatch;
+	if (facultyId) {
+		openFacultyModal(facultyId);
+		if (queryMatch && !hashMatch && window.history && window.history.replaceState) {
+			window.history.replaceState(null, '', window.location.pathname + '#faculty-' + facultyId);
+		}
+	}
+}
+document.addEventListener('DOMContentLoaded', function() {
+	openFacultyFromHash();
+	// Inject Share button next to each View Profile button
+	document.querySelectorAll('button[onclick*="openFacultyModal"]').forEach(function(btn) {
+		const match = btn.getAttribute('onclick')?.match(/openFacultyModal\s*\(\s*['"]([^'"]+)['"]\s*\)/);
+		if (!match || btn.parentElement?.classList?.contains('flex')) return;
+		const facultyId = match[1];
+		const wrap = document.createElement('div');
+		wrap.className = 'flex items-center gap-3 flex-wrap';
+		btn.parentNode.insertBefore(wrap, btn);
+		wrap.appendChild(btn);
+		const shareBtn = document.createElement('button');
+		shareBtn.type = 'button';
+		shareBtn.className = 'text-msu-deep-ocean font-medium hover:underline flex items-center gap-1.5 text-sm cursor-pointer share-profile-btn-wrap';
+		shareBtn.title = 'Share profile';
+		shareBtn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684L6 12m2.684-1.316a3 3 0 105.367 2.684L6 12l2.051-2.051m0 0L6 12l2.684-2.684m0 0a3 3 0 105.367-2.684L6 12"></path></svg> Share';
+		shareBtn.onclick = function(e) { e.preventDefault(); shareFacultyProfile(facultyId); };
+		wrap.appendChild(shareBtn);
+	});
+});
+window.addEventListener('hashchange', openFacultyFromHash);
+
 document.getElementById('facultyModal').addEventListener('click', function(e) {
 	if (e.target === this) {
 		closeFacultyModal();
@@ -4272,6 +4366,7 @@ document.addEventListener('keydown', function(e) {
 
 // Make functions globally accessible
 (window as any).openFacultyModal = openFacultyModal;
+(window as any).shareFacultyProfile = shareFacultyProfile;
 (window as any).closeFacultyModal = closeFacultyModal;
 (window as any).openPersonnelModal = openPersonnelModal;
 (window as any).closePersonnelModal = closePersonnelModal;
@@ -13254,7 +13349,8 @@ document.head.appendChild(style);
 <script>
 // Video starts at 0:00:00 and loops at 0:01:14 (74 seconds)
 document.addEventListener('DOMContentLoaded', function() {
-  const heroVideo = document.getElementById('hero-video');
+  const heroVideoEl = document.getElementById('hero-video');
+  const heroVideo = heroVideoEl instanceof HTMLVideoElement ? heroVideoEl : null;
   if (heroVideo) {
     // Ensure video starts at 0:00:00
     heroVideo.currentTime = 0;

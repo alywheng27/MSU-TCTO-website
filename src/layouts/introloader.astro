@@ -28,10 +28,13 @@ const {
 const siteUrl = Astro.url.origin;
 const currentUrl = ogUrl || `${siteUrl}${Astro.url.pathname}`;
 
-// Ensure absolute URL for ogImage
+// Default share image for Messenger/Facebook/Twitter (calendar and general links)
+const defaultShareImage = `${siteUrl}/images/msutcto_wordmark_magenta_.png`;
+
+// Ensure absolute URL for ogImage; fallback to wordmark so links show image on all platforms
 const absoluteOgImage = ogImage 
   ? (ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage.startsWith('/') ? '' : '/'}${ogImage}`)
-  : undefined;
+  : defaultShareImage;
 
 // Ensure absolute URL for twitterImage
 const absoluteTwitterImage = twitterImage 
@@ -45,7 +48,7 @@ const absoluteTwitterImage = twitterImage
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="generator" content={Astro.generator} />
-  <link rel="icon" type="image/png" href="/images/Official MSU-TCTO logo-01.png" />
+  <link rel="icon" type="image/png" href="/images/msutcto_wordmark_magenta_.png" />
   <script src="/js/screenshot-protection.js" defer></script>
   <script src="/js/logo-protection.js" defer></script>
   
@@ -62,8 +65,11 @@ const absoluteTwitterImage = twitterImage
   {ogDescription && <meta property="og:description" content={ogDescription} />}
   {ogDescription && !ogTitle && <meta property="og:title" content={title} />}
   {absoluteOgImage && <meta property="og:image" content={absoluteOgImage} />}
+  {absoluteOgImage && <meta property="og:image:width" content="1200" />}
+  {absoluteOgImage && <meta property="og:image:height" content="630" />}
   <meta property="og:url" content={currentUrl} />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="MSU-TCTO" />
   
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image" />

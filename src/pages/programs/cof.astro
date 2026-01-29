@@ -23,6 +23,25 @@ import { getCOFPrograms } from '../../api/api.jsx';
 
 
 const currentPath = Astro.url.pathname;
+const site = 'https://msutcto.edu.ph';
+const FACULTY_SHARE_MAP: Record<string, { name: string; image: string }> = {
+	jaroAjik: { name: 'Prof. Jaro O. Ajik', image: '/images/cof/Faculty/Jaro O. Ajik.png' },
+	wahayminJamil: { name: 'Asst. Prof. Wahaymin M. Jamil', image: '/images/cof/Faculty/Wahaymin M. Jamil.png' },
+	merilynAmlani: { name: 'Asst. Prof. Merilyn Q. Amlani', image: '/images/cof/Faculty/Merilyn Q. Amlani.png' },
+	albarisTahiluddin: { name: 'Assistant Prof. Albaris B. Tahiluddin', image: '/images/cof/Faculty/Albaris B. Tahiluddin.png' },
+	jurminSarri: { name: 'Asst. Prof. Jurmin H. Sarri', image: '/images/cof/Faculty/Jurmin H. Sarri.png' },
+	mariaLizaToringFarquerabao: { name: 'Maria Liza B. Toring-Farquerabao', image: '/images/cof/Faculty/Maria Liza B. Toring-Farquerabao.png' },
+	ainulyakinImlani: { name: 'Prof. Ainulyakin H. Imlani', image: '/images/cof/Faculty/Ainulyakin H. Imlani.png' },
+	yashierJumah: { name: 'Prof. Yashier U. Jumah', image: '/images/cof/Faculty/Yashier U. Jumah.png' },
+	rosalindaShariff: { name: 'Assoc. Prof. Rosalinda P. Shariff', image: '/images/cof/Faculty/Rosalinda P. Shariff.png' },
+	kingpuAjik: { name: 'Assoc. Prof. Kingpu O. Ajik', image: '/images/cof/Faculty/Kingpu O. Ajik.png' }
+};
+const profileId = Astro.url.searchParams.get('profile');
+const facultyShare = profileId && FACULTY_SHARE_MAP[profileId] ? FACULTY_SHARE_MAP[profileId] : null;
+const ogImage = facultyShare ? site + facultyShare.image : undefined;
+const ogTitle = facultyShare ? `${facultyShare.name} - MSU-TCTO College of Fisheries` : undefined;
+const ogDescription = facultyShare ? `View ${facultyShare.name}'s profile at MSU-TCTO COF.` : undefined;
+const ogUrl = profileId ? `${site}/programs/cof?profile=${profileId}` : undefined;
 
 // Fetch COF programs data from Sanity
 type ProgramDataItem = {
@@ -202,7 +221,13 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 
 
-<Layout title="College of Fisheries | MSU-TCTO">
+<Layout
+	title="College of Fisheries | MSU-TCTO"
+	ogImage={ogImage}
+	ogTitle={ogTitle}
+	ogDescription={ogDescription}
+	ogUrl={ogUrl}
+>
 	<main class="font-sans">
 
 		<Navbar path={currentPath} client:visible />
@@ -2030,6 +2055,30 @@ function renderFeaturedFacultyCards() {
 
 document.addEventListener('DOMContentLoaded', renderFeaturedFacultyCards);
 
+// Share faculty profile
+const SHARE_COLLEGE_NAME = 'College of Fisheries';
+function shareFacultyProfile(facultyId) {
+	// Use ?profile=id so Messenger/Facebook/Twitter crawlers get og:image (faculty photo)
+	const url = typeof window !== 'undefined' ? `${window.location.origin}${window.location.pathname}?profile=${facultyId}` : '';
+	const title = `Faculty Profile - MSU-TCTO ${SHARE_COLLEGE_NAME}`;
+	const text = 'View this faculty profile at MSU-TCTO.';
+	if (typeof navigator !== 'undefined' && navigator.share) {
+		navigator.share({ title, text, url }).catch(() => copyShareLink(url));
+	} else {
+		copyShareLink(url);
+	}
+}
+function copyShareLink(url) {
+	if (typeof navigator === 'undefined' || !navigator.clipboard) return;
+	navigator.clipboard.writeText(url).then(() => {
+		const toast = document.createElement('div');
+		toast.className = 'fixed bottom-4 left-1/2 -translate-x-1/2 bg-msu-maroon text-white px-4 py-2 rounded-lg shadow-lg text-sm font-medium z-[9999] animate-fade-in';
+		toast.textContent = 'Link copied! Share it with anyone.';
+		document.body.appendChild(toast);
+		setTimeout(() => toast.remove(), 2500);
+	});
+}
+
 function openFacultyModal(facultyId) {
 	console.log('Opening modal for:', facultyId); // Debug log
 	const modal = document.getElementById('facultyModal');
@@ -3788,6 +3837,10 @@ function openFacultyModal(facultyId) {
 							${faculty.rank ? `<p class="text-xs md:text-sm text-gray-300 uppercase tracking-wide">${faculty.rank}</p>` : ''}
 						</div>
 					` : ''}
+					<button type="button" onclick="event.stopPropagation(); shareFacultyProfile('${facultyId}')" class="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/20 hover:bg-white/30 text-white text-sm font-medium transition-colors" title="Share profile">
+						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684L6 12m2.684-1.316a3 3 0 105.367 2.684L6 12l2.051-2.051m0 0L6 12l2.684-2.684m0 0a3 3 0 105.367-2.684L6 12"></path></svg>
+						Share profile
+					</button>
 				</div>
 			</div>
 			<!-- Content Section -->
@@ -4041,6 +4094,40 @@ function closeFacultyModal() {
 }
 
 // Close modal when clicking outside
+// Open faculty modal from URL hash (#faculty-id) or query (?profile=id)
+function openFacultyFromHash() {
+	if (typeof window === 'undefined') return;
+	const hashMatch = window.location.hash.match(/^#faculty-(.+)$/);
+	const queryMatch = typeof URLSearchParams !== 'undefined' && new URLSearchParams(window.location.search).get('profile');
+	const facultyId = hashMatch?.[1] || queryMatch;
+	if (facultyId) {
+		openFacultyModal(facultyId);
+		if (queryMatch && !hashMatch && window.history && window.history.replaceState) {
+			window.history.replaceState(null, '', window.location.pathname + '#faculty-' + facultyId);
+		}
+	}
+}
+document.addEventListener('DOMContentLoaded', function() {
+	openFacultyFromHash();
+	document.querySelectorAll('button[onclick*="openFacultyModal"]').forEach(function(btn) {
+		const match = btn.getAttribute('onclick')?.match(/openFacultyModal\s*\(\s*['"]([^'"]+)['"]\s*\)/);
+		if (!match || btn.parentElement?.classList?.contains('flex')) return;
+		const facultyId = match[1];
+		const wrap = document.createElement('div');
+		wrap.className = 'flex items-center gap-3 flex-wrap';
+		btn.parentNode.insertBefore(wrap, btn);
+		wrap.appendChild(btn);
+		const shareBtn = document.createElement('button');
+		shareBtn.type = 'button';
+		shareBtn.className = 'text-msu-deep-ocean font-medium hover:underline flex items-center gap-1.5 text-sm cursor-pointer share-profile-btn-wrap';
+		shareBtn.title = 'Share profile';
+		shareBtn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684L6 12m2.684-1.316a3 3 0 105.367 2.684L6 12l2.051-2.051m0 0L6 12l2.684-2.684m0 0a3 3 0 105.367-2.684L6 12"></path></svg> Share';
+		shareBtn.onclick = function(e) { e.preventDefault(); shareFacultyProfile(facultyId); };
+		wrap.appendChild(shareBtn);
+	});
+});
+window.addEventListener('hashchange', openFacultyFromHash);
+
 document.getElementById('facultyModal').addEventListener('click', function(e) {
 	if (e.target === this) {
 		closeFacultyModal();
@@ -5234,6 +5321,7 @@ document.addEventListener('keydown', function(e) {
 });
 
 // Make functions globally accessible
+(window as any).shareFacultyProfile = shareFacultyProfile;
 (window as any).openFacultyModal = openFacultyModal;
 (window as any).closeFacultyModal = closeFacultyModal;
 (window as any).openPersonnelModal = openPersonnelModal;
@@ -13733,7 +13821,8 @@ document.head.appendChild(style);
 <script>
 // Video starts at 0:00:00 and loops at 0:01:14 (74 seconds)
 document.addEventListener('DOMContentLoaded', function() {
-  const heroVideo = document.getElementById('hero-video');
+  const heroVideoEl = document.getElementById('hero-video');
+  const heroVideo = heroVideoEl instanceof HTMLVideoElement ? heroVideoEl : null;
   if (heroVideo) {
     // Ensure video starts at 0:00:00
     heroVideo.currentTime = 0;
