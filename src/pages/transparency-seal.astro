@@ -8,306 +8,351 @@ import '../styles/css/global.css';
 const currentPath = Astro.url.pathname;
 ---
 
-<Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
-	<main>
+<Layout title="Transparency Seal | MSU-TCTO">
+	<main class="min-h-screen flex flex-col">
 		<Navbar path={currentPath} client:visible />
 
-        <div class="bg-white-pure w-full xl:px-[12.5%] xs:px-[3.85%] py-[80px]">
-            <h4 class="xl:h4 xs:h5 text-msu-maroon text-center">MSU-TCTO(Tawi-tawi) Compliance with Sec. 93 (Transparency Seal) R.A. No. 10155 (General Appropriations Act, FY 2013)</h4>
-            <div class="mt-10">
-                <p class="paragraph p2">The agency's mandates and functions, names of its officials with their positions and designations, and contact information</p>
-                <p class="paragraph p2">Annual Financial Reports</p>
-                <ul class="ml-10 list-disc">
-                    <li>
-                        2023
-                        <ul class="ml-10 list-decimal">
-                            <a href="transparency/Annual Financial Report/2023/FAR 4 as of February 2023 Submitted.pdf"><li class="text-msu-rusty-red">FAR 4 as of February 2023 Submitted</li></a>
-                            <a href="transparency/Annual Financial Report/2023/FAR 4 as of January 31, 2023 Submitted.pdf"><li class="text-msu-rusty-red">FAR 4 as of January 31, 2023 Submitted</li></a>
-                            <a href="transparency/Annual Financial Report/2023/FAR 4 as of March 31, 2023 Submitted.pdf"><li class="text-msu-rusty-red">FAR 4 as of March 31, 2023 Submitted</li></a>
-                            <a href="transparency/Annual Financial Report/2023/FAR1 as of March 31, 2023 Submitted.pdf"><li class="text-msu-rusty-red">FAR1 as of March 31, 2023 Submitted</li></a>
-                            <a href="transparency/Annual Financial Report/2023/FAR1A as of March 31, 2023 Submitted.pdf"><li class="text-msu-rusty-red">FAR1A as of March 31, 2023 Submitted</li></a>
-                            <a href="transparency/Annual Financial Report/2023/FAR 1 As of June 2023 submitted.pdf"><li class="text-msu-rusty-red">FAR 1 As of June 2023 submitted</li></a>
-                            <a href="transparency/Annual Financial Report/2023/FAR 1A as of june 2023 submitted.pdf"><li class="text-msu-rusty-red">FAR 1A as of june 2023 submitted</li></a>
-                            <a href="transparency/Annual Financial Report/2023/FAR 3 AGING FY 2022 SUBMITTED.pdf"><li class="text-msu-rusty-red">FAR 3 AGING FY 2022 SUBMITTED</li></a>
-                            <a href="transparency/Annual Financial Report/2023/FAR 4 For the month of April 2023 SUBMITTED.pdf"><li class="text-msu-rusty-red">FAR 4 For the month of April 2023 SUBMITTED</li></a>
-                            <a href="transparency/Annual Financial Report/2023/FAR 4 JUNE 2023 SUBMITTED.pdf"><li class="text-msu-rusty-red">FAR 4 JUNE 2023 SUBMITTED</li></a>
-                            <a href="transparency/Annual Financial Report/2023/FAR 4 MAY 2023 Submitted.pdf"><li class="text-msu-rusty-red">FAR 4 MAY 2023 Submitted</li></a>
-                        </ul>
-                    </li>
-                    <li>
-                        2022
-                        <ul class="ml-10 list-decimal">
-                            <a href="transparency/Annual Financial Report/2022/FAR 4 JUNE.pdf"><li class="text-msu-rusty-red">FAR 4 JUNE</li></a>
-                            <a href="transparency/Annual Financial Report/2022/FAR 4 MAR.pdf"><li class="text-msu-rusty-red">FAR 4 MAR</li></a>
-                            <a href="transparency/Annual Financial Report/2022/FAR 4 MAY.pdf"><li class="text-msu-rusty-red">FAR 4 MAY</li></a>
-                            <a href="transparency/Annual Financial Report/2022/FAR 4 NOV 2022.pdf"><li class="text-msu-rusty-red">FAR 4 NOV 2022</li></a>
-                            <a href="transparency/Annual Financial Report/2022/FAR 4 OCT 2022.pdf"><li class="text-msu-rusty-red">FAR 4 OCT 2022</li></a>
-                            <a href="transparency/Annual Financial Report/2022/FAR 5 3rd Q FY2022.pdf"><li class="text-msu-rusty-red">FAR 5 3rd Q FY2022</li></a>
-                            <a href="transparency/Annual Financial Report/2022/FAR 5-4th Q FY2022 final.pdf"><li class="text-msu-rusty-red">FAR 5-4th Q FY2022 final</li></a>
-                            <a href="transparency/Annual Financial Report/2022/FAR 5-4th Q FY2022.pdf"><li class="text-msu-rusty-red">FAR 5-4th Q FY2022</li></a>
-                            <a href="transparency/Annual Financial Report/2022/FAR4-Sept22.pdf"><li class="text-msu-rusty-red">FAR4-Sept22</li></a>
-                            <a href="transparency/Annual Financial Report/2022/FAR 1A As of Dec 31 2022 Submitted revised.pdf"><li class="text-msu-rusty-red">FAR 1A As of Dec 31 2022 Submitted revised</li></a>
-                            <a href="transparency/Annual Financial Report/2022/FAR 4 APRIL 200.pdf"><li class="text-msu-rusty-red">FAR 4 APRIL 200</li></a>
-                            <a href="transparency/Annual Financial Report/2022/FAR 4 AUGUST 2022.pdf"><li class="text-msu-rusty-red">FAR 4 AUGUST 2022</li></a>
-                            <a href="transparency/Annual Financial Report/2022/FAR 4 December 2022.pdf"><li class="text-msu-rusty-red">FAR 4 December 2022</li></a>
-                            <a href="transparency/Annual Financial Report/2022/FAR 4 FEB 2022.pdf"><li class="text-msu-rusty-red">FAR 4 FEB 2022</li></a>
-                            <a href="transparency/Annual Financial Report/2022/FAR 4 JAN 2022.pdf"><li class="text-msu-rusty-red">FAR 4 JAN 2022</li></a>
-                            <a href="transparency/Annual Financial Report/2022/FAR 4 JULY 2022.pdf"><li class="text-msu-rusty-red">FAR 4 JULY 2022</li></a>
-                        </ul>
-                    </li>
-                    <li>
-                        2021
-                        <ul class="ml-10 list-decimal">
-                            <a href="transparency/Annual Financial Report/2021/2nd Quarter - Far 4 2021.pdf"><li class="text-msu-rusty-red">2nd Quarter - Far 4 2021</li></a>
-                            <a href="transparency/Annual Financial Report/2021/3rd Quarter-Far 4 2021.pdf"><li class="text-msu-rusty-red">3rd Quarter-Far 4 2021</li></a>
-                            <a href="transparency/Annual Financial Report/2021/4th Quarter- Far 4 2021.pdf"><li class="text-msu-rusty-red">4th Quarter- Far 4 2021</li></a>
-                            <a href="transparency/Annual Financial Report/2021/Far 1 2021.pdf"><li class="text-msu-rusty-red">Far 1 2021</li></a>
-                            <a href="transparency/Annual Financial Report/2021/FAR 1 As of December 31^ 2021_1.pdf"><li class="text-msu-rusty-red">FAR 1 As of December 31^ 2021_1</li></a>
-                            <a href="transparency/Annual Financial Report/2021/far 1A 2021.pdf"><li class="text-msu-rusty-red">far 1A 2021</li></a>
-                            <a href="transparency/Annual Financial Report/2021/Far 3 2021.pdf"><li class="text-msu-rusty-red">Far 3 2021</li></a>
-                            <a href="transparency/Annual Financial Report/2021/Far 4 -1st quarter - 2021.pdf"><li class="text-msu-rusty-red">Far 4 -1st quarter - 2021</li></a>
-                            <a href="transparency/Annual Financial Report/2021/far 5 2021.pdf"><li class="text-msu-rusty-red">far 5 2021</li></a>
-                            <a href="transparency/Annual Financial Report/2021/Far1 2021 2021.pdf"><li class="text-msu-rusty-red">Far1 2021 2021</li></a>
-                        </ul>
-                    </li>
-                    <li>
-                        2020
-                        <ul class="ml-10 list-decimal">
-                            <a href="transparency/Annual Financial Report/2020/FAR 4 JAN-MAY, 2020.pdf"><li class="text-msu-rusty-red">FAR 4 JAN-MAY, 2020</li></a>
-                            <a href="transparency/Annual Financial Report/2020/FAR 4 JUNE-OCT, 2020.pdf"><li class="text-msu-rusty-red">FAR 4 JUNE-OCT, 2020</li></a>
-                            <a href="transparency/Annual Financial Report/2020/FAR 4 Nov-Dec 2020.pdf"><li class="text-msu-rusty-red">FAR 4 Nov-Dec 2020</li></a>
-                            <a href="transparency/Annual Financial Report/2020/MSU-TCTO_FAR_1_as_of_December_31,_2020_A.pdf"><li class="text-msu-rusty-red">MSU-TCTO_FAR_1_as_of_December_31,_2020_A</li></a>
-                        </ul>
-                    </li>
-                    <li>
-                        2019
-                        <ul class="ml-10 list-decimal">
-                            <a href="transparency/Annual Financial Report/2019/Appendix 23 - MRD - FAR 4 2019.pdf"><li class="text-msu-rusty-red">Appendix 23 - MRD - FAR 4 2019</li></a>
-                            <a href="transparency/Annual Financial Report/2019/FAR 5 Quarterly report of revenue and Other receipts 2019.pdf"><li class="text-msu-rusty-red">FAR 5 Quarterly report of revenue and Other receipts 2019</li></a>
-                            <a href="transparency/Annual Financial Report/2019/FAR1 2019.pdf"><li class="text-msu-rusty-red">FAR1 2019</li></a>
-                        </ul>
-                    </li>
-                    <li>
-                        2016
-                        <ul class="ml-10 list-decimal">
-                            <a href="transparency/2016_FAR1-B_Q1-Q4.pdf"><li class="text-msu-rusty-red">FAR No. 1-B: Statement of Approved Budget, Utilizations, Disbursement and Balances</li></a>
-                            <a href="transparency/2016_FAR4_Q1-Q4.pdf"><li class="text-msu-rusty-red">Summary Report of Disbursements</li></a>
-                            <a href="transparency/2016_BAR1_Q1-Q4.pdf"><li class="text-msu-rusty-red">BAR No. 1: Quarterly Physical Report of Operations/Physical Plan</li></a>
-                            <a href="2016_FAR5_Q1-Q4.pdf"><li class="text-msu-rusty-red">FAR No. 5: Quarterly Report on Revenue and Other Receipts</li></a>
-                            <a href="transparency/2016_BED1.pdf"><li class="text-msu-rusty-red">Financial Plan (Detailed Statement of Current Year's Obligations, Disbursements and Unpaid Obligations)</li></a>
-                            <a href="transparency/2016_FAR1-A_Q1-Q4.pdf"><li class="text-msu-rusty-red">Summary of Appropriations, Allotments, Obligations, Disbursement and Balance</li></a>
-                            <a href="transparency/2016_FAR2_Q4.pdf"><li class="text-msu-rusty-red">List of Allotment and Sub-allotments</li></a>
-                        </ul>
-                    </li>
-                        
-                    <li>
-                        2015
-                        <ul class="ml-10 list-decimal">
-                            <a href="transparency/2015_FARS_No1Q3.pdf"><li class="text-msu-rusty-red">FAR No. 1: SAAOBDB (Statement of Appropriations, Allotments, Obligations, Disbursements and Balances)</li></a>
-                            <a href="transparency/2015_FARS_No4Q3.pdf"><li class="text-msu-rusty-red">Summary Report of Disbursements</li></a>
-                            <a href="transparency/2015_BAR_No1Q3.pdf"><li class="text-msu-rusty-red">BAR No. 1: Quarterly Physical Report of Operations/Physical Plan</li></a>
-                            <a href="transparency/2015_FARS_No5Q3.pdf"><li class="text-msu-rusty-red">FAR No. 5: Quarterly Report on Revenue and Other Receipts</li></a>
-                            <a href="transparency/2015_FARS_No1AQ3.pdf"><li class="text-msu-rusty-red">Financial Plan (Detailed Statement of Current Year's Obligations, Disbursements and Unpaid Obligations)</li></a>
-                        </ul>
-                    </li>
-                    <li>
-                        2014
-                        <ul class="ml-10 list-decimal">
-                            <a href="transparency/2014_FARS_No1Q3.pdf"><li class="text-msu-rusty-red">FAR No. 1 - Statement of Appropriations, Allotments,Obligations,Disbursements and Balances</li></a>
-                            <a href="transparency/2014_FARS_No1AQ3.pdf"><li class="text-msu-rusty-red">FAR No. 1A - Summary of Prior Year's Obligations and Unpaid Prior Year's Obligations</li></a>
-                            <a href="transparency/2014_FARS_No1BQ3.pdf"><li class="text-msu-rusty-red">FAR No. 1B - List of ABM/SAROs/Sub-Allotment Release Orders</li></a>
-                            <a href=""><li class="text-msu-rusty-red">FAR No. 2 - Statement of Approved Budget, Utilization, Disbursements and Balances</li></a>
-                            <a href="transparency/2014_FARS_No2AQ3.pdf"><li class="text-msu-rusty-red">FAR No. 2A - Summary of Approved Budget, Utilizations, Disbursements and Balances by Object of Expenditures</li></a>
-                            <a href="transparency/2014_FARS_No4Q3.pdf"><li class="text-msu-rusty-red">FAR No. 4 - Monthly Report of Disbursements</li></a>
-                        </ul>
-                    </li>
-                    <li>
-                        2013
-                        <ul class="ml-10 list-decimal">
-                            <a href="transparency/2013_FARS_AnnexAQ3.pdf"><li class="text-msu-rusty-red">Annex A Statement of Appropriations, Allotments, Obligations, Disbursements and Balances</li></a>
-                            <a href="transparency/2013_FARS_AnnexA1Q2.pdf"><li class="text-msu-rusty-red">Annex A-1 List of Agency Budget Matrix Special Allotment Release Orders, Sub-Allotment Release Orders</li></a>
-                            <a href="transparency/2013_FARS_AnnexBQ3.pdf"><li class="text-msu-rusty-red">Annex B Detailed Statement of Current Year's Obligations Disbursement and Unpaid Obligations</li></a>
-                            <a href="transparency/2013_FARS_AnnexDQ3.pdf"><li class="text-msu-rusty-red">Annex C Summary of Prior Year's Obligations, Disbursements and Unpaid Prior Year Obligations</li></a>
-                            <a href="transparency/2013_FARS_AnnexDQ3.pdf"><li class="text-msu-rusty-red">Annex D Summary Report of Disbursements</li></a>
-                        </ul>
-                    </li>
-                </ul>
-                <p class="paragraph p2">Annual Audit Reports</p>
-                <ul class="ml-10 list-disc">
-                    <li>
-                        2022
-                        <ul class="ml-10 list-decimal">
-                            <a href="/transparency/Annual Audit Report/2022/MSU-TCTO2022_Audit_Report.pdf"><li class="text-msu-rusty-red">MSU-TCTO2022_Audit_Report</li></a>
-                        </ul>
-                    </li>
-                    <li>
-                        2021
-                        <ul class="ml-10 list-decimal">
-                            <a href="/transparency/Annual Audit Report/2021/MSU-TCTO2021_Audit_Report.pdf"><li class="text-msu-rusty-red">MSU-TCTO2021_Audit_Report</li></a>
-                        </ul>
-                    </li>
-                    <li>
-                        2020
-                        <ul class="ml-10 list-decimal">
-                            <a href="/transparency/Annual Audit Report/2020/MSU-TCTO2020_Audit_Report.pdf"><li class="text-msu-rusty-red">MSU-TCTO2020_Audit_Report</li></a>
-                        </ul>
-                    </li>
-                    <li>
-                        2019
-                        <ul class="ml-10 list-decimal">
-                            <a href="/transparency/Annual Audit Report/2019/MSU-TCTO2019_Audit_Report.pdf"><li class="text-msu-rusty-red">MSU-TCTO2019_Audit_Report</li></a>
-                        </ul>
-                    </li>
-                    <li>
-                        2018
-                        <ul class="ml-10 list-decimal">
-                            <a href="/transparency/Annual Audit Report/2018/MSU-TCTO2018_Audit_Report.pdf"><li class="text-msu-rusty-red">MSU-TCTO2018_Audit_Report</li></a>
-                        </ul>
-                    </li>
-                    <li>
-                        2017
-                        <ul class="ml-10 list-decimal">
-                            <a href="/transparency/Annual Audit Report/2017/MSU-TCTO2017_Audit_Report.pdf"><li class="text-msu-rusty-red">MSU-TCTO2017_Audit_Report</li></a>
-                        </ul>
-                    </li>
-                    <li>
-                        2016
-                        <ul class="ml-10 list-decimal">
-                            <a href="/transparency/Annual Audit Report/2016/01-MSU-TCTO2016_Transmital Letters.pdf"><li class="text-msu-rusty-red">01-MSU-TCTO2016_Transmital Letters</li></a>
-                            <a href="/transparency/Annual Audit Report/2016/02-MSU-TCTO2016_Cover.pdf"><li class="text-msu-rusty-red">02-MSU-TCTO2016_Cover</li></a>
-                            <a href="/transparency/Annual Audit Report/2016/03-MSU-TCTO2016_Executive_Summary.doc"><li class="text-msu-rusty-red">03-MSU-TCTO2016_Executive_Summary</li></a>
-                            <a href="/transparency/Annual Audit Report/2016/04-MSU-TCTO2016_Table_of_Contents.doc"><li class="text-msu-rusty-red">04-MSU-TCTO2016_Table_of_Contents</li></a>
-                            <a href="/transparency/Annual Audit Report/2016/05_MSU-TCTO2016_Part1-Audited_FS.pdf"><li class="text-msu-rusty-red">05_MSU-TCTO2016_Part1-Audited_FS</li></a>
-                            <a href="/transparency/Annual Audit Report/2016/06-MSU-TCTO2016_Part2-Observations_and_Recomm.doc"><li class="text-msu-rusty-red">06-MSU-TCTO2016_Part2-Observations_and_Recomm</li></a>
-                            <a href="/transparency/Annual Audit Report/2016/07-MSU-TCTO2016_Part3-Status_of_PYs_Recomm.doc"><li class="text-msu-rusty-red">07-MSU-TCTO2016_Part3-Status_of_PYs_Recomm</li></a>
-                            <a href="/transparency/Annual Audit Report/2016/08_MSU-TCTO2016_Part4-Annexes.doc"><li class="text-msu-rusty-red">08_MSU-TCTO2016_Part4-Annexes</li></a>
-                        </ul>
-                    </li>
-                    <li>
-                        2015
-                        <ul class="ml-10 list-decimal">
-                            <a href="/transparency/Annual Audit Report/2015/01-MSU_TTCTO2015_Audit_Report.pdf"><li class="text-msu-rusty-red">01-MSU_TTCTO2015_Audit_Report</li></a>
-                            <a href="/transparency/Annual Audit Report/2015/02-MSU_TTCTO2015_Annexes.xls"><li class="text-msu-rusty-red">02-MSU_TTCTO2015_Annexes</li></a>
-                        </ul>
-                    </li>
-                    <li>
-                        2014
-                        <ul class="ml-10 list-decimal">
-                            <a href="/transparency/Annual Audit Report/2014/01-MSU-TCTO2014_Audit_Report.doc"><li class="text-msu-rusty-red">01-MSU-TCTO2014_Audit_Report</li></a>
-                            <a href="/transparency/Annual Audit Report/2014/02-MSU-TCTO2014_FS.xls"><li class="text-msu-rusty-red">02-MSU-TCTO2014_FS</li></a>
-                            <a href="/transparency/Annual Audit Report/2014/03-MSU-TCTO2014_Annexes.xls"><li class="text-msu-rusty-red">03-MSU-TCTO2014_Annexes</li></a>
-                        </ul>
-                    </li>
-                    <li>
-                        2013
-                        <ul class="ml-10 list-decimal">
-                            <a href="/transparency/Annual Audit Report/2013/01-MSU-TCTO2013_Audit_Report.doc"><li class="text-msu-rusty-red">01-MSU-TCTO2013_Audit_Report</li></a>
-                            <a href="/transparency/Annual Audit Report/2013/02-MSU-TCTO2013_FS.xls"><li class="text-msu-rusty-red">02-MSU-TCTO2013_FS</li></a>
-                        </ul>
-                    </li>
-                    <li>
-                        2012
-                        <ul class="ml-10 list-decimal">
-                            <a href="/transparency/Annual Audit Report/2012/01.MSU-TCTO_Bongao2012_Audit_Report.doc"><li class="text-msu-rusty-red">01.MSU-TCTO_Bongao2012_Audit_Report</li></a>
-                            <a href="/transparency/Annual Audit Report/2012/02.MSU-TCTO_Bongao2012_FS.xls"><li class="text-msu-rusty-red">02.MSU-TCTO_Bongao2012_FS</li></a>
-                            <a href="/transparency/Annual Audit Report/2012/03.MSU-TCTO_Bongao2012_Annexes.xls"><li class="text-msu-rusty-red">03.MSU-TCTO_Bongao2012_Annexes</li></a>
-                        </ul>
-                    </li>
-                    <li>
-                        2011
-                        <ul class="ml-10 list-decimal">
-                            <a href="/transparency/Annual Audit Report/2011/01-MSU_TCTO2011_Audit_Report.doc"><li class="text-msu-rusty-red">01-MSU_TCTO2011_Audit_Report</li></a>
-                            <a href="/transparency/Annual Audit Report/2011/02-MSU TCTO2011_FS.xls"><li class="text-msu-rusty-red">02-MSU TCTO2011_FS</li></a>
-                            <a href="/transparency/Annual Audit Report/2011/03-MSU-TCTO2011_Annexes.xls"><li class="text-msu-rusty-red">03-MSU-TCTO2011_Annexes</li></a>
-                        </ul>
-                    </li>
-                    
-                </ul>
-                <p class="paragraph p2">DBM Approved Budget and Targets</p>
-                <ul class="ml-10 list-decimal">
-                    <a href="transparency/2016_GAA_MSU-TCTO_BUDGET.pdf"><li class="text-msu-rusty-red">Budget 2016</li></a>
-                    <a href="transparency/2016_MSU-TCTO_PERFORMANCE_TARGETS_2.pdf"><li class="text-msu-rusty-red">MFO Targets 2016</li></a>
-                </ul>
-                <!-- <p class="paragraph p2">Projects, Programs and Activities, Beneficiaries, and Status of Implementation</p> -->
-                <p class="paragraph p2">Annual Procurement Plans</p>
-                <ul class="ml-10 list-decimal">
-                    <a href="transparency/Annual Procurement Plan/2018 APP.xlsx"><li class="text-msu-rusty-red">2018 APP</li></a>
-                    <a href="transparency/Annual Procurement Plan/2019 APP.xlsx"><li class="text-msu-rusty-red">2019 APP</li></a>
-                    <a href="transparency/Annual Procurement Plan/2020 APP.xlsx"><li class="text-msu-rusty-red">2020 APP</li></a>
-                    <a href="transparency/Annual Procurement Plan/2021 APP.xlsx"><li class="text-msu-rusty-red">2021 APP</li></a>
-                    <a href="transparency/Annual Procurement Plan/2022 APP.xlsx"><li class="text-msu-rusty-red">2022 APP</li></a>
-                </ul>
-                <!-- <p class="paragraph p2">Annual Report</p>
-                <ul class="ml-10 list-decimal">
-                    <a href="transparency/Annual Report/Annual Report 18.pdf"><li class="text-msu-rusty-red">Annual Report 18</li></a>
-                    <a href="transparency/Annual Report/Annual Report 2017.pdf"><li class="text-msu-rusty-red">Annual Report 2017</li></a>
-                    <a href="transparency/Annual Report/Annual Report 2019.pdf"><li class="text-msu-rusty-red">Annual Report 2019</li></a>
-                    <a href="transparency/Annual Report/Annual Report 2020.pdf"><li class="text-msu-rusty-red">Annual Report 2020</li></a>
-                    <a href="transparency/Annual Report/ANNUAL REPORT 2021.pdf"><li class="text-msu-rusty-red">ANNUAL REPORT 2021</li></a>
-                </ul> -->
-                <!-- <p class="paragraph p2">Gazette</p>
-                <ul class="ml-10 list-disc">
-                    <li>
-                        2022
-                        <ul class="ml-10 list-decimal">
-                            <a href="transparency/Gazette/2022/Gazette 2022 1st Quarter.pdf"><li class="text-msu-rusty-red">Gazette 2022 1st Quarter</li></a>
-                            <a href="transparency/Gazette/2022/Gazette 2022 2nd Quarter.pdf"><li class="text-msu-rusty-red">Gazette 2022 2nd Quarter</li></a>
-                        </ul>
-                    </li>
-                    <li>
-                        2021
-                        <ul class="ml-10 list-decimal">
-                            <a href="transparency/Gazette/2021/Gazette 2021 1st Sem January - June.pdf"><li class="text-msu-rusty-red">Gazette 2021 1st Sem January - June</li></a>
-                            <a href="transparency/Gazette/2021/Gazette 2021 2nd Sem July-December.pdf"><li class="text-msu-rusty-red">Gazette 2021 2nd Sem July-December</li></a>
-                        </ul>
-                    </li>
-                    <li>
-                        2020
-                        <ul class="ml-10 list-decimal">
-                            <a href="transparency/Gazette/2020/Gazette 2020 1st Sem January - June.pdf"><li class="text-msu-rusty-red">Gazette 2020 1st Sem January - June</li></a>
-                            <a href="transparency/Gazette/2020/Gazette 2020 2nd Sem July - Dec  (SHORT).pdf"><li class="text-msu-rusty-red">Gazette 2020 2nd Sem July - Dec  (SHORT)</li></a>
-                        </ul>
-                    </li>
-                    <li>
-                        2019
-                        <ul class="ml-10 list-decimal">
-                            <a href="transparency/Gazette/2019/Gazette 2019 1st Quarter.pdf"><li class="text-msu-rusty-red">Gazette 2019 1st Quarter</li></a>
-                            <a href="transparency/Gazette/2019/Gazette 2019 2nd Quarter.pdf"><li class="text-msu-rusty-red">Gazette 2019 2nd Quarter</li></a>
-                            <a href="transparency/Gazette/2019/Gazette 2019 3rd Quarter.pdf"><li class="text-msu-rusty-red">Gazette 2019 3rd Quarter</li></a>
-                            <a href="transparency/Gazette/2019/Gazette 2019 4th Quarter.pdf"><li class="text-msu-rusty-red">Gazette 2019 4th Quarter</li></a>
-                        </ul>
-                    </li>
-                    <li>
-                        2018
-                        <ul class="ml-10 list-decimal">
-                            <a href="transparency/Gazette/2018/Gazette 2018 1st Quarter.pdf"><li class="text-msu-rusty-red">Gazette 2018 1st Quarter</li></a>
-                            <a href="transparency/Gazette/2018/Gazette 2018 2nd Quarter.pdf"><li class="text-msu-rusty-red">Gazette 2018 2nd Quarter</li></a>
-                            <a href="transparency/Gazette/2018/Gazette 2018 3rd Quarter.pdf"><li class="text-msu-rusty-red">Gazette 2018 3rd Quarter</li></a>
-                            <a href="transparency/Gazette/2018/Gazette 2018 4th Quarter.pdf"><li class="text-msu-rusty-red">Gazette 2018 4th Quarter</li></a>
-                        </ul>
-                    </li>
-                </ul> -->
-                <!-- <p class="paragraph p2">QMS Certification</p> -->
-                <a href="transparency/SystemOfRanking.pdf"><p class="paragraph p2 text-msu-rusty-red">System of Ranking Delivery Units and Individuals</p></a>
-                <!-- <p class="paragraph p2">Agency Operations Manual</p> -->
-                <ul class="ml-10 list-decimal">
-                    <!-- <a href="transparency/"><li class="text-msu-rusty-red">Manual on Faculty Recruitment</li></a> -->
-                </ul>
-                <p class="paragraph p2">Freedom of Information</p>
-                <ul class="ml-10 list-decimal">
-                    <a href="transparency/FOI.pdf"><li class="text-msu-rusty-red">Freedom of Information (FOI) Manual</li></a>
-                </ul>
-            </div>
-        </div>
-		
-<!-- FooterNaV -->
-        <FooterNav />
-<!-- end FooterNaV -->
+		<!-- Hero / Page Header -->
+		<section class="bg-gradient-to-b from-msu-maroon/10 to-white-pure border-b border-msu-maroon/10">
+			<div class="w-full xl:px-[12.5%] xs:px-[3.85%] py-12 md:py-16">
+				<div class="max-w-4xl mx-auto text-center">
+					<p class="paragraph xl:p2 xs:p3 text-msu-rusty-red font-semibold uppercase tracking-wider mb-2">Sec. 93 • R.A. No. 10155</p>
+					<h1 class="headings xl:h3 xs:h4 text-msu-maroon font-bold tracking-tight leading-tight">
+						MSU-TCTO Transparency Seal
+					</h1>
+					<p class="paragraph xl:p1 xs:p2 text-gray-700 mt-4 max-w-2xl mx-auto">
+						Compliance with Sec. 93 (Transparency Seal) R.A. No. 10155 (General Appropriations Act, FY 2013)
+					</p>
+				</div>
+			</div>
+		</section>
 
-<!-- Footer -->
+		<!-- Content -->
+		<div class="bg-white-pure w-full xl:px-[12.5%] xs:px-[3.85%] py-12 md:py-16">
+			<div class="max-w-4xl mx-auto space-y-12">
+
+				<!-- Intro (card) -->
+				<article class="transparency-section">
+					<header class="flex items-center gap-3 mb-4 pb-3 border-b-2 border-msu-maroon">
+						<span class="flex h-10 w-10 items-center justify-center rounded-lg bg-msu-maroon text-white text-lg font-bold">i</span>
+						<h2 class="headings xl:h5 xs:h6 text-msu-maroon font-bold m-0">Agency Information</h2>
+					</header>
+					<p class="paragraph xl:p2 xs:p3 text-gray-800 leading-relaxed">
+						The agency's mandates and functions, names of its officials with their positions and designations, and contact information.
+					</p>
+				</article>
+
+				<!-- Section: Annual Financial Reports -->
+				<article class="transparency-section">
+					<header class="flex items-center gap-3 mb-6 pb-3 border-b-2 border-msu-maroon">
+						<span class="flex h-10 w-10 items-center justify-center rounded-lg bg-msu-maroon text-white text-lg font-bold">1</span>
+						<h2 class="headings xl:h5 xs:h6 text-msu-maroon font-bold m-0">Annual Financial Reports</h2>
+					</header>
+					<div class="space-y-6">
+						<!-- 2023 -->
+						<div class="transparency-year-group">
+							<h3 class="text-sm font-semibold text-msu-maroon uppercase tracking-wider mb-3">2023</h3>
+							<ul class="transparency-doc-list space-y-2">
+								<li><a href="transparency/Annual Financial Report/2023/FAR 4 as of February 2023 Submitted.pdf" class="transparency-link">FAR 4 as of February 2023 Submitted</a></li>
+								<li><a href="transparency/Annual Financial Report/2023/FAR 4 as of January 31, 2023 Submitted.pdf" class="transparency-link">FAR 4 as of January 31, 2023 Submitted</a></li>
+								<li><a href="transparency/Annual Financial Report/2023/FAR 4 as of March 31, 2023 Submitted.pdf" class="transparency-link">FAR 4 as of March 31, 2023 Submitted</a></li>
+								<li><a href="transparency/Annual Financial Report/2023/FAR1 as of March 31, 2023 Submitted.pdf" class="transparency-link">FAR1 as of March 31, 2023 Submitted</a></li>
+								<li><a href="transparency/Annual Financial Report/2023/FAR1A as of March 31, 2023 Submitted.pdf" class="transparency-link">FAR1A as of March 31, 2023 Submitted</a></li>
+								<li><a href="transparency/Annual Financial Report/2023/FAR 1 As of June 2023 submitted.pdf" class="transparency-link">FAR 1 As of June 2023 submitted</a></li>
+								<li><a href="transparency/Annual Financial Report/2023/FAR 1A as of june 2023 submitted.pdf" class="transparency-link">FAR 1A as of june 2023 submitted</a></li>
+								<li><a href="transparency/Annual Financial Report/2023/FAR 3 AGING FY 2022 SUBMITTED.pdf" class="transparency-link">FAR 3 AGING FY 2022 SUBMITTED</a></li>
+								<li><a href="transparency/Annual Financial Report/2023/FAR 4 For the month of April 2023 SUBMITTED.pdf" class="transparency-link">FAR 4 For the month of April 2023 SUBMITTED</a></li>
+								<li><a href="transparency/Annual Financial Report/2023/FAR 4 JUNE 2023 SUBMITTED.pdf" class="transparency-link">FAR 4 JUNE 2023 SUBMITTED</a></li>
+								<li><a href="transparency/Annual Financial Report/2023/FAR 4 MAY 2023 Submitted.pdf" class="transparency-link">FAR 4 MAY 2023 Submitted</a></li>
+							</ul>
+						</div>
+						<!-- 2022 -->
+						<div class="transparency-year-group">
+							<h3 class="text-sm font-semibold text-msu-maroon uppercase tracking-wider mb-3">2022</h3>
+							<ul class="transparency-doc-list space-y-2">
+								<li><a href="transparency/Annual Financial Report/2022/FAR 4 JUNE.pdf" class="transparency-link">FAR 4 JUNE</a></li>
+								<li><a href="transparency/Annual Financial Report/2022/FAR 4 MAR.pdf" class="transparency-link">FAR 4 MAR</a></li>
+								<li><a href="transparency/Annual Financial Report/2022/FAR 4 MAY.pdf" class="transparency-link">FAR 4 MAY</a></li>
+								<li><a href="transparency/Annual Financial Report/2022/FAR 4 NOV 2022.pdf" class="transparency-link">FAR 4 NOV 2022</a></li>
+								<li><a href="transparency/Annual Financial Report/2022/FAR 4 OCT 2022.pdf" class="transparency-link">FAR 4 OCT 2022</a></li>
+								<li><a href="transparency/Annual Financial Report/2022/FAR 5 3rd Q FY2022.pdf" class="transparency-link">FAR 5 3rd Q FY2022</a></li>
+								<li><a href="transparency/Annual Financial Report/2022/FAR 5-4th Q FY2022 final.pdf" class="transparency-link">FAR 5-4th Q FY2022 final</a></li>
+								<li><a href="transparency/Annual Financial Report/2022/FAR 5-4th Q FY2022.pdf" class="transparency-link">FAR 5-4th Q FY2022</a></li>
+								<li><a href="transparency/Annual Financial Report/2022/FAR4-Sept22.pdf" class="transparency-link">FAR4-Sept22</a></li>
+								<li><a href="transparency/Annual Financial Report/2022/FAR 1A As of Dec 31 2022 Submitted revised.pdf" class="transparency-link">FAR 1A As of Dec 31 2022 Submitted revised</a></li>
+								<li><a href="transparency/Annual Financial Report/2022/FAR 4 APRIL 200.pdf" class="transparency-link">FAR 4 APRIL 200</a></li>
+								<li><a href="transparency/Annual Financial Report/2022/FAR 4 AUGUST 2022.pdf" class="transparency-link">FAR 4 AUGUST 2022</a></li>
+								<li><a href="transparency/Annual Financial Report/2022/FAR 4 December 2022.pdf" class="transparency-link">FAR 4 December 2022</a></li>
+								<li><a href="transparency/Annual Financial Report/2022/FAR 4 FEB 2022.pdf" class="transparency-link">FAR 4 FEB 2022</a></li>
+								<li><a href="transparency/Annual Financial Report/2022/FAR 4 JAN 2022.pdf" class="transparency-link">FAR 4 JAN 2022</a></li>
+								<li><a href="transparency/Annual Financial Report/2022/FAR 4 JULY 2022.pdf" class="transparency-link">FAR 4 JULY 2022</a></li>
+							</ul>
+						</div>
+						<!-- 2021 -->
+						<div class="transparency-year-group">
+							<h3 class="text-sm font-semibold text-msu-maroon uppercase tracking-wider mb-3">2021</h3>
+							<ul class="transparency-doc-list space-y-2">
+								<li><a href="transparency/Annual Financial Report/2021/2nd Quarter - Far 4 2021.pdf" class="transparency-link">2nd Quarter - Far 4 2021</a></li>
+								<li><a href="transparency/Annual Financial Report/2021/3rd Quarter-Far 4 2021.pdf" class="transparency-link">3rd Quarter-Far 4 2021</a></li>
+								<li><a href="transparency/Annual Financial Report/2021/4th Quarter- Far 4 2021.pdf" class="transparency-link">4th Quarter- Far 4 2021</a></li>
+								<li><a href="transparency/Annual Financial Report/2021/Far 1 2021.pdf" class="transparency-link">Far 1 2021</a></li>
+								<li><a href="transparency/Annual Financial Report/2021/FAR 1 As of December 31^ 2021_1.pdf" class="transparency-link">FAR 1 As of December 31^ 2021_1</a></li>
+								<li><a href="transparency/Annual Financial Report/2021/far 1A 2021.pdf" class="transparency-link">far 1A 2021</a></li>
+								<li><a href="transparency/Annual Financial Report/2021/Far 3 2021.pdf" class="transparency-link">Far 3 2021</a></li>
+								<li><a href="transparency/Annual Financial Report/2021/Far 4 -1st quarter - 2021.pdf" class="transparency-link">Far 4 -1st quarter - 2021</a></li>
+								<li><a href="transparency/Annual Financial Report/2021/far 5 2021.pdf" class="transparency-link">far 5 2021</a></li>
+								<li><a href="transparency/Annual Financial Report/2021/Far1 2021 2021.pdf" class="transparency-link">Far1 2021 2021</a></li>
+							</ul>
+						</div>
+						<!-- 2020 -->
+						<div class="transparency-year-group">
+							<h3 class="text-sm font-semibold text-msu-maroon uppercase tracking-wider mb-3">2020</h3>
+							<ul class="transparency-doc-list space-y-2">
+								<li><a href="transparency/Annual Financial Report/2020/FAR 4 JAN-MAY, 2020.pdf" class="transparency-link">FAR 4 JAN-MAY, 2020</a></li>
+								<li><a href="transparency/Annual Financial Report/2020/FAR 4 JUNE-OCT, 2020.pdf" class="transparency-link">FAR 4 JUNE-OCT, 2020</a></li>
+								<li><a href="transparency/Annual Financial Report/2020/FAR 4 Nov-Dec 2020.pdf" class="transparency-link">FAR 4 Nov-Dec 2020</a></li>
+								<li><a href="transparency/Annual Financial Report/2020/MSU-TCTO_FAR_1_as_of_December_31,_2020_A.pdf" class="transparency-link">MSU-TCTO_FAR_1_as_of_December_31,_2020_A</a></li>
+							</ul>
+						</div>
+						<!-- 2019 -->
+						<div class="transparency-year-group">
+							<h3 class="text-sm font-semibold text-msu-maroon uppercase tracking-wider mb-3">2019</h3>
+							<ul class="transparency-doc-list space-y-2">
+								<li><a href="transparency/Annual Financial Report/2019/Appendix 23 - MRD - FAR 4 2019.pdf" class="transparency-link">Appendix 23 - MRD - FAR 4 2019</a></li>
+								<li><a href="transparency/Annual Financial Report/2019/FAR 5 Quarterly report of revenue and Other receipts 2019.pdf" class="transparency-link">FAR 5 Quarterly report of revenue and Other receipts 2019</a></li>
+								<li><a href="transparency/Annual Financial Report/2019/FAR1 2019.pdf" class="transparency-link">FAR1 2019</a></li>
+							</ul>
+						</div>
+						<!-- 2016 -->
+						<div class="transparency-year-group">
+							<h3 class="text-sm font-semibold text-msu-maroon uppercase tracking-wider mb-3">2016</h3>
+							<ul class="transparency-doc-list space-y-2">
+								<li><a href="transparency/2016_FAR1-B_Q1-Q4.pdf" class="transparency-link">FAR No. 1-B: Statement of Approved Budget, Utilizations, Disbursement and Balances</a></li>
+								<li><a href="transparency/2016_FAR4_Q1-Q4.pdf" class="transparency-link">Summary Report of Disbursements</a></li>
+								<li><a href="transparency/2016_BAR1_Q1-Q4.pdf" class="transparency-link">BAR No. 1: Quarterly Physical Report of Operations/Physical Plan</a></li>
+								<li><a href="2016_FAR5_Q1-Q4.pdf" class="transparency-link">FAR No. 5: Quarterly Report on Revenue and Other Receipts</a></li>
+								<li><a href="transparency/2016_BED1.pdf" class="transparency-link">Financial Plan (Detailed Statement of Current Year's Obligations, Disbursements and Unpaid Obligations)</a></li>
+								<li><a href="transparency/2016_FAR1-A_Q1-Q4.pdf" class="transparency-link">Summary of Appropriations, Allotments, Obligations, Disbursement and Balance</a></li>
+								<li><a href="transparency/2016_FAR2_Q4.pdf" class="transparency-link">List of Allotment and Sub-allotments</a></li>
+							</ul>
+						</div>
+						<!-- 2015 -->
+						<div class="transparency-year-group">
+							<h3 class="text-sm font-semibold text-msu-maroon uppercase tracking-wider mb-3">2015</h3>
+							<ul class="transparency-doc-list space-y-2">
+								<li><a href="transparency/2015_FARS_No1Q3.pdf" class="transparency-link">FAR No. 1: SAAOBDB (Statement of Appropriations, Allotments, Obligations, Disbursements and Balances)</a></li>
+								<li><a href="transparency/2015_FARS_No4Q3.pdf" class="transparency-link">Summary Report of Disbursements</a></li>
+								<li><a href="transparency/2015_BAR_No1Q3.pdf" class="transparency-link">BAR No. 1: Quarterly Physical Report of Operations/Physical Plan</a></li>
+								<li><a href="transparency/2015_FARS_No5Q3.pdf" class="transparency-link">FAR No. 5: Quarterly Report on Revenue and Other Receipts</a></li>
+								<li><a href="transparency/2015_FARS_No1AQ3.pdf" class="transparency-link">Financial Plan (Detailed Statement of Current Year's Obligations, Disbursements and Unpaid Obligations)</a></li>
+							</ul>
+						</div>
+						<!-- 2014 -->
+						<div class="transparency-year-group">
+							<h3 class="text-sm font-semibold text-msu-maroon uppercase tracking-wider mb-3">2014</h3>
+							<ul class="transparency-doc-list space-y-2">
+								<li><a href="transparency/2014_FARS_No1Q3.pdf" class="transparency-link">FAR No. 1 - Statement of Appropriations, Allotments,Obligations,Disbursements and Balances</a></li>
+								<li><a href="transparency/2014_FARS_No1AQ3.pdf" class="transparency-link">FAR No. 1A - Summary of Prior Year's Obligations and Unpaid Prior Year's Obligations</a></li>
+								<li><a href="transparency/2014_FARS_No1BQ3.pdf" class="transparency-link">FAR No. 1B - List of ABM/SAROs/Sub-Allotment Release Orders</a></li>
+								<li><a href="" class="transparency-link opacity-60 cursor-not-allowed">FAR No. 2 - Statement of Approved Budget, Utilization, Disbursements and Balances</a></li>
+								<li><a href="transparency/2014_FARS_No2AQ3.pdf" class="transparency-link">FAR No. 2A - Summary of Approved Budget, Utilizations, Disbursements and Balances by Object of Expenditures</a></li>
+								<li><a href="transparency/2014_FARS_No4Q3.pdf" class="transparency-link">FAR No. 4 - Monthly Report of Disbursements</a></li>
+							</ul>
+						</div>
+						<!-- 2013 -->
+						<div class="transparency-year-group">
+							<h3 class="text-sm font-semibold text-msu-maroon uppercase tracking-wider mb-3">2013</h3>
+							<ul class="transparency-doc-list space-y-2">
+								<li><a href="transparency/2013_FARS_AnnexAQ3.pdf" class="transparency-link">Annex A Statement of Appropriations, Allotments, Obligations, Disbursements and Balances</a></li>
+								<li><a href="transparency/2013_FARS_AnnexA1Q2.pdf" class="transparency-link">Annex A-1 List of Agency Budget Matrix Special Allotment Release Orders, Sub-Allotment Release Orders</a></li>
+								<li><a href="transparency/2013_FARS_AnnexBQ3.pdf" class="transparency-link">Annex B Detailed Statement of Current Year's Obligations Disbursement and Unpaid Obligations</a></li>
+								<li><a href="transparency/2013_FARS_AnnexDQ3.pdf" class="transparency-link">Annex C Summary of Prior Year's Obligations, Disbursements and Unpaid Prior Year Obligations</a></li>
+								<li><a href="transparency/2013_FARS_AnnexDQ3.pdf" class="transparency-link">Annex D Summary Report of Disbursements</a></li>
+							</ul>
+						</div>
+					</div>
+				</article>
+
+				<!-- Section: Annual Audit Reports -->
+				<article class="transparency-section">
+					<header class="flex items-center gap-3 mb-6 pb-3 border-b-2 border-msu-maroon">
+						<span class="flex h-10 w-10 items-center justify-center rounded-lg bg-msu-maroon text-white text-lg font-bold">2</span>
+						<h2 class="headings xl:h5 xs:h6 text-msu-maroon font-bold m-0">Annual Audit Reports</h2>
+					</header>
+					<div class="space-y-6">
+						<div class="transparency-year-group">
+							<h3 class="text-sm font-semibold text-msu-maroon uppercase tracking-wider mb-3">2022</h3>
+							<ul class="transparency-doc-list space-y-2">
+								<li><a href="/transparency/Annual Audit Report/2022/MSU-TCTO2022_Audit_Report.pdf" class="transparency-link">MSU-TCTO2022_Audit_Report</a></li>
+							</ul>
+						</div>
+						<div class="transparency-year-group">
+							<h3 class="text-sm font-semibold text-msu-maroon uppercase tracking-wider mb-3">2021</h3>
+							<ul class="transparency-doc-list space-y-2">
+								<li><a href="/transparency/Annual Audit Report/2021/MSU-TCTO2021_Audit_Report.pdf" class="transparency-link">MSU-TCTO2021_Audit_Report</a></li>
+							</ul>
+						</div>
+						<div class="transparency-year-group">
+							<h3 class="text-sm font-semibold text-msu-maroon uppercase tracking-wider mb-3">2020</h3>
+							<ul class="transparency-doc-list space-y-2">
+								<li><a href="/transparency/Annual Audit Report/2020/MSU-TCTO2020_Audit_Report.pdf" class="transparency-link">MSU-TCTO2020_Audit_Report</a></li>
+							</ul>
+						</div>
+						<div class="transparency-year-group">
+							<h3 class="text-sm font-semibold text-msu-maroon uppercase tracking-wider mb-3">2019</h3>
+							<ul class="transparency-doc-list space-y-2">
+								<li><a href="/transparency/Annual Audit Report/2019/MSU-TCTO2019_Audit_Report.pdf" class="transparency-link">MSU-TCTO2019_Audit_Report</a></li>
+							</ul>
+						</div>
+						<div class="transparency-year-group">
+							<h3 class="text-sm font-semibold text-msu-maroon uppercase tracking-wider mb-3">2018</h3>
+							<ul class="transparency-doc-list space-y-2">
+								<li><a href="/transparency/Annual Audit Report/2018/MSU-TCTO2018_Audit_Report.pdf" class="transparency-link">MSU-TCTO2018_Audit_Report</a></li>
+							</ul>
+						</div>
+						<div class="transparency-year-group">
+							<h3 class="text-sm font-semibold text-msu-maroon uppercase tracking-wider mb-3">2017</h3>
+							<ul class="transparency-doc-list space-y-2">
+								<li><a href="/transparency/Annual Audit Report/2017/MSU-TCTO2017_Audit_Report.pdf" class="transparency-link">MSU-TCTO2017_Audit_Report</a></li>
+							</ul>
+						</div>
+						<div class="transparency-year-group">
+							<h3 class="text-sm font-semibold text-msu-maroon uppercase tracking-wider mb-3">2016</h3>
+							<ul class="transparency-doc-list space-y-2">
+								<li><a href="/transparency/Annual Audit Report/2016/01-MSU-TCTO2016_Transmital Letters.pdf" class="transparency-link">01-MSU-TCTO2016_Transmital Letters</a></li>
+								<li><a href="/transparency/Annual Audit Report/2016/02-MSU-TCTO2016_Cover.pdf" class="transparency-link">02-MSU-TCTO2016_Cover</a></li>
+								<li><a href="/transparency/Annual Audit Report/2016/03-MSU-TCTO2016_Executive_Summary.doc" class="transparency-link">03-MSU-TCTO2016_Executive_Summary</a></li>
+								<li><a href="/transparency/Annual Audit Report/2016/04-MSU-TCTO2016_Table_of_Contents.doc" class="transparency-link">04-MSU-TCTO2016_Table_of_Contents</a></li>
+								<li><a href="/transparency/Annual Audit Report/2016/05_MSU-TCTO2016_Part1-Audited_FS.pdf" class="transparency-link">05_MSU-TCTO2016_Part1-Audited_FS</a></li>
+								<li><a href="/transparency/Annual Audit Report/2016/06-MSU-TCTO2016_Part2-Observations_and_Recomm.doc" class="transparency-link">06-MSU-TCTO2016_Part2-Observations_and_Recomm</a></li>
+								<li><a href="/transparency/Annual Audit Report/2016/07-MSU-TCTO2016_Part3-Status_of_PYs_Recomm.doc" class="transparency-link">07-MSU-TCTO2016_Part3-Status_of_PYs_Recomm</a></li>
+								<li><a href="/transparency/Annual Audit Report/2016/08_MSU-TCTO2016_Part4-Annexes.doc" class="transparency-link">08_MSU-TCTO2016_Part4-Annexes</a></li>
+							</ul>
+						</div>
+						<div class="transparency-year-group">
+							<h3 class="text-sm font-semibold text-msu-maroon uppercase tracking-wider mb-3">2015</h3>
+							<ul class="transparency-doc-list space-y-2">
+								<li><a href="/transparency/Annual Audit Report/2015/01-MSU_TTCTO2015_Audit_Report.pdf" class="transparency-link">01-MSU_TTCTO2015_Audit_Report</a></li>
+								<li><a href="/transparency/Annual Audit Report/2015/02-MSU_TTCTO2015_Annexes.xls" class="transparency-link">02-MSU_TTCTO2015_Annexes</a></li>
+							</ul>
+						</div>
+						<div class="transparency-year-group">
+							<h3 class="text-sm font-semibold text-msu-maroon uppercase tracking-wider mb-3">2014</h3>
+							<ul class="transparency-doc-list space-y-2">
+								<li><a href="/transparency/Annual Audit Report/2014/01-MSU-TCTO2014_Audit_Report.doc" class="transparency-link">01-MSU-TCTO2014_Audit_Report</a></li>
+								<li><a href="/transparency/Annual Audit Report/2014/02-MSU-TCTO2014_FS.xls" class="transparency-link">02-MSU-TCTO2014_FS</a></li>
+								<li><a href="/transparency/Annual Audit Report/2014/03-MSU-TCTO2014_Annexes.xls" class="transparency-link">03-MSU-TCTO2014_Annexes</a></li>
+							</ul>
+						</div>
+						<div class="transparency-year-group">
+							<h3 class="text-sm font-semibold text-msu-maroon uppercase tracking-wider mb-3">2013</h3>
+							<ul class="transparency-doc-list space-y-2">
+								<li><a href="/transparency/Annual Audit Report/2013/01-MSU-TCTO2013_Audit_Report.doc" class="transparency-link">01-MSU-TCTO2013_Audit_Report</a></li>
+								<li><a href="/transparency/Annual Audit Report/2013/02-MSU-TCTO2013_FS.xls" class="transparency-link">02-MSU-TCTO2013_FS</a></li>
+							</ul>
+						</div>
+						<div class="transparency-year-group">
+							<h3 class="text-sm font-semibold text-msu-maroon uppercase tracking-wider mb-3">2012</h3>
+							<ul class="transparency-doc-list space-y-2">
+								<li><a href="/transparency/Annual Audit Report/2012/01.MSU-TCTO_Bongao2012_Audit_Report.doc" class="transparency-link">01.MSU-TCTO_Bongao2012_Audit_Report</a></li>
+								<li><a href="/transparency/Annual Audit Report/2012/02.MSU-TCTO_Bongao2012_FS.xls" class="transparency-link">02.MSU-TCTO_Bongao2012_FS</a></li>
+								<li><a href="/transparency/Annual Audit Report/2012/03.MSU-TCTO_Bongao2012_Annexes.xls" class="transparency-link">03.MSU-TCTO_Bongao2012_Annexes</a></li>
+							</ul>
+						</div>
+						<div class="transparency-year-group">
+							<h3 class="text-sm font-semibold text-msu-maroon uppercase tracking-wider mb-3">2011</h3>
+							<ul class="transparency-doc-list space-y-2">
+								<li><a href="/transparency/Annual Audit Report/2011/01-MSU_TCTO2011_Audit_Report.doc" class="transparency-link">01-MSU_TCTO2011_Audit_Report</a></li>
+								<li><a href="/transparency/Annual Audit Report/2011/02-MSU TCTO2011_FS.xls" class="transparency-link">02-MSU TCTO2011_FS</a></li>
+								<li><a href="/transparency/Annual Audit Report/2011/03-MSU-TCTO2011_Annexes.xls" class="transparency-link">03-MSU-TCTO2011_Annexes</a></li>
+							</ul>
+						</div>
+					</div>
+				</article>
+
+				<!-- Section: DBM Approved Budget and Targets -->
+				<article class="transparency-section">
+					<header class="flex items-center gap-3 mb-6 pb-3 border-b-2 border-msu-maroon">
+						<span class="flex h-10 w-10 items-center justify-center rounded-lg bg-msu-maroon text-white text-lg font-bold">3</span>
+						<h2 class="headings xl:h5 xs:h6 text-msu-maroon font-bold m-0">DBM Approved Budget and Targets</h2>
+					</header>
+					<ul class="transparency-doc-list space-y-2">
+						<li><a href="transparency/2016_GAA_MSU-TCTO_BUDGET.pdf" class="transparency-link">Budget 2016</a></li>
+						<li><a href="transparency/2016_MSU-TCTO_PERFORMANCE_TARGETS_2.pdf" class="transparency-link">MFO Targets 2016</a></li>
+					</ul>
+				</article>
+
+				<!-- Section: Annual Procurement Plans -->
+				<article class="transparency-section">
+					<header class="flex items-center gap-3 mb-6 pb-3 border-b-2 border-msu-maroon">
+						<span class="flex h-10 w-10 items-center justify-center rounded-lg bg-msu-maroon text-white text-lg font-bold">4</span>
+						<h2 class="headings xl:h5 xs:h6 text-msu-maroon font-bold m-0">Annual Procurement Plans</h2>
+					</header>
+					<ul class="transparency-doc-list space-y-2">
+						<li><a href="transparency/Annual Procurement Plan/2018 APP.xlsx" class="transparency-link">2018 APP</a></li>
+						<li><a href="transparency/Annual Procurement Plan/2019 APP.xlsx" class="transparency-link">2019 APP</a></li>
+						<li><a href="transparency/Annual Procurement Plan/2020 APP.xlsx" class="transparency-link">2020 APP</a></li>
+						<li><a href="transparency/Annual Procurement Plan/2021 APP.xlsx" class="transparency-link">2021 APP</a></li>
+						<li><a href="transparency/Annual Procurement Plan/2022 APP.xlsx" class="transparency-link">2022 APP</a></li>
+					</ul>
+				</article>
+
+				<!-- Section: System of Ranking -->
+				<article class="transparency-section">
+					<header class="flex items-center gap-3 mb-6 pb-3 border-b-2 border-msu-maroon">
+						<span class="flex h-10 w-10 items-center justify-center rounded-lg bg-msu-maroon text-white text-lg font-bold">5</span>
+						<h2 class="headings xl:h5 xs:h6 text-msu-maroon font-bold m-0">System of Ranking</h2>
+					</header>
+					<p class="paragraph xl:p2 xs:p3 text-gray-700 mb-4">Delivery Units and Individuals</p>
+					<a href="transparency/SystemOfRanking.pdf" class="transparency-link inline-flex items-center gap-2 font-medium">System of Ranking Delivery Units and Individuals</a>
+				</article>
+
+				<!-- Section: Freedom of Information -->
+				<article class="transparency-section">
+					<header class="flex items-center gap-3 mb-6 pb-3 border-b-2 border-msu-maroon">
+						<span class="flex h-10 w-10 items-center justify-center rounded-lg bg-msu-maroon text-white text-lg font-bold">6</span>
+						<h2 class="headings xl:h5 xs:h6 text-msu-maroon font-bold m-0">Freedom of Information</h2>
+					</header>
+					<ul class="transparency-doc-list space-y-2">
+						<li><a href="transparency/FOI.pdf" class="transparency-link">Freedom of Information (FOI) Manual</a></li>
+					</ul>
+				</article>
+
+			</div>
+		</div>
+
+		<FooterNav />
 		<Footer />
-<!-- end Footer -->
-
 	</main>
-	
+
+	<style>
+		.transparency-section {
+			@apply rounded-xl border border-gray-200 bg-white p-6 md:p-8 shadow-sm;
+		}
+		.transparency-year-group {
+			@apply pl-0;
+		}
+		.transparency-year-group:not(:last-child) {
+			@apply border-b border-gray-100 pb-6;
+		}
+		.transparency-doc-list {
+			@apply list-none pl-0 space-y-1;
+		}
+		.transparency-link {
+			@apply flex items-center gap-2 py-2.5 px-3 -mx-3 rounded-lg text-msu-rusty-red font-medium transition-colors duration-200;
+			@apply hover:bg-msu-maroon/10 hover:text-msu-maroon;
+		}
+		.transparency-link::before {
+			content: '';
+			display: inline-block;
+			width: 6px;
+			height: 6px;
+			border-radius: 50%;
+			background-color: currentColor;
+			flex-shrink: 0;
+		}
+		.transparency-link[href=""].opacity-60:hover {
+			@apply bg-transparent cursor-not-allowed;
+		}
+	</style>
 </Layout>

@@ -119,11 +119,12 @@ const one_sixLatestAnnualReport = await get1_6LatestAnnualReport();
                 <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-8 mb-16">
                     {one_fourLatestAnnualReport.map((report) => (
                         <div class="bg-msu-bgc-color dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-                            <div class="relative group h-100 overflow-hidden">
+                            <div class="relative group h-80 sm:h-96 lg:h-[28rem] xl:h-[32rem] overflow-hidden bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
                                 <img 
                                     src={report.mainImage.asset.url} 
-                                    class="w-full h-full object-cover transform transition-all duration-500 group-hover:scale-110"
+                                    class="w-full h-full object-contain transform transition-all duration-500 group-hover:scale-105"
                                     alt={report.title}
+                                    loading="lazy"
                                 />
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                                     <a 

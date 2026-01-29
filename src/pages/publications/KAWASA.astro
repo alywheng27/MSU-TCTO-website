@@ -139,7 +139,7 @@ function getYear(dateString: string) {
             <div class="w-full h-full">
                 <div class="bg-white dark:bg-gray-900 w-full h-full flex flex-col overflow-hidden">
                     <!-- PDF Viewer Header -->
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-6 bg-gradient-to-r from-msu-blue via-msu-dark-blue to-msu-blue text-white shadow-2xl">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-6 bg-gradient-to-r from-[#61063B] via-[#7a0849] to-[#61063B] text-white shadow-2xl">
                         <div class="flex items-center space-x-2 sm:space-x-4 w-full sm:w-auto mb-3 sm:mb-0">
                             <div class="flex items-center justify-center w-10 h-10 sm:w-14 sm:h-14 bg-white/20 rounded-xl backdrop-blur-sm">
                                 <svg class="w-5 h-5 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -147,7 +147,7 @@ function getYear(dateString: string) {
                                 </svg>
                             </div>
                             <div class="flex-1 min-w-0">
-                                <h3 id="modalPdfTitle" class="text-sm sm:text-2xl font-bold text-msu-deep-ocean truncate">KAWASA Publication Viewer</h3>
+                                <h3 id="modalPdfTitle" class="text-sm sm:text-2xl font-bold text-white truncate">KAWASA Publication Viewer</h3>
                                 <p class="text-white/90 text-xs sm:text-sm font-medium hidden sm:block">Student Research Repository</p>
                             </div>
                         </div>
@@ -258,13 +258,13 @@ function getYear(dateString: string) {
                                     The PDF file could not be loaded. Please try again or download the file.
                                 </p>
                                 <div class="flex flex-col space-y-3 sm:space-y-4">
-                                    <button onclick="openPdfInNewTab()" class="flex items-center justify-center space-x-2 sm:space-x-3 bg-purple-600 hover:bg-purple-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg text-sm sm:text-base">
+                                    <button onclick="openPdfInNewTab()" class="flex items-center justify-center space-x-2 sm:space-x-3 bg-[#61063B] hover:bg-[#7a0849] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg text-sm sm:text-base">
                                         <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                                         </svg>
                                         <span>Open in New Tab</span>
                                     </button>
-                                    <button onclick="downloadPdf()" class="flex items-center justify-center space-x-2 sm:space-x-3 bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg text-sm sm:text-base">
+                                    <button onclick="downloadPdf()" class="flex items-center justify-center space-x-2 sm:space-x-3 bg-[#61063B] hover:bg-[#7a0849] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold transition-all duration-200 hover:scale-105 shadow-lg text-sm sm:text-base">
                                         <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                                         </svg>
@@ -289,30 +289,30 @@ function getYear(dateString: string) {
             <div class="container mx-auto px-4 xl:px-0 relative z-10">
                 <!-- Breadcrumb -->
                 <div class="mb-4 sm:mb-6 lg:mb-8 animate-fade-in">
-                    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 transition-colors duration-300">
-                        <a href="/home" class="hover:text-msu-blue dark:hover:text-yellow-300 transition-colors">Home</a> / 
-                        <a href="/publications" class="hover:text-msu-blue dark:hover:text-yellow-300 transition-colors">Publications</a> / 
-                        <span class="text-msu-blue dark:text-yellow-300 font-semibold">KAWASA</span>
+                    <p class="text-sm sm:text-base text-gray-700 dark:text-gray-300 transition-colors duration-300">
+                        <a href="/home" class="hover:text-[#61063B] dark:hover:text-white transition-colors">Home</a> / 
+                        <a href="/publications" class="hover:text-[#61063B] dark:hover:text-white transition-colors">Publications</a> / 
+                        <span class="text-[#61063B] dark:text-white font-semibold">KAWASA</span>
                     </p>
                 </div>
 
                 <!-- Hero Content -->
                 <div class="text-center mb-8 sm:mb-12">
                     <div class="inline-block mb-4 sm:mb-6 animate-bounce-slow">
-                        <div class="bg-gradient-to-r from-msu-blue to-msu-deep-ocean text-white px-6 py-2 rounded-full text-sm font-bold shadow-xl">
+                        <div class="bg-gradient-to-r from-[#61063B] to-[#7a0849] text-white px-6 py-2 rounded-full text-sm font-bold shadow-xl">
                             ✨ Student Excellence Repository
                         </div>
                     </div>
                     
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black mb-4 sm:mb-6 animate-slide-up">
-                        <span class="bg-gradient-to-r from-msu-blue via-msu-dark-blue to-msu-deep-ocean bg-clip-text text-transparent">
+                        <span class="bg-gradient-to-r from-[#61063B] via-[#7a0849] to-[#61063B] bg-clip-text text-transparent">
                             KAWASA
                         </span>
                     </h1>
                     
-                    <div class="w-20 sm:w-24 lg:w-32 h-1.5 sm:h-2 bg-gradient-to-r from-msu-blue to-msu-deep-ocean mx-auto mb-4 sm:mb-6 rounded-full transition-colors duration-300 animate-slide-up" style="animation-delay: 0.1s;"></div>
+                    <div class="w-20 sm:w-24 lg:w-32 h-1.5 sm:h-2 bg-gradient-to-r from-[#61063B] to-[#7a0849] mx-auto mb-4 sm:mb-6 rounded-full transition-colors duration-300 animate-slide-up" style="animation-delay: 0.1s;"></div>
                     
-                    <p class="text-base sm:text-lg lg:text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0 transition-colors duration-300 animate-slide-up" style="animation-delay: 0.2s;">
+                    <p class="text-base sm:text-lg lg:text-xl text-gray-900 dark:text-gray-200 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0 transition-colors duration-300 animate-slide-up" style="animation-delay: 0.2s;">
                         Empowering Student Research & Creative Excellence at MSU Tawi-Tawi College of Technology and Oceanography
                     </p>
                 </div>
@@ -327,7 +327,7 @@ function getYear(dateString: string) {
                     <div class="w-full lg:w-1/2">
                         <div class="relative group overflow-hidden rounded-2xl shadow-2xl max-w-md mx-auto lg:max-w-none transform transition-all duration-500 hover:scale-[1.02]">
                             <!-- Placeholder with gradient -->
-                            <div class="aspect-[3/4] bg-gradient-to-br from-msu-blue via-msu-dark-blue to-msu-deep-ocean flex items-center justify-center">
+                            <div class="aspect-[3/4] bg-gradient-to-br from-[#61063B] via-[#7a0849] to-[#61063B] flex items-center justify-center">
                                 <div class="text-center text-white p-8">
                                     <svg class="w-24 h-24 mx-auto mb-4 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
@@ -335,13 +335,13 @@ function getYear(dateString: string) {
                                     <h3 class="text-2xl font-bold">{latestPublication.title}</h3>
                             </div>
                             </div>
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                                 <div class="text-white">
                                     <h3 class="text-xl font-bold mb-2">{latestPublication.title}</h3>
                                     <p class="text-sm">Click to view publication</p>
                                 </div>
                             </div>
-                            <div class="absolute top-4 right-4 bg-msu-main-color text-white font-bold px-4 py-2 rounded-full text-xs sm:text-sm shadow-lg">
+                            <div class="absolute top-4 right-4 bg-[#61063B] text-white font-bold px-4 py-2 rounded-full text-xs sm:text-sm shadow-lg">
                                 Latest Publication
                             </div>
                         </div>
@@ -350,51 +350,51 @@ function getYear(dateString: string) {
                     <!-- Publication Details -->
                     <div class="w-full lg:w-1/2">
                         <div class="bg-white dark:bg-gray-900 p-6 sm:p-8 lg:p-10 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 transition-colors duration-300">
-                            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-msu-main-color dark:text-yellow-300 mb-4 sm:mb-6 transition-colors duration-300">
+                            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black text-[#61063B] dark:text-white mb-4 sm:mb-6 transition-colors duration-300">
                                 {latestPublication.title}
                             </h2>
                             
                             <!-- Author Info -->
                             <div class="flex items-center space-x-3 mb-4 sm:mb-6">
-                                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-msu-blue to-msu-deep-ocean flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                                <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-[#61063B] to-[#7a0849] flex items-center justify-center text-white font-bold text-lg shadow-lg">
                                     {latestPublication.author.split(' ').map(n => n[0]).join('')}
                                 </div>
                                 <div>
-                                    <p class="font-bold text-gray-800 dark:text-white text-sm sm:text-base">{latestPublication.author}</p>
-                                    <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400">{latestPublication.program}</p>
+                                    <p class="font-bold text-gray-900 dark:text-white text-sm sm:text-base">{latestPublication.author}</p>
+                                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">{latestPublication.program}</p>
                                 </div>
                             </div>
                             
                             <!-- Meta Info -->
                             <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-                                <span class="bg-msu-blue/10 dark:bg-yellow-400/20 text-msu-main-color dark:text-yellow-300 px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-colors duration-300">
+                                <span class="bg-[#61063B]/10 dark:bg-[#61063B]/30 text-[#61063B] dark:text-white px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-colors duration-300">
                                     {latestPublication.year}
                                 </span>
-                                <span class="bg-msu-gold/10 dark:bg-yellow-400/20 text-msu-main-color dark:text-yellow-300 px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-colors duration-300">
+                                <span class="bg-[#61063B]/10 dark:bg-[#61063B]/30 text-[#61063B] dark:text-white px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-colors duration-300">
                                     {latestPublication.category}
                                 </span>
-                                <span class="bg-msu-deep-ocean/10 dark:bg-yellow-400/20 text-msu-main-color dark:text-yellow-300 px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-colors duration-300">
+                                <span class="bg-[#61063B]/10 dark:bg-[#61063B]/30 text-[#61063B] dark:text-white px-3 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-colors duration-300">
                                     {latestPublication.semester}
                                 </span>
                             </div>
                             
                             <!-- Stats -->
                             <div class="grid grid-cols-3 gap-3 mb-6 sm:mb-8">
-                                <div class="text-center p-3 bg-gradient-to-br from-blue-50 to-gray-50 dark:from-blue-900/20 dark:to-gray-800/20 rounded-xl border border-blue-100 dark:border-blue-800">
-                                    <div class="text-xl sm:text-2xl font-black text-msu-blue dark:text-blue-400">{latestPublication.views}</div>
-                                    <div class="text-xs text-gray-600 dark:text-gray-400 font-medium">Views</div>
+                                <div class="text-center p-3 bg-gradient-to-br from-gray-50 to-white dark:from-gray-800/50 dark:to-gray-900/50 rounded-xl border border-gray-200 dark:border-gray-700">
+                                    <div class="text-xl sm:text-2xl font-black text-[#61063B] dark:text-white">{latestPublication.views}</div>
+                                    <div class="text-xs text-gray-700 dark:text-gray-300 font-medium">Views</div>
                                 </div>
-                                <div class="text-center p-3 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-800/20 dark:to-blue-900/20 rounded-xl border border-gray-100 dark:border-gray-700">
-                                    <div class="text-xl sm:text-2xl font-black text-msu-dark-blue dark:text-blue-300">{latestPublication.citations}</div>
-                                    <div class="text-xs text-gray-600 dark:text-gray-400 font-medium">Citations</div>
+                                <div class="text-center p-3 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900/50 dark:to-gray-800/50 rounded-xl border border-gray-200 dark:border-gray-700">
+                                    <div class="text-xl sm:text-2xl font-black text-[#61063B] dark:text-white">{latestPublication.citations}</div>
+                                    <div class="text-xs text-gray-700 dark:text-gray-300 font-medium">Citations</div>
                                 </div>
-                                <div class="text-center p-3 bg-gradient-to-br from-blue-50 to-gray-50 dark:from-blue-900/20 dark:to-gray-800/20 rounded-xl border border-blue-100 dark:border-blue-800">
-                                    <div class="text-xl sm:text-2xl font-black text-msu-deep-ocean dark:text-blue-400">{latestPublication.downloads}</div>
-                                    <div class="text-xs text-gray-600 dark:text-gray-400 font-medium">Downloads</div>
+                                <div class="text-center p-3 bg-gradient-to-br from-gray-50 to-white dark:from-gray-800/50 dark:to-gray-900/50 rounded-xl border border-gray-200 dark:border-gray-700">
+                                    <div class="text-xl sm:text-2xl font-black text-[#61063B] dark:text-white">{latestPublication.downloads}</div>
+                                    <div class="text-xs text-gray-700 dark:text-gray-300 font-medium">Downloads</div>
                                 </div>
                             </div>
                             
-                            <p class="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-6 sm:mb-8 leading-relaxed transition-colors duration-300">
+                            <p class="text-sm sm:text-base text-gray-700 dark:text-gray-300 mb-6 sm:mb-8 leading-relaxed transition-colors duration-300">
                                 {latestPublication.abstract}
                             </p>
                             
@@ -404,7 +404,7 @@ function getYear(dateString: string) {
                                     id="viewLatestPDF"
                                     data-pdf-url={latestPublication.file.asset.url}
                                     data-title={latestPublication.title}
-                                    class="inline-flex items-center justify-center bg-msu-main-color hover:bg-msu-deep-ocean text-white font-bold py-3 sm:py-3.5 px-5 sm:px-7 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl text-sm sm:text-base"
+                                    class="inline-flex items-center justify-center bg-[#61063B] hover:bg-[#7a0849] text-white font-bold py-3 sm:py-3.5 px-5 sm:px-7 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-xl text-sm sm:text-base"
                                 >
                                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -416,7 +416,7 @@ function getYear(dateString: string) {
                                     href={latestPublication.file.asset.url} 
                                     target="_blank" 
                                     rel="noopener noreferrer"
-                                    class="inline-flex items-center justify-center bg-white dark:bg-gray-800 border-2 border-msu-blue text-msu-blue dark:text-blue-400 hover:bg-msu-blue/5 dark:hover:bg-gray-700 font-semibold py-3 sm:py-3.5 px-5 sm:px-7 rounded-xl shadow-md transform transition-all duration-300 hover:scale-105 text-sm sm:text-base"
+                                    class="inline-flex items-center justify-center bg-white dark:bg-gray-800 border-2 border-[#61063B] text-[#61063B] dark:text-white hover:bg-[#61063B]/5 dark:hover:bg-gray-700 font-semibold py-3 sm:py-3.5 px-5 sm:px-7 rounded-xl shadow-md transform transition-all duration-300 hover:scale-105 text-sm sm:text-base"
                                 >
                                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
@@ -438,7 +438,7 @@ function getYear(dateString: string) {
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
                         <!-- Year Filter -->
                         <div class="relative">
-                            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            <label class="block text-sm font-semibold text-gray-900 dark:text-gray-200 mb-2">
                                 <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                 </svg>
@@ -454,7 +454,7 @@ function getYear(dateString: string) {
 
                         <!-- Category Filter -->
                         <div class="relative">
-                            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            <label class="block text-sm font-semibold text-gray-900 dark:text-gray-200 mb-2">
                                 <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
                             </svg>
@@ -469,7 +469,7 @@ function getYear(dateString: string) {
 
                         <!-- Search Input -->
                         <div class="relative">
-                            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                            <label class="block text-sm font-semibold text-gray-900 dark:text-gray-200 mb-2">
                                 <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                 </svg>
@@ -487,10 +487,10 @@ function getYear(dateString: string) {
 
                 <!-- Section Header -->
                 <div class="text-center mb-8 sm:mb-10 lg:mb-12">
-                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-msu-main-color dark:text-yellow-300 mb-4 transition-colors duration-300">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-[#61063B] dark:text-white mb-4 transition-colors duration-300">
                         Publications Archive
                     </h2>
-                    <div class="w-24 sm:w-32 h-1.5 sm:h-2 bg-msu-deep-ocean dark:bg-yellow-400 mx-auto rounded-full transition-colors duration-300"></div>
+                    <div class="w-24 sm:w-32 h-1.5 sm:h-2 bg-[#61063B] dark:bg-white mx-auto rounded-full transition-colors duration-300"></div>
                 </div>
 
                 <!-- Publications Grid -->
@@ -505,15 +505,15 @@ function getYear(dateString: string) {
                             data-content={pub.abstract}
                         >
                             <!-- Image -->
-                            <div class="relative h-48 sm:h-56 lg:h-64 overflow-hidden bg-gradient-to-br from-msu-blue/30 via-msu-dark-blue/30 to-msu-deep-ocean/30">
+                            <div class="relative h-48 sm:h-56 lg:h-64 overflow-hidden bg-gradient-to-br from-[#61063B]/30 via-[#7a0849]/30 to-[#61063B]/30">
                                 <div class="absolute inset-0 flex items-center justify-center">
-                                    <svg class="w-20 h-20 text-msu-blue/20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-20 h-20 text-[#61063B]/20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                                     </svg>
                                 </div>
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 sm:p-5">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 sm:p-5">
                                     <button 
-                                        class="view-pdf-btn w-full inline-flex items-center justify-center bg-msu-main-color hover:bg-msu-deep-ocean text-white font-semibold py-2.5 px-4 rounded-xl transition-all duration-300 text-sm"
+                                        class="view-pdf-btn w-full inline-flex items-center justify-center bg-[#61063B] hover:bg-[#7a0849] text-white font-semibold py-2.5 px-4 rounded-xl transition-all duration-300 text-sm"
                                         data-pdf-url={pub.file.asset.url}
                                         data-title={pub.title}
                                     >
@@ -524,40 +524,40 @@ function getYear(dateString: string) {
                                         View PDF
                                     </button>
                                 </div>
-                                <div class="absolute top-3 right-3 bg-msu-main-color text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+                                <div class="absolute top-3 right-3 bg-[#61063B] text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
                                     {pub.category}
                             </div>
                             </div>
                             
                             <!-- Content -->
                             <div class="p-5 sm:p-6">
-                                <h3 class="text-lg sm:text-xl font-bold text-gray-800 dark:text-white mb-3 line-clamp-2 group-hover:text-msu-blue dark:group-hover:text-yellow-300 transition-all duration-300">
+                                <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3 line-clamp-2 group-hover:text-[#61063B] dark:group-hover:text-white transition-all duration-300">
                                     {pub.title}
                                 </h3>
                                 
                                 <!-- Author -->
                                 <div class="flex items-center space-x-2 mb-3">
-                                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-msu-blue to-msu-deep-ocean flex items-center justify-center text-white font-bold text-xs shadow">
+                                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#61063B] to-[#7a0849] flex items-center justify-center text-white font-bold text-xs shadow">
                                         {pub.author.split(' ').map(n => n[0]).join('')}
                                     </div>
                                     <div>
-                                        <p class="text-sm font-semibold text-gray-800 dark:text-white">{pub.author}</p>
-                                        <p class="text-xs text-gray-500 dark:text-gray-400">{pub.program}</p>
+                                        <p class="text-sm font-semibold text-gray-900 dark:text-white">{pub.author}</p>
+                                        <p class="text-xs text-gray-600 dark:text-gray-400">{pub.program}</p>
                                     </div>
                                 </div>
                                 
-                                <p class="text-sm text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
+                                <p class="text-sm text-gray-700 dark:text-gray-300 mb-4 line-clamp-2">
                                     {pub.abstract}
                                 </p>
                                 
                                 <!-- Meta -->
                                 <div class="flex items-center justify-between text-xs sm:text-sm">
                                     <div class="flex items-center space-x-2">
-                                        <span class="bg-msu-blue/10 dark:bg-yellow-400/20 text-msu-main-color dark:text-yellow-300 px-2.5 py-1 rounded-full font-semibold">
+                                        <span class="bg-[#61063B]/10 dark:bg-[#61063B]/30 text-[#61063B] dark:text-white px-2.5 py-1 rounded-full font-semibold">
                                             {pub.year}
                                         </span>
                                     </div>
-                                    <div class="flex items-center space-x-1 text-gray-500 dark:text-gray-400">
+                                    <div class="flex items-center space-x-1 text-gray-700 dark:text-gray-300">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
@@ -573,7 +573,7 @@ function getYear(dateString: string) {
                 <!-- Pagination -->
                 <div class="flex justify-center">
                     <div id="pagination" class="flex items-center space-x-2">
-                        <button id="prevPage" class="w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 rounded-xl transition-all hover:bg-msu-blue hover:text-white hover:border-msu-blue disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white dark:disabled:hover:bg-gray-800 disabled:hover:text-gray-600 dark:disabled:hover:text-gray-400 disabled:hover:border-gray-200 dark:disabled:hover:border-gray-700" disabled>
+                        <button id="prevPage" class="w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-200 rounded-xl transition-all hover:bg-[#61063B] hover:text-white hover:border-[#61063B] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white dark:disabled:hover:bg-gray-800 disabled:hover:text-gray-900 dark:disabled:hover:text-gray-200 disabled:hover:border-gray-200 dark:disabled:hover:border-gray-700" disabled>
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                             </svg>
@@ -583,7 +583,7 @@ function getYear(dateString: string) {
                             <!-- Page numbers will be dynamically inserted here -->
                         </div>
 
-                        <button id="nextPage" class="w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-400 rounded-xl transition-all hover:bg-msu-blue hover:text-white hover:border-msu-blue disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white dark:disabled:hover:bg-gray-800 disabled:hover:text-gray-600 dark:disabled:hover:text-gray-400 disabled:hover:border-gray-200 dark:disabled:hover:border-gray-700">
+                        <button id="nextPage" class="w-10 h-10 flex items-center justify-center bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-200 rounded-xl transition-all hover:bg-[#61063B] hover:text-white hover:border-[#61063B] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white dark:disabled:hover:bg-gray-800 disabled:hover:text-gray-900 dark:disabled:hover:text-gray-200 disabled:hover:border-gray-200 dark:disabled:hover:border-gray-700">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                             </svg>
@@ -1013,7 +1013,7 @@ function getYear(dateString: string) {
                     // Add hover effect
                     pageButton.addEventListener('mouseenter', () => {
                         if (currentPage !== pageNumber) {
-                            pageButton.style.backgroundColor = '#03045e';
+                            pageButton.style.backgroundColor = '#61063B';
                             pageButton.style.color = '#ffffff';
                         }
                     });
@@ -1073,11 +1073,13 @@ function getYear(dateString: string) {
             /* CSS Variables */
             :root {
                 --msu-deep-ocean: #61063B;
-                --msu-main-color: #03045e;
-                --msu-blue: #03045e;
-                --msu-dark-blue: #0C1C59;
+                --msu-main-color: #61063B;
+                --msu-blue: #61063B;
+                --msu-dark-blue: #7a0849;
                 --msu-gold: #F7D93C;
                 --msu-light-blue: #E6F2FF;
+                --msu-white: #ffffff;
+                --msu-black: #000000;
             }
 
             /* Animations */
@@ -1122,7 +1124,7 @@ function getYear(dateString: string) {
             }
 
             .kawasa-filter-dropdown:hover {
-                border-color: var(--msu-blue);
+                border-color: var(--msu-deep-ocean);
             }
 
             /* Line clamp utilities */
@@ -1161,12 +1163,12 @@ function getYear(dateString: string) {
             
             #pdfCanvas, #nextPdfCanvas {
                 transition: all 0.3s ease-in-out;
-                border: 2px solid rgba(0, 0, 0, 0.1);
+                border: 2px solid rgba(0, 0, 0, 0.2);
                 box-shadow: 
-                    0 20px 40px -10px rgba(0, 0, 0, 0.15),
-                    0 0 0 1px rgba(255, 255, 255, 0.5);
+                    0 20px 40px -10px rgba(97, 6, 59, 0.2),
+                    0 0 0 1px rgba(255, 255, 255, 0.8);
                 border-radius: 12px;
-                background: white;
+                background: #ffffff;
                 max-width: 100%;
                 max-height: 100%;
                 width: auto;
@@ -1185,7 +1187,7 @@ function getYear(dateString: string) {
             }
 
             ::-webkit-scrollbar-thumb {
-                background: linear-gradient(135deg, var(--msu-main-color), var(--msu-deep-ocean));
+                background: linear-gradient(135deg, var(--msu-deep-ocean), var(--msu-dark-blue));
                 border-radius: 6px;
             }
 

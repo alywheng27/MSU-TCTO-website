@@ -75,7 +75,7 @@ export const navigationConfig = {
       { label: "Gazettes", href: "/publications/gazette" },
       { label: "Bidding", href: "/bidding" },
       { label: "Annual Reports", href: "/publications/annual-reports" },
-      { label: "KAWASA Publications", href: "/underprocess" },
+      { label: "KAWASA Publications", href: "/publications/ KAWASA" },
     ]
   },
 

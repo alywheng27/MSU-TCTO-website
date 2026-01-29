@@ -410,11 +410,12 @@ const uniqueQuarters = ['All', 'January', 'February', 'March', 'April','May','Ju
                             data-title={gazette.title}
                             data-content={gazette.body[0].children[0].text}
                         >
-                            <div class="relative group h-48 sm:h-56 lg:h-64 overflow-hidden">
+                            <div class="relative group h-80 sm:h-96 lg:h-[28rem] xl:h-[32rem] overflow-hidden bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
                                 <img 
                                     src={gazette.mainImage.asset.url} 
-                                    class="w-full h-full object-cover transform transition-all duration-500 group-hover:scale-110"
+                                    class="w-full h-full object-contain transform transition-all duration-500 group-hover:scale-105"
                                     alt={gazette.title}
+                                    loading="lazy"
                                 />
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3 sm:p-4">
                                     <button 

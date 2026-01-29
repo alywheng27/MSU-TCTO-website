@@ -23,6 +23,97 @@ import { getCASPrograms } from '../../api/api.jsx';
 
 
 const currentPath = Astro.url.pathname;
+const site = 'https://msutcto.edu.ph';
+// Faculty id -> { name, image } for Open Graph / Messenger / social share preview
+const FACULTY_SHARE_MAP: Record<string, { name: string; image: string }> = {
+	lee: { name: 'Roddalyn Attani Lee', image: '/images/cas/Profile/msufaculty.png' },
+	largon: { name: 'Mona Isada M. Largon', image: '/images/cas/Profile/msufaculty.png' },
+	edubos: { name: 'Prof. Jerimy Invierno Edubos, Ph.D.', image: '/images/cas/Profile/msufaculty.png' },
+	landa: { name: 'Jonnairah Shad Landa', image: '/images/cas/Profile/msufaculty.png' },
+	miguel: { name: 'Assistant Prof. Farhata S. Miguel', image: '/images/cas/Profile/msufaculty.png' },
+	diaz: { name: 'Assistant Prof. Jean Saavedra Diaz', image: '/images/cas/Profile/msufaculty.png' },
+	les: { name: 'Nabeer Sages Les', image: '/images/cas/Profile/msufaculty.png' },
+	rajk: { name: 'Jeffrey Ann Rajk', image: '/images/cas/Profile/msufaculty.png' },
+	kamson: { name: 'Dayang Jale Kamson', image: '/images/cas/Profile/msufaculty.png' },
+	palaguddin: { name: 'Assistant Prof. Dovid Jarnoldin Palaguddin', image: '/images/cas/Profile/msufaculty.png' },
+	sameraga: { name: 'Rocher Akod Sameraga', image: '/images/cas/Profile/msufaculty.png' },
+	walima: { name: 'Prof. Aradell Alagasi Walima, Ph.D.', image: '/images/cas/Profile/msufaculty.png' },
+	abdulla: { name: 'Assistant Prof. Rolan Sumaani Abdulla', image: '/images/cas/Profile/msufaculty.png' },
+	kamlian: { name: 'Associate Prof. Dayang Talib Kamlian', image: '/images/cas/Profile/KAMLIAN.png' },
+	laja: { name: 'Associate Prof. Nurbarain Sugala Laja', image: '/images/cas/Profile/LAJA.png' },
+	langoh: { name: 'Prof. Mona Froida Matolo Langoh, Ph.D.', image: '/images/cas/Profile/LANGOH.png' },
+	larida: { name: 'Jonalyn Shaid Larida', image: '/images/cas/Profile/LARIDA.png' },
+	miguel2: { name: 'Assistant Prof. Tarhata S. Miguel', image: '/images/cas/Profile/MIGUEL.png' },
+	olaer: { name: 'Assistant Prof. Jo-an Salaveria Olaer', image: '/images/cas/Profile/OLAER.png' },
+	rajik: { name: 'Associate Prof. Jeffrey Alih Rajik', image: '/images/cas/Profile/RAJIK.png' },
+	salapuddin: { name: 'Assistant Prof. Conrad Jainuddin Salapuddin', image: '/images/cas/Profile/SALAPUDDIN.png' },
+	samaniego: { name: 'Rachel Alawi Samaniego', image: '/images/cas/Profile/SAMANIEGO.png' },
+	wellms: { name: 'Prof. Anabel Alagasi Wellms, Ph.D.', image: '/images/cas/Profile/Wellms.png' },
+	abdella: { name: 'Assistant Prof. Roben Suwarani Abdella', image: '/images/cas/Profile/ABDELLA.png' },
+	abdul: { name: 'Associate Prof. Glenda Orozco Abdul', image: '/images/cas/Profile/ABDUL.png' },
+	bakun: { name: 'Associate Prof. Clarisse Joy Daham Bakun', image: '/images/cas/Profile/BAKUN.png' },
+	dino: { name: 'Assistant Prof. Nelson Singson Dino', image: '/images/cas/Profile/DINO.png' },
+	esmael: { name: 'Mirra Edora Asaad Esmael', image: '/images/cas/Profile/ESMAEL.png' },
+	hashim: { name: 'Associate Prof. Charity Joy Bayle Hashim', image: '/images/cas/Profile/HASHIM.png' },
+	jalil: { name: 'Ruhil Malinao Jalil', image: '/images/cas/Profile/JALIL.png' },
+	jumsali: { name: 'Myrnahil Hashim Jumsali', image: '/images/cas/Profile/JUMSALI.png' },
+	mama: { name: 'Associate Prof. Aly Lagunda Mama', image: '/images/cas/Profile/MAMA.png' },
+	olmodo: { name: 'Chamberlain Dablo Olmedo', image: '/images/cas/Profile/OLMEDO.png' },
+	AmiruddinRajik: { name: 'Associate Prof. Bayah Jaujali Amiruddin-Rajik', image: '/images/cas/Profile/AMIRUDDIN-RAJIK.png' },
+	artes: { name: 'Associate Prof.Rosalio Gaid Artes, Jr.', image: '/images/cas/Profile/msufaculty.png' },
+	fabillar: { name: 'Associate Prof. Edwin Bello Fabillar', image: '/images/cas/Profile/FABILLAR.png' },
+	hamja: { name: 'Prof. Jamil Julhijiri Hamja', image: '/images/cas/Profile/HAMJA.png' },
+	hassan: { name: 'Prof. Javier Abdurajan Hassan', image: '/images/cas/Profile/HASSAN.png' },
+	'jal-usman': { name: 'Ebni Atiulla Jal-Usman', image: '/images/cas/Profile/JAL-USMAN.png' },
+	kamdon: { name: 'Associate Prof. Sisteta Uy Kamdon', image: '/images/cas/Profile/KAMDON.png' },
+	laja2: { name: 'Associate Prof. Amy Anqui Laja', image: '/images/cas/Profile/LAJA (2).png' },
+	laja3: { name: 'Prof. Ladznar Sahali Laja, Ph.D.', image: '/images/cas/Profile/LAJA L.png' },
+	langamin: { name: 'Associate Prof. Danilo Galvez Langamin', image: '/images/cas/Profile/LANGAMIN (2).png' },
+	langamin2: { name: 'Associate Prof. Mercedita Aglosolos Langamin', image: '/images/cas/Profile/LANGAMIN.png' },
+	mohammad: { name: 'Associate Prof.Nurijam Hanna Mohammad Mohammad', image: '/images/cas/Profile/MOHAMMAD.png' },
+	nads: { name: 'Assistant Prof. Azman Akuk Nads', image: '/images/cas/Profile/NADS.png' },
+	pon: { name: 'Keith Einstein Remonde Pon', image: '/images/cas/Profile/PON.png' },
+	rasid: { name: 'Prof. Regimar Adan Rasid, Ph.D.', image: '/images/cas/Profile/RASID.png' },
+	salim: { name: 'Associate Prof. Jeffrey Imer Coronado Salim', image: '/images/cas/Profile/SALIM.png' },
+	sallil: { name: 'Associate Prof.Ummar Asani Sallil', image: '/images/cas/Profile/SALLIL.png' },
+	bernado: { name: 'Associate Prof. Astridin Aspani Bernado', image: '/images/cas/Profile/BERNADO.png' },
+	abdulhamiid: { name: 'Nurshima Janang Abdulhamiid', image: '/images/cas/Profile/ABDULHAMID.png' },
+	romero: { name: 'Assistant Prof. Rafael Carin Romero', image: '/images/cas/Profile/ROMERO.png' },
+	celerian: { name: 'Assistant Prof. Ma. Angelica Esguerra Celerian', image: '/images/cas/Profile/CELERIAN.png' },
+	talal: { name: 'Associate Prof. Nasiff Saro Talal', image: '/images/cas/Profile/TALAL.png' },
+	eldani: { name: 'Associate Prof. Abdulhamid A. Eldani', image: '/images/cas/Profile/ELDANI.png' },
+	bation: { name: 'Mr. Abel Gumera Bation', image: '/images/cas/Profile/BATIONs.png' },
+	tambihasan: { name: 'Assistant Prof. Ajilma Majid Tambihasan', image: '/images/cas/Profile/TAMBIHASAN.png' },
+	leematolo: { name: 'Associate Prof. Al-Haniff Lee Matolo', image: '/images/cas/Profile/MATOLO.png' },
+	majinji: { name: 'Associate Prof.Alzie Abdulgaful Majinji', image: '/images/cas/Profile/MAJINJI.png' },
+	sabal: { name: 'Associate Prof. Alshadat Bayo Sabal', image: '/images/cas/Profile/SABAL.png' },
+	talipan: { name: 'Carolyn Nur Talipan', image: '/images/cas/Profile/CAROLYN (1).png' },
+	ondo: { name: 'Assistant Prof. Darwisa Sali Ondo', image: '/images/cas/Profile/ONDO.png' },
+	adaro: { name: 'Diolindo Orong  Adaro', image: '/images/cas/Profile/ADARO.png' },
+	miguel_ibrahim: { name: 'Associate Prof. Ibrahim Sahidjun Miguel', image: '/images/cas/Profile/MIGUEL (2).png' },
+	matolo: { name: 'Associate Prof.Mylene Capuno Matolo', image: '/images/cas/Profile/MATOLO, M.png' },
+	halun: { name: 'Prof. Zulfikarl Bartilad Halun, DPA', image: '/images/cas/Profile/HALUN.png' },
+	sabdul: { name: 'Alsadjaik Ytang Sabdul', image: '/images/cas/Profile/SABDUL.png' },
+	bacol: { name: 'Ariel Pajela Bacol', image: '/images/cas/Profile/BACOL.png' },
+	talandig: { name: 'Assistant Prof. Datu Moden C. Talandig', image: '/images/cas/Profile/TALANDIG.png' },
+	muyong: { name: 'Kaisher Bangali Muyong', image: '/images/cas/Profile/MUYONG.png' },
+	asis_omar: { name: 'Assistant Prof. Madzween Joy Kaibing De Asis-Omar', image: '/images/cas/Profile/DE ASIS.png' },
+	turmindig: { name: 'Morshed Kunakon Tumindig', image: '/images/cas/Profile/TUMINDIG.png' },
+	eldani_hamida: { name: 'Assistant Prof. Mur-Hamida Sapaih Eldani', image: '/images/cas/Profile/ELDANI (2).png' },
+	abraham: { name: 'Shiernalyn Sabandal Abraham', image: '/images/cas/Profile/ABRAHAM.png' },
+	chua: { name: 'Nikko Devinasflores Chua', image: '/images/cas/Profile/CHUA.png' },
+	muharam: { name: 'Assistant Prof. Rushaida Abdulbaki Muham', image: '/images/cas/Profile/MUHAM.png' },
+	caliat: { name: 'Associate Prof.Calvin Jumawid Caliat', image: '/images/cas/Profile/CALIAT.png' },
+	castro: { name: 'Associate Prof.Lorie Mae Aborque Castro', image: '/images/cas/Profile/CASTRO.png' },
+	ishmael_ticzon: { name: 'Kathleen Montemayor Ishmael-Ticzon', image: '/images/cas/Profile/ISHMAEL-TICZON.png' },
+	ahmad: { name: 'Julhajiri Kasim Ahmad', image: '/images/cas/Profile/AHMAD.png' }
+};
+const profileId = Astro.url.searchParams.get('profile');
+const facultyShare = profileId && FACULTY_SHARE_MAP[profileId] ? FACULTY_SHARE_MAP[profileId] : null;
+const ogImage = facultyShare ? site + facultyShare.image : undefined;
+const ogTitle = facultyShare ? `${facultyShare.name} - MSU-TCTO College of Arts and Sciences` : undefined;
+const ogDescription = facultyShare ? `View ${facultyShare.name}'s profile at MSU-TCTO CAS.` : undefined;
+const ogUrl = profileId ? `${site}/programs/cas?profile=${profileId}` : undefined;
 
 // Fetch COED programs data from Sanity
 let programsData = [];
@@ -97,7 +188,13 @@ try {
 
 
 
-<Layout title="College of Arts and Sciences | MSU-TCTO">
+<Layout
+	title="College of Arts and Sciences | MSU-TCTO"
+	ogImage={ogImage}
+	ogTitle={ogTitle}
+	ogDescription={ogDescription}
+	ogUrl={ogUrl}
+>
 	<main class="font-sans">
 
 		<Navbar path={currentPath} client:visible />
@@ -1498,6 +1595,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
+
+// Share faculty profile
+const SHARE_COLLEGE_NAME = 'College of Arts and Sciences';
+function shareFacultyProfile(facultyId) {
+	// Use ?profile=id so Messenger/Facebook/Twitter crawlers get og:image (faculty photo)
+	const url = typeof window !== 'undefined' ? `${window.location.origin}${window.location.pathname}?profile=${facultyId}` : '';
+	const title = `Faculty Profile - MSU-TCTO ${SHARE_COLLEGE_NAME}`;
+	const text = 'View this faculty profile at MSU-TCTO.';
+	if (typeof navigator !== 'undefined' && navigator.share) {
+		navigator.share({ title, text, url }).catch(() => copyShareLink(url));
+	} else {
+		copyShareLink(url);
+	}
+}
+function copyShareLink(url) {
+	if (typeof navigator === 'undefined' || !navigator.clipboard) return;
+	navigator.clipboard.writeText(url).then(() => {
+		const toast = document.createElement('div');
+		toast.className = 'fixed bottom-4 left-1/2 -translate-x-1/2 bg-msu-maroon text-white px-4 py-2 rounded-lg shadow-lg text-sm font-medium z-[9999] animate-fade-in';
+		toast.textContent = 'Link copied! Share it with anyone.';
+		document.body.appendChild(toast);
+		setTimeout(() => toast.remove(), 2500);
+	});
+}
 
 // Faculty Modal System
 function openFacultyModal(facultyId) {
@@ -3013,6 +3134,10 @@ function openFacultyModal(facultyId) {
 					<h1 class="text-3xl md:text-4xl font-bold text-white mb-2 text-center">${faculty.name}</h1>
 					<p class="text-xl text-gray-200 text-center">${faculty.position}</p>
 					${faculty.rank ? `<p class="text-lg text-gray-300 text-center mt-2">${faculty.rank}</p>` : ''}
+					<button type="button" onclick="event.stopPropagation(); shareFacultyProfile('${facultyId}')" class="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/20 hover:bg-white/30 text-white text-sm font-medium transition-colors" title="Share profile">
+						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684L6 12m2.684-1.316a3 3 0 105.367 2.684L6 12l2.051-2.051m0 0L6 12l2.684-2.684m0 0a3 3 0 105.367-2.684L6 12"></path></svg>
+						Share profile
+					</button>
 				</div>
 			</div>
 			<!-- Content Section -->
@@ -3212,7 +3337,40 @@ function closeFacultyModal() {
 	}, 300);
 }
 
-// Close modal when clicking outside
+// Open faculty modal from URL hash (#faculty-id) or query (?profile=id)
+function openFacultyFromHash() {
+	if (typeof window === 'undefined') return;
+	const hashMatch = window.location.hash.match(/^#faculty-(.+)$/);
+	const queryMatch = typeof URLSearchParams !== 'undefined' && new URLSearchParams(window.location.search).get('profile');
+	const facultyId = hashMatch?.[1] || queryMatch;
+	if (facultyId) {
+		openFacultyModal(facultyId);
+		if (queryMatch && !hashMatch && window.history && window.history.replaceState) {
+			window.history.replaceState(null, '', window.location.pathname + '#faculty-' + facultyId);
+		}
+	}
+}
+document.addEventListener('DOMContentLoaded', function() {
+	openFacultyFromHash();
+	document.querySelectorAll('button[onclick*="openFacultyModal"]').forEach(function(btn) {
+		const match = btn.getAttribute('onclick')?.match(/openFacultyModal\s*\(\s*['"]([^'"]+)['"]\s*\)/);
+		if (!match || btn.parentElement?.classList?.contains('flex')) return;
+		const facultyId = match[1];
+		const wrap = document.createElement('div');
+		wrap.className = 'flex items-center gap-3 flex-wrap';
+		btn.parentNode.insertBefore(wrap, btn);
+		wrap.appendChild(btn);
+		const shareBtn = document.createElement('button');
+		shareBtn.type = 'button';
+		shareBtn.className = 'text-msu-deep-ocean font-medium hover:underline flex items-center gap-1.5 text-sm cursor-pointer share-profile-btn-wrap';
+		shareBtn.title = 'Share profile';
+		shareBtn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684L6 12m2.684-1.316a3 3 0 105.367 2.684L6 12l2.051-2.051m0 0L6 12l2.684-2.684m0 0a3 3 0 105.367-2.684L6 12"></path></svg> Share';
+		shareBtn.onclick = function(e) { e.preventDefault(); shareFacultyProfile(facultyId); };
+		wrap.appendChild(shareBtn);
+	});
+});
+window.addEventListener('hashchange', openFacultyFromHash);
+
 document.getElementById('facultyModal').addEventListener('click', function(e) {
 	if (e.target === this) {
 		closeFacultyModal();
@@ -4103,6 +4261,7 @@ function downloadPdf() {
 }
 
 // Make functions globally accessible
+(window as any).shareFacultyProfile = shareFacultyProfile;
 (window as any).openFacultyModal = openFacultyModal;
 (window as any).closeFacultyModal = closeFacultyModal;
 (window as any).openPersonnelModal = openPersonnelModal;

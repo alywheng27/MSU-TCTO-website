@@ -2,9 +2,22 @@
 import 'normalize.css/normalize.css';
 export interface Props {
   title: string;
+  /** Absolute URL to image for social share (Open Graph / Messenger / Twitter) */
+  ogImage?: string;
+  /** Title for social share preview */
+  ogTitle?: string;
+  /** Description for social share preview */
+  ogDescription?: string;
+  /** Canonical URL for the shared page */
+  ogUrl?: string;
 }
 
-const { title } = Astro.props;
+const { title, ogImage, ogTitle, ogDescription, ogUrl } = Astro.props;
+const site = 'https://msutcto.edu.ph';
+const shareTitle = ogTitle ?? title;
+const shareDescription = ogDescription ?? 'MSU-Tawi-Tawi College of Technology and Oceanography';
+const shareImage = ogImage ?? `${site}/images/msutcto_wordmark_magenta_.png`;
+const shareUrl = ogUrl ?? (typeof Astro.url !== 'undefined' ? new URL(Astro.url.pathname, site).href : site);
 ---
 
 <!DOCTYPE html>
@@ -13,7 +26,7 @@ const { title } = Astro.props;
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="generator" content={Astro.generator} />
-  <link rel="icon" type="image/png" href="/images/Official MSU-TCTO logo-01.png" />
+  <link rel="icon" type="image/png" href="/images/msutcto_wordmark_magenta_.png" />
   <script src="/js/screenshot-protection.js" defer></script>
   <script src="/js/logo-protection.js" defer></script>
   
@@ -21,6 +34,20 @@ const { title } = Astro.props;
   <meta name="facebook-domain-verification" content="63d47sat4plmhjgb73ob4sbrleldy4" />
   
   <title>{title}</title>
+  <!-- Open Graph / Facebook / Messenger -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={shareUrl} />
+  <meta property="og:title" content={shareTitle} />
+  <meta property="og:description" content={shareDescription} />
+  <meta property="og:image" content={shareImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="MSU-TCTO" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={shareTitle} />
+  <meta name="twitter:description" content={shareDescription} />
+  <meta name="twitter:image" content={shareImage} />
   <style>
     /* Modern animation keyframes */
     @keyframes heartbeat {
