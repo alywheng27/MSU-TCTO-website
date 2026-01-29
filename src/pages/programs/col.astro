@@ -23,6 +23,71 @@ import { getCOLPrograms } from '../../api/api.jsx';
 
 
 const currentPath = Astro.url.pathname;
+const site = 'https://msutcto.edu.ph';
+const FACULTY_SHARE_MAP: Record<string, { name: string; image: string }> = {
+	jemsy: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	budlong: { name: 'Prof. Cherry T. Budlong-Alih', image: '/images/coed/Profile/cherry.png' },
+	abubakar: { name: 'Dr. Fatima B. Abubakar, Ed.D.', image: '/images/coed/Profile/msufaculty.png' },
+	colicol: { name: 'Assoc. Prof. Fernigil L. Colicol, PhD', image: '/images/coed/Profile/colicol.png' },
+	nagamora: { name: 'Dr. Fatima B. Abubakar, Ed.D.', image: '/images/coed/Profile/msufaculty.png' },
+	maruhom: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	sanuddin: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	edris: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	jumat: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	panandigan: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	jaafar: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	mama: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	olmedo: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	rajik: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	artes: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	fabillar: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	hamja: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	hassan: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	jalusman: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	kamdon: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	laja: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	langamin: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	mohammad: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	nads: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	pon: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	rasicd: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	salim: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	sallil: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	bernado: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	abdulhamiid: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	romero: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	celerian: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	talal: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	eldani: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	tambihasan: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	matolo: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	majinji: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	sabal: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	talipan: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	ondo: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	adaro: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	halun: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	sabdul: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	bacol: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	talandig: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	muyong: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	deAsisOmar: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	turnindig: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	eldaniMur: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	abraham: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	chua: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	muharam: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	caliat: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	castro: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	ishmaelTiczon: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
+	ahmad: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' }
+};
+const profileId = Astro.url.searchParams.get('profile');
+const facultyShare = profileId && FACULTY_SHARE_MAP[profileId] ? FACULTY_SHARE_MAP[profileId] : null;
+const ogImage = facultyShare ? site + facultyShare.image : undefined;
+const ogTitle = facultyShare ? `${facultyShare.name} - MSU-TCTO College of Law` : undefined;
+const ogDescription = facultyShare ? `View ${facultyShare.name}'s profile at MSU-TCTO COL.` : undefined;
+const ogUrl = profileId ? `${site}/programs/col?profile=${profileId}` : undefined;
 
 // Fetch COED programs data from Sanity
 let programsData = [];
@@ -97,7 +162,13 @@ try {
 
 
 
-<Layout title="College of Law | MSU-TCTO">
+<Layout
+	title="College of Law | MSU-TCTO"
+	ogImage={ogImage}
+	ogTitle={ogTitle}
+	ogDescription={ogDescription}
+	ogUrl={ogUrl}
+>
 	<main class="font-sans">
 
 		<Navbar path={currentPath} client:visible />
@@ -1269,6 +1340,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
+
+// Share faculty profile
+const SHARE_COLLEGE_NAME = 'College of Law';
+function shareFacultyProfile(facultyId) {
+	// Use ?profile=id so Messenger/Facebook/Twitter crawlers get og:image (faculty photo)
+	const url = typeof window !== 'undefined' ? `${window.location.origin}${window.location.pathname}?profile=${facultyId}` : '';
+	const title = `Faculty Profile - MSU-TCTO ${SHARE_COLLEGE_NAME}`;
+	const text = 'View this faculty profile at MSU-TCTO.';
+	if (typeof navigator !== 'undefined' && navigator.share) {
+		navigator.share({ title, text, url }).catch(() => copyShareLink(url));
+	} else {
+		copyShareLink(url);
+	}
+}
+function copyShareLink(url) {
+	if (typeof navigator === 'undefined' || !navigator.clipboard) return;
+	navigator.clipboard.writeText(url).then(() => {
+		const toast = document.createElement('div');
+		toast.className = 'fixed bottom-4 left-1/2 -translate-x-1/2 bg-msu-maroon text-white px-4 py-2 rounded-lg shadow-lg text-sm font-medium z-[9999] animate-fade-in';
+		toast.textContent = 'Link copied! Share it with anyone.';
+		document.body.appendChild(toast);
+		setTimeout(() => toast.remove(), 2500);
+	});
+}
 
 // Faculty Modal System
 function openFacultyModal(facultyId) {
@@ -2669,6 +2764,10 @@ function openFacultyModal(facultyId) {
 					</div>
 					<h1 class="text-3xl md:text-4xl font-bold text-white mb-2 text-center">${faculty.name}</h1>
 					<p class="text-xl text-gray-200 text-center">${faculty.position}</p>
+					<button type="button" onclick="event.stopPropagation(); shareFacultyProfile('${facultyId}')" class="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/20 hover:bg-white/30 text-white text-sm font-medium transition-colors" title="Share profile">
+						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684L6 12m2.684-1.316a3 3 0 105.367 2.684L6 12l2.051-2.051m0 0L6 12l2.684-2.684m0 0a3 3 0 105.367-2.684L6 12"></path></svg>
+						Share profile
+					</button>
 				</div>
 			</div>
 			<!-- Content Section -->
@@ -2860,6 +2959,40 @@ function closeFacultyModal() {
 }
 
 // Close modal when clicking outside
+// Open faculty modal from URL hash (#faculty-id) or query (?profile=id)
+function openFacultyFromHash() {
+	if (typeof window === 'undefined') return;
+	const hashMatch = window.location.hash.match(/^#faculty-(.+)$/);
+	const queryMatch = typeof URLSearchParams !== 'undefined' && new URLSearchParams(window.location.search).get('profile');
+	const facultyId = hashMatch?.[1] || queryMatch;
+	if (facultyId) {
+		openFacultyModal(facultyId);
+		if (queryMatch && !hashMatch && window.history && window.history.replaceState) {
+			window.history.replaceState(null, '', window.location.pathname + '#faculty-' + facultyId);
+		}
+	}
+}
+document.addEventListener('DOMContentLoaded', function() {
+	openFacultyFromHash();
+	document.querySelectorAll('button[onclick*="openFacultyModal"]').forEach(function(btn) {
+		const match = btn.getAttribute('onclick')?.match(/openFacultyModal\s*\(\s*['"]([^'"]+)['"]\s*\)/);
+		if (!match || btn.parentElement?.classList?.contains('flex')) return;
+		const facultyId = match[1];
+		const wrap = document.createElement('div');
+		wrap.className = 'flex items-center gap-3 flex-wrap';
+		btn.parentNode.insertBefore(wrap, btn);
+		wrap.appendChild(btn);
+		const shareBtn = document.createElement('button');
+		shareBtn.type = 'button';
+		shareBtn.className = 'text-msu-deep-ocean font-medium hover:underline flex items-center gap-1.5 text-sm cursor-pointer share-profile-btn-wrap';
+		shareBtn.title = 'Share profile';
+		shareBtn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684L6 12m2.684-1.316a3 3 0 105.367 2.684L6 12l2.051-2.051m0 0L6 12l2.684-2.684m0 0a3 3 0 105.367-2.684L6 12"></path></svg> Share';
+		shareBtn.onclick = function(e) { e.preventDefault(); shareFacultyProfile(facultyId); };
+		wrap.appendChild(shareBtn);
+	});
+});
+window.addEventListener('hashchange', openFacultyFromHash);
+
 document.getElementById('facultyModal').addEventListener('click', function(e) {
 	if (e.target === this) {
 		closeFacultyModal();
@@ -4366,6 +4499,7 @@ function downloadPdf() {
 }
 
 // Make functions globally accessible
+(window as any).shareFacultyProfile = shareFacultyProfile;
 (window as any).openFacultyModal = openFacultyModal;
 (window as any).closeFacultyModal = closeFacultyModal;
 (window as any).openPDFViewer = openPDFViewer;
@@ -11169,7 +11303,8 @@ document.head.appendChild(style);
 <script>
 // Video starts at 0:00:00 and loops at 0:01:14 (74 seconds)
 document.addEventListener('DOMContentLoaded', function() {
-  const heroVideo = document.getElementById('hero-video');
+  const heroVideoEl = document.getElementById('hero-video');
+  const heroVideo = heroVideoEl instanceof HTMLVideoElement ? heroVideoEl : null;
   if (heroVideo) {
     // Ensure video starts at 0:00:00
     heroVideo.currentTime = 0;

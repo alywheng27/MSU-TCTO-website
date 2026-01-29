@@ -9,6 +9,17 @@ const client = createClient({
   useCdn: true
 });
 
+/** Log Sanity/network errors briefly to avoid huge terminal dumps (e.g. ENOTFOUND) */
+function logSanityError(context, err) {
+  const code = err?.code || '';
+  const msg = err?.message || String(err);
+  if (code === 'ENOTFOUND' || code === 'ECONNREFUSED' || code === 'ETIMEDOUT' || msg.includes('getaddrinfo')) {
+    console.warn(`[Sanity] ${context}: ${msg} (${code || 'network'}). Check internet and firewall.`);
+  } else {
+    console.error(`[Sanity] ${context}:`, msg);
+  }
+}
+
 export const imageBuilder = createImageBuilder(useSanityClient());
 
 
@@ -132,20 +143,25 @@ export async function getArticle() {
     const articles = await useSanityClient().fetch(query);
     return Array.isArray(articles) ? articles : [];
   } catch (error) {
-    console.error('Error fetching articles:', error);
+    logSanityError('Error fetching articles', error);
     return [];
   }
 }
 
 export async function getSearchArticleCount(search, category) {
-  let hold = "";
-  if(category != undefined && category != "All") {
-    hold = ` && category._ref in *[_type=="articleCategory" && category=="${category}"]._id`;
-  }
-  const query = groq`*[_type == "article" && title match "*${search}*"${hold}] | order(publishedAt desc){}`;
+  try {
+    let hold = "";
+    if(category != undefined && category != "All") {
+      hold = ` && category._ref in *[_type=="articleCategory" && category=="${category}"]._id`;
+    }
+    const query = groq`*[_type == "article" && title match "*${search}*"${hold}] | order(publishedAt desc){}`;
 
-  const articles = await useSanityClient().fetch(query);
-  return articles;
+    const articles = await useSanityClient().fetch(query);
+    return articles;
+  } catch (error) {
+    logSanityError('Error fetching search article count', error);
+    return [];
+  }
 }
 
 export async function getSearchArticle(search, category, page) {
@@ -201,8 +217,13 @@ export async function getSearchArticle(search, category, page) {
     _createdAt,
   }`;
 
-  const articles = await useSanityClient().fetch(query);
-  return articles;
+  try {
+    const articles = await useSanityClient().fetch(query);
+    return articles;
+  } catch (error) {
+    logSanityError('Error fetching search articles', error);
+    return [];
+  }
 }
 
 // the single, latest document

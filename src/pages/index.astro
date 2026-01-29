@@ -60,9 +60,34 @@ if (testCalendar && testCalendar.length > 0) {
   console.log('Test calendar first event date:', testCalendar[0]?.date);
   console.log('Test calendar first event title:', testCalendar[0]?.title);
 }
+
+// Check if calendar parameter is present for social sharing
+const urlParams = Astro.url.searchParams;
+const isCalendarShare = urlParams.get('calendar') === 'open';
+const siteUrl = Astro.url.origin;
+const currentUrl = `${siteUrl}${Astro.url.pathname}${Astro.url.search}`;
+
+// Set meta tags for calendar sharing
+const pageTitle = isCalendarShare 
+  ? 'MSU–TCTO Academic Calendar AY 2025-2026'
+  : 'MSU | Tawi-Tawi College of Technology and Oceanography';
+const pageDescription = isCalendarShare
+  ? 'Check out the MSU–Tawi-Tawi College of Technology and Oceanography Academic Calendar for Academic Year 2025-2026'
+  : undefined;
+const wordmarkImage = '/images/msutcto_wordmark_magenta_.png';
 ---
 
-<Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
+<Layout 
+  title={pageTitle}
+  description={pageDescription}
+  ogTitle={isCalendarShare ? pageTitle : undefined}
+  ogDescription={isCalendarShare ? pageDescription : undefined}
+  ogImage={isCalendarShare ? wordmarkImage : undefined}
+  ogUrl={isCalendarShare ? currentUrl : undefined}
+  twitterTitle={isCalendarShare ? pageTitle : undefined}
+  twitterDescription={isCalendarShare ? pageDescription : undefined}
+  twitterImage={isCalendarShare ? wordmarkImage : undefined}
+>
     
             <main class="font-sans antialiased text-gray-800 dark:text-white dark:bg-gray-900 leading-normal">
         
@@ -1285,6 +1310,11 @@ if (testCalendar && testCalendar.length > 0) {
                                                     <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">February 18 – February 20, 2026</td>
                                                 </tr>
                                                 <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">9</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Start of Application for graduation</td>
+                                                    <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">February 20 – March 11, 2026</td>
+                                                </tr>
+                                                <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
                                                     <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm font-medium whitespace-nowrap">11</td>
                                                     <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm">Pre-Council Meeting</td>
                                                     <td class="border border-gray-300 dark:border-gray-600 px-2 py-2 sm:px-3 sm:py-2 md:px-4 md:py-3 text-xs sm:text-sm whitespace-nowrap">Friday, February 17, 2026</td>
@@ -2187,6 +2217,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 ["7", "Late Registration with Fines", "January 12 – January 16, 2026"],
                                 ["8", "Change/Add Matriculation & Validation", "January 12 – January 16, 2026"],
                                 ["10", "First Preliminary Examination", "February 18 – February 20, 2026"],
+                                ["9", "Start of Application for Graduation", "February 20 – March 11, 2026"],
                                 ["11", "Pre-Council Meeting", "Friday, February 17, 2026"],
                                 ["12", "Period of Dropping Subjects", "February 6 – March 6, 2026"],
                                 ["13", "Campus Academic Council Meeting", "Thursday, March 12, 2026"],
