@@ -25,7 +25,7 @@ const currentUrl = ogUrl || `${siteUrl}${Astro.url?.pathname || '/'}`;
 // One canonical share image URL (Sanity mainImage) for all platforms - Messenger, Facebook, Twitter, etc.
 const absoluteOgImage = ogImage
   ? (ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage.startsWith('/') ? '' : '/'}${ogImage}`)
-  : `${siteUrl}/images/Official MSU-TCTO logo-01.png`;
+  : `${siteUrl}/images/msutcto_wordmark_magenta_.png`;
 const absoluteTwitterImage = twitterImage
   ? (twitterImage.startsWith('http') ? twitterImage : `${siteUrl}${twitterImage.startsWith('/') ? '' : '/'}${twitterImage}`)
   : absoluteOgImage;
