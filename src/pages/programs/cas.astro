@@ -111,8 +111,8 @@ const FACULTY_SHARE_MAP: Record<string, { name: string; image: string }> = {
 const profileId = Astro.url.searchParams.get('profile');
 const facultyShare = profileId && FACULTY_SHARE_MAP[profileId] ? FACULTY_SHARE_MAP[profileId] : null;
 const ogImage = facultyShare ? site + facultyShare.image : undefined;
-const ogTitle = facultyShare ? `${facultyShare.name} - MSU-TCTO College of Arts and Sciences` : undefined;
-const ogDescription = facultyShare ? `View ${facultyShare.name}'s profile at MSU-TCTO CAS.` : undefined;
+const ogTitle = facultyShare ? `${facultyShare.name} - MSU-TCTO College of Arts and Social Sciences (CASS)` : undefined;
+const ogDescription = facultyShare ? `View ${facultyShare.name}'s profile at MSU-TCTO CASS.` : undefined;
 const ogUrl = profileId ? `${site}/programs/cas?profile=${profileId}` : undefined;
 
 // Fetch COED programs data from Sanity
@@ -189,7 +189,7 @@ try {
 
 
 <Layout
-	title="College of Arts and Sciences | MSU-TCTO"
+	title="College of Arts and Social Sciences (CASS) | MSU-TCTO"
 	ogImage={ogImage}
 	ogTitle={ogTitle}
 	ogDescription={ogDescription}
@@ -215,7 +215,7 @@ try {
 
 					<!-- Fallback image -->
 
-					<!-- Professional CAS Icon -->
+					<!-- Professional CASS Icon -->
 
 					<div class="w-full h-full flex items-center justify-center bg-gradient-to-r from-msu-main-color to-msu-deep-ocean p-8">
 
@@ -378,7 +378,7 @@ try {
 
 					<!-- Enhanced Typography with white text using Poppins font - Mobile Optimized -->
 					<h1 class="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-bold mb-4 sm:mb-6 md:mb-8 leading-tight animate-fadeInUp px-4 text-white" style="font-family: 'Poppins', Arial, sans-serif; font-weight: 400;">
-						College of Arts and Sciences
+						College of Arts and Social Sciences (CASS)
 					</h1>
 
 					<!-- Enhanced subtitle with animated underline - Mobile Optimized -->
@@ -559,7 +559,7 @@ try {
 				<div class="flex items-center justify-between px-5 sm:px-6 py-4 sm:py-5 border-b border-gray-200 bg-gradient-to-r from-msu-main-color/10 to-msu-deep-ocean/10">
 					<div class="space-y-2">
 						<span class="text-xs uppercase tracking-[0.28em] text-msu-deep-ocean/70">Academic Programs</span>
-						<h2 id="departmentProgramsModalTitle" class="text-2xl font-bold text-msu-deep-ocean">College of Arts and Sciences</h2>
+						<h2 id="departmentProgramsModalTitle" class="text-2xl font-bold text-msu-deep-ocean">College of Arts and Social Sciences (CASS)</h2>
 						<div
 							id="departmentProgramsModalSubtitle"
 							class="inline-flex items-center gap-2 rounded-full border border-[#61063B]/20 bg-[#61063B]/10 px-3 py-1 text-sm font-semibold text-[#61063B] shadow-sm transition-opacity duration-200 hidden"
@@ -600,10 +600,10 @@ try {
 							</svg>
 						</div>
 					</div>
-					<h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-[#61063B] dark:text-msu-bgc-color" >About the College of Arts and Sciences</h2>
+					<h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-[#61063B] dark:text-msu-bgc-color" >About the College of Arts and Social Sciences (CASS)</h2>
 					<p class="text-lg sm:text-xl text-msu-main-color dark:text-msu-bgc-color max-w-3xl mx-auto px-4">
 
-						The College of Arts and Sciences (CAS) was established in 1990 as a service college providing quality instruction, research, innovation, development, and extension services. It supports the university's general education and specialized disciplines with inclusive, community-responsive, and future-facing programs, anchored in professional excellence and ethical leadership.
+						The College of Arts and Social Sciences (CASS), formerly the College of Arts and Sciences (CAS), was established in 1990 as a service college providing quality instruction, research, innovation, development, and extension services. It supports the university's general education and specialized disciplines with inclusive, community-responsive, and future-facing programs, anchored in professional excellence and ethical leadership.
 					</p>
 
 				</div>
@@ -616,7 +616,7 @@ try {
 
 						<div class="relative rounded-2xl overflow-hidden shadow-2xl group cursor-pointer h-64 sm:h-80 md:h-96">
 
-							<img src="/images/cas/cas.jpg" alt="CAS Building" 
+							<img src="/images/cas/cas.jpg" alt="CASS Building" 
 								class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image" loading="lazy" />
 							
 
@@ -624,7 +624,7 @@ try {
 
 								<div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
 
-									<h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 md:mb-3">Excellence in Arts and Sciences</h3>
+									<h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 md:mb-3">Excellence in Arts and Social Sciences</h3>
 									<p class="text-gray-200 text-sm sm:text-base md:text-lg">Providing quality education with professional excellence and ethical leadership since 1990</p>
 								</div>
 
@@ -755,7 +755,7 @@ try {
 						<div class="tab-content hidden" id="goal-content">
 							<div class="space-y-6 text-msu-main-color dark:text-msu-bgc-color">
 								<div class="bg-gradient-to-r from-msu-deep-ocean/10 to-transparent p-6 rounded-lg border-l-4 border-msu-deep-ocean">
-									<h4 class="font-bold text-msu-deep-ocean dark:text-msu-bgc-color mb-4 text-xl">CAS Goals</h4>
+									<h4 class="font-bold text-msu-deep-ocean dark:text-msu-bgc-color mb-4 text-xl">CASS Goals</h4>
 								<div class="space-y-4">
 									<div class="flex items-start">
 											<span class="text-msu-deep-ocean font-bold mr-3 mt-1 text-lg">1.</span>
@@ -778,7 +778,7 @@ try {
 						<div class="tab-content hidden" id="objectives-content">
 							<div class="space-y-6 text-msu-main-color dark:text-msu-bgc-color">
 								<div class="bg-gradient-to-r from-msu-deep-ocean/10 to-transparent p-6 rounded-lg border-l-4 border-msu-deep-ocean">
-									<h4 class="font-bold text-msu-deep-ocean dark:text-msu-bgc-color mb-4 text-xl">CAS Objectives</h4>
+									<h4 class="font-bold text-msu-deep-ocean dark:text-msu-bgc-color mb-4 text-xl">CASS Objectives</h4>
 								<div class="space-y-4">
 									<div class="flex items-start">
 											<span class="text-msu-deep-ocean font-bold mr-3 mt-1 text-lg">1.</span>
@@ -819,7 +819,7 @@ try {
 									<h4 class="font-bold text-msu-deep-ocean dark:text-msu-main-color text-lg">Evolution into Dynamic Academic Unit</h4>
 								</div>
 								<p class="text-sm leading-relaxed mb-3">
-									Over the years, CAS evolved into a dynamic academic unit with <strong>nine (9) departments</strong>, each with a specific focus:
+									Over the years, CASS evolved into a dynamic academic unit with <strong>nine (9) departments</strong>, each with a specific focus:
 								</p>
 								<div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
 									<div class="space-y-2">
@@ -968,7 +968,7 @@ try {
 									Commitment to Excellence
 								</h4>
 								<p class="text-sm leading-relaxed text-gray-100">
-									CAS reaffirms its commitment to providing relevant, inclusive, globally competitive education, excelling in research, innovation, development, and extension services that contribute to local and national growth.
+									CASS reaffirms its commitment to providing relevant, inclusive, globally competitive education, excelling in research, innovation, development, and extension services that contribute to local and national growth.
 								</p>
 							</div>
 
@@ -1444,7 +1444,7 @@ try {
 <!-- <section class="py-12 sm:py-16 md:py-20 bg-gray-50 dark:bg-gray-800">
     <div class="container mx-auto px-4 sm:px-6">
         <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold mb-4 text-[#61063B] dark:text-msu-bgc-color">CAS Academic Programs Overview</h2>
+            <h2 class="text-3xl font-bold mb-4 text-[#61063B] dark:text-msu-bgc-color">CASS Academic Programs Overview</h2>
             <p class="text-msu-main-color dark:text-msu-bgc-color max-w-3xl mx-auto">
                 Our comprehensive academic portfolio includes graduate and undergraduate programs designed to prepare students for diverse career opportunities in the fields of Arts and Sciences.
             </p>
@@ -1597,7 +1597,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 // Share faculty profile
-const SHARE_COLLEGE_NAME = 'College of Arts and Sciences';
+const SHARE_COLLEGE_NAME = 'College of Arts and Social Sciences (CASS)';
 function shareFacultyProfile(facultyId) {
 	// Use ?profile=id so Messenger/Facebook/Twitter crawlers get og:image (faculty photo)
 	const url = typeof window !== 'undefined' ? `${window.location.origin}${window.location.pathname}?profile=${facultyId}` : '';
@@ -1668,7 +1668,7 @@ function openFacultyModal(facultyId) {
 			],
 			publications: [],
 			accomplishments: [],
-			description: "Mona Isada M. Largon is the Dean of the College of Arts and Sciences and an Associate Professor V specializing in Development Communication. She holds a Master of Science in Development Communication and Bachelor of Science in Development Communication, and is currently pursuing her Doctor of Philosophy in Development Communication."
+			description: "Mona Isada M. Largon is the Dean of the College of Arts and Social Sciences (CASS) and an Associate Professor V specializing in Development Communication. She holds a Master of Science in Development Communication and Bachelor of Science in Development Communication, and is currently pursuing her Doctor of Philosophy in Development Communication."
 		},
 		edubos: {
 			name: "Prof. Jerimy Invierno Edubos, Ph.D.",
@@ -1688,7 +1688,7 @@ function openFacultyModal(facultyId) {
 			],
 			publications: [],
 			accomplishments: [],
-			description: "Jerimy Invierno Edubos is a Professor V and serves as the Dean of the College of Arts and Sciences. He specializes in Reading, Language, and Literature with extensive expertise in English Language Teaching, holding a Doctor of Philosophy in Education."
+			description: "Jerimy Invierno Edubos is a Professor V and serves as the Dean of the College of Arts and Social Sciences (CASS). He specializes in Reading, Language, and Literature with extensive expertise in English Language Teaching, holding a Doctor of Philosophy in Education."
 		},
 		landa: {
 			name: "Jonnairah Shad Landa",
@@ -1934,9 +1934,9 @@ function openFacultyModal(facultyId) {
 			description: "Jonalyn Shaid Larida is an Instructor I specializing in Linguistics and Literature. She is currently pursuing her Master of English in Applied Linguistics."
 		},
 		miguel2: {
-			name: "Assistant Prof. Tarhata S. Miguel",
-			position: "Faculty",
-			rank: "Assistant Professor IV",
+			name: "Associate Prof. Tarhata S. Miguel",
+			position: "Chairperson, Department of Languages",
+			rank: "Associate Professor",
 			image: "/images/cas/Profile/MIGUEL.png",
 			education: [
 				"Bachelor of Arts in English",
@@ -2518,7 +2518,7 @@ function openFacultyModal(facultyId) {
 		},
 		bernado: {
 			name: "Associate Prof. Astridin Aspani Bernado",
-			position: "Chairperson, Department of History",
+			position: "Associate Professor II",
 			rank: "Associate Professor II",
 			image: "/images/cas/Profile/BERNADO.png",
 			education: [
@@ -2532,7 +2532,7 @@ function openFacultyModal(facultyId) {
 				"The Living Treasures of Tabawan: Unveiling The Sacred Sites And Narratives Of A Resilient Communityasian Journal Of Arts, Culture And Tourism   E-Issn: 2710-5830 | Vol. 7, No. 3, 8-18, 2025  [DOI link: https://Doi.Org/10.55057/Ajact.2025.7.3.2]"
 			],
 			accomplishments: [],
-			description: "Associate Prof. Astridin Aspani Bernado is the Chairperson of the Department of History specializing in History. He holds a Bachelor of Arts in History and Master in History. He has published research on 'The Living Treasures of Tabawan: Unveiling The Sacred Sites And Narratives Of A Resilient Communityasian Journal Of Arts, Culture And Tourism   E-Issn: 2710-5830 | Vol. 7, No. 3, 8-18, 2025.'"
+			description: "Associate Prof. Astridin Aspani Bernado is an Associate Professor II specializing in History. He holds a Bachelor of Arts in History and Master in History. He has published research on 'The Living Treasures of Tabawan: Unveiling The Sacred Sites And Narratives Of A Resilient Communityasian Journal Of Arts, Culture And Tourism   E-Issn: 2710-5830 | Vol. 7, No. 3, 8-18, 2025.'"
 		},
 		abdulhamiid: {
 			name: "Nurshima Janang Abdulhamiid",
@@ -2569,9 +2569,9 @@ function openFacultyModal(facultyId) {
 			description: "Rafael Carin Romero is an Assistant Professor IV specializing in History. He holds a Bachelor of Arts in History and Master in History."
 		},
 		celerian: {
-			name: "Assistant Prof. Ma. Angelica Esguerra Celerian",
-			position: "Faculty",
-			rank: "Assistant Professor IV",
+			name: "Associate Prof. Maria Angelica E. Celerian",
+			position: "Chairperson, Department of History",
+			rank: "Associate Professor",
 			image: "/images/cas/Profile/CELERIAN.png",
 			education: [
 				"Bachelor of Arts in History",
@@ -2742,7 +2742,7 @@ function openFacultyModal(facultyId) {
 			accomplishments: [
 				"Passed the Civil Service Examination in 2017 (Professional/Second Level Eligibility)"
 			],
-			description: "Ma'am. Carolyn N. Talipan, she is a youngest daughter of Mr. and Mrs. Abduraja A. Nur, was botn on February 7, 1992 at Bongao, Tawi-Tawi, currently residing at Pagasinan, Bongao, Tawi-Tawi. As for her professional affiliation, she is a regular faculty member of the Department of Public Administration of the  College of Arts and Sciences (CAS) of MSU-TCTO, she is handling BPA Cources, also she served as on the advisers of Samahan ng Mag-aaral sa Sining at Agham (SAMASA) from 2021 to 2024 and currently an adviser of the Public Administration Students Society (PASS) of the College of Arts and Sciences. and also a Vice President of MSU-TCTO AA Campus-Based, she assumed the President position since the elected President is on his official study leave. "
+			description: "Ma'am. Carolyn N. Talipan, she is a youngest daughter of Mr. and Mrs. Abduraja A. Nur, was botn on February 7, 1992 at Bongao, Tawi-Tawi, currently residing at Pagasinan, Bongao, Tawi-Tawi. As for her professional affiliation, she is a regular faculty member of the Department of Public Administration of the  College of Arts and Social Sciences (CASS) (CAS) of MSU-TCTO, she is handling BPA Cources, also she served as on the advisers of Samahan ng Mag-aaral sa Sining at Agham (SAMASA) from 2021 to 2024 and currently an adviser of the Public Administration Students Society (PASS) of the College of Arts and Social Sciences (CASS). and also a Vice President of MSU-TCTO AA Campus-Based, she assumed the President position since the elected President is on his official study leave. "
 		},
 		ondo: {
 			name: "Assistant Prof. Darwisa Sali Ondo",
@@ -2777,7 +2777,7 @@ function openFacultyModal(facultyId) {
 			],
 			publications: [],
 			accomplishments: [],
-			description: "Sir. Diolindo O. Adaro, is a dedicated educator with a strong academic foundation in Political Science and Public Administration. He is born on August 26, 1987, He from garduated MSU-TCTO with a degree Bachelor of Arts in Political Science (Cum Laude) in 2016 and currently serving as Instructor I at College of Arts and Sciences under the  Public Administration Department. He combined his passion for teaching with a commitment to advancing scholarly inquiry. In 2024, he completed his Master's Degree of Public Administration, Major in Organization and Management, further solidifying his expertise in governance and policy analysis. Now he is actively engaged in research within his filed of specialization, focusing on contemporary challenges in Public Administration and Poltical Systems."
+			description: "Sir. Diolindo O. Adaro, is a dedicated educator with a strong academic foundation in Political Science and Public Administration. He is born on August 26, 1987, He from garduated MSU-TCTO with a degree Bachelor of Arts in Political Science (Cum Laude) in 2016 and currently serving as Instructor I at College of Arts and Social Sciences (CASS) under the  Public Administration Department. He combined his passion for teaching with a commitment to advancing scholarly inquiry. In 2024, he completed his Master's Degree of Public Administration, Major in Organization and Management, further solidifying his expertise in governance and policy analysis. Now he is actively engaged in research within his filed of specialization, focusing on contemporary challenges in Public Administration and Poltical Systems."
 		},
 		miguel_ibrahim: {
 			name: "Associate Prof. Ibrahim Sahidjun Miguel",
@@ -2843,7 +2843,7 @@ function openFacultyModal(facultyId) {
 			accomplishments: [
 			
 			],
-			description: "Prof. Zulfikarl B. Halun, a 53 years old and resident of Bongao, Tawi-Tawi. He finished Bachelor of Arts in Political Science at University of San Carlos, Cebu City in 1993. He also graduated Master of Public Administration at MSU-TCTO in 2017 and eventually he earned Doctor of Public Administration at Cebu Normal University in 2024. He joined MSU-TCTO in July 5, 2004 as faculty under the umbrella of all College of Arts and Sciences, specifically the Department of Political Science. Due to current academic development and CHED memorandum circulars and policy, he now joined the Department of Public Administration and currently becomes the Chairperson of the said department, holding an academic rank of full Professor VI."
+			description: "Prof. Zulfikarl B. Halun, a 53 years old and resident of Bongao, Tawi-Tawi. He finished Bachelor of Arts in Political Science at University of San Carlos, Cebu City in 1993. He also graduated Master of Public Administration at MSU-TCTO in 2017 and eventually he earned Doctor of Public Administration at Cebu Normal University in 2024. He joined MSU-TCTO in July 5, 2004 as faculty under the umbrella of all College of Arts and Social Sciences (CASS), specifically the Department of Political Science. Due to current academic development and CHED memorandum circulars and policy, he now joined the Department of Public Administration and currently becomes the Chairperson of the said department, holding an academic rank of full Professor VI."
 		},
 		sabdul: {
 			name: "Alsadjaik Ytang Sabdul",
@@ -2865,7 +2865,7 @@ function openFacultyModal(facultyId) {
 				"AFP ROTC Best Male Cadet 2023",
 				"Global Leader Award 2025 by EduTourism for Unity"
 			],
-			description: "Alsadjaik Y. Sabdul is an Instructor at the Department of Political Science, College of Arts and Sciences, Mindanao State University - Tawi-Tawi College of Technology and Oceanography (MSU-TCTO). He earned his Bachelor of Science in Philosophy Major in Applied Ethics from MSU-Iligan Institute of Technology. His academic interests include applied ethics, Islamic philosophy, social ontology, and the integration of education with indigenous concepts. His research engages with the ethical dimensions of culture, religion, and conflict in Mindanao, focusing particularly on rido (clan conflict) and the Moro value of sipug (shame), while exploring how traditional worldviews can be meaningfully incorporated into contemporary education and governance. Beyong teaching, Sabdul pursues scholarship that bridges philosophy, social realities, and indigenous knowledge systems, contributing to critical conversations on ethics, identity, and cultural continuity in the Southern Philippines. His professional background in student governance, journalism, and military training informs a holistic approach to both his pedagogy and research."
+			description: "Alsadjaik Y. Sabdul is an Instructor at the Department of Political Science, College of Arts and Social Sciences (CASS), Mindanao State University - Tawi-Tawi College of Technology and Oceanography (MSU-TCTO). He earned his Bachelor of Science in Philosophy Major in Applied Ethics from MSU-Iligan Institute of Technology. His academic interests include applied ethics, Islamic philosophy, social ontology, and the integration of education with indigenous concepts. His research engages with the ethical dimensions of culture, religion, and conflict in Mindanao, focusing particularly on rido (clan conflict) and the Moro value of sipug (shame), while exploring how traditional worldviews can be meaningfully incorporated into contemporary education and governance. Beyong teaching, Sabdul pursues scholarship that bridges philosophy, social realities, and indigenous knowledge systems, contributing to critical conversations on ethics, identity, and cultural continuity in the Southern Philippines. His professional background in student governance, journalism, and military training informs a holistic approach to both his pedagogy and research."
 		},
 		bacol: {
 			name: "Ariel Pajela Bacol",
@@ -2883,9 +2883,9 @@ function openFacultyModal(facultyId) {
 			description: "Ariel Bacol earned his Bachelor of Science degree in International Relations from Mindanao State University–Marawi. Before joining the Department of Political Science as an Instructor I, he gained professional experience at the Philippine Center for Islam and Democracy, the Department of Foreign Affairs, and GMA Network, Inc."
 		},
 		talandig: {
-			name: "Assistant Prof. Datu Moden C. Talandig",
-			position: "Faculty",
-			rank: "Assistant Professor IV",
+			name: "Associate Prof. Datu Moden C. Talandig",
+			position: "Chairperson, Department of Political Science",
+			rank: "Associate Professor",
 			image: "/images/cas/Profile/TALANDIG.png",
 			education: [
 				"Bachelor of Arts in International Studies",
@@ -2923,11 +2923,11 @@ function openFacultyModal(facultyId) {
 			accomplishments: [
 				"Rawaten Elite (MSU-TCTO)"
 			],
-			description: "Kaisher B. Muyong is an instructor at the Department of Political Science, College of Arts and Sciences. He is a licensed professional teacher and graduated from Western Mindanao State University with a degree in Bachelor of Arts in Political Science. Currently, he is pursuing a Juris Doctor degree at MSU Tawi-Tawi College of Law. With almost a decade of experience in academia, he began his teaching journey as an instructor and was later promoted to Humanities and Social Sciences Strand Coordinator at Mahardika Institute of Technology, Inc. (MIT) from 2017 and 2020. He also served as an Admin Aide IV at the Department of Social Welfare and Development, Region 9, in Zamboanga City, before teaching at MSU Integrated Laboratory School, where he teaches Research Methods and Fundamentals of Peace Education. He is a member of Philippine Association for Teachers and Educators (PAFTE) and attended various trainings and seminars hosted by the Philippine Education Assistance Committee (PEAC), UP Education Research Program and MSU-TCTO College of Education."
+			description: "Kaisher B. Muyong is an instructor at the Department of Political Science, College of Arts and Social Sciences (CASS). He is a licensed professional teacher and graduated from Western Mindanao State University with a degree in Bachelor of Arts in Political Science. Currently, he is pursuing a Juris Doctor degree at MSU Tawi-Tawi College of Law. With almost a decade of experience in academia, he began his teaching journey as an instructor and was later promoted to Humanities and Social Sciences Strand Coordinator at Mahardika Institute of Technology, Inc. (MIT) from 2017 and 2020. He also served as an Admin Aide IV at the Department of Social Welfare and Development, Region 9, in Zamboanga City, before teaching at MSU Integrated Laboratory School, where he teaches Research Methods and Fundamentals of Peace Education. He is a member of Philippine Association for Teachers and Educators (PAFTE) and attended various trainings and seminars hosted by the Philippine Education Assistance Committee (PEAC), UP Education Research Program and MSU-TCTO College of Education."
 		},
 		asis_omar: {
 			name: "Assistant Prof. Madzween Joy Kaibing De Asis-Omar",
-			position: "Chairperson, Department of Political Science; Director, IPDM",
+			position: "Director, IPDM",
 			rank: "Assistant Professor IV",
 			image: "/images/cas/Profile/DE ASIS.png",
 			education: [
@@ -2941,7 +2941,7 @@ function openFacultyModal(facultyId) {
 				"De Asis, M. J. K. (2025). Pagnakura of the Bangsamoro Women in Tawi-Tawi, Philippines: How Dynastic Politics Enable Women's Political Participation in Muslim Communities"
 			],
 			accomplishments: [],
-			description: "Asst. Prof. Madzween Joy Kaibing De Asis-Omar is a faculty member and current Chairperson of the Department of Political Science at Mindanao State University – Tawi-Tawi College of Technology and Oceanography (MSU-TCTO), where she also serves as Director of the Institute for Peace and Development in Mindanao. She holds a Master of Arts in Political Science from the University of San Carlos (2024) and earned her Bachelor of Arts in Political Science, graduating magna cum laude from MSU-TCTO (2015).\n\nHer research interests lie at the intersection of Muslim political thought, post-conflict governance, intergenerational poverty, and gendered political participation in the Bangsamoro Autonomous Region. She has led several funded research projects on former combatants, youth livelihood, women’s political agency, and community peacebuilding. She is also an active participant in academic and policy conferences, having presented original research at both national and international fora."
+			description: "Asst. Prof. Madzween Joy Kaibing De Asis-Omar is a faculty member at Mindanao State University – Tawi-Tawi College of Technology and Oceanography (MSU-TCTO), where she serves as Director of the Institute for Peace and Development in Mindanao (IPDM). She holds a Master of Arts in Political Science from the University of San Carlos (2024) and earned her Bachelor of Arts in Political Science, graduating magna cum laude from MSU-TCTO (2015).\n\nHer research interests lie at the intersection of Muslim political thought, post-conflict governance, intergenerational poverty, and gendered political participation in the Bangsamoro Autonomous Region. She has led several funded research projects on former combatants, youth livelihood, women’s political agency, and community peacebuilding. She is also an active participant in academic and policy conferences, having presented original research at both national and international fora."
 		},
 		turmindig: {
 			name: "Morshed Kunakon Tumindig",
@@ -3400,7 +3400,7 @@ function openPersonnelModal(personnelId) {
 	const personnelData = {
 		langoh: {
 			name: "Prof. Mona Froida Matolo Langoh, Ph.D.",
-			position: "Dean, College of Arts and Sciences",
+			position: "Dean, College of Arts and Social Sciences (CASS)",
 			rank: "Professor VI",
 			image: "/images/cas/Profile/LANGOH.png",
 			education: ["Bachelor of Arts in English",
@@ -3507,7 +3507,7 @@ function openPersonnelModal(personnelId) {
 				"Secretarial Science"
 			],
 			awards: [],
-			description: "Saidata Bakil Abdul is an Administrative Aide with an Associate in Secretarial Science. She specializes in Secretarial Science and provides essential administrative support to the College of Arts and Sciences."
+			description: "Saidata Bakil Abdul is an Administrative Aide with an Associate in Secretarial Science. She specializes in Secretarial Science and provides essential administrative support to the College of Arts and Social Sciences (CASS)."
 		},
 		jalalain: {
 			name: "Sulayman Mattuh Jalalain",
@@ -3517,7 +3517,7 @@ function openPersonnelModal(personnelId) {
 			education: [],
 			specialization: [],
 			awards: [],
-			description: "Sulayman Mattuh Jalalain is an Administrative Aide who assists with administrative functions within the College of Arts and Sciences."
+			description: "Sulayman Mattuh Jalalain is an Administrative Aide who assists with administrative functions within the College of Arts and Social Sciences (CASS)."
 		},
 		bakil: {
 			name: "Meqailah Abdurahim Bakil",
@@ -3531,7 +3531,7 @@ function openPersonnelModal(personnelId) {
 				"Political Science"
 			],
 			awards: [],
-			description: "Meqailah Abdurahim Bakil is currently serving as an Administrative Aide IV at the Department of Political Science, College of Arts and Sciences, Mindanao State University – Tawi-Tawi College of Technology and Oceanography (MSU-TCTO). She graduated Magna Cum Laude with a Bachelor of Arts in Political Science from the same institution in July 2025. Throughout her academic journey, she consistently demonstrated excellence in both scholarship and leadership, earning distinctions such as the Community Service Award, Leadership Award, and being recognized as the College of Arts and Sciences' Valedictorian. Her experiences reflect a strong commitment to public service, academic integrity, and community engagement—values she continues to uphold in her professional and scholarly pursuits."
+			description: "Meqailah Abdurahim Bakil is currently serving as an Administrative Aide IV at the Department of Political Science, College of Arts and Social Sciences (CASS), Mindanao State University – Tawi-Tawi College of Technology and Oceanography (MSU-TCTO). She graduated Magna Cum Laude with a Bachelor of Arts in Political Science from the same institution in July 2025. Throughout her academic journey, she consistently demonstrated excellence in both scholarship and leadership, earning distinctions such as the Community Service Award, Leadership Award, and being recognized as the College of Arts and Social Sciences (CASS)' Valedictorian. Her experiences reflect a strong commitment to public service, academic integrity, and community engagement—values she continues to uphold in her professional and scholarly pursuits."
 		},
 		gaddong: {
 			name: "Muslima Asaril Gaddong",
@@ -3546,7 +3546,7 @@ function openPersonnelModal(personnelId) {
 				"Education"
 			],
 			awards: [],
-			description: "Muslima Asaril Gaddong is an Administrative Aide IV with a Bachelor of Elementary Education and is currently pursuing a Master of Arts in Education, major in Reading. She specializes in Education and assists with administrative tasks and operations within the College of Arts and Sciences."
+			description: "Muslima Asaril Gaddong is an Administrative Aide IV with a Bachelor of Elementary Education and is currently pursuing a Master of Arts in Education, major in Reading. She specializes in Education and assists with administrative tasks and operations within the College of Arts and Social Sciences (CASS)."
 		},
 		jalilul: {
 			name: "Abdulhan Asgari Jalilul",
@@ -3560,7 +3560,7 @@ function openPersonnelModal(personnelId) {
 				"Political Science"
 			],
 			awards: [],
-			description: "Abdulhan A. Jalilul is a native Sama of Bongao. He graduated from MSU-TCTO with a Bachelor of Arts in Political Science (Cum Laude) under the College of Arts and Sciences. A dedicated individual, he has worked in various establishments, serving as a Receptionist, Barista, Pattisier, and Service Crew for 10 months at the Yalus Beach House. He also seized the opportunity to serve as a manager for 6 months at D'Originals By: Je Dreamshoppe at Roadside Commercial Center. He is now working at MSU-TCTO as Staff of Public Administration under the College of Arts and Sciences."
+			description: "Abdulhan A. Jalilul is a native Sama of Bongao. He graduated from MSU-TCTO with a Bachelor of Arts in Political Science (Cum Laude) under the College of Arts and Social Sciences (CASS). A dedicated individual, he has worked in various establishments, serving as a Receptionist, Barista, Pattisier, and Service Crew for 10 months at the Yalus Beach House. He also seized the opportunity to serve as a manager for 6 months at D'Originals By: Je Dreamshoppe at Roadside Commercial Center. He is now working at MSU-TCTO as Staff of Public Administration under the College of Arts and Social Sciences (CASS)."
 		},
 		janang: {
 			name: "Halima Abdulhamid Janang",
@@ -3574,7 +3574,7 @@ function openPersonnelModal(personnelId) {
 				"History - Education"
 			],
 			awards: [],
-			description: "Halima Abdulhamid Janang is an Administrative Aide IV with a Bachelor of Arts in History. She specializes in History - Education and assists with administrative functions within the College of Arts and Sciences."
+			description: "Halima Abdulhamid Janang is an Administrative Aide IV with a Bachelor of Arts in History. She specializes in History - Education and assists with administrative functions within the College of Arts and Social Sciences (CASS)."
 		},
 		gambe: {
 			name: "Jaime Beloy Gambe, Sr.",
@@ -3584,7 +3584,7 @@ function openPersonnelModal(personnelId) {
 			education: [],
 			specialization: [],
 			awards: [],
-			description: "Jaime Beloy Gambe, Sr. is an Administrative Aide I who provides essential administrative support to the College of Arts and Sciences."
+			description: "Jaime Beloy Gambe, Sr. is an Administrative Aide I who provides essential administrative support to the College of Arts and Social Sciences (CASS)."
 		}
 	};
 	
@@ -4457,7 +4457,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		'laja': { name: 'Nurbarain Sugala Laja', position: 'Faculty', specialization: ['Development Communication'] },
 		'langoh': { name: 'Prof. Mona Froida Matolo Langoh, Ph.D.', position: 'Faculty', specialization: ['Reading', 'Language', 'Literature'] },
 		'larida': { name: 'Jonalyn Shaid Larida', position: 'Faculty', specialization: ['Linguistics', 'Literature'] },
-		'miguel2': { name: 'Tarhata S. Miguel', position: 'Faculty', specialization: ['English Language'] },
+		'miguel2': { name: 'Tarhata S. Miguel', position: 'Chairperson, Department of Languages', specialization: ['English Language'] },
 		'olaer': { name: 'Jo-an Salaveria Olaer', position: 'Faculty', specialization: ['English Language'] },
 		'rajik': { name: 'Jeffrey Alih Rajik', position: 'Chairperson, Department of Languages', specialization: ['Applied Linguistics'] },
 		'salapuddin': { name: 'Conrad Jainuddin Salapuddin', position: 'Faculty', specialization: ['Teaching English as a Second Language'] },
@@ -4490,10 +4490,10 @@ document.addEventListener('DOMContentLoaded', function() {
 		'rasid': { name: 'Prof. Regimar Adan Rasid, Ph.D.', position: 'Director, Student Services', specialization: ['Statistics'] },
 		'salim': { name: 'Associate Prof. Jeffrey Imer Coronado Salim', position: 'Faculty', specialization: ['Mathematics'] },
 		'sallil': { name: 'Ummar Asani Sallil', position: 'Faculty', specialization: ['Statistics'] },
-		'bernado': { name: 'Astridin Aspani Bernado', position: 'Chairperson, Department of History', specialization: ['History'] },
+		'bernado': { name: 'Astridin Aspani Bernado', position: 'Associate Professor II', specialization: ['History'] },
 		'abdulhamiid': { name: 'Nurshima Janang Abdulhamiid', position: 'Instructor', specialization: ['History'] },
 		'romero': { name: 'Rafael Carin Romero', position: 'Assistant Professor IV', specialization: ['History'] },
-		'celerian': { name: 'Ma. Angelica Esguerra Celerian', position: 'Assistant Professor IV', specialization: ['History'] },
+		'celerian': { name: 'Ma. Angelica Esguerra Celerian', position: 'Chairperson, Department of History', specialization: ['History'] },
 		'talal': { name: 'Nasiff Saro Talal', position: 'Associate Professor III', specialization: ['History'] },
 		'eldani': { name: 'Abdulhamid A. Eldani', position: 'Associate Professor I', specialization: ['History'] },
 		'bation': { name: 'Abel Gumera Bation', position: 'Instructor I', specialization: ['History'] },
@@ -4509,9 +4509,9 @@ document.addEventListener('DOMContentLoaded', function() {
 		'halun': { name: 'Prof. Zulfikarl Bartilad Halun, DPA', position: 'Professor VI', specialization: ['Public Administration', 'Organization Management'] },
 		'sabdul': { name: 'Alsadjaik Ytang Sabdul', position: 'Instructor III', specialization: ['Philosophy', 'Applied Ethics', 'Aesthetics', 'Indigenous Philosophy'] },
 		'bacol': { name: 'Ariel Pajela Bacol', position: 'Faculty', specialization: ['International Relations'] },
-		'talandig': { name: 'Datu Moden C. Talandig', position: 'Assistant Professor IV', specialization: ['International Studies', 'Global Politics'] },
+		'talandig': { name: 'Datu Moden C. Talandig', position: 'Chairperson, Department of Political Science', specialization: ['International Studies', 'Global Politics'] },
 		'muyong': { name: 'Kaisher Bangali Muyong', position: 'Instructor', specialization: ['Political Science', 'Law'] },
-		'asis_omar': { name: 'Madzween Joy Kaibing De Asis-Omar', position: 'Assistant Professor IV', specialization: ['Political Science'] },
+		'asis_omar': { name: 'Madzween Joy Kaibing De Asis-Omar', position: 'Director, IPDM', specialization: ['Political Science'] },
 		'turmindig': { name: 'Morshed Kunakon Tumindig', position: 'Instructor', specialization: ['International Relations', 'Diplomacy', 'International Politics', 'Comparative Politics', 'International Law', 'International Economy'] },
 		'eldani_hamida': { name: 'Mur-Hamida Sapaih Eldani', position: 'Assistant Professor IV', specialization: ['Political Science', 'International Relations', 'Social Sciences'] },
 		'abraham': { name: 'Shiernalyn Sabandal Abraham', position: 'Assistant Professor IV', specialization: ['Political Science'] },
@@ -4617,7 +4617,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					entryData = {
 						name: cardName.trim(),
 						position: cardPosition.trim(),
-						department: cardElement.dataset.department || 'College of Arts and Sciences',
+						department: cardElement.dataset.department || 'College of Arts and Social Sciences (CASS)',
 						specialization: cardSpecialization ? [cardSpecialization.trim()] : []
 					};
 				}
@@ -4667,7 +4667,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			const groupedEntries = new Map();
 
 			matchedEntries.forEach(entry => {
-				const department = (entry.data && entry.data.department) || entry.card.dataset.department || 'College of Arts and Sciences';
+				const department = (entry.data && entry.data.department) || entry.card.dataset.department || 'College of Arts and Social Sciences (CASS)';
 				if (!groupedEntries.has(department)) {
 					groupedEntries.set(department, []);
 				}
@@ -4841,7 +4841,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		[normalizeDepartmentValue('Department of Public Administration')]: 'Department of Public Administration',
 		[normalizeDepartmentValue('Department of Political Science')]: 'Department of Political Science',
 		[normalizeDepartmentValue('Department of Management')]: 'Department of Management',
-		[normalizeDepartmentValue('College of Arts and Sciences')]: 'College of Arts and Sciences'
+		[normalizeDepartmentValue('College of Arts and Social Sciences (CASS)')]: 'College of Arts and Social Sciences (CASS)'
 	};
 
 	function resolveDepartmentPrograms(department: string) {
@@ -5030,9 +5030,9 @@ document.addEventListener('DOMContentLoaded', function() {
 			}
 		}
 
-		// Always set title to "College of Arts and Sciences"
+		// Always set title to "College of Arts and Social Sciences (CASS)"
 		if (departmentProgramsModalTitle) {
-			departmentProgramsModalTitle.textContent = 'College of Arts and Sciences';
+			departmentProgramsModalTitle.textContent = 'College of Arts and Social Sciences (CASS)';
 		}
 		
 		// Hide department name subtitle/banner
@@ -6449,10 +6449,10 @@ document.addEventListener('DOMContentLoaded', function() {
 										Critical inquiry into literature, culture, and creative expression that enriches understanding of human experience and cultural heritage.
 									</p>
 									<div class="mt-4 flex items-center gap-4">
-										<img src="/images/cas/Profile/msufaculty.png" alt="Associate Professor Glenda O. Abdul, PhD" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
+										<img src="/images/cas/Profile/ABDUL.png" alt="Associate Prof. Glenda O. Abdul, Ph.D." class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
 										<div>
 											<p class="text-sm md:text-base text-white/95 font-medium">
-												<strong>Chairperson:</strong> Associate Professor Glenda O. Abdul, PhD
+												<strong>Chairperson:</strong> Associate Prof. Glenda O. Abdul, Ph.D.
 											</p>
 										</div>
 									</div>
@@ -6504,7 +6504,7 @@ document.addEventListener('DOMContentLoaded', function() {
 											</svg>
 											<div class="leading-tight">
 												<p class="font-semibold">Associate Prof. Glenda O. Abdul, PhD</p>
-												<p class="text-white/80 text-sm font-normal">Associate Professor I • Chairperson, Department of Literary and Cultural Studies</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor • Chairperson, Department of Literary and Cultural Studies</p>
 											</div>
 										</div>
 										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
@@ -6601,10 +6601,10 @@ document.addEventListener('DOMContentLoaded', function() {
 										Multilingual communication, linguistic competence, and cultural literacy for global engagement and understanding.
 									</p>
 									<div class="mt-4 flex items-center gap-4">
-										<img src="/images/cas/Profile/msufaculty.png" alt="Associate Professor Jeffrey A. Rajik, PhD" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
+										<img src="/images/cas/Profile/MIGUEL.png" alt="Associate Prof. Tarhata S. Miguel" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
 										<div>
 											<p class="text-sm md:text-base text-white/95 font-medium">
-												<strong>Chairperson:</strong> Associate Professor Jeffrey A. Rajik, PhD
+												<strong>Chairperson:</strong> Associate Prof. Tarhata S. Miguel & Associate Prof. Jeffrey A. Rajik, Ph.D.
 											</p>
 										</div>
 									</div>
@@ -6665,7 +6665,7 @@ document.addEventListener('DOMContentLoaded', function() {
 											</svg>
 											<div class="leading-tight">
 												<p class="font-semibold">Prof. Mona Froida M. Langoh, PhD</p>
-												<p class="text-white/80 text-sm font-normal">Professor VI • Dean, College of Arts and Sciences</p>
+												<p class="text-white/80 text-sm font-normal">Professor VI • Dean, College of Arts and Social Sciences (CASS)</p>
 											</div>
 										</div>
 										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
@@ -6682,8 +6682,8 @@ document.addEventListener('DOMContentLoaded', function() {
 												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
 											</svg>
 											<div class="leading-tight">
-												<p class="font-semibold">Assistant Prof. Tarhata S. Miguel</p>
-												<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Faculty</p>
+												<p class="font-semibold">Associate Prof. Tarhata S. Miguel</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor • Chairperson, Department of Languages</p>
 											</div>
 										</div>
 										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
@@ -6700,8 +6700,8 @@ document.addEventListener('DOMContentLoaded', function() {
 												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
 											</svg>
 											<div class="leading-tight">
-												<p class="font-semibold">Associate Prof. Jeffrey A. Rajik, PhD</p>
-												<p class="text-white/80 text-sm font-normal">Associate Professor V • Chairperson, Department of Languages</p>
+												<p class="font-semibold">Associate Prof. Jeffrey A. Rajik, Ph.D.</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor • Chairperson, Department of Languages</p>
 											</div>
 										</div>
 										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
@@ -7030,10 +7030,10 @@ document.addEventListener('DOMContentLoaded', function() {
 										Historical method, heritage preservation, and nation-building perspectives for understanding the past and shaping the future.
 									</p>
 									<div class="mt-4 flex items-center gap-4">
-										<img src="/images/cas/Profile/BERNADO.png" alt="Associate Professor Astridin A. Bernado" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
+										<img src="/images/cas/Profile/CELERIAN.png" alt="Associate Prof. Maria Angelica E. Celerian" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
 										<div>
 											<p class="text-sm md:text-base text-white/95 font-medium">
-												<strong>Chairperson:</strong> Associate Professor Astridin A. Bernado
+												<strong>Chairperson:</strong> Associate Prof. Maria Angelica E. Celerian
 											</p>
 										</div>
 									</div>
@@ -7075,8 +7075,8 @@ document.addEventListener('DOMContentLoaded', function() {
 												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
 											</svg>
 											<div class="leading-tight">
-												<p class="font-semibold">Associate Prof. Astridin A. Bernado</p>
-												<p class="text-white/80 text-sm font-normal">Associate Professor II • Chairperson, Department of History</p>
+												<p class="font-semibold">Associate Prof. Maria Angelica E. Celerian</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor • Chairperson, Department of History</p>
 											</div>
 										</div>
 										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
@@ -7111,8 +7111,8 @@ document.addEventListener('DOMContentLoaded', function() {
 												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
 											</svg>
 											<div class="leading-tight">
-												<p class="font-semibold">Assistant Prof. Ma. Angelica Esguerra Celerian</p>
-												<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Faculty</p>
+												<p class="font-semibold">Associate Prof. Astridin A. Bernado</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor II • Faculty</p>
 											</div>
 										</div>
 										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
@@ -7307,10 +7307,10 @@ document.addEventListener('DOMContentLoaded', function() {
 										Governance, policy analysis, and public affairs rooted in democratic and peace-oriented values.
 									</p>
 									<div class="mt-4 flex items-center gap-4">
-										<img src="/images/cas/Profile/DE ASIS.png" alt="Assistant Professor Madzween Joy Kaibing De Asis-Omar" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
+										<img src="/images/cas/Profile/TALANDIG.png" alt="Associate Prof. Datu Moden C. Talandig" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
 										<div>
 											<p class="text-sm md:text-base text-white/95 font-medium">
-												<strong>Chairperson:</strong> Assistant Professor Madzween Joy Kaibing De Asis-Omar
+												<strong>Chairperson:</strong> Associate Prof. Datu Moden C. Talandig
 											</p>
 										</div>
 									</div>
@@ -7370,8 +7370,8 @@ document.addEventListener('DOMContentLoaded', function() {
 												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
 											</svg>
 											<div class="leading-tight">
-												<p class="font-semibold">Assistant Prof. Datu Moden C. Talandig</p>
-												<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Faculty</p>
+												<p class="font-semibold">Associate Prof. Datu Moden C. Talandig</p>
+												<p class="text-white/80 text-sm font-normal">Associate Professor • Chairperson, Department of Political Science</p>
 											</div>
 										</div>
 										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
@@ -7389,7 +7389,7 @@ document.addEventListener('DOMContentLoaded', function() {
 											</svg>
 											<div class="leading-tight">
 												<p class="font-semibold">Assistant Prof. Madzween Joy Kaibing De Asis-Omar</p>
-												<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Chairperson, Department of Political Science / Director, IPDM</p>
+												<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Director, IPDM</p>
 											</div>
 										</div>
 										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
@@ -7657,10 +7657,10 @@ document.addEventListener('DOMContentLoaded', function() {
 					<!-- Tarhata S. Miguel -->
 					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden" id="additionalFaculty2">
 						<div class="h-90 overflow-hidden relative">
-							<img src="/images/cas/Profile/MIGUEL.png" alt="Assistant Prof. Tarhata S. Miguel" class="w-full h-full object-cover lazy-image" loading="lazy">
+							<img src="/images/cas/Profile/MIGUEL.png" alt="Associate Prof. Tarhata S. Miguel" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-								<h3 class="text-white font-bold text-xl">Assistant Prof. Tarhata S. Miguel</h3>
-								<p class="text-gray-300 text-sm">Assistant Professor IV</p>
+								<h3 class="text-white font-bold text-xl">Associate Prof. Tarhata S. Miguel</h3>
+								<p class="text-gray-300 text-sm">Chairperson, Department of Languages</p>
 							</div>
 						</div>
 						<div class="p-6">
@@ -9505,7 +9505,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				<div class="text-center mb-8 sm:mb-12 md:mb-16">
 					<h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-3 sm:mb-4 px-4">Personnel Spotlight</h2>
 					<p class="text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto px-4">
-						Meet our dedicated faculty and support staff who contribute to the excellence of our College of Arts and Sciences
+						Meet our dedicated faculty and support staff who contribute to the excellence of our College of Arts and Social Sciences (CASS)
 					</p>
 				</div>
 
@@ -9517,7 +9517,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							<img src="/images/cas/Profile/LANGOH.png" alt="Mona Isada M. Largon" class="w-full h-full object-cover rounded-full border-4 border-white shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
 						</div>
 						<h3 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Prof. Mona Froida Matolo Langoh, Ph.D.</h3>
-						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Dean, College of Arts and Sciences</p>
+						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Dean, College of Arts and Social Sciences (CASS)</p>
 						<p class="text-xs text-gray-600 dark:text-gray-400 px-2">Professor VI</p>
 					</div>
 				</div>
@@ -9526,6 +9526,15 @@ document.addEventListener('DOMContentLoaded', function() {
 				<div class="mb-8 sm:mb-10 md:mb-12">
 					<h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-6 sm:mb-8 text-center px-4">The Chairpersons</h3>
 					<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
+						<!-- Assoc. Prof. Tarhata S. Miguel - Department of Languages -->
+						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openFacultyModal('miguel2')">
+							<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
+								<img src="/images/cas/Profile/MIGUEL.png" alt="Assoc. Prof. Tarhata S. Miguel" class="w-full h-full object-cover rounded-full border-4 border-white shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
+							</div>
+							<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Assoc. Prof. Tarhata S. Miguel</h4>
+							<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color px-2">Chairperson, Department of Languages</p>
+						</div>
+
 						<!-- Assoc. Prof. Jeffrey Alih Rajik - Department of Languages -->
 						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openFacultyModal('rajik')">
 							<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
@@ -9562,12 +9571,12 @@ document.addEventListener('DOMContentLoaded', function() {
 							<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color px-2">Chairperson, Department of Statistics</p>
 						</div>
 
-						<!-- Assoc. Prof. Astridin Aspani Bernado - Department of History -->
-						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openFacultyModal('bernado')">
+						<!-- Assoc. Prof. Maria Angelica E. Celerian - Department of History -->
+						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openFacultyModal('celerian')">
 							<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
-								<img src="/images/cas/Profile/BERNADO.png" alt="Assoc. Prof. Astridin Aspani Bernado" class="w-full h-full object-cover rounded-full border-4 border-white shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
+								<img src="/images/cas/Profile/CELERIAN.png" alt="Assoc. Prof. Maria Angelica E. Celerian" class="w-full h-full object-cover rounded-full border-4 border-white shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
 							</div>
-							<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Assoc. Prof. Astridin Aspani Bernado</h4>
+							<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Assoc. Prof. Maria Angelica E. Celerian</h4>
 							<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color px-2">Chairperson, Department of History</p>
 						</div>
 
@@ -9580,12 +9589,12 @@ document.addEventListener('DOMContentLoaded', function() {
 							<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color px-2">Chairperson, Department of Public Administration</p>
 						</div>
 
-						<!-- Asst. Prof. Madzween Joy Kaibing De Asis-Omar - Department of Political Science -->
-						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openFacultyModal('asis_omar')">
+						<!-- Assoc. Prof. Datu Moden C. Talandig - Department of Political Science -->
+						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openFacultyModal('talandig')">
 							<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
-								<img src="/images/cas/Profile/DE ASIS.png" alt="Asst. Prof. Madzween Joy Kaibing De Asis-Omar" class="w-full h-full object-cover rounded-full border-4 border-white shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
+								<img src="/images/cas/Profile/TALANDIG.png" alt="Assoc. Prof. Datu Moden C. Talandig" class="w-full h-full object-cover rounded-full border-4 border-white shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
 							</div>
-							<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Asst. Prof. Madzween Joy Kaibing De Asis-Omar</h4>
+							<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Assoc. Prof. Datu Moden C. Talandig</h4>
 							<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color px-2">Chairperson, Department of Political Science</p>
 						</div>
 
@@ -10950,7 +10959,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                                 <h3 class="text-lg font-medium">Address</h3>
 
-                                <p class="text-gray-300">MSU-TCTO College of Arts and Sciences</p>
+                                <p class="text-gray-300">MSU-TCTO College of Arts and Social Sciences (CASS)</p>
 
                                 <p class="text-gray-300">Sanga-Sanga, Bongao, Tawi-Tawi</p>
 
@@ -11601,7 +11610,7 @@ document.head.appendChild(style);
 
       <p class="text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto px-4">
 
-		MSU-TCTO College of Arts and Sciences<br>
+		MSU-TCTO College of Arts and Social Sciences (CASS)<br>
 
 		Sanga-Sanga, Bongao, Tawi-Tawi
 

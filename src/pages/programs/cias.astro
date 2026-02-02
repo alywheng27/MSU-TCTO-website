@@ -26,10 +26,10 @@ const currentPath = Astro.url.pathname;
 const site = 'https://msutcto.edu.ph';
 const FACULTY_SHARE_MAP: Record<string, { name: string; image: string }> = {
 	sali: { name: 'Associate Prof. Najeeb Razul A. Sali, Ph.D.', image: '/images/cias/Faculty/Najeeb Razul sali.png' },
-	abdulwahid: { name: 'Associate Prof. Kasmil S. Abdulwahid, Ph.D.', image: '/images/cias/Faculty/Doc Kasmil Abdulwahid.png' },
+	abdulwahid: { name: 'Prof. Kasmil S. Abdulwahid, Ph.D.', image: '/images/cias/Faculty/Doc Kasmil Abdulwahid.png' },
 	bud: { name: 'Prof. Aisa U. Bud, Ph.D.', image: '/images/cias/Faculty/AISA U BUD.png' },
 	astarani: { name: 'Associate Prof. Haidit A. Astarani', image: '/images/cias/Faculty/Haidit Astarani.png' },
-	pagaruan: { name: 'Instructor Sulaiman A. Pagaruan', image: '/images/cias/Faculty/prof. Sulaiman Pagaruan.png' },
+	pagaruan: { name: 'Mr. Sulaiman A. Pagaruan', image: '/images/cias/Faculty/prof. Sulaiman Pagaruan.png' },
 	utoeglis: { name: 'Assistant Prof. Eliriza S. Utoeglis', image: '/images/cias/Faculty/Eliriza Utoeglis.png' },
 	baguio: { name: 'Assistant Prof. Estefanio Jr. B. Baguio', image: '/images/cias/Faculty/estefanio baguio.png' },
 	arabani: { name: 'Instructor Benhar T. Arabani', image: '/images/cias/Faculty/Benhar Arabani.png' },
@@ -41,7 +41,7 @@ const FACULTY_SHARE_MAP: Record<string, { name: string; image: string }> = {
 const profileId = Astro.url.searchParams.get('profile');
 const facultyShare = profileId && FACULTY_SHARE_MAP[profileId] ? FACULTY_SHARE_MAP[profileId] : null;
 const ogImage = facultyShare ? site + facultyShare.image : undefined;
-const ogTitle = facultyShare ? `${facultyShare.name} - MSU-TCTO College of Islamic and Arabic Studies` : undefined;
+const ogTitle = facultyShare ? `${facultyShare.name} - MSU-TCTO College of Islamic Arts and Sciences` : undefined;
 const ogDescription = facultyShare ? `View ${facultyShare.name}'s profile at MSU-TCTO CIAS.` : undefined;
 const ogUrl = profileId ? `${site}/programs/cias?profile=${profileId}` : undefined;
 
@@ -119,7 +119,7 @@ try {
 
 
 <Layout
-	title="College of Islamic and Arabic Studies | MSU-TCTO"
+	title="College of Islamic Arts and Sciences | MSU-TCTO"
 	ogImage={ogImage}
 	ogTitle={ogTitle}
 	ogDescription={ogDescription}
@@ -310,7 +310,7 @@ try {
 
 					<!-- Enhanced Typography with white text using Poppins font - Mobile Optimized -->
 					<h1 class="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-bold mb-4 sm:mb-6 md:mb-8 leading-tight animate-fadeInUp px-4 text-white" style="font-family: 'Poppins', Arial, sans-serif; font-weight: 400;">
-						College of Islamic and Arabic Studies
+						College of Islamic Arts and Sciences
 					</h1>
 
 					<!-- Enhanced subtitle with animated underline -->
@@ -495,10 +495,10 @@ try {
 							</svg>
 						</div>
 					</div>
-					<h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-[#61063B] dark:text-msu-bgc-color" >About the College of Islamic and Arabic Studies</h2>
+					<h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-[#61063B] dark:text-msu-bgc-color" >About the College of Islamic Arts and Sciences</h2>
 					<p class="text-lg sm:text-xl text-msu-main-color dark:text-msu-bgc-color max-w-3xl mx-auto px-4">
 
-						The College of Islamic and Arabic Studies (CIAS), an integral academic unit of the University, was established to address the critical need for strengthening Islamic Education and promoting specialized studies across the Tawi-Tawi region and the broader Southern Philippine archipelago. Its history is a testament to the institution's enduring commitment to merging academic excellence with spiritual and cultural preservation.
+						The College of Islamic Arts and Sciences (CIAS), an integral academic unit of the University, was established to address the critical need for strengthening Islamic Education and promoting specialized studies across the Tawi-Tawi region and the broader Southern Philippine archipelago. Its history is a testament to the institution's enduring commitment to merging academic excellence with spiritual and cultural preservation.
 					</p>
 
 				</div>
@@ -774,7 +774,7 @@ try {
 									<h4 class="font-bold text-purple-600 dark:text-purple-400 text-lg">Institutional Renaming and Vision</h4>
 								</div>
 								<p class="text-sm leading-relaxed mb-2">
-									A major institutional shift occurred in 2005 when the college was officially renamed the <strong>College of Islamic and Arabic Studies (CIAS)</strong>.
+									A major institutional shift occurred in 2005 when the college was officially renamed the <strong>College of Islamic Arts and Sciences (CIAS)</strong>.
 								</p>
 								<p class="text-sm leading-relaxed">
 									That same year, CIAS pioneered an innovative integrated education model, leading to the establishment of the <strong>Childhood Integrated Learning Development School (CHILDS)</strong> on December 3, 2005, serving as the college's laboratory school.
@@ -1406,7 +1406,7 @@ function escapeHtml(value: unknown): string {
 }
 
 // Share faculty profile
-const SHARE_COLLEGE_NAME = 'College of Islamic and Arabic Studies';
+const SHARE_COLLEGE_NAME = 'College of Islamic Arts and Sciences';
 function shareFacultyProfile(facultyId) {
 	// Use ?profile=id so Messenger/Facebook/Twitter crawlers get og:image (faculty photo)
 	const url = typeof window !== 'undefined' ? `${window.location.origin}${window.location.pathname}?profile=${facultyId}` : '';
@@ -1445,7 +1445,7 @@ function openFacultyModal(facultyId) {
 	const facultyData = {
 	    sali: {
 	        name: "Associate Prof. Najeeb Razul A. Sali, Ph.D.",
-        position: "Acting Dean, College of Islamic and Arabic Studies",
+        position: "Acting Dean, College of Islamic Arts and Sciences",
         rank: "Associate Professor V",
 	        image: "/images/cias/Faculty/Najeeb Razul sali.png",
         education: [
@@ -1497,8 +1497,8 @@ function openFacultyModal(facultyId) {
 	        description: "Associate Prof. Sali guides CIAS through its COPC pursuit by fusing his cum laude foundation from MSU-TCTO, graduate work at UP, and PhD with academic distinction from IIUM specializing in Islamic Banking Econometrics. A seasoned administrator and award-winning mentor, he elevates Islamic scholarship while strengthening institutional governance and student achievement."
     },
 	    abdulwahid: {
-	        name: "Associate Prof. Kasmil S. Abdulwahid, Ph.D.",
-        position: "Chairperson, Graduate Islamic Education Department",
+	        name: "Prof. Kasmil S. Abdulwahid, Ph.D.",
+        position: "Chairperson, Department of Graduate Islamic Education",
         rank: "Associate Professor V",
 	        image: "/images/cias/Faculty/Doc Kasmil Abdulwahid.png",
         education: [
@@ -1513,7 +1513,7 @@ function openFacultyModal(facultyId) {
             "Islamic Pedagogy"
         ],
 	        achievements: [
-	            "Chairperson of the Islamic Education Department",
+	            "Chairperson of the Department of Graduate Islamic Education",
 	            "Associate Professor V with permanent appointment",
 	            "Beasiswa Unggulan/Madaris Scholar, Universitas Muhammadiyah Yogyakarta",
 	            "Most Promising Faculty of the Year"
@@ -1580,8 +1580,8 @@ function openFacultyModal(facultyId) {
 	        description: "Associate Prof. Astarani brings together a political science and law background from Western Mindanao State University with Shari'ah expertise, guiding CIAS governance as College Secretary. His extension leadership—from Halaqatul 'Ilm to halal and environmental programs—highlights his commitment to community-centered Islamic legal education."
     },
     pagaruan: {
-        name: "Instructor Sulaiman A. Pagaruan",
-        position: "Chairperson, Teaching Arabic Department (BSTA)",
+        name: "Mr. Sulaiman A. Pagaruan",
+        position: "Chairperson, Department of Teaching Arabic",
         rank: "Instructor I",
 	        image: "/images/cias/Faculty/prof. Sulaiman Pagaruan.png",
 	        education: [
@@ -2046,7 +2046,7 @@ function openPersonnelModal(personnelId) {
 	const personnelData = {
 		sali_staff: {
 			name: "Associate Prof. Najeeb Razul A. Sali, Ph.D.",
-			position: "Acting Dean, College of Islamic and Arabic Studies",
+			position: "Acting Dean, College of Islamic Arts and Sciences",
 			rank: "Associate Professor V",
 			image: "/images/cias/Faculty/msufaculty.png",
 			education: [
@@ -2995,11 +2995,11 @@ document.addEventListener('DOMContentLoaded', function() {
 	// Faculty data for search (matching modal data structure)
 	const facultySearchData = {
     'sali': { name: 'Assoc. Prof. Najeeb Razul A. Sali, Ph.D.', position: 'Acting Dean, CIAS', department: 'Islamic Studies Department', specialization: ['Islamic Banking Econometrics', 'Islamic Studies', 'Educational Leadership'] },
-    'abdulwahid': { name: 'Assoc. Prof. Kasmil S. Abdulwahid, Ph.D.', position: 'Chairperson, Graduate Islamic Education Department', department: 'Graduate Islamic Education Department', specialization: ['Islamic Education', 'Arabic Language Teaching', 'Educational Psychology'] },
+    'abdulwahid': { name: 'Prof. Kasmil S. Abdulwahid, Ph.D.', position: 'Chairperson, Department of Graduate Islamic Education', department: 'Graduate Islamic Education Department', specialization: ['Islamic Education', 'Arabic Language Teaching', 'Educational Psychology'] },
     'bud': { name: 'Prof. Aisa U. Bud, Ph.D.', position: 'Director, Guidance and Counseling Office', department: 'Teaching Arabic Department', specialization: ['Language Studies', 'Guidance and Counseling', 'Islamic Education'] },
     'astarani': { name: 'Assoc. Prof. Haidit A. Astarani', position: 'College Secretary', department: 'Islamic Studies Department', specialization: ['Shari\'ah Law', 'Legal Outreach', 'Community Programs'] },
-    'pagaruan': { name: 'Instructor Sulaiman A. Pagaruan', position: 'Chairperson, Teaching Arabic Department', department: 'Teaching Arabic Department', specialization: ['Islamic Education', 'Community Engagement', 'Peace Advocacy'] },
-    'utoeglis': { name: 'Asst. Prof. Eliriza S. Utoeglis', position: 'Chairperson, Islamic Studies Department', department: 'Islamic Studies Department', specialization: ['Shari\'ah', 'Halal Governance', 'Islamic Insurance'] },
+    'pagaruan': { name: 'Mr. Sulaiman A. Pagaruan', position: 'Chairperson, Department of Teaching Arabic', department: 'Teaching Arabic Department', specialization: ['Islamic Education', 'Community Engagement', 'Peace Advocacy'] },
+    'utoeglis': { name: 'Assistant Prof. Eliriza S. Utoeglis', position: 'Chairperson, Department of Islamic Studies', department: 'Islamic Studies Department', specialization: ['Shari\'ah', 'Halal Governance', 'Islamic Insurance'] },
     'baguio': { name: 'Asst. Prof. Estefanio Jr. B. Baguio', position: 'Faculty', department: 'Teaching Arabic Department', specialization: ['Islamic Education', 'Values Transformation', 'Peace Advocacy'] },
     'arabani': { name: 'Instructor Benhar T. Arabani', position: 'Faculty', department: 'Teaching Arabic Department', specialization: ['Arabic Studies', 'Islamic Education'] },
     'eldani': { name: 'Assoc. Prof. Abdulhamid A. Eldani, Ph.D.', position: 'Faculty', department: 'Islamic Studies Department', specialization: ['Islamic Studies', 'Philippine History'] },
@@ -3123,7 +3123,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					entryData = {
 						name: cardName.trim(),
 						position: cardPosition.trim(),
-						department: cardElement.dataset.department || 'College of Islamic and Arabic Studies',
+						department: cardElement.dataset.department || 'College of Islamic Arts and Sciences',
 						specialization: cardSpecialization ? [cardSpecialization.trim()] : []
 					};
 				}
@@ -3190,7 +3190,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			const groupedEntries = new Map();
 
 			matchedEntries.forEach(entry => {
-				const department = (entry.data && entry.data.department) || entry.card.dataset.department || 'College of Islamic and Arabic Studies';
+				const department = (entry.data && entry.data.department) || entry.card.dataset.department || 'College of Islamic Arts and Sciences';
 				if (!groupedEntries.has(department)) {
 					groupedEntries.set(department, []);
 				}
@@ -3677,7 +3677,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 
 		if (departmentProgramsModalTitle) {
-			departmentProgramsModalTitle.textContent = 'College of Islamic and Arabic Studies';
+			departmentProgramsModalTitle.textContent = 'College of Islamic Arts and Sciences';
 		}
 		departmentProgramsModal.classList.remove('hidden');
 		departmentProgramsModal.classList.add('flex');
@@ -4295,7 +4295,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						<h3 class="text-lg sm:text-xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-3">Islamic Education &amp; Pedagogy</h3>
 						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">
 
-							Assoc. Prof. Kasmil Abdulwahid, Instructor Sulaiman Pagaruan, Assistant Prof. Estefanio Baguio, Instructor Ahmad Jalhani, and Instructor Al-Ameen Ibnohajad drive teacher development, curriculum innovation, and values formation for Arabic and Islamic studies programs.
+							Prof. Kasmil Abdulwahid, Mr. Sulaiman Pagaruan, Assistant Prof. Estefanio Baguio, Instructor Ahmad Jalhani, and Instructor Al-Ameen Ibnohajad drive teacher development, curriculum innovation, and values formation for Arabic and Islamic studies programs.
 						</p>
 
 					</div>
@@ -4590,7 +4590,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					<h3 class="text-lg sm:text-xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-3">Islamic Education &amp; Pedagogy</h3>
 					<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">
 
-						Assoc. Prof. Kasmil Abdulwahid, Instructor Sulaiman Pagaruan, Assistant Prof. Estefanio Baguio, Instructor Ahmad Jalhani, and Instructor Al-Ameen Ibnohajad drive teacher development, curriculum innovation, and values formation for Arabic and Islamic studies programs.
+						Prof. Kasmil Abdulwahid, Mr. Sulaiman Pagaruan, Assistant Prof. Estefanio Baguio, Instructor Ahmad Jalhani, and Instructor Al-Ameen Ibnohajad drive teacher development, curriculum innovation, and values formation for Arabic and Islamic studies programs.
 					</p>
 
 				</div>
@@ -4696,11 +4696,11 @@ document.addEventListener('DOMContentLoaded', function() {
 						<ul class="space-y-2 text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">
 							<li class="flex items-start">
 								<span class="text-msu-deep-ocean mr-2 mt-1">•</span>
-								<span><strong>Associate Prof. Kasmil S. Abdulwahid, Ph.D.</strong> &mdash; Graduate Islamic Education Department Chair researching Islamic pedagogy and teacher well-being</span>
+								<span><strong>Prof. Kasmil S. Abdulwahid, Ph.D.</strong> &mdash; Graduate Islamic Education Department Chair researching Islamic pedagogy and teacher well-being</span>
 							</li>
 							<li class="flex items-start">
 								<span class="text-msu-deep-ocean mr-2 mt-1">•</span>
-								<span><strong>Instructor Sulaiman A. Pagaruan</strong> &mdash; Teaching Arabic Department Chair leading Arabic teacher development and peace advocacy</span>
+								<span><strong>Mr. Sulaiman A. Pagaruan</strong> &mdash; Teaching Arabic Department Chair leading Arabic teacher development and peace advocacy</span>
 							</li>
 							<li class="flex items-start">
 								<span class="text-msu-deep-ocean mr-2 mt-1">•</span>
@@ -4755,7 +4755,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				<div class="text-center mb-16">
 					<h2 class="text-3xl font-bold mb-4 text-[#61063B] dark:text-msu-bgc-color">Departments</h2>
 					<p class="text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto">
-						Explore the academic departments of the College of Islamic and Arabic Studies, each dedicated to excellence in Islamic scholarship, Arabic language education, and community leadership.
+						Explore the academic departments of the College of Islamic Arts and Sciences, each dedicated to excellence in Islamic scholarship, Arabic language education, and community leadership.
 					</p>
 				</div>
 
@@ -4771,10 +4771,10 @@ document.addEventListener('DOMContentLoaded', function() {
 										Dedicated to excellence in Arabic language education, preparing future educators and scholars through comprehensive Arabic language instruction and Islamic pedagogical methods.
 									</p>
 									<div class="mt-4 flex items-center gap-4">
-										<img src="/images/cias/Faculty/prof. Sulaiman Pagaruan.png" alt="Inst. Sulaiman A. Pagaruan" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
+										<img src="/images/cias/Faculty/prof. Sulaiman Pagaruan.png" alt="Mr. Sulaiman A. Pagaruan" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
 										<div>
 											<p class="text-sm md:text-base text-white/95 font-medium">
-												<strong>Chairperson:</strong> Inst. Sulaiman A. Pagaruan, MAED
+												<strong>Chairperson:</strong> Mr. Sulaiman A. Pagaruan
 											</p>
 										</div>
 									</div>
@@ -4853,7 +4853,7 @@ document.addEventListener('DOMContentLoaded', function() {
 											</svg>
 											<div class="leading-tight">
 												<p class="font-semibold">Sulaiman A. Pagaruan</p>
-												<p class="text-white/80 text-sm font-normal">Instructor I • Chairperson of Teaching Arabic Department</p>
+												<p class="text-white/80 text-sm font-normal">Chairperson of Department of Teaching Arabic</p>
 											</div>
 										</div>
 									</div>
@@ -4894,10 +4894,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2" data-faculty-card data-department="Teaching Arabic Department">
 							<div class="h-90 overflow-hidden relative">
-								<img src="/images/cias/Faculty/Doc Kasmil Abdulwahid.png" alt="Associate Prof. Kasmil S. Abdulwahid, Ph.D." class="w-full h-full object-cover lazy-image" loading="lazy">
+								<img src="/images/cias/Faculty/Doc Kasmil Abdulwahid.png" alt="Prof. Kasmil S. Abdulwahid, Ph.D." class="w-full h-full object-cover lazy-image" loading="lazy">
 								<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-									<h3 class="text-white font-bold text-xl">Associate Prof. Kasmil S. Abdulwahid, Ph.D.</h3>
-									<p class="text-gray-300 text-sm">Associate Professor V • Chairperson of Graduate Islamic Education Department</p>
+									<h3 class="text-white font-bold text-xl">Prof. Kasmil S. Abdulwahid, Ph.D.</h3>
+									<p class="text-gray-300 text-sm">Chairperson, Department of Graduate Islamic Education</p>
 								</div>
 							</div>
 							<div class="p-6">
@@ -4975,10 +4975,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2" data-faculty-card data-department="Teaching Arabic Department">
 							<div class="h-90 overflow-hidden relative">
-								<img src="/images/cias/Faculty/prof. Sulaiman Pagaruan.png" alt="Instructor Sulaiman A. Pagaruan" class="w-full h-full object-cover lazy-image" loading="lazy">
+								<img src="/images/cias/Faculty/prof. Sulaiman Pagaruan.png" alt="Mr. Sulaiman A. Pagaruan" class="w-full h-full object-cover lazy-image" loading="lazy">
 								<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-									<h3 class="text-white font-bold text-xl">Instructor Sulaiman A. Pagaruan</h3>
-									<p class="text-gray-300 text-sm">Instructor I • Chairperson of Teaching Arabic Department</p>
+									<h3 class="text-white font-bold text-xl">Mr. Sulaiman A. Pagaruan</h3>
+									<p class="text-gray-300 text-sm">Chairperson, Department of Teaching Arabic</p>
 								</div>
 							</div>
 							<div class="p-6">
@@ -5015,7 +5015,7 @@ document.addEventListener('DOMContentLoaded', function() {
 										<img src="/images/cias/Faculty/Eliriza Utoeglis.png" alt="Asst. Prof. Eliriza S. Utoeglis" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
 										<div>
 											<p class="text-sm md:text-base text-white/95 font-medium">
-												<strong>Chairperson:</strong> Asst. Prof. Eliriza S. Utoeglis, MAIS
+												<strong>Chairperson:</strong> Assistant Prof. Eliriza S. Utoeglis
 											</p>
 										</div>
 									</div>
@@ -5254,10 +5254,10 @@ document.addEventListener('DOMContentLoaded', function() {
 										Fostering advanced scholarship in Islamic education, pedagogy, and educational leadership through graduate programs that prepare educators and administrators for excellence in Islamic educational institutions.
 									</p>
 									<div class="mt-4 flex items-center gap-4">
-										<img src="/images/cias/Faculty/Doc Kasmil Abdulwahid.png" alt="Assoc. Prof. Kasmil S. Abdulwahid, Ph.D." class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
+										<img src="/images/cias/Faculty/Doc Kasmil Abdulwahid.png" alt="Prof. Kasmil S. Abdulwahid, Ph.D." class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
 										<div>
 											<p class="text-sm md:text-base text-white/95 font-medium">
-												<strong>Chairperson:</strong> Assoc. Prof. Kasmil S. Abdulwahid, Ph.D.
+												<strong>Chairperson:</strong> Prof. Kasmil S. Abdulwahid, Ph.D.
 											</p>
 										</div>
 									</div>
@@ -5300,7 +5300,7 @@ document.addEventListener('DOMContentLoaded', function() {
 											</svg>
 											<div class="leading-tight">
 												<p class="font-semibold">Kasmil S. Abdulwahid</p>
-												<p class="text-white/80 text-sm font-normal">Associate Professor V • Graduate Islamic Education Department</p>
+												<p class="text-white/80 text-sm font-normal">Professor • Chairperson of Department of Graduate Islamic Education</p>
 											</div>
 										</div>
 										<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
@@ -5341,10 +5341,10 @@ document.addEventListener('DOMContentLoaded', function() {
 					<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 department-faculty-cards hidden" data-department="Graduate Islamic Education Department">
 						<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2" data-faculty-card data-department="Graduate Islamic Education Department">
 							<div class="h-90 overflow-hidden relative">
-								<img src="/images/cias/Faculty/Doc Kasmil Abdulwahid.png" alt="Associate Prof. Kasmil S. Abdulwahid, Ph.D." class="w-full h-full object-cover lazy-image" loading="lazy">
+								<img src="/images/cias/Faculty/Doc Kasmil Abdulwahid.png" alt="Prof. Kasmil S. Abdulwahid, Ph.D." class="w-full h-full object-cover lazy-image" loading="lazy">
 								<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-									<h3 class="text-white font-bold text-xl">Associate Prof. Kasmil S. Abdulwahid, Ph.D.</h3>
-									<p class="text-gray-300 text-sm">Associate Professor V • Graduate Islamic Education Department</p>
+									<h3 class="text-white font-bold text-xl">Prof. Kasmil S. Abdulwahid, Ph.D.</h3>
+									<p class="text-gray-300 text-sm">Chairperson, Department of Graduate Islamic Education</p>
 								</div>
 							</div>
 							<div class="p-6">
@@ -5478,22 +5478,22 @@ document.addEventListener('DOMContentLoaded', function() {
 			<div class="mb-8 sm:mb-10 md:mb-12">
 				<h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-6 sm:mb-8 text-center px-4">The Chairpersons</h3>
 				<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
-					<!-- Assoc. Prof. Kasmil S. Abdulwahid, Ph.D. - Graduate Islamic Education Department -->
+					<!-- Prof. Kasmil S. Abdulwahid, Ph.D. - Graduate Islamic Education Department -->
 					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openFacultyModal('abdulwahid')">
 						<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
-							<img src="/images/cias/Faculty/Doc Kasmil Abdulwahid.png" alt="Assoc. Prof. Kasmil S. Abdulwahid, Ph.D." class="w-full h-full object-cover rounded-full border-4 border-white shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
+							<img src="/images/cias/Faculty/Doc Kasmil Abdulwahid.png" alt="Prof. Kasmil S. Abdulwahid, Ph.D." class="w-full h-full object-cover rounded-full border-4 border-white shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
 						</div>
-						<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Assoc. Prof. Kasmil S. Abdulwahid, Ph.D.</h4>
-						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color px-2">Chairperson, Graduate Islamic Education Department</p>
+						<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Prof. Kasmil S. Abdulwahid, Ph.D.</h4>
+						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color px-2">Chairperson, Department of Graduate Islamic Education</p>
 					</div>
 
-					<!-- Instructor Sulaiman A. Pagaruan - Teaching Arabic Department -->
+					<!-- Mr. Sulaiman A. Pagaruan - Teaching Arabic Department -->
 					<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openFacultyModal('pagaruan')">
 						<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
-							<img src="/images/cias/Faculty/prof. Sulaiman Pagaruan.png" alt="Instructor Sulaiman A. Pagaruan" class="w-full h-full object-cover rounded-full border-4 border-white shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
+							<img src="/images/cias/Faculty/prof. Sulaiman Pagaruan.png" alt="Mr. Sulaiman A. Pagaruan" class="w-full h-full object-cover rounded-full border-4 border-white shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
 						</div>
-						<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Instructor Sulaiman A. Pagaruan</h4>
-						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color px-2">Chairperson, Teaching Arabic Department</p>
+						<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Mr. Sulaiman A. Pagaruan</h4>
+						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color px-2">Chairperson, Department of Teaching Arabic</p>
 					</div>
 
 					<!-- Asst. Prof. Eliriza S. Utoeglis - Islamic Studies Department -->
@@ -6180,7 +6180,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				<div class="flex items-center justify-between px-5 sm:px-6 py-4 sm:py-5 border-b border-gray-200 bg-gradient-to-r from-msu-main-color/10 to-msu-deep-ocean/10">
 					<div class="space-y-2">
 						<span class="text-xs uppercase tracking-[0.28em] text-msu-deep-ocean/70">Academic Programs</span>
-						<h2 id="departmentProgramsModalTitle" class="text-2xl font-bold text-msu-deep-ocean">College of Islamic and Arabic Studies</h2>
+						<h2 id="departmentProgramsModalTitle" class="text-2xl font-bold text-msu-deep-ocean">College of Islamic Arts and Sciences</h2>
 					</div>
 					<button
 						type="button"

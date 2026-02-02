@@ -82,11 +82,30 @@ const FACULTY_SHARE_MAP: Record<string, { name: string; image: string }> = {
 	ishmaelTiczon: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' },
 	ahmad: { name: 'Prof. Alhisan U. Jemsy, PhD', image: '/images/coed/Profile/jemsy.png' }
 };
+// Guest Lecturer id -> { name, image } for Open Graph / shareable link preview
+const GUEST_LECTURER_SHARE_MAP: Record<string, { name: string; image: string }> = {
+	bara: { name: 'Atty. Arif T. Bara, CPA', image: '/images/col/Guest/Atty. Bara.jpg' },
+	bucoy: { name: 'Atty. Arnold C. Bucoy, LL.M.', image: '/images/col/Guest/Atty. Bucoy.jpg' },
+	deasis: { name: 'Atty. Aveneer K. De Asis', image: '/images/col/Guest/Atty. De Asis.jpg' },
+	disalo: { name: 'Atty. Al-Noor M. Disalo', image: '/images/col/Guest/Atty. Disalo.jpg' },
+	domado: { name: 'Atty. Mohamad M. Rayyan Domado, SCL', image: '/images/col/Guest/Atty. Domado.jpg' },
+	estrella: { name: 'Atty. Mohammad A. Muktadir Estrella', image: '/images/col/Guest/Atty. Estrella.jpg' },
+	pumbaya: { name: 'Atty. Sitty Nor-Aisah M. Pumbaya', image: '/images/col/Guest/Atty. Pumbaya.jpg' },
+	diamante: { name: 'Judge Joventino V. Diamante', image: '/images/col/Guest/Judge Diamante.jpg' },
+	mamutuk: { name: 'Judge Jamel T. Mamutuk, CPA, CESE, SCL', image: '/images/col/Guest/Judge Mamutuk.jpg' },
+	cuento: { name: 'Provincial Prosecutor J. Jerry Cuento', image: '/images/col/Guest/Prosecutor Cuento.jpg' },
+	maruhom: { name: 'Assoc. Prof. Atty. Datu Esma Mikee P. Maruhom', image: '/images/col/Guest/DATU ESMA MIKEE P. MARUHOM.jpg' },
+	nagamora: { name: 'Prosecutor Jamairah A. Nagamora', image: '/images/col/Guest/Prosecutor Nagamora.jpg' },
+	matba: { name: 'Atty. Ymil Rjiv D. Matba', image: '/images/col/Guest/Atty. Matba.jpg' },
+	cader: { name: 'Atty. Junaid G. Cader', image: '/images/col/Guest/Atty. Cader.jpg' }
+};
 const profileId = Astro.url.searchParams.get('profile');
 const facultyShare = profileId && FACULTY_SHARE_MAP[profileId] ? FACULTY_SHARE_MAP[profileId] : null;
-const ogImage = facultyShare ? site + facultyShare.image : undefined;
-const ogTitle = facultyShare ? `${facultyShare.name} - MSU-TCTO College of Law` : undefined;
-const ogDescription = facultyShare ? `View ${facultyShare.name}'s profile at MSU-TCTO COL.` : undefined;
+const guestShare = profileId && GUEST_LECTURER_SHARE_MAP[profileId] ? GUEST_LECTURER_SHARE_MAP[profileId] : null;
+const shareInfo = guestShare || facultyShare;
+const ogImage = shareInfo ? site + shareInfo.image : undefined;
+const ogTitle = shareInfo ? `${shareInfo.name} - MSU-TCTO College of Law` : undefined;
+const ogDescription = shareInfo ? `View ${shareInfo.name}'s profile at MSU-TCTO COL.` : undefined;
 const ogUrl = profileId ? `${site}/programs/col?profile=${profileId}` : undefined;
 
 // Fetch COED programs data from Sanity
@@ -1363,6 +1382,17 @@ function copyShareLink(url) {
 		document.body.appendChild(toast);
 		setTimeout(() => toast.remove(), 2500);
 	});
+}
+// Share guest lecturer profile (same shareable link pattern as faculty)
+function shareGuestLecturerProfile(lecturerId) {
+	const url = typeof window !== 'undefined' ? `${window.location.origin}${window.location.pathname}?profile=${lecturerId}` : '';
+	const title = `Guest Lecturer - MSU-TCTO ${SHARE_COLLEGE_NAME}`;
+	const text = 'View this guest lecturer profile at MSU-TCTO.';
+	if (typeof navigator !== 'undefined' && navigator.share) {
+		navigator.share({ title, text, url }).catch(() => copyShareLink(url));
+	} else {
+		copyShareLink(url);
+	}
 }
 
 // Faculty Modal System
@@ -2959,16 +2989,26 @@ function closeFacultyModal() {
 }
 
 // Close modal when clicking outside
-// Open faculty modal from URL hash (#faculty-id) or query (?profile=id)
+// Guest lecturer IDs for opening correct modal from ?profile=id
+const GUEST_LECTURER_IDS = ['bara','bucoy','deasis','disalo','domado','estrella','pumbaya','diamante','mamutuk','cuento','maruhom','nagamora','matba','cader'];
+// Open faculty or guest lecturer modal from URL hash (#faculty-id / #guest-lecturer-id) or query (?profile=id)
 function openFacultyFromHash() {
 	if (typeof window === 'undefined') return;
-	const hashMatch = window.location.hash.match(/^#faculty-(.+)$/);
+	const hashFaculty = window.location.hash.match(/^#faculty-(.+)$/);
+	const hashGuest = window.location.hash.match(/^#guest-lecturer-(.+)$/);
 	const queryMatch = typeof URLSearchParams !== 'undefined' && new URLSearchParams(window.location.search).get('profile');
-	const facultyId = hashMatch?.[1] || queryMatch;
-	if (facultyId) {
-		openFacultyModal(facultyId);
-		if (queryMatch && !hashMatch && window.history && window.history.replaceState) {
-			window.history.replaceState(null, '', window.location.pathname + '#faculty-' + facultyId);
+	const profileId = hashFaculty?.[1] || hashGuest?.[1] || queryMatch;
+	if (!profileId) return;
+	const isGuest = GUEST_LECTURER_IDS.includes(profileId);
+	if (isGuest) {
+		openGuestLecturerModal(profileId);
+		if (queryMatch && !hashGuest && window.history && window.history.replaceState) {
+			window.history.replaceState(null, '', window.location.pathname + '#guest-lecturer-' + profileId);
+		}
+	} else {
+		openFacultyModal(profileId);
+		if (queryMatch && !hashFaculty && window.history && window.history.replaceState) {
+			window.history.replaceState(null, '', window.location.pathname + '#faculty-' + profileId);
 		}
 	}
 }
@@ -2988,6 +3028,23 @@ document.addEventListener('DOMContentLoaded', function() {
 		shareBtn.title = 'Share profile';
 		shareBtn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684L6 12m2.684-1.316a3 3 0 105.367 2.684L6 12l2.051-2.051m0 0L6 12l2.684-2.684m0 0a3 3 0 105.367-2.684L6 12"></path></svg> Share';
 		shareBtn.onclick = function(e) { e.preventDefault(); shareFacultyProfile(facultyId); };
+		wrap.appendChild(shareBtn);
+	});
+	// Add Share link next to each Guest Lecturer card "View Profile" button (same as faculty)
+	document.querySelectorAll('button[onclick*="openGuestLecturerModal"]').forEach(function(btn) {
+		const match = btn.getAttribute('onclick')?.match(/openGuestLecturerModal\s*\(\s*['"]([^'"]+)['"]\s*\)/);
+		if (!match || btn.parentElement?.classList?.contains('flex')) return;
+		const lecturerId = match[1];
+		const wrap = document.createElement('div');
+		wrap.className = 'flex items-center gap-3 flex-wrap';
+		btn.parentNode.insertBefore(wrap, btn);
+		wrap.appendChild(btn);
+		const shareBtn = document.createElement('button');
+		shareBtn.type = 'button';
+		shareBtn.className = 'text-msu-deep-ocean font-medium hover:underline flex items-center gap-1.5 text-sm cursor-pointer share-profile-btn-wrap';
+		shareBtn.title = 'Share profile';
+		shareBtn.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684L6 12m2.684-1.316a3 3 0 105.367 2.684L6 12l2.051-2.051m0 0L6 12l2.684-2.684m0 0a3 3 0 105.367-2.684L6 12"></path></svg> Share';
+		shareBtn.onclick = function(e) { e.preventDefault(); shareGuestLecturerProfile(lecturerId); };
 		wrap.appendChild(shareBtn);
 	});
 });
@@ -3681,6 +3738,10 @@ Atty. Matba was admitted to the Philippine Bar in 2019. He earned his political 
 					<h2 class="text-2xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-2">${lecturer.name}</h2>
 					<p class="text-lg text-msu-deep-ocean dark:text-msu-bgc-color mb-4">${lecturer.position}</p>
 					<p class="text-md text-gray-600 dark:text-gray-300 mb-4"><strong>Academic Rank:</strong> ${lecturer.academicRank}</p>
+					<button type="button" onclick="event.stopPropagation(); shareGuestLecturerProfile('${lecturerId}')" class="mt-2 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-msu-deep-ocean/10 hover:bg-msu-deep-ocean/20 text-msu-deep-ocean dark:text-msu-bgc-color text-sm font-medium transition-colors" title="Share profile">
+						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684L6 12m2.684-1.316a3 3 0 105.367 2.684L6 12l2.051-2.051m0 0L6 12l2.684-2.684m0 0a3 3 0 105.367-2.684L6 12"></path></svg>
+						Share profile
+					</button>
 				</div>
 			</div>
 			
@@ -3856,6 +3917,7 @@ document.addEventListener('keydown', function(e) {
 });
 
 // Expose functions to global scope
+(window as any).shareGuestLecturerProfile = shareGuestLecturerProfile;
 (window as any).openGuestLecturerModal = openGuestLecturerModal;
 (window as any).closeGuestLecturerModal = closeGuestLecturerModal;
 

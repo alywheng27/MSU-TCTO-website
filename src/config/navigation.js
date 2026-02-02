@@ -34,13 +34,16 @@ export const navigationConfig = {
   programs: {
     title: "Programs",
     links: [
-      { label: "College of Arts and Sciences", href: "/programs/cas", footerLabel: "College of Arts and Sciences (CAS)", footerHref: "/programs/cas" },
-      { label: "College of Islamic & Arabic Studies", href: "/programs/cias", footerLabel: "College of Islamic and Arabic Studies (CIAS)", footerHref: "/programs/cias" },
-      { label: "College of Education", href: "/programs/coed", footerLabel: "College of Education (COED)", footerHref: "/programs/coed" },
-      { label: "College of Fisheries", href: "/programs/cof", footerLabel: "College of Fisheries (COF)", footerHref: "/programs/cof" },
+      { label: "College of Arts and Social Sciences (CASS)", href: "/programs/cas", footerLabel: "College of Arts and Social Sciences (CASS)", footerHref: "/programs/cas" },
+      { label: "College of Islamic Arts and Sciences (CIAS)", href: "/programs/cias", footerLabel: "College of Islamic Arts and Sciences (CIAS)", footerHref: "/programs/cias" },
+      { label: "College of Education (COED)", href: "/programs/coed", footerLabel: "College of Education (COED)", footerHref: "/programs/coed" },
+      { label: "College of Business, Accountancy, and Management (CBAM)", href: "/505", footerLabel: "College of Business, Accountancy, and Management (CBAM)", footerHref: "/505" },
+      { label: "College of Mathematical Sciences (CMS)", href: "/505", footerLabel: "College of Mathematical Sciences (CMS)", footerHref: "/505" },
+      // { label: "College of Fisheries", href: "/programs/cof", footerLabel: "College of Fisheries (COF)", footerHref: "/programs/cof" },
+      { label: "College of Fisheries, Oceanoraphy , Environmental Science, and Technology (COFEST)", href: "/programs/cofest", footerLabel: "College of Fisheries, Oceanoraphy , Environmental Science, and Technology (COFEST)", footerHref: "/programs/cof" },
       { label: "College of Computer Studies (CCS)", href: "/programs/ccs", footerLabel: "College of Computer Studies (CCS)", footerHref: "/programs/ccs" },
-      { label: "Institute of Oceanography and Environmental Science", href: "/programs/ioes", footerLabel: "Institute of Oceanography and Environmental Sciences (IOES)", footerHref: "/programs/ioes" },
-      { label: "College of Law", href: "/programs/col", footerLabel: "College of Law (COL)", footerHref: "/programs/col" },
+      // { label: "Institute of Oceanography and Environmental Science", href: "/programs/ioes", footerLabel: "Institute of Oceanography and Environmental Sciences (IOES)", footerHref: "/programs/ioes" },
+      { label: "College of Law (COL)", href: "/programs/col", footerLabel: "College of Law (COL)", footerHref: "/programs/col" },
     ]
   },
 
@@ -75,7 +78,7 @@ export const navigationConfig = {
       { label: "Gazettes", href: "/publications/gazette" },
       { label: "Bidding", href: "/bidding" },
       { label: "Annual Reports", href: "/publications/annual-reports" },
-      { label: "KAWASA Publications", href: "/publications/ KAWASA" },
+      { label: "KAWASA Publications", href: "/505" },
     ]
   },
 

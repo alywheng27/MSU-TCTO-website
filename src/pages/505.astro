@@ -1,0 +1,333 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from "../components/Navbar";
+import FooterNav from "../components/FooterNav.astro";
+import Footer from "../components/Footer.astro";
+import '../styles/css/global.css';
+
+const currentPath = Astro.url.pathname;
+---
+
+<Layout title="Under Construction | MSU-Tawi-Tawi College of Technology and Oceanography">
+	<main class="min-h-screen bg-gradient-to-br from-msu-maroon-100 via-white to-msu-maroon-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
+		<Navbar path={currentPath} client:visible />
+
+		<section class="relative min-h-[90vh] flex flex-col items-center justify-center w-full xl:px-[10%] xs:px-4 sm:px-6 py-12 md:py-20">
+			{/* Geometric / grid background */}
+			<div class="absolute inset-0 opacity-[0.04] dark:opacity-[0.07]" style="background-image: linear-gradient(#61063B 1px, transparent 1px), linear-gradient(90deg, #61063B 1px, transparent 1px); background-size: 56px 56px;"></div>
+			<div class="absolute top-0 right-0 w-[80%] md:w-[50%] h-[50%] bg-gradient-to-bl from-msu-deep-ocean/5 to-transparent rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+			<div class="absolute bottom-0 left-0 w-[60%] md:w-[40%] h-[40%] bg-gradient-to-tr from-msu-maroon-300/10 to-transparent rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
+
+			{/* Floating orbs */}
+			<div class="uc-orbs" aria-hidden="true">
+				<div class="uc-orb uc-orb-1"></div>
+				<div class="uc-orb uc-orb-2"></div>
+				<div class="uc-orb uc-orb-3"></div>
+				<div class="uc-orb uc-orb-4"></div>
+				<div class="uc-orb uc-orb-5"></div>
+			</div>
+
+			{/* Ocean waves */}
+			<div class="absolute bottom-0 left-0 right-0 h-28 md:h-36 overflow-hidden pointer-events-none">
+				<svg class="absolute bottom-0 w-full uc-wave" viewBox="0 0 1200 120" preserveAspectRatio="none">
+					<path class="fill-msu-maroon-200/50 dark:fill-msu-maroon-800/50" d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"></path>
+					<path class="fill-msu-maroon-300/70 dark:fill-msu-maroon-700/60" d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z"></path>
+					<path class="fill-msu-deep-ocean dark:fill-msu-maroon-600" d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"></path>
+				</svg>
+			</div>
+
+			{/* Main card */}
+			<div class="relative z-10 w-full max-w-3xl mx-auto uc-card">
+				{/* Badge */}
+				<div class="absolute -top-2 left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:top-4 sm:right-6 bg-msu-deep-ocean text-white text-xs sm:text-sm font-bold px-4 py-2 rounded-full shadow-lg animate-pulse border-2 border-white/20 dark:border-gray-700">
+					UNDER CONSTRUCTION
+				</div>
+
+				{/* 505 number */}
+				<div class="relative pt-6 sm:pt-8 pb-2">
+					<h2 class="font-philosopher text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight select-none text-center">
+						<span class="text-transparent bg-clip-text bg-gradient-to-br from-msu-maroon-600 via-msu-deep-ocean to-msu-maroon-700 dark:from-msu-maroon-400 dark:via-msu-deep-ocean dark:to-msu-maroon-500 uc-505-text">505</span>
+					</h2>
+					<div class="absolute inset-0 flex items-center justify-center pointer-events-none pt-6 sm:pt-8 pb-2">
+						<span class="font-philosopher text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-msu-deep-ocean/10 dark:text-msu-maroon-400/10 blur-sm">505</span>
+					</div>
+				</div>
+
+				{/* Icon + ripple */}
+				<div class="flex justify-center pt-8 sm:pt-10 pb-4">
+					<div class="relative">
+						<div class="uc-icon-wrap">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28" aria-hidden="true">
+								<rect x="187.317" y="387.122" class="fill-msu-maroon-300 dark:fill-msu-maroon-500" width="137.366" height="74.927"/>
+								<rect y="31.22" class="fill-msu-deep-ocean dark:fill-msu-maroon-600" width="512" height="374.634"/>
+								<rect x="256" y="31.22" class="fill-msu-maroon-700 dark:fill-msu-maroon-700" width="256" height="374.634"/>
+								<rect x="143.61" y="443.317" class="fill-msu-maroon-200 dark:fill-msu-maroon-400" width="224.78" height="37.463"/>
+								<rect x="256" y="443.317" class="fill-msu-maroon-100 dark:fill-msu-maroon-500" width="112.39" height="37.463"/>
+								<g class="fill-white">
+									<polygon points="337.927,149.097 311.438,175.586 354.388,218.537 311.438,261.487 337.927,287.976 407.368,218.537"/>
+									<polygon points="157.612,218.537 200.562,175.586 174.073,149.097 104.632,218.537 174.073,287.976 200.562,261.487"/>
+									<polygon points="297.489,112.39 259.203,112.39 214.509,324.683 252.797,324.683"/>
+								</g>
+							</svg>
+						</div>
+						<div class="uc-ripple"></div>
+					</div>
+				</div>
+
+				{/* Headline */}
+				<h1 class="font-philosopher text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-msu-maroon-700 via-msu-deep-ocean to-msu-maroon-600 dark:from-msu-maroon-300 dark:via-white dark:to-msu-maroon-400 text-center px-4 mb-3">
+					Digital Transformation Underway
+				</h1>
+				<p class="text-base sm:text-lg text-gray-600 dark:text-gray-400 text-center max-w-xl mx-auto px-4 mb-8 leading-relaxed">
+					We're building an immersive digital experience for our oceanography and technology community. Our team is working to launch a platform that reflects our excellence in marine research and education.
+				</p>
+
+				{/* Progress */}
+				<div class="px-4 sm:px-6 mb-8">
+					<div class="flex justify-between items-center mb-2">
+						<span class="text-sm font-semibold text-msu-deep-ocean dark:text-msu-maroon-300 flex items-center gap-1.5">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clip-rule="evenodd" />
+							</svg>
+							Development progress
+						</span>
+						<span class="text-sm font-bold text-msu-deep-ocean dark:text-msu-maroon-300">30%</span>
+					</div>
+					<div class="w-full h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+						<div class="uc-progress-bar h-full rounded-full relative overflow-hidden">
+							<div class="absolute inset-0 bg-gradient-to-r from-msu-maroon-400 via-msu-deep-ocean to-msu-maroon-600"></div>
+							<div class="uc-progress-shine"></div>
+						</div>
+					</div>
+				</div>
+
+				{/* Contact card */}
+				<div class="mx-4 sm:mx-6 mb-8 p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-msu-maroon-50 to-msu-maroon-100/80 dark:from-gray-700/80 dark:to-gray-800/80 border border-msu-maroon-200/50 dark:border-gray-600/50 shadow-inner">
+					<h3 class="text-lg font-semibold text-msu-deep-ocean dark:text-msu-maroon-300 mb-4 flex items-center justify-center gap-2">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+						</svg>
+						Contact our team
+					</h3>
+					<div class="grid sm:grid-cols-2 gap-4">
+						<a href="mailto:icto@msutcto.edu.ph" class="uc-contact-item">
+							<span class="font-medium text-msu-deep-ocean dark:text-msu-maroon-300">General inquiries</span>
+							<span class="text-gray-700 dark:text-gray-300 hover:text-msu-deep-ocean dark:hover:text-msu-maroon-400 transition-colors">icto@msutcto.edu.ph</span>
+						</a>
+						<a href="https://www.facebook.com/msutctoicto" target="_blank" rel="noopener noreferrer" class="uc-contact-item uc-contact-fb">
+							<span class="font-medium text-msu-deep-ocean dark:text-msu-maroon-300 group-hover:text-[#1877F2] transition-colors">Follow us</span>
+							<span class="text-gray-700 dark:text-gray-300 group-hover:text-[#1877F2] transition-colors">@msutctoicto</span>
+						</a>
+					</div>
+				</div>
+
+				{/* CTAs */}
+				<div class="flex flex-col sm:flex-row gap-3 justify-center items-center px-4 pb-8">
+					<a href="/" class="uc-btn-primary">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+						</svg>
+						Go to Home
+					</a>
+					<a href="/programs/cas" class="uc-btn-secondary">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+						</svg>
+						Browse Programs
+					</a>
+				</div>
+			</div>
+
+			{/* Social strip */}
+			<div class="relative z-10 mt-6 sm:mt-8 flex justify-center gap-6">
+				<a href="https://www.facebook.com/msutctoicto" target="_blank" rel="noopener noreferrer" class="p-3 rounded-full bg-white/80 dark:bg-gray-800/80 border border-msu-maroon-200/40 dark:border-gray-600/40 text-msu-deep-ocean dark:text-msu-maroon-400 hover:text-[#1877F2] hover:border-[#1877F2]/30 hover:scale-110 transition-all duration-300 shadow-lg">
+					<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+				</a>
+			</div>
+		</section>
+
+		<FooterNav />
+		<Footer />
+	</main>
+</Layout>
+
+<style is:global>
+	@import url('https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&display=swap');
+
+	/* Orbs */
+	.uc-orbs { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+	.uc-orb {
+		position: absolute;
+		border-radius: 50%;
+		background: radial-gradient(circle at 30% 30%, rgba(97, 6, 59, 0.12), rgba(97, 6, 59, 0.02));
+		animation: uc-float 18s ease-in-out infinite;
+	}
+	.uc-orb-1 { width: 70px; height: 70px; left: 8%; top: 15%; animation-delay: 0s; }
+	.uc-orb-2 { width: 45px; height: 45px; left: 22%; top: 55%; animation-delay: -4s; }
+	.uc-orb-3 { width: 90px; height: 90px; right: 12%; top: 20%; animation-delay: -8s; }
+	.uc-orb-4 { width: 35px; height: 35px; right: 28%; top: 65%; animation-delay: -12s; }
+	.uc-orb-5 { width: 55px; height: 55px; left: 55%; top: 10%; animation-delay: -2s; }
+	@keyframes uc-float {
+		0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.7; }
+		33% { transform: translate(15px, -20px) scale(1.05); opacity: 0.9; }
+		66% { transform: translate(-10px, 15px) scale(0.95); opacity: 0.6; }
+	}
+
+	/* Wave */
+	.uc-wave { animation: uc-wave-motion 6s ease-in-out infinite; }
+	@keyframes uc-wave-motion {
+		0%, 100% { transform: translateX(0) scaleY(1); }
+		50% { transform: translateX(-3%) scaleY(1.03); }
+	}
+
+	/* Card */
+	.uc-card {
+		background: rgba(255, 255, 255, 0.92);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border-radius: 1.5rem;
+		box-shadow: 0 25px 50px -12px rgba(97, 6, 59, 0.12), 0 0 0 1px rgba(97, 6, 59, 0.06);
+		border: 1px solid rgba(229, 184, 209, 0.5);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+	.uc-card:hover {
+		transform: translateY(-6px);
+		box-shadow: 0 30px 60px -15px rgba(97, 6, 59, 0.18), 0 0 0 1px rgba(97, 6, 59, 0.08);
+	}
+	.dark .uc-card {
+		background: rgba(31, 41, 55, 0.92);
+		border-color: rgba(75, 85, 99, 0.5);
+		box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+	}
+	.dark .uc-card:hover {
+		box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.5);
+	}
+
+	/* 505 text shimmer */
+	.uc-505-text {
+		animation: uc-text-shimmer 4s ease-in-out infinite;
+	}
+	@keyframes uc-text-shimmer {
+		0%, 100% { filter: brightness(1); }
+		50% { filter: brightness(1.08); }
+	}
+
+	/* Icon */
+	.uc-icon-wrap {
+		animation: uc-icon-float 4s ease-in-out infinite;
+	}
+	@keyframes uc-icon-float {
+		0%, 100% { transform: translateY(0); }
+		50% { transform: translateY(-8px); }
+	}
+	.uc-ripple {
+		position: absolute;
+		inset: -20px;
+		border-radius: 50%;
+		background: radial-gradient(circle, rgba(97, 6, 59, 0.08) 0%, transparent 70%);
+		animation: uc-ripple-pulse 3s ease-out infinite;
+		pointer-events: none;
+	}
+	@keyframes uc-ripple-pulse {
+		0% { transform: scale(0.8); opacity: 1; }
+		100% { transform: scale(1.4); opacity: 0; }
+	}
+
+	/* Progress bar */
+	.uc-progress-bar {
+		width: 30%;
+		min-width: 30%;
+	}
+	.uc-progress-shine {
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 50%;
+		height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+		animation: uc-shine 2s ease-in-out infinite;
+	}
+	@keyframes uc-shine {
+		0% { left: -100%; }
+		100% { left: 100%; }
+	}
+
+	/* Contact items */
+	.uc-contact-item {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+		padding: 1rem;
+		background: rgba(255, 255, 255, 0.7);
+		border-radius: 0.75rem;
+		border: 1px solid rgba(229, 184, 209, 0.4);
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+	}
+	.uc-contact-item:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 20px -8px rgba(97, 6, 59, 0.2);
+	}
+	.dark .uc-contact-item {
+		background: rgba(55, 65, 81, 0.5);
+		border-color: rgba(75, 85, 99, 0.5);
+	}
+	.uc-contact-fb:hover span { color: #1877F2 !important; }
+
+	/* Buttons - msu-deep-ocean #61063B */
+	.uc-btn-primary {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.75rem 1.5rem;
+		font-weight: 700;
+		color: white;
+		background-color: #61063B;
+		background: #61063B;
+		border-radius: 9999px;
+		box-shadow: 0 4px 14px rgba(97, 6, 59, 0.35);
+		transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+		min-width: 160px;
+	}
+	.uc-btn-primary:hover {
+		transform: translateY(-2px) scale(1.02);
+		background-color: #4D052F;
+		background: #4D052F;
+		box-shadow: 0 8px 24px rgba(97, 6, 59, 0.45);
+	}
+	.uc-btn-primary:focus-visible {
+		outline: none;
+		box-shadow: 0 0 0 3px rgba(97, 6, 59, 0.4);
+	}
+	.uc-btn-secondary {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.75rem 1.5rem;
+		font-weight: 700;
+		color: #61063B;
+		background: transparent;
+		border: 2px solid #61063B;
+		border-radius: 9999px;
+		transition: transform 0.2s ease, background 0.2s ease;
+		min-width: 160px;
+	}
+	.uc-btn-secondary:hover {
+		background: rgba(97, 6, 59, 0.08);
+		transform: translateY(-2px);
+	}
+	.uc-btn-secondary:focus-visible {
+		outline: none;
+		box-shadow: 0 0 0 3px rgba(97, 6, 59, 0.3);
+	}
+	.dark .uc-btn-secondary {
+		color: #D58BB5;
+		border-color: #D58BB5;
+	}
+	.dark .uc-btn-secondary:hover {
+		background: rgba(213, 139, 181, 0.12);
+	}
+
+	@media (max-width: 640px) {
+		.uc-orbs .uc-orb { animation-duration: 22s; }
+	}
+</style>

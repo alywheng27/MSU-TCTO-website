@@ -77,7 +77,11 @@ module.exports = {
 				'graphite': '#777777',
 			},
 			screens: {
-				'xs': '360px',
+				'xs': '360px',       /* Small phones (iPhone SE, Android) */
+				'pro': '390px',      /* iPhone 12/13/14 Pro */
+				'ipad-air': '820px', /* iPad Air 2024 */
+				'ipad-pro': '834px', /* iPad Pro 11" */
+				'surface': '912px',  /* Surface Pro 7 */
 				'3xl': '1920px',
 				'90vw': '90vw',
 				'95vw': '95vw',

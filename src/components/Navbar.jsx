@@ -156,6 +156,17 @@ const Navbar = ({ path }) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen]);
 
+  // Toggle body class so AI Summary and other fixed elements hide when nav menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add('nav-sidebar-open');
+      window.dispatchEvent(new CustomEvent('navSidebarOpened'));
+    } else {
+      document.body.classList.remove('nav-sidebar-open');
+    }
+    return () => document.body.classList.remove('nav-sidebar-open');
+  }, [isOpen]);
+
   // Initialize dark mode from localStorage
   useEffect(() => {
     const savedDarkMode = localStorage.getItem('darkMode') === 'true';
@@ -247,10 +258,10 @@ const Navbar = ({ path }) => {
         </div>
 
         {/* Main Navbar */}
-        <div className={`w-full bg-msu-deep-ocean dark:bg-gray-900 text-white dark:text-gray-100 transition-all duration-300 ${scrolled ? 'py-2' : 'py-4'} border-b border-msu-main-color dark:border-gray-700 border-opacity-30`}>
-          <div className="container mx-auto px-4 xl:px-6 flex justify-between items-center">
+        <div className={`w-full bg-msu-deep-ocean dark:bg-gray-900 text-white dark:text-gray-100 transition-all duration-300 ${scrolled ? 'py-2' : 'py-3 pro:py-4'} border-b border-msu-main-color dark:border-gray-700 border-opacity-30 safe-area-top`}>
+          <div className="container mx-auto px-3 xs:px-4 pro:px-5 xl:px-6 flex justify-between items-center gap-2 min-w-0">
             {/* Logo */}
-            <a href="/" className="flex items-center relative">
+            <a href="/" className="flex items-center relative min-w-0 flex-shrink">
               <div
                 aria-hidden="true"
                 className="logo-watermark-overlay pointer-events-none"
@@ -266,7 +277,7 @@ const Navbar = ({ path }) => {
               <img 
                 src="/api/protected-logo" 
                 alt="MSU-TCTO Logo" 
-                className={`transition-all duration-300 ${scrolled ? 'h-10 sm:h-12' : 'h-12 sm:h-16'} mr-3 sm:mr-4`}
+                className={`transition-all duration-300 flex-shrink-0 ${scrolled ? 'h-9 xs:h-10 sm:h-12' : 'h-10 xs:h-12 sm:h-16'} mr-2 xs:mr-3 sm:mr-4`}
                 data-protected-image="true"
                 draggable="false"
                 style={{ 
@@ -279,7 +290,11 @@ const Navbar = ({ path }) => {
               <img 
                 src="/images/TCTO Header - White.png" 
                 alt="MSU-TCTO Wordmark" 
-                className={`hidden sm:block transition-all duration-300 ${scrolled ? 'max-h-16 sm:max-h-20 md:max-h-24 lg:max-h-28' : 'max-h-20 sm:max-h-24 md:max-h-28 lg:max-h-32'} max-w-[400px] sm:max-w-[500px] md:max-w-[600px] lg:max-w-[700px] xl:max-w-[800px] w-auto h-auto object-contain`}
+                className={`hidden md:block transition-all duration-300 w-auto h-auto object-contain
+                  ${scrolled 
+                    ? 'max-h-20 md:max-h-24 lg:max-h-32 xl:max-h-36 max-w-[280px] md:max-w-[340px] lg:max-w-[480px] xl:max-w-[640px]' 
+                    : 'max-h-24 md:max-h-28 lg:max-h-36 xl:max-h-40 max-w-[320px] md:max-w-[380px] lg:max-w-[520px] xl:max-w-[700px]'
+                  }`}
                 draggable="false"
                 style={{ 
                   userSelect: 'none', 
@@ -290,39 +305,39 @@ const Navbar = ({ path }) => {
               />
             </a>
 
-            {/* Action Buttons */}
-            <div className="flex items-center space-x-3">
+            {/* Action Buttons - 44px min on mobile (iPhone 12 Pro, etc.) for touch-friendly tap targets */}
+            <div className="flex items-center gap-1 sm:gap-2">
               <button 
                 onClick={toggleSearch}
-                className="text-white dark:text-gray-200 hover:text-msu-gold dark:hover:text-yellow-400 hover:bg-msu-main-color dark:hover:bg-gray-700 hover:bg-opacity-20 transition-colors duration-300 p-2 rounded-full relative group"
+                className="flex items-center justify-center min-w-[44px] min-h-[44px] w-11 h-11 sm:w-9 sm:h-9 text-white dark:text-gray-200 hover:text-msu-gold dark:hover:text-yellow-400 hover:bg-msu-main-color dark:hover:bg-gray-700 hover:bg-opacity-20 transition-colors duration-300 rounded-full relative group shrink-0 touch-manipulation"
                 aria-label="Toggle search"
                 title="Search (Ctrl+K or Cmd+K)"
               >
-                <FaSearch className="text-lg" />
+                <FaSearch className="text-lg sm:text-base block flex-shrink-0" style={{ lineHeight: 0 }} />
                 <span className="absolute -bottom-1 -right-1 text-[8px] bg-msu-main-color dark:bg-yellow-600 text-white px-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
                   K
                 </span>
               </button>
               <button 
                 onClick={toggleDarkMode}
-                className="text-white dark:text-gray-200 hover:text-msu-gold dark:hover:text-yellow-400 hover:bg-msu-main-color dark:hover:bg-gray-700 hover:bg-opacity-20 transition-colors duration-300 p-2 rounded-full"
+                className="flex items-center justify-center min-w-[44px] min-h-[44px] w-11 h-11 sm:w-9 sm:h-9 text-white dark:text-gray-200 hover:text-msu-gold dark:hover:text-yellow-400 hover:bg-msu-main-color dark:hover:bg-gray-700 hover:bg-opacity-20 transition-colors duration-300 rounded-full shrink-0 touch-manipulation"
                 aria-label="Toggle dark mode"
               >
                 {isDarkMode ? (
-                  <FaSun className="text-lg" />
+                  <FaSun className="text-lg sm:text-base block flex-shrink-0" style={{ lineHeight: 0 }} />
                 ) : (
-                  <FaMoon className="text-lg" />
+                  <FaMoon className="text-lg sm:text-base block flex-shrink-0" style={{ lineHeight: 0 }} />
                 )}
               </button>
               <button 
-                onClick={toggleNavbar} 
-                className="hamburger-button text-white dark:text-gray-200 hover:text-msu-gold dark:hover:text-yellow-400 hover:bg-msu-main-color dark:hover:bg-gray-700 hover:bg-opacity-20 transition-colors duration-300 p-2 rounded-full"
+                onClick={toggleNavbar}
+                className="hamburger-button flex items-center justify-center min-w-[44px] min-h-[44px] w-11 h-11 sm:w-9 sm:h-9 text-white dark:text-gray-200 hover:text-msu-gold dark:hover:text-yellow-400 hover:bg-msu-main-color dark:hover:bg-gray-700 hover:bg-opacity-20 transition-colors duration-300 rounded-full shrink-0 touch-manipulation"
                 aria-label="Toggle navigation"
               >
                 {isOpen ? (
-                  <FaTimes className="text-xl" />
+                  <FaTimes className="text-xl sm:text-lg block flex-shrink-0" style={{ lineHeight: 0 }} />
                 ) : (
-                  <FaBars className="text-xl" />
+                  <FaBars className="text-xl sm:text-lg block flex-shrink-0" style={{ lineHeight: 0 }} />
                 )}
               </button>
             </div>
@@ -335,8 +350,8 @@ const Navbar = ({ path }) => {
             isSearchVisible ? 'max-h-96 py-3' : 'max-h-0 py-0'
           }`}
         >
-          <div className="container mx-auto px-4 xl:px-6">
-            <div className="relative max-w-2xl mx-auto">
+          <div className="container mx-auto px-3 xs:px-4 pro:px-5 xl:px-6">
+            <div className="relative w-full max-w-2xl mx-auto min-w-0">
               <form 
                 onSubmit={(e) => {
                   e.preventDefault();

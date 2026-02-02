@@ -39,8 +39,8 @@ const FACULTY_SHARE_MAP: Record<string, { name: string; image: string }> = {
 	rabor: { name: 'Jencen T. Rabor', image: '/images/coed/Profile/RABOR, Jencen T.png' },
 	sali: { name: 'Asst. Prof. Fatima Zahra V. Sali', image: '/images/coed/Profile/SALI, FATIMA ZAHRA V.png' },
 	sulanting: { name: 'Asst. Prof. Harimas M. Sulanting', image: '/images/coed/Profile/SULANTING.png' },
-	tahir: { name: 'Assoc. Prof. Kartini R. Tahir, PhD', image: '/images/coed/Profile/TAHIR, KARTINI.png' },
-	pajiji: { name: 'Asst. Prof. Jocelyn A. Pajiji, EdD', image: '/images/coed/Profile/Pajiji.png' }
+	tahir: { name: 'Assoc. Prof. Kartini A. Tahir, PhD', image: '/images/coed/Profile/TAHIR, KARTINI.png' },
+	pajiji: { name: 'Assoc. Prof. Jocelyn A. Pajiji, EdD', image: '/images/coed/Profile/Pajiji.png' }
 };
 const profileId = Astro.url.searchParams.get('profile');
 const facultyShare = profileId && FACULTY_SHARE_MAP[profileId] ? FACULTY_SHARE_MAP[profileId] : null;
@@ -2027,7 +2027,7 @@ function openFacultyModal(facultyId) {
 		},
 		mastul: {
 			name: "Prof. Al-Rashiff H. Mastul, EdD",
-			position: "Chairperson, Department of Early Childhood and Elementary Education",
+			position: "Faculty",
 			rank: "Professor I",
 			image: "/images/coed/Profile/Mastul, Al-Rashiff  H.png",
 			education: [
@@ -2037,7 +2037,7 @@ function openFacultyModal(facultyId) {
 			],
 			achievements: [
 				"Professor I, MSU-TCTO",
-				"Chairperson, Department of Early Childhood and Elementary Education (DECEE)",
+				"Former Chairperson, Department of Early Childhood and Elementary Education (DECEE)",
 				"Licensed Professional Teacher",
 				"Perennial trainer in various training and seminars at both regional and provincial levels",
 				"Lead writer and evaluator on the development of Adaptive Learning Materials (ALMs) in Tawi-Tawi",
@@ -2064,7 +2064,7 @@ function openFacultyModal(facultyId) {
 				"Al-Rashiff H. Mastul1, Dwi Sulisworo2*, Murshida A. Montasir3, Bonjovi H. Hajan4, Potchong M. Jackaria5, Fauzia S. Latif6, Elvinia R. Alivio (2024). Leadership Dynamics within Secondary High Schools in the Philippines: Exploring Transactional Leadership and Participatory Management Styles. Educational Administration: Theory and Practice 2024, 30(6), 2930-2941 ISSN: 2148-2403 https://kuey.net/",
 				"Bonjovi H. Hajan; Jovito C. Anito Jr.; Potchong M. Jackaria; Al-Rashiff H. Mastul. Macrostructural Analysis of STEM Students' Research Introductions in the Secondary Education Context: Implications for Pedagogy, Curriculum, and Teacher Professional Development. International Journal of Learning, Teaching and Educational Research v23 n3 p150-168 2024"
 			],
-			description: "Dr. AL-RASHIFF H. MASTUL holds a professor 1 position at Mindanao State University-Tawi-Tawi College of Technology and Oceanography under the College of Education, Sanga-Sanga, Bongao, Tawi-Tawi. He finished his Baccalaureate Degree as Cum Laude at MSU-TCTO in 2005. During his college days, he was an active student leader of the college and tirelessly engaged in various activities both academic and extra curricula. He earned his Master of Arts in Education major in Administration and Supervision (MAED) from the same university and was a recipient of Academic Distinction Award in 2016. He obtained his Doctor of Education major in Educational Administration at Western Mindanao State University, Zamboanga City. He is a licensed professional teacher, who has been a perennial trainer in various training and seminars at both regional and provincial levels. He was also a lead writer and evaluator on the development of Adaptive Learning Materials (ALMs) in Tawi-Tawi and other instructional materials development for the K-3 learners in the Bangsamoro Autonomous Region in Muslim Mindanao (BARMM) including the Big Book during the pandemic era. Before becoming a faculty member of the College of Education, he served as public school teacher for more than ten (10) years, six (6) months as school head and two (2) years' work experience at division office designated as Division ALM Focal at the Ministry of Basic Higher and Technical Education, Tawi-Tawi division. Dr. Mastul is an educational researcher, who has published many articles in reputable journals. He also presented his paper in an international research conference here in the Philippines. Currently, he serves as a Chairperson of the Department of Early Childhood and Elementary Education."
+			description: "Dr. AL-RASHIFF H. MASTUL holds a professor 1 position at Mindanao State University-Tawi-Tawi College of Technology and Oceanography under the College of Education, Sanga-Sanga, Bongao, Tawi-Tawi. He finished his Baccalaureate Degree as Cum Laude at MSU-TCTO in 2005. During his college days, he was an active student leader of the college and tirelessly engaged in various activities both academic and extra curricula. He earned his Master of Arts in Education major in Administration and Supervision (MAED) from the same university and was a recipient of Academic Distinction Award in 2016. He obtained his Doctor of Education major in Educational Administration at Western Mindanao State University, Zamboanga City. He is a licensed professional teacher, who has been a perennial trainer in various training and seminars at both regional and provincial levels. He was also a lead writer and evaluator on the development of Adaptive Learning Materials (ALMs) in Tawi-Tawi and other instructional materials development for the K-3 learners in the Bangsamoro Autonomous Region in Muslim Mindanao (BARMM) including the Big Book during the pandemic era. Before becoming a faculty member of the College of Education, he served as public school teacher for more than ten (10) years, six (6) months as school head and two (2) years' work experience at division office designated as Division ALM Focal at the Ministry of Basic Higher and Technical Education, Tawi-Tawi division. Dr. Mastul is an educational researcher, who has published many articles in reputable journals. He also presented his paper in an international research conference here in the Philippines. He previously served as Chairperson of the Department of Early Childhood and Elementary Education."
 		},
 		nurhusin: {
 			name: "Asst. Prof. Sharmini I. Nurhusin",
@@ -2177,8 +2177,8 @@ function openFacultyModal(facultyId) {
 			description: "Asst. Prof. Harimas M. Sulanting is a seasoned mathematics educator with over two decades of teaching experience across elementary, secondary, undergraduate, and graduate levels. She began her teaching career in elementary mathematics in 1999, later expanding to high school and tertiary education, including the Master of Arts in Education Program. She currently teaches undergraduate courses in assessment of learning and experiential learning, mentoring future educators with research-informed practices in mathematics and school leadership."
 		},
 			tahir: {
-				name: "Assoc. Prof. Kartini R. Tahir, PhD",
-			position: "Director, Office of International Linkages (OIL)",
+				name: "Assoc. Prof. Kartini A. Tahir, PhD",
+			position: "Chairperson, Department of Early Childhood and Elementary Education (DECEE)",
 			rank: "Associate Professor V",
 			image: "/images/coed/Profile/TAHIR, KARTINI.png",
 			education: [
@@ -2187,7 +2187,7 @@ function openFacultyModal(facultyId) {
 				"Bachelor of Education major in Preschool Education - MSU-TCTO, 2008"
 			],
 			achievements: [
-				"Director, Office of International Linkages (OIL), MSU-TCTO",
+				"Chairperson, Department of Early Childhood and Elementary Education (DECEE)",
 				"Associate Professor V, College of Education",
 				"Consultant and technical expert for BARMM education initiatives",
 				"Former Regional Program Coordinator for Kindergarten and Indigenous People's Education, DepEd-ARMM (2014–2020)"
@@ -2199,10 +2199,10 @@ function openFacultyModal(facultyId) {
 			publications: [
 				"Influence of Parental Support and Teaching Strategies on Pupils' Academic Performance: Implications for ISAL Program Supervision (Montasir, M. A., Mastul, A. H., Abdulwahid, K. S., Tahir, K. R., Sali, F. Z. V., Abdurasid, S. C., and Hadji, A. A.). International Journal of Learning Teaching and Educational Research, Vol. 24, No. 3, pp. 409-429, March 2025."
 			],
-			description: "Dr. Kartini R. Tahir is the Director of the Office of International Linkages and an Associate Professor at the College of Education, Mindanao State University – Tawi-Tawi College of Technology and Oceanography (MSU-TCTO). She earned her Bachelor of Education major in Preschool Education from MSU-TCTO in 2008, her Master of Education in Early Childhood Education as an Australia Awards Scholar at the University of Canberra in 2011, and her Doctor of Philosophy in Islamic Education Psychology at Universitas Muhammadiyah Yogyakarta, Indonesia, in 2020, with her dissertation focusing on Childhood Development in an Islamic Perspective. She has experience in program coordination and policy development, having served as Regional Program Coordinator for Kindergarten and Indigenous People's Education at the Department of Education-ARMM (2014–2020). Beyond her academic and administrative roles, Dr. Tahir has also served as a consultant and technical expert for education initiatives in the Bangsamoro Autonomous Region in Muslim Mindanao (BARMM), contributing to teacher professional development, inclusive education, curriculum design for K–3 learners, and Muslim education."
+			description: "Dr. Kartini A. Tahir is the Chairperson of the Department of Early Childhood and Elementary Education and an Associate Professor at the College of Education, Mindanao State University – Tawi-Tawi College of Technology and Oceanography (MSU-TCTO). She earned her Bachelor of Education major in Preschool Education from MSU-TCTO in 2008, her Master of Education in Early Childhood Education as an Australia Awards Scholar at the University of Canberra in 2011, and her Doctor of Philosophy in Islamic Education Psychology at Universitas Muhammadiyah Yogyakarta, Indonesia, in 2020, with her dissertation focusing on Childhood Development in an Islamic Perspective. She has experience in program coordination and policy development, having served as Regional Program Coordinator for Kindergarten and Indigenous People's Education at the Department of Education-ARMM (2014–2020). Beyond her academic and administrative roles, Dr. Tahir has also served as a consultant and technical expert for education initiatives in the Bangsamoro Autonomous Region in Muslim Mindanao (BARMM), contributing to teacher professional development, inclusive education, curriculum design for K–3 learners, and Muslim education."
 		},
 		pajiji: {
-			name: "Asst. Prof. Jocelyn A. Pajiji, EdD",
+			name: "Assoc. Prof. Jocelyn A. Pajiji, EdD",
 			position: "Chairperson DELPS",
 			rank: "Associate Professor V",
 			image: "/images/coed/Profile/Pajiji.png",
@@ -2715,7 +2715,7 @@ function openFacultyModal(facultyId) {
 				"Doctor of Philosophy in Science Education, Major in Chemistry - University of Science and Technology of Southern Philippines, Cagayan de Oro City"
 			],
 			achievements: [
-				"Assistant Professor IV, MSU-TCTO",
+				"Associate Professor V, MSU-TCTO",
 				"Chairperson, Department of Science and Mathematics Education (DSME)",
 				"Manangha Award",
 				"Dedicated researcher in chemical sciences, particularly marine and environmental chemistry"
@@ -5099,7 +5099,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			// Add more names here that should appear in this department's banner
 		],
 		'Department of Educational Leadership and Professional Services': [
-	 		{ name: 'Prof. Al-Rashiff H. Mastul, EdD', designation:'Chairperson, Department of Early Childhood and Elementary Education (DECEE)'}
+			// Chairperson names displayed in department banners
 		],
 		'Department of Language Education': [
 			// Add names here that should appear in this department's banner
@@ -5241,7 +5241,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		'kassim': { name: 'Asst. Prof. Julasmin S. Kassim', position: 'Special Assistant to OVCAA', rank: 'Assistant Professor IV', department: 'Department of Early Childhood and Elementary Education', specialization: ['Professional Education', 'Administration and Supervision'] },
 		'mastul': { 
 			name: 'Prof. Al-Rashiff H. Mastul, EdD', 
-			position: 'Chairperson, Department of Early Childhood and Elementary Education (DECEE)', 
+			position: 'Faculty', 
 			rank: 'Professor I', 
 			department: 'Department of Early Childhood and Elementary Education', // Primary department
 			departments: ['Department of Early Childhood and Elementary Education', 'Department of Educational Leadership and Professional Services'], // All departments
@@ -5249,7 +5249,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		},
 		'mastul-delps': { 
 			name: 'Prof. Al-Rashiff H. Mastul, EdD', 
-			position: 'Chairperson, Department of Early Childhood and Elementary Education (DECEE)', 
+			position: 'Faculty', 
 			rank: 'Professor I', 
 			department: 'Department of Early Childhood and Elementary Education', // Primary department
 			departments: ['Department of Early Childhood and Elementary Education', 'Department of Educational Leadership and Professional Services'], // All departments
@@ -5260,8 +5260,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		'rabor': { name: 'Jencen T. Rabor', position: 'Instructor', rank: 'Instructor', department: 'Department of Early Childhood and Elementary Education', specialization: ['Music, Arts, PE, & Health (MAPEH)', 'Administration and Supervision'] },
 		'sali': { name: 'Asst. Prof. Fatima Zahra V. Sali', position: 'Faculty', rank: 'Assistant Professor IV', department: 'Department of Early Childhood and Elementary Education', specialization: ['Educational Administration'] },
 		'sulanting': { name: 'Asst. Prof. Harimas M. Sulanting', position: 'Faculty', rank: 'Assistant Professor IV', department: 'Department of Early Childhood and Elementary Education', specialization: ['Mathematics', 'Administration and Supervision'] },
-		'tahir': { name: 'Assoc. Prof. Kartini R. Tahir, PhD', position: 'Director, Office of International Linkages (OIL)', rank: 'Associate Professor V', department: 'Department of Early Childhood and Elementary Education', specialization: ['Early Childhood Education', 'Islamic Education Psychology', 'Program Coordination and Policy Development'] },
-		'pajiji': { name: 'Asst. Prof. Jocelyn A. Pajiji, EdD', position: 'Chairperson DELPS', rank: 'Associate Professor V', department: 'Department of Educational Leadership and Professional Services', specialization: ['Educational Management', 'General Science'] },
+		'tahir': { name: 'Assoc. Prof. Kartini A. Tahir, PhD', position: 'Chairperson, Department of Early Childhood and Elementary Education (DECEE)', rank: 'Associate Professor V', department: 'Department of Early Childhood and Elementary Education', specialization: ['Early Childhood Education', 'Islamic Education Psychology', 'Program Coordination and Policy Development'] },
+		'pajiji': { name: 'Assoc. Prof. Jocelyn A. Pajiji, EdD', position: 'Chairperson DELPS', rank: 'Associate Professor V', department: 'Department of Educational Leadership and Professional Services', specialization: ['Educational Management', 'General Science'] },
 		'bakkang': { name: 'Assoc. Prof. Alcyn R. Bakkang', position: 'Vice Chancellor for Student Affairs (VCSA)', rank: 'Associate Professor V', department: 'Department of Educational Leadership and Professional Services', specialization: ['Educational Assessment', 'Measurement', 'Evaluation'] },
 		'aripin': { name: 'Abdurizal S. Aripin', position: 'Faculty', rank: 'Professor I', department: 'Department of Educational Leadership and Professional Services', specialization: ['Educational Management'] },
 		'matolo': { name: 'Prof. Mona-Allea L. Matolo', position: 'Faculty', rank: 'Professor VI', department: 'Department of Educational Leadership and Professional Services', specialization: ['Educational Administration'] },
@@ -5272,7 +5272,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		'wagas': { name: 'Asst. Prof. Ronaliza M. Wagas', position: 'College Secretary, College of Education', rank: 'Assistant Professor IV', department: 'Department of Language Education', specialization: ['English', 'Administration and Supervision'] },
 		'werble': { name: 'Prof. Surma J. Werble, PhD', position: 'Faculty', rank: 'Professor VI', department: 'Department of Language Education', specialization: ['English Language Teaching'] },
 		'juhuri': { name: 'Nasri A. Juhuri', position: 'Faculty', rank: 'Instructor I', department: 'Department of Early Childhood and Elementary Education', specialization: ['Educational Technology', 'Application of Artificial Intelligence in Education'] },
-		'tangon': { name: 'Asst. Prof. Efren Tangon, PhD', position: 'Chairperson, Department of Science and Mathematics Education', rank: 'Assistant Professor IV', department: 'Department of Science and Mathematics Education', specialization: ['Chemistry Education'] },
+		'tangon': { name: 'Assoc. Prof. Efren Tangon, PhD', position: 'Chairperson, Department of Science and Mathematics Education', rank: 'Associate Professor V', department: 'Department of Science and Mathematics Education', specialization: ['Chemistry Education'] },
 		'jaudinez': { name: 'Asst. Prof. Aljemedin S. Jaudinez', position: 'Faculty', rank: 'Associate Professor V', department: 'Department of Science and Mathematics Education', specialization: ['Mathematics and Statistics Education'] },
 		'jackaria': { name: 'Assoc. Prof. Potchong M. Jackaria', position: 'Coordinator, College Quality Assurance and Extension', rank: 'Associate Professor III', department: 'Department of Science and Mathematics Education', specialization: ['Mathematics Education'] },
 		'eldani': { name: 'Asst. Prof. Nurul-Ainie S. Eldani', position: 'Faculty', rank: 'Assistant Professor IV', department: 'Department of Science and Mathematics Education', specialization: ['Physics Education', 'Physical Science'] },
@@ -6834,10 +6834,10 @@ document.addEventListener('DOMContentLoaded', function() {
 										Celebrating educators who cultivate inclusive, child-centered learning experiences from early childhood through the elementary years.
 									</p>
 									<div class="mt-4 flex items-center gap-4">
-										<img src="/images/coed/Profile/Mastul, Al-Rashiff  H.png" alt="Dr. Al-Rashiff H. Mastul" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
+										<img src="/images/coed/Profile/TAHIR, KARTINI.png" alt="Assoc. Prof. Kartini A. Tahir, PhD" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
 										<div>
 											<p class="text-sm md:text-base text-white/95 font-medium">
-												<strong>Chairperson:</strong> Prof. Al-Rashiff H. Mastul, EdD
+												<strong>Chairperson:</strong> Assoc. Prof. Kartini A. Tahir, Ph.D.
 											</p>
 										</div>
 									</div>
@@ -6879,14 +6879,14 @@ document.addEventListener('DOMContentLoaded', function() {
 							</div>
 						</div>
 					</div>
-					<!-- kartini -->
+					<!-- kartini - Chairperson DECEE -->
 
-					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
+					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty" data-department="Department of Early Childhood and Elementary Education" data-faculty-card data-faculty-id="tahir">
 						<div class="h-90 overflow-hidden relative">
-							<img src="/images/coed/Profile/TAHIR, KARTINI.png" alt="Assoc. Prof. Kartini R. Tahir, PhD" class="w-full h-full object-cover lazy-image" loading="lazy">
+							<img src="/images/coed/Profile/TAHIR, KARTINI.png" alt="Assoc. Prof. Kartini A. Tahir, PhD" class="w-full h-full object-cover lazy-image" loading="lazy">
 								<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-									<h3 class="text-white font-bold text-xl">Assoc. Prof. Kartini R. Tahir, PhD</h3>
-								<p class="text-gray-300 text-sm"></p>
+									<h3 class="text-white font-bold text-xl">Assoc. Prof. Kartini A. Tahir, PhD</h3>
+									<p class="text-gray-300 text-sm">Chairperson, DECEE</p>
 							</div>
 							</div>
 							<div class="p-6">
@@ -6897,7 +6897,7 @@ document.addEventListener('DOMContentLoaded', function() {
 									<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Early Childhood Education • Islamic Education Psychology</span>
 								</div>
 								<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-									Leads international linkages for MSU-TCTO while advancing inclusive approaches in Early Childhood and Islamic Education Psychology across BARMM.
+									Chairperson of the Department of Early Childhood and Elementary Education, advancing inclusive approaches in Early Childhood and Islamic Education Psychology across BARMM.
 								</p>
 								<button onclick="openFacultyModal('tahir')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
 									View Profile
@@ -7034,7 +7034,7 @@ document.addEventListener('DOMContentLoaded', function() {
 								<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Educational Leadership • Elementary Education</span>
 							</div>
 							<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-								Chairperson of the Department of Early Childhood and Elementary Education (DECEE), leading instructional innovation, quality assurance, and faculty development across the College of Education.
+								Professor I specializing in Educational Leadership and Elementary Education. Former Chairperson of the Department of Early Childhood and Elementary Education (DECEE).
 							</p>
 							<button onclick="openFacultyModal('mastul')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
 								View Profile
@@ -7587,9 +7587,9 @@ document.addEventListener('DOMContentLoaded', function() {
 					<!-- Science and Mathematics Faculty -->
 					<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 hidden additional-faculty">
 						<div class="h-90 overflow-hidden relative">
-							<img src="/images/coed/Profile/Dr. Efren Tangon, Phd.png" alt="Asst. Prof. Efren Tangon, PhD" class="w-full h-full object-cover lazy-image" loading="lazy">
+							<img src="/images/coed/Profile/Dr. Efren Tangon, Phd.png" alt="Assoc. Prof. Efren Tangon, PhD" class="w-full h-full object-cover lazy-image" loading="lazy">
 							<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-								<h3 class="text-white font-bold text-xl">Asst. Prof. Efren Tangon, PhD</h3>
+								<h3 class="text-white font-bold text-xl">Assoc. Prof. Efren Tangon, PhD</h3>
 								<p class="text-gray-300 text-sm"></p>
 							</div>
 						</div>
@@ -7790,7 +7790,7 @@ document.addEventListener('DOMContentLoaded', function() {
 										<img src="/images/coed/Profile/msufaculty.png" alt="Dr. Shamira C. Dais" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
 										<div>
 											<p class="text-sm md:text-base text-white/95 font-medium">
-												<strong>Chairperson:</strong> Prof. Shamira C. Dais, EdD
+												<strong>Chairperson:</strong> Prof. Shamira C. Dais, Ph.D.
 											</p>
 										</div>
 									</div>
@@ -8173,7 +8173,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							<span class="text-sm text-msu-main-color dark:text-msu-bgc-color">Educational Leadership • Elementary Education</span>
 						</div>
 						<p class="text-msu-main-color dark:text-msu-bgc-color mb-4">
-							Chairperson of the Department of Early Childhood and Elementary Education (DECEE), leading instructional innovation, quality assurance, and faculty development across the College of Education.
+							Professor I specializing in Educational Leadership and Elementary Education. Former Chairperson of the Department of Early Childhood and Elementary Education (DECEE).
 						</p>
 						<button onclick="openFacultyModal('mastul')" class="text-msu-deep-ocean font-medium hover:underline flex items-center text-sm cursor-pointer">
 							View Profile
@@ -8444,7 +8444,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
 								<img src="/images/coed/Profile/Pajiji.png" alt="Dr. Jocelyn A. Pajiji" class="w-full h-full object-cover rounded-full border-4 border-white shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
 							</div>
-							<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Asst. Prof. Jocelyn A. Pajiji, EdD</h4>
+							<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Assoc. Prof. Jocelyn A. Pajiji, EdD</h4>
 							<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color px-2">Chairperson, Department of Educational Leadership and Professional Services (DELPS)</p>
 						</div>
 
@@ -8457,12 +8457,12 @@ document.addEventListener('DOMContentLoaded', function() {
 							<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color px-2">Chairperson, Department of Language Education (DLE)</p>
 						</div>
 
-						<!-- Dr. Mastul - DECEE -->
-						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openFacultyModal('mastul')">
+						<!-- Dr. Tahir - DECEE -->
+						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openFacultyModal('tahir')">
 							<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
-								<img src="/images/coed/Profile/Mastul, Al-Rashiff  H.png" alt="Dr. Al-Rashiff H. Mastul" class="w-full h-full object-cover rounded-full border-4 border-white shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
+								<img src="/images/coed/Profile/TAHIR, KARTINI.png" alt="Assoc. Prof. Kartini A. Tahir, PhD" class="w-full h-full object-cover rounded-full border-4 border-white shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
 							</div>
-							<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Prof. Al-Rashiff H. Mastul, EdD</h4>
+							<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Assoc. Prof. Kartini A. Tahir, Ph.D.</h4>
 							<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color px-2">Chairperson, Department of Early Childhood and Elementary Education (DECEE)</p>
 						</div>
 
@@ -8471,7 +8471,7 @@ document.addEventListener('DOMContentLoaded', function() {
 							<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
 								<img src="/images/coed/Profile/Dr. Efren Tangon, Phd.png" alt="Dr. Efren Tangon" class="w-full h-full object-cover rounded-full border-4 border-white shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
 							</div>
-							<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Asst. Prof. Efren Tangon, PhD</h4>
+							<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Assoc. Prof. Efren Tangon, Ph.D.</h4>
 							<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color px-2">Chairperson, Department of Science and Mathematics Education (DSME)</p>
 						</div>
 
