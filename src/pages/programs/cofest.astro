@@ -16,7 +16,7 @@ import '../../styles/css/globalanimate.css';
 
 import '../../styles/css/pdf-viewer.css';
 
-import { getCOFPrograms } from '../../api/api.jsx';
+import { getCOFESTPrograms } from '../../api/api.jsx';
 
 
 
@@ -25,6 +25,7 @@ import { getCOFPrograms } from '../../api/api.jsx';
 const currentPath = Astro.url.pathname;
 const site = 'https://msutcto.edu.ph';
 const FACULTY_SHARE_MAP: Record<string, { name: string; image: string }> = {
+	andas: { name: 'Prof. Sheriffa T. Andas, Ph.D.', image: '/images/ioes/Faculty/SHERIFFA T. ANDAS.jpg' },
 	jaroAjik: { name: 'Prof. Jaro O. Ajik', image: '/images/cof/Faculty/Jaro O. Ajik.png' },
 	wahayminJamil: { name: 'Asst. Prof. Wahaymin M. Jamil', image: '/images/cof/Faculty/Wahaymin M. Jamil.png' },
 	merilynAmlani: { name: 'Asst. Prof. Merilyn Q. Amlani', image: '/images/cof/Faculty/Merilyn Q. Amlani.png' },
@@ -37,11 +38,44 @@ const FACULTY_SHARE_MAP: Record<string, { name: string; image: string }> = {
 	kingpuAjik: { name: 'Assoc. Prof. Kingpu O. Ajik', image: '/images/cof/Faculty/Kingpu O. Ajik.png' }
 };
 const profileId = Astro.url.searchParams.get('profile');
+const personnelId = Astro.url.searchParams.get('personnel');
+const PERSONNEL_SHARE_MAP: Record<string, { name: string; image: string }> = {
+	andas_dean: { name: 'Prof. Sheriffa T. Andas, Ph.D.', image: '/images/ioes/Faculty/SHERIFFA T. ANDAS.jpg' },
+	jaro_ajik_dean: { name: 'Prof. Jaro O. Ajik', image: '/images/cof/Faculty/Jaro O. Ajik.png' },
+	chair_imlani: { name: 'Prof. Ainulyakin H. Imlani, Ph.D.', image: '/images/cof/Faculty/Ainulyakin H. Imlani.png' },
+	chair_tahiluddin: { name: 'Assoc. Prof. Albaris B. Tahiluddin, Ph.D.', image: '/images/cof/Faculty/Albaris B. Tahiluddin.png' },
+	chair_sarri: { name: 'Assistant Prof. Jurmin H. Sarri', image: '/images/cof/Faculty/Jurmin H. Sarri.png' },
+	chair_mohammad: { name: 'Assistant Prof. Kimtang Joy H. Mohammad', image: '/images/ioes/Faculty/KIMTANG JOY H. MOHAMMAD.jpg' },
+	chair_abdulmajid: { name: 'Assistant Prof. Nur-Aisa S. Abdulmajid', image: '/images/ioes/Faculty/NUR-AISA S. ABDULMAJID.jpg' },
+	chair_amlani: { name: 'Assistant Prof. Merilyn Q. Amlani', image: '/images/cof/Faculty/Merilyn Q. Amlani.png' },
+	hadjirul: { name: 'Angeline B. Hadjirul', image: '/images/ioes/Faculty/ANGELINE B. HADJIRUL.jpg' },
+	kalimuddin: { name: 'Sharifa K. Kalimuddin', image: '/images/ioes/Faculty/SHARIFA KALIMUDDIN.jpg' },
+	hussin: { name: 'Bibing A. Hussin', image: '/images/ioes/Faculty/BIBING A. HUSSIN.jpg' },
+	gunong: { name: 'Adzlan D. Gunong', image: '/images/ioes/Faculty/Adzlan gunong.png' },
+	salabi: { name: 'Kilin R. Salabi', image: '/images/ioes/Faculty/KILIN R. SALABI.jpg' },
+	abduraup: { name: 'Suhana A. Abduraup', image: '/images/cof/personnel/SUHANA A. ABDURAUP.png' },
+	ajik_mn: { name: 'Mohammad-Norodom H. Ajik', image: '/images/cof/personnel/MOHAMMAD-NORODOM H. AJIK.png' },
+	alsim: { name: 'Abdel-Azeem M. Alsim', image: '/images/cof/personnel/ABDEL-AZEEM M. ALSIM.png' },
+	camsain: { name: 'Aisa Mae B. Camsain', image: '/images/cof/personnel/AISA MAE B. CAMSAIN.png' },
+	esmola: { name: 'Mujaiyon R. Esmola', image: '/images/cof/personnel/MUJAIYON R. ESMOLA.png' },
+	garamon: { name: 'Adzmon J. Garamon', image: '/images/cof/personnel/ADZMON J. GARAMON.png' },
+	jalaidi: { name: 'Noriam L. Jalaidi', image: '/images/cof/personnel/NORIAM L. JALAIDI.png' },
+	ricablangca: { name: 'Ariel J. Ricablangca', image: '/images/cof/personnel/ARIEL J. RICABLANGCA.png' },
+	sansawi: { name: 'Belen I. Sansawi', image: '/images/cof/personnel/BELEN I. SANSAWI.png' },
+	talaid: { name: 'Emely M. Talaid', image: '/images/cof/personnel/EMELY M. TALAID.png' },
+	ujing: { name: 'Romar A. Ujing', image: '/images/cof/personnel/ROMAR A. UJING.png' },
+	yangson: { name: 'Nour Aley T. Yangson', image: '/images/cof/personnel/NOUR ALEY TAN YANGSON.png' },
+	arupin: { name: 'Adalin H. Arupin', image: '/images/cof/personnel/ADALIN H. ARUPIN.png' },
+	abduli: { name: 'Adzmar S. Abduli', image: '/images/cof/personnel/ADZMAR S. ABDULI.png' },
+	esmael: { name: 'Aljievnie J. Esmael', image: '/images/cof/personnel/ALJIEVNIE J. ESMAEL.png' },
+	jalilul: { name: 'Assami A. Jalilul', image: '/images/cof/personnel/ASSAMI A. JALILUL.png' }
+};
 const facultyShare = profileId && FACULTY_SHARE_MAP[profileId] ? FACULTY_SHARE_MAP[profileId] : null;
-const ogImage = facultyShare ? site + facultyShare.image : undefined;
-const ogTitle = facultyShare ? `${facultyShare.name} - MSU-TCTO College of Fisheries` : undefined;
-const ogDescription = facultyShare ? `View ${facultyShare.name}'s profile at MSU-TCTO COF.` : undefined;
-const ogUrl = profileId ? `${site}/programs/cof?profile=${profileId}` : undefined;
+const personnelShare = personnelId && PERSONNEL_SHARE_MAP[personnelId] ? PERSONNEL_SHARE_MAP[personnelId] : null;
+const ogImage = personnelShare ? site + personnelShare.image : (facultyShare ? site + facultyShare.image : undefined);
+const ogTitle = personnelShare ? `${personnelShare.name} - MSU-TCTO COFEST` : (facultyShare ? `${facultyShare.name} - MSU-TCTO COFEST` : undefined);
+const ogDescription = personnelShare ? `View ${personnelShare.name}'s profile at MSU-TCTO COFEST Personnel Spotlight.` : (facultyShare ? `View ${facultyShare.name}'s profile at MSU-TCTO COFEST.` : undefined);
+const ogUrl = personnelId ? `${site}/programs/cofest?personnel=${personnelId}` : (profileId ? `${site}/programs/cofest?profile=${profileId}` : undefined);
 
 // Fetch COF programs data from Sanity
 type ProgramDataItem = {
@@ -82,7 +116,7 @@ function extractTextFromBlocks(blocks: any[]): string {
 }
 
 try {
-  const rawProgramsData = await getCOFPrograms();
+  const rawProgramsData = await getCOFESTPrograms();
   
   // Transform Sanity data to match frontend expectations
   programsData = rawProgramsData.map(program => ({
@@ -114,7 +148,7 @@ try {
   filterOptions.levels = Array.from(levelSet);
   filterOptions.departments = Array.from(departmentSet);
   
-  console.log('COF Programs loaded:', programsData.length);
+  console.log('COFEST Programs loaded:', programsData.length);
   console.log('Filter options:', filterOptions);
   console.log('Sample program:', programsData[0]);
   console.log('Sample program description:', programsData[0]?.description);
@@ -126,10 +160,13 @@ try {
 }
 
 const targetDepartments = [
-  'Post-Harvest Fisheries Department',
-  'Food Science and Technology Department',
-  'Capture Fisheries Department',
-  'Aquaculture Department'
+  'Department of Aquaculture',
+  'Department of Capture Fisheries',
+  'Department of Post-Harvest Fisheries',
+  'Department of Aquatic Resources Management',
+  'Department of Marine Sciences',
+  'Department of Environmental Science',
+  'Department of Food Science and Technology'
 ];
 
 const normalizeDepartmentName = (value: string) =>
@@ -215,6 +252,32 @@ unmatchedDepartments.forEach((department) => {
   );
 });
 
+// Map IOES departments to COFEST so merged data from cof + ioes appears under correct banners
+const marineBiologyPrograms = programsData.filter((p) => {
+  const d = (p.department || '').toString();
+  const n = normalizeDepartmentName(d);
+  return n.includes('marine biology') || n.includes('marine sciences');
+});
+const marineSciencesList = [...(departmentProgramsMap['Department of Marine Sciences'] || []), ...marineBiologyPrograms];
+const marineSeen = new Set<string>();
+departmentProgramsMap['Department of Marine Sciences'] = marineSciencesList.filter((p: ProgramDataItem) => {
+  if (marineSeen.has(p._id)) return false;
+  marineSeen.add(p._id);
+  return true;
+});
+const envSciPrograms = programsData.filter((p) => {
+  const d = (p.department || '').toString();
+  const n = normalizeDepartmentName(d);
+  return n.includes('environmental science');
+});
+const envSciList = [...(departmentProgramsMap['Department of Environmental Science'] || []), ...envSciPrograms];
+const envSeen = new Set<string>();
+departmentProgramsMap['Department of Environmental Science'] = envSciList.filter((p: ProgramDataItem) => {
+  if (envSeen.has(p._id)) return false;
+  envSeen.add(p._id);
+  return true;
+});
+
 console.log('Department programs map created for departments:', Object.keys(departmentProgramsMap));
 
 ---
@@ -222,7 +285,7 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 
 <Layout
-	title="College of Fisheries | MSU-TCTO"
+	title="College of Fisheries, Oceanography, Environmental Science, and Technology (COFEST) | MSU-TCTO"
 	ogImage={ogImage}
 	ogTitle={ogTitle}
 	ogDescription={ogDescription}
@@ -414,14 +477,14 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 					<!-- Enhanced Typography with white text using Poppins font - Mobile Optimized -->
 					<h1 class="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-bold mb-4 sm:mb-6 md:mb-8 leading-tight animate-fadeInUp px-4 text-white" style="font-family: 'Poppins', Arial, sans-serif; font-weight: 400;">
-						College of Fisheries
+						College of Fisheries, Oceanography, Environmental Science, and Technology (COFEST)
 					</h1>
 
 					<!-- Enhanced subtitle with animated underline -->
 
 					<div class="relative mb-6 sm:mb-8 md:mb-12 animate-fadeInUp delay-100 px-4">
 						<p class="text-base sm:text-lg md:text-xl lg:text-2xl text-white font-light max-w-3xl mx-auto leading-relaxed">
-                            Nurturing stewards of the sea, sustaining tomorrow's fisheries.
+                            Exploring oceans, protecting environment, building a sustainable future.
                         </p>
 
 
@@ -617,9 +680,9 @@ console.log('Department programs map created for departments:', Object.keys(depa
 							</svg>
 						</div>
 					</div>
-					<h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-[#61063B] dark:text-msu-bgc-color" >About the College of Fisheries</h2>
+					<h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-[#61063B] dark:text-msu-bgc-color" >About COFEST</h2>
 					<p class="text-lg sm:text-xl text-msu-main-color dark:text-msu-bgc-color max-w-3xl mx-auto px-4">
-						The College of Fisheries advances sustainable fisheries education and research for the Sulu archipelago, equipping communities with the knowledge to responsibly harness and conserve marine resources.
+						The College of Fisheries, Oceanography, Environmental Science, and Technology (COFEST) merges the former College of Fisheries and Institute of Oceanography and Environmental Science, advancing sustainable fisheries, oceanography, environmental science, and technology for the Sulu archipelago and beyond.
 					</p>
 
 				</div>
@@ -630,32 +693,73 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 					<div class="lg:w-1/2">
 
-						<div class="relative rounded-2xl overflow-hidden shadow-2xl group cursor-pointer h-64 sm:h-80 md:h-96">
-
-							<img src="/images/cof/cof.jpg" alt="College of Fisheries Building" 
-								class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image" loading="lazy" />
-							
-
-							<div class="absolute inset-0 bg-gradient-to-t from-msu-deep-ocean/80 via-transparent to-transparent flex items-end p-4 sm:p-6 md:p-8">
-
-								<div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-
-									<h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 md:mb-3">Pioneering Fisheries Innovation</h3>
-									<p class="text-gray-200 text-sm sm:text-base md:text-lg">Empowering coastal communities through research, stewardship, and sustainable practices</p>
+						<!-- Carousel slider: COF + IOES images -->
+						<div class="cofest-about-carousel relative rounded-2xl overflow-hidden shadow-2xl h-64 sm:h-80 md:h-96" aria-label="COFEST about image carousel">
+							<div class="cofest-carousel-track flex transition-transform duration-500 ease-out h-full" style="width: 200%;">
+								<!-- Slide 1: College of Fisheries (cof.astro) -->
+								<div class="cofest-carousel-slide flex-shrink-0 w-1/2 h-full relative group">
+									<img src="/images/cof/cof.jpg" alt="College of Fisheries Building" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image" loading="lazy" />
+									<div class="absolute inset-0 bg-gradient-to-t from-[#61063B]/80 via-transparent to-transparent flex items-end p-4 sm:p-6 md:p-8">
+										<div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+											<h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 md:mb-3">Pioneering Fisheries Innovation</h3>
+											<p class="text-gray-200 text-sm sm:text-base md:text-lg">Empowering coastal communities through research, stewardship, and sustainable practices</p>
+										</div>
+									</div>
+									<div class="absolute top-4 right-4 sm:top-6 sm:right-6 bg-[#61063B]/90 backdrop-blur-sm text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold">Est. 1969</div>
 								</div>
-
+								<!-- Slide 2: Institute of Oceanography and Environmental Science (ioes.astro) -->
+								<div class="cofest-carousel-slide flex-shrink-0 w-1/2 h-full relative group">
+									<img src="/images/ioes/bgioes.jpg" alt="Institute of Oceanography and Environmental Science" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 lazy-image" loading="lazy" />
+									<div class="absolute inset-0 bg-gradient-to-t from-[#61063B]/80 via-transparent to-transparent flex items-end p-4 sm:p-6 md:p-8">
+										<div class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+											<h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 md:mb-3">Pioneering Marine and Environmental Science</h3>
+											<p class="text-gray-200 text-sm sm:text-base md:text-lg">Advancing marine and environmental science through research, education, and extension</p>
+										</div>
+									</div>
+									<div class="absolute top-4 right-4 sm:top-6 sm:right-6 bg-[#61063B]/90 backdrop-blur-sm text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold">Est. 1996</div>
+								</div>
 							</div>
-
-							
-
-							<!-- Floating elements -->
-
-							<div class="absolute top-4 right-4 sm:top-6 sm:right-6 bg-msu-deep-ocean/90 backdrop-blur-sm text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold">
-
-								Est. 1969
+							<!-- Carousel controls -->
+							<button type="button" class="cofest-carousel-prev absolute left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-[#61063B] shadow-lg flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-[#61063B]" aria-label="Previous slide">
+								<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+							</button>
+							<button type="button" class="cofest-carousel-next absolute right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-[#61063B] shadow-lg flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-[#61063B]" aria-label="Next slide">
+								<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+							</button>
+							<!-- Dots -->
+							<div class="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+								<button type="button" class="cofest-carousel-dot w-2.5 h-2.5 rounded-full bg-white/80 hover:bg-white transition-colors focus:outline-none focus:ring-2 focus:ring-white" data-slide="0" aria-label="Go to slide 1"></button>
+								<button type="button" class="cofest-carousel-dot w-2.5 h-2.5 rounded-full bg-white/30 hover:bg-white/60 transition-colors focus:outline-none focus:ring-2 focus:ring-white" data-slide="1" aria-label="Go to slide 2"></button>
 							</div>
-
 						</div>
+						<script is:inline>
+							(function() {
+								const carousel = document.querySelector('.cofest-about-carousel');
+								if (!carousel) return;
+								const track = carousel.querySelector('.cofest-carousel-track');
+								const prevBtn = carousel.querySelector('.cofest-carousel-prev');
+								const nextBtn = carousel.querySelector('.cofest-carousel-next');
+								const dots = carousel.querySelectorAll('.cofest-carousel-dot');
+								let index = 0;
+								const total = 2;
+								function goTo(i) {
+									index = (i + total) % total;
+									track.style.transform = 'translateX(-' + (index * 50) + '%)';
+									dots.forEach(function(dot, j) {
+										dot.classList.toggle('bg-white/80', j === index);
+										dot.classList.toggle('bg-white/30', j !== index);
+									});
+								}
+								prevBtn && prevBtn.addEventListener('click', function() { goTo(index - 1); });
+								nextBtn && nextBtn.addEventListener('click', function() { goTo(index + 1); });
+								dots.forEach(function(dot, i) {
+									dot.addEventListener('click', function() { goTo(i); });
+								});
+								let autoplay = setInterval(function() { goTo(index + 1); }, 5000);
+								carousel.addEventListener('mouseenter', function() { clearInterval(autoplay); });
+								carousel.addEventListener('mouseleave', function() { autoplay = setInterval(function() { goTo(index + 1); }, 5000); });
+							})();
+						</script>
 
 					</div>
 
@@ -667,7 +771,7 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 							<nav class="-mb-px flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 md:space-x-8">
 
-								<button class="tab-button active py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm border-msu-deep-ocean text-msu-main-color dark:text-msu-bgc-color transition-all duration-300" data-tab="background">
+								<button type="button" class="tab-button tab-disabled py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm border-transparent text-gray-400 dark:text-gray-500 cursor-not-allowed transition-all duration-300" data-tab="background" disabled aria-disabled="true" title="Disabled — under construction">
 									<span class="flex items-center justify-center sm:justify-start">
 										<svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
@@ -677,7 +781,7 @@ console.log('Department programs map created for departments:', Object.keys(depa
 									</span>
 								</button>
 
-								<button class="tab-button py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm border-transparent text-msu-main-color dark:text-msu-bgc-color hover:text-msu-deep-ocean hover:border-gray-300 transition-all duration-300" data-tab="history">
+								<button type="button" class="tab-button tab-disabled py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm border-transparent text-gray-400 dark:text-gray-500 cursor-not-allowed transition-all duration-300" data-tab="history" disabled aria-disabled="true" title="Disabled — under construction">
 
 									<span class="flex items-center justify-center sm:justify-start">
 
@@ -695,7 +799,7 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 								</button>
 
-								<button class="tab-button py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm border-transparent text-msu-main-color dark:text-msu-bgc-color hover:text-msu-deep-ocean hover:border-gray-300 transition-all duration-300" data-tab="goals">
+								<button type="button" class="tab-button tab-disabled py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm border-transparent text-gray-400 dark:text-gray-500 cursor-not-allowed transition-all duration-300" data-tab="goals" disabled aria-disabled="true" title="Disabled — under construction">
 
 									<span class="flex items-center justify-center sm:justify-start">
 
@@ -713,13 +817,23 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 								</button>
 
+								<button type="button" class="tab-button active py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm border-[#61063B] text-[#61063B] dark:text-[#D58BB5] transition-all duration-300" data-tab="505">
+									<span class="flex items-center justify-center sm:justify-start">
+										<svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+										</svg>
+										<span class="hidden sm:inline">505</span>
+										<span class="sm:hidden">505</span>
+									</span>
+								</button>
+
 							</nav>
 
 						</div>
 
 						
 
-						<div class="tab-content active" id="background-content">
+						<div class="tab-content hidden" id="background-content">
 							<div class="space-y-6 text-msu-main-color dark:text-msu-bgc-color">
 								<h3 class="text-2xl font-bold text-msu-deep-ocean dark:text-msu-bgc-color mb-4">General Background</h3>
 								<div class="space-y-4 text-lg leading-relaxed">
@@ -731,9 +845,6 @@ console.log('Department programs map created for departments:', Object.keys(depa
 									</p>
 									<p>
 										Since its founding year, the college has produced graduates of the Bachelor of Science in Fisheries across three specializations—fish culture, fish capture, and fish processing—as well as diplomates in fisheries technology. Many alumni now lead government and non-government institutions or operate their own enterprises, exemplifying the college’s enduring contributions to regional progress and marine stewardship.
-									</p>
-									<p>
-										Together with the Institute of Oceanography and Environmental Science (IOES) and other academic units, the College of Fisheries advances MSU-TCTO’s mission of education, research, and extension for the Sulu Archipelago.
 									</p>
 								</div>
 							</div>
@@ -776,6 +887,24 @@ console.log('Department programs map created for departments:', Object.keys(depa
 							</div>
 						</div>
 
+						<!-- 505 tab: Under Construction — msu-deep-ocean #61063B -->
+						<div class="tab-content active" id="505-content">
+							<div class="space-y-6 text-msu-main-color dark:text-msu-bgc-color">
+								<h3 class="text-2xl font-bold text-[#61063B] dark:text-msu-bgc-color mb-4">505 — Under Construction</h3>
+								<div class="rounded-2xl overflow-hidden border-2 border-[#61063B]/30 dark:border-gray-600 bg-gradient-to-br from-[#61063B]/5 to-white dark:from-gray-800 dark:to-gray-800/80 p-6 sm:p-8 text-center shadow-lg">
+									<div class="mb-4">
+										<span class="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-[#61063B] dark:text-[#61063B]">505</span>
+									</div>
+									<p class="text-lg font-semibold text-[#61063B] dark:text-[#D58BB5] mb-2">This section is under construction</p>
+									<p class="text-msu-main-color dark:text-msu-bgc-color/90 mb-6 max-w-md mx-auto">General Background, Brief History, and Goal & Objectives content is being updated. Visit our full under-construction page for more.</p>
+									<a href="/505" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full font-bold text-white bg-[#61063B] hover:bg-[#4D052F] transition-colors shadow-md hover:shadow-lg">
+										<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+										View 505 page
+									</a>
+								</div>
+							</div>
+						</div>
+
 					</div>
 
 				</div>
@@ -796,6 +925,8 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 					button.addEventListener('click', function() {
 
+						if (this.disabled || this.classList.contains('tab-disabled')) return;
+
 						// Remove active class from all buttons and contents
 
 						document.querySelectorAll('.tab-button').forEach(btn => {
@@ -804,7 +935,7 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 							btn.classList.add('border-transparent', 'text-gray-500');
 
-							btn.classList.remove('border-msu-deep-ocean', 'text-msu-bgc-color');
+							btn.classList.remove('border-[#61063B]', 'text-[#61063B]', 'dark:text-[#D58BB5]');
 
 						});
 
@@ -822,7 +953,7 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 						// Add active class to clicked button
 
-						this.classList.add('active', 'border-msu-deep-ocean', 'text-msu-bgc-color');
+						this.classList.add('active', 'border-[#61063B]', 'text-[#61063B]', 'dark:text-[#D58BB5]');
 
 						this.classList.remove('border-transparent', 'text-gray-500');
 
@@ -858,7 +989,7 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 				.tab-button.active {
 
-					color: #03045e;
+					color: #61063B;
 
 					border-color: #61063B;
 
@@ -868,7 +999,9 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 				.dark .tab-button.active {
 
-					color: #ffffff;
+					color: #D58BB5;
+
+					border-color: #61063B;
 
 				}
 
@@ -1375,9 +1508,11 @@ document.addEventListener('DOMContentLoaded', function() {
     registerDepartmentDisplay(
         [
             'College of Fisheries',
-            'Fisheries College'
+            'Fisheries College',
+            'COFEST',
+            'IOES'
         ],
-        'College of Fisheries'
+        'COFEST'
     );
 
     const resolveDepartmentPrograms = (department: string) => {
@@ -1800,178 +1935,48 @@ const getFacultyImagePath = (name) => {
 	return `/images/cof/Faculty/${coreName}.png`;
 };
 
+// COFEST: merged COF + IOES faculty; departments match chairperson-assigned banners (same data as cof.astro + ioes.astro)
 const featuredFacultyEntries = [
-	{
-		name: 'Prof.Jaro O. Ajik',
-		id: 'jaroAjik',
-		departments: ['Capture Fisheries Department'],
-		image: getFacultyImagePath('Jaro O. Ajik'),
-		subtitle: 'Dean, College of Fisheries',
-		highlight: 'Capture Fisheries • Fisheries Management',
-		summary: 'Fisheries dean driving research and extension partnerships that strengthen navigation, ocean stewardship, and community resilience.'
-	},
-	{
-		name: 'Asst. Prof. Wahaymin M. Jamil',
-		id: 'wahayminJamil',
-		departments: ['Aquaculture Department'],
-		image: getFacultyImagePath('Asst. Prof. Wahaymin M. Jamil'),
-		subtitle: 'College Secretary, College of Fisheries',
-		highlight: 'Aquaculture • Feed Management',
-		summary: 'Aquaculture scholar and College Secretary focused on optimized feeding systems, faculty support, and community-engaged fisheries research.'
-	},
-	{
-		name: 'Asst. Prof. Merilyn Q. Amlani',
-		id: 'merilynAmlani',
-		departments: ['Post-Harvest Fisheries Department', 'Food Science and Technology Department'],
-		image: getFacultyImagePath('Asst. Prof. Merilyn Q. Amlani'),
-		subtitle: 'Chairperson, Fish Processing & Food Technology',
-		highlight: 'Food Engineering • Post-Harvest Innovation',
-		summary: 'Internationally trained food engineer leading the SFPIC, advancing value-added seaweed products and collaborative fisheries research.'
-	},
-	{
-		name: 'Assistant Prof. Albaris B. Tahiluddin',
-		id: 'albarisTahiluddin',
-		departments: ['Aquaculture Department', 'Capture Fisheries Department'],
-		image: getFacultyImagePath('Assistant Prof. Albaris B. Tahiluddin'),
-		subtitle: 'Chairperson, Aquaculture Department',
-		highlight: 'Seaweed Farming • Aquaculture Health',
-		summary: 'Ph.D. aquaculture scientist publishing on nutrient enrichment and seaweed disease management to strengthen regional blue economies.'
-	},
-	{
-		name: 'Asst. Prof. Jurmin H. Sarri',
-		id: 'jurminSarri',
-		departments: ['Capture Fisheries Department','Capture Fisheries Department','Aquaculture Department'],
-		image: getFacultyImagePath('Asst. Prof. Jurmin H. Sarri'),
-		subtitle: 'Chairperson, Capture Fisheries Department',
-		highlight: 'Aquaculture • Fish Nutrition • Algal Biotechnology',
-		summary: 'Marine fisheries scholar guiding department research on algal biotechnology, capture fisheries trends, and community livelihoods in the Sulu Archipelago.'
-	},
-	{
-		name: 'Maria Liza B. Toring-Farquerabao',
-		id: 'mariaLizaToringFarquerabao',
-		departments: ['Capture Fisheries Department'],
-		image: getFacultyImagePath('Maria Liza B. Toring-Farquerabao'),
-		subtitle: 'Faculty, Capture Fisheries Department',
-		highlight: 'Capture Fisheries • Fisheries Biology',
-		summary: 'Registered fisheries professional documenting coastal ecosystems and fisheries markets while mentoring future capture fisheries specialists.'
-	},
-	{
-		name: 'Prof. Ainulyakin H. Imlani',
-		id: 'ainulyakinImlani',
-		departments: ['Aquaculture Department'],
-		image: getFacultyImagePath('Prof. Ainulyakin H. Imlani'),
-		subtitle: 'Director, Fisheries Training & Aquaculture Production',
-		highlight: 'Aquaculture • Fish Nutrition • Fish Health',
-		summary: 'Professor VI and MSU-TCTO connectivity ambassador leading fish nutrition research and international partnerships in aquaculture innovation.'
-	},
-	{
-		name: 'Prof. Yashier U. Jumah',
-		id: 'yashierJumah',
-		departments: ['Aquaculture Department'],
-		image: getFacultyImagePath('Prof. Yashier U. Jumah'),
-		subtitle: 'Aquaculture Department, Professor VI',
-		highlight: 'Aquaculture • Fish Immunology • Nutrition',
-		summary: 'Top-ranked fisheries technologist exploring fish physiology and immunology to strengthen resilient aquaculture systems across BARMM.'
-	},
-	{
-		name: 'Assoc. Prof. Rosalinda P. Shariff',
-		id: 'rosalindaShariff',
-		departments: ['Aquaculture Department'],
-		image: getFacultyImagePath('Assoc. Prof. Rosalinda P. Shariff'),
-		subtitle: 'Special Assistant to the OVCAA',
-		highlight: 'Aquatic Ecology • Marine Biodiversity',
-		summary: 'Long-time aquatic ecologist and academic leader championing curriculum development, biodiversity conservation, and faculty advancement.'
-	},
-	{
-		name: 'Assoc. Prof. Kingpu O. Ajik',
-		id: 'kingpuAjik',
-		departments: ['Post-Harvest Fisheries Department','Food Science and Technology Department'],
-		image: getFacultyImagePath('Assoc. Prof. Kingpu O. Ajik'),
-		subtitle: 'Fish Processing Technology Department',
-		highlight: 'Aquaculture • Analytical Chemistry',
-		summary: 'Associate professor bridging aquaculture and chemistry through heavy metal profiling and food safety research in fisheries products.'
-	},
-	{
-		name: 'Asst. Prof. Iannie P. Maribao',
-		id: 'iannieMaribao',
-		departments: ['Post-Harvest Fisheries Department','Food Science and Technology Department'],
-		image: getFacultyImagePath('Asst. Prof. Iannie P. Maribao'),
-		subtitle: 'Food Technology & Fish Processing Faculty',
-		highlight: 'Food Engineering • Protein Systems',
-		summary: 'Food engineer applying non-thermal technologies to improve fisheries products and mentoring students in innovative processing techniques.'
-	},
-	{
-		name: 'Ms. Normina A. Abubakar',
-		id: 'norminaAbubakar',
-		departments: ['Post-Harvest Fisheries Department','Food Science and Technology Department'],
-		image: getFacultyImagePath('Normina A. Abubakar'),
-		subtitle: 'Instructor I, Fish Processing Technology',
-		highlight: 'Post-Harvest Fisheries • Food Technology',
-		summary: 'Fish processing specialist and APDP scholar focused on value-added seafood, food safety, and empowering future fisheries professionals.'
-	},
-	{
-		name: 'Mr. Marhamin H. Jumsali',
-		id: 'marhaminJumsali',
-		departments: ['Post-Harvest Fisheries Department','Food Science and Technology Department'],
-		image: getFacultyImagePath('Marhamin H. Jumsali'),
-		subtitle: 'Instructor I, Fish Processing Technology',
-		highlight: 'Aquaculture • Food Microbiology',
-		summary: 'BIGAST scholar advancing seaweed-based products, microalgae research, and science-driven community extension in food microbiology.'
-	},
-	{
-		name: 'Angelica B. Bermil',
-		id: 'angelicaBermil',
-		departments: ['Capture Fisheries Department'],
-		image: getFacultyImagePath('Angelica B. Bermil'),
-		subtitle: 'Instructor I, Capture Fisheries Department',
-		highlight: 'Capture Fisheries • Marine Biodiversity',
-		summary: 'PhilDOST-TUMSAT scholar applying marine biodiversity and environmental DNA tools to strengthen capture fisheries research and community livelihoods.'
-	},
-	{
-		name: 'Assoc. Prof. Melodina D. Hairol',
-		id: 'melodinaHairol',
-		departments: ['Aquaculture Department'],
-		image: getFacultyImagePath('Assoc. Prof. Melodina D. Hairol'),
-		subtitle: 'Extension Project Staff, Aquaculture Department',
-		highlight: 'Fish Nutrition • Seaweed Farming',
-		summary: 'Associate professor and former BFAR aquaculturist leveraging indigenous resources for fish nutrition, seaweed farming, and extension services.'
-	},
-	{
-		name: 'Associate Prof. Hadjiran A. Illud',
-		id: 'hadjiranIllud',
-		departments: ['Capture Fisheries Department'],
-		image: getFacultyImagePath('Associate Prof. Hadjiran A. Illud'),
-		subtitle: 'Capture Fisheries Department',
-		highlight: 'Aquaculture • Marine Fisheries Management',
-		summary: 'Doctor of Fisheries Technology leading marine fisheries management, aquaculture research, and faculty mentoring at MSU-TCTO.'
-	},
-	{
-		name: 'Associate Prof. Cherry T. Nian',
-		id: 'cherryNian',
-		departments: ['Aquaculture Department'],
-		image: getFacultyImagePath('Associate Prof. Cherry T. Nian'),
-		subtitle: 'Associate Professor V, Aquaculture Department',
-		highlight: 'Fish Nutrition • Hatchery Management',
-		summary: 'Aquaculture leader overseeing hatchery innovation, faculty development, and community trainings that sustain coastal livelihoods.'
-	},
-	{
-		name: 'Gerly-Ayn J. Tupas',
-		id: 'gerlyAynTupas',
-		departments: ['Aquaculture Department'],
-		image: getFacultyImagePath('Gerly-Ayn J. Tupas'),
-		subtitle: 'Assistant Professor IV, Aquaculture Department',
-		highlight: 'Aquaculture • Fish Immunology • Genetics',
-		summary: 'Assistant professor blending international aquaculture experience with local research on fish nutrition, genetics, and smart farming systems.'
-	},
-	{
-		name: 'Rizal Jhunn F. Robles',
-		id: 'rizalRobles',
-		departments: ['Aquaculture Department', 'Capture Fisheries Department'],
-		image: getFacultyImagePath('Rizal Jhunn F. Robles'),
-		subtitle: 'Assistant Professor IV',
-		highlight: 'Seaweed Science • Carrageenan Rheology',
-		summary: 'Aquaculture faculty specializing in seaweed processing and carrageenan characterization to support sustainable coastal industries.'
-	}
+	// COF – Department of Aquaculture
+	{ name: 'Prof. Ainulyakin H. Imlani', id: 'ainulyakinImlani', departments: ['Department of Aquaculture'], image: getFacultyImagePath('Prof. Ainulyakin H. Imlani'), subtitle: 'Chairperson, Department of Aquaculture', highlight: 'Aquaculture • Fish Nutrition • Fish Health', summary: 'Professor VI and Chairperson leading fish nutrition research and international partnerships in aquaculture innovation.' },
+	{ name: 'Asst. Prof. Wahaymin M. Jamil', id: 'wahayminJamil', departments: ['Department of Aquaculture'], image: getFacultyImagePath('Asst. Prof. Wahaymin M. Jamil'), subtitle: 'College Secretary, COFEST', highlight: 'Aquaculture • Feed Management', summary: 'Aquaculture scholar and College Secretary focused on optimized feeding systems and community-engaged fisheries research.' },
+	{ name: 'Assistant Prof. Albaris B. Tahiluddin', id: 'albarisTahiluddin', departments: ['Department of Aquaculture', 'Department of Post-Harvest Fisheries'], image: getFacultyImagePath('Assistant Prof. Albaris B. Tahiluddin'), subtitle: 'Chairperson, Department of Post-Harvest Fisheries', highlight: 'Seaweed Farming • Aquaculture Health', summary: 'Ph.D. aquaculture scientist publishing on nutrient enrichment and seaweed disease management.' },
+	{ name: 'Prof. Yashier U. Jumah', id: 'yashierJumah', departments: ['Department of Aquaculture'], image: getFacultyImagePath('Prof. Yashier U. Jumah'), subtitle: 'Professor VI', highlight: 'Aquaculture • Fish Immunology • Nutrition', summary: 'Top-ranked fisheries technologist exploring fish physiology and immunology.' },
+	{ name: 'Assoc. Prof. Rosalinda P. Shariff', id: 'rosalindaShariff', departments: ['Department of Aquaculture'], image: getFacultyImagePath('Assoc. Prof. Rosalinda P. Shariff'), subtitle: 'Special Assistant to the OVCAA', highlight: 'Aquatic Ecology • Marine Biodiversity', summary: 'Long-time aquatic ecologist championing curriculum development and biodiversity conservation.' },
+	{ name: 'Assoc. Prof. Melodina D. Hairol', id: 'melodinaHairol', departments: ['Department of Aquaculture'], image: getFacultyImagePath('Assoc. Prof. Melodina D. Hairol'), subtitle: 'Extension Project Staff', highlight: 'Fish Nutrition • Seaweed Farming', summary: 'Associate professor leveraging indigenous resources for fish nutrition and seaweed farming.' },
+	{ name: 'Associate Prof. Cherry T. Nian', id: 'cherryNian', departments: ['Department of Aquaculture'], image: getFacultyImagePath('Associate Prof. Cherry T. Nian'), subtitle: 'Associate Professor V', highlight: 'Fish Nutrition • Hatchery Management', summary: 'Aquaculture leader overseeing hatchery innovation and community trainings.' },
+	{ name: 'Gerly-Ayn J. Tupas', id: 'gerlyAynTupas', departments: ['Department of Aquaculture'], image: getFacultyImagePath('Gerly-Ayn J. Tupas'), subtitle: 'Assistant Professor IV', highlight: 'Aquaculture • Fish Immunology • Genetics', summary: 'Assistant professor blending international aquaculture experience with local research.' },
+	{ name: 'Rizal Jhunn F. Robles', id: 'rizalRobles', departments: ['Department of Aquaculture', 'Department of Capture Fisheries'], image: getFacultyImagePath('Rizal Jhunn F. Robles'), subtitle: 'Assistant Professor IV', highlight: 'Seaweed Science • Carrageenan Rheology', summary: 'Faculty specializing in seaweed processing and carrageenan characterization.' },
+	// COF – Department of Capture Fisheries
+	{ name: 'Prof. Jaro O. Ajik', id: 'jaroAjik', departments: ['Department of Capture Fisheries'], image: getFacultyImagePath('Jaro O. Ajik'), subtitle: 'Chairperson, Department of Capture Fisheries', highlight: 'Capture Fisheries • Fisheries Management', summary: 'Fisheries leader driving research and extension partnerships for ocean stewardship and community resilience.' },
+	{ name: 'Asst. Prof. Jurmin H. Sarri', id: 'jurminSarri', departments: ['Department of Capture Fisheries', 'Department of Aquatic Resources Management'], image: getFacultyImagePath('Asst. Prof. Jurmin H. Sarri'), subtitle: 'Chairperson, Department of Aquatic Resources Management', highlight: 'Aquaculture • Fish Nutrition • Algal Biotechnology', summary: 'Marine fisheries scholar guiding research on algal biotechnology and capture fisheries.' },
+	{ name: 'Maria Liza B. Toring-Farquerabao', id: 'mariaLizaToringFarquerabao', departments: ['Department of Capture Fisheries'], image: getFacultyImagePath('Maria Liza B. Toring-Farquerabao'), subtitle: 'Faculty', highlight: 'Capture Fisheries • Fisheries Biology', summary: 'Registered fisheries professional documenting coastal ecosystems and fisheries markets.' },
+	{ name: 'Associate Prof. Hadjiran A. Illud', id: 'hadjiranIllud', departments: ['Department of Capture Fisheries'], image: getFacultyImagePath('Associate Prof. Hadjiran A. Illud'), subtitle: 'Faculty', highlight: 'Aquaculture • Marine Fisheries Management', summary: 'Doctor of Fisheries Technology leading marine fisheries management and aquaculture research.' },
+	{ name: 'Angelica B. Bermil', id: 'angelicaBermil', departments: ['Department of Capture Fisheries'], image: getFacultyImagePath('Angelica B. Bermil'), subtitle: 'Instructor I', highlight: 'Capture Fisheries • Marine Biodiversity', summary: 'PhilDOST-TUMSAT scholar applying marine biodiversity and environmental DNA tools.' },
+	// COF – Department of Post-Harvest Fisheries & Food Science and Technology
+	{ name: 'Asst. Prof. Merilyn Q. Amlani', id: 'merilynAmlani', departments: ['Department of Post-Harvest Fisheries', 'Department of Food Science and Technology'], image: getFacultyImagePath('Asst. Prof. Merilyn Q. Amlani'), subtitle: 'Chairperson, Department of Food Science and Technology', highlight: 'Food Engineering • Post-Harvest Innovation', summary: 'Internationally trained food engineer leading the SFPIC and value-added seaweed products.' },
+	{ name: 'Assoc. Prof. Kingpu O. Ajik', id: 'kingpuAjik', departments: ['Department of Post-Harvest Fisheries', 'Department of Food Science and Technology'], image: getFacultyImagePath('Assoc. Prof. Kingpu O. Ajik'), subtitle: 'Faculty', highlight: 'Aquaculture • Analytical Chemistry', summary: 'Associate professor bridging aquaculture and chemistry through heavy metal profiling.' },
+	{ name: 'Asst. Prof. Iannie P. Maribao', id: 'iannieMaribao', departments: ['Department of Post-Harvest Fisheries', 'Department of Food Science and Technology'], image: getFacultyImagePath('Asst. Prof. Iannie P. Maribao'), subtitle: 'Faculty', highlight: 'Food Engineering • Protein Systems', summary: 'Food engineer applying non-thermal technologies to improve fisheries products.' },
+	{ name: 'Ms. Normina A. Abubakar', id: 'norminaAbubakar', departments: ['Department of Post-Harvest Fisheries', 'Department of Food Science and Technology'], image: getFacultyImagePath('Normina A. Abubakar'), subtitle: 'Instructor I', highlight: 'Post-Harvest Fisheries • Food Technology', summary: 'Fish processing specialist focused on value-added seafood and food safety.' },
+	{ name: 'Mr. Marhamin H. Jumsali', id: 'marhaminJumsali', departments: ['Department of Post-Harvest Fisheries', 'Department of Food Science and Technology'], image: getFacultyImagePath('Marhamin H. Jumsali'), subtitle: 'Instructor I', highlight: 'Aquaculture • Food Microbiology', summary: 'BIGAST scholar advancing seaweed-based products and microalgae research.' },
+	// IOES – Department of Marine Sciences (same data as ioes.astro Marine Biology)
+	{ name: 'Prof. Sheriffa T. Andas, Ph.D.', id: 'andas', departments: ['Department of Marine Sciences'], image: '/images/ioes/Faculty/SHERIFFA T. ANDAS.jpg', subtitle: 'Dean, COFEST', highlight: 'Biology • Environmental Science', summary: 'Dean of COFEST with extensive expertise in biology and environmental science.' },
+	{ name: 'Asst. Prof. Kimtang Joy H. Mohammad', id: 'mohammad', departments: ['Department of Marine Sciences'], image: '/images/ioes/Faculty/KIMTANG JOY H. MOHAMMAD.jpg', subtitle: 'Chairperson, Department of Marine Sciences', highlight: 'Marine Biology • Seaweed Research', summary: 'Chairperson specializing in marine biology, seaweed research, and coral reef assessment.' },
+	{ name: 'Dr. Richard N. Muallil', id: 'muallil', departments: ['Department of Marine Sciences'], image: '/images/ioes/Faculty/RICHARD N. MUALLIL.jpg', subtitle: 'VCRIDE', highlight: 'Marine Science • Fisheries Management', summary: 'Distinguished marine scientist with research in marine conservation and fisheries management.' },
+	{ name: 'Dr. Sitti Zayda B. Halun', id: 'halun', departments: ['Department of Marine Sciences'], image: '/images/ioes/Faculty/SITTI ZAYDA B. HALUN.jpg', subtitle: 'Director for SeaRDeC', highlight: 'Marine Ecology • Seaweed Research', summary: 'Expert in marine ecology and seaweed research, leading blue-carbon ecosystem studies.' },
+	{ name: 'Assoc. Prof. Araniza M. Diansuy', id: 'diansuy', departments: ['Department of Marine Sciences'], image: '/images/ioes/Faculty/ARANIZA M. DIANSUY.jpg', subtitle: 'Director for ICEES', highlight: 'Marine Biology • Seaweed Cultivation', summary: 'Leading extension services and community engagement in marine science education.' },
+	{ name: 'Sitti Amina M. Regino', id: 'regino', departments: ['Department of Marine Sciences'], image: '/images/ioes/Faculty/SITTI AMINA M. REGINO.jpg', subtitle: 'Faculty', highlight: 'Marine Biology • Aquaculture', summary: 'Specializing in marine science education and aquaculture.' },
+	{ name: 'Anina Haslee A. Julkanain-Ong', id: 'julkanain', departments: ['Department of Marine Sciences'], image: '/images/ioes/Faculty/ANINA HASLEE A. JULKANAIN-ONG.jpg', subtitle: 'Instructor II', highlight: 'Marine Biology • Oceanography', summary: 'Pursuing advanced studies in oceanography and nutrient dynamics.' },
+	{ name: 'Ahalnida M. Tambihasan', id: 'tambihasan', departments: ['Department of Marine Sciences'], image: '/images/ioes/Faculty/AHALNIDA TAMBIHASAN.jpg', subtitle: 'Special Assistant, OVCRE', highlight: 'Marine Biology • Coastal Resource Assessment', summary: 'Specializing in marine biology and population genetics.' },
+	{ name: 'Assoc. Prof. Abdurajan B. Lintasan', id: 'lintasan', departments: ['Department of Marine Sciences'], image: '/images/ioes/Faculty/ABDURAJAN B. LINTASAN.jpg', subtitle: 'Associate Professor V', highlight: 'Physics', summary: 'Associate Professor contributing to interdisciplinary marine science research.' },
+	{ name: 'Asst. Prof. Faricia M. Abdulwahid', id: 'abdulwahid', departments: ['Department of Marine Sciences'], image: '/images/ioes/Faculty/FARICIA M. ABDULWAHID.jpg', subtitle: 'Chief, Integrated Science Laboratory', highlight: 'Chemistry', summary: 'Chief of the Integrated Science Laboratory, specializing in chemistry.' },
+	{ name: 'Monica Mae R. Pon', id: 'pon', departments: ['Department of Marine Sciences'], image: '/images/ioes/Faculty/MONICA MAE R. PON.jpg', subtitle: 'Instructor I', highlight: 'Biology • Genetics', summary: 'Dedicated science educator specializing in biology and environmental education.' },
+	{ name: 'Assoc. Prof. Karen Joy B. Serag-Endonila', id: 'serag', departments: ['Department of Marine Sciences', 'Department of Environmental Science'], image: '/images/ioes/Faculty/KAREN JOY B. SERAG-ENDONILA.jpg', subtitle: 'Special Assistant, OVCRE', highlight: 'Marine Ecology • Marine Biodiversity', summary: 'Associate Professor specializing in marine biodiversity conservation and seaweed tissue culture.' },
+	// IOES – Department of Environmental Science (same data as ioes.astro)
+	{ name: 'Assistant Prof. Nur-Aisa S. Abdulmajid', id: 'abdulmajid', departments: ['Department of Environmental Science'], image: '/images/ioes/Faculty/NUR-AISA S. ABDULMAJID.jpg', subtitle: 'Chairperson, Department of Environmental Science', highlight: 'Environmental Science • Microbiology', summary: 'Chairperson specializing in microbiology and environmental management.' },
+	{ name: 'Assoc. Prof. Nurhima H. Jammang', id: 'jammang', departments: ['Department of Environmental Science'], image: '/images/ioes/Faculty/NURHIMA H. JAMMANG.jpg', subtitle: 'College Secretary', highlight: 'Disaster Risk Reduction', summary: 'College Secretary specializing in Disaster Risk Reduction and environmental science education.' },
+	{ name: 'Dahlia P. Burias', id: 'burias', departments: ['Department of Environmental Science'], image: '/images/ioes/Faculty/DAHLIA P. BURIAS.jpg', subtitle: 'Instructor I', highlight: 'Environmental Science • Coastal Ecosystem Assessment', summary: 'Specializing in coastal ecosystem assessment and coral reefs.' },
+	{ name: 'Zharifa G. Rasul, MSc', id: 'rasul', departments: ['Department of Environmental Science'], image: '/images/ioes/Faculty/ZHARIFA G. RASUL.jpg', subtitle: 'Instructor I', highlight: 'Biodiversity', summary: 'Specializing in biodiversity research and species diversity.' }
 ];
 
 function renderFeaturedFacultyCards() {
@@ -2059,7 +2064,7 @@ function renderFeaturedFacultyCards() {
 document.addEventListener('DOMContentLoaded', renderFeaturedFacultyCards);
 
 // Share faculty profile
-const SHARE_COLLEGE_NAME = 'College of Fisheries';
+const SHARE_COLLEGE_NAME = 'COFEST';
 function shareFacultyProfile(facultyId) {
 	// Use ?profile=id so Messenger/Facebook/Twitter crawlers get og:image (faculty photo)
 	const url = typeof window !== 'undefined' ? `${window.location.origin}${window.location.pathname}?profile=${facultyId}` : '';
@@ -2081,6 +2086,17 @@ function copyShareLink(url) {
 		setTimeout(() => toast.remove(), 2500);
 	});
 }
+// Share personnel profile (Personnel Spotlight) – link includes ?personnel=id so OG image is the person's photo
+function sharePersonnelProfile(personnelId) {
+	const url = typeof window !== 'undefined' ? `${window.location.origin}${window.location.pathname}?personnel=${personnelId}` : '';
+	const title = `Personnel Spotlight - MSU-TCTO ${SHARE_COLLEGE_NAME}`;
+	const text = 'View this personnel profile at MSU-TCTO COFEST.';
+	if (typeof navigator !== 'undefined' && navigator.share) {
+		navigator.share({ title, text, url }).catch(() => copyShareLink(url));
+	} else {
+		copyShareLink(url);
+	}
+}
 
 function openFacultyModal(facultyId) {
 	console.log('Opening modal for:', facultyId); // Debug log
@@ -2097,10 +2113,10 @@ function openFacultyModal(facultyId) {
 	const facultyData: Record<string, any> = {
 		jaroAjik: {
 			name: "Prof. Jaro O. Ajik",
-			position: "Dean, College of Fisheries",
+			position: "Chairperson, Department of Capture Fisheries",
 			rank: "Professor VI",
 			image: getFacultyImagePath("Jaro O. Ajik"),
-			department: "Capture Fisheries Department",
+			department: "Department of Capture Fisheries",
 			education: [
 				"Doctor in Fisheries Technology (2021) – Iloilo State University of Fisheries Science and Technology, Iloilo City, Philippines",
 				"Master of Science in Marine Management (2008) – Zamboanga State College of Marine Science and Technology, Zamboanga City, Philippines",
@@ -2121,14 +2137,14 @@ function openFacultyModal(facultyId) {
 				"Muallil, R. N., Irilis, R. A., Habibuddin, A. A., Abdulmajid, N. S., Ajik, J. O., Ancheta, R. A. (2024). A rapid assessment of the status, trends and challenges in small-scale commercial sardine fisheries in the Sulu Archipelago, southern Philippines. Marine Policy 160, 105965.",
 				"Suhaili, N. A., Jamih, R. S., Abubakar, N. A., Ajik, J. O., Amlani, M. Q. (2024). Preliminary Study on the Effects of Vinegar as Pre-Treatment for the Oven-Drying of Pacific Yellowtail Emperor. ASEAN Journal on Science and Technology for Development 40 (2), 9."
 			],
-			description: "Prof. Jaro O. Ajik is the Dean of the College of Fisheries at MSU-TCTO. A Professor VI and fisheries leader, he champions research and extension programs that empower coastal communities, with expertise spanning capture fisheries, fisheries oceanography, and navigation."
+			description: "Prof. Jaro O. Ajik is the Chairperson of the Department of Capture Fisheries at COFEST, MSU-TCTO. A Professor VI and fisheries leader, he champions research and extension programs that empower coastal communities, with expertise spanning capture fisheries, fisheries oceanography, and navigation."
 		},
 		wahayminJamil: {
 			name: "Asst. Prof. Wahaymin M. Jamil",
-			position: "College Secretary, Office of the Dean, College of Fisheries",
+			position: "College Secretary, Office of the Dean, COFEST",
 			rank: "Assistant Professor IV",
 			image: getFacultyImagePath("Asst. Prof. Wahaymin M. Jamil"),
-			department: "Aquaculture Department",
+			department: "Department of Aquaculture",
 			education: [
 				"Master of Science in Aquaculture (2024) – Mindanao State University – Tawi-Tawi College of Technology and Oceanography",
 				"Bachelor of Science in Fisheries (2015) – Mindanao State University – Tawi-Tawi College of Technology and Oceanography"
@@ -2150,10 +2166,10 @@ function openFacultyModal(facultyId) {
 		},
 		merilynAmlani: {
 			name: "Asst. Prof. Merilyn Q. Amlani",
-			position: "Chairperson, Fish Processing Department & Food Technology Department, College of Fisheries",
+			position: "Chairperson, Department of Food Science and Technology, COFEST",
 			rank: "Assistant Professor IV",
 			image: getFacultyImagePath("Asst. Prof. Merilyn Q. Amlani"),
-			department: "Food Science and Technology Department",
+			department: "Department of Food Science and Technology",
 			education: [
 				"Master of Science in Food Engineering (2023) – Kastamonu University, Türkiye",
 				"Bachelor of Science in Fisheries (2016) – Mindanao State University – Tawi-Tawi College of Technology and Oceanography"
@@ -2178,10 +2194,10 @@ function openFacultyModal(facultyId) {
 		},
 		albarisTahiluddin: {
 			name: "Assistant Prof. Albaris B. Tahiluddin",
-			position: "Chairperson, Aquaculture Department, College of Fisheries",
-			rank: "Assistant Professor IV",
+			position: "Chairperson, Department of Post-Harvest Fisheries, COFEST",
+			rank: "Associate Professor (Ph.D.)",
 			image: getFacultyImagePath("Assistant Prof. Albaris B. Tahiluddin"),
-			department: "Aquaculture Department",
+			department: "Department of Post-Harvest Fisheries",
 			education: [
 				"Ph.D. in Aquaculture – Kastamonu University, Türkiye",
 				"Master of Science in Ocean Sciences, major in Biological Oceanography (2018) – University of the Philippines Visayas",
@@ -2202,14 +2218,14 @@ function openFacultyModal(facultyId) {
 				"Magcanta-Mortos, M. L., Tahiluddin, A. B., et al. (2025). Sargassum hatchery-based cultivation and mariculture techniques in the Philippines. Aquatic Botany, 103925.",
 				"Tahiluddin, A. B., Esmola, F. R., Abduraup, S. A., et al. (2025). Seaweed Consumption Practices in Coastal Communities of Tawi-Tawi, Philippines. Phycology, 5(2), 25."
 			],
-			description: "Assistant Prof. Albaris B. Tahiluddin heads the Aquaculture Department at MSU-TCTO. His research drives seaweed health management, nutrient enrichment strategies, and disease mitigation—empowering local aquaculture producers with science-based solutions."
+			description: "Assistant Prof. Albaris B. Tahiluddin heads the Department of Post-Harvest Fisheries at COFEST, MSU-TCTO. His research drives seaweed health management, nutrient enrichment strategies, and disease mitigation—empowering local aquaculture and post-harvest producers with science-based solutions."
 		},
 		jurminSarri: {
 			name: "Asst. Prof. Jurmin H. Sarri",
-			position: "Chairperson, Capture Fisheries Department, College of Fisheries",
+			position: "Chairperson, Department of Aquatic Resources Management, COFEST",
 			rank: "Assistant Professor IV",
 			image: getFacultyImagePath("Asst. Prof. Jurmin H. Sarri"),
-			department: "Capture Fisheries Department",
+			department: "Department of Aquatic Resources Management",
 			education: [
 				"Master of Science in Aquaculture (2023) – Kastamonu University, Türkiye",
 				"Bachelor of Science in Fisheries (2019) – College of Fisheries, MSU-TCTO"
@@ -2238,10 +2254,10 @@ function openFacultyModal(facultyId) {
 		},
 		mariaLizaToringFarquerabao: {
 			name: "Maria Liza B. Toring-Farquerabao",
-			position: "Faculty, Capture Fisheries Department, College of Fisheries",
+			position: "Faculty, Department of Capture Fisheries, COFEST",
 			rank: "Instructor II",
 			image: getFacultyImagePath("Maria Liza B. Toring-Farquerabao"),
-			department: "Capture Fisheries Department",
+			department: "Department of Capture Fisheries",
 			education: [
 				"Master of Science in Fisheries major in Fisheries Biology (CAR) – University of the Philippines Visayas",
 				"Graduate coursework in Master of Science in Aquaculture – MSU-TCTO",
@@ -2267,10 +2283,10 @@ function openFacultyModal(facultyId) {
 		},
 		ainulyakinImlani: {
 			name: "Prof. Ainulyakin H. Imlani",
-			position: "Director, Fisheries Training and Aquaculture Production; Ambassador for Connectivity to IPB",
+			position: "Chairperson, Department of Aquaculture, COFEST; Director, Fisheries Training and Aquaculture Production",
 			rank: "Professor VI",
 			image: getFacultyImagePath("Prof. Ainulyakin H. Imlani"),
-			department: "Aquaculture Department",
+			department: "Department of Aquaculture",
 			education: [
 				"Doctor of Philosophy in Aquaculture (2024) – Institut Pertanian Bogor, Indonesia",
 				"Master of Science in Aquaculture (2018) – Mindanao State University – Tawi-Tawi College of Technology and Oceanography",
@@ -3716,34 +3732,6 @@ function openFacultyModal(facultyId) {
 			],
 			description: "Ms. BLANCHE B. BELARGA is 40 years old and a resident of Barangay Sanga-Sanga, Bongao, Tawi-Tawi. She is happily married and blessed with three children. She is graduate of the Bachelor of Physical Education (BPE), class of 2006, from Western Mindanao State University (WMSU). In 2021, she completed the academic requirements for the Master of Science in Physical Education (MSPE) in the same institution, further strengthening her expertise in the field. She previously served as the Chairperson of the Sports, Physical Education and Recreation (SPEAR Department), where she actively promoted physical education programs and sports initiatives within the university. With her strong commitment to fostering athletic growth and student development, she currently holds the position of Sports Director of the Office of Sports and Recreation (OSAR), a role she has been fulfilling since 2024. Blanche continues to champion a culture of wellness, discipline, and excellence in sports, embodying both passion and professionalism in her service to the academic and athletic community."
 		},
-		mohammad: {
-			name: "Al-Shadat A. Mohammad",
-			position: "Director of OCAD",
-			rank: "Instructor I",
-			image: "/images/coed/Profile/AL-SHADAT A. MOHAMMAD.png",
-			education: [
-				"Master of Arts in Education, Major in Physical Education - Philippine Christian University"
-			],
-			achievements: [
-				"Instructor I, MSU-TCTO",
-				"Director, Office of Cultural Affairs and Development (OCAD)",
-				"Faculty Member, Department of Physical Education, College of Education"
-			],
-			positions: [
-				"Field of Specialization: Dance, Martial Arts and Sports",
-				"Director, Office of Cultural Affairs and Development (OCAD)",
-				"Department of Physical Education, College of Education"
-			],
-			research: [
-				"Sports Pedagogy",
-				"Movement Education",
-				"Physical Education",
-				"Dance",
-				"Martial Arts",
-				"Sports"
-			],
-			description: "Al-Shadat A. Mohammad is a faculty member of the College of Education, specializing in Physical Education. He currently serves as Director of the Office of Cultural Affairs and Development at Mindanao State University – Tawi-Tawi College of Technology and Oceanography (MSU-TCTO), His teaching and research interests include sports pedagogy and movement education. As an educator, Mr. Mohammad is committed to promoting holistic development through physical education, emphasizing discipline, teamwork, and cultural awareness. He designs lessons that foster both physical competence and appreciation of the diverse traditions that shape Filipino identity. He continues to inspire future educators to view Physical Education not only as a subject for physical fitness but also as a platform for character formation, cultural preservation, and lifelong well-being."
-		},
 		salasain: {
 			name: "Rubina Salasain",
 			position: "Faculty",
@@ -3810,6 +3798,273 @@ function openFacultyModal(facultyId) {
 				"Guiding learners toward personal growth and academic excellence"
 			],
 			description: "Assoc. Prof. Rubia A. Abulwahab is an Associate Professor V at the College of Arts and Sciences, Mindanao State University Tawi-Tawi College of Technology and Oceanography (MSU-TCTO). She earned her Bachelor of Science major in Psychology from MSU-Marawi in 2005 under the Special Muslim Grant and completed her Master of Arts in Education major in Administration and Supervision at MSU-TCTO in 2015. Currently, she is pursuing her Doctor of Philosophy in Counseling major in School and Community Counseling at De La Salle University-Dasmariñas through the APDP grant. A licensed professional teacher, Assoc. Prof. Abulwahab specializes in psychology and is deeply passionate about teaching, counseling, and guiding learners toward personal growth and academic excellence."
+		},
+		// IOES faculty (merged for COFEST – Department of Marine Sciences / Department of Environmental Science)
+		andas: {
+			name: "Prof. Sheriffa T. Andas, Ph.D.",
+			position: "Dean, COFEST",
+			rank: "Professor VI",
+			image: "/images/ioes/Faculty/SHERIFFA T. ANDAS.jpg",
+			department: "Department of Marine Sciences",
+			education: [
+				"Doctor of Philosophy in Biology Major in Systematics and Ecology",
+				"Master of Arts in Science Education Major in Biology and General Science",
+				"Bachelor of Science in Biology"
+			],
+			specialization: ["Biology", "Environmental Science"],
+			achievements: [],
+			publications: [],
+			description: "Prof. Sheriffa T. Andas serves as the Dean of the College of Fisheries, Oceanography, Environmental Science, and Technology (COFEST), MSU-TCTO, bringing extensive expertise in biology and environmental science to lead the college's academic and research initiatives."
+		},
+		muallil: {
+			name: "Dr. Richard N. Muallil",
+			position: "Vice Chancellor for Research, Innovation, Development and Extension (VCRIDE)",
+			rank: "Professor VI",
+			image: "/images/ioes/Faculty/RICHARD N. MUALLIL.jpg",
+			department: "Department of Marine Sciences",
+			education: [
+				"Doctor of Philosophy in Marine Science Major in Marine Biology",
+				"Master of Science in Marine Science",
+				"Bachelor of Science in Zoology"
+			],
+			specialization: ["Marine Science", "Marine Biology", "Fisheries Management"],
+			achievements: [
+				"Outstanding Young Scientist of the Philippines (2018)",
+				"Ten Outstanding Young Men (TOYM) of the Philippines – Marine Science and Conservation (2016)",
+				"Outstanding Young Scientists (OYS) of the Philippines – Marine Science (2016)"
+			],
+			publications: [
+				"Muallil, R.N., Irilis, R.A., Habibuddin, A.A., Abdulmajid, N.S., Ajik, J.O., Ancheta, R.A. (2024). A rapid assessment of the status, trends and challenges in small-scale commercial sardine fisheries in the Sulu Archipelago, southern Philippines. Marine Policy 160, 105965.",
+				"Muallil, R.N., Tambihasan, A.M., Enojario, M.J., Tarabasa, R.T., Habibuddin, A.A., Injani, A.S., Ammang, M.A.T., Aksa, A.S. and Nañola Jr, C.L. (2023). Data on the length-weight relationship of 161 species of commercially important coral reef fishes in Tawi-Tawi islands, Southern Philippines. Data in Brief 50, 109537."
+			],
+			description: "Dr. Richard N. Muallil is a distinguished marine scientist and Vice Chancellor for Research, Innovation, Development and Extension. His research in marine conservation and fisheries management has earned him national recognition and numerous prestigious awards."
+		},
+		halun: {
+			name: "Dr. Sitti Zayda B. Halun",
+			position: "Director, Seaweed Research and Development Center (SeaRDeC)",
+			rank: "Professor VI",
+			image: "/images/ioes/Faculty/SITTI ZAYDA B. HALUN.jpg",
+			department: "Department of Marine Sciences",
+			education: [
+				"Doctor of Philosophy in Biology Major in Marine Ecology",
+				"Master of Science in Environmental Science",
+				"Bachelor of Science in Biology"
+			],
+			specialization: ["Marine Ecology", "Seaweed Research"],
+			achievements: [],
+			publications: [
+				"Halun, Sitti Zayda B. (2011). The Effects of Fertilization and Simulated Grazing on the Community Structure of a Seagrass Bed in South Florida. FIU Electronic Theses and Dissertations. 415.",
+				"Z. Halun, J. Terrados, J. Borum, L. Kamp-Nielsen, C. M. Duarte, M. D. Fortes (2002). Experimental evaluation of the effects of siltation-derived changes in sediment conditions on the Philippine seagrass Cymodocea rotundata. Journal of Experimental Marine Biology and Ecology 279, 73–87."
+			],
+			description: "Dr. Sitti Zayda B. Halun is a Professor and Director of the Seaweed Research and Development Center (SeaRDeC) at MSU-TCTO. Her research integrates marine ecology, reproductive biology, and population genetics to advance climate resilience and sustainable coastal livelihoods."
+		},
+		diansuy: {
+			name: "Assoc. Prof. Araniza M. Diansuy",
+			position: "Director of the Office of Continuing Education and Extension Services (OCEANeS)",
+			rank: "Associate Professor V",
+			image: "/images/ioes/Faculty/ARANIZA M. DIANSUY.jpg",
+			department: "Department of Marine Sciences",
+			education: [
+				"Master of Science in Marine Science",
+				"Bachelor of Science in Marine Biology"
+			],
+			specialization: ["Marine Biology", "Seaweed Cultivation"],
+			achievements: [],
+			publications: [],
+			description: "Assoc. Prof. Araniza M. Diansuy is an Associate Professor V at MSU-TCTO and Director for Continuing Education and Extension Services. Her research interests center on seaweeds and the ecophysiology of marine plants, with contributions to seaweed farming and community-based resource management."
+		},
+		jammang: {
+			name: "Assoc. Prof. Nurhima H. Jammang",
+			position: "College Secretary, COFEST",
+			rank: "Associate Professor V",
+			image: "/images/ioes/Faculty/NURHIMA H. JAMMANG.jpg",
+			department: "Department of Environmental Science",
+			education: [
+				"Master of Science in Teaching Biology",
+				"Bachelor of Science in Marine Biology"
+			],
+			specialization: ["Disaster Risk Reduction", "Environmental Science"],
+			achievements: [],
+			publications: [],
+			description: "Assoc. Prof. Nurhima H. Jammang is an Associate Professor at COFEST, MSU-TCTO, with a specialization in Disaster Risk Reduction Management. She teaches Environmental Science, Marine Pollution, Ecology, and Climate Change, and contributes to academic excellence and environmental sustainability."
+		},
+		serag: {
+			name: "Assoc. Prof. Karen Joy B. Serag-Endonila",
+			position: "Special Assistant to the Office of the Vice Chancellor for Research and Extension",
+			rank: "Associate Professor V",
+			image: "/images/ioes/Faculty/KAREN JOY B. SERAG-ENDONILA.jpg",
+			department: "Department of Marine Sciences",
+			education: [
+				"Master of Science in Environmental Science",
+				"Bachelor of Science in Marine Biology"
+			],
+			specialization: ["Marine Ecology", "Marine Biodiversity"],
+			achievements: [],
+			publications: [
+				"Oral administration of Sargassum polycystum extracts stimulates immune response and increases survival against Aeromonas hydrophila infection in Oncorhynchus mykiss (2021).",
+				"Wild Kappaphycus cf. striatus Growing in a Mangrove Stand in Siasi, Sulu, Philippines (2023)."
+			],
+			description: "Assoc. Prof. Karen Joy B. Serag-Endonila holds a Master of Science in Environmental Science major in Marine Ecology. Her expertise encompasses marine biodiversity conservation, with a focus on sea turtles and seaweed tissue culture."
+		},
+		regino: {
+			name: "Sitti Amina M. Regino",
+			position: "Chairperson, BS Marine Science Program",
+			rank: "Instructor III",
+			image: "/images/ioes/Faculty/SITTI AMINA M. REGINO.jpg",
+			department: "Department of Marine Sciences",
+			education: [
+				"Master of Science in Aquaculture",
+				"Master of Science in Marine Science (CAR)",
+				"Bachelor of Science in Marine Biology"
+			],
+			specialization: ["Marine Biology", "Aquaculture"],
+			achievements: [],
+			publications: [],
+			description: "Sitti Amina M. Regino is an Instructor at MSU-TCTO and Chairperson of the Marine Science Program. Her research focuses on nutrition, aquaculture, and production of marine invertebrates, as well as seagrass and mangrove ecosystems."
+		},
+		abdulmajid: {
+			name: "Asst. Prof. Nur-Aisa S. Abdulmajid",
+			position: "Chairperson, Department of Environmental Science, COFEST",
+			rank: "Assistant Professor IV",
+			image: "/images/ioes/Faculty/NUR-AISA S. ABDULMAJID.jpg",
+			department: "Department of Environmental Science",
+			education: [
+				"Master of Science in Microbiology",
+				"Bachelor of Science in Biology"
+			],
+			specialization: ["Environmental Science", "Microbiology"],
+			achievements: [],
+			publications: [
+				"Muallil, R.N., Irilis, R.A., Habibuddin, A.A., Abdulmajid, N.S., Ajik, J.O., Ancheta, R.A. (2024). A rapid assessment of the status, trends and challenges in small-scale commercial sardine fisheries in the Sulu Archipelago, southern Philippines. Marine Policy 160, 105965."
+			],
+			description: "Asst. Prof. Nur-Aisa S. Abdulmajid is an Assistant Professor IV at COFEST, MSU-TCTO, and Chairperson of the Department of Environmental Science. Her research interests center on endophytic fungi, food microbiology, and environmental microbiology."
+		},
+		tambihasan: {
+			name: "Ahalnida M. Tambihasan",
+			position: "Special Research Assistant to the Office of the Vice Chancellor for Research and Extension",
+			rank: "Instructor I",
+			image: "/images/ioes/Faculty/AHALNIDA TAMBIHASAN.jpg",
+			department: "Department of Marine Sciences",
+			education: [
+				"Master of Science in Marine Science Major in Marine Biology",
+				"Bachelor of Science in Biology"
+			],
+			specialization: ["Marine Biology", "Coastal Resource Assessment"],
+			achievements: [],
+			publications: [
+				"Muallil, R. N., Tambihasan, A. M., Enojario, M. J., Ong, Y. N., & Nañola, C. L. (2020). Inventory of commercially important coral reef fishes in Tawi-Tawi Islands, Southern Philippines. Fisheries Research 230, 105640.",
+				"Muallil, R. N., Tambihasan, A. M., et al. (2023). Data on the length-weight relationship of 161 species of commercially important coral reef fishes in Tawi-Tawi islands, Southern Philippines. Data in Brief 50, 109537."
+			],
+			description: "Ahalnida M. Tambihasan is an instructor and researcher specializing in marine biology, coastal resource assessment, and population genetics of marine vertebrates at MSU-TCTO."
+		},
+		lintasan: {
+			name: "Assoc. Prof. Abdurajan B. Lintasan",
+			position: "Faculty, Department of Marine Sciences",
+			rank: "Associate Professor V",
+			image: "/images/ioes/Faculty/ABDURAJAN B. LINTASAN.jpg",
+			department: "Department of Marine Sciences",
+			education: [
+				"Doctor of Philosophy in Physics (on-going)",
+				"Master of Science in Physics",
+				"Bachelor of Science in Physics"
+			],
+			specialization: ["Physics"],
+			achievements: [],
+			publications: [],
+			description: "Assoc. Prof. Abdurajan B. Lintasan is an Associate Professor V specializing in Physics at COFEST, MSU-TCTO."
+		},
+		abdulwahid: {
+			name: "Asst. Prof. Faricia M. Abdulwahid",
+			position: "Chief, Integrated Science Laboratory (ISL)",
+			rank: "Assistant Professor IV",
+			image: "/images/ioes/Faculty/FARICIA M. ABDULWAHID.jpg",
+			department: "Department of Marine Sciences",
+			education: [
+				"Master in Education – University of Western Australia (2009 – AUS-AID Scholar)",
+				"Master of Public Administration – Western Mindanao State University",
+				"Bachelor of Science in Chemistry – Western Mindanao State University"
+			],
+			specialization: ["Chemistry"],
+			achievements: ["AUS AID Scholar – Master in Education, University of Western Australia (2009)"],
+			publications: [],
+			description: "Asst. Prof. Faricia M. Abdulwahid is a holder of Bachelor of Science in Chemistry and Master in Education. She serves as Chief of the Integrated Science Laboratory (ISL) at COFEST, MSU-TCTO."
+		},
+		mohammad: {
+			name: "Asst. Prof. Kimtang Joy H. Mohammad",
+			position: "Chairperson, Department of Marine Sciences, COFEST",
+			rank: "Assistant Professor IV",
+			image: "/images/ioes/Faculty/KIMTANG JOY H. MOHAMMAD.jpg",
+			department: "Department of Marine Sciences",
+			education: [
+				"Master of Science in Marine Biology",
+				"Bachelor of Science in Marine Biology"
+			],
+			specialization: ["Marine Biology", "Seaweed Research"],
+			achievements: [],
+			publications: [],
+			description: "Asst. Prof. Kimtang Joy H. Mohammad is a Cum Laude graduate in Marine Biology from MSU-TCTO, where she now serves as an Assistant Professor IV and Chairperson of the Department of Marine Sciences. She has contributed to coral recruitment assessment and seaweed research at SeaRDeC, and earned her Master's degree in Marine Biology from MSU-IIT as a DOST-ASTHRDP scholar."
+		},
+		rasul: {
+			name: "Zharifa G. Rasul, MSc",
+			position: "Special Assistant, Secondary Education",
+			rank: "Instructor I",
+			image: "/images/ioes/Faculty/ZHARIFA G. RASUL.jpg",
+			department: "Department of Environmental Science",
+			education: [
+				"Master of Science in Biology",
+				"Bachelor of Science in Marine Biology"
+			],
+			specialization: ["Biodiversity"],
+			achievements: [],
+			publications: [],
+			description: "Zharifa G. Rasul is a faculty member of COFEST, MSU-TCTO, under the Department of Environmental Science. Her field of specialization is biodiversity, with a focus on species diversity and distribution."
+		},
+		pon: {
+			name: "Monica Mae R. Pon",
+			position: "Faculty, Department of Marine Sciences",
+			rank: "Instructor I",
+			image: "/images/ioes/Faculty/MONICA MAE R. PON.jpg",
+			department: "Department of Marine Sciences",
+			education: [
+				"Master of Science in Genetics (pursuing) – University of the Philippines Los Baños",
+				"Bachelor of Science in Biology (Cum Laude, 2012) – MSU-IIT (DOST-SEI Scholar)"
+			],
+			specialization: ["Biology", "Genetics"],
+			achievements: [],
+			publications: [
+				"Fernigil L Colicol, Charmine Z Puig, Shielamar J Judan, Monica Mae R Pon, et al. (2025). Critical Reflections and Using Bourdieu-Scheerens Framework in Transformative Mixed Methods Teachers' Licensure Review Evaluation. IJLTER.ORG 24:1, 542-562."
+			],
+			description: "Monica Mae R. Pon is a dedicated science educator with over 10 years of experience in teaching biology, chemistry, and environmental education at MSU-TCTO."
+		},
+		burias: {
+			name: "Dahlia P. Burias",
+			position: "Faculty, Department of Environmental Science",
+			rank: "Instructor I",
+			image: "/images/ioes/Faculty/DAHLIA P. BURIAS.jpg",
+			department: "Department of Environmental Science",
+			education: [
+				"Master's Degree (on-going) – University of the Philippines Diliman (APDP Grant)",
+				"Bachelor of Science in Environmental Science (Cum Laude, 2017) – MSU-TCTO"
+			],
+			specialization: ["Environmental Science", "Coastal Ecosystem Assessment"],
+			achievements: ["Cum Laude – Bachelor of Science in Environmental Science (2017)", "APDP Grant Recipient"],
+			publications: [],
+			description: "Dahlia P. Burias is an instructor at COFEST, MSU-TCTO, specializing in coastal ecosystem assessment. Her research focuses on mangrove forests, seagrass beds, coral reefs, carbon stock assessment, and plastics pollution."
+		},
+		julkanain: {
+			name: "Anina Haslee A. Julkanain-Ong",
+			position: "Faculty, Department of Marine Sciences",
+			rank: "Instructor II",
+			image: "/images/ioes/Faculty/ANINA HASLEE A. JULKANAIN-ONG.jpg",
+			department: "Department of Marine Sciences",
+			education: [
+				"Master's Degree (on-going) – Universiti Malaysia Terengganu (DOST-SEI Scholarship)",
+				"Bachelor of Science in Marine Biology (Magna Cum Laude, Class Marshal, 2018) – MSU-TCTO"
+			],
+			specialization: ["Marine Biology", "Oceanography"],
+			achievements: ["Magna Cum Laude – Bachelor of Science in Marine Biology (2018)", "College Leadership Award", "Class Marshal", "DOST-SEI Foreign Graduate Scholarship Program Recipient"],
+			publications: [],
+			description: "Anina Haslee A. Julkanain-Ong earned her Bachelor of Science in Marine Biology from MSU-TCTO, graduating Magna Cum Laude in 2018. She is pursuing a Master's degree in Oceanography at Universiti Malaysia Terengganu under the DOST-SEI Scholarship."
 		}
 	};
 
@@ -4679,9 +4934,33 @@ function openPersonnelModal(personnelId) {
 	
 	// Personnel data
 	const personnelData = {
+		andas_dean: {
+			name: "Prof. Sheriffa T. Andas, Ph.D.",
+			position: "Dean, College of Fisheries, Oceanography, Environmental Science, and Technology (COFEST)",
+			rank: "Professor VI",
+			image: "/images/ioes/Faculty/SHERIFFA T. ANDAS.jpg",
+			education: [
+				"Doctor of Philosophy in Biology Major in Systematics and Ecology",
+				"Master of Arts in Science Education Major in Biology and General Science",
+				"Bachelor of Science in Biology"
+			],
+			specialization: [
+				"Biology",
+				"Environmental Science",
+				"Academic Leadership"
+			],
+			achievements: [
+				"Dean, COFEST (College of Fisheries, Oceanography, Environmental Science, and Technology), MSU-TCTO",
+				"Former Dean, Institute of Oceanography and Environmental Science",
+				"Professor VI, MSU-TCTO"
+			],
+			awards: [],
+			publications: [],
+			description: "Prof. Sheriffa T. Andas, Ph.D. serves as the Dean of the College of Fisheries, Oceanography, Environmental Science, and Technology (COFEST) at MSU-TCTO, bringing extensive expertise in biology and environmental science to lead the college's academic and research initiatives."
+		},
 		jaro_ajik_dean: {
 			name: "Prof. Jaro O. Ajik",
-			position: "Dean, College of Fisheries",
+			position: "Chairperson, Department of Capture Fisheries",
 			rank: "Professor VI",
 			image: "/images/cof/Faculty/Jaro O. Ajik.png",
 			education: [
@@ -4699,7 +4978,7 @@ function openPersonnelModal(personnelId) {
 				"Plaque of Appreciation for publishing Scopus journals – MSU-TCTO",
 				"Graduated Cum Laude",
 				"Leads extension projects on salt-making in Bongao, Tawi-Tawi",
-				"Dean, College of Fisheries, MSU-TCTO",
+				"Chairperson, Department of Capture Fisheries, COFEST",
 				"Professor VI, MSU-TCTO"
 			],
 			awards: [
@@ -4710,7 +4989,246 @@ function openPersonnelModal(personnelId) {
 				"Muallil, R. N., Irilis, R. A., Habibuddin, A. A., Abdulmajid, N. S., Ajik, J. O., Ancheta, R. A. (2024). A rapid assessment of the status, trends and challenges in small-scale commercial sardine fisheries in the Sulu Archipelago, southern Philippines. Marine Policy 160, 105965.",
 				"Suhaili, N. A., Jamih, R. S., Abubakar, N. A., Ajik, J. O., Amlani, M. Q. (2024). Preliminary Study on the Effects of Vinegar as Pre-Treatment for the Oven-Drying of Pacific Yellowtail Emperor. ASEAN Journal on Science and Technology for Development 40 (2), 9."
 			],
-			description: "Prof. Jaro O. Ajik is the Dean of the College of Fisheries at MSU-TCTO. A Professor VI and fisheries leader, he champions research and extension programs that empower coastal communities, with expertise spanning capture fisheries, fisheries oceanography, and navigation."
+			description: "Prof. Jaro O. Ajik is the Chairperson of the Department of Capture Fisheries at COFEST, MSU-TCTO. A Professor VI and fisheries leader, he champions research and extension programs that empower coastal communities, with expertise spanning capture fisheries, fisheries oceanography, and navigation."
+		},
+		chair_imlani: {
+			name: "Prof. Ainulyakin H. Imlani, Ph.D.",
+			position: "Chairperson, Department of Aquaculture, COFEST",
+			rank: "Professor VI",
+			image: "/images/cof/Faculty/Ainulyakin H. Imlani.png",
+			education: [
+				"Doctor of Philosophy in Aquaculture (2024) – Institut Pertanian Bogor, Indonesia",
+				"Master of Science in Aquaculture (2018) – MSU-TCTO",
+				"Bachelor of Science in Fisheries (2012) – College of Fisheries, MSU-TCTO"
+			],
+			specialization: ["Aquaculture", "Fish Nutrition", "Fish Health Management", "Shellfish and Seaweed Culture"],
+			achievements: [
+				"Plaque of Appreciation for publishing Scopus journals – MSU-TCTO",
+				"Director, Fisheries Training and Aquaculture Production, MSU-TCTO",
+				"Ambassador for Connectivity of MSU-TCTO to Institut Pertanian Bogor and partner institutions in Indonesia"
+			],
+			awards: [],
+			publications: [
+				"Anggreani, S. F., Imlani, A. H., et al. (2025). Sweet Potato Leaf Extract as a Protective Antioxidant in Mahseer Fish. Jurnal Medik Veterinar, 8(1).",
+				"Suciyono, S., Budi, D. S., ... Imlani, A. H. (2025). Effect of purple sweet potato leaf extract on histopathology of Neolissochilus soroides exposed to ammonia. Egyptian Journal of Aquatic Biology & Fisheries, 29(2)."
+			],
+			description: "Prof. Ainulyakin H. Imlani, Ph.D. is the Chairperson of the Department of Aquaculture at COFEST. He forges global partnerships and leads aquaculture training, integrating fish nutrition, health management, and seaweed culture research to uplift coastal communities."
+		},
+		chair_tahiluddin: {
+			name: "Associate Prof. Albaris B. Tahiluddin, Ph.D.",
+			position: "Chairperson, Department of Post-Harvest Fisheries, COFEST",
+			rank: "Assistant Professor IV",
+			image: "/images/cof/Faculty/Albaris B. Tahiluddin.png",
+			education: [
+				"Ph.D. in Aquaculture – Kastamonu University, Türkiye",
+				"Master of Science in Ocean Sciences, major in Biological Oceanography (2018) – University of the Philippines Visayas",
+				"Bachelor of Science in Fisheries (2012) – College of Fisheries, MSU-TCTO"
+			],
+			specialization: ["Diseases and Health Management", "Seaweed Farming", "Biological Oceanography"],
+			achievements: [
+				"Certificate of Appreciation for Scopus/SCI publications – Kastamonu University",
+				"Plaques of Appreciation for publishing Scopus journals – MSU-TCTO (2023, 2024)",
+				"Magna Cum Laude; Top 5, Fisheries Technologist Licensure Examination (2012)"
+			],
+			awards: [],
+			publications: [
+				"Tahiluddin, A. B., & Roleda, M. Y. (2025). Inorganic nutrient enrichment in eucheumatoid seaweed farming. Algal Research, 86, 103922.",
+				"Tahiluddin, A. B., Esmola, F. R., Abduraup, S. A., et al. (2025). Seaweed Consumption Practices in Coastal Communities of Tawi-Tawi, Philippines. Phycology, 5(2), 25."
+			],
+			description: "Associate Prof. Albaris B. Tahiluddin, Ph.D. is the Chairperson of the Department of Post-Harvest Fisheries at COFEST. His research drives seaweed health management, nutrient enrichment strategies, and disease mitigation—empowering local aquaculture producers with science-based solutions."
+		},
+		chair_sarri: {
+			name: "Assistant Prof. Jurmin H. Sarri",
+			position: "Chairperson, Department of Aquatic Resources Management, COFEST",
+			rank: "Assistant Professor IV",
+			image: "/images/cof/Faculty/Jurmin H. Sarri.png",
+			education: [
+				"Master of Science in Aquaculture (2023) – Kastamonu University, Türkiye",
+				"Bachelor of Science in Fisheries (2019) – College of Fisheries, MSU-TCTO"
+			],
+			specialization: ["Aquaculture", "Fish Nutrition", "Feed Additives", "Algal Production", "Algal Biotechnology"],
+			achievements: [
+				"Certificate of Appreciation for publishing Scopus journals (Co-author, 2025) – MSU-TCTO",
+				"Plaque of Appreciation for publishing Scopus journals (2025) – MSU-TCTO"
+			],
+			awards: [],
+			publications: [
+				"Kissae, A.-N. H., Sarri, J. H., et al. (2025). Incorporation of salinity and AMPEP concentration in nutrient medium on Nannochloropsis sp. culture. AACL Bioflux, 18(3):1593-1604.",
+				"Sarri, J. H., & Elp, M. (2024). Optimization of iron, phosphate, and salinity in nutrient medium for enhancing biochemical composition in Chlorella sp. culture. Algal Research, 84, 103747."
+			],
+			description: "Assistant Prof. Jurmin H. Sarri is the Chairperson of the Department of Aquatic Resources Management at COFEST. He leads research on aquaculture nutrition, algal biotechnology, and coastal resource assessments that support resilient capture fisheries in Tawi-Tawi."
+		},
+		chair_mohammad: {
+			name: "Assistant Prof. Kimtang Joy H. Mohammad",
+			position: "Chairperson, Department of Marine Sciences, COFEST",
+			rank: "Assistant Professor IV",
+			image: "/images/ioes/Faculty/KIMTANG JOY H. MOHAMMAD.jpg",
+			education: [
+				"Master of Science in Marine Biology – Mindanao State University – Iligan Institute of Technology (MSU-IIT)",
+				"Bachelor of Science in Marine Biology (Cum Laude) – MSU-TCTO"
+			],
+			specialization: ["Marine Biology", "Seaweed Research", "Coral Reef Assessment"],
+			achievements: [
+				"DOST-ASTHRDP scholar – Master of Science in Marine Biology, MSU-IIT",
+				"Contributor to coral recruitment assessment and monitoring in Bongao, Tawi-Tawi",
+				"Lecturer in seaweed farmer training programs in Tawi-Tawi"
+			],
+			awards: [],
+			publications: [],
+			description: "Assistant Prof. Kimtang Joy H. Mohammad is the Chairperson of the Department of Marine Sciences at COFEST. A Cum Laude graduate in Marine Biology from MSU-TCTO, she contributes to coral reef and seaweed research and serves as a lecturer in seaweed farmer training programs in Tawi-Tawi."
+		},
+		chair_abdulmajid: {
+			name: "Assistant Prof. Nur-Aisa S. Abdulmajid",
+			position: "Chairperson, Department of Environmental Science, COFEST",
+			rank: "Assistant Professor IV",
+			image: "/images/ioes/Faculty/NUR-AISA S. ABDULMAJID.jpg",
+			education: [
+				"Master of Science in Microbiology – University of Santo Tomas",
+				"Bachelor of Science in Biology"
+			],
+			specialization: ["Environmental Science", "Microbiology", "Endophytic Fungi", "Food Microbiology"],
+			achievements: [
+				"Chairperson of Environmental Science Department, COFEST",
+				"More than five years of teaching experience at MSU-TCTO"
+			],
+			awards: [],
+			publications: [
+				"Muallil, R.N., Irilis, R.A., Habibuddin, A.A., Abdulmajid, N.S., Ajik, J.O., Ancheta, R.A. (2024). A rapid assessment of the status, trends and challenges in small-scale commercial sardine fisheries in the Sulu Archipelago, southern Philippines. Marine Policy, 160, 105965."
+			],
+			description: "Assistant Prof. Nur-Aisa S. Abdulmajid is the Chairperson of the Department of Environmental Science at COFEST. She holds a Master of Science in Microbiology from the University of Santo Tomas. Her research interests center on endophytic fungi, food microbiology, and environmental microbiology. She promotes sustainable utilization of resources and quality education at MSU-TCTO."
+		},
+		chair_amlani: {
+			name: "Assistant Prof. Merilyn Q. Amlani",
+			position: "Chairperson, Department of Food Science and Technology, COFEST",
+			rank: "Assistant Professor IV",
+			image: "/images/cof/Faculty/Merilyn Q. Amlani.png",
+			education: [
+				"Master of Science in Food Engineering (2023) – Kastamonu University, Türkiye",
+				"Bachelor of Science in Fisheries (2016) – MSU-TCTO"
+			],
+			specialization: ["Fish and Food Processing", "Food Engineering", "Thermodynamics", "Bioactive Components"],
+			achievements: [
+				"Plaque of Appreciation for publishing Scopus journals (2023, 2024)",
+				"Director, Seaweeds and Fisheries Product Innovation Center (SFPIC)",
+				"International conference presenter (ICELIS, ICABF, SOFAS)"
+			],
+			awards: [],
+			publications: [
+				"Yetgin, S., & Amlani, M. (2024). Agricultural low-cost waste adsorption of methylene blue. Clean Technologies and Environmental Policy, 1-21.",
+				"Suhaili, N. A., Jamih, R. S., Abubakar, N. A., Ajik, J. O., & Amlani, M. Q. (2024). Vinegar pre-treatment for Pacific Yellowtail Emperor fillets. ASEAN Journal on Science and Technology for Development, 40(2)."
+			],
+			description: "Assistant Prof. Merilyn Q. Amlani is the Chairperson of the Department of Food Science and Technology at COFEST. A Turkish Higher Education Council scholar, she advances post-harvest innovations, bioactive compound research, and industry partnerships for coastal communities."
+		},
+		// Staff & Research Personnel (COFEST/IOES)
+		hadjirul: {
+			name: "Angeline B. Hadjirul",
+			position: "Aquacultural Technologist & Guest Lecturer",
+			rank: "Aquacultural Technologist & Guest Lecturer",
+			image: "/images/ioes/Faculty/ANGELINE B. HADJIRUL.jpg",
+			education: [
+				"Master of Science in Aquaculture",
+				"Bachelor of Science in Marine Biology"
+			],
+			specialization: ["Seaweed Cultivation", "Aquaculture System Design", "Sustainable Marine Farming"],
+			achievements: [
+				"Guest lecturer at COFEST/IOES for the past five years",
+				"M.S. degree in Aquaculture; focuses on seaweed cultivation and eco-friendly aquaculture"
+			],
+			awards: [],
+			publications: [],
+			description: "Angeline Hadjirul is a passionate Aquacultural Technologist at MSU-TCTO, College of Fisheries, Oceanography, Environmental Science, and Technology (COFEST). She holds an M.S. degree in Aquaculture and focuses on seaweed cultivation, aquaculture system design, and sustainable marine farming. Dedicated to promoting eco-friendly aquaculture, she strives to improve the health and well-being of aquatic life. For the past five years, she has inspired students and colleagues as a guest lecturer at the college."
+		},
+		kalimuddin: {
+			name: "Sharifa K. Kalimuddin",
+			position: "Administrative Aide IV",
+			rank: "Administrative Aide IV",
+			image: "/images/ioes/Faculty/SHARIFA KALIMUDDIN.jpg",
+			education: [
+				"Master of Science in Aquaculture – MSU-TCTO",
+				"Bachelor of Science in Information Technology – MSU-TCTO"
+			],
+			specialization: ["Aquaculture", "Environmental Stewardship", "Administrative Support"],
+			achievements: [
+				"Serves under COFEST (Institute of Oceanography and Environmental Science)",
+				"Commitment to advancing sustainable aquatic food production"
+			],
+			awards: [],
+			publications: [],
+			description: "Sharifa K. Kalimuddin is an Administrative Aide IV at MSU-TCTO, serving under the College of Fisheries, Oceanography, Environmental Science, and Technology (COFEST). She holds a Master of Science in Aquaculture and a Bachelor of Science in Information Technology, both from MSU-TCTO. Her academic and professional interests focus on aquaculture, reflecting her commitment to advancing sustainable aquatic food production and environmental stewardship."
+		},
+		hussin: {
+			name: "Bibing A. Hussin",
+			position: "Research Assistant & Guest Lecturer",
+			rank: "Research Assistant",
+			image: "/images/ioes/Faculty/BIBING A. HUSSIN.jpg",
+			education: [
+				"Master's Degree (pursuing) – Universiti Malaysia Terengganu (DOST-SEI Scholarship)",
+				"Bachelor of Science in Environmental Science (Magna Cum Laude, 2022) – MSU-TCTO (DBP-Rise Scholar)"
+			],
+			specialization: ["Marine Pollution", "Microplastics", "Environmental Science"],
+			achievements: [
+				"Magna Cum Laude – Bachelor of Science in Environmental Science (2022)",
+				"DBP-Rise Scholarship Recipient",
+				"Member, Student Announcers of 94.1 Nutriskwela Radyo Kasannangan DXNH-FM MSU-TCTO",
+				"DOST-SEI Scholarship – pursuing master's degree at Universiti Malaysia Terengganu"
+			],
+			awards: [
+				"Magna Cum Laude – Bachelor of Science in Environmental Science (2022)",
+				"DBP-Rise Scholarship Recipient"
+			],
+			publications: [],
+			description: "Bibing A. Hussin is a distinguished graduate of Bachelor of Science in Environmental Science from MSU-TCTO, where she earned her degree Magna Cum Laude in 2022. As an accomplished academic scholar, she was a recipient of the DBP-Rise Scholarship and actively contributed as a member of the Student Announcers of 94.1 Nutriskwela Radyo Kasannangan DXNH-FM MSU-TCTO. Currently, she is pursuing her master's degree at Universiti Malaysia Terengganu under the prestigious DOST-SEI Scholarship. Her research interests are centered on marine pollution, with a specific focus on microplastics, reflecting her passion for addressing critical environmental challenges in marine ecosystems."
+		},
+		gunong: {
+			name: "Adzlan D. Gunong",
+			position: "Science Research Assistant",
+			rank: "",
+			image: "/images/ioes/Faculty/Adzlan gunong.png",
+			education: [
+				"Bachelor of Science in Environmental Science (2020) – MSU-TCTO"
+			],
+			specialization: ["Environmental Science", "Microplastics Research", "Coastal Resource Management"],
+			achievements: [
+				"College Student Leadership Award (CSLA)",
+				"PRIMe-TP Trainee – University of the Philippines Marine Science Institute (2022)",
+				"Lead Facilitator – PRIMe-TP Mindanao at MSU Naawan (2023)",
+				"Project Staff – DOST-MOST funded Microplastics Research Project (2023)",
+				"Laboratory Aide at SeaRDeC (2020); Science Research Assistant at Research Office (2021–2023) and SeaRDeC (2024)"
+			],
+			awards: [
+				"College Student Leadership Award (CSLA)",
+				"PRIMe-TP Trainee – UP Marine Science Institute (2022)"
+			],
+			publications: [
+				"Seaweed Consumption Practices in Coastal Communities of Tawi-Tawi, Philippines | MDPI <a href=\"https://share.google/Ow7PMcOJSi11smThI\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"text-msu-deep-ocean dark:text-msu-bgc-color underline hover:no-underline\">View article</a>"
+			],
+			description: "Adzlan D. Gunong is a graduate of Bachelor of Science in Environmental Science from MSU-TCTO, completing his degree in 2020. He was honored with the College Student Leadership Award (CSLA) for his exemplary service during his undergraduate years. He began his professional career in 2020 as a Laboratory Aide at the Seaweed Research and Development Center (SeaRDeC). In 2021, he worked as a Science Research Assistant at the Research Office, a position he held until 2023. In 2022, Mr. Gunong was selected as one of the trainees for the Plastics Research-Intensive Methods Training Program (PRIMe-TP) at the University of the Philippines Marine Science Institute. In 2023, he became one of the lead facilitators of the PRIMe-TP Mindanao at MSU Naawan and was engaged as Project Staff in a DOST-MOST funded project on microplastics in fish and shellfish of Tawi-Tawi. He has presented his research on microplastics in national and international conferences. Currently, he works as a Science Research Assistant at MSU-TCTO under COFEST, where he applies his academic training to various research and extension initiatives."
+		},
+		salabi: {
+			name: "Kilin R. Salabi",
+			position: "Research Assistant & Guest Lecturer",
+			rank: "Research Assistant",
+			image: "/images/ioes/Faculty/KILIN R. SALABI.jpg",
+			education: [
+				"Bachelor of Science in Marine Biology (Magna Cum Laude, 2023) – MSU-TCTO (DBP-RISE Scholar)"
+			],
+			specialization: ["Marine Biology", "Research", "Extension", "Leadership"],
+			achievements: [
+				"Magna Cum Laude – Bachelor of Science in Marine Biology (2023)",
+				"College Student Leadership Award (CSLA)",
+				"Gawad Chancellor for Student Journalism",
+				"DBP-RISE Scholar Citation",
+				"Editor-in-Chief – KAWASA (Official Student Publication of MSU-TCTO)",
+				"Associate Editor – KAWASA"
+			],
+			awards: [
+				"Magna Cum Laude – Bachelor of Science in Marine Biology (2023)",
+				"College Student Leadership Award (CSLA)",
+				"Gawad Chancellor for Student Journalism",
+				"DBP-RISE Scholar Citation"
+			],
+			publications: [],
+			description: "Kilin R. Salabi is a graduate of the Bachelor of Science in Marine Biology from MSU-TCTO, completing his degree in 2023 with the academic distinction of Magna Cum Laude. He has been honored with multiple accolades, including the College Student Leadership Award (CSLA), Gawad Chancellor for Student Journalism, and a Citation as a DBP-RISE Scholar. His leadership and editorial experience include serving as Associate Editor and later Editor-in-Chief of KAWASA, the official student publication of MSU-TCTO. He has also participated in various training programs and workshops that strengthened his leadership, communication, and organizational skills. Currently, he works as a Research Assistant at MSU-TCTO, where he applies his academic training to research and extension initiatives. With a strong academic foundation and a deep appreciation for the marine biodiversity of Tawi-Tawi, he is committed to contributing significantly to the protection and sustainable management of the province's rich natural resources."
 		},
 		abduraup: {
 			name: "Suhana A. Abduraup",
@@ -5127,6 +5645,10 @@ function openPersonnelModal(personnelId) {
 					<h1 class="text-3xl md:text-4xl font-bold text-white mb-2 text-center">${personnel.name}</h1>
 					<p class="text-xl text-gray-200 text-center">${personnel.position}</p>
 					${personnel.rank ? `<p class="text-lg text-gray-300 text-center mt-2">${personnel.rank}</p>` : ''}
+					<button type="button" onclick="event.stopPropagation(); sharePersonnelProfile('${personnelId}')" class="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/20 hover:bg-white/30 text-white text-sm font-medium transition-colors" title="Share profile">
+						<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684L6 12m2.684-1.316a3 3 0 105.367 2.684L6 12"></path></svg>
+						Share profile
+					</button>
 				</div>
 			</div>
 			<!-- Content Section -->
@@ -5301,8 +5823,16 @@ function closePersonnelModal() {
 	}, 300);
 }
 
+// Open personnel modal from URL query (?personnel=id) so shared links open the correct profile
+function openPersonnelFromQuery() {
+	if (typeof window === 'undefined') return;
+	const params = typeof URLSearchParams !== 'undefined' ? new URLSearchParams(window.location.search) : null;
+	const id = params && params.get('personnel');
+	if (id) openPersonnelModal(id);
+}
 // Close personnel modal when clicking outside
 document.addEventListener('DOMContentLoaded', function() {
+	openPersonnelFromQuery();
 	const personnelModal = document.getElementById('personnelModal');
 	if (personnelModal) {
 		personnelModal.addEventListener('click', function(e) {
@@ -5325,6 +5855,7 @@ document.addEventListener('keydown', function(e) {
 
 // Make functions globally accessible
 (window as any).shareFacultyProfile = shareFacultyProfile;
+(window as any).sharePersonnelProfile = sharePersonnelProfile;
 (window as any).openFacultyModal = openFacultyModal;
 (window as any).closeFacultyModal = closeFacultyModal;
 (window as any).openPersonnelModal = openPersonnelModal;
@@ -5538,13 +6069,30 @@ document.addEventListener('DOMContentLoaded', function() {
 			.trim();
 	}
 
+	// COFEST: map legacy/API department names to banner department names for program matching
+	const departmentAliasesForPrograms: Record<string, string[]> = {
+		'Department of Marine Sciences': ['department of marine sciences', 'department of marine biology', 'marine sciences', 'marine biology'],
+		'Department of Environmental Science': ['department of environmental science', 'environmental science'],
+		'Department of Aquaculture': ['department of aquaculture', 'aquaculture department', 'aquaculture'],
+		'Department of Capture Fisheries': ['department of capture fisheries', 'capture fisheries department', 'capture fisheries'],
+		'Department of Post-Harvest Fisheries': ['department of post-harvest fisheries', 'post-harvest fisheries department', 'post-harvest'],
+		'Department of Food Science and Technology': ['department of food science and technology', 'food science and technology department', 'food science'],
+		'Department of Aquatic Resources Management': ['department of aquatic resources management', 'aquatic resources management', 'aquatic resources']
+	};
 	function programsMatchDepartment(programDepartment: string, targetDepartment: string) {
 		if (!programDepartment || !targetDepartment) return false;
 		const normalizedProgram = normalizeDepartmentName(programDepartment);
 		const normalizedTarget = normalizeDepartmentName(targetDepartment);
-		return normalizedProgram === normalizedTarget ||
+		if (normalizedProgram === normalizedTarget ||
 			normalizedProgram.includes(normalizedTarget) ||
-			normalizedTarget.includes(normalizedProgram);
+			normalizedTarget.includes(normalizedProgram)) {
+			return true;
+		}
+		const aliases = departmentAliasesForPrograms[targetDepartment];
+		if (aliases && aliases.some(alias => normalizedProgram.includes(alias) || alias.includes(normalizedProgram))) {
+			return true;
+		}
+		return false;
 	}
 
 	function hideDepartmentNotice() {
@@ -5953,15 +6501,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// Faculty data for search (matching modal data structure)
 	const facultySearchData = {
-		'jaroAjik': { name: 'Prof. Jaro O. Ajik', position: 'Dean, College of Fisheries', rank: 'Professor VI', department: 'Capture Fisheries Department', specialization: ['Capture Fisheries', 'Fisheries Oceanography', 'Fisheries Management'] },
-		'wahayminJamil': { name: 'Asst. Prof. Wahaymin M. Jamil', position: 'College Secretary, Office of the Dean, College of Fisheries', rank: 'Assistant Professor IV', department: 'Aquaculture Department', specialization: ['Aquaculture', 'Feed Management'] },
-		'merilynAmlani': { name: 'Asst. Prof. Merilyn Q. Amlani', position: 'Chairperson, Fish Processing & Food Technology Departments', rank: 'Assistant Professor IV', department: 'Food Science and Technology Department', departments: ['Post-Harvest Fisheries Department', 'Food Science and Technology Department'], specialization: ['Food Engineering', 'Fish Processing', 'Bioactive Components'] },
-		'albarisTahiluddin': { name: 'Assistant Prof. Albaris B. Tahiluddin', position: 'Chairperson, Aquaculture Department', rank: 'Assistant Professor IV', department: 'Aquaculture Department', departments: ['Aquaculture Department', 'Capture Fisheries Department'], specialization: ['Seaweed Farming', 'Aquaculture Health Management', 'Biological Oceanography'] },
-		'jurminSarri': { name: 'Asst. Prof. Jurmin H. Sarri', position: 'Chairperson, Capture Fisheries Department', rank: 'Assistant Professor IV', department: 'Capture Fisheries Department', specialization: ['Aquaculture', 'Fish Nutrition', 'Algal Biotechnology'] },
-		'hadjiranIllud': { name: 'Associate Prof. Hadjiran A. Illud', position: 'Faculty, Capture Fisheries Department', rank: 'Associate Professor IV', department: 'Capture Fisheries Department', specialization: ['Marine Fisheries Management', 'Fisheries Resource Assessment'] },
-		'mariaLizaToringFarquerabao': { name: 'Maria Liza B. Toring-Farquerabao', position: 'Instructor II, Capture Fisheries Department', rank: 'Instructor II', department: 'Capture Fisheries Department', specialization: ['Capture Fisheries', 'Fisheries Biology'] },
-		'angelicaBermil': { name: 'Angelica B. Bermil', position: 'Instructor I, Capture Fisheries Department', rank: 'Instructor I', department: 'Capture Fisheries Department', specialization: ['Marine Biodiversity', 'Environmental DNA Monitoring'] },
-		'rizalRobles': { name: 'Rizal Jhunn F. Robles', position: 'Assistant Professor IV', rank: 'Assistant Professor IV', department: 'Aquaculture Department', departments: ['Aquaculture Department', 'Capture Fisheries Department'], specialization: ['Seaweed Science', 'Carrageenan Research'] },
+		'jaroAjik': { name: 'Prof. Jaro O. Ajik', position: 'Chairperson, Department of Capture Fisheries', rank: 'Professor VI', department: 'Department of Capture Fisheries', specialization: ['Capture Fisheries', 'Fisheries Oceanography', 'Fisheries Management'] },
+		'wahayminJamil': { name: 'Asst. Prof. Wahaymin M. Jamil', position: 'College Secretary, COFEST', rank: 'Assistant Professor IV', department: 'Department of Aquaculture', specialization: ['Aquaculture', 'Feed Management'] },
+		'merilynAmlani': { name: 'Asst. Prof. Merilyn Q. Amlani', position: 'Chairperson, Department of Food Science and Technology', rank: 'Assistant Professor IV', department: 'Department of Food Science and Technology', departments: ['Department of Post-Harvest Fisheries', 'Department of Food Science and Technology'], specialization: ['Food Engineering', 'Fish Processing', 'Bioactive Components'] },
+		'albarisTahiluddin': { name: 'Assistant Prof. Albaris B. Tahiluddin', position: 'Chairperson, Department of Post-Harvest Fisheries', rank: 'Associate Professor (Ph.D.)', department: 'Department of Post-Harvest Fisheries', departments: ['Department of Aquaculture', 'Department of Post-Harvest Fisheries'], specialization: ['Seaweed Farming', 'Aquaculture Health Management', 'Biological Oceanography'] },
+		'jurminSarri': { name: 'Asst. Prof. Jurmin H. Sarri', position: 'Chairperson, Department of Aquatic Resources Management', rank: 'Assistant Professor IV', department: 'Department of Aquatic Resources Management', departments: ['Department of Capture Fisheries', 'Department of Aquatic Resources Management'], specialization: ['Aquaculture', 'Fish Nutrition', 'Algal Biotechnology'] },
+		'hadjiranIllud': { name: 'Associate Prof. Hadjiran A. Illud', position: 'Faculty, Department of Capture Fisheries', rank: 'Associate Professor IV', department: 'Department of Capture Fisheries', specialization: ['Marine Fisheries Management', 'Fisheries Resource Assessment'] },
+		'mariaLizaToringFarquerabao': { name: 'Maria Liza B. Toring-Farquerabao', position: 'Instructor II, Department of Capture Fisheries', rank: 'Instructor II', department: 'Department of Capture Fisheries', specialization: ['Capture Fisheries', 'Fisheries Biology'] },
+		'angelicaBermil': { name: 'Angelica B. Bermil', position: 'Instructor I, Department of Capture Fisheries', rank: 'Instructor I', department: 'Department of Capture Fisheries', specialization: ['Marine Biodiversity', 'Environmental DNA Monitoring'] },
+		'rizalRobles': { name: 'Rizal Jhunn F. Robles', position: 'Assistant Professor IV', rank: 'Assistant Professor IV', department: 'Department of Aquaculture', departments: ['Department of Aquaculture', 'Department of Capture Fisheries'], specialization: ['Seaweed Science', 'Carrageenan Research'] },
 		'jemsy': { name: 'Prof. Alhisan U. Jemsy, PhD', position: 'Dean, College of Education', department: 'Department of Educational Leadership and Professional Services', specialization: ['Educational Research', 'Educational Evaluation and Assessment', 'Professional Education'] },
 		'budlong': { name: 'Assoc. Prof. Cherry T. Budlong-Alih', position: 'Faculty', rank: 'Associate Professor V', department: 'Department of Language Education', specialization: ['Filipino'] },
 		'colicol': { name: 'Assoc. Prof. Fernigil L. Colicol, PhD', position: 'Chairperson, Department of Educational Leadership and Professional Services (DELPS)', rank: 'Associate Professor V', department: 'Department of Educational Leadership and Professional Services', specialization: ['Educational Research'] },
@@ -6000,9 +6548,25 @@ document.addEventListener('DOMContentLoaded', function() {
 		'shajila': { name: 'Shajila C. Ali', position: 'Faculty', rank: 'Instructor I', department: 'Department of Physical Education', specialization: ['Physical Education', 'Sports'] },
 	'santos': { name: 'Sharmina D. Santos', position: 'Faculty', rank: 'Instructor I', department: 'Department of Physical Education', specialization: ['Physical Education', 'Sports', 'Dance', 'Health', 'Fitness', 'Recreation'] },
 	'blanche': { name: 'Blanche B. Matolo', position: 'Acting Director of OSAR', rank: 'Instructor I', department: 'Department of Physical Education', specialization: ['Dance', 'Sports', 'Physical Education'] },
-	'mohammad': { name: 'Al-Shadat A. Mohammad', position: 'Director of OCAD', rank: 'Instructor I', department: 'Department of Physical Education', specialization: ['Dance', 'Martial Arts', 'Sports', 'Physical Education'] },
 	'salasain': { name: 'Rubina Salasain', position: 'Faculty', rank: 'Instructor I', department: 'Department of Physical Education', specialization: ['School Fitness', 'Sports', 'Physical Education'] },
-	'abdulwahab': { name: 'Assoc. Prof. Rubia A. Abulwahab', position: 'Faculty', rank: 'Associate Professor V', department: 'Department of Early Childhood and Elementary Education', specialization: ['Administration and Supervision', 'Psychology', 'Counseling'] }
+	'abdulwahab': { name: 'Assoc. Prof. Rubia A. Abulwahab', position: 'Faculty', rank: 'Associate Professor V', department: 'Department of Early Childhood and Elementary Education', specialization: ['Administration and Supervision', 'Psychology', 'Counseling'] },
+		// COFEST – IOES faculty (Department of Marine Sciences / Department of Environmental Science)
+		'andas': { name: 'Prof. Sheriffa T. Andas, Ph.D.', position: 'Dean, COFEST', rank: 'Professor VI', department: 'Department of Marine Sciences', specialization: ['Biology', 'Environmental Science'] },
+		'muallil': { name: 'Dr. Richard N. Muallil', position: 'VCRIDE', rank: 'Professor VI', department: 'Department of Marine Sciences', specialization: ['Marine Science', 'Marine Biology', 'Fisheries Management'] },
+		'halun': { name: 'Dr. Sitti Zayda B. Halun', position: 'Director, SeaRDeC', rank: 'Professor VI', department: 'Department of Marine Sciences', specialization: ['Marine Ecology', 'Seaweed Research'] },
+		'diansuy': { name: 'Assoc. Prof. Araniza M. Diansuy', position: 'Director, OCEANeS', rank: 'Associate Professor V', department: 'Department of Marine Sciences', specialization: ['Marine Biology', 'Seaweed Cultivation'] },
+		'jammang': { name: 'Assoc. Prof. Nurhima H. Jammang', position: 'College Secretary, COFEST', rank: 'Associate Professor V', department: 'Department of Environmental Science', specialization: ['Disaster Risk Reduction', 'Environmental Science'] },
+		'serag': { name: 'Assoc. Prof. Karen Joy B. Serag-Endonila', position: 'Special Assistant, OVCRE', rank: 'Associate Professor V', department: 'Department of Marine Sciences', departments: ['Department of Marine Sciences', 'Department of Environmental Science'], specialization: ['Marine Ecology', 'Marine Biodiversity'] },
+		'regino': { name: 'Sitti Amina M. Regino', position: 'Chairperson, BS Marine Science Program', rank: 'Instructor III', department: 'Department of Marine Sciences', specialization: ['Marine Biology', 'Aquaculture'] },
+		'abdulmajid': { name: 'Asst. Prof. Nur-Aisa S. Abdulmajid', position: 'Chairperson, Department of Environmental Science', rank: 'Assistant Professor IV', department: 'Department of Environmental Science', specialization: ['Environmental Science', 'Microbiology'] },
+		'tambihasan': { name: 'Ahalnida M. Tambihasan', position: 'Special Research Assistant, OVCRE', rank: 'Instructor I', department: 'Department of Marine Sciences', specialization: ['Marine Biology', 'Coastal Resource Assessment'] },
+		'lintasan': { name: 'Assoc. Prof. Abdurajan B. Lintasan', position: 'Faculty', rank: 'Associate Professor V', department: 'Department of Marine Sciences', specialization: ['Physics'] },
+		'abdulwahid': { name: 'Asst. Prof. Faricia M. Abdulwahid', position: 'Chief, Integrated Science Laboratory (ISL)', rank: 'Assistant Professor IV', department: 'Department of Marine Sciences', specialization: ['Chemistry'] },
+		'mohammad': { name: 'Asst. Prof. Kimtang Joy H. Mohammad', position: 'Chairperson, Department of Marine Sciences', rank: 'Assistant Professor IV', department: 'Department of Marine Sciences', specialization: ['Marine Biology', 'Seaweed Research'] },
+		'rasul': { name: 'Zharifa G. Rasul, MSc', position: 'Special Assistant, Secondary Education', rank: 'Instructor I', department: 'Department of Environmental Science', specialization: ['Biodiversity'] },
+		'pon': { name: 'Monica Mae R. Pon', position: 'Faculty', rank: 'Instructor I', department: 'Department of Marine Sciences', specialization: ['Biology', 'Genetics'] },
+		'burias': { name: 'Dahlia P. Burias', position: 'Faculty', rank: 'Instructor I', department: 'Department of Environmental Science', specialization: ['Environmental Science', 'Coastal Ecosystem Assessment'] },
+		'julkanain': { name: 'Anina Haslee A. Julkanain-Ong', position: 'Faculty', rank: 'Instructor II', department: 'Department of Marine Sciences', specialization: ['Marine Biology', 'Oceanography'] }
 	};
 	
 	// Get all faculty cards
@@ -7754,21 +8318,21 @@ document.addEventListener('DOMContentLoaded', function() {
 				
 
 
-					<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Post-Harvest Fisheries Department">
+					<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Department of Post-Harvest Fisheries">
 						<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#61063B] via-[#8C1F5A] to-[#2F1A45] text-white p-8 md:p-10 shadow-2xl">
 							<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
 							<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
 								<div class="max-w-xl">
 									<!-- <p class="uppercase tracking-[0.35em] text-xs md:text-sm text-white/80 mb-3">Faculty Spotlight</p> -->
-								<h3 class="text-2xl md:text-3xl font-bold leading-snug">Post-Harvest Fisheries Department</h3>
+								<h3 class="text-2xl md:text-3xl font-bold leading-snug">Department of Post-Harvest Fisheries</h3>
 								<p class="mt-4 text-sm md:text-base text-white/90">
 									Championing sustainable post-harvest innovations that protect the value of marine resources and support resilient coastal communities.
 								</p>
 								<div class="mt-4 flex items-center gap-4">
-									<img src="/images/cof/Faculty/Merilyn Q. Amlani.png" alt="Asst. Prof. Merilyn Q. Amlani" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
+									<img src="/images/cof/Faculty/Albaris B. Tahiluddin.png" alt="Assoc. Prof. Albaris B. Tahiluddin, Ph.D." class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
 									<div>
 										<p class="text-sm md:text-base text-white/95 font-medium">
-											<strong>Chairperson:</strong> Asst. Prof. Merilyn Q. Amlani, M.Sc.
+											<strong>Chairperson:</strong> Assoc. Prof. Albaris B. Tahiluddin, Ph.D.
 										</p>
 									</div>
 								</div>
@@ -7776,7 +8340,7 @@ document.addEventListener('DOMContentLoaded', function() {
 										<button
 											type="button"
 											class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
-											data-department="Post-Harvest Fisheries Department"
+											data-department="Department of Post-Harvest Fisheries"
 											aria-pressed="false"
 										>
 											<div class="text-left leading-tight">
@@ -7790,7 +8354,7 @@ document.addEventListener('DOMContentLoaded', function() {
 										<button
 											type="button"
 											class="department-program-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white text-[#61063B] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
-											data-department="Post-Harvest Fisheries Department"
+											data-department="Department of Post-Harvest Fisheries"
 											data-department-search="Post-Harvest"
 										>
 											<div class="text-left leading-tight">
@@ -7856,13 +8420,13 @@ document.addEventListener('DOMContentLoaded', function() {
 							</div>
 						</div>
 					</div>
-				<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Food Science and Technology Department">
+				<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Department of Food Science and Technology">
 					<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#61063B] via-[#8C1F5A] to-[#2F1A45] text-white p-8 md:p-10 shadow-2xl">
 						<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
 						<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
 							<div class="max-w-xl">
 								<!-- <p class="uppercase tracking-[0.35em] text-xs md:text-sm text-white/80 mb-3">Faculty Spotlight</p> -->
-							<h3 class="text-2xl md:text-3xl font-bold leading-snug">Food Science and Technology Department</h3>
+							<h3 class="text-2xl md:text-3xl font-bold leading-snug">Department of Food Science and Technology</h3>
 							<p class="mt-4 text-sm md:text-base text-white/90">
 								Driving fisheries-based food innovation, quality assurance, and value-added processing that uplift the region's blue economy.
 							</p>
@@ -7870,7 +8434,7 @@ document.addEventListener('DOMContentLoaded', function() {
 								<img src="/images/cof/Faculty/Merilyn Q. Amlani.png" alt="Asst. Prof. Merilyn Q. Amlani" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
 								<div>
 									<p class="text-sm md:text-base text-white/95 font-medium">
-										<strong>Chairperson:</strong> Asst. Prof. Merilyn Q. Amlani, M.Sc.
+										<strong>Chairperson:</strong> Asst. Prof. Merilyn Q. Amlani
 									</p>
 								</div>
 							</div>
@@ -7878,7 +8442,7 @@ document.addEventListener('DOMContentLoaded', function() {
 								<button
 									type="button"
 									class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
-									data-department="Food Science and Technology Department"
+									data-department="Department of Food Science and Technology"
 									aria-pressed="false"
 								>
 									<div class="text-left leading-tight">
@@ -7892,7 +8456,7 @@ document.addEventListener('DOMContentLoaded', function() {
 								<button
 									type="button"
 									class="department-program-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white text-[#61063B] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
-									data-department="Food Science and Technology Department"
+									data-department="Department of Food Science and Technology"
 									data-department-search="Food Science"
 								>
 									<div class="text-left leading-tight">
@@ -7962,20 +8526,20 @@ document.addEventListener('DOMContentLoaded', function() {
 				
 				<!-- input  -->
 
-				<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Capture Fisheries Department">
+				<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Department of Capture Fisheries">
 					<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#61063B] via-[#8C1F5A] to-[#2F1A45] text-white p-8 md:p-10 shadow-2xl">
 						<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3C/svg%3E')] bg-cover bg-center"></div>
 						<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
 							<div class="max-w-xl">
-							<h3 class="text-2xl md:text-3xl font-bold leading-snug">Capture Fisheries Department</h3>
+							<h3 class="text-2xl md:text-3xl font-bold leading-snug">Department of Capture Fisheries</h3>
 							<p class="mt-4 text-sm md:text-base text-white/90">
 								Advancing sustainable capture fisheries, marine biodiversity protection, and resilient coastal livelihoods across the archipelago.
 							</p>
 							<div class="mt-4 flex items-center gap-4">
-								<img src="/images/cof/Faculty/Jurmin H. Sarri.png" alt="Asst. Prof. Jurmin H. Sarri" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
+								<img src="/images/cof/Faculty/Jaro O. Ajik.png" alt="Prof. Jaro O. Ajik, DFT" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
 								<div>
 									<p class="text-sm md:text-base text-white/95 font-medium">
-										<strong>Chairperson:</strong> Asst. Prof. Jurmin H. Sarri, M.Sc.
+										<strong>Chairperson:</strong> Prof. Jaro O. Ajik, DFT
 									</p>
 								</div>
 							</div>
@@ -7983,7 +8547,7 @@ document.addEventListener('DOMContentLoaded', function() {
 									<button
 										type="button"
 										class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
-										data-department="Capture Fisheries Department"
+										data-department="Department of Capture Fisheries"
 										aria-pressed="false"
 									>
 										<div class="text-left leading-tight">
@@ -7997,7 +8561,7 @@ document.addEventListener('DOMContentLoaded', function() {
 									<button
 										type="button"
 										class="department-program-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white text-[#61063B] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
-										data-department="Capture Fisheries Department"
+										data-department="Department of Capture Fisheries"
 										data-department-search="Capture Fisheries"
 									>
 										<div class="text-left leading-tight">
@@ -8018,7 +8582,7 @@ document.addEventListener('DOMContentLoaded', function() {
 										</svg>
 										<div class="leading-tight">
 											<p class="font-semibold">Assistant Prof. Jurmin H. Sarri</p>
-											<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Chairperson of CFD</p>
+											<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Chairperson, Department of Aquatic Resources Management</p>
 										</div>
 									</div>
 									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
@@ -8027,7 +8591,7 @@ document.addEventListener('DOMContentLoaded', function() {
 										</svg>
 										<div class="leading-tight">
 											<p class="font-semibold">Prof. Jaro O. Ajik</p>
-											<p class="text-white/80 text-sm font-normal">Professor VI • Dean, College of Fisheries</p>
+											<p class="text-white/80 text-sm font-normal">Professor VI • Chairperson, Department of Capture Fisheries</p>
 										</div>
 									</div>
 									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
@@ -8082,20 +8646,20 @@ document.addEventListener('DOMContentLoaded', function() {
 					</div>
 				</div>
 
-				<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Aquaculture Department">
+				<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Department of Aquaculture">
 					<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#61063B] via-[#8C1F5A] to-[#2F1A45] text-white p-8 md:p-10 shadow-2xl">
 						<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3C/svg%3E')] bg-cover bg-center"></div>
 						<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
 							<div class="max-w-xl">
-							<h3 class="text-2xl md:text-3xl font-bold leading-snug">Aquaculture Department</h3>
+							<h3 class="text-2xl md:text-3xl font-bold leading-snug">Department of Aquaculture</h3>
 							<p class="mt-4 text-sm md:text-base text-white/90">
 								Strengthening aquaculture innovation, fish health management, and community-based production systems for sustainable blue growth.
 							</p>
 							<div class="mt-4 flex items-center gap-4">
-								<img src="/images/cof/Faculty/Albaris B. Tahiluddin.png" alt="Asst. Prof. Albaris B. Tahiluddin" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
+								<img src="/images/cof/Faculty/Ainulyakin H. Imlani.png" alt="Prof. Ainulyakin H. Imlani, Ph.D." class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
 								<div>
 									<p class="text-sm md:text-base text-white/95 font-medium">
-										<strong>Chairperson:</strong> Asst. Prof. Albaris B. Tahiluddin, Ph.D.
+										<strong>Chairperson:</strong> Prof. Ainulyakin H. Imlani, Ph.D.
 									</p>
 								</div>
 							</div>
@@ -8103,7 +8667,7 @@ document.addEventListener('DOMContentLoaded', function() {
 									<button
 										type="button"
 										class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
-										data-department="Aquaculture Department"
+										data-department="Department of Aquaculture"
 										aria-pressed="false"
 									>
 										<div class="text-left leading-tight">
@@ -8117,7 +8681,7 @@ document.addEventListener('DOMContentLoaded', function() {
 									<button
 										type="button"
 										class="department-program-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white text-[#61063B] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent"
-										data-department="Aquaculture Department"
+										data-department="Department of Aquaculture"
 										data-department-search="Aquaculture"
 									>
 										<div class="text-left leading-tight">
@@ -8137,8 +8701,8 @@ document.addEventListener('DOMContentLoaded', function() {
 											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
 										</svg>
 										<div class="leading-tight">
-											<p class="font-semibold">Assistant Prof. Albaris B. Tahiluddin</p>
-											<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Chairperson of AQD</p>
+											<p class="font-semibold">Prof. Ainulyakin H. Imlani</p>
+											<p class="text-white/80 text-sm font-normal">Professor VI • Chairperson, Department of Aquaculture</p>
 										</div>
 									</div>
 									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
@@ -8146,8 +8710,8 @@ document.addEventListener('DOMContentLoaded', function() {
 											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
 										</svg>
 										<div class="leading-tight">
-											<p class="font-semibold">Prof.Ainulyakin H. Imlani</p>
-											<p class="text-white/80 text-sm font-normal">Professor VI • Director, Fisheries Training and Aquaculture Production</p>
+											<p class="font-semibold">Asst. Prof. Wahaymin M. Jamil</p>
+											<p class="text-white/80 text-sm font-normal">Assistant Professor IV • College Secretary, COFEST</p>
 										</div>
 									</div>
 									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
@@ -8220,6 +8784,257 @@ document.addEventListener('DOMContentLoaded', function() {
 										<div class="leading-tight">
 											<p class="font-semibold">Assistant Prof. Rizal Jhunn F. Robles</p>
 											<p class="text-white/80 text-sm font-normal">Assistant Professor IV</p>
+										</div>
+									</div>
+								</div>
+								<div class="space-y-3 text-sm md:text-base faculty-banner-programs hidden"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Department of Aquatic Resources Management -->
+				<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Department of Aquatic Resources Management">
+					<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#61063B] via-[#8C1F5A] to-[#2F1A45] text-white p-8 md:p-10 shadow-2xl">
+						<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
+						<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+							<div class="max-w-xl">
+								<h3 class="text-2xl md:text-3xl font-bold leading-snug">Department of Aquatic Resources Management</h3>
+								<p class="mt-4 text-sm md:text-base text-white/90">
+									Integrating fisheries, coastal resource assessment, and sustainable management for resilient aquatic ecosystems and livelihoods.
+								</p>
+								<div class="mt-4 flex items-center gap-4">
+									<img src="/images/cof/Faculty/Jurmin H. Sarri.png" alt="Asst. Prof. Jurmin H. Sarri" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
+									<div>
+										<p class="text-sm md:text-base text-white/95 font-medium">
+											<strong>Chairperson:</strong> Asst. Prof. Jurmin H. Sarri
+										</p>
+									</div>
+								</div>
+								<div class="mt-6 flex flex-wrap gap-3">
+									<button type="button" class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent" data-department="Department of Aquatic Resources Management" aria-pressed="false">
+										<div class="text-left leading-tight">
+											<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-white/80">Show</span>
+											<span class="block text-sm md:text-base font-semibold">Faculty</span>
+										</div>
+										<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+									</button>
+									<button type="button" class="department-program-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white text-[#61063B] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent" data-department="Department of Aquatic Resources Management" data-department-search="Aquatic Resources">
+										<div class="text-left leading-tight">
+											<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-[#61063B]/80">View</span>
+											<span class="block text-sm md:text-base font-semibold">Academic Programs</span>
+										</div>
+										<svg class="w-5 h-5 text-[#61063B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path></svg>
+									</button>
+								</div>
+							</div>
+							<div class="flex-1 w-full space-y-4 md:space-y-6">
+								<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base font-semibold faculty-banner-content hidden" data-static-content="true" data-member-count="1">
+									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+										<div class="leading-tight">
+											<p class="font-semibold">Asst. Prof. Jurmin H. Sarri</p>
+											<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Chairperson</p>
+										</div>
+									</div>
+								</div>
+								<div class="space-y-3 text-sm md:text-base faculty-banner-programs hidden"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Department of Marine Sciences -->
+				<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Department of Marine Sciences">
+					<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#61063B] via-[#8C1F5A] to-[#2F1A45] text-white p-8 md:p-10 shadow-2xl">
+						<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
+						<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+							<div class="max-w-xl">
+								<h3 class="text-2xl md:text-3xl font-bold leading-snug">Department of Marine Sciences</h3>
+								<p class="mt-4 text-sm md:text-base text-white/90">
+									Advancing marine science education and research to understand and protect marine ecosystems and biodiversity.
+								</p>
+								<div class="mt-4 flex items-center gap-4">
+									<img src="/images/ioes/Faculty/KIMTANG JOY H. MOHAMMAD.jpg" alt="Asst. Prof. Kimtang Joy H. Mohammad" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
+									<div>
+										<p class="text-sm md:text-base text-white/95 font-medium">
+											<strong>Chairperson:</strong> Asst. Prof. Kimtang Joy H. Mohammad
+										</p>
+									</div>
+								</div>
+								<div class="mt-6 flex flex-wrap gap-3">
+									<button type="button" class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent" data-department="Department of Marine Sciences" aria-pressed="false">
+										<div class="text-left leading-tight">
+											<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-white/80">Show</span>
+											<span class="block text-sm md:text-base font-semibold">Faculty</span>
+										</div>
+										<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+									</button>
+									<button type="button" class="department-program-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white text-[#61063B] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent" data-department="Department of Marine Sciences" data-department-search="Marine">
+										<div class="text-left leading-tight">
+											<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-[#61063B]/80">View</span>
+											<span class="block text-sm md:text-base font-semibold">Academic Programs</span>
+										</div>
+										<svg class="w-5 h-5 text-[#61063B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path></svg>
+									</button>
+								</div>
+							</div>
+							<div class="flex-1 w-full space-y-4 md:space-y-6">
+								<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base faculty-banner-content hidden" data-static-content="true" data-member-count="12">
+									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+										<div class="leading-tight">
+											<p class="font-semibold">Prof. Sheriffa T. Andas, Ph.D.</p>
+											<p class="text-white/80 text-sm font-normal">Professor VI • Dean, COFEST</p>
+										</div>
+									</div>
+									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+										<div class="leading-tight">
+											<p class="font-semibold">Asst. Prof. Kimtang Joy H. Mohammad</p>
+											<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Chairperson</p>
+										</div>
+									</div>
+									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+										<div class="leading-tight">
+											<p class="font-semibold">Dr. Richard N. Muallil</p>
+											<p class="text-white/80 text-sm font-normal">Professor VI • VCRIDE</p>
+										</div>
+									</div>
+									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+										<div class="leading-tight">
+											<p class="font-semibold">Dr. Sitti Zayda B. Halun</p>
+											<p class="text-white/80 text-sm font-normal">Professor VI • Director, SeaRDeC</p>
+										</div>
+									</div>
+									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+										<div class="leading-tight">
+											<p class="font-semibold">Assoc. Prof. Araniza M. Diansuy</p>
+											<p class="text-white/80 text-sm font-normal">Associate Professor V • Director, OCEANeS</p>
+										</div>
+									</div>
+									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+										<div class="leading-tight">
+											<p class="font-semibold">Sitti Amina M. Regino</p>
+											<p class="text-white/80 text-sm font-normal">Instructor III • Chairperson, BS Marine Science</p>
+										</div>
+									</div>
+									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+										<div class="leading-tight">
+											<p class="font-semibold">Ahalnida M. Tambihasan</p>
+											<p class="text-white/80 text-sm font-normal">Instructor I • Special Assistant, OVCRE</p>
+										</div>
+									</div>
+									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+										<div class="leading-tight">
+											<p class="font-semibold">Assoc. Prof. Abdurajan B. Lintasan</p>
+											<p class="text-white/80 text-sm font-normal">Associate Professor V</p>
+										</div>
+									</div>
+									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+										<div class="leading-tight">
+											<p class="font-semibold">Asst. Prof. Faricia M. Abdulwahid</p>
+											<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Chief, ISL</p>
+										</div>
+									</div>
+									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+										<div class="leading-tight">
+											<p class="font-semibold">Monica Mae R. Pon</p>
+											<p class="text-white/80 text-sm font-normal">Instructor I</p>
+										</div>
+									</div>
+									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+										<div class="leading-tight">
+											<p class="font-semibold">Anina Haslee A. Julkanain-Ong</p>
+											<p class="text-white/80 text-sm font-normal">Instructor II</p>
+										</div>
+									</div>
+									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+										<div class="leading-tight">
+											<p class="font-semibold">Assoc. Prof. Karen Joy B. Serag-Endonila</p>
+											<p class="text-white/80 text-sm font-normal">Associate Professor V • Special Assistant, OVCRE</p>
+										</div>
+									</div>
+								</div>
+								<div class="space-y-3 text-sm md:text-base faculty-banner-programs hidden"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Department of Environmental Science -->
+				<div class="md:col-span-2 lg:col-span-3 faculty-spotlight-banner faculty-department-banner" data-department="Department of Environmental Science">
+					<div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#61063B] via-[#8C1F5A] to-[#2F1A45] text-white p-8 md:p-10 shadow-2xl">
+						<div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml,%3Csvg width=\'160\' height=\'160\' viewBox=\'0 0 160 160\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cdefs%3E%3ClinearGradient id=\'g3\' x1=\'0%25\' y1=\'0%25\' x2=\'100%25\' y2=\'100%25\'%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0.35\'/%3E%3Cstop stop-color=\'%23FFFFFF\' stop-opacity=\'0\' offset=\'1\'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d=\'M0 0h160v160H0z\' fill=\'%23000000\'/%3E%3Cpath d=\'M-40 40l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3Cpath d=\'M40 160l80-80 40 40-80 80z\' fill=\'url(%23g3)\'/%3E%3C/svg%3E')] bg-cover bg-center"></div>
+						<div class="relative z-10 flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
+							<div class="max-w-xl">
+								<h3 class="text-2xl md:text-3xl font-bold leading-snug">Department of Environmental Science</h3>
+								<p class="mt-4 text-sm md:text-base text-white/90">
+									Promoting sustainable environmental management and conservation through innovative research and education.
+								</p>
+								<div class="mt-4 flex items-center gap-4">
+									<img src="/images/ioes/Faculty/NUR-AISA S. ABDULMAJID.jpg" alt="Asst. Prof. Nur-Aisa S. Abdulmajid" class="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-white/50 shadow-lg flex-shrink-0" loading="lazy">
+									<div>
+										<p class="text-sm md:text-base text-white/95 font-medium">
+											<strong>Chairperson:</strong> Asst. Prof. Nur-Aisa S. Abdulmajid
+										</p>
+									</div>
+								</div>
+								<div class="mt-6 flex flex-wrap gap-3">
+									<button type="button" class="department-faculty-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white/10 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent" data-department="Department of Environmental Science" aria-pressed="false">
+										<div class="text-left leading-tight">
+											<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-white/80">Show</span>
+											<span class="block text-sm md:text-base font-semibold">Faculty</span>
+										</div>
+										<svg class="w-5 h-5 department-button-icon transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+									</button>
+									<button type="button" class="department-program-toggle inline-flex items-center justify-between gap-4 px-5 py-3 rounded-full border border-white/40 bg-white text-[#61063B] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white/60 focus:ring-offset-2 focus:ring-offset-transparent" data-department="Department of Environmental Science" data-department-search="Environmental Science">
+										<div class="text-left leading-tight">
+											<span class="block text-[0.65rem] uppercase tracking-[0.35em] text-[#61063B]/80">View</span>
+											<span class="block text-sm md:text-base font-semibold">Academic Programs</span>
+										</div>
+										<svg class="w-5 h-5 text-[#61063B]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7-7 7M21 12H3"></path></svg>
+									</button>
+								</div>
+							</div>
+							<div class="flex-1 w-full space-y-4 md:space-y-6">
+								<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base faculty-banner-content hidden" data-static-content="true" data-member-count="4">
+									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+										<div class="leading-tight">
+											<p class="font-semibold">Asst. Prof. Nur-Aisa S. Abdulmajid</p>
+											<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Chairperson</p>
+										</div>
+									</div>
+									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+										<div class="leading-tight">
+											<p class="font-semibold">Assoc. Prof. Nurhima H. Jammang</p>
+											<p class="text-white/80 text-sm font-normal">Associate Professor V • College Secretary</p>
+										</div>
+									</div>
+									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+										<div class="leading-tight">
+											<p class="font-semibold">Dahlia P. Burias</p>
+											<p class="text-white/80 text-sm font-normal">Instructor I</p>
+										</div>
+									</div>
+									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+										<div class="leading-tight">
+											<p class="font-semibold">Zharifa G. Rasul, MSc</p>
+											<p class="text-white/80 text-sm font-normal">Instructor I</p>
 										</div>
 									</div>
 								</div>
@@ -8911,52 +9726,117 @@ document.addEventListener('DOMContentLoaded', function() {
 				<div class="text-center mb-8 sm:mb-12 md:mb-16">
 					<h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-3 sm:mb-4 px-4">Personnel Spotlight</h2>
 					<p class="text-sm sm:text-base md:text-lg text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto px-4">
-						Meet our dedicated staff and support personnel who contribute to the excellence of our College of Fisheries
+						Meet our dedicated staff and support personnel who contribute to the excellence of COFEST
 					</p>
 				</div>
 
 				<!-- Leadership Section - Dean -->
 				<div class="flex flex-col sm:flex-row justify-center items-center gap-8 sm:gap-10 md:gap-12 mb-8 sm:mb-10 md:mb-12">
-					<!-- Prof. Jaro O. Ajik - Dean -->
-					<div class="text-center w-full sm:w-auto cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('jaro_ajik_dean')">
+					<!-- Prof. Sheriffa T. Andas, Ph.D. - Dean -->
+					<div class="text-center w-full sm:w-auto cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('andas_dean')">
 						<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
-							<img src="/images/cof/Faculty/Jaro O. Ajik.png" alt="Prof. Jaro O. Ajik" class="w-full h-full object-cover rounded-full border-4 border-white shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy" onerror="this.src='/images/cof/Faculty/Jaro O. Ajik.png'">
+							<img src="/images/ioes/Faculty/SHERIFFA T. ANDAS.jpg" alt="Prof. Sheriffa T. Andas, Ph.D." class="w-full h-full object-cover rounded-full border-4 border-white shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
 						</div>
-						<h3 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Prof. Jaro O. Ajik</h3>
-						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Dean, College of Fisheries</p>
+						<h3 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Prof. Sheriffa T. Andas, Ph.D.</h3>
+						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Dean, College of Fisheries, Oceanography, Environmental Science, and Technology (COFEST)</p>
 						<p class="text-xs text-gray-600 dark:text-gray-400 px-2">Professor VI</p>
 					</div>
 				</div>
 
-				<!-- Chairpersons Section -->
+				<!-- C. Chairpersons – Avatars (click to open modal) -->
 				<div class="mb-8 sm:mb-10 md:mb-12">
-					<h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-6 sm:mb-8 text-center px-4">The Chairpersons</h3>
-					<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
-						<!-- Asst. Prof. Merilyn Q. Amlani - Fish Processing & Food Technology -->
-						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openFacultyModal('merilynAmlani')">
-							<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
-								<img src="/images/cof/Faculty/Merilyn Q. Amlani.png" alt="Asst. Prof. Merilyn Q. Amlani" class="w-full h-full object-cover rounded-full border-4 border-white shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
+					<h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-6 sm:mb-8 text-center px-4">Chairpersons</h3>
+					<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-6 sm:gap-8 max-w-6xl mx-auto mb-8">
+						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('chair_imlani')">
+							<div class="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-main-color/20 dark:border-msu-bgc-color/20 shadow-lg bg-gray-100 dark:bg-gray-700 hover:shadow-xl transition-shadow">
+								<img src="/images/cof/Faculty/Ainulyakin H. Imlani.png" alt="Prof. Ainulyakin H. Imlani, Ph.D." class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/ioes/Faculty/msuguest.png'">
 							</div>
-							<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Asst. Prof. Merilyn Q. Amlani</h4>
-							<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color px-2">Chairperson, Fish Processing & Food Technology Departments</p>
+							<h4 class="font-bold text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color mb-1 px-2">Prof. Ainulyakin H. Imlani, Ph.D.</h4>
+							<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 px-2">Department of Aquaculture</p>
 						</div>
-
-						<!-- Assistant Prof. Albaris B. Tahiluddin - Aquaculture Department -->
-						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openFacultyModal('albarisTahiluddin')">
-							<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
-								<img src="/images/cof/Faculty/Albaris B. Tahiluddin.png" alt="Assistant Prof. Albaris B. Tahiluddin" class="w-full h-full object-cover rounded-full border-4 border-white shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
+						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('jaro_ajik_dean')">
+							<div class="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-main-color/20 dark:border-msu-bgc-color/20 shadow-lg bg-gray-100 dark:bg-gray-700 hover:shadow-xl transition-shadow">
+								<img src="/images/cof/Faculty/Jaro O. Ajik.png" alt="Prof. Jaro O. Ajik, DFT" class="w-full h-full object-cover lazy-image" loading="lazy">
 							</div>
-							<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Assistant Prof. Albaris B. Tahiluddin</h4>
-							<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color px-2">Chairperson, Aquaculture Department</p>
+							<h4 class="font-bold text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color mb-1 px-2">Prof. Jaro O. Ajik, DFT</h4>
+							<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 px-2">Department of Capture Fisheries</p>
 						</div>
-
-						<!-- Asst. Prof. Jurmin H. Sarri - Capture Fisheries Department -->
-						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openFacultyModal('jurminSarri')">
-							<div class="relative w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mx-auto mb-3 sm:mb-4">
-								<img src="/images/cof/Faculty/Jurmin H. Sarri.png" alt="Asst. Prof. Jurmin H. Sarri" class="w-full h-full object-cover rounded-full border-4 border-white shadow-lg hover:shadow-xl transition-shadow lazy-image" loading="lazy">
+						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('chair_tahiluddin')">
+							<div class="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-main-color/20 dark:border-msu-bgc-color/20 shadow-lg bg-gray-100 dark:bg-gray-700 hover:shadow-xl transition-shadow">
+								<img src="/images/cof/Faculty/Albaris B. Tahiluddin.png" alt="Associate Prof. Albaris B. Tahiluddin, Ph.D." class="w-full h-full object-cover lazy-image" loading="lazy">
 							</div>
-							<h4 class="font-bold text-base sm:text-lg md:text-xl text-msu-main-color dark:text-msu-bgc-color mb-1 sm:mb-2 px-2">Asst. Prof. Jurmin H. Sarri</h4>
-							<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color px-2">Chairperson, Capture Fisheries Department</p>
+							<h4 class="font-bold text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color mb-1 px-2">Assoc. Prof. Albaris B. Tahiluddin, Ph.D.</h4>
+							<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 px-2">Department of Post-Harvest Fisheries</p>
+						</div>
+						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('chair_sarri')">
+							<div class="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-main-color/20 dark:border-msu-bgc-color/20 shadow-lg bg-gray-100 dark:bg-gray-700 hover:shadow-xl transition-shadow">
+								<img src="/images/cof/Faculty/Jurmin H. Sarri.png" alt="Assistant Prof. Jurmin H. Sarri" class="w-full h-full object-cover lazy-image" loading="lazy">
+							</div>
+							<h4 class="font-bold text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color mb-1 px-2">Assistant Prof. Jurmin H. Sarri</h4>
+							<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 px-2">Department of Aquatic Resources Management</p>
+						</div>
+						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('chair_mohammad')">
+							<div class="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-main-color/20 dark:border-msu-bgc-color/20 shadow-lg bg-gray-100 dark:bg-gray-700 hover:shadow-xl transition-shadow">
+								<img src="/images/ioes/Faculty/KIMTANG JOY H. MOHAMMAD.jpg" alt="Assistant Prof. Kimtang Joy H. Mohammad" class="w-full h-full object-cover lazy-image" loading="lazy">
+							</div>
+							<h4 class="font-bold text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color mb-1 px-2">Assistant Prof. Kimtang Joy H. Mohammad</h4>
+							<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 px-2">Department of Marine Sciences</p>
+						</div>
+						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('chair_abdulmajid')">
+							<div class="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-main-color/20 dark:border-msu-bgc-color/20 shadow-lg bg-gray-100 dark:bg-gray-700 hover:shadow-xl transition-shadow">
+								<img src="/images/ioes/Faculty/NUR-AISA S. ABDULMAJID.jpg" alt="Assistant Prof. Nur-Aisa S. Abdulmajid" class="w-full h-full object-cover lazy-image" loading="lazy">
+							</div>
+							<h4 class="font-bold text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color mb-1 px-2">Assistant Prof. Nur-Aisa S. Abdulmajid</h4>
+							<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 px-2">Department of Environmental Science</p>
+						</div>
+						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('chair_amlani')">
+							<div class="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-main-color/20 dark:border-msu-bgc-color/20 shadow-lg bg-gray-100 dark:bg-gray-700 hover:shadow-xl transition-shadow">
+								<img src="/images/cof/Faculty/Merilyn Q. Amlani.png" alt="Assistant Prof. Merilyn Q. Amlani" class="w-full h-full object-cover lazy-image" loading="lazy">
+							</div>
+							<h4 class="font-bold text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color mb-1 px-2">Assistant Prof. Merilyn Q. Amlani</h4>
+							<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 px-2">Department of Food Science and Technology</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- Staff & Research Personnel (COFEST/IOES) -->
+				<div class="mb-8 sm:mb-10 md:mb-12">
+					<h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-msu-main-color dark:text-msu-bgc-color mb-6 sm:mb-8 text-center px-4">Staff & Research Personnel</h3>
+					<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8 max-w-5xl mx-auto mb-8">
+						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('hadjirul')">
+							<div class="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-main-color/20 dark:border-msu-bgc-color/20 shadow-lg bg-gray-100 dark:bg-gray-700 hover:shadow-xl transition-shadow">
+								<img src="/images/ioes/Faculty/ANGELINE B. HADJIRUL.jpg" alt="Angeline B. Hadjirul" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/ioes/Faculty/msuguest.png'">
+							</div>
+							<h4 class="font-bold text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color mb-1 px-2">Angeline B. Hadjirul</h4>
+							<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 px-2">Aquacultural Technologist & Guest Lecturer</p>
+						</div>
+						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('kalimuddin')">
+							<div class="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-main-color/20 dark:border-msu-bgc-color/20 shadow-lg bg-gray-100 dark:bg-gray-700 hover:shadow-xl transition-shadow">
+								<img src="/images/ioes/Faculty/SHARIFA KALIMUDDIN.jpg" alt="Sharifa K. Kalimuddin" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/ioes/Faculty/msuguest.png'">
+							</div>
+							<h4 class="font-bold text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color mb-1 px-2">Sharifa K. Kalimuddin</h4>
+							<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 px-2">Administrative Aide IV</p>
+						</div>
+						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('hussin')">
+							<div class="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-main-color/20 dark:border-msu-bgc-color/20 shadow-lg bg-gray-100 dark:bg-gray-700 hover:shadow-xl transition-shadow">
+								<img src="/images/ioes/Faculty/BIBING A. HUSSIN.jpg" alt="Bibing A. Hussin" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/ioes/Faculty/msuguest.png'">
+							</div>
+							<h4 class="font-bold text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color mb-1 px-2">Bibing A. Hussin</h4>
+							<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 px-2">Research Assistant & Guest Lecturer</p>
+						</div>
+						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('gunong')">
+							<div class="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-main-color/20 dark:border-msu-bgc-color/20 shadow-lg bg-gray-100 dark:bg-gray-700 hover:shadow-xl transition-shadow">
+								<img src="/images/ioes/Faculty/Adzlan gunong.png" alt="Adzlan D. Gunong" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/ioes/Faculty/msuguest.png'">
+							</div>
+							<h4 class="font-bold text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color mb-1 px-2">Adzlan D. Gunong</h4>
+							<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 px-2">Science Research Assistant</p>
+						</div>
+						<div class="text-center cursor-pointer transform transition-transform duration-300 hover:scale-105" onclick="openPersonnelModal('salabi')">
+							<div class="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mx-auto mb-3 sm:mb-4 rounded-full overflow-hidden border-4 border-msu-main-color/20 dark:border-msu-bgc-color/20 shadow-lg bg-gray-100 dark:bg-gray-700 hover:shadow-xl transition-shadow">
+								<img src="/images/ioes/Faculty/KILIN R. SALABI.jpg" alt="Kilin R. Salabi" class="w-full h-full object-cover lazy-image" loading="lazy" onerror="this.src='/images/ioes/Faculty/msuguest.png'">
+							</div>
+							<h4 class="font-bold text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color mb-1 px-2">Kilin R. Salabi</h4>
+							<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 px-2">Research Assistant & Guest Lecturer</p>
 						</div>
 					</div>
 				</div>
@@ -9792,7 +10672,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                                 <h3 class="text-lg font-medium">Email</h3>
 
-                                <p class="text-gray-300">msutctocoed@msutcto.edu.ph</p>
+                                <p class="text-gray-300">cofest@msutcto.edu.ph</p>
 
                             </div>
 
@@ -9816,7 +10696,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
                                 <h3 class="text-lg font-medium">Phone</h3>
 
-                                <p class="text-gray-300">(0917) 159 1947</p>
+                                <p class="text-gray-300">+639 979 757 616</p>
+								<p class="text-gray-300">+639 171 591 947</p>
 
                             </div>
 
@@ -9842,9 +10723,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
                                 <h3 class="text-lg font-medium">Address</h3>
 
-                                <p class="text-gray-300">College of Education, MSU-TCTO</p>
+                                <p class="text-gray-300">The College of Fisheries, Oceanography, Environmental, and Technology (COFEST), MSU-TCTO</p>
 
-                                <p class="text-gray-300">Sanga Sanga Bridge, Bongao, Tawi-Tawi</p>
+                                <p class="text-gray-300">Sanga Sanga, Bongao, Tawi-Tawi</p>
 
                             </div>
 
@@ -10373,80 +11254,108 @@ document.head.appendChild(style);
 
 </script>
 
-<!-- Map Section -->
-
-<!-- Map Section -->
-
-<section class="bg-white py-12">
-
-  <div class="container mx-auto px-6">
-
-    <div class="text-center mb-8">
-
-      <h2 class="text-3xl font-bold mb-2" style="color: #61063B;" data-dark-color="white">Our Location</h2>
-
-      <p class="text-msu-main-color dark:text-msu-bgc-color max-w-2xl mx-auto">
-
-        College of Education, MSU-TCTO<br>
-
-		2PQW+V2C, MSU-TCTO, Sanga Sanga Bridge, Bongao, Tawi-Tawi
-
+<!-- Our Locations Section -->
+<section class="relative py-16 md:py-24 overflow-hidden bg-gradient-to-b from-gray-50 to-white dark:from-gray-900/80 dark:to-gray-900">
+  <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%2361063B\' fill-opacity=\'0.03\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-80 dark:opacity-40" aria-hidden="true"></div>
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="text-center mb-12 md:mb-16">
+      <span class="inline-block text-xs font-semibold uppercase tracking-[0.2em] text-[#61063B] dark:text-amber-400/90 mb-3">Find Us</span>
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4" style="color: #61063B;" data-dark-color="white">Our Locations</h2>
+      <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
+        Visit our campuses at Sanga Sanga Bridge, Bongao, Tawi-Tawi
       </p>
-
     </div>
 
-    
-
-    <div class="rounded-xl overflow-hidden shadow-xl h-96">
-
-      <div class="embed-map-responsive">
-        <div class="embed-map-container">
-          <iframe 
-            class="embed-map-frame" 
-            frameborder="0" 
-            scrolling="no" 
-            marginheight="0" 
-            marginwidth="0" 
-            src="https://maps.google.com/maps?width=600&height=400&hl=en&q=MSUTCTO%20COLLEGE%20OF%20EDUCATION%20&t=h&z=14&ie=UTF8&iwloc=B&output=embed"
-            title="College of Education, MSU-TCTO Location"
-          ></iframe>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 max-w-6xl mx-auto">
+      <!-- Environmental Science -->
+      <article class="location-card group bg-white dark:bg-gray-800/90 rounded-2xl shadow-lg hover:shadow-2xl border border-gray-100 dark:border-gray-700/50 overflow-hidden transition-all duration-300 hover:-translate-y-1">
+        <div class="p-6 md:p-7 border-b border-gray-100 dark:border-gray-700/50">
+          <div class="flex items-start gap-4">
+            <span class="flex-shrink-0 w-12 h-12 rounded-xl bg-[#61063B]/10 dark:bg-amber-500/20 flex items-center justify-center text-[#61063B] dark:text-amber-400" aria-hidden="true">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            </span>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1">Environmental Science</h3>
+              <p class="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-2">
+                <svg class="w-4 h-4 flex-shrink-0 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
+                MSU-TCTO, Sanga Sanga Bridge, Bongao, Tawi-Tawi
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
+        <div class="relative overflow-hidden rounded-b-2xl">
+          <div class="embed-map-responsive location-map-height border-t border-gray-100 dark:border-gray-700/50">
+            <div class="embed-map-container">
+              <iframe
+                class="embed-map-frame"
+                frameborder="0"
+                scrolling="no"
+                marginheight="0"
+                marginwidth="0"
+                src="https://maps.google.com/maps?width=600&height=400&hl=en&q=MSUTCTO%20Environmental%20Science%20&t=&z=14&ie=UTF8&iwloc=B&output=embed"
+                title="MSU-TCTO Environmental Science Location"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+        <div class="p-5 md:p-6 bg-gray-50/50 dark:bg-gray-800/50">
+          <a
+            href="https://www.google.com/maps/search/MSUTCTO+Environmental+Science"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-5 py-3 rounded-xl text-sm font-semibold text-white bg-[#61063B] hover:bg-[#4d052e] dark:bg-amber-600 dark:hover:bg-amber-700 shadow-md hover:shadow-lg transition-all duration-300"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            Get Directions
+          </a>
+        </div>
+      </article>
 
+      <!-- College of Fisheries -->
+      <article class="location-card group bg-white dark:bg-gray-800/90 rounded-2xl shadow-lg hover:shadow-2xl border border-gray-100 dark:border-gray-700/50 overflow-hidden transition-all duration-300 hover:-translate-y-1">
+        <div class="p-6 md:p-7 border-b border-gray-100 dark:border-gray-700/50">
+          <div class="flex items-start gap-4">
+            <span class="flex-shrink-0 w-12 h-12 rounded-xl bg-[#61063B]/10 dark:bg-amber-500/20 flex items-center justify-center text-[#61063B] dark:text-amber-400" aria-hidden="true">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            </span>
+            <div>
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1">College of Fisheries</h3>
+              <p class="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-2">
+                <svg class="w-4 h-4 flex-shrink-0 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
+                MSU-TCTO, Sanga Sanga Bridge, Bongao, Tawi-Tawi
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="relative overflow-hidden rounded-b-2xl">
+          <div class="embed-map-responsive location-map-height border-t border-gray-100 dark:border-gray-700/50">
+            <div class="embed-map-container">
+              <iframe
+                class="embed-map-frame"
+                frameborder="0"
+                scrolling="no"
+                marginheight="0"
+                marginwidth="0"
+                src="https://maps.google.com/maps?width=600&height=400&hl=en&q=MSUTCTO%20College%20of%20Fisheries&t=&z=14&ie=UTF8&iwloc=B&output=embed"
+                title="MSU-TCTO College of Fisheries Location"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+        <div class="p-5 md:p-6 bg-gray-50/50 dark:bg-gray-800/50">
+          <a
+            href="https://www.google.com/maps/search/MSUTCTO+College+of+Fisheries"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-5 py-3 rounded-xl text-sm font-semibold text-white bg-[#61063B] hover:bg-[#4d052e] dark:bg-amber-600 dark:hover:bg-amber-700 shadow-md hover:shadow-lg transition-all duration-300"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            Get Directions
+          </a>
+        </div>
+      </article>
     </div>
-
-    
-
-    <div class="text-center mt-6">
-
-      <a 
-
-        href="https://www.google.com/maps/place/College+of+Education,+MSU-TCTO/@5.0384759,119.741455,17z/data=!3m1!4b1!4m6!3m5!1s0x32410b2e33c75f35:0x8359e168f5974d1d!8m2!3d5.0384706!4d119.7440353!16s%2Fg%2F11s7_67s63?entry=ttu&g_ep=EgoyMDI1MDkxNy4wIKXMDSoASAFQAw%3D%3D" 
-
-        target="_blank" 
-
-        rel="noopener noreferrer"
-
-        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-[#61063B] hover:bg-msu-deep-ocean shadow-sm transition-colors duration-300"
-
-      >
-
-        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-
-        </svg>
-
-        Get Directions
-
-      </a>
-
-    </div>
-
   </div>
-
 </section>
 
 <style>
@@ -10457,7 +11366,9 @@ document.head.appendChild(style);
   height: 0;
   padding-bottom: 66.66666666666666%;
 }
-
+.location-map-height {
+  padding-bottom: 56.25%;
+}
 .embed-map-container {
   overflow: hidden;
   background: none !important;
@@ -10467,7 +11378,6 @@ document.head.appendChild(style);
   top: 0;
   left: 0;
 }
-
 .embed-map-frame {
   width: 100% !important;
   height: 100% !important;
@@ -11019,7 +11929,7 @@ document.head.appendChild(style);
 			<script src="../../js/smoothscroll.js" ></script>
 
 			<!-- Contact form handler -->
-			<script src="../../js/contact-form-api.js"></script>
+			<script src="../../js/contact-form-cofest.js"></script>
 
 			
 

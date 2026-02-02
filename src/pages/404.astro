@@ -8,255 +8,228 @@ import '../styles/css/global.css';
 const currentPath = Astro.url.pathname;
 ---
 
-<Layout title="MSU | Tawi-Tawi College of Technology and Oceanography - Under Construction">
-	<main class="bg-gradient-to-b from-blue-50 to-white dark:from-gray-800 dark:to-gray-900">
+<Layout title="404 | Page Not Found - MSU-Tawi-Tawi College of Technology and Oceanography">
+	<main class="min-h-screen bg-gradient-to-b from-msu-maroon-100 via-white to-msu-maroon-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
 		<Navbar path={currentPath} client:visible />
 
-        <div class="min-h-[80vh] flex flex-col items-center justify-center w-full xl:px-[12.5%] xs:px-[3.85%] py-[80px] relative overflow-hidden">
-            {/* Ocean Wave Background */}
-            <div class="absolute bottom-0 left-0 right-0 h-24 overflow-hidden">
-                <svg class="absolute bottom-0 w-full" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                    <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="fill-blue-200 dark:fill-blue-800"></path>
-                    <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="fill-blue-300 dark:fill-blue-700"></path>
-                    <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="fill-blue-400 dark:fill-blue-600"></path>
-                </svg>
-            </div>
+		<section class="relative min-h-[85vh] flex flex-col items-center justify-center w-full xl:px-[12.5%] xs:px-[3.85%] py-16 md:py-24">
+			{/* Subtle grid overlay */}
+			<div class="absolute inset-0 opacity-[0.03] dark:opacity-[0.06]" style="background-image: linear-gradient(#61063B 1px, transparent 1px), linear-gradient(90deg, #61063B 1px, transparent 1px); background-size: 48px 48px;"></div>
 
-            {/* Animated Marine Elements */}
-            <div class="absolute bottom-24 left-1/4 w-32 h-32 animate-dolphin-swim">
-                <svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M510.371 246.258C503.688 238.9 494.075 235.029 484.229 235.029H374.857L300.571 160.743C293.714 153.886 284.229 150.4 274.286 150.4H150.4C133.943 150.4 120.457 163.886 120.457 180.343C120.457 196.8 133.943 210.286 150.4 210.286H246.4L194.743 261.943C187.886 268.8 184.4 278.286 184.4 288.229V384.229C184.4 400.686 197.886 414.171 214.343 414.171C230.8 414.171 244.286 400.686 244.286 384.229V314.514L313.143 383.371C319.543 389.771 328.229 393.143 337.371 393.143H484.229C494.075 393.143 503.688 389.271 510.371 381.914C517.029 374.557 520.914 364.914 520.8 355.086V273.086C520.914 263.257 517.029 253.615 510.371 246.258Z" fill="#1E3A8A"/>
-                    <path d="M120.457 288.229C120.457 271.772 106.971 258.286 90.5143 258.286H27.4286C10.9714 258.286 0 269.257 0 285.714V384.229C0 400.686 13.4857 414.171 29.9429 414.171H90.5143C106.971 414.171 120.457 400.686 120.457 384.229V288.229Z" fill="#1E3A8A"/>
-                </svg>
-            </div>
+			{/* Floating bubbles - decorative */}
+			<div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+				<div class="bubble bubble-1"></div>
+				<div class="bubble bubble-2"></div>
+				<div class="bubble bubble-3"></div>
+				<div class="bubble bubble-4"></div>
+				<div class="bubble bubble-5"></div>
+				<div class="bubble bubble-6"></div>
+				<div class="bubble bubble-7"></div>
+				<div class="bubble bubble-8"></div>
+			</div>
 
-            {/* Construction Container */}
-            <div class="max-w-4xl mx-auto text-center px-8 py-12 rounded-xl bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm shadow-2xl border border-blue-100/30 dark:border-gray-600/30 relative z-10 transform transition-all hover:scale-[1.01]">
-                {/* Construction Badge */}
-                <div class="absolute -top-4 -right-4 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold px-4 py-2 rounded-full shadow-lg transform rotate-6 animate-pulse">
-                    UNDER CONSTRUCTION
-                </div>
+			{/* Ocean waves - multi-layer */}
+			<div class="absolute bottom-0 left-0 right-0 h-32 md:h-40 overflow-hidden">
+				<svg class="absolute bottom-0 w-full wave-svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+					<path class="fill-msu-maroon-200/40 dark:fill-msu-maroon-800/50" d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"></path>
+					<path class="fill-msu-maroon-300/60 dark:fill-msu-maroon-700/60" d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z"></path>
+					<path class="fill-msu-deep-ocean dark:fill-msu-maroon-600" d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"></path>
+				</svg>
+			</div>
 
-                {/* Tech & Oceanography Icon */}
-                <div class="flex justify-center items-center mb-8">
-                    <div class="relative">
-                        {/* Enhanced PC Icon with Ocean Theme */}
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="h-28 w-28" xml:space="preserve">
-                          <rect x="187.317" y="387.122" style="fill:#78B9EB;" width="137.366" height="74.927"/>
-                          <rect y="31.22" style="fill:#0052B4;" width="512" height="374.634"/>
-                          <rect x="256" y="31.22" style="fill:#003778;" width="256" height="374.634"/>
-                          <rect x="143.61" y="443.317" style="fill:#AED5F3;" width="224.78" height="37.463"/>
-                          <rect x="256" y="443.317" style="fill:#93C7EF;" width="112.39" height="37.463"/>
-                          <g>
-                            <polygon style="fill:#FFFFFF;" points="337.927,149.097 311.438,175.586 354.388,218.537 311.438,261.487 337.927,287.976 407.368,218.537"/>
-                            <polygon style="fill:#FFFFFF;" points="157.612,218.537 200.562,175.586 174.073,149.097 104.632,218.537 174.073,287.976 200.562,261.487"/>
-                            <polygon style="fill:#FFFFFF;" points="297.489,112.39 259.203,112.39 214.509,324.683 252.797,324.683"/>
-                          </g>
-                        </svg>
-                        {/* Animated Ripple Effect */}
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="h-32 w-32 rounded-full bg-blue-400/10 animate-ripple"></div>
-                        </div>
-                    </div>
-                </div>
+			{/* Dolphin accent - optional */}
+			<div class="absolute bottom-28 left-[15%] w-20 h-20 md:w-24 md:h-24 opacity-60 animate-dolphin-swim hidden sm:block" aria-hidden="true">
+				<svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+					<path d="M510.37 246.26C503.69 238.9 494.07 235.03 484.23 235.03H374.86L300.57 160.74C293.71 153.89 284.23 150.4 274.29 150.4H150.4C133.94 150.4 120.46 163.89 120.46 180.34C120.46 196.8 133.94 210.29 150.4 210.29H246.4L194.74 261.94C187.89 268.8 184.4 278.29 184.4 288.23V384.23C184.4 400.69 197.89 414.17 214.34 414.17C230.8 414.17 244.29 400.69 244.29 384.23V314.51L313.14 383.37C319.54 389.77 328.23 393.14 337.37 393.14H484.23C494.07 393.14 503.69 389.27 510.37 381.91C517.03 374.56 520.91 364.91 520.8 355.09V273.09C520.91 263.26 517.03 253.62 510.37 246.26Z" class="fill-msu-deep-ocean"/>
+					<path d="M120.46 288.23C120.46 271.77 106.97 258.29 90.51 258.29H27.43C10.97 258.29 0 269.26 0 285.71V384.23C0 400.69 13.49 414.17 29.94 414.17H90.51C106.97 414.17 120.46 400.69 120.46 384.23V288.23Z" class="fill-msu-deep-ocean"/>
+				</svg>
+			</div>
 
-                {/* Heading */}
-                <h1 class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-900 to-blue-600 dark:from-blue-300 dark:to-blue-400 mb-6">
-                    <span class="inline-block">Digital Transformation</span> <span class="inline-block">Underway</span>
-                </h1>
+			{/* Main content card */}
+			<div class="relative z-10 w-full max-w-4xl mx-auto text-center px-6 sm:px-8 py-10 sm:py-14 rounded-2xl sm:rounded-3xl bg-white/90 dark:bg-gray-800/90 backdrop-blur-md shadow-xl dark:shadow-2xl border border-msu-maroon-200/40 dark:border-gray-600/40 transition-all duration-500 hover:shadow-2xl hover:border-msu-maroon-300/60 dark:hover:border-msu-maroon-500/40 404-card">
+				{/* 404 number - bold and interactive */}
+				<div class="relative mb-4 sm:mb-6">
+					<h1 class="font-philosopher text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] font-bold tracking-tight select-none">
+						<span class="text-transparent bg-clip-text bg-gradient-to-br from-msu-maroon-600 via-msu-deep-ocean to-msu-maroon-700 dark:from-msu-maroon-400 dark:via-msu-deep-ocean dark:to-msu-maroon-500 404-text">404</span>
+					</h1>
+					<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+						<span class="font-philosopher text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] font-bold text-msu-deep-ocean/10 dark:text-msu-maroon-400/10 blur-sm 404-glow">404</span>
+					</div>
+				</div>
 
-                {/* Subheading */}
-                <p class="text-xl text-gray-700 dark:text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
-                    We're crafting an immersive digital experience for our oceanography community. Our team is working diligently to launch a cutting-edge platform that reflects our marine research excellence.
-                </p>
+				{/* Headline */}
+				<h2 class="font-philosopher text-2xl sm:text-3xl md:text-4xl font-bold text-msu-maroon-800 dark:text-msu-maroon-200 mb-3">
+					Lost at sea?
+				</h2>
+				<p class="text-base sm:text-lg text-gray-600 dark:text-gray-400 max-w-xl mx-auto mb-8 leading-relaxed">
+					The page you're looking for isn't here. Let's get you back to shore.
+				</p>
 
-                {/* Enhanced Progress Bar */}
-                <div class="mb-10 px-4">
-                    <div class="flex justify-between mb-3">
-                        <span class="text-sm font-semibold text-blue-900 dark:text-blue-300 flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clip-rule="evenodd" />
-                            </svg>
-                            Development Progress
-                        </span>
-                        <span class="text-sm font-semibold text-blue-900 dark:text-blue-300">60%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 overflow-hidden">
-                        <div class="bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 h-2.5 rounded-full relative overflow-hidden">
-                            <div class="absolute inset-0 bg-white/30 animate-progress-shine"></div>
-                        </div>
-                    </div>
-                </div>
+				{/* CTA buttons */}
+				<div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10">
+					<a href="/" class="404-btn-primary group focus:outline-none focus-visible:ring-2 focus-visible:ring-msu-deep-ocean focus-visible:ring-offset-2 rounded-full">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 transition-transform group-hover:-translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+						</svg>
+						Go to Home
+					</a>
+					<a href="/programs/cas" class="404-btn-secondary group focus:outline-none focus-visible:ring-2 focus-visible:ring-msu-deep-ocean focus-visible:ring-offset-2 rounded-full">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+						</svg>
+						Browse Programs
+					</a>
+				</div>
 
-                {/* Enhanced Contact Card */}
-                <div class="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-gray-700 dark:to-gray-800 rounded-xl p-6 mb-8 border border-blue-200/50 dark:border-gray-600/50 shadow-inner">
-                    <h3 class="text-xl font-semibold text-blue-900 dark:text-blue-300 mb-4 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                        Contact Our Team
-                    </h3>
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <div class="bg-white/90 dark:bg-gray-600/90 p-4 rounded-lg shadow-sm border border-blue-100 dark:border-gray-500 hover:shadow-md transition-shadow">
-                            <p class="font-medium text-blue-800 dark:text-blue-300 mb-1 flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                                </svg>
-                                General Inquiries
-                            </p>
-                            <p class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">icto@msutcto.edu.ph</p>
-                        </div>
-                        <a href="https://www.facebook.com/msutctoicto" target="_blank" class="bg-white/90 dark:bg-gray-600/90 p-4 rounded-lg shadow-sm border border-blue-100 dark:border-gray-500 hover:shadow-md transition-shadow hover:border-[#1877F2] dark:hover:border-[#1877F2] group">
-                            <p class="font-medium text-blue-800 dark:text-blue-300 mb-1 flex items-center group-hover:text-[#1877F2] transition-colors">
-                                <svg class="h-5 w-5 mr-1" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                                </svg>
-                                Follow Us
-                            </p>
-                            <p class="text-gray-700 dark:text-gray-300 group-hover:text-[#1877F2] transition-colors">@msutctoicto</p>
-                        </a>
-                    </div>
-                </div>
+				{/* Quick links */}
+				<div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
+					<a href="/about/campus" class="text-msu-deep-ocean dark:text-msu-maroon-400 hover:underline font-medium transition-colors">About</a>
+					<a href="/admissions/admissions" class="text-msu-deep-ocean dark:text-msu-maroon-400 hover:underline font-medium transition-colors">Admissions</a>
+					<a href="/offices/offices" class="text-msu-deep-ocean dark:text-msu-maroon-400 hover:underline font-medium transition-colors">Offices</a>
+					<a href="/publications/articles" class="text-msu-deep-ocean dark:text-msu-maroon-400 hover:underline font-medium transition-colors">Publications</a>
+				</div>
+			</div>
 
-                {/* Social Media with Hover Effects */}
-                <div class="flex flex-col items-center">
-                    <p class="text-gray-600 dark:text-gray-400 mb-4">Follow our digital journey</p>
-                    <div class="flex space-x-6">
-                        <a href="https://www.facebook.com/msutctoicto" class="text-blue-600 dark:text-blue-400 hover:text-[#1877F2] dark:hover:text-blue-300 transition-all duration-300 transform hover:-translate-y-1">
-                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" />
-                            </svg>
-                        </a>
-                        <!-- <a href="#" class="text-blue-600 hover:text-[#E4405F] transition-all duration-300 transform hover:-translate-y-1">
-                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
-                            </svg>
-                        </a>
-                        <a href="#" class="text-blue-600 hover:text-[#1DA1F2] transition-all duration-300 transform hover:-translate-y-1">
-                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                            </svg>
-                        </a>
-                        <a href="#" class="text-blue-600 hover:text-[#0A66C2] transition-all duration-300 transform hover:-translate-y-1">
-                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10c5.523 0 10-4.477 10-10S17.523 2 12 2zM6.344 15.271a8 8 0 0011.312 0 5.957 5.957 0 01-3.96 1.418v-1.5a4.457 4.457 0 003.96-1.418 6 6 0 00-11.312 0 4.457 4.457 0 003.96 1.418v1.5a5.957 5.957 0 01-3.96-1.418zM12 8a4 4 0 100 8 4 4 0 000-8z" clip-rule="evenodd" />
-                            </svg>
-                        </a> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-		
-        <!-- FooterNaV -->
-        <FooterNav />
-        <!-- end FooterNaV -->
+			{/* Contact strip */}
+			<div class="relative z-10 mt-8 sm:mt-10 max-w-2xl mx-auto">
+				<div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 p-4 sm:p-6 rounded-xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-msu-maroon-200/30 dark:border-gray-600/30 shadow-lg">
+					<div class="flex items-center gap-2">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-msu-deep-ocean dark:text-msu-maroon-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+						</svg>
+						<a href="mailto:icto@msutcto.edu.ph" class="text-gray-700 dark:text-gray-300 hover:text-msu-deep-ocean dark:hover:text-msu-maroon-400 font-medium transition-colors">icto@msutcto.edu.ph</a>
+					</div>
+					<a href="https://www.facebook.com/msutctoicto" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-[#1877F2] font-medium transition-colors">
+						<svg class="h-5 w-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+						@msutctoicto
+					</a>
+				</div>
+			</div>
+		</section>
 
-        <!-- Footer -->
+		<FooterNav />
 		<Footer />
-        <!-- end Footer -->
 	</main>
 </Layout>
 
 <style is:global>
-    /* Enhanced Animations */
-    @keyframes bounce {
-        0%, 100% {
-            transform: translateY(0);
-        }
-        50% {
-            transform: translateY(-15px);
-        }
-    }
-    
-    @keyframes pulse {
-        0%, 100% {
-            opacity: 1;
-            transform: scale(1);
-        }
-        50% {
-            opacity: 0.8;
-            transform: scale(1.02);
-        }
-    }
-    
-    /* Dolphin Animation */
-    @keyframes dolphin-swim {
-        0% {
-            transform: translateX(0) translateY(0) rotate(0deg);
-        }
-        25% {
-            transform: translateX(50px) translateY(-10px) rotate(5deg);
-        }
-        50% {
-            transform: translateX(100px) translateY(0) rotate(0deg);
-        }
-        75% {
-            transform: translateX(150px) translateY(-10px) rotate(-5deg);
-        }
-        100% {
-            transform: translateX(200px) translateY(0) rotate(0deg);
-        }
-    }
-    
-    .animate-dolphin-swim {
-        animation: dolphin-swim 8s ease-in-out infinite;
-    }
-    
-    /* Ripple Effect */
-    @keyframes ripple {
-        0% {
-            transform: scale(0.8);
-            opacity: 1;
-        }
-        100% {
-            transform: scale(1.4);
-            opacity: 0;
-        }
-    }
-    
-    .animate-ripple {
-        animation: ripple 3s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-    }
-    
-    /* Progress Shine */
-    @keyframes progress-shine {
-        0% {
-            left: -100%;
-        }
-        100% {
-            left: 100%;
-        }
-    }
-    
-    .animate-progress-shine {
-        animation: progress-shine 2s infinite;
-    }
-    
-    /* Enhancements */
-    .shadow-2xl {
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-    }
-    
-    .transition-all {
-        transition-property: all;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 300ms;
-    }
-    
-    .backdrop-blur-sm {
-        backdrop-filter: blur(4px);
-    }
-    
-    /* Custom PC Icon Styling */
-    .pc-icon-wave {
-        stroke-dasharray: 4 1;
-    }
-    
-    /* Responsive Adjustments */
-    @media (max-width: 640px) {
-        .animate-dolphin-swim {
-            animation: dolphin-swim 12s ease-in-out infinite;
-        }
-    }
+	@import url('https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&display=swap');
+
+	/* Bubbles */
+	.bubble {
+		position: absolute;
+		border-radius: 50%;
+		background: radial-gradient(circle at 30% 30%, rgba(97, 6, 59, 0.15), rgba(97, 6, 59, 0.05));
+		animation: float-up 15s ease-in-out infinite;
+	}
+	.bubble-1 { width: 60px; height: 60px; left: 10%; top: 20%; animation-delay: 0s; }
+	.bubble-2 { width: 40px; height: 40px; left: 25%; top: 60%; animation-delay: -3s; }
+	.bubble-3 { width: 80px; height: 80px; right: 15%; top: 25%; animation-delay: -5s; }
+	.bubble-4 { width: 30px; height: 30px; right: 30%; top: 70%; animation-delay: -7s; }
+	.bubble-5 { width: 50px; height: 50px; left: 50%; top: 15%; animation-delay: -2s; }
+	.bubble-6 { width: 35px; height: 35px; left: 75%; top: 55%; animation-delay: -4s; }
+	.bubble-7 { width: 45px; height: 45px; left: 5%; top: 75%; animation-delay: -6s; }
+	.bubble-8 { width: 55px; height: 55px; right: 8%; top: 45%; animation-delay: -1s; }
+
+	@keyframes float-up {
+		0%, 100% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+		10% { opacity: 0.6; }
+		90% { opacity: 0.4; }
+		100% { transform: translateY(-100px) scale(1); opacity: 0; }
+	}
+
+	/* Wave motion */
+	.wave-svg {
+		animation: wave-motion 8s ease-in-out infinite;
+	}
+	@keyframes wave-motion {
+		0%, 100% { transform: translateX(0) scaleY(1); }
+		50% { transform: translateX(-2%) scaleY(1.02); }
+	}
+
+	/* Dolphin */
+	@keyframes dolphin-swim {
+		0% { transform: translateX(0) translateY(0) rotate(0deg); }
+		25% { transform: translateX(30px) translateY(-8px) rotate(5deg); }
+		50% { transform: translateX(60px) translateY(0) rotate(0deg); }
+		75% { transform: translateX(90px) translateY(-8px) rotate(-5deg); }
+		100% { transform: translateX(120px) translateY(0) rotate(0deg); }
+	}
+	.animate-dolphin-swim {
+		animation: dolphin-swim 10s ease-in-out infinite;
+	}
+
+	/* 404 text shimmer */
+	.404-text {
+		animation: text-shimmer 4s ease-in-out infinite;
+	}
+	@keyframes text-shimmer {
+		0%, 100% { filter: brightness(1); }
+		50% { filter: brightness(1.08); }
+	}
+
+	/* Card hover lift */
+	.404-card {
+		transform: translateY(0);
+	}
+	.404-card:hover {
+		transform: translateY(-4px);
+	}
+
+	/* Primary CTA - msu-deep-ocean #61063B */
+	.404-btn-primary {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.75rem 1.5rem;
+		font-weight: 700;
+		color: white;
+		background-color: #61063B;
+		background: #61063B;
+		border-radius: 9999px;
+		box-shadow: 0 4px 14px rgba(97, 6, 59, 0.4);
+		transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+	}
+	.404-btn-primary:hover {
+		transform: translateY(-2px) scale(1.02);
+		background-color: #4D052F;
+		background: #4D052F;
+		box-shadow: 0 8px 24px rgba(97, 6, 59, 0.5);
+	}
+	.404-btn-primary:active {
+		transform: translateY(0) scale(0.98);
+	}
+
+	/* Secondary CTA */
+	.404-btn-secondary {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.75rem 1.5rem;
+		font-weight: 700;
+		color: #61063B;
+		background: transparent;
+		border: 2px solid #61063B;
+		border-radius: 9999px;
+		transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+	}
+	.404-btn-secondary:hover {
+		background: rgba(97, 6, 59, 0.08);
+		transform: translateY(-2px);
+	}
+	.404-btn-secondary:active {
+		transform: translateY(0);
+	}
+	.dark .404-btn-secondary {
+		color: #D58BB5;
+		border-color: #D58BB5;
+	}
+	.dark .404-btn-secondary:hover {
+		background: rgba(213, 139, 181, 0.15);
+	}
+
+	@media (max-width: 640px) {
+		.animate-dolphin-swim { animation-duration: 14s; }
+		.bubble { animation-duration: 20s; }
+	}
 </style>

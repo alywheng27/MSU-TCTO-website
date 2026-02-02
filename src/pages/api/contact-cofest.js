@@ -70,7 +70,7 @@ export async function POST({ request }) {
                 console.log('✅ SMTP connection verified successfully');
 
                 // Email configuration
-                const recipientEmail = 'iict@msutcto.edu.ph';
+                const recipientEmail = 'cofest@msutcto.edu.ph';
                 const emailSubject = `Contact Form: ${subject} - ${name}`;
 
                 // Escape HTML for safe rendering in email
@@ -135,7 +135,7 @@ Reply to: ${email}
                   <td>
                     <div style="display: inline-block; background: linear-gradient(135deg, #C41E5E 0%, #9e1850 100%); color: #fff; font-size: 11px; font-weight: 600; padding: 6px 14px; border-radius: 20px; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 24px;">New Inquiry</div>
                     <h1 style="color: #1a1a2e; font-size: 24px; font-weight: 600; margin: 0 0 8px 0; line-height: 1.3;">Contact Form Submission</h1>
-                    <p style="color: #6b7280; font-size: 14px; margin: 0 0 28px 0;">A visitor has submitted a message through the IICT contact form.</p>
+                    <p style="color: #6b7280; font-size: 14px; margin: 0 0 28px 0;">A visitor has submitted a message through the COFEST contact form.</p>
                     
                     <!-- Sender details card -->
                     <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 24px;">
@@ -162,7 +162,7 @@ Reply to: ${email}
           <tr>
             <td style="padding: 24px 40px; background-color: #f8fafc; border-top: 1px solid #e2e8f0;">
               <p style="color: #64748b; font-size: 12px; margin: 0 0 8px 0; line-height: 1.5;">
-                This message was sent from the <strong>MSU-TCTO website</strong> (IICT contact form).
+                This message was sent from the <strong>MSU-TCTO website</strong> (COFEST contact form).
               </p>
               <p style="color: #475569; font-size: 13px; margin: 0; line-height: 1.5;">
                 <strong>Kindly contact the client at the email address provided above:</strong><br>

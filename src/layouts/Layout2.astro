@@ -8,20 +8,38 @@ export interface Props {
   ogTitle?: string;
   ogDescription?: string;
   ogImage?: string;
+  ogImageAlt?: string;
   ogUrl?: string;
   twitterTitle?: string;
   twitterDescription?: string;
   twitterImage?: string;
+  twitterImageAlt?: string;
 }
 
-const { title } = Astro.props;
+const { title, description, ogTitle, ogDescription, ogImage, ogImageAlt, ogUrl, twitterTitle, twitterDescription, twitterImage, twitterImageAlt } = Astro.props;
+
+// Site URL for absolute image URLs (required by Facebook, Messenger, Twitter)
+const siteUrl = Astro.site ? new URL(Astro.site).origin : 'https://msutcto.edu.ph';
+const currentUrl = ogUrl || `${siteUrl}${Astro.url?.pathname || '/'}`;
+
+// Ensure absolute URL for og:image and twitter:image - platforms reject relative URLs
+const absoluteOgImage = ogImage
+  ? (ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage.startsWith('/') ? '' : '/'}${ogImage}`)
+  : `${siteUrl}/images/Official MSU-TCTO logo-01.png`;
+const absoluteTwitterImage = twitterImage
+  ? (twitterImage.startsWith('http') ? twitterImage : `${siteUrl}${twitterImage.startsWith('/') ? '' : '/'}${twitterImage}`)
+  : absoluteOgImage;
+
+const shareTitle = ogTitle ?? twitterTitle ?? title;
+const shareDescription = ogDescription ?? twitterDescription ?? description ?? 'MSU-Tawi-Tawi College of Technology and Oceanography';
+const shareImageAlt = ogImageAlt ?? twitterImageAlt ?? shareTitle;
 ---
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <meta name="generator" content={Astro.generator} />
   <link rel="icon" type="image/png" href="/images/Official MSU-TCTO logo-01.png" />
   <script src="/js/screenshot-protection.js" defer></script>
@@ -31,6 +49,28 @@ const { title } = Astro.props;
   <meta name="facebook-domain-verification" content="63d47sat4plmhjgb73ob4sbrleldy4" />
   
   <title>{title}</title>
+  
+  <!-- Meta Description -->
+  {description && <meta name="description" content={description} />}
+  
+  <!-- Open Graph / Facebook / Messenger - article main image from Sanity shows when shared -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={currentUrl} />
+  <meta property="og:title" content={shareTitle} />
+  <meta property="og:description" content={shareDescription} />
+  <meta property="og:image" content={absoluteOgImage} />
+  <meta property="og:image:secure_url" content={absoluteOgImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content={shareImageAlt} />
+  <meta property="og:site_name" content="MSU-TCTO" />
+  
+  <!-- Twitter / X Card - large image preview with article main image from Sanity -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={shareTitle} />
+  <meta name="twitter:description" content={shareDescription} />
+  <meta name="twitter:image" content={absoluteTwitterImage} />
+  <meta name="twitter:image:alt" content={shareImageAlt} />
   <style>
     /* Modern animation keyframes */
     @keyframes heartbeat {

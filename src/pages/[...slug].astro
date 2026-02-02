@@ -142,48 +142,59 @@ function generateSummary(bodyContent: any[], maxSentences = 3, maxChars = 420) {
 
 const aiSummary = generateSummary(safeBody);
 
-// Force the use of the article's main image for social media sharing
+// Use only the article's main image from Sanity for social sharing (og:image / twitter:image) on all platforms.
+// Build an absolute Sanity CDN URL so shared links show the article main image, not a shareable link or other photo.
+const SANITY_CDN_BASE = 'https://cdn.sanity.io';
 let socialMediaImageUrl;
 if (mainImage?.asset) {
-  // Create a high-quality social media optimized version
-  socialMediaImageUrl = urlForImage(mainImage.asset)
+  // Build URL from Sanity main image asset only (not shareable link, not gallery/other photos)
+  const built = urlForImage(mainImage.asset)
     .width(1200)
     .height(630)
     .fit('crop')
     .quality(95)
     .format('jpg')
     .url();
-  
-  // Ensure it's an absolute URL - handle Sanity CDN URLs properly
-  if (!socialMediaImageUrl.startsWith('http')) {
-    if (socialMediaImageUrl.startsWith('//')) {
-      // CDN URL starting with //
-      socialMediaImageUrl = `https:${socialMediaImageUrl}`;
-    } else if (socialMediaImageUrl.startsWith('/')) {
-      // Relative URL
-      socialMediaImageUrl = `${siteUrl}${socialMediaImageUrl}`;
+  socialMediaImageUrl = built || '';
+
+  // Ensure absolute URL: platforms require a direct image URL from Sanity CDN, not relative or our domain
+  if (socialMediaImageUrl.startsWith('http')) {
+    // Already absolute; ensure it's the Sanity CDN image (not a redirect/share link)
+    if (!socialMediaImageUrl.includes('cdn.sanity.io/images')) {
+      const directUrl = mainImage.asset?.url;
+      if (directUrl && typeof directUrl === 'string' && directUrl.includes('cdn.sanity.io')) {
+        socialMediaImageUrl = directUrl.includes('?')
+          ? `${directUrl.split('?')[0]}?w=1200&h=630&fit=crop&q=95&fm=jpg`
+          : `${directUrl}?w=1200&h=630&fit=crop&q=95&fm=jpg`;
+      }
+    }
+  } else if (socialMediaImageUrl.startsWith('//')) {
+    socialMediaImageUrl = `https:${socialMediaImageUrl}`;
+  } else if (socialMediaImageUrl.startsWith('/') && socialMediaImageUrl.includes('/images/')) {
+    // Relative Sanity path: resolve to Sanity CDN, not our site
+    socialMediaImageUrl = `${SANITY_CDN_BASE}${socialMediaImageUrl}`;
+  } else if (socialMediaImageUrl.startsWith('/')) {
+    socialMediaImageUrl = `${siteUrl}${socialMediaImageUrl}`;
+  } else if (socialMediaImageUrl) {
+    socialMediaImageUrl = `https://${socialMediaImageUrl}`;
+  }
+
+  if (!socialMediaImageUrl || !socialMediaImageUrl.startsWith('http')) {
+    const directUrl = mainImage.asset?.url;
+    if (directUrl && typeof directUrl === 'string') {
+      const base = directUrl.split('?')[0];
+      socialMediaImageUrl = `${base}?w=1200&h=630&fit=crop&q=95&fm=jpg`;
     } else {
-      // No protocol or slash
-      socialMediaImageUrl = `https://${socialMediaImageUrl}`;
+      socialMediaImageUrl = `${siteUrl}/images/Official MSU-TCTO logo-01.png`;
     }
   }
 } else {
-  // Only use logo if absolutely no image is available
   socialMediaImageUrl = `${siteUrl}/images/Official MSU-TCTO logo-01.png`;
 }
 
-// Final absolute URL - remove cache busting which can cause issues with social media platforms
-const cacheBustingImageUrl = socialMediaImageUrl;
-
-// Debug logging for development
-console.log('Social Media Image Debug:', {
-  hasMainImage: !!mainImage?.asset?.url,
-  mainImageUrl: mainImage?.asset?.url,
-  socialMediaImageUrl,
-  finalImageUrl: cacheBustingImageUrl,
-  articleTitle: title,
-  siteUrl
-});
+// Single canonical share image URL from Sanity main image for all platforms
+const shareImageUrl = socialMediaImageUrl;
+const shareImageAlt = mainImage?.caption || title;
 
 const relatedArticles = (article?._id && articleSubject && articleSubject._id) 
   ? (await getRelatedArticles(article._id, articleSubject._id, 3)) || []
@@ -273,44 +284,46 @@ if (safeBody && safeBody.length > 0) {
 <Layout2 
   title={shareTitle}
   header={title} 
-  image={cacheBustingImageUrl} 
+  image={shareImageUrl} 
   description={articleDescription}
   ogTitle={shareTitle}
   ogDescription={articleDescription}
-  ogImage={cacheBustingImageUrl}
+  ogImage={shareImageUrl}
   ogUrl={currentUrl}
+  ogImageAlt={shareImageAlt}
   twitterTitle={shareTitle}
   twitterDescription={articleDescription}
-  twitterImage={cacheBustingImageUrl}
+  twitterImage={shareImageUrl}
+  twitterImageAlt={shareImageAlt}
 >
-  <!-- 
-  SOCIAL MEDIA DEBUG INFO:
-  - Has Main Image: {!!mainImage?.asset?.url}
-  - Raw Image URL: {mainImage?.asset?.url || 'NONE'}
-  - Social Media URL: {socialMediaImageUrl}
-  - Final URL with Cache Busting: {cacheBustingImageUrl}
-  - Article Title: {title}
-  -->
-  
   <!-- Premium Navigation with Glass Morphism Effect -->
   <Navbar path={currentPath} client:visible />
   
-  <main class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans antialiased overflow-hidden transition-colors duration-300">
+  <main class="slug-page bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans antialiased overflow-x-hidden transition-colors duration-300 min-w-0">
     <!-- AI Summary Floating Button & Drawer -->
     <button 
       id="ai-summary-button" 
-      class="ai-summary-fab fixed z-[9900] right-4 xl:right-8 top-1/2 -translate-y-1/2 md:top-1/2 md:-translate-y-1/2 sm:bottom-20 sm:top-auto sm:translate-y-0 xs:bottom-20 xs:top-auto xs:translate-y-0 bg-gradient-to-b from-msu-main-color to-msu-deep-ocean text-white-pure shadow-2xl hover:shadow-[0_10px_30px_rgba(0,0,0,0.25)] hover:-translate-y-[55%] md:hover:-translate-y-[55%] sm:hover:translate-y-0 sm:hover:scale-105 xs:hover:translate-y-0 xs:hover:scale-105 transition-all duration-300 rounded-full px-3 py-3 sm:px-4 sm:py-3.5 xs:px-4 xs:py-3.5 flex items-center gap-2 font-semibold text-xs sm:text-sm tracking-tight touch-manipulation min-w-[48px] min-h-[48px] sm:min-w-[52px] sm:min-h-[52px]"
+      class="ai-summary-fab fixed z-[9900] flex items-center justify-center gap-2 font-semibold text-xs sm:text-sm tracking-tight touch-manipulation rounded-full bg-gradient-to-b from-msu-main-color to-msu-deep-ocean text-white-pure shadow-2xl hover:shadow-[0_10px_30px_rgba(0,0,0,0.25)] transition-all duration-300 w-max shrink-0
+        right-4 bottom-[5.5rem] top-auto translate-y-0 left-auto
+        sm:right-4 sm:bottom-24 sm:top-auto sm:translate-y-0
+        md:right-5 md:bottom-[8rem] md:top-auto md:translate-y-0
+        lg:right-8 lg:top-1/2 lg:bottom-auto lg:-translate-y-1/2
+        xl:right-8
+        min-w-[48px] min-h-[48px] px-3 py-3
+        sm:min-w-[52px] sm:min-h-[52px] sm:px-4 sm:py-3.5
+        md:min-w-[56px] md:min-h-[56px] md:px-4 md:py-3
+        hover:scale-105 active:scale-95 lg:hover:-translate-y-[55%] lg:hover:scale-100"
       aria-label="Open AI summary"
     >
       <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 sm:w-5 sm:h-5 xs:w-5 xs:h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7H7m6 4H7m6 4H7m6-8h1a2 2 0 012 2v6a2 2 0 01-2 2h-1l-4 3v-3H9a2 2 0 01-2-2V9a2 2 0 012-2h4z" />
       </svg>
-      <span class="hidden sm:inline xs:hidden">AI Summary</span>
+      <span class="hidden sm:inline">AI Summary</span>
     </button>
 
     <div 
       id="ai-summary-panel" 
-      class="ai-summary-panel fixed z-[9950] right-0 top-0 h-full w-full sm:w-[380px] bg-white dark:bg-gray-900 shadow-2xl transform translate-x-full opacity-0 transition-all duration-300 border-l border-gray-200 dark:border-gray-800 flex flex-col safe-area-inset"
+      class="ai-summary-panel fixed z-[9950] right-0 top-0 h-full w-full sm:w-[380px] md:w-[380px] md:max-w-[48vw] ipad-air:w-[400px] lg:w-[400px] bg-white dark:bg-gray-900 shadow-2xl transform translate-x-full opacity-0 transition-all duration-300 border-l border-gray-200 dark:border-gray-800 flex flex-col safe-area-inset min-w-0"
       aria-hidden="true"
     >
       <div class="flex items-center justify-between px-4 py-3 sm:px-5 sm:py-4 border-b border-gray-200 dark:border-gray-800 safe-area-top">
@@ -365,7 +378,7 @@ if (safeBody && safeBody.length > 0) {
     </div>
 
     <!-- Animated Breadcrumb with Microinteractions -->
-    <div class='bg-gradient-to-r from-msu-deep-ocean to-msu-main-color h-[50px] xl:px-[12.5%] xs:px-[5%] '>
+    <div class='bg-gradient-to-r from-msu-deep-ocean to-msu-main-color min-h-[44px] xl:h-[50px] lg:h-[50px] md:h-[48px] sm:h-[46px] xs:h-[44px] px-4 xs:px-[4%] pro:px-[5%] sm:px-[6%] md:px-[7%] ipad-air:px-[8%] lg:px-[10%] xl:px-[12.5%] overflow-x-auto overflow-y-hidden'>
       <nav class="paragraph p2 py-[15px] text-titanium flex items-center overflow-x-auto whitespace-nowrap scrollbar-hide text-[0.8125rem]">
         <a href="/home" class="hover:text-white-pure transition-all duration-300 hover:scale-105 transform flex items-center group text-[0.8125rem]">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -378,12 +391,12 @@ if (safeBody && safeBody.length > 0) {
         <span class="mx-2 text-white-pure/50">/</span>
         <a href="/articles" class="hover:text-white-pure transition-all duration-300 hover:scale-105 transform text-[0.8125rem]">Articles</a>
         <span class="mx-2 text-white-pure/50">/</span>
-        <span class="text-white-pure truncate max-w-[200px] xs:hidden xl:inline font-medium text-[0.8125rem]">{title}</span>
+        <span class="text-white-pure truncate max-w-[120px] pro:max-w-[160px] xs:hidden xl:inline font-medium text-[0.8125rem]">{title}</span>
       </nav>
     </div>
 
-    <!-- Hero Section with Parallax and Glass Morphism -->
-    <div class="relative w-full overflow-hidden xl:h-[700px] lg:h-[600px] md:h-[500px] sm:h-[450px] xs:h-[400px]">
+    <!-- Hero Section - responsive heights: phones 360-390px, tablets 768-1024px, desktop 1280px+ -->
+    <div class="relative w-full overflow-hidden xl:h-[700px] lg:h-[550px] ipad-pro:h-[500px] ipad-air:h-[480px] md:h-[450px] sm:h-[420px] pro:h-[400px] xs:h-[380px] min-h-[320px]">
       <!-- Parallax Background with Blur Effect -->
       <div 
         class="absolute inset-0 bg-cover bg-center bg-no-repeat transform translate-y-0 scale-105"
@@ -395,10 +408,10 @@ if (safeBody && safeBody.length > 0) {
       <div class="absolute inset-0 bg-gradient-to-b from-msu-deep-ocean/90 via-msu-main-color/80 to-msu-deep-ocean/90 backdrop-blur-sm z-0"></div>
       
       <!-- Premium Content Container -->
-      <div class="relative z-10 flex flex-col items-center justify-center h-full xl:px-[15%] lg:px-[10%] md:px-[8%] sm:px-[6%] xs:px-[5%]">
-        <div class="text-center max-w-5xl bg-white/10 backdrop-blur-lg rounded-2xl xl:p-8 lg:p-6 md:p-5 sm:p-4 xs:p-4 border border-white/20 shadow-2xl">
+      <div class="relative z-10 flex flex-col items-center justify-center h-full xl:px-[15%] lg:px-[12%] ipad-pro:px-[10%] ipad-air:px-[8%] md:px-[7%] sm:px-[6%] pro:px-[5%] xs:px-[4%]">
+        <div class="text-center max-w-5xl w-full min-w-0 bg-white/10 backdrop-blur-lg rounded-2xl xl:p-8 lg:p-6 ipad-pro:p-5 md:p-5 sm:p-4 pro:p-3 xs:p-3 border border-white/20 shadow-2xl">
           <!-- Premium Title with Gradient Text -->
-          <h1 class="font-philosopher h1 text-transparent bg-clip-text bg-gradient-to-r from-white-pure to-titanium xl:text-6xl lg:text-5xl md:text-4xl sm:text-3xl xs:text-2xl text-[1.875rem] font-bold xl:leading-tight lg:leading-tight md:leading-tight sm:leading-snug xs:leading-snug leading-[1.2] xl:mb-8 lg:mb-6 md:mb-5 sm:mb-4 xs:mb-3 drop-shadow-2xl animate-fade-in">
+          <h1 class="font-philosopher h1 text-transparent bg-clip-text bg-gradient-to-r from-white-pure to-titanium text-xl xs:text-2xl pro:text-2xl sm:text-3xl md:text-4xl ipad-air:text-4xl ipad-pro:text-4xl lg:text-5xl xl:text-6xl font-bold leading-snug xl:leading-tight lg:leading-tight md:leading-snug xl:mb-8 lg:mb-6 md:mb-5 sm:mb-4 xs:mb-3 drop-shadow-2xl animate-fade-in">
             {title}
           </h1>
           
@@ -440,7 +453,7 @@ if (safeBody && safeBody.length > 0) {
       </div>
       
       <!-- Premium Article Categories Floating Bar -->
-      <div class="absolute bottom-0 left-0 right-0 z-10 bg-gradient-to-r from-msu-deep-ocean/95 to-msu-main-color/95 xl:px-[12.5%] lg:px-[10%] md:px-[8%] sm:px-[6%] xs:px-[5%] xl:py-4 lg:py-3 md:py-3 sm:py-2 xs:py-2 animate-slide-in-up delay-200 backdrop-blur-md border-t border-white/20">
+      <div class="absolute bottom-0 left-0 right-0 z-10 bg-gradient-to-r from-msu-deep-ocean/95 to-msu-main-color/95 xl:px-[12.5%] lg:px-[10%] ipad-pro:px-[8%] md:px-[7%] sm:px-[6%] pro:px-[5%] xs:px-[4%] xl:py-4 lg:py-3 md:py-3 sm:py-2 xs:py-2 animate-slide-in-up delay-200 backdrop-blur-md border-t border-white/20">
         <div class="flex flex-wrap xl:gap-3 lg:gap-2.5 md:gap-2 sm:gap-1.5 xs:gap-1.5 justify-center">
           <span class="xl:text-base lg:text-sm md:text-xs sm:text-xs xs:text-xs text-[0.75rem] xl:py-2 xl:px-6 lg:py-1.5 lg:px-4 md:py-1.5 md:px-3 sm:py-1 sm:px-2.5 xs:py-1 xs:px-2.5 py-2 px-4 rounded-full bg-white/15 text-white backdrop-blur-sm border border-white/30 hover:bg-white/25 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="xl:h-4 xl:w-4 lg:h-3.5 lg:w-3.5 md:h-3 md:w-3 sm:h-3 sm:w-3 xs:h-3 xs:w-3 h-3 w-3 xl:mr-2 lg:mr-1.5 md:mr-1 sm:mr-1 xs:mr-1 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -453,8 +466,8 @@ if (safeBody && safeBody.length > 0) {
       </div>
     </div>
 
-    <!-- Premium Article Content Section -->
-    <div class="bg-white-pure dark:bg-gray-800 xl:px-[18%] lg:px-[12%] md:px-[8%] sm:px-[6%] xs:px-[4%] xl:py-10 lg:py-8 md:py-6 sm:py-5 xs:py-4 transition-colors duration-300 max-w-5xl mx-auto">
+    <!-- Premium Article Content Section - fluid padding for all viewports -->
+    <div class="bg-white-pure dark:bg-gray-800 px-4 xs:px-[4%] pro:px-[5%] sm:px-[6%] md:px-[7%] ipad-air:px-[8%] ipad-pro:px-[10%] lg:px-[14%] xl:px-[18%] py-4 xs:py-4 sm:py-5 md:py-6 ipad-pro:py-7 lg:py-8 xl:py-10 transition-colors duration-300 max-w-5xl mx-auto overflow-x-hidden w-full min-w-0">
       <!-- Featured Image - Clean and Simple -->
       {mainImage?.asset && (
         <div class="xl:mb-10 lg:mb-8 md:mb-6 sm:mb-5 xs:mb-4">
@@ -462,7 +475,7 @@ if (safeBody && safeBody.length > 0) {
             <img 
               src={urlForImage(mainImage.asset).quality(90).url()}
               alt={title}
-              class="w-full h-auto"
+              class="w-full h-auto max-w-full"
               loading="lazy"
             />
             {mainImage?.caption && (
@@ -496,8 +509,8 @@ if (safeBody && safeBody.length > 0) {
         </div>
       </div>
 
-      <!-- Enhanced Professional Article Body -->
-      <article class="article-content prose prose-lg max-w-none mx-auto transition-colors duration-300">
+      <!-- Enhanced Professional Article Body - responsive typography -->
+      <article class="article-content prose prose-sm sm:prose-base md:prose-lg lg:prose-xl max-w-none mx-auto transition-colors duration-300 overflow-x-hidden [&_img]:max-w-full [&_iframe]:max-w-full">
         {
           (safeBody && safeBody.length > 0) ? safeBody.map((block: any, blockIndex: number) => {
             // Skip null/undefined blocks
@@ -846,62 +859,77 @@ if (safeBody && safeBody.length > 0) {
         </div>
       )}
 
-      <!-- Premium Social Sharing with Floating Icons -->
-      <div class="xl:mt-20 lg:mt-16 md:mt-12 sm:mt-10 xs:mt-8 xl:pt-12 lg:pt-10 md:pt-8 sm:pt-6 xs:pt-6 border-t border-gray-100 dark:border-gray-700 transition-colors duration-300">
+      <!-- Premium Social Sharing with Official Logos - shared link shows article main image (og:image) -->
+      <div class="share-section xl:mt-20 lg:mt-16 md:mt-12 sm:mt-10 xs:mt-8 xl:pt-12 lg:pt-10 md:pt-8 sm:pt-6 xs:pt-6 border-t border-gray-100 dark:border-gray-700 transition-colors duration-300">
         <h4 class="headings h4 text-charcoal dark:text-gray-300 xl:mb-8 lg:mb-6 md:mb-5 sm:mb-4 xs:mb-4 text-center tracking-wider uppercase xl:text-sm lg:text-xs md:text-xs sm:text-xs xs:text-xs text-[0.75rem] font-semibold text-gray-500 dark:text-gray-400 leading-[1.4]">
           Share This Article
         </h4>
         <div class="flex xl:gap-6 lg:gap-5 md:gap-4 sm:gap-3 xs:gap-3 justify-center flex-wrap">
-          <!-- Facebook Share -->
+          <!-- Facebook - Official logo -->
           <a 
             href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}&quote=${encodeURIComponent(shareTitle)}`}
             target="_blank"
             rel="noopener noreferrer"
-            class="xl:w-14 xl:h-14 lg:w-12 lg:h-12 md:w-11 md:h-11 sm:w-10 sm:h-10 xs:w-10 xs:h-10 rounded-full bg-facebook-blue flex items-center justify-center text-white-pure hover:bg-facebook-blue-dark transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105 group"
+            class="share-btn xl:w-14 xl:h-14 lg:w-12 lg:h-12 md:w-11 md:h-11 sm:w-10 sm:h-10 xs:w-10 xs:h-10 rounded-full bg-facebook-blue flex items-center justify-center text-white-pure hover:bg-facebook-blue-dark transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105 group"
             aria-label="Share on Facebook"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" class="xl:h-6 xl:w-6 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-5 sm:w-5 xs:h-5 xs:w-5 h-5 w-5 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
-            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="xl:h-6 xl:w-6 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-5 sm:w-5 xs:h-5 xs:w-5 h-5 w-5 group-hover:scale-110 transition-transform shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
           </a>
           
-          <!-- Twitter Share -->
+          <!-- X (Twitter) - Official X logo -->
           <a 
-            href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(shareTitle)}`}
+            href={`https://x.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(shareTitle)}`}
             target="_blank"
             rel="noopener noreferrer"
-            class="xl:w-14 xl:h-14 lg:w-12 lg:h-12 md:w-11 md:h-11 sm:w-10 sm:h-10 xs:w-10 xs:h-10 rounded-full bg-twitter-blue flex items-center justify-center text-white-pure hover:bg-twitter-blue-dark transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105 group"
-            aria-label="Share on Twitter"
+            class="share-btn xl:w-14 xl:h-14 lg:w-12 lg:h-12 md:w-11 md:h-11 sm:w-10 sm:h-10 xs:w-10 xs:h-10 rounded-full bg-x-black flex items-center justify-center text-white-pure hover:bg-x-black-dark transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105 group"
+            aria-label="Share on X"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" class="xl:h-6 xl:w-6 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-5 sm:w-5 xs:h-5 xs:w-5 h-5 w-5 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
-            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="xl:h-5 xl:w-5 lg:h-4 lg:w-4 md:h-4 md:w-4 sm:h-4 sm:w-4 xs:h-4 xs:w-4 h-4 w-4 group-hover:scale-110 transition-transform shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           </a>
           
-          <!-- LinkedIn Share -->
+          <!-- LinkedIn - Official logo -->
           <a 
             href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`}
             target="_blank"
             rel="noopener noreferrer"
-            class="xl:w-14 xl:h-14 lg:w-12 lg:h-12 md:w-11 md:h-11 sm:w-10 sm:h-10 xs:w-10 xs:h-10 rounded-full bg-linkedin-blue flex items-center justify-center text-white-pure hover:bg-linkedin-blue-dark transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105 group"
+            class="share-btn xl:w-14 xl:h-14 lg:w-12 lg:h-12 md:w-11 md:h-11 sm:w-10 sm:h-10 xs:w-10 xs:h-10 rounded-full bg-linkedin-blue flex items-center justify-center text-white-pure hover:bg-linkedin-blue-dark transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105 group"
             aria-label="Share on LinkedIn"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" class="xl:h-6 xl:w-6 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-5 sm:w-5 xs:h-5 xs:w-5 h-5 w-5 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
-            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="xl:h-6 xl:w-6 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-5 sm:w-5 xs:h-5 xs:w-5 h-5 w-5 group-hover:scale-110 transition-transform shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
           </a>
           
-          <!-- WhatsApp Share -->
+          <!-- WhatsApp - Official logo -->
           <a 
-            href={`https://api.whatsapp.com/send?text=${encodeURIComponent(shareTitle + ' - ' + currentUrl)}`}
+            href={`https://api.whatsapp.com/send?text=${encodeURIComponent(shareTitle + ' ' + currentUrl)}`}
             target="_blank"
             rel="noopener noreferrer"
-            class="xl:w-14 xl:h-14 lg:w-12 lg:h-12 md:w-11 md:h-11 sm:w-10 sm:h-10 xs:w-10 xs:h-10 rounded-full bg-whatsapp-green flex items-center justify-center text-white-pure hover:bg-whatsapp-green-dark transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105 group"
+            class="share-btn xl:w-14 xl:h-14 lg:w-12 lg:h-12 md:w-11 md:h-11 sm:w-10 sm:h-10 xs:w-10 xs:h-10 rounded-full bg-whatsapp-green flex items-center justify-center text-white-pure hover:bg-whatsapp-green-dark transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105 group"
             aria-label="Share on WhatsApp"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" class="xl:h-6 xl:w-6 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-5 sm:w-5 xs:h-5 xs:w-5 h-5 w-5 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558 .064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
-            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" class="xl:h-6 xl:w-6 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-5 sm:w-5 xs:h-5 xs:w-5 h-5 w-5 group-hover:scale-110 transition-transform shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </a>
+          
+          <!-- Telegram - Official logo -->
+          <a 
+            href={`https://t.me/share/url?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(shareTitle)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="share-btn xl:w-14 xl:h-14 lg:w-12 lg:h-12 md:w-11 md:h-11 sm:w-10 sm:h-10 xs:w-10 xs:h-10 rounded-full bg-telegram-blue flex items-center justify-center text-white-pure hover:bg-telegram-blue-dark transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105 group"
+            aria-label="Share on Telegram"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="xl:h-6 xl:w-6 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-5 sm:w-5 xs:h-5 xs:w-5 h-5 w-5 group-hover:scale-110 transition-transform shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          </a>
+          
+          <!-- Messenger - opens Messenger app (mobile) or messenger.com (desktop), not Facebook -->
+          <a 
+            href={`https://www.messenger.com/open/?link=${encodeURIComponent(currentUrl)}&ref=share_link`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="share-btn messenger-share xl:w-14 xl:h-14 lg:w-12 lg:h-12 md:w-11 md:h-11 sm:w-10 sm:h-10 xs:w-10 xs:h-10 rounded-full bg-messenger-blue flex items-center justify-center text-white-pure hover:bg-messenger-blue-dark transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105 group"
+            aria-label="Share on Messenger"
+            data-messenger-share-url={currentUrl}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="xl:h-6 xl:w-6 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-5 sm:w-5 xs:h-5 xs:w-5 h-5 w-5 group-hover:scale-110 transition-transform shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.36 2 2 6.13 2 11.7c0 3.19 1.6 6.02 4.03 7.8.22.15.36.42.36.7v2.1c0 .55.45.98.98.98.15 0 .3-.03.43-.1l2.3-1.57c.3.06.61.1.93.1 5.64 0 10-4.13 10-9.7S17.64 2 12 2zm.76 12.55l-2.68-2.87-5.23 2.87 5.75-6.14 2.68 2.87 5.23-2.87-5.75 6.14z"/></svg>
           </a>
           
           <!-- Email Share -->
@@ -909,10 +937,10 @@ if (safeBody && safeBody.length > 0) {
             href={`mailto:?subject=${encodeURIComponent(shareTitle)}&body=${encodeURIComponent('Check out this article: ' + currentUrl)}`}
             target="_blank"
             rel="noopener noreferrer"
-            class="xl:w-14 xl:h-14 lg:w-12 lg:h-12 md:w-11 md:h-11 sm:w-10 sm:h-10 xs:w-10 xs:h-10 rounded-full bg-gray-700 dark:bg-gray-600 flex items-center justify-center text-white-pure hover:bg-gray-800 dark:hover:bg-gray-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105 group"
+            class="share-btn xl:w-14 xl:h-14 lg:w-12 lg:h-12 md:w-11 md:h-11 sm:w-10 sm:h-10 xs:w-10 xs:h-10 rounded-full bg-gray-700 dark:bg-gray-600 flex items-center justify-center text-white-pure hover:bg-gray-800 dark:hover:bg-gray-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105 group"
             aria-label="Share via Email"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" class="xl:h-6 xl:w-6 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-5 sm:w-5 xs:h-5 xs:w-5 h-5 w-5 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="xl:h-6 xl:w-6 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-5 sm:w-5 xs:h-5 xs:w-5 h-5 w-5 group-hover:scale-110 transition-transform shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
           </a>
@@ -927,7 +955,7 @@ if (safeBody && safeBody.length > 0) {
             <p class="paragraph p2 text-gray-500 dark:text-gray-400 xl:mt-2 lg:mt-2 md:mt-1.5 sm:mt-1 xs:mt-1 xl:text-base lg:text-sm md:text-sm sm:text-xs xs:text-xs text-[0.8125rem] leading-[1.6]">Discover more content you might enjoy</p>
           </div>
           
-          <div class="grid xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 xl:gap-8 lg:gap-6 md:gap-5 sm:gap-4 xs:gap-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:gap-8 lg:gap-6 md:gap-5 sm:gap-4 gap-4">
             {relatedArticles.map((relatedArticle) => (
               <a href={`/articles/${relatedArticle.slug.current}`} class="group">
                 <div class="bg-white dark:bg-gray-800 xl:rounded-xl lg:rounded-xl md:rounded-lg sm:rounded-lg xs:rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col border border-gray-100 dark:border-gray-700 hover:border-msu-main-color/30 dark:hover:border-yellow-500/30">
@@ -972,8 +1000,8 @@ if (safeBody && safeBody.length > 0) {
       <Stories />
     </div> -->
 
-    <!-- Footer Navigation -->
-    <div class="flex xl:block xs:hidden">
+    <!-- Footer Navigation - show on tablet and desktop, compact on mobile -->
+    <div class="flex lg:block hidden">
       <FooterNav />
     </div>
 
@@ -1023,8 +1051,8 @@ if (safeBody && safeBody.length > 0) {
       </svg>
     </button>
 
-    <!-- Image Container - Clean & Elegant -->
-    <div class="relative w-full h-full flex items-center justify-center p-6 xs:p-4 sm:p-5 md:p-6 lg:p-8 xl:p-10">
+    <!-- Image Container - responsive padding for phones, tablets, desktop -->
+    <div class="relative w-full h-full flex items-center justify-center p-4 xs:p-4 sm:p-5 md:p-6 ipad-air:p-6 lg:p-8 xl:p-10">
       <div class="relative w-full max-w-6xl max-h-full flex flex-col items-center justify-center">
         <!-- Elegant Loading Indicator -->
         <div id="gallery-loading" class="absolute inset-0 flex items-center justify-center z-10 hidden">
@@ -1308,6 +1336,22 @@ if (safeBody && safeBody.length > 0) {
     summaryClose?.addEventListener('click', closeSummary);
     summaryMinimize?.addEventListener('click', closeSummary);
 
+    // Close AI Summary panel when navigation sidebar opens (so it stays hidden)
+    window.addEventListener('navSidebarOpened', closeSummary);
+
+    // Messenger share: on mobile open Messenger app directly (fb-messenger://), not Facebook
+    document.querySelectorAll('.messenger-share').forEach((btn) => {
+      btn.addEventListener('click', function (e) {
+        const url = this.getAttribute('data-messenger-share-url');
+        if (!url) return;
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        if (isMobile) {
+          e.preventDefault();
+          window.location.href = 'fb-messenger://share?link=' + encodeURIComponent(url) + '&app_id=966242223397117';
+        }
+      });
+    });
+
     if (summaryCopy) {
       summaryCopy.addEventListener('click', async (e) => {
         e.preventDefault();
@@ -1478,6 +1522,15 @@ if (safeBody && safeBody.length > 0) {
   
   /* AI Summary Button & Panel */
   .ai-summary-fab {
+    position: fixed !important;
+    width: max-content !important;
+    max-width: 200px !important;
+    min-width: 48px !important;
+    flex-shrink: 0 !important;
+    box-sizing: border-box !important;
+    left: auto !important;
+    /* Prevent stretch on refresh / hydration */
+    contain: layout style;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     /* Ensure button is always clickable */
@@ -1559,8 +1612,8 @@ if (safeBody && safeBody.length > 0) {
     }
   }
 
-  /* Small devices (landscape phones, 640px and up) */
-  @media (min-width: 641px) and (max-width: 768px) {
+  /* Landscape phones / small tablets (641-767px) - full width panel */
+  @media (min-width: 641px) and (max-width: 767px) {
     .ai-summary-fab {
       top: auto !important;
       bottom: max(1.25rem, env(safe-area-inset-bottom, 1.25rem)) !important;
@@ -1580,19 +1633,62 @@ if (safeBody && safeBody.length > 0) {
     }
   }
 
-  /* Tablet portrait/landscape (Android & iOS) */
-  @media (min-width: 769px) and (max-width: 1024px) {
+  /* iPad Mini (768×1024), iPad, tablets - responsive FAB & side panel */
+  @media (min-width: 768px) and (max-width: 1024px) {
     .ai-summary-panel {
-      width: 420px !important;
-      max-width: 85vw !important;
+      width: min(380px, 48vw) !important;
+      max-width: min(380px, 48vw) !important;
+      min-width: 320px !important;
       height: 100vh !important;
       height: 100dvh !important;
+      height: -webkit-fill-available !important;
+      /* Ensure panel slides in correctly on iPad */
+      right: 0 !important;
+      left: auto !important;
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+    }
+
+    .ai-summary-panel.open {
+      transform: translateX(0) !important;
+      -webkit-transform: translateX(0) !important;
     }
 
     .ai-summary-fab {
-      right: 1.25rem !important;
-      top: 45% !important;
-      transform: translateY(-45%) !important;
+      right: max(1.25rem, env(safe-area-inset-right, 1.25rem)) !important;
+      bottom: max(8rem, calc(env(safe-area-inset-bottom, 0px) + 7.5rem)) !important;
+      top: auto !important;
+      transform: translateY(0) !important;
+      -webkit-transform: translateY(0) !important;
+      left: auto !important;
+      min-width: 56px !important;
+      min-height: 56px !important;
+      padding: 1rem !important;
+      font-size: 0.875rem !important;
+      /* Clear share icons - position above them */
+      z-index: 9900 !important;
+    }
+
+    .ai-summary-fab:hover {
+      transform: translateY(0) scale(1.05) !important;
+      -webkit-transform: translateY(0) scale(1.05) !important;
+    }
+
+    .ai-summary-fab:active {
+      transform: translateY(0) scale(0.98) !important;
+      -webkit-transform: translateY(0) scale(0.98) !important;
+    }
+
+    /* iPad Mini: readable text & touch-friendly panel controls */
+    .ai-summary-panel #ai-summary-text {
+      font-size: 0.9375rem !important;
+      line-height: 1.6 !important;
+    }
+
+    .ai-summary-panel button {
+      min-width: 48px !important;
+      min-height: 48px !important;
+      padding: 0.75rem 1rem !important;
     }
 
     /* Slightly larger readable copy for tablets */
@@ -1611,12 +1707,29 @@ if (safeBody && safeBody.length > 0) {
       margin-bottom: 0.75rem;
     }
 
+    /* Add bottom padding so FAB doesn't overlap share icons on iPad Mini */
+    .share-section {
+      padding-bottom: 2rem !important;
+    }
   }
 
-  /* Tablet and up (768px and up) - Keep desktop behavior */
-  @media (min-width: 769px) {
+  /* iPad Mini landscape (1024×768) - use tablet layout for consistency */
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .ai-summary-panel {
+      width: min(360px, 45vw) !important;
+      max-width: min(360px, 45vw) !important;
+    }
+
     .ai-summary-fab {
-      /* Desktop: center-right */
+      bottom: max(5rem, calc(env(safe-area-inset-bottom, 0px) + 4.5rem)) !important;
+      min-width: 52px !important;
+      min-height: 52px !important;
+    }
+  }
+
+  /* Desktop only (1024px+) - center-right FAB */
+  @media (min-width: 1024px) {
+    .ai-summary-fab {
       top: 50% !important;
       transform: translateY(-50%) !important;
       right: 2rem !important;
@@ -1628,8 +1741,8 @@ if (safeBody && safeBody.length > 0) {
     }
   }
 
-  /* Landscape orientation on mobile */
-  @media (max-width: 768px) and (orientation: landscape) {
+  /* Landscape orientation on mobile (exclude iPad Mini 768px+) */
+  @media (max-width: 767px) and (orientation: landscape) {
     .ai-summary-fab {
       bottom: max(0.75rem, env(safe-area-inset-bottom, 0.75rem)) !important;
       right: max(0.75rem, env(safe-area-inset-right, 0.75rem)) !important;
@@ -1644,18 +1757,16 @@ if (safeBody && safeBody.length > 0) {
     }
   }
 
-  /* iOS Safari specific fixes */
+  /* iPad Mini & iOS Safari specific fixes */
   @supports (-webkit-touch-callout: none) {
     .ai-summary-fab {
-      /* Better rendering on iOS */
       -webkit-transform: translateZ(0);
       transform: translateZ(0);
-      /* Prevent iOS bounce effect */
       -webkit-touch-callout: none;
+      touch-action: manipulation;
     }
 
     .ai-summary-panel {
-      /* Fix for iOS Safari viewport */
       position: fixed;
       top: 0;
       left: 0;
@@ -1663,6 +1774,14 @@ if (safeBody && safeBody.length > 0) {
       bottom: 0;
       height: 100vh;
       height: -webkit-fill-available;
+    }
+
+    /* iPad Mini: ensure FAB is tappable (avoid iOS tap delay) */
+    @media (min-width: 768px) and (max-width: 1024px) {
+      .ai-summary-fab {
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+      }
     }
   }
 
@@ -1720,10 +1839,19 @@ if (safeBody && safeBody.length > 0) {
   }
 
   /* Galaxy S9+ and similar tall screens */
-  @media (min-width: 360px) and (max-width: 400px) and (min-height: 700px) {
+  @media (min-width: 360px) and (max-width: 389px) and (min-height: 700px) {
     .ai-summary-fab {
       bottom: max(1.5rem, env(safe-area-inset-bottom, 1.5rem)) !important;
     }
+  }
+
+  /* Hide AI Summary when navigation sidebar is open (mobile & desktop) */
+  body.nav-sidebar-open .ai-summary-fab,
+  body.nav-sidebar-open .ai-summary-panel {
+    visibility: hidden !important;
+    pointer-events: none !important;
+    z-index: -1 !important;
+    opacity: 0 !important;
   }
 
   /* Prevent pull-to-refresh interference */
@@ -1740,8 +1868,8 @@ if (safeBody && safeBody.length > 0) {
     }
   }
 
-  /* Animation improvements for mobile */
-  @media (max-width: 768px) {
+  /* Animation improvements for mobile (below iPad Mini) */
+  @media (max-width: 767px) {
     .ai-summary-panel {
       transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
     }
@@ -1857,6 +1985,25 @@ if (safeBody && safeBody.length > 0) {
     }
   }
 
+  /* Slug page - prevent horizontal overflow on all devices */
+  .slug-page {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  /* Article content - responsive media (images, iframes) */
+  .article-content img,
+  .article-content iframe,
+  .article-content video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .article-content .youtube-embed-wrapper {
+    max-width: 100%;
+    overflow: hidden;
+  }
+
   /* Enhanced Article Content Styles */
   .article-content {
     font-family: 'Georgia', 'Times New Roman', serif;
@@ -1883,6 +2030,17 @@ if (safeBody && safeBody.length > 0) {
     .article-content .first-paragraph::first-letter {
       font-size: 3.5rem;
       margin-right: 0.5rem;
+    }
+  }
+
+  /* iPad Air (820px), iPad Pro 11" (834px), Surface Pro 7 (912px) */
+  @media (min-width: 820px) and (max-width: 1024px) {
+    .article-content .first-paragraph::first-letter {
+      font-size: 4rem;
+    }
+    .article-content {
+      font-size: 1.0625rem;
+      line-height: 1.75;
     }
   }
 
@@ -2190,96 +2348,85 @@ if (safeBody && safeBody.length > 0) {
     border: 1px solid rgba(255, 255, 255, 0.18);
   }
 
-  /* Social Media Brand Colors */
+  /* Social Media Brand Colors - Official logos */
   .bg-facebook-blue {
-    background-color: #3b5998;
+    background-color: #1877F2;
   }
   
   .bg-facebook-blue-dark {
-    background-color: #344e86;
+    background-color: #166fe5;
   }
   
-  .bg-twitter-blue {
-    background-color: #1da1f2;
+  .bg-x-black {
+    background-color: #000000;
   }
   
-  .bg-twitter-blue-dark {
-    background-color: #1991db;
+  .bg-x-black-dark {
+    background-color: #1a1a1a;
   }
   
   .bg-linkedin-blue {
-    background-color: #0077b5;
+    background-color: #0A66C2;
   }
   
   .bg-linkedin-blue-dark {
-    background-color: #00669b;
+    background-color: #004182;
   }
   
   .bg-whatsapp-green {
-    background-color: #25d366;
+    background-color: #25D366;
   }
   
   .bg-whatsapp-green-dark {
-    background-color: #1fba58;
+    background-color: #1DA851;
+  }
+  
+  .bg-telegram-blue {
+    background-color: #26A5E4;
+  }
+  
+  .bg-telegram-blue-dark {
+    background-color: #1e8bc3;
+  }
+  
+  .bg-messenger-blue {
+    background-color: #0084FF;
+  }
+  
+  .bg-messenger-blue-dark {
+    background-color: #0066cc;
   }
 
   /* Social Share Icons - Mobile Visibility */
   @media (max-width: 768px) {
-    /* Ensure social share buttons are visible on mobile */
-    .bg-facebook-blue,
-    .bg-twitter-blue,
-    .bg-linkedin-blue,
-    .bg-whatsapp-green,
-    .bg-gray-700 {
+    .share-btn {
       display: flex !important;
       visibility: visible !important;
       opacity: 1 !important;
-    }
-
-    /* Ensure icons inside buttons are visible */
-    .bg-facebook-blue svg,
-    .bg-twitter-blue svg,
-    .bg-linkedin-blue svg,
-    .bg-whatsapp-green svg,
-    .bg-gray-700 svg {
-      display: block !important;
-      visibility: visible !important;
-      opacity: 1 !important;
-      width: 1.25rem !important; /* 20px */
-      height: 1.25rem !important; /* 20px */
-      fill: currentColor !important;
-      color: white !important;
-    }
-
-    /* Make buttons more prominent on mobile */
-    .bg-facebook-blue,
-    .bg-twitter-blue,
-    .bg-linkedin-blue,
-    .bg-whatsapp-green,
-    .bg-gray-700 {
-      min-width: 2.5rem !important; /* 40px */
-      min-height: 2.5rem !important; /* 40px */
+      min-width: 2.5rem !important;
+      min-height: 2.5rem !important;
       width: 2.5rem !important;
       height: 2.5rem !important;
     }
+
+    .share-btn svg {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      width: 1.25rem !important;
+      height: 1.25rem !important;
+      fill: currentColor !important;
+      color: white !important;
+    }
   }
 
-  /* Extra small mobile devices */
   @media (max-width: 640px) {
-    .bg-facebook-blue svg,
-    .bg-twitter-blue svg,
-    .bg-linkedin-blue svg,
-    .bg-whatsapp-green svg,
-    .bg-gray-700 svg {
-      width: 1.25rem !important; /* 20px */
-      height: 1.25rem !important; /* 20px */
+    .share-btn svg {
+      width: 1.25rem !important;
+      height: 1.25rem !important;
     }
 
-    .bg-facebook-blue,
-    .bg-twitter-blue,
-    .bg-linkedin-blue,
-    .bg-whatsapp-green,
-    .bg-gray-700 {
+    .share-btn {
       min-width: 2.5rem !important;
       min-height: 2.5rem !important;
     }
@@ -2315,9 +2462,135 @@ if (safeBody && safeBody.length > 0) {
 <style is:global>
   /* Gallery CSS removed */
 
+  /* iPhone 12 Pro (390×844) - slug page was falling through with no dedicated rules; Galaxy S9+ (360–400) was applying and tuned for 360px */
+  @media (min-width: 385px) and (max-width: 414px) and (min-height: 800px) {
+    .slug-page {
+      overflow-x: hidden !important;
+      max-width: 100vw !important;
+    }
+    /* Navbar - prevent overflow at 390px (slug + all pages via global.css) */
+    .fixed.top-0.w-full.z-50 .container.mx-auto {
+      padding-left: 0.875rem !important;
+      padding-right: 0.875rem !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+    }
+    .fixed.top-0.w-full.z-50 a.flex.items-center.relative.min-w-0 {
+      max-width: calc(100% - 152px) !important;
+      min-width: 0 !important;
+    }
+    .fixed.top-0.w-full.z-50 a.flex.items-center.relative.min-w-0 img:first-of-type {
+      max-height: 2.5rem !important;
+      height: 2.5rem !important;
+      width: auto !important;
+    }
+    .fixed.top-0.w-full.z-50 .flex.items-center button,
+    .fixed.top-0.w-full.z-50 .hamburger-button {
+      min-width: 44px !important;
+      min-height: 44px !important;
+    }
+    /* Slug hero & typography for 390px */
+    .slug-page .font-philosopher.h1,
+    .slug-page h1.font-philosopher {
+      font-size: 2rem !important;
+      line-height: 1.25 !important;
+      margin-bottom: 1.5rem !important;
+    }
+    .slug-page nav.paragraph.p2 a,
+    .slug-page nav.paragraph.p2 span {
+      font-size: 0.8125rem !important;
+    }
+    .slug-page .prose,
+    .slug-page article.prose p {
+      font-size: 0.9375rem !important;
+      line-height: 1.7 !important;
+    }
+    .slug-page .headings.h3 {
+      font-size: 1.25rem !important;
+    }
+    /* AI Summary FAB - safe area so it doesn't sit under home indicator */
+    .slug-page .ai-summary-fab {
+      right: max(1rem, env(safe-area-inset-right, 1rem)) !important;
+      bottom: max(5.5rem, env(safe-area-inset-bottom, 5.5rem)) !important;
+      min-width: 48px !important;
+      min-height: 48px !important;
+    }
+  }
+
+  /* Poco F8 Ultra (6.9" 1200×2608) - Navbar & slug responsive */
+  @media (min-width: 393px) and (max-width: 430px) and (min-height: 800px) {
+    /* Navbar - prevent overflow, touch-friendly */
+    .fixed.top-0.w-full.z-50 .container.mx-auto {
+      padding-left: 0.875rem !important;
+      padding-right: 0.875rem !important;
+      min-width: 0 !important;
+      max-width: 100% !important;
+    }
+    .fixed.top-0.w-full.z-50 a.flex.items-center.relative.min-w-0 {
+      max-width: calc(100% - 160px) !important;
+      min-width: 0 !important;
+    }
+    .fixed.top-0.w-full.z-50 a.flex.items-center.relative.min-w-0 img:first-of-type {
+      max-height: 2.5rem !important;
+      height: 2.5rem !important;
+      width: auto !important;
+    }
+    .fixed.top-0.w-full.z-50 .flex.items-center button,
+    .fixed.top-0.w-full.z-50 .hamburger-button {
+      min-width: 44px !important;
+      min-height: 44px !important;
+      width: 44px !important;
+      height: 44px !important;
+    }
+    .slug-page .ai-summary-fab {
+      right: max(0.875rem, env(safe-area-inset-right, 0.875rem)) !important;
+      bottom: max(5.5rem, env(safe-area-inset-bottom, 5.5rem)) !important;
+      min-width: 48px !important;
+      min-height: 48px !important;
+    }
+    /* Hero & breadcrumb */
+    .slug-page .font-philosopher.h1,
+    h1.font-philosopher {
+      font-size: 2rem !important;
+      line-height: 1.2 !important;
+      margin-bottom: 1.5rem !important;
+    }
+    nav.paragraph.p2 a,
+    nav.paragraph.p2 span {
+      font-size: 0.8125rem !important;
+    }
+    .slug-page .prose,
+    .slug-page article.prose p {
+      font-size: 0.9375rem !important;
+      line-height: 1.7 !important;
+    }
+    .slug-page .headings.h3 {
+      font-size: 1.25rem !important;
+    }
+  }
+
+  /* Poco F8 Ultra landscape */
+  @media (min-width: 800px) and (max-width: 920px) and (max-height: 450px) and (orientation: landscape) {
+    .fixed.top-0.w-full.z-50 .container.mx-auto {
+      padding-left: 0.75rem !important;
+      padding-right: 0.75rem !important;
+    }
+    .fixed.top-0.w-full.z-50 a.flex.items-center.relative.min-w-0 img:first-of-type {
+      max-height: 2.25rem !important;
+      height: 2.25rem !important;
+    }
+    .slug-page .font-philosopher.h1 {
+      font-size: 2.25rem !important;
+    }
+    .slug-page .prose p {
+      font-size: 1rem !important;
+      margin-bottom: 1.25rem !important;
+    }
+  }
+
   /* Galaxy S9+ Typography Responsive Fixes */
   /* Galaxy S9+ Portrait: 360px width, ~740px height */
-  @media (min-width: 360px) and (max-width: 400px) and (min-height: 700px) {
+  @media (min-width: 360px) and (max-width: 389px) and (min-height: 700px) {
     /* Hero Title - Galaxy S9+ */
     h1.font-philosopher,
     .font-philosopher.h1 {
@@ -2559,7 +2832,7 @@ if (safeBody && safeBody.length > 0) {
   }
 
   /* Galaxy S9+ Specific Text Scaling for Better Readability */
-  @media (min-width: 360px) and (max-width: 400px) {
+  @media (min-width: 360px) and (max-width: 389px) {
     /* Hero Title - Responsive scaling */
     h1.font-philosopher,
     .font-philosopher.h1 {
@@ -2675,7 +2948,7 @@ if (safeBody && safeBody.length > 0) {
 
   /* Galaxy S9+ Typography Responsive Fixes */
   /* Galaxy S9+ Portrait: 360px width, ~740px height */
-  @media (min-width: 360px) and (max-width: 400px) and (min-height: 700px) {
+  @media (min-width: 360px) and (max-width: 389px) and (min-height: 700px) {
     /* Hero Title - Galaxy S9+ */
     h1.font-philosopher,
     .font-philosopher.h1 {
@@ -2917,7 +3190,7 @@ if (safeBody && safeBody.length > 0) {
   }
 
   /* Galaxy S9+ Specific Text Scaling for Better Readability */
-  @media (min-width: 360px) and (max-width: 400px) {
+  @media (min-width: 360px) and (max-width: 389px) {
     /* Hero Title - Responsive scaling */
     h1.font-philosopher,
     .font-philosopher.h1 {
@@ -3031,7 +3304,7 @@ if (safeBody && safeBody.length > 0) {
   }
 
   /* Galaxy S9+ High DPI Text Rendering */
-  @media (min-width: 360px) and (max-width: 400px) and (-webkit-min-device-pixel-ratio: 3.5) {
+  @media (min-width: 360px) and (max-width: 389px) and (-webkit-min-device-pixel-ratio: 3.5) {
     /* Crisp text rendering on high DPI */
     * {
       -webkit-font-smoothing: antialiased;

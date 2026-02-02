@@ -2346,6 +2346,19 @@ export async function getIOESPrograms() {
   }
 }
 
+/** COFEST: merged College of Fisheries + IOES programs */
+export async function getCOFESTPrograms() {
+  try {
+    const [cofPrograms, ioesPrograms] = await Promise.all([getCOFPrograms(), getIOESPrograms()]);
+    const merged = [...(cofPrograms || []), ...(ioesPrograms || [])];
+    console.log('=== DEBUG: getCOFESTPrograms ===');
+    console.log('COF programs:', cofPrograms?.length, 'IOES programs:', ioesPrograms?.length, 'Total:', merged.length);
+    return merged;
+  } catch (error) {
+    console.error('Error in getCOFESTPrograms:', error);
+    return [];
+  }
+}
 
 
 export async function getCIASPrograms() {
