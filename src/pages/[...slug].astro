@@ -192,8 +192,11 @@ if (mainImage?.asset) {
   socialMediaImageUrl = `${siteUrl}/images/Official MSU-TCTO logo-01.png`;
 }
 
-// Single canonical share image URL from Sanity main image for all platforms
-const shareImageUrl = socialMediaImageUrl;
+// Single canonical share image URL from Sanity mainImage for all platforms (Messenger, Facebook, Twitter, etc.)
+let shareImageUrl = socialMediaImageUrl;
+if (shareImageUrl && shareImageUrl.startsWith('http:')) {
+  shareImageUrl = shareImageUrl.replace(/^http:/, 'https:');
+}
 const shareImageAlt = mainImage?.caption || title;
 
 const relatedArticles = (article?._id && articleSubject && articleSubject._id) 

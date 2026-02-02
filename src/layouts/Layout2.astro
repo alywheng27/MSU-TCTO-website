@@ -22,13 +22,14 @@ const { title, description, ogTitle, ogDescription, ogImage, ogImageAlt, ogUrl, 
 const siteUrl = Astro.site ? new URL(Astro.site).origin : 'https://msutcto.edu.ph';
 const currentUrl = ogUrl || `${siteUrl}${Astro.url?.pathname || '/'}`;
 
-// Ensure absolute URL for og:image and twitter:image - platforms reject relative URLs
+// One canonical share image URL (Sanity mainImage) for all platforms - Messenger, Facebook, Twitter, etc.
 const absoluteOgImage = ogImage
   ? (ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage.startsWith('/') ? '' : '/'}${ogImage}`)
   : `${siteUrl}/images/Official MSU-TCTO logo-01.png`;
 const absoluteTwitterImage = twitterImage
   ? (twitterImage.startsWith('http') ? twitterImage : `${siteUrl}${twitterImage.startsWith('/') ? '' : '/'}${twitterImage}`)
   : absoluteOgImage;
+const canonicalShareImage = absoluteOgImage.startsWith('http:') ? absoluteOgImage.replace(/^http:/, 'https:') : absoluteOgImage;
 
 const shareTitle = ogTitle ?? twitterTitle ?? title;
 const shareDescription = ogDescription ?? twitterDescription ?? description ?? 'MSU-Tawi-Tawi College of Technology and Oceanography';
@@ -53,23 +54,24 @@ const shareImageAlt = ogImageAlt ?? twitterImageAlt ?? shareTitle;
   <!-- Meta Description -->
   {description && <meta name="description" content={description} />}
   
-  <!-- Open Graph / Facebook / Messenger - article main image from Sanity shows when shared -->
+  <!-- Open Graph: same Sanity mainImage for Messenger, Facebook, LinkedIn, etc. -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content={currentUrl} />
   <meta property="og:title" content={shareTitle} />
   <meta property="og:description" content={shareDescription} />
-  <meta property="og:image" content={absoluteOgImage} />
-  <meta property="og:image:secure_url" content={absoluteOgImage} />
+  <meta property="og:image" content={canonicalShareImage} />
+  <meta property="og:image:secure_url" content={canonicalShareImage} />
+  <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content={shareImageAlt} />
   <meta property="og:site_name" content="MSU-TCTO" />
   
-  <!-- Twitter / X Card - large image preview with article main image from Sanity -->
+  <!-- Twitter / X: same Sanity mainImage as og:image -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={shareTitle} />
   <meta name="twitter:description" content={shareDescription} />
-  <meta name="twitter:image" content={absoluteTwitterImage} />
+  <meta name="twitter:image" content={canonicalShareImage} />
   <meta name="twitter:image:alt" content={shareImageAlt} />
   <style>
     /* Modern animation keyframes */
