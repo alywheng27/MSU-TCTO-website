@@ -142,38 +142,59 @@ function generateSummary(bodyContent: any[], maxSentences = 3, maxChars = 420) {
 
 const aiSummary = generateSummary(safeBody);
 
-// Force the use of the article's main image for social media sharing
+// Use only the article's main image from Sanity for social sharing (og:image / twitter:image) on all platforms.
+// Build an absolute Sanity CDN URL so shared links show the article main image, not a shareable link or other photo.
+const SANITY_CDN_BASE = 'https://cdn.sanity.io';
 let socialMediaImageUrl;
 if (mainImage?.asset) {
-  // Create a high-quality social media optimized version
-  socialMediaImageUrl = urlForImage(mainImage.asset)
+  // Build URL from Sanity main image asset only (not shareable link, not gallery/other photos)
+  const built = urlForImage(mainImage.asset)
     .width(1200)
     .height(630)
     .fit('crop')
     .quality(95)
     .format('jpg')
     .url();
-  
-  // Ensure it's an absolute URL - handle Sanity CDN URLs properly
-  if (!socialMediaImageUrl.startsWith('http')) {
-    if (socialMediaImageUrl.startsWith('//')) {
-      // CDN URL starting with //
-      socialMediaImageUrl = `https:${socialMediaImageUrl}`;
-    } else if (socialMediaImageUrl.startsWith('/')) {
-      // Relative URL
-      socialMediaImageUrl = `${siteUrl}${socialMediaImageUrl}`;
+  socialMediaImageUrl = built || '';
+
+  // Ensure absolute URL: platforms require a direct image URL from Sanity CDN, not relative or our domain
+  if (socialMediaImageUrl.startsWith('http')) {
+    // Already absolute; ensure it's the Sanity CDN image (not a redirect/share link)
+    if (!socialMediaImageUrl.includes('cdn.sanity.io/images')) {
+      const directUrl = mainImage.asset?.url;
+      if (directUrl && typeof directUrl === 'string' && directUrl.includes('cdn.sanity.io')) {
+        socialMediaImageUrl = directUrl.includes('?')
+          ? `${directUrl.split('?')[0]}?w=1200&h=630&fit=crop&q=95&fm=jpg`
+          : `${directUrl}?w=1200&h=630&fit=crop&q=95&fm=jpg`;
+      }
+    }
+  } else if (socialMediaImageUrl.startsWith('//')) {
+    socialMediaImageUrl = `https:${socialMediaImageUrl}`;
+  } else if (socialMediaImageUrl.startsWith('/') && socialMediaImageUrl.includes('/images/')) {
+    // Relative Sanity path: resolve to Sanity CDN, not our site
+    socialMediaImageUrl = `${SANITY_CDN_BASE}${socialMediaImageUrl}`;
+  } else if (socialMediaImageUrl.startsWith('/')) {
+    socialMediaImageUrl = `${siteUrl}${socialMediaImageUrl}`;
+  } else if (socialMediaImageUrl) {
+    socialMediaImageUrl = `https://${socialMediaImageUrl}`;
+  }
+
+  if (!socialMediaImageUrl || !socialMediaImageUrl.startsWith('http')) {
+    const directUrl = mainImage.asset?.url;
+    if (directUrl && typeof directUrl === 'string') {
+      const base = directUrl.split('?')[0];
+      socialMediaImageUrl = `${base}?w=1200&h=630&fit=crop&q=95&fm=jpg`;
     } else {
-      // No protocol or slash
-      socialMediaImageUrl = `https://${socialMediaImageUrl}`;
+      socialMediaImageUrl = `${siteUrl}/images/Official MSU-TCTO logo-01.png`;
     }
   }
 } else {
-  // Only use logo if absolutely no image is available
   socialMediaImageUrl = `${siteUrl}/images/Official MSU-TCTO logo-01.png`;
 }
 
-// Final absolute URL - remove cache busting which can cause issues with social media platforms
-const cacheBustingImageUrl = socialMediaImageUrl;
+// Single canonical share image URL from Sanity main image for all platforms
+const shareImageUrl = socialMediaImageUrl;
+const shareImageAlt = mainImage?.caption || title;
 
 const relatedArticles = (article?._id && articleSubject && articleSubject._id) 
   ? (await getRelatedArticles(article._id, articleSubject._id, 3)) || []
@@ -263,15 +284,17 @@ if (safeBody && safeBody.length > 0) {
 <Layout2 
   title={shareTitle}
   header={title} 
-  image={cacheBustingImageUrl} 
+  image={shareImageUrl} 
   description={articleDescription}
   ogTitle={shareTitle}
   ogDescription={articleDescription}
-  ogImage={cacheBustingImageUrl}
+  ogImage={shareImageUrl}
   ogUrl={currentUrl}
+  ogImageAlt={shareImageAlt}
   twitterTitle={shareTitle}
   twitterDescription={articleDescription}
-  twitterImage={cacheBustingImageUrl}
+  twitterImage={shareImageUrl}
+  twitterImageAlt={shareImageAlt}
 >
   <!-- Premium Navigation with Glass Morphism Effect -->
   <Navbar path={currentPath} client:visible />
@@ -897,13 +920,14 @@ if (safeBody && safeBody.length > 0) {
             <svg xmlns="http://www.w3.org/2000/svg" class="xl:h-6 xl:w-6 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-5 sm:w-5 xs:h-5 xs:w-5 h-5 w-5 group-hover:scale-110 transition-transform shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
           </a>
           
-          <!-- Messenger - Official logo -->
+          <!-- Messenger - opens Messenger app (mobile) or messenger.com (desktop), not Facebook -->
           <a 
-            href={`https://www.facebook.com/dialog/send?link=${encodeURIComponent(currentUrl)}&app_id=966242223397117&redirect_uri=${encodeURIComponent(currentUrl)}`}
+            href={`https://www.messenger.com/open/?link=${encodeURIComponent(currentUrl)}&ref=share_link`}
             target="_blank"
             rel="noopener noreferrer"
-            class="share-btn xl:w-14 xl:h-14 lg:w-12 lg:h-12 md:w-11 md:h-11 sm:w-10 sm:h-10 xs:w-10 xs:h-10 rounded-full bg-messenger-blue flex items-center justify-center text-white-pure hover:bg-messenger-blue-dark transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105 group"
+            class="share-btn messenger-share xl:w-14 xl:h-14 lg:w-12 lg:h-12 md:w-11 md:h-11 sm:w-10 sm:h-10 xs:w-10 xs:h-10 rounded-full bg-messenger-blue flex items-center justify-center text-white-pure hover:bg-messenger-blue-dark transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 hover:scale-105 group"
             aria-label="Share on Messenger"
+            data-messenger-share-url={currentUrl}
           >
             <svg xmlns="http://www.w3.org/2000/svg" class="xl:h-6 xl:w-6 lg:h-5 lg:w-5 md:h-5 md:w-5 sm:h-5 sm:w-5 xs:h-5 xs:w-5 h-5 w-5 group-hover:scale-110 transition-transform shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.36 2 2 6.13 2 11.7c0 3.19 1.6 6.02 4.03 7.8.22.15.36.42.36.7v2.1c0 .55.45.98.98.98.15 0 .3-.03.43-.1l2.3-1.57c.3.06.61.1.93.1 5.64 0 10-4.13 10-9.7S17.64 2 12 2zm.76 12.55l-2.68-2.87-5.23 2.87 5.75-6.14 2.68 2.87 5.23-2.87-5.75 6.14z"/></svg>
           </a>
@@ -1314,6 +1338,19 @@ if (safeBody && safeBody.length > 0) {
 
     // Close AI Summary panel when navigation sidebar opens (so it stays hidden)
     window.addEventListener('navSidebarOpened', closeSummary);
+
+    // Messenger share: on mobile open Messenger app directly (fb-messenger://), not Facebook
+    document.querySelectorAll('.messenger-share').forEach((btn) => {
+      btn.addEventListener('click', function (e) {
+        const url = this.getAttribute('data-messenger-share-url');
+        if (!url) return;
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        if (isMobile) {
+          e.preventDefault();
+          window.location.href = 'fb-messenger://share?link=' + encodeURIComponent(url) + '&app_id=966242223397117';
+        }
+      });
+    });
 
     if (summaryCopy) {
       summaryCopy.addEventListener('click', async (e) => {
