@@ -143,7 +143,7 @@ function generateSummary(bodyContent: any[], maxSentences = 3, maxChars = 420) {
 const aiSummary = generateSummary(safeBody);
 
 // Use only the article's main image from Sanity for social sharing (og:image / twitter:image) on all platforms.
-// Build an absolute Sanity CDN URL so shared links show the article main image, not a shareable link or other photo.
+// Build an absolute Sanity CDN URL so preview works on both msu-tcto-website.vercel.app and msutcto.edu.ph.
 const SANITY_CDN_BASE = 'https://cdn.sanity.io';
 let socialMediaImageUrl;
 if (mainImage?.asset) {
@@ -185,15 +185,20 @@ if (mainImage?.asset) {
       const base = directUrl.split('?')[0];
       socialMediaImageUrl = `${base}?w=1200&h=630&fit=crop&q=95&fm=jpg`;
     } else {
-      socialMediaImageUrl = `${siteUrl}/images/Official MSU-TCTO logo-01.png`;
+      const origin = typeof Astro.url !== 'undefined' && Astro.url?.origin ? Astro.url.origin : siteUrl;
+      socialMediaImageUrl = `${origin}/images/msutcto_wordmark_magenta_.png`;
     }
   }
 } else {
-  socialMediaImageUrl = `${siteUrl}/images/Official MSU-TCTO logo-01.png`;
+  const origin = typeof Astro.url !== 'undefined' && Astro.url?.origin ? Astro.url.origin : siteUrl;
+  socialMediaImageUrl = `${origin}/images/msutcto_wordmark_magenta_.png`;
 }
 
-// Single canonical share image URL from Sanity main image for all platforms
-const shareImageUrl = socialMediaImageUrl;
+// Single canonical share image URL: Sanity mainImage (absolute CDN URL) so preview is correct on Vercel and msutcto.edu.ph
+let shareImageUrl = socialMediaImageUrl;
+if (shareImageUrl && shareImageUrl.startsWith('http:')) {
+  shareImageUrl = shareImageUrl.replace(/^http:/, 'https:');
+}
 const shareImageAlt = mainImage?.caption || title;
 
 const relatedArticles = (article?._id && articleSubject && articleSubject._id) 
