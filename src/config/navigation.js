@@ -39,10 +39,10 @@ export const navigationConfig = {
       { label: "College of Education (COED)", href: "/programs/coed", footerLabel: "College of Education (COED)", footerHref: "/programs/coed" },
       { label: "College of Business, Accountancy, and Management (CBAM)", href: "/505", footerLabel: "College of Business, Accountancy, and Management (CBAM)", footerHref: "/505" },
       { label: "College of Mathematical Sciences (CMS)", href: "/505", footerLabel: "College of Mathematical Sciences (CMS)", footerHref: "/505" },
-       { label: "College of Fisheries", href: "/programs/cof", footerLabel: "College of Fisheries (COF)", footerHref: "/programs/cof" },
+      //  { label: "College of Fisheries", href: "/programs/cof", footerLabel: "College of Fisheries (COF)", footerHref: "/programs/cof" },
       { label: "College of Fisheries, Oceanoraphy , Environmental Science, and Technology (COFEST)", href: "/programs/cofest", footerLabel: "College of Fisheries, Oceanoraphy , Environmental Science, and Technology (COFEST)", footerHref: "/programs/cof" },
       { label: "College of Computer Studies (CCS)", href: "/programs/ccs", footerLabel: "College of Computer Studies (CCS)", footerHref: "/programs/ccs" },
-       { label: "Institute of Oceanography and Environmental Science", href: "/programs/ioes", footerLabel: "Institute of Oceanography and Environmental Sciences (IOES)", footerHref: "/programs/ioes" },
+      //  { label: "Institute of Oceanography and Environmental Science", href: "/programs/ioes", footerLabel: "Institute of Oceanography and Environmental Sciences (IOES)", footerHref: "/programs/ioes" },
       { label: "College of Law (COL)", href: "/programs/col", footerLabel: "College of Law (COL)", footerHref: "/programs/col" },
     ]
   },
