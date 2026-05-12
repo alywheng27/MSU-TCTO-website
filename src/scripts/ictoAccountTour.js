@@ -1,8 +1,9 @@
 import { driver as driverFactory } from 'driver.js';
 import 'driver.js/dist/driver.css';
 
-const STORAGE_TOUR = 'icto-svc-tour-seen';
-const MODAL_TOUR = 'icto-svc-tour-form-seen';
+// Bumped to v2 to re-offer the refreshed tour after new features were added.
+const STORAGE_TOUR = 'icto-svc-tour-seen-v2';
+const MODAL_TOUR = 'icto-svc-tour-form-seen-v2';
 
 function getDriverFactory() {
   return Promise.resolve(driverFactory);
@@ -14,7 +15,7 @@ function buildSteps() {
       popover: {
         title: 'Welcome to the ICT service request',
         description:
-          'This short tour explains how to use the page. Use Next, Back, or the keyboard. You can close anytime with Esc or the × in the popover.',
+          'This short tour shows what is new on this page and how to complete a request. Use Next / Back or the arrow keys; press Esc or the × to close at any time.',
         side: 'over',
         align: 'center',
       },
@@ -25,9 +26,9 @@ function buildSteps() {
     steps.push({
       element: '#tour-hero',
       popover: {
-        title: 'Page purpose',
+        title: 'What this page is for',
         description:
-          'Use this for MSUTCTO institutional accounts and other ICT support—aligned with the official ICTO paper form.',
+          'Use this for MSUTCTO institutional accounts and other ICT support. It mirrors the official ICTO paper form and ends with a printable receipt.',
         side: 'bottom',
         align: 'start',
       },
@@ -38,9 +39,9 @@ function buildSteps() {
     steps.push({
       element: '#tour-pick-service',
       popover: {
-        title: 'Select a service type',
+        title: 'Pick a service type',
         description:
-          'Choose Emergency, Major, or Routine. Your choice sets priority context and opens the full request form in a focused window.',
+          'Choose <strong>Emergency</strong>, <strong>Major</strong>, or <strong>Routine</strong>. Your pick sets priority context and opens the full ICTO request form in a focused window.',
         side: 'top',
         align: 'center',
       },
@@ -51,9 +52,9 @@ function buildSteps() {
     steps.push({
       element: '#tour-quick-email',
       popover: {
-        title: 'Email without the form',
+        title: 'Need a quick email instead?',
         description:
-          'If you only need a quick message to ICTO, you can use this link—structured requests are still best with the form.',
+          'If you only need a quick message to ICTO, use this link. For trackable requests, please still use the form.',
         side: 'left',
         align: 'center',
       },
@@ -62,9 +63,9 @@ function buildSteps() {
 
   steps.push({
     popover: {
-      title: 'You are ready',
+      title: 'You are ready to start',
       description:
-        'Open a service type to fill the form. Inside, choose Student, Faculty, or Staff so the correct labels (College/Office) appear. Tip: a second tour inside the form is available with “Form guide” at the top of the form.',
+        'Open a service type and choose <strong>Student</strong>, <strong>Faculty</strong>, or <strong>Staff</strong> so the right labels and document uploads appear. Tip: a second, in‑form walkthrough is available via <strong>Form guide (tour)</strong> at the top of the request form.',
       side: 'over',
       align: 'center',
     },
@@ -75,70 +76,115 @@ function buildSteps() {
 
 function buildModalSteps() {
   const steps = [];
+
   if (document.getElementById('tour-modal-type-blurb')) {
     steps.push({
       element: '#tour-modal-type-blurb',
       popover: {
         title: 'Context for your request',
-        description: 'This area reminds you what Emergency, Major, or Routine means for this submission.',
+        description:
+          'This banner reminds you what <strong>Emergency</strong>, <strong>Major</strong>, or <strong>Routine</strong> means for this submission. You can re-open this walkthrough anytime via <strong>Form guide (tour)</strong>.',
         side: 'bottom',
       },
     });
   }
+
+  if (document.getElementById('tour-form-stepper')) {
+    steps.push({
+      element: '#tour-form-stepper',
+      popover: {
+        title: 'New · Live progress stepper',
+        description:
+          'Track the four steps — <strong>Requester</strong>, <strong>Documents</strong>, <strong>Service details</strong>, <strong>Attestation</strong>. Each badge turns green as you complete it, red if something needs fixing. Click any step to jump straight to that section.',
+        side: 'bottom',
+      },
+    });
+  }
+
   if (document.getElementById('tour-requester')) {
     steps.push({
       element: '#tour-requester',
       popover: {
-        title: 'Who is requesting',
+        title: 'Step 1 · Who is requesting',
         description:
-          'Select Student, Faculty, or Staff. Students see College/Location; faculty and staff see Office/Work location.',
+          'Pick <strong>Student</strong>, <strong>Faculty</strong>, or <strong>Staff</strong>. Students see <em>College / Location</em>; faculty and staff see <em>Office / Work location</em>. The required uploads in the next step also adapt to your role.',
         side: 'bottom',
       },
     });
   }
+
+  if (document.getElementById('tour-supporting-docs')) {
+    steps.push({
+      element: '#tour-supporting-docs',
+      popover: {
+        title: 'Step 2 · Supporting documents',
+        description:
+          'Upload the IDs ICTO needs to verify you. Students upload <strong>Student ID (front & back)</strong> and a <strong>Certificate of Registration</strong>; faculty and staff upload a <strong>Valid ID (front & back)</strong>. The fields only appear after you pick your role in Step 1.',
+        side: 'top',
+      },
+    });
+  }
+
   if (document.getElementById('tour-software-accounts')) {
     steps.push({
       element: '#tour-software-accounts',
       popover: {
-        title: 'Account-related help',
+        title: 'Step 3 · Account-related help',
         description:
-          'For institutional accounts, tick “Account configuration…” and/or “User access and permissions” and describe details below.',
+          'For institutional accounts, tick <strong>Account configuration and login assistance</strong> and/or <strong>User access and permissions</strong>, then describe the details in the <em>Software — Specific</em> box below.',
         side: 'top',
       },
     });
   }
+
   if (document.getElementById('tour-liability')) {
     steps.push({
       element: '#tour-liability',
       popover: {
-        title: 'Liability disclaimer',
-        description: 'Read the terms and check the box before sending your request to ICTO.',
+        title: 'Step 4 · Liability disclaimer',
+        description:
+          'Read the terms and tick the box before sending your request to ICTO. Submission is blocked until this is acknowledged.',
         side: 'top',
       },
     });
   }
+
   if (document.getElementById('tour-e-signature')) {
     steps.push({
       element: '#tour-e-signature',
       popover: {
-        title: 'Electronic signature',
+        title: 'Electronic signature & attestation',
         description:
-          'Draw your signature on the pad, then type your printed name underneath. Both are required, along with the confirmation checkbox, before ICTO can rely on your electronic sign-off.',
+          'Draw your signature on the pad <em>or</em> use the new <strong>Upload image</strong> button to send a photo of your signature. Then enter your <strong>printed name</strong> and tick the confirmation box — all three are required before ICTO can rely on your e-sign.',
         side: 'top',
       },
     });
   }
+
+  if (document.getElementById('icto-human-verify-wrap')) {
+    steps.push({
+      element: '#icto-human-verify-wrap',
+      popover: {
+        title: 'New · Security verification',
+        description:
+          'Tick <strong>I am not a robot</strong> just before sending. If a <strong>CAPTCHA</strong> appears, type the code shown — you can refresh the code if it is hard to read. This protects ICTO from automated submissions.',
+        side: 'top',
+      },
+    });
+  }
+
   if (document.getElementById('tour-submit')) {
     steps.push({
       element: '#tour-submit',
       popover: {
         title: 'Send to ICTO',
         description:
-          'This sends your answers to the ICTO Google Form and shows your appointment reference receipt—bring it when you visit ICTO.',
+          'This sends your answers to the ICTO Google Form and opens your <strong>appointment reference receipt</strong>, which you can print or save as PDF. Bring or send the reference number when you follow up with ICTO.',
         side: 'top',
       },
     });
   }
+
   return steps;
 }
 
