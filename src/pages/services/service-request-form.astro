@@ -719,7 +719,7 @@ const ictoEntryHeaderMapJson = JSON.stringify(ictoEntryIdByFormResponseHeader);
           </div>
 
           <div class="p-6 sm:p-8 space-y-10 text-slate-800 dark:text-slate-200">
-            <section class="ict-form-stepper" aria-label="Request form steps">
+            <section id="tour-form-stepper" class="ict-form-stepper" aria-label="Request form steps">
               <p class="ict-form-stepper-hint">Progress updates live. Click a step to review or edit.</p>
               <ol class="ict-form-stepper-list">
                 <li class="ict-form-stepper-item is-active" data-icto-step="1" role="status" aria-live="polite">
@@ -1590,22 +1590,24 @@ const ictoEntryHeaderMapJson = JSON.stringify(ictoEntryIdByFormResponseHeader);
         data-close-receipt-modal
         aria-hidden="true"
       ></div>
-      <div class="icto-receipt-print-host relative z-10 flex min-h-[100svh] items-start sm:items-center justify-center p-4 sm:p-6 pointer-events-none">
+      <div
+        class="icto-receipt-print-host relative z-10 flex w-full min-h-[100svh] items-stretch justify-center overflow-y-auto overscroll-y-contain px-[max(1rem,env(safe-area-inset-left))] py-[max(0.75rem,env(safe-area-inset-top))] pb-[max(1rem,env(safe-area-inset-bottom))] pr-[max(1rem,env(safe-area-inset-right))] sm:items-center sm:px-6 sm:py-6 pointer-events-none"
+      >
         <div
           id="icto-receipt-panel"
-          class="pointer-events-auto w-full max-w-lg sm:max-w-xl rounded-2xl border border-slate-200/90 bg-white text-slate-900 shadow-[0_25px_80px_-12px_rgba(15,23,42,0.35)] dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 overflow-hidden"
+          class="pointer-events-auto my-auto flex w-full min-h-0 max-h-[min(92dvh,56rem)] max-w-lg flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white text-slate-900 shadow-[0_25px_80px_-12px_rgba(15,23,42,0.35)] dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 sm:max-h-[min(90dvh,52rem)] sm:max-w-xl lg:max-w-2xl"
         >
-          <div class="relative bg-gradient-to-r from-[#61063B] via-[#4D052F] to-[#61063B] px-6 py-5 text-white shrink-0">
+          <div class="relative shrink-0 bg-gradient-to-r from-[#61063B] via-[#4D052F] to-[#61063B] px-4 py-4 text-white sm:px-6 sm:py-5">
             <div class="pointer-events-none absolute inset-0 opacity-[0.14]" aria-hidden="true" style="background-image:url('data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.5\' fill-rule=\'evenodd\'%3E%3Cpath d=\'M20 36c8.837 0 16-7.163 16-16S28.837 4 20 4 4 11.163 4 20s7.163 16 16 16zm0 2c9.941 0 18-8.059 18-18S29.941 2 20 2 2 10.059 2 20s8.059 18 18 18z\'/%3E%3C/g%3E%3C/svg%3E');"></div>
-            <div class="relative flex items-start justify-between gap-4">
-              <div>
-                <p class="text-[10px] font-bold uppercase tracking-[0.22em] text-white/75">Mindanao State University &mdash; TCTO</p>
-                <h2 id="icto-receipt-title" class="mt-2 text-xl sm:text-2xl font-bold font-serif tracking-tight">ICTO submission receipt</h2>
-                <p class="mt-1 text-sm text-white/90">Official reference for inquiries at the ICT Office.</p>
+            <div class="relative flex items-start justify-between gap-3 sm:gap-4">
+              <div class="min-w-0 flex-1 pr-1">
+                <p class="text-[9px] font-bold uppercase tracking-[0.18em] text-white/75 sm:text-[10px] sm:tracking-[0.22em]">Mindanao State University &mdash; TCTO</p>
+                <h2 id="icto-receipt-title" class="mt-1.5 text-lg font-bold font-serif tracking-tight sm:mt-2 sm:text-2xl">ICTO submission receipt</h2>
+                <p class="mt-1 text-xs leading-snug text-white/90 sm:text-sm">Official reference for inquiries at the ICT Office.</p>
               </div>
               <button
                 type="button"
-                class="icto-no-print shrink-0 rounded-lg p-2 text-white/90 hover:bg-white/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                class="icto-no-print -mr-1 shrink-0 rounded-lg p-2 text-white/90 hover:bg-white/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-white sm:-mr-0"
                 data-close-receipt-modal
                 aria-label="Close receipt"
               >
@@ -1614,89 +1616,89 @@ const ictoEntryHeaderMapJson = JSON.stringify(ictoEntryIdByFormResponseHeader);
             </div>
           </div>
 
-          <div id="icto-receipt-print-area" class="px-6 py-6 sm:px-8 sm:pb-8">
+          <div id="icto-receipt-print-area" class="icto-receipt-print-scroll min-h-0 flex-1 overflow-y-auto overscroll-y-contain px-4 py-5 sm:px-8 sm:pb-8 sm:pt-6">
             <div
               id="icto-receipt-success"
-              class="mb-6 flex gap-4 rounded-xl border border-emerald-200/90 bg-emerald-50 dark:border-emerald-800/50 dark:bg-emerald-950/35 px-4 py-4 sm:px-5 sm:py-4"
+              class="mb-5 flex flex-col items-center gap-3 rounded-xl border border-emerald-200/90 bg-emerald-50 px-3 py-4 text-center dark:border-emerald-800/50 dark:bg-emerald-950/35 sm:mb-6 sm:flex-row sm:items-start sm:gap-4 sm:px-5 sm:py-4 sm:text-left"
               role="status"
               aria-live="polite"
               tabindex="-1"
             >
               <div
-                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-white shadow-lg shadow-emerald-600/25 dark:bg-emerald-500 dark:shadow-emerald-900/30"
+                class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-white shadow-lg shadow-emerald-600/25 dark:bg-emerald-500 dark:shadow-emerald-900/30 sm:h-12 sm:w-12"
                 aria-hidden="true"
               >
                 <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <div class="min-w-0 pt-0.5">
-                <p class="text-base font-bold text-emerald-950 dark:text-emerald-50">Successfully submitted</p>
-                <p id="icto-receipt-success-sub" class="mt-1 text-sm leading-relaxed text-emerald-900/85 dark:text-emerald-100/85">
+              <div class="min-w-0 max-w-full pt-0 sm:pt-0.5">
+                <p class="text-sm font-bold text-emerald-950 dark:text-emerald-50 sm:text-base">Successfully submitted</p>
+                <p id="icto-receipt-success-sub" class="mt-1 text-xs leading-relaxed text-emerald-900/85 dark:text-emerald-100/85 sm:text-sm">
                   Your request is recorded below. Copy the appointment reference, <strong class="font-semibold">download a JPG</strong> of this
                   receipt, or print — keep one for ICTO visits and your records.
                 </p>
               </div>
             </div>
 
-            <div class="rounded-xl border-2 border-dashed border-[#61063B]/25 bg-[#61063B]/[0.04] dark:border-rose-500/35 dark:bg-rose-950/20 px-4 py-4 text-center">
-              <p class="text-[11px] font-semibold uppercase tracking-widest text-[#61063B] dark:text-rose-300/90">Appointment reference</p>
+            <div class="rounded-xl border-2 border-dashed border-[#61063B]/25 bg-[#61063B]/[0.04] px-3 py-3.5 text-center dark:border-rose-500/35 dark:bg-rose-950/20 sm:px-4 sm:py-4">
+              <p class="text-[10px] font-semibold uppercase tracking-widest text-[#61063B] dark:text-rose-300/90 sm:text-[11px]">Appointment reference</p>
               <p
                 id="icto-receipt-ref"
-                class="mt-2 font-mono text-2xl sm:text-3xl font-bold tracking-tight text-[#61063B] dark:text-white break-all selection:bg-[#61063B]/20"
+                class="mt-2 font-mono text-[clamp(1rem,4.5vw,1.875rem)] font-bold leading-tight tracking-tight text-[#61063B] [overflow-wrap:anywhere] dark:text-white selection:bg-[#61063B]/20 sm:text-3xl"
               >
                 &mdash;
               </p>
-              <p id="icto-receipt-dateline" class="mt-3 text-xs text-slate-600 dark:text-slate-400">&mdash;</p>
+              <p id="icto-receipt-dateline" class="mt-2 text-[11px] text-slate-600 dark:text-slate-400 sm:mt-3 sm:text-xs">&mdash;</p>
             </div>
 
-            <p class="mt-5 text-xs text-slate-600 dark:text-slate-400 leading-relaxed rounded-lg bg-slate-50 dark:bg-slate-800/80 border border-slate-100 dark:border-slate-700 px-3 py-3">
+            <p class="mt-4 rounded-lg border border-slate-100 bg-slate-50 px-3 py-2.5 text-[11px] leading-relaxed text-slate-600 dark:border-slate-700 dark:bg-slate-800/80 dark:text-slate-400 sm:mt-5 sm:px-3 sm:py-3 sm:text-xs">
               <strong class="text-slate-800 dark:text-slate-200">Present at ICTO:</strong>
               quote this appointment reference together with valid ID when you visit or follow up.
             </p>
 
-            <dl class="mt-6 grid grid-cols-1 gap-x-8 gap-y-3 text-sm border-t border-slate-200 dark:border-slate-700 pt-6">
-              <div class="flex flex-col sm:flex-row sm:gap-3">
-                <dt class="shrink-0 sm:w-[11rem] text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Service type</dt>
-                <dd id="icto-receipt-service" class="font-medium text-slate-900 dark:text-slate-100">&mdash;</dd>
+            <dl class="mt-5 grid grid-cols-1 gap-x-6 gap-y-3.5 border-t border-slate-200 pt-5 text-sm dark:border-slate-700 sm:mt-6 sm:gap-y-3 sm:pt-6">
+              <div class="flex min-w-0 flex-col gap-0.5 sm:flex-row sm:gap-3">
+                <dt class="shrink-0 text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 sm:w-[11rem] sm:text-xs">Service type</dt>
+                <dd id="icto-receipt-service" class="min-w-0 break-words font-medium text-slate-900 dark:text-slate-100">&mdash;</dd>
               </div>
-              <div class="flex flex-col sm:flex-row sm:gap-3">
-                <dt class="shrink-0 sm:w-[11rem] text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Requester</dt>
-                <dd id="icto-receipt-person" class="text-slate-800 dark:text-slate-200">&mdash;</dd>
+              <div class="flex min-w-0 flex-col gap-0.5 sm:flex-row sm:gap-3">
+                <dt class="shrink-0 text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 sm:w-[11rem] sm:text-xs">Requester</dt>
+                <dd id="icto-receipt-person" class="min-w-0 break-words text-slate-800 dark:text-slate-200">&mdash;</dd>
               </div>
-              <div class="flex flex-col sm:flex-row sm:gap-3">
-                <dt class="shrink-0 sm:w-[11rem] text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Role</dt>
-                <dd id="icto-receipt-role" class="text-slate-800 dark:text-slate-200">&mdash;</dd>
+              <div class="flex min-w-0 flex-col gap-0.5 sm:flex-row sm:gap-3">
+                <dt class="shrink-0 text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 sm:w-[11rem] sm:text-xs">Role</dt>
+                <dd id="icto-receipt-role" class="min-w-0 break-words text-slate-800 dark:text-slate-200">&mdash;</dd>
               </div>
-              <div class="flex flex-col sm:flex-row sm:gap-3">
-                <dt class="shrink-0 sm:w-[11rem] text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Date (form)</dt>
-                <dd id="icto-receipt-date" class="font-mono text-xs text-slate-800 dark:text-slate-200">&mdash;</dd>
+              <div class="flex min-w-0 flex-col gap-0.5 sm:flex-row sm:gap-3">
+                <dt class="shrink-0 text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 sm:w-[11rem] sm:text-xs">Date (form)</dt>
+                <dd id="icto-receipt-date" class="min-w-0 break-words font-mono text-xs text-slate-800 dark:text-slate-200">&mdash;</dd>
               </div>
-              <div class="flex flex-col sm:flex-row sm:gap-3">
-                <dt class="shrink-0 sm:w-[11rem] text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Printed name</dt>
-                <dd id="icto-receipt-printed" class="text-slate-800 dark:text-slate-200">&mdash;</dd>
+              <div class="flex min-w-0 flex-col gap-0.5 sm:flex-row sm:gap-3">
+                <dt class="shrink-0 text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 sm:w-[11rem] sm:text-xs">Printed name</dt>
+                <dd id="icto-receipt-printed" class="min-w-0 break-words text-slate-800 dark:text-slate-200">&mdash;</dd>
               </div>
-              <div class="flex flex-col sm:flex-row sm:gap-3">
-                <dt class="shrink-0 sm:w-[11rem] text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Email</dt>
-                <dd id="icto-receipt-email" class="text-slate-800 dark:text-slate-200 break-all">&mdash;</dd>
+              <div class="flex min-w-0 flex-col gap-0.5 sm:flex-row sm:gap-3">
+                <dt class="shrink-0 text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 sm:w-[11rem] sm:text-xs">Email</dt>
+                <dd id="icto-receipt-email" class="min-w-0 break-all text-slate-800 dark:text-slate-200">&mdash;</dd>
               </div>
-              <div class="flex flex-col sm:flex-row sm:gap-3 sm:items-start">
-                <dt class="shrink-0 sm:w-[11rem] text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Office / college</dt>
-                <dd id="icto-receipt-office" class="text-slate-800 dark:text-slate-200">&mdash;</dd>
+              <div class="flex min-w-0 flex-col gap-0.5 sm:flex-row sm:items-start sm:gap-3">
+                <dt class="shrink-0 text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 sm:w-[11rem] sm:text-xs">Office / college</dt>
+                <dd id="icto-receipt-office" class="min-w-0 break-words text-slate-800 dark:text-slate-200">&mdash;</dd>
               </div>
-              <div class="flex flex-col sm:flex-row sm:gap-3">
-                <dt class="shrink-0 sm:w-[11rem] text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Location</dt>
-                <dd id="icto-receipt-location" class="text-slate-800 dark:text-slate-200">&mdash;</dd>
+              <div class="flex min-w-0 flex-col gap-0.5 sm:flex-row sm:gap-3">
+                <dt class="shrink-0 text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 sm:w-[11rem] sm:text-xs">Location</dt>
+                <dd id="icto-receipt-location" class="min-w-0 break-words text-slate-800 dark:text-slate-200">&mdash;</dd>
               </div>
             </dl>
 
-            <p id="icto-receipt-system-id" class="mt-6 text-[11px] text-slate-500 dark:text-slate-500 border-t border-slate-200 dark:border-slate-700 pt-4"></p>
+            <p id="icto-receipt-system-id" class="mt-5 border-t border-slate-200 pt-3 text-[10px] leading-relaxed text-slate-500 dark:border-slate-700 dark:text-slate-500 sm:mt-6 sm:pt-4 sm:text-[11px]"></p>
 
-            <div class="mt-6 flex flex-col sm:flex-row flex-wrap gap-2.5 no-print-buttons icto-no-print">
+            <div class="icto-receipt-actions mt-5 grid grid-cols-1 gap-2.5 no-print-buttons sm:mt-6 sm:grid-cols-2 lg:grid-cols-4 icto-no-print">
               <button
                 type="button"
                 id="icto-receipt-copy"
-                class="inline-flex flex-1 min-w-[8rem] items-center justify-center gap-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-4 py-3 text-sm font-semibold text-slate-800 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#61063B]"
+                class="inline-flex min-h-[2.75rem] w-full items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 transition-colors hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#61063B] dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700 sm:py-3"
               >
                 <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
                 Copy reference
@@ -1704,7 +1706,7 @@ const ictoEntryHeaderMapJson = JSON.stringify(ictoEntryIdByFormResponseHeader);
               <button
                 type="button"
                 id="icto-receipt-download"
-                class="inline-flex flex-1 min-w-[8rem] items-center justify-center gap-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800 px-4 py-3 text-sm font-semibold text-slate-800 dark:text-slate-100 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#61063B]"
+                class="inline-flex min-h-[2.75rem] w-full items-center justify-center gap-2 rounded-xl border border-slate-300 bg-slate-50 px-4 py-2.5 text-sm font-semibold text-slate-800 transition-colors hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#61063B] dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700 sm:py-3"
               >
                 <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
                 Download receipt
@@ -1712,14 +1714,14 @@ const ictoEntryHeaderMapJson = JSON.stringify(ictoEntryIdByFormResponseHeader);
               <button
                 type="button"
                 id="icto-receipt-print"
-                class="inline-flex flex-1 min-w-[8rem] items-center justify-center gap-2 rounded-xl bg-[#61063B] px-4 py-3 text-sm font-semibold text-white hover:bg-[#4D052F] shadow-md shadow-[#61063B]/25 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#61063B] dark:focus-visible:ring-offset-slate-900"
+                class="inline-flex min-h-[2.75rem] w-full items-center justify-center gap-2 rounded-xl bg-[#61063B] px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-[#61063B]/25 transition-colors hover:bg-[#4D052F] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#61063B] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 sm:col-span-2 sm:py-3 lg:col-span-1"
               >
                 <svg class="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
                 Print receipt
               </button>
               <button
                 type="button"
-                class="icto-no-print inline-flex flex-1 min-w-[8rem] items-center justify-center gap-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-100 dark:bg-slate-800 px-4 py-3 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#61063B]"
+                class="icto-no-print inline-flex min-h-[2.75rem] w-full items-center justify-center gap-2 rounded-xl border border-slate-300 bg-slate-100 px-4 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#61063B] dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700 sm:col-span-2 sm:py-3 lg:col-span-1"
                 data-close-receipt-modal
               >
                 Done
@@ -1728,7 +1730,7 @@ const ictoEntryHeaderMapJson = JSON.stringify(ictoEntryIdByFormResponseHeader);
 
             <div
               id="icto-receipt-copy-toast"
-              class="pointer-events-none fixed left-1/2 top-5 z-[140] hidden -translate-x-1/2 rounded-2xl border border-emerald-200/70 bg-emerald-50/95 px-4 py-2.5 text-sm font-semibold text-emerald-900 shadow-lg shadow-emerald-900/10 backdrop-blur dark:border-emerald-700/40 dark:bg-emerald-950/90 dark:text-emerald-100"
+              class="pointer-events-none fixed left-1/2 top-[max(1.25rem,env(safe-area-inset-top))] z-[140] hidden max-w-[min(calc(100vw-2rem),20rem)] -translate-x-1/2 rounded-2xl border border-emerald-200/70 bg-emerald-50/95 px-3 py-2 text-center text-xs font-semibold text-emerald-900 shadow-lg shadow-emerald-900/10 backdrop-blur dark:border-emerald-700/40 dark:bg-emerald-950/90 dark:text-emerald-100 sm:px-4 sm:py-2.5 sm:text-sm"
               role="status"
               aria-live="polite"
               aria-atomic="true"
@@ -3063,7 +3065,12 @@ const ictoEntryHeaderMapJson = JSON.stringify(ictoEntryIdByFormResponseHeader);
       transform: translateY(0);
       opacity: 1;
     }
-
+    .icto-receipt-print-host {
+      -webkit-overflow-scrolling: touch;
+    }
+    .icto-receipt-print-scroll {
+      -webkit-overflow-scrolling: touch;
+    }
     #icto-intake-error-modal {
       transition: opacity 0.28s ease;
     }
@@ -3350,10 +3357,16 @@ const ictoEntryHeaderMapJson = JSON.stringify(ictoEntryIdByFormResponseHeader);
         border: 1px solid #e2e8f0 !important;
         border-radius: 0 !important;
         max-width: none !important;
+        max-height: none !important;
         width: 100% !important;
         margin: 0 !important;
         background: #fff !important;
         color: #0f172a !important;
+        overflow: visible !important;
+      }
+      html.icto-receipt-print-active #icto-receipt-print-area {
+        overflow: visible !important;
+        max-height: none !important;
       }
       html.icto-receipt-print-active #icto-receipt-panel * {
         color: inherit !important;
@@ -4575,7 +4588,8 @@ const ictoEntryHeaderMapJson = JSON.stringify(ictoEntryIdByFormResponseHeader);
             !!gField('requestingPerson') &&
             !!gField('institutionalOfficialEmail') &&
             emailOk &&
-            !!gField('collegeOrOffice')
+            !!gField('collegeOrOffice') &&
+            !!gField('locationOrWorkLocation')
           );
         }
         function step2Ok() {
@@ -4750,7 +4764,14 @@ const ictoEntryHeaderMapJson = JSON.stringify(ictoEntryIdByFormResponseHeader);
         if (live) {
           live.textContent = ICTO_PROCESSING_MESSAGES[0];
         }
+        if (root.parentNode !== document.body) {
+          try {
+            document.body.appendChild(root);
+          } catch (ePortal) {}
+        }
         root.classList.remove('hidden');
+        root.style.display = 'block';
+        root.style.zIndex = '130';
         root.setAttribute('aria-hidden', 'false');
         root.setAttribute('role', 'dialog');
         root.setAttribute('aria-modal', 'true');
@@ -4785,6 +4806,8 @@ const ictoEntryHeaderMapJson = JSON.stringify(ictoEntryIdByFormResponseHeader);
         root.removeAttribute('aria-labelledby');
         setTimeout(function () {
           if (!root.classList.contains('is-open')) {
+            root.style.display = '';
+            root.style.zIndex = '';
             root.classList.add('hidden');
             root.removeAttribute('role');
           }
@@ -6523,15 +6546,15 @@ const ictoEntryHeaderMapJson = JSON.stringify(ictoEntryIdByFormResponseHeader);
           }
 
           openIctoSubmitProcessingOverlay();
-          mirrorSubmissionToGoogleForm(payload, appointmentReference);
           requestAnimationFrame(function () {
             requestAnimationFrame(function () {
+              mirrorSubmissionToGoogleForm(payload, appointmentReference);
               window.setTimeout(function () {
                 closeIctoSubmitProcessingOverlay();
                 window.setTimeout(function () {
                   finishIctoUiAfterSubmit();
                 }, 220);
-              }, 360);
+              }, 520);
             });
           });
         }
