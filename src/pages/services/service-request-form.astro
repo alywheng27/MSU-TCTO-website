@@ -4575,7 +4575,8 @@ const ictoEntryHeaderMapJson = JSON.stringify(ictoEntryIdByFormResponseHeader);
             !!gField('requestingPerson') &&
             !!gField('institutionalOfficialEmail') &&
             emailOk &&
-            !!gField('collegeOrOffice')
+            !!gField('collegeOrOffice') &&
+            !!gField('locationOrWorkLocation')
           );
         }
         function step2Ok() {
@@ -4750,7 +4751,14 @@ const ictoEntryHeaderMapJson = JSON.stringify(ictoEntryIdByFormResponseHeader);
         if (live) {
           live.textContent = ICTO_PROCESSING_MESSAGES[0];
         }
+        if (root.parentNode !== document.body) {
+          try {
+            document.body.appendChild(root);
+          } catch (ePortal) {}
+        }
         root.classList.remove('hidden');
+        root.style.display = 'block';
+        root.style.zIndex = '130';
         root.setAttribute('aria-hidden', 'false');
         root.setAttribute('role', 'dialog');
         root.setAttribute('aria-modal', 'true');
@@ -4785,6 +4793,8 @@ const ictoEntryHeaderMapJson = JSON.stringify(ictoEntryIdByFormResponseHeader);
         root.removeAttribute('aria-labelledby');
         setTimeout(function () {
           if (!root.classList.contains('is-open')) {
+            root.style.display = '';
+            root.style.zIndex = '';
             root.classList.add('hidden');
             root.removeAttribute('role');
           }
@@ -6523,15 +6533,15 @@ const ictoEntryHeaderMapJson = JSON.stringify(ictoEntryIdByFormResponseHeader);
           }
 
           openIctoSubmitProcessingOverlay();
-          mirrorSubmissionToGoogleForm(payload, appointmentReference);
           requestAnimationFrame(function () {
             requestAnimationFrame(function () {
+              mirrorSubmissionToGoogleForm(payload, appointmentReference);
               window.setTimeout(function () {
                 closeIctoSubmitProcessingOverlay();
                 window.setTimeout(function () {
                   finishIctoUiAfterSubmit();
                 }, 220);
-              }, 360);
+              }, 520);
             });
           });
         }
