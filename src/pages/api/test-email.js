@@ -1,7 +1,10 @@
 // Test endpoint for email functionality
 // This helps verify your Gmail setup is working correctly
+import { notFoundUnlessDev } from '../../lib/api-guards.js';
 
 export async function GET({ request }) {
+    const denied = notFoundUnlessDev();
+    if (denied) return denied;
     try {
         // Check if environment variables are set
         const gmailUser = process.env.GMAIL_USER;

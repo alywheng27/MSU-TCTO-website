@@ -27,7 +27,7 @@ const one_sixLatestAnnualReport = await get1_6LatestAnnualReport();
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
     <main class="bg-msu-bgc-color dark:bg-gray-900">
-        <Navbar path={currentPath} client:visible />
+        <Navbar path={currentPath} client:only="react" />
 
         <!-- Hero Section -->
         <div class="relative pt-24 pb-12 bg-msu-bgc-color dark:bg-gray-900">

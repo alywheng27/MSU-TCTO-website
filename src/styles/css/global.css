@@ -573,23 +573,23 @@ select {
 
   /* iPhone 12 Pro (390×844) - Navbar responsive on all pages; 390px was not covered (Poco starts at 393px) */
   @media (min-width: 385px) and (max-width: 414px) and (min-height: 800px) {
-    .fixed.top-0.w-full.z-50 .container.mx-auto {
+    .navbar-fixed-shell .container.mx-auto {
       padding-left: 0.875rem !important;
       padding-right: 0.875rem !important;
       min-width: 0 !important;
       max-width: 100% !important;
     }
-    .fixed.top-0.w-full.z-50 a.flex.items-center.relative.min-w-0 {
+    .navbar-fixed-shell a.flex.items-center.relative.min-w-0 {
       max-width: calc(100% - 152px) !important;
       min-width: 0 !important;
     }
-    .fixed.top-0.w-full.z-50 a.flex.items-center.relative.min-w-0 img:first-of-type {
+    .navbar-fixed-shell a.flex.items-center.relative.min-w-0 img:first-of-type {
       max-height: 2.5rem !important;
       height: 2.5rem !important;
       width: auto !important;
     }
-    .fixed.top-0.w-full.z-50 .flex.items-center button,
-    .fixed.top-0.w-full.z-50 .hamburger-button {
+    .navbar-fixed-shell .flex.items-center button,
+    .navbar-fixed-shell .hamburger-button {
       min-width: 44px !important;
       min-height: 44px !important;
     }
@@ -597,23 +597,23 @@ select {
 
   /* Poco F8 Ultra (6.9" 1200×2608) - Navbar responsive on all pages */
   @media (min-width: 393px) and (max-width: 430px) and (min-height: 800px) {
-    .fixed.top-0.w-full.z-50 .container.mx-auto {
+    .navbar-fixed-shell .container.mx-auto {
       padding-left: 0.875rem !important;
       padding-right: 0.875rem !important;
       min-width: 0 !important;
       max-width: 100% !important;
     }
-    .fixed.top-0.w-full.z-50 a.flex.items-center.relative.min-w-0 {
+    .navbar-fixed-shell a.flex.items-center.relative.min-w-0 {
       max-width: calc(100% - 160px) !important;
       min-width: 0 !important;
     }
-    .fixed.top-0.w-full.z-50 a.flex.items-center.relative.min-w-0 img:first-of-type {
+    .navbar-fixed-shell a.flex.items-center.relative.min-w-0 img:first-of-type {
       max-height: 2.5rem !important;
       height: 2.5rem !important;
       width: auto !important;
     }
-    .fixed.top-0.w-full.z-50 .flex.items-center button,
-    .fixed.top-0.w-full.z-50 .hamburger-button {
+    .navbar-fixed-shell .flex.items-center button,
+    .navbar-fixed-shell .hamburger-button {
       min-width: 44px !important;
       min-height: 44px !important;
       width: 44px !important;
@@ -621,11 +621,11 @@ select {
     }
   }
   @media (min-width: 800px) and (max-width: 920px) and (max-height: 450px) and (orientation: landscape) {
-    .fixed.top-0.w-full.z-50 .container.mx-auto {
+    .navbar-fixed-shell .container.mx-auto {
       padding-left: 0.75rem !important;
       padding-right: 0.75rem !important;
     }
-    .fixed.top-0.w-full.z-50 a.flex.items-center.relative.min-w-0 img:first-of-type {
+    .navbar-fixed-shell a.flex.items-center.relative.min-w-0 img:first-of-type {
       max-height: 2.25rem !important;
       height: 2.25rem !important;
     }
@@ -1484,10 +1484,10 @@ a {
     }
   }
   
-  /* Ensure sidebar layout works properly on mobile */
+  /* Sidebar width: readable column, not edge-to-edge, so menu stays visually clear */
   @media (max-width: 768px) {
     .sidebar-menu {
-      width: 100vw !important;
+      width: min(100vw - 1rem, 20rem);
       max-width: 320px;
     }
     

@@ -1,16 +1,27 @@
 // Contact form handler - Working version
+import { rateLimitJsonResponse, isHoneypotTripped } from '../../lib/spam-guard.js';
+import { logIfDev } from '../../lib/dev-only-log.js';
+
 export async function POST({ request }) {
     try {
-        console.log('=== CONTACT FORM START ===');
-        
-        // Get form data
         const formData = await request.formData();
+
+        if (isHoneypotTripped(formData)) {
+            return new Response(JSON.stringify({ success: true }), {
+                status: 200,
+                headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
+            });
+        }
+
+        const tooMany = rateLimitJsonResponse('contact-mail', request, 20);
+        if (tooMany) return tooMany;
+
         const name = formData.get('name');
         const email = formData.get('email');
         const subject = formData.get('subject');
         const message = formData.get('message');
 
-        console.log('Form data received:', { name, email, subject, message });
+        logIfDev('Form data received:', { name, email, subject, message });
 
         // Validate required fields
         if (!name || !email || !subject || !message) {
@@ -27,31 +38,20 @@ export async function POST({ request }) {
         const gmailUser = import.meta.env.GMAIL_USER || process.env.GMAIL_USER;
         const gmailPassword = import.meta.env.GMAIL_APP_PASSWORD || process.env.GMAIL_APP_PASSWORD;
         
-        console.log('Credentials check:', {
-            user: gmailUser ? 'Set' : 'Not set',
-            password: gmailPassword ? 'Set' : 'Not set'
-        });
-        console.log('Environment variables available:', {
-            'import.meta.env.GMAIL_USER': !!import.meta.env.GMAIL_USER,
-            'process.env.GMAIL_USER': !!process.env.GMAIL_USER,
-            'import.meta.env.GMAIL_APP_PASSWORD': !!import.meta.env.GMAIL_APP_PASSWORD,
-            'process.env.GMAIL_APP_PASSWORD': !!process.env.GMAIL_APP_PASSWORD
-        });
-
         if (!gmailUser || !gmailPassword) {
-            console.log('⚠️ Gmail credentials not configured');
-            console.log('📧 Would send to: michorobledo@msutcto.edu.ph');
-            console.log('📝 Subject:', `Contact Form: ${subject} - ${name}`);
-            console.log('👤 From:', email);
-            console.log('💬 Message:', message);
-            console.log('✅ Form submission processed (simulation mode)');
-            console.log('🔧 To fix: Create .env file with GMAIL_USER and GMAIL_APP_PASSWORD');
+            logIfDev('⚠️ Gmail credentials not configured');
+            logIfDev('📧 Would send to: michorobledo@msutcto.edu.ph');
+            logIfDev('📝 Subject:', `Contact Form: ${subject} - ${name}`);
+            logIfDev('👤 From:', email);
+            logIfDev('💬 Message:', message);
+            logIfDev('✅ Form submission processed (simulation mode)');
+            logIfDev('🔧 To fix: Create .env file with GMAIL_USER and GMAIL_APP_PASSWORD');
         } else {
             // Send actual email using Gmail SMTP
-            console.log('📧 SENDING ACTUAL EMAIL...');
-            console.log('To: michorobledo@msutcto.edu.ph');
-            console.log('From:', email);
-            console.log('Subject:', `Contact Form: ${subject} - ${name}`);
+            logIfDev('📧 SENDING ACTUAL EMAIL...');
+            logIfDev('To: michorobledo@msutcto.edu.ph');
+            logIfDev('From:', email);
+            logIfDev('Subject:', `Contact Form: ${subject} - ${name}`);
             
             try {
                 const nodemailer = await import('nodemailer');
@@ -67,7 +67,7 @@ export async function POST({ request }) {
 
                 // Test SMTP connection
                 await transporter.verify();
-                console.log('✅ SMTP connection verified successfully');
+                logIfDev('✅ SMTP connection verified successfully');
 
                 // Email configuration
                 const recipientEmail = 'msutctocias@msutcto.edu.ph';
@@ -181,9 +181,9 @@ Reply to: ${email}
 
                 // Send the email
                 const result = await transporter.sendMail(mailOptions);
-                console.log('✅ Email sent successfully!');
-                console.log('Message ID:', result.messageId);
-                console.log('Recipient:', recipientEmail);
+                logIfDev('✅ Email sent successfully!');
+                logIfDev('Message ID:', result.messageId);
+                logIfDev('Recipient:', recipientEmail);
                 
             } catch (emailError) {
                 console.error('❌ Email sending failed:', emailError);

@@ -13,7 +13,7 @@ const pageTitle = "Legal Statement | MSU-TCTO";
 
 <Layout title={pageTitle}>
     <main class="min-h-screen flex flex-col">
-        <Navbar path={currentPath} client:visible />
+        <Navbar path={currentPath} client:only="react" />
 
         <!-- Hero Section -->
         <section class="relative bg-gradient-to-br from-msu-deep-ocean via-msu-main-color to-msu-deep-ocean py-20 md:py-32 overflow-hidden">

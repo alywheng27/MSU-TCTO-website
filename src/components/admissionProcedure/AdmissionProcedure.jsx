@@ -1,11 +1,10 @@
 import React, { useState, useReducer } from 'react';
-import { Navigation, Autoplay, EffectFade } from 'swiper/modules';
+import { Navigation, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/bundle';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import 'swiper/css/effect-fade';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiChevronRight, FiDownload, FiExternalLink, FiInfo, FiMail, FiPhone } from 'react-icons/fi';
 
@@ -43,7 +42,7 @@ export default function AdmissionProcedure() {
     } else if (state.studentFees) {
       dispatch({ type: 'freshmenAndTransferee' });
     }
-    my_swiper.slideNext();
+    my_swiper?.slideNext?.();
   };
 
   const handlePrevSlide = () => {
@@ -54,7 +53,7 @@ export default function AdmissionProcedure() {
     } else if (state.studentFees) {
       dispatch({ type: 'returningShiftingAndRemedial' });
     }
-    my_swiper.slidePrev();
+    my_swiper?.slidePrev?.();
   };
 
   // Animation variants
@@ -253,183 +252,172 @@ export default function AdmissionProcedure() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 dark:from-gray-900 to-white dark:to-gray-800 px-[5%] xl:pt-[80px] xs:pt-[60px] pb-20">
-      {/* Hero Section */}
+    <div className="min-h-screen xl:pt-[80px] xs:pt-[60px] pb-20">
+      {/* Hero Section - Enhanced */}
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        className="text-center mb-12 relative"
+        className="text-center mb-14 relative"
       >
-        <div className="absolute -top-10 -left-10 w-32 h-32 bg-msu-maroon/10 rounded-full filter blur-3xl"></div>
-        <div className="absolute -bottom-5 -right-5 w-40 h-40 bg-msu-green/10 rounded-full filter blur-3xl"></div>
+        <div className="absolute -top-10 -left-10 w-32 h-32 bg-msu-deep-ocean/10 rounded-full filter blur-3xl" aria-hidden="true"></div>
+        <div className="absolute -bottom-5 -right-5 w-40 h-40 bg-msu-maroon/10 rounded-full filter blur-3xl" aria-hidden="true"></div>
         
-        <h1 className="text-4xl md:text-5xl font-bold text-msu-deep-ocean dark:text-gray-100 dark:text-gray-100 mb-4 relative z-10">
-          Admission <span className="text-msu-green dark:text-yellow-400">Procedures</span>
-        </h1>
-        <p className="text-xl text-gray-600 dark:text-gray-300 dark:text-gray-300 max-w-3xl mx-auto relative z-10">
-          Your journey to academic excellence starts here. Explore our streamlined admission process.
-        </p>
-        
-        <motion.div 
-          className="mt-8 flex justify-center gap-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
+        <motion.span 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="inline-block mb-4 px-4 py-2 text-sm font-semibold tracking-wide uppercase text-msu-deep-ocean dark:text-msu-gold bg-msu-deep-ocean/10 dark:bg-msu-gold/10 rounded-full border border-msu-deep-ocean/20 dark:border-msu-gold/30"
         >
-          {/* <a 
-            href="#process" 
-            className="px-6 py-3 bg-msu-maroon text-white rounded-lg font-medium hover:bg-msu-dark-maroon transition-colors shadow-md hover:shadow-lg"
-          >
-            View Process
-          </a>
-          <a 
-            href="#contact" 
-            className="px-6 py-3 bg-white text-msu-maroon dark:text-yellow-400 rounded-lg font-medium hover:bg-gray-100 transition-colors shadow-md hover:shadow-lg border border-gray-200 dark:border-gray-600"
-          >
-            Contact Us
-          </a> */}
-        </motion.div>
+          How to Apply
+        </motion.span>
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-msu-deep-ocean dark:text-gray-100 mb-4 relative z-10 tracking-tight">
+          Admission <span className="text-msu-maroon dark:text-msu-gold">Procedures</span>
+        </h1>
+        <div className="w-20 h-1 bg-gradient-to-r from-msu-deep-ocean to-msu-maroon dark:from-msu-gold dark:to-msu-deep-ocean mx-auto mb-6 rounded-full" aria-hidden="true"></div>
+        <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto relative z-10 leading-relaxed">
+          Your journey to academic excellence starts here. Explore our streamlined admission process for freshmen, transferees, and returning students.
+        </p>
       </motion.div>
 
-      {/* Main Content Container */}
-      <div className="max-w-7xl mx-auto bg-white dark:bg-gray-800 rounded-3xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700 relative">
-        {/* Decorative elements */}
-        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-msu-maroon via-msu-green to-msu-gold"></div>
+      {/* Main Content Container - Enhanced */}
+      <div className="max-w-7xl mx-auto bg-white dark:bg-gray-800 rounded-2xl md:rounded-3xl shadow-xl dark:shadow-2xl overflow-hidden border border-gray-200/80 dark:border-gray-700 relative ring-1 ring-black/5 dark:ring-white/5">
+        {/* Decorative top bar */}
+        <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-msu-deep-ocean via-msu-maroon to-msu-gold dark:from-msu-gold dark:via-msu-maroon dark:to-msu-deep-ocean"></div>
         
-        {/* Swiper for Mobile */}
-        <div className="xl:hidden xs:block py-6 px-4 relative">
+        {/* Swiper for Mobile - solid tab pill and slide effect to prevent text ghosting */}
+        <div className="xl:hidden xs:block py-6 px-4 relative overflow-hidden">
           <Swiper
-            modules={[Navigation, Autoplay, EffectFade]}
-            effect="fade"
-            spaceBetween={50}
+            modules={[Navigation, Autoplay]}
+            spaceBetween={0}
             slidesPerView={1}
             onInit={(ev) => set_my_swiper(ev)}
             allowTouchMove={false}
             loop={true}
             autoplay={{ delay: 5000, disableOnInteraction: false }}
             navigation={{
-              nextEl: '.swiper-button-next',
-              prevEl: '.swiper-button-prev',
+              nextEl: '.admission-swiper-next',
+              prevEl: '.admission-swiper-prev',
             }}
+            className="admission-tab-swiper"
           >
             {AdmissionProcedureTab.map((tab, index) => (
               <SwiperSlide key={index}>
-                <div className="flex justify-center items-center">
-                  <motion.div 
-                    className="bg-gradient-to-r from-msu-maroon to-msu-dark-maroon text-white rounded-full px-6 py-2 font-semibold shadow-md"
-                    whileHover={{ scale: 1.05 }}
+                <div className="flex justify-center items-center min-h-[52px] overflow-hidden">
+                  <div
+                    className="bg-msu-deep-ocean text-white rounded-full px-6 py-3 font-semibold shadow-md text-center max-w-[90%]"
+                    style={{ isolation: 'isolate' }}
                   >
-                    {tab.label}
-                  </motion.div>
+                    <span className="relative z-10 block">{tab.label}</span>
+                  </div>
                 </div>
               </SwiperSlide>
             ))}
-            <div onClick={handlePrevSlide} className="swiper-button-prev text-msu-maroon dark:text-yellow-400 hover:text-msu-dark-maroon"></div>
-            <div onClick={handleNextSlide} className="swiper-button-next text-msu-maroon dark:text-yellow-400 hover:text-msu-dark-maroon"></div>
           </Swiper>
+          <button type="button" onClick={handlePrevSlide} className="admission-swiper-prev swiper-button-prev !text-msu-deep-ocean dark:!text-msu-gold hover:!opacity-80 after:!text-2xl" aria-label="Previous tab" />
+          <button type="button" onClick={handleNextSlide} className="admission-swiper-next swiper-button-next !text-msu-deep-ocean dark:!text-msu-gold hover:!opacity-80 after:!text-2xl" aria-label="Next tab" />
         </div>
 
         {/* Desktop Layout */}
         <div className="flex flex-col xl:flex-row">
-          {/* Sidebar for Desktop */}
-          <div className="xl:w-1/4 xs:w-full bg-gradient-to-b from-gray-50 dark:from-gray-800 to-white dark:to-gray-700 p-6 border-r border-gray-200 dark:border-gray-600 relative">
+          {/* Sidebar for Desktop - Enhanced */}
+          <div className="xl:w-1/4 xs:w-full bg-gradient-to-b from-gray-50/80 dark:from-gray-800/80 to-gray-50 dark:to-gray-800/50 p-6 lg:p-8 border-r border-gray-200 dark:border-gray-700 relative">
             <div className="sticky top-24">
               <motion.div 
-                className="flex flex-col gap-4"
+                className="flex flex-col gap-3"
                 initial="hidden"
                 animate="visible"
                 variants={containerVariants}
               >
                 <motion.button
                   onClick={() => dispatch({ type: 'freshmenAndTransferee' })}
-                  className={`text-left p-4 rounded-xl transition-all flex items-center ${state.freshmenAndTransferee ? 
-                    'bg-gradient-to-r from-msu-deep-ocean to-msu-dark-maroon text-white font-bold shadow-lg' : 
-                    'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600 dark:border-gray-600 shadow-sm hover:shadow-md'}`}
+                  className={`text-left p-4 rounded-xl transition-all duration-200 flex items-center gap-4 ${state.freshmenAndTransferee ? 
+                    'bg-gradient-to-r from-msu-deep-ocean to-msu-dark-pink text-white font-bold shadow-lg ring-2 ring-msu-deep-ocean/30' : 
+                    'bg-white dark:bg-gray-700/80 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600 shadow-sm hover:shadow-md hover:border-msu-deep-ocean/30'}`}
                   variants={itemVariants}
                   whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  <span className="mr-3 text-xl bg-white/20 rounded-full w-10 h-10 flex items-center justify-center">🎓</span>
-                  <div>
+                  <span className="flex-shrink-0 w-11 h-11 rounded-xl bg-white/20 dark:bg-white/10 flex items-center justify-center text-xl">🎓</span>
+                  <div className="min-w-0">
                     <div className="font-semibold">Freshmen & Transferee</div>
-                    <div className="text-xs opacity-80 mt-1">New student enrollment</div>
+                    <div className="text-xs opacity-90 mt-0.5">New student enrollment</div>
                   </div>
                 </motion.button>
                 
                 <motion.button
                   onClick={() => dispatch({ type: 'returningShiftingAndRemedial' })}
-                  className={`text-left p-4 rounded-xl transition-all flex items-center ${state.returningShiftingAndRemedial ? 
-                    'bg-gradient-to-r from-msu-deep-ocean to-msu-dark-maroon text-white font-bold shadow-lg' : 
-                    'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600 dark:border-gray-600 shadow-sm hover:shadow-md'}`}
+                  className={`text-left p-4 rounded-xl transition-all duration-200 flex items-center gap-4 ${state.returningShiftingAndRemedial ? 
+                    'bg-gradient-to-r from-msu-deep-ocean to-msu-dark-pink text-white font-bold shadow-lg ring-2 ring-msu-deep-ocean/30' : 
+                    'bg-white dark:bg-gray-700/80 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600 shadow-sm hover:shadow-md hover:border-msu-deep-ocean/30'}`}
                   variants={itemVariants}
                   whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  <span className="mr-3 text-xl bg-white/20 rounded-full w-10 h-10 flex items-center justify-center">🔄</span>
-                  <div>
+                  <span className="flex-shrink-0 w-11 h-11 rounded-xl bg-white/20 dark:bg-white/10 flex items-center justify-center text-xl">🔄</span>
+                  <div className="min-w-0">
                     <div className="font-semibold">Returning & Shifting</div>
-                    <div className="text-xs opacity-80 mt-1">Continuing students</div>
+                    <div className="text-xs opacity-90 mt-0.5">Continuing students</div>
                   </div>
                 </motion.button>
                 
                 <motion.button
                   onClick={() => dispatch({ type: 'studentFees' })}
-                  className={`text-left p-4 rounded-xl transition-all flex items-center ${state.studentFees ? 
-                    'bg-gradient-to-r from-msu-deep-ocean to-msu-dark-maroon text-white font-bold shadow-lg' : 
-                    'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600 dark:border-gray-600 shadow-sm hover:shadow-md'}`}
+                  className={`text-left p-4 rounded-xl transition-all duration-200 flex items-center gap-4 ${state.studentFees ? 
+                    'bg-gradient-to-r from-msu-deep-ocean to-msu-dark-pink text-white font-bold shadow-lg ring-2 ring-msu-deep-ocean/30' : 
+                    'bg-white dark:bg-gray-700/80 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600 shadow-sm hover:shadow-md hover:border-msu-deep-ocean/30'}`}
                   variants={itemVariants}
                   whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  <span className="mr-3 text-xl bg-white/20 rounded-full w-10 h-10 flex items-center justify-center">💲</span>
-                  <div>
+                  <span className="flex-shrink-0 w-11 h-11 rounded-xl bg-white/20 dark:bg-white/10 flex items-center justify-center text-xl">💲</span>
+                  <div className="min-w-0">
                     <div className="font-semibold">Student Fees</div>
-                    <div className="text-xs opacity-80 mt-1">Tuition & other charges</div>
+                    <div className="text-xs opacity-90 mt-0.5">Tuition & other charges</div>
                   </div>
                 </motion.button>
 
                 <motion.div 
-                  className="mt-8 p-6 bg-white dark:bg-gray-700 rounded-xl border border-msu-maroon/20 dark:border-yellow-400/30 shadow-md"
+                  className="mt-6 p-5 bg-white dark:bg-gray-700/90 rounded-xl border border-msu-deep-ocean/15 dark:border-msu-gold/20 shadow-md"
                   variants={itemVariants}
                 >
-                  <h4 className="text-msu-maroon dark:text-yellow-400 dark:text-yellow-400 font-bold mb-3 flex items-center">
-                    <FiInfo className="mr-2" /> Need Help?
+                  <h4 className="text-msu-deep-ocean dark:text-msu-gold font-bold mb-3 flex items-center gap-2">
+                    <FiInfo className="w-5 h-5 flex-shrink-0" /> Need Help?
                   </h4>
-                  <p className="text-gray-600 dark:text-gray-300 dark:text-gray-300 text-sm mb-4">Our admission team is ready to assist you with any questions about the application process.</p>
-                  <div className="space-y-3">
-                    <a href="mailto:admissions@msutawitawi.edu.ph" className="flex items-center text-sm text-gray-700 dark:text-gray-300 dark:text-gray-300 hover:text-msu-maroon dark:text-yellow-400 dark:hover:text-yellow-400">
-                      <FiMail className="mr-2" /> admissions@msutawitawi.edu.ph
+                  <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 leading-relaxed">Our admission team is ready to assist you with any questions about the application process.</p>
+                  <div className="space-y-2.5">
+                    <a href="mailto:admissions@msutcto.edu.ph" className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 hover:text-msu-deep-ocean dark:hover:text-msu-gold transition-colors">
+                      <FiMail className="w-4 h-4 flex-shrink-0" /> admissions@msutcto.edu.ph
                     </a>
-                    <a href="tel:+639123456789" className="flex items-center text-sm text-gray-700 dark:text-gray-300 dark:text-gray-300 hover:text-msu-maroon dark:text-yellow-400 dark:hover:text-yellow-400">
-                      <FiPhone className="mr-2" /> (0909) 982 6063
+                    <a href="tel:+639517171690" className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 hover:text-msu-deep-ocean dark:hover:text-msu-gold transition-colors">
+                      <FiPhone className="w-4 h-4 flex-shrink-0" /> 0951 717 1690
                     </a>
                   </div>
-                  {/* <button className="mt-4 w-full bg-msu-maroon text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-msu-dark-maroon transition-all shadow-md">
-                    Schedule Consultation
-                  </button> */}
                 </motion.div>
 
                 <motion.div 
-                  className="p-6 bg-white dark:bg-gray-700 rounded-xl border border-msu-maroon/20 dark:border-yellow-400/30 shadow-md"
+                  className="p-5 bg-white dark:bg-gray-700/90 rounded-xl border border-msu-deep-ocean/15 dark:border-msu-gold/20 shadow-md"
                   variants={itemVariants}
                 >
-                  <h4 className="text-msu-maroon dark:text-yellow-400 dark:text-yellow-400 font-bold mb-3 flex items-center">
-                    <FiDownload className="mr-2" /> Download Forms
+                  <h4 className="text-msu-deep-ocean dark:text-msu-gold font-bold mb-3 flex items-center gap-2">
+                    <FiDownload className="w-5 h-5 flex-shrink-0" /> Download Forms
                   </h4>
-                  <div className="flex flex-col gap-3">
-                    <a href="#" className="text-gray-700 dark:text-gray-300 dark:text-gray-300 text-sm flex items-center justify-between hover:text-msu-maroon dark:text-yellow-400 dark:hover:text-yellow-400 p-2 hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg">
+                  <div className="flex flex-col gap-1">
+                    <a href="#" className="text-gray-700 dark:text-gray-300 text-sm flex items-center justify-between gap-2 py-2.5 px-3 hover:text-msu-deep-ocean dark:hover:text-msu-gold hover:bg-msu-deep-ocean/5 dark:hover:bg-msu-gold/10 rounded-lg transition-colors">
                       <span>Application Form</span>
-                      <FiExternalLink />
+                      <FiExternalLink className="w-4 h-4 flex-shrink-0" />
                     </a>
-                    <a href="#" className="text-gray-700 dark:text-gray-300 dark:text-gray-300 text-sm flex items-center justify-between hover:text-msu-maroon dark:text-yellow-400 dark:hover:text-yellow-400 p-2 hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg">
+                    <a href="#" className="text-gray-700 dark:text-gray-300 text-sm flex items-center justify-between gap-2 py-2.5 px-3 hover:text-msu-deep-ocean dark:hover:text-msu-gold hover:bg-msu-deep-ocean/5 dark:hover:bg-msu-gold/10 rounded-lg transition-colors">
                       <span>Medical Form</span>
-                      <FiExternalLink />
+                      <FiExternalLink className="w-4 h-4 flex-shrink-0" />
                     </a>
-                    <a href="#" className="text-gray-700 dark:text-gray-300 dark:text-gray-300 text-sm flex items-center justify-between hover:text-msu-maroon dark:text-yellow-400 dark:hover:text-yellow-400 p-2 hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg">
+                    <a href="#" className="text-gray-700 dark:text-gray-300 text-sm flex items-center justify-between gap-2 py-2.5 px-3 hover:text-msu-deep-ocean dark:hover:text-msu-gold hover:bg-msu-deep-ocean/5 dark:hover:bg-msu-gold/10 rounded-lg transition-colors">
                       <span>Fee Structure</span>
-                      <FiExternalLink />
+                      <FiExternalLink className="w-4 h-4 flex-shrink-0" />
                     </a>
-                    <a href="#" className="text-gray-700 dark:text-gray-300 dark:text-gray-300 text-sm flex items-center justify-between hover:text-msu-maroon dark:text-yellow-400 dark:hover:text-yellow-400 p-2 hover:bg-gray-50 dark:hover:bg-gray-600 rounded-lg">
+                    <a href="#" className="text-gray-700 dark:text-gray-300 text-sm flex items-center justify-between gap-2 py-2.5 px-3 hover:text-msu-deep-ocean dark:hover:text-msu-gold hover:bg-msu-deep-ocean/5 dark:hover:bg-msu-gold/10 rounded-lg transition-colors">
                       <span>Scholarship Forms</span>
-                      <FiExternalLink />
+                      <FiExternalLink className="w-4 h-4 flex-shrink-0" />
                     </a>
                   </div>
                 </motion.div>
@@ -439,7 +427,7 @@ export default function AdmissionProcedure() {
 
           {/* Content Area */}
           <div className="xl:w-3/4 xs:w-full p-8 bg-white dark:bg-gray-800 relative" id="process">
-            <div className="absolute -top-20 right-0 w-64 h-64 bg-msu-green/5 rounded-full filter blur-3xl"></div>
+            <div className="absolute -top-20 right-0 w-64 h-64 bg-msu-deep-ocean/5 rounded-full filter blur-3xl" aria-hidden="true"></div>
             
             <AnimatePresence mode="wait">
               {/* Freshmen & Transferee Content */}
@@ -462,13 +450,13 @@ export default function AdmissionProcedure() {
                       Freshmen & Transferee Admission
                     </motion.h2>
                     
-                    <motion.div className="bg-gradient-to-r from-msu-maroon/5 to-msu-green/5 p-6 rounded-xl mb-8 border border-gray-200 dark:border-gray-600 shadow-sm" variants={itemVariants}>
-                      <h3 className="text-xl font-semibold text-msu-deep-ocean dark:text-gray-100 mb-4 flex items-center">
-                        <FiInfo className="mr-2" /> Required Documents
+                    <motion.div className="bg-gradient-to-r from-msu-deep-ocean/5 to-msu-maroon/5 dark:from-msu-deep-ocean/10 dark:to-msu-maroon/10 p-6 rounded-xl mb-8 border border-gray-200 dark:border-gray-600 shadow-sm" variants={itemVariants}>
+                      <h3 className="text-xl font-semibold text-msu-deep-ocean dark:text-gray-100 mb-4 flex items-center gap-2">
+                        <FiInfo className="w-5 h-5 text-msu-deep-ocean dark:text-msu-gold" /> Required Documents
                       </h3>
                       <div className="grid md:grid-cols-2 gap-6">
-                        <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-100 dark:border-gray-600">
-                          <h4 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-3 border-b pb-2 border-gray-200">For Freshmen:</h4>
+                        <div className="bg-white dark:bg-gray-700/80 p-5 rounded-xl shadow-sm border border-gray-200 dark:border-gray-600">
+                          <h4 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-3 border-b border-msu-deep-ocean/20 dark:border-msu-gold/30 pb-2">For Freshmen:</h4>
                           <ul className="space-y-3">
                             <li className="flex items-start">
                               <span className="text-msu-maroon dark:text-yellow-400 mr-2 mt-1">•</span>
@@ -492,8 +480,8 @@ export default function AdmissionProcedure() {
                             </li>
                           </ul>
                         </div>
-                        <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-100 dark:border-gray-600">
-                          <h4 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-3 border-b pb-2 border-gray-200">For Transferees:</h4>
+                        <div className="bg-white dark:bg-gray-700/80 p-5 rounded-xl shadow-sm border border-gray-200 dark:border-gray-600">
+                          <h4 className="text-lg font-medium text-gray-800 dark:text-gray-200 mb-3 border-b border-msu-deep-ocean/20 dark:border-msu-gold/30 pb-2">For Transferees:</h4>
                           <ul className="space-y-3">
                             <li className="flex items-start">
                               <span className="text-msu-maroon dark:text-yellow-400 mr-2 mt-1">•</span>
@@ -532,14 +520,15 @@ export default function AdmissionProcedure() {
                       {freshmenSteps.map((step, index) => (
                         <motion.div
                           key={index}
-                          className={`bg-white dark:bg-gray-700 p-6 rounded-xl shadow-sm cursor-pointer border border-gray-200 dark:border-gray-600 dark:border-gray-600 hover:border-msu-maroon dark:hover:border-yellow-400 transition-all ${hoveredStep === index ? 'ring-2 ring-msu-maroon' : ''}`}
+                          className={`relative overflow-hidden bg-white dark:bg-gray-700/80 p-6 rounded-xl shadow-sm cursor-pointer border border-gray-200 dark:border-gray-600 hover:border-msu-deep-ocean/50 dark:hover:border-msu-gold/50 transition-all duration-200 ${hoveredStep === index ? 'ring-2 ring-msu-deep-ocean/40 dark:ring-msu-gold/40 shadow-md' : ''}`}
                           variants={itemVariants}
-                          whileHover={{ scale: 1.03, boxShadow: "0 10px 25px rgba(0,0,0,0.1)", borderColor: "#8B1D1D" }}
+                          whileHover={{ y: -2, boxShadow: '0 12px 28px rgba(97,6,59,0.12)' }}
                           onMouseEnter={() => setHoveredStep(index)}
                           onMouseLeave={() => setHoveredStep(null)}
                         >
-                          <div className="flex items-start">
-                            <div className="bg-gradient-to-br from-msu-deep-ocean to-msu-dark-maroon text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold mr-4 shadow-md">
+                          <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-msu-deep-ocean to-msu-maroon dark:from-msu-gold dark:to-msu-deep-ocean rounded-l" aria-hidden="true"></div>
+                          <div className="flex items-start pl-1">
+                            <div className="bg-gradient-to-br from-msu-deep-ocean to-msu-dark-pink text-white rounded-xl w-12 h-12 flex items-center justify-center text-lg font-bold mr-4 shadow-md flex-shrink-0">
                               {step.step}
                             </div>
                             <div className="flex-1">
@@ -566,8 +555,8 @@ export default function AdmissionProcedure() {
                                 >
                                   <ul className="space-y-2 text-gray-600 dark:text-gray-300 text-sm">
                                     {step.details.map((detail, i) => (
-                                      <li key={i} className="flex items-start">
-                                        <span className="text-msu-maroon dark:text-yellow-400 mr-2 mt-1 text-xs">▪</span>
+                                      <li key={i} className="flex items-start gap-2">
+                                        <span className="text-msu-deep-ocean dark:text-msu-gold mt-1 text-xs">▪</span>
                                         <span>{detail}</span>
                                       </li>
                                     ))}
@@ -581,7 +570,7 @@ export default function AdmissionProcedure() {
                     </motion.div>
 
                     <motion.div 
-                      className="mt-8 bg-gradient-to-r from-msu-green/5 to-msu-maroon/5 p-6 rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm"
+                      className="mt-8 bg-gradient-to-r from-msu-deep-ocean/5 to-msu-maroon/5 dark:from-msu-deep-ocean/10 dark:to-msu-maroon/10 p-6 rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm"
                       variants={itemVariants}
                     >
                       {/* <h3 className="text-xl font-semibold text-msu-maroon dark:text-yellow-400 mb-4">Important Dates</h3>
@@ -624,9 +613,9 @@ export default function AdmissionProcedure() {
                       Returning, Shifting & Remedial Programs
                     </motion.h2>
                     
-                    <motion.div className="bg-gradient-to-r from-msu-maroon/5 to-msu-green/5 p-6 rounded-xl mb-8 border border-gray-200 dark:border-gray-600 shadow-sm" variants={itemVariants}>
-                      <h3 className="text-xl font-semibold text-msu-deep-ocean dark:text-gray-100 mb-4 flex items-center">
-                        <FiInfo className="mr-2" /> For Returning and Shifting Students
+                    <motion.div className="bg-gradient-to-r from-msu-deep-ocean/5 to-msu-maroon/5 dark:from-msu-deep-ocean/10 dark:to-msu-maroon/10 p-6 rounded-xl mb-8 border border-gray-200 dark:border-gray-600 shadow-sm" variants={itemVariants}>
+                      <h3 className="text-xl font-semibold text-msu-deep-ocean dark:text-gray-100 mb-4 flex items-center gap-2">
+                        <FiInfo className="w-5 h-5 text-msu-deep-ocean dark:text-msu-gold" /> For Returning and Shifting Students
                       </h3>
                       <div className="grid md:grid-cols-1 gap-12">
                         <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-100 dark:border-gray-600">
@@ -669,14 +658,15 @@ export default function AdmissionProcedure() {
                       {returnSteps.map((step, index) => (
                         <motion.div
                           key={index}
-                          className={`bg-white dark:bg-gray-700 p-6 rounded-xl shadow-sm cursor-pointer border border-gray-200 dark:border-gray-600 dark:border-gray-600 hover:border-msu-maroon dark:hover:border-yellow-400 transition-all ${hoveredStep === index+6 ? 'ring-2 ring-msu-maroon' : ''}`}
+                          className={`relative overflow-hidden bg-white dark:bg-gray-700/80 p-6 rounded-xl shadow-sm cursor-pointer border border-gray-200 dark:border-gray-600 hover:border-msu-deep-ocean/50 dark:hover:border-msu-gold/50 transition-all duration-200 ${hoveredStep === index+6 ? 'ring-2 ring-msu-deep-ocean/40 dark:ring-msu-gold/40 shadow-md' : ''}`}
                           variants={itemVariants}
-                          whileHover={{ scale: 1.03, boxShadow: "0 10px 25px rgba(0,0,0,0.1)", borderColor: "#8B1D1D" }}
+                          whileHover={{ y: -2, boxShadow: '0 12px 28px rgba(97,6,59,0.12)' }}
                           onMouseEnter={() => setHoveredStep(index+6)}
                           onMouseLeave={() => setHoveredStep(null)}
                         >
-                          <div className="flex items-start">
-                            <div className="bg-gradient-to-br from-msu-deep-ocean to-msu-dark-maroon text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold mr-4 shadow-md">
+                          <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-msu-deep-ocean to-msu-maroon dark:from-msu-gold dark:to-msu-deep-ocean rounded-l" aria-hidden="true"></div>
+                          <div className="flex items-start pl-1">
+                            <div className="bg-gradient-to-br from-msu-deep-ocean to-msu-dark-pink text-white rounded-xl w-12 h-12 flex items-center justify-center text-lg font-bold mr-4 shadow-md flex-shrink-0">
                               {step.step}
                             </div>
                             <div className="flex-1">
@@ -687,24 +677,24 @@ export default function AdmissionProcedure() {
                               <p className="text-gray-600 dark:text-gray-300 mt-2 text-sm">{step.description}</p>
                               
                               <button 
-                                className="mt-3 text-msu-maroon dark:text-yellow-400 text-sm font-medium flex items-center"
+                                className="mt-3 text-msu-deep-ocean dark:text-msu-gold text-sm font-medium flex items-center hover:underline"
                                 onClick={() => toggleAccordion(index)}
                               >
                                 {activeAccordion === index ? 'Hide details' : 'View details'}
-                                <FiChevronRight className={`ml-1 transition-transform ${activeAccordion === index ? 'transform rotate-90' : ''}`} />
+                                <FiChevronRight className={`ml-1 transition-transform duration-200 ${activeAccordion === index ? 'rotate-90' : ''}`} />
                               </button>
                               
                               {activeAccordion === index && (
                                 <motion.div 
-                                  className="mt-3 pl-4 border-l-2 border-msu-maroon/30"
+                                  className="mt-3 pl-4 border-l-2 border-msu-deep-ocean/30 dark:border-msu-gold/30"
                                   initial={{ opacity: 0, height: 0 }}
                                   animate={{ opacity: 1, height: 'auto' }}
                                   exit={{ opacity: 0, height: 0 }}
                                 >
                                   <ul className="space-y-2 text-gray-600 dark:text-gray-300 text-sm">
                                     {step.details.map((detail, i) => (
-                                      <li key={i} className="flex items-start">
-                                        <span className="text-msu-maroon dark:text-yellow-400 mr-2 mt-1 text-xs">▪</span>
+                                      <li key={i} className="flex items-start gap-2">
+                                        <span className="text-msu-deep-ocean dark:text-msu-gold mt-1 text-xs">▪</span>
                                         <span>{detail}</span>
                                       </li>
                                     ))}
@@ -718,7 +708,7 @@ export default function AdmissionProcedure() {
                     </motion.div>
 
                     <motion.div 
-                      className="mt-8 bg-gradient-to-r from-msu-green/5 to-msu-maroon/5 p-6 rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm"
+                      className="mt-8 bg-gradient-to-r from-msu-deep-ocean/5 to-msu-maroon/5 dark:from-msu-deep-ocean/10 dark:to-msu-maroon/10 p-6 rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm"
                       variants={itemVariants}
                     >
                       <h3 className="text-xl font-semibold text-msu-deep-ocean dark:text-gray-100 mb-4">Remedial Program</h3>
@@ -775,9 +765,9 @@ export default function AdmissionProcedure() {
                       Student Fees Structure
                     </motion.h2>
                     
-                    <motion.div className="bg-gradient-to-r from-msu-maroon/5 to-msu-green/5 p-12 rounded-xl mb-8 border border-gray-200 dark:border-gray-600 shadow-sm" variants={itemVariants}>
-                      <h3 className="text-xl font-semibold text-msu-maroon dark:text-yellow-400 mb-4 flex items-center">
-                        <FiInfo className="mr-2" /> For Student Fees (BOR RES #50, Series 2005)
+                    <motion.div className="bg-gradient-to-r from-msu-deep-ocean/5 to-msu-maroon/5 dark:from-msu-deep-ocean/10 dark:to-msu-maroon/10 p-6 md:p-8 rounded-xl mb-8 border border-gray-200 dark:border-gray-600 shadow-sm" variants={itemVariants}>
+                      <h3 className="text-xl font-semibold text-msu-deep-ocean dark:text-msu-gold mb-4 flex items-center gap-2">
+                        <FiInfo className="w-5 h-5" /> For Student Fees (BOR RES #50, Series 2005)
                       </h3>
                       <div className="grid md:grid-cols-1 gap-6">
                         <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-100 dark:border-gray-600">
@@ -809,34 +799,52 @@ export default function AdmissionProcedure() {
                     </motion.div>
 
                     <motion.div 
-                      className="overflow-hidden rounded-xl shadow-lg mb-8"
+                      className="mb-8"
                       variants={itemVariants}
                     >
-                      <table className="w-full">
-                        <thead>
-                          <tr className="bg-gradient-to-r from-msu-deep-ocean to-msu-dark-maroon text-white">
-                            <th className="py-4 px-6 text-left font-bold">Fee Description</th>
-                            <th className="py-4 px-6 text-right font-bold">Amount</th>
-                            <th className="py-4 px-6 text-left font-bold">Description</th>
-                          </tr>
-                        </thead>
-                        <tbody className="divide-y divide-gray-200 dark:divide-gray-600">
-                          {feesData.map((fee, index) => (
-                            <tr 
-                              key={index} 
-                              className={`${index % 2 === 0 ? 'bg-white dark:bg-gray-700' : 'bg-gray-50 dark:bg-gray-600'} hover:bg-gray-100 dark:hover:bg-gray-500 transition-colors`}
-                            >
-                              <td className="py-4 px-6 text-gray-700 dark:text-gray-300 font-medium">{fee.name}</td>
-                              <td className="py-4 px-6 text-right text-msu-deep-ocean dark:text-gray-100 font-medium whitespace-nowrap">{fee.amount}</td>
-                              <td className="py-4 px-6 text-gray-600 dark:text-gray-300 text-sm">{fee.description}</td>
+                      {/* Desktop: table */}
+                      <div className="hidden md:block overflow-hidden rounded-xl shadow-lg border border-gray-200 dark:border-gray-600">
+                        <table className="w-full">
+                          <thead>
+                            <tr className="bg-gradient-to-r from-msu-deep-ocean to-msu-dark-pink text-white">
+                              <th className="py-4 px-6 text-left font-bold rounded-tl-xl">Fee Description</th>
+                              <th className="py-4 px-6 text-right font-bold">Amount</th>
+                              <th className="py-4 px-6 text-left font-bold rounded-tr-xl">Description</th>
                             </tr>
-                          ))}
-                        </tbody>
-                      </table>
+                          </thead>
+                          <tbody className="divide-y divide-gray-200 dark:divide-gray-600 bg-white dark:bg-gray-700/50">
+                            {feesData.map((fee, index) => (
+                              <tr 
+                                key={index} 
+                                className={`${index % 2 === 0 ? 'bg-white dark:bg-gray-700/50' : 'bg-gray-50/80 dark:bg-gray-600/50'} hover:bg-msu-deep-ocean/5 dark:hover:bg-msu-gold/5 transition-colors`}
+                              >
+                                <td className="py-4 px-6 text-gray-700 dark:text-gray-300 font-medium">{fee.name}</td>
+                                <td className="py-4 px-6 text-right text-msu-deep-ocean dark:text-msu-gold font-semibold whitespace-nowrap">{fee.amount}</td>
+                                <td className="py-4 px-6 text-gray-600 dark:text-gray-300 text-sm">{fee.description}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                      {/* Mobile: cards */}
+                      <div className="md:hidden space-y-3">
+                        {feesData.map((fee, index) => (
+                          <div
+                            key={index}
+                            className="bg-white dark:bg-gray-700/80 p-4 rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm"
+                          >
+                            <div className="flex justify-between items-start gap-3">
+                              <span className="font-medium text-gray-800 dark:text-gray-200">{fee.name}</span>
+                              <span className="text-msu-deep-ocean dark:text-msu-gold font-semibold whitespace-nowrap text-sm">{fee.amount}</span>
+                            </div>
+                            <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">{fee.description}</p>
+                          </div>
+                        ))}
+                      </div>
                     </motion.div>
 
                     <motion.div 
-                      className="mt-8 bg-gradient-to-r from-msu-green/5 to-msu-maroon/5 p-6 rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm"
+                      className="mt-8 bg-gradient-to-r from-msu-deep-ocean/5 to-msu-maroon/5 dark:from-msu-deep-ocean/10 dark:to-msu-maroon/10 p-6 rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm"
                       variants={itemVariants}
                     >
                       <h3 className="text-xl font-semibold text-msu-deep-ocean dark:text-gray-100 mb-4">Payment Information</h3>

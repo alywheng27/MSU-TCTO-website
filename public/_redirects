@@ -1,3 +1,6 @@
+# Renamed ICTO service page (preserve bookmarks / external links)
+/services/institutional-account  /services/service-request-form  301!
+
 # Redirect old domain
 https://msutawi-tawi.edu.ph/*  https://msutcto.edu.ph/:splat  301!
 

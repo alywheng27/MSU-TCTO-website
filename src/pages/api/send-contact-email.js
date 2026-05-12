@@ -1,5 +1,10 @@
+import { notFoundUnlessDev } from '../../lib/api-guards.js';
+
 export async function POST({ request }) {
     try {
+        const denied = notFoundUnlessDev();
+        if (denied) return denied;
+
         const { name, email, subject, message, department } = await request.json();
 
         // Validate required fields

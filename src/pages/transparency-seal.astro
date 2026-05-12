@@ -10,7 +10,7 @@ const currentPath = Astro.url.pathname;
 
 <Layout title="Transparency Seal | MSU-TCTO">
 	<main class="min-h-screen flex flex-col">
-		<Navbar path={currentPath} client:visible />
+		<Navbar path={currentPath} client:only="react" />
 
 		<!-- Hero / Page Header -->
 		<section class="bg-gradient-to-b from-msu-maroon/10 to-white-pure border-b border-msu-maroon/10">

@@ -2995,6 +2995,17 @@ document.addEventListener('DOMContentLoaded', () => {
 // Contact form handling
 document.addEventListener('DOMContentLoaded', () => {
 	const contactForm = document.getElementById('contactForm') as HTMLFormElement | null;
+	if (contactForm && !contactForm.querySelector('input[name="hp_company_url"]')) {
+		const hp = document.createElement('input');
+		hp.type = 'text';
+		hp.name = 'hp_company_url';
+		hp.setAttribute('autocomplete', 'off');
+		hp.setAttribute('tabindex', '-1');
+		hp.setAttribute('aria-hidden', 'true');
+		hp.style.cssText = 'position:absolute;left:-9999px;width:1px;height:1px;opacity:0;overflow:hidden';
+		hp.value = '';
+		contactForm.appendChild(hp);
+	}
 	const submitBtn = document.getElementById('submitBtn') as HTMLButtonElement | null;
 	const submitText = document.getElementById('submitText');
 	const submitSpinner = document.getElementById('submitSpinner');

@@ -1,0 +1,495 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from "../../components/Navbar";
+import FooterNav from "../../components/FooterNav.astro";
+import Footer from "../../components/Footer.astro";
+import '../../styles/css/global.css';
+import '../../styles/css/globalanimate.css';
+
+const currentPath = Astro.url.pathname;
+
+const headOfOffice = {
+  name: "Dr. Mary Joyce Z. Guinto-Sali",
+  title: "University Chancellor",
+  avatar: "/images/fold-06 chancy.png",
+  initials: "MG"
+};
+
+const chiefOfStaff = {
+  name: "Atty. Alnasul K. Sali, CESE",
+  title: "Chief-of-Staff, Office of the Chancellor",
+  avatar: "https://i.pravatar.cc/150?img=12",
+  initials: "AS",
+  educationBackground: ["Bachelor of Laws (LL.B.), Mindanao State University", "Civil Service Executive (CESE)"],
+  experience: "Chief of Staff with extensive experience in university administration and legal affairs."
+};
+
+const officeStaff = [
+  { name: "Maria Santos", title: "Office of the Campus Secretary", avatar: "https://i.pravatar.cc/150?img=1", initials: "MS", educationBackground: ["Bachelor of Science in Office Administration, MSU-TCTO", "Units in Master in Public Administration"], experience: "Over 10 years in academic and administrative support." },
+  { name: "Roberto Cruz", title: "Executive Assistant to the Chancellor", avatar: "https://i.pravatar.cc/150?img=11", initials: "RC", educationBackground: ["Bachelor of Science in Business Administration, MSU-TCTO", "Professional development in executive support"], experience: "Executive coordination and liaison with university units." },
+  { name: "Ana Reyes", title: "Administrative Officer III", avatar: "https://i.pravatar.cc/150?img=5", initials: "AR", educationBackground: ["Bachelor of Science in Public Administration", "Civil Service Professional eligibility"], experience: "Administrative operations and resource management." },
+  { name: "Carlos Mendoza", title: "Administrative Assistant", avatar: "https://i.pravatar.cc/150?img=13", initials: "CM", educationBackground: ["Bachelor of Arts in Political Science, MSU-TCTO"], experience: "Day-to-day office and records support." },
+  { name: "Elena Torres", title: "Records Officer", avatar: "https://i.pravatar.cc/150?img=9", initials: "ET", educationBackground: ["Bachelor of Science in Library and Information Science", "Records management training"], experience: "Document and records management for the Chancellor's Office." },
+  { name: "Miguel Fernandez", title: "Administrative Aide", avatar: "https://i.pravatar.cc/150?img=15", initials: "MF", educationBackground: ["Bachelor of Science in Office Administration"], experience: "Administrative and clerical support." }
+];
+---
+
+<Layout title="Chancellor's Office | MSU TCTO" 
+       ogDescription="Office of the Chancellor – central leadership overseeing the strategic direction and governance of MSU Tawi-Tawi College of Technology and Oceanography">
+  <main class="chancellor-office-page font-sans antialiased overflow-hidden pt-0 mt-0">
+    <Navbar path={currentPath} client:only="react" />
+
+    <!-- Breadcrumb – extends up to cover white strip at top -->
+    <div class="bg-[#61063B] min-h-[50px] pt-8 pb-3 xl:px-[12.5%] xs:px-[5%] -mt-8">
+      <nav class="paragraph p2 py-[15px] text-white/80 flex items-center overflow-x-auto whitespace-nowrap scrollbar-hide">
+        <a href="/home" class="hover:text-[#ffffff] transition-colors flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>Home</a>
+        <span class="mx-2 text-white/50">/</span>
+        <a href="/publications" class="hover:text-[#ffffff] transition-colors">Publications</a>
+        <span class="mx-2 text-white/50">/</span>
+        <a href="/offices/universityoffices" class="hover:text-[#ffffff] transition-colors">University Offices</a>
+        <span class="mx-2 text-white/50">/</span>
+        <span class="text-[#ffffff] font-medium">Chancellor's Office</span>
+      </nav>
+    </div>
+
+    <!-- 1. Hero – Editorial -->
+    <section class="relative bg-[#61063B] py-28 lg:py-36 overflow-hidden">
+      <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.03\' fill-rule=\'evenodd\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/svg%3E')]"></div>
+      <div class="relative z-10 max-w-4xl mx-auto px-6 lg:px-8 text-center">
+        <p class="text-[#ffffff] text-xs font-semibold tracking-[0.25em] uppercase mb-6 opacity-90">Office of the Chancellor</p>
+        <h1 class="headings text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-[#ffffff] leading-[1.1] tracking-tight">Chancellor's Office</h1>
+        <div class="w-16 h-0.5 bg-[#ffffff] mx-auto my-8 opacity-80"></div>
+        <p class="text-lg sm:text-xl text-white/85 max-w-2xl mx-auto leading-relaxed">Strategic direction and governance for MSU Tawi-Tawi College of Technology and Oceanography.</p>
+      </div>
+    </section>
+
+    <!-- 2. The Chancellor – Featured leadership (full-bleed split) -->
+    <section class="relative overflow-hidden">
+      <div class="grid lg:grid-cols-2 min-h-[520px] lg:min-h-[720px]">
+        <div class="relative bg-[#61063B] flex items-center justify-center p-12 lg:p-16 order-2 lg:order-1">
+          <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.03\' fill-rule=\'evenodd\'%3E%3Cpath d=\'M0 40L40 0H20L0 20m40 0V20L20 40\'/%3E%3C/g%3E%3C/svg%3E')]"></div>
+          <div class="relative z-10 text-center lg:text-left">
+            <p class="text-[#ffffff] text-xs font-semibold tracking-[0.2em] uppercase mb-4 opacity-80">Head of Office</p>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#ffffff] leading-tight tracking-tight">{headOfOffice.name}</h2>
+            <p class="mt-4 text-[#ffffff] text-lg opacity-90">{headOfOffice.title}</p>
+            <div class="mt-8 pt-8 border-t border-white/20">
+              <p class="text-white/80 text-sm">Chancellor's Office</p>
+              <p class="text-[#ffffff] font-medium mt-1">MSU Tawi-Tawi College of Technology and Oceanography</p>
+            </div>
+          </div>
+        </div>
+        <div class="relative bg-[#ffffff] flex items-center justify-center p-6 lg:p-10 order-1 lg:order-2 min-h-[400px] lg:min-h-[720px]">
+          <div class="chancellor-featured-photo relative w-full h-full flex items-center justify-center">
+            {headOfOffice.avatar ? (
+              <img src={headOfOffice.avatar} alt={headOfOffice.name} class="w-full max-w-md h-[420px] lg:h-[600px] object-cover object-top shadow-2xl border-4 border-[#61063B]/10" />
+            ) : (
+              <div class="w-full max-w-md h-[420px] lg:h-[600px] bg-[#61063B] flex items-center justify-center text-[#ffffff] text-6xl font-bold shadow-2xl">{headOfOffice.initials}</div>
+            )}
+            <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 px-5 py-2 rounded-full bg-[#61063B] text-[#ffffff] text-sm font-bold tracking-wider shadow-lg">Chancellor</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick nav: Office Staff & Contact Us -->
+    <div class="bg-[#ffffff] border-y border-[#61063B]/10 py-4">
+      <div class="max-w-6xl mx-auto px-6 lg:px-8 flex flex-wrap items-center justify-center gap-4">
+        <a href="#office-staff" class="inline-flex items-center gap-2 px-6 py-3 bg-[#61063B] text-white font-semibold rounded-xl hover:bg-[#61063B]/90 transition-all shadow-md hover:shadow-lg">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+          Office Staff
+        </a>
+        <a href="#contact-us" class="inline-flex items-center gap-2 px-6 py-3 bg-[#61063B] text-white font-semibold rounded-xl hover:bg-[#61063B]/90 transition-all shadow-md hover:shadow-lg">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+          Contact Us
+        </a>
+      </div>
+    </div>
+
+    <!-- 3. About the Office – Strategic Leadership & Responsibilities -->
+    <section class="py-24 lg:py-32 bg-[#ffffff]">
+      <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        <header class="text-center max-w-2xl mx-auto mb-20">
+          <p class="text-[#61063B] text-xs font-semibold tracking-[0.2em] uppercase mb-4">About the Office</p>
+          <h2 class="text-3xl sm:text-4xl font-bold text-[#61063B] leading-tight">Strategic Leadership</h2>
+          <div class="w-12 h-0.5 bg-[#61063B] mx-auto mt-6"></div>
+        </header>
+        <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+          <div>
+            <p class="text-[#61063B]/90 text-lg leading-relaxed mb-6">
+              The Chancellor's Office is the apex of institutional leadership at MSU TCTO. It provides vision, policy direction, and oversight so the university fulfills its mandate in instruction, research, extension, and production.
+            </p>
+            <p class="text-[#61063B]/80 leading-relaxed">
+              Working with the Office of the Campus Secretary and other units in the Chancellor Cluster, this office upholds transparency, accountability, and excellence across university operations.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-[#61063B] font-bold text-lg mb-6">Key Responsibilities</h3>
+            <ul class="space-y-4">
+              {["Strategic planning and institutional development", "Governance, policy formulation, and compliance", "External relations and stakeholder engagement", "Oversight of vice chancellors and major units", "Resource stewardship and institutional sustainability"].map((item) => (
+                <li class="flex items-start gap-3">
+                  <span class="flex-shrink-0 w-5 h-5 rounded-full bg-[#61063B]/15 flex items-center justify-center mt-0.5">
+                    <svg class="w-3 h-3 text-[#61063B]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                  </span>
+                  <span class="text-[#61063B]/90">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Our Team – Chief of Staff (TOP) + Office Staff (BOTTOM) -->
+    <section id="office-staff" class="py-24 lg:py-32 bg-[#61063B]/[0.03] scroll-mt-24">
+      <div class="max-w-6xl mx-auto px-6 lg:px-8">
+        <header class="text-center max-w-2xl mx-auto mb-16">
+          <p class="text-[#61063B] text-xs font-semibold tracking-[0.2em] uppercase mb-4">Our Team</p>
+          <h2 class="text-3xl sm:text-4xl font-bold text-[#61063B] leading-tight">Office Staff</h2>
+          <div class="w-12 h-0.5 bg-[#61063B] mx-auto mt-6 mb-4"></div>
+          <p class="text-[#61063B]/80">Personnel supporting the day-to-day operations of the Chancellor's Office.</p>
+        </header>
+
+        <!-- TOP: Chief of Staff -->
+        <div class="flex justify-center mb-16">
+          <div class="staff-card staff-card-clickable group bg-[#ffffff] rounded-2xl overflow-hidden border border-[#61063B]/10 hover:border-[#61063B]/20 hover:shadow-xl transition-all duration-300 w-full max-w-md cursor-pointer" role="button" tabindex="0" data-staff-index="0" data-staff-name={chiefOfStaff.name} data-staff-title={chiefOfStaff.title} data-staff-initials={chiefOfStaff.initials} data-staff-avatar={chiefOfStaff.avatar || ''} data-staff-education={JSON.stringify(chiefOfStaff.educationBackground)} data-staff-experience={chiefOfStaff.experience}>
+            <div class="h-1 w-full bg-[#61063B]"></div>
+            <div class="p-8 flex flex-col items-center text-center">
+              <p class="text-[#61063B] text-xs font-semibold tracking-[0.2em] uppercase mb-4">Chief of Staff</p>
+              <div class="relative mb-6">
+                <div class="absolute -inset-1 rounded-2xl bg-[#61063B]/10 group-hover:bg-[#61063B]/15 transition-colors rounded-2xl"></div>
+                {chiefOfStaff.avatar ? (
+                  <img src={chiefOfStaff.avatar} alt={chiefOfStaff.name} class="relative w-28 h-28 rounded-2xl object-cover border border-[#61063B]/10 group-hover:scale-[1.02] transition-transform duration-300" />
+                ) : (
+                  <div class="relative w-28 h-28 rounded-2xl bg-[#61063B]/10 flex items-center justify-center text-[#61063B] text-2xl font-bold border border-[#61063B]/10 group-hover:scale-[1.02] transition-transform duration-300">{chiefOfStaff.initials}</div>
+                )}
+              </div>
+              <h3 class="text-[#61063B] font-bold text-lg">{chiefOfStaff.name}</h3>
+              <p class="text-[#61063B]/80 text-sm mt-1 leading-snug">{chiefOfStaff.title}</p>
+              <p class="text-[#61063B]/60 text-xs mt-2">Click to view profile</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTTOM: All other office staff -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
+          {officeStaff.map((staff, index) => (
+            <div class="staff-card staff-card-clickable group bg-[#ffffff] rounded-2xl overflow-hidden border border-[#61063B]/10 hover:border-[#61063B]/20 hover:shadow-xl transition-all duration-300 cursor-pointer" role="button" tabindex="0" data-staff-index={index + 1} data-staff-name={staff.name} data-staff-title={staff.title} data-staff-initials={staff.initials} data-staff-avatar={staff.avatar || ''} data-staff-education={JSON.stringify(staff.educationBackground)} data-staff-experience={staff.experience}>
+              <div class="h-1 w-full bg-[#61063B]"></div>
+              <div class="p-8 flex flex-col items-center text-center">
+                <div class="relative mb-6">
+                  <div class="absolute -inset-1 rounded-2xl bg-[#61063B]/10 group-hover:bg-[#61063B]/15 transition-colors rounded-2xl"></div>
+                  {staff.avatar ? (
+                    <img src={staff.avatar} alt={staff.name} class="relative w-28 h-28 rounded-2xl object-cover border border-[#61063B]/10 group-hover:scale-[1.02] transition-transform duration-300" />
+                  ) : (
+                    <div class="relative w-28 h-28 rounded-2xl bg-[#61063B]/10 flex items-center justify-center text-[#61063B] text-2xl font-bold border border-[#61063B]/10 group-hover:scale-[1.02] transition-transform duration-300">{staff.initials}</div>
+                  )}
+                </div>
+                <h3 class="text-[#61063B] font-bold text-lg">{staff.name}</h3>
+                <p class="text-[#61063B]/80 text-sm mt-1 leading-snug">{staff.title}</p>
+                <p class="text-[#61063B]/60 text-xs mt-2">Click to view profile</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Staff Profile Modal -->
+    <div id="staffProfileModal" class="staff-modal fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/50 backdrop-blur-sm" aria-hidden="true" role="dialog" aria-labelledby="staffModalTitle">
+      <div class="staff-modal-content relative w-full max-w-lg max-h-[90vh] overflow-y-auto bg-[#ffffff] rounded-2xl shadow-2xl border border-[#61063B]/10" onclick="event.stopPropagation()">
+        <button type="button" id="staffModalClose" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-[#61063B]/10 hover:bg-[#61063B]/20 flex items-center justify-center text-[#61063B] transition-colors" aria-label="Close">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+        <div class="p-8 pt-14">
+          <div class="flex flex-col items-center text-center mb-8">
+            <div id="staffModalAvatar" class="w-24 h-24 rounded-2xl bg-[#61063B]/10 flex items-center justify-center text-[#61063B] text-2xl font-bold border border-[#61063B]/10 mb-4"></div>
+            <h2 id="staffModalTitle" class="text-xl font-bold text-[#61063B]"></h2>
+            <p id="staffModalPosition" class="text-[#61063B]/80 text-sm mt-1"></p>
+          </div>
+          <div class="space-y-6 text-left border-t border-[#61063B]/10 pt-6">
+            <div>
+              <h3 class="text-[#61063B] font-semibold text-sm uppercase tracking-wider mb-2">Education Background</h3>
+              <ul id="staffModalEducation" class="list-disc list-inside text-[#61063B]/90 text-sm space-y-1"></ul>
+            </div>
+            <div>
+              <h3 class="text-[#61063B] font-semibold text-sm uppercase tracking-wider mb-2">Experience</h3>
+              <p id="staffModalExperience" class="text-[#61063B]/90 text-sm leading-relaxed"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Contact & Visit -->
+    <section class="relative bg-[#ffffff] py-20 lg:py-24">
+      <div class="relative max-w-6xl mx-auto px-6 lg:px-8">
+        <!-- Contact Us – Send us a Message -->
+        <div id="contact-us" class="mt-24 pt-20 border-t border-[#61063B]/10 scroll-mt-24">
+          <div class="grid lg:grid-cols-2 gap-16 lg:gap-20 items-start">
+            <div>
+              <p class="text-[#61063B] text-xs font-semibold tracking-[0.2em] uppercase mb-3">Contact Us</p>
+              <h2 class="text-2xl sm:text-3xl font-bold text-[#61063B] leading-tight mb-4">Send us a Message</h2>
+              <div class="w-12 h-0.5 bg-[#61063B] mb-6"></div>
+              <p class="text-[#61063B]/80 leading-relaxed mb-8">
+                Have a question or feedback for the Chancellor's Office? We'd love to hear from you. Fill out the form and our team will get back to you as soon as possible.
+              </p>
+              <div class="space-y-6">
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-xl bg-[#61063B]/10 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-6 h-6 text-[#61063B]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                  </div>
+                  <div>
+                    <p class="text-[#61063B] font-semibold">Address</p>
+                    <p class="text-[#61063B]/80">Administrative Building<br />Sanga-Sanga, Bongao, Tawi-Tawi</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-xl bg-[#61063B]/10 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-6 h-6 text-[#61063B]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                  </div>
+                  <div>
+                    <p class="text-[#61063B] font-semibold">Phone</p>
+                    <a href="tel:+686812681621" class="text-[#61063B]/80 hover:text-[#61063B] transition-colors">(068) 268-1621</a>
+                  </div>
+                </div>
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-xl bg-[#61063B]/10 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-6 h-6 text-[#61063B]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                  </div>
+                  <div>
+                    <p class="text-[#61063B] font-semibold">Email</p>
+                    <a href="mailto:info@msutcto.edu.ph" class="text-[#61063B]/80 hover:text-[#61063B] transition-colors">info@msutcto.edu.ph</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bg-[#ffffff] rounded-2xl border border-[#61063B]/10 shadow-xl shadow-[#61063B]/5 p-8 lg:p-10">
+              <form id="chancellorContactForm" class="space-y-6">
+                <div>
+                  <label for="chancellor-name" class="block text-[#61063B] font-medium mb-2">Full Name <span class="text-[#61063B]/60">*</span></label>
+                  <input type="text" id="chancellor-name" name="name" required placeholder="Your name" class="w-full px-4 py-3 rounded-xl border border-[#61063B]/20 bg-white text-[#61063B] placeholder-[#61063B]/40 focus:outline-none focus:ring-2 focus:ring-[#61063B]/30 focus:border-[#61063B] transition-all" />
+                </div>
+                <div>
+                  <label for="chancellor-email" class="block text-[#61063B] font-medium mb-2">Email <span class="text-[#61063B]/60">*</span></label>
+                  <input type="email" id="chancellor-email" name="email" required placeholder="you@example.com" class="w-full px-4 py-3 rounded-xl border border-[#61063B]/20 bg-white text-[#61063B] placeholder-[#61063B]/40 focus:outline-none focus:ring-2 focus:ring-[#61063B]/30 focus:border-[#61063B] transition-all" />
+                </div>
+                <div>
+                  <label for="chancellor-subject" class="block text-[#61063B] font-medium mb-2">Subject <span class="text-[#61063B]/60">*</span></label>
+                  <input type="text" id="chancellor-subject" name="subject" required placeholder="What is this regarding?" class="w-full px-4 py-3 rounded-xl border border-[#61063B]/20 bg-white text-[#61063B] placeholder-[#61063B]/40 focus:outline-none focus:ring-2 focus:ring-[#61063B]/30 focus:border-[#61063B] transition-all" />
+                </div>
+                <div>
+                  <label for="chancellor-message" class="block text-[#61063B] font-medium mb-2">Message <span class="text-[#61063B]/60">*</span></label>
+                  <textarea id="chancellor-message" name="message" required rows="5" placeholder="Type your message here..." class="w-full px-4 py-3 rounded-xl border border-[#61063B]/20 bg-white text-[#61063B] placeholder-[#61063B]/40 focus:outline-none focus:ring-2 focus:ring-[#61063B]/30 focus:border-[#61063B] transition-all resize-none"></textarea>
+                </div>
+                <input
+                  type="text"
+                  id="chancellor-hp-url"
+                  name="hp_company_url"
+                  tabindex="-1"
+                  autocomplete="off"
+                  class="sr-only"
+                  aria-hidden="true"
+                  value=""
+                />
+                <div id="chancellorFormStatus" class="hidden p-4 rounded-xl text-sm"></div>
+                <button type="submit" id="chancellorSubmitBtn" class="w-full py-4 px-6 bg-[#61063B] text-white font-semibold rounded-xl hover:bg-[#61063B]/90 focus:outline-none focus:ring-2 focus:ring-[#61063B]/50 focus:ring-offset-2 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
+                  <span id="chancellorSubmitText">Send Message</span>
+                  <span id="chancellorSubmitSpinner" class="hidden">
+                    <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                  </span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Address / Map (bottom of Contact Us – Send us a Message) -->
+        <div class="mt-20 pt-16 border-t border-[#61063B]/10">
+          <h3 class="text-[#61063B] font-bold text-xl mb-4 text-center">Find Us</h3>
+          <div class="rounded-2xl overflow-hidden border border-[#61063B]/10 shadow-lg w-full max-w-4xl mx-auto aspect-[3/2] sm:aspect-[600/400] bg-[#61063B]/5">
+            <div class="w-full h-full min-h-[280px] sm:min-h-[320px]">
+              <iframe
+                class="w-full h-full min-h-[280px] sm:min-h-[320px]"
+                title="MSU TCTO – Sabdani Hall location"
+                frameborder="0"
+                scrolling="no"
+                marginheight="0"
+                marginwidth="0"
+                src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=Sabdani%20Hall%20MSUTCTO&amp;t=k&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+              ></iframe>
+            </div>
+          </div>
+          <p class="text-center text-[#61063B]/80 text-sm mt-3">Sabdani Hall, MSU TCTO · Sanga-Sanga, Bongao, Tawi-Tawi</p>
+        </div>
+
+        <div class="mt-20 text-center">
+          <a href="/offices/universityoffices" class="inline-flex items-center gap-2 px-8 py-4 bg-[#61063B] text-[#ffffff] font-semibold rounded-full hover:bg-[#61063B]/90 transition-colors shadow-lg">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+            Back to University Offices
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scroll to Top Button (same as other pages) -->
+    <button class="scroll-to-top" aria-label="Scroll to top">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+      </svg>
+    </button>
+
+    <FooterNav />
+    <Footer />
+  </main>
+</Layout>
+
+<script src="../../js/animate.js"></script>
+
+<style is:global>
+  #content:has(.chancellor-office-page) {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+    background: #ffffff !important;
+  }
+  .chancellor-office-page {
+    --msu-primary: #61063B;
+    --msu-white: #ffffff;
+    color: #61063B;
+    background: #ffffff !important;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .staff-card {
+    will-change: transform;
+  }
+  .staff-modal {
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+  .staff-modal.staff-modal-open {
+    display: flex;
+  }
+  .staff-card-clickable:focus {
+    outline: 2px solid #61063B;
+    outline-offset: 2px;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Staff profile modal
+    const modal = document.getElementById('staffProfileModal');
+    const modalClose = document.getElementById('staffModalClose');
+    const modalTitle = document.getElementById('staffModalTitle');
+    const modalPosition = document.getElementById('staffModalPosition');
+    const modalAvatar = document.getElementById('staffModalAvatar');
+    const modalEducation = document.getElementById('staffModalEducation');
+    const modalExperience = document.getElementById('staffModalExperience');
+
+    function openStaffModal(card) {
+      const name = card.getAttribute('data-staff-name') || '';
+      const title = card.getAttribute('data-staff-title') || '';
+      const initials = card.getAttribute('data-staff-initials') || '?';
+      const avatar = card.getAttribute('data-staff-avatar') || '';
+      let education = [];
+      try {
+        education = JSON.parse(card.getAttribute('data-staff-education') || '[]');
+      } catch (_) {}
+      const experience = card.getAttribute('data-staff-experience') || '—';
+
+      modalTitle.textContent = name;
+      modalPosition.textContent = title;
+      if (avatar) {
+        modalAvatar.innerHTML = '<img src="' + avatar.replace(/"/g, '&quot;') + '" alt="" class="w-full h-full rounded-2xl object-cover" />';
+      } else {
+        modalAvatar.innerHTML = '';
+        modalAvatar.appendChild(document.createTextNode(initials));
+      }
+      modalEducation.innerHTML = education.length ? education.map(function (item) { return '<li>' + item + '</li>'; }).join('') : '<li class="text-[#61063B]/60">—</li>';
+      modalExperience.textContent = experience;
+      modal.classList.add('staff-modal-open');
+      modal.classList.remove('hidden');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeStaffModal() {
+      modal.classList.remove('staff-modal-open');
+      modal.classList.add('hidden');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) closeStaffModal();
+    });
+    if (modalClose) modalClose.addEventListener('click', closeStaffModal);
+    document.addEventListener('keydown', function (e) {
+      if ((e as KeyboardEvent).key === 'Escape' && modal && modal.classList.contains('staff-modal-open')) closeStaffModal();
+    });
+
+    document.querySelectorAll('.staff-card-clickable').forEach(function (card) {
+      card.addEventListener('click', function () { openStaffModal(card); });
+      card.addEventListener('keydown', function (e) {
+        if ((e as KeyboardEvent).key === 'Enter' || (e as KeyboardEvent).key === ' ') { e.preventDefault(); openStaffModal(card); }
+      });
+    });
+
+    // Contact form
+    const form = document.getElementById('chancellorContactForm');
+    const submitBtn = document.getElementById('chancellorSubmitBtn');
+    const submitText = document.getElementById('chancellorSubmitText');
+    const submitSpinner = document.getElementById('chancellorSubmitSpinner');
+    const statusEl = document.getElementById('chancellorFormStatus');
+
+    if (form) {
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const subInput = form.querySelector('[name="subject"]') as HTMLInputElement | null;
+        const rawSubject = (subInput && subInput.value) ? subInput.value.trim() : '';
+        const formData = new FormData(form as HTMLFormElement);
+        formData.set('subject', 'Chancellor\'s Office: ' + rawSubject);
+
+        if (!formData.get('name') || !formData.get('email') || !formData.get('message')) {
+          statusEl.textContent = 'Please fill in all required fields.';
+          statusEl.className = 'p-4 rounded-xl text-sm bg-red-50 text-red-800 border border-red-200';
+          statusEl.classList.remove('hidden');
+          return;
+        }
+
+        submitBtn.setAttribute('disabled', 'true');
+        submitText.classList.add('hidden');
+        submitSpinner.classList.remove('hidden');
+        statusEl.classList.add('hidden');
+
+        try {
+          const response = await fetch('/api/contact-form', { method: 'POST', body: formData });
+          const result = await response.json();
+          if (result.success) {
+            statusEl.textContent = 'Thank you! Your message has been sent successfully. We will get back to you soon.';
+            statusEl.className = 'p-4 rounded-xl text-sm bg-green-50 text-green-800 border border-green-200';
+            (form as HTMLFormElement).reset();
+          } else {
+            throw new Error(result.error || 'Failed to send');
+          }
+        } catch (err) {
+          statusEl.textContent = 'Sorry, there was an error sending your message. Please try again or email us directly.';
+          statusEl.className = 'p-4 rounded-xl text-sm bg-red-50 text-red-800 border border-red-200';
+        } finally {
+          statusEl.classList.remove('hidden');
+          submitBtn.removeAttribute('disabled');
+          submitText.classList.remove('hidden');
+          submitSpinner.classList.add('hidden');
+        }
+      });
+    }
+  });
+</script>

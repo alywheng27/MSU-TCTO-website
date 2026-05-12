@@ -1,6 +1,9 @@
 import { useSanityClient, groq } from 'astro-sanity';
+import { notFoundUnlessDev } from '../../lib/api-guards.js';
 
 export async function GET() {
+  const denied = notFoundUnlessDev();
+  if (denied) return denied;
   try {
     console.log('=== DEBUG API: Checking Sanity Database ===');
     

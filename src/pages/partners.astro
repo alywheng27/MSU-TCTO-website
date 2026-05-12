@@ -36,7 +36,7 @@ const threeLatestAnnualReport = await get3LatestAnnualReport();
     
     <main class="font-sans antialiased text-gray-800 dark:text-gray-200 dark:bg-gray-900 leading-normal">
         <!-- Enhanced Navbar -->
-        <Navbar path={currentPath} client:visible />
+        <Navbar path={currentPath} client:only="react" />
 
 
     <!-- Partners Sections (Keep your existing partners code) -->

@@ -1,6 +1,9 @@
 import { testSanityConnection } from '../../api/api.jsx';
+import { notFoundUnlessDev } from '../../lib/api-guards.js';
 
 export async function GET() {
+  const denied = notFoundUnlessDev();
+  if (denied) return denied;
   try {
     console.log('Testing Sanity connection...');
     const result = await testSanityConnection();

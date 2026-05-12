@@ -10,9 +10,11 @@ export interface Props {
   ogDescription?: string;
   /** Canonical URL for the shared page */
   ogUrl?: string;
+  /** Omit screenshot/watermark protection script (see public/js/screenshot-protection.js) */
+  omitScreenshotProtection?: boolean;
 }
 
-const { title, ogImage, ogTitle, ogDescription, ogUrl } = Astro.props;
+const { title, ogImage, ogTitle, ogDescription, ogUrl, omitScreenshotProtection = false } = Astro.props;
 const site = 'https://msutcto.edu.ph';
 const shareTitle = ogTitle ?? title;
 const shareDescription = ogDescription ?? 'MSU-Tawi-Tawi College of Technology and Oceanography';
@@ -27,8 +29,6 @@ const shareUrl = ogUrl ?? (typeof Astro.url !== 'undefined' ? new URL(Astro.url.
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <meta name="generator" content={Astro.generator} />
   <link rel="icon" type="image/png" href="/images/msutcto_wordmark_magenta_.png" />
-  <script src="/js/screenshot-protection.js" defer></script>
-  <script src="/js/logo-protection.js" defer></script>
   
   <!-- Facebook Domain Verification -->
   <meta name="facebook-domain-verification" content="63d47sat4plmhjgb73ob4sbrleldy4" />
@@ -455,5 +455,9 @@ const shareUrl = ogUrl ?? (typeof Astro.url !== 'undefined' ? new URL(Astro.url.
       }, 40);
     });
   </script>
+
+  {!omitScreenshotProtection && (
+    <script is:inline src="/js/screenshot-protection.js"></script>
+  )}
 </body>
 </html>

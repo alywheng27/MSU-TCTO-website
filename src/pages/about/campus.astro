@@ -20,7 +20,7 @@ const currentPath = Astro.url.pathname;
 
     <main class="font-sans antialiased text-gray-800 dark:text-gray-200 dark:bg-gray-900 leading-normal">
         <!-- Enhanced Navbar -->
-        <Navbar path={currentPath} client:visible />
+        <Navbar path={currentPath} client:only="react" />
 
 <!-- Video Hero Section -->
 <section class="relative h-screen min-h-[800px] overflow-hidden">
@@ -179,9 +179,7 @@ const currentPath = Astro.url.pathname;
                          give Muslims and other cultural minorities access to quality education and develop such other programs as will promote Muslim welfare and hasten 
                          socio-economic development of the southernmost region of the country.
                         
-                        MSU-TCTO is comprised of the following academic units: the College of Fisheries, College of Arts and Sciences, College of Education, 
-                        Institute of Environmental and Oceanography Studies, College of Islamic and Arabic Studies, and the Institute of Information and
-                         Communications Technology.
+                        MSU-TCTO is comprised of the following academic units: the College of Arts and Social Sciences (CASS), College of Islamic Arts and Sciences (CIAS), College of Education (COED), College of Business, Accountancy, and Management (CBAM), College of Mathematical Sciences (CMS), College of Fisheries, Oceanography, Environmental Science, and Technology (COFEST), College of Computer Studies (CCS), and College of Law (COL).
                     </p>
                 </div>
             </div>
@@ -360,123 +358,11 @@ const currentPath = Astro.url.pathname;
         </p>
     </div>
 
-    <!-- Academic Units Grid -->
+    <!-- Academic Units Grid - aligned with Programs in navigation.js -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- College of Fisheries -->
-        <div class="academic-card group bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+        <!-- College of Arts and Social Sciences (CASS) -->
+        <a href="/programs/cas" class="academic-card group bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 block" data-aos="fade-up" data-aos-delay="100">
             <div class="icon-box bg-msu-deep-ocean dark:bg-msu-deep-ocean group-hover:bg-msu-dark-pink dark:group-hover:bg-msu-dark-pink w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                <!-- Dolphin Icon -->
-                <svg class="w-8 h-8 text-white dark:text-gray-900" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path d="M20 10c0 4.4-3.6 8-8 8s-8-3.6-8-8 3.6-8 8-8 8 3.6 8 8z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M16 10c0 2.2-1.8 4-4 4s-4-1.8-4-4 1.8-4 4-4 4 1.8 4 4z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M12 16v-2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-            <h3 class="text-2xl font-bold mb-3 text-msu-deep-ocean dark:text-msu-deep-ocean">College of Fisheries</h3>
-            <p class="text-gray-600 dark:text-gray-300 mb-4">
-                Premier institution for marine sciences and fisheries technology in Southern Philippines.
-            </p>
-            <ul class="space-y-2 text-gray-600 dark:text-gray-300">
-                <li class="flex items-center">
-                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    MS in Aquaculture
-                </li>
-                <li class="flex items-center">
-                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    BS in Food Technology
-                </li>
-                <li class="flex items-center">
-                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                   Diploma in Fisheries Technology (Aquaculture)
-                </li>
-            </ul>
-        </div>
-
-        <!-- College of Islamic and Arabic Studies -->
-        <div class="academic-card group bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-delay="150">
-            <div class="icon-box bg-msu-deep-ocean dark:bg-msu-deep-ocean group-hover:bg-msu-dark-pink dark:group-hover:bg-msu-dark-pink w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                <!-- Mosque Icon -->
-                <svg class="w-8 h-8 text-white dark:text-gray-900" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path d="M12 2L2 7v10l10 5 10-5V7L12 2z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M12 22V12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M17 7v10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M7 7v10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M2 7h20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-            <h3 class="text-2xl font-bold mb-3 text-msu-deep-ocean dark:text-msu-deep-ocean">College of Islamic and Arabic Studies</h3>
-            <p class="text-gray-600 dark:text-gray-300 mb-4">
-                Preserving and advancing Islamic knowledge and Arabic language studies.
-            </p>
-            <ul class="space-y-2 text-gray-600 dark:text-gray-300">
-                <li class="flex items-center">
-                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    Master of Arts in Islamic Education
-                </li>
-                <li class="flex items-center">
-                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    BA in Islamic Studies (Sharia)
-                </li>
-                <li class="flex items-center">
-                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    BS in Teaching Arabic
-                </li>
-            </ul>
-        </div>
-
-        <!-- College of Education -->
-        <div class="academic-card group bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
-            <div class="icon-box bg-msu-deep-ocean dark:bg-msu-deep-ocean group-hover:bg-msu-dark-pink dark:group-hover:bg-msu-dark-pink w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                <!-- Graduation Cap Icon -->
-                <svg class="w-8 h-8 text-white dark:text-gray-900" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path d="M4 13v8a2 2 0 002 2h12a2 2 0 002-2v-8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M12 3L2 7l10 4 10-4-10-4z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M6.53 9C4.6 8.8 3 7.1 3 5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M6.53 9c.3.6.8 1 1.47 1h10c.67 0 1.17-.4 1.47-1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-            <h3 class="text-2xl font-bold mb-3 text-msu-deep-ocean dark:text-msu-deep-ocean">College of Education</h3>
-            <p class="text-gray-600 dark:text-gray-300 mb-4">
-                Developing exceptional educators and education professionals.
-            </p>
-            <ul class="space-y-2 text-gray-600 dark:text-gray-300">
-                <li class="flex items-center">
-                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    PhD in Education Management
-                </li>
-                <li class="flex items-center">
-                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    Bachelor of Elementary Education
-                </li>
-                <li class="flex items-center">
-                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    MA in Education (Educational Management)
-                </li>
-            </ul>
-        </div>
-
-        <!-- College of Arts and Science -->
-        <div class="academic-card group bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
-            <div class="icon-box bg-msu-deep-ocean dark:bg-msu-deep-ocean group-hover:bg-msu-dark-pink dark:group-hover:bg-msu-dark-pink w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                <!-- Atom Icon -->
                 <svg class="w-8 h-8 text-white dark:text-gray-900" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <circle cx="12" cy="12" r="1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M12 2v2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -485,119 +371,190 @@ const currentPath = Astro.url.pathname;
                     <path d="M17.66 17.66l1.41 1.41" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M2 12h2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M20 12h2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M6.34 17.66l-1.41 1.41" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M19.07 4.93l-1.41 1.41" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </div>
-            <h3 class="text-2xl font-bold mb-3 text-msu-deep-ocean dark:text-msu-deep-ocean">College of Arts and Science</h3>
+            <h3 class="text-2xl font-bold mb-3 text-msu-deep-ocean dark:text-msu-deep-ocean">College of Arts and Social Sciences (CASS)</h3>
             <p class="text-gray-600 dark:text-gray-300 mb-4">
-                Comprehensive liberal arts and sciences education with diverse disciplines.
+                Comprehensive liberal arts and social sciences education with diverse disciplines.
             </p>
             <ul class="space-y-2 text-gray-600 dark:text-gray-300">
                 <li class="flex items-center">
-                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
+                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                     Master in Public Administration
                 </li>
                 <li class="flex items-center">
-                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
+                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                     Bachelor of Public Administration
                 </li>
                 <li class="flex items-center">
-                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
+                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                     Master of Science in Teaching Mathematics
                 </li>
             </ul>
-        </div>
+        </a>
 
-        <!-- Institute of Information and Communication Technology -->
-        <div class="academic-card group bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-delay="150">
+        <!-- College of Islamic Arts and Sciences (CIAS) -->
+        <a href="/programs/cias" class="academic-card group bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 block" data-aos="fade-up" data-aos-delay="150">
             <div class="icon-box bg-msu-deep-ocean dark:bg-msu-deep-ocean group-hover:bg-msu-dark-pink dark:group-hover:bg-msu-dark-pink w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                <!-- Computer Chip Icon -->
+                <svg class="w-8 h-8 text-white dark:text-gray-900" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M12 2L2 7v10l10 5 10-5V7L12 2z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 22V12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 7h20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 text-msu-deep-ocean dark:text-msu-deep-ocean">College of Islamic Arts and Sciences (CIAS)</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">
+                Preserving and advancing Islamic knowledge and Arabic language studies.
+            </p>
+            <ul class="space-y-2 text-gray-600 dark:text-gray-300">
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    Master of Arts in Islamic Education
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    BA in Islamic Studies (Sharia)
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    BS in Teaching Arabic
+                </li>
+            </ul>
+        </a>
+
+        <!-- College of Education (COED) -->
+        <a href="/programs/coed" class="academic-card group bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 block" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon-box bg-msu-deep-ocean dark:bg-msu-deep-ocean group-hover:bg-msu-dark-pink dark:group-hover:bg-msu-dark-pink w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                <svg class="w-8 h-8 text-white dark:text-gray-900" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M4 13v8a2 2 0 002 2h12a2 2 0 002-2v-8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 3L2 7l10 4 10-4-10-4z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 text-msu-deep-ocean dark:text-msu-deep-ocean">College of Education (COED)</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">
+                Developing exceptional educators and education professionals.
+            </p>
+            <ul class="space-y-2 text-gray-600 dark:text-gray-300">
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    PhD in Education Management
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    Bachelor of Elementary Education
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    MA in Education (Educational Management)
+                </li>
+            </ul>
+        </a>
+
+        <!-- College of Business, Accountancy, and Management (CBAM) -->
+        <a href="/505" class="academic-card group bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 block" data-aos="fade-up" data-aos-delay="100">
+            <div class="icon-box bg-msu-deep-ocean dark:bg-msu-deep-ocean group-hover:bg-msu-dark-pink dark:group-hover:bg-msu-dark-pink w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                <svg class="w-8 h-8 text-white dark:text-gray-900" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 text-msu-deep-ocean dark:text-msu-deep-ocean">College of Business, Accountancy, and Management (CBAM)</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">
+                Preparing future leaders in business, accountancy, and management.
+            </p>
+            <ul class="space-y-2 text-gray-600 dark:text-gray-300">
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    Business & Accountancy programs
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    Management education
+                </li>
+            </ul>
+        </a>
+
+        <!-- College of Mathematical Sciences (CMS) -->
+        <a href="/505" class="academic-card group bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 block" data-aos="fade-up" data-aos-delay="150">
+            <div class="icon-box bg-msu-deep-ocean dark:bg-msu-deep-ocean group-hover:bg-msu-dark-pink dark:group-hover:bg-msu-dark-pink w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                <svg class="w-8 h-8 text-white dark:text-gray-900" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M4 4h16v16H4z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 9h6v6H9z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M4 12h4M16 12h4M12 4v4M12 16v4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 text-msu-deep-ocean dark:text-msu-deep-ocean">College of Mathematical Sciences (CMS)</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">
+                Excellence in mathematics and applied mathematical sciences.
+            </p>
+            <ul class="space-y-2 text-gray-600 dark:text-gray-300">
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    Mathematics & Statistics
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    Applied mathematical sciences
+                </li>
+            </ul>
+        </a>
+
+        <!-- College of Fisheries, Oceanography, Environmental Science, and Technology (COFEST) -->
+        <a href="/programs/cofest" class="academic-card group bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 block" data-aos="fade-up" data-aos-delay="200">
+            <div class="icon-box bg-msu-deep-ocean dark:bg-msu-deep-ocean group-hover:bg-msu-dark-pink dark:group-hover:bg-msu-dark-pink w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                <svg class="w-8 h-8 text-white dark:text-gray-900" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M20 10c0 4.4-3.6 8-8 8s-8-3.6-8-8 3.6-8 8-8 8 3.6 8 8z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 15c4 3 8 3 12 0s8-3 12 0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M2 9c4-3 8-3 12 0s8 3 12 0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-3 text-msu-deep-ocean dark:text-msu-deep-ocean">College of Fisheries, Oceanography, Environmental Science, and Technology (COFEST)</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">
+                Premier institution for fisheries, marine sciences, oceanography, and environmental technology in Southern Philippines.
+            </p>
+            <ul class="space-y-2 text-gray-600 dark:text-gray-300">
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    MS in Aquaculture / BS in Food Technology
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    BS in Environmental Science / BS in Marine Science
+                </li>
+                <li class="flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    Diploma in Fisheries Technology
+                </li>
+            </ul>
+        </a>
+
+        <!-- College of Computer Studies (CCS) -->
+        <a href="/programs/ccs" class="academic-card group bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 block" data-aos="fade-up" data-aos-delay="100">
+            <div class="icon-box bg-msu-deep-ocean dark:bg-msu-deep-ocean group-hover:bg-msu-dark-pink dark:group-hover:bg-msu-dark-pink w-16 h-16 rounded-full flex items-center justify-center mb-4">
                 <svg class="w-8 h-8 text-white dark:text-gray-900" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <rect x="4" y="4" width="16" height="16" rx="2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     <rect x="9" y="9" width="6" height="6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M9 1v3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M15 1v3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M9 20v3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M15 20v3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M20 9h3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M20 14h3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M1 9h3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M1 14h3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </div>
-            <h3 class="text-2xl font-bold mb-3 text-msu-deep-ocean dark:text-msu-deep-ocean">Institute of ICT</h3>
+            <h3 class="text-2xl font-bold mb-3 text-msu-deep-ocean dark:text-msu-deep-ocean">College of Computer Studies (CCS)</h3>
             <p class="text-gray-600 dark:text-gray-300 mb-4">
                 Cutting-edge technology education for the digital age.
             </p>
             <ul class="space-y-2 text-gray-600 dark:text-gray-300">
                 <li class="flex items-center">
-                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                  BS in Information Technology
+                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    BS in Information Technology
                 </li>
                 <li class="flex items-center">
-                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                  BS in Computer Applications
-                </li>
-                <!-- <li class="flex items-center">
-                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    Cybersecurity
-                </li> -->
-            </ul>
-        </div>
-
-        <!-- Institute of Oceanography and Environmental Science -->
-        <div class="academic-card group bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
-            <div class="icon-box bg-msu-deep-ocean dark:bg-msu-deep-ocean group-hover:bg-msu-dark-pink dark:group-hover:bg-msu-dark-pink w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                <!-- Wave Icon -->
-                <svg class="w-8 h-8 text-white dark:text-gray-900" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path d="M2 15c4 3 8 3 12 0s8-3 12 0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M2 9c4-3 8-3 12 0s8 3 12 0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M2 3c4 3 8 3 12 0s8-3 12 0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-            <h3 class="text-2xl font-bold mb-3 text-msu-deep-ocean dark:text-msu-deep-ocean">Institute of Oceanography & Environmental Science</h3>
-            <p class="text-gray-600 dark:text-gray-300 mb-4">
-                Pioneering research in marine conservation and environmental sustainability.
-            </p>
-            <ul class="space-y-2 text-gray-600 dark:text-gray-300">
-                <li class="flex items-center">
-                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    BS in Environmental Science
-                </li>
-                <li class="flex items-center">
-                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                   BS in Marine Science
-                </li>
-                <li class="flex items-center">
-                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    Climate Change Studies
+                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    BS in Computer Applications
                 </li>
             </ul>
-        </div>
+        </a>
 
-        <!-- College of Law -->
-        <div class="academic-card group bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300" data-aos="fade-up" data-aos-delay="250">
+        <!-- College of Law (COL) -->
+        <a href="/programs/col" class="academic-card group bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 block" data-aos="fade-up" data-aos-delay="250">
             <div class="icon-box bg-msu-deep-ocean dark:bg-msu-deep-ocean group-hover:bg-msu-dark-pink dark:group-hover:bg-msu-dark-pink w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                <!-- Scale of Justice Icon -->
                 <svg class="w-8 h-8 text-white dark:text-gray-900" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <path d="M12 3v18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M8 7l4-4 4 4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -606,36 +563,22 @@ const currentPath = Astro.url.pathname;
                     <path d="M4 11h4a4 4 0 004-4V3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </div>
-            <h3 class="text-2xl font-bold mb-3 text-msu-deep-ocean dark:text-msu-deep-ocean">College of Law</h3>
+            <h3 class="text-2xl font-bold mb-3 text-msu-deep-ocean dark:text-msu-deep-ocean">College of Law (COL)</h3>
             <p class="text-gray-600 dark:text-gray-300 mb-4">
                 Developing ethical legal professionals with a commitment to justice.
             </p>
             <ul class="space-y-2 text-gray-600 dark:text-gray-300">
                 <li class="flex items-center">
-                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
+                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                     Juris Doctor
                 </li>
-                <!-- <li class="flex items-center">
-                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    International Law
-                </li>
-                <li class="flex items-center">
-                    <svg class="w-4 h-4 mr-2 text-msu-deep-ocean dark:text-msu-deep-ocean" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    Maritime Law
-                </li> -->
             </ul>
-        </div>
+        </a>
     </div>
 
     <!-- View All Programs Button -->
     <div class="text-center mt-16" data-aos="fade-up">
-        <a href="/404.astro" class="inline-flex items-center px-8 py-3 border border-msu-deep-ocean dark:border-msu-deep-ocean text-msu-deep-ocean dark:text-msu-deep-ocean rounded-full hover:bg-msu-deep-ocean dark:hover:bg-msu-dark-pink hover:text-white dark:hover:text-white transition-all duration-300">
+        <a href="/programs/cas" class="inline-flex items-center px-8 py-3 border border-msu-deep-ocean dark:border-msu-deep-ocean text-msu-deep-ocean dark:text-msu-deep-ocean rounded-full hover:bg-msu-deep-ocean dark:hover:bg-msu-dark-pink hover:text-white dark:hover:text-white transition-all duration-300">
             View All Academic Programs
             <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>

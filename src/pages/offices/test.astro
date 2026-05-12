@@ -26,7 +26,7 @@ const fourLatestArticles = await get4LatestArticles();
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
     <main>
-        <Navbar path={currentPath} client:visible />
+        <Navbar path={currentPath} client:only="react" />
 
 <!-- Animated Magazine-Style Article Card -->
 <div class="flex justify-center xl:mx-[240px] xs:mx-[20px] xl:mt-20">

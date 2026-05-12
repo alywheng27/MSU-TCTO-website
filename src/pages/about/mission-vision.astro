@@ -11,21 +11,20 @@ const currentPath = Astro.url.pathname;
 ---
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
-  <main class="bg-gray-50 dark:bg-gray-900">
-    <Navbar path={currentPath} client:visible />
+  <main class="bg-msu-deep-ocean dark:bg-gray-900">
+    <Navbar path={currentPath} client:only="react" />
     
     <!-- Hero Section -->
-    <section class="relative bg-msu-deep-ocean text-white py-40 overflow-hidden">
+    <section class="relative bg-msu-deep-ocean text-white pt-28 pb-16 sm:pt-32 sm:pb-20 md:pt-40 md:pb-24 overflow-hidden">
       <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1567359781514-3c964c02b32a?q=80&w=1932&auto=format&fit=crop')] bg-cover bg-center opacity-30"></div>
-      <div class="container mx-auto px-6 relative z-10 text-center">
-        <h1 class="headings text-5xl md:text-6xl font-bold mb-6 animate-fade-in-up pt-[100px]">
+      <div class="container mx-auto px-4 sm:px-6 relative z-10 text-center">
+        <h1 class="headings text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 animate-fade-in-up">
           Our Vision & Mission
         </h1>
-        <p class="text-xl max-w-3xl mx-auto animate-fade-in-up delay-100">
+        <p class="text-base sm:text-lg md:text-xl max-w-3xl mx-auto animate-fade-in-up delay-100">
           Guiding principles that shape our university's future
         </p>
       </div>
-      <div class="absolute bottom-0 left-0 right-0 h-16 bg-white/10 backdrop-blur-sm"></div>
     </section>
 
     <!-- Vision Section -->
@@ -140,6 +139,12 @@ const currentPath = Astro.url.pathname;
 
   <!-- Add these styles to your global CSS -->
   <style>
+    /* Remove global top loading strip on this page */
+    #loading-container,
+    #loading-bar {
+      display: none !important;
+    }
+
     .animate-fade-in {
       animation: fadeIn 0.8s ease-out forwards;
     }

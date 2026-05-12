@@ -1,0 +1,524 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from "../../components/Navbar";
+import FooterNav from "../../components/FooterNav.astro";
+import Footer from "../../components/Footer.astro";
+import '../../styles/css/global.css';
+import '../../styles/css/globalanimate.css';
+
+const currentPath = Astro.url.pathname;
+
+// Office clusters data structure
+const officeData = {
+  chancellorCluster: {
+    title: "Office of the Chancellor Cluster",
+    icon: "🏛️",
+    description: "The central leadership office overseeing the strategic direction and governance of the university.",
+    offices: [
+      "Chancellor's Office",
+      "Campus Secretary",
+      "Budget Management Office",
+      "Internal Control and Audit Unit",
+      "Office of Information, Press, and Publications",
+      "Alumni Relations Office",
+      "Office of Disaster Risk Reduction and Management Office",
+      "Institute of Peace and Development in Mindanao",
+      "Legal Services Office",
+      "Manila Information and Liaison Office",
+      "Office of Safety and Security",
+      "Information and Communications Technology Office",
+      "Office of Gender and Development",
+      "Office of Quality Assurance Management and Development",
+      "Nutriskwela Rady Kasannangan",
+      "American Corner Tawi-Tawi",
+      "Office of Safety and Security",
+      "Office of Safety and Security",
+      "Bids and Award Community Secretary"
+    ],
+    color: "msu-maroon"
+  },
+  colleges: {
+    title: "Academic Colleges",
+    icon: "🎓",
+    description: "The academic heart of the university, delivering quality education and fostering academic excellence.",
+    offices: [
+      { name: "College of Arts and Social Sciences (CASS)", href: "/programs/cas" },
+      { name: "College of Islamic Arts and Sciences (CIAS)", href: "/programs/cias" },
+      { name: "College of Education (COED)", href: "/programs/coed" },
+      { name: "College of Business, Accountancy, and Management (CBAM)", href: "/programs/cbam" },
+      { name: "College of Mathematical Sciences (CMS)", href: "/505" },
+      { name: "College of Oceanography, Fisheries, Environmental Science, and Technology (COFEST)", href: "/programs/cofest" },
+      { name: "College of Computer Studies (CCS)", href: "/programs/ccs" },
+      { name: "College of Law (COL)", href: "/programs/col" }
+    ],
+    color: "msu-main-color"
+  },
+  academicAffairs: {
+    title: "Office of the Vice Chancellor for Academic Affairs Cluster",
+    icon: "📚",
+    description: "Ensuring academic excellence, curriculum development, and educational quality assurance.",
+    offices: [
+      "Office of the Vice Chancellor",
+      "University Registrar",
+      "Office of Admissions and Scholarships",
+      "University Librarian",
+      "Integrated Science Laboratory",
+      "Office of Quality Assurance Management and Development"
+    ],
+    color: "msu-deep-ocean"
+  },
+  researchEnterprise: {
+    title: "Office of the Vice Chancellor for Research and Extension",
+    icon: "🔬",
+    description: "Driving innovation, research excellence, and extension services across the university.",
+    offices: [
+      "Research Office",
+      "Office of Continuing Education and Extension Services",
+      "Sama Studies Center/Sentro ng Wika at Kultura",
+      "Office of Creative Works"
+    ],
+    color: "msu-pink"
+  },
+  adminFinance: {
+    title: "Office of the Vice Chancellor for Administration and Finance Cluster",
+    icon: "💼",
+    description: "Managing financial resources, administrative operations, and institutional infrastructure.",
+    offices: [
+      "Vice Chancellor",
+      "Human Resource Development Office",
+      "Administrative Services Offices",
+      "Accounting Office",
+      "Cashiering Office",
+      "Supply and Property Office",
+      "Procurement Office",
+      "Auxiliary Services Office",
+      "Infrastructure Services Office",
+      "Remitting Office"
+    ],
+    color: "msu-dark-ocean"
+  },
+  strategicInitiatives: {
+    title: "Office of the Vice Chancellor for Planning and Development",
+    icon: "🎯",
+    description: "Leading strategic planning, institutional development, and futures foresight.",
+    offices: [
+      "Office of Futures Studies and Foresight"
+    ],
+    color: "msu-golden-fog"
+  },
+  studentServices: {
+    title: "Office of the Vice Chancellor for Student Affairs",
+    icon: "👥",
+    description: "Supporting student welfare, development, and comprehensive campus life experiences.",
+    offices: [
+      "Office of Student Relations",
+      "Office of Medical and Wellness Services",
+      "Office of Sports and Recreation",
+      "Office of Guidance and Counselling",
+      "Office of Cultural Affairs and Development",
+      "Office of Food and Residential Services",
+      "Tawsih Residence Hall",
+      "MSU TCTO Cafeteria",
+      "Dandunay Residence Hall",
+      "Layang-Layang Residence Hall",
+      "Linggisan Residence Hall"
+    ],
+    color: "msu-rusty-red"
+  },
+  publicAffairs: {
+    title: "Office of the Vice Chancellor for Public Affairs",
+    icon: "📢",
+    description: "Managing public relations, communications, and community engagement initiatives.",
+    offices: [
+      "Vice Chancellor for Public Affairs",
+      "Public Information Office",
+      "Media Relations Office",
+      "Community Outreach Office",
+      "Alumni Relations Office",
+      "Marketing and Communications Office"
+    ],
+    color: "msu-shallow-ocean"
+  },
+  internationalAffairs: {
+    title: "Office of the Vice Chancellor for International Affairs",
+    icon: "🌍",
+    description: "Fostering global partnerships, international collaborations, and cross-cultural exchanges.",
+    offices: [],
+    color: "msu-crimson-ground"
+  },
+  secondaryEducation: {
+    title: "Office of the Assistant Vice Chancellor for Secondary Education",
+    icon: "📖",
+    description: "Overseeing junior high school programs across MSU TCTO.",
+    offices: [
+      "MSU TCTO Central and Southern Junior High Schools",
+      "MSU TCTO Western Junior High Schools",
+      "MSU TCTO Eastern Junior High Schools"
+    ],
+    color: "msu-shallow-ocean"
+  },
+  cofest: {
+    title: "College of Oceanography, Fisheries, Environmental Science, and Technology (COFEST)",
+    icon: "🌊",
+    description: "Academic and research units in fisheries, oceanography, environmental science, and technology.",
+    offices: [
+      "Seaweed Research and Development Center",
+      "Marine Science Museum",
+      "Student Food Processing Innovation Center",
+      "Fisheries Training and Aquaculture Production",
+      "Integrated Fisheries Training Center",
+      "MSU TCTO Fishpond",
+      "Multi-Species Hatchery",
+      "MSU TCTO Floating Cage",
+      "Department of Aquaculture",
+      "Department of Capture Fisheries",
+      "Department of Post-Harvest Fisheries",
+      "Department of Aquatic Resources Management",
+      "Department of Marine Sciences",
+      "Department of Environmental Science",
+      "Department of Food Science and Technology"
+    ],
+    color: "msu-deep-ocean"
+  }
+};
+---
+
+<Layout title="University Offices | MSU Tawi-Tawi College of Technology and Oceanography" 
+       ogDescription="Comprehensive directory of all university offices and administrative clusters at MSU TCTO">
+  <!-- Page palette: msu-deep-ocean #61063B, msu-bgc-color #ffffff -->
+  <main class="university-offices-page bg-msu-bgc-color text-gray-900 font-sans antialiased overflow-hidden dark:bg-gray-900 dark:text-white">
+    <!-- Premium Navigation -->
+    <Navbar path={currentPath} client:only="react" />
+    
+    <!-- Breadcrumb Navigation – extends up to cover white strip below nav -->
+    <div class="bg-gradient-to-r from-msu-deep-ocean to-msu-deep-ocean min-h-[50px] pt-8 pb-3 xl:px-[12.5%] xs:px-[5%] -mt-8">
+      <nav class="paragraph p2 py-[15px] text-titanium flex items-center overflow-x-auto whitespace-nowrap scrollbar-hide">
+        <a href="/home" class="hover:text-white-pure transition-all duration-300 hover:scale-105 transform flex items-center group">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 group-hover:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
+          Home
+        </a>
+        <span class="mx-2 text-white-pure/50">/</span>
+        <a href="/publications" class="hover:text-white-pure transition-all duration-300 hover:scale-105 transform">Publications</a>
+        <span class="mx-2 text-white-pure/50">/</span>
+        <span class="text-white-pure font-medium">University Offices</span>
+      </nav>
+    </div>
+
+    <!-- Hero Section: outer msu-bgc-color (#ffffff), inner msu-deep-ocean (#61063B) -->
+    <section class="relative bg-msu-bgc-color py-32 overflow-hidden">
+      <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
+        <div class="animate-fade-in-up">
+          <h1 class="headings text-6xl md:text-7xl font-bold text-msu-deep-ocean mb-6 leading-tight">
+            University
+            <span class="block text-msu-deep-ocean">
+              Offices Directory
+            </span>
+          </h1>
+          <div class="w-32 h-1.5 bg-msu-deep-ocean mx-auto mb-8 rounded-full"></div>
+          <p class="paragraph text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
+            Comprehensive directory of all administrative offices, academic departments, and service units 
+            dedicated to supporting excellence in education, research, and community service at MSU TCTO.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Navigation -->
+    <section class="py-12 bg-msu-bgc-color dark:bg-gray-800">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-12">
+                     <h2 class="text-3xl font-bold text-msu-deep-ocean dark:text-yellow-400">Quick Navigation</h2>
+           <p class="mt-4 text-gray-600 dark:text-yellow-300">Jump to any office cluster</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {Object.entries(officeData).map(([key, cluster]) => (
+            <a href={`#${key}`} 
+               class="group bg-msu-bgc-color p-4 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105 border border-gray-100 dark:bg-gray-700 dark:border-gray-600">
+              <div class="text-center">
+                <div class="text-3xl mb-2 group-hover:scale-110 transition-transform">{cluster.icon}</div>
+                                 <h3 class="text-sm font-semibold text-gray-800 group-hover:text-msu-deep-ocean transition-colors leading-tight dark:text-yellow-400">
+                   {cluster.title.replace('Office of the ', '').replace('Cluster', '')}
+                 </h3>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Office Clusters -->
+    <section class="py-20">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="space-y-24">
+          {Object.entries(officeData).map(([key, cluster], index) => (
+            <div id={key} class="animate-fade-in-up" style={`animation-delay: ${index * 0.1}s`}>
+              <!-- Cluster Header -->
+              <div class="text-center mb-16">
+                <div class={`inline-flex items-center justify-center w-20 h-20 bg-msu-deep-ocean rounded-full mb-6 shadow-lg`}>
+                  <span class="text-4xl">{cluster.icon}</span>
+                </div>
+                                 <h2 class="text-4xl font-bold text-msu-deep-ocean mb-4 dark:text-white">{cluster.title}</h2>
+                 <div class="w-24 h-1 bg-msu-deep-ocean mx-auto mb-6 rounded-full"></div>
+                 <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed dark:text-yellow-300">{cluster.description}</p>
+              </div>
+
+              <!-- Office Cards Grid -->
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {cluster.offices.map((office, officeIndex) => {
+                  const officeDisplay = typeof office === 'object' && office?.name ? office.name : office;
+                  const isChancellor = typeof office === 'string' && office === "Chancellor's Office";
+                  const isCollegeLink = key === 'colleges' && typeof office === 'object' && office?.href;
+                  const cardContent = (
+                    <>
+                      <div class="h-2 bg-gradient-to-r from-msu-deep-ocean to-msu-deep-ocean/80"></div>
+                      <div class="p-8">
+                        <div class="flex items-start space-x-4">
+                          <div class="flex-shrink-0 w-12 h-12 bg-msu-deep-ocean/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 text-msu-deep-ocean" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-6m-8 0H3m2 0h6M9 7h6m-6 4h6m-6 4h6" />
+                            </svg>
+                          </div>
+                          <div class="flex-1">
+                            <h3 class="text-lg font-semibold text-gray-900 group-hover:text-msu-deep-ocean transition-colors leading-tight dark:text-yellow-400">{officeDisplay}</h3>
+                            <div class="mt-4 flex items-center text-sm text-gray-500 dark:text-yellow-300">
+                              <svg class="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                              </svg>
+                              {isCollegeLink ? 'Programs & offerings' : 'Administrative Building'}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <div class="flex items-center text-sm text-msu-deep-ocean font-medium dark:text-yellow-400">
+                            {isCollegeLink ? 'View programs' : isChancellor ? 'View office' : 'Learn more'}
+                            <svg class="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  );
+                  const cardClass = "group bg-msu-bgc-color rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 overflow-hidden hover:scale-105 dark:bg-gray-800 dark:border-gray-700";
+                  if (isChancellor) return (<a href="/offices/chancellor-office" class={`${cardClass} block`}>{cardContent}</a>);
+                  if (isCollegeLink) return (<a href={office.href} class={`${cardClass} block`}>{cardContent}</a>);
+                  return (<div class={cardClass}>{cardContent}</div>);
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Information -->
+    <section class="py-20 bg-gradient-to-br from-msu-deep-ocean to-msu-deep-ocean">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+        <h2 class="text-4xl font-bold text-white mb-8">Need Assistance?</h2>
+        <p class="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
+          Our offices are here to serve you. Contact us for any inquiries or assistance you may need.
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+            <div class="w-16 h-16 bg-msu-gold rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-4">Phone</h3>
+            <p class="text-gray-300">(068) 268-1621</p>
+          </div>
+          
+          <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+            <div class="w-16 h-16 bg-msu-gold rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-4">Email</h3>
+            <p class="text-gray-300">info@msutcto.edu.ph</p>
+          </div>
+          
+          <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+            <div class="w-16 h-16 bg-msu-gold rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-4">Address</h3>
+            <p class="text-gray-300">Sanga-Sanga, Bongao, Tawi-Tawi</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top fixed bottom-8 right-8 bg-msu-deep-ocean hover:bg-msu-deep-ocean text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-50" aria-label="Scroll to top">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+      </svg>
+    </button>
+
+    <!-- Footer Navigation -->
+    <FooterNav />
+
+    <!-- Footer -->
+    <Footer />
+  </main>
+</Layout>
+
+<script src="../../js/animate.js"></script>
+<script src="../../js/loadinganim.js"></script>
+
+<style is:global>
+  /* University Offices page: enforce #61063B (msu-deep-ocean) and #ffffff (msu-bgc-color) */
+  main.university-offices-page {
+    background-color: #ffffff;
+  }
+  main.university-offices-page.bg-msu-bgc-color {
+    background-color: #ffffff;
+  }
+  .dark main.university-offices-page {
+    background-color: var(--tw-color-gray-900, #111827);
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Animation classes */
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Scroll to top button */
+  .scroll-to-top {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Card hover effects */
+  .group:hover .group-hover\:scale-110 {
+    transform: scale(1.1);
+  }
+
+  .group:hover .group-hover\:translate-x-1 {
+    transform: translateX(0.25rem);
+  }
+
+  /* Gradient background animation */
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease infinite;
+  }
+
+  /* Custom scrollbar */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Dark mode icon styling */
+  .dark .text-3xl {
+    color: #fbbf24 !important; /* yellow-400 */
+  }
+
+  .dark .text-4xl {
+    color: #fbbf24 !important; /* yellow-400 */
+  }
+
+  .dark svg {
+    color: #fbbf24 !important; /* yellow-400 */
+  }
+</style>
+
+<script>
+  // Scroll to top functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const scrollButton = document.querySelector('.scroll-to-top');
+    
+    window.addEventListener('scroll', function() {
+      if (window.pageYOffset > 300) {
+        scrollButton.classList.add('visible');
+      } else {
+        scrollButton.classList.remove('visible');
+      }
+    });
+    
+    scrollButton.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  });
+
+  // Smooth scroll for navigation links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href').substring(1);
+      const targetElement = document.getElementById(targetId);
+      
+      if (targetElement) {
+        const offsetTop = targetElement.offsetTop - 100; // Account for fixed header
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  // Intersection Observer for scroll animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.target instanceof HTMLElement) {
+        entry.target.style.animationPlayState = 'running';
+      }
+    });
+  }, observerOptions);
+
+  // Observe all animated elements
+  document.querySelectorAll('.animate-fade-in-up').forEach(el => {
+    if (el instanceof HTMLElement) {
+      el.style.animationPlayState = 'paused';
+    }
+    observer.observe(el);
+  });
+</script>

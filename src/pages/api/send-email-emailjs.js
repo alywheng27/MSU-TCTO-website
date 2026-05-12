@@ -1,8 +1,16 @@
-// This is a server-side implementation using EmailJS
-// You'll need to install: npm install @emailjs/browser
+// Server-side EmailJS proxy — dev-only; configure env + rate limits before enabling in production.
+
+import { notFoundUnlessDev } from '../../lib/api-guards.js';
+import { rateLimitJsonResponse } from '../../lib/spam-guard.js';
 
 export async function POST({ request }) {
     try {
+        const denied = notFoundUnlessDev();
+        if (denied) return denied;
+
+        const tooMany = rateLimitJsonResponse('emailjs-proxy', request, 20, 3_600_000);
+        if (tooMany) return tooMany;
+
         const { name, email, subject, message, department } = await request.json();
 
         // Validate required fields
@@ -16,11 +24,16 @@ export async function POST({ request }) {
             });
         }
 
-        // EmailJS configuration
-        // You'll need to set these up in your EmailJS account
-        const EMAILJS_SERVICE_ID = process.env.EMAILJS_SERVICE_ID || 'your_service_id';
-        const EMAILJS_TEMPLATE_ID = process.env.EMAILJS_TEMPLATE_ID || 'your_template_id';
-        const EMAILJS_PUBLIC_KEY = process.env.EMAILJS_PUBLIC_KEY || 'your_public_key';
+        const EMAILJS_SERVICE_ID = String(process.env.EMAILJS_SERVICE_ID || '').trim();
+        const EMAILJS_TEMPLATE_ID = String(process.env.EMAILJS_TEMPLATE_ID || '').trim();
+        const EMAILJS_PUBLIC_KEY = String(process.env.EMAILJS_PUBLIC_KEY || '').trim();
+
+        if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+            return new Response(JSON.stringify({ success: false, error: 'EmailJS is not configured' }), {
+                status: 503,
+                headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
+            });
+        }
 
         // Email template parameters
         const templateParams = {

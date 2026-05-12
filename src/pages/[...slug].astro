@@ -142,6 +142,86 @@ function generateSummary(bodyContent: any[], maxSentences = 3, maxChars = 420) {
 
 const aiSummary = generateSummary(safeBody);
 
+/** Full article plain text for TTS (body blocks only; capped for page weight) */
+function extractFullArticlePlainText(bodyContent: any[], maxChars = 24000) {
+  if (!Array.isArray(bodyContent) || bodyContent.length === 0) return '';
+
+  const paragraphs = bodyContent
+    .map((block: any) => {
+      if (!block || !block.children || !Array.isArray(block.children) || block.children.length === 0) return '';
+      const validChildren = block.children.filter((c: any) => c != null);
+      if (validChildren.length === 0) return '';
+
+      const text = validChildren
+        .map((child: any) => {
+          if (!child || !child.text || typeof child.text !== 'string') return '';
+          return child.text;
+        })
+        .filter((t: string) => t && typeof t === 'string' && t.length > 0)
+        .join(' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+      return text;
+    })
+    .filter((p: string) => p && typeof p === 'string' && p.length > 0);
+
+  if (paragraphs.length === 0) return '';
+
+  let out = paragraphs.join(' ').replace(/\s+/g, ' ').trim();
+  if (!out) return '';
+  if (out.length > maxChars) {
+    const truncated = out.slice(0, maxChars);
+    const cut = truncated.lastIndexOf(' ');
+    out = (cut > Math.floor(maxChars * 0.88) ? truncated.slice(0, cut) : truncated) + '\u2026';
+  }
+  return out;
+}
+
+const aiFullArticleText = extractFullArticlePlainText(safeBody);
+
+/** Per-block offsets into normalized body plain text — same join order as extractFullArticlePlainText */
+function plainTextFromSanityBlock(block: any): string {
+  if (!block || !block.children || !Array.isArray(block.children) || block.children.length === 0) return '';
+  const validChildren = block.children.filter((c: any) => c != null);
+  if (validChildren.length === 0) return '';
+  return validChildren
+    .map((child: any) => {
+      if (!child || !child.text || typeof child.text !== 'string') return '';
+      return child.text;
+    })
+    .filter((t: string) => t && typeof t === 'string' && t.length > 0)
+    .join(' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+type TtsBodySegment = { blockIndex: number; bodyStart: number; bodyEnd: number };
+
+function buildTtsBodySegments(bodyContent: any[]): TtsBodySegment[] {
+  const segs: TtsBodySegment[] = [];
+  let off = 0;
+  if (!Array.isArray(bodyContent)) return segs;
+  bodyContent.forEach((block: any, blockIndex: number) => {
+    const raw = plainTextFromSanityBlock(block);
+    const t = raw.replace(/\s+/g, ' ').trim();
+    if (!t.length) return;
+    if (segs.length) off += 1;
+    const bodyStart = off;
+    const bodyEnd = off + t.length;
+    segs.push({ blockIndex, bodyStart, bodyEnd });
+    off += t.length;
+  });
+  return segs;
+}
+
+const ttsBodySegments: TtsBodySegment[] = buildTtsBodySegments(safeBody);
+
+/** For quick lookup while rendering `{blockIndex}` */
+const segmentIndexByBlockIndex: Record<number, number> = {};
+ttsBodySegments.forEach((seg, i) => {
+  segmentIndexByBlockIndex[seg.blockIndex] = i;
+});
+
 // Use only the article's main image from Sanity for social sharing (og:image / twitter:image) on all platforms.
 // Build an absolute Sanity CDN URL so preview works on both msu-tcto-website.vercel.app and msutcto.edu.ph.
 const SANITY_CDN_BASE = 'https://cdn.sanity.io';
@@ -302,29 +382,68 @@ if (safeBody && safeBody.length > 0) {
   twitterImageAlt={shareImageAlt}
 >
   <!-- Premium Navigation with Glass Morphism Effect -->
-  <Navbar path={currentPath} client:visible />
+  <Navbar path={currentPath} client:load />
   
   <main class="slug-page bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans antialiased overflow-x-hidden transition-colors duration-300 min-w-0">
     <!-- AI Summary Floating Button & Drawer -->
-    <button 
-      id="ai-summary-button" 
-      class="ai-summary-fab fixed z-[9900] flex items-center justify-center gap-2 font-semibold text-xs sm:text-sm tracking-tight touch-manipulation rounded-full bg-gradient-to-b from-msu-main-color to-msu-deep-ocean text-white-pure shadow-2xl hover:shadow-[0_10px_30px_rgba(0,0,0,0.25)] transition-all duration-300 w-max shrink-0
+    <div
+      id="ai-summary-fab-wrap"
+      class="ai-summary-fab fixed z-[9900] flex flex-row items-stretch font-semibold text-xs sm:text-sm tracking-tight touch-manipulation rounded-full bg-gradient-to-b from-msu-main-color to-msu-deep-ocean text-white-pure shadow-2xl hover:shadow-[0_10px_30px_rgba(0,0,0,0.25)] transition-all duration-300 w-max shrink-0 overflow-hidden
         right-4 bottom-[5.5rem] top-auto translate-y-0 left-auto
         sm:right-4 sm:bottom-24 sm:top-auto sm:translate-y-0
         md:right-5 md:bottom-[8rem] md:top-auto md:translate-y-0
         lg:right-8 lg:top-1/2 lg:bottom-auto lg:-translate-y-1/2
         xl:right-8
-        min-w-[48px] min-h-[48px] px-3 py-3
-        sm:min-w-[52px] sm:min-h-[52px] sm:px-4 sm:py-3.5
-        md:min-w-[56px] md:min-h-[56px] md:px-4 md:py-3
+        min-h-[48px]
+        sm:min-h-[52px]
+        md:min-h-[56px]
         hover:scale-105 active:scale-95 lg:hover:-translate-y-[55%] lg:hover:scale-100"
-      aria-label="Open AI summary"
+      role="group"
+      aria-label="AI summary and voice"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 sm:w-5 sm:h-5 xs:w-5 xs:h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7H7m6 4H7m6 4H7m6-8h1a2 2 0 012 2v6a2 2 0 01-2 2h-1l-4 3v-3H9a2 2 0 01-2-2V9a2 2 0 012-2h4z" />
-      </svg>
-      <span class="hidden sm:inline">AI Summary</span>
-    </button>
+      <button
+        type="button"
+        id="ai-voice-avatar-fab"
+        class="relative flex flex-col items-center justify-center pl-3 pr-2 py-3 sm:pl-4 sm:pr-2 shrink-0 min-w-[48px] min-h-[48px] bg-transparent hover:bg-black/15 active:bg-black/25 border-r border-white/25 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white-pure rounded-none rounded-l-full"
+        aria-pressed="false"
+        aria-label="Play or pause Delphina Voice AI"
+      >
+        <span class="pointer-events-none absolute inset-1 rounded-xl ring-2 ring-transparent ai-news-avatar-ring opacity-0 transition-opacity duration-300" id="fab-avatar-playing-ring"></span>
+        <img
+          src="/images/AIDOLPHINE.png"
+          alt="Delphina Voice AI"
+          class="relative z-[1] w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover flex-shrink-0 border border-white/55 shadow-sm pointer-events-none"
+          loading="lazy"
+          decoding="async"
+        />
+      </button>
+      <button
+        type="button"
+        id="ai-summary-button"
+        class="flex items-center justify-center gap-2 pr-3 pl-1.5 py-2.5 sm:pr-4 sm:pl-2 min-h-[48px] sm:min-h-[52px] min-w-0 shrink bg-transparent hover:bg-black/15 active:bg-black/25 transition-colors rounded-none rounded-r-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white-pure touch-manipulation"
+        aria-label="Open AI summary"
+      >
+        <span class="inline-flex sm:hidden items-center gap-1.5 ai-summary-read-mobile">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.5C10.2 5.5 8.4 5 6 5a3 3 0 00-3 3v9.5a.5.5 0 00.7.45C5.1 17.3 7 17 9 17c1.3 0 2.3.2 3 .7m0-11.2C13.8 5.5 15.6 5 18 5a3 3 0 013 3v9.5a.5.5 0 01-.7.45C18.9 17.3 17 17 15 17c-1.3 0-2.3.2-3 .7m0-11.2v11.2" />
+          </svg>
+          <span class="text-[0.72rem] font-semibold tracking-wide uppercase">Read</span>
+        </span>
+        <!-- <img
+          src="/images/AIDOLPHINE.png"
+          alt="Delphina Voice AI"
+          class="hidden sm:block w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-full object-cover flex-shrink-0 border border-white/40 shadow-sm"
+          loading="lazy"
+          decoding="async"
+        /> -->
+        <span class="hidden sm:inline-flex items-center gap-1 whitespace-nowrap ai-summary-label-desktop">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.5C10.2 5.5 8.4 5 6 5a3 3 0 00-3 3v9.5a.5.5 0 00.7.45C5.1 17.3 7 17 9 17c1.3 0 2.3.2 3 .7m0-11.2C13.8 5.5 15.6 5 18 5a3 3 0 013 3v9.5a.5.5 0 01-.7.45C18.9 17.3 17 17 15 17c-1.3 0-2.3.2-3 .7m0-11.2v11.2" />
+          </svg>
+          Delphina Summary
+        </span>
+      </button>
+    </div>
 
     <div 
       id="ai-summary-panel" 
@@ -333,14 +452,18 @@ if (safeBody && safeBody.length > 0) {
     >
       <div class="flex items-center justify-between px-4 py-3 sm:px-5 sm:py-4 border-b border-gray-200 dark:border-gray-800 safe-area-top">
         <div class="flex items-center gap-2">
-          <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-br from-msu-main-color to-msu-deep-ocean flex items-center justify-center shadow-md flex-shrink-0">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-5 sm:h-5 text-white-pure" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7H7m6 4H7m6 4H7m6-8h1a2 2 0 012 2v6a2 2 0 01-2 2h-1l-4 3v-3H9a2 2 0 01-2-2V9a2 2 0 012-2h4z" />
-            </svg>
+          <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-br from-msu-main-color/25 to-msu-deep-ocean/30 flex items-center justify-center shadow-md flex-shrink-0 p-[1px]">
+            <img
+              src="/images/AIDOLPHINE.png"
+              alt="AI summary logo"
+              class="w-full h-full rounded-full object-cover border border-white/50 dark:border-white/25"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
           <div class="min-w-0 flex-1">
-            <p class="text-xs sm:text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">AI Summary</p>
-            <p class="text-[0.625rem] sm:text-xs text-gray-500 dark:text-gray-400 truncate">Quick takeaways</p>
+            <p class="text-xs sm:text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">News &amp; summary</p>
+            <p class="text-[0.625rem] sm:text-xs text-gray-500 dark:text-gray-400 truncate">Quick takeaways &amp; Delphina Voice AI</p>
           </div>
         </div>
         <button id="ai-summary-close" class="p-2 sm:p-2.5 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 active:bg-gray-200 dark:active:bg-gray-700 transition touch-manipulation min-w-[44px] min-h-[44px] flex items-center justify-center flex-shrink-0" aria-label="Close AI summary">
@@ -350,8 +473,32 @@ if (safeBody && safeBody.length > 0) {
         </button>
       </div>
       <div class="flex-1 overflow-y-auto px-4 py-3 sm:px-5 sm:py-4 overscroll-contain">
-        <div class="bg-gray-50 dark:bg-gray-800/70 border border-gray-200 dark:border-gray-700 rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-inner">
-          <p id="ai-summary-text" class="text-xs sm:text-sm leading-5 sm:leading-6 text-gray-800 dark:text-gray-200"></p>
+        <div class="flex flex-row gap-3 sm:gap-4 items-start">
+          <button
+            type="button"
+            id="ai-voice-avatar-panel"
+            class="relative flex flex-col items-center justify-center flex-shrink-0 w-[4.5rem] h-[4.5rem] sm:w-[5.25rem] sm:h-[5.25rem] rounded-2xl border-2 border-msu-main-color/40 dark:border-msu-main-color/55 bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 shadow-md hover:shadow-lg hover:border-msu-main-color/70 active:scale-[0.98] transition-all touch-manipulation"
+            aria-pressed="false"
+            aria-label="Play or pause Delphina Voice AI reading the full article"
+          >
+            <span class="pointer-events-none absolute inset-0.5 rounded-[0.85rem] ai-news-avatar-ring opacity-0 transition-opacity" id="panel-avatar-playing-ring"></span>
+            <img
+              src="/images/AIDOLPHINE.png"
+              alt="Delphina Voice AI avatar"
+              class="relative z-[1] w-14 h-14 sm:w-[3.75rem] sm:h-[3.75rem] rounded-full object-cover border border-msu-main-color/40 dark:border-purple-300/40 shadow-sm pointer-events-none"
+              loading="lazy"
+              decoding="async"
+            />
+            <span class="relative z-[1] mt-0.5 text-[0.5625rem] sm:text-[0.625rem] font-bold uppercase tracking-wide text-msu-main-color dark:text-purple-300">Delphina</span>
+          </button>
+          <div class="min-w-0 flex-1">
+            <div class="bg-gray-50 dark:bg-gray-800/70 border border-gray-200 dark:border-gray-700 rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-inner">
+              <p id="ai-summary-text" class="text-xs sm:text-sm leading-5 sm:leading-6 text-gray-800 dark:text-gray-200"></p>
+            </div>
+            <p class="mt-2 text-[0.625rem] sm:text-[0.6875rem] text-gray-500 dark:text-gray-400 leading-snug">
+              Delphina Voice AI reads the full story when available (neural voice if configured). Summary text above is shortened for scanning.
+            </p>
+          </div>
         </div>
         <div class="mt-3 sm:mt-4 space-y-1.5 sm:space-y-2">
           <div class="flex items-center gap-2 sm:gap-3 text-[0.625rem] sm:text-xs text-gray-500 dark:text-gray-400 flex-wrap">
@@ -367,7 +514,20 @@ if (safeBody && safeBody.length > 0) {
           </p>
         </div>
       </div>
-      <div class="px-4 py-3 sm:px-5 sm:py-4 border-t border-gray-200 dark:border-gray-800 flex gap-2 sm:gap-3 safe-area-bottom">
+      <div class="px-4 py-3 sm:px-5 sm:py-4 border-t border-gray-200 dark:border-gray-800 flex flex-col gap-2 safe-area-bottom">
+        <button
+          id="ai-summary-listen"
+          type="button"
+          class="w-full inline-flex items-center justify-center gap-2 rounded-lg sm:rounded-xl px-3 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold border-2 border-msu-main-color text-msu-main-color dark:text-msu-main-color hover:bg-msu-main-color/10 dark:hover:bg-msu-main-color/20 active:scale-[0.98] transition touch-manipulation min-h-[44px]"
+          aria-pressed="false"
+          aria-label="Listen to full article with Delphina Voice AI"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-[18px] sm:h-[18px] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+          </svg>
+          <span id="ai-summary-listen-label">Listen to full article</span>
+        </button>
+        <div class="flex gap-2 sm:gap-3">
         <button id="ai-summary-copy" class="flex-1 inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-msu-main-color text-white-pure rounded-lg sm:rounded-xl px-3 py-2.5 sm:px-4 sm:py-3 text-xs sm:text-sm font-semibold shadow-lg hover:shadow-xl active:shadow-md active:scale-95 transition touch-manipulation min-h-[44px]">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16h8m-8-4h8m-8-4h8M5 8h-.01M5 12h-.01M5 16h-.01M19 5H9a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2z" />
@@ -379,6 +539,7 @@ if (safeBody && safeBody.length > 0) {
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
           </svg>
         </button>
+        </div>
       </div>
     </div>
 
@@ -515,7 +676,10 @@ if (safeBody && safeBody.length > 0) {
       </div>
 
       <!-- Enhanced Professional Article Body - responsive typography -->
-      <article class="article-content prose prose-sm sm:prose-base md:prose-lg lg:prose-xl max-w-none mx-auto transition-colors duration-300 overflow-x-hidden [&_img]:max-w-full [&_iframe]:max-w-full">
+      <article
+        id="article-reading-root"
+        class="article-content article-ai-reading-scope prose prose-sm sm:prose-base md:prose-lg lg:prose-xl max-w-none mx-auto transition-colors duration-300 overflow-x-hidden [&_img]:max-w-full [&_iframe]:max-w-full"
+      >
         {
           (safeBody && safeBody.length > 0) ? safeBody.map((block: any, blockIndex: number) => {
             // Skip null/undefined blocks
@@ -572,8 +736,16 @@ if (safeBody && safeBody.length > 0) {
                 h6: 'text-base xl:text-lg lg:text-base md:text-sm font-medium mt-6 mb-3 text-gray-700 dark:text-gray-300 uppercase tracking-wide'
               };
               
+              const ttsAnch = typeof segmentIndexByBlockIndex[blockIndex] === 'number';
+              const ttsCn = `${headingClasses[block.style as keyof typeof headingClasses]}${ttsAnch ? ' ai-tts-anchor' : ''}`;
+              const ttsProps = ttsAnch
+                ? {
+                    'data-ai-tts-block': String(blockIndex),
+                    id: `ai-tts-b-${blockIndex}`,
+                  }
+                : {};
               return (
-                <HeadingTag class={headingClasses[block.style as keyof typeof headingClasses]}>
+                <HeadingTag class={ttsCn} {...ttsProps}>
                   {headingText}
                 </HeadingTag>
               );
@@ -582,8 +754,16 @@ if (safeBody && safeBody.length > 0) {
             // Handle blockquotes
             if (block.style === 'blockquote') {
               const quoteText = block.children?.map((c: any) => c?.text).join('') || '';
+              const ttsAnchBq = typeof segmentIndexByBlockIndex[blockIndex] === 'number';
+              const bqCls = `border-l-4 border-msu-main-color bg-gray-50 dark:bg-gray-800/50 pl-6 pr-6 py-5 my-8 italic text-lg xl:text-xl text-gray-700 dark:text-gray-300 rounded-r-lg shadow-sm${ttsAnchBq ? ' ai-tts-anchor' : ''}`;
+              const bqProps = ttsAnchBq
+                ? {
+                    'data-ai-tts-block': String(blockIndex),
+                    id: `ai-tts-b-${blockIndex}`,
+                  }
+                : {};
               return (
-                <blockquote class="border-l-4 border-msu-main-color bg-gray-50 dark:bg-gray-800/50 pl-6 pr-6 py-5 my-8 italic text-lg xl:text-xl text-gray-700 dark:text-gray-300 rounded-r-lg shadow-sm">
+                <blockquote class={bqCls} {...bqProps}>
                   <svg class="w-8 h-8 text-msu-main-color/30 mb-2" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
                   </svg>
@@ -596,12 +776,21 @@ if (safeBody && safeBody.length > 0) {
             if (block.listItem === 'bullet' || block.listItem === 'number') {
               const listText = block.children?.map((c: any) => c?.text).join('') || '';
               const ListTag = block.listItem === 'bullet' ? 'ul' : 'ol';
-              
+              const ttsAnchLi = typeof segmentIndexByBlockIndex[blockIndex] === 'number';
+              const wrapCls = `${
+                block.listItem === 'bullet'
+                  ? 'list-disc list-inside space-y-2 my-6 ml-6 text-gray-800 dark:text-gray-200'
+                  : 'list-decimal list-inside space-y-2 my-6 ml-6 text-gray-800 dark:text-gray-200'
+              }${ttsAnchLi ? ' ai-tts-anchor' : ''}`;
+              const wrapProps = ttsAnchLi
+                ? {
+                    'data-ai-tts-block': String(blockIndex),
+                    id: `ai-tts-b-${blockIndex}`,
+                  }
+                : {};
+
               return (
-                <ListTag class={block.listItem === 'bullet' ? 
-                  'list-disc list-inside space-y-2 my-6 ml-6 text-gray-800 dark:text-gray-200' : 
-                  'list-decimal list-inside space-y-2 my-6 ml-6 text-gray-800 dark:text-gray-200'
-                }>
+                <ListTag class={wrapCls} {...wrapProps}>
                   <li class="text-base xl:text-lg leading-relaxed pl-2">
                     {listText}
                   </li>
@@ -670,16 +859,37 @@ if (safeBody && safeBody.length > 0) {
                     
                     // Regular paragraph with enhanced styling
                     const isFirstParagraph = blockIndex === 0 && childIndex === 0;
-                    
+                    const ttsAnchP =
+                      typeof segmentIndexByBlockIndex[blockIndex] === 'number';
+                    const ttsExtras = ttsAnchP
+                      ? {
+                          'data-ai-tts-block': String(blockIndex),
+                          id:
+                            typeof childIndex === 'number'
+                              ? `ai-tts-b-${blockIndex}-c-${childIndex}`
+                              : undefined,
+                          className: `${isFirstParagraph ? 'first-paragraph text-lg xl:text-xl font-normal ' : ''}article-paragraph ai-tts-anchor ai-read-line-bg text-gray-800 dark:text-gray-200 leading-relaxed xl:leading-loose lg:leading-relaxed md:leading-relaxed mb-6 xl:mb-7 lg:mb-6 md:mb-5 sm:mb-4 text-base xl:text-lg lg:text-base md:text-base sm:text-sm`,
+                        }
+                      : null;
+
                     return (
-                      <p class={`
+                      <p
+                        class={
+                          ttsExtras
+                            ? ttsExtras.className
+                            : `
                         article-paragraph
                         text-gray-800 dark:text-gray-200 
                         leading-relaxed xl:leading-loose lg:leading-relaxed md:leading-relaxed
                         mb-6 xl:mb-7 lg:mb-6 md:mb-5 sm:mb-4
                         text-base xl:text-lg lg:text-base md:text-base sm:text-sm
                         ${isFirstParagraph ? 'first-paragraph text-lg xl:text-xl font-normal' : ''}
-                      `}>
+                      `
+                        }
+                        {...(ttsExtras
+                          ? { 'data-ai-tts-block': ttsExtras['data-ai-tts-block'], id: ttsExtras.id || undefined }
+                          : {})}
+                      >
                         {isFirstParagraph && (
                           <span class="first-letter:text-5xl first-letter:font-bold first-letter:text-msu-main-color first-letter:mr-2 first-letter:float-left first-letter:leading-none first-letter:mt-1"></span>
                         )}
@@ -1085,7 +1295,15 @@ if (safeBody && safeBody.length > 0) {
   </div>
 </Layout2>
 
-<script define:vars={{ galleryImagesData: galleryImages, aiSummaryText: aiSummary }}>
+<script
+  define:vars={{
+    galleryImagesData: galleryImages,
+    aiSummaryText: aiSummary,
+    articleTitleForVoice: title,
+    aiFullArticleText: aiFullArticleText,
+    ttsBodySegmentsJson: JSON.stringify(ttsBodySegments),
+  }}
+>
   // Gallery images data
   const galleryImages = (Array.isArray(galleryImagesData) ? galleryImagesData : []).map((img, index) => ({
     url: img?.url || '',
@@ -1109,6 +1327,12 @@ if (safeBody && safeBody.length > 0) {
   const summaryCopy = document.getElementById('ai-summary-copy');
   const summaryText = document.getElementById('ai-summary-text');
   const summaryCopyLabel = document.getElementById('ai-summary-copy-label');
+  const summaryListen = document.getElementById('ai-summary-listen');
+  const summaryListenLabel = document.getElementById('ai-summary-listen-label');
+  const voiceAvatarFab = document.getElementById('ai-voice-avatar-fab');
+  const voiceAvatarPanel = document.getElementById('ai-voice-avatar-panel');
+  const fabAvatarRing = document.getElementById('fab-avatar-playing-ring');
+  const panelAvatarRing = document.getElementById('panel-avatar-playing-ring');
 
   // Prevent body scroll when modal is open (better for mobile)
   let scrollY = 0;
@@ -1321,6 +1545,594 @@ if (safeBody && safeBody.length > 0) {
       summaryText.textContent = aiSummaryText || 'Summary not available.';
     }
 
+    /** News TTS — OpenAI neural (server) when OPENAI_API_KEY is set; else neural-style browser voices */
+    let newsTtsPlaying = false;
+    let openAiSpeechAbort = null;
+    /** @type {HTMLAudioElement | null} */
+    let currentSpeechAudio = null;
+
+    /** AI read-along segments (offsets into normalized body plain text; built server-side) */
+    /** @type {{ blockIndex: number; bodyStart: number; bodyEnd: number }[]} */
+    let ttsSegmentList = [];
+    try {
+      ttsSegmentList =
+        typeof ttsBodySegmentsJson === 'string' && ttsBodySegmentsJson.trim()
+          ? JSON.parse(ttsBodySegmentsJson)
+          : [];
+    } catch (_) {
+      ttsSegmentList = [];
+    }
+
+    /** @type {HTMLElement | null} */
+    let aiReadActiveEl = null;
+    let aiReadNarrSnapshot = '';
+    let aiReadBodyBeginsAt = -1;
+    let aiReadNeuralChunkStarts = /** @type {number[]} */ ([]);
+    let aiReadNeuralChunks = /** @type {string[]} */ ([]);
+
+    /** @type {number | undefined} */
+    let aiReadScrollScheduled = undefined;
+    let aiReadLastScrollAt = 0;
+
+    /** Body normalization — mirrors buildNewsNarration */
+    function getMatchedBodyNormalizedForReadalong() {
+      const summary =
+        aiSummaryText && typeof aiSummaryText === 'string' ? aiSummaryText.trim() : '';
+      let fullRaw = typeof aiFullArticleText === 'string' ? aiFullArticleText.trim() : '';
+      let body =
+        fullRaw.length >= 60 ? fullRaw : summaryText?.textContent?.trim?.() || summary || '';
+      body = `${body || ''}`.replace(/\s+/g, ' ').trim();
+      return body === 'Summary not available.' ? '' : body;
+    }
+
+    function narrationIndexWhereBodyBegins(fullNarration) {
+      const body = getMatchedBodyNormalizedForReadalong();
+      if (!body || typeof fullNarration !== 'string' || !fullNarration.length) return -1;
+      const snip = body.slice(0, Math.min(160, Math.max(16, Math.floor(body.length * 0.28))));
+      if (snip.length < 8) return -1;
+      let hit = fullNarration.indexOf(snip);
+      if (hit < 0) hit = fullNarration.lastIndexOf(snip);
+      return hit >= 0 ? hit : -1;
+    }
+
+    function beginAiReadAlongSession(normalizedFullNarration, neuralChunks) {
+      aiReadNarrSnapshot = typeof normalizedFullNarration === 'string' ? normalizedFullNarration : '';
+      aiReadBodyBeginsAt = narrationIndexWhereBodyBegins(aiReadNarrSnapshot);
+      aiReadNeuralChunkStarts = [];
+      aiReadNeuralChunks = [];
+      if (neuralChunks && Array.isArray(neuralChunks) && neuralChunks.length) {
+        aiReadNeuralChunks = neuralChunks.filter((c) => typeof c === 'string');
+        let cum = 0;
+        aiReadNeuralChunks.forEach((c, i) => {
+          aiReadNeuralChunkStarts[i] = cum;
+          cum += c.length;
+        });
+      }
+    }
+
+    function endAiReadAlongSession() {
+      clearAiReadHighlight();
+      aiReadNeuralChunkStarts = [];
+      aiReadNeuralChunks = [];
+      aiReadNarrSnapshot = '';
+      aiReadBodyBeginsAt = -1;
+    }
+
+    function clearAiReadHighlight() {
+      document.querySelectorAll('.article-ai-reading-scope .ai-tts-reading').forEach((node) => {
+        try {
+          node.classList.remove('ai-tts-reading');
+        } catch (_) {
+          /**/
+        }
+      });
+      aiReadActiveEl = null;
+    }
+
+    /** @param {HTMLElement | null | undefined} anchor */
+    function scrollArticleToHighlight(anchor) {
+      if (!anchor?.scrollIntoView) return;
+      const now = Date.now();
+      if (now - aiReadLastScrollAt < 380) return;
+      aiReadLastScrollAt = now;
+      if (aiReadScrollScheduled) {
+        cancelAnimationFrame(aiReadScrollScheduled);
+        aiReadScrollScheduled = undefined;
+      }
+      aiReadScrollScheduled = requestAnimationFrame(() => {
+        try {
+          anchor.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+        } catch (_) {
+          try {
+            anchor.scrollIntoView({ behavior: 'auto', block: 'center', inline: 'nearest' });
+          } catch (_) {
+            /**/
+          }
+        }
+        aiReadScrollScheduled = undefined;
+      });
+    }
+
+    /**
+     * Fallback for browsers where `onboundary` is inconsistent.
+     * @param {string} utterText
+     * @param {number} utterStart
+     * @param {number} rate
+     * @returns {() => void}
+     */
+    function startUtteranceReadAlongFallback(utterText, utterStart, rate) {
+      const textLen = typeof utterText === 'string' ? utterText.length : 0;
+      if (!textLen) return () => {};
+      const words = Math.max(1, utterText.trim().split(/\s+/).length);
+      const cps = Math.max(8, 13 * (typeof rate === 'number' ? rate : 1));
+      const estimatedMs = Math.max(900, Math.round((textLen / cps) * 1000));
+      const tickEvery = 170;
+      let elapsed = 0;
+      const timer = window.setInterval(() => {
+        if (!newsTtsPlaying) return;
+        elapsed += tickEvery;
+        const frac = Math.min(1, elapsed / estimatedMs);
+        const relChar = Math.min(textLen - 1, Math.floor(frac * textLen));
+        aiReadAlongFromAbsoluteNarrAbs(relChar, utterStart);
+      }, tickEvery);
+      return () => {
+        try {
+          window.clearInterval(timer);
+        } catch (_) {
+          /**/
+        }
+      };
+    }
+
+    /** @param {number} innerChar offset into normalized BODY string (server offsets) */
+    function setAiHighlightForBodyInnerOffset(innerChar) {
+      if (typeof innerChar !== 'number' || innerChar < 0 || !ttsSegmentList.length) return;
+
+      let seg = /** @type {(typeof ttsSegmentList)[0] | undefined} */ (undefined);
+      for (let i = 0; i < ttsSegmentList.length; i++) {
+        const s = ttsSegmentList[i];
+        if (innerChar >= s.bodyStart && innerChar < s.bodyEnd) {
+          seg = s;
+          break;
+        }
+      }
+      const lastSeg = ttsSegmentList[ttsSegmentList.length - 1];
+      if (!seg && lastSeg && innerChar >= lastSeg.bodyStart && lastSeg.bodyEnd !== undefined)
+        seg = lastSeg;
+      if (!seg) return;
+
+      const anchor = /** @type {HTMLElement | null} */ (
+        document.querySelector(`[data-ai-tts-block="${String(seg.blockIndex)}"]`)
+      );
+      if (!anchor) return;
+
+      if (aiReadActiveEl && aiReadActiveEl !== anchor)
+        aiReadActiveEl.classList.remove('ai-tts-reading');
+      aiReadActiveEl = anchor;
+      aiReadActiveEl.classList.add('ai-tts-reading');
+      scrollArticleToHighlight(aiReadActiveEl);
+    }
+
+    /**
+     * @param {number} relChar within current utterance
+     * @param {number} absoluteUtteranceBase offset into full narration
+     */
+    function aiReadAlongFromAbsoluteNarrAbs(relChar, absoluteUtteranceBase) {
+      if (!newsTtsPlaying) return;
+      if (typeof relChar !== 'number' || relChar < 0) return;
+      const abs =
+        typeof absoluteUtteranceBase === 'number'
+          ? absoluteUtteranceBase + relChar
+          : relChar;
+      let bodyBeg = aiReadBodyBeginsAt >= 0 ? aiReadBodyBeginsAt : narrationIndexWhereBodyBegins(aiReadNarrSnapshot);
+      if (bodyBeg < 0 || !aiReadNarrSnapshot) return;
+      if (abs < bodyBeg) return;
+
+      const inner = Math.max(0, abs - bodyBeg);
+      const bn = getMatchedBodyNormalizedForReadalong();
+      if (!bn || !bn.length) return;
+      if (inner >= bn.length) return;
+      setAiHighlightForBodyInnerOffset(inner);
+    }
+
+    /**
+     * Neural MP3: progress through chunk i (0–1).
+     * @param {number} chunkIx
+     * @param {number} frac
+     */
+    function aiReadAlongNeuralFrac(chunkIx, frac) {
+      if (!newsTtsPlaying || !ttsSegmentList.length) return;
+      if (!aiReadNeuralChunks.length || chunkIx < 0 || chunkIx >= aiReadNeuralChunks.length)
+        return;
+
+      const f = typeof frac === 'number' ? Math.min(1, Math.max(0, frac)) : 0;
+      const chunk = aiReadNeuralChunks[chunkIx];
+      const startFull =
+        typeof aiReadNeuralChunkStarts[chunkIx] === 'number' ? aiReadNeuralChunkStarts[chunkIx] : 0;
+      const posInFull = Math.min(
+        startFull + Math.floor(f * Math.max(1, chunk.length)),
+        Math.max(0, aiReadNarrSnapshot.length - 1),
+      );
+
+      let bodyBeg = aiReadBodyBeginsAt >= 0 ? aiReadBodyBeginsAt : narrationIndexWhereBodyBegins(aiReadNarrSnapshot);
+      if (bodyBeg < 0) return;
+      if (posInFull < bodyBeg) return;
+
+      const inner = posInFull - bodyBeg;
+      const bn = getMatchedBodyNormalizedForReadalong();
+      if (!bn || !bn.length) return;
+      if (inner < 0 || inner >= bn.length) return;
+      setAiHighlightForBodyInnerOffset(inner);
+    }
+
+    function setNewsPlayingUi(active) {
+      newsTtsPlaying = active;
+      if (summaryListenLabel) summaryListenLabel.textContent = active ? 'Stop' : 'Listen to full article';
+      summaryListen?.setAttribute('aria-pressed', active ? 'true' : 'false');
+      voiceAvatarFab?.setAttribute('aria-pressed', active ? 'true' : 'false');
+      voiceAvatarPanel?.setAttribute('aria-pressed', active ? 'true' : 'false');
+      voiceAvatarFab?.classList.toggle('ai-news-avatar--playing', !!active);
+      voiceAvatarPanel?.classList.toggle('ai-news-avatar--playing', !!active);
+      if (fabAvatarRing)
+        fabAvatarRing.style.opacity = active ? '1' : '0';
+      if (panelAvatarRing)
+        panelAvatarRing.style.opacity = active ? '1' : '0';
+    }
+
+    function finishNewsPlayback() {
+      endAiReadAlongSession();
+      newsTtsPlaying = false;
+      setNewsPlayingUi(false);
+    }
+
+    function cancelNewsSpeech() {
+      try {
+        openAiSpeechAbort?.abort?.();
+      } catch (_) {
+        /**/
+      }
+      openAiSpeechAbort = null;
+      if (currentSpeechAudio) {
+        try {
+          currentSpeechAudio.pause();
+          const u = currentSpeechAudio.src;
+          if (u && u.startsWith('blob:')) URL.revokeObjectURL(u);
+        } catch (_) {
+          /**/
+        }
+        currentSpeechAudio = null;
+      }
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      finishNewsPlayback();
+    }
+
+    /**
+     * @param {string} text
+     * @param {number} maxChars
+     */
+    function chunkTextForSpeech(text, maxChars) {
+      const chunks = [];
+      let rest = (text || '').trim().replace(/\s+/g, ' ');
+      if (!rest.length) return chunks;
+
+      while (rest.length > maxChars) {
+        const dot = rest.lastIndexOf('. ', maxChars);
+        if (dot !== -1 && dot > maxChars * 0.12) {
+          chunks.push(rest.slice(0, dot + 1).trim());
+          rest = rest.slice(dot + 2).trim();
+          continue;
+        }
+        const sp = rest.lastIndexOf(' ', maxChars);
+        if (sp > maxChars * 0.08) {
+          chunks.push(rest.slice(0, sp).trim());
+          rest = rest.slice(sp + 1).trim();
+          continue;
+        }
+        chunks.push(rest.slice(0, maxChars).trim());
+        rest = rest.slice(maxChars).trim();
+      }
+      if (rest.length) chunks.push(rest);
+      return chunks;
+    }
+
+    function pickReporterFemaleVoice() {
+      const voices = window.speechSynthesis.getVoices();
+      if (!voices || voices.length === 0) return null;
+
+      const neuralPreferred = voices.find((v) => {
+        const n = v.name || '';
+        const lng = (v.lang || '').toLowerCase();
+        if (!/^en([-_])/i.test(lng)) return false;
+        if (/\b(Male|Guy|Aaron|Guy|Fred)\b/i.test(n)) return false;
+        return (
+          /\bNeural\b|\bNatural\b/i.test(n) ||
+          /Jenny|Sonia|Samantha|Sara|Aria|Karen|Google.*English.*Female/i.test(n)
+        );
+      });
+      if (neuralPreferred) return neuralPreferred;
+
+      const namePatterns = [
+        /English\s*\(?US\)?\s+Female/i,
+        /English\s*\(?UK\)?\s+Female/i,
+        /Google\s+.*Female/i,
+        /^Microsoft\s+.*(?:Zira|Jenny|Sonia|Aria\b|Aria\s+Natural)/i,
+        /\bFemale\b/i,
+        /Samantha/i,
+        /Karen\b/i,
+        /Victoria/i,
+        /Moira/i,
+        /Serena\b/i,
+        /Fiona/i,
+        /Tessa\b/i,
+      ];
+
+      for (const re of namePatterns) {
+        const hit = voices.find((v) => re.test(v.name));
+        if (hit) return hit;
+      }
+
+      const enVoices = voices.filter((v) => /^en([-_])/i.test((v.lang || '').replace('_', '-')));
+      const hinted = enVoices.find((v) =>
+        /female|Samantha|Karen|Jenny|Zira|Sonia|Aria/i.test(v.name)
+      );
+      if (hinted) return hinted;
+      return (
+        enVoices.find((v) => /en-US|en-GB|en-AU/i.test(v.lang)) || enVoices[0] || voices[0]
+      );
+    }
+
+    function buildNewsNarration() {
+      const summary =
+        aiSummaryText && typeof aiSummaryText === 'string' ? aiSummaryText.trim() : '';
+      let fullRaw = typeof aiFullArticleText === 'string' ? aiFullArticleText.trim() : '';
+
+      /** Prefer extracted body; fall back to on-screen summary if body empty */
+      let body =
+        fullRaw.length >= 60 ? fullRaw : summaryText?.textContent?.trim?.() || summary || '';
+
+      if (!body || body === 'Summary not available.') return '';
+
+      const headline =
+        typeof articleTitleForVoice === 'string' ? articleTitleForVoice.trim() : '';
+
+      const lead = headline.length
+        ? `Here is today's story from MSU Tawi-Tawi College of Technology and Oceanography. ${headline}.`
+        : `Here is today's story from MSU Tawi-Tawi College of Technology and Oceanography.`;
+
+      return `${lead} ${body}`.replace(/\s+/g, ' ').trim();
+    }
+
+    /**
+     * @param {Blob} blob
+     * @param {{ onProgress?: (frac: number) => void }} [opts]
+     * @returns {Promise<void>}
+     */
+    function playAudioBlob(blob, opts) {
+      return new Promise((resolve, reject) => {
+        const url = URL.createObjectURL(blob);
+        const audio = new Audio(url);
+        currentSpeechAudio = audio;
+        /** @type {((this: HTMLAudioElement) => void) | null} */
+        let progressTick = null;
+        let progressTimer = null;
+        const doneWithCleanup = () => {
+          if (progressTick) {
+            try {
+              audio.removeEventListener('timeupdate', progressTick);
+            } catch (_) {
+              /**/
+            }
+            progressTick = null;
+          }
+          if (progressTimer) {
+            try {
+              window.clearInterval(progressTimer);
+            } catch (_) {
+              /**/
+            }
+            progressTimer = null;
+          }
+          URL.revokeObjectURL(url);
+          if (currentSpeechAudio === audio) currentSpeechAudio = null;
+        };
+        progressTick = function () {
+          if (!audio.duration || !opts?.onProgress) return;
+          opts.onProgress(Math.min(1, Math.max(0, audio.currentTime / audio.duration)));
+        };
+        if (opts?.onProgress) {
+          audio.addEventListener('timeupdate', progressTick);
+          progressTimer = window.setInterval(() => {
+            if (!audio.duration || !opts?.onProgress) return;
+            opts.onProgress(Math.min(1, Math.max(0, audio.currentTime / audio.duration)));
+          }, 180);
+        }
+        const done = () => {
+          doneWithCleanup();
+        };
+        audio.onended = () => {
+          done();
+          resolve();
+        };
+        audio.onerror = () => {
+          done();
+          reject(new Error('audio'));
+        };
+        audio.play().catch((err) => {
+          done();
+          reject(err);
+        });
+      });
+    }
+
+    function speakViaBrowserSynth(fullText) {
+      if (!('speechSynthesis' in window)) {
+        finishNewsPlayback();
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+
+      const narrationNorm = (fullText || '').replace(/\s+/g, ' ').trim();
+      beginAiReadAlongSession(narrationNorm, null);
+
+      /** Shorter clauses help OS speech engines remain stable on long reads */
+      const parts = chunkTextForSpeech(fullText, 240);
+      if (!parts.length) {
+        finishNewsPlayback();
+        return;
+      }
+
+      const female = pickReporterFemaleVoice();
+      /** Cumulative absolute character offset matching concatenated narration */
+      let charBase = 0;
+
+      parts.forEach((part, idx) => {
+        const utterStart = charBase;
+        const ut = new SpeechSynthesisUtterance(part);
+        if (female) {
+          ut.voice = female;
+          ut.lang = female.lang || 'en-US';
+        } else ut.lang = 'en-US';
+        ut.rate = 0.92;
+        ut.pitch = 1;
+        let stopFallback = () => {};
+        ut.onstart = () => {
+          try {
+            aiReadAlongFromAbsoluteNarrAbs(0, utterStart);
+            stopFallback = startUtteranceReadAlongFallback(part, utterStart, ut.rate);
+          } catch (_) {
+            /**/
+          }
+        };
+        ut.onboundary = (e) => {
+          try {
+            if (e && typeof e.charIndex === 'number' && e.charIndex >= 0)
+              aiReadAlongFromAbsoluteNarrAbs(e.charIndex, utterStart);
+          } catch (_) {
+            /**/
+          }
+        };
+        const isLastPart = idx === parts.length - 1;
+        const prevEnd = ut.onend;
+        ut.onend = (ev) => {
+          try {
+            stopFallback();
+          } catch (_) {
+            /**/
+          }
+          if (typeof prevEnd === 'function') prevEnd(ev);
+          if (isLastPart) finishNewsPlayback();
+        };
+        const prevError = ut.onerror;
+        ut.onerror = (ev) => {
+          try {
+            stopFallback();
+          } catch (_) {
+            /**/
+          }
+          if (typeof prevError === 'function') prevError(ev);
+          if (isLastPart) finishNewsPlayback();
+        };
+        window.speechSynthesis.speak(ut);
+        charBase += typeof part === 'string' ? part.length : 0;
+      });
+    }
+
+    async function speakViaOpenAIWhenAvailable(fullText) {
+      const chunks = chunkTextForSpeech(fullText, 3800);
+      if (!chunks.length) {
+        speakViaBrowserSynth(fullText);
+        return;
+      }
+
+      beginAiReadAlongSession((fullText || '').replace(/\s+/g, ' ').trim(), chunks);
+
+      openAiSpeechAbort = new AbortController();
+      const signal = openAiSpeechAbort.signal;
+
+      for (let i = 0; i < chunks.length; i++) {
+        if (!newsTtsPlaying && i > 0) break;
+
+        let res;
+        try {
+          res = await fetch('/api/article-tts', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              text: chunks[i],
+              voice: 'shimmer',
+              speed: 1,
+            }),
+            signal,
+          });
+        } catch (e) {
+          if (signal.aborted) break;
+          speakViaBrowserSynth(fullText);
+          return;
+        }
+
+        const ct = (res.headers.get('content-type') || '').toLowerCase();
+
+        if (res.status === 503 && ct.includes('json')) {
+          try {
+            const j = await res.json();
+            if (j.fallback) {
+              speakViaBrowserSynth(fullText);
+              return;
+            }
+          } catch (_) {
+            speakViaBrowserSynth(fullText);
+            return;
+          }
+        }
+
+        if (!res.ok || !ct.includes('audio')) {
+          speakViaBrowserSynth(fullText);
+          return;
+        }
+
+        const blob = await res.blob();
+
+        try {
+          await playAudioBlob(blob, {
+            onProgress: (frac) => {
+              try {
+                aiReadAlongNeuralFrac(i, frac);
+              } catch (_) {
+                /**/
+              }
+            },
+          });
+        } catch (e) {
+          if (signal.aborted) break;
+          finishNewsPlayback();
+          return;
+        }
+      }
+
+      finishNewsPlayback();
+    }
+
+    /** @param {MouseEvent|null} ev */
+    function toggleNewsVoice(ev) {
+      if (ev && typeof ev.preventDefault === 'function') ev.preventDefault();
+
+      if (newsTtsPlaying) {
+        cancelNewsSpeech();
+        return;
+      }
+
+      const narration = buildNewsNarration();
+      if (!narration.length) return;
+
+      newsTtsPlaying = true;
+      setNewsPlayingUi(true);
+
+      void speakViaOpenAIWhenAvailable(narration);
+    }
+
     const openSummary = (e) => {
       if (e?.preventDefault) e.preventDefault();
       if (!summaryPanel) return;
@@ -1330,10 +2142,18 @@ if (safeBody && safeBody.length > 0) {
 
     const closeSummary = (e) => {
       if (e?.preventDefault) e.preventDefault();
+      cancelNewsSpeech();
       if (!summaryPanel) return;
       summaryPanel.classList.remove('open');
       summaryPanel.setAttribute('aria-hidden', 'true');
     };
+
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      window.speechSynthesis.addEventListener('voiceschanged', () => {
+        window.speechSynthesis.getVoices();
+      });
+      window.speechSynthesis.getVoices();
+    }
 
     if (summaryButton) {
       summaryButton.addEventListener('click', openSummary);
@@ -1372,6 +2192,10 @@ if (safeBody && safeBody.length > 0) {
         }
       });
     }
+
+    summaryListen?.addEventListener('click', toggleNewsVoice);
+    voiceAvatarFab?.addEventListener('click', toggleNewsVoice);
+    voiceAvatarPanel?.addEventListener('click', toggleNewsVoice);
 
     // Remove any duplicate close buttons on page load
     if (modal) {
@@ -1553,6 +2377,8 @@ if (safeBody && safeBody.length > 0) {
     -webkit-backdrop-filter: blur(6px);
     transform: translateX(100%);
     opacity: 0;
+    /* Closed: must not intercept clicks — panel is full-viewport width and above the navbar (z-50). */
+    pointer-events: none;
     /* Smooth transitions */
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
   }
@@ -1560,6 +2386,69 @@ if (safeBody && safeBody.length > 0) {
   .ai-summary-panel.open {
     transform: translateX(0);
     opacity: 1;
+    pointer-events: auto;
+  }
+
+  /** AI avatar — glow while neural / browser speech is playing */
+  @keyframes aiNewsAvatarGlow {
+    0%,
+    100% {
+      box-shadow:
+        0 0 0 2px rgba(236, 72, 153, 0.45),
+        0 0 14px rgba(148, 96, 147, 0.35);
+      opacity: 0.92;
+    }
+    50% {
+      box-shadow:
+        0 0 0 3px rgba(236, 72, 153, 0.75),
+        0 0 28px rgba(236, 72, 153, 0.55);
+      opacity: 1;
+    }
+  }
+
+  #ai-voice-avatar-fab.ai-news-avatar--playing .ai-news-avatar-ring,
+  #ai-voice-avatar-panel.ai-news-avatar--playing .ai-news-avatar-ring {
+    opacity: 1 !important;
+    animation: aiNewsAvatarGlow 1.2s ease-in-out infinite;
+    border-radius: 0.75rem;
+    --tw-ring-opacity: 0.9 !important;
+  }
+
+  /** Hover: emphasize voice anchor before / while user aims at listen */
+  #ai-summary-fab-wrap:hover #ai-voice-avatar-fab {
+    filter: drop-shadow(0 0 10px rgba(236, 72, 153, 0.45));
+    transform: scale(1.04);
+    transition:
+      filter 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  @keyframes aiReadingBlockPulse {
+    0%,
+    100% {
+      background-color: rgb(250 245 255 / 0.35);
+      box-shadow:
+        inset 4px 0 0 0 rgb(148 96 147 / 0.85),
+        0 0 0 1px rgb(148 96 147 / 0.12);
+    }
+    50% {
+      background-color: rgb(237 233 254 / 0.55);
+      box-shadow:
+        inset 4px 0 0 0 rgb(236 72 153 / 0.9),
+        0 4px 24px rgb(148 96 147 / 0.18);
+    }
+  }
+
+  .article-ai-reading-scope .ai-tts-anchor.ai-tts-reading {
+    animation: aiReadingBlockPulse 2.2s ease-in-out infinite;
+  }
+
+  .dark .article-ai-reading-scope .ai-tts-anchor.ai-tts-reading {
+    animation: aiReadingBlockPulse 2.2s ease-in-out infinite;
+    background-color: rgb(30 41 59 / 0.65);
+    box-shadow:
+      inset 4px 0 0 0 rgb(167 139 250 / 0.95),
+      0 0 12px rgb(99 102 241 / 0.15);
   }
 
   /* Safe area insets for notched devices */
@@ -2474,23 +3363,23 @@ if (safeBody && safeBody.length > 0) {
       max-width: 100vw !important;
     }
     /* Navbar - prevent overflow at 390px (slug + all pages via global.css) */
-    .fixed.top-0.w-full.z-50 .container.mx-auto {
+    .navbar-fixed-shell .container.mx-auto {
       padding-left: 0.875rem !important;
       padding-right: 0.875rem !important;
       min-width: 0 !important;
       max-width: 100% !important;
     }
-    .fixed.top-0.w-full.z-50 a.flex.items-center.relative.min-w-0 {
+    .navbar-fixed-shell a.flex.items-center.relative.min-w-0 {
       max-width: calc(100% - 152px) !important;
       min-width: 0 !important;
     }
-    .fixed.top-0.w-full.z-50 a.flex.items-center.relative.min-w-0 img:first-of-type {
+    .navbar-fixed-shell a.flex.items-center.relative.min-w-0 img:first-of-type {
       max-height: 2.5rem !important;
       height: 2.5rem !important;
       width: auto !important;
     }
-    .fixed.top-0.w-full.z-50 .flex.items-center button,
-    .fixed.top-0.w-full.z-50 .hamburger-button {
+    .navbar-fixed-shell .flex.items-center button,
+    .navbar-fixed-shell .hamburger-button {
       min-width: 44px !important;
       min-height: 44px !important;
     }
@@ -2525,23 +3414,23 @@ if (safeBody && safeBody.length > 0) {
   /* Poco F8 Ultra (6.9" 1200×2608) - Navbar & slug responsive */
   @media (min-width: 393px) and (max-width: 430px) and (min-height: 800px) {
     /* Navbar - prevent overflow, touch-friendly */
-    .fixed.top-0.w-full.z-50 .container.mx-auto {
+    .navbar-fixed-shell .container.mx-auto {
       padding-left: 0.875rem !important;
       padding-right: 0.875rem !important;
       min-width: 0 !important;
       max-width: 100% !important;
     }
-    .fixed.top-0.w-full.z-50 a.flex.items-center.relative.min-w-0 {
+    .navbar-fixed-shell a.flex.items-center.relative.min-w-0 {
       max-width: calc(100% - 160px) !important;
       min-width: 0 !important;
     }
-    .fixed.top-0.w-full.z-50 a.flex.items-center.relative.min-w-0 img:first-of-type {
+    .navbar-fixed-shell a.flex.items-center.relative.min-w-0 img:first-of-type {
       max-height: 2.5rem !important;
       height: 2.5rem !important;
       width: auto !important;
     }
-    .fixed.top-0.w-full.z-50 .flex.items-center button,
-    .fixed.top-0.w-full.z-50 .hamburger-button {
+    .navbar-fixed-shell .flex.items-center button,
+    .navbar-fixed-shell .hamburger-button {
       min-width: 44px !important;
       min-height: 44px !important;
       width: 44px !important;
@@ -2576,11 +3465,11 @@ if (safeBody && safeBody.length > 0) {
 
   /* Poco F8 Ultra landscape */
   @media (min-width: 800px) and (max-width: 920px) and (max-height: 450px) and (orientation: landscape) {
-    .fixed.top-0.w-full.z-50 .container.mx-auto {
+    .navbar-fixed-shell .container.mx-auto {
       padding-left: 0.75rem !important;
       padding-right: 0.75rem !important;
     }
-    .fixed.top-0.w-full.z-50 a.flex.items-center.relative.min-w-0 img:first-of-type {
+    .navbar-fixed-shell a.flex.items-center.relative.min-w-0 img:first-of-type {
       max-height: 2.25rem !important;
       height: 2.25rem !important;
     }
@@ -3321,6 +4210,96 @@ if (safeBody && safeBody.length > 0) {
     .text-white-pure,
     .text-titanium {
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  /* AI Summary cross-device normalization (final override) */
+  .slug-page #ai-summary-fab-wrap.ai-summary-fab {
+    width: max-content !important;
+    max-width: min(92vw, 20rem) !important;
+    min-height: 48px !important;
+    right: max(0.875rem, env(safe-area-inset-right, 0.875rem)) !important;
+    bottom: max(5rem, env(safe-area-inset-bottom, 5rem)) !important;
+    left: auto !important;
+    top: auto !important;
+    transform: translateY(0) !important;
+  }
+
+  .slug-page #ai-summary-button {
+    min-height: 48px !important;
+    padding-inline: 0.55rem 0.85rem !important;
+    gap: 0.45rem !important;
+  }
+
+  .slug-page #ai-summary-button img {
+    width: 1.7rem !important;
+    height: 1.7rem !important;
+    object-fit: cover !important;
+    border-radius: 9999px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .slug-page #ai-summary-panel.ai-summary-panel {
+    width: min(24rem, 100vw) !important;
+    max-width: min(24rem, 100vw) !important;
+    height: 100dvh !important;
+    right: 0 !important;
+    left: auto !important;
+  }
+
+  @media (max-width: 480px) {
+    .slug-page #ai-summary-fab-wrap.ai-summary-fab {
+      right: max(0.65rem, env(safe-area-inset-right, 0.65rem)) !important;
+      bottom: max(4.4rem, env(safe-area-inset-bottom, 4.4rem)) !important;
+      max-width: calc(100vw - 1.25rem) !important;
+    }
+
+    .slug-page #ai-summary-button {
+      padding-inline: 0.45rem 0.7rem !important;
+    }
+
+    .slug-page #ai-summary-button .ai-summary-label-desktop {
+      display: none !important;
+    }
+
+    .slug-page #ai-summary-panel.ai-summary-panel {
+      width: 100vw !important;
+      max-width: 100vw !important;
+      border-left-width: 0 !important;
+    }
+  }
+
+  @media (min-width: 481px) and (max-width: 767px) {
+    .slug-page #ai-summary-fab-wrap.ai-summary-fab {
+      bottom: max(4.8rem, env(safe-area-inset-bottom, 4.8rem)) !important;
+    }
+
+    .slug-page #ai-summary-panel.ai-summary-panel {
+      width: min(22rem, 100vw) !important;
+      max-width: min(22rem, 100vw) !important;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .slug-page #ai-summary-fab-wrap.ai-summary-fab {
+      right: max(1rem, env(safe-area-inset-right, 1rem)) !important;
+      bottom: max(6rem, env(safe-area-inset-bottom, 6rem)) !important;
+      min-height: 54px !important;
+    }
+
+    .slug-page #ai-summary-button {
+      min-height: 54px !important;
+    }
+
+    .slug-page #ai-summary-button img {
+      width: 1.9rem !important;
+      height: 1.9rem !important;
+    }
+
+    .slug-page #ai-summary-panel.ai-summary-panel {
+      width: min(24rem, 46vw) !important;
+      max-width: min(24rem, 46vw) !important;
+      min-width: 20rem !important;
     }
   }
 </style>

@@ -1,5 +1,7 @@
 import { groq } from 'astro-sanity';
 import { createClient } from "@sanity/client";
+import { rateLimitJsonResponse } from '../../lib/spam-guard.js';
+import { notFoundUnlessDev } from '../../lib/api-guards.js';
 
 const client = createClient({
   projectId: "w8lfrsa6",
@@ -8,9 +10,13 @@ const client = createClient({
   useCdn: true
 });
 
-export async function GET() {
+export async function GET({ request }) {
   try {
-    console.log('Fetching all commencement photos...');
+    const devOnly = notFoundUnlessDev();
+    if (devOnly) return devOnly;
+
+    const denied = rateLimitJsonResponse('commencement-export', request, 12, 3_600_000);
+    if (denied) return denied;
     
     const query = groq`*[_type == "commencement"] {
       _id,
@@ -24,8 +30,6 @@ export async function GET() {
     }`;
     
     const photos = await client.fetch(query);
-    console.log('All commencement photos:', photos);
-    console.log('Number of photos found:', photos ? photos.length : 0);
     
     return new Response(JSON.stringify({ 
       success: true, 
@@ -43,8 +47,7 @@ export async function GET() {
     
     return new Response(JSON.stringify({ 
       success: false, 
-      error: error.message,
-      message: 'Failed to fetch commencement photos'
+      error: 'Failed to fetch commencement photos'
     }), {
       status: 500,
       headers: {
