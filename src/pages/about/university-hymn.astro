@@ -10,8 +10,8 @@ const currentPath = Astro.url.pathname;
 ---
 
 <Layout title="MSU Hymn | Tawi-Tawi College of Technology and Oceanography">
-    <main class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-200 font-sans antialiased">
-      <Navbar path={currentPath} client:visible />
+    <main class="bg-msu-deep-ocean dark:bg-gray-900 text-gray-900 dark:text-gray-200 font-sans antialiased">
+      <Navbar path={currentPath} client:only="react" />
 
 
           <!-- Hero Section -->
@@ -25,14 +25,13 @@ const currentPath = Astro.url.pathname;
             Official Hymn of Mindanao State University
           </p>
         </div>
-        <div class="absolute bottom-0 left-0 right-0 h-16 bg-white/10 backdrop-blur-sm"></div>
       </section>
   
       
       
   
       <!-- Hymn Player Section -->
-      <section class="py-16 md:py-24">
+      <section class="py-16 md:py-24 bg-white dark:bg-gray-900">
         <div class="container mx-auto px-6 max-w-4xl">
           <!-- Enhanced Audio Player with Progress Bar -->
           <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 mb-12">

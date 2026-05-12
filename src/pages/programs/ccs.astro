@@ -128,7 +128,7 @@ try {
 >
 	<main class="font-sans">
 
-		<Navbar path={currentPath} client:visible />
+		<Navbar path={currentPath} client:only="react" />
 
 
 
@@ -6366,7 +6366,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                                 <h3 class="text-lg font-medium">Email</h3>
 
-                                <p class="text-gray-300">iict@msutcto.edu.ph</p>
+                                <p class="text-gray-300">msutctoccs@msutawi-tawi.edu.ph</p>
 
                             </div>
 
@@ -6390,7 +6390,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                                 <h3 class="text-lg font-medium">Phone</h3>
 
-                                <p class="text-gray-300">+639171098241</p>
+                                <p class="text-gray-300">0920 969 9045</p>
 
                             </div>
 
@@ -7834,6 +7834,18 @@ document.head.appendChild(style);
 
 					
 
+					const facultyAttrCards = document.querySelectorAll('#facultySpotlight [data-faculty-card], #facultyGrid [data-faculty-card]');
+
+					facultyAttrCards.forEach(card => {
+
+						(card as HTMLElement).style.backgroundColor = '#374151'; /* gray-700 */
+
+						(card as HTMLElement).style.border = '1px solid #4b5563'; /* gray-600 */
+
+					});
+
+					
+
 					// Apply dark mode to Research & Innovation cards
 
 					const researchCards = document.querySelectorAll('.bg-white.p-8.rounded-xl.shadow-md');
@@ -8051,6 +8063,18 @@ document.head.appendChild(style);
 					const facultyCards = document.querySelectorAll('.bg-white.rounded-xl.shadow-lg');
 
 					facultyCards.forEach(card => {
+
+						(card as HTMLElement).style.backgroundColor = '';
+
+						(card as HTMLElement).style.border = '';
+
+					});
+
+					
+
+					const facultyAttrCards = document.querySelectorAll('#facultySpotlight [data-faculty-card], #facultyGrid [data-faculty-card]');
+
+					facultyAttrCards.forEach(card => {
 
 						(card as HTMLElement).style.backgroundColor = '';
 
@@ -9848,9 +9872,33 @@ document.head.appendChild(style);
 
 		
 
+		.dark #facultySpotlight [data-faculty-card],
+
+		.dark #facultyGrid [data-faculty-card] {
+
+			background-color: #374151 !important; /* gray-700 */
+
+			border: 1px solid #4b5563 !important; /* gray-600 */
+
+		}
+
+		
+
+		.dark #facultySpotlight [data-faculty-card]:hover,
+
+		.dark #facultyGrid [data-faculty-card]:hover {
+
+			background-color: #4b5563 !important; /* gray-600 */
+
+		}
+
+		
+
 		/* Dark mode for Faculty card content */
 
-		.dark .h-64.overflow-hidden.relative {
+		.dark .h-64.overflow-hidden.relative,
+
+		.dark .h-90.overflow-hidden.relative {
 
 			background-color: #374151 !important; /* gray-700 */
 

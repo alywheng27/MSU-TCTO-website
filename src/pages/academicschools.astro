@@ -11,7 +11,7 @@ const currentPath = Astro.url.pathname;
 <Layout title="MSU-TCTO | Commencement Exercise Invitation">
     <main class="font-sans antialiased text-gray-800 leading-normal overflow-x-hidden">
         <!-- Navbar -->
-        <Navbar path={currentPath} client:visible />
+        <Navbar path={currentPath} client:only="react" />
 
         <!-- Hero Section - Elegant Invitation -->
         <section class="relative bg-gradient-to-br from-msu-main-color via-msu-deep-ocean to-purple-900 min-h-screen flex items-center overflow-hidden pt-16 sm:pt-20 md:pt-24 lg:pt-[80px] pb-20">

@@ -30,6 +30,22 @@ export const navigationConfig = {
     ]
   },
 
+  // Services section - ICT and institutional support (navbar)
+  services: {
+    title: "Services",
+    links: [
+      {
+        label: "Request to Create Resource Maintenance & Service Request",
+        href: "/services/service-request-form",
+      },
+
+      {
+        label: "Office & Student Survey",
+        href: "officefeedback",
+      },
+    ],
+  },
+
   // Programs section - appears in both navbar and footer
   programs: {
     title: "Programs",
@@ -54,7 +70,7 @@ export const navigationConfig = {
       { label: "Administrative Offices", href: "/offices/offices", footerLabel: "Administrative Offices", footerHref: "/offices/offices#administrative" },
       { label: "Academic Offices", href: "/offices/academic-offices", footerLabel: "Academic Offices" },
       { label: "Faculty & Staff", href: "/offices/faculty-staff", footerLabel: "Faculty and Staff" },
-      { label: "University Offices", href: "/offices/universityoffices", footerLabel: "University Offices" },
+      { label: "University Offices", href: "/505", footerLabel: "University Offices" },
     ]
   },
 
@@ -63,7 +79,6 @@ export const navigationConfig = {
     title: "Home",
     links: [
       { label: "Overview", href: "/" },
-      { label: "Office & Student Survey", href: "/officefeedback" },
       { label: "Local and International Partners", href: "/partners" }
     ]
   },
@@ -124,6 +139,7 @@ export function getNavbarItems() {
     navigationConfig.university, // Note: footer uses "University" but navbar uses "About"
     navigationConfig.admissions,
     navigationConfig.programs,
+    navigationConfig.services,
     navigationConfig.offices,
     navigationConfig.publications,
     navigationConfig.careers,

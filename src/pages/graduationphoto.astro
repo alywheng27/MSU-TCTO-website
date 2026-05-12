@@ -139,7 +139,7 @@ const currentPath = Astro.url.pathname;
     
     <main class="font-sans antialiased text-gray-800 leading-normal overflow-x-hidden bg-msu-bgc-color dark:bg-gray-900 dark:text-white">
         <!-- Navbar -->
-        <Navbar path={currentPath} client:visible />
+        <Navbar path={currentPath} client:only="react" />
 
         <!-- Hero Section with Graduation Theme -->
         <section class="relative bg-msu-deep-ocean min-h-screen flex items-center overflow-hidden pt-16 sm:pt-20 md:pt-24 lg:pt-[80px] pb-20 dark:bg-gray-800">
@@ -1385,6 +1385,17 @@ const currentPath = Astro.url.pathname;
                            
                
                         
+                        <input
+                            type="text"
+                            id="commencement_hp_url"
+                            name="hp_company_url"
+                            tabindex="-1"
+                            autocomplete="off"
+                            class="sr-only"
+                            aria-hidden="true"
+                            value=""
+                        />
+
                         <button 
                             type="submit"
                             id="searchButton"
@@ -2396,7 +2407,10 @@ const currentPath = Astro.url.pathname;
                     },
                     body: JSON.stringify({
                         name: name,
-                        birthDate: formattedBirthdate
+                        birthDate: formattedBirthdate,
+                        hp_company_url:
+                            (document.getElementById('commencement_hp_url') as HTMLInputElement | null)
+                                ?.value?.trim() ?? '',
                     })
                 });
                 
@@ -2503,7 +2517,10 @@ const currentPath = Astro.url.pathname;
                     },
                     body: JSON.stringify({
                         name: name,
-                        birthDate: formattedBirthdate
+                        birthDate: formattedBirthdate,
+                        hp_company_url:
+                            (document.getElementById('commencement_hp_url') as HTMLInputElement | null)
+                                ?.value?.trim() ?? '',
                     })
                 });
                 

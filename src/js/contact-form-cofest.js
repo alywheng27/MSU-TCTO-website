@@ -9,6 +9,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const formStatus = document.getElementById('formStatus');
 
     if (contactForm) {
+        if (!contactForm.querySelector('input[name="hp_company_url"]')) {
+            const hp = document.createElement('input');
+            hp.type = 'text';
+            hp.name = 'hp_company_url';
+            hp.setAttribute('autocomplete', 'off');
+            hp.setAttribute('tabindex', '-1');
+            hp.setAttribute('aria-hidden', 'true');
+            hp.style.cssText = 'position:absolute;left:-9999px;width:1px;height:1px;opacity:0;overflow:hidden';
+            hp.value = '';
+            contactForm.appendChild(hp);
+        }
         contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             

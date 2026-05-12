@@ -211,7 +211,7 @@ try {
     title={pageTitle}
 >
     <main class="bg-white dark:bg-gray-900 min-h-screen">
-        <Navbar path={currentPath} client:visible />
+        <Navbar path={currentPath} client:only="react" />
 
         <!-- Hero Section -->
         <section class="relative bg-gradient-to-b from-msu-main-color to-msu-dark-color py-20">

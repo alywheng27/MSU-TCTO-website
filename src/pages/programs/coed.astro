@@ -172,7 +172,7 @@ console.log('Department programs map created for departments:', Object.keys(depa
 >
 	<main class="font-sans">
 
-		<Navbar path={currentPath} client:visible />
+		<Navbar path={currentPath} client:only="react" />
 
 
 
@@ -502,7 +502,7 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 					<div class="text-center">
 
-						<img src="/api/protected-logo" alt="MSU-TCTO Logo" class="h-24 sm:h-28 md:h-32 mx-auto mb-3 md:mb-4" data-protected-image="true" draggable="false" style="user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; -webkit-user-drag: none;">
+						<img src="/images/Official MSU-TCTO logo-01.png" alt="MSU-TCTO Logo" class="h-24 sm:h-28 md:h-32 mx-auto mb-3 md:mb-4">
 						<h3 class="text-base sm:text-lg font-semibold text-msu-bgc-color">Mindanao State University</h3>
 
 						<p class="text-sm sm:text-base text-msu-main-color dark:text-msu-bgc-color">Tawi-Tawi College of Technology and Oceanography</p>
@@ -10736,6 +10736,18 @@ document.head.appendChild(style);
 
 					
 
+					const facultyAttrCards = document.querySelectorAll('#facultySpotlight [data-faculty-card], #facultyGrid [data-faculty-card]');
+
+					facultyAttrCards.forEach(card => {
+
+						(card as HTMLElement).style.backgroundColor = '#374151'; /* gray-700 */
+
+						(card as HTMLElement).style.border = '1px solid #4b5563'; /* gray-600 */
+
+					});
+
+					
+
 					// Apply dark mode to Research & Innovation cards
 
 					const researchCards = document.querySelectorAll('.bg-white.p-8.rounded-xl.shadow-md');
@@ -10953,6 +10965,18 @@ document.head.appendChild(style);
 					const facultyCards = document.querySelectorAll('.bg-white.rounded-xl.shadow-lg');
 
 					facultyCards.forEach(card => {
+
+						(card as HTMLElement).style.backgroundColor = '';
+
+						(card as HTMLElement).style.border = '';
+
+					});
+
+					
+
+					const facultyAttrCards = document.querySelectorAll('#facultySpotlight [data-faculty-card], #facultyGrid [data-faculty-card]');
+
+					facultyAttrCards.forEach(card => {
 
 						(card as HTMLElement).style.backgroundColor = '';
 
@@ -12750,9 +12774,33 @@ document.head.appendChild(style);
 
 		
 
+		.dark #facultySpotlight [data-faculty-card],
+
+		.dark #facultyGrid [data-faculty-card] {
+
+			background-color: #374151 !important; /* gray-700 */
+
+			border: 1px solid #4b5563 !important; /* gray-600 */
+
+		}
+
+		
+
+		.dark #facultySpotlight [data-faculty-card]:hover,
+
+		.dark #facultyGrid [data-faculty-card]:hover {
+
+			background-color: #4b5563 !important; /* gray-600 */
+
+		}
+
+		
+
 		/* Dark mode for Faculty card content */
 
-		.dark .h-64.overflow-hidden.relative {
+		.dark .h-64.overflow-hidden.relative,
+
+		.dark .h-90.overflow-hidden.relative {
 
 			background-color: #374151 !important; /* gray-700 */
 

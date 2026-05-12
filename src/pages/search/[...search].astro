@@ -39,7 +39,7 @@ const pageDescription = searchQuery
 <Layout title={pageTitle} description={pageDescription}>
   <!-- Modern White Theme -->
   <div class="min-h-screen flex flex-col bg-white">
-    <Navbar path={currentPath} client:visible />
+    <Navbar path={currentPath} client:only="react" />
 
     <!-- Elegant Header -->
     <header class="bg-msu-deep-ocean from-msu-crimson-ground to-msu-deep-ocean py-16">

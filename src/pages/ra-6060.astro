@@ -13,7 +13,7 @@ const pageDescription = "Learn about Republic Act 6060 which established the Sul
 
 <Layout title={pageTitle} description={pageDescription}>
     <main class="min-h-screen flex flex-col">
-        <Navbar path={currentPath} client:visible />
+        <Navbar path={currentPath} client:only="react" />
 
         <!-- Document Content Section -->
         <section class="bg-white w-full xl:px-[12.5%] xs:px-[3.85%] py-16 md:py-20">

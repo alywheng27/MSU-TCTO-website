@@ -20,7 +20,7 @@ const currentPath = Astro.url.pathname;
 
     <main class="font-sans antialiased text-gray-800 dark:text-gray-200 dark:bg-gray-900 leading-normal">
         <!-- Enhanced Navbar -->
-        <Navbar path={currentPath} client:visible />
+        <Navbar path={currentPath} client:only="react" />
 
 <!-- Video Hero Section -->
 <section class="relative h-screen min-h-[800px] overflow-hidden">

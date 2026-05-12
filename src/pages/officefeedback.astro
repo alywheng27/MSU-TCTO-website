@@ -13,7 +13,7 @@ const currentPath = Astro.url.pathname;
 
 <Layout title="MSUTCTO - Office Evaluation and Students Survey">
   <main>
-    <Navbar path={currentPath} client:visible />
+    <Navbar path={currentPath} client:only="react" />
 
     <!-- Main Content Container -->
     <div class="min-h-screen bg-gray-50 dark:bg-gray-900">

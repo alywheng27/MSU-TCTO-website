@@ -9,18 +9,15 @@
 
   // Configuration - Professional and optimized
   const config = {
-    enableBlur: true,
-    enableWatermark: true,
-    enableConsoleWarnings: true,
+    enableWatermark: false, // no full-page diagonal "PROTECTED CONTENT - MSU-TCTO" label
+    enableConsoleWarnings: false, // no console.warn / console.log protection messages
     enableDevToolsDetection: true,
     enableFullScreenProtection: true,
-    blurIntensity: '8px', // Reduced for mobile performance
-    watermarkText: 'PROTECTED CONTENT - MSU-TCTO',
-    watermarkOpacity: 0.3, // More subtle
+    watermarkText: 'PROTECTED CONTENT - MSU-TCTO', // unused when enableWatermark is false
+    watermarkOpacity: 0.3,
     logoOpacity: 1.0, // Logo is fully visible by default (100% opacity)
     logoBlurOnDetection: '25px', // Strong blur when detected
     autoDisableDuration: 10000, // Auto-disable for 10 seconds when detected
-    mobileBlurIntensity: '6px' // Even lighter for mobile
   };
 
   // State tracking
@@ -90,25 +87,19 @@
    * Show protection overlay
    */
   function showProtectionOverlay() {
-    // Disabled - only logo protection is active, no screen overlay
-    // const overlay = createProtectionOverlay();
-    // overlay.style.opacity = '1';
-    
-    // if (config.enableBlur) {
-    //   document.body.style.filter = `blur(${config.blurIntensity})`;
-    //   document.body.style.transition = 'filter 0.3s ease';
-    // }
+    const overlay = createProtectionOverlay();
+    overlay.style.opacity = '1';
   }
 
   /**
    * Hide protection overlay
    */
   function hideProtectionOverlay() {
-    // Disabled - only logo protection is active, no screen overlay
-    // if (protectionOverlay) {
-    //   protectionOverlay.style.opacity = '0';
-    // }
-    // document.body.style.filter = '';
+    if (protectionOverlay) {
+      protectionOverlay.style.opacity = '0';
+    }
+    document.body.style.filter = '';
+    document.body.style.transition = '';
   }
 
   /**
@@ -341,68 +332,13 @@
   }
 
   /**
-   * Professional warning message with modern design
+   * Toast UI is intentionally suppressed. All call sites keep working; protection
+   * behavior (blur, shortcuts, etc.) is unchanged—only the visible message is skipped.
+   * @param {string} [message] unused; kept for API compatibility
    */
-  function showWarningMessage(message) {
-    // Remove existing warning if any
-    const existingWarning = document.getElementById('screenshot-warning');
-    if (existingWarning) {
-      existingWarning.remove();
-    }
-
-    const warning = document.createElement('div');
-    warning.id = 'screenshot-warning';
-    warning.style.cssText = `
-      position: fixed;
-      top: clamp(16px, 4vh, 24px);
-      left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(135deg, rgba(220, 38, 38, 0.98), rgba(185, 28, 28, 0.98));
-      color: white;
-      padding: 14px 20px;
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-      z-index: 1000000;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      font-size: clamp(12px, 2.5vw, 14px);
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      pointer-events: none;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      max-width: 90%;
-      text-align: center;
-    `;
-    warning.textContent = message;
-
-    // Add professional animation
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes slideDown {
-        from {
-          opacity: 0;
-          transform: translateX(-50%) translateY(-30px) scale(0.95);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(-50%) translateY(0) scale(1);
-        }
-      }
-    `;
-    if (!document.getElementById('screenshot-warning-style')) {
-      style.id = 'screenshot-warning-style';
-      document.head.appendChild(style);
-    }
-
-    document.body.appendChild(warning);
-
-    setTimeout(() => {
-      warning.style.opacity = '0';
-      warning.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-      warning.style.transform = 'translateX(-50%) translateY(-20px) scale(0.95)';
-      setTimeout(() => warning.remove(), 400);
-    }, 3500);
+  function showWarningMessage(_message) {
+    void _message;
+    return;
   }
 
   /**
@@ -762,7 +698,6 @@
     const logos = document.querySelectorAll('img[src*="Official MSU-TCTO logo-01.png"], img[src*="/api/protected-logo"], canvas[data-protected-image="true"], canvas[data-secure-loaded="true"]');
     
     const isMobile = isMobileDevice();
-    const blurAmount = isMobile ? config.mobileBlurIntensity : config.logoBlurOnDetection;
     
     // Auto-disable screenshots when logo is detected
     if (autoDisable && logos.length > 0) {
@@ -781,7 +716,7 @@
       // This ensures logo is blurred before screenshot can be captured
       // On mobile: Increase from 50% blur to full blur when detected
       // On desktop: Apply full blur
-      const detectionBlur = isMobile ? config.logoBlurOnDetection : blurAmount;
+      const detectionBlur = config.logoBlurOnDetection;
       logo.style.setProperty('filter', `blur(${detectionBlur})`, 'important');
       logo.style.setProperty('-webkit-filter', `blur(${detectionBlur})`, 'important');
       logo.style.setProperty('-moz-filter', `blur(${detectionBlur})`, 'important');
@@ -869,19 +804,15 @@
    * 🔐 Auth-protected API endpoint
    */
   function generateAuthToken() {
-    const timestamp = Math.floor(Date.now() / (1000 * 60 * 5)); // 5-minute window
+    const timestamp = Math.floor(Date.now() / (1000 * 60 * 5));
     const hostname = window.location.hostname;
-    const secret = 'msu-tcto-logo-secret-2024'; // Should match server secret
-    
-    // Simple hash function
-    const hashInput = `${timestamp}-${hostname}-${secret}`;
+    const hashInput = `${timestamp}-${hostname}`;
     let hash = 0;
     for (let i = 0; i < hashInput.length; i++) {
       const char = hashInput.charCodeAt(i);
       hash = ((hash << 5) - hash) + char;
       hash = hash & hash;
     }
-    
     return Math.abs(hash).toString(36);
   }
 
@@ -1133,8 +1064,22 @@
     const originalGetImageData = CanvasRenderingContext2D.prototype.getImageData;
     const originalDrawImage = CanvasRenderingContext2D.prototype.drawImage;
 
+    /**
+     * Legitimate canvases must bypass the spoofed black output (e‑sign pad, JPEG export scratch).
+     * `HTMLCanvasElement#toDataURL` is REQUIRED for ICTO electronic signature upload to Drive/Forms.
+     */
+    function canvasToDataURLAllowed(canvas) {
+      if (!canvas || !(canvas instanceof HTMLCanvasElement)) return false;
+      if (canvas.id === 'ict-signature-canvas') return true;
+      if (canvas.getAttribute && canvas.getAttribute('data-allow-canvas-export') === 'true') return true;
+      return false;
+    }
+
     // Detect toDataURL calls (used by many screenshot tools) - BLOCK SCREENSHOTS
     HTMLCanvasElement.prototype.toDataURL = function(...args) {
+      if (canvasToDataURLAllowed(this)) {
+        return originalToDataURL.apply(this, args);
+      }
       screenshotAttempts++;
       makeLogosBlack(config.autoDisableDuration, true); // Auto-disable on canvas capture
       showProtectionOverlay();
@@ -1154,7 +1099,7 @@
         const ctx = blankCanvas.getContext('2d');
         ctx.fillStyle = 'black';
         ctx.fillRect(0, 0, blankCanvas.width, blankCanvas.height);
-        return blankCanvas.toDataURL(...args);
+        return originalToDataURL.apply(blankCanvas, args);
       } catch (e) {
         return originalToDataURL.apply(this, args);
       }
@@ -1162,6 +1107,10 @@
 
     // Detect getImageData calls - BLOCK screenshot data extraction
     CanvasRenderingContext2D.prototype.getImageData = function(...args) {
+      const cnv = this.canvas;
+      if (cnv instanceof HTMLCanvasElement && canvasToDataURLAllowed(cnv)) {
+        return originalGetImageData.apply(this, args);
+      }
       screenshotAttempts++;
       makeLogosBlack(config.autoDisableDuration, true); // Auto-disable on image data extraction
       showProtectionOverlay();

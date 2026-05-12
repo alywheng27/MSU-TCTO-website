@@ -42,7 +42,7 @@ export default function AdmissionProcedure() {
     } else if (state.studentFees) {
       dispatch({ type: 'freshmenAndTransferee' });
     }
-    my_swiper.slideNext();
+    my_swiper?.slideNext?.();
   };
 
   const handlePrevSlide = () => {
@@ -53,7 +53,7 @@ export default function AdmissionProcedure() {
     } else if (state.studentFees) {
       dispatch({ type: 'returningShiftingAndRemedial' });
     }
-    my_swiper.slidePrev();
+    my_swiper?.slidePrev?.();
   };
 
   // Animation variants
@@ -386,11 +386,11 @@ export default function AdmissionProcedure() {
                   </h4>
                   <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 leading-relaxed">Our admission team is ready to assist you with any questions about the application process.</p>
                   <div className="space-y-2.5">
-                    <a href="mailto:admissions@msutawitawi.edu.ph" className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 hover:text-msu-deep-ocean dark:hover:text-msu-gold transition-colors">
-                      <FiMail className="w-4 h-4 flex-shrink-0" /> admissions@msutawitawi.edu.ph
+                    <a href="mailto:admissions@msutcto.edu.ph" className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 hover:text-msu-deep-ocean dark:hover:text-msu-gold transition-colors">
+                      <FiMail className="w-4 h-4 flex-shrink-0" /> admissions@msutcto.edu.ph
                     </a>
-                    <a href="tel:+639099826063" className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 hover:text-msu-deep-ocean dark:hover:text-msu-gold transition-colors">
-                      <FiPhone className="w-4 h-4 flex-shrink-0" /> (0909) 982 6063
+                    <a href="tel:+639517171690" className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300 hover:text-msu-deep-ocean dark:hover:text-msu-gold transition-colors">
+                      <FiPhone className="w-4 h-4 flex-shrink-0" /> 0951 717 1690
                     </a>
                   </div>
                 </motion.div>

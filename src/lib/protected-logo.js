@@ -1,40 +1,27 @@
 /**
- * Protected Logo Utility
- * Provides the protected logo URL to prevent direct access
- * 
+ * Official MSU-TCTO seal asset path (served statically from `public/images`).
+ *
  * Usage:
- *   import { getProtectedLogoUrl } from '../lib/protected-logo';
+ *   import { LOGO_IMAGE_PATH, getProtectedLogoUrl } from '../lib/protected-logo';
  *   const logoUrl = getProtectedLogoUrl();
  */
 
-/**
- * The official MSU-TCTO logo image path
- * @constant {string}
- */
 export const LOGO_IMAGE_PATH = '/images/Official MSU-TCTO logo-01.png';
 
-/**
- * Get the protected logo URL
- * This endpoint validates requests and prevents direct URL access
- * 
- * @returns {string} The protected logo API endpoint URL
- */
+/** Canonical URL used for `<img src>` references site-wide */
 export function getProtectedLogoUrl() {
-  // Use the protected API endpoint instead of direct image path
-  return '/api/protected-logo';
+  return LOGO_IMAGE_PATH;
 }
 
 /**
- * Get the protected logo URL with optional query parameters
- * 
- * @param {Object} params - Optional query parameters
- * @returns {string} The protected logo API endpoint URL with query params
+ * Logo path with optional query string (e.g. cache-busting).
+ * Params are appended to the static image URL, not `/api/protected-logo`.
  */
 export function getProtectedLogoUrlWithParams(params = {}) {
-  const url = new URL('/api/protected-logo', window.location.origin);
-  Object.keys(params).forEach(key => {
-    url.searchParams.append(key, params[key]);
-  });
-  return url.pathname + url.search;
+  const keys = Object.keys(params);
+  if (keys.length === 0) return LOGO_IMAGE_PATH;
+  const search = keys
+    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(String(params[key]))}`)
+    .join('&');
+  return `${LOGO_IMAGE_PATH}?${search}`;
 }
-

@@ -47,7 +47,7 @@ const allPdfUrls = allsulimbang.map(sulimbang => ({
 
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
     <main class="bg-white dark:bg-gray-900">
-        <Navbar path={currentPath} client:visible />
+        <Navbar path={currentPath} client:only="react" />
         
         <!-- Mobile-Optimized Full-Screen PDF Viewer Modal -->
         <div id="pdfViewerModal" class="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-md hidden">

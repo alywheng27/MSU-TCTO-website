@@ -49,9 +49,6 @@ const absoluteTwitterImage = twitterImage
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <meta name="generator" content={Astro.generator} />
   <link rel="icon" type="image/png" href="/images/msutcto_wordmark_magenta_.png" />
-  <script src="/js/screenshot-protection.js" defer></script>
-  <script src="/js/logo-protection.js" defer></script>
-  
   <!-- Facebook Domain Verification -->
   <meta name="facebook-domain-verification" content="63d47sat4plmhjgb73ob4sbrleldy4" />
   
@@ -486,5 +483,7 @@ const absoluteTwitterImage = twitterImage
       }, 40);
     });
   </script>
+
+  <script is:inline src="/js/screenshot-protection.js"></script>
 </body>
 </html>

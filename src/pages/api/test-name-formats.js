@@ -1,6 +1,9 @@
 import { getCommencementPhotos } from '../../api/api.jsx';
+import { notFoundUnlessDev } from '../../lib/api-guards.js';
 
 export async function POST({ request }) {
+  const denied = notFoundUnlessDev();
+  if (denied) return denied;
   try {
     const { testName } = await request.json();
     

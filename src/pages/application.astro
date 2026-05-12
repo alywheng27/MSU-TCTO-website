@@ -12,7 +12,7 @@ const currentPath = Astro.url.pathname;
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
 	<main>
 <!-- fold 01 - Header -->
-		<Navbar path={currentPath} client:visible />
+		<Navbar path={currentPath} client:only="react" />
 <!-- end fold 01 -->
 
 <!-- fold 02 -->

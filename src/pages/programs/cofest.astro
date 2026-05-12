@@ -293,7 +293,7 @@ console.log('Department programs map created for departments:', Object.keys(depa
 >
 	<main class="font-sans">
 
-		<Navbar path={currentPath} client:visible />
+		<Navbar path={currentPath} client:only="react" />
 
 
 
@@ -769,9 +769,9 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 						<div class="mb-6 md:mb-8 border-b border-gray-200">
 
-							<nav class="-mb-px flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 md:space-x-8">
+							<nav class="-mb-px flex flex-col sm:flex-row flex-wrap gap-y-2 sm:gap-y-0 sm:space-x-4 md:space-x-6 lg:space-x-8">
 
-								<button type="button" class="tab-button tab-disabled py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm border-transparent text-gray-400 dark:text-gray-500 cursor-not-allowed transition-all duration-300" data-tab="background" disabled aria-disabled="true" title="Disabled — under construction">
+								<button type="button" class="tab-button active py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm border-[#61063B] text-[#61063B] dark:text-[#D58BB5] transition-all duration-300" data-tab="background">
 									<span class="flex items-center justify-center sm:justify-start">
 										<svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
@@ -781,49 +781,54 @@ console.log('Department programs map created for departments:', Object.keys(depa
 									</span>
 								</button>
 
-								<button type="button" class="tab-button tab-disabled py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm border-transparent text-gray-400 dark:text-gray-500 cursor-not-allowed transition-all duration-300" data-tab="history" disabled aria-disabled="true" title="Disabled — under construction">
-
+								<button type="button" class="tab-button py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm border-transparent text-gray-500 dark:text-gray-400 transition-all duration-300" data-tab="history">
 									<span class="flex items-center justify-center sm:justify-start">
-
 										<svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-
 											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-
 										</svg>
-
 										<span class="hidden sm:inline">Brief History</span>
-
 										<span class="sm:hidden">History</span>
-
 									</span>
-
 								</button>
 
-								<button type="button" class="tab-button tab-disabled py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm border-transparent text-gray-400 dark:text-gray-500 cursor-not-allowed transition-all duration-300" data-tab="goals" disabled aria-disabled="true" title="Disabled — under construction">
-
+								<button type="button" class="tab-button py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm border-transparent text-gray-500 dark:text-gray-400 transition-all duration-300" data-tab="goals">
 									<span class="flex items-center justify-center sm:justify-start">
-
 										<svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-
 											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-
 										</svg>
-
-										<span class="hidden sm:inline">Goal & Objectives</span>
-
+										<span class="hidden sm:inline">Goals &amp; Objectives</span>
 										<span class="sm:hidden">Goals</span>
-
 									</span>
-
 								</button>
 
-								<button type="button" class="tab-button active py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm border-[#61063B] text-[#61063B] dark:text-[#D58BB5] transition-all duration-300" data-tab="505">
+								<button type="button" class="tab-button py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm border-transparent text-gray-500 dark:text-gray-400 transition-all duration-300" data-tab="core-functions">
 									<span class="flex items-center justify-center sm:justify-start">
 										<svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
 										</svg>
-										<span class="hidden sm:inline">505</span>
-										<span class="sm:hidden">505</span>
+										<span class="hidden sm:inline">Core Functions</span>
+										<span class="sm:hidden">Functions</span>
+									</span>
+								</button>
+
+								<button type="button" class="tab-button py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm border-transparent text-gray-500 dark:text-gray-400 transition-all duration-300" data-tab="vision">
+									<span class="flex items-center justify-center sm:justify-start">
+										<svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+										</svg>
+										<span class="hidden sm:inline">Vision</span>
+										<span class="sm:hidden">Vision</span>
+									</span>
+								</button>
+
+								<button type="button" class="tab-button py-3 sm:py-4 px-1 border-b-2 font-medium text-xs sm:text-sm border-transparent text-gray-500 dark:text-gray-400 transition-all duration-300" data-tab="mission">
+									<span class="flex items-center justify-center sm:justify-start">
+										<svg class="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path>
+										</svg>
+										<span class="hidden sm:inline">Mission</span>
+										<span class="sm:hidden">Mission</span>
 									</span>
 								</button>
 
@@ -833,18 +838,12 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 						
 
-						<div class="tab-content hidden" id="background-content">
+						<div class="tab-content active" id="background-content">
 							<div class="space-y-6 text-msu-main-color dark:text-msu-bgc-color">
 								<h3 class="text-2xl font-bold text-msu-deep-ocean dark:text-msu-bgc-color mb-4">General Background</h3>
 								<div class="space-y-4 text-lg leading-relaxed">
 									<p>
-										R.A. 6060 established the Mindanao State University–Sulu College of Technology and Oceanography (MSU-SCTO) on August 4, 1969 to extend higher education to Muslims and other cultural communities. In 1973, when Tawi-Tawi became a separate province, the institution was renamed MSU–Tawi-Tawi College of Technology and Oceanography (MSU-TCTO).
-									</p>
-									<p>
-										In response to its legislative mandate, the College of Fisheries developed academic programs centered on the sustainable exploitation and conservation of the Sulu Sea’s fisheries resources. Research initiatives in fish processing, aquaculture, and capture fisheries were launched to uplift livelihoods and drive socio-economic development in coastal communities.
-									</p>
-									<p>
-										Since its founding year, the college has produced graduates of the Bachelor of Science in Fisheries across three specializations—fish culture, fish capture, and fish processing—as well as diplomates in fisheries technology. Many alumni now lead government and non-government institutions or operate their own enterprises, exemplifying the college’s enduring contributions to regional progress and marine stewardship.
+										The establishment of COFEST is integral to MSU-TCTO's mission of advancing sustainable development and responsible resource management in the Sulu Archipelago. The research and extension work of COFEST addresses global, regional and local challenges, including food security, climate resilience, and environmental sustainability. By fostering interdisciplinary research, innovative education, and strong collaborations with academia, industry, government agencies, and local communities, the college plays a role in shaping science-based policies and sustainable practices. With its existing programs serving as a strong foundation, COFEST is poised to become a leading institution in the responsible stewardship of marine and terrestrial resources for the benefit of present and future generations.
 									</p>
 								</div>
 							</div>
@@ -852,56 +851,97 @@ console.log('Department programs map created for departments:', Object.keys(depa
 
 						<div class="tab-content hidden" id="history-content">
 							<div class="space-y-6 text-msu-main-color dark:text-msu-bgc-color">
-								<h3 class="text-2xl font-bold text-msu-deep-ocean dark:text-msu-bgc-color mb-4">College of Fisheries: A Brief History</h3>
+								<h3 class="text-2xl font-bold text-msu-deep-ocean dark:text-msu-bgc-color mb-4">Brief History</h3>
 								<div class="space-y-4 text-lg leading-relaxed">
-									<p>
-										The College of Fisheries traces its roots to the Fisheries Department established in 1969, laying the foundation for fisheries education and research in MSU-TCTO. On September 7, 1990, the department was elevated to college status with Prof. Eddie M. Alih serving as the first dean.
-									</p>
-									<p>
-										At its inception, the college offered the Bachelor of Science in Fisheries with majors in Marine Fisheries, Inland Fisheries, and Fish Processing Technology, complemented by diploma programs in the same disciplines. Over the decades, it has produced outstanding leaders in fisheries science, including university chancellors, Bureau of Fisheries and Aquatic Resources (BFAR) regional directors, and academic deans.
-									</p>
-									<p>
-										From its early beginnings to its present stature, the college remains steadfast in advancing fisheries education, sustainable practices, and community development—affirming its legacy as a pillar of excellence in aquatic science.
-									</p>
+									<p>The College of Oceanography, Fisheries, Environmental Science, and Technology (COFEST) was formally established through the merger of the former College of Fisheries (COF) and the Institute of Oceanography and Environmental Science (IOES), as approved under Board of Regents (BOR) Resolution No. 222, series of 2025. This institutional integration, which took effect on January 1, 2026, represents a strategic milestone in the university's continuing commitment to academic excellence, innovation, and responsiveness to emerging environmental and societal needs.</p>
+									<p>Prior to the merger, both COF and IOES had independently developed strong academic and research foundations. The College of Fisheries has long been recognized for its flagship Bachelor of Science in Fisheries program, while the Institute of Oceanography and Environmental Science expanded the university's academic portfolio with programs in Marine Biology, Environmental Science, and Food Technology. These programs collectively earned Level II Accreditation from the Accrediting Agency of Chartered Colleges and Universities in the Philippines (AACCUP) on December 16, 2024, affirming their adherence to national academic standards.</p>
+									<p>Both academic units also demonstrated a shared commitment to quality assurance and institutional excellence, as evidenced by their ISO 9001:2015 certification granted by TUV SUD PSB Philippines, Inc., and compliance with the Certificate of Program Compliance (COPC) issued by the Commission on Higher Education (CHED).</p>
+									<p>The creation of COFEST marks the convergence of these two established institutions into a unified college that reflects a more integrated and interdisciplinary approach to fisheries, oceanography, and environmental science education. Situated within the ecologically significant Sulu-Celebes Seas, the new college builds upon the legacy of its predecessor units while positioning itself to address the growing demands for sustainable resource management, marine conservation, and environmental stewardship in the Bangsamoro region and beyond.</p>
+									<p>Today, COFEST stands as a testament to the university's vision of harmonizing academic strengths, optimizing resources, and advancing research and education in support of global sustainability and local development.</p>
 								</div>
 							</div>
 						</div>
 
 						<div class="tab-content hidden" id="goals-content">
 							<div class="space-y-6 text-msu-main-color dark:text-msu-bgc-color">
-								<h3 class="text-2xl font-bold text-msu-deep-ocean dark:text-msu-bgc-color mb-4">Goal and Objectives</h3>
-								<div class="space-y-4 text-lg leading-relaxed">
+								<h3 class="text-2xl font-bold text-msu-deep-ocean dark:text-msu-bgc-color mb-4">Goals and Objectives</h3>
+								<div class="space-y-6 text-lg leading-relaxed">
 									<div>
-										<p class="font-semibold text-msu-deep-ocean dark:text-msu-bgc-color">Goal:</p>
-										<p>To be the center of excellence in the Sulu archipelago.</p>
+										<p class="font-semibold text-msu-deep-ocean dark:text-msu-bgc-color mb-3">Goals</p>
+										<ol class="space-y-3 list-decimal list-outside pl-5 sm:pl-6">
+											<li>Deliver high-quality undergraduate and graduate programs that integrate scientific knowledge with practical applications in fisheries, marine biology, and environmental science and technology, preparing graduates for leadership roles in research, industry, and policy.</li>
+											<li>Advance cutting-edge research that addresses critical environmental challenges, supports sustainable resource management, and informs policies and industry best practices in fisheries, oceanography, marine biology, and environmental science.</li>
+											<li>Strengthen partnerships with government agencies, industries, academic and research institutions, NGOs, LGUs, and local communities to implement science-based solutions that promote sustainable fisheries, marine conservation, and environmental stewardship.</li>
+											<li>Develop and advocate for sustainable practices in fisheries, aquaculture, coastal resource management, marine biodiversity conservation, and climate change adaptation to ensure long-term environmental resilience.</li>
+											<li>Equip faculty, students, and researchers with the expertise and skills to drive scientific advancements, lead environmental initiatives, and influence policy development, establishing COFEST as a recognized institution in marine and environmental research, sustainability, and innovation on the global stage.</li>
+										</ol>
 									</div>
 									<div>
-										<p class="font-semibold text-msu-deep-ocean dark:text-msu-bgc-color">Objectives:</p>
-										<ul class="space-y-3 list-decimal list-inside">
-											<li>Strengthen the faculty in their fields of expertise through development programs and continuing professional growth.</li>
-											<li>Promote and enhance research and extension services.</li>
-											<li>Create a diverse community and environment-friendly campus.</li>
-										</ul>
+										<p class="font-semibold text-msu-deep-ocean dark:text-msu-bgc-color mb-3">Objectives</p>
+										<p class="mb-3">
+											COFEST is dedicated to advancing its leadership in fisheries, oceanography, and marine biology and environmental science by striving to become a recognized Center of Excellence. To realize this vision, it aims to:
+										</p>
+										<ol class="space-y-3 list-decimal list-outside pl-5 sm:pl-6">
+											<li>Enhance Academic Programs – Continuously improve BSc and MSc curricula by integrating the latest advancements in fisheries, oceanography, marine biology and environmental science. This includes incorporating emerging technologies, interdisciplinary approaches, and industry-aligned best practices. Additionally, COFEST aims to develop and offer PhD programs in the future to further strengthen research and academic excellence in these fields.</li>
+											<li>Expand Research Capacity – Secure diverse funding sources to support innovative research on pressing environmental challenges such as climate change, pollution, and biodiversity loss. Strengthen research efforts on economically important marine resources, including seaweeds, sea cucumbers, and other key fisheries. Foster collaborations with local and international research institutions, government agencies, and industry partners to enhance research impact and drive sustainable resource management.</li>
+											<li>Strengthen Community Engagement – Develop outreach programs that translate research into real-world applications, focusing on the sustainable management of economically important marine resources such as seaweeds, sea cucumbers, shellfish, and other fisheries. Engage local communities and stakeholders through capacity-building initiatives, policy dialogues, workshops, and awareness campaigns. Foster partnerships with government agencies, industries, and NGOs to ensure that research findings contribute to sustainable fisheries, aquaculture, and marine resource management.</li>
+											<li>Improve Graduate Employability – Achieve a 90% graduate placement rate within two years by strengthening career services, expanding industry partnerships, and providing internships and hands-on training opportunities. Align academic programs with workforce demands to equip graduates with the skills needed for careers in fisheries, oceanography, aquaculture, and environmental science.</li>
+											<li>Increase National and International Recognition – Strive to attain recognition as a Center of Development in fisheries, oceanography, marine biology and environmental sciences, with the long-term goal of becoming a Center of Excellence. This will be achieved through strategic collaborations, high-impact research publications, enhanced academic programs, and active engagement in national and international academic, research and policy networks.</li>
+											<li>Develop Infrastructure – Secure funding and resources for state-of-the-art laboratory facilities, advanced research equipment, and updated technological infrastructure to support teaching and research. This includes a phased approach to infrastructure upgrades.</li>
+										</ol>
 									</div>
 								</div>
 							</div>
 						</div>
 
-						<!-- 505 tab: Under Construction — msu-deep-ocean #61063B -->
-						<div class="tab-content active" id="505-content">
+						<div class="tab-content hidden" id="core-functions-content">
 							<div class="space-y-6 text-msu-main-color dark:text-msu-bgc-color">
-								<h3 class="text-2xl font-bold text-[#61063B] dark:text-msu-bgc-color mb-4">505 — Under Construction</h3>
-								<div class="rounded-2xl overflow-hidden border-2 border-[#61063B]/30 dark:border-gray-600 bg-gradient-to-br from-[#61063B]/5 to-white dark:from-gray-800 dark:to-gray-800/80 p-6 sm:p-8 text-center shadow-lg">
-									<div class="mb-4">
-										<span class="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-[#61063B] dark:text-[#61063B]">505</span>
-									</div>
-									<p class="text-lg font-semibold text-[#61063B] dark:text-[#D58BB5] mb-2">This section is under construction</p>
-									<p class="text-msu-main-color dark:text-msu-bgc-color/90 mb-6 max-w-md mx-auto">General Background, Brief History, and Goal & Objectives content is being updated. Visit our full under-construction page for more.</p>
-									<a href="/505" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full font-bold text-white bg-[#61063B] hover:bg-[#4D052F] transition-colors shadow-md hover:shadow-lg">
-										<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-										View 505 page
-									</a>
+								<h3 class="text-2xl font-bold text-msu-deep-ocean dark:text-msu-bgc-color mb-4">Core Functions</h3>
+								<ol class="space-y-6 list-decimal list-outside pl-5 sm:pl-6 text-lg leading-relaxed">
+									<li class="pl-1">
+										<p class="font-semibold text-msu-deep-ocean dark:text-msu-bgc-color">Instruction (Academic Excellence)</p>
+										<p class="mt-2">Deliver high-quality undergraduate and graduate education in fisheries, oceanography, marine biology, environmental science, and related fields. The College ensures relevant, industry-aligned curricula that integrate scientific knowledge with practical applications.</p>
+									</li>
+									<li class="pl-1">
+										<p class="font-semibold text-msu-deep-ocean dark:text-msu-bgc-color">Research and Innovation</p>
+										<p class="mt-2">Conduct cutting-edge, interdisciplinary research addressing critical issues such as climate change, biodiversity conservation, sustainable fisheries, pollution, and coastal resource management. The College promotes scientific discovery and supports evidence-based policy development.</p>
+									</li>
+									<li class="pl-1">
+										<p class="font-semibold text-msu-deep-ocean dark:text-msu-bgc-color">Extension and Community Engagement</p>
+										<p class="mt-2">Provide community-based programs, training, and technology transfer initiatives that translate research into practical solutions. COFEST actively engages with local communities, government agencies, and stakeholders to promote sustainable practices and improve livelihoods.</p>
+									</li>
+									<li class="pl-1">
+										<p class="font-semibold text-msu-deep-ocean dark:text-msu-bgc-color">Production and Resource Management</p>
+										<p class="mt-2">Develop and manage fisheries, aquaculture, and food production systems that support food security, economic development, and environmental sustainability. This includes the use of institutional facilities for training, demonstration, and income-generating projects.</p>
+									</li>
+									<li class="pl-1">
+										<p class="font-semibold text-msu-deep-ocean dark:text-msu-bgc-color">Partnerships and Linkages</p>
+										<p class="mt-2">Establish and strengthen collaborations with academic institutions, government agencies, industries, NGOs, and local communities to advance research, education, and sustainable development initiatives.</p>
+									</li>
+								</ol>
+							</div>
+						</div>
+
+						<div class="tab-content hidden" id="vision-content">
+							<div class="space-y-6 text-msu-main-color dark:text-msu-bgc-color">
+								<h3 class="text-2xl font-bold text-msu-deep-ocean dark:text-msu-bgc-color mb-4">Vision Statement</h3>
+								<div class="space-y-4 text-lg leading-relaxed">
+									<p>
+										A university in the Sulu Archipelago renowned for Fisheries, Marine and Environmental Science, and other disciplines.
+									</p>
 								</div>
+							</div>
+						</div>
+
+						<div class="tab-content hidden" id="mission-content">
+							<div class="space-y-6 text-msu-main-color dark:text-msu-bgc-color">
+								<h3 class="text-2xl font-bold text-msu-deep-ocean dark:text-msu-bgc-color mb-4">Mission Statement</h3>
+								<ol class="space-y-3 list-decimal list-outside pl-5 sm:pl-6 text-lg leading-relaxed">
+									<li>Provide relevant quality education especially to Muslims and other indigenous groups</li>
+									<li>Promote environmental conservation and sustainable utilization of fisheries and marine resources</li>
+									<li>Develop and transfer new knowledge and innovative technology to the community</li>
+									<li>Engage stakeholders in peace and socio-economic development endeavors</li>
+								</ol>
 							</div>
 						</div>
 
@@ -1952,7 +1992,7 @@ const featuredFacultyEntries = [
 	{ name: 'Asst. Prof. Jurmin H. Sarri', id: 'jurminSarri', departments: ['Department of Capture Fisheries', 'Department of Aquatic Resources Management'], image: getFacultyImagePath('Asst. Prof. Jurmin H. Sarri'), subtitle: 'Chairperson, Department of Aquatic Resources Management', highlight: 'Aquaculture • Fish Nutrition • Algal Biotechnology', summary: 'Marine fisheries scholar guiding research on algal biotechnology and capture fisheries.' },
 	{ name: 'Maria Liza B. Toring-Farquerabao', id: 'mariaLizaToringFarquerabao', departments: ['Department of Capture Fisheries'], image: getFacultyImagePath('Maria Liza B. Toring-Farquerabao'), subtitle: 'Faculty', highlight: 'Capture Fisheries • Fisheries Biology', summary: 'Registered fisheries professional documenting coastal ecosystems and fisheries markets.' },
 	{ name: 'Associate Prof. Hadjiran A. Illud', id: 'hadjiranIllud', departments: ['Department of Capture Fisheries'], image: getFacultyImagePath('Associate Prof. Hadjiran A. Illud'), subtitle: 'Faculty', highlight: 'Aquaculture • Marine Fisheries Management', summary: 'Doctor of Fisheries Technology leading marine fisheries management and aquaculture research.' },
-	{ name: 'Angelica B. Bermil', id: 'angelicaBermil', departments: ['Department of Capture Fisheries'], image: getFacultyImagePath('Angelica B. Bermil'), subtitle: 'Instructor I', highlight: 'Capture Fisheries • Marine Biodiversity', summary: 'PhilDOST-TUMSAT scholar applying marine biodiversity and environmental DNA tools.' },
+	{ name: 'Angelica B. Bermil, RFP', id: 'angelicaBermil', departments: ['Department of Capture Fisheries', 'Department of Aquatic Resources Management'], image: getFacultyImagePath('Angelica B. Bermil'), subtitle: 'Instructor I', highlight: 'Ocean Science • Marine-Derived Fungi', summary: 'Instructor and RFP focused on ocean science, marine-derived fungi, and marine resources research.' },
 	// COF – Department of Post-Harvest Fisheries & Food Science and Technology
 	{ name: 'Asst. Prof. Merilyn Q. Amlani', id: 'merilynAmlani', departments: ['Department of Post-Harvest Fisheries', 'Department of Food Science and Technology'], image: getFacultyImagePath('Asst. Prof. Merilyn Q. Amlani'), subtitle: 'Chairperson, Department of Food Science and Technology', highlight: 'Food Engineering • Post-Harvest Innovation', summary: 'Internationally trained food engineer leading the SFPIC and value-added seaweed products.' },
 	{ name: 'Assoc. Prof. Kingpu O. Ajik', id: 'kingpuAjik', departments: ['Department of Post-Harvest Fisheries', 'Department of Food Science and Technology'], image: getFacultyImagePath('Assoc. Prof. Kingpu O. Ajik'), subtitle: 'Faculty', highlight: 'Aquaculture • Analytical Chemistry', summary: 'Associate professor bridging aquaculture and chemistry through heavy metal profiling.' },
@@ -2221,36 +2261,45 @@ function openFacultyModal(facultyId) {
 			description: "Assistant Prof. Albaris B. Tahiluddin heads the Department of Post-Harvest Fisheries at COFEST, MSU-TCTO. His research drives seaweed health management, nutrient enrichment strategies, and disease mitigation—empowering local aquaculture and post-harvest producers with science-based solutions."
 		},
 		jurminSarri: {
-			name: "Asst. Prof. Jurmin H. Sarri",
-			position: "Chairperson, Department of Aquatic Resources Management, COFEST",
+			name: "Asst. Prof. Jurmin H. Sarri, RFP",
+			position: "Assistant Professor IV; Department Chairperson, COFEST",
 			rank: "Assistant Professor IV",
 			image: getFacultyImagePath("Asst. Prof. Jurmin H. Sarri"),
-			department: "Department of Aquatic Resources Management",
+			department: "Department of Capture Fisheries",
 			education: [
-				"Master of Science in Aquaculture (2023) – Kastamonu University, Türkiye",
-				"Bachelor of Science in Fisheries (2019) – College of Fisheries, MSU-TCTO"
+				"Master of Science in Aquaculture (November 27, 2023) – Kastamonu University, Turkiye",
+				"Bachelor of Science in Fisheries (July 18, 2019) – MSU-TCTO, Philippines"
 			],
 			specialization: [
-				"Aquaculture",
-				"Fish Nutrition",
-				"Feed Additives",
 				"Algal Production",
-				"Algal Biotechnology"
+				"Aquaculture",
+				"Fisheries and Seaweeds",
+				"Microalgae Cultivation and Biomass Production",
+				"Aquaculture Feed, Biofuels, and Ecosystem Restoration"
 			],
 			achievements: [
-				"Certificate of Appreciation for publishing Scopus journals (Co-author, 2025) – MSU-TCTO",
-				"Plaque of Appreciation for publishing Scopus journals (2025) – MSU-TCTO",
-				"Certificate of Appreciation for publishing Scopus journals (Co-author, 2024) – MSU-TCTO",
-				"Plaque of Appreciation for publishing Scopus journals (2024) – MSU-TCTO"
+				"Scientific publications in Scopus-indexed journals (Q1-Q4) for fisheries and food specialization (Elsevier, Springer, and others)",
+				"Associate Member, National Research Council of the Philippines (NRCP)",
+				"Registered Fisheries Professional (0002224)",
+				"Department Chairperson, COFEST (2023-2025); Capture Fisheries Department (2024-2025)"
 			],
 			publications: [
-				"Kissae, A.-N. H., Sarri, J. H., et al. (2025). Incorporation of salinity and AMPEP concentration in nutrient medium on Nannochloropsis sp. culture. AACL Bioflux, 18(3):1593-1604.",
-				"Abduhasad, A. K., Nando, A. T., ... Sarri, J. H. (2025). Species composition, abundance, distribution and diversity of seagrass at Provinces of Sulu and Basilan, Philippines. Yüzüncü Yıl University Journal of Agricultural Sciences, 35(1), 165-179.",
-				"Sarri, J. H., Ajik, K. O., et al. (2025). Market sales practices of gastropods and bivalves during the Ramadan market trend in Tawi-Tawi. AACL Bioflux, 18(3):1605-1617.",
-				"Sarri, J. H., & Elp, M. (2024). Optimization of iron, phosphate, and salinity in nutrient medium for enhancing biochemical composition in Chlorella sp. culture. Algal Research, 84, 103747.",
-				"Sarri, J. H., Erbil, G. Ç., & Elp, M. (2024). Impact of AMPEP concentration in nutrient medium on the growth and lipid accumulation of Chlorella sp. culture. Journal of Agricultural Sciences, 30(4), 658-667."
+				"Kissae, A.-N. H., Sarri, J. H., Amlani, M. Q., Jumsali, M. H. J., Jamil, W. M., Imbuk, E. S., Jalilul J. M., Jeva, M. A., Hairol, M. D. (2025). Incorporation of salinity and AMPEP concentration in nutrient medium on dry weight, cell density, growth response, and pigment accumulation of Nannochloropsis sp. culture. AACL Bioflux, 18(3):1593-1604.",
+				"Abduhasad, A. K., Nando, A. T., Imbuk, E. S., Paradji, S. M., Arsad, H. H., Sailadjan, S. J., Marsukl, P. T., Sarri, J. H., Julpatri, A. I., Muktadir, N. T. (2025). Species composition, abundance, distribution and diversity of seagrass at provinces of Sulu and Basilan, Philippines. Yuzuncu Yil University Journal of Agricultural Sciences, 35(1):165-179.",
+				"Sarri, J. H., Ajik, K. O., Lauhari, M. I., Sarih, A. N., Sadaae, A. S., Imbuk, E. S., Jalaide, A. T., Araman, L. O. (2025). Market sales practices and socioeconomic importance of gastropods and bivalves during the Ramadan market trend in Tawi-Tawi, Southern Philippines. AACL Bioflux, 18(3):1605-1617.",
+				"Sarri, J. H., & Elp, M. (2024). Optimization of iron, phosphate, and salinity in nutrient medium using response surface methodology for enhancing biochemical composition in Chlorella sp. culture. Algal Research, 84, 103747.",
+				"Sarri, J. H., Erbil, G. C., & Elp, M. (2024). Impact of Acadian Marine Plant Extract Powder (AMPEP) concentration in nutrient medium on the growth and lipid accumulation of Chlorella sp. culture. Journal of Agricultural Sciences, 30(4), 658-667.",
+				"Sarri, J. H., Erbil, G. C., Elp, M., & Kadak, A. E. (2024). Acceptability of different concentrations of Chlorella sp. in Filipino delicacy puto as coloring agent. Yuzuncu Yil University Journal of Agricultural Sciences, 34(1), 62-73.",
+				"Imbuk, E. S., Indanan, S. L., Sailadjan, S. J., Yuruten Ozdemir, K., Sarri, J. H. (2023). Fattening of mangrove crab Scylla serrata fed with two different diets (stingray and trash fish). Mediterranean Fisheries and Aquaculture Research, 6(1):1-9.",
+				"Maribao, I. P., Abdel-Azeem, M., Eldani, A. A., & Sarri, J. H. (2023). Effects of the combination of treflan and furazolidone as therapeutants on molting, survival, and growth performance of blue swimming crab instar Portunus pelagicus. Acta Natura et Scientia, 4(1), 17-26.",
+				"Sarri, J. H., Abdulmutalib, Y. A., Mohammad, Uilka, M. E., Terzi, E., & Tabiluddin, A. B. (2022). Effects of inorganic nutrient enrichment on the carrageenan yield, growth, and ice-ice disease occurrence of red alga Kappaphycus striatus. Aquatic Research, 5(2), 99-109.",
+				"Tahiluddin, A. B., & Sarri, J. H. (2022). An overview of destructive fishing in the Philippines. Acta Natura et Scientia, 3(2), 116-125.",
+				"Hairol, M. D., Cherry, T. N., Imlani, A. H., Tikmasan, J. A., & Sarri, J. H. (2022). Effects of crab shellmeal inclusions to fishmeal replacement on the survival, growth, and feed utilization of mangrove crab Scylla serrata (Forsskal 1775). Yuzuncu Yil University Journal of Agricultural Sciences, 32(4), 714-726.",
+				"Imlani, S. H. H., Nian, C. T., Hairol, M. D., Illud, H. A., & Sarri, J. H. (2022). Parasite infestation in bluefin trevally Caranx melampygus in Bongao, Tawi-Tawi, Philippines. Journal of Biometry Studies, 2(2), 42-47.",
+				"Tahiluddin, A. B., Maribao, I. P., Amlani, M. Q., & Sarri, J. H. (2022). A review on spoilage microorganisms in fresh and processed aquatic food products. Food Bulletin, 1(1), 21-36.",
+				"Imlani, A. H., Tahiluddin, A. B., Sarri, J. H., Imlani, M. H. (2022). Growth and survival rates and feed utilization of orange-spotted grouper Epinephelus coioides cultured at different stocking densities in floating net cage. Mediterranean Fisheries and Aquaculture Research, 5(2):47-53."
 			],
-			description: "Assistant Professor Jurmin H. Sarri leads the Capture Fisheries Department while publishing on aquaculture nutrition, algal biotechnology, and coastal resource assessments that support resilient capture fisheries in Tawi-Tawi."
+			description: "Asst. Prof. Jurmin H. Sarri, RFP is an Assistant Professor IV and Department Chairperson at COFEST whose work focuses on aquaculture, microalgae, fisheries and seaweeds, with strong publication output in Scopus-indexed journals and applied research for coastal resource sustainability."
 		},
 		mariaLizaToringFarquerabao: {
 			name: "Maria Liza B. Toring-Farquerabao",
@@ -2474,30 +2523,37 @@ function openFacultyModal(facultyId) {
 			description: "Marhamin H. Jumsali bridges aquaculture and food microbiology, developing seaweed-based products and sharing research-driven practices with fisheries students."
 		},
 		angelicaBermil: {
-			name: "Angelica B. Bermil",
-			position: "Instructor I, Capture Fisheries Department",
+			name: "Angelica B. Bermil, RFP",
+			position: "Instructor I",
 			rank: "Instructor I",
 			image: getFacultyImagePath("Angelica B. Bermil"),
-			department: "Capture Fisheries Department",
+			department: "Department of Capture Fisheries and Department of Aquatic Resources Management",
 			education: [
-				"Master’s course in Marine Resources and Environment (on-going) – Tokyo University of Marine Science and Technology",
-				"Bachelor of Science in Fisheries (2019, Cum Laude) – College of Fisheries, MSU-TCTO"
+				"Master of Science in Marine Science with a master's course on Marine Resources and Environment (on-going) – Tokyo University of Marine Science and Technology, Japan",
+				"Bachelor of Science in Fisheries (June 18, 2019) – MSU-TCTO, Philippines"
 			],
 			specialization: [
-				"Marine Biodiversity",
+				"Ocean Science",
 				"Marine-Derived Fungi",
-				"Environmental DNA Monitoring"
+				"Marine Resources and Environmental Studies",
+				"Mesopelagic Fish Larvae (Morphology, Distribution, and Ecological Roles)",
+				"Oceanography",
+				"Meteorology",
+				"Zoology"
 			],
 			achievements: [
-				"PhilDOST-TUMSAT Graduate Scholarship Awardee",
-				"Registered Fisheries Professional (2021)",
-				"Cum Laude, Bachelor of Science in Fisheries"
+				"PD907-Honor Graduate Eligibility",
+				"Registered Fisheries Professional (0004279)",
+				"Notable academic or community contributions: None"
 			],
 			publications: [
-				"Tahiluddin, A. B., Esmola, F. R., Abduraup, S. A., Camsain, A. M. B., Jamil, W. M., Bermil, A. B., ... & Robles, R. J. F. (2025). Seaweed Consumption Practices in Coastal Communities of Tawi-Tawi, Philippines. Phycology, 5(2), 25.",
-				"Toring-Farquerabao, M. L., Tahiluddin, A., & Bermil, A. (2025). Advances in ecological modeling: Tools, approaches, and future perspectives. Journal of Tropical Resources and Sustainable Science, 13(1), 71-88."
+				"Advances in Ecological Modeling: Tools, Approaches, and Future Perspectives, 2025, Journal of Tropical Resources and Sustainable Science. DOI: 10.47253/jtrss.v13i1.1429",
+				"Seaweed Consumption Practices in Coastal Communities of Tawi-Tawi, Philippines, 2025, Phycology. https://doi.org/10.3390/phycology5020025",
+				"Exploring Ecosystem Health through Physico-chemical Parameters and Bioindicators in Miagao, Iloilo, Philippines: A preliminary study, 2024, Journal of Biometry Studies. DOI: 10.61326/jofbs.v4i1.01",
+				"Abundance of Marine-derived Fungi in Nutrient-enriched Kappaphycus Species, 2022, Journal of Biometry Studies. DOI: 10.29329/JofBS.2022.444.01",
+				"Conference Proceedings: 5th International Congress on Engineering and Life Sciences (ICELIS), 2024, September 10-12, 2024, Pitesti, Romania"
 			],
-			description: "Angelica Bermil brings marine biodiversity and environmental DNA expertise to capture fisheries research, supporting sustainable resource management and graduate collaborations abroad."
+			description: "Angelica B. Bermil, RFP is an Instructor I whose research focuses on ocean sciences, marine resources and environment, mesopelagic fish larvae ecology, and marine-derived fungi to support biodiversity understanding and sustainable marine resource management."
 		},
 		melodinaHairol: {
 			name: "Assoc. Prof. Melodina D. Hairol",
@@ -5038,25 +5094,39 @@ function openPersonnelModal(personnelId) {
 			description: "Associate Prof. Albaris B. Tahiluddin, Ph.D. is the Chairperson of the Department of Post-Harvest Fisheries at COFEST. His research drives seaweed health management, nutrient enrichment strategies, and disease mitigation—empowering local aquaculture producers with science-based solutions."
 		},
 		chair_sarri: {
-			name: "Assistant Prof. Jurmin H. Sarri",
-			position: "Chairperson, Department of Aquatic Resources Management, COFEST",
+			name: "Asst. Prof. Jurmin H. Sarri, RFP",
+			position: "Assistant Professor IV; Department Chairperson, COFEST",
 			rank: "Assistant Professor IV",
 			image: "/images/cof/Faculty/Jurmin H. Sarri.png",
 			education: [
-				"Master of Science in Aquaculture (2023) – Kastamonu University, Türkiye",
-				"Bachelor of Science in Fisheries (2019) – College of Fisheries, MSU-TCTO"
+				"Master of Science in Aquaculture (November 27, 2023) – Kastamonu University, Turkiye",
+				"Bachelor of Science in Fisheries (July 18, 2019) – MSU-TCTO, Philippines"
 			],
-			specialization: ["Aquaculture", "Fish Nutrition", "Feed Additives", "Algal Production", "Algal Biotechnology"],
+			specialization: ["Algal Production", "Aquaculture", "Fisheries and Seaweeds", "Microalgae Cultivation and Biomass Production", "Aquaculture Feed, Biofuels, and Ecosystem Restoration"],
 			achievements: [
-				"Certificate of Appreciation for publishing Scopus journals (Co-author, 2025) – MSU-TCTO",
-				"Plaque of Appreciation for publishing Scopus journals (2025) – MSU-TCTO"
+				"Scientific publications in Scopus-indexed journals (Q1-Q4) for fisheries and food specialization (Elsevier, Springer, and others)",
+				"Associate Member, National Research Council of the Philippines (NRCP)",
+				"Registered Fisheries Professional (0002224)",
+				"Department Chairperson, COFEST (2023-2025); Capture Fisheries Department (2024-2025)"
 			],
 			awards: [],
 			publications: [
-				"Kissae, A.-N. H., Sarri, J. H., et al. (2025). Incorporation of salinity and AMPEP concentration in nutrient medium on Nannochloropsis sp. culture. AACL Bioflux, 18(3):1593-1604.",
-				"Sarri, J. H., & Elp, M. (2024). Optimization of iron, phosphate, and salinity in nutrient medium for enhancing biochemical composition in Chlorella sp. culture. Algal Research, 84, 103747."
+				"Kissae, A.-N. H., Sarri, J. H., Amlani, M. Q., Jumsali, M. H. J., Jamil, W. M., Imbuk, E. S., Jalilul J. M., Jeva, M. A., Hairol, M. D. (2025). Incorporation of salinity and AMPEP concentration in nutrient medium on dry weight, cell density, growth response, and pigment accumulation of Nannochloropsis sp. culture. AACL Bioflux, 18(3):1593-1604.",
+				"Abduhasad, A. K., Nando, A. T., Imbuk, E. S., Paradji, S. M., Arsad, H. H., Sailadjan, S. J., Marsukl, P. T., Sarri, J. H., Julpatri, A. I., Muktadir, N. T. (2025). Species composition, abundance, distribution and diversity of seagrass at provinces of Sulu and Basilan, Philippines. Yuzuncu Yil University Journal of Agricultural Sciences, 35(1):165-179.",
+				"Sarri, J. H., Ajik, K. O., Lauhari, M. I., Sarih, A. N., Sadaae, A. S., Imbuk, E. S., Jalaide, A. T., Araman, L. O. (2025). Market sales practices and socioeconomic importance of gastropods and bivalves during the Ramadan market trend in Tawi-Tawi, Southern Philippines. AACL Bioflux, 18(3):1605-1617.",
+				"Sarri, J. H., & Elp, M. (2024). Optimization of iron, phosphate, and salinity in nutrient medium using response surface methodology for enhancing biochemical composition in Chlorella sp. culture. Algal Research, 84, 103747.",
+				"Sarri, J. H., Erbil, G. C., & Elp, M. (2024). Impact of Acadian Marine Plant Extract Powder (AMPEP) concentration in nutrient medium on the growth and lipid accumulation of Chlorella sp. culture. Journal of Agricultural Sciences, 30(4), 658-667.",
+				"Sarri, J. H., Erbil, G. C., Elp, M., & Kadak, A. E. (2024). Acceptability of different concentrations of Chlorella sp. in Filipino delicacy puto as coloring agent. Yuzuncu Yil University Journal of Agricultural Sciences, 34(1), 62-73.",
+				"Imbuk, E. S., Indanan, S. L., Sailadjan, S. J., Yuruten Ozdemir, K., Sarri, J. H. (2023). Fattening of mangrove crab Scylla serrata fed with two different diets (stingray and trash fish). Mediterranean Fisheries and Aquaculture Research, 6(1):1-9.",
+				"Maribao, I. P., Abdel-Azeem, M., Eldani, A. A., & Sarri, J. H. (2023). Effects of the combination of treflan and furazolidone as therapeutants on molting, survival, and growth performance of blue swimming crab instar Portunus pelagicus. Acta Natura et Scientia, 4(1), 17-26.",
+				"Sarri, J. H., Abdulmutalib, Y. A., Mohammad, Uilka, M. E., Terzi, E., & Tabiluddin, A. B. (2022). Effects of inorganic nutrient enrichment on the carrageenan yield, growth, and ice-ice disease occurrence of red alga Kappaphycus striatus. Aquatic Research, 5(2), 99-109.",
+				"Tahiluddin, A. B., & Sarri, J. H. (2022). An overview of destructive fishing in the Philippines. Acta Natura et Scientia, 3(2), 116-125.",
+				"Hairol, M. D., Cherry, T. N., Imlani, A. H., Tikmasan, J. A., & Sarri, J. H. (2022). Effects of crab shellmeal inclusions to fishmeal replacement on the survival, growth, and feed utilization of mangrove crab Scylla serrata (Forsskal 1775). Yuzuncu Yil University Journal of Agricultural Sciences, 32(4), 714-726.",
+				"Imlani, S. H. H., Nian, C. T., Hairol, M. D., Illud, H. A., & Sarri, J. H. (2022). Parasite infestation in bluefin trevally Caranx melampygus in Bongao, Tawi-Tawi, Philippines. Journal of Biometry Studies, 2(2), 42-47.",
+				"Tahiluddin, A. B., Maribao, I. P., Amlani, M. Q., & Sarri, J. H. (2022). A review on spoilage microorganisms in fresh and processed aquatic food products. Food Bulletin, 1(1), 21-36.",
+				"Imlani, A. H., Tahiluddin, A. B., Sarri, J. H., Imlani, M. H. (2022). Growth and survival rates and feed utilization of orange-spotted grouper Epinephelus coioides cultured at different stocking densities in floating net cage. Mediterranean Fisheries and Aquaculture Research, 5(2):47-53."
 			],
-			description: "Assistant Prof. Jurmin H. Sarri is the Chairperson of the Department of Aquatic Resources Management at COFEST. He leads research on aquaculture nutrition, algal biotechnology, and coastal resource assessments that support resilient capture fisheries in Tawi-Tawi."
+			description: "Asst. Prof. Jurmin H. Sarri, RFP is an Assistant Professor IV and Department Chairperson at COFEST whose work focuses on aquaculture, microalgae, fisheries and seaweeds, with strong publication output in Scopus-indexed journals and applied research for coastal resource sustainability."
 		},
 		chair_mohammad: {
 			name: "Assistant Prof. Kimtang Joy H. Mohammad",
@@ -6505,10 +6575,10 @@ document.addEventListener('DOMContentLoaded', function() {
 		'wahayminJamil': { name: 'Asst. Prof. Wahaymin M. Jamil', position: 'College Secretary, COFEST', rank: 'Assistant Professor IV', department: 'Department of Aquaculture', specialization: ['Aquaculture', 'Feed Management'] },
 		'merilynAmlani': { name: 'Asst. Prof. Merilyn Q. Amlani', position: 'Chairperson, Department of Food Science and Technology', rank: 'Assistant Professor IV', department: 'Department of Food Science and Technology', departments: ['Department of Post-Harvest Fisheries', 'Department of Food Science and Technology'], specialization: ['Food Engineering', 'Fish Processing', 'Bioactive Components'] },
 		'albarisTahiluddin': { name: 'Assistant Prof. Albaris B. Tahiluddin', position: 'Chairperson, Department of Post-Harvest Fisheries', rank: 'Associate Professor (Ph.D.)', department: 'Department of Post-Harvest Fisheries', departments: ['Department of Aquaculture', 'Department of Post-Harvest Fisheries'], specialization: ['Seaweed Farming', 'Aquaculture Health Management', 'Biological Oceanography'] },
-		'jurminSarri': { name: 'Asst. Prof. Jurmin H. Sarri', position: 'Chairperson, Department of Aquatic Resources Management', rank: 'Assistant Professor IV', department: 'Department of Aquatic Resources Management', departments: ['Department of Capture Fisheries', 'Department of Aquatic Resources Management'], specialization: ['Aquaculture', 'Fish Nutrition', 'Algal Biotechnology'] },
+		'jurminSarri': { name: 'Asst. Prof. Jurmin H. Sarri, RFP', position: 'Assistant Professor IV; Department Chairperson', rank: 'Assistant Professor IV', department: 'Department of Capture Fisheries', departments: ['Department of Capture Fisheries', 'Department of Aquatic Resources Management'], specialization: ['Algal Production', 'Aquaculture', 'Fisheries and Seaweeds'] },
 		'hadjiranIllud': { name: 'Associate Prof. Hadjiran A. Illud', position: 'Faculty, Department of Capture Fisheries', rank: 'Associate Professor IV', department: 'Department of Capture Fisheries', specialization: ['Marine Fisheries Management', 'Fisheries Resource Assessment'] },
 		'mariaLizaToringFarquerabao': { name: 'Maria Liza B. Toring-Farquerabao', position: 'Instructor II, Department of Capture Fisheries', rank: 'Instructor II', department: 'Department of Capture Fisheries', specialization: ['Capture Fisheries', 'Fisheries Biology'] },
-		'angelicaBermil': { name: 'Angelica B. Bermil', position: 'Instructor I, Department of Capture Fisheries', rank: 'Instructor I', department: 'Department of Capture Fisheries', specialization: ['Marine Biodiversity', 'Environmental DNA Monitoring'] },
+		'angelicaBermil': { name: 'Angelica B. Bermil, RFP', position: 'Instructor I, Department of Capture Fisheries', rank: 'Instructor I', department: 'Department of Capture Fisheries', departments: ['Department of Capture Fisheries', 'Department of Aquatic Resources Management'], specialization: ['Ocean Science', 'Marine-Derived Fungi', 'Marine Resources and Environmental Studies'] },
 		'rizalRobles': { name: 'Rizal Jhunn F. Robles', position: 'Assistant Professor IV', rank: 'Assistant Professor IV', department: 'Department of Aquaculture', departments: ['Department of Aquaculture', 'Department of Capture Fisheries'], specialization: ['Seaweed Science', 'Carrageenan Research'] },
 		'jemsy': { name: 'Prof. Alhisan U. Jemsy, PhD', position: 'Dean, College of Education', department: 'Department of Educational Leadership and Professional Services', specialization: ['Educational Research', 'Educational Evaluation and Assessment', 'Professional Education'] },
 		'budlong': { name: 'Assoc. Prof. Cherry T. Budlong-Alih', position: 'Faculty', rank: 'Associate Professor V', department: 'Department of Language Education', specialization: ['Filipino'] },
@@ -8635,7 +8705,7 @@ document.addEventListener('DOMContentLoaded', function() {
 											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
 										</svg>
 										<div class="leading-tight">
-											<p class="font-semibold">Angelica B. Bermil</p>
+											<p class="font-semibold">Angelica B. Bermil, RFP</p>
 											<p class="text-white/80 text-sm font-normal">Instructor I</p>
 										</div>
 									</div>
@@ -8829,12 +8899,19 @@ document.addEventListener('DOMContentLoaded', function() {
 								</div>
 							</div>
 							<div class="flex-1 w-full space-y-4 md:space-y-6">
-								<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base font-semibold faculty-banner-content hidden" data-static-content="true" data-member-count="1">
+								<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 text-sm md:text-base font-semibold faculty-banner-content hidden" data-static-content="true" data-member-count="2">
 									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
 										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
 										<div class="leading-tight">
 											<p class="font-semibold">Asst. Prof. Jurmin H. Sarri</p>
 											<p class="text-white/80 text-sm font-normal">Assistant Professor IV • Chairperson</p>
+										</div>
+									</div>
+									<div class="flex items-start gap-3 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm" data-banner-member>
+										<svg class="w-5 h-5 text-yellow-300 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+										<div class="leading-tight">
+											<p class="font-semibold">Angelica B. Bermil, RFP</p>
+											<p class="text-white/80 text-sm font-normal">Instructor I</p>
 										</div>
 									</div>
 								</div>
@@ -12121,6 +12198,18 @@ document.head.appendChild(style);
 
 					
 
+					const facultyAttrCards = document.querySelectorAll('#facultySpotlight [data-faculty-card], #facultyGrid [data-faculty-card]');
+
+					facultyAttrCards.forEach(card => {
+
+						(card as HTMLElement).style.backgroundColor = '#374151'; /* gray-700 */
+
+						(card as HTMLElement).style.border = '1px solid #4b5563'; /* gray-600 */
+
+					});
+
+					
+
 					// Apply dark mode to Research & Innovation cards
 
 					const researchCards = document.querySelectorAll('.bg-white.p-8.rounded-xl.shadow-md');
@@ -12338,6 +12427,18 @@ document.head.appendChild(style);
 					const facultyCards = document.querySelectorAll('.bg-white.rounded-xl.shadow-lg');
 
 					facultyCards.forEach(card => {
+
+						(card as HTMLElement).style.backgroundColor = '';
+
+						(card as HTMLElement).style.border = '';
+
+					});
+
+					
+
+					const facultyAttrCards = document.querySelectorAll('#facultySpotlight [data-faculty-card], #facultyGrid [data-faculty-card]');
+
+					facultyAttrCards.forEach(card => {
 
 						(card as HTMLElement).style.backgroundColor = '';
 
@@ -14135,9 +14236,33 @@ document.head.appendChild(style);
 
 		
 
+		.dark #facultySpotlight [data-faculty-card],
+
+		.dark #facultyGrid [data-faculty-card] {
+
+			background-color: #374151 !important; /* gray-700 */
+
+			border: 1px solid #4b5563 !important; /* gray-600 */
+
+		}
+
+		
+
+		.dark #facultySpotlight [data-faculty-card]:hover,
+
+		.dark #facultyGrid [data-faculty-card]:hover {
+
+			background-color: #4b5563 !important; /* gray-600 */
+
+		}
+
+		
+
 		/* Dark mode for Faculty card content */
 
-		.dark .h-64.overflow-hidden.relative {
+		.dark .h-64.overflow-hidden.relative,
+
+		.dark .h-90.overflow-hidden.relative {
 
 			background-color: #374151 !important; /* gray-700 */
 

@@ -17,7 +17,7 @@ const currentPath = Astro.url.pathname;
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography">
 
 
-  <Navbar path={currentPath} client:visible />       
+  <Navbar path={currentPath} client:only="react" />       
   <!-- Loading Animation -->
   <!-- <div id="loading-animation" class="fixed inset-0 z-50 flex items-center justify-center bg-white transition-opacity duration-500">
     <div class="relative w-24 h-24">
@@ -25,7 +25,7 @@ const currentPath = Astro.url.pathname;
       <div class="absolute inset-4 border-4 border-t-[#61063B] border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin animation-delay-200"></div>
       <div class="absolute inset-8 border-4 border-t-[#61063B] border-r-transparent border-b-transparent border-l-transparent rounded-full animate-spin animation-delay-400"></div>
       <div class="absolute inset-0 flex items-center justify-center">
-        <img src="/images/Official MSU-TCTO logo-01.png" alt="MSU-TCTO Logo" class="w-12 h-12" data-protected-image="true" draggable="false" style="user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;" />
+        <img src="/images/Official MSU-TCTO logo-01.png" alt="MSU-TCTO Logo" class="w-12 h-12" />
       </div>
     </div>
   </div> -->

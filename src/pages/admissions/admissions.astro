@@ -17,67 +17,72 @@ const currentPath = Astro.url.pathname;
 <Layout title="MSU | Tawi-Tawi College of Technology and Oceanography - Admissions">
     <main class="font-sans antialiased text-gray-800 dark:text-gray-200 leading-normal dark:bg-gray-900">
         <!-- Enhanced Navbar -->
-        <Navbar path={currentPath} client:visible />
+        <Navbar path={currentPath} client:load />
 
 
 
       
-    <!-- Hero Section -->
-  	<!-- Hero Section with Video Background -->
-		<section class="relative bg-msu-main-color h-screen min-h-[700px] flex items-center overflow-hidden pt-[80px]">
+    <!-- Hero Section — fluid layout for small viewports, zoom, and dynamic browser chrome -->
+		<section
+      class="admissions-hero relative bg-msu-main-color flex flex-col justify-center overflow-x-clip pt-[clamp(4.5rem,12vw,5.75rem)] pb-8 sm:pb-12 min-h-[100svh] min-h-[100dvh]"
+      aria-label="Admissions overview"
+    >
 			<!-- Video Background -->
-			<div class="absolute inset-0 z-0 overflow-hidden">
-				<video id="hero-video" autoplay muted class="video-pan">
+			<div class="absolute inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
+				<video id="hero-video" autoplay muted playsinline class="video-pan admissions-hero-video">
 					<source src="/video/2026video.mp4" type="video/mp4">
 					<!-- Fallback image -->
-					<img src="/images/development.png" alt="MSUTCTO" class="w-full h-full object-cover">
+					<img src="/images/development.png" alt="" class="w-full h-full object-cover">
 				</video>
 				<div class="absolute inset-0 bg-black/40"></div>
 			</div>
-			
-      			<!-- Gradient overlay -->
-			<div class="absolute inset-0 bg-gradient-to-t from-msu-deep-ocean/90 via-msu-main-color/50 to-transparent z-1"></div>
 
-      			  <!-- Content Container with Responsive Adjustments -->
-    <div class="container mx-auto px-4 sm:px-6 z-10 relative">
-        <div class="max-w-4xl mx-auto text-center px-4">
-            <!-- University Seal with Responsive Sizing -->
-             
-            <!-- University Wordmark Logo -->
-            <div class="mb-4 sm:mb-6 animate-fadeInUp">
-              <img 
-                  src="/images/msutcto_wordmark.png" 
-                  alt="MSU-TCTO Wordmark" 
-                  class="h-auto w-full max-w-6xl mx-auto transition-all duration-500 hover:scale-105"
+			<div class="absolute inset-0 bg-gradient-to-t from-msu-deep-ocean/90 via-msu-main-color/50 to-transparent z-[1] pointer-events-none" aria-hidden="true"></div>
+
+      <div class="admissions-hero-inner relative z-10 w-full max-w-[100vw] mx-auto px-4 pb-1 sm:px-6 sm:pb-0 [padding-left:max(1rem,env(safe-area-inset-left,0px))] [padding-right:max(1rem,env(safe-area-inset-right,0px))]">
+        <div class="mx-auto text-center max-w-[min(100%,56rem)]">
+            <div class="mb-[clamp(0.75rem,3vw,1.5rem)] animate-fadeInUp">
+              <img
+                  src="/images/msutcto_wordmark.png"
+                  alt="MSU-TCTO Wordmark"
+                  class="admissions-hero-wordmark h-auto w-full max-w-[min(92vw,56rem)] mx-auto object-contain object-center transition-all duration-500 motion-safe:hover:scale-[1.02]"
+                  sizes="(max-width: 640px) 92vw, (max-width: 1024px) 85vw, 896px"
                   loading="eager"
+                  decoding="async"
+              >
+            </div>
+
+          <div class="mb-[clamp(1rem,4vw,2rem)] mx-auto w-full max-w-[min(88vw,28rem)] animate-fadeInUp delay-100">
+              <img
+                  src="/images/Creating Opportunities Transforming Lives.png"
+                  alt="Creating Opportunities Transforming Lives"
+                  class="h-auto w-full object-contain object-center transition-all duration-500 motion-safe:hover:scale-[1.02]"
+                  sizes="(max-width: 640px) 88vw, 360px"
+                  loading="eager"
+                  decoding="async"
               >
           </div>
 
-          
-          <!-- Slogan Image -->
-          <!-- Size options: max-w-xs (very small), max-w-sm (small), max-w-md (medium), max-w-lg (large), max-w-xl (x-large), max-w-2xl (2x large), max-w-3xl (3x large) -->
-          <div class="mb-5 sm:mb-8 max-w-xs sm:max-w-sm md:max-w-md mx-auto animate-fadeInUp delay-100">
-              <img 
-                  src="/images/Creating Opportunities Transforming Lives.png" 
-                  alt="Creating Opportunities Transforming Lives" 
-                  class="h-auto w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto transition-all duration-500 hover:scale-105"
-                  loading="eager"
-              >
-          </div>
-   <!-- Responsive Subheading -->
-            <p class="font-philosopher text-lg sm:text-xl md:text-2xl text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto animate-fadeInUp delay-100 leading-relaxed">
+            <p class="admissions-hero-lede font-philosopher text-white/90 mb-[clamp(1rem,4vw,2rem)] mx-auto max-w-[min(42rem,94vw)] animate-fadeInUp delay-100 leading-relaxed px-1">
                  MSU-TCTO welcomes adept and curious students who wish to excel in academics, arts, research, technology, and community extension. Inclusion and diversity are the core of our operations.
             </p>
 
-        <div class="flex flex-col sm:flex-row justify-center gap-4">
-          <a href="#admission" class="bg-msu-main-color hover:bg-msu-deep-ocean text-white px-8 py-4 rounded-lg font-medium transition duration-300 transform hover:scale-105">
+        <div class="flex flex-col xs:flex-row flex-wrap items-stretch xs:items-center justify-center gap-3 sm:gap-4 max-w-xl xs:max-w-none mx-auto w-full">
+          <a
+            href="#admission"
+            class="inline-flex items-center justify-center text-center whitespace-normal sm:whitespace-nowrap bg-msu-main-color hover:bg-msu-deep-ocean focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white text-white w-full xs:w-auto min-h-[44px] px-[clamp(1rem,4vw,2rem)] py-3 rounded-lg text-[clamp(0.875rem,2.8vw,1rem)] font-medium transition-colors duration-300 motion-safe:transform motion-safe:hover:scale-[1.02]"
+          >
            Admission Procedures
           </a>
-          <a href="/404.astro" class="bg-transparent border-2 border-white hover:bg-white/20 text-white px-8 py-4 rounded-lg font-medium transition duration-300">
+          <a
+            href="/404.astro"
+            class="inline-flex items-center justify-center text-center whitespace-normal sm:whitespace-nowrap bg-transparent border-2 border-white hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white text-white w-full xs:w-auto min-h-[44px] px-[clamp(1rem,4vw,2rem)] py-3 rounded-lg text-[clamp(0.875rem,2.8vw,1rem)] font-medium transition-colors duration-300"
+          >
             Explore Programs
           </a>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- Stats Section -->
@@ -200,7 +205,7 @@ const currentPath = Astro.url.pathname;
         <div class="absolute inset-0" style="background-image: url(&quot;data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2361063B' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E&quot;);"></div>
       </div>
       <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <AdmissionProcedure client:visible />
+        <AdmissionProcedure client:load />
       </div>
     </section>
 
@@ -276,9 +281,7 @@ const currentPath = Astro.url.pathname;
       });
     });
   </script>
-</Layout>
 
-    
     <!-- Scroll to Top Button -->
     <button class="scroll-to-top" aria-label="Scroll to top">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -286,16 +289,38 @@ const currentPath = Astro.url.pathname;
       </svg>
     </button>
 
-
-
     <!-- Footer Navigation -->
     <FooterNav />
 
     <!-- Footer -->
     <Footer />
 
+    </main>
+</Layout>
+
 
 <style>
+    /* Admissions hero: fluid type + zoom-friendly layout */
+    .admissions-hero-lede {
+        font-size: clamp(0.9375rem, 0.82rem + 0.65vw, 1.4375rem);
+        line-height: 1.55;
+    }
+    /* Slightly stronger cover on narrow / tall-zoom viewports */
+    @media (max-width: 520px) {
+        .admissions-hero .video-pan {
+            width: 140vw;
+            height: 140vh;
+            min-width: 140%;
+            min-height: 140%;
+        }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .admissions-hero .video-pan {
+            animation: none;
+            transform: translate(-50%, -50%) scale(1.28);
+        }
+    }
+
     /* Video panning animation - smooth movement for 1920x1080 video */
     @keyframes videoPan {
         0% {
@@ -346,24 +371,18 @@ const currentPath = Astro.url.pathname;
 <script>
 // Video starts at 0:00:00 and loops at 0:01:14 (74 seconds)
 document.addEventListener('DOMContentLoaded', function() {
-  const heroVideo = document.getElementById('hero-video');
-  if (heroVideo) {
-    // Ensure video starts at 0:00:00
-    heroVideo.currentTime = 0;
-    
-    // Listen for time updates to loop at 0:01:14
-    heroVideo.addEventListener('timeupdate', function() {
-      // If video reaches 74 seconds (0:01:14), loop back to start
-      if (heroVideo.currentTime >= 74) {
-        heroVideo.currentTime = 0;
-      }
-    });
-    
-    // Also handle when video ends (fallback)
-    heroVideo.addEventListener('ended', function() {
-      heroVideo.currentTime = 0;
-      heroVideo.play();
-    });
-  }
+  const el = document.getElementById('hero-video');
+  const video = el instanceof HTMLVideoElement ? el : null;
+  if (!video) return;
+  video.currentTime = 0;
+  video.addEventListener('timeupdate', function() {
+    if (video.currentTime >= 74) {
+      video.currentTime = 0;
+    }
+  });
+  video.addEventListener('ended', function() {
+    video.currentTime = 0;
+    video.play();
+  });
 });
 </script>

@@ -47,7 +47,7 @@ const featuredImageUrl = baseFeaturedImageUrl.startsWith('http') ? baseFeaturedI
     twitterImage={featuredImageUrl}
 >
     <main class="bg-white dark:bg-gray-900 min-h-screen">
-        <Navbar path={currentPath} client:visible />
+        <Navbar path={currentPath} client:only="react" />
 
         <!-- Hero Section with Featured Article -->
         <section class="relative bg-gradient-to-b from-white dark:from-gray-900 to-gray-50 dark:to-gray-800 py-16">

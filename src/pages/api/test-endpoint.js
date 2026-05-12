@@ -1,4 +1,8 @@
+import { notFoundUnlessDev } from '../../lib/api-guards.js';
+
 export async function GET({ request }) {
+  const denied = notFoundUnlessDev();
+  if (denied) return denied;
   return new Response(JSON.stringify({ 
     message: 'Test endpoint is working',
     timestamp: new Date().toISOString(),
@@ -15,6 +19,8 @@ export async function GET({ request }) {
 }
 
 export async function POST({ request }) {
+  const denied = notFoundUnlessDev();
+  if (denied) return denied;
   try {
     const body = await request.json();
     return new Response(JSON.stringify({ 
@@ -48,6 +54,8 @@ export async function POST({ request }) {
 }
 
 export async function OPTIONS({ request }) {
+  const denied = notFoundUnlessDev();
+  if (denied) return denied;
   return new Response(null, {
     status: 200,
     headers: {

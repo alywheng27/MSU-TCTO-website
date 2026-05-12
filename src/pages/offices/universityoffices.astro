@@ -188,7 +188,7 @@ const officeData = {
   <!-- Page palette: msu-deep-ocean #61063B, msu-bgc-color #ffffff -->
   <main class="university-offices-page bg-msu-bgc-color text-gray-900 font-sans antialiased overflow-hidden dark:bg-gray-900 dark:text-white">
     <!-- Premium Navigation -->
-    <Navbar path={currentPath} client:visible />
+    <Navbar path={currentPath} client:only="react" />
     
     <!-- Breadcrumb Navigation – extends up to cover white strip below nav -->
     <div class="bg-gradient-to-r from-msu-deep-ocean to-msu-deep-ocean min-h-[50px] pt-8 pb-3 xl:px-[12.5%] xs:px-[5%] -mt-8">

@@ -21,6 +21,17 @@ export default defineConfig({
   output: "server",
   adapter: adapter,
   vite: {
+    // Pre-bundle heavy client deps so dev server does not hit 504 "Outdated Optimize Dep"
+    // after lockfile edits, dependency updates, or interrupted first-run optimize.
+    optimizeDeps: {
+      include: [
+        'framer-motion',
+        'react-dom/client',
+        'swiper/react',
+        'swiper/modules',
+        'react-icons/fi',
+      ],
+    },
     build: {
       // Disable source maps in production to hide file structure completely
       sourcemap: process.env.NODE_ENV === 'production' ? false : 'hidden',

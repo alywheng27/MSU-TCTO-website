@@ -1,6 +1,9 @@
 import { getCOEDPrograms } from '../../api/api.jsx';
+import { notFoundUnlessDev } from '../../lib/api-guards.js';
 
 export async function GET() {
+  const denied = notFoundUnlessDev();
+  if (denied) return denied;
   try {
     console.log('=== DEBUG: Checking page data ===');
     

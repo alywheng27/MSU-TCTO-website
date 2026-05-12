@@ -1,12 +1,7 @@
 /**
- * Protected Logo API Endpoint
- * 🔐 Auth-protected API endpoint with token validation
- * 📉 Serve compressed version
- * 🚫 No public direct access
- * 
- * Works in both local development and Vercel/serverless environments
- * 
- * Usage: Replace /images/Official MSU-TCTO logo-01.png with /api/protected-logo
+ * Serves compressed university logo with basic referrer checks.
+ * Logo access is intentionally public via same-domain pages; `/src/js/screenshot-protection.js`
+ * must use the same time-slot fingerprint as `fingerprintLogoAuthToken()` here.
  */
 
 import sharp from 'sharp';
@@ -26,61 +21,26 @@ function createBlankImage() {
   return Buffer.from(blankPNG, 'base64');
 }
 
-// Generate authentication token based on session/timestamp
-function generateAuthToken(request) {
-  const url = new URL(request.url);
-  const timestamp = Math.floor(Date.now() / (1000 * 60 * 5)); // 5-minute window
-  const referer = request.headers.get('referer') || '';
-  const hostname = url.hostname;
-  
-  // Create a simple hash from timestamp + hostname + referer
-  const secret = process.env.LOGO_SECRET_TOKEN || 'msu-tcto-logo-secret-2024';
-  const hashInput = `${timestamp}-${hostname}-${secret}`;
-  
-  // Simple hash function (in production, use crypto)
+/** Deterministic fingerprint; must mirror client loaders (see screenshot-protection.js). */
+function fingerprintLogoAuthToken(hostname, slot) {
+  const hashInput = `${slot}-${hostname}`;
   let hash = 0;
   for (let i = 0; i < hashInput.length; i++) {
     const char = hashInput.charCodeAt(i);
-    hash = ((hash << 5) - hash) + char;
-    hash = hash & hash; // Convert to 32-bit integer
+    hash = (hash << 5) - hash + char;
+    hash = hash & hash;
   }
-  
   return Math.abs(hash).toString(36);
 }
 
-// Validate authentication token
 function validateAuthToken(request, providedToken) {
   if (!providedToken) return false;
-  
   const url = new URL(request.url);
-  const timestamp = Math.floor(Date.now() / (1000 * 60 * 5)); // Current 5-minute window
-  const referer = request.headers.get('referer') || '';
+  const slot = Math.floor(Date.now() / (1000 * 60 * 5));
   const hostname = url.hostname;
-  const secret = process.env.LOGO_SECRET_TOKEN || 'msu-tcto-logo-secret-2024';
-  
-  // Check current window
-  const hashInput = `${timestamp}-${hostname}-${secret}`;
-  let hash = 0;
-  for (let i = 0; i < hashInput.length; i++) {
-    const char = hashInput.charCodeAt(i);
-    hash = ((hash << 5) - hash) + char;
-    hash = hash & hash;
-  }
-  const currentToken = Math.abs(hash).toString(36);
-  
-  if (providedToken === currentToken) return true;
-  
-  // Check previous window (for clock skew)
-  const prevHashInput = `${timestamp - 1}-${hostname}-${secret}`;
-  hash = 0;
-  for (let i = 0; i < prevHashInput.length; i++) {
-    const char = prevHashInput.charCodeAt(i);
-    hash = ((hash << 5) - hash) + char;
-    hash = hash & hash;
-  }
-  const prevToken = Math.abs(hash).toString(36);
-  
-  return providedToken === prevToken;
+  const now = fingerprintLogoAuthToken(hostname, slot);
+  const prev = fingerprintLogoAuthToken(hostname, slot - 1);
+  return providedToken === now || providedToken === prev;
 }
 
 // Process image with compression (no watermark)
@@ -157,15 +117,16 @@ export async function GET({ request }) {
     const isFaviconRequest = url.pathname.includes('favicon') || 
                              userAgent.includes('favicon');
     
-    // Check for secret token in query parameter (for internal use)
     const secretToken = url.searchParams.get('token');
-    const validToken = secretToken === process.env.LOGO_SECRET_TOKEN || secretToken === 'dev-token-2024';
-    
-    // For development, allow all requests
-    const isDevelopment = process.env.NODE_ENV !== 'production' || 
-      origin.includes('localhost') || 
-      referer.includes('localhost') ||
-      url.hostname.includes('localhost');
+    const configuredSecret =
+      typeof process.env.LOGO_SECRET_TOKEN === 'string'
+        ? process.env.LOGO_SECRET_TOKEN.trim()
+        : '';
+    const validToken =
+      Boolean(configuredSecret) && secretToken != null && secretToken === configuredSecret;
+
+    /** Never trust spoofable Origin/Referer localhost headers on deployed builds. */
+    const isDevelopment = import.meta.env.DEV === true || url.hostname === 'localhost';
     
     // 🔐 AUTH-PROTECTED: Require valid auth token OR valid session token OR development mode
     // If DevTools inspection detected, ALWAYS return blank image
