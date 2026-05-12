@@ -5,6 +5,8 @@
  * Security (production):
  *   - `ICTO_APPS_SCRIPT_INGEST_URL` and `ICTO_SERVICE_SHEET_SHARED_SECRET` must be server-only.
  *     Set them in the host dashboard (Netlify / Vercel). Do **not** use the `PUBLIC_` prefix.
+ *   - Optional `ICTO_SHEET_INGEST_ALLOWED_ORIGINS` (comma-separated full origins) if users hit
+ *     a host alias where `Origin` does not match `request.url` (e.g. www vs apex).
  *   - Secrets are never sent to the browser; the page only POSTs same-origin JSON to this route.
  *   - Successful responses do not echo upstream payloads (prevents leaking Apps Script internals).
  *
@@ -150,17 +152,39 @@ function unauthorized(msg) {
   });
 }
 
+/**
+ * Optional comma-separated absolute origins (e.g. `https://www.example.com,https://example.com`)
+ * when the live site is reachable on multiple hosts but `request.url` origin differs from `Origin`
+ * (aliases, www vs apex). Prefer fixing DNS/canonical URLs; this is an escape hatch.
+ */
+function originAllowedForSheetIngest(request, actualOrigin) {
+  let expected;
+  try {
+    expected = new URL(request.url).origin;
+  } catch {
+    return false;
+  }
+  if (actualOrigin === expected) return true;
+  const raw = String(process.env.ICTO_SHEET_INGEST_ALLOWED_ORIGINS || '').trim();
+  if (!raw) return false;
+  const parts = raw.split(',');
+  for (let i = 0; i < parts.length; i++) {
+    const p = parts[i].trim();
+    if (!p) continue;
+    try {
+      if (new URL(p).origin === actualOrigin) return true;
+    } catch {
+      /* ignore bad entry */
+    }
+  }
+  return false;
+}
+
 /** In production, reject cross-origin browser POSTs when `Origin` is present. */
 function crossOriginBlockResponse(request) {
   if (!import.meta.env.PROD) return null;
   const origin = request.headers.get('origin');
   if (!origin || !origin.trim()) return null;
-  let expected;
-  try {
-    expected = new URL(request.url).origin;
-  } catch {
-    return null;
-  }
   let actual;
   try {
     actual = new URL(origin).origin;
@@ -170,7 +194,7 @@ function crossOriginBlockResponse(request) {
       headers: jsonNoStoreHeaders(),
     });
   }
-  if (actual !== expected) {
+  if (!originAllowedForSheetIngest(request, actual)) {
     return new Response(JSON.stringify({ success: false, error: 'Forbidden' }), {
       status: 403,
       headers: jsonNoStoreHeaders(),
