@@ -1961,7 +1961,7 @@ const ictoEntryHeaderMapJson = JSON.stringify(ictoEntryIdByFormResponseHeader);
       </div>
     </div>
 
-    <!-- Full-screen processing state while intake log / sheet relay completes (sheet ingest enabled) -->
+    <!-- Full-screen processing state after submit (sheet-ingest path waits on API; Google Form path shows briefly so it still paints online) -->
     <div
       id="icto-submit-processing"
       class="icto-submit-processing fixed inset-0 z-[115] hidden opacity-0 pointer-events-none transition-opacity duration-300"
@@ -6522,8 +6522,18 @@ const ictoEntryHeaderMapJson = JSON.stringify(ictoEntryIdByFormResponseHeader);
             return;
           }
 
+          openIctoSubmitProcessingOverlay();
           mirrorSubmissionToGoogleForm(payload, appointmentReference);
-          finishIctoUiAfterSubmit();
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              window.setTimeout(function () {
+                closeIctoSubmitProcessingOverlay();
+                window.setTimeout(function () {
+                  finishIctoUiAfterSubmit();
+                }, 220);
+              }, 360);
+            });
+          });
         }
 
         if (typeof navigator !== 'undefined' && navigator.onLine === false) {
