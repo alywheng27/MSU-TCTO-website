@@ -4,10 +4,12 @@ import tailwind from '@astrojs/tailwind';
 import sanity from "astro-sanity";
 import netlify from "@astrojs/netlify";
 import vercel from "@astrojs/vercel";
-import { loadEnv } from 'vite';
 
-// Determine adapter based on environment variable or default to Netlify
-const adapter = process.env.VERCEL ? vercel() : netlify();
+// Netlify sets `NETLIFY=true` on CI; Vercel sets `VERCEL`. Prefer Netlify when both are set so a
+// stray `VERCEL` env on Netlify does not ship the wrong adapter (breaks `/api/*` on Netlify).
+const onNetlifyCi = String(process.env.NETLIFY || "").toLowerCase() === "true";
+const onVercelCi = String(process.env.VERCEL || "").toLowerCase() === "true";
+const adapter = onNetlifyCi ? netlify() : onVercelCi ? vercel() : netlify();
 
 // https://astro.build/config
 export default defineConfig({
